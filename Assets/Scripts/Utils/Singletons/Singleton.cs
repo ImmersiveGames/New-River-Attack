@@ -10,7 +10,7 @@
 */
 namespace Utils
 {
-	public sealed class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+	public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 	{
 		static T _instance;
 		
