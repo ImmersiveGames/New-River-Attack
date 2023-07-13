@@ -1,4 +1,3 @@
-using Immersive;
 using UnityEngine;
 namespace RiverAttack
 {
@@ -27,7 +26,11 @@ namespace RiverAttack
         void Update()
         {
             if (GameManager.instance.GetStates() != GameManager.States.GamePlay || GameManager.instance.GetPaused())
+            {
+                isMoving = false;
                 return;
+            }
+            isMoving = true;
             var inputVector = gameInputs.GetMovementVector2Normalized();
             float axisAutoMovement = inputVector.y switch
             {

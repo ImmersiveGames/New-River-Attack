@@ -3,13 +3,13 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Immersive
+namespace RiverAttack
 {
     public class GameManager : Utils.Singleton<GameManager>
     {
         [SerializeField] private bool isGameOver;
         [SerializeField] private bool isGamePaused;
-        [SerializeField] private bool isGameBaet;
+        [SerializeField] private bool isGameFinish;
 
         public enum States
         {
@@ -24,6 +24,9 @@ namespace Immersive
         States states;
         [SerializeField]
         float countdownToStartTimer = 3f;
+
+        [SerializeField]
+        GameSettings m_GameSettings;
 
         /*[SerializeField]
         private GameSettings gameSettings;
@@ -40,23 +43,13 @@ namespace Immersive
     
         private GameManagerSaves gameSaves;
         */
-
-        public void ChangeStates(States newStates)
-        {
-            states = newStates;
-        }
-        public States GetStates()
-        {
-            return states;
-        }
-
-        public bool GetPaused()
-        {
-            return isGamePaused;
-        }
+    #region UNITYMETHODS
         void Awake()
         {
             states = States.Menu;
+            isGameFinish = false;
+            isGameOver = false;
+            isGamePaused = false;
         }
         private void Start()
         {
@@ -102,6 +95,22 @@ namespace Immersive
                     throw new ArgumentOutOfRangeException();
             }
         }
+        #endregion
+        public void ChangeStatesGamePlay(States newStates = States.GamePlay)
+        {
+            states = newStates;
+        }
+        public States GetStates()
+        {
+            return states;
+        }
+
+        public bool GetPaused()
+        {
+            return isGamePaused;
+        }
+        
+        
         
         void GameInput_onPauseAction(object sender, EventArgs e)
         {
