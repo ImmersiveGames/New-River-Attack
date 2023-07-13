@@ -23,7 +23,7 @@ namespace RiverAttack
         }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             if (GameManager.instance.GetStates() != GameManager.States.GamePlay || GameManager.instance.GetPaused())
             {

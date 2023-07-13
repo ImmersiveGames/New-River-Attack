@@ -94,11 +94,94 @@ namespace RiverAttack
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""1a826521-81f3-4882-b684-0d86c3f2c5a1"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""645e82d8-6c1f-40df-99c1-87e0b3c4ae5e"",
+                    ""path"": ""<Touchscreen>/primaryTouch/delta/up"",
+                    ""interactions"": """",
+                    ""processors"": ""Normalize(min=0.4,max=1)"",
+                    ""groups"": ""Mobile"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""f0748454-b38f-40a7-9804-7e9838a84b2c"",
+                    ""path"": ""<Touchscreen>/primaryTouch/delta/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""ad1968f7-ff0a-4834-93e1-a59ba84a6031"",
+                    ""path"": ""<Touchscreen>/primaryTouch/delta/left"",
+                    ""interactions"": """",
+                    ""processors"": ""Clamp(min=0.2,max=2)"",
+                    ""groups"": ""Mobile"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""c5ddc0d2-da93-4314-aff3-f65cda49953a"",
+                    ""path"": ""<Touchscreen>/primaryTouch/delta/right"",
+                    ""interactions"": """",
+                    ""processors"": ""Clamp(min=0.2,max=2)"",
+                    ""groups"": ""Mobile"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Mobile"",
+            ""bindingGroup"": ""Mobile"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Touchscreen>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""PC"",
+            ""bindingGroup"": ""PC"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
@@ -206,6 +289,24 @@ namespace RiverAttack
             }
         }
         public PlayerActions @Player => new PlayerActions(this);
+        private int m_MobileSchemeIndex = -1;
+        public InputControlScheme MobileScheme
+        {
+            get
+            {
+                if (m_MobileSchemeIndex == -1) m_MobileSchemeIndex = asset.FindControlSchemeIndex("Mobile");
+                return asset.controlSchemes[m_MobileSchemeIndex];
+            }
+        }
+        private int m_PCSchemeIndex = -1;
+        public InputControlScheme PCScheme
+        {
+            get
+            {
+                if (m_PCSchemeIndex == -1) m_PCSchemeIndex = asset.FindControlSchemeIndex("PC");
+                return asset.controlSchemes[m_PCSchemeIndex];
+            }
+        }
         public interface IPlayerActions
         {
             void OnMove(InputAction.CallbackContext context);
