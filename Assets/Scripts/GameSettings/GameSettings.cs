@@ -3,26 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace RiverAttack
 {
-    [CreateAssetMenu(fileName = "GameSettings", menuName = "GameManagers/GameSettings", order = 0)]
+    [CreateAssetMenu(fileName = "GameSettings", menuName = "RiverAttack/GameSettings", order = 0)]
     public class GameSettings : SingletonScriptableObject<GameSettings>
     {
-        [SerializeField]
-        GameObject playerPrefab;
+        public GameObject playerPrefab;
+        
         [Header("Options")]
-        [SerializeField]
-        int maxContinue;
-        [SerializeField]
-        int continues;
+        public float autoMovement;
+        public int maxContinue;
+        public int continues;
+        
         [Header("Tag Names")]
-        [SerializeField]
-        public string playerTag = "Players"; // identifica o nome da tag para o player
-        [SerializeField]
-        public string wallTag = "Walls"; // identifica o nome da tag para as paredes
-        [SerializeField]
-        public string enemyTag = "Enemies"; // identifica o nome da tag para os inimigos
-        [SerializeField]
+        public string playerTag = "Players";        // identifica o nome da tag para o player
+        public string wallTag = "Walls";            // identifica o nome da tag para as paredes
+        public string enemyTag = "Enemies";         // identifica o nome da tag para os inimigos
         public string collectionTag = "Collection"; // identifica o nome da tag dos coletaveis
-        [SerializeField]
+        
         public string shootTag = "Shoots"; // identifica o nome da tag dos disparos
     
         #region GameModes

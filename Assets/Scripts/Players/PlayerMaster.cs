@@ -1,25 +1,31 @@
+using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 namespace RiverAttack
 {
     public class PlayerMaster : MonoBehaviour
     {
     #region SerilizedField
-        [SerializeField] float autoMovement = .5f;
-        [SerializeField] float movementSpeed = 8f;
-        [SerializeField] bool isMoving = false;
-        [SerializeField] float autoMovementUp = 2f;
-        [SerializeField] float autoMovementDown = .1f;
+        float m_AutoMovement;
+        float m_MovementSpeed;
+        [SerializeField] bool hasPlayerReady = false;
+        float m_MultiplyVelocityUp;
+        float m_MultiplyVelocityDown;
   #endregion
 
         [SerializeField] GameInputs gameInputs;
+        [SerializeField] PlayerStats playerStats;
 
         GameManager m_GameManager;
+   
 
     #region UNITYMETHODS
-        // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
-            //START
+            m_AutoMovement = GameSettings.instance.autoMovement;
+            m_MovementSpeed = playerStats.mySpeedy;
+            m_MultiplyVelocityUp = playerStats.multiplyVelocityUp;
+            m_MultiplyVelocityDown = playerStats.multiplyVelocityDown;
         }
 
         // Update is called once per frame
@@ -27,26 +33,43 @@ namespace RiverAttack
         {
             if (GameManager.instance.GetStates() != GameManager.States.GamePlay || GameManager.instance.GetPaused())
             {
-                isMoving = false;
+                hasPlayerReady = false;
                 return;
             }
-            isMoving = true;
+            hasPlayerReady = true;
             var inputVector = gameInputs.GetMovementVector2Normalized();
             float axisAutoMovement = inputVector.y switch
             {
-                > 0 => autoMovementUp,
-                < 0 => autoMovementDown,
-                _ => autoMovement
+                > 0 => m_MultiplyVelocityUp,
+                < 0 => m_MultiplyVelocityDown,
+                _ => m_AutoMovement
             };
 
             var moveDir = new Vector3(inputVector.x, 0, axisAutoMovement);
-            if (isMoving)
-                transform.position += moveDir * (movementSpeed * Time.deltaTime);
+            if (hasPlayerReady)
+                transform.position += moveDir * (m_MovementSpeed * Time.deltaTime);
         }
   #endregion
+
+        public void Init(PlayerStats player, int id)
+        {
+            
+        }
+
+        public PlayerStats PlayersSettings()
+        {
+            return playerStats;
+    }
         public void AllowedMove(bool allowed = true)
         {
-            isMoving = allowed;
+            hasPlayerReady = allowed;
+        }
+        public bool shouldPlayerBeReady
+        {
+            get
+            {
+                return GamePlayManager.instance.shouldBePlayingGame && hasPlayerReady == true;
+            }
         }
     }
 }

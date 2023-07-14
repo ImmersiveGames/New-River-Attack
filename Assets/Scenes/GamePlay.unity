@@ -1275,15 +1275,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 768ed1b6590af2b46a45b6492aacbbd6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0000000074047306
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 768ed1b6590af2b46a45b6492aacbbd6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.000000011920981
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 768ed1b6590af2b46a45b6492aacbbd6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.00000031544613
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 768ed1b6590af2b46a45b6492aacbbd6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1291,7 +1291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 768ed1b6590af2b46a45b6492aacbbd6, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.00000008146034
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 768ed1b6590af2b46a45b6492aacbbd6, type: 3}
       propertyPath: m_LocalRotation.y
@@ -1299,7 +1299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 768ed1b6590af2b46a45b6492aacbbd6, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 768ed1b6590af2b46a45b6492aacbbd6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1337,7 +1337,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1346035651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1486,12 +1486,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 214c32e9f97e6fd4198d91096268ae16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoMovement: 0.5
-  movementSpeed: 10
   isMoving: 0
-  autoMovementUp: 2
-  autoMovementDown: 0.3
   gameInputs: {fileID: 633854546}
+  playerStats: {fileID: 11400000, guid: c11a8f0b743164845ab2754709110c91, type: 2}
 --- !u!1 &1483532484
 GameObject:
   m_ObjectHideFlags: 0
