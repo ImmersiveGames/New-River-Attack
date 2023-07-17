@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
+// ReSharper disable StringLiteralTypo
 
 namespace RiverAttack
 {
     [RequireComponent(typeof(PlayerMaster))]
 public class PlayerShoot : MonoBehaviour, ICommand, IHasPool
 {
+    // ReSharper disable once StringLiteralTypo
     [Tooltip("Identifica se o jogador em modo rapidfire")]
     
     [SerializeField]
     float shootCadence;
-    [SerializeField]
-    float idButtonMap;
+    /*[SerializeField]
+    float idButtonMap;*/
     [Tooltip("Objeto disparado pelo player")]
     [SerializeField]
     GameObject bullet;
