@@ -4,7 +4,7 @@ using UnityEngine;
 namespace RiverAttack
 {
    
-public abstract class ObstacleMoviment : MonoBehaviour {
+public abstract class ObstacleMovement : MonoBehaviour {
 
     [SerializeField]
     public bool canMove;
@@ -31,7 +31,7 @@ public abstract class ObstacleMoviment : MonoBehaviour {
     #endregion
 
     float EnemySpeedy = 1f;
-    //private float EnemySpeedy { get { return (enemy.enemysDifficulty.GetDifficult(GamePlayManager.instance.HightScorePlayers()).multplySpeedy > 0) ? movementSpeed.Value * enemy.enemysDifficulty.GetDifficult(GamePlayManager.instance.HightScorePlayers()).multplySpeedy : movementSpeed.Value; } }
+    //private float EnemySpeedy { get { return (enemy.enemysDifficulty.GetDifficult(GamePlayManager.instance.HightScorePlayers()).multiplySpeedy > 0) ? movementSpeed.Value * enemy.enemysDifficulty.GetDifficult(GamePlayManager.instance.HightScorePlayers()).multiplySpeedy : movementSpeed.Value; } }
     public Directions MoveDirection { get { return moveDirection; } set { moveDirection = value; } }
     public Vector3 FreeDirection { get { return freeDirection; } set { freeDirection = value; } }
     public float MovementSpeed { get { return movementSpeed; } set { movementSpeed = value; } }

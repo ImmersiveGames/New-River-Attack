@@ -11,23 +11,22 @@ namespace RiverAttack
         [SerializeField]
         public float cadencyShoot;
         [SerializeField]
-        public int startpool;
+        public int startPool;
         [SerializeField]
         public bool playerTarget;
 
         [ContextMenu("LoadPrefab")]
         private void LoadPrefab()
         {
-            LevelObstacleSpawnMaster spawnMaster = GetComponent<LevelObstacleSpawnMaster>();
-            ObstacleShoot oshoot = spawnMaster.GetPrefab.GetComponent<ObstacleShoot>();
-            if (oshoot != null)
-            {
-                this.bulletSpeedy = oshoot.bulletSpeedy;
-                this.cadencyShoot = oshoot.cadencyShoot;
-                EnemyShoot enemyShoot = (EnemyShoot)oshoot;
-                this.startpool = enemyShoot.startpool;
-                this.playerTarget = enemyShoot.playerTarget;
-            }
+            var spawnMaster = GetComponent<LevelObstacleSpawnMaster>();
+            var obstacleShoot = spawnMaster.getPrefab.GetComponent<ObstacleShoot>();
+            if (obstacleShoot == null)
+                return;
+            bulletSpeedy = obstacleShoot.bulletSpeedy;
+            cadencyShoot = obstacleShoot.cadencyShoot;
+            var enemiesShoot = (EnemiesShoot)obstacleShoot;
+            startPool = enemiesShoot.poolStart;
+            playerTarget = enemiesShoot.playerTarget;
         }
     }
 }

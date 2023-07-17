@@ -4,7 +4,7 @@ namespace RiverAttack
 {
     
     [RequireComponent(typeof(LevelObstacleSpawnMaster))]
-    public class LevelObstacleSpawnMovement : ObstacleMoviment
+    public class LevelObstacleSpawnMovement : ObstacleMovement
     {
         private void OnEnable() { }
         private void SetInitialReferences() { }
@@ -15,7 +15,7 @@ namespace RiverAttack
         private void LoadPrefab()
         {
             LevelObstacleSpawnMaster spawnMaster = GetComponent<LevelObstacleSpawnMaster>();
-            ObstacleMoviment om = spawnMaster.GetPrefab.GetComponent<ObstacleMoviment>();
+            ObstacleMovement om = spawnMaster.getPrefab.GetComponent<ObstacleMovement>();
             if (om != null)
             {
                 moveDirection = om.MoveDirection;

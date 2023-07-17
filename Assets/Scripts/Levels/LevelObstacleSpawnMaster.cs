@@ -1,128 +1,131 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using JetBrains.Annotations;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace RiverAttack
 {
-    
-public class LevelObstacleSpawnMaster : MonoBehaviour
-{
-    [SerializeField]
-    private bool persistPrefab = true;
-    [SerializeField]
-    private GameObject[] prefab;
-    [SerializeField]
-    private bool ignoreWall;
-    //[SerializeField]
-    //private bool ignoreEnemys;
-
-    [Header("Show prefab ID -Only View")]
-    public int viewIdPrefab;
-    public Color wireColor = new Color(255, 0, 0, 050);
-
-    public GameObject GetPrefab { get { return prefab[viewIdPrefab]; } }
-
-    private void Awake()
+    public class LevelObstacleSpawnMaster : MonoBehaviour
     {
-        this.gameObject.SetActive(true);
-        SpawnObstacles();
-        this.gameObject.SetActive(false);
-    }
+        [SerializeField]
+        private bool persistPrefab = true;
+        [SerializeField]
+        private GameObject[] prefab;
+        [SerializeField]
+        private bool ignoreWall;
+        [SerializeField]
+        private bool ignoreEnemies;
 
-    private void SpawnObstacles()
-    {
-        if (prefab != null && prefab.Length > 0)
+        [Header("Show prefab ID -Only View")]
+        public int viewIdPrefab;
+        public Color wireColor = new Color(255, 0, 0, 050);
+
+        public GameObject getPrefab { get { return prefab[viewIdPrefab]; } }
+
+        private void Awake()
         {
+            this.gameObject.SetActive(true);
+            SpawnObstacles();
+            this.gameObject.SetActive(false);
+        }
+
+        private void SpawnObstacles()
+        {
+            if (prefab == null || prefab.Length <= 0)
+                return;
             SetGameObjectsActive(prefab, false);
             int sort = Random.Range(0, prefab.Length - 1);
-            
-            GameObject enemy = Instantiate(prefab[sort], this.transform.position, this.transform.rotation, this.transform.parent);
+
+            var transform1 = this.transform;
+            var enemy = Instantiate(prefab[sort], transform1.position, transform1.rotation, transform1.parent);
             if (!persistPrefab)
             {
                 enemy.GetComponent<EnemiesMaster>().ignoreWall = ignoreWall;
-                //enemy.GetComponent<EnemyMaster>().ignoreEnemys = ignoreEnemys;
-                ObstacleMoviment om = enemy.GetComponent<ObstacleMoviment>();
-                ObstacleMoveByApproach omba = enemy.GetComponent<ObstacleMoveByApproach>();
-                ObstacleSkins oskin = enemy.GetComponent<ObstacleSkins>();
-                ObstacleShoot oShoot = enemy.GetComponent<ObstacleShoot>();
-                ObstacleDetectApproach oShootApp = enemy.GetComponent<ObstacleDetectApproach>();
-                if (GetComponent<LevelObstacleSpawnMovement>() && om)
+                enemy.GetComponent<EnemiesMaster>().ignoreEnemies = ignoreEnemies;
+                var obstacleMovement = enemy.GetComponent<ObstacleMovement>();
+                var obstacleMoveByApproach = enemy.GetComponent<ObstacleMoveByApproach>();
+                var obstacleSkins = enemy.GetComponent<ObstacleSkins>();
+                var obstacleShoot = enemy.GetComponent<ObstacleShoot>();
+                var obstacleDetectApproach = enemy.GetComponent<ObstacleDetectApproach>();
+                if (GetComponent<LevelObstacleSpawnMovement>() && obstacleMovement)
                 {
-                    LevelObstacleSpawnMovement spawnMovement = GetComponent<LevelObstacleSpawnMovement>();
-                    om.canMove = spawnMovement.canMove;
-                    om.MovementSpeed = spawnMovement.MovementSpeed;
-                    om.MoveDirection = spawnMovement.MoveDirection;
-                    om.FreeDirection = spawnMovement.FreeDirection;
-                    om.CurveMoviment = spawnMovement.CurveMoviment;
+                    var spawnMovement = GetComponent<LevelObstacleSpawnMovement>();
+                    obstacleMovement.canMove = spawnMovement.canMove;
+                    obstacleMovement.MovementSpeed = spawnMovement.MovementSpeed;
+                    obstacleMovement.MoveDirection = spawnMovement.MoveDirection;
+                    obstacleMovement.FreeDirection = spawnMovement.FreeDirection;
+                    obstacleMovement.CurveMoviment = spawnMovement.CurveMoviment;
                 }
-                if (GetComponent<LevelObstacleSpawnMovApproch>() && omba)
+                if (GetComponent<LevelObstacleSpawnMoveApproach>() && obstacleMoveByApproach)
                 {
-                    LevelObstacleSpawnMovApproch spawnMovimentApp = GetComponent<LevelObstacleSpawnMovApproch>();
-                    omba.RadiusPlayerProximity = spawnMovimentApp.RadiusPlayerProximity;
-                    omba.TimeToCheck = spawnMovimentApp.TimeToCheck;
-                    omba.dificultType = spawnMovimentApp.dificultType;
-                    omba.RandomPlayerDistanceNear = spawnMovimentApp.RandomPlayerDistanceNear;
-                    //omba.enDifList = spawnMovimentApp.enDifList;
+                    var spawnMoveApproach = GetComponent<LevelObstacleSpawnMoveApproach>();
+                    obstacleMoveByApproach.radiusPlayerProximity = spawnMoveApproach.radiusPlayerProximity;
+                    obstacleMoveByApproach.timeToCheck = spawnMoveApproach.timeToCheck;
+                    obstacleMoveByApproach.difficultType = spawnMoveApproach.difficultType;
+                    obstacleMoveByApproach.randomPlayerDistanceNear = spawnMoveApproach.randomPlayerDistanceNear;
+                    obstacleMoveByApproach.enemyDifficultyList = spawnMoveApproach.enemyDifficultyList;
                 }
-                if (GetComponent<LevelObstacleSpawnSkins>() && oskin)
+                if (GetComponent<LevelObstacleSpawnSkins>() && obstacleSkins)
                 {
-                    LevelObstacleSpawnSkins spawnSkin = GetComponent<LevelObstacleSpawnSkins>();
-                    oskin.IndexSkin = spawnSkin.IndexSkin;
-                    oskin.RandomSkin = spawnSkin.RandomSkin;
-                    oskin.EnemySkins = (spawnSkin.EnemySkins.Length > 0) ? spawnSkin.EnemySkins : oskin.EnemySkins;
+                    var spawnSkin = GetComponent<LevelObstacleSpawnSkins>();
+                    obstacleSkins.IndexSkin = spawnSkin.IndexSkin;
+                    obstacleSkins.RandomSkin = spawnSkin.RandomSkin;
+                    obstacleSkins.EnemySkins = (spawnSkin.EnemySkins.Length > 0) ? spawnSkin.EnemySkins : obstacleSkins.EnemySkins;
                 }
-                if (GetComponent<LevelObstacleSpawnShoot>() && oShoot)
+                if (GetComponent<LevelObstacleSpawnShoot>() && obstacleShoot)
                 {
-                    LevelObstacleSpawnShoot spawnShoot = GetComponent<LevelObstacleSpawnShoot>();
-                    oShoot.bulletSpeedy = spawnShoot.bulletSpeedy;
-                    oShoot.cadencyShoot = spawnShoot.cadencyShoot;
-                    EnemyShoot enemyShoot = (EnemyShoot)oShoot;
-                    enemyShoot.startpool = spawnShoot.startpool;
-                    enemyShoot.playerTarget = spawnShoot.playerTarget;
+                    var spawnShoot = GetComponent<LevelObstacleSpawnShoot>();
+                    obstacleShoot.bulletSpeedy = spawnShoot.bulletSpeedy;
+                    obstacleShoot.cadencyShoot = spawnShoot.cadencyShoot;
+                    var enemiesShoot = (EnemiesShoot)obstacleShoot;
+                    enemiesShoot.poolStart = spawnShoot.startPool;
+                    enemiesShoot.playerTarget = spawnShoot.playerTarget;
                 }
-                if (GetComponent<LevelObstacleSpawnShootApproach>() && oShootApp)
+                if (GetComponent<LevelObstacleSpawnShootApproach>() && obstacleDetectApproach)
                 {
-                    LevelObstacleSpawnShootApproach spawnShootApp = GetComponent<LevelObstacleSpawnShootApproach>();
-                    oShootApp.radiusPlayerProximity = spawnShootApp.radiusPlayerProximity;
-                    oShootApp.randomPlayerDistanceNear = spawnShootApp.randomPlayerDistanceNear;
-                    oShootApp.dificultType = spawnShootApp.dificultType;
-                    //oShootApp.enDifList = spawnShootApp.enDifList;
-                    EnemyShootApproach enemyShootApp = (EnemyShootApproach)oShootApp;
-                    enemyShootApp.timeToCheck = spawnShootApp.timeToCheck;
+                    var spawnShootApp = GetComponent<LevelObstacleSpawnShootApproach>();
+                    obstacleDetectApproach.radiusPlayerProximity = spawnShootApp.radiusPlayerProximity;
+                    obstacleDetectApproach.randomPlayerDistanceNear = spawnShootApp.randomPlayerDistanceNear;
+                    obstacleDetectApproach.difficultType = spawnShootApp.difficultType;
+                    //obstacleDetectApproach.enemyDifficultyList = spawnShootApp.enemyDifficultyList;
+                    var enemiesShootApp = (EnemiesShootApproach)obstacleDetectApproach;
+                    enemiesShootApp.timeToCheck = spawnShootApp.timeToCheck;
                 }
             }
             enemy.SetActive(true);
-            this.gameObject.SetActive(false);
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
+            if (gameObject != null)
+                Destroy(gameObject);
         }
-    }
 
-    private void SetGameObjectsActive(GameObject[] objects, bool active)
-    {
-        for (int i = 0; i < objects.Length; i++)
+        private static void SetGameObjectsActive([NotNull] IEnumerable<GameObject> objects, bool active)
         {
-            objects[i].SetActive(active);
+            foreach (var t in objects)
+            {
+                t.SetActive(active);
+            }
         }
-    }
 
-    [ContextMenu("LoadPrefab")]
-    private void LoadPrefab()
-    {
-        if (prefab != null && prefab.Length > 0)
+        [ContextMenu("LoadPrefab")]
+        private void LoadPrefab()
         {
-            ignoreWall = prefab[viewIdPrefab].GetComponent<EnemiesMaster>().ignoreWall;
-            //ignoreEnemys = prefab[viewIdPrefab].GetComponent<EnemyMaster>().ignoreEnemys;
+            if (prefab is { Length: > 0 })
+            {
+                ignoreWall = prefab[viewIdPrefab].GetComponent<EnemiesMaster>().ignoreWall;
+                ignoreEnemies = prefab[viewIdPrefab].GetComponent<EnemiesMaster>().ignoreEnemies;
+            }
         }
-    }
 
     #region DrawGizmos
-    void OnDrawGizmos()
-    {
-        if (prefab != null && prefab.Length > 0)
+        void OnDrawGizmos()
         {
+            if (prefab is not { Length: > 0 }) return;
             Gizmos.color = wireColor;
-            Mesh mesh = prefab[viewIdPrefab].GetComponentInChildren<MeshFilter>().sharedMesh;
-            Gizmos.DrawWireMesh(mesh, transform.position, transform.rotation, transform.localScale);
+            var mesh = prefab[viewIdPrefab].GetComponentInChildren<MeshFilter>().sharedMesh;
+            var transform1 = transform;
+            Gizmos.DrawWireMesh(mesh, transform1.position, transform1.rotation, transform1.localScale);
         }
-    }
     #endregion
-}
+    }
 }

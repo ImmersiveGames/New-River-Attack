@@ -5,13 +5,13 @@ using Utils;
 
 namespace RiverAttack
 {
-    public class EnemiesMaster : MonoBehaviour
+    public sealed class EnemiesMaster : MonoBehaviour
     {
         public EnemiesScriptable enemy;
         public bool isDestroyed;
-        //public bool goalLevel;
+        public bool goalLevel;
         public bool ignoreWall;
-        //public bool ignoreEnemys;
+        public bool ignoreEnemies;
         public Vector3 enemyStartPosition
         {
             get;
@@ -39,13 +39,13 @@ namespace RiverAttack
             isDestroyed = false;
         }
 
-        protected virtual void OnEnable()
+        void OnEnable()
         {
             SetInitialReferences();
             m_GamePlayManager.EventResetEnemies += OnInitializeEnemy;
         }
 
-        protected virtual void SetInitialReferences()
+        void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
             //Debug.Log(GameSettings.Instance.enemyTag);
@@ -53,7 +53,7 @@ namespace RiverAttack
             //gameObject.layer = GameSettings.instance.layerEnemies;
         }
 
-        protected virtual void OnInitializeEnemy()
+        void OnInitializeEnemy()
         {
             if (!enemy.canRespawn && isDestroyed)
                 Destroy(this.gameObject, 0.1f);
@@ -75,7 +75,7 @@ namespace RiverAttack
             }
         }
 
-        protected virtual void OnDisable()
+        void OnDisable()
         {
             m_GamePlayManager.EventResetEnemies -= OnInitializeEnemy;
         }

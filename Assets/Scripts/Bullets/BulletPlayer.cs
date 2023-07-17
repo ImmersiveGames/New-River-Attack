@@ -2,54 +2,54 @@ using UnityEngine;
 
 namespace RiverAttack
 {
-    public class BulletPlayer : MonoBehaviour
+    public class BulletPlayer : Bullets
     {
          #region Variable Private Inspector
-        [SerializeField] AudioEventSample audioShoot;
-        [SerializeField] float shootVelocity = 10f;
         [SerializeField] bool bulletLifeTime = false;
         [SerializeField] float lifeTime = 2f;
         float m_StartTime;
         public PlayerMaster ownerShoot;
         Transform m_MyPool;
+        
+        #endregion
 
-        public void SetMyPool(Transform myPool)
+        #region UnityMethods
+        void Awake()
         {
-            m_MyPool = myPool;
+            ownerShoot = GetComponentInParent<PlayerMaster>();
+            shootVelocity = ownerShoot.PlayersSettings().shootVelocity;
         }
-    #endregion
-
         private void OnEnable()
         {
             var audioSource = GetComponent<AudioSource>();
             audioShoot.Play(audioSource);
         }
-        /// <summary>
-        /// Executa quando o objeto esta ativo
-        /// </summary>
-        /// 
         void Start()
         {
             m_StartTime = Time.time + lifeTime;
         }
-
-        public void SetSpeedShoot(double speedy)
-        {
-            shootVelocity = (float)speedy;
-        }
-        /// <summary>
-        /// Executa a cada atualização de frame da fisica
-        /// </summary>
-        /// 
         void FixedUpdate()
         {
             MoveShoot();
             AutoDestroy();
         }
-        /// <summary>
-        /// Proper this object forward
-        /// </summary>
-        /// 
+        void OnTriggerEnter(Collider collision)
+        {
+            if (collision.GetComponentInParent<PlayerMaster>()) return;
+            var hitCollectable = (CollectibleScriptable)collision.transform.root.GetComponent<EnemiesMaster>().enemy;
+            if (hitCollectable) return;
+            DestroyMe();
+        }
+        void OnBecameInvisible()
+        {
+            Invoke(nameof(DestroyMe), .1f);
+        }
+        #endregion
+
+        public void SetSpeedShoot(double speedy)
+        {
+            shootVelocity = (float)speedy;
+        }
         void MoveShoot()
         {
             if (GamePlayManager.instance.shouldBePlayingGame)
@@ -61,19 +61,8 @@ namespace RiverAttack
             {
                 DestroyMe();
             }
+        }
 
-        }
-        void OnTriggerEnter(Collider collision)
-        {
-            if (collision.GetComponentInParent<PlayerMaster>()) return;
-            var hitCollectable = (CollectibleScriptable)collision.transform.root.GetComponent<EnemiesMaster>().enemy;
-            if (hitCollectable) return;
-            DestroyMe();
-        }
-        /// <summary>
-        /// If OnLifeTime set, auto destroyer this object
-        /// </summary>
-        /// 
         void AutoDestroy()
         {
             if (bulletLifeTime && Time.time >= m_StartTime)
@@ -81,9 +70,6 @@ namespace RiverAttack
                 DestroyMe();
             }
         }
-        /// <summary>
-        /// Atalho para destruir este objeto
-        /// </summary>
         void DestroyMe()
         {
             //Destroy(this.gameObject);
@@ -91,13 +77,6 @@ namespace RiverAttack
             gameObject.SetActive(false);
             gameObject.transform.SetParent(m_MyPool);
             gameObject.transform.SetAsLastSibling();
-        }
-        /// <summary>
-        /// Se o objeto sai da tela ele é destruido
-        /// </summary>
-        void OnBecameInvisible()
-        {
-            Invoke(nameof(DestroyMe), .1f);
         }
     }
 }

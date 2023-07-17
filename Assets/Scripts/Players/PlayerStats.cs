@@ -13,13 +13,13 @@ namespace RiverAttack
         public int score;
         public Vector3 spawnPosition;
         public Vector3 spawnRotation;
-        //[Header("Skin Settings")]
-        //[SerializeField]
-        //public ShopProductSkin playerSkin;
-        //[Header("Shopping")]
-        //public int wealth;
-        //[SerializeField]
-        /*public List<ShopProduct> listProducts;
+        /*[Header("Skin Settings")]
+        [SerializeField]
+        public ShopProductSkin playerSkin;
+        [Header("Shopping")]
+        public int wealth;
+        [SerializeField]
+        public List<ShopProduct> listProducts;
         [Header("Controller Settings")]
         public ControllerMap controllerMap;*/
 
