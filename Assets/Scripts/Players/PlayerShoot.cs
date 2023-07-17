@@ -26,7 +26,7 @@ public class PlayerShoot : MonoBehaviour, ICommand, IHasPool
     float m_NextShoot;
     GameObject m_MyShoot;
     PlayerMaster m_PlayerMaster;
-    GameInputs m_GameInputs;
+    PlayerController m_PlayerController;
 
     /// <summary>
     /// Executa quando ativa o objeto
@@ -44,7 +44,7 @@ public class PlayerShoot : MonoBehaviour, ICommand, IHasPool
     private void SetInitialReferences()
     {
         m_PlayerMaster = GetComponent<PlayerMaster>();
-        m_GameInputs = GameInputs.instance;
+        m_PlayerController = GetComponent<PlayerController>();
         //controllerMap = m_PlayerMaster.playerSettings.controllerMap;
     }
     

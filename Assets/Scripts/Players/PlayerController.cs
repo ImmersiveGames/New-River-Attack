@@ -3,7 +3,7 @@ using Utils;
 
 namespace  RiverAttack
 {
-    public class GameInputs : Singleton<GameInputs>
+    public class PlayerController : MonoBehaviour
     {
         PlayersInputActions m_PlayersInputActions;
 
@@ -26,4 +26,3 @@ namespace  RiverAttack
         }
     }
 }
-

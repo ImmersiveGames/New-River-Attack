@@ -13,7 +13,7 @@ namespace RiverAttack
         float m_MultiplyVelocityDown;
   #endregion
 
-        [SerializeField] GameInputs gameInputs;
+        PlayerController m_PlayerController;
         [SerializeField] PlayerStats playerStats;
 
         GameManager m_GameManager;
@@ -26,6 +26,7 @@ namespace RiverAttack
             m_MovementSpeed = playerStats.mySpeedy;
             m_MultiplyVelocityUp = playerStats.multiplyVelocityUp;
             m_MultiplyVelocityDown = playerStats.multiplyVelocityDown;
+            m_PlayerController = GetComponent<PlayerController>();
         }
 
         // Update is called once per frame
@@ -37,7 +38,7 @@ namespace RiverAttack
                 return;
             }
             hasPlayerReady = true;
-            var inputVector = gameInputs.GetMovementVector2Normalized();
+            var inputVector = m_PlayerController.GetMovementVector2Normalized();
             float axisAutoMovement = inputVector.y switch
             {
                 > 0 => m_MultiplyVelocityUp,
