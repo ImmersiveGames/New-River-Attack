@@ -12,25 +12,25 @@ namespace RiverAttack
         public Vector3 shootDirection;
         [SerializeField] AudioEventSample audioShoot;
         [SerializeField]
-        private float TimeToDestroy;
+        private float timeToDestroy;
 
-        private GameSettings gameSettings;
-        private Collider col;
-        private AudioSource audioSource;
+        private GameSettings m_GameSettings;
+        private Collider m_Col;
+        private AudioSource m_AudioSource;
 
         private void OnEnable()
         {
             SetInitialReferences();
-            audioShoot.Play(audioSource);
-            col.enabled = true;
-            Invoke("DisableShoot", TimeToDestroy);
+            audioShoot.Play(m_AudioSource);
+            m_Col.enabled = true;
+            Invoke(nameof(DisableShoot), timeToDestroy);
         }
 
         private void SetInitialReferences()
         {
-            gameSettings = GameSettings.instance;
-            col = GetComponent<Collider>();
-            audioSource = GetComponent<AudioSource>();
+            m_GameSettings = GameSettings.instance;
+            m_Col = GetComponent<Collider>();
+            m_AudioSource = GetComponent<AudioSource>();
         }
 
         private void FixedUpdate()
@@ -46,15 +46,14 @@ namespace RiverAttack
         private void DisableShoot()
         {
             gameObject.SetActive(false);
-            col.enabled = false;
+            m_Col.enabled = false;
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(gameSettings.playerTag) || other.CompareTag(gameSettings.shootTag))
-            {
-                gameObject.SetActive(false);
-                col.enabled = false;
-            }
+            if (!other.GetComponent<PlayerMaster>() && !other.GetComponent<BulletPlayer>())
+                return;
+            gameObject.SetActive(false);
+            m_Col.enabled = false;
         }
     }
 }

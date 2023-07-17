@@ -61,7 +61,7 @@ public abstract class ObstacleMoviment : MonoBehaviour {
     protected virtual void MoveEnemy()
     {
         //Debug.Log("Canmove: "+ canMove + " Move dir: " + moveDirection + " Gameover?: " + gameManager.isGameOver + " Pause: " + gameManager.isPaused + " Destroy: " + enemyMaster.IsDestroyed);
-        if (!canMove || !GamePlayManager.instance.shouldBePlayingGame || moveDirection == Directions.None || enemyMaster.IsDestroyed)
+        if (!canMove || !GamePlayManager.instance.shouldBePlayingGame || moveDirection == Directions.None || enemyMaster.isDestroyed)
             return;
         enemyMovment = faceDirection * EnemySpeedy * Time.deltaTime;
         transform.position += enemyMovment;
@@ -71,8 +71,8 @@ public abstract class ObstacleMoviment : MonoBehaviour {
 
     private Vector3 MoveInCurveAnimation(Directions moveDirection)
     {
-        float st = enemyMaster.EnemyStartPosition.y - 2;
-        float st2 = enemyMaster.EnemyStartPosition.y + 2;
+        float st = enemyMaster.enemyStartPosition.y - 2;
+        float st2 = enemyMaster.enemyStartPosition.y + 2;
         float posy = Mathf.Lerp(st, st2, curveMoviment.Evaluate(Time.time));//enemyMaster.EnemyStartPosition.y + curveMovment.Evaluate(enemySpeedy / Time.time);
         //float posy = Mathf.Clamp(curveMovment.Evaluate(Time.time), enemyMaster.EnemyStartPosition.y - 3, enemyMaster.EnemyStartPosition.y + 3);
         return new Vector3(transform.position.x, posy, transform.position.y);

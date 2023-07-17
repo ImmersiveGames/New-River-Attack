@@ -34,6 +34,7 @@ namespace RiverAttack
         public float multiplyVelocityUp;
         [Range(.01f, 1f)]
         public float multiplyVelocityDown;
+        public float cadenceShoot;
         public float shootVelocity = 10f;
         [Header("PowerUP Effects")]
         public float speedyShoot;

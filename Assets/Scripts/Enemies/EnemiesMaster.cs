@@ -5,121 +5,104 @@ using Utils;
 
 namespace RiverAttack
 {
-    
-public class EnemiesMaster : MonoBehaviour
-{
-    public EnemiesScriptable enemy;
-    public bool IsDestroyed;
-    //public bool goalLevel;
-    public bool ignoreWall;
-    //public bool ignoreEnemys;
-    protected Vector3 startPosition;
-    public Vector3 EnemyStartPosition { get { return startPosition; } }
-
-    protected GamePlayManager gamePlay;
-
-    public delegate void GeneralEventHandler();
-    public event GeneralEventHandler EventDestroyEnemy;
-    public event GeneralEventHandler EventChangeSkin;
-
-    public delegate void MovimentEventHandler(Vector3 pos);
-    public event MovimentEventHandler EventMovimentEnemy;
-    public event MovimentEventHandler EventFlipEnemy;
-
-    public delegate void EnemyEventHandler(PlayerMaster playerMaster);
-    public event EnemyEventHandler EventPlayerDestroyEnemy;
-
-    private void Awake()
+    public class EnemiesMaster : MonoBehaviour
     {
-        gameObject.name = enemy.name;
-
-        startPosition = transform.position;
-        IsDestroyed = false;
-    }
-
-    protected virtual void OnEnable()
-    {
-        SetInitialReferences();
-        gamePlay.EventResetEnemies += OnInitializeEnemy;
-    }
-
-    protected virtual void SetInitialReferences()
-    {
-        gamePlay = GamePlayManager.instance;
-        //Debug.Log(GameSettings.Instance.enemyTag);
-        gameObject.tag = GameSettings.instance.enemyTag;
-        gameObject.layer = GameSettings.instance.layerEnemies;
-    }
-
-    protected virtual void OnInitializeEnemy()
-    {
-        if (!enemy.canRespawn && IsDestroyed)
-            Destroy(this.gameObject, 0.1f);
-        else
+        public EnemiesScriptable enemy;
+        public bool isDestroyed;
+        //public bool goalLevel;
+        public bool ignoreWall;
+        //public bool ignoreEnemys;
+        public Vector3 enemyStartPosition
         {
-            Utils.Tools.ToggleChildren(this.transform, true);
-            transform.position = startPosition;
-            IsDestroyed = false;
+            get;
+            private set;
         }
 
-    }
+        GamePlayManager m_GamePlayManager;
 
-    public void SetTagLayer(GameObject[] objects, string mytag, int mylayer)
-    {
-        for (int i = 0; i < objects.Length; i++)
+        public delegate void GeneralEventHandler();
+        public event GeneralEventHandler EventDestroyEnemy;
+        public event GeneralEventHandler EventChangeSkin;
+
+        public delegate void MovementEventHandler(Vector3 pos);
+        public event MovementEventHandler EventMovementEnemy;
+        public event MovementEventHandler EventFlipEnemy;
+
+        public delegate void EnemyEventHandler(PlayerMaster playerMaster);
+        public event EnemyEventHandler EventPlayerDestroyEnemy;
+
+        private void Awake()
         {
-            objects[i].tag = mytag;
-            objects[i].layer = mylayer;
-        }
-    }
+            gameObject.name = enemy.name;
 
-    protected virtual void OnDisable()
-    {
-        gamePlay.EventResetEnemies -= OnInitializeEnemy;
-    }
+            enemyStartPosition = transform.position;
+            isDestroyed = false;
+        }
+
+        protected virtual void OnEnable()
+        {
+            SetInitialReferences();
+            m_GamePlayManager.EventResetEnemies += OnInitializeEnemy;
+        }
+
+        protected virtual void SetInitialReferences()
+        {
+            m_GamePlayManager = GamePlayManager.instance;
+            //Debug.Log(GameSettings.Instance.enemyTag);
+            //gameObject.tag = GameSettings.instance.enemyTag;
+            //gameObject.layer = GameSettings.instance.layerEnemies;
+        }
+
+        protected virtual void OnInitializeEnemy()
+        {
+            if (!enemy.canRespawn && isDestroyed)
+                Destroy(this.gameObject, 0.1f);
+            else
+            {
+                Utils.Tools.ToggleChildren(this.transform, true);
+                transform.position = enemyStartPosition;
+                isDestroyed = false;
+            }
+
+        }
+
+        public void SetTagLayer(IEnumerable<GameObject> objects, string myTag, int myLayer)
+        {
+            foreach (var t in objects)
+            {
+                t.tag = myTag;
+                t.layer = myLayer;
+            }
+        }
+
+        protected virtual void OnDisable()
+        {
+            m_GamePlayManager.EventResetEnemies -= OnInitializeEnemy;
+        }
 
     #region Calls
-    public void CallEventDestroyEnemy()
-    {
-        if (EventDestroyEnemy != null)
+        public void CallEventDestroyEnemy()
         {
-            EventDestroyEnemy();
+            EventDestroyEnemy?.Invoke();
         }
-    }
-    public void CallEventMovimentEnemy(Vector3 pos)
-    {
-        if (EventMovimentEnemy != null)
+        public void CallEventMovementEnemy(Vector3 pos)
         {
-            EventMovimentEnemy(pos);
+            EventMovementEnemy?.Invoke(pos);
         }
-    }
-    public void CallEventFlipEnemy(Vector3 pos)
-    {
-        if (EventFlipEnemy != null)
+        public void CallEventFlipEnemy(Vector3 pos)
         {
-            EventFlipEnemy(pos);
+            EventFlipEnemy?.Invoke(pos);
         }
-    }
-    public void CallEventDestroyEnemy(PlayerMaster playerMaster)
-    {
-        if (EventDestroyEnemy != null)
+        public void CallEventDestroyEnemy(PlayerMaster playerMaster)
         {
-            EventDestroyEnemy();
+            EventDestroyEnemy?.Invoke();
+            EventPlayerDestroyEnemy?.Invoke(playerMaster);
         }
-        if (EventPlayerDestroyEnemy != null)
-        {
-            EventPlayerDestroyEnemy(playerMaster);
-        }
-    }
 
-    public void CallEventChangeSkin()
-    {
-        if (EventChangeSkin != null)
+        public void CallEventChangeSkin()
         {
-            EventChangeSkin();
+            EventChangeSkin?.Invoke();
         }
-    }
     #endregion
+    }
 }
-}
-

@@ -123,5 +123,12 @@ namespace RiverAttack
                 list.Add(itemResults);
             }
         }
+
+        #region Calls
+        public void CallEventPlayerShoot()
+        {
+            EventPlayerShoot?.Invoke();
+        }
+  #endregion
     }
 }

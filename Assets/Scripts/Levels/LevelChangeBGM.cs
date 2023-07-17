@@ -1,30 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace RiverAttack
 {
     public class LevelChangeBGM : MonoBehaviour
     {
-        public GamePlayAudio.LevelType idBGMtoChange;
+        public GamePlayAudio.LevelType idBgMtoChange;
         public float speedy;
-        GamePlayAudio playAudio;
-        GamePlayManager playMaster;
+        GamePlayAudio m_PlayAudio;
+        GamePlayManager m_PlayMaster;
         private void OnEnable()
         {
-            playMaster = GamePlayManager.instance;
-            playAudio = GamePlayAudio.instance;
+            m_PlayMaster = GamePlayManager.instance;
+            m_PlayAudio = GamePlayAudio.instance;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if ((other.transform.root.CompareTag(GameSettings.instance.playerTag)))
-            {
-                Debug.Log("Colidiu");
-                playAudio.ChangeBGM(idBGMtoChange, speedy);
-                playMaster.actualBGM = idBGMtoChange;
-                GetComponent<Collider>().enabled = false;
-            }
+            if (!other.GetComponentInParent<PlayerMaster>()) return;
+            Debug.Log("Colidiu");
+            m_PlayAudio.ChangeBGM(idBgMtoChange, speedy);
+            m_PlayMaster.actualBGM = idBgMtoChange;
+            GetComponent<Collider>().enabled = false;
         }
     }
 }
