@@ -12,6 +12,9 @@ namespace RiverAttack
         public float autoMovement;
         public int maxContinue;
         public int continues;
+
+        [Header("Layer Names")]
+        public LayerMask layerPlayer, layerEnemies, layerCollection, layerWall;
         
         [Header("Tag Names")]
         public string playerTag = "Players";        // identifica o nome da tag para o player
