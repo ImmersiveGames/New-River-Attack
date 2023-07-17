@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RiverAttack
@@ -28,7 +28,7 @@ namespace RiverAttack
         [SerializeField]
         GameSettings m_GameSettings;
 
-        /*[SerializeField]
+        [SerializeField]
         private GameSettings gameSettings;
         [SerializeField]
         public GamePlaySettings gamePlayLog;
@@ -38,11 +38,11 @@ namespace RiverAttack
         [SerializeField]
         public Levels actualLevel;
         [SerializeField]
-        private Player[] numPlayer;
+        //private Player[] numPlayer;
         private Dictionary<string, object> gameplayDefault = new Dictionary<string, object>();
     
-        private GameManagerSaves gameSaves;
-        */
+        //private GameManagerSaves gameSaves;
+        
     #region UNITYMETHODS
         void Awake()
         {
