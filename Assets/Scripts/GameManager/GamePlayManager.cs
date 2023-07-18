@@ -131,7 +131,7 @@ namespace RiverAttack
 
         public PlayerStats GetPlayerSettings(int id)
         {
-            return listPlayer[id].GetComponent<PlayerMaster>().PlayersSettings();
+            return listPlayer[id].GetComponent<PlayerMaster>().GetPlayersSettings();
         }
 
         public void ReadyPlayer(bool ready)
