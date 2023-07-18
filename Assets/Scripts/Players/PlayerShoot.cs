@@ -41,7 +41,7 @@ namespace RiverAttack
         {
             m_PlayerMaster = GetComponent<PlayerMaster>();
             m_PlayerController = GetComponent<PlayerController>();
-            m_PlayerStats = m_PlayerMaster.PlayersSettings();
+            m_PlayerStats = m_PlayerMaster.GetPlayersSettings();
             //controllerMap = m_PlayerMaster.playerSettings.controllerMap;
         }
         void FixedUpdate()

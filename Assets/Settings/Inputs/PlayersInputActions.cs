@@ -96,7 +96,7 @@ namespace RiverAttack
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""2D Vector"",
+                    ""name"": ""TouchMove"",
                     ""id"": ""1a826521-81f3-4882-b684-0d86c3f2c5a1"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
@@ -133,7 +133,7 @@ namespace RiverAttack
                     ""id"": ""ad1968f7-ff0a-4834-93e1-a59ba84a6031"",
                     ""path"": ""<Touchscreen>/primaryTouch/delta/left"",
                     ""interactions"": """",
-                    ""processors"": ""Clamp(min=0.2,max=2)"",
+                    ""processors"": ""Clamp(max=1)"",
                     ""groups"": ""Mobile"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
@@ -144,7 +144,7 @@ namespace RiverAttack
                     ""id"": ""c5ddc0d2-da93-4314-aff3-f65cda49953a"",
                     ""path"": ""<Touchscreen>/primaryTouch/delta/right"",
                     ""interactions"": """",
-                    ""processors"": ""Clamp(min=0.2,max=2)"",
+                    ""processors"": ""Clamp(max=1)"",
                     ""groups"": ""Mobile"",
                     ""action"": ""Move"",
                     ""isComposite"": false,

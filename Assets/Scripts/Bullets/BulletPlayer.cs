@@ -16,7 +16,7 @@ namespace RiverAttack
         void Awake()
         {
             ownerShoot = GetComponentInParent<PlayerMaster>();
-            shootVelocity = ownerShoot.PlayersSettings().shootVelocity;
+            shootVelocity = ownerShoot.GetPlayersSettings().shootVelocity;
         }
         private void OnEnable()
         {

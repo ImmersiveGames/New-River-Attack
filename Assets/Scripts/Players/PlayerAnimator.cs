@@ -29,7 +29,7 @@ namespace RiverAttack
             m_PlayerMaster = GetComponent<PlayerMaster>();
             m_Animator = GetComponent<Animator>();
         }
-        private void AnimationMovement(Vector3 dir)
+        private void AnimationMovement(Vector2 dir)
         {
             m_Animator.SetFloat(DirX, dir.x);
             m_Animator.SetFloat(DirY, dir.y);
