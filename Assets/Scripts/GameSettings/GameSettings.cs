@@ -6,28 +6,19 @@ namespace RiverAttack
     [CreateAssetMenu(fileName = "GameSettings", menuName = "RiverAttack/GameSettings", order = 0)]
     public class GameSettings : SingletonScriptableObject<GameSettings>
     {
-        public GameObject playerPrefab;
-        
         [Header("Options")]
         public float autoMovement;
         public int maxContinue;
         public int continues;
 
         [Header("Layer Names")]
-        public LayerMask layerPlayer, layerEnemies, layerCollection, layerWall;
+        public LayerMask layerPlayer;
+        public LayerMask layerEnemies;
+        public LayerMask layerCollection; 
+        public LayerMask layerWall;
         
-        [Header("Tag Names")]
-        public string playerTag = "Players";        // identifica o nome da tag para o player
-        public string wallTag = "Walls";            // identifica o nome da tag para as paredes
-        public string enemyTag = "Enemies";         // identifica o nome da tag para os inimigos
-        public string collectionTag = "Collection"; // identifica o nome da tag dos coletaveis
-        
-        public string shootTag = "Shoots"; // identifica o nome da tag dos disparos
-    
-        #region GameModes
-        [SerializeField]
         public enum GameModes { Classic = 0, Mission = 1 }
-        [SerializeField]
+        [SerializeField, Header("GameModes")]
         GameModes actualGameMode = GameModes.Mission;
         
         public void ChangeGameMode(GameModes gameMode)
@@ -46,8 +37,7 @@ namespace RiverAttack
         {
             actualGameMode = (GameModes)gameMode;
         }
-      
-      #endregion
+        
 
         #region GameScenes
         public enum GameScenes { Mission, Credits };

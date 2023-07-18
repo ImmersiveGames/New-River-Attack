@@ -165,5 +165,9 @@ namespace Utils
             public float minValue;
             public float maxValue;
         }
+        public static void ToggleChildrens(Transform transform, bool b)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

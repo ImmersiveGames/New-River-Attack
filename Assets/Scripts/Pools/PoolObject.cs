@@ -9,7 +9,7 @@ namespace Utils
 
         private readonly GameObject m_PooledObj;
 
-        //private int initialPoolSize;
+        private int m_InitialPoolSize;
 
         private readonly Transform m_MyRoot;
         private Transform m_Target;
@@ -18,8 +18,8 @@ namespace Utils
         {
             m_PooledObjects = new List<GameObject>();
             this.m_MyRoot = new GameObject("Pool(" + myRoot.root.name + ")").transform;
-            //this.myroot.SetParent(myroot);
-            //this.myroot.SetAsLastSibling();
+            this.m_MyRoot.SetParent(myRoot);
+            this.m_MyRoot.SetAsLastSibling();
             var transform = this.m_MyRoot.transform;
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
@@ -30,7 +30,7 @@ namespace Utils
             if (persistent)
                 Object.DontDestroyOnLoad(myRoot);
             this.m_PooledObj = prefab;
-            //this.initialPoolSize = initialPoolSize;
+            this.m_InitialPoolSize = initialPoolSize;
         }
 
         private GameObject CreateObject(GameObject prefab, Transform poolRoot)
@@ -54,7 +54,7 @@ namespace Utils
                 //set the object to active.
                 m_PooledObjects[i].SetActive(true);
                 //return the object we found.
-                //pooledObjects[i].transform.parent = null;
+                m_PooledObjects[i].transform.parent = null;
                 return m_PooledObjects[i];
             }
             return CreateObject(m_PooledObj, this.m_MyRoot);

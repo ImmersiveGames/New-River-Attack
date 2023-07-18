@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// ReSharper disable StringLiteralTypo
 
 namespace RiverAttack
 {
@@ -26,10 +27,8 @@ namespace RiverAttack
         float countdownToStartTimer = 3f;
 
         [SerializeField]
-        GameSettings m_GameSettings;
-
-        [SerializeField]
-        private GameSettings gameSettings;
+        GameSettings gameSettings;
+        
         [SerializeField]
         public GamePlaySettings gamePlayLog;
         
@@ -39,14 +38,14 @@ namespace RiverAttack
         public Levels actualLevel;
         [SerializeField]
         //private Player[] numPlayer;
-        private Dictionary<string, object> gameplayDefault = new Dictionary<string, object>();
+        private Dictionary<string, object> m_GameplayDefault = new Dictionary<string, object>();
     
         //private GameManagerSaves gameSaves;
         
     #region UNITYMETHODS
         void Awake()
         {
-            states = States.Menu;
+            //states = States.Menu;
             isGameFinish = false;
             isGameOver = false;
             isGamePaused = false;

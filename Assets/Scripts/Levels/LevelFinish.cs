@@ -1,29 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace RiverAttack
 {
     public class LevelFinish : MonoBehaviour
     {
-        GameSettings gameSettings;
-        GameManager gameManager;
-        GamePlayManager gamePlay;
-        private void OnEnable()
+        GameSettings m_GameSettings;
+        GameManager m_GameManager;
+        GamePlayManager m_GamePlay;
+        void OnEnable()
         {
-            gamePlay = GamePlayManager.instance;
-            gameManager = GameManager.instance;
-            gameSettings = GameSettings.instance;
+            m_GamePlay = GamePlayManager.instance;
+            m_GameManager = GameManager.instance;
+            m_GameSettings = GameSettings.instance;
         }
 
-        private void OnTriggerEnter(Collider other)
+        void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag(gameSettings.playerTag))
-            {
-                if (!gameManager.levelsFinish.Contains(gameManager.actualLevel))
-                    gameManager.levelsFinish.Add(gameManager.actualLevel);
-                gamePlay.CallEventCompletePath();
-            }
+            if (!other.GetComponent<PlayerMaster>()) return;
+            if (!m_GameManager.levelsFinish.Contains(m_GameManager.actualLevel))
+                m_GameManager.levelsFinish.Add(m_GameManager.actualLevel);
+            m_GamePlay.CallEventCompletePath();
         }
     }
 }

@@ -20,11 +20,11 @@ namespace RiverAttack
         [SerializeField]
         public float totalTime;
         [SerializeField]
-        public List<EnemiesResults> HitEnemys;
+        public List<global::EnemiesResults> HitEnemys;
     
         public int GetEnemysHit(EnemiesScriptable enemy)
         {
-            EnemiesResults item = HitEnemys.Find(x => x.enemy == enemy);
+            global::EnemiesResults item = HitEnemys.Find(x => x.enemy == enemy);
             if (item != null)
             {
                 return item.quantity;

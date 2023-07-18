@@ -39,7 +39,7 @@ namespace RiverAttack
     #endregion
         
         [SerializeField]
-        private List<EnemiesResults> listEnemiesHit;
+        private List<global::EnemiesResults> listEnemiesHit;
 
     #region UNITYMETHODS
         void Awake()
@@ -49,7 +49,7 @@ namespace RiverAttack
             m_MultiplyVelocityUp = playerStats.multiplyVelocityUp;
             m_MultiplyVelocityDown = playerStats.multiplyVelocityDown;
             m_PlayerController = GetComponent<PlayerController>();
-            listEnemiesHit = new List<EnemiesResults>();
+            listEnemiesHit = new List<global::EnemiesResults>();
         }
 
         // Update is called once per frame
@@ -101,14 +101,14 @@ namespace RiverAttack
             AddResultList(GamePlaySettings.instance.HitEnemys, obstacle, qnt);
         }
 
-        void AddResultList(List<EnemiesResults> list, EnemiesScriptable enemy, int qnt = 1)
+        static void AddResultList(List<global::EnemiesResults> list, EnemiesScriptable enemy, int qnt = 1)
         {
             var itemResults = list.Find(x => x.enemy == enemy);
             if (itemResults != null)
             {
                 if (enemy.GetType() == typeof(CollectibleScriptable))
                 {
-                    CollectibleScriptable collectibles = (CollectibleScriptable)enemy;
+                    var collectibles = (CollectibleScriptable)enemy;
                     if (itemResults.quantity + qnt < collectibles.maxCollectible)
                         itemResults.quantity += qnt;
                     else
@@ -119,9 +119,20 @@ namespace RiverAttack
             }
             else
             {
-                itemResults = new EnemiesResults(enemy, qnt);
+                itemResults = new global::EnemiesResults(enemy, qnt);
                 list.Add(itemResults);
             }
         }
+
+        #region Calls
+        public void CallEventPlayerShoot()
+        {
+            EventPlayerShoot?.Invoke();
+        }
+        public void CallEventPlayerHit()
+        {
+            EventPlayerHit?.Invoke();
+        }
+  #endregion
     }
 }

@@ -16,7 +16,7 @@ namespace RiverAttack
         public int enemyScore;
         public Sprite spriteIcon;
         public AudioMixerGroup enemyAudioMixerGroup;
-        //public DifficultyList enemiesDifficulty;
+        public DifficultyList enemiesDifficulty;
         public bool canFlip;
         public bool canRespawn;
         public bool canDestruct;

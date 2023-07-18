@@ -1,106 +1,82 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace RiverAttack
 {
-    public class BulletPlayer : MonoBehaviour
+    public class BulletPlayer : Bullets
     {
          #region Variable Private Inspector
-    [SerializeField] AudioEventSample audioShoot;
-    [SerializeField] float shootVelocity = 10f;
-    [SerializeField] bool bulletLifeTime = false;
-    [SerializeField] float lifeTime = 2f;
-    private float startTime;
-    public PlayerMaster OwnerShoot { get; set; }
-    public Transform myPool { get; set; }
-    #endregion
-
-    private void OnEnable()
-    {
-        AudioSource audioSource = GetComponent<AudioSource>();
-        audioShoot.Play(audioSource);
-    }
-    /// <summary>
-    /// Executa quando o objeto esta ativo
-    /// </summary>
-    /// 
-    private void Start()
-    {
-        startTime = Time.time + lifeTime;
-    }
-
-    public void SetSpeedShoot(double speedy)
-    {
-        shootVelocity = (float)speedy;
-    }
-    /// <summary>
-    /// Executa a cada atualização de frame da fisica
-    /// </summary>
-    /// 
-    void FixedUpdate()
-    {
-        MoveShoot();
-        AutoDestroy();
-    }
-    /// <summary>
-    /// Proper this object forward
-    /// </summary>
-    /// 
-    private void MoveShoot()
-    {
-        if (GamePlayManager.instance.shouldBePlayingGame)
-        {
-            float speedy = shootVelocity * Time.deltaTime;
-            transform.Translate(Vector3.forward * speedy);
-        }
-        else
-        {
-            DestroyMe();
-        }
+        [SerializeField] bool bulletLifeTime = false;
+        [SerializeField] float lifeTime = 2f;
+        float m_StartTime;
+        public PlayerMaster ownerShoot;
+        Transform m_MyPool;
         
-    }
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (!collision.transform.root.CompareTag(GameSettings.instance.playerTag))
+        #endregion
+
+        #region UnityMethods
+        void Awake()
         {
-            if (collision.transform.root.CompareTag(GameSettings.instance.collectionTag)){
-                var collectibles = (CollectibleScriptable)collision.transform.root.GetComponent<EnemiesMaster>().enemy;
-                //if (collectibles.PowerUp != null) return;
-            } 
+            ownerShoot = GetComponentInParent<PlayerMaster>();
+            shootVelocity = ownerShoot.PlayersSettings().shootVelocity;
+        }
+        private void OnEnable()
+        {
+            var audioSource = GetComponent<AudioSource>();
+            audioShoot.Play(audioSource);
+        }
+        void Start()
+        {
+            m_StartTime = Time.time + lifeTime;
+        }
+        void FixedUpdate()
+        {
+            MoveShoot();
+            AutoDestroy();
+        }
+        void OnTriggerEnter(Collider collision)
+        {
+            if (collision.GetComponentInParent<PlayerMaster>()) return;
+            var hitCollectable = (CollectibleScriptable)collision.transform.root.GetComponent<EnemiesMaster>().enemy;
+            if (hitCollectable) return;
             DestroyMe();
         }
-    }
-    /// <summary>
-    /// If OnLifeTime set, auto destroyer this object
-    /// </summary>
-    /// 
-    private void AutoDestroy()
-    {
-        if (bulletLifeTime && Time.time >= startTime)
+        void OnBecameInvisible()
         {
-            DestroyMe();
+            Invoke(nameof(DestroyMe), .1f);
         }
-    }
-    /// <summary>
-    /// Atalho para destruir este objeto
-    /// </summary>
-    private void DestroyMe()
-    {
-        //Destroy(this.gameObject);
-        
-        gameObject.SetActive(false);
-        gameObject.transform.SetParent(myPool);
-        gameObject.transform.SetAsLastSibling();
-    }
-    /// <summary>
-    /// Se o objeto sai da tela ele é destruido
-    /// </summary>
-    private void OnBecameInvisible()
-    {
-        Invoke("DestroyMe", .1f);
-    }
+        #endregion
+
+        public void SetSpeedShoot(double speedy)
+        {
+            shootVelocity = (float)speedy;
+        }
+        void MoveShoot()
+        {
+            if (GamePlayManager.instance.shouldBePlayingGame)
+            {
+                float speedy = shootVelocity * Time.deltaTime;
+                transform.Translate(Vector3.forward * speedy);
+            }
+            else
+            {
+                DestroyMe();
+            }
+        }
+
+        void AutoDestroy()
+        {
+            if (bulletLifeTime && Time.time >= m_StartTime)
+            {
+                DestroyMe();
+            }
+        }
+        void DestroyMe()
+        {
+            //Destroy(this.gameObject);
+
+            gameObject.SetActive(false);
+            gameObject.transform.SetParent(m_MyPool);
+            gameObject.transform.SetAsLastSibling();
+        }
     }
 }
-
-

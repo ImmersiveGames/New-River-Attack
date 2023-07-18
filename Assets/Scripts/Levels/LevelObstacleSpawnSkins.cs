@@ -13,7 +13,7 @@ namespace RiverAttack
         private void LoadPrefab()
         {
             LevelObstacleSpawnMaster spawnMaster = GetComponent<LevelObstacleSpawnMaster>();
-            ObstacleSkins oskin = spawnMaster.GetPrefab.GetComponent<ObstacleSkins>();
+            ObstacleSkins oskin = spawnMaster.getPrefab.GetComponent<ObstacleSkins>();
             if (oskin != null)
             {
                 this.indexStartSkin = oskin.IndexSkin;
