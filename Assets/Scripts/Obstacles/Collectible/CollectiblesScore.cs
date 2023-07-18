@@ -27,7 +27,7 @@ namespace RiverAttack
 
         private void SetCollScore(PlayerMaster playerMaster)
         {
-            playerMaster.PlayersSettings().score += scoreCollect;
+            playerMaster.GetPlayersSettings().score += scoreCollect;
         }
     }
 }

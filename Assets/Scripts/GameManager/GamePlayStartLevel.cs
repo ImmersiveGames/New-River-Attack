@@ -58,9 +58,9 @@ namespace RiverAttack
             Time.timeScale = 1;
             SplashScreen(playMaster.GetActualLevel().name, "Start");
             //playMaster.ListPlayer[0].transform.GetComponent<PlayerMaster>().SetFixCam(true);
-            foreach (var player in playMaster.ListPlayer)
+            foreach (var player in playMaster.listPlayer)
             {
-                Vector3 playerPos = player.GetComponent<PlayerMaster>().PlayersSettings().spawnPosition;
+                Vector3 playerPos = player.GetComponent<PlayerMaster>().GetPlayersSettings().spawnPosition;
                 Vector3 to = new Vector3(playerPos.x, playerPos.y, playMaster.GetActualLevel().levelMilstones[0].z);
                 StartCoroutine(MoveToPosition(player.transform, to, inTime));
                 player.GetComponent<PlayerMaster>().UpdateSavePoint(to);
@@ -88,7 +88,7 @@ namespace RiverAttack
             audioSource.Play();
             Vector3 pos = playMaster.GetActualLevel().levelMilstones[playMaster.GetActualLevel().levelMilstones.Count - 1];
             Vector3 to = new Vector3(pos.x, pos.y + 10, pos.z);
-            foreach (GameObject player in playMaster.ListPlayer)
+            foreach (GameObject player in playMaster.listPlayer)
             {
                 StartCoroutine(MoveToPosition(player.transform, to, inTime));
             }

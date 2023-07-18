@@ -43,7 +43,7 @@ namespace RiverAttack
                     {
                         changed = true;
                         activePowerups.Remove(powerup);
-                        powerup.PowerUpEnd(GetComponent<PlayerMaster>().PlayersSettings());
+                        powerup.PowerUpEnd(GetComponent<PlayerMaster>().GetPlayersSettings());
                     }
                 }
             }
@@ -67,7 +67,7 @@ namespace RiverAttack
             if (!activePowerups.ContainsKey(powerup))
             {
                 //Debug.Log("Não tem esse powerup na lista");
-                powerup.PowerUpStart(playerMaster.PlayersSettings());
+                powerup.PowerUpStart(playerMaster.GetPlayersSettings());
                 activePowerups.Add(powerup, powerup.duration);
             }
             else
@@ -95,7 +95,7 @@ namespace RiverAttack
                 if (onlyeffect && !powerup.Key.canAccumulateEffects)
                     return;
                 //Debug.Log("Termina o Powerup");
-                powerup.Key.PowerUpEnd(playerMaster.PlayersSettings());
+                powerup.Key.PowerUpEnd(playerMaster.GetPlayersSettings());
             }
             if (!onlyeffect)
                 activePowerups.Clear();

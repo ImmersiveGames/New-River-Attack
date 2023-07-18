@@ -2,7 +2,7 @@
 using Utils;
 namespace RiverAttack
 {
-    public class PlayerBombSet : MonoBehaviour
+    public class PlayerBombSet : Bullets
     {
 
         [SerializeField]

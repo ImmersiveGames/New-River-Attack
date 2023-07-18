@@ -38,7 +38,7 @@ namespace RiverAttack
         }
         void Update()
         {
-            if (autoDecreaseHp && !GamePlayManager.instance.godmode)
+            if (autoDecreaseHp && !GamePlayManager.instance.getGodMode)
             {
                 AutoReduceHp(reduceFuelRate, reduceFuelCadence);
             }
@@ -53,7 +53,7 @@ namespace RiverAttack
         void SetInitialReferences()
         {
             m_PlayerMaster = GetComponent<PlayerMaster>();
-            m_PlayerStats = m_PlayerMaster.PlayersSettings();
+            m_PlayerStats = m_PlayerMaster.GetPlayersSettings();
             m_AudioSource = GetComponent<AudioSource>();
         }
         private void AutoReduceHp(int reduce, float time)
@@ -68,11 +68,11 @@ namespace RiverAttack
 
         private void CheckHealth()
         {
-            if (playerAlert && m_PlayerMaster.shouldPlayerBeReady && m_PlayerStats.actualHp <= alertHp && !playerAlert.isPlaying(m_AudioSource))
+            if (playerAlert && m_PlayerMaster.shouldPlayerBeReady && m_PlayerStats.actualHp <= alertHp && !playerAlert.IsPlaying(m_AudioSource))
             {
                 playerAlert.Play(m_AudioSource);
             }
-            else if (playerAlert && m_PlayerMaster.shouldPlayerBeReady && m_PlayerStats.actualHp > alertHp && playerAlert.isPlaying(m_AudioSource))
+            else if (playerAlert && m_PlayerMaster.shouldPlayerBeReady && m_PlayerStats.actualHp > alertHp && playerAlert.IsPlaying(m_AudioSource))
             {
                 playerAlert.Stop(m_AudioSource);
             }

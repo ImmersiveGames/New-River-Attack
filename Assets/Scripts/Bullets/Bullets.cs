@@ -7,5 +7,14 @@ namespace RiverAttack
     {
         [SerializeField] protected AudioEventSample audioShoot;
         [SerializeField] public float shootVelocity;
+        protected internal PlayerMaster ownerShoot;
+        public void SetOwner(PlayerMaster owner)
+        {
+            ownerShoot = owner;
+        }
+        public PlayerMaster GetOwner()
+        {
+            return ownerShoot;
+        }
     }
 }

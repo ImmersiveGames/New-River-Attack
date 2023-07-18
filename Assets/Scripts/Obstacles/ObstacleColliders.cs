@@ -30,20 +30,22 @@ namespace RiverAttack
         public virtual void CollectThis(Collider collision) { }
         protected PlayerMaster WhoHit(Collider collision)
         {
-            if (!collision.GetComponentInParent<BulletPlayer>()) return null;
             if (collision.GetComponentInParent<PlayerMaster>())
             {
                 collision.GetComponentInParent<PlayerMaster>().AddEnemiesHitList(enemiesMaster.enemy);
                 return collision.GetComponentInParent<PlayerMaster>();
             }
-            collision.GetComponentInParent<BulletPlayer>().ownerShoot.AddEnemiesHitList(enemiesMaster.enemy);
-            return collision.GetComponentInParent<BulletPlayer>().ownerShoot;
-
-            /*if (collision.transform.root.GetComponent<PlayerBombSet>())
+            if (collision.transform.root.GetComponent<PlayerBombSet>())
             {
-                collision.transform.root.GetComponent<PlayerBombSet>().OwnerShoot.AddHitList(enemiesMaster.enemy);
-                return collision.transform.root.GetComponent<PlayerBombSet>().OwnerShoot;
-            }*/
+                var ownerBomb = collision.GetComponentInParent<PlayerBombSet>().GetOwner();
+                ownerBomb.AddHitList(enemiesMaster.enemy);
+                return ownerBomb;
+            }
+            var ownerShoot = collision.GetComponentInParent<BulletPlayer>().GetOwner();
+            ownerShoot.AddEnemiesHitList(enemiesMaster.enemy);
+            return ownerShoot;
+
+            
 
         }
 

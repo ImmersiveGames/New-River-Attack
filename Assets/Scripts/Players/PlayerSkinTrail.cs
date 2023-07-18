@@ -22,7 +22,7 @@ public class PlayerSkinTrail : MonoBehaviour
         playerMaster = GetComponentInParent<PlayerMaster>();
         gamePlay = GamePlayManager.instance;
     }
-    private void SetTrail(Vector3 dir)
+    private void SetTrail(Vector2 dir)
     {
         if (dir.y > 0)
             SetTrails(true);

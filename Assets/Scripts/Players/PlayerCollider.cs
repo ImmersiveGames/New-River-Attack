@@ -44,7 +44,7 @@ namespace RiverAttack
         {
             if (collision.GetComponentInParent<EnemiesMaster>() || collision.GetComponent<WallsMaster>())
             {
-                if (m_GamePlayManager.godmode) return;
+                if (m_GamePlayManager.getGodMode) return;
                 m_GamePlayManager.CallEventPausePlayGame();
                 m_PlayerMaster.CallEventPlayerHit();
                 m_PlayerMaster.CallEventPlayerDestroy();

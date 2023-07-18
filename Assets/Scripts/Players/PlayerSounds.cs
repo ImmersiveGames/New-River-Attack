@@ -45,7 +45,7 @@ public class PlayerSounds : MonoBehaviour
         gamePlay = GamePlayManager.instance;
     }
 
-    private void SoundEngine(Vector3 dir)
+    private void SoundEngine(Vector2 dir)
     {
         if (playerEngineAudio != null && playerMaster.shouldPlayerBeReady)
         {
@@ -57,14 +57,14 @@ public class PlayerSounds : MonoBehaviour
             if (dir.y < 0 && playerMaster.playerStatus != PlayerMaster.Status.Reduce)
             {
                 playerMaster.playerStatus = PlayerMaster.Status.Reduce;
-                playerEngineAudio.UpdateChangePith(audioSource, playerEngineAudio.audioSample.pitch.maxValue, enginePitchDown);
+                AudioEventSample.UpdateChangePith(audioSource, playerEngineAudio.audioSample.pitch.maxValue, enginePitchDown);
             }
             else if (dir.y == 0 && playerMaster.playerStatus != PlayerMaster.Status.None)
             {
                 if (playerMaster.playerStatus == PlayerMaster.Status.Accelerate)
                     StartCoroutine(ChangeEngine(playerDeaceceEngineAudio, playerEngineAudio));
                 if (playerMaster.playerStatus == PlayerMaster.Status.Reduce)
-                    playerEngineAudio.UpdateChangePith(audioSource, audioSource.pitch, playerEngineAudio.audioSample.pitch.maxValue);
+                    AudioEventSample.UpdateChangePith(audioSource, audioSource.pitch, playerEngineAudio.audioSample.pitch.maxValue);
                 playerMaster.playerStatus = PlayerMaster.Status.None;
             }
             else if (playerEngineAudio != null && playerMaster.shouldPlayerBeReady && !audioSource.isPlaying && playerMaster.playerStatus == PlayerMaster.Status.None)

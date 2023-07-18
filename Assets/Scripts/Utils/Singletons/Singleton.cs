@@ -78,7 +78,7 @@ namespace Utils
             So, this was made to be sure we're not creating that buggy ghost object.
          </summary>
          */
-        void OnDestroy()
+        protected virtual void OnDestroy()
         {
             _applicationIsQuitting = true;
         }

@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// ReSharper disable StringLiteralTypo
-
 namespace RiverAttack
 {
     public class GameManager : Utils.Singleton<GameManager>

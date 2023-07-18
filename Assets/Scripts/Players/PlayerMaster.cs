@@ -7,8 +7,6 @@ namespace RiverAttack
     {
     #region SerilizedField
 
-        [SerializeField] bool hasPlayerReady = false;
-
         float m_AutoMovement;
         float m_MovementSpeed;
         [SerializeField] public bool hasPlayerReady = false;
@@ -87,7 +85,7 @@ namespace RiverAttack
             playerStatus = newStatus;
         }
 
-        public PlayerStats PlayersSettings()
+        public PlayerStats GetPlayersSettings()
         {
             return playerStats;
         }
@@ -202,13 +200,10 @@ namespace RiverAttack
         {
             EventPlayerAddLive?.Invoke();
         }
-  #endregion
-
         public void CallEventControllerMovement(Vector2 dir)
         {           
             EventControllerMovement?.Invoke(dir);
         }
-
-        #endregion
+  #endregion
     }
 }

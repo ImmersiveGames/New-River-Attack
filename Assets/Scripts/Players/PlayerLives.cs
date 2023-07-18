@@ -42,7 +42,7 @@ namespace RiverAttack
         private void SetInitialReferences()
         {
             m_PlayerMaster = GetComponent<PlayerMaster>();
-            m_PlayerStats = m_PlayerMaster.PlayersSettings();
+            m_PlayerStats = m_PlayerMaster.GetPlayersSettings();
             m_GamePlayMaster = GamePlayManager.instance;
         }
         private void AddLives(int newLives)

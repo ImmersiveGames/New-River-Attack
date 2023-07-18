@@ -25,7 +25,7 @@ namespace RiverAttack
         private void SetInitialReferences()
         {
             playerMaster = GetComponent<PlayerMaster>();
-            ShopProductSkin skin = playerMaster.PlayersSettings().playerSkin ?? defaultSkin;
+            ShopProductSkin skin = playerMaster.GetPlayersSettings().playerSkin ?? defaultSkin;
             SetPlayerSkin(skin);
         }
 
@@ -35,7 +35,7 @@ namespace RiverAttack
                 DestroyImmediate(transform.GetChild(0).gameObject);
             mySkin = Instantiate(skin.GetSkin, transform);
             mySkin.transform.SetAsFirstSibling();
-            playerMaster.PlayersSettings().playerSkin = skin;
+            playerMaster.GetPlayersSettings().playerSkin = skin;
             if (mySkin.GetComponent<Collider>())
             {
                 Tools.CopyComponent(mySkin.GetComponentInChildren<Collider>(), gameObject);

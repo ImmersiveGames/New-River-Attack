@@ -17,26 +17,23 @@ namespace RiverAttack
         [SerializeField]
         Levels actualLevel;
 
-
-        public bool godmode { get { return godMode; } }
-
+        public bool getGodMode { get { return godMode; } }
         public bool isGamePause { get { return gamePaused; } }
         public bool isGameBeat { get { return gameBeat; } }
 
         [Header("Level Settings"), SerializeField]
-        private Levels classicLevel;
+        Levels classicLevel;
         [SerializeField]
-        private PlayerStats[] numPlayers;
+        PlayerStats[] numPlayers;
         [SerializeField]
-        private GameObject prefabPlayer;
-        public List<GameObject> listPlayer { get; private set; }
-        private int m_ActualPath;
-        private Dictionary<string, object> m_GameplayDefault = new Dictionary<string, object>();
+        GameObject prefabPlayer;
+         public List<GameObject> listPlayer { get; set; }
+        int m_ActualPath;
+        Dictionary<string, object> m_GameplayDefault = new Dictionary<string, object>();
 
-        private GameManager m_GameManager;
-        private GameSettings m_GameSettings;
-        private GamePlayAudio m_GamePlayAudio;
-        public List<GameObject> ListPlayer;
+        GameManager m_GameManager;
+        GameSettings m_GameSettings;
+        GamePlayAudio m_GamePlayAudio;
         public GamePlayAudio.LevelType actualBGM { get; set; }
 
     #region Delegates
@@ -96,10 +93,10 @@ namespace RiverAttack
   #endregion
 
 
-        private void SpawnPlayers(int numPlayers)
+        private void SpawnPlayers(int players)
         {
             listPlayer = new List<GameObject>();
-            for (int i = 0; i < numPlayers; i++)
+            for (int i = 0; i < players; i++)
             {
                 listPlayer.Add(Instantiate(prefabPlayer));
                 listPlayer[i].SetActive(true);

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 namespace RiverAttack
@@ -13,9 +11,7 @@ namespace RiverAttack
     [System.Serializable]
     public class AudioEventClip
     {
-        [SerializeField]
         public string name;
-        [SerializeField]
         public AudioClip audioClip;
         [Tools.MinMaxRangeAttribute(0, 1)]
         public Tools.FloatRanged volume;

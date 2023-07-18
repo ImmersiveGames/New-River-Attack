@@ -8,7 +8,6 @@ namespace RiverAttack
         [SerializeField] bool bulletLifeTime = false;
         [SerializeField] float lifeTime = 2f;
         float m_StartTime;
-        public PlayerMaster ownerShoot;
         Transform m_MyPool;
         #endregion
 
@@ -45,6 +44,7 @@ namespace RiverAttack
         }
         #endregion
 
+        
         public void SetSpeedShoot(double speedy)
         {
             shootVelocity = (float)speedy;
