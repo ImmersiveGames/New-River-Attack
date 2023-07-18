@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace RiverAttack
 {
-    public class EnemyCollider : ObstacleColliders
+    public class EnemiesCollider : ObstacleColliders
     {
         Collider[] m_MyCollider;
 
@@ -42,7 +42,7 @@ namespace RiverAttack
         }
 
 
-        void ColliderOff()
+        protected void ColliderOff()
         {
             m_MyCollider = GetComponentsInChildren<Collider>();
             int length = m_MyCollider.Length;

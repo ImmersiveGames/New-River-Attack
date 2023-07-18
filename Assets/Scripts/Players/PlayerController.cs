@@ -1,7 +1,7 @@
 using UnityEngine;
 using Utils;
 
-namespace  RiverAttack
+namespace RiverAttack
 {
     public class PlayerController : MonoBehaviour
     {

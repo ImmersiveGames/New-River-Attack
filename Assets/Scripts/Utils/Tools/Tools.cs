@@ -117,7 +117,7 @@ namespace Utils
                 return new Vector2(width, height);
             }
         }
-        
+
 
         public static bool TryParseEnum<TEnum>(string aName, out TEnum aValue) where TEnum : struct
         {
@@ -164,10 +164,6 @@ namespace Utils
         {
             public float minValue;
             public float maxValue;
-        }
-        public static void ToggleChildrens(Transform transform, bool b)
-        {
-            throw new NotImplementedException();
         }
     }
 }

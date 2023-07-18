@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace RiverAttack
 {
-    public class LevelObstacleSpawnShoot : MonoBehaviour {
+    public class LevelObstacleSpawnShoot : MonoBehaviour
+    {
 
         [SerializeField]
         public float bulletSpeedy;
@@ -30,4 +31,3 @@ namespace RiverAttack
         }
     }
 }
-

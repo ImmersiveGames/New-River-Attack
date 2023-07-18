@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public abstract class ObstacleSkins : MonoBehaviour {
+public abstract class ObstacleSkins : MonoBehaviour
+{
 
     [SerializeField]
     protected int indexStartSkin;
@@ -28,11 +29,11 @@ public abstract class ObstacleSkins : MonoBehaviour {
         {
             if (randomSkin)
                 indexStartSkin = UnityEngine.Random.Range(0, enemySkins.Length);
-            if(enemySkins[indexStartSkin] != obstacleSkin)
+            if (enemySkins[indexStartSkin] != obstacleSkin)
             {
                 // precisa mudar
                 obstacleSkin = enemySkins[indexStartSkin];
-                if(transform.GetChild(0))
+                if (transform.GetChild(0))
                     DestroyImmediate(transform.GetChild(0).gameObject);
                 GameObject go = Instantiate(obstacleSkin, transform);
                 go.transform.SetAsFirstSibling();

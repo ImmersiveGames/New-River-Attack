@@ -2,7 +2,7 @@
 
 namespace RiverAttack
 {
-    
+
     [RequireComponent(typeof(LevelObstacleSpawnMaster))]
     public class LevelObstacleSpawnMovement : ObstacleMovement
     {
@@ -27,4 +27,3 @@ namespace RiverAttack
         }
     }
 }
-

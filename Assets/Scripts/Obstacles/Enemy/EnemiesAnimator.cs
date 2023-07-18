@@ -4,7 +4,7 @@ using UnityEngine;
 namespace RiverAttack
 {
     [RequireComponent(typeof(EnemiesMaster))]
-    public sealed class EnemiesAnimator : MonoBehaviour
+    public class EnemiesAnimator : MonoBehaviour
     {
 
         public string explosionTrigger;
@@ -15,7 +15,7 @@ namespace RiverAttack
         Animator m_Animator;
         GamePlayManager m_GamePlayManager;
 
-        void OnEnable()
+        protected virtual void OnEnable()
         {
             SetInitialReferences();
             m_EnemyMaster.EventDestroyEnemy += ExplodeAnimation;
@@ -26,7 +26,7 @@ namespace RiverAttack
         }
 
 
-        void SetInitialReferences()
+        protected virtual void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_EnemyMaster = GetComponent<EnemiesMaster>();
@@ -77,7 +77,7 @@ namespace RiverAttack
             }
         }
 
-        void OnDisable()
+        protected virtual void OnDisable()
         {
             m_EnemyMaster.EventDestroyEnemy -= ExplodeAnimation;
             m_EnemyMaster.EventMovementEnemy -= MovementAnimation;

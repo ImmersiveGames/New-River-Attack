@@ -24,7 +24,7 @@ namespace RiverAttack
         GamePlayManager m_GamePlayManager;
         EnemiesDifficulty m_EnemiesDifficulties;
         protected float playerDistance;
-        
+
         void OnEnable()
         {
             SetInitialReferences();

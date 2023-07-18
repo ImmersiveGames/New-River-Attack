@@ -28,20 +28,20 @@ namespace RiverAttack
 
         [SerializeField]
         GameSettings gameSettings;
-        
+
         [SerializeField]
         public GamePlaySettings gamePlayLog;
-        
+
         [SerializeField]
         public List<Levels> levelsFinish = new List<Levels>();
         [SerializeField]
         public Levels actualLevel;
         [SerializeField]
-        //private Player[] numPlayer;
+        private PlayerStats[] numPlayer;
         private Dictionary<string, object> m_GameplayDefault = new Dictionary<string, object>();
-    
+
         //private GameManagerSaves gameSaves;
-        
+
     #region UNITYMETHODS
         void Awake()
         {
@@ -108,9 +108,14 @@ namespace RiverAttack
         {
             return isGamePaused;
         }
-        
-        
-        
+
+        public bool GetGameOver()
+        {
+            return isGameOver;
+        }
+
+
+
         void GameInput_onPauseAction(object sender, EventArgs e)
         {
             TogglePauseGame();
@@ -121,7 +126,7 @@ namespace RiverAttack
             //gameSaves = GameManagerSaves.Instance;
         }
 
-        
+
         public void SetupGame()
         {
             isGameOver = false;
@@ -155,10 +160,10 @@ namespace RiverAttack
             return null;
         }
 
-        /*public Player GetFirstPlayer(int num = 0)
+        public PlayerStats GetFirstPlayer(int num = 0)
         {
             return numPlayer[num];
-        }*/
+        }
         /*private void OnDisable()
         {
             gamePlayLog.totalTime += Time.unscaledTime;

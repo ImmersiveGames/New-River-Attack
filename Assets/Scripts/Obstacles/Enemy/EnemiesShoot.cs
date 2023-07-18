@@ -6,18 +6,21 @@ namespace RiverAttack
     {
         public int poolStart;
         public bool playerTarget;
-    
-        private EnemySkinParts m_SkinPart;
+
+        private EnemiesSkinParts m_SkinPart;
         Transform m_SpawnPosition;
         PoolObjectManager m_MyPool;
 
-        Transform target { get;
-            set; }
-    
+        Transform target
+        {
+            get;
+            set;
+        }
+
         protected override void OnEnable()
         {
             base.OnEnable();
-            m_SkinPart = GetComponentInChildren<EnemySkinParts>();
+            m_SkinPart = GetComponentInChildren<EnemiesSkinParts>();
             m_MyPool = PoolObjectManager.instance;
             if (!GetComponent<ObstacleDetectApproach>().enabled)
                 InvokeRepeating(nameof(StartFire), 1, cadencyShoot);
@@ -25,7 +28,7 @@ namespace RiverAttack
         private void Start()
         {
             SetTarget(GamePlayManager.instance.GetPlayer(0).transform);
-            m_SpawnPosition = GetComponentInChildren<EnemyShootSpawn>().transform;
+            m_SpawnPosition = GetComponentInChildren<EnemiesShootSpawn>().transform;
             StartMyPool();
         }
         new void Fire()
@@ -44,7 +47,7 @@ namespace RiverAttack
         {
             target = (playerTarget) ? toTarget : null;
         }
-    
+
         private void StartFire()
         {
             if (ShouldFire())
@@ -52,7 +55,7 @@ namespace RiverAttack
                 Fire();
             }
         }
-    
+
         private void FixedUpdate()
         {
             if (m_SkinPart != null && playerTarget)
@@ -61,7 +64,7 @@ namespace RiverAttack
                 m_SkinPart.transform.rotation = Quaternion.Lerp(transform1.rotation, Quaternion.LookRotation(target.position - transform1.position), Time.deltaTime);
             }
         }
-    
+
         public void StartMyPool(bool isPersistent = false)
         {
             m_MyPool.CreatePool(this, prefab, poolStart, m_SpawnPosition, isPersistent);
@@ -69,4 +72,3 @@ namespace RiverAttack
     }
 
 }
-

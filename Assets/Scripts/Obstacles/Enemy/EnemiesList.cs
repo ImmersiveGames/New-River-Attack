@@ -1,16 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 namespace RiverAttack
 {
-    
-    [CreateAssetMenu(fileName = "EnemyList", menuName = "RiverAttack/Lists/EnemyLists", order = 4)]
-    public class EnemyList : ScriptableObject
+
+    [CreateAssetMenu(fileName = "EnemiesList", menuName = "RiverAttack/Lists/EnemyLists", order = 4)]
+    public class EnemiesList : ScriptableObject
     {
 
 #if UNITY_EDITOR
-    [Multiline]
-    public string DeveloperDescription = "";
+        [Multiline]
+        public string developerDescription = "";
 #endif
         public List<EnemiesScriptable> value = new List<EnemiesScriptable>();
 

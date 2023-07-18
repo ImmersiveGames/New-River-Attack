@@ -5,7 +5,8 @@ using UnityEngine;
 namespace RiverAttack
 {
     [RequireComponent(typeof(LevelObstacleSpawnShoot))]
-    public class LevelObstacleSpawnShootApproach : EnemiesShootApproach {
+    public class LevelObstacleSpawnShootApproach : EnemiesShootApproach
+    {
 
         private LevelObstacleSpawnMaster spawnMaster;
         protected override void OnEnable() { }
@@ -27,4 +28,3 @@ namespace RiverAttack
         }
     }
 }
-

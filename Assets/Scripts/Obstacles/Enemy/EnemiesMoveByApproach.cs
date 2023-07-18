@@ -2,10 +2,10 @@
 
 namespace RiverAttack
 {
-    public class EnemyMoveByApproach : ObstacleMoveByApproach
+    public class EnemiesMoveByApproach : ObstacleMoveByApproach
     {
         protected override void ApproachPlayer()
-        {       
+        {
             playerDistance = GetPlayerDistance();
             if (randomPlayerDistanceNear.maxValue > 0)
                 playerDistance = rangePatrol;

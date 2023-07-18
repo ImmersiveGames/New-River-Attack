@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Utils
 {
-    public class PoolObjectManager : Singleton<PoolObjectManager> {
+    public class PoolObjectManager : Singleton<PoolObjectManager>
+    {
 
         private readonly Dictionary<IHasPool, PoolObject> m_ObjectPools = new Dictionary<IHasPool, PoolObject>();
 

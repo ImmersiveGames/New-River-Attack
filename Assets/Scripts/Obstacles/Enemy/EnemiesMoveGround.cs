@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 namespace RiverAttack
 {
-    public class EnemyMoveGround : ObstacleMove
+    public class EnemiesMoveGround : ObstacleMove
     {
         EnemiesMaster m_EnemyMaster;
-        EnemiesShoot m_EnemiesesShoot;
+        EnemiesShoot m_EnemiesShoot;
         GamePlayManager m_GamePlayManager;
         bool m_AlreadyCol;
 
@@ -21,7 +21,7 @@ namespace RiverAttack
             base.SetInitialReferences();
             m_EnemyMaster = GetComponent<EnemiesMaster>();
             m_GamePlayManager = GamePlayManager.instance;
-            m_EnemiesesShoot = GetComponent<EnemiesShoot>();
+            m_EnemiesShoot = GetComponent<EnemiesShoot>();
         }
 
         void OnTriggerEnter(Collider other)
@@ -29,7 +29,7 @@ namespace RiverAttack
             if (m_AlreadyCol || m_EnemyMaster.ignoreWall || !other.GetComponentInParent<WallsMaster>()) return;
             m_AlreadyCol = true;
             MoveStop();
-            if (m_EnemiesesShoot != null && m_EnemiesesShoot.holdShoot) m_EnemiesesShoot.holdShoot = false;
+            if (m_EnemiesShoot != null && m_EnemiesShoot.holdShoot) m_EnemiesShoot.holdShoot = false;
         }
 
         void Update()
@@ -48,9 +48,9 @@ namespace RiverAttack
         void ResetMovement()
         {
             m_AlreadyCol = false;
-            if (m_EnemiesesShoot != null)
+            if (m_EnemiesShoot)
             {
-                m_EnemiesesShoot.holdShoot = true;
+                m_EnemiesShoot.holdShoot = true;
             }
         }
         void LateUpdate()

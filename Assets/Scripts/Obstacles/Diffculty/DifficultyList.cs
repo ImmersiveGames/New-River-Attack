@@ -31,4 +31,3 @@ namespace RiverAttack
         public float multiplyPlayerDistance;
     }
 }
-

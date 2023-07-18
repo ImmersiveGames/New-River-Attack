@@ -4,7 +4,7 @@ using Utils;
 namespace RiverAttack
 {
     [RequireComponent(typeof(EnemiesMaster))]
-    public class EnemyParticle : MonoBehaviour
+    public class EnemiesParticle : MonoBehaviour
     {
         [SerializeField]
         private GameObject particlePrefab;
@@ -26,8 +26,8 @@ namespace RiverAttack
 
         private void ParticleExplosion()
         {
-            Tools.ToggleChildrens(this.transform, false);
-            GameObject go = Instantiate(particlePrefab, transform);
+            Tools.ToggleChildren(this.transform, false);
+            var go = Instantiate(particlePrefab, transform);
             Destroy(go, timeoutDestroy);
         }
 

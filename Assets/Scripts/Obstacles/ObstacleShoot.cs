@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace RiverAttack
 {
-    
+
     public abstract class ObstacleShoot : MonoBehaviour, IShoot
     {
         public GameObject prefab;
         public float bulletSpeedy;
         public float cadencyShoot;
-        public bool holdShoot;    
+        public bool holdShoot;
         protected Renderer myrenderer;
 
         protected virtual void OnEnable()
         {
-            myrenderer = GetComponentInChildren<Renderer>();       
+            myrenderer = GetComponentInChildren<Renderer>();
         }
 
-        public void SetTarget(Transform toTarget){}
+        public void SetTarget(Transform toTarget) { }
 
         public virtual bool ShouldFire()
         {
@@ -26,6 +26,6 @@ namespace RiverAttack
             return false;
         }
 
-        public void Fire(){}
+        public void Fire() { }
     }
 }

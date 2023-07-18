@@ -5,7 +5,7 @@ using Utils;
 
 namespace RiverAttack
 {
-    public sealed class EnemiesMaster : MonoBehaviour
+    public class EnemiesMaster : MonoBehaviour
     {
         public EnemiesScriptable enemy;
         public bool isDestroyed;
@@ -18,7 +18,7 @@ namespace RiverAttack
             private set;
         }
 
-        GamePlayManager m_GamePlayManager;
+        private protected GamePlayManager m_GamePlayManager;
 
         public delegate void GeneralEventHandler();
         public event GeneralEventHandler EventDestroyEnemy;
@@ -39,13 +39,13 @@ namespace RiverAttack
             isDestroyed = false;
         }
 
-        void OnEnable()
+        protected virtual void OnEnable()
         {
             SetInitialReferences();
             m_GamePlayManager.EventResetEnemies += OnInitializeEnemy;
         }
 
-        void SetInitialReferences()
+        protected virtual void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
             //Debug.Log(GameSettings.Instance.enemyTag);
@@ -75,7 +75,7 @@ namespace RiverAttack
             }
         }
 
-        void OnDisable()
+        protected virtual void OnDisable()
         {
             m_GamePlayManager.EventResetEnemies -= OnInitializeEnemy;
         }

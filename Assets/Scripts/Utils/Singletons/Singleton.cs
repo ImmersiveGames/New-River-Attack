@@ -10,82 +10,82 @@
 */
 namespace Utils
 {
-	public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
-	{
-		static T _instance;
-		
-		static readonly object _lock = new object();
+    public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+    {
+        static T _instance;
 
-		public static T instance
-		{
-			get
-			{
-				if (_applicationIsQuitting)
-				{
-					Debug.LogWarning("[Singleton] Instance '" + typeof(T) +
-						"' already destroyed on application quit." +
-						" Won't create again - returning null.");
-					return null;
-				}
-				lock (_lock)
-				{
-					if (_instance)
-						return _instance;
-					_instance = (T)FindObjectOfType(typeof(T));
+        static readonly object _lock = new object();
 
-					if (FindObjectsOfType(typeof(T)).Length > 1)
-					{
-						Debug.LogError("[Singleton] Something went really wrong " +
-							" - there should never be more than 1 singleton!" +
-							" Reopening the scene might fix it.");
-						return _instance;
-					}
+        public static T instance
+        {
+            get
+            {
+                if (_applicationIsQuitting)
+                {
+                    Debug.LogWarning("[Singleton] Instance '" + typeof(T) +
+                        "' already destroyed on application quit." +
+                        " Won't create again - returning null.");
+                    return null;
+                }
+                lock (_lock)
+                {
+                    if (_instance)
+                        return _instance;
+                    _instance = (T)FindObjectOfType(typeof(T));
 
-					if (_instance)
-						return _instance;
-					var singleton = new GameObject();
-					_instance = singleton.AddComponent<T>();
-					singleton.name = "(singleton) " + typeof(T);
+                    if (FindObjectsOfType(typeof(T)).Length > 1)
+                    {
+                        Debug.LogError("[Singleton] Something went really wrong " +
+                            " - there should never be more than 1 singleton!" +
+                            " Reopening the scene might fix it.");
+                        return _instance;
+                    }
 
-					DontDestroyOnLoad(singleton);
+                    if (_instance)
+                        return _instance;
+                    var singleton = new GameObject();
+                    _instance = singleton.AddComponent<T>();
+                    singleton.name = "(singleton) " + typeof(T);
 
-					Debug.Log("[Singleton] An instance of " + typeof(T) +
-						" is needed in the scene, so '" + singleton +
-						"' was created with DontDestroyOnLoad.");
-					//Debug.Log("[Singleton] Using instance already created: " +
-					//	_instance.gameObject.name);
+                    DontDestroyOnLoad(singleton);
 
-					return _instance;
-				}
-			}
-		}
+                    Debug.Log("[Singleton] An instance of " + typeof(T) +
+                        " is needed in the scene, so '" + singleton +
+                        "' was created with DontDestroyOnLoad.");
+                    //Debug.Log("[Singleton] Using instance already created: " +
+                    //	_instance.gameObject.name);
 
-		public void RemoveSingleton()
-		{
-			if (_instance)
-			{
-				Destroy(gameObject);
-			}
-		}
-		// ReSharper disable once StaticMemberInGenericType
-		static bool _applicationIsQuitting;
-		/* <summary>
-			When Unity quits, it destroys objects in a random order.
-			In principle, a Singleton is only destroyed when application quits.
-			If any script calls Instance after it have been destroyed,
-			it will create a buggy ghost object that will stay on the Editor scene
-		    even after stopping playing the Application. Really bad!
-			So, this was made to be sure we're not creating that buggy ghost object.
-		 </summary>
-		 */
-		void OnDestroy()
-		{
-			_applicationIsQuitting = true;
-		}
+                    return _instance;
+                }
+            }
+        }
 
-		public void SetApplicationIsQuitting()
-		{
-			_applicationIsQuitting = false;
-		}
-	}
+        public void RemoveSingleton()
+        {
+            if (_instance)
+            {
+                Destroy(gameObject);
+            }
+        }
+        // ReSharper disable once StaticMemberInGenericType
+        static bool _applicationIsQuitting;
+        /* <summary>
+            When Unity quits, it destroys objects in a random order.
+            In principle, a Singleton is only destroyed when application quits.
+            If any script calls Instance after it have been destroyed,
+            it will create a buggy ghost object that will stay on the Editor scene
+            even after stopping playing the Application. Really bad!
+            So, this was made to be sure we're not creating that buggy ghost object.
+         </summary>
+         */
+        void OnDestroy()
+        {
+            _applicationIsQuitting = true;
+        }
+
+        public void SetApplicationIsQuitting()
+        {
+            _applicationIsQuitting = false;
+        }
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace RiverAttack
 {
     [System.Serializable]
-    public class EnemiesResults
+    public partial class EnemiesResults
     {
         [SerializeField]
         public EnemiesScriptable enemy;

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace RiverAttack
 {
-    public class EnemySkins : ObstacleSkins
+    public class EnemiesSkins : ObstacleSkins
     {
 
         private EnemiesMaster m_EnemiesMaster;

@@ -10,7 +10,6 @@ namespace RiverAttack
         float m_StartTime;
         public PlayerMaster ownerShoot;
         Transform m_MyPool;
-        
         #endregion
 
         #region UnityMethods

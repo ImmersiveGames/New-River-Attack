@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using RiverAttack;
 using UnityEngine;
 namespace Utils
 {
@@ -63,15 +64,15 @@ namespace Utils
             return flipVertices2D;
         }
 
-        public static Bounds GetChildRenderBounds(GameObject objeto, string tag)
+        public static Bounds GetChildRenderBounds(GameObject wallsObjet)
         {
             var bounds = new Bounds(Vector3.zero, Vector3.zero);
-            var render = objeto.GetComponentsInChildren<Renderer>();
+            var render = wallsObjet.GetComponentsInChildren<Renderer>();
             if (render == null)
                 return bounds;
             foreach (var t in render)
             {
-                if (tag != null && !t.gameObject.CompareTag(tag)) continue;
+                if (!t.gameObject.GetComponent<WallsMaster>()) continue;
                 //Debug.Log("Render: " + render[i].bounds);
                 bounds.Encapsulate(t.bounds);
             }

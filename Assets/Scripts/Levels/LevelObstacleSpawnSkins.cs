@@ -7,7 +7,7 @@ namespace RiverAttack
     [RequireComponent(typeof(LevelObstacleSpawnMaster))]
     public class LevelObstacleSpawnSkins : ObstacleSkins
     {
-        private void OnEnable(){}
+        private void OnEnable() { }
         private void LoadDefaultSkin() { }
         [ContextMenu("LoadPrefab")]
         private void LoadPrefab()
@@ -23,5 +23,3 @@ namespace RiverAttack
         }
     }
 }
-
-

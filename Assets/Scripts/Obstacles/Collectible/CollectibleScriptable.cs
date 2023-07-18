@@ -11,11 +11,10 @@ namespace RiverAttack
         [Tooltip("Valor em dinheiro do coletavel")]
         public int collectValuable;
         [Tooltip("Quantos itens dele mesmo ele representa")]
-        public int ammontColletables = 1;
-        //[SerializeField]
-        //private PowerUp powerUp;
+        public int amountCollectables = 1;
+        [SerializeField]
+        private PowerUp powerUp;
 
-        //public PowerUp PowerUp { get { return powerUp; } }
+        public PowerUp getPowerUp { get { return powerUp; } }
     }
 }
-

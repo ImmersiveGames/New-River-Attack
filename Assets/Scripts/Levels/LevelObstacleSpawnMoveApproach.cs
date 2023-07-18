@@ -8,7 +8,7 @@ namespace RiverAttack
     public class LevelObstacleSpawnMoveApproach : ObstacleMoveByApproach
     {
         private LevelObstacleSpawnMaster m_SpawnMaster;
-        protected override void SetInitialReferences(){}
+        protected override void SetInitialReferences() { }
         [ContextMenu("LoadPrefab")]
         private void LoadPrefab()
         {
@@ -25,4 +25,3 @@ namespace RiverAttack
         }
     }
 }
-

@@ -37,7 +37,6 @@ namespace RiverAttack
         //    if(playOnEnable)
         //    StopBGM();
         //}
-        
   #endregion
 
         public void PlayBGM()
@@ -55,7 +54,7 @@ namespace RiverAttack
                 StartCoroutine(StopPlay(m_AudioSource, endBGM));
             }
         }
-        
+
         public IEnumerator StartPlay(AudioSource source, AudioEventClip startEventClip, AudioEventClip loopEventClip)
         {
             var sourceClip = startEventClip.audioClip;

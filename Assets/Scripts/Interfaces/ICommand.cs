@@ -1,6 +1,7 @@
-namespace  Utils
+namespace Utils
 {
-    public interface ICommand {
+    public interface ICommand
+    {
 
         void Execute();
         void UnExecute();

@@ -13,14 +13,14 @@ namespace RiverAttack
         public int score;
         public Vector3 spawnPosition;
         public Vector3 spawnRotation;
-        /*[Header("Skin Settings")]
+        [Header("Skin Settings")]
         [SerializeField]
         public ShopProductSkin playerSkin;
         [Header("Shopping")]
         public int wealth;
         [SerializeField]
         public List<ShopProduct> listProducts;
-        [Header("Controller Settings")]
+        /*[Header("Controller Settings")]
         public ControllerMap controllerMap;*/
 
         public float mySpeedy;
@@ -48,17 +48,17 @@ namespace RiverAttack
         public int bombs;
         public int maxBombs;
 
-        /*public void ChangeLife(int life)
+        public void ChangeLife(int life)
         {
-            if (maxLives != 0 && lives.Value + life >= maxLives)
-                lives.SetValue(maxLives);
-            else if (lives.Value + life <= 0)
-                lives.SetValue(0);
+            if (maxLives != 0 && lives + life >= maxLives)
+                lives = maxLives;
+            else if (lives + life <= 0)
+                lives = 0;
             else
-                lives.ApplyChange(life);
+                lives += life;
         }
-    
-        public void InitPlayer()
+
+        /*public void InitPlayer()
         {
             lives.SetValue(startLives);
             bombs.SetValue(3);

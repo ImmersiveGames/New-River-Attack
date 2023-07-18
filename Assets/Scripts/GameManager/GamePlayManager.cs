@@ -36,6 +36,7 @@ namespace RiverAttack
         private GameManager m_GameManager;
         private GameSettings m_GameSettings;
         private GamePlayAudio m_GamePlayAudio;
+        public List<GameObject> ListPlayer;
         public GamePlayAudio.LevelType actualBGM { get; set; }
 
     #region Delegates
@@ -66,7 +67,6 @@ namespace RiverAttack
 
         public delegate void ShakeCamEventHandle(float power, float inTime);
         public event ShakeCamEventHandle EventShakeCam;
-
     #endregion
 #region UnityMethods
         /*
@@ -178,7 +178,7 @@ namespace RiverAttack
                 return score;
             }
             else*/
-                return 1;
+            return 1;
         }
 
         public void SaveAllPlayers()
@@ -214,7 +214,7 @@ namespace RiverAttack
         {
             get
             {
-                return true;//!m_GameManager.isGamePaused && !gamePaused && (m_GameManager.isGameOver || completePath) ? false : true;
+                return true; //!m_GameManager.isGamePaused && !gamePaused && (m_GameManager.isGameOver || completePath) ? false : true;
             }
         }
 
@@ -243,7 +243,6 @@ namespace RiverAttack
         }
 
     #region Calls
-
         public void CallEventPausePlayGame()
         {
             gamePaused = true;

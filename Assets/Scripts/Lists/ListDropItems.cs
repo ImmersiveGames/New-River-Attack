@@ -47,14 +47,14 @@ namespace Utils
                 case 1:
                     return value[0];
             }
-            float totals = value.Sum(x=> x.sortChances);
+            float totals = value.Sum(x => x.sortChances);
             var orderByDescending = value.OrderByDescending(x => x.realChance);
             for (int i = 0; i < n; i++)
             {
                 value[i].SetRealChance(totals);
                 realNum += value[i].realsort;
                 //Debug.Log("Real Chance: " + Value[i].realsort);
-                if (realNum >= range) return value[i];                    
+                if (realNum >= range) return value[i];
             }
             //Debug.Log("Real Numero : " + realnum);
             return new ItemsDrop();
@@ -82,7 +82,7 @@ namespace Utils
         }
 
         //public float realChance { get; private set; }
-        public float realsort { get;  set; }
+        public float realsort { get; set; }
 
         public void SetRealChance(float totalWeight)
         {

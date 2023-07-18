@@ -5,7 +5,6 @@ namespace RiverAttack
 {
     public class WallsMaster : MonoBehaviour
     {
-   
+
     }
 }
-

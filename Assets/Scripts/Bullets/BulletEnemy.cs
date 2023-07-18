@@ -3,7 +3,8 @@ using Utils;
 namespace RiverAttack
 {
     [RequireComponent(typeof(Collider), typeof(AudioSource))]
-    public class BulletEnemy : Bullets, IPoolable {
+    public class BulletEnemy : Bullets, IPoolable
+    {
         [HideInInspector]
         public Vector3 shootDirection;
         [SerializeField]
@@ -52,4 +53,3 @@ namespace RiverAttack
         }
     }
 }
-

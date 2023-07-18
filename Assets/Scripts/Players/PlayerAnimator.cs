@@ -4,7 +4,8 @@ namespace RiverAttack
 {
     [RequireComponent(typeof(PlayerMaster))]
     [RequireComponent(typeof(Animator))]
-    public class PlayerAnimator : MonoBehaviour {
+    public class PlayerAnimator : MonoBehaviour
+    {
     #region Variables Private References
         private PlayerMaster m_PlayerMaster;
         private Animator m_Animator;

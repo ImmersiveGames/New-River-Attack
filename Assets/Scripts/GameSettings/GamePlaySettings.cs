@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace RiverAttack
 {
-    
+
     [CreateAssetMenu(fileName = "GamePlaySettings", menuName = "RiverAttack/GamePlaySettings", order = 2)]
     public class GamePlaySettings : SingletonScriptableObject<GamePlaySettings>
     {
@@ -20,11 +20,11 @@ namespace RiverAttack
         [SerializeField]
         public float totalTime;
         [SerializeField]
-        public List<global::EnemiesResults> HitEnemys;
-    
+        public List<EnemiesResults> HitEnemys;
+
         public int GetEnemysHit(EnemiesScriptable enemy)
         {
-            global::EnemiesResults item = HitEnemys.Find(x => x.enemy == enemy);
+            EnemiesResults item = HitEnemys.Find(x => x.enemy == enemy);
             if (item != null)
             {
                 return item.quantity;
@@ -34,4 +34,3 @@ namespace RiverAttack
         }
     }
 }
-

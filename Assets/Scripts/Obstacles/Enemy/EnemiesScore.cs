@@ -3,17 +3,17 @@
 namespace RiverAttack
 {
     [RequireComponent(typeof(EnemiesMaster))]
-    public sealed class EnemyScore : MonoBehaviour
+    public class EnemiesScore : MonoBehaviour
     {
 
         EnemiesMaster m_EnemyMaster;
         EnemiesDifficulty m_EnemyDifficulties;
-        void OnEnable()
+        protected virtual void OnEnable()
         {
             SetInitialReferences();
             m_EnemyMaster.EventPlayerDestroyEnemy += SetScore;
         }
-        void SetInitialReferences()
+        protected virtual void SetInitialReferences()
         {
             m_EnemyMaster = GetComponent<EnemiesMaster>();
             if (GetComponent<EnemiesDifficulty>())
@@ -21,7 +21,7 @@ namespace RiverAttack
                 m_EnemyDifficulties = GetComponent<EnemiesDifficulty>();
             }
         }
-        void OnDisable()
+        protected virtual void OnDisable()
         {
             m_EnemyMaster.EventPlayerDestroyEnemy -= SetScore;
         }
