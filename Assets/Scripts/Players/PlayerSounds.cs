@@ -53,7 +53,7 @@ namespace RiverAttack
 
         void SoundEngine(Vector2 dir)
         {
-            if (audioEngineLoop == null || !m_PlayerMaster.shouldPlayerBeReady) return;
+            if (audioEngineLoop == null || m_PlayerMaster.shouldPlayerBeReady == false) return;
             if (dir.y > 0 && m_PlayerMaster.playerStatus != PlayerMaster.Status.Accelerate)
             {
                 m_PlayerMaster.playerStatus = PlayerMaster.Status.Accelerate;
@@ -63,20 +63,20 @@ namespace RiverAttack
             {
                 case < 0 when m_PlayerMaster.playerStatus != PlayerMaster.Status.Reduce:
                     m_PlayerMaster.playerStatus = PlayerMaster.Status.Reduce;
-                    AudioEventSample.UpdateChangePith(m_AudioSource, audioEngineLoop.audioSample.pitch.maxValue, enginePitchDown);
+                    AudioEventSample.UpdateChangePith(m_AudioSource, audioEngineLoop.audioSample.pitch.y, enginePitchDown);
                     break;
                 case 0 when m_PlayerMaster.playerStatus != PlayerMaster.Status.None:
                 {
                     if (m_PlayerMaster.playerStatus == PlayerMaster.Status.Accelerate)
                         StartCoroutine(ChangeEngine(audioDeceleratorEngine, audioEngineLoop));
                     if (m_PlayerMaster.playerStatus == PlayerMaster.Status.Reduce)
-                        AudioEventSample.UpdateChangePith(m_AudioSource, m_AudioSource.pitch, audioEngineLoop.audioSample.pitch.maxValue);
+                        AudioEventSample.UpdateChangePith(m_AudioSource, m_AudioSource.pitch, audioEngineLoop.audioSample.pitch.y);
                     m_PlayerMaster.playerStatus = PlayerMaster.Status.None;
                     break;
                 }
                 default:
                 {
-                    if (audioEngineLoop != null && m_PlayerMaster.shouldPlayerBeReady && !m_AudioSource.isPlaying && m_PlayerMaster.playerStatus == PlayerMaster.Status.None)
+                    if (m_PlayerMaster.shouldPlayerBeReady && !m_AudioSource.isPlaying && m_PlayerMaster.playerStatus == PlayerMaster.Status.None)
                     {
                         //StopAllCoroutines();
                         audioEngineLoop.Play(m_AudioSource);

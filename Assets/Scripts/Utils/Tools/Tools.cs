@@ -148,6 +148,7 @@ namespace Utils
             public float min { get; private set; }
             public float max { get; private set; }
         }
+
         [Serializable]
         public struct FloatRanged
         {
