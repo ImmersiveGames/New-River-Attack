@@ -95,6 +95,5 @@ namespace RiverAttack
             m_InputVector = Vector2.zero;
             Debug.Log(context.phase);
         }
-
     }
 }
