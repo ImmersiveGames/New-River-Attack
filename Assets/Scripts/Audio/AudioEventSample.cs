@@ -1,7 +1,6 @@
-using System.Collections;
 using UnityEngine.Audio;
 using UnityEngine;
-using Utils;
+using GD.MinMaxSlider;
 namespace RiverAttack
 {
 
@@ -17,7 +16,7 @@ namespace RiverAttack
 
         public override void Play(AudioSource source)
         {
-            if (audioSample?.audioClip) return;
+            if (audioSample?.audioClip == null) return;
             SetupSource(source);
             source.Play();
         }
@@ -27,44 +26,38 @@ namespace RiverAttack
             get
             {
                 var volume = audioSample.volume;
-                return Random.Range(volume.minValue, volume.maxValue);
+                return Random.Range(volume.x, volume.y);
             }
         }
-
         public float getPitch
         {
             get
             {
-                return Random.Range(audioSample.pitch.minValue, audioSample.pitch.maxValue);
+                return Random.Range(audioSample.pitch.x, audioSample.pitch.y);
             }
         }
-
         void SetupSource(AudioSource source)
         {
             source.outputAudioMixerGroup = audioMixerGroup;
             source.clip = audioSample.audioClip;
-            source.volume = Random.Range(audioSample.volume.minValue, audioSample.volume.maxValue);
-            source.pitch = Random.Range(audioSample.pitch.minValue, audioSample.pitch.maxValue);
+            source.volume = Random.Range(audioSample.volume.x, audioSample.volume.y);
+            source.pitch = Random.Range(audioSample.pitch.x, audioSample.pitch.y);
             source.loop = audioSample.loop;
         }
-
         public override void PlayOnShot(AudioSource source)
         {
             if (audioSample.audioClip == null) return;
             if (audioMixerGroup != null) source.outputAudioMixerGroup = audioMixerGroup;
-            source.PlayOneShot(audioSample.audioClip, Random.Range(audioSample.volume.minValue, audioSample.volume.maxValue));
+            source.PlayOneShot(audioSample.audioClip, Random.Range(audioSample.volume.x, audioSample.volume.y));
         }
-
         public bool IsPlaying(AudioSource source)
         {
             return source.isPlaying && source.clip == audioSample.audioClip;
         }
-
         public override void Stop(AudioSource source)
         {
             source.Stop();
         }
-
         public static void UpdateChangePith(AudioSource source, float start, float end)
         {
             source.pitch = Mathf.Clamp(Time.time, start, end);

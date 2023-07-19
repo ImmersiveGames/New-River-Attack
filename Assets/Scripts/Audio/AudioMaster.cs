@@ -61,8 +61,8 @@ namespace RiverAttack
             if (sourceClip != null)
             {
                 source.clip = sourceClip;
-                source.volume = Random.Range(startEventClip.volume.minValue, startEventClip.volume.maxValue);
-                source.pitch = Random.Range(startEventClip.pitch.minValue, startEventClip.pitch.maxValue);
+                source.volume = Random.Range(startEventClip.volume.x, startEventClip.volume.y);
+                source.pitch = Random.Range(startEventClip.pitch.x, startEventClip.pitch.y);
                 source.loop = false;
                 source.Play();
                 while (source.isPlaying)
@@ -71,8 +71,8 @@ namespace RiverAttack
                 }
             }
             source.clip = loopEventClip.audioClip;
-            source.volume = Random.Range(loopEventClip.volume.minValue, loopEventClip.volume.maxValue);
-            source.pitch = Random.Range(loopEventClip.pitch.minValue, loopEventClip.pitch.maxValue);
+            source.volume = Random.Range(loopEventClip.volume.x, loopEventClip.volume.y);
+            source.pitch = Random.Range(loopEventClip.pitch.x, loopEventClip.pitch.y);
             source.loop = loopEventClip.loop;
             source.Play();
             yield return null;
@@ -81,8 +81,8 @@ namespace RiverAttack
         static IEnumerator StopPlay(AudioSource source, AudioEventClip endEventClip)
         {
             source.clip = endEventClip.audioClip;
-            source.volume = Random.Range(endEventClip.volume.minValue, endEventClip.volume.maxValue);
-            source.pitch = Random.Range(endEventClip.pitch.minValue, endEventClip.pitch.maxValue);
+            source.volume = Random.Range(endEventClip.volume.x, endEventClip.volume.y);
+            source.pitch = Random.Range(endEventClip.pitch.x, endEventClip.pitch.y);
             source.loop = false;
             source.Play();
             while (source.isPlaying)

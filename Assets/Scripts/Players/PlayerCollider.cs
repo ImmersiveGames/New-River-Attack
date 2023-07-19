@@ -21,10 +21,10 @@ namespace RiverAttack
         }
         void OnTriggerEnter(Collider collision)
         {
-            if (!collision.GetComponentInParent<EnemiesMaster>() && !collision.GetComponent<WallsMaster>()) return;
+            if (!collision.GetComponentInParent<WallsMaster>() && !collision.GetComponentInParent<EnemiesMaster>()) return;
             if (m_GamePlayManager.getGodMode) return;
-            m_GamePlayManager.CallEventPausePlayGame();
-            m_PlayerMaster.CallEventPlayerHit();
+            //m_GamePlayManager.CallEventPausePlayGame();
+            //m_PlayerMaster.CallEventPlayerHit();
             m_PlayerMaster.CallEventPlayerDestroy();
         }
         void OnDisable()

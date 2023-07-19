@@ -1,3 +1,4 @@
+using GD.MinMaxSlider;
 using UnityEngine;
 using Utils;
 namespace RiverAttack
@@ -13,10 +14,10 @@ namespace RiverAttack
     {
         public string name;
         public AudioClip audioClip;
-        [Tools.MinMaxRangeAttribute(0, 1)]
-        public Tools.FloatRanged volume;
-        [Tools.MinMaxRangeAttribute(-3, 3)]
-        public Tools.FloatRanged pitch;
+        [MinMaxSlider(0f,1f)]
+        public Vector2 volume;
+        [MinMaxSlider(-3f,3f)]
+        public Vector2 pitch;
         public bool loop;
     }
 }

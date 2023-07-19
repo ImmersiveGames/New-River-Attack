@@ -74,8 +74,6 @@ namespace RiverAttack
             m_GameManager = GameManager.instance;
         }
 
-        // Update is called once per frame
-       
   #endregion
 
         public void Init(PlayerSettings player, int id)
