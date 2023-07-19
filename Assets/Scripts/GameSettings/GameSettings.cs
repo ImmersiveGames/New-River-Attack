@@ -20,6 +20,17 @@ namespace RiverAttack
         public enum GameModes { Classic = 0, Mission = 1 }
         [SerializeField, Header("GameModes")]
         GameModes actualGameMode = GameModes.Mission;
+        
+#region UnityMethods
+        private void OnEnable()
+        {
+            // Aqui carrega apenas na primeira vez que o jogo carrega ja que só a uma entrada.
+            // Carregando a referencia da primeira scene
+
+            /*ChangeGameScene(SceneManager.GetActiveScene().buildIndex);
+            previousScene = actualScene;*/
+        }
+  #endregion
 
         public void ChangeGameMode(GameModes gameMode)
         {
@@ -37,7 +48,6 @@ namespace RiverAttack
         {
             actualGameMode = (GameModes)gameMode;
         }
-
 
         #region GameScenes
         public enum GameScenes { Mission, Credits };
@@ -63,15 +73,6 @@ namespace RiverAttack
         }
   #endregion
 
-        #region UnityMethods
-        private void OnEnable()
-        {
-            // Aqui carrega apenas na primeira vez que o jogo carrega ja que só a uma entrada.
-            // Carregando a referencia da primeira scene
-
-            /*ChangeGameScene(SceneManager.GetActiveScene().buildIndex);
-            previousScene = actualScene;*/
-        }
-  #endregion
+        
     }
 }

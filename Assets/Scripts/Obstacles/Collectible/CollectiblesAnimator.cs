@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace RiverAttack
 {
@@ -9,14 +7,20 @@ namespace RiverAttack
     {
 
         public string collectTrigger;
+        CollectiblesMaster m_CollectiblesMaster;
 
-        protected CollectiblesMaster collectiblesMaster;
-
+        #region UNITY METHODS
         protected override void OnEnable()
         {
             base.OnEnable();
-            collectiblesMaster.CollectibleEvent += CollectAnimation;
+            m_CollectiblesMaster.CollectibleEvent += CollectAnimation;
         }
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            m_CollectiblesMaster.CollectibleEvent -= CollectAnimation;
+        }
+  #endregion
 
         void CollectAnimation(PlayerMaster playerMaster)
         {
@@ -26,12 +30,7 @@ namespace RiverAttack
         protected override void SetInitialReferences()
         {
             base.SetInitialReferences();
-            collectiblesMaster = GetComponent<CollectiblesMaster>();
-        }
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-            collectiblesMaster.CollectibleEvent -= CollectAnimation;
+            m_CollectiblesMaster = GetComponent<CollectiblesMaster>();
         }
     }
 }

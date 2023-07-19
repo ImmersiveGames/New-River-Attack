@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace RiverAttack
 {
@@ -10,21 +8,21 @@ namespace RiverAttack
         [SerializeField]
         public float bulletSpeedy;
         [SerializeField]
-        public float cadencyShoot;
+        public float cadenceShoot;
         [SerializeField]
         public int startPool;
         [SerializeField]
         public bool playerTarget;
 
         [ContextMenu("LoadPrefab")]
-        private void LoadPrefab()
+        void LoadPrefab()
         {
             var spawnMaster = GetComponent<LevelObstacleSpawnMaster>();
             var obstacleShoot = spawnMaster.getPrefab.GetComponent<ObstacleShoot>();
             if (obstacleShoot == null)
                 return;
             bulletSpeedy = obstacleShoot.bulletSpeedy;
-            cadencyShoot = obstacleShoot.cadencyShoot;
+            cadenceShoot = obstacleShoot.cadenceShoot;
             var enemiesShoot = (EnemiesShoot)obstacleShoot;
             startPool = enemiesShoot.poolStart;
             playerTarget = enemiesShoot.playerTarget;

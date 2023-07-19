@@ -13,7 +13,7 @@ namespace RiverAttack
         [Tooltip("Quantos itens dele mesmo ele representa")]
         public int amountCollectables = 1;
         [SerializeField]
-        private PowerUp powerUp;
+        PowerUp powerUp;
 
         public PowerUp getPowerUp { get { return powerUp; } }
     }

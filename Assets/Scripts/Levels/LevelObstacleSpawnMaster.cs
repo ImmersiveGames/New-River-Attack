@@ -9,37 +9,37 @@ namespace RiverAttack
     public class LevelObstacleSpawnMaster : MonoBehaviour
     {
         [SerializeField]
-        private bool persistPrefab = true;
+        bool persistPrefab = true;
         [SerializeField]
-        private GameObject[] prefab;
+        GameObject[] prefab;
         [SerializeField]
-        private bool ignoreWall;
+        bool ignoreWall;
         [SerializeField]
-        private bool ignoreEnemies;
+        bool ignoreEnemies;
 
         [Header("Show prefab ID -Only View")]
         public int viewIdPrefab;
         public Color wireColor = new Color(255, 0, 0, 050);
 
         public GameObject getPrefab { get { return prefab[viewIdPrefab]; } }
-
-        private void Awake()
+#region UNITY METHODS
+        void Awake()
         {
-            this.gameObject.SetActive(true);
+            gameObject.SetActive(true);
             SpawnObstacles();
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
-
-        private void SpawnObstacles()
+  #endregion
+        
+        void SpawnObstacles()
         {
-            if (prefab == null || prefab.Length <= 0)
-                return;
+            if (prefab is not { Length: > 0 })  return;
             SetGameObjectsActive(prefab, false);
             int sort = Random.Range(0, prefab.Length - 1);
 
             var transform1 = this.transform;
             var enemy = Instantiate(prefab[sort], transform1.position, transform1.rotation, transform1.parent);
-            if (!persistPrefab)
+            if (persistPrefab)
             {
                 enemy.GetComponent<EnemiesMaster>().ignoreWall = ignoreWall;
                 enemy.GetComponent<EnemiesMaster>().ignoreEnemies = ignoreEnemies;
@@ -52,10 +52,10 @@ namespace RiverAttack
                 {
                     var spawnMovement = GetComponent<LevelObstacleSpawnMovement>();
                     obstacleMovement.canMove = spawnMovement.canMove;
-                    obstacleMovement.MovementSpeed = spawnMovement.MovementSpeed;
-                    obstacleMovement.MoveDirection = spawnMovement.MoveDirection;
-                    obstacleMovement.FreeDirection = spawnMovement.FreeDirection;
-                    obstacleMovement.CurveMoviment = spawnMovement.CurveMoviment;
+                    obstacleMovement.movementSpeed = spawnMovement.movementSpeed;
+                    obstacleMovement.moveDirection = spawnMovement.moveDirection;
+                    obstacleMovement.moveFree = spawnMovement.moveFree;
+                    obstacleMovement.curveMovement = spawnMovement.curveMovement;
                 }
                 if (GetComponent<LevelObstacleSpawnMoveApproach>() && obstacleMoveByApproach)
                 {
@@ -69,15 +69,15 @@ namespace RiverAttack
                 if (GetComponent<LevelObstacleSpawnSkins>() && obstacleSkins)
                 {
                     var spawnSkin = GetComponent<LevelObstacleSpawnSkins>();
-                    obstacleSkins.IndexSkin = spawnSkin.IndexSkin;
-                    obstacleSkins.RandomSkin = spawnSkin.RandomSkin;
-                    obstacleSkins.EnemySkins = (spawnSkin.EnemySkins.Length > 0) ? spawnSkin.EnemySkins : obstacleSkins.EnemySkins;
+                    obstacleSkins.indexSkin = spawnSkin.indexSkin;
+                    obstacleSkins.randomSkin = spawnSkin.randomSkin;
+                    obstacleSkins.enemiesSkins = (spawnSkin.enemiesSkins.Length > 0) ? spawnSkin.enemiesSkins : obstacleSkins.enemiesSkins;
                 }
                 if (GetComponent<LevelObstacleSpawnShoot>() && obstacleShoot)
                 {
                     var spawnShoot = GetComponent<LevelObstacleSpawnShoot>();
                     obstacleShoot.bulletSpeedy = spawnShoot.bulletSpeedy;
-                    obstacleShoot.cadencyShoot = spawnShoot.cadencyShoot;
+                    obstacleShoot.cadenceShoot = spawnShoot.cadenceShoot;
                     var enemiesShoot = (EnemiesShoot)obstacleShoot;
                     enemiesShoot.poolStart = spawnShoot.startPool;
                     enemiesShoot.playerTarget = spawnShoot.playerTarget;
@@ -85,10 +85,10 @@ namespace RiverAttack
                 if (GetComponent<LevelObstacleSpawnShootApproach>() && obstacleDetectApproach)
                 {
                     var spawnShootApp = GetComponent<LevelObstacleSpawnShootApproach>();
-                    obstacleDetectApproach.radiusPlayerProximity = spawnShootApp.radiusPlayerProximity;
-                    obstacleDetectApproach.randomPlayerDistanceNear = spawnShootApp.randomPlayerDistanceNear;
-                    obstacleDetectApproach.difficultType = spawnShootApp.difficultType;
-                    //obstacleDetectApproach.enemyDifficultyList = spawnShootApp.enemyDifficultyList;
+                    spawnShootApp.radiusPlayerProximity = spawnShootApp.radiusPlayerProximity;
+                    spawnShootApp.randomPlayerDistanceNear = spawnShootApp.randomPlayerDistanceNear;
+                    spawnShootApp.difficultType = spawnShootApp.difficultType;
+                    spawnShootApp.enemiesDifficultyList = spawnShootApp.enemiesDifficultyList;
                     var enemiesShootApp = (EnemiesShootApproach)obstacleDetectApproach;
                     enemiesShootApp.timeToCheck = spawnShootApp.timeToCheck;
                 }
@@ -99,7 +99,7 @@ namespace RiverAttack
                 Destroy(gameObject);
         }
 
-        private static void SetGameObjectsActive([NotNull] IEnumerable<GameObject> objects, bool active)
+        static void SetGameObjectsActive([NotNull] IEnumerable<GameObject> objects, bool active)
         {
             foreach (var t in objects)
             {
@@ -108,13 +108,11 @@ namespace RiverAttack
         }
 
         [ContextMenu("LoadPrefab")]
-        private void LoadPrefab()
+        void LoadPrefab()
         {
-            if (prefab is { Length: > 0 })
-            {
-                ignoreWall = prefab[viewIdPrefab].GetComponent<EnemiesMaster>().ignoreWall;
-                ignoreEnemies = prefab[viewIdPrefab].GetComponent<EnemiesMaster>().ignoreEnemies;
-            }
+            if (prefab is not { Length: > 0 }) return;
+            ignoreWall = prefab[viewIdPrefab].GetComponent<EnemiesMaster>().ignoreWall;
+            ignoreEnemies = prefab[viewIdPrefab].GetComponent<EnemiesMaster>().ignoreEnemies;
         }
 
     #region DrawGizmos

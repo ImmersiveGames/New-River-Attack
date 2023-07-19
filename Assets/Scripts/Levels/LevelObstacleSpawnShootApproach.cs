@@ -1,30 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace RiverAttack
 {
     [RequireComponent(typeof(LevelObstacleSpawnShoot))]
     public class LevelObstacleSpawnShootApproach : EnemiesShootApproach
     {
-
-        private LevelObstacleSpawnMaster spawnMaster;
-        protected override void OnEnable() { }
-        private void Start() { }
+        LevelObstacleSpawnMaster m_SpawnMaster;
+        
         [ContextMenu("LoadPrefab")]
         private void LoadPrefab()
         {
-            spawnMaster = GetComponent<LevelObstacleSpawnMaster>();
-            ObstacleDetectApproach oda = spawnMaster.getPrefab.GetComponent<ObstacleDetectApproach>();
-            if (oda != null)
-            {
-                radiusPlayerProximity = oda.radiusPlayerProximity;
-                randomPlayerDistanceNear = oda.randomPlayerDistanceNear;
-                difficultType = oda.difficultType;
-                EnemiesShootApproach enemiesOda = (EnemiesShootApproach)oda;
-                timeToCheck = enemiesOda.timeToCheck;
-                //enemyDifficultyList = oda.enemyDifficultyList;
-            }
+            m_SpawnMaster = GetComponent<LevelObstacleSpawnMaster>();
+            var oda = m_SpawnMaster.getPrefab.GetComponent<ObstacleDetectApproach>();
+            if (oda == null) return;
+            radiusPlayerProximity = oda.radiusPlayerProximity;
+            randomPlayerDistanceNear = oda.randomPlayerDistanceNear;
+            difficultType = oda.difficultType;
+            var enemiesOda = (EnemiesShootApproach)oda;
+            timeToCheck = enemiesOda.timeToCheck;
+            enemiesDifficultyList = oda.enemiesDifficultyList;
         }
     }
 }

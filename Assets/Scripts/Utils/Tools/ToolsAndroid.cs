@@ -2,7 +2,6 @@
 
 namespace Utils
 {
-
     public static class ToolsAndroid
     {
 #if UNITY_ANDROID && !UNITY_EDITOR

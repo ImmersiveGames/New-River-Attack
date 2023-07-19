@@ -4,107 +4,108 @@ using UnityEngine;
 namespace RiverAttack
 {
     [RequireComponent(typeof(PlayerMaster))]
-[RequireComponent(typeof(AudioSource))]
-public class PlayerSounds : MonoBehaviour
-{
+    [RequireComponent(typeof(AudioSource))]
+    public class PlayerSounds : MonoBehaviour
+    {
     #region Variable Private Inspector
-    [SerializeField]
-    private AudioEventSample playerEngineAudio;
-    [SerializeField]
-    private AudioEventSample playerStartAccelEngineAudio;
-    [SerializeField]
-    private AudioEventSample playerAceceEngineAudio;
-    [SerializeField]
-    private AudioEventSample playerDeaceceEngineAudio;
-    [SerializeField]
-    [Range(.1f, 3)]
-    private float enginePitchDown = .5f;
-    [SerializeField]
-    private AudioEventSample playerExplosion;
+        [SerializeField]
+        AudioEventSample audioEngineLoop;
+        [SerializeField]
+        AudioEventSample audioStartAccelEngine;
+        [SerializeField]
+        AudioEventSample audioEngineAccelerator;
+        [SerializeField]
+        AudioEventSample audioDeceleratorEngine;
+        [SerializeField, Range(.1f, 3)]
+        float enginePitchDown = .5f;
+        [SerializeField]
+        AudioEventSample audioPlayerExplosion;
     #endregion
 
     #region Variable Private References
-    private PlayerMaster playerMaster;
-    private AudioSource audioSource;
-    private GamePlayManager gamePlay;
+        PlayerMaster m_PlayerMaster;
+        AudioSource m_AudioSource;
+        GamePlayManager m_GamePlayManager;
     #endregion
 
-    private void OnEnable()
-    {
-        SetInitialReferences();
-        playerMaster.EventControllerMovement += SoundEngine;
-        playerMaster.EventPlayerDestroy += SoundExplosion;
-        gamePlay.EventPausePlayGame += SoundStop;
-        gamePlay.EventCompletePath += SoundStop;
-    }
-
-    private void SetInitialReferences()
-    {
-        playerMaster = GetComponent<PlayerMaster>();
-        audioSource = GetComponent<AudioSource>();
-        gamePlay = GamePlayManager.instance;
-    }
-
-    private void SoundEngine(Vector2 dir)
-    {
-        if (playerEngineAudio != null && playerMaster.shouldPlayerBeReady)
+        #region UNITY METHODS
+        void OnEnable()
         {
-            if (dir.y > 0 && playerMaster.playerStatus != PlayerMaster.Status.Accelerate)
+            SetInitialReferences();
+            m_PlayerMaster.EventControllerMovement += SoundEngine;
+            m_PlayerMaster.EventPlayerDestroy += SoundExplosion;
+            m_GamePlayManager.EventPausePlayGame += SoundStop;
+            m_GamePlayManager.EventCompletePath += SoundStop;
+        }
+        void OnDisable()
+        {
+            m_PlayerMaster.EventControllerMovement -= SoundEngine;
+            m_PlayerMaster.EventPlayerDestroy -= SoundExplosion;
+            m_GamePlayManager.EventPausePlayGame -= SoundStop;
+        }
+  #endregion
+        void SetInitialReferences()
+        {
+            m_PlayerMaster = GetComponent<PlayerMaster>();
+            m_AudioSource = GetComponent<AudioSource>();
+            m_GamePlayManager = GamePlayManager.instance;
+        }
+
+        void SoundEngine(Vector2 dir)
+        {
+            if (audioEngineLoop == null || !m_PlayerMaster.shouldPlayerBeReady) return;
+            if (dir.y > 0 && m_PlayerMaster.playerStatus != PlayerMaster.Status.Accelerate)
             {
-                playerMaster.playerStatus = PlayerMaster.Status.Accelerate;
-                StartCoroutine(ChangeEngine(playerStartAccelEngineAudio, playerAceceEngineAudio));
+                m_PlayerMaster.playerStatus = PlayerMaster.Status.Accelerate;
+                StartCoroutine(ChangeEngine(audioStartAccelEngine, audioEngineAccelerator));
             }
-            if (dir.y < 0 && playerMaster.playerStatus != PlayerMaster.Status.Reduce)
+            switch (dir.y)
             {
-                playerMaster.playerStatus = PlayerMaster.Status.Reduce;
-                AudioEventSample.UpdateChangePith(audioSource, playerEngineAudio.audioSample.pitch.maxValue, enginePitchDown);
-            }
-            else if (dir.y == 0 && playerMaster.playerStatus != PlayerMaster.Status.None)
-            {
-                if (playerMaster.playerStatus == PlayerMaster.Status.Accelerate)
-                    StartCoroutine(ChangeEngine(playerDeaceceEngineAudio, playerEngineAudio));
-                if (playerMaster.playerStatus == PlayerMaster.Status.Reduce)
-                    AudioEventSample.UpdateChangePith(audioSource, audioSource.pitch, playerEngineAudio.audioSample.pitch.maxValue);
-                playerMaster.playerStatus = PlayerMaster.Status.None;
-            }
-            else if (playerEngineAudio != null && playerMaster.shouldPlayerBeReady && !audioSource.isPlaying && playerMaster.playerStatus == PlayerMaster.Status.None)
-            {
-                //StopAllCoroutines();
-                playerEngineAudio.Play(audioSource);
+                case < 0 when m_PlayerMaster.playerStatus != PlayerMaster.Status.Reduce:
+                    m_PlayerMaster.playerStatus = PlayerMaster.Status.Reduce;
+                    AudioEventSample.UpdateChangePith(m_AudioSource, audioEngineLoop.audioSample.pitch.maxValue, enginePitchDown);
+                    break;
+                case 0 when m_PlayerMaster.playerStatus != PlayerMaster.Status.None:
+                {
+                    if (m_PlayerMaster.playerStatus == PlayerMaster.Status.Accelerate)
+                        StartCoroutine(ChangeEngine(audioDeceleratorEngine, audioEngineLoop));
+                    if (m_PlayerMaster.playerStatus == PlayerMaster.Status.Reduce)
+                        AudioEventSample.UpdateChangePith(m_AudioSource, m_AudioSource.pitch, audioEngineLoop.audioSample.pitch.maxValue);
+                    m_PlayerMaster.playerStatus = PlayerMaster.Status.None;
+                    break;
+                }
+                default:
+                {
+                    if (audioEngineLoop != null && m_PlayerMaster.shouldPlayerBeReady && !m_AudioSource.isPlaying && m_PlayerMaster.playerStatus == PlayerMaster.Status.None)
+                    {
+                        //StopAllCoroutines();
+                        audioEngineLoop.Play(m_AudioSource);
+                    }
+                    break;
+                }
             }
         }
-    }
 
-    private IEnumerator ChangeEngine(AudioEventSample audioStart, AudioEventSample audiofix)
-    {
-        audioStart.Play(audioSource);
-        while (audioSource.isPlaying)
+        IEnumerator ChangeEngine(AudioEvent audioStart, AudioEvent audioFix)
         {
-            yield return null;
+            audioStart.Play(m_AudioSource);
+            while (m_AudioSource.isPlaying)
+            {
+                yield return null;
+            }
+            audioFix.Play(m_AudioSource);
         }
-        audiofix.Play(audioSource);
-    }
 
-    private void SoundExplosion()
-    {
-        if (playerExplosion != null)
+        void SoundExplosion()
+        {
+            if (audioPlayerExplosion == null) return;
+            StopAllCoroutines();
+            audioPlayerExplosion.Play(m_AudioSource);
+        }
+        void SoundStop()
         {
             StopAllCoroutines();
-            playerExplosion.Play(audioSource);
+            m_AudioSource.Stop();
         }
     }
-
-    private void SoundStop()
-    {
-        StopAllCoroutines();
-        audioSource.Stop();
-    }
-
-    private void OnDisable()
-    {
-        playerMaster.EventControllerMovement -= SoundEngine;
-        playerMaster.EventPlayerDestroy -= SoundExplosion;
-        gamePlay.EventPausePlayGame -= SoundStop;
-    }
-}
 }

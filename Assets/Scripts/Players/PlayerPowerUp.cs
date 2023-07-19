@@ -1,109 +1,105 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 namespace RiverAttack
 {
-
     [RequireComponent(typeof(PlayerMaster))]
     public class PlayerPowerUp : MonoBehaviour
     {
-        public Dictionary<PowerUp, float> activePowerups = new Dictionary<PowerUp, float>();
-        private List<PowerUp> keys = new List<PowerUp>();
+        readonly Dictionary<PowerUp, float> m_ActivePowerUps = new Dictionary<PowerUp, float>();
+        List<PowerUp> m_Keys = new List<PowerUp>();
 
-        private PlayerMaster playerMaster;
-        private CollectibleScriptable collectibles;
-        private GamePlayPowerUps gamePlayPowerUps;
+        PlayerMaster m_PlayerMaster;
+        CollectibleScriptable m_Collectibles;
+        GamePlayPowerUps m_GamePlayPowerUps;
 
+        #region UNITY METHODS
         private void OnEnable()
         {
             SetInitialReferences();
-            playerMaster.EventPlayerReload += ResetPowerUp;
-
+            m_PlayerMaster.EventPlayerReload += ResetPowerUp;
         }
-
-        private void SetInitialReferences()
-        {
-            playerMaster = GetComponent<PlayerMaster>();
-        }
-
-        private void HandleGlobalPowerUps()
-        {
-            bool changed = false;
-
-            if (activePowerups.Count > 0)
-            {
-                foreach (PowerUp powerup in keys)
-                {
-                    if (activePowerups[powerup] > 0)
-                    {
-                        activePowerups[powerup] -= Time.deltaTime;
-                    }
-                    else
-                    {
-                        changed = true;
-                        activePowerups.Remove(powerup);
-                        powerup.PowerUpEnd(GetComponent<PlayerMaster>().GetPlayersSettings());
-                    }
-                }
-            }
-
-            if (changed)
-            {
-                keys = new List<PowerUp>(activePowerups.Keys);
-            }
-        }
-
-        // checks for disabling global powerups
         void Update()
         {
             HandleGlobalPowerUps();
         }
+        void OnDisable()
+        {
+            m_PlayerMaster.EventPlayerReload -= ResetPowerUp;
+        }
+        
+  #endregion
+        void SetInitialReferences()
+        {
+            m_PlayerMaster = GetComponent<PlayerMaster>();
+        }
 
-        public void ActivatePowerup(PowerUp powerup) //, Player target)
+        void HandleGlobalPowerUps()
+        {
+            bool changed = false;
+
+            if (m_ActivePowerUps.Count > 0)
+            {
+                var playerMaster = GetComponent<PlayerMaster>();
+                foreach (var powerUp in m_Keys)
+                {
+                    if (m_ActivePowerUps[powerUp] > 0)
+                    {
+                        m_ActivePowerUps[powerUp] -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        changed = true;
+                        m_ActivePowerUps.Remove(powerUp);
+                        powerUp.PowerUpEnd(playerMaster.GetPlayersSettings());
+                    }
+                }
+            }
+            if (changed)
+            {
+                m_Keys = new List<PowerUp>(m_ActivePowerUps.Keys);
+            }
+        }
+        
+        public void ActivatePowerUp(PowerUp powerUp) //, Player target)
         {
             //Debug.Log("AQUI: "+ powerup.name);
-            ClearActivePowerups(powerup.canAccumulateEffects);
-            if (!activePowerups.ContainsKey(powerup))
+            ClearActivePowerUps(powerUp.canAccumulateEffects);
+            if (!m_ActivePowerUps.ContainsKey(powerUp))
             {
                 //Debug.Log("Não tem esse powerup na lista");
-                powerup.PowerUpStart(playerMaster.GetPlayersSettings());
-                activePowerups.Add(powerup, powerup.duration);
+                powerUp.PowerUpStart(m_PlayerMaster.GetPlayersSettings());
+                m_ActivePowerUps.Add(powerUp, powerUp.duration);
             }
             else
             {
                 //Debug.Log("Ja tem esse power Up adiciona tempo");
-                if (powerup.canAccumulateDuration)
-                    activePowerups[powerup] += powerup.duration;
+                if (powerUp.canAccumulateDuration)
+                    m_ActivePowerUps[powerUp] += powerUp.duration;
                 else
-                    activePowerups[powerup] = powerup.duration;
+                    m_ActivePowerUps[powerUp] = powerUp.duration;
             }
-            keys = new List<PowerUp>(activePowerups.Keys);
+            m_Keys = new List<PowerUp>(m_ActivePowerUps.Keys);
         }
 
-        public void ResetPowerUp()
+        void ResetPowerUp()
         {
-            ClearActivePowerups();
+            ClearActivePowerUps();
         }
 
         // Calls the end action of each powerup and clears them from the activePowerups
-        public void ClearActivePowerups(bool onlyeffect = false) //(Player target, bool onlyeffect = false)
+        void ClearActivePowerUps(bool onlyEffect = false) //(Player target, bool onlyeffect = false)
         {
             //Debug.Log("Can Acumulate: "+ onlyeffect);
-            foreach (KeyValuePair<PowerUp, float> powerup in activePowerups)
+            foreach (var powerUp in m_ActivePowerUps)
             {
-                if (onlyeffect && !powerup.Key.canAccumulateEffects)
+                if (onlyEffect && !powerUp.Key.canAccumulateEffects)
                     return;
                 //Debug.Log("Termina o Powerup");
-                powerup.Key.PowerUpEnd(playerMaster.GetPlayersSettings());
+                powerUp.Key.PowerUpEnd(m_PlayerMaster.GetPlayersSettings());
             }
-            if (!onlyeffect)
-                activePowerups.Clear();
+            if (!onlyEffect)
+                m_ActivePowerUps.Clear();
         }
 
-        private void OnDisable()
-        {
-            playerMaster.EventPlayerReload -= ResetPowerUp;
-        }
     }
 }

@@ -1,35 +1,31 @@
 ﻿using UnityEngine;
+using Shopping;
 
 namespace RiverAttack
 {
-
     [CreateAssetMenu(fileName = "ShopSkin", menuName = "RiverAttack/Shopping/Skin", order = 1)]
     [System.Serializable]
     public class ShopProductSkin : ShopProduct
     {
-        //[SerializeField]
-        //private RuntimeAnimatorController animatorController;
         [SerializeField]
-        private GameObject skinProduct;
-        [SerializeField]
+        GameObject skinProduct;
         public Sprite hubSprite;
 
-        public GameObject GetSkin { get { return skinProduct; } }
-        //public RuntimeAnimatorController GetAnimatorSkin { get { return animatorController; } }
+        public GameObject getSkin { get { return skinProduct; } }
 
-        private void OnEnable()
+        #region UNITY METHODS
+        void OnEnable()
         {
             isConsumable = false;
         }
-
-        public override bool ShouldBeConsume(PlayerStats player)
+  #endregion
+        
+        public override bool ShouldBeConsume(PlayerSettings player)
         {
-            if (player.playerSkin == this)
-                return false;
-            return true;
+            return player.playerSkin != this;
         }
 
-        public override void ConsumeProduct(PlayerStats player)
+        public override void ConsumeProduct(PlayerSettings player)
         {
             player.playerSkin = this;
         }

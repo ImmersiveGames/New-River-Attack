@@ -5,80 +5,85 @@ using Utils;
 
 namespace Shopping
 {
-
     public class ShopMaster : Singleton<ShopMaster>
     {
         [SerializeField]
-        private Transform contentShop;
+        Transform contentShop;
         [SerializeField]
-        private GameObject objProduct;
+        GameObject objProduct;
         [SerializeField]
-        private RectTransform refCenter;
+        RectTransform refCenter;
         [SerializeField]
-        private ListShopStock productStock;
+        ListShopStock productStock;
         [SerializeField]
-        private GameObject productFoward, productBackward;
+        GameObject productForward, productBackward;
 
         [Header("Carousel"), SerializeField]
-        private bool infinityLooping;
+        bool infinityLooping;
         [SerializeField]
-        private float gapBeteenPanels = 0, maxposition = 0;
+        float spaceBetweenPanels = 0, maxPosition = 0;
 
-        private PlayerStats activePlayer;
-        private ShopCarousel shop;
-        private Task task;
+        PlayerSettings m_ActivePlayer;
+        ShopCarousel m_Shop;
+        Task m_Task;
 
-        public delegate void GeneralUpdateButtons(PlayerStats player, ShopProductStock item);
-        public GeneralUpdateButtons EventButtonSelect;
-        public GeneralUpdateButtons EventButtonBuy;
+        public delegate void GeneralUpdateButtons(PlayerSettings player, ShopProductStock item);
+        public GeneralUpdateButtons eventButtonSelect;
+        public GeneralUpdateButtons eventButtonBuy;
 
-        private void OnEnable()
+        #region UNITY METHODS
+        void OnEnable()
         {
             //SaveGame.DeleteAll();
             SetInitialReferences();
             SetupShop();
         }
 
-        private void Start()
+        void Start()
         {
-            productFoward.SetActive(true);
+            productForward.SetActive(true);
             productBackward.SetActive(true);
-            if (shop.GetActualProduct == 0 && !infinityLooping)
+            if (m_Shop.getActualProduct == 0 && !infinityLooping)
             {
                 productBackward.SetActive(false);
             }
         }
-
-        private void SetInitialReferences()
+        void LateUpdate()
         {
-            activePlayer = GameManager.instance.GetFirstPlayer(0);
+            m_Shop?.Update();
+        }
+        void OnDisable()
+        {
+            //GameManagerSaves.Instance.SavePlayer(activePlayer);
+        }
+  #endregion
+        void SetInitialReferences()
+        {
+            m_ActivePlayer = GameManager.instance.GetFirstPlayer(0);
             //GameManagerSaves.Instance.LoadPlayer(ref activePlayer);
             //activePlayer.LoadValues();
         }
-
-        private void SetupShop()
+        void SetupShop()
         {
-            shop = new ShopCarousel(contentShop, objProduct, refCenter);
-            shop.maxposition = maxposition;
-            shop.gapBeteenPanels = gapBeteenPanels;
-            shop.infinityLooping = infinityLooping;
-            if (shop != null)
+            m_Shop = new ShopCarousel(contentShop, objProduct, refCenter)
             {
-                shop.CreateShopping(productStock.value);
-                for (int i = 0; i < shop.GetProducts.Length; i++)
-                {
-                    UIItemShop item = shop.GetProducts[i].GetComponent<UIItemShop>();
-                    if (item)
-                    {
-                        item.SetupButtons(activePlayer);
-                        item.GetBuyButton.onClick.AddListener(delegate { BuyThisItem(activePlayer, item.myproductStock); });
-                        item.GetSelectButton.onClick.AddListener(delegate { SelectThisItem(activePlayer, item.myproductStock); });
-                    }
-                }
+                spaceBetweenPanels = spaceBetweenPanels,
+                infinityLooping = infinityLooping,
+                maxPosition = maxPosition
+            };
+            if (m_Shop == null) return;
+            m_Shop.CreateShopping(productStock.value);
+            foreach (var t in m_Shop.getProducts)
+            {
+                var item = t.GetComponent<UIItemShop>();
+                if (!item) continue;
+                item.SetupButtons(m_ActivePlayer);
+                item.getBuyButton.onClick.AddListener(delegate { BuyThisItem(m_ActivePlayer, item.productInStock); });
+                item.getSelectButton.onClick.AddListener(delegate { SelectThisItem(m_ActivePlayer, item.productInStock); });
             }
         }
 
-        public void BuyThisItem(PlayerStats player, ShopProductStock product)
+        void BuyThisItem(PlayerSettings player, ShopProductStock product)
         {
             player.listProducts.Add(product.shopProduct);
             player.wealth += -product.shopProduct.priceItem;
@@ -86,65 +91,46 @@ namespace Shopping
             product.RemoveStock(1);
             CallEventButtonBuy(player, product);
         }
-        private void SelectThisItem(PlayerStats player, ShopProductStock productStock)
+        void SelectThisItem(PlayerSettings player, ShopProductStock shopProductStock)
         {
-            productStock.shopProduct.ConsumeProduct(player);
-            CallEventButtonSelect(player, productStock);
-        }
-
-        private void LateUpdate()
-        {
-            if (shop != null)
-                shop.Update();
+            shopProductStock.shopProduct.ConsumeProduct(player);
+            CallEventButtonSelect(player, shopProductStock);
         }
 
         public void ButtonNavegation(int next)
         {
-            shop.ButtonNavegation(next);
+            m_Shop.ButtonNavegation(next);
             if (!infinityLooping)
             {
-                if (shop.GetActualProduct == 0)
+                if (m_Shop.getActualProduct == 0)
                 {
                     productBackward.SetActive(false);
-                    productFoward.SetActive(true);
+                    productForward.SetActive(true);
                 }
                 else
                 {
                     productBackward.SetActive(true);
-                    productFoward.SetActive(true);
+                    productForward.SetActive(true);
                 }
-                if (shop.GetProducts.Length - 1 == shop.GetActualProduct)
-                {
-                    productBackward.SetActive(true);
-                    productFoward.SetActive(false);
-                }
+                if (m_Shop.getProducts.Length - 1 != m_Shop.getActualProduct) return;
+                productBackward.SetActive(true);
+                productForward.SetActive(false);
             }
             else
             {
                 productBackward.SetActive(true);
-                productFoward.SetActive(true);
+                productForward.SetActive(true);
             }
 
         }
 
-        public void CallEventButtonSelect(PlayerStats player, ShopProductStock item)
+        public void CallEventButtonSelect(PlayerSettings player, ShopProductStock item)
         {
-            if (EventButtonSelect != null)
-            {
-                EventButtonSelect(player, item);
-            }
+            eventButtonSelect?.Invoke(player, item);
         }
-        public void CallEventButtonBuy(PlayerStats player, ShopProductStock item)
+        public void CallEventButtonBuy(PlayerSettings player, ShopProductStock item)
         {
-            if (EventButtonBuy != null)
-            {
-                EventButtonBuy(player, item);
-            }
-        }
-
-        private void OnDisable()
-        {
-            //GameManagerSaves.Instance.SavePlayer(activePlayer);
+            eventButtonBuy?.Invoke(player, item);
         }
     }
 }

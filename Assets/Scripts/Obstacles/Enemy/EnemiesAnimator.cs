@@ -6,7 +6,6 @@ namespace RiverAttack
     [RequireComponent(typeof(EnemiesMaster))]
     public class EnemiesAnimator : MonoBehaviour
     {
-
         public string explosionTrigger;
         public string onMove;
         public string onFlip;
@@ -15,6 +14,7 @@ namespace RiverAttack
         Animator m_Animator;
         GamePlayManager m_GamePlayManager;
 
+        #region UNITY METHODS
         protected virtual void OnEnable()
         {
             SetInitialReferences();
@@ -24,7 +24,15 @@ namespace RiverAttack
             m_EnemyMaster.EventChangeSkin += SetInitialReferences;
             m_GamePlayManager.EventResetEnemies += ResetAnimation;
         }
-
+        protected virtual void OnDisable()
+        {
+            m_EnemyMaster.EventDestroyEnemy -= ExplodeAnimation;
+            m_EnemyMaster.EventMovementEnemy -= MovementAnimation;
+            m_EnemyMaster.EventFlipEnemy -= FlipAnimation;
+            m_EnemyMaster.EventChangeSkin -= SetInitialReferences;
+            m_GamePlayManager.EventResetEnemies -= ResetAnimation;
+        }
+  #endregion
 
         protected virtual void SetInitialReferences()
         {
@@ -33,21 +41,21 @@ namespace RiverAttack
             m_Animator = GetComponentInChildren<Animator>();
         }
 
-        private void MovementAnimation(Vector3 pos)
+        void MovementAnimation(Vector3 pos)
         {
             if (m_Animator == null || string.IsNullOrEmpty(onMove) || !m_Animator.gameObject.activeSelf)
                 return;
             m_Animator.SetBool(onMove, pos.x != 0);
-            //animator.SetFloat(MovimentFloat, pos.x * 10);
+            //m_Animator.SetFloat(MovimentFloat, pos.x * 10);
         }
 
-        private void FlipAnimation(Vector3 face)
+        void FlipAnimation(Vector3 face)
         {
             if (m_Animator != null && !string.IsNullOrEmpty(onFlip))
                 m_Animator.SetBool(onFlip, !m_Animator.GetBool(onFlip));
         }
 
-        private void ResetAnimation()
+        void ResetAnimation()
         {
             if (m_Animator != null && !string.IsNullOrEmpty(onMove))
                 m_Animator.SetBool(onMove, false);
@@ -62,30 +70,17 @@ namespace RiverAttack
                 m_Animator.SetBool(explosionTrigger, true);
             }
         }
-        public void RemoveAnimation()
+        protected void RemoveAnimation()
         {
             if (m_Animator != null && GetComponent<SpriteRenderer>())
                 GetComponent<SpriteRenderer>().enabled = false;
             if (m_Animator != null && GetComponent<MeshRenderer>())
                 GetComponent<MeshRenderer>().enabled = false;
-            if (transform.childCount > 0)
+            if (transform.childCount <= 0) return;
+            for (int i = 0; i < transform.childCount; i++)
             {
-                for (int i = 0; i < transform.childCount; i++)
-                {
-                    transform.GetChild(i).gameObject.SetActive(false);
-                }
+                transform.GetChild(i).gameObject.SetActive(false);
             }
         }
-
-        protected virtual void OnDisable()
-        {
-            m_EnemyMaster.EventDestroyEnemy -= ExplodeAnimation;
-            m_EnemyMaster.EventMovementEnemy -= MovementAnimation;
-            m_EnemyMaster.EventFlipEnemy -= FlipAnimation;
-            m_EnemyMaster.EventChangeSkin -= SetInitialReferences;
-            m_GamePlayManager.EventResetEnemies -= ResetAnimation;
-
-        }
     }
-
 }

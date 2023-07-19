@@ -13,10 +13,17 @@ namespace RiverAttack
         float m_MultiplyVelocityUp;
         float m_MultiplyVelocityDown;
         [SerializeField]
-        private List<EnemiesResults> ListEnemysHit;
+        List<EnemiesResults> enemiesHitList;
         [SerializeField]
-        private List<EnemiesResults> ListCollectiblesCatch;
-        public int subWealth { get; private set; }
+        List<EnemiesResults> collectiblesCatchList;
+        int subWealth { get;
+            set; }
+        
+        int idPlayer
+        {
+            get;
+            set;
+        }
         public enum Status
         {
             None,
@@ -32,7 +39,7 @@ namespace RiverAttack
   #endregion
 
         PlayerController m_PlayerController;
-        [SerializeField] PlayerStats playerStats;
+        [SerializeField] PlayerSettings playerSettings;
 
         GameManager m_GameManager;
         Vector3 m_StartPlayerPosition;
@@ -44,11 +51,9 @@ namespace RiverAttack
         public event GeneralEventHandler EventPlayerBomb;
         public event GeneralEventHandler EventPlayerAddLive;
         public event GeneralEventHandler EventPlayerHit;
-
         public delegate void HealthEventHandler(int health);
         public event HealthEventHandler EventIncreaseHealth;
         public event HealthEventHandler EventDecreaseHealth;
-
         public delegate void ControllerEventHandler(Vector2 dir);
         public event ControllerEventHandler EventControllerMovement;
 
@@ -69,33 +74,49 @@ namespace RiverAttack
             listEnemiesHit = new List<EnemiesResults>();
             m_StartPlayerPosition = transform.position;
             playerStatus = Status.Paused;
+            m_GameManager = GameManager.instance;
         }
 
         // Update is called once per frame
        
   #endregion
 
-        public void Init(PlayerStats player, int id)
+        public void Init(PlayerSettings player, int id)
         {
-
+            /*idPlayer = id;
+            playerSettings = player;
+            name = playerSettings.name;
+            var gameSettings = GameSettings.instance;
+            gameObject.layer = gameSettings.layerPlayer;
+            m_StartPlayerPosition = playerSettings.spawnPosition;
+            transform.position = playerSettings.spawnPosition;
+            transform.rotation = Quaternion.Euler(playerSettings.spawnRotation);
+            playerSettings.lives = playerSettings.startLives;
+            if (playerSettings.lives <= 0 && gameSettings.gameMode.modeId == gameSettings.GetGameModes(0).modeId)
+                playerSettings.InitPlayer();
+            else if (playerSettings.lives.Value <= 0 && gameSettings.gameMode.modeId != gameSettings.GetGameModes(0).modeId)
+                playerSettings.ChangeLife(1);
+            if (gameSettings.gameMode.modeId == gameSettings.GetGameModes(0).modeId ||
+                GameManager.Instance.levelsFinish.Count <= 0)
+                playerSettings.score.SetValue(0);
+            GameManagerSaves.Instance.LoadPlayer(ref playerSettings);
+            //playerSettings.LoadValues(); */
         }
-
+        
         public void ChangeStatus(Status newStatus)
         {
             playerStatus = newStatus;
         }
-
-        public PlayerStats GetPlayersSettings()
+        public PlayerSettings GetPlayersSettings()
         {
-            return playerStats;
+            return playerSettings;
         }
         public void AllowedMove(bool allowed = true)
         {
             hasPlayerReady = allowed;
         }
         public bool shouldPlayerBeReady
-        {
-            get
+        { get
             {
                 return GamePlayManager.instance.shouldBePlayingGame && hasPlayerReady == true;
             }
@@ -103,7 +124,7 @@ namespace RiverAttack
         public void AddEnemiesHitList(EnemiesScriptable obstacle, int qnt = 1)
         {
             AddResultList(listEnemiesHit, obstacle, qnt);
-            AddResultList(GamePlaySettings.instance.HitEnemys, obstacle, qnt);
+            AddResultList(GamePlaySettings.instance.hitEnemiesResultsList, obstacle, qnt);
         }
 
         static void AddResultList(List<EnemiesResults> list, EnemiesScriptable enemy, int qnt = 1)
@@ -145,13 +166,10 @@ namespace RiverAttack
         }
         public bool CouldCollectItem(int max, CollectibleScriptable collectible)
         {
-            EnemiesResults itemResults = ListCollectiblesCatch.Find(x => x.enemy == collectible);
-            if (itemResults != null)
-            {
-                if (max != 0 && itemResults.quantity >= max)
-                    return false;
-            }
-            return true;
+            var itemResults = collectiblesCatchList.Find(x => x.enemy == collectible);
+            if (itemResults == null)
+                return true;
+            return max == 0 || itemResults.quantity < max;
         }
         public void AddCollectiblesList(CollectibleScriptable collectibles, int qnt = 1)
         {
@@ -159,12 +177,12 @@ namespace RiverAttack
             {
                 subWealth += collectibles.collectValuable;
             }
-            AddResultList(ListCollectiblesCatch, collectibles, qnt);
+            AddResultList(collectiblesCatchList, collectibles, qnt);
         }
         public void AddHitList(EnemiesScriptable obstacle, int qnt = 1)
         {
-            AddResultList(ListEnemysHit, obstacle, qnt);
-            AddResultList(GamePlaySettings.instance.HitEnemys, obstacle, qnt);
+            AddResultList(enemiesHitList, obstacle, qnt);
+            AddResultList(GamePlaySettings.instance.hitEnemiesResultsList, obstacle, qnt);
         }
 
         #region Calls
@@ -205,5 +223,9 @@ namespace RiverAttack
             EventControllerMovement?.Invoke(dir);
         }
   #endregion
+        protected virtual void CallEventChangeSkin(ShopProductSkin skin)
+        {
+            EventChangeSkin?.Invoke(skin);
+        }
     }
 }

@@ -32,7 +32,7 @@ namespace RiverAttack
         }
         void OnTriggerEnter(Collider other)
         {
-            if (!other.GetComponent<PlayerMaster>() && !other.GetComponent<BulletPlayer>())
+            if (other.GetComponent<PlayerMaster>() == null && !other.GetComponent<BulletPlayer>())
                 return;
             gameObject.SetActive(false);
             m_Collider.enabled = false;

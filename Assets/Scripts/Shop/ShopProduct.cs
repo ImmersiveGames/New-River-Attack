@@ -1,46 +1,44 @@
 ﻿using UnityEngine;
 using RiverAttack;
-[System.Serializable]
-public abstract class ShopProduct : ScriptableObject
+namespace  Shopping
 {
-
-    [SerializeField]
-    public new string name;
-    /*[SerializeField]
-    public LocalizationString translateName;*/
-    [SerializeField]
-    public Sprite spriteItem;
-    [SerializeField]
-    [Multiline]
-    public string desciptionItem;
-    /*[SerializeField]
-    public LocalizationString translateDesc;*/
-    [SerializeField]
-    public string refPriceFirebase;
-    [SerializeField]
-    public int priceItem;
-    [SerializeField]
-    public bool isConsumable;
-
-    /*public virtual string GetName()
+    [System.Serializable]
+    public abstract class ShopProduct : ScriptableObject
     {
-        if (translateName != null)
+    
+        public new string name;
+        /*
+        public LocalizationString translateName;*/
+        public Sprite spriteItem;
+        [Multiline]
+        public string descriptionItem;
+        /*
+        public LocalizationString translateDesc;*/
+        public string refPriceFirebase;
+        public int priceItem;
+        public bool isConsumable;
+
+        /*public virtual string GetName()
         {
-            LocalizationTranslate translate = new LocalizationTranslate(LocalizationSettings.Instance.GetActualLanguage());
-            return translate.Translate(translateName, LocalizationTranslate.StringFormat.FirstLetterUp);
-        }
-        return this.name;
-    }
-    public virtual string GetDescription()
-    {
-            if (translateDesc != null)
+            if (translateName != null)
             {
                 LocalizationTranslate translate = new LocalizationTranslate(LocalizationSettings.Instance.GetActualLanguage());
-                return translate.Translate(translateDesc, LocalizationTranslate.StringFormat.FirstLetterUp);
+                return translate.Translate(translateName, LocalizationTranslate.StringFormat.FirstLetterUp);
             }
-            return this.desciptionItem;
-    }*/
+            return this.name;
+        }
+        public virtual string GetDescription()
+        {
+                if (translateDesc != null)
+                {
+                    LocalizationTranslate translate = new LocalizationTranslate(LocalizationSettings.Instance.GetActualLanguage());
+                    return translate.Translate(translateDesc, LocalizationTranslate.StringFormat.FirstLetterUp);
+                }
+                return this.desciptionItem;
+        }*/
 
-    public virtual bool ShouldBeConsume(PlayerStats player) { return false; }
-    public virtual void ConsumeProduct(PlayerStats player) { Debug.Log("Usou o Produto"); }
+        public virtual bool ShouldBeConsume(PlayerSettings player) { return false; }
+        public virtual void ConsumeProduct(PlayerSettings player) { Debug.Log("Usou o Produto"); }
+    }
+
 }

@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
+using MyMenus;
+
 namespace RiverAttack
 {
     public class PanelManager : MonoBehaviour

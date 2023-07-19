@@ -6,23 +6,25 @@ namespace RiverAttack
     {
         protected EnemiesMaster enemiesMaster;
         protected GamePlayManager gamePlay;
-        protected GameSettings gameSettings;
-        protected GameManager gameManager;
+        GameSettings m_GameSettings;
+        GameManager m_GameManager;
 
+        #region UNITY METHODS
         protected virtual void OnEnable()
         {
             SetInitialReferences();
         }
+        protected virtual void OnTriggerEnter(Collider collision) { }
+  #endregion
 
         protected virtual void SetInitialReferences()
         {
             enemiesMaster = GetComponent<EnemiesMaster>();
-            gameSettings = GameSettings.instance;
+            m_GameSettings = GameSettings.instance;
             gamePlay = GamePlayManager.instance;
-            gameManager = GameManager.instance;
+            m_GameManager = GameManager.instance;
         }
-
-        protected virtual void OnTriggerEnter(Collider collision) { }
+      
         public virtual void HitThis(Collider collision) { }
 
         //public virtual void HitThis(Collider collision, PlayerMaster playerM = null) { }
@@ -44,24 +46,8 @@ namespace RiverAttack
             var ownerShoot = collision.GetComponentInParent<BulletPlayer>().GetOwner();
             ownerShoot.AddEnemiesHitList(enemiesMaster.enemy);
             return ownerShoot;
-
-            
-
         }
-
-        //protected void ShouldCompleteMission()
-        //{
-        //    if (enemyMaster.goalLevel)
-        //    {
-        //        //TODO: Rervisitar aqui pra faze a animação de final de fase por enquanto so termina a fase
-        //        gamePlay.levelComplete = true;
-        //        if (gameManager.ActualLevel.beatGame == true)
-        //            gameManager.isGameBeat = true;
-        //        gamePlay.PausePlayGame();
-        //        gamePlay.CallEventCompleteMission();
-        //    }
-        //}
-
+        
         protected void ShouldSavePoint()
         {
             if (enemiesMaster.enemy.isCheckInPoint)

@@ -6,100 +6,113 @@ namespace RiverAttack
     public class GamePlayStartLevel : MonoBehaviour
     {
         [SerializeField]
-        private GameObject panelStartText;
+        GameObject panelStartText;
         [Header("Move Player Start")]
         [SerializeField]
-        private float inTime;
+        float inTime;
         [Header("GameOver Set")]
         [SerializeField]
-        public string gameoverText;
+        public string gameOverText;
         [SerializeField]
-        private AudioClip gameoverSound;
+        AudioClip gameOverSound;
         [Header("Finish Path")]
         [SerializeField]
         public string victoryText;
         [SerializeField]
-        private AudioClip victorySound;
+        AudioClip victorySound;
         [SerializeField]
-        private AudioClip sucessSound;
+        AudioClip successSound;
         [SerializeField]
-        private AudioClip failSound;
+        AudioClip failSound;
 
-        private GamePlayManager playMaster;
-        private AudioSource audioSource;
-        private void Awake()
+        GamePlayManager m_GamePlayManager;
+        AudioSource m_AudioSource;
+        Animator m_Animator;
+
+        #region UNITYMETHODS
+        void Awake()
         {
+            m_Animator = panelStartText.GetComponent<Animator>();
             panelStartText.SetActive(false);
         }
-
         private void OnEnable()
         {
             SetInitialReferences();
-            playMaster.EventStartPath += StartLevel;
-            playMaster.EventCompletePath += EndLevel;
-            playMaster.EventUnPausePlayGame += ClosePanel;
-            playMaster.EventGameOver += GameOverScreen;
-            //panelStartText.SetActive(true);
-
+            m_GamePlayManager.EventStartPath += StartLevel;
+            m_GamePlayManager.EventCompletePath += EndLevel;
+            m_GamePlayManager.EventUnPausePlayGame += ClosePanel;
+            m_GamePlayManager.EventGameOver += GameOverScreen;
+            panelStartText.SetActive(true);
         }
-        private void SetInitialReferences()
+        private void OnDisable()
         {
-            playMaster = GamePlayManager.instance;
-            audioSource = GetComponent<AudioSource>();
+            m_GamePlayManager.EventStartPath -= StartLevel;
+            m_GamePlayManager.EventCompletePath -= EndLevel;
+            m_GamePlayManager.EventUnPausePlayGame -= ClosePanel;
+            m_GamePlayManager.EventGameOver -= GameOverScreen;
+        }
+  #endregion
+        
+        void SetInitialReferences()
+        {
+            m_GamePlayManager = GamePlayManager.instance;
+            m_AudioSource = GetComponent<AudioSource>();
         }
 
-        private void ClosePanel()
+        void ClosePanel()
         {
             panelStartText.SetActive(false);
         }
 
-        private void StartLevel()
+        void StartLevel()
         {
             Time.timeScale = 1;
-            SplashScreen(playMaster.GetActualLevel().name, "Start");
-            //playMaster.ListPlayer[0].transform.GetComponent<PlayerMaster>().SetFixCam(true);
-            foreach (var player in playMaster.listPlayer)
+            SplashScreen(m_GamePlayManager.GetActualLevel().name, "Start");
+            foreach (var player in m_GamePlayManager.listPlayer)
             {
-                Vector3 playerPos = player.GetComponent<PlayerMaster>().GetPlayersSettings().spawnPosition;
-                Vector3 to = new Vector3(playerPos.x, playerPos.y, playMaster.GetActualLevel().levelMilstones[0].z);
+                var playerPos = player.GetComponent<PlayerMaster>().GetPlayersSettings().spawnPosition;
+                var to = new Vector3(playerPos.x, playerPos.y, m_GamePlayManager.GetActualLevel().levelMilestones[0].z);
                 StartCoroutine(MoveToPosition(player.transform, to, inTime));
                 player.GetComponent<PlayerMaster>().UpdateSavePoint(to);
             }
         }
 
-        private void GameOverScreen()
+        void GameOverScreen()
         {
-            audioSource.clip = gameoverSound;
-            audioSource.loop = false;
-            audioSource.Play();
-            SplashScreen(gameoverText, "GameOver");
-            audioSource.PlayOneShot(failSound);
+            m_AudioSource.clip = gameOverSound;
+            m_AudioSource.loop = false;
+            m_AudioSource.Play();
+            SplashScreen(gameOverText, "GameOver");
+            m_AudioSource.PlayOneShot(failSound);
         }
 
-        private void EndLevel()
+        void EndLevel()
         {
-            //Debug.Log("END LEVEL SPLASH");
+            Debug.Log("END LEVEL SPLASH");
             SplashScreen(victoryText, "Finish");
-            //playMaster.ListPlayer[0].transform.GetComponent<PlayerMaster>().SetFixCam(false);
+            
             //TODO: Fazer controle de audio em outro arquivo
-            audioSource.PlayOneShot(sucessSound);
-            audioSource.clip = victorySound;
-            audioSource.loop = false;
-            audioSource.Play();
-            Vector3 pos = playMaster.GetActualLevel().levelMilstones[playMaster.GetActualLevel().levelMilstones.Count - 1];
-            Vector3 to = new Vector3(pos.x, pos.y + 10, pos.z);
-            foreach (GameObject player in playMaster.listPlayer)
+            
+            m_AudioSource.PlayOneShot(successSound);
+            m_AudioSource.clip = victorySound;
+            m_AudioSource.loop = false;
+            m_AudioSource.Play();
+            var pos = m_GamePlayManager.GetActualLevel().levelMilestones[^1];
+            var to = new Vector3(pos.x, pos.y + 10, pos.z);
+            foreach (var player in m_GamePlayManager.listPlayer)
             {
                 StartCoroutine(MoveToPosition(player.transform, to, inTime));
             }
-            playMaster.SaveAllPlayers();
+            m_GamePlayManager.SaveAllPlayers();
         }
 
-        private void SplashScreen(string splashText, string animeParm)
+        void SplashScreen(string splashText, string paramAnimation)
         {
             //TODO: SplashScreen com texto
-            /*panelStartText.SetActive(true);
-            panelStartText.GetComponent<Animator>().SetTrigger(animeParm);
+            Debug.Log("FAZ O MENU SPLASH NA TELA");
+            panelStartText.SetActive(true);
+            m_Animator.SetTrigger(paramAnimation);
+            /*
             PanelSplashText splash;
             if (splash = panelStartText.GetComponent<PanelSplashText>())
                 splash.SetSplashText(splashText);*/
@@ -112,24 +125,16 @@ namespace RiverAttack
             SplashScreen(txt, animeParm);
         }*/
 
-        public IEnumerator MoveToPosition(Transform transform, Vector3 position, float timeToMove)
+        static IEnumerator MoveToPosition(Transform transform, Vector3 position, float timeToMove)
         {
             var currentPos = transform.position;
-            var t = 0f;
+            float t = 0f;
             while (t < 1)
             {
                 t += Time.deltaTime / timeToMove;
                 transform.position = Vector3.Lerp(currentPos, position, t);
                 yield return null;
             }
-        }
-
-        private void OnDisable()
-        {
-            playMaster.EventStartPath -= StartLevel;
-            playMaster.EventCompletePath -= EndLevel;
-            playMaster.EventUnPausePlayGame -= ClosePanel;
-            playMaster.EventGameOver -= GameOverScreen;
         }
     }
 }

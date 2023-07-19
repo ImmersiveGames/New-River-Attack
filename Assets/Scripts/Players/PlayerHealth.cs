@@ -25,10 +25,10 @@ namespace RiverAttack
     #endregion
     #region Variable Private References
         PlayerMaster m_PlayerMaster;
-        PlayerStats m_PlayerStats;
+        PlayerSettings m_PlayerSettings;
     #endregion
 
-        #region UNITYMETHODS
+        #region UNITY METHODS
         void OnEnable()
         {
             SetInitialReferences();
@@ -53,12 +53,12 @@ namespace RiverAttack
         void SetInitialReferences()
         {
             m_PlayerMaster = GetComponent<PlayerMaster>();
-            m_PlayerStats = m_PlayerMaster.GetPlayersSettings();
+            m_PlayerSettings = m_PlayerMaster.GetPlayersSettings();
             m_AudioSource = GetComponent<AudioSource>();
         }
-        private void AutoReduceHp(int reduce, float time)
+        void AutoReduceHp(int reduce, float time)
         {
-            if (!m_PlayerMaster.shouldPlayerBeReady || m_PlayerStats.actualHp <= 0 || !(Time.time > m_NextDescesseFuel))
+            if (!m_PlayerMaster.shouldPlayerBeReady || m_PlayerSettings.actualHp <= 0 || !(Time.time > m_NextDescesseFuel))
                 return;
             m_NextDescesseFuel = Time.time + time;
             ReduceFuel(reduce);
@@ -66,13 +66,13 @@ namespace RiverAttack
             LogFuelSpent(reduce);
         }
 
-        private void CheckHealth()
+        void CheckHealth()
         {
-            if (playerAlert && m_PlayerMaster.shouldPlayerBeReady && m_PlayerStats.actualHp <= alertHp && !playerAlert.IsPlaying(m_AudioSource))
+            if (playerAlert && m_PlayerMaster.shouldPlayerBeReady && m_PlayerSettings.actualHp <= alertHp && !playerAlert.IsPlaying(m_AudioSource))
             {
                 playerAlert.Play(m_AudioSource);
             }
-            else if (playerAlert && m_PlayerMaster.shouldPlayerBeReady && m_PlayerStats.actualHp > alertHp && playerAlert.IsPlaying(m_AudioSource))
+            else if (playerAlert && m_PlayerMaster.shouldPlayerBeReady && m_PlayerSettings.actualHp > alertHp && playerAlert.IsPlaying(m_AudioSource))
             {
                 playerAlert.Stop(m_AudioSource);
             }
@@ -80,29 +80,27 @@ namespace RiverAttack
 
         static void LogFuelSpent(int reduce)
         {
-            GamePlaySettings.instance.fuelSpents += reduce;
+            GamePlaySettings.instance.fuelSpent += reduce;
         }
 
         void ReduceFuel(int fuel)
         {
-            m_PlayerStats.actualHp -= fuel;
-            if (m_PlayerStats.actualHp > 0) return;
-            m_PlayerStats.actualHp = 0;
+            m_PlayerSettings.actualHp -= fuel;
+            if (m_PlayerSettings.actualHp > 0) return;
+            m_PlayerSettings.actualHp = 0;
             m_PlayerMaster.CallEventPlayerDestroy();
         }
         void IncreaseFuel(int fuel)
         {
-            m_PlayerStats.actualHp = fuel;
-            if (m_PlayerStats.actualHp > m_PlayerStats.maxHp)
+            m_PlayerSettings.actualHp = fuel;
+            if (m_PlayerSettings.actualHp > m_PlayerSettings.maxHp)
             {
-                m_PlayerStats.actualHp = m_PlayerStats.maxHp;
+                m_PlayerSettings.actualHp = m_PlayerSettings.maxHp;
             }
         }
         void PlayerSetup()
         {
-            m_PlayerStats.actualHp = m_PlayerStats.maxHp;
+            m_PlayerSettings.actualHp = m_PlayerSettings.maxHp;
         }
-
-
     }
 }

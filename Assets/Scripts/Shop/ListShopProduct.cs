@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Shopping
@@ -9,7 +8,7 @@ namespace Shopping
     {
 #if UNITY_EDITOR
         [Multiline]
-        public string DeveloperDescription = "";
+        public string developerDescription = "";
 #endif
         public List<ShopProduct> value = new List<ShopProduct>();
 

@@ -20,39 +20,28 @@ namespace Shopping
                 quantity = 0;
         }
 
-        public bool AvariableToSelect(PlayerStats player)
+        public bool AvailableToSelect(PlayerSettings player)
         {
-            if (PlayerAlreadyBuy(player) && shopProduct.ShouldBeConsume(player))
-                return true;
-            return false;
+            return PlayerAlreadyBuy(player) && shopProduct.ShouldBeConsume(player);
         }
 
         public bool AvailableInStock()
         {
-            if (infinity || (!infinity && quantity > 0))
-                return true;
-            return false;
+            return infinity || (!infinity && quantity > 0);
         }
 
-        public bool AvariableForBuy(PlayerStats player)
+        public bool AvailableForBuy(PlayerSettings player)
         {
-            if (AvailableInStock() && HaveMoneyToBuy(player) && (PlayerAlreadyBuy(player) && shopProduct.isConsumable || !PlayerAlreadyBuy(player)))
-                return true;
-            return false;
+            return AvailableInStock() && HaveMoneyToBuy(player) && (PlayerAlreadyBuy(player) && shopProduct.isConsumable || !PlayerAlreadyBuy(player));
         }
 
-        public bool HaveMoneyToBuy(PlayerStats player)
+        public bool HaveMoneyToBuy(PlayerSettings player)
         {
-            if (player.wealth >= shopProduct.priceItem)
-                return true;
-            return false;
+            return player.wealth >= shopProduct.priceItem;
         }
-        public bool PlayerAlreadyBuy(PlayerStats player)
+        public bool PlayerAlreadyBuy(PlayerSettings player)
         {
-            if (player.listProducts.Count > 0 && player.listProducts.Contains(shopProduct))
-                return true;
-            else
-                return false;
+            return player.listProducts.Count > 0 && player.listProducts.Contains(shopProduct);
         }
     }
 }

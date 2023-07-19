@@ -8,25 +8,35 @@ namespace RiverAttack
     {
         Collider[] m_MyCollider;
 
+        #region UNITY METHODS
         protected override void OnEnable()
         {
             base.OnEnable();
             if (enemiesMaster.enemy.canRespawn)
                 gamePlay.EventResetEnemies += ColliderOn;
         }
-
-        protected override void SetInitialReferences()
-        {
-            base.SetInitialReferences();
-            m_MyCollider = GetComponentsInChildren<Collider>();
-        }
-
         protected override void OnTriggerEnter(Collider collision)
         {
             if ((collision.GetComponentInParent<PlayerMaster>() || collision.GetComponentInParent<Bullets>()) && enemiesMaster.enemy.canDestruct)
             {
                 HitThis(collision);
             }
+        }
+        private void OnDisable()
+        {
+            if (enemiesMaster.enemy.canRespawn)
+                gamePlay.EventResetEnemies -= ColliderOn;
+        }
+        private void OnDestroy()
+        {
+            if (enemiesMaster.enemy.canRespawn)
+                gamePlay.EventResetEnemies -= ColliderOn;
+        }
+  #endregion
+        protected override void SetInitialReferences()
+        {
+            base.SetInitialReferences();
+            m_MyCollider = GetComponentsInChildren<Collider>();
         }
 
         public override void HitThis(Collider collision)
@@ -40,11 +50,8 @@ namespace RiverAttack
             playerMaster.CallEventPlayerHit();
             //ShouldCompleteMission();
         }
-
-
         protected void ColliderOff()
         {
-            m_MyCollider = GetComponentsInChildren<Collider>();
             int length = m_MyCollider.Length;
             for (int i = 0; i < length; i++)
             {
@@ -53,26 +60,13 @@ namespace RiverAttack
         }
         void ColliderOn()
         {
-            m_MyCollider = GetComponentsInChildren<Collider>();
-            if (m_MyCollider != null)
+            if (m_MyCollider == null)  return;
+            int length = m_MyCollider.Length;
+            for (int i = 0; i < length; i++)
             {
-                int length = m_MyCollider.Length;
-                for (int i = 0; i < length; i++)
-                {
-                    m_MyCollider[i].enabled = true;
-                }
+                m_MyCollider[i].enabled = true;
             }
 
-        }
-        private void OnDisable()
-        {
-            if (enemiesMaster.enemy.canRespawn)
-                gamePlay.EventResetEnemies -= ColliderOn;
-        }
-        private void OnDestroy()
-        {
-            if (enemiesMaster.enemy.canRespawn)
-                gamePlay.EventResetEnemies -= ColliderOn;
         }
     }
 }

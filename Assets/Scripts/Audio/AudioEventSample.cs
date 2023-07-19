@@ -17,7 +17,7 @@ namespace RiverAttack
 
         public override void Play(AudioSource source)
         {
-            if (!audioSample.audioClip) return;
+            if (audioSample?.audioClip) return;
             SetupSource(source);
             source.Play();
         }
@@ -41,7 +41,7 @@ namespace RiverAttack
 
         void SetupSource(AudioSource source)
         {
-            if (audioMixerGroup) source.outputAudioMixerGroup = audioMixerGroup;
+            source.outputAudioMixerGroup = audioMixerGroup;
             source.clip = audioSample.audioClip;
             source.volume = Random.Range(audioSample.volume.minValue, audioSample.volume.maxValue);
             source.pitch = Random.Range(audioSample.pitch.minValue, audioSample.pitch.maxValue);

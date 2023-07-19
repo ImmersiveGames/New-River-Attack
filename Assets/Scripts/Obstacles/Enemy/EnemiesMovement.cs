@@ -22,12 +22,12 @@ namespace RiverAttack
         protected override void MoveEnemy()
         {
             base.MoveEnemy();
-            if (enemyMovment != Vector3.zero)
+            if (m_EnemyMovement != Vector3.zero)
             {
-                enemyMaster.CallEventMovementEnemy(enemyMovment);
+                enemyMaster.CallEventMovementEnemy(m_EnemyMovement);
             }
         }
-        private void FlipMe()
+        void FlipMe()
         {
             m_AlreadyCol = true;
             if (faceDirection.x != 0)

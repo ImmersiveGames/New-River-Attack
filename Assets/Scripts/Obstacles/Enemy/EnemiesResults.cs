@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using RiverAttack;
-
+namespace RiverAttack
+{
     [System.Serializable]
     public class EnemiesResults
     {
@@ -17,8 +15,11 @@ using RiverAttack;
             this.quantity = quantity;
         }
 
-        public int ScoreTotal
+        public int scoreTotal
         {
             get { return this.quantity * enemy.enemyScore; }
         }
     }
+}
+
+    

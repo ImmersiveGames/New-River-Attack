@@ -68,7 +68,7 @@ namespace RiverAttack
 
         public void StopBGM()
         {
-            if (audioSource)
+            if (audioSource != null)
                 audioSource.Stop();
         }
 

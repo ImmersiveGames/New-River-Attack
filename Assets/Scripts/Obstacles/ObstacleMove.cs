@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Utils;
 namespace RiverAttack
 {
     public abstract class ObstacleMove : MonoBehaviour, IMove
@@ -25,20 +25,19 @@ namespace RiverAttack
         }
         public void Move(Vector3 directionV3)
         {
-            if (!ShouldMove()) return;
+            if (!canMove) return;
             if (!isMove) isMove = true;
             AnimateOnMove(directionV3);
-            transform.Translate(directionV3 * moveSpeed * Time.deltaTime);
+            transform.Translate(directionV3 * (moveSpeed * Time.deltaTime));
         }
-
-        public void MoveStop()
+        protected void MoveStop()
         {
             isMove = false;
             canMove = false;
             m_Animator.SetBool(parameterAnimationMove, false);
         }
 
-        public void CanMove(bool can)
+        public void SetCanMove(bool can)
         {
             canMove = can;
         }

@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Shopping;
 
 namespace RiverAttack
 {
     [CreateAssetMenu(fileName = "PlayerStats", menuName = "RiverAttack/Players", order = 101)]
-    public class PlayerStats : ScriptableObject
+    public class PlayerSettings : ScriptableObject
     {
         [SerializeField]
         public new string name;
@@ -14,18 +14,13 @@ namespace RiverAttack
         public Vector3 spawnPosition;
         public Vector3 spawnRotation;
         [Header("Skin Settings")]
-        [SerializeField]
         public ShopProductSkin playerSkin;
         [Header("Shopping")]
         public int wealth;
-        [SerializeField]
         public List<ShopProduct> listProducts;
-        /*[Header("Controller Settings")]
-        public ControllerMap controllerMap;*/
-
+        [Header("Player")]
         public float mySpeedy;
         public float myAgility;
-
         [Range(1f, 30f)]
         public float speedHorizontal;
         [Range(1f, 10f)]
@@ -38,13 +33,13 @@ namespace RiverAttack
         public float shootVelocity = 10f;
         [Header("PowerUP Effects")]
         public float speedyShoot;
-        [FormerlySerializedAs("maxHP")]
         [Header("Player Lives e HP")]
         public int maxHp;
         public int actualHp;
         public int startLives;
         public int maxLives;
         public int lives;
+        public int startBombs;
         public int bombs;
         public int maxBombs;
 
@@ -58,12 +53,12 @@ namespace RiverAttack
                 lives += life;
         }
 
-        /*public void InitPlayer()
+        public void InitPlayer()
         {
-            lives.SetValue(startLives);
-            bombs.SetValue(3);
-            actualHp.SetValue(maxHp);
+            lives = startLives;
+            bombs = startBombs;
+            actualHp = maxHp;
             //LoadListShop();
-        }*/
+        }
     }
 }

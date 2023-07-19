@@ -9,26 +9,26 @@ namespace RiverAttack
         PlayerMaster m_PlayerMaster;        
         PlayersInputActions m_PlayersInputActions;
 
-        PlayerStats playerStats;
+        PlayerSettings m_PlayerSettings;
         
-        [SerializeField] float m_AutoMovement;
-        [SerializeField] float m_MovementSpeed;
-        [SerializeField] float m_MultiplyVelocityUp;
-        [SerializeField] float m_MultiplyVelocityDown;
+        [SerializeField] float autoMovement;
+        [SerializeField] float movementSpeed;
+        [SerializeField] float multiplyVelocityUp;
+        [SerializeField] float multiplyVelocityDown;
 
-        Vector2 inputVector;
+        Vector2 m_InputVector;
 
         #region UNITYMETHODS
         void Awake()
         {
             m_PlayerMaster = GetComponent<PlayerMaster>();
-            playerStats = m_PlayerMaster.GetPlayersSettings();
+            m_PlayerSettings = m_PlayerMaster.GetPlayersSettings();
             m_PlayersInputActions = new PlayersInputActions();
 
-            m_AutoMovement = GameSettings.instance.autoMovement;
-            m_MovementSpeed = playerStats.mySpeedy;
-            m_MultiplyVelocityUp = playerStats.multiplyVelocityUp;
-            m_MultiplyVelocityDown = playerStats.multiplyVelocityDown;            
+            autoMovement = GameSettings.instance.autoMovement;
+            movementSpeed = m_PlayerSettings.mySpeedy;
+            multiplyVelocityUp = m_PlayerSettings.multiplyVelocityUp;
+            multiplyVelocityDown = m_PlayerSettings.multiplyVelocityDown;            
 
             m_PlayersInputActions.Enable();
         }
@@ -51,40 +51,35 @@ namespace RiverAttack
 
             //var inputVector = GetMovementVector2Normalized();
 
-            float axisAutoMovement = inputVector.y switch
+            float axisAutoMovement = m_InputVector.y switch
             {
-                > 0 => m_MultiplyVelocityUp,
-                < 0 => m_MultiplyVelocityDown,
-                _ => m_AutoMovement
+                > 0 => multiplyVelocityUp,
+                < 0 => multiplyVelocityDown,
+                _ => autoMovement
             };
 
-            var moveDir = new Vector3(inputVector.x, 0, axisAutoMovement);
+            var moveDir = new Vector3(m_InputVector.x, 0, axisAutoMovement);
             if (m_PlayerMaster.GetHasPlayerReady())
-                transform.position += moveDir * (m_MovementSpeed * Time.deltaTime);
+                transform.position += moveDir * (movementSpeed * Time.deltaTime);
 
-            m_PlayerMaster.CallEventControllerMovement(inputVector);
+            m_PlayerMaster.CallEventControllerMovement(m_InputVector);
         }
 
         #endregion
-        /*
-         * Pega o valor do input, normaliza e retorna um vetor para ser usado com o transform do objeto
-         */
+
         public Vector2 GetMovementVector2Normalized()
         {
-            var inputVector = m_PlayersInputActions.Player.Move.ReadValue<Vector2>();
-            inputVector = inputVector.normalized;
-
-            return inputVector;
+            return m_PlayersInputActions.Player.Move.ReadValue<Vector2>().normalized;
         }
 
-        private void TouchMove(InputAction.CallbackContext context) 
+        void TouchMove(InputAction.CallbackContext context) 
         {
-            inputVector = context.ReadValue<Vector2>().normalized;            
+            m_InputVector = context.ReadValue<Vector2>().normalized;            
         }
 
-        private void EndTouchMove(InputAction.CallbackContext context) 
+        void EndTouchMove(InputAction.CallbackContext context) 
         {
-            inputVector = Vector2.zero;            
+            m_InputVector = Vector2.zero;            
         }
     }
 }

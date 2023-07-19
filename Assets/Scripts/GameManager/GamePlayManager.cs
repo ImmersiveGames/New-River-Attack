@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Utils;
 namespace RiverAttack
@@ -24,12 +25,13 @@ namespace RiverAttack
         [Header("Level Settings"), SerializeField]
         Levels classicLevel;
         [SerializeField]
-        PlayerStats[] numPlayers;
+        PlayerSettings[] numPlayers;
         [SerializeField]
         GameObject prefabPlayer;
-         public List<GameObject> listPlayer { get; set; }
+        public List<GameObject> listPlayer { get;
+            private set; }
         int m_ActualPath;
-        Dictionary<string, object> m_GameplayDefault = new Dictionary<string, object>();
+        //Dictionary<string, object> m_GameplayDefault = new Dictionary<string, object>();
 
         GameManager m_GameManager;
         GameSettings m_GameSettings;
@@ -48,51 +50,40 @@ namespace RiverAttack
         public event GamePlayManagerEventHandler EventResetEnemies;
         public event GamePlayManagerEventHandler EventResetPlayers;
         public event GamePlayManagerEventHandler EventUICollectable;
-
         public delegate void PlayerPositionEventHandler(Vector3 position);
         public event PlayerPositionEventHandler EventCheckPoint;
         public event PlayerPositionEventHandler EventCheckPlayerPosition;
-
         public delegate void PowerUpEventHandler(bool active);
         public event PowerUpEventHandler EventRapidFire;
-
         public delegate void GameManagerRestartPlayer(int lives);
         public event GameManagerRestartPlayer EventRestartPlayer;
-
         public delegate void CollectableEventHandle(CollectibleScriptable collectibles);
         public event CollectableEventHandle EventCollectItem;
-
         public delegate void ShakeCamEventHandle(float power, float inTime);
         public event ShakeCamEventHandle EventShakeCam;
     #endregion
 #region UnityMethods
-        /*
-         private void OnEnable()
-    {
-        SetInitialReferences();
-        completePath = false;
-        GameObject levelroot = new GameObject();
-        m_ActualPath = 0;
-        levelroot.name = actualLevel.levelName;
-        m_GameManager.actualLevel.CreateLevel(levelroot.transform);
-        actualBGM = m_GameManager.actualLevel.startLevelBGM;
-        m_GamePlayAudio.PlayBGM(actualBGM);
-        SpawnPlayers(numPlayers.Length);
-        EventCheckPlayerPosition += CheckPoolLevel;
-        m_GameplayDefault.Add("config_gamePlay_godmod", false);
-        FirebaseRemoteConfig.SetDefaults(m_GameplayDefault);
-    }
-
-    private void Start()
-    {
-        FirebaseRemoteConfig.ActivateFetched();
-
-        godMode = (godMode) ? godMode : FirebaseRemoteConfig.GetValue("config_gamePlay_godmod").BooleanValue;
-    }
-         * */
+        void OnEnable()
+        {
+            SetInitialReferences();
+            completePath = false;
+            var levelRoot = new GameObject();
+            m_ActualPath = 0;
+            levelRoot.name = actualLevel.levelName;
+            m_GameManager.actualLevel.CreateLevel(levelRoot.transform);
+            actualBGM = m_GameManager.actualLevel.startLevelBGM;
+            m_GamePlayAudio.PlayBGM(actualBGM);
+            SpawnPlayers(numPlayers.Length);
+            EventCheckPlayerPosition += CheckPoolLevel;
+            //m_GameplayDefault.Add("config_gamePlay_godmod", false);
+        }
+        void OnDisable()
+        {
+            EventCheckPlayerPosition -= CheckPoolLevel;
+            m_GamePlayAudio.StopBGM();
+            StopAllCoroutines();
+        }
   #endregion
-
-
         private void SpawnPlayers(int players)
         {
             listPlayer = new List<GameObject>();
@@ -126,16 +117,16 @@ namespace RiverAttack
             return listPlayer[id].GetComponent<PlayerMaster>();
         }
 
-        public PlayerStats GetPlayerSettings(int id)
+        public PlayerSettings GetPlayerSettings(int id)
         {
             return listPlayer[id].GetComponent<PlayerMaster>().GetPlayersSettings();
         }
 
         public void ReadyPlayer(bool ready)
         {
-            for (int i = 0; i < listPlayer.Count; i++)
+            foreach (var t in listPlayer)
             {
-                listPlayer[i].GetComponent<PlayerMaster>().AllowedMove(ready);
+                t.GetComponent<PlayerMaster>().AllowedMove(ready);
             }
         }
         public Levels GetActualLevel()
@@ -150,11 +141,9 @@ namespace RiverAttack
 
         private void CheckPoolLevel(Vector3 pos)
         {
-            /*if (!completePath && (actualLevel.levelMilstones[m_ActualPath] - pos).z <= 0)
-            {
-                actualLevel.CallUpdatePoolLevel(m_ActualPath);
-                m_ActualPath++;
-            }*/
+            if (completePath || !((actualLevel.levelMilestones[m_ActualPath] - pos).z <= 0)) return;
+            actualLevel.CallUpdatePoolLevel(m_ActualPath);
+            m_ActualPath++;
         }
 
         public void GamePlayPause(bool setPause)
@@ -162,24 +151,20 @@ namespace RiverAttack
             gamePaused = setPause;
         }
 
-        public int HightScorePlayers()
+        public int HighScorePlayers()
         {
-            /*if (listPlayer.Count > 0)
+            if (listPlayer.Count <= 0)  return 0;
+            int score = 0;
+            foreach (var pl in listPlayer.Where(pl => score < pl.GetComponent<PlayerMaster>().GetPlayersSettings().score))
             {
-                int score = 0;
-                foreach (GameObject pl in listPlayer)
-                {
-                    if (score < pl.GetComponent<PlayerMaster>().playerSettings.score.Value)
-                        score = (int)pl.GetComponent<PlayerMaster>().playerSettings.score.Value;
-                }
-                return score;
+                score = (int)pl.GetComponent<PlayerMaster>().GetPlayersSettings().score;
             }
-            else*/
-            return 1;
+            return score;
         }
 
         public void SaveAllPlayers()
         {
+            Debug.Log("AQUI SALVA O JOGO");
             /*for (int i = 0; i < numPlayers.Length; i++)
             {
                 GameManagerSaves.Instance.SavePlayer(numPlayers[i]);
@@ -190,12 +175,7 @@ namespace RiverAttack
         {
             get
             {
-                foreach (var t in listPlayer)
-                {
-                    if (t.GetComponent<PlayerMaster>().shouldPlayerBeReady)
-                        return true;
-                }
-                return false;
+                return listPlayer.Any(t => t.GetComponent<PlayerMaster>().shouldPlayerBeReady);
             }
         }
 
@@ -203,7 +183,7 @@ namespace RiverAttack
         {
             get
             {
-                return true; //(gamePaused && !m_GameManager.isGamePaused && !m_GameManager.isGameOver && !gameBeat && !completePath) ? true : false;
+                return (gamePaused && !m_GameManager.isGamePaused && !m_GameManager.isGameOver && !gameBeat && !completePath);
             }
         }
 
@@ -211,7 +191,7 @@ namespace RiverAttack
         {
             get
             {
-                return true; //!m_GameManager.isGamePaused && !gamePaused && (m_GameManager.isGameOver || completePath) ? false : true;
+                return m_GameManager.isGamePaused || gamePaused || (!m_GameManager.isGameOver && !completePath);
             }
         }
 
@@ -219,7 +199,7 @@ namespace RiverAttack
         {
             get
             {
-                return true; //(m_GameManager.isGameOver && !m_GameManager.isGamePaused && !gamePaused) ? true : false;
+                return (m_GameManager.isGameOver && !m_GameManager.isGamePaused && !gamePaused);
             }
         }
 
@@ -227,7 +207,7 @@ namespace RiverAttack
         {
             get
             {
-                return true; //(completePath && !gamePaused && !m_GameManager.isGameOver && !m_GameManager.isGamePaused) ? true : false;
+                return (completePath && !gamePaused && !m_GameManager.isGameOver && !m_GameManager.isGamePaused);
             }
         }
 
@@ -235,7 +215,7 @@ namespace RiverAttack
         {
             get
             {
-                return true; //(gameBeat && completePath && !m_GameManager.isGameOver && !m_GameManager.isGamePaused) ? true : false;
+                return (gameBeat && completePath && !m_GameManager.isGameOver && !m_GameManager.isGamePaused);
             }
         }
 
@@ -315,17 +295,10 @@ namespace RiverAttack
             m_GameManager.SetupGame();
             EventRestartPlayer?.Invoke(lives);
         }
-        public void CallEventShakeCam(float power, float intime)
+        public void CallEventShakeCam(float power, float inTime)
         {
-            EventShakeCam?.Invoke(power, intime);
+            EventShakeCam?.Invoke(power, inTime);
         }
     #endregion
-
-        private void OnDisable()
-        {
-            EventCheckPlayerPosition -= CheckPoolLevel;
-            //m_GamePlayAudio.StopBGM();
-            StopAllCoroutines();
-        }
     }
 }

@@ -7,91 +7,83 @@ namespace Shopping
     public class UIItemShop : MonoBehaviour
     {
         [SerializeField, Header("Product Display")]
-        private Text productName;
+        Text productName;
         [SerializeField]
-        private Text productDescription;
+        Text productDescription;
         [SerializeField]
-        private Text productPrice;
+        Text productPrice;
         [SerializeField]
-        private Image productImage;
+        Image productImage;
         [SerializeField]
-        private Button btnBuy;
+        Button btnBuy;
         [SerializeField]
-        private Button btnSelect;
+        Button btnSelect;
 
-        public ShopProductStock myproductStock;
-        private ShopMaster shopManager;
+        public ShopProductStock productInStock;
+        ShopMaster m_ShopManager;
 
-        public Button GetBuyButton { get { return btnBuy; } }
-        public Button GetSelectButton { get { return btnSelect; } }
+        public Button getBuyButton { get { return btnBuy; } }
+        public Button getSelectButton { get { return btnSelect; } }
 
-        private void OnEnable()
+        #region UNITY METHODS
+        void OnEnable()
         {
             SetInitialReferences();
-            shopManager.EventButtonBuy += UpdateBuyButton;
-            shopManager.EventButtonSelect += SelectThisItem;
-            //Firebase.RemoteConfig.FirebaseRemoteConfig.ActivateFetched();
+            m_ShopManager.eventButtonBuy += UpdateBuyButton;
+            m_ShopManager.eventButtonSelect += SelectThisItem;
         }
-
-        private void SetInitialReferences()
+        void OnDisable()
         {
-            shopManager = ShopMaster.instance;
+            m_ShopManager.eventButtonBuy -= UpdateBuyButton;
+            m_ShopManager.eventButtonSelect -= SelectThisItem;
+        }
+  #endregion
+        void SetInitialReferences()
+        {
+            m_ShopManager = ShopMaster.instance;
         }
 
         public void SetupDisplay(ShopProductStock stockProduct)
         {
-            myproductStock = stockProduct;
-            //stockProduct.shopProduct.priceItem = (int)FirebaseRemoteConfig.GetValue(myproductStock.shopProduct.refPriceFirebase).LongValue;
-
-            ShopProduct shopProduct = stockProduct.shopProduct;
+            productInStock = stockProduct;
+            var shopProduct = stockProduct.shopProduct;
             productName.text = shopProduct.name;
-            productDescription.text = shopProduct.desciptionItem;
+            productDescription.text = shopProduct.descriptionItem;
             productPrice.text = shopProduct.priceItem.ToString();
             productImage.sprite = shopProduct.spriteItem;
         }
 
-        public void SetupButtons(PlayerStats player)
+        public void SetupButtons(PlayerSettings player)
         {
             SetupBuyButton(player);
             SetupSelectButton(player);
         }
 
-        public void UpdateBuyButton(PlayerStats player, ShopProductStock product)
+        void UpdateBuyButton(PlayerSettings player, ShopProductStock product)
         {
             SetupButtons(player);
         }
 
-        public void SelectThisItem(PlayerStats player, ShopProductStock product)
+        void SelectThisItem(PlayerSettings player, ShopProductStock product)
         {
             SetupButtons(player);
         }
 
-        private void SetupBuyButton(PlayerStats player)
+        void SetupBuyButton(PlayerSettings player)
         {
             btnBuy.gameObject.SetActive(true);
-            btnBuy.interactable = false;
-            if (myproductStock.AvariableForBuy(player))
-                btnBuy.interactable = true;
-            if (myproductStock.PlayerAlreadyBuy(player) && !myproductStock.shopProduct.isConsumable)
+            btnBuy.interactable = false || productInStock.AvailableForBuy(player);
+            if (productInStock.PlayerAlreadyBuy(player) && !productInStock.shopProduct.isConsumable)
                 btnBuy.gameObject.SetActive(false);
         }
 
-        private void SetupSelectButton(PlayerStats player)
+        void SetupSelectButton(PlayerSettings player)
         {
-            btnSelect.gameObject.SetActive(!myproductStock.AvariableForBuy(player));
-            btnSelect.interactable = false;
-            if (myproductStock.AvariableToSelect(player))
-                btnSelect.interactable = true;
-            if (myproductStock.shopProduct.isConsumable)
+            btnSelect.gameObject.SetActive(!productInStock.AvailableForBuy(player));
+            btnSelect.interactable = false || productInStock.AvailableToSelect(player);
+            if (productInStock.shopProduct.isConsumable)
                 btnSelect.gameObject.SetActive(false);
-
             //Debug.Log(myproductStock.shopProduct.GetName + "  Ativo: " + myproductStock.shopProduct.ShouldBeConsume(player));
-        }
-
-        private void OnDisable()
-        {
-            shopManager.EventButtonBuy -= UpdateBuyButton;
-            shopManager.EventButtonSelect -= SelectThisItem;
         }
     }
 }

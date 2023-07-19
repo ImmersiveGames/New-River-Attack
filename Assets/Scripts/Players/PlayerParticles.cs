@@ -7,41 +7,43 @@ namespace RiverAttack
     {
 
         [SerializeField]
-        private GameObject particlePrefab;
+        GameObject particlePrefab;
         [SerializeField]
-        private float timeoutDestroy;
+        float timeoutDestroy;
 
-        private PlayerMaster m_PlayerMaster;
+        PlayerMaster m_PlayerMaster;
 
-        private void OnEnable()
+        #region UNITY METHODS
+        void OnEnable()
         {
             SetInitialReferences();
             m_PlayerMaster.EventPlayerDestroy += ExplodeParticle;
             m_PlayerMaster.EventPlayerReload += RestoreChildren;
         }
-
-        private void SetInitialReferences()
+        void OnDisable()
+        {
+            m_PlayerMaster.EventPlayerDestroy -= ExplodeParticle;
+            m_PlayerMaster.EventPlayerReload -= RestoreChildren;
+        }
+  #endregion
+        void SetInitialReferences()
         {
             m_PlayerMaster = GetComponent<PlayerMaster>();
             // find children with Particles
         }
 
-        private void ExplodeParticle()
+        void ExplodeParticle()
         {
             Tools.ToggleChildren(this.transform, false);
-            GameObject go = Instantiate(particlePrefab, this.transform);
+            var go = Instantiate(particlePrefab, transform);
             Destroy(go, timeoutDestroy);
         }
 
-        private void RestoreChildren()
+        void RestoreChildren()
         {
-            Tools.ToggleChildren(this.transform, true);
+            Tools.ToggleChildren(transform, true);
         }
 
-        private void OnDisable()
-        {
-            m_PlayerMaster.EventPlayerDestroy -= ExplodeParticle;
-            m_PlayerMaster.EventPlayerReload -= RestoreChildren;
-        }
+        
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace RiverAttack
 {
@@ -45,7 +44,7 @@ namespace RiverAttack
         {
             m_PlayerMaster = GetComponent<PlayerMaster>();
             m_GamePlayManager = GamePlayManager.instance;
-            distanceOffset = (int)(m_GamePlayManager.GetActualLevel().levelMilstones[0].z / cadenceDistance);
+            distanceOffset = (int)(m_GamePlayManager.GetActualLevel().levelMilestones[0].z / cadenceDistance);
             lifeTime = Time.time + checkTime;
         }
 
@@ -64,6 +63,5 @@ namespace RiverAttack
         {
             pathDistance = (int)(transform.position.z / cadenceDistance) - distanceOffset;
         }
-
     }
 }

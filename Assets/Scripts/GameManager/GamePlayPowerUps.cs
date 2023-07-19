@@ -6,12 +6,12 @@ namespace RiverAttack
     public class GamePlayPowerUps : Singleton<GamePlayPowerUps>
     {
         //ATENÇÃO NÃO ACEITA EVENTS PORQUE ELE NÃO VAI APRA A MEMORIA CHAMANDO PELO SCRIPTABLE
-        public static PlayerStats target;
+        public static PlayerSettings target;
         [Header("RapidFire PowerUp")]
         [Range(0.1f, 2)]
         public float minRapidFire = 0.1f;
 
-        public void SetTarget(PlayerStats player)
+        public void SetTarget(PlayerSettings player)
         {
             target = player;
         }
@@ -41,7 +41,7 @@ namespace RiverAttack
 
         public void GainBomb(int amount)
         {
-            if (target)
+            if (target != null)
             {
                 target.bombs += amount;
             }

@@ -1,20 +1,23 @@
 ﻿using UnityEngine;
 
-namespace  RiverAttack
+namespace RiverAttack
 {
-    
     [RequireComponent(typeof(Renderer))]
     public class CollectiblesOnScreen : MonoBehaviour
     {
-        private CollectiblesMaster collectiblesMaster;
-        private void OnEnable()
+        CollectiblesMaster m_CollectiblesMaster;
+
+        #region UNITY METHODS
+        void OnEnable()
         {
-            collectiblesMaster = GetComponentInParent<CollectiblesMaster>();
+            m_CollectiblesMaster = GetComponentInParent<CollectiblesMaster>();
         }
 
         private void OnBecameVisible()
         {
-            collectiblesMaster.CallShowOnScreen();
+            m_CollectiblesMaster.CallShowOnScreen();
         }
+  #endregion
+
     }
 }

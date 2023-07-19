@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace RiverAttack
@@ -8,21 +7,21 @@ namespace RiverAttack
     public class PlayerLives : MonoBehaviour
     {
         [SerializeField]
-        private float timeoutReSpawn = 1.8f;
+        float timeoutReSpawn = 1.8f;
     #region Variable Private Inspector
-        private PlayerMaster m_PlayerMaster;
-        private PlayerStats m_PlayerStats;
-        private GamePlayManager m_GamePlayMaster;
+        PlayerMaster m_PlayerMaster;
+        PlayerSettings m_PlayerSettings;
+        GamePlayManager m_GamePlayMaster;
 
         [SerializeField]
-        private int scoreForExtraLife;
-        private int m_Score;
+        int scoreForExtraLife;
+        int m_Score;
     #endregion
 
-    #region UNITYMETHODS
+    #region UNITY METHODS
         void Start()
         {
-            m_Score = (int)m_PlayerStats.score + scoreForExtraLife;
+            m_Score = (int)m_PlayerSettings.score + scoreForExtraLife;
         }
         void OnEnable()
         {
@@ -39,26 +38,26 @@ namespace RiverAttack
         }
   #endregion
 
-        private void SetInitialReferences()
+        void SetInitialReferences()
         {
             m_PlayerMaster = GetComponent<PlayerMaster>();
-            m_PlayerStats = m_PlayerMaster.GetPlayersSettings();
+            m_PlayerSettings = m_PlayerMaster.GetPlayersSettings();
             m_GamePlayMaster = GamePlayManager.instance;
         }
-        private void AddLives(int newLives)
+        void AddLives(int newLives)
         {
-            if (m_PlayerStats.maxLives > 0 && (m_PlayerStats.lives + newLives) > m_PlayerStats.maxLives)
-                m_PlayerStats.lives += m_PlayerStats.maxLives;
+            if (m_PlayerSettings.maxLives > 0 && (m_PlayerSettings.lives + newLives) > m_PlayerSettings.maxLives)
+                m_PlayerSettings.lives += m_PlayerSettings.maxLives;
             else
-                m_PlayerStats.lives += newLives;
+                m_PlayerSettings.lives += newLives;
             m_PlayerMaster.CallEventPlayerAddLive();
         }
 
-        private void KillPlayer()
+        void KillPlayer()
         {
-            m_PlayerStats.ChangeLife(-1);
+            m_PlayerSettings.ChangeLife(-1);
             LogLives(1);
-            if (m_PlayerStats.lives <= 0 && !GameManager.instance.GetGameOver())
+            if (m_PlayerSettings.lives <= 0 && !GameManager.instance.GetGameOver())
             {
                 m_GamePlayMaster.CallEventGameOver();
             }
@@ -69,9 +68,9 @@ namespace RiverAttack
             }
         }
 
-        public void RevivePlayer(int numLives)
+        void RevivePlayer(int numLives)
         {
-            m_PlayerStats.ChangeLife(numLives);
+            m_PlayerSettings.ChangeLife(numLives);
             //StopAllCoroutines();
             StartCoroutine(ReSpawn());
         }
@@ -87,22 +86,18 @@ namespace RiverAttack
             m_GamePlayMaster.GamePlayPause(false);
             //gamePlayMaster.CallEventUnPausePlayGame();
         }
-
         void GainExtraLive()
         {
-            if (m_PlayerStats.score < m_Score) return;
-            int rest = (int)m_PlayerStats.score - m_Score;
+            if (m_PlayerSettings.score < m_Score) return;
+            int rest = (int)m_PlayerSettings.score - m_Score;
             int life = 1;
             if (rest >= scoreForExtraLife) life += rest / scoreForExtraLife;
             AddLives(life);
-            m_Score = ((int)m_PlayerStats.score - rest) + scoreForExtraLife * life;
+            m_Score = ((int)m_PlayerSettings.score - rest) + scoreForExtraLife * life;
         }
-
         static void LogLives(int lives)
         {
-            GamePlaySettings.instance.livesSpents += Mathf.Abs(lives);
+            GamePlaySettings.instance.livesSpent += Mathf.Abs(lives);
         }
-
-
     }
 }

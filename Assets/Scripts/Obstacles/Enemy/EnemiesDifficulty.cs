@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 namespace RiverAttack
 {
-
     [RequireComponent(typeof(EnemiesMaster))]
     public sealed class EnemiesDifficulty : MonoBehaviour
     {
-
         EnemiesMaster m_EnemyMaster;
-        private DifficultyList m_EnemiesDifficulty;
+        DifficultyList m_EnemiesDifficulty;
         public EnemySetDifficulty myDifficulty { get; private set; }
 
-        private void Awake()
+        #region UNITY METHODS
+        void Awake()
         {
             if (m_EnemiesDifficulty != null)
                 myDifficulty = m_EnemiesDifficulty.difficultiesList[0];
@@ -20,14 +19,18 @@ namespace RiverAttack
         {
             SetInitialReferences();
             //ChangeDifficulty();
-
         }
 
-        private void Start()
+        void Start()
         {
             ChangeDifficulty();
             m_EnemyMaster.EventDestroyEnemy += ChangeDifficulty;
         }
+        void OnDisable()
+        {
+            m_EnemyMaster.EventDestroyEnemy -= ChangeDifficulty;
+        }
+  #endregion
 
         void SetInitialReferences()
         {
@@ -36,12 +39,11 @@ namespace RiverAttack
             if (m_EnemiesDifficulty != null)
                 myDifficulty = m_EnemiesDifficulty.difficultiesList[0];
         }
-
         void ChangeDifficulty()
         {
             if (m_EnemiesDifficulty != null)
             {
-                myDifficulty = GetDifficult((int)(GamePlayManager.instance.HightScorePlayers()));
+                myDifficulty = GetDifficult((int)(GamePlayManager.instance.HighScorePlayers()));
             }
         }
         public EnemySetDifficulty GetDifficult(string difficultName)
@@ -55,11 +57,6 @@ namespace RiverAttack
         public DifficultyList GetDifficultList()
         {
             return m_EnemiesDifficulty;
-        }
-
-        void OnDisable()
-        {
-            m_EnemyMaster.EventDestroyEnemy -= ChangeDifficulty;
         }
     }
 }

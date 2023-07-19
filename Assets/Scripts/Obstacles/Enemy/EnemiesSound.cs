@@ -11,38 +11,41 @@ namespace RiverAttack
     {
 
         EnemiesMaster m_EnemyMaster;
-        protected AudioSource m_AudioSource;
+        protected AudioSource audioSource;
         [SerializeField]
         AudioEventSample enemyExplodeAudio;
 
         GamePlayManager m_GamePlayManager;
 
+        #region UNITY METHODS
         protected virtual void OnEnable()
         {
             SetInitialReferences();
             m_EnemyMaster.EventDestroyEnemy += ExplodeSound;
             m_GamePlayManager.EventResetEnemies += StopSound;
         }
-        protected virtual void SetInitialReferences()
-        {
-            m_EnemyMaster = GetComponent<EnemiesMaster>();
-            m_AudioSource = GetComponent<AudioSource>();
-            m_GamePlayManager = GamePlayManager.instance;
-        }
         protected virtual void OnDisable()
         {
             m_EnemyMaster.EventDestroyEnemy -= ExplodeSound;
             m_GamePlayManager.EventResetEnemies -= StopSound;
         }
+  #endregion
+
+        protected virtual void SetInitialReferences()
+        {
+            m_EnemyMaster = GetComponent<EnemiesMaster>();
+            audioSource = GetComponent<AudioSource>();
+            m_GamePlayManager = GamePlayManager.instance;
+        }
         void StopSound()
         {
-            if (m_AudioSource != null && m_AudioSource.isPlaying)
-                m_AudioSource.Stop();
+            if (audioSource != null && audioSource.isPlaying)
+                audioSource.Stop();
         }
         void ExplodeSound()
         {
-            if (m_AudioSource != null && enemyExplodeAudio != null)
-                enemyExplodeAudio.Play(m_AudioSource);
+            if (audioSource != null && enemyExplodeAudio != null)
+                enemyExplodeAudio.Play(audioSource);
         }
     }
 }

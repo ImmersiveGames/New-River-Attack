@@ -58,7 +58,7 @@ namespace RiverAttack
         static IEnumerator StartPlay(AudioSource source, AudioEventClip startEventClip, AudioEventClip loopEventClip)
         {
             var sourceClip = startEventClip.audioClip;
-            if (!sourceClip)
+            if (sourceClip != null)
             {
                 source.clip = sourceClip;
                 source.volume = Random.Range(startEventClip.volume.minValue, startEventClip.volume.maxValue);

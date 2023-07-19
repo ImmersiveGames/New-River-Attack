@@ -4,30 +4,29 @@ namespace RiverAttack
 {
     public class PlayerBombSet : Bullets
     {
-
         [SerializeField]
-        private ParticleSystem pSystem;
+        ParticleSystem pSystem;
         [SerializeField]
-        private float radiusSize;
+        float radiusSize;
         [SerializeField]
-        private float radiusSpeed;
+        float radiusSpeed;
         [SerializeField]
-        private float shakeForce;
+        float shakeForce;
         [SerializeField]
-        private float shakeTime;
+        float shakeTime;
         [SerializeField]
-        private long millisecondsVibrate;
+        long millisecondsVibrate;
         float timeLife
         {
             get;
             set;
         }
-        private float m_EndLife;
-        private double m_TParam;
+        float m_EndLife;
+        double m_TParam;
+        Collider m_Collider;
 
-        private Collider m_Collider;
-
-        private void OnEnable()
+        #region UNITY METHODS
+        void OnEnable()
         {
             timeLife = pSystem.main.duration;
             m_Collider = GetComponent<Collider>();
@@ -38,15 +37,21 @@ namespace RiverAttack
         {
             m_EndLife = Time.time + timeLife;
         }
+        void FixedUpdate()
+        {
+            ExpandCollider();
+            AutoDestroy();
+        }
+  #endregion
 
-        private void AutoDestroy()
+        void AutoDestroy()
         {
             if (Time.time >= m_EndLife)
             {
                 DestroyMe();
             }
         }
-        private void ExpandCollider()
+        void ExpandCollider()
         {
             m_TParam += Time.deltaTime * radiusSpeed;
             GamePlayManager.instance.CallEventShakeCam(shakeForce, shakeTime);
@@ -61,13 +66,7 @@ namespace RiverAttack
             var sphere = (SphereCollider)m_Collider;
             sphere.radius = Mathf.Lerp(0.5f, radiusSize, (float)m_TParam);
         }
-        void FixedUpdate()
-        {
-            ExpandCollider();
-            AutoDestroy();
-        }
-
-        private void DestroyMe()
+        void DestroyMe()
         {
             GameObject o;
             (o = gameObject).SetActive(false);

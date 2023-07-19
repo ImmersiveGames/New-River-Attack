@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Utils;
 
@@ -8,143 +9,125 @@ namespace RiverAttack
     [System.Serializable]
     public class Levels : ScriptableObject
     {
-        [SerializeField]
         public string levelName;
         /*[SerializeField]
         public LocalizationString translateName;*/
-        [SerializeField]
         [Multiline]
         public string levelDescription;
         /*[SerializeField]
         public LocalizationString translateDedescription;*/
-        [SerializeField]
         public Sprite levelIcon;
-        [SerializeField]
         public Vector3 levelIconPos;
-        [SerializeField]
         public GamePlayAudio.LevelType startLevelBGM;
-        [SerializeField]
         public bool beatGame;
         [SerializeField]
-        private Vector3 levelOffset;
+        Vector3 levelOffset;
         [SerializeField]
-        private GameObject pathStart;
+        GameObject pathStart;
         [SerializeField]
-        private GameObject pathEnd;
+        GameObject pathEnd;
         [SerializeField]
-        private List<LevelsSetup> levelSet;
+        List<LevelsSetup> levelSet;
         [SerializeField]
-        private List<Levels> previousLevel;
+        List<Levels> previousLevel;
         [SerializeField]
-        private int maxLevels = 8;
+        int maxLevels = 8;
 
         public List<Levels> previousLevelList { get { return previousLevel; } }
 
-        private List<GameObject> PoolLevels;
-        private List<GameObject> PoolEnemyLevels;
+        List<GameObject> m_PoolLevels;
+        List<GameObject> m_PoolEnemyLevels;
 
-        public List<Vector3> levelMilstones { get; private set; }
-        public void CreateLevel(Transform myroot = null)
+        public List<Vector3> levelMilestones { get; private set; }
+        public void CreateLevel(Transform myRoot = null)
         {
-            if (levelSet.Count > 0)
-            {
-                Vector3 nextbound = new Vector3(levelOffset.x, levelOffset.y, levelOffset.z);
-                int patchs = levelSet.Count;
-                PoolLevels = new List<GameObject>();
-                PoolEnemyLevels = new List<GameObject>();
-                levelMilstones = new List<Vector3>();
+            if (levelSet.Count <= 0) return;
+            var nextBound = new Vector3(levelOffset.x, levelOffset.y, levelOffset.z);
+            int numPatches = levelSet.Count;
+            m_PoolLevels = new List<GameObject>();
+            m_PoolEnemyLevels = new List<GameObject>();
+            levelMilestones = new List<Vector3>();
 
-                FixedPath(ref nextbound, pathStart, myroot);
-                for (int i = 0; i < patchs; i++)
-                {
-                    SetEnemys(nextbound, i, myroot);
-                    PoolLevels.Add(BuildPath(ref nextbound, levelSet[i].levelPaths, myroot));
-                    if (maxLevels > i)
-                        PoolLevels[i].SetActive(true);
-                }
-                FixedPath(ref nextbound, pathEnd, myroot);
+            FixedPath(ref nextBound, pathStart, myRoot);
+            for (int i = 0; i < numPatches; i++)
+            {
+                SetEnemies(nextBound, i, myRoot);
+                m_PoolLevels.Add(BuildPath(ref nextBound, levelSet[i].levelPaths, myRoot));
+                if (maxLevels > i)
+                    m_PoolLevels[i].SetActive(true);
             }
+            FixedPath(ref nextBound, pathEnd, myRoot);
         }
 
-        private void FixedPath(ref Vector3 nextbound, GameObject nextPath, Transform myroot)
+        void FixedPath(ref Vector3 nextBound, GameObject nextPath, Transform myRoot)
         {
-            if (nextPath != null)
-            {
-                GameObject path = BuildPath(ref nextbound, nextPath, myroot);
-                path.SetActive(true);
-            }
+            if (nextPath == null)
+                return;
+            var path = BuildPath(ref nextBound, nextPath, myRoot);
+            path.SetActive(true);
         }
 
-        private GameObject BuildPath(ref Vector3 nextbound, GameObject nextPath, Transform myroot)
+        GameObject BuildPath(ref Vector3 nextBound, GameObject nextPath, Transform myRoot)
         {
-            GameObject patch = Instantiate(nextPath, myroot);
+            var patch = Instantiate(nextPath, myRoot);
             patch.SetActive(false);
-            Bounds bound = MashTriangulation.GetChildRenderBounds(patch);
-            patch.transform.position = nextbound;
-            nextbound += new Vector3(levelOffset.x, levelOffset.y, bound.size.z);
-            levelMilstones.Add(nextbound);
+            var bound = MashTriangulation.GetChildRenderBounds(patch);
+            patch.transform.position = nextBound;
+            nextBound += new Vector3(levelOffset.x, levelOffset.y, bound.size.z);
+            levelMilestones.Add(nextBound);
             return patch;
         }
 
         public void CallUpdatePoolLevel(int actualHandle)
         {
-            UpdatePoolLevel(PoolLevels, actualHandle);
-            UpdatePoolLevel(PoolEnemyLevels, actualHandle);
+            UpdatePoolLevel(m_PoolLevels, actualHandle);
+            UpdatePoolLevel(m_PoolEnemyLevels, actualHandle);
         }
 
-        private void UpdatePoolLevel(List<GameObject> pool, int actualHandle)
+        void UpdatePoolLevel(IReadOnlyList<GameObject> pool, int actualHandle)
         {
-            int activeindex = actualHandle + (maxLevels - 1);
-            int deactiveindex = actualHandle - (maxLevels - 1);
-            int removeindex = actualHandle - (maxLevels - 2);
+            int activeIndex = actualHandle + (maxLevels - 1);
+            int deactivateIndex = actualHandle - (maxLevels - 1);
+            int removeIndex = actualHandle - (maxLevels - 2);
 
-            if (activeindex < pool.Count && !pool[activeindex].activeInHierarchy)
-                pool[activeindex].SetActive(true);
+            if (activeIndex < pool.Count && !pool[activeIndex].activeInHierarchy)
+                pool[activeIndex].SetActive(true);
 
-            if ((deactiveindex >= 0 && deactiveindex < pool.Count - maxLevels) && pool[deactiveindex].activeInHierarchy)
-                pool[deactiveindex].SetActive(false);
+            if (deactivateIndex >= 0 && deactivateIndex < pool.Count - maxLevels && pool[deactivateIndex].activeInHierarchy)
+                pool[deactivateIndex].SetActive(false);
 
-            if ((removeindex >= 0 && removeindex < pool.Count - maxLevels) && !pool[removeindex].activeInHierarchy)
-                Destroy(pool[removeindex]);
+            if (removeIndex >= 0 && removeIndex < pool.Count - maxLevels && !pool[removeIndex].activeInHierarchy)
+                Destroy(pool[removeIndex]);
         }
 
-        private void SetEnemys(Vector3 nextbound, int i, Transform myroot)
+        void SetEnemies(Vector3 nextBound, int i, Transform myRoot)
         {
-            if (levelSet[i].enemysSets != null)
-            {
-                levelSet[i].enemysSets.SetActive(false);
-                GameObject enemys = Instantiate(levelSet[i].enemysSets, myroot);
-                enemys.transform.position = nextbound;
-                if (maxLevels > i)
-                    enemys.SetActive(true);
-                PoolEnemyLevels.Add(enemys);
-            }
+            if (levelSet[i].enemiesSets == null) return;
+            levelSet[i].enemiesSets.SetActive(false);
+            var enemies = Instantiate(levelSet[i].enemiesSets, myRoot);
+            enemies.transform.position = nextBound;
+            if (maxLevels > i)
+                enemies.SetActive(true);
+            m_PoolEnemyLevels.Add(enemies);
         }
-
-
-        public bool CheckIfCompleate(List<Levels> finishList)
+        public bool CheckIfComplete(List<Levels> finishList)
         {
-            return (finishList.Contains(this)) ? true : false;
+            return finishList.Contains(this);
         }
 
         public bool CheckIfLastFinish(List<Levels> finishList)
         {
-            return (finishList[finishList.Count - 1] == this) ? true : false;
+            return finishList[^1] == this;
         }
 
-        public bool CheckIfUnloked(Levels previous)
+        public bool CheckIfUnlocked(Levels previous)
         {
-            return (previousLevel.Contains(previous)) ? true : false;
+            return previousLevel.Contains(previous);
         }
 
         public bool CheckIfLocked(List<Levels> finishList)
         {
-            if (previousLevel.Count <= 0) return false;
-            for (int i = 0; i < previousLevel.Count; i++)
-            {
-                if (finishList.Count >= 1 && finishList.Contains(previousLevel[i])) return false;
-            }
-            return true;
+            return previousLevel.Count > 0 && previousLevel.All(t => finishList.Count < 1 || !finishList.Contains(t));
         }
     }
 
@@ -152,6 +135,6 @@ namespace RiverAttack
     public struct LevelsSetup
     {
         public GameObject levelPaths;
-        public GameObject enemysSets;
+        public GameObject enemiesSets;
     }
 }

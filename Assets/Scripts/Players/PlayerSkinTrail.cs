@@ -1,56 +1,59 @@
 ﻿using UnityEngine;
 namespace RiverAttack
 {
-   
-public class PlayerSkinTrail : MonoBehaviour
-{
-    private PlayerMaster playerMaster;
-    private GamePlayManager gamePlay;
-    private TrailRenderer[] trailRenderer;
+    public class PlayerSkinTrail : MonoBehaviour
+    {
+        PlayerMaster m_PlayerMaster;
+        GamePlayManager m_GamePlayManager;
+        TrailRenderer[] m_TrailRenderer;
 
-    private void OnEnable()
-    {
-        SetInitialReferences();
-        if (playerMaster)
-            playerMaster.EventControllerMovement += SetTrail;
-        trailRenderer = GetComponentsInChildren<TrailRenderer>();
-        gamePlay.EventCompletePath += EnableTrails;
-        SetTrails(false);
-    }
-    private void SetInitialReferences()
-    {
-        playerMaster = GetComponentInParent<PlayerMaster>();
-        gamePlay = GamePlayManager.instance;
-    }
-    private void SetTrail(Vector2 dir)
-    {
-        if (dir.y > 0)
-            SetTrails(true);
-        if (dir.y <= 0)
+        #region UNITY METHODS
+        void OnEnable()
+        {
+            SetInitialReferences();
+            if (m_PlayerMaster)
+                m_PlayerMaster.EventControllerMovement += SetTrail;
+            m_TrailRenderer = GetComponentsInChildren<TrailRenderer>();
+            m_GamePlayManager.EventCompletePath += EnableTrails;
             SetTrails(false);
-    }
-
-    private void SetTrails(bool setting)
-    {
-        for (int i = 0; i < trailRenderer.Length; i++)
+        }
+        void OnDisable()
         {
-            trailRenderer[i].enabled = setting;
+            if (m_PlayerMaster)
+                m_PlayerMaster.EventControllerMovement -= SetTrail;
+            m_GamePlayManager.EventCompletePath -= EnableTrails;
+        }
+  #endregion
+        void SetInitialReferences()
+        {
+            m_PlayerMaster = GetComponentInParent<PlayerMaster>();
+            m_GamePlayManager = GamePlayManager.instance;
+        }
+        void SetTrail(Vector2 dir)
+        {
+            switch (dir.y)
+            {
+                case > 0:
+                    SetTrails(true);
+                    break;
+                case <= 0:
+                    SetTrails(false);
+                    break;
+            }
+        }
+        void SetTrails(bool setting)
+        {
+            foreach (var t in m_TrailRenderer)
+            {
+                t.enabled = setting;
+            }
+        }
+        void EnableTrails()
+        {
+            foreach (var t in m_TrailRenderer)
+            {
+                t.enabled = true;
+            }
         }
     }
-    private void EnableTrails()
-    {
-        for (int i = 0; i < trailRenderer.Length; i++)
-        {
-            trailRenderer[i].enabled = true;
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (playerMaster)
-            playerMaster.EventControllerMovement -= SetTrail;
-        gamePlay.EventCompletePath -= EnableTrails;
-    }
-} 
 }
-

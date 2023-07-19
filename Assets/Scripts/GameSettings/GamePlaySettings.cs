@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace RiverAttack
@@ -10,27 +9,22 @@ namespace RiverAttack
         [SerializeField]
         public int pathDistance;
         [SerializeField]
-        public int livesSpents;
+        public int livesSpent;
         [SerializeField]
-        public int fuelSpents;
+        public int fuelSpent;
         [SerializeField]
-        public int bombSpents;
+        public int bombSpent;
         [SerializeField]
         public int totalScore;
         [SerializeField]
         public float totalTime;
         [SerializeField]
-        public List<EnemiesResults> HitEnemys;
+        public List<EnemiesResults> hitEnemiesResultsList;
 
-        public int GetEnemysHit(EnemiesScriptable enemy)
+        public int GetEnemiesHit(EnemiesScriptable enemy)
         {
-            EnemiesResults item = HitEnemys.Find(x => x.enemy == enemy);
-            if (item != null)
-            {
-                return item.quantity;
-            }
-            else
-                return 0;
+            var item = hitEnemiesResultsList.Find(x => x.enemy == enemy);
+            return item?.quantity ?? 0;
         }
     }
 }

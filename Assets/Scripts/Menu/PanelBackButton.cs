@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PanelBackButton : MonoBehaviour
+namespace MyMenus
 {
+    public class PanelBackButton : MonoBehaviour
+    {
 
+    }
 }
+

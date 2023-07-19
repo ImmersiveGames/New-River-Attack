@@ -1,31 +1,32 @@
 ﻿using UnityEngine;
 namespace RiverAttack
 {
-    
     public class CollectiblesScore : EnemiesScore
     {
-
         [SerializeField]
         protected int scoreCollect;
-        protected CollectiblesMaster collectiblesMaster;
+        CollectiblesMaster m_CollectiblesMaster;
 
+        #region UNITY METHODS
         protected override void OnEnable()
         {
             base.OnEnable();
-            collectiblesMaster.CollectibleEvent += SetCollScore;
-        }
-        protected override void SetInitialReferences()
-        {
-            base.SetInitialReferences();
-            collectiblesMaster = GetComponent<CollectiblesMaster>();
+            m_CollectiblesMaster.CollectibleEvent += SetCollScore;
         }
         protected override void OnDisable()
         {
             base.OnDisable();
-            collectiblesMaster.CollectibleEvent -= SetCollScore;
+            m_CollectiblesMaster.CollectibleEvent -= SetCollScore;
         }
-
-        private void SetCollScore(PlayerMaster playerMaster)
+  #endregion
+       
+        protected override void SetInitialReferences()
+        {
+            base.SetInitialReferences();
+            m_CollectiblesMaster = GetComponent<CollectiblesMaster>();
+        }
+        
+        void SetCollScore(PlayerMaster playerMaster)
         {
             playerMaster.GetPlayersSettings().score += scoreCollect;
         }

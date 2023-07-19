@@ -1,29 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Utils;
 namespace RiverAttack
 {
-
     public abstract class ObstacleShoot : MonoBehaviour, IShoot
     {
         public GameObject prefab;
         public float bulletSpeedy;
-        public float cadencyShoot;
+        public float cadenceShoot;
         public bool holdShoot;
-        protected Renderer myrenderer;
-
+        Renderer m_MyRenderer;
+#region UNITY METHODS
         protected virtual void OnEnable()
         {
-            myrenderer = GetComponentInChildren<Renderer>();
+            m_MyRenderer = GetComponentInChildren<Renderer>();
         }
-
+  #endregion
         public void SetTarget(Transform toTarget) { }
 
         public virtual bool ShouldFire()
         {
-            if (GamePlayManager.instance.shouldBePlayingGame && GamePlayManager.instance.shouldPlayReady && gameObject.activeInHierarchy && myrenderer.isVisible && !holdShoot)
-                return true;
-            return false;
+            var gamePlayManager = GamePlayManager.instance;
+            return gamePlayManager.shouldBePlayingGame && gamePlayManager.shouldPlayReady && gameObject.activeInHierarchy && m_MyRenderer.isVisible && !holdShoot;
         }
 
         public void Fire() { }

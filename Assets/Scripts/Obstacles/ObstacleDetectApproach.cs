@@ -17,7 +17,7 @@ namespace RiverAttack
     #region GizmoSettings
         [Header("Gizmo Settings")]
         [SerializeField]
-        public DifficultyList enDifList;
+        public DifficultyList enemiesDifficultyList;
         [HideInInspector]
         public string difficultType;
         [SerializeField]
@@ -59,16 +59,16 @@ namespace RiverAttack
         {
             if (!(radiusPlayerProximity > 0) && !(randomPlayerDistanceNear.maxValue > 0))
                 return;
-            float circleDistance = radiusPlayerProximity;
+            float radius = radiusPlayerProximity;
             if (randomPlayerDistanceNear.maxValue > 0)
-                circleDistance = randomPlayerDistanceNear.maxValue;
-            if (GetComponent<EnemiesDifficulty>() != null && Math.Abs(radiusPlayerProximity - circleDistance) > TOLERANCE)
+                radius = randomPlayerDistanceNear.maxValue;
+            if (GetComponent<EnemiesDifficulty>() != null && Math.Abs(radiusPlayerProximity - radius) > TOLERANCE)
             {
                 var myDifficulty = GetComponent<EnemiesDifficulty>().GetDifficult(difficultType);
-                circleDistance *= myDifficulty.multiplyPlayerDistance;
+                radius *= myDifficulty.multiplyPlayerDistance;
             }
             Gizmos.color = gizmoColor;
-            Gizmos.DrawWireSphere(transform.localPosition, circleDistance);
+            Gizmos.DrawWireSphere(transform.localPosition, radius);
         }
         const double TOLERANCE = 0.10;
     }

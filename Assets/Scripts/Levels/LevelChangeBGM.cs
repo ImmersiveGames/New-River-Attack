@@ -8,8 +8,8 @@ namespace RiverAttack
         public float speedy;
         GamePlayAudio m_PlayAudio;
         GamePlayManager m_PlayMaster;
-        #region MyRegion
-        private void OnEnable()
+        #region UNITY METHODS
+        void OnEnable()
         {
             m_PlayMaster = GamePlayManager.instance;
             m_PlayAudio = GamePlayAudio.instance;

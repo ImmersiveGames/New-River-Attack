@@ -7,6 +7,7 @@ namespace RiverAttack
         GameSettings m_GameSettings;
         GameManager m_GameManager;
         GamePlayManager m_GamePlay;
+        #region UNITY METHODS
         void OnEnable()
         {
             m_GamePlay = GamePlayManager.instance;
@@ -16,10 +17,12 @@ namespace RiverAttack
 
         void OnTriggerEnter(Collider other)
         {
-            if (!other.GetComponent<PlayerMaster>()) return;
+            if (other.GetComponent<PlayerMaster>() == null) return;
             if (!m_GameManager.levelsFinish.Contains(m_GameManager.actualLevel))
                 m_GameManager.levelsFinish.Add(m_GameManager.actualLevel);
             m_GamePlay.CallEventCompletePath();
         }
+  #endregion
+        
     }
 }

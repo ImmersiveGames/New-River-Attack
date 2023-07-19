@@ -2,28 +2,20 @@
 
 namespace RiverAttack
 {
-
     [RequireComponent(typeof(LevelObstacleSpawnMaster))]
     public class LevelObstacleSpawnMovement : ObstacleMovement
     {
-        private void OnEnable() { }
-        private void SetInitialReferences() { }
-        private void Update() { }
-        private void OnDisable() { }
-
         [ContextMenu("LoadPrefab")]
-        private void LoadPrefab()
+        void LoadPrefab()
         {
-            LevelObstacleSpawnMaster spawnMaster = GetComponent<LevelObstacleSpawnMaster>();
-            ObstacleMovement om = spawnMaster.getPrefab.GetComponent<ObstacleMovement>();
-            if (om != null)
-            {
-                moveDirection = om.MoveDirection;
-                freeDirection = om.FreeDirection;
-                movementSpeed = om.MovementSpeed;
-                curveMoviment = om.CurveMoviment;
-                canMove = om.canMove;
-            }
+            var spawnMaster = GetComponent<LevelObstacleSpawnMaster>();
+            var om = spawnMaster.getPrefab.GetComponent<ObstacleMovement>();
+            if (om == null) return;
+            directions = om.moveDirection;
+            freeDirection = om.moveFree;
+            movementSpeed = om.movementSpeed;
+            animationCurve = om.curveMovement;
+            canMove = om.canMove;
         }
     }
 }

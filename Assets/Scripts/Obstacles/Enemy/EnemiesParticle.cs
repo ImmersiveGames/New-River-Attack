@@ -7,33 +7,35 @@ namespace RiverAttack
     public class EnemiesParticle : MonoBehaviour
     {
         [SerializeField]
-        private GameObject particlePrefab;
+        GameObject particlePrefab;
         [SerializeField]
-        private float timeoutDestroy;
-        private EnemiesMaster m_EnemiesMaster;
+        float timeoutDestroy;
 
-        private void OnEnable()
+        EnemiesMaster m_EnemiesMaster;
+
+        #region UNITY METHODS
+        void OnEnable()
         {
             SetInitialReferences();
             m_EnemiesMaster.EventDestroyEnemy += ParticleExplosion;
         }
+        void OnDisable()
+        {
+            m_EnemiesMaster.EventDestroyEnemy -= ParticleExplosion;
+        }
+  #endregion
 
-        private void SetInitialReferences()
+        void SetInitialReferences()
         {
             m_EnemiesMaster = GetComponent<EnemiesMaster>();
             // find children with Particles
         }
 
-        private void ParticleExplosion()
+        void ParticleExplosion()
         {
             Tools.ToggleChildren(this.transform, false);
             var go = Instantiate(particlePrefab, transform);
             Destroy(go, timeoutDestroy);
-        }
-
-        private void OnDisable()
-        {
-            m_EnemiesMaster.EventDestroyEnemy -= ParticleExplosion;
         }
     }
 }

@@ -3,7 +3,6 @@ using UnityEngine.Events;
 
 namespace RiverAttack
 {
-
     [CreateAssetMenu(fileName = "PowerUp", menuName = "RiverAttack/PowerUp", order = 3)]
     public class PowerUp : ScriptableObject
     {
@@ -27,17 +26,15 @@ namespace RiverAttack
         [SerializeField]
         public UnityEvent endAction;
 
-        public void PowerUpStart(PlayerStats player)
+        public void PowerUpStart(PlayerSettings player)
         {
             GamePlayPowerUps.target = player;
-            if (startAction != null)
-                startAction.Invoke();
+            startAction?.Invoke();
         }
-        public void PowerUpEnd(PlayerStats player)
+        public void PowerUpEnd(PlayerSettings player)
         {
             GamePlayPowerUps.target = player;
-            if (endAction != null)
-                endAction.Invoke();
+            endAction?.Invoke();
         }
     }
 }

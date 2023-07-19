@@ -17,26 +17,34 @@ namespace RiverAttack
             set;
         }
 
+        #region UNITY METHODS
         protected override void OnEnable()
         {
             base.OnEnable();
             m_SkinPart = GetComponentInChildren<EnemiesSkinParts>();
             m_MyPool = PoolObjectManager.instance;
             if (!GetComponent<ObstacleDetectApproach>().enabled)
-                InvokeRepeating(nameof(StartFire), 1, cadencyShoot);
+                InvokeRepeating(nameof(StartFire), 1, cadenceShoot);
         }
-        private void Start()
+        void Start()
         {
             SetTarget(GamePlayManager.instance.GetPlayer(0).transform);
             m_SpawnPosition = GetComponentInChildren<EnemiesShootSpawn>().transform;
             StartMyPool();
         }
+        void FixedUpdate()
+        {
+            if (m_SkinPart == null || !playerTarget) return;
+            var transform1 = m_SkinPart.transform;
+            m_SkinPart.transform.rotation = Quaternion.Lerp(transform1.rotation, Quaternion.LookRotation(target.position - transform1.position), Time.deltaTime);
+        }
+  #endregion
         new void Fire()
         {
-            GameObject bullet = m_MyPool.GetObject(this);
+            var bullet = PoolObjectManager.GetObject(this);
             bullet.transform.position = m_SpawnPosition.position;
             bullet.transform.rotation = m_SpawnPosition.rotation;
-            BulletEnemy enemyBullet = bullet.GetComponent<BulletEnemy>();
+            var enemyBullet = bullet.GetComponent<BulletEnemy>();
             enemyBullet.shootDirection = Vector3.forward;
             enemyBullet.shootVelocity = bulletSpeedy;
             if (playerTarget)
@@ -55,20 +63,9 @@ namespace RiverAttack
                 Fire();
             }
         }
-
-        private void FixedUpdate()
-        {
-            if (m_SkinPart != null && playerTarget)
-            {
-                var transform1 = m_SkinPart.transform;
-                m_SkinPart.transform.rotation = Quaternion.Lerp(transform1.rotation, Quaternion.LookRotation(target.position - transform1.position), Time.deltaTime);
-            }
-        }
-
         public void StartMyPool(bool isPersistent = false)
         {
-            m_MyPool.CreatePool(this, prefab, poolStart, m_SpawnPosition, isPersistent);
+            PoolObjectManager.CreatePool(this, prefab, poolStart, m_SpawnPosition, isPersistent);
         }
     }
-
 }

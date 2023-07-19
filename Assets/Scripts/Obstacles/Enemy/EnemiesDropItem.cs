@@ -14,18 +14,24 @@ namespace RiverAttack
         EnemiesMaster m_EnemyMaster;
         GameObject m_ItemDrop;
 
+        #region UNITY METHODS
         void OnEnable()
         {
             SetInitialReferences();
             m_EnemyMaster.EventDestroyEnemy += DropItem;
         }
+        void OnDisable()
+        {
+            m_EnemyMaster.EventDestroyEnemy -= DropItem;
+        }
+  #endregion
 
         void SetInitialReferences()
         {
             m_EnemyMaster = GetComponent<EnemiesMaster>();
         }
         //TODO: implementar Dropar mais de 1 item e pois precisa alterar a poição;
-        private void DropItem()
+        void DropItem()
         {
             if (!(dropChance.maxValue > 0) || itemsVariables == null) return;
             float checkChance = (dropChance.minValue != 0) ? Random.Range(dropChance.minValue, dropChance.maxValue) : dropChance.maxValue;
@@ -42,14 +48,9 @@ namespace RiverAttack
             if (timeToAutoDestroy > 0)
                 Invoke(nameof(DestroyDrop), timeToAutoDestroy);
         }
-        private void DestroyDrop()
+        void DestroyDrop()
         {
             Destroy(m_ItemDrop);
-        }
-
-        private void OnDisable()
-        {
-            m_EnemyMaster.EventDestroyEnemy -= DropItem;
         }
     }
 }

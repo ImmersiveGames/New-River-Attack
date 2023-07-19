@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Utils;
 
 namespace RiverAttack
@@ -10,54 +7,52 @@ namespace RiverAttack
     public class PlayerSkin : MonoBehaviour
     {
         [SerializeField]
-        private ShopProductSkin defaultSkin;
-        private GameObject mySkin;
-        private PlayerMaster playerMaster;
+        ShopProductSkin defaultSkin;
+        GameObject m_MySkin;
+        PlayerMaster m_PlayerMaster;
 
-        private void OnEnable()
+        #region UNITY METHODS
+        void OnEnable()
         {
             SetInitialReferences();
-            playerMaster.EventChangeSkin += SetPlayerSkin;
-            playerMaster.EventPlayerDestroy += DisableSkin;
-            playerMaster.EventPlayerReload += EnableSkin;
+            m_PlayerMaster.EventChangeSkin += SetPlayerSkin;
+            m_PlayerMaster.EventPlayerDestroy += DisableSkin;
+            m_PlayerMaster.EventPlayerReload += EnableSkin;
         }
-
-        private void SetInitialReferences()
+        void OnDisable()
         {
-            playerMaster = GetComponent<PlayerMaster>();
-            ShopProductSkin skin = playerMaster.GetPlayersSettings().playerSkin ?? defaultSkin;
+            m_PlayerMaster.EventChangeSkin -= SetPlayerSkin;
+            m_PlayerMaster.EventPlayerDestroy -= DisableSkin;
+            m_PlayerMaster.EventPlayerReload -= EnableSkin;
+        }
+  #endregion
+
+        void SetInitialReferences()
+        {
+            m_PlayerMaster = GetComponent<PlayerMaster>();
+            var skin = m_PlayerMaster.GetPlayersSettings().playerSkin != null ? m_PlayerMaster.GetPlayersSettings().playerSkin : defaultSkin;
             SetPlayerSkin(skin);
         }
 
-        private void SetPlayerSkin(ShopProductSkin skin)
+        void SetPlayerSkin(ShopProductSkin skin)
         {
             if (transform.GetChild(0))
                 DestroyImmediate(transform.GetChild(0).gameObject);
-            mySkin = Instantiate(skin.GetSkin, transform);
-            mySkin.transform.SetAsFirstSibling();
-            playerMaster.GetPlayersSettings().playerSkin = skin;
-            if (mySkin.GetComponent<Collider>())
+            m_MySkin = Instantiate(skin.getSkin, transform);
+            m_MySkin.transform.SetAsFirstSibling();
+            m_PlayerMaster.GetPlayersSettings().playerSkin = skin;
+            if (m_MySkin.GetComponent<Collider>())
             {
-                Tools.CopyComponent(mySkin.GetComponentInChildren<Collider>(), gameObject);
+                Tools.CopyComponent(m_MySkin.GetComponentInChildren<Collider>(), gameObject);
             }
-            //playerMaster.SetTagLayerChild();
         }
-
-        private void DisableSkin()
+        void DisableSkin()
         {
-            mySkin.SetActive(false);
+            m_MySkin.SetActive(false);
         }
-        private void EnableSkin()
+        void EnableSkin()
         {
-            mySkin.SetActive(true);
-        }
-
-        private void OnDisable()
-        {
-            playerMaster.EventChangeSkin -= SetPlayerSkin;
-            playerMaster.EventPlayerDestroy -= DisableSkin;
-            playerMaster.EventPlayerReload -= EnableSkin;
+            m_MySkin.SetActive(true);
         }
     }
-
 }

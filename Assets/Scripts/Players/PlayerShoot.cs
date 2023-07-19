@@ -1,6 +1,5 @@
 using UnityEngine;
 using Utils;
-// ReSharper disable StringLiteralTypo
 
 namespace RiverAttack
 {
@@ -10,8 +9,6 @@ namespace RiverAttack
         // ReSharper disable once StringLiteralTypo
         [Tooltip("Identifica se o jogador em modo rapidfire")]
         float m_ShootCadence;
-        /*[SerializeField]
-        float idButtonMap;*/
         [Tooltip("Objeto disparado pelo player")]
         [SerializeField]
         GameObject bullet;
@@ -22,32 +19,27 @@ namespace RiverAttack
         float m_NextShoot;
         GameObject m_MyShoot;
         PlayerMaster m_PlayerMaster;
-        PlayerStats m_PlayerStats;
+        PlayerSettings m_PlayerSettings;
         PlayerController m_PlayerController;
-        /// <summary>
-        /// Executa quando ativa o objeto
-        /// </summary>
-        /// 
-        private void OnEnable()
+       #region UNITY METHODS
+        void OnEnable()
         {
             SetInitialReferences();
             StartMyPool();
-        }
-        /// <summary>
-        /// Configura as referencias iniciais
-        /// </summary>
-        /// 
-        private void SetInitialReferences()
-        {
-            m_PlayerMaster = GetComponent<PlayerMaster>();
-            m_PlayerController = GetComponent<PlayerController>();
-            m_PlayerStats = m_PlayerMaster.GetPlayersSettings();
-            //controllerMap = m_PlayerMaster.playerSettings.controllerMap;
         }
         void FixedUpdate()
         {
             this.Execute();
         }
+  #endregion
+        
+        void SetInitialReferences()
+        {
+            m_PlayerMaster = GetComponent<PlayerMaster>();
+            m_PlayerController = GetComponent<PlayerController>();
+            m_PlayerSettings = m_PlayerMaster.GetPlayersSettings();
+        }
+        
         public void Execute()
         {
             if (!m_PlayerMaster.shouldPlayerBeReady) return;
@@ -57,12 +49,12 @@ namespace RiverAttack
                 return;
             m_PlayerMaster.CallEventPlayerShoot();
 
-            m_ShootCadence = m_PlayerStats.cadenceShoot;
+            m_ShootCadence = m_PlayerSettings.cadenceShoot;
             Fire();
         }
-        private void Fire()
+        void Fire()
         {
-            m_MyShoot = PoolObjectManager.instance.GetObject(this);
+            m_MyShoot = PoolObjectManager.GetObject(this);
             //double sp = Firebase.RemoteConfig.FirebaseRemoteConfig.GetValue("player_speed_shoot").DoubleValue;
             //m_MyShoot.GetComponent<BulletPlayer>().SetSpeedShoot(sp);
             m_MyShoot.transform.parent = null;
@@ -79,7 +71,7 @@ namespace RiverAttack
         }
         public void StartMyPool(bool isPersistent = false)
         {
-            PoolObjectManager.instance.CreatePool(this, bullet, startPool, transform, isPersistent);
+            PoolObjectManager.CreatePool(this, bullet, startPool, transform, isPersistent);
         }
     }
 }

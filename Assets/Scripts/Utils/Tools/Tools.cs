@@ -1,15 +1,4 @@
-﻿/* <summary>
-    Namespace:      Utils
-    Class:          Tools
-    Description:    Ferramentas de auxilio de funções estaticas
-    Author:         Renato Innocenti                    Date: 26/03/2018
-    Notes:          copyrights 2017-2018 (c) immersivegames.com.br - contato@immersivegames.com.br       
-    Revision History:
-    Name: v1.0           Date: 26/03/2018       Description: versão funcional
-    Name: v2.0           Date: 07/07/2023       Description: Atualização para v2022.3
-    </summary>
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -33,7 +22,7 @@ namespace Utils
             return defaultList;
         }
 
-        public static List<int> ListToScriptableList<T>(List<T> listProducts) where T : ScriptableObject
+        public static List<int> ListToScriptableList<T>(IEnumerable<T> listProducts) where T : ScriptableObject
         {
             return listProducts.Select(item => item.GetInstanceID()).ToList();
         }
@@ -153,11 +142,11 @@ namespace Utils
         {
             public MinMaxRangeAttribute(float min, float max)
             {
-                Min = min;
-                Max = max;
+                this.min = min;
+                this.max = max;
             }
-            public float Min { get; private set; }
-            public float Max { get; private set; }
+            public float min { get; private set; }
+            public float max { get; private set; }
         }
         [Serializable]
         public struct FloatRanged

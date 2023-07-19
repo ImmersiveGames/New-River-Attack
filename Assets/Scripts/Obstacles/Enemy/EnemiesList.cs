@@ -2,7 +2,6 @@
 using UnityEngine;
 namespace RiverAttack
 {
-
     [CreateAssetMenu(fileName = "EnemiesList", menuName = "RiverAttack/Lists/EnemyLists", order = 4)]
     public class EnemiesList : ScriptableObject
     {

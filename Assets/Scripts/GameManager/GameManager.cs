@@ -6,8 +6,8 @@ namespace RiverAttack
 {
     public class GameManager : Utils.Singleton<GameManager>
     {
-        [SerializeField] private bool isGameOver;
-        [SerializeField] private bool isGamePaused;
+        [SerializeField] internal bool isGameOver;
+        [SerializeField] internal bool isGamePaused;
         [SerializeField] private bool isGameFinish;
 
         public enum States
@@ -35,7 +35,7 @@ namespace RiverAttack
         [SerializeField]
         public Levels actualLevel;
         [SerializeField]
-        private PlayerStats[] numPlayer;
+        private PlayerSettings[] numPlayer;
         private Dictionary<string, object> m_GameplayDefault = new Dictionary<string, object>();
 
         //private GameManagerSaves gameSaves;
@@ -134,17 +134,7 @@ namespace RiverAttack
         void TogglePauseGame()
         {
             isGamePaused = !isGamePaused;
-            if (isGamePaused)
-            {
-                Time.timeScale = 0f;
-                //OnGamePaused.Invoke(this,EventArgs.Empty);
-            }
-            else
-            {
-                Time.timeScale = 1f;
-                //OnGameUnPaused.Invoke(this,EventArgs.Empty);
-            }
-
+            Time.timeScale = isGamePaused ? 0f : 1f;
         }
 
         public IEnumerator LoadAsyncScene()
@@ -158,7 +148,7 @@ namespace RiverAttack
             return null;
         }
 
-        public PlayerStats GetFirstPlayer(int num = 0)
+        public PlayerSettings GetFirstPlayer(int num = 0)
         {
             return numPlayer[num];
         }

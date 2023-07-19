@@ -1,39 +1,35 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace Utils
 {
     public class PoolObject
     {
-        private readonly List<GameObject> m_PooledObjects;
-
-        private readonly GameObject m_PooledObj;
-
-        private int m_InitialPoolSize;
-
-        private readonly Transform m_MyRoot;
-        private Transform m_Target;
+         readonly List<GameObject> m_PooledObjects;
+         readonly GameObject m_PooledObj;
+         int m_InitialPoolSize;
+         readonly Transform m_MyRoot; 
+         Transform m_Target;
 
         public PoolObject(GameObject prefab, int initialPoolSize, Transform myRoot, bool persistent = false)
         {
             m_PooledObjects = new List<GameObject>();
-            this.m_MyRoot = new GameObject("Pool(" + myRoot.root.name + ")").transform;
-            this.m_MyRoot.SetParent(myRoot);
-            this.m_MyRoot.SetAsLastSibling();
-            var transform = this.m_MyRoot.transform;
+            m_MyRoot = new GameObject("Pool(" + myRoot.root.name + ")").transform;
+            m_MyRoot.SetParent(myRoot);
+            m_MyRoot.SetAsLastSibling();
+            var transform = m_MyRoot.transform;
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
             for (int i = 0; i < initialPoolSize; i++)
             {
-                CreateObject(prefab, this.m_MyRoot);
+                CreateObject(prefab, m_MyRoot);
             }
             if (persistent)
                 Object.DontDestroyOnLoad(myRoot);
-            this.m_PooledObj = prefab;
-            this.m_InitialPoolSize = initialPoolSize;
+            m_PooledObj = prefab;
+            m_InitialPoolSize = initialPoolSize;
         }
 
-        private GameObject CreateObject(GameObject prefab, Transform poolRoot)
+        GameObject CreateObject(GameObject prefab, Transform poolRoot)
         {
             var transform = this.m_MyRoot.transform;
             var nObj = Object.Instantiate(prefab, transform.position, transform.rotation, poolRoot);
@@ -60,7 +56,7 @@ namespace Utils
             return CreateObject(m_PooledObj, this.m_MyRoot);
         }
 
-        private void ResetPosition(GameObject gameObject)
+        void ResetPosition(GameObject gameObject)
         {
             var transform = this.m_MyRoot.transform;
             var localPosition = transform.localPosition;

@@ -1,82 +1,85 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 namespace RiverAttack
 {
-
     public abstract class ObstacleMovement : MonoBehaviour
     {
-
-        [SerializeField]
         public bool canMove;
-        //[SerializeField]
-        //private DifficultyList enemysDifficulty;
         [SerializeField]
-        protected float movementSpeed;
+        DifficultyList enemiesDifficultyList;
+        [SerializeField]
+        protected float moveSpeed;
         public enum Directions { None, Up, Right, Down, Left, Forward, Backward, Free }
-        [SerializeField]
-        protected Directions moveDirection;
+        protected Directions directions;
         protected Vector3 faceDirection;
         [SerializeField]
         protected Vector3 freeDirection;
         [SerializeField]
-        protected AnimationCurve curveMoviment;
+        protected AnimationCurve animationCurve;
 
     #region Variable Private
-        private Directions _moveDirection;
-        private Vector3 _freeDirection;
-        protected Vector3 enemyMovment;
-        protected GamePlayManager gamePlay;
+        Directions m_StartDirection;
+        Vector3 m_StartFreeDirection;
+        // ReSharper disable once InconsistentNaming
+        private protected Vector3 m_EnemyMovement;
+        GamePlayManager m_GamePlayManager;
         protected EnemiesMaster enemyMaster;
         protected EnemiesScriptable enemy;
     #endregion
-
-        float EnemySpeedy = 1f;
-        //private float EnemySpeedy { get { return (enemy.enemysDifficulty.GetDifficult(GamePlayManager.instance.HightScorePlayers()).multiplySpeedy > 0) ? movementSpeed.Value * enemy.enemysDifficulty.GetDifficult(GamePlayManager.instance.HightScorePlayers()).multiplySpeedy : movementSpeed.Value; } }
-        public Directions MoveDirection { get { return moveDirection; } set { moveDirection = value; } }
-        public Vector3 FreeDirection { get { return freeDirection; } set { freeDirection = value; } }
-        public float MovementSpeed { get { return movementSpeed; } set { movementSpeed = value; } }
-        public AnimationCurve CurveMoviment { get { return curveMoviment; } set { curveMoviment = value; } }
-
+    #region Unity METHODS
         private void OnEnable()
         {
             SetInitialReferences();
-            gamePlay.EventResetEnemies += ResetMovement;
+            m_GamePlayManager.EventResetEnemies += ResetMovement;
         }
-
-        private void SetInitialReferences()
-        {
-            gamePlay = GamePlayManager.instance;
-            enemyMaster = GetComponent<EnemiesMaster>();
-            enemy = enemyMaster.enemy;
-            _moveDirection = moveDirection;
-            _freeDirection = freeDirection;
-            SetDirection(moveDirection);
-        }
-
         private void Update()
         {
             MoveEnemy();
         }
+        private void OnDisable()
+        {
+            m_GamePlayManager.EventResetEnemies -= ResetMovement;
+        }
+    #endregion
+
+        readonly int m_HighScorePlayer = GamePlayManager.instance.HighScorePlayers();
+        private float enemySpeedy { get { return (enemy.enemiesDifficulty.GetDifficult(m_HighScorePlayer).multiplySpeedy > 0) ? movementSpeed * enemy.enemiesDifficulty.GetDifficult(m_HighScorePlayer).multiplySpeedy : movementSpeed; } }
+        public Directions moveDirection { get { return directions; } set { directions = value; } }
+        public Vector3 moveFree { get { return freeDirection; } set { freeDirection = value; } }
+        public float movementSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
+        public AnimationCurve curveMovement { get { return animationCurve; } set { animationCurve = value; } }
+
+        
+
+        private void SetInitialReferences()
+        {
+            m_StartDirection = directions;
+            m_GamePlayManager = GamePlayManager.instance;
+            enemyMaster = GetComponent<EnemiesMaster>();
+            enemy = enemyMaster.enemy;
+            m_StartFreeDirection = freeDirection;
+            SetDirection(directions);
+        }
+
+        
 
         protected virtual void MoveEnemy()
         {
             //Debug.Log("Canmove: "+ canMove + " Move dir: " + moveDirection + " Gameover?: " + gameManager.isGameOver + " Pause: " + gameManager.isPaused + " Destroy: " + enemyMaster.IsDestroyed);
-            if (!canMove || !GamePlayManager.instance.shouldBePlayingGame || moveDirection == Directions.None || enemyMaster.isDestroyed)
+            if (!canMove || !GamePlayManager.instance.shouldBePlayingGame || directions == Directions.None || enemyMaster.isDestroyed)
                 return;
-            enemyMovment = faceDirection * EnemySpeedy * Time.deltaTime;
-            transform.position += enemyMovment;
-            if (curveMoviment.length > 1)
-                transform.position = MoveInCurveAnimation(moveDirection);
+            m_EnemyMovement = faceDirection * (enemySpeedy * Time.deltaTime);
+            transform.position += m_EnemyMovement;
+            if (animationCurve.length > 1)
+                transform.position = MoveInCurveAnimation();
         }
 
-        private Vector3 MoveInCurveAnimation(Directions moveDirection)
+        private Vector3 MoveInCurveAnimation()
         {
             float st = enemyMaster.enemyStartPosition.y - 2;
             float st2 = enemyMaster.enemyStartPosition.y + 2;
-            float posy = Mathf.Lerp(st, st2, curveMoviment.Evaluate(Time.time)); //enemyMaster.EnemyStartPosition.y + curveMovment.Evaluate(enemySpeedy / Time.time);
-            //float posy = Mathf.Clamp(curveMovment.Evaluate(Time.time), enemyMaster.EnemyStartPosition.y - 3, enemyMaster.EnemyStartPosition.y + 3);
-            return new Vector3(transform.position.x, posy, transform.position.y);
+            float posy = Mathf.Lerp(st, st2, animationCurve.Evaluate(Time.time));
+            var position = transform.position;
+            return new Vector3(position.x, posy, position.y);
         }
 
         private void SetDirection(Directions dir)
@@ -107,20 +110,18 @@ namespace RiverAttack
                 case Directions.Free:
                     faceDirection = freeDirection;
                     return;
+                default:
+                    faceDirection = Vector3.zero;
+                    break;
             }
         }
 
         private void ResetMovement()
         {
-            enemyMovment = Vector3.zero;
-            moveDirection = _moveDirection;
-            freeDirection = _freeDirection;
-            SetDirection(moveDirection);
-        }
-
-        private void OnDisable()
-        {
-            gamePlay.EventResetEnemies -= ResetMovement;
+            m_EnemyMovement = Vector3.zero;
+            directions = m_StartDirection;
+            freeDirection = m_StartFreeDirection;
+            SetDirection(directions);
         }
     }
 }

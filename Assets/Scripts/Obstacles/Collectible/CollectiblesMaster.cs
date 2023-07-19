@@ -1,37 +1,45 @@
 ﻿using UnityEngine;
 namespace RiverAttack
 {
-
     public class CollectiblesMaster : EnemiesMaster
     {
+        [SerializeField] CollectibleScriptable collectibleScriptable;
         public event GeneralEventHandler ShowOnScreen;
         public event EnemyEventHandler CollectibleEvent;
-        internal CollectibleScriptable collectibles { get; set; }
+        internal CollectibleScriptable collectibles
+        {
+            get
+            {
+                return collectibleScriptable;
+            }
+            private set
+            {
+                collectibleScriptable = value;
+            }
+        }
 
     #region UNITYMETHODS
         protected override void OnEnable()
         {
             base.OnEnable();
-            m_GamePlayManager.EventResetEnemies += DestroyCollectable;
+            gamePlayManager.EventResetEnemies += DestroyCollectable;
         }
         protected override void OnDisable()
         {
             base.OnDisable();
-            m_GamePlayManager.EventResetEnemies -= DestroyCollectable;
+            gamePlayManager.EventResetEnemies -= DestroyCollectable;
         }
   #endregion
         protected override void SetInitialReferences()
         {
             base.SetInitialReferences();
-            //this.tag = GameSettings.instance.collectionTag;
-            this.gameObject.layer = LayerMask.NameToLayer("Collections");
-            collectibles = (CollectibleScriptable)enemy;
-            if (collectibles.getPowerUp)
+            gameObject.layer = LayerMask.NameToLayer("Collections");
+            collectibleScriptable = (CollectibleScriptable)enemy;
+            if (collectibleScriptable.getPowerUp)
             {
-                name += "(" + collectibles.getPowerUp.name + ")";
+                name += "(" + collectibleScriptable.getPowerUp.name + ")";
             }
         }
-
         public void CallCollectibleEvent(PlayerMaster playerMaster)
         {
             CollectibleEvent?.Invoke(playerMaster);
@@ -42,9 +50,8 @@ namespace RiverAttack
         }
         void DestroyCollectable()
         {
-            if (collectibles.getPowerUp)
-                Destroy(this.gameObject);
+            if (collectibleScriptable.getPowerUp)
+                Destroy(gameObject);
         }
-
     }
 }

@@ -52,7 +52,7 @@ namespace Utils
             for (int i = 0; i < n; i++)
             {
                 value[i].SetRealChance(totals);
-                realNum += value[i].realsort;
+                realNum += value[i].realSort;
                 //Debug.Log("Real Chance: " + Value[i].realsort);
                 if (realNum >= range) return value[i];
             }
@@ -82,11 +82,11 @@ namespace Utils
         }
 
         //public float realChance { get; private set; }
-        public float realsort { get; set; }
+        public float realSort { get; set; }
 
         public void SetRealChance(float totalWeight)
         {
-            realsort = realChance / totalWeight;
+            realSort = realChance / totalWeight;
         }
     }
 }

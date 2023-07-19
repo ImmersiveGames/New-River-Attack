@@ -6,6 +6,7 @@ namespace RiverAttack
 {
     public abstract class ObstacleMoveByApproach : MonoBehaviour
     {
+        const double TOLERANCE = 0.10;
         [SerializeField] protected internal float radiusPlayerProximity;
         [SerializeField, Range(.1f, 5)] public float timeToCheck;
         [SerializeField, Tools.MinMaxRangeAttribute(0f, 10f)] protected internal Tools.FloatRanged randomPlayerDistanceNear;
@@ -65,18 +66,17 @@ namespace RiverAttack
         void OnDrawGizmosSelected()
         {
             if (!(radiusPlayerProximity > 0) && !(randomPlayerDistanceNear.maxValue > 0)) return;
-            float circleDistance = radiusPlayerProximity;
+            float radius = radiusPlayerProximity;
             if (randomPlayerDistanceNear.maxValue > 0)
-                circleDistance = randomPlayerDistanceNear.maxValue;
-            if (GetComponent<EnemiesDifficulty>() != null && Math.Abs(radiusPlayerProximity - circleDistance) > TOLERANCE)
+                radius = randomPlayerDistanceNear.maxValue;
+            if (GetComponent<EnemiesDifficulty>() != null && Math.Abs(radiusPlayerProximity - radius) > TOLERANCE)
             {
                 var myDifficulty = GetComponent<EnemiesDifficulty>().GetDifficult(difficultType);
-                circleDistance *= myDifficulty.multiplyPlayerDistance;
+                radius *= myDifficulty.multiplyPlayerDistance;
             }
             Gizmos.color = gizmoColor;
-            Gizmos.DrawWireSphere(transform.position, circleDistance);
+            Gizmos.DrawWireSphere(center: transform.position, radius);
         }
-        const double TOLERANCE = 0.10;
         void OnDisable()
         {
             m_GamePlayManager.EventResetEnemies -= ResetPatrol;

@@ -1,27 +1,26 @@
 ﻿using UnityEngine;
+using Shopping;
 namespace RiverAttack
 {
-
     [CreateAssetMenu(fileName = "ShopBomb", menuName = "RiverAttack/Shopping/Bombs", order = 3)]
     public class ShopProductBomb : ShopProduct
     {
 
         [SerializeField]
-        private int quantity;
+        int quantity;
 
-        private void OnEnable()
+        #region UNITY METHODS
+        void OnEnable()
         {
             isConsumable = true;
         }
-
-        public override bool ShouldBeConsume(PlayerStats player)
+  #endregion
+        public override bool ShouldBeConsume(PlayerSettings player)
         {
-            if (player.bombs + quantity > player.maxBombs)
-                return false;
-            return true;
+            return player.bombs + quantity <= player.maxBombs;
         }
 
-        public override void ConsumeProduct(PlayerStats player)
+        public override void ConsumeProduct(PlayerSettings player)
         {
             player.bombs += quantity;
         }
