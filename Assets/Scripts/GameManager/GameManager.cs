@@ -13,6 +13,7 @@ namespace RiverAttack
         public enum States
         {
             Menu,
+            InitialAnimation,
             WaitGamePlay,
             GamePlay,
             GameOver,
@@ -70,11 +71,15 @@ namespace RiverAttack
                     Debug.Log("Menu");
                     break;
                 case States.WaitGamePlay:
+                    // Animação de entrada
                     countdownToStartTimer -= Time.deltaTime;
                     if (countdownToStartTimer <= 0)
                     {
                         states = States.GamePlay;
                     }
+                    break;
+                case States.InitialAnimation:
+                    Debug.Log("GameOver");
                     break;
                 case States.GamePlay:
                     Debug.Log("Começou o jogo");
