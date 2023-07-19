@@ -49,8 +49,6 @@ namespace RiverAttack
 
             m_PlayerMaster.SetHasPlayerReady(true);
 
-            //var inputVector = GetMovementVector2Normalized();
-
             float axisAutoMovement = m_InputVector.y switch
             {
                 > 0 => m_MultiplyVelocityUp,
@@ -65,6 +63,7 @@ namespace RiverAttack
             m_PlayerMaster.CallEventControllerMovement(m_InputVector);
         }
 
+
         #endregion
 
         public Vector2 GetMovementVector2Normalized()
@@ -74,12 +73,28 @@ namespace RiverAttack
 
         void TouchMove(InputAction.CallbackContext context) 
         {
-            m_InputVector = context.ReadValue<Vector2>().normalized;            
+            m_InputVector = context.ReadValue<Vector2>(); 
+        }
+
+        void TouchAcel(InputAction.CallbackContext context) 
+        {
+            if (context.performed == true)
+            {
+                m_InputVector.y = context.ReadValue<Vector2>().y;
+
+                if (m_InputVector.y > 0) m_InputVector.y = 1f;
+                if (m_InputVector.y < 0) m_InputVector.y = -1f;
+                
+                Debug.Log(m_InputVector.y);
+                Debug.Log(context.phase);
+            }
         }
 
         void EndTouchMove(InputAction.CallbackContext context) 
         {
-            m_InputVector = Vector2.zero;            
+            m_InputVector = Vector2.zero;
+            Debug.Log(context.phase);
         }
+
     }
 }
