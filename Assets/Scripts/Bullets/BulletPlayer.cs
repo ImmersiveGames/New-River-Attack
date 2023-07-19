@@ -5,9 +5,7 @@ namespace RiverAttack
     public class BulletPlayer : Bullets
     {
          #region Variable Private Inspector
-        [SerializeField] bool bulletLifeTime = false;
-        [SerializeField] float lifeTime = 2f;
-        float m_StartTime;
+        
         Transform m_MyPool;
         #endregion
 
@@ -24,7 +22,7 @@ namespace RiverAttack
         }
         void Start()
         {
-            m_StartTime = Time.time + lifeTime;
+            startTime = Time.time + lifeTime;
         }
         void FixedUpdate()
         {
@@ -64,7 +62,7 @@ namespace RiverAttack
 
         void AutoDestroy()
         {
-            if (bulletLifeTime && Time.time >= m_StartTime)
+            if (bulletLifeTime && Time.time >= startTime)
             {
                 DestroyMe();
             }

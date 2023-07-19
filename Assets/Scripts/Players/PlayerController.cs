@@ -11,10 +11,10 @@ namespace RiverAttack
 
         PlayerSettings m_PlayerSettings;
         
-        [SerializeField] float autoMovement;
-        [SerializeField] float movementSpeed;
-        [SerializeField] float multiplyVelocityUp;
-        [SerializeField] float multiplyVelocityDown;
+        float m_AutoMovement;
+        float m_MovementSpeed;
+        float m_MultiplyVelocityUp;
+        float m_MultiplyVelocityDown;
 
         Vector2 m_InputVector;
 
@@ -25,10 +25,10 @@ namespace RiverAttack
             m_PlayerSettings = m_PlayerMaster.GetPlayersSettings();
             m_PlayersInputActions = new PlayersInputActions();
 
-            autoMovement = GameSettings.instance.autoMovement;
-            movementSpeed = m_PlayerSettings.mySpeedy;
-            multiplyVelocityUp = m_PlayerSettings.multiplyVelocityUp;
-            multiplyVelocityDown = m_PlayerSettings.multiplyVelocityDown;            
+            m_AutoMovement = GameSettings.instance.autoMovement;
+            m_MovementSpeed = m_PlayerSettings.mySpeedy;
+            m_MultiplyVelocityUp = m_PlayerSettings.multiplyVelocityUp;
+            m_MultiplyVelocityDown = m_PlayerSettings.multiplyVelocityDown;            
 
             m_PlayersInputActions.Enable();
         }
@@ -53,14 +53,14 @@ namespace RiverAttack
 
             float axisAutoMovement = m_InputVector.y switch
             {
-                > 0 => multiplyVelocityUp,
-                < 0 => multiplyVelocityDown,
-                _ => autoMovement
+                > 0 => m_MultiplyVelocityUp,
+                < 0 => m_MultiplyVelocityDown,
+                _ => m_AutoMovement
             };
 
             var moveDir = new Vector3(m_InputVector.x, 0, axisAutoMovement);
             if (m_PlayerMaster.GetHasPlayerReady())
-                transform.position += moveDir * (movementSpeed * Time.deltaTime);
+                transform.position += moveDir * (m_MovementSpeed * Time.deltaTime);
 
             m_PlayerMaster.CallEventControllerMovement(m_InputVector);
         }

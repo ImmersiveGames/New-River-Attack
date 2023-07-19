@@ -61,9 +61,6 @@ namespace RiverAttack
         public event SkinChangeEventHandler EventChangeSkin;
     #endregion
 
-        [SerializeField]
-        private List<EnemiesResults> listEnemiesHit;
-
         public bool GetHasPlayerReady() { return hasPlayerReady; }
         public bool SetHasPlayerReady(bool set) { return hasPlayerReady = set; }
 
@@ -71,7 +68,7 @@ namespace RiverAttack
         void Awake()
         {
             m_PlayerController = GetComponent<PlayerController>();
-            listEnemiesHit = new List<EnemiesResults>();
+            enemiesHitList = new List<EnemiesResults>();
             m_StartPlayerPosition = transform.position;
             playerStatus = Status.Paused;
             m_GameManager = GameManager.instance;
@@ -123,7 +120,7 @@ namespace RiverAttack
         }
         public void AddEnemiesHitList(EnemiesScriptable obstacle, int qnt = 1)
         {
-            AddResultList(listEnemiesHit, obstacle, qnt);
+            AddResultList(enemiesHitList, obstacle, qnt);
             AddResultList(GamePlaySettings.instance.hitEnemiesResultsList, obstacle, qnt);
         }
 
