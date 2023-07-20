@@ -1,83 +1,79 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Newtonsoft.Json.Bson;
 namespace RiverAttack
 {
     public class PlayerMaster : MonoBehaviour
     {
-    #region SerilizedField
-
         float m_AutoMovement;
         float m_MovementSpeed;
-        [SerializeField] public bool hasPlayerReady = false;
         float m_MultiplyVelocityUp;
         float m_MultiplyVelocityDown;
+
+        public enum MovementStatus { None, Paused, Accelerate, Reduce }
+        int subWealth { get;
+            set; }
+        int idPlayer { get;
+            set; }
+        [SerializeField] float lastSavePosition = 0f;
+        PlayerController m_PlayerController;
+        GameManager m_GameManager;
+
+    #region SerilizedField
+        [SerializeField] public bool isPlayerDead = false;
         [SerializeField]
         List<EnemiesResults> enemiesHitList;
         [SerializeField]
         List<EnemiesResults> collectiblesCatchList;
-        int subWealth { get;
-            set; }
-        
-        int idPlayer
-        {
-            get;
-            set;
-        }
-        public enum Status
-        {
-            None,
-            Paused,
-            Play,
-            Accelerate,
-            Reduce,
-            Dead,
-            Invincible
-        }
         [SerializeField]
-        protected internal Status playerStatus;
+        protected internal MovementStatus playerMovementStatus;
+        [SerializeField] PlayerSettings playerSettings;
   #endregion
 
-        PlayerController m_PlayerController;
-        [SerializeField] PlayerSettings playerSettings;
-
-        GameManager m_GameManager;
-        Vector3 m_StartPlayerPosition;
+        
     #region Delagetes
+        
+        //New Delegates
         public delegate void GeneralEventHandler();
-        public event GeneralEventHandler EventPlayerShoot;
-        public event GeneralEventHandler EventPlayerDestroy;
-        public event GeneralEventHandler EventPlayerReload;
+        public event GeneralEventHandler EventPlayerMasterPlayerShoot;
+        public event GeneralEventHandler EventPlayerMasterCollider;
+        public event GeneralEventHandler EventPlayerMasterOnDestroy;
+        public event GeneralEventHandler EventPlayerMasterReSpawn;
+        
+        public delegate void ControllerEventHandler(Vector2 dir);
+        public event ControllerEventHandler EventPlayerMasterControllerMovement;
+        
+        //Old Delegates
+
+        
         public event GeneralEventHandler EventPlayerBomb;
         public event GeneralEventHandler EventPlayerAddLive;
-        public event GeneralEventHandler EventPlayerHit;
+        
         public delegate void HealthEventHandler(int health);
         public event HealthEventHandler EventIncreaseHealth;
         public event HealthEventHandler EventDecreaseHealth;
-        public delegate void ControllerEventHandler(Vector2 dir);
-        public event ControllerEventHandler EventControllerMovement;
 
         public delegate void SkinChangeEventHandler(ShopProductSkin skin);
         public event SkinChangeEventHandler EventChangeSkin;
     #endregion
-
-        public bool GetHasPlayerReady() { return hasPlayerReady; }
-        public bool SetHasPlayerReady(bool set) { return hasPlayerReady = set; }
+        
 
         #region UNITYMETHODS
         void Awake()
         {
             m_PlayerController = GetComponent<PlayerController>();
             enemiesHitList = new List<EnemiesResults>();
-            m_StartPlayerPosition = transform.position;
-            playerStatus = Status.Paused;
+            playerMovementStatus = MovementStatus.Paused;
             m_GameManager = GameManager.instance;
+            lastSavePosition = transform.position.z;
         }
-
+        
   #endregion
 
         public void Init(PlayerSettings player, int id)
         {
+            isPlayerDead = false;
             /*idPlayer = id;
             playerSettings = player;
             name = playerSettings.name;
@@ -98,24 +94,28 @@ namespace RiverAttack
             //playerSettings.LoadValues(); */
         }
         
-        public void ChangeStatus(Status newStatus)
-        {
-            playerStatus = newStatus;
-        }
         public PlayerSettings GetPlayersSettings()
         {
             return playerSettings;
         }
-        public void AllowedMove(bool allowed = true)
+
+        public bool ShouldPlayerMove() => isPlayerDead == false;
+        public bool ShouldPlayerBeReady() => isPlayerDead == false && playerMovementStatus != MovementStatus.Paused;
+        public MovementStatus GetActualPlayerStateMovement()
+        { 
+            return playerMovementStatus;
+        }
+        public void SetActualPlayerStateMovement(MovementStatus status)
         {
-            hasPlayerReady = allowed;
+            playerMovementStatus = status;
         }
-        public bool shouldPlayerBeReady
-        { get
-            {
-                return GamePlayManager.instance.shouldBePlayingGame && hasPlayerReady == true;
-            }
+
+        protected internal void SetPlayerReady()
+        {
+            isPlayerDead = false;
         }
+
+        protected internal float GetLastSavePosition() => lastSavePosition;
         public void AddEnemiesHitList(EnemiesScriptable obstacle, int qnt = 1)
         {
             AddResultList(enemiesHitList, obstacle, qnt);
@@ -146,7 +146,7 @@ namespace RiverAttack
         }
         public void UpdateSavePoint(Vector3 position)
         {
-            m_StartPlayerPosition = new Vector3(position.x, transform.position.y, position.z);
+            //m_PlayerStartPosition = new Vector3(position.x, transform.position.y, position.z);
             //SaveWealth();
             /*if (GameManager.Instance.firebase.MyFirebaseApp != null && GameManager.Instance.firebase.dependencyStatus == Firebase.DependencyStatus.Available)
             {
@@ -181,26 +181,42 @@ namespace RiverAttack
         }
 
         #region Calls
+        
+        //new Calls
         protected internal void CallEventPlayerShoot()
         {
-            EventPlayerShoot?.Invoke();
+            EventPlayerMasterPlayerShoot?.Invoke();
+            
         }
-        protected internal void CallEventPlayerHit()
+        protected internal void CallEventPlayerMasterCollider()
         {
-            EventPlayerHit?.Invoke();
+            EventPlayerMasterCollider?.Invoke();
         }
-        protected internal void CallEventPlayerDestroy()
+        protected internal void CallEventPlayerMasterOnDestroy()
         {
-            EventPlayerDestroy?.Invoke();
+            playerMovementStatus = MovementStatus.Paused;
+            isPlayerDead = true;
+            EventPlayerMasterOnDestroy?.Invoke();
         }
+        protected internal void CallEventPlayerMasterReSpawn()
+        {
+            EventPlayerMasterReSpawn?.Invoke();
+        }
+        
+        public void CallEventPlayerMasterControllerMovement(Vector2 dir)
+        {           
+            EventPlayerMasterControllerMovement?.Invoke(dir);
+        }
+
+        //Old Calls
+        
+        
+        
         protected internal void CallEventPlayerBomb()
         {
             EventPlayerBomb?.Invoke();
         }
-        protected internal void CallEventPlayerReload()
-        {
-            EventPlayerReload?.Invoke();
-        }
+        
         protected internal void CallEventIncreaseHealth(int health)
         {
             EventIncreaseHealth?.Invoke(health);
@@ -213,14 +229,12 @@ namespace RiverAttack
         {
             EventPlayerAddLive?.Invoke();
         }
-        public void CallEventControllerMovement(Vector2 dir)
-        {           
-            EventControllerMovement?.Invoke(dir);
-        }
-  #endregion
-        protected virtual void CallEventChangeSkin(ShopProductSkin skin)
+        
+        public void CallEventChangeSkin(ShopProductSkin skin)
         {
             EventChangeSkin?.Invoke(skin);
         }
+  #endregion
+       
     }
 }

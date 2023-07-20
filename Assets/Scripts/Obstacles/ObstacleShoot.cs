@@ -20,7 +20,7 @@ namespace RiverAttack
         public virtual bool ShouldFire()
         {
             var gamePlayManager = GamePlayManager.instance;
-            return gamePlayManager.shouldBePlayingGame && gamePlayManager.shouldPlayReady && gameObject.activeInHierarchy && m_MyRenderer.isVisible && !holdShoot;
+            return gamePlayManager.shouldBePlayingGame && gamePlayManager.haveAnyPlayMasterBeReady && gameObject.activeInHierarchy && m_MyRenderer.isVisible && !holdShoot;
         }
 
         public void Fire() { }

@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8957561622807004078}
   - component: {fileID: 2895308431917710512}
   - component: {fileID: 1867910898741857105}
+  - component: {fileID: 7102336100269651067}
   - component: {fileID: 965690163096126669}
   m_Layer: 8
   m_Name: Player
@@ -220,10 +221,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 214c32e9f97e6fd4198d91096268ae16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasPlayerReady: 0
+  isPlayerDead: 0
   enemiesHitList: []
   collectiblesCatchList: []
-  playerStatus: 0
+  playerMovementStatus: 0
   playerSettings: {fileID: 11400000, guid: c11a8f0b743164845ab2754709110c91, type: 2}
 --- !u!114 &1454929694160534396
 MonoBehaviour:
@@ -293,6 +294,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98ecbb7336c13214485691d5bc8ca883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7102336100269651067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409879802783298609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55193ee4619879145bdce786130d6a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeoutReSpawn: 1.8
+  scoreForExtraLife: 0
 --- !u!114 &965690163096126669
 MonoBehaviour:
   m_ObjectHideFlags: 0

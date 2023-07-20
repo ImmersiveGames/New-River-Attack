@@ -47,7 +47,7 @@ namespace RiverAttack
             // Quem desativa o rander é o animation de explosão
             enemiesMaster.CallEventDestroyEnemy(playerMaster);
             ShouldSavePoint();
-            playerMaster.CallEventPlayerHit();
+            playerMaster.CallEventPlayerMasterCollider();
             //ShouldCompleteMission();
         }
         protected void ColliderOff()

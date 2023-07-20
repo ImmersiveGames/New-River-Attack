@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &336786196 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 409879802783298609, guid: 060c0640ee0816b46994f8281ca9b242, type: 3}
+  m_PrefabInstance: {fileID: 4272953102049396499}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &344798172
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,6 +826,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3263703776832575192, guid: f3d53f62db710d24b8284268aaf6e663, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4820713286160178306, guid: f3d53f62db710d24b8284268aaf6e663, type: 3}
       propertyPath: m_Name
       value: TouchStick
@@ -1150,6 +1159,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2516296704643808230, guid: 060c0640ee0816b46994f8281ca9b242, type: 3}
   m_PrefabInstance: {fileID: 4272953102049396499}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1366788928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336786196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f736b251207c5429db453951bd82bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cadenceDistance: 0
+  pathDistance: 0
+  checkTime: 2
+  lifeTime: 0
 --- !u!1 &1483532484
 GameObject:
   m_ObjectHideFlags: 0
@@ -3938,6 +3963,10 @@ PrefabInstance:
       propertyPath: gameInputs
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7102336100269651067, guid: 060c0640ee0816b46994f8281ca9b242, type: 3}
+      propertyPath: reSpawnInSavePoint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7735193164345113819, guid: 060c0640ee0816b46994f8281ca9b242, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -3949,7 +3978,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 409879802783298609, guid: 060c0640ee0816b46994f8281ca9b242, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1366788928}
   m_SourcePrefab: {fileID: 100100000, guid: 060c0640ee0816b46994f8281ca9b242, type: 3}
 --- !u!1001 &8991254718375544599
 PrefabInstance:
@@ -3989,6 +4021,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6174398392474209380, guid: 065609105772a834aa8f89040f3ab329, type: 3}
       propertyPath: states
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6174398392474209380, guid: 065609105772a834aa8f89040f3ab329, type: 3}
+      propertyPath: actualGameState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8693508807189897402, guid: 065609105772a834aa8f89040f3ab329, type: 3}

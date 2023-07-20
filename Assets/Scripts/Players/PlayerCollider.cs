@@ -15,8 +15,8 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
-            m_PlayerMaster.EventPlayerDestroy += ColliderOff; // desliga o collider quando destroy o player
-            m_PlayerMaster.EventPlayerReload += ColliderOn;   // liga o collider quando reinicia o player
+            m_PlayerMaster.EventPlayerMasterOnDestroy += ColliderOff; // desliga o collider quando destroy o player
+            m_PlayerMaster.EventPlayerMasterReSpawn += ColliderOn;   // liga o collider quando reinicia o player
             m_GamePlayManager.EventCompletePath += ColliderOff;
         }
         void OnTriggerEnter(Collider collision)
@@ -25,12 +25,12 @@ namespace RiverAttack
             if (m_GamePlayManager.getGodMode) return;
             //m_GamePlayManager.CallEventPausePlayGame();
             //m_PlayerMaster.CallEventPlayerHit();
-            m_PlayerMaster.CallEventPlayerDestroy();
+            m_PlayerMaster.CallEventPlayerMasterOnDestroy();
         }
         void OnDisable()
         {
-            m_PlayerMaster.EventPlayerDestroy -= ColliderOff;
-            m_PlayerMaster.EventPlayerReload -= ColliderOn;
+            m_PlayerMaster.EventPlayerMasterOnDestroy -= ColliderOff;
+            m_PlayerMaster.EventPlayerMasterReSpawn -= ColliderOn;
             m_GamePlayManager.EventCompletePath -= ColliderOff;
         }
   #endregion

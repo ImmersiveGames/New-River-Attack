@@ -42,23 +42,5 @@ namespace RiverAttack
         public int startBombs;
         public int bombs;
         public int maxBombs;
-
-        public void ChangeLife(int life)
-        {
-            if (maxLives != 0 && lives + life >= maxLives)
-                lives = maxLives;
-            else if (lives + life <= 0)
-                lives = 0;
-            else
-                lives += life;
-        }
-
-        public void InitPlayer()
-        {
-            lives = startLives;
-            bombs = startBombs;
-            actualHp = maxHp;
-            //LoadListShop();
-        }
     }
 }

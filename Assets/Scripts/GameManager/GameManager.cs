@@ -7,7 +7,7 @@ namespace RiverAttack
     public class GameManager : Utils.Singleton<GameManager>
     {
         [SerializeField] internal bool isGameOver;
-        [SerializeField] internal bool isGamePaused;
+        [SerializeField] internal bool isGameStopped;
         [SerializeField] private bool isGameFinish;
 
         public enum States
@@ -21,7 +21,7 @@ namespace RiverAttack
             Credits
         }
         [SerializeField]
-        States states;
+        States actualGameState;
         [SerializeField]
         float countdownToStartTimer = 3f;
 
@@ -47,7 +47,7 @@ namespace RiverAttack
             //states = States.Menu;
             isGameFinish = false;
             isGameOver = false;
-            isGamePaused = false;
+            isGameStopped = false;
         }
         private void Start()
         {
@@ -65,7 +65,7 @@ namespace RiverAttack
         }
         void Update()
         {
-            switch (states)
+            switch (actualGameState)
             {
                 case States.Menu:
                     Debug.Log("Menu");
@@ -75,7 +75,7 @@ namespace RiverAttack
                     countdownToStartTimer -= Time.deltaTime;
                     if (countdownToStartTimer <= 0)
                     {
-                        states = States.GamePlay;
+                        actualGameState = States.GamePlay;
                     }
                     break;
                 case States.InitialAnimation:
@@ -100,16 +100,16 @@ namespace RiverAttack
         #endregion
         public void ChangeStatesGamePlay(States newStates = States.GamePlay)
         {
-            states = newStates;
+            actualGameState = newStates;
         }
-        public States GetStates()
+        public States GetActualGameState()
         {
-            return states;
+            return actualGameState;
         }
 
-        public bool GetPaused()
+        public bool HasGameStopped()
         {
-            return isGamePaused;
+            return isGameStopped;
         }
 
         public bool GetGameOver()
@@ -117,11 +117,9 @@ namespace RiverAttack
             return isGameOver;
         }
 
-
-
-        void GameInput_onPauseAction(object sender, EventArgs e)
+        void GameInput_onStopAction(object sender, EventArgs e)
         {
-            TogglePauseGame();
+            ToggleStopGame();
         }
 
         private void OnEnable()
@@ -133,13 +131,13 @@ namespace RiverAttack
         public void SetupGame()
         {
             isGameOver = false;
-            isGamePaused = false;
+            isGameStopped = false;
         }
 
-        void TogglePauseGame()
+        void ToggleStopGame()
         {
-            isGamePaused = !isGamePaused;
-            Time.timeScale = isGamePaused ? 0f : 1f;
+            isGameStopped = !isGameStopped;
+            Time.timeScale = isGameStopped ? 0f : 1f;
         }
 
         public IEnumerator LoadAsyncScene()

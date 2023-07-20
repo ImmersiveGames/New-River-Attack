@@ -5,7 +5,6 @@ namespace RiverAttack
     public class BulletPlayer : Bullets
     {
          #region Variable Private Inspector
-        
         Transform m_MyPool;
         #endregion
 
@@ -15,7 +14,7 @@ namespace RiverAttack
             ownerShoot = GetComponentInParent<PlayerMaster>();
             shootVelocity = ownerShoot.GetPlayersSettings().shootVelocity;
         }
-        private void OnEnable()
+        void OnEnable()
         {
             var audioSource = GetComponent<AudioSource>();
             audioShoot.Play(audioSource);

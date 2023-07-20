@@ -12,7 +12,7 @@ namespace RiverAttack
         {
             SetInitialReferences();
             if (m_PlayerMaster)
-                m_PlayerMaster.EventControllerMovement += SetTrail;
+                m_PlayerMaster.EventPlayerMasterControllerMovement += SetTrail;
             m_TrailRenderer = GetComponentsInChildren<TrailRenderer>();
             m_GamePlayManager.EventCompletePath += EnableTrails;
             SetTrails(false);
@@ -20,7 +20,7 @@ namespace RiverAttack
         void OnDisable()
         {
             if (m_PlayerMaster)
-                m_PlayerMaster.EventControllerMovement -= SetTrail;
+                m_PlayerMaster.EventPlayerMasterControllerMovement -= SetTrail;
             m_GamePlayManager.EventCompletePath -= EnableTrails;
         }
   #endregion

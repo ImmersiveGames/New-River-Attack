@@ -22,13 +22,12 @@ namespace RiverAttack
         {
             base.OnEnable();
             m_SkinPart = GetComponentInChildren<EnemiesSkinParts>();
-            m_MyPool = PoolObjectManager.instance;
             if (!GetComponent<ObstacleDetectApproach>().enabled)
                 InvokeRepeating(nameof(StartFire), 1, cadenceShoot);
         }
         void Start()
         {
-            SetTarget(GamePlayManager.instance.GetPlayer(0).transform);
+            SetTarget(GamePlayManager.instance.GetPlayerById(0).transform);
             m_SpawnPosition = GetComponentInChildren<EnemiesShootSpawn>().transform;
             StartMyPool();
         }

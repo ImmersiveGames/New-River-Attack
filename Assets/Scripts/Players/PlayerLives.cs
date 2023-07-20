@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace RiverAttack
@@ -6,8 +7,10 @@ namespace RiverAttack
     [RequireComponent(typeof(PlayerMaster))]
     public class PlayerLives : MonoBehaviour
     {
-        [SerializeField]
-        float timeoutReSpawn = 1.8f;
+        [SerializeField] int playerStartLives = 3;
+        [SerializeField] int playerLivesMax = 9;
+        [SerializeField] float timeoutReSpawn = 1.8f;
+        [SerializeField] bool reSpawnInSavePoint = false;
     #region Variable Private Inspector
         PlayerMaster m_PlayerMaster;
         PlayerSettings m_PlayerSettings;
@@ -16,25 +19,32 @@ namespace RiverAttack
         [SerializeField]
         int scoreForExtraLife;
         int m_Score;
+        [SerializeField] int playerLives;
     #endregion
 
     #region UNITY METHODS
         void Start()
         {
-            m_Score = (int)m_PlayerSettings.score + scoreForExtraLife;
+            m_PlayerSettings.maxLives = playerLivesMax;
+            m_PlayerSettings.startLives = playerStartLives;
+            m_PlayerSettings.lives = playerStartLives;
+            playerLives = playerStartLives;
+
+            m_Score = m_PlayerSettings.score + scoreForExtraLife;
         }
+        
         void OnEnable()
         {
             SetInitialReferences();
-            m_PlayerMaster.EventPlayerDestroy += KillPlayer;
-            m_PlayerMaster.EventPlayerHit += GainExtraLive;
-            m_GamePlayMaster.EventRestartPlayer += RevivePlayer;
+            m_PlayerMaster.EventPlayerMasterOnDestroy += PlayerLivesKill;
+            //m_PlayerMaster.EventPlayerMasterCollider += GainExtraLive;
+            //m_GamePlayMaster.EventRestartPlayer += RevivePlayer;
         }
         void OnDisable()
         {
-            m_PlayerMaster.EventPlayerDestroy -= KillPlayer;
-            m_PlayerMaster.EventPlayerHit -= GainExtraLive;
-            m_GamePlayMaster.EventRestartPlayer -= RevivePlayer;
+            m_PlayerMaster.EventPlayerMasterOnDestroy -= PlayerLivesKill;
+            //m_PlayerMaster.EventPlayerMasterCollider -= GainExtraLive;
+            //m_GamePlayMaster.EventRestartPlayer -= RevivePlayer;
         }
   #endregion
 
@@ -44,46 +54,44 @@ namespace RiverAttack
             m_PlayerSettings = m_PlayerMaster.GetPlayersSettings();
             m_GamePlayMaster = GamePlayManager.instance;
         }
-        void AddLives(int newLives)
-        {
-            if (m_PlayerSettings.maxLives > 0 && (m_PlayerSettings.lives + newLives) > m_PlayerSettings.maxLives)
-                m_PlayerSettings.lives += m_PlayerSettings.maxLives;
-            else
-                m_PlayerSettings.lives += newLives;
-            m_PlayerMaster.CallEventPlayerAddLive();
-        }
+        
 
-        void KillPlayer()
+        void PlayerLivesKill()
         {
-            m_PlayerSettings.ChangeLife(-1);
-            LogLives(1);
+            ChangeLife(-1);
             if (m_PlayerSettings.lives <= 0 && !GameManager.instance.GetGameOver())
             {
+                GameManager.instance.ChangeStatesGamePlay(GameManager.States.GameOver);
+                m_PlayerMaster.SetActualPlayerStateMovement(PlayerMaster.MovementStatus.Paused);
                 m_GamePlayMaster.CallEventGameOver();
             }
             else
             {
                 StopAllCoroutines();
                 StartCoroutine(ReSpawn());
+                Debug.Log("Chamou corrotina respawn");
             }
         }
 
-        void RevivePlayer(int numLives)
+        void SetRespawnPosition(float positionZ)
         {
-            m_PlayerSettings.ChangeLife(numLives);
-            //StopAllCoroutines();
-            StartCoroutine(ReSpawn());
+            var transform1 = transform;
+            transform1.position = reSpawnInSavePoint ? new Vector3(0f, transform1.position.y, positionZ) : new Vector3(0f, transform1.position.y, m_PlayerMaster.GetLastSavePosition());
         }
 
         IEnumerator ReSpawn()
         {
+            m_PlayerMaster.SetActualPlayerStateMovement(PlayerMaster.MovementStatus.Paused);
             yield return new WaitForSeconds(timeoutReSpawn);
             if (!m_GamePlayMaster.shouldBePlayingGame)
                 yield break;
-            m_PlayerMaster.CallEventPlayerReload();
-            m_GamePlayMaster.CallEventResetPlayers();
+            m_PlayerMaster.CallEventPlayerMasterReSpawn();
             m_GamePlayMaster.CallEventResetEnemies();
+            SetRespawnPosition(transform.localPosition.z);
             m_GamePlayMaster.GamePlayPause(false);
+            m_PlayerMaster.SetActualPlayerStateMovement(PlayerMaster.MovementStatus.None);
+            
+            m_PlayerMaster.SetPlayerReady();
             //gamePlayMaster.CallEventUnPausePlayGame();
         }
         void GainExtraLive()
@@ -92,12 +100,20 @@ namespace RiverAttack
             int rest = (int)m_PlayerSettings.score - m_Score;
             int life = 1;
             if (rest >= scoreForExtraLife) life += rest / scoreForExtraLife;
-            AddLives(life);
-            m_Score = ((int)m_PlayerSettings.score - rest) + scoreForExtraLife * life;
+            ChangeLife(life);
+            m_Score = (m_PlayerSettings.score - rest) + scoreForExtraLife * life;
+            m_PlayerMaster.CallEventPlayerAddLive();
         }
-        static void LogLives(int lives)
+        void ChangeLife(int life)
         {
-            GamePlaySettings.instance.livesSpent += Mathf.Abs(lives);
+            if (m_PlayerSettings.maxLives != 0 && m_PlayerSettings.lives + life >= m_PlayerSettings.maxLives)
+                m_PlayerSettings.lives = m_PlayerSettings.maxLives;
+            else if (m_PlayerSettings.lives + life <= 0)
+                playerLives = m_PlayerSettings.lives = 0;
+            else
+                playerLives = m_PlayerSettings.lives += life;
+            GamePlaySettings.instance.livesSpent += life * 1;
         }
+        
     }
 }

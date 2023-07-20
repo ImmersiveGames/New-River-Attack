@@ -41,13 +41,13 @@ namespace RiverAttack
 
         void FixedUpdate()
         {
-            if (GameManager.instance.GetStates() != GameManager.States.GamePlay || GameManager.instance.GetPaused())
+            if (GameManager.instance.GetActualGameState() != GameManager.States.GamePlay || GameManager.instance.HasGameStopped())
             {
-                m_PlayerMaster.SetHasPlayerReady(false);
+                m_PlayerMaster.SetActualPlayerStateMovement(PlayerMaster.MovementStatus.Paused);
                 return;
             }
 
-            m_PlayerMaster.SetHasPlayerReady(true);
+            //m_PlayerMaster.SetActualPlayerStateMovement(PlayerMaster.MovementStatus.None);
 
             float axisAutoMovement = m_InputVector.y switch
             {
@@ -57,10 +57,10 @@ namespace RiverAttack
             };
 
             var moveDir = new Vector3(m_InputVector.x, 0, axisAutoMovement);
-            if (m_PlayerMaster.GetHasPlayerReady())
+            if (m_PlayerMaster.ShouldPlayerMove())
                 transform.position += moveDir * (m_MovementSpeed * Time.deltaTime);
 
-            m_PlayerMaster.CallEventControllerMovement(m_InputVector);
+            m_PlayerMaster.CallEventPlayerMasterControllerMovement(m_InputVector);
         }
 
 

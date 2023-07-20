@@ -32,15 +32,15 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
-            m_PlayerMaster.EventControllerMovement += SoundEngine;
-            m_PlayerMaster.EventPlayerDestroy += SoundExplosion;
+            m_PlayerMaster.EventPlayerMasterControllerMovement += SoundEngine;
+            m_PlayerMaster.EventPlayerMasterOnDestroy += SoundExplosion;
             m_GamePlayManager.EventPausePlayGame += SoundStop;
             m_GamePlayManager.EventCompletePath += SoundStop;
         }
         void OnDisable()
         {
-            m_PlayerMaster.EventControllerMovement -= SoundEngine;
-            m_PlayerMaster.EventPlayerDestroy -= SoundExplosion;
+            m_PlayerMaster.EventPlayerMasterControllerMovement -= SoundEngine;
+            m_PlayerMaster.EventPlayerMasterOnDestroy -= SoundExplosion;
             m_GamePlayManager.EventPausePlayGame -= SoundStop;
         }
   #endregion
@@ -53,30 +53,30 @@ namespace RiverAttack
 
         void SoundEngine(Vector2 dir)
         {
-            if (audioEngineLoop == null || m_PlayerMaster.shouldPlayerBeReady == false) return;
-            if (dir.y > 0 && m_PlayerMaster.playerStatus != PlayerMaster.Status.Accelerate)
+            if (audioEngineLoop == null || m_PlayerMaster.ShouldPlayerMove() == false) return;
+            if (dir.y > 0 && m_PlayerMaster.playerMovementStatus != PlayerMaster.MovementStatus.Accelerate)
             {
-                m_PlayerMaster.playerStatus = PlayerMaster.Status.Accelerate;
+                m_PlayerMaster.playerMovementStatus = PlayerMaster.MovementStatus.Accelerate;
                 StartCoroutine(ChangeEngine(audioStartAccelEngine, audioEngineAccelerator));
             }
             switch (dir.y)
             {
-                case < 0 when m_PlayerMaster.playerStatus != PlayerMaster.Status.Reduce:
-                    m_PlayerMaster.playerStatus = PlayerMaster.Status.Reduce;
+                case < 0 when m_PlayerMaster.playerMovementStatus != PlayerMaster.MovementStatus.Reduce:
+                    m_PlayerMaster.playerMovementStatus = PlayerMaster.MovementStatus.Reduce;
                     AudioEventSample.UpdateChangePith(m_AudioSource, audioEngineLoop.audioSample.pitch.y, enginePitchDown);
                     break;
-                case 0 when m_PlayerMaster.playerStatus != PlayerMaster.Status.None:
+                case 0 when m_PlayerMaster.playerMovementStatus != PlayerMaster.MovementStatus.None:
                 {
-                    if (m_PlayerMaster.playerStatus == PlayerMaster.Status.Accelerate)
+                    if (m_PlayerMaster.playerMovementStatus == PlayerMaster.MovementStatus.Accelerate)
                         StartCoroutine(ChangeEngine(audioDeceleratorEngine, audioEngineLoop));
-                    if (m_PlayerMaster.playerStatus == PlayerMaster.Status.Reduce)
+                    if (m_PlayerMaster.playerMovementStatus == PlayerMaster.MovementStatus.Reduce)
                         AudioEventSample.UpdateChangePith(m_AudioSource, m_AudioSource.pitch, audioEngineLoop.audioSample.pitch.y);
-                    m_PlayerMaster.playerStatus = PlayerMaster.Status.None;
+                    m_PlayerMaster.playerMovementStatus = PlayerMaster.MovementStatus.None;
                     break;
                 }
                 default:
                 {
-                    if (m_PlayerMaster.shouldPlayerBeReady && !m_AudioSource.isPlaying && m_PlayerMaster.playerStatus == PlayerMaster.Status.None)
+                    if (m_PlayerMaster.ShouldPlayerMove() && !m_AudioSource.isPlaying && m_PlayerMaster.playerMovementStatus == PlayerMaster.MovementStatus.None)
                     {
                         //StopAllCoroutines();
                         audioEngineLoop.Play(m_AudioSource);

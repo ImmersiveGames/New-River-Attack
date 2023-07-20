@@ -1,24 +1,29 @@
 using System.Collections.Generic;
 using UnityEngine;
+// ReSharper disable ConditionIsAlwaysTrueOrFalse
 namespace Utils
 {
     public class PoolObject
     {
-         readonly List<GameObject> m_PooledObjects;
-         readonly GameObject m_PooledObj;
-         int m_InitialPoolSize;
+        readonly List<GameObject> m_PooledObjects;
+        readonly GameObject m_PooledObj;
+         //int m_InitialPoolSize;
          readonly Transform m_MyRoot; 
          Transform m_Target;
 
         public PoolObject(GameObject prefab, int initialPoolSize, Transform myRoot, bool persistent = false)
         {
             m_PooledObjects = new List<GameObject>();
-            m_MyRoot = new GameObject("Pool(" + myRoot.root.name + ")").transform;
-            m_MyRoot.SetParent(myRoot);
-            m_MyRoot.SetAsLastSibling();
-            var transform = m_MyRoot.transform;
-            transform.localPosition = Vector3.zero;
-            transform.localRotation = Quaternion.identity;
+            if (m_MyRoot == null)
+            {
+                m_MyRoot = new GameObject("Pool(" + myRoot.root.name + ")").transform;
+                m_MyRoot.SetParent(myRoot);
+                m_MyRoot.SetAsLastSibling();
+                var transform = m_MyRoot.transform;
+                transform.localPosition = Vector3.zero;
+                transform.localRotation = Quaternion.identity;
+            }
+            
             for (int i = 0; i < initialPoolSize; i++)
             {
                 CreateObject(prefab, m_MyRoot);
@@ -26,7 +31,7 @@ namespace Utils
             if (persistent)
                 Object.DontDestroyOnLoad(myRoot);
             m_PooledObj = prefab;
-            m_InitialPoolSize = initialPoolSize;
+            //m_InitialPoolSize = initialPoolSize;
         }
 
         GameObject CreateObject(GameObject prefab, Transform poolRoot)
@@ -44,7 +49,7 @@ namespace Utils
             for (int i = 0; i < lenght; i++)
             {
                 //look for the first one that is inactive.
-                if (m_PooledObjects[i].activeSelf != false)
+                if (m_PooledObjects[i].activeSelf)
                     continue;
                 ResetPosition(m_PooledObjects[i]);
                 //set the object to active.
@@ -53,12 +58,12 @@ namespace Utils
                 m_PooledObjects[i].transform.parent = null;
                 return m_PooledObjects[i];
             }
-            return CreateObject(m_PooledObj, this.m_MyRoot);
+            return CreateObject(m_PooledObj, m_MyRoot);
         }
 
         void ResetPosition(GameObject gameObject)
         {
-            var transform = this.m_MyRoot.transform;
+            var transform = m_MyRoot.transform;
             var localPosition = transform.localPosition;
             gameObject.transform.localPosition = new Vector3(localPosition.x, localPosition.y, localPosition.z);
             var localRotation = transform.localRotation;

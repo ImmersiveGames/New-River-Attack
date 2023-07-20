@@ -85,10 +85,10 @@ namespace RiverAttack
                 if (GetComponent<LevelObstacleSpawnShootApproach>() && obstacleDetectApproach)
                 {
                     var spawnShootApp = GetComponent<LevelObstacleSpawnShootApproach>();
-                    spawnShootApp.radiusPlayerProximity = spawnShootApp.radiusPlayerProximity;
-                    spawnShootApp.randomPlayerDistanceNear = spawnShootApp.randomPlayerDistanceNear;
-                    spawnShootApp.difficultType = spawnShootApp.difficultType;
-                    spawnShootApp.enemiesDifficultyList = spawnShootApp.enemiesDifficultyList;
+                    obstacleDetectApproach.radiusPlayerProximity = spawnShootApp.radiusPlayerProximity;
+                    obstacleDetectApproach.randomPlayerDistanceNear = spawnShootApp.randomPlayerDistanceNear;
+                    obstacleDetectApproach.difficultType = spawnShootApp.difficultType;
+                    obstacleDetectApproach.enemiesDifficultyList = spawnShootApp.enemiesDifficultyList;
                     var enemiesShootApp = (EnemiesShootApproach)obstacleDetectApproach;
                     enemiesShootApp.timeToCheck = spawnShootApp.timeToCheck;
                 }

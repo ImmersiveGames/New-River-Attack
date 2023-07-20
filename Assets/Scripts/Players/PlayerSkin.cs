@@ -16,14 +16,14 @@ namespace RiverAttack
         {
             SetInitialReferences();
             m_PlayerMaster.EventChangeSkin += SetPlayerSkin;
-            m_PlayerMaster.EventPlayerDestroy += DisableSkin;
-            m_PlayerMaster.EventPlayerReload += EnableSkin;
+            m_PlayerMaster.EventPlayerMasterOnDestroy += DisableSkin;
+            m_PlayerMaster.EventPlayerMasterReSpawn += EnableSkin;
         }
         void OnDisable()
         {
             m_PlayerMaster.EventChangeSkin -= SetPlayerSkin;
-            m_PlayerMaster.EventPlayerDestroy -= DisableSkin;
-            m_PlayerMaster.EventPlayerReload -= EnableSkin;
+            m_PlayerMaster.EventPlayerMasterOnDestroy -= DisableSkin;
+            m_PlayerMaster.EventPlayerMasterReSpawn -= EnableSkin;
         }
   #endregion
 

@@ -50,7 +50,7 @@ namespace RiverAttack
         }
         public void Execute()
         {
-            if (bombQuantity <= 0 || !m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.hasPlayerReady)
+            if (bombQuantity <= 0 || !m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.ShouldPlayerBeReady())
                 return;
             bombQuantity -= 1;
             var bomb = Instantiate(prefabBomb);

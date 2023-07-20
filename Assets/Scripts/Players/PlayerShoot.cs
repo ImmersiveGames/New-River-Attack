@@ -18,9 +18,9 @@ namespace RiverAttack
         //private ControllerMap controllerMap;
         float m_NextShoot;
         GameObject m_MyShoot;
+        GamePlayManager m_GamePlayManager;
         PlayerMaster m_PlayerMaster;
         PlayerSettings m_PlayerSettings;
-        PlayerController m_PlayerController;
        #region UNITY METHODS
         void OnEnable()
         {
@@ -35,14 +35,16 @@ namespace RiverAttack
         
         void SetInitialReferences()
         {
+            m_GamePlayManager = GamePlayManager.instance;
             m_PlayerMaster = GetComponent<PlayerMaster>();
-            m_PlayerController = GetComponent<PlayerController>();
             m_PlayerSettings = m_PlayerMaster.GetPlayersSettings();
+            
         }
         
         public void Execute()
         {
-            if (!m_PlayerMaster.shouldPlayerBeReady) return;
+            if (!m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.ShouldPlayerBeReady())
+                return;
             m_ShootCadence -= Time.deltaTime;
             //Debug.Log("SHOOT Cadenciado:" + m_shootCadence);
             if (!(m_ShootCadence <= 0))

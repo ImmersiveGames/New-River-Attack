@@ -5,7 +5,6 @@ namespace RiverAttack
 {
     public class PlayerParticles : MonoBehaviour
     {
-
         [SerializeField]
         GameObject particlePrefab;
         [SerializeField]
@@ -17,13 +16,13 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
-            m_PlayerMaster.EventPlayerDestroy += ExplodeParticle;
-            m_PlayerMaster.EventPlayerReload += RestoreChildren;
+            m_PlayerMaster.EventPlayerMasterOnDestroy += ExplodeParticle;
+            m_PlayerMaster.EventPlayerMasterReSpawn += RestoreChildren;
         }
         void OnDisable()
         {
-            m_PlayerMaster.EventPlayerDestroy -= ExplodeParticle;
-            m_PlayerMaster.EventPlayerReload -= RestoreChildren;
+            m_PlayerMaster.EventPlayerMasterOnDestroy -= ExplodeParticle;
+            m_PlayerMaster.EventPlayerMasterReSpawn -= RestoreChildren;
         }
   #endregion
         void SetInitialReferences()
@@ -43,7 +42,5 @@ namespace RiverAttack
         {
             Tools.ToggleChildren(transform, true);
         }
-
-        
     }
 }

@@ -5,12 +5,11 @@ namespace RiverAttack
     [RequireComponent(typeof(PlayerMaster))]
     public class PlayerDistance : MonoBehaviour
     {
-        [SerializeField]
-        float cadenceDistance;
+        [SerializeField] float cadenceDistance;
         GamePlayManager m_GamePlayManager;
         PlayerMaster m_PlayerMaster;
         int distanceOffset { get; set; }
-        int pathDistance { get; set; }
+        [SerializeField] int pathDistance;
 
         [SerializeField] float checkTime = 2;
         [SerializeField] float lifeTime;
@@ -23,7 +22,7 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
-            m_PlayerMaster.EventPlayerReload += ClearDistance;
+            m_PlayerMaster.EventPlayerMasterReSpawn += ClearDistance;
             m_GamePlayManager.EventCheckPoint += Log;
         }
         void LateUpdate()
@@ -36,7 +35,7 @@ namespace RiverAttack
         }
         void OnDisable()
         {
-            m_PlayerMaster.EventPlayerReload -= ClearDistance;
+            m_PlayerMaster.EventPlayerMasterReSpawn -= ClearDistance;
             m_GamePlayManager.EventCheckPoint -= Log;
         }
   #endregion
@@ -55,7 +54,7 @@ namespace RiverAttack
 
         void UpdateDistance()
         {
-            if (m_PlayerMaster.shouldPlayerBeReady)
+            if (m_PlayerMaster.ShouldPlayerMove())
                 pathDistance = (int)(transform.position.z / cadenceDistance) - distanceOffset;
         }
 

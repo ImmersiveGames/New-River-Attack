@@ -34,7 +34,7 @@ namespace RiverAttack
             SetInitialReferences();
             PlayerSetup();
             m_PlayerMaster.EventIncreaseHealth += IncreaseFuel;
-            m_PlayerMaster.EventPlayerReload += PlayerSetup;
+            m_PlayerMaster.EventPlayerMasterReSpawn += PlayerSetup;
         }
         void Update()
         {
@@ -46,7 +46,7 @@ namespace RiverAttack
         void OnDisable()
         {
             m_PlayerMaster.EventIncreaseHealth -= IncreaseFuel;
-            m_PlayerMaster.EventPlayerReload -= PlayerSetup;
+            m_PlayerMaster.EventPlayerMasterReSpawn -= PlayerSetup;
         }
   #endregion
 
@@ -58,7 +58,7 @@ namespace RiverAttack
         }
         void AutoReduceHp(int reduce, float time)
         {
-            if (!m_PlayerMaster.shouldPlayerBeReady || m_PlayerSettings.actualHp <= 0 || !(Time.time > m_NextDescesseFuel))
+            if (!m_PlayerMaster.ShouldPlayerBeReady() || m_PlayerSettings.actualHp <= 0 || !(Time.time > m_NextDescesseFuel))
                 return;
             m_NextDescesseFuel = Time.time + time;
             ReduceFuel(reduce);
@@ -68,11 +68,11 @@ namespace RiverAttack
 
         void CheckHealth()
         {
-            if (playerAlert && m_PlayerMaster.shouldPlayerBeReady && m_PlayerSettings.actualHp <= alertHp && !playerAlert.IsPlaying(m_AudioSource))
+            if (playerAlert && m_PlayerMaster.ShouldPlayerBeReady() && m_PlayerSettings.actualHp <= alertHp && !playerAlert.IsPlaying(m_AudioSource))
             {
                 playerAlert.Play(m_AudioSource);
             }
-            else if (playerAlert && m_PlayerMaster.shouldPlayerBeReady && m_PlayerSettings.actualHp > alertHp && playerAlert.IsPlaying(m_AudioSource))
+            else if (playerAlert && m_PlayerMaster.ShouldPlayerBeReady() && m_PlayerSettings.actualHp > alertHp && playerAlert.IsPlaying(m_AudioSource))
             {
                 playerAlert.Stop(m_AudioSource);
             }
@@ -88,7 +88,7 @@ namespace RiverAttack
             m_PlayerSettings.actualHp -= fuel;
             if (m_PlayerSettings.actualHp > 0) return;
             m_PlayerSettings.actualHp = 0;
-            m_PlayerMaster.CallEventPlayerDestroy();
+            m_PlayerMaster.CallEventPlayerMasterOnDestroy();
         }
         void IncreaseFuel(int fuel)
         {

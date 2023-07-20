@@ -16,7 +16,7 @@ namespace RiverAttack
         private void OnEnable()
         {
             SetInitialReferences();
-            m_PlayerMaster.EventPlayerReload += ResetPowerUp;
+            m_PlayerMaster.EventPlayerMasterReSpawn += ResetPowerUp;
         }
         void Update()
         {
@@ -24,7 +24,7 @@ namespace RiverAttack
         }
         void OnDisable()
         {
-            m_PlayerMaster.EventPlayerReload -= ResetPowerUp;
+            m_PlayerMaster.EventPlayerMasterReSpawn -= ResetPowerUp;
         }
         
   #endregion

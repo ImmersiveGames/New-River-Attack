@@ -17,11 +17,11 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
-            m_PlayerMaster.EventControllerMovement += AnimationMovement;
+            m_PlayerMaster.EventPlayerMasterControllerMovement += AnimationMovement;
         }
         void OnDisable()
         {
-            m_PlayerMaster.EventControllerMovement -= AnimationMovement;
+            m_PlayerMaster.EventPlayerMasterControllerMovement -= AnimationMovement;
         }
   #endregion
         
