@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 namespace RiverAttack
 {
     public class PlayerSkinTrail : MonoBehaviour
@@ -8,11 +9,15 @@ namespace RiverAttack
         TrailRenderer[] m_TrailRenderer;
 
         #region UNITY METHODS
+        void Start()
+        {
+            OnEnable();
+        }
         void OnEnable()
         {
             SetInitialReferences();
             if (m_PlayerMaster)
-                m_PlayerMaster.EventPlayerMasterControllerMovement += SetTrail;
+                m_PlayerMaster.EventPlayerMasterControllerMovement += ActiveTrailsOnMovement;
             m_TrailRenderer = GetComponentsInChildren<TrailRenderer>();
             m_GamePlayManager.EventCompletePath += EnableTrails;
             SetTrails(false);
@@ -20,7 +25,7 @@ namespace RiverAttack
         void OnDisable()
         {
             if (m_PlayerMaster)
-                m_PlayerMaster.EventPlayerMasterControllerMovement -= SetTrail;
+                m_PlayerMaster.EventPlayerMasterControllerMovement -= ActiveTrailsOnMovement;
             m_GamePlayManager.EventCompletePath -= EnableTrails;
         }
   #endregion
@@ -29,7 +34,7 @@ namespace RiverAttack
             m_PlayerMaster = GetComponentInParent<PlayerMaster>();
             m_GamePlayManager = GamePlayManager.instance;
         }
-        void SetTrail(Vector2 dir)
+        void ActiveTrailsOnMovement(Vector2 dir)
         {
             switch (dir.y)
             {
@@ -45,6 +50,7 @@ namespace RiverAttack
         {
             foreach (var t in m_TrailRenderer)
             {
+                //t.emitting = setting;
                 t.enabled = setting;
             }
         }

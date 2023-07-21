@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Utils;
 
 namespace RiverAttack
@@ -12,6 +13,10 @@ namespace RiverAttack
         PlayerMaster m_PlayerMaster;
 
         #region UNITY METHODS
+        void Start()
+        {
+            SetInitialReferences();
+        }
         void OnEnable()
         {
             SetInitialReferences();
