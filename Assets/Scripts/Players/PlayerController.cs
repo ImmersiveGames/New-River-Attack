@@ -38,7 +38,7 @@ namespace RiverAttack
             m_PlayersInputActions = m_PlayerMaster.playersInputActions;
             m_PlayersInputActions.Enable();
             m_PlayersInputActions.Player.Move.performed += ctx => TouchMove(ctx);
-            m_PlayersInputActions.Player.Move.canceled += ctx => EndTouchMove(ctx);
+            m_PlayersInputActions.Player.Move.canceled += ctx => EndTouchMove(ctx);          
         }
 
         void FixedUpdate()
