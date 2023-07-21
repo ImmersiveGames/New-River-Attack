@@ -37,6 +37,15 @@ namespace RiverAttack
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Bomb"",
+                    ""type"": ""Button"",
+                    ""id"": ""68e80c70-e206-4200-9f34-04b4dc24b9aa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -204,6 +213,17 @@ namespace RiverAttack
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8f32df7a-8ab0-4c27-80ee-1c90447aa4f3"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile"",
+                    ""action"": ""Bomb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -241,6 +261,7 @@ namespace RiverAttack
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+            m_Player_Bomb = m_Player.FindAction("Bomb", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -303,11 +324,13 @@ namespace RiverAttack
         private readonly InputActionMap m_Player;
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Move;
+        private readonly InputAction m_Player_Bomb;
         public struct PlayerActions
         {
             private @PlayersInputActions m_Wrapper;
             public PlayerActions(@PlayersInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Player_Move;
+            public InputAction @Bomb => m_Wrapper.m_Player_Bomb;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -320,6 +343,9 @@ namespace RiverAttack
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Bomb.started += instance.OnBomb;
+                @Bomb.performed += instance.OnBomb;
+                @Bomb.canceled += instance.OnBomb;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -327,6 +353,9 @@ namespace RiverAttack
                 @Move.started -= instance.OnMove;
                 @Move.performed -= instance.OnMove;
                 @Move.canceled -= instance.OnMove;
+                @Bomb.started -= instance.OnBomb;
+                @Bomb.performed -= instance.OnBomb;
+                @Bomb.canceled -= instance.OnBomb;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -365,6 +394,7 @@ namespace RiverAttack
         public interface IPlayerActions
         {
             void OnMove(InputAction.CallbackContext context);
+            void OnBomb(InputAction.CallbackContext context);
         }
     }
 }
