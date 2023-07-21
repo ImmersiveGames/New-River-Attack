@@ -17,8 +17,9 @@ namespace RiverAttack
         int idPlayer { get;
             set; }
         [SerializeField] float lastSavePosition = 0f;
-        PlayerController m_PlayerController;
+        protected internal PlayersInputActions playersInputActions;
         GameManager m_GameManager;
+        
 
     #region SerilizedField
         [SerializeField] public bool isPlayerDead = false;
@@ -62,7 +63,8 @@ namespace RiverAttack
         #region UNITYMETHODS
         void Awake()
         {
-            m_PlayerController = GetComponent<PlayerController>();
+            playersInputActions = new PlayersInputActions();
+            playersInputActions.Enable();
             enemiesHitList = new List<EnemiesResults>();
             playerMovementStatus = MovementStatus.Paused;
             m_GameManager = GameManager.instance;

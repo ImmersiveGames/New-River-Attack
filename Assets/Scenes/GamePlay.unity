@@ -123,6 +123,67 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &252315691
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1252923162750986, guid: d97546fc6d8e6cc45aaa1ac03610a78e, type: 3}
+      propertyPath: m_Name
+      value: Bomb
+      objectReference: {fileID: 0}
+    - target: {fileID: 4248775949542480, guid: d97546fc6d8e6cc45aaa1ac03610a78e, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4248775949542480, guid: d97546fc6d8e6cc45aaa1ac03610a78e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4248775949542480, guid: d97546fc6d8e6cc45aaa1ac03610a78e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 4248775949542480, guid: d97546fc6d8e6cc45aaa1ac03610a78e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 4248775949542480, guid: d97546fc6d8e6cc45aaa1ac03610a78e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4248775949542480, guid: d97546fc6d8e6cc45aaa1ac03610a78e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4248775949542480, guid: d97546fc6d8e6cc45aaa1ac03610a78e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4248775949542480, guid: d97546fc6d8e6cc45aaa1ac03610a78e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4248775949542480, guid: d97546fc6d8e6cc45aaa1ac03610a78e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4248775949542480, guid: d97546fc6d8e6cc45aaa1ac03610a78e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4248775949542480, guid: d97546fc6d8e6cc45aaa1ac03610a78e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d97546fc6d8e6cc45aaa1ac03610a78e, type: 3}
 --- !u!1 &344798172
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,7 +278,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 60
-  field of view: 80
+  field of view: 34.2
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -243,7 +304,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 412436317}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 51.800003, z: 32.724895}
+  m_LocalPosition: {x: 0.0000009536743, y: 51.800003, z: 9.229216}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1190,7 +1251,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 1366788915}
   m_Lens:
-    FieldOfView: 80
+    FieldOfView: 34.2
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 60
@@ -1216,7 +1277,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1483532484}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 51.800003, z: 32.724895}
+  m_LocalPosition: {x: 0.0000009536743, y: 51.800003, z: 9.229216}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1764,14 +1825,14 @@ MonoBehaviour:
   m_ZDamping: 1
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
-  m_ScreenY: 0.89
+  m_ScreenY: 0.8000001
   m_CameraDistance: 50
-  m_DeadZoneWidth: 0.5
-  m_DeadZoneHeight: 0.15
+  m_DeadZoneWidth: 0.56
+  m_DeadZoneHeight: 0.16
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.61
-  m_SoftZoneHeight: 0.21
+  m_SoftZoneWidth: 0.7
+  m_SoftZoneHeight: 0.34
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1

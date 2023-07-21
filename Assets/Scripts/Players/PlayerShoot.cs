@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Utils;
 
 namespace RiverAttack
@@ -54,6 +55,10 @@ namespace RiverAttack
             m_ShootCadence = m_PlayerSettings.cadenceShoot;
             Fire();
         }
+        public void Execute(InputAction.CallbackContext callbackContext)
+        {
+            throw new System.NotImplementedException();
+        }
         void Fire()
         {
             m_MyShoot = PoolObjectManager.GetObject(this);
@@ -68,6 +73,10 @@ namespace RiverAttack
             m_MyShoot.transform.rotation = new Quaternion(transformRotation.x, transformRotation.y, transformRotation.z, transformRotation.w);
         }
         public void UnExecute()
+        {
+            throw new System.NotImplementedException();
+        }
+        public void UnExecute(InputAction.CallbackContext callbackContext)
         {
             throw new System.NotImplementedException();
         }

@@ -6,7 +6,7 @@ namespace RiverAttack
 {
     public class PlayerController : MonoBehaviour
     {
-        PlayerMaster m_PlayerMaster;        
+        PlayerMaster m_PlayerMaster;
         PlayersInputActions m_PlayersInputActions;
 
         PlayerSettings m_PlayerSettings;
@@ -23,18 +23,20 @@ namespace RiverAttack
         {
             m_PlayerMaster = GetComponent<PlayerMaster>();
             m_PlayerSettings = m_PlayerMaster.GetPlayersSettings();
-            m_PlayersInputActions = new PlayersInputActions();
+            
 
             m_AutoMovement = GameSettings.instance.autoMovement;
             m_MovementSpeed = m_PlayerSettings.mySpeedy;
             m_MultiplyVelocityUp = m_PlayerSettings.multiplyVelocityUp;
             m_MultiplyVelocityDown = m_PlayerSettings.multiplyVelocityDown;            
 
-            m_PlayersInputActions.Enable();
+            
         }
 
         void Start()
         {
+            m_PlayersInputActions = m_PlayerMaster.playersInputActions;
+            m_PlayersInputActions.Enable();
             m_PlayersInputActions.Player.Move.performed += ctx => TouchMove(ctx);
             m_PlayersInputActions.Player.Move.canceled += ctx => EndTouchMove(ctx);
         }

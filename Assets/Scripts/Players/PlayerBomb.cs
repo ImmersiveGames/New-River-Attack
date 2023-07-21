@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
 using Utils;
 namespace RiverAttack
 {
@@ -12,13 +14,27 @@ namespace RiverAttack
         LayerMask layerMask;
         [SerializeField]
         GameObject prefabBomb;
-        [SerializeField]
-        int idButtonMap;
+        
         PlayerMaster m_PlayerMaster;
         GamePlayManager m_GamePlayManager;
+        PlayersInputActions m_PlayersInputActions;
+        
         public int quantityBomb { get { return (int)bombQuantity; } }
 
         #region UNITY METHODS
+        void Awake()
+        {
+            m_PlayersInputActions = new PlayersInputActions();
+        }
+        void Start()
+        {
+            m_PlayerMaster = GetComponent<PlayerMaster>();
+            m_PlayersInputActions = m_PlayerMaster.playersInputActions;
+            if (bombQuantity != 0) return;
+            bombQuantity = m_PlayerMaster.GetPlayersSettings().startBombs;
+            m_PlayerMaster.GetPlayersSettings().bombs = bombQuantity;
+            m_PlayersInputActions.Player.Bomb.performed += Execute;
+        }
         void OnEnable()
         {
             SetInitialReferences();
@@ -29,6 +45,7 @@ namespace RiverAttack
             m_GamePlayManager.EventCollectItem -= UpdateBombs;
         }
   #endregion
+        
         void UpdateBombs(CollectibleScriptable collectibles)
         {
             if (bombQuantity <= collectibles.maxCollectible)
@@ -50,6 +67,10 @@ namespace RiverAttack
         }
         public void Execute()
         {
+            throw new NotImplementedException();
+        }
+        public void Execute(InputAction.CallbackContext context)
+        {
             if (bombQuantity <= 0 || !m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.ShouldPlayerBeReady())
                 return;
             bombQuantity -= 1;
@@ -62,6 +83,10 @@ namespace RiverAttack
         public void UnExecute()
         {
             throw new System.NotImplementedException();
+        }
+        public void UnExecute(InputAction.CallbackContext callbackContext)
+        {
+            throw new NotImplementedException();
         }
         static void LogBomb(int bomb)
         {
