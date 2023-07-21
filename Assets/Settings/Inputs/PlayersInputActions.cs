@@ -227,11 +227,11 @@ namespace RiverAttack
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7d8b584a-c4ac-4528-8b51-eb5040b792ee"",
+                    ""id"": ""46c1eefe-6bdf-407f-b952-5d33b8425615"",
                     ""path"": ""<Keyboard>/b"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""PC"",
+                    ""groups"": ""Mobile"",
                     ""action"": ""Bomb"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -246,6 +246,11 @@ namespace RiverAttack
             ""devices"": [
                 {
                     ""devicePath"": ""<Touchscreen>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Keyboard>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
