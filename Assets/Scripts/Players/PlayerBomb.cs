@@ -65,7 +65,7 @@ namespace RiverAttack
         }
         static void LogBomb(int bomb)
         {
-            GamePlaySettings.instance.bombSpent += Mathf.Abs(bomb);
+            GamePlaySettings.instance.bombSpent += bomb;
         }
     }
 }
