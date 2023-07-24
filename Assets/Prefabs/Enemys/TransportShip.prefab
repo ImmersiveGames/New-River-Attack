@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 54725638357193558}
   - component: {fileID: 95344633156177360}
   - component: {fileID: 82511288264527072}
+  - component: {fileID: 7973982009139563381}
   m_Layer: 0
   m_Name: TransportShip
   m_TagString: Untagged
@@ -179,6 +180,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!65 &7973982009139563381
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113912366842368}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.4, y: 1.8, z: 1.3199999}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1 &1757037158363252
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,7 +212,6 @@ GameObject:
   - component: {fileID: 4899045809292906}
   - component: {fileID: 33405734383224430}
   - component: {fileID: 23615381697277680}
-  - component: {fileID: 65640741424958272}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -263,24 +284,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65640741424958272
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757037158363252}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.4, y: 1.8, z: 1.3199999}
-  m_Center: {x: 0, y: 0.9, z: 0}
