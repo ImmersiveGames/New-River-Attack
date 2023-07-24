@@ -37,6 +37,7 @@ namespace RiverAttack
                 if (myDifficulty.scoreMod > 0)
                     score *= myDifficulty.scoreMod;
             }
+            if (playerMaster == null) return;
             playerMaster.GetPlayersSettings().score += (int)(score);
         }
         void Log(int score)
