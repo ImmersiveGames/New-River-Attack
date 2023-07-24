@@ -2,13 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 namespace RiverAttack
 {
-    public class GameManager : Utils.Singleton<GameManager>
+    public class GameManager : Singleton<GameManager>
     {
         [SerializeField] internal bool isGameOver;
         [SerializeField] internal bool isGameStopped;
         [SerializeField] private bool isGameFinish;
+        [Header("Layer Names")]
+        public LayerMask layerPlayer;
+        public LayerMask layerEnemies;
+        public LayerMask layerCollection;
+        public LayerMask layerWall;
 
         public enum States
         {

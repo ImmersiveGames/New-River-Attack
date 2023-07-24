@@ -30,6 +30,7 @@ namespace RiverAttack
         //public virtual void HitThis(Collider collision, PlayerMaster playerM = null) { }
 
         public virtual void CollectThis(Collider collision) { }
+        
         protected PlayerMaster WhoHit(Collider collision)
         {
             if (collision.GetComponentInParent<PlayerMaster>())
@@ -37,7 +38,7 @@ namespace RiverAttack
                 collision.GetComponentInParent<PlayerMaster>().AddEnemiesHitList(enemiesMaster.enemy);
                 return collision.GetComponentInParent<PlayerMaster>();
             }
-            var ownerShoot = collision.GetComponentInParent<Bullets>().GetOwner();
+            var ownerShoot = collision.GetComponent<Bullets>().GetOwner();
             ownerShoot.AddEnemiesHitList(enemiesMaster.enemy);
             return ownerShoot;
         }

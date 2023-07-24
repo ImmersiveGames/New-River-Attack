@@ -292,9 +292,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGameOver: 0
-  isGamePaused: 0
+  isGameStopped: 0
   isGameFinish: 0
-  states: 1
+  layerPlayer:
+    serializedVersion: 2
+    m_Bits: 256
+  layerEnemies:
+    serializedVersion: 2
+    m_Bits: 8
+  layerCollection:
+    serializedVersion: 2
+    m_Bits: 128
+  layerWall:
+    serializedVersion: 2
+    m_Bits: 64
+  actualGameState: 2
   countdownToStartTimer: 3
   gameSettings: {fileID: 11400000, guid: db36c8f305b070e4286b509243b94647, type: 2}
   gamePlayLog: {fileID: 11400000, guid: d7fdaebbdf1935e419b9e68b0fc7503b, type: 2}

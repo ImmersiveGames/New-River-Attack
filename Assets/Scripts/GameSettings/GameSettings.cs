@@ -11,12 +11,6 @@ namespace RiverAttack
         public int maxContinue;
         public int continues;
 
-        [Header("Layer Names")]
-        public LayerMask layerPlayer;
-        public LayerMask layerEnemies;
-        public LayerMask layerCollection;
-        public LayerMask layerWall;
-
         public enum GameModes { Classic = 0, Mission = 1 }
         [SerializeField, Header("GameModes")]
         GameModes actualGameMode = GameModes.Mission;

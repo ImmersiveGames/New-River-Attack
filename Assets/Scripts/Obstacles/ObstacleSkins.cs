@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace RiverAttack
 {
@@ -21,6 +22,15 @@ namespace RiverAttack
             LoadDefaultSkin();
         }
   #endregion
+
+        protected void SetLayers(LayerMask layerMask)
+        {
+            foreach (var skin in enemiesSkins)
+            {
+                int novoLayer = Mathf.RoundToInt(Mathf.Log(layerMask.value, 2));
+                skin.layer = novoLayer;
+            }
+        }
         private void LoadDefaultSkin()
         {
             m_MyCollider = GetComponent<Collider>();

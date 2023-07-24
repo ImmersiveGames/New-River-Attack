@@ -23,7 +23,7 @@ namespace RiverAttack
         }
         void DetectPlayer()
         {
-            var colliders = ApproachPlayer(GameSettings.instance.layerPlayer);
+            var colliders = ApproachPlayer(GameManager.instance.layerPlayer);
             if (colliders.Length <= 0) return;
             if (m_EnemiesShoot.playerTarget)
                 m_EnemiesShoot.SetTarget(colliders[0].transform);

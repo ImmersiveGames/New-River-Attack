@@ -1,4 +1,5 @@
 ﻿using System;
+using GD.MinMaxSlider;
 using UnityEngine;
 using Utils;
 using Random = UnityEngine.Random;
@@ -9,7 +10,7 @@ namespace RiverAttack
         const double TOLERANCE = 0.10;
         [SerializeField] protected internal float radiusPlayerProximity;
         [SerializeField, Range(.1f, 5)] public float timeToCheck;
-        [SerializeField, Tools.MinMaxRangeAttribute(0f, 10f)] protected internal Tools.FloatRanged randomPlayerDistanceNear;
+        [SerializeField, MinMaxSlider(0f,10f)] protected internal Vector2 randomPlayerDistanceNear;
 
     #region GizmoSettings
         [Header("Gizmo Settings")]
@@ -39,7 +40,7 @@ namespace RiverAttack
             obstacleMovement = GetComponent<ObstacleMovement>();
             if (GetComponent<EnemiesDifficulty>() == null) return;
             m_EnemiesDifficulties = GetComponent<EnemiesDifficulty>();
-            if (radiusPlayerProximity > 0 || randomPlayerDistanceNear.maxValue > 0)
+            if (radiusPlayerProximity > 0 || randomPlayerDistanceNear.y > 0)
             {
                 obstacleMovement.canMove = false;
             }
@@ -51,12 +52,12 @@ namespace RiverAttack
         }
         void ResetPatrol()
         {
-            if (radiusPlayerProximity > 0 || randomPlayerDistanceNear.maxValue > 0)
+            if (radiusPlayerProximity > 0 || randomPlayerDistanceNear.y > 0)
                 obstacleMovement.canMove = false;
         }
         protected float rangePatrol
         {
-            get { return Random.Range(randomPlayerDistanceNear.minValue, randomPlayerDistanceNear.maxValue); }
+            get { return Random.Range(randomPlayerDistanceNear.x, randomPlayerDistanceNear.y); }
         }
 
         protected virtual void ApproachPlayer()
@@ -65,10 +66,10 @@ namespace RiverAttack
         }
         void OnDrawGizmosSelected()
         {
-            if (!(radiusPlayerProximity > 0) && !(randomPlayerDistanceNear.maxValue > 0)) return;
+            if (!(radiusPlayerProximity > 0) && !(randomPlayerDistanceNear.y > 0)) return;
             float radius = radiusPlayerProximity;
-            if (randomPlayerDistanceNear.maxValue > 0)
-                radius = randomPlayerDistanceNear.maxValue;
+            if (randomPlayerDistanceNear.y > 0)
+                radius = randomPlayerDistanceNear.y;
             if (GetComponent<EnemiesDifficulty>() != null && Math.Abs(radiusPlayerProximity - radius) > TOLERANCE)
             {
                 var myDifficulty = GetComponent<EnemiesDifficulty>().GetDifficult(difficultType);

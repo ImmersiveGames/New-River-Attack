@@ -4,7 +4,7 @@ namespace RiverAttack
 {
     public class EnemiesMovement : ObstacleMovement
     {
-        private bool m_AlreadyCol;
+        bool m_AlreadyCol;
 
         #region UnityMethods
         void OnTriggerEnter(Collider other)

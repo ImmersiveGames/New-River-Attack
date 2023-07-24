@@ -158,7 +158,7 @@ namespace RiverAttack
 
         public int HighScorePlayers()
         {
-            if (listPlayer.Count <= 0)  return 0;
+            if (listPlayer is not { Count: > 0 }) return 0;
             int score = 0;
             foreach (var pl in listPlayer.Where(pl => score < pl.GetComponent<PlayerMaster>().GetPlayersSettings().score))
             {

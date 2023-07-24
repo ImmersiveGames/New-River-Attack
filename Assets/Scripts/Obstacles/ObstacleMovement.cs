@@ -4,11 +4,12 @@ namespace RiverAttack
     public abstract class ObstacleMovement : MonoBehaviour
     {
         public bool canMove;
-        [SerializeField]
-        DifficultyList enemiesDifficultyList;
+        /*[SerializeField]
+        DifficultyList enemiesDifficultyList;*/
         [SerializeField]
         protected float moveSpeed;
         public enum Directions { None, Up, Right, Down, Left, Forward, Backward, Free }
+        [SerializeField]
         protected Directions directions;
         protected Vector3 faceDirection;
         [SerializeField]
@@ -41,7 +42,7 @@ namespace RiverAttack
         }
     #endregion
 
-        readonly int m_HighScorePlayer = GamePlayManager.instance.HighScorePlayers();
+        int m_HighScorePlayer;
         private float enemySpeedy { get { return (enemy.enemiesDifficulty.GetDifficult(m_HighScorePlayer).multiplySpeedy > 0) ? movementSpeed * enemy.enemiesDifficulty.GetDifficult(m_HighScorePlayer).multiplySpeedy : movementSpeed; } }
         public Directions moveDirection { get { return directions; } set { directions = value; } }
         public Vector3 moveFree { get { return freeDirection; } set { freeDirection = value; } }
@@ -54,6 +55,7 @@ namespace RiverAttack
         {
             m_StartDirection = directions;
             m_GamePlayManager = GamePlayManager.instance;
+            m_HighScorePlayer = m_GamePlayManager.HighScorePlayers();
             enemyMaster = GetComponent<EnemiesMaster>();
             enemy = enemyMaster.enemy;
             m_StartFreeDirection = freeDirection;
@@ -65,7 +67,7 @@ namespace RiverAttack
         protected virtual void MoveEnemy()
         {
             //Debug.Log("Canmove: "+ canMove + " Move dir: " + moveDirection + " Gameover?: " + gameManager.isGameOver + " Pause: " + gameManager.isPaused + " Destroy: " + enemyMaster.IsDestroyed);
-            if (!canMove || !GamePlayManager.instance.shouldBePlayingGame || directions == Directions.None || enemyMaster.isDestroyed)
+            if (!canMove || !m_GamePlayManager.shouldBePlayingGame || directions == Directions.None || enemyMaster.isDestroyed)
                 return;
             m_EnemyMovement = faceDirection * (enemySpeedy * Time.deltaTime);
             transform.position += m_EnemyMovement;
@@ -75,11 +77,23 @@ namespace RiverAttack
 
         private Vector3 MoveInCurveAnimation()
         {
-            float st = enemyMaster.enemyStartPosition.y - 2;
-            float st2 = enemyMaster.enemyStartPosition.y + 2;
-            float posy = Mathf.Lerp(st, st2, animationCurve.Evaluate(Time.time));
+            float st, st2, modPos;
             var position = transform.position;
-            return new Vector3(position.x, posy, position.y);
+            switch (m_StartDirection)
+            {
+                case Directions.Up or Directions.Down:
+                    st = enemyMaster.enemyStartPosition.y - 2;
+                    st2 = enemyMaster.enemyStartPosition.y + 2;
+                    modPos = Mathf.Lerp(st, st2, animationCurve.Evaluate(Time.time));
+                    return new Vector3(position.x, modPos, position.z);
+                case Directions.Right or Directions.Left:
+                    st = enemyMaster.enemyStartPosition.x - 2;
+                    st2 = enemyMaster.enemyStartPosition.x + 2;
+                    modPos = Mathf.Lerp(st, st2, animationCurve.Evaluate(Time.time));
+                    return new Vector3(modPos, position.y, position.z);
+                default:
+                    return new Vector3(position.x, position.y, position.z);
+            }
         }
 
         private void SetDirection(Directions dir)

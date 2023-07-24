@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RiverAttack
@@ -51,29 +52,23 @@ namespace RiverAttack
         protected virtual void SetInitialReferences()
         {
             gamePlayManager = GamePlayManager.instance;
-            gameObject.layer = GameSettings.instance.layerEnemies;
+            Debug.Log(GameManager.instance.layerEnemies.value);
+            int novoLayer = Mathf.RoundToInt(Mathf.Log(GameManager.instance.layerEnemies.value, 2));
+            gameObject.layer = novoLayer;
         }
 
         void OnInitializeEnemy()
         {
             if (!enemy.canRespawn && isDestroyed)
-                Destroy(this.gameObject, 0.1f);
+                Destroy(gameObject, 0.1f);
             else
             {
                 Utils.Tools.ToggleChildren(this.transform, true);
                 transform.position = enemyStartPosition;
                 isDestroyed = false;
             }
+        }
 
-        }
-        public static void SetTagLayer(IEnumerable<GameObject> objects, int myLayer)
-        {
-            foreach (var t in objects)
-            {
-                t.layer = myLayer;
-            }
-        }
-        
     #region Calls
         public void CallEventDestroyEnemy()
         {

@@ -1,4 +1,5 @@
-﻿namespace RiverAttack
+﻿using UnityEngine;
+namespace RiverAttack
 {
     public class EnemiesSkins : ObstacleSkins
     {
@@ -7,7 +8,7 @@
         void Start()
                 {
                     SetInitialReferences();
-                    EnemiesMaster.SetTagLayer(skins, GameSettings.instance.layerEnemies);
+                    SetLayers(GameManager.instance.layerEnemies);
                     m_EnemiesMaster.CallEventChangeSkin();
                 }
   #endregion

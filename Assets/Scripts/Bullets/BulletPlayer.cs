@@ -31,8 +31,8 @@ namespace RiverAttack
         void OnTriggerEnter(Collider collision)
         {
             if (collision.GetComponentInParent<PlayerMaster>() || collision.GetComponentInParent<Bullets>() ) return;
-            var hitCollectable = (CollectibleScriptable)collision.transform.root.GetComponent<EnemiesMaster>().enemy;
-            if (hitCollectable == null) return;
+            var hitCollectable = collision.transform.GetComponentInParent<EnemiesMaster>();
+            if (hitCollectable == null && hitCollectable.enemy is CollectibleScriptable) return;
             DestroyMe();
         }
         void OnBecameInvisible()

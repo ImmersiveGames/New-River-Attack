@@ -18,14 +18,5 @@ namespace RiverAttack
         public bool canRespawn;
         public bool canDestruct;
         public bool isCheckInPoint;
-
-        public string getName
-        {
-            get
-            {
-                return this.name;
-                // Traduzir o nome
-            }
-        }
     }
 }

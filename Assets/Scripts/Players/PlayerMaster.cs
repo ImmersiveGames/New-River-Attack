@@ -70,12 +70,22 @@ namespace RiverAttack
             m_GameManager = GameManager.instance;
             lastSavePosition = transform.position.z;
         }
-        
+        void Start()
+        {
+            Init();
+        }
   #endregion
-
+        void Init()
+        {
+            isPlayerDead = false;
+            int novoLayer = Mathf.RoundToInt(Mathf.Log(GameManager.instance.layerPlayer.value, 2));
+            gameObject.layer = novoLayer;
+        }
         public void Init(PlayerSettings player, int id)
         {
             isPlayerDead = false;
+            int novoLayer = Mathf.RoundToInt(Mathf.Log(GameManager.instance.layerPlayer.value, 2));
+            gameObject.layer = novoLayer;
             /*idPlayer = id;
             playerSettings = player;
             name = playerSettings.name;
