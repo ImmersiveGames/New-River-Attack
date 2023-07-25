@@ -52,7 +52,6 @@ namespace RiverAttack
         protected virtual void SetInitialReferences()
         {
             gamePlayManager = GamePlayManager.instance;
-            Debug.Log(GameManager.instance.layerEnemies.value);
             int novoLayer = Mathf.RoundToInt(Mathf.Log(GameManager.instance.layerEnemies.value, 2));
             gameObject.layer = novoLayer;
         }

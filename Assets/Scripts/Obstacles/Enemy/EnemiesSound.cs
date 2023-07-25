@@ -1,12 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using RiverAttack;
+﻿using System;
 using UnityEngine;
 namespace RiverAttack
 {
-
     [RequireComponent(typeof(EnemiesMaster))]
-    [RequireComponent(typeof(AudioSource))]
     public class EnemiesSound : MonoBehaviour
     {
 
@@ -34,7 +30,7 @@ namespace RiverAttack
         protected virtual void SetInitialReferences()
         {
             m_EnemyMaster = GetComponent<EnemiesMaster>();
-            audioSource = GetComponent<AudioSource>();
+            audioSource = GetComponentInChildren<AudioSource>();
             m_GamePlayManager = GamePlayManager.instance;
         }
         void StopSound()

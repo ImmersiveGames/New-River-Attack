@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using RiverAttack;
 using UnityEditor;
-namespace Utils.Lists.Editor
-{
+
     [CustomEditor(typeof(ObstacleMoveByApproach), true)]
-    public class DropDownDifficulty : UnityEditor.Editor
-    {
+    public class DropDownDifficulty : Editor {
 
         DifficultyList m_EnemyDifficultyList;
         SerializedProperty m_DifficultType;
@@ -30,6 +28,7 @@ namespace Utils.Lists.Editor
             serializedObject.Update();
             GetDropDownDifficult();
             serializedObject.ApplyModifiedProperties();
+            //DrawDefaultInspector();
         }
 
         void SetDropDownDifficult()
@@ -52,4 +51,5 @@ namespace Utils.Lists.Editor
             m_DifficultType.stringValue = m_DifficultList[m_IndexDifficult];
         }
     }
-}
+
+

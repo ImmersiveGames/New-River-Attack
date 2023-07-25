@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace RiverAttack
@@ -43,6 +44,10 @@ namespace RiverAttack
 
         void MovementAnimation(Vector3 pos)
         {
+            if (m_Animator == null)
+            {
+                m_Animator = GetComponentInChildren<Animator>();
+            }
             if (m_Animator == null || string.IsNullOrEmpty(onMove) || !m_Animator.gameObject.activeSelf)
                 return;
             m_Animator.SetBool(onMove, pos.x != 0);

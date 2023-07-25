@@ -40,7 +40,6 @@ namespace RiverAttack
             }
             var ownerShoot = collision.GetComponent<Bullets>().GetOwner();
             if (ownerShoot == null) return new PlayerMaster();
-            Debug.Log(ownerShoot.name);
             ownerShoot.AddEnemiesHitList(enemiesMaster.enemy);
             return ownerShoot;
         }

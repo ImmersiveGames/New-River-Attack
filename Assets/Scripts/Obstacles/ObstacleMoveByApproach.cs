@@ -1,7 +1,6 @@
 ﻿using System;
 using GD.MinMaxSlider;
 using UnityEngine;
-using Utils;
 using Random = UnityEngine.Random;
 namespace RiverAttack
 {

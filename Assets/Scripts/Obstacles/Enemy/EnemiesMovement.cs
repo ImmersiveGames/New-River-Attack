@@ -9,6 +9,7 @@ namespace RiverAttack
         #region UnityMethods
         void OnTriggerEnter(Collider other)
         {
+            
             if (!m_AlreadyCol && !enemyMaster.ignoreWall && other.GetComponentInParent<WallsMaster>())
             {
                 FlipMe();

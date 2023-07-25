@@ -5,7 +5,7 @@ namespace RiverAttack
     {
         EnemiesMaster m_EnemiesMaster;
         #region UNITY METHODS
-        void Start()
+        void Awake()
                 {
                     SetInitialReferences();
                     SetLayers(GameManager.instance.layerEnemies);
