@@ -37,7 +37,9 @@ namespace RiverAttack
         }
         void OnBecameInvisible()
         {
-            Invoke(nameof(DestroyMe), .1f);
+            Debug.Log("On BecameInvisible");
+            //DestroyMe();
+            Invoke(nameof(DestroyMe), .01f);
         }
         #endregion
 
