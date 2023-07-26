@@ -32,12 +32,11 @@ namespace RiverAttack
             
             if (m_EnemiesMaster.enemy == null || m_EnemiesMaster.enemy.enemiesSetDifficultyListSo == null) return;
             DifficultUpdates();
-            
             if (playerApproachRadius != 0) InvokeRepeating(nameof(HasPlayerApproach), 0, timeToCheck);
         }
         void OnTriggerEnter(Collider other)
         {
-            if(m_AlreadyCollided || (other.GetComponentInParent<WallsMaster>() && m_EnemiesMaster.ignoreWall)) return;
+            if(m_AlreadyCollided || (other.GetComponentInParent<WallsMaster>() && m_EnemiesMaster.ignoreWall) || (other.GetComponentInParent<EnemiesMaster>() && m_EnemiesMaster.ignoreEnemies)) return;
             
             FlipMe();
         }
@@ -73,17 +72,25 @@ namespace RiverAttack
         }
         void HasPlayerApproach()
         {
-            var results = new Collider[] { };
+            var results = new Collider[5];
             int size = Physics.OverlapSphereNonAlloc(transform.position, playerApproachRadius, results, GameManager.instance.layerPlayer);
-            if (size < 1) return;
-            m_EnemiesMaster.canMove = canMove = true;
+
+            for (int i = 0; i < size; i++)
+            {
+                if (results[i].GetComponent<PlayerMaster>())
+                {
+                    m_EnemiesMaster.canMove = canMove = true;
+                }
+            }
         }
         void DifficultUpdates()
         {
             m_EnemyDifficult = m_EnemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(m_EnemiesMaster.getDifficultName);
-                playerApproachRadius = m_EnemiesMaster.enemy.radiusToApproach * m_EnemyDifficult.multiplyPlayerDistanceRadius;
-                moveVelocity = m_EnemiesMaster.enemy.velocity * m_EnemyDifficult.multiplyEnemiesSpeedy;
+            moveVelocity = m_EnemiesMaster.enemy.velocity * m_EnemyDifficult.multiplyEnemiesSpeedy;
             
+            if (canMoveByApproach == false || (m_EnemiesMaster.enemy.radiusToApproach == 0 || playerApproachRadius == 0)) return;
+            if(m_EnemiesMaster.enemy.radiusToApproach != 0 && m_EnemyDifficult.multiplyPlayerDistanceRadius != 0)
+                playerApproachRadius = m_EnemiesMaster.enemy.radiusToApproach * m_EnemyDifficult.multiplyPlayerDistanceRadius;
         }
 
         float SetPlayerApproachRadius()
@@ -130,5 +137,6 @@ namespace RiverAttack
             enemy.velocity = moveVelocity;
             enemy.radiusToApproach = playerApproachRadius;
         }
+        
     }
 }

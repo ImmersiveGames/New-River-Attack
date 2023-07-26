@@ -52,7 +52,6 @@ namespace RiverAttack
                     var spawnMovement = GetComponent<LevelObstacleSpawnMovement>();
                     obstacleMovement.canMove = spawnMovement.canMove;
                     obstacleMovement.moveVelocity = spawnMovement.moveVelocity;
-                    obstacleMovement.moveDirection = spawnMovement.moveDirection;
                     obstacleMovement.moveFreeDirection = spawnMovement.moveFreeDirection;
                     obstacleMovement.animationCurve = spawnMovement.animationCurve;
                 }

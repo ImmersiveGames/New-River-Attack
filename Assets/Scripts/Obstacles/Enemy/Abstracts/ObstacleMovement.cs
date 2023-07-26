@@ -1,4 +1,5 @@
-﻿using GD.MinMaxSlider;
+﻿using System;
+using GD.MinMaxSlider;
 using UnityEngine;
 using Utils;
 namespace RiverAttack
@@ -8,10 +9,10 @@ namespace RiverAttack
         [SerializeField]
         protected internal bool canMove;
         [SerializeField] bool isMoving;
+        [SerializeField]
+        protected internal bool canMoveByApproach;
         
         [SerializeField] internal float moveVelocity;
-        [SerializeField]
-        internal Vector3 moveDirection;
         public enum Directions { None, Up, Right, Down, Left, Forward, Backward, Free }
         [SerializeField]
         protected internal Directions directions;
@@ -25,15 +26,25 @@ namespace RiverAttack
         [SerializeField]
         protected internal AnimationCurve animationCurve;
         [Header("Start Move By Player Approach")]
+        [Tooltip("If the enemy has versions with and without player approach, it is recommended to use a different Enemy SO.")]
         [SerializeField] protected internal float playerApproachRadius;
         [SerializeField, Range(.1f, 5)] public float timeToCheck = 2f;
-        [SerializeField, MinMaxSlider(0f,10f)] protected internal Vector2 playerApproachRadiusRandom;
+        [SerializeField, MinMaxSlider(0f,20f)] protected internal Vector2 playerApproachRadiusRandom;
 
         #region GizmoSettings
         [Header("Gizmo Settings")]
         [SerializeField]
         Color gizmoColor = new Color(255, 0, 0, 150);
         #endregion
+
+        Directions startDirection;
+
+        #region UNITYMETHODS
+        void Awake()
+        {
+            startDirection = directions;
+        }
+  #endregion
         
         public void Move(Vector3 direction, float velocity)
         {
@@ -68,11 +79,13 @@ namespace RiverAttack
             return canMove;
         }
 
-        public void ResetMovement()
+        public virtual void ResetMovement()
         {
-            directions = Directions.None;
+            canMove = playerApproachRadius == 0 && playerApproachRadiusRandom == Vector2.zero;
+            isMoving = false;
+            directions = startDirection;
             facingDirection = SetDirection(directions);
-            canMove = playerApproachRadius != 0 || playerApproachRadiusRandom != Vector2.zero;
+            
         }
         private protected Vector3 SetDirection(Directions dir)
         {
