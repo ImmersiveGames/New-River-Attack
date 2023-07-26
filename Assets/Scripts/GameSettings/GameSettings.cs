@@ -10,7 +10,6 @@ namespace RiverAttack
         public float autoMovement;
         public int maxContinue;
         public int continues;
-
         public enum GameModes { Classic = 0, Mission = 1 }
         [SerializeField, Header("GameModes")]
         GameModes actualGameMode = GameModes.Mission;

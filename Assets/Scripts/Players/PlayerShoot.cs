@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utils;
@@ -15,6 +16,8 @@ namespace RiverAttack
         GameObject bullet;
         [SerializeField]
         int startPool;
+        [SerializeField]
+        bool autoShoot;
 
         //private ControllerMap controllerMap;
         float m_NextShoot;
@@ -22,7 +25,17 @@ namespace RiverAttack
         GamePlayManager m_GamePlayManager;
         PlayerMaster m_PlayerMaster;
         PlayerSettings m_PlayerSettings;
+        PlayersInputActions m_PlayersInputActions;
        #region UNITY METHODS
+        void Awake()
+        {
+            m_PlayersInputActions = new PlayersInputActions();
+        }
+        void Start()
+        {
+            m_PlayersInputActions = m_PlayerMaster.playersInputActions;
+            m_PlayersInputActions.Player.Shoot.performed += Execute;
+        }
         void OnEnable()
         {
             SetInitialReferences();
@@ -30,7 +43,7 @@ namespace RiverAttack
         }
         void FixedUpdate()
         {
-            this.Execute();
+            if(autoShoot) Execute();
         }
   #endregion
         
@@ -39,7 +52,6 @@ namespace RiverAttack
             m_GamePlayManager = GamePlayManager.instance;
             m_PlayerMaster = GetComponent<PlayerMaster>();
             m_PlayerSettings = m_PlayerMaster.GetPlayersSettings();
-            
         }
         
         public void Execute()
@@ -47,7 +59,6 @@ namespace RiverAttack
             if (!m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.ShouldPlayerBeReady())
                 return;
             m_ShootCadence -= Time.deltaTime;
-            //Debug.Log("SHOOT Cadenciado:" + m_shootCadence);
             if (!(m_ShootCadence <= 0))
                 return;
             m_PlayerMaster.CallEventPlayerShoot();
@@ -57,13 +68,14 @@ namespace RiverAttack
         }
         public void Execute(InputAction.CallbackContext callbackContext)
         {
-            throw new System.NotImplementedException();
+            if (!m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.ShouldPlayerBeReady())
+                return;
+            m_PlayerMaster.CallEventPlayerShoot();
+            Fire();
         }
         void Fire()
         {
             m_MyShoot = PoolObjectManager.GetObject(this);
-            //double sp = Firebase.RemoteConfig.FirebaseRemoteConfig.GetValue("player_speed_shoot").DoubleValue;
-            //m_MyShoot.GetComponent<BulletPlayer>().SetSpeedShoot(sp);
             m_MyShoot.transform.parent = null;
             m_MyShoot.GetComponent<BulletPlayer>().ownerShoot = m_PlayerMaster;
             var transform1 = transform;

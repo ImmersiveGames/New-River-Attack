@@ -15,7 +15,7 @@ namespace RiverAttack
         public LayerMask layerEnemies;
         public LayerMask layerCollection;
         public LayerMask layerWall;
-
+        
         public enum States
         {
             Menu,
@@ -26,23 +26,18 @@ namespace RiverAttack
             Results,
             Credits
         }
+        [Header("Game States")]
         [SerializeField]
         States actualGameState;
         [SerializeField]
         float countdownToStartTimer = 3f;
-
+        [Header("Game Settings")]
         [SerializeField]
         GameSettings gameSettings;
-
         [SerializeField]
         public GamePlaySettings gamePlayLog;
-
         [SerializeField]
-        public List<Levels> levelsFinish = new List<Levels>();
-        [SerializeField]
-        public Levels actualLevel;
-        [SerializeField]
-        private PlayerSettings[] numPlayer;
+        protected internal PlayerSettings[] playerStateAvailableArray;
         private Dictionary<string, object> m_GameplayDefault = new Dictionary<string, object>();
 
         //private GameManagerSaves gameSaves;
@@ -159,7 +154,7 @@ namespace RiverAttack
 
         public PlayerSettings GetFirstPlayer(int num = 0)
         {
-            return numPlayer[num];
+            return playerStateAvailableArray[num];
         }
         /*private void OnDisable()
         {

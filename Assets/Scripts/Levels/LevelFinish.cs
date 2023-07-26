@@ -4,23 +4,19 @@ namespace RiverAttack
 {
     public class LevelFinish : MonoBehaviour
     {
-        GameSettings m_GameSettings;
-        GameManager m_GameManager;
-        GamePlayManager m_GamePlay;
+        GamePlayManager m_GamePlayManager;
         #region UNITY METHODS
         void OnEnable()
         {
-            m_GamePlay = GamePlayManager.instance;
-            m_GameManager = GameManager.instance;
-            m_GameSettings = GameSettings.instance;
+            m_GamePlayManager = GamePlayManager.instance;
         }
 
         void OnTriggerEnter(Collider other)
         {
             if (other.GetComponent<PlayerMaster>() == null) return;
-            if (!m_GameManager.levelsFinish.Contains(m_GameManager.actualLevel))
-                m_GameManager.levelsFinish.Add(m_GameManager.actualLevel);
-            m_GamePlay.CallEventCompletePath();
+            if (!m_GamePlayManager.levelsFinish.Contains(m_GamePlayManager.actualLevel))
+                m_GamePlayManager.levelsFinish.Add(m_GamePlayManager.actualLevel);
+            m_GamePlayManager.CallEventCompletePath();
         }
   #endregion
         

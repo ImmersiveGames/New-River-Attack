@@ -62,11 +62,12 @@ MonoBehaviour:
   gamePaused: 0
   completePath: 0
   godMode: 0
+  levelsFinish: []
   actualLevel: {fileID: 0}
   classicLevel: {fileID: 0}
-  numPlayers:
-  - {fileID: 11400000, guid: c11a8f0b743164845ab2754709110c91, type: 2}
+  activePlayerStatesArray: []
   prefabPlayer: {fileID: 409879802783298609, guid: 060c0640ee0816b46994f8281ca9b242, type: 3}
+  playersMasterList: []
 --- !u!1 &2401987901429398255
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,9 +311,8 @@ MonoBehaviour:
   countdownToStartTimer: 3
   gameSettings: {fileID: 11400000, guid: db36c8f305b070e4286b509243b94647, type: 2}
   gamePlayLog: {fileID: 11400000, guid: d7fdaebbdf1935e419b9e68b0fc7503b, type: 2}
-  levelsFinish: []
-  actualLevel: {fileID: 0}
-  numPlayer: []
+  playerStateAvailableArray:
+  - {fileID: 11400000, guid: c11a8f0b743164845ab2754709110c91, type: 2}
 --- !u!114 &6121206031495218800
 MonoBehaviour:
   m_ObjectHideFlags: 0

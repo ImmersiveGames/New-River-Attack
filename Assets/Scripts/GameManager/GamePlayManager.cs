@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 namespace RiverAttack
 {
@@ -16,17 +13,16 @@ namespace RiverAttack
         bool completePath;
         [SerializeField]
         bool godMode;
-        [SerializeField]
-        Levels actualLevel;
-
         public bool getGodMode { get { return godMode; } }
         public bool isGamePause { get { return gamePaused; } }
         public bool isGameBeat { get { return gameBeat; } }
 
         [Header("Level Settings"), SerializeField]
-        Levels classicLevel;
+        public List<Levels> levelsFinish = new List<Levels>();
         [SerializeField]
-        PlayerSettings[] numPlayers;
+        public Levels actualLevel;
+        [SerializeField]
+        Levels classicLevel;
         [SerializeField]
         GameObject prefabPlayer;
         public List<GameObject> listPlayer { get;
@@ -34,7 +30,6 @@ namespace RiverAttack
 
         public List<PlayerMaster> playersMasterList;
         int m_ActualPath;
-        //Dictionary<string, object> m_GameplayDefault = new Dictionary<string, object>();
 
         GameManager m_GameManager;
         GameSettings m_GameSettings;
@@ -79,8 +74,8 @@ namespace RiverAttack
             if (actualLevel != null)
             {
                 levelRoot.name = actualLevel.levelName;
-                m_GameManager.actualLevel.CreateLevel(levelRoot.transform);
-                actualBGM = m_GameManager.actualLevel.startLevelBGM;
+                actualLevel.CreateLevel(levelRoot.transform);
+                actualBGM = actualLevel.startLevelBGM;
                 m_GamePlayAudio.PlayBGM(actualBGM); 
             }
             //SpawnPlayers(numPlayers.Length);
@@ -123,7 +118,7 @@ namespace RiverAttack
                 listPlayer.Add(Instantiate(prefabPlayer));
                 listPlayer[i].SetActive(true);
                 listPlayer[i].name = "Player" + i;
-                listPlayer[i].GetComponent<PlayerMaster>().Init(this.numPlayers[i], i);
+                listPlayer[i].GetComponent<PlayerMaster>().Init(m_GameManager.playerStateAvailableArray[i], i);
             }
         }
         public PlayerMaster GetPlayerMasterByMultiPlayerId(int id)
