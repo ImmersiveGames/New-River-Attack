@@ -67,11 +67,13 @@ namespace RiverAttack
             playersInputActions.Enable();
             enemiesHitList = new List<EnemiesResults>();
             playerMovementStatus = MovementStatus.Paused;
+            m_GamePlayManager = GamePlayManager.instance;
+            m_GamePlayManager.AddPlayerToGamePlayManager(this);
             lastSavePosition = transform.position.z;
         }
         void Start()
         {
-            m_GamePlayManager = GamePlayManager.instance;
+            
             Init();
         }
   #endregion
@@ -80,7 +82,6 @@ namespace RiverAttack
             isPlayerDead = false;
             int novoLayer = Mathf.RoundToInt(Mathf.Log(GameManager.instance.layerPlayer.value, 2));
             gameObject.layer = novoLayer;
-            m_GamePlayManager.AddPlayerToGamePlayManager(this);
         }
         public void Init(PlayerSettings player, int id)
         {
