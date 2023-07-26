@@ -46,6 +46,15 @@ namespace RiverAttack
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""14f96e93-972b-4dd8-afb8-4db285b0092e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -217,7 +226,7 @@ namespace RiverAttack
                 {
                     ""name"": """",
                     ""id"": ""8f32df7a-8ab0-4c27-80ee-1c90447aa4f3"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mobile"",
@@ -233,6 +242,28 @@ namespace RiverAttack
                     ""processors"": """",
                     ""groups"": ""Mobile"",
                     ""action"": ""Bomb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""48ca84ef-a25e-466e-b3c9-ee00eb606c23"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile;PC"",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b0934bcf-47ed-4866-a5fb-ed3ffee80723"",
+                    ""path"": ""<Keyboard>/n"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -278,6 +309,7 @@ namespace RiverAttack
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Bomb = m_Player.FindAction("Bomb", throwIfNotFound: true);
+            m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -341,12 +373,14 @@ namespace RiverAttack
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Bomb;
+        private readonly InputAction m_Player_Shoot;
         public struct PlayerActions
         {
             private @PlayersInputActions m_Wrapper;
             public PlayerActions(@PlayersInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Player_Move;
             public InputAction @Bomb => m_Wrapper.m_Player_Bomb;
+            public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -362,6 +396,9 @@ namespace RiverAttack
                 @Bomb.started += instance.OnBomb;
                 @Bomb.performed += instance.OnBomb;
                 @Bomb.canceled += instance.OnBomb;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -372,6 +409,9 @@ namespace RiverAttack
                 @Bomb.started -= instance.OnBomb;
                 @Bomb.performed -= instance.OnBomb;
                 @Bomb.canceled -= instance.OnBomb;
+                @Shoot.started -= instance.OnShoot;
+                @Shoot.performed -= instance.OnShoot;
+                @Shoot.canceled -= instance.OnShoot;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -411,6 +451,7 @@ namespace RiverAttack
         {
             void OnMove(InputAction.CallbackContext context);
             void OnBomb(InputAction.CallbackContext context);
+            void OnShoot(InputAction.CallbackContext context);
         }
     }
 }
