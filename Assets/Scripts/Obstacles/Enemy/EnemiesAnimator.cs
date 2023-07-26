@@ -66,10 +66,12 @@ namespace RiverAttack
 
         void ResetAnimation()
         {
-            if (m_Animator != null && !string.IsNullOrEmpty(onMove))
+            Debug.Log("RESET ANIMATON: "+ m_Animator);
+            if (m_Animator == null) return;
+            if(!string.IsNullOrEmpty(onMove))
                 m_Animator.SetBool(onMove, false);
-            if (m_Animator != null && !string.IsNullOrEmpty(onFlip))
-                m_Animator.SetBool(onFlip, false);
+            if(!string.IsNullOrEmpty(onMove))
+                m_Animator.SetBool(onMove, false);
         }
 
         void ExplodeAnimation()

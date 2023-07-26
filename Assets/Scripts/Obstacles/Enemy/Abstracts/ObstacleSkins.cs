@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace RiverAttack
@@ -12,16 +13,10 @@ namespace RiverAttack
         protected GameObject[] skins;
         GameObject m_ObstacleSkin;
 
-        Collider m_MyCollider;
+        //Collider m_MyCollider;
 
         public int indexSkin { get { return indexStartSkin; } set { indexStartSkin = value; } }
         public GameObject[] enemiesSkins { get { return skins; } set { skins = value; } }
-#region UNITY METHODS
-        void OnEnable()
-        {
-            LoadDefaultSkin();
-        }
-  #endregion
 
         protected void SetLayers(LayerMask layerMask)
         {
@@ -31,9 +26,9 @@ namespace RiverAttack
                 skin.layer = novoLayer;
             }
         }
-        private void LoadDefaultSkin()
+        private protected void LoadDefaultSkin()
         {
-            m_MyCollider = GetComponent<Collider>();
+            //m_MyCollider = GetComponent<Collider>();
             if (skins == null)  return;
             indexStartSkin = 0;
             if (randomSkin && skins.Length > 1)
@@ -46,11 +41,14 @@ namespace RiverAttack
                 DestroyImmediate(transform.GetChild(0).gameObject);
             var go = Instantiate(m_ObstacleSkin, transform);
             go.transform.SetAsFirstSibling();
-            var goCollider = go.GetComponentInChildren<Collider>();
+            //go.transform.position = Vector3.zero;
+            //go.transform.rotation = quaternion.identity;
+            /*var goCollider = go.GetComponentInChildren<Collider>();
             if ((m_MyCollider && goCollider) && (m_MyCollider != goCollider))
             {
                 Utils.Tools.CopyComponent<Collider>(goCollider, gameObject);
-            }
+            }*/
         }
+        
     }
 }

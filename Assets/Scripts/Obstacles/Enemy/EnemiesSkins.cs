@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 namespace RiverAttack
 {
     public class EnemiesSkins : ObstacleSkins
     {
         EnemiesMaster m_EnemiesMaster;
+        GamePlayManager m_GamePlayManager;
         #region UNITY METHODS
         void Awake()
                 {
@@ -11,10 +13,27 @@ namespace RiverAttack
                     SetLayers(GameManager.instance.layerEnemies);
                     m_EnemiesMaster.CallEventChangeSkin();
                 }
+        void OnEnable()
+        {
+            m_GamePlayManager = GamePlayManager.instance;
+            LoadDefaultSkin();
+            m_GamePlayManager.EventResetEnemies += ResetSkinPosition;
+        }
+        void OnDisable()
+        {
+            m_GamePlayManager.EventResetEnemies -= ResetSkinPosition;
+        }
   #endregion
         void SetInitialReferences()
         {
             m_EnemiesMaster = GetComponent<EnemiesMaster>();
+        }
+        void ResetSkinPosition()
+        {
+            var go = transform.GetChild(0);
+            var transform1 = go.transform;
+            transform1.localPosition = Vector3.zero;
+            transform1.localRotation = Quaternion.identity;
         }
     }
 }

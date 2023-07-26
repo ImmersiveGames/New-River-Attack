@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Utils;
 using Random = UnityEngine.Random;
 
 namespace RiverAttack
@@ -14,6 +15,7 @@ namespace RiverAttack
         GamePlayManager m_GamePlayManager;
         EnemiesMaster m_EnemiesMaster;
         EnemiesSetDifficulty m_EnemyDifficult;
+        PlayerDetectApproach m_PlayerDetectApproach;
         
         #region UNITYMETHODS
         void OnEnable()
@@ -32,7 +34,9 @@ namespace RiverAttack
             
             if (m_EnemiesMaster.enemy == null || m_EnemiesMaster.enemy.enemiesSetDifficultyListSo == null) return;
             DifficultUpdates();
+            
             if (playerApproachRadius != 0) InvokeRepeating(nameof(HasPlayerApproach), 0, timeToCheck);
+            
         }
         void OnTriggerEnter(Collider other)
         {
@@ -71,19 +75,13 @@ namespace RiverAttack
         {
             m_EnemiesMaster = GetComponent<EnemiesMaster>();
             m_GamePlayManager = GamePlayManager.instance;
+            
         }
         void HasPlayerApproach()
         {
-            var results = new Collider[5];
-            int size = Physics.OverlapSphereNonAlloc(transform.position, playerApproachRadius, results, GameManager.instance.layerPlayer);
-
-            for (int i = 0; i < size; i++)
-            {
-                if (results[i].GetComponent<PlayerMaster>())
-                {
-                    m_EnemiesMaster.canMove = canMove = true;
-                }
-            }
+            m_PlayerDetectApproach ??= new PlayerDetectApproach(transform.position, playerApproachRadius);
+            m_PlayerDetectApproach.UpdatePatrolDistance(playerApproachRadius);
+            m_EnemiesMaster.canMove = canMove = m_PlayerDetectApproach.TargetApproach<PlayerMaster>(GameManager.instance.layerPlayer);
         }
         void DifficultUpdates()
         {
