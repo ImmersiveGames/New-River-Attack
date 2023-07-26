@@ -36,8 +36,10 @@ namespace RiverAttack
         }
         void OnTriggerEnter(Collider other)
         {
-            if(m_AlreadyCollided || (other.GetComponentInParent<WallsMaster>() && m_EnemiesMaster.ignoreWall) || (other.GetComponentInParent<EnemiesMaster>() && m_EnemiesMaster.ignoreEnemies)) return;
-            
+            if(m_AlreadyCollided || (other.GetComponentInParent<WallsMaster>() && m_EnemiesMaster.ignoreWall) || 
+               (other.GetComponentInParent<EnemiesMaster>() && m_EnemiesMaster.ignoreEnemies) || 
+            other.GetComponentInParent<PlayerMaster>()) return;
+
             FlipMe();
         }
         void LateUpdate()

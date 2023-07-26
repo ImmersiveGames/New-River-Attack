@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: particlePrefab
       value: 
       objectReference: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7, type: 3}
+    - target: {fileID: 578047918151501529, guid: b3916f5e457547a45b308806424048bb, type: 3}
+      propertyPath: timeoutDestroy
+      value: 1.3
+      objectReference: {fileID: 0}
     - target: {fileID: 945441580871462752, guid: b3916f5e457547a45b308806424048bb, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -60,10 +64,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: AirCraft_P_1101
       objectReference: {fileID: 0}
+    - target: {fileID: 5098405757653915416, guid: b3916f5e457547a45b308806424048bb, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 11400000, guid: 1b28244012c900c4ea639acd1a9f7b54, type: 2}
+    - target: {fileID: 5098405757653915416, guid: b3916f5e457547a45b308806424048bb, type: 3}
+      propertyPath: ignoreWall
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5098405757653915416, guid: b3916f5e457547a45b308806424048bb, type: 3}
+      propertyPath: ignoreEnemies
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6421188239924259748, guid: b3916f5e457547a45b308806424048bb, type: 3}
       propertyPath: enemyExplodeAudio
       value: 
       objectReference: {fileID: 11400000, guid: 999c3629fff6df6419914d2e2384598c, type: 2}
+    - target: {fileID: 8040410916055668558, guid: b3916f5e457547a45b308806424048bb, type: 3}
+      propertyPath: canMove
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040410916055668558, guid: b3916f5e457547a45b308806424048bb, type: 3}
+      propertyPath: directions
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040410916055668558, guid: b3916f5e457547a45b308806424048bb, type: 3}
+      propertyPath: moveVelocity
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040410916055668558, guid: b3916f5e457547a45b308806424048bb, type: 3}
+      propertyPath: moveFreeDirection.x
+      value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040410916055668558, guid: b3916f5e457547a45b308806424048bb, type: 3}
+      propertyPath: moveFreeDirection.z
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

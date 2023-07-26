@@ -35,7 +35,8 @@ namespace RiverAttack
         {
             m_MyCollider = GetComponent<Collider>();
             if (skins == null)  return;
-            if (randomSkin)
+            indexStartSkin = 0;
+            if (randomSkin && skins.Length > 1)
                 indexStartSkin = UnityEngine.Random.Range(0, skins.Length);
             if (skins[indexStartSkin] == m_ObstacleSkin)  return;
             

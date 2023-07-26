@@ -136,6 +136,15 @@ namespace RiverAttack
             }
         }
         #endregion
+
+        public PlayerSettings getPlayerSettings
+        {
+            get
+            {
+                return numPlayers[0];
+            }
+        }
+        
         public Levels GetActualLevel()
         {
             return actualLevel;
