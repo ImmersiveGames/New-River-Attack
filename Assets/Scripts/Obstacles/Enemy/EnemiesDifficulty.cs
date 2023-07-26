@@ -5,14 +5,14 @@ namespace RiverAttack
     public sealed class EnemiesDifficulty : MonoBehaviour
     {
         EnemiesMaster m_EnemyMaster;
-        DifficultyList m_EnemiesDifficulty;
-        public EnemySetDifficulty myDifficulty { get; private set; }
+        EnemiesSetDifficultyListSo m_EnemiesSetDifficultList;
+        public EnemiesSetDifficulty myDifficulty { get; private set; }
 
         #region UNITY METHODS
         void Awake()
         {
-            if (m_EnemiesDifficulty != null)
-                myDifficulty = m_EnemiesDifficulty.difficultiesList[0];
+            if (m_EnemiesSetDifficultList != null)
+                myDifficulty = m_EnemiesSetDifficultList.enemiesSetDifficulties[0];
         }
 
         void OnEnable()
@@ -35,28 +35,22 @@ namespace RiverAttack
         void SetInitialReferences()
         {
             m_EnemyMaster = GetComponent<EnemiesMaster>();
-            m_EnemiesDifficulty = m_EnemyMaster.enemy.enemiesDifficulty;
-            if (m_EnemiesDifficulty != null)
-                myDifficulty = m_EnemiesDifficulty.difficultiesList[0];
+            m_EnemiesSetDifficultList = m_EnemyMaster.enemy.enemiesSetDifficultyListSo;
+            if (m_EnemiesSetDifficultList != null)
+                myDifficulty = m_EnemiesSetDifficultList.GetDifficultByEnemyDifficult(m_EnemyMaster.getDifficultName);
         }
         void ChangeDifficulty()
         {
-            if (m_EnemiesDifficulty != null)
+            if (m_EnemiesSetDifficultList != null)
             {
-                myDifficulty = GetDifficult((int)(GamePlayManager.instance.HighScorePlayers()));
+                myDifficulty = m_EnemyMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByScore((int)(GamePlayManager.instance.HighScorePlayers()));
             }
         }
-        public EnemySetDifficulty GetDifficult(string difficultName)
+
+        
+        public EnemiesSetDifficultyListSo GetDifficultList()
         {
-            return m_EnemiesDifficulty.difficultiesList.Find(x => x.name == difficultName);
-        }
-        EnemySetDifficulty GetDifficult(int score)
-        {
-            return m_EnemiesDifficulty.difficultiesList.Find(x => x.scoreToChange >= (score));
-        }
-        public DifficultyList GetDifficultList()
-        {
-            return m_EnemiesDifficulty;
+            return m_EnemiesSetDifficultList;
         }
     }
 }

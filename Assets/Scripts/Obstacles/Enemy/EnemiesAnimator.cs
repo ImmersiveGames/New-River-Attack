@@ -20,16 +20,16 @@ namespace RiverAttack
         {
             SetInitialReferences();
             m_EnemyMaster.EventDestroyEnemy += ExplodeAnimation;
-            m_EnemyMaster.EventMovementEnemy += MovementAnimation;
-            m_EnemyMaster.EventFlipEnemy += FlipAnimation;
+            m_EnemyMaster.EventEnemiesMasterMovement += MovementAnimation;
+            m_EnemyMaster.EventEnemiesMasterFlipEnemies += EnemiesMasterFlipAnimation;
             m_EnemyMaster.EventChangeSkin += SetInitialReferences;
             m_GamePlayManager.EventResetEnemies += ResetAnimation;
         }
         protected virtual void OnDisable()
         {
             m_EnemyMaster.EventDestroyEnemy -= ExplodeAnimation;
-            m_EnemyMaster.EventMovementEnemy -= MovementAnimation;
-            m_EnemyMaster.EventFlipEnemy -= FlipAnimation;
+            m_EnemyMaster.EventEnemiesMasterMovement -= MovementAnimation;
+            m_EnemyMaster.EventEnemiesMasterFlipEnemies -= EnemiesMasterFlipAnimation;
             m_EnemyMaster.EventChangeSkin -= SetInitialReferences;
             m_GamePlayManager.EventResetEnemies -= ResetAnimation;
         }
@@ -50,12 +50,16 @@ namespace RiverAttack
             }
             if (m_Animator == null || string.IsNullOrEmpty(onMove) || !m_Animator.gameObject.activeSelf)
                 return;
-            m_Animator.SetBool(onMove, pos.x != 0);
-            //m_Animator.SetFloat(MovimentFloat, pos.x * 10);
+
+            m_Animator.SetBool(onMove, pos != Vector3.zero);
         }
 
-        void FlipAnimation(Vector3 face)
+        void EnemiesMasterFlipAnimation(Vector3 face)
         {
+            if (m_Animator == null)
+            {
+                m_Animator = GetComponentInChildren<Animator>();
+            }
             if (m_Animator != null && !string.IsNullOrEmpty(onFlip))
                 m_Animator.SetBool(onFlip, !m_Animator.GetBool(onFlip));
         }

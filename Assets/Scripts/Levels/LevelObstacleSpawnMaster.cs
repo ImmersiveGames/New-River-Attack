@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -44,7 +43,7 @@ namespace RiverAttack
                 enemy.GetComponent<EnemiesMaster>().ignoreWall = ignoreWall;
                 enemy.GetComponent<EnemiesMaster>().ignoreEnemies = ignoreEnemies;
                 var obstacleMovement = enemy.GetComponent<ObstacleMovement>();
-                var obstacleMoveByApproach = enemy.GetComponent<ObstacleMoveByApproach>();
+                //var obstacleMoveByApproach = enemy.GetComponent<ObstacleMoveByApproach>();
                 var obstacleSkins = enemy.GetComponent<ObstacleSkins>();
                 var obstacleShoot = enemy.GetComponent<ObstacleShoot>();
                 var obstacleDetectApproach = enemy.GetComponent<ObstacleDetectApproach>();
@@ -52,20 +51,20 @@ namespace RiverAttack
                 {
                     var spawnMovement = GetComponent<LevelObstacleSpawnMovement>();
                     obstacleMovement.canMove = spawnMovement.canMove;
-                    obstacleMovement.movementSpeed = spawnMovement.movementSpeed;
+                    obstacleMovement.moveVelocity = spawnMovement.moveVelocity;
                     obstacleMovement.moveDirection = spawnMovement.moveDirection;
-                    obstacleMovement.moveFree = spawnMovement.moveFree;
-                    obstacleMovement.curveMovement = spawnMovement.curveMovement;
+                    obstacleMovement.moveFreeDirection = spawnMovement.moveFreeDirection;
+                    obstacleMovement.animationCurve = spawnMovement.animationCurve;
                 }
-                if (GetComponent<LevelObstacleSpawnMoveApproach>() && obstacleMoveByApproach)
+                /*if (GetComponent<LevelObstacleSpawnMoveApproach>() && obstacleMoveByApproach)
                 {
                     var spawnMoveApproach = GetComponent<LevelObstacleSpawnMoveApproach>();
                     obstacleMoveByApproach.radiusPlayerProximity = spawnMoveApproach.radiusPlayerProximity;
                     obstacleMoveByApproach.timeToCheck = spawnMoveApproach.timeToCheck;
                     obstacleMoveByApproach.difficultType = spawnMoveApproach.difficultType;
                     obstacleMoveByApproach.randomPlayerDistanceNear = spawnMoveApproach.randomPlayerDistanceNear;
-                    obstacleMoveByApproach.enemyDifficultyList = spawnMoveApproach.enemyDifficultyList;
-                }
+                    obstacleMoveByApproach.enemiesEnemiesSetDifficultyListSo = spawnMoveApproach.enemiesEnemiesSetDifficultyListSo;
+                }*/
                 if (GetComponent<LevelObstacleSpawnSkins>() && obstacleSkins)
                 {
                     var spawnSkin = GetComponent<LevelObstacleSpawnSkins>();
@@ -88,7 +87,7 @@ namespace RiverAttack
                     obstacleDetectApproach.radiusPlayerProximity = spawnShootApp.radiusPlayerProximity;
                     obstacleDetectApproach.randomPlayerDistanceNear = spawnShootApp.randomPlayerDistanceNear;
                     obstacleDetectApproach.difficultType = spawnShootApp.difficultType;
-                    obstacleDetectApproach.enemiesDifficultyList = spawnShootApp.enemiesDifficultyList;
+                    obstacleDetectApproach.enemiesesEnemiesSetDifficultyListSo = spawnShootApp.enemiesesEnemiesSetDifficultyListSo;
                     var enemiesShootApp = (EnemiesShootApproach)obstacleDetectApproach;
                     enemiesShootApp.timeToCheck = spawnShootApp.timeToCheck;
                 }

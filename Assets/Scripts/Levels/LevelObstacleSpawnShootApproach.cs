@@ -18,7 +18,7 @@ namespace RiverAttack
             difficultType = oda.difficultType;
             var enemiesOda = (EnemiesShootApproach)oda;
             timeToCheck = enemiesOda.timeToCheck;
-            enemiesDifficultyList = oda.enemiesDifficultyList;
+            enemiesesEnemiesSetDifficultyListSo = oda.enemiesesEnemiesSetDifficultyListSo;
         }
     }
 }

@@ -17,12 +17,13 @@ namespace RiverAttack
     #region GizmoSettings
         [Header("Gizmo Settings")]
         [SerializeField]
-        public DifficultyList enemiesDifficultyList;
+        public EnemiesSetDifficultyListSo enemiesesEnemiesSetDifficultyListSo;
         [HideInInspector]
-        public string difficultType;
+        public EnemiesSetDifficulty.EnemyDifficult difficultType;
         [SerializeField]
         Color gizmoColor = new Color(255, 0, 0, 150);
     #endregion
+        EnemiesMaster m_EnemiesMaster;
 
         EnemiesDifficulty m_EnemiesDifficulties;
         float m_PlayerDistance;
@@ -38,6 +39,8 @@ namespace RiverAttack
         }
         protected virtual void SetInitialReferences()
         {
+            m_EnemiesMaster = GetComponent<EnemiesMaster>();
+            difficultType = m_EnemiesMaster.getDifficultName;
             if (GetComponent<EnemiesDifficulty>() != null)
                 m_EnemiesDifficulties = GetComponent<EnemiesDifficulty>();
         }
@@ -53,7 +56,7 @@ namespace RiverAttack
 
         float GetPlayerDistance()
         {
-            return (m_EnemiesDifficulties.myDifficulty.multiplyPlayerDistance > 0) ? radiusPlayerProximity * m_EnemiesDifficulties.myDifficulty.multiplyPlayerDistance : radiusPlayerProximity;
+            return (m_EnemiesDifficulties.myDifficulty.multiplyPlayerDistanceRadius > 0) ? radiusPlayerProximity * m_EnemiesDifficulties.myDifficulty.multiplyPlayerDistanceRadius : radiusPlayerProximity;
         }
         void OnDrawGizmosSelected()
         {
@@ -64,8 +67,8 @@ namespace RiverAttack
                 radius = randomPlayerDistanceNear.maxValue;
             if (GetComponent<EnemiesDifficulty>() != null && Math.Abs(radiusPlayerProximity - radius) > TOLERANCE)
             {
-                var myDifficulty = GetComponent<EnemiesDifficulty>().GetDifficult(difficultType);
-                radius *= myDifficulty.multiplyPlayerDistance;
+                var myDifficulty = m_EnemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(difficultType);//GetDifficult(difficultType);
+                radius *= myDifficulty.multiplyPlayerDistanceRadius;
             }
             Gizmos.color = gizmoColor;
             Gizmos.DrawWireSphere(transform.localPosition, radius);

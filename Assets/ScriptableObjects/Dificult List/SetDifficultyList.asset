@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 259bfbf32c4ac37478e71998e1c60310, type: 3}
   m_Name: SetDifficultyList
   m_EditorClassIdentifier: 
-  difficultiesList:
-  - name: Easy
-    scoreMod: 1.5
-    scoreToChange: 100
-    multiplySpeedy: 1
-    multiplyPlayerDistance: 1.3
-  - name: Normal
-    scoreMod: 1
+  enemiesSetDifficulties:
+  - enemyDifficult: 0
+    multiplyScore: 1.5
     scoreToChange: 1000
-    multiplySpeedy: 1.3
-    multiplyPlayerDistance: 1
-  - name: Hard
-    scoreMod: 0.5
-    scoreToChange: 1000
-    multiplySpeedy: 1.5
-    multiplyPlayerDistance: 0.6
+    multiplyEnemiesSpeedy: 0.8
+    multiplyPlayerDistanceRadius: 0.8
+  - enemyDifficult: 1
+    multiplyScore: 1
+    scoreToChange: 10000
+    multiplyEnemiesSpeedy: 1
+    multiplyPlayerDistanceRadius: 1
+  - enemyDifficult: 2
+    multiplyScore: 0.5
+    scoreToChange: 100000
+    multiplyEnemiesSpeedy: 1.5
+    multiplyPlayerDistanceRadius: 2

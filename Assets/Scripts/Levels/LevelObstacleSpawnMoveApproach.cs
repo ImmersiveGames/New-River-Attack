@@ -2,7 +2,7 @@
 
 namespace RiverAttack
 {
-    [RequireComponent(typeof(LevelObstacleSpawnMaster))]
+    /*[RequireComponent(typeof(LevelObstacleSpawnMaster))]
     public class LevelObstacleSpawnMoveApproach : ObstacleMoveByApproach
     {
         LevelObstacleSpawnMaster m_SpawnMaster;
@@ -17,7 +17,7 @@ namespace RiverAttack
             timeToCheck = obstacleMoveByApproach.timeToCheck;
             difficultType = obstacleMoveByApproach.difficultType;
             randomPlayerDistanceNear = obstacleMoveByApproach.randomPlayerDistanceNear;
-            enemyDifficultyList = obstacleMoveByApproach.enemyDifficultyList;
+            enemiesEnemiesSetDifficultyListSo = obstacleMoveByApproach.enemiesEnemiesSetDifficultyListSo;
         }
-    }
+    }*/
 }

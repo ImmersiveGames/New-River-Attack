@@ -3,8 +3,10 @@ namespace  Utils
 {
     public interface IMove
     {
-        void Move(Vector3 directionV3);
-        bool ShouldMove();
+        abstract void Move(Vector3 direction, float velocity);
+        abstract void StopMove();
+        abstract bool ShouldMoving();
+        abstract void ResetMovement();
     }
 }
 

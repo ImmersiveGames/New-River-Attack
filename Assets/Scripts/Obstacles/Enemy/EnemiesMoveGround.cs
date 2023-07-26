@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿/*
+using UnityEngine;
 namespace RiverAttack
 {
     public class EnemiesMoveGround : ObstacleMove
@@ -62,3 +63,4 @@ namespace RiverAttack
         }
     }
 }
+*/

@@ -11,10 +11,25 @@ namespace RiverAttack
         public bool goalLevel;
         public bool ignoreWall;
         public bool ignoreEnemies;
+        internal bool canMove;
+        [SerializeField]
+        EnemiesSetDifficulty.EnemyDifficult actualDifficultName;
         public Vector3 enemyStartPosition
         {
             get;
             private set;
+        }
+
+        public EnemiesSetDifficulty.EnemyDifficult getDifficultName
+        {
+            get
+            {
+                return actualDifficultName;
+            }
+            private set
+            {
+                actualDifficultName = value;
+            }
         }
 
         private protected GamePlayManager gamePlayManager;
@@ -24,8 +39,8 @@ namespace RiverAttack
         public event GeneralEventHandler EventDestroyEnemy;
         public event GeneralEventHandler EventChangeSkin;
         public delegate void MovementEventHandler(Vector3 pos);
-        public event MovementEventHandler EventMovementEnemy;
-        public event MovementEventHandler EventFlipEnemy;
+        public event MovementEventHandler EventEnemiesMasterMovement;
+        public event MovementEventHandler EventEnemiesMasterFlipEnemies;
         public delegate void EnemyEventHandler(PlayerMaster playerMaster);
         public event EnemyEventHandler EventPlayerDestroyEnemy;
   #endregion
@@ -73,13 +88,13 @@ namespace RiverAttack
         {
             EventDestroyEnemy?.Invoke();
         }
-        public void CallEventMovementEnemy(Vector3 pos)
+        public void CallEventEnemiesMasterMovement(Vector3 pos)
         {
-            EventMovementEnemy?.Invoke(pos);
+            EventEnemiesMasterMovement?.Invoke(pos);
         }
-        public void CallEventFlipEnemy(Vector3 pos)
+        public void CallEventEnemiesMasterFlipEnemies(Vector3 pos)
         {
-            EventFlipEnemy?.Invoke(pos);
+            EventEnemiesMasterFlipEnemies?.Invoke(pos);
         }
         public void CallEventDestroyEnemy(PlayerMaster playerMaster)
         {

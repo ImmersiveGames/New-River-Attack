@@ -34,8 +34,8 @@ namespace RiverAttack
             if (m_EnemyDifficulties != null)
             {
                 var myDifficulty = m_EnemyDifficulties.myDifficulty;
-                if (myDifficulty.scoreMod > 0)
-                    score *= myDifficulty.scoreMod;
+                if (myDifficulty.multiplyScore > 0)
+                    score *= myDifficulty.multiplyScore;
             }
             if (playerMaster == null) return;
             playerMaster.GetPlayersSettings().score += (int)(score);
