@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
-using Utils;
 namespace RiverAttack
 {
-    public class GamePlayManager : Singleton<GamePlayManager>
+    public class GamePlayManager : Utils.Singleton<GamePlayManager>
     {
         [SerializeField]
         bool gameBeat;
@@ -31,6 +31,8 @@ namespace RiverAttack
         GameObject prefabPlayer;
         public List<GameObject> listPlayer { get;
             private set; }
+
+        public List<PlayerMaster> playersMasterList;
         int m_ActualPath;
         //Dictionary<string, object> m_GameplayDefault = new Dictionary<string, object>();
 
@@ -64,6 +66,10 @@ namespace RiverAttack
         public event ShakeCamEventHandle EventShakeCam;
     #endregion
 #region UnityMethods
+        void Awake()
+        {
+            playersMasterList = new List<PlayerMaster>();
+        }
         void OnEnable()
         {
             SetInitialReferences();
@@ -137,13 +143,15 @@ namespace RiverAttack
         }
         #endregion
 
-        public PlayerSettings getPlayerSettings
+        public void AddPlayerToGamePlayManager(PlayerMaster playerMaster)
         {
-            get
-            {
-                return numPlayers[0];
-            }
+            playersMasterList.Add(playerMaster);
         }
+
+        public PlayerMaster GetPlayerMasterByIndex(int indexPlayer)
+        {
+            return playersMasterList[indexPlayer];
+        } 
         
         public Levels GetActualLevel()
         {

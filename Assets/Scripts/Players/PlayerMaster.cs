@@ -18,7 +18,7 @@ namespace RiverAttack
             set; }
         [SerializeField] float lastSavePosition = 0f;
         protected internal PlayersInputActions playersInputActions;
-        GameManager m_GameManager;
+        GamePlayManager m_GamePlayManager;
         
 
     #region SerilizedField
@@ -67,11 +67,11 @@ namespace RiverAttack
             playersInputActions.Enable();
             enemiesHitList = new List<EnemiesResults>();
             playerMovementStatus = MovementStatus.Paused;
-            m_GameManager = GameManager.instance;
             lastSavePosition = transform.position.z;
         }
         void Start()
         {
+            m_GamePlayManager = GamePlayManager.instance;
             Init();
         }
   #endregion
@@ -80,6 +80,7 @@ namespace RiverAttack
             isPlayerDead = false;
             int novoLayer = Mathf.RoundToInt(Mathf.Log(GameManager.instance.layerPlayer.value, 2));
             gameObject.layer = novoLayer;
+            m_GamePlayManager.AddPlayerToGamePlayManager(this);
         }
         public void Init(PlayerSettings player, int id)
         {
