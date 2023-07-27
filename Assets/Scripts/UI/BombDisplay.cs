@@ -11,6 +11,7 @@ namespace RiverAttack
         void Update()
         {
             bombAmoutText.text = "X " + playerSettings.bombs.ToString();
+            Debug.Log("X " + playerSettings.bombs.ToString());
         }
     }
 }

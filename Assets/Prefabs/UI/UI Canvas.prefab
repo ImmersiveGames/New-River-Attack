@@ -248,7 +248,7 @@ RectTransform:
   - {fileID: 6282279622976013208}
   - {fileID: 6678395856819673137}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 7589279630608924514}
   - component: {fileID: 7393504988215981528}
   - component: {fileID: 3198330671607750213}
+  - component: {fileID: 7673336143907879502}
   m_Layer: 5
   m_Name: Score_Text
   m_TagString: Untagged
@@ -453,6 +454,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7673336143907879502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2732210488149335230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3180e32e57753f241aa794ccd6a0bdc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSettings: {fileID: 11400000, guid: c11a8f0b743164845ab2754709110c91, type: 2}
+  scoreText: {fileID: 3198330671607750213}
 --- !u!1 &2850381425011346544
 GameObject:
   m_ObjectHideFlags: 0
