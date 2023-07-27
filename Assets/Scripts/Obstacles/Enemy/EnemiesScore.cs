@@ -41,7 +41,7 @@ namespace RiverAttack
             }
             if (playerMaster == null) return;
             playerMaster.GetPlayersSettings().score += (int)(score);
-            m_GamePlayManager.CallEventUIScore();
+            m_GamePlayManager.CallEventUIScore(playerMaster.GetPlayersSettings().score);
         }
         void Log(int score)
         {

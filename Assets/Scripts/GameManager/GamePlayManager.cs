@@ -48,7 +48,7 @@ namespace RiverAttack
         public event GamePlayManagerEventHandler EventResetEnemies;
         public event GamePlayManagerEventHandler EventResetPlayers;
         public event GamePlayManagerEventHandler EventUICollectable;
-        public event GamePlayManagerEventHandler EventUIScore;
+        
         public delegate void PlayerPositionEventHandler(Vector3 position);
         public event PlayerPositionEventHandler EventCheckPoint;
         public event PlayerPositionEventHandler EventCheckPlayerPosition;
@@ -56,6 +56,8 @@ namespace RiverAttack
         public event PowerUpEventHandler EventRapidFire;
         public delegate void GameManagerRestartPlayer(int lives);
         public event GameManagerRestartPlayer EventRestartPlayer;
+        public delegate void GameManagerUIEventHandler(int value);
+        public event GameManagerUIEventHandler EventUIScore;
         
         public delegate void CollectableEventHandle(CollectibleScriptable collectibles);
         public event CollectableEventHandle EventCollectItem;
@@ -289,9 +291,9 @@ namespace RiverAttack
             EventResetPlayers?.Invoke();
         }
 
-        public void CallEventUIScore()
+        public void CallEventUIScore(int score)
         {
-            EventUIScore?.Invoke();
+            EventUIScore?.Invoke(score);
         }
 
         public void CallEventCheckPoint(Vector3 position)
