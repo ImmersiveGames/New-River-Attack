@@ -7,10 +7,6 @@ namespace RiverAttack
     {
         [HideInInspector]
         public Vector3 shootDirection;
-        [SerializeField]
-        float timeToDestroy;
-
-        GameSettings m_GameSettings;
         Collider m_Collider;
         AudioSource m_AudioSource;
 #region UNITYMETHODS
@@ -19,7 +15,7 @@ namespace RiverAttack
             SetInitialReferences();
             audioShoot.Play(m_AudioSource);
             m_Collider.enabled = true;
-            Invoke(nameof(DisableShoot), timeToDestroy);
+            Invoke(nameof(DisableShoot), lifeTime);
         }
         void FixedUpdate()
         {
@@ -40,7 +36,6 @@ namespace RiverAttack
   #endregion
         void SetInitialReferences()
         {
-            m_GameSettings = GameSettings.instance;
             m_Collider = GetComponent<Collider>();
             m_AudioSource = GetComponent<AudioSource>();
         }

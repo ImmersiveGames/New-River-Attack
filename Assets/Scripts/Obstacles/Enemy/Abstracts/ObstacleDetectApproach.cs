@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using GD.MinMaxSlider;
 using UnityEngine;
 using Utils;
 using Random = UnityEngine.Random;
@@ -8,71 +7,36 @@ namespace RiverAttack
 {
     public abstract class ObstacleDetectApproach : MonoBehaviour
     {
-        [SerializeField]
-        public float radiusPlayerProximity;
-        [SerializeField]
-        [Tools.MinMaxRangeAttribute(0f, 10f)]
-        public Tools.FloatRanged randomPlayerDistanceNear;
+        [Header("Start Move By Player Approach")]
+        [Tooltip("If the enemy has versions with and without player approach, it is recommended to use a different Enemy SO.")]
+        [SerializeField] protected internal float playerApproachRadius;
+        [SerializeField, Range(.1f, 5)] public float timeToCheck = 2f;
+        [SerializeField, MinMaxSlider(0f,20f)] protected internal Vector2 playerApproachRadiusRandom;
 
-    #region GizmoSettings
+        PlayerDetectApproach m_PlayerDetectApproach;
+        
+        #region GizmoSettings
         [Header("Gizmo Settings")]
-        [SerializeField]
-        public EnemiesSetDifficultyListSo enemiesesEnemiesSetDifficultyListSo;
-        [HideInInspector]
-        public EnemiesSetDifficulty.EnemyDifficult difficultType;
-        [SerializeField]
-        Color gizmoColor = new Color(255, 0, 0, 150);
-    #endregion
-        EnemiesMaster m_EnemiesMaster;
+        public Color gizmoColor = new Color(255, 0, 0, 150);
+        #endregion
 
-        EnemiesDifficulty m_EnemiesDifficulties;
-        float m_PlayerDistance;
-
-        float randomRangeDetect
+        protected float randomRangeDetect
         {
-            get { return Random.Range(randomPlayerDistanceNear.minValue, randomPlayerDistanceNear.maxValue); }
+            get { return Random.Range(playerApproachRadiusRandom.x, playerApproachRadiusRandom.y); }
         }
-
-        protected virtual void OnEnable()
+        protected bool FindTarget<T>(LayerMask layer)
         {
-            SetInitialReferences();
+            m_PlayerDetectApproach ??= new PlayerDetectApproach(transform.position, playerApproachRadius);
+            m_PlayerDetectApproach.UpdatePatrolDistance(playerApproachRadius);
+            return m_PlayerDetectApproach.TargetApproach<T>(layer);
         }
-        protected virtual void SetInitialReferences()
-        {
-            m_EnemiesMaster = GetComponent<EnemiesMaster>();
-            difficultType = m_EnemiesMaster.getDifficultName;
-            if (GetComponent<EnemiesDifficulty>() != null)
-                m_EnemiesDifficulties = GetComponent<EnemiesDifficulty>();
-        }
-        [SuppressMessage("ReSharper", "Unity.PreferNonAllocApi")]
-        protected Collider[] ApproachPlayer(LayerMask layerMask)
-        {
-            //implementar no concreto
-            m_PlayerDistance = GetPlayerDistance();
-            if (randomPlayerDistanceNear.maxValue > 0)
-                m_PlayerDistance = randomRangeDetect;
-            return Physics.OverlapSphere(transform.position, m_PlayerDistance, layerMask);
-        }
-
-        float GetPlayerDistance()
-        {
-            return (m_EnemiesDifficulties.myDifficulty.multiplyPlayerDistanceRadius > 0) ? radiusPlayerProximity * m_EnemiesDifficulties.myDifficulty.multiplyPlayerDistanceRadius : radiusPlayerProximity;
-        }
+        
         void OnDrawGizmosSelected()
         {
-            if (!(radiusPlayerProximity > 0) && !(randomPlayerDistanceNear.maxValue > 0))
-                return;
-            float radius = radiusPlayerProximity;
-            if (randomPlayerDistanceNear.maxValue > 0)
-                radius = randomPlayerDistanceNear.maxValue;
-            if (GetComponent<EnemiesDifficulty>() != null && Math.Abs(radiusPlayerProximity - radius) > TOLERANCE)
-            {
-                var myDifficulty = m_EnemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(difficultType);//GetDifficult(difficultType);
-                radius *= myDifficulty.multiplyPlayerDistanceRadius;
-            }
+            if (playerApproachRadius <= 0 && playerApproachRadiusRandom.y <= 0) return;
+            float radius = playerApproachRadius;
             Gizmos.color = gizmoColor;
-            Gizmos.DrawWireSphere(transform.localPosition, radius);
+            Gizmos.DrawWireSphere(center: transform.position, radius);
         }
-        const double TOLERANCE = 0.10;
     }
 }

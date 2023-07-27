@@ -37,7 +37,7 @@ namespace RiverAttack
         [SerializeField]
         public GamePlaySettings gamePlayLog;
         [SerializeField]
-        protected internal PlayerSettings[] playerStateAvailableArray;
+        protected internal List<Transform> playerObjectAvailableList;
         private Dictionary<string, object> m_GameplayDefault = new Dictionary<string, object>();
 
         //private GameManagerSaves gameSaves;
@@ -152,9 +152,15 @@ namespace RiverAttack
             return null;
         }
 
-        public PlayerSettings GetFirstPlayer(int num = 0)
+        public Transform GetActivePlayerTransform(int num = 0)
         {
-            return playerStateAvailableArray[num];
+            return playerObjectAvailableList[num];
+        }
+
+        internal void AddActivePlayerObject(Transform activePlayer)
+        {
+            playerObjectAvailableList.Add(activePlayer);
+            
         }
         /*private void OnDisable()
         {

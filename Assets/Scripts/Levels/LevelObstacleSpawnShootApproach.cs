@@ -10,7 +10,7 @@ namespace RiverAttack
         [ContextMenu("LoadPrefab")]
         private void LoadPrefab()
         {
-            m_SpawnMaster = GetComponent<LevelObstacleSpawnMaster>();
+            /*m_SpawnMaster = GetComponent<LevelObstacleSpawnMaster>();
             var oda = m_SpawnMaster.getPrefab.GetComponent<ObstacleDetectApproach>();
             if (oda == null) return;
             radiusPlayerProximity = oda.radiusPlayerProximity;
@@ -18,7 +18,7 @@ namespace RiverAttack
             difficultType = oda.difficultType;
             var enemiesOda = (EnemiesShootApproach)oda;
             timeToCheck = enemiesOda.timeToCheck;
-            enemiesesEnemiesSetDifficultyListSo = oda.enemiesesEnemiesSetDifficultyListSo;
+            enemiesesEnemiesSetDifficultyListSo = oda.enemiesesEnemiesSetDifficultyListSo;*/
         }
     }
 }

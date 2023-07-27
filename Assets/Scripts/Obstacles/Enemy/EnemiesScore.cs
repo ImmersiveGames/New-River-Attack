@@ -20,7 +20,7 @@ namespace RiverAttack
             m_EnemyMaster.EventPlayerDestroyEnemy -= SetScore;
         }
   #endregion
-        
+
         protected virtual void SetInitialReferences()
         {
             m_EnemyMaster = GetComponent<EnemiesMaster>();
@@ -48,5 +48,6 @@ namespace RiverAttack
             if (score > GamePlaySettings.instance.totalScore)
                 GamePlaySettings.instance.totalScore = score;
         }
+        
     }
 }

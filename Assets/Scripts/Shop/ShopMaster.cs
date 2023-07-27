@@ -59,7 +59,8 @@ namespace Shopping
   #endregion
         void SetInitialReferences()
         {
-            m_ActivePlayer = GameManager.instance.GetFirstPlayer(0);
+            var activePlayer = GameManager.instance.GetActivePlayerTransform(0);
+            m_ActivePlayer = activePlayer.GetComponent<PlayerMaster>().GetPlayersSettings();
             //GameManagerSaves.Instance.LoadPlayer(ref activePlayer);
             //activePlayer.LoadValues();
         }

@@ -19,6 +19,7 @@ namespace RiverAttack
         [SerializeField] float lastSavePosition = 0f;
         protected internal PlayersInputActions playersInputActions;
         GamePlayManager m_GamePlayManager;
+        GameManager m_GameManager;
         
 
     #region SerilizedField
@@ -68,7 +69,9 @@ namespace RiverAttack
             enemiesHitList = new List<EnemiesResults>();
             playerMovementStatus = MovementStatus.Paused;
             m_GamePlayManager = GamePlayManager.instance;
+            m_GameManager = GameManager.instance;
             m_GamePlayManager.AddPlayerToGamePlayManager(this);
+            m_GameManager.AddActivePlayerObject(transform);
             lastSavePosition = transform.position.z;
         }
         void Start()

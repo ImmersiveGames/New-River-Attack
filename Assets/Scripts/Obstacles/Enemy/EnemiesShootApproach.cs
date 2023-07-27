@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using Utils;
 namespace RiverAttack
 {
-    public class EnemiesShootApproach : ObstacleDetectApproach
+    public class EnemiesShootApproach : ObstacleDetectApproach, IShoot
     {
-        [SerializeField]
+        /*[SerializeField]
         float startTime;
         [SerializeField, Range(.1f, 5)]
         public float timeToCheck;
@@ -28,6 +29,18 @@ namespace RiverAttack
             if (m_EnemiesShoot.playerTarget)
                 m_EnemiesShoot.SetTarget(colliders[0].transform);
             m_EnemiesShoot.Fire();
+        }*/
+        public void Fire()
+        {
+            throw new System.NotImplementedException();
+        }
+        public bool ShouldFire()
+        {
+            throw new System.NotImplementedException();
+        }
+        public void SetTarget(Transform toTarget)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -6,7 +6,6 @@ namespace Utils
     public interface IShoot
     {
         void Fire();
-        bool ShouldFire();
         void SetTarget(Transform toTarget);
     }
 }

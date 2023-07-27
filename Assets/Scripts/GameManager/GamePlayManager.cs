@@ -25,7 +25,7 @@ namespace RiverAttack
         Levels classicLevel;
         [SerializeField]
         GameObject prefabPlayer;
-        public List<GameObject> listPlayer { get;
+        public List<Transform> listPlayer { get;
             private set; }
 
         public List<PlayerMaster> playersMasterList;
@@ -110,19 +110,20 @@ namespace RiverAttack
         }
         
         #region Multiplayer
-        public GameObject GetPlayerById(int id)
+        public Transform GetPlayerById(int id)
         {
             return listPlayer[id];
         }
         private void MultiPlayerSpawns(int players)
         {
-            listPlayer = new List<GameObject>();
+            listPlayer = new List<Transform>();
             for (int i = 0; i < players; i++)
             {
-                listPlayer.Add(Instantiate(prefabPlayer));
-                listPlayer[i].SetActive(true);
+                var player = Instantiate(prefabPlayer);
+                listPlayer.Add(player.transform);
+                listPlayer[i].gameObject.SetActive(true);
                 listPlayer[i].name = "Player" + i;
-                listPlayer[i].GetComponent<PlayerMaster>().Init(m_GameManager.playerStateAvailableArray[i], i);
+                //listPlayer[i].GetComponent<PlayerMaster>().Init(m_GameManager.playerObjectAvailableList[i], i);
             }
         }
         public PlayerMaster GetPlayerMasterByMultiPlayerId(int id)

@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-using Utils;
-using Random = UnityEngine.Random;
+﻿using UnityEngine;
 
 namespace RiverAttack
 {
@@ -15,7 +12,7 @@ namespace RiverAttack
         GamePlayManager m_GamePlayManager;
         EnemiesMaster m_EnemiesMaster;
         EnemiesSetDifficulty m_EnemyDifficult;
-        PlayerDetectApproach m_PlayerDetectApproach;
+        
         
         #region UNITYMETHODS
         void OnEnable()
@@ -77,11 +74,9 @@ namespace RiverAttack
             m_GamePlayManager = GamePlayManager.instance;
             
         }
-        void HasPlayerApproach()
+        protected void HasPlayerApproach()
         {
-            m_PlayerDetectApproach ??= new PlayerDetectApproach(transform.position, playerApproachRadius);
-            m_PlayerDetectApproach.UpdatePatrolDistance(playerApproachRadius);
-            m_EnemiesMaster.canMove = canMove = m_PlayerDetectApproach.TargetApproach<PlayerMaster>(GameManager.instance.layerPlayer);
+            m_EnemiesMaster.canMove = canMove = FindTarget<PlayerMaster>(GameManager.instance.layerPlayer);
         }
         void DifficultUpdates()
         {
@@ -96,7 +91,7 @@ namespace RiverAttack
         float SetPlayerApproachRadius()
         {
             if (playerApproachRadiusRandom != Vector2.zero)
-                playerApproachRadius = Random.Range(playerApproachRadiusRandom.x, playerApproachRadiusRandom.y);
+                playerApproachRadius = randomRangeDetect;
            
             return playerApproachRadius;
         }

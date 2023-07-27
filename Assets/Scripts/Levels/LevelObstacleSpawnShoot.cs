@@ -18,14 +18,14 @@ namespace RiverAttack
         void LoadPrefab()
         {
             var spawnMaster = GetComponent<LevelObstacleSpawnMaster>();
-            var obstacleShoot = spawnMaster.getPrefab.GetComponent<ObstacleShoot>();
+            var obstacleShoot = spawnMaster.getPrefab.GetComponent<EnemiesShoot>();
             if (obstacleShoot == null)
                 return;
             bulletSpeedy = obstacleShoot.bulletSpeedy;
             cadenceShoot = obstacleShoot.cadenceShoot;
-            var enemiesShoot = (EnemiesShoot)obstacleShoot;
+            var enemiesShoot = obstacleShoot;
             startPool = enemiesShoot.poolStart;
-            playerTarget = enemiesShoot.playerTarget;
+            playerTarget = enemiesShoot.hasTarget;
         }
     }
 }

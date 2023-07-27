@@ -2,69 +2,94 @@
 using Utils;
 namespace RiverAttack
 {
-    public class EnemiesShoot : ObstacleShoot, IHasPool
+    public class EnemiesShoot : ObstacleDetectApproach, IShoot, IHasPool
     {
-        public int poolStart;
-        public bool playerTarget;
-
-        private EnemiesSkinParts m_SkinPart;
-        Transform m_SpawnPosition;
         PoolObjectManager m_MyPool;
+        [SerializeField]
+        protected internal int poolStart;
+        [SerializeField]
+        protected GameObject prefabShoot;
+        [SerializeField]
+        protected internal bool hasTarget;
+        [SerializeField]
+        protected bool canShoot;
 
+        public enum ShootStatus {Hold, Shoot, Patrol}
+        [SerializeField]
+        ShootStatus enemyShootStatus;
+
+        [Header("Config Bullets")]
+        [SerializeField]
+        protected internal float bulletSpeedy;
+        [SerializeField]
+        protected internal float cadenceShoot;
+        Transform m_SpawnPosition;
+        
         Transform target
         {
             get;
             set;
         }
-
-        #region UNITY METHODS
-        protected override void OnEnable()
+        Renderer m_MyRenderer;
+        GameManager m_GameManager;
+        GamePlayManager m_GamePlayManager;
+        EnemiesMaster m_EnemiesMaster;
+        EnemiesSkinParts m_SkinPart;
+        
+        #region UNITYMETHODS
+        void OnEnable()
         {
-            base.OnEnable();
-            m_SkinPart = GetComponentInChildren<EnemiesSkinParts>();
-            if (!GetComponent<ObstacleDetectApproach>().enabled)
-                InvokeRepeating(nameof(StartFire), 1, cadenceShoot);
+            SetInitialReferences();
+            StartMyPool();
+            /*if (!shootByApproach)
+            {
+                InvokeRepeating(nameof(Fire), 1, cadenceShoot);
+            }*/
         }
         void Start()
         {
-            SetTarget(GamePlayManager.instance.GetPlayerById(0).transform);
-            m_SpawnPosition = GetComponentInChildren<EnemiesShootSpawn>().transform;
-            StartMyPool();
+            SetTarget(GameManager.instance.GetActivePlayerTransform(0));
+            m_SpawnPosition = transform;
         }
-        void FixedUpdate()
+        void LateUpdate()
         {
-            if (m_SkinPart == null || !playerTarget) return;
+            if (!GamePlayManager.instance.shouldBePlayingGame || !m_EnemiesMaster.ShouldEnemyBeReady() || enemyShootStatus != ShootStatus.Shoot || !m_MyRenderer.isVisible) return;
+            /*if (m_SkinPart == null || !hasTarget) return;
             var transform1 = m_SkinPart.transform;
-            m_SkinPart.transform.rotation = Quaternion.Lerp(transform1.rotation, Quaternion.LookRotation(target.position - transform1.position), Time.deltaTime);
+            m_SkinPart.transform.rotation = Quaternion.Lerp(transform1.rotation, Quaternion.LookRotation(target.position - transform1.position), Time.deltaTime);*/
+            Fire();
         }
-  #endregion
-        new void Fire()
+        #endregion
+        void SetInitialReferences()
         {
-            var bullet = PoolObjectManager.GetObject(this);
-            bullet.transform.position = m_SpawnPosition.position;
-            bullet.transform.rotation = m_SpawnPosition.rotation;
-            var enemyBullet = bullet.GetComponent<BulletEnemy>();
-            enemyBullet.shootDirection = Vector3.forward;
-            enemyBullet.shootVelocity = bulletSpeedy;
-            if (playerTarget)
-                enemyBullet.transform.LookAt(target);
+            m_GameManager = GameManager.instance;
+            m_GamePlayManager = GamePlayManager.instance;
+            m_EnemiesMaster = GetComponent<EnemiesMaster>();
+            m_MyRenderer = GetComponentInChildren<Renderer>();
+            m_SkinPart = GetComponentInChildren<EnemiesSkinParts>();
         }
-
-        new void SetTarget(Transform toTarget)
+        public void Fire()
         {
-            target = (playerTarget) ? toTarget : null;
+            Debug.Log("SHOOT");
+                /*if (canShoot)
+                {
+                    var bullet = PoolObjectManager.GetObject(this);
+                    bullet.transform.position = m_SpawnPosition.position;
+                    bullet.transform.rotation = m_SpawnPosition.rotation;
+                    var enemyBullet = bullet.GetComponent<BulletEnemy>();
+                    enemyBullet.shootDirection = Vector3.forward;
+                    enemyBullet.shootVelocity = bulletSpeedy;
+                    if (hasTarget)
+                        enemyBullet.transform.LookAt(target);
+                }*/
         }
-
-        private void StartFire()
+        public void SetTarget(Transform toTarget)
         {
-            if (ShouldFire())
-            {
-                Fire();
-            }
+            target = toTarget;
         }
         public void StartMyPool(bool isPersistent = false)
         {
-            PoolObjectManager.CreatePool(this, prefab, poolStart, m_SpawnPosition, isPersistent);
+            PoolObjectManager.CreatePool(this, prefabShoot, poolStart, transform, isPersistent);
         }
     }
 }

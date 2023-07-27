@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 945441580871462752, guid: b3916f5e457547a45b308806424048bb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 945441580871462752, guid: b3916f5e457547a45b308806424048bb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -65,13 +65,25 @@ PrefabInstance:
       value: Towers
       objectReference: {fileID: 0}
     - target: {fileID: 5098405757653915416, guid: b3916f5e457547a45b308806424048bb, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 11400000, guid: 88ac0375924b0394d9f19e540ecb970d, type: 2}
+    - target: {fileID: 5098405757653915416, guid: b3916f5e457547a45b308806424048bb, type: 3}
       propertyPath: ignoreWall
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5098405757653915416, guid: b3916f5e457547a45b308806424048bb, type: 3}
+      propertyPath: ignoreEnemies
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6421188239924259748, guid: b3916f5e457547a45b308806424048bb, type: 3}
       propertyPath: enemyExplodeAudio
       value: 
       objectReference: {fileID: 11400000, guid: 999c3629fff6df6419914d2e2384598c, type: 2}
+    - target: {fileID: 9200479897418373190, guid: b3916f5e457547a45b308806424048bb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9200479897418373190, guid: b3916f5e457547a45b308806424048bb, type: 3}
       propertyPath: skins.Array.size
       value: 2
@@ -91,13 +103,45 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 945441580871462752, guid: b3916f5e457547a45b308806424048bb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2326666666354670990}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1504127474328815682, guid: b3916f5e457547a45b308806424048bb, type: 3}
+      insertIndex: 6
+      addedObject: {fileID: 7627960496635686587}
   m_SourcePrefab: {fileID: 100100000, guid: b3916f5e457547a45b308806424048bb, type: 3}
 --- !u!4 &72227137675005720 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 945441580871462752, guid: b3916f5e457547a45b308806424048bb, type: 3}
   m_PrefabInstance: {fileID: 873267496251629688}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1783922289016793146 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1504127474328815682, guid: b3916f5e457547a45b308806424048bb, type: 3}
+  m_PrefabInstance: {fileID: 873267496251629688}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7627960496635686587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783922289016793146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b41819c0ad060ce43acdc2d3b8d62e7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerApproachRadius: 0
+  timeToCheck: 2
+  playerApproachRadiusRandom: {x: 0, y: 0}
+  gizmoColor: {r: 255, g: 0, b: 0, a: 150}
+  poolStart: 10
+  prefabShoot: {fileID: 1153674050946406, guid: 96c3e2b69c987b5458ed58e9d0514a6e, type: 3}
+  hasTarget: 0
+  canShoot: 0
+  holdShoot: 0
+  shootByApproach: 0
+  bulletSpeedy: 10
+  cadenceShoot: 1
 --- !u!1001 &5512830077670178839
 PrefabInstance:
   m_ObjectHideFlags: 0

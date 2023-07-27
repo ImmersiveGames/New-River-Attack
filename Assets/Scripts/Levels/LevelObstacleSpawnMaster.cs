@@ -45,7 +45,7 @@ namespace RiverAttack
                 var obstacleMovement = enemy.GetComponent<ObstacleMovement>();
                 //var obstacleMoveByApproach = enemy.GetComponent<ObstacleMoveByApproach>();
                 var obstacleSkins = enemy.GetComponent<ObstacleSkins>();
-                var obstacleShoot = enemy.GetComponent<ObstacleShoot>();
+                var obstacleShoot = enemy.GetComponent<EnemiesShoot>();
                 var obstacleDetectApproach = enemy.GetComponent<ObstacleDetectApproach>();
                 if (GetComponent<LevelObstacleSpawnMovement>() && obstacleMovement)
                 {
@@ -76,11 +76,11 @@ namespace RiverAttack
                     var spawnShoot = GetComponent<LevelObstacleSpawnShoot>();
                     obstacleShoot.bulletSpeedy = spawnShoot.bulletSpeedy;
                     obstacleShoot.cadenceShoot = spawnShoot.cadenceShoot;
-                    var enemiesShoot = (EnemiesShoot)obstacleShoot;
+                    var enemiesShoot = obstacleShoot;
                     enemiesShoot.poolStart = spawnShoot.startPool;
-                    enemiesShoot.playerTarget = spawnShoot.playerTarget;
+                    enemiesShoot.hasTarget = spawnShoot.playerTarget;
                 }
-                if (GetComponent<LevelObstacleSpawnShootApproach>() && obstacleDetectApproach)
+                /*if (GetComponent<LevelObstacleSpawnShootApproach>() && obstacleDetectApproach)
                 {
                     var spawnShootApp = GetComponent<LevelObstacleSpawnShootApproach>();
                     obstacleDetectApproach.radiusPlayerProximity = spawnShootApp.radiusPlayerProximity;
@@ -89,7 +89,7 @@ namespace RiverAttack
                     obstacleDetectApproach.enemiesesEnemiesSetDifficultyListSo = spawnShootApp.enemiesesEnemiesSetDifficultyListSo;
                     var enemiesShootApp = (EnemiesShootApproach)obstacleDetectApproach;
                     enemiesShootApp.timeToCheck = spawnShootApp.timeToCheck;
-                }
+                }*/
             }
             enemy.SetActive(true);
             gameObject.SetActive(false);

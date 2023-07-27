@@ -12,6 +12,11 @@ namespace RiverAttack
         public bool ignoreWall;
         public bool ignoreEnemies;
         internal bool canMove;
+
+        protected internal enum EnemyStatus { Paused, Active }
+        [SerializeField]
+        protected internal EnemyStatus actualEnemyStatus;
+        public bool ShouldEnemyBeReady() => isDestroyed == false && actualEnemyStatus == EnemyStatus.Active;
         [SerializeField]
         EnemiesSetDifficulty.EnemyDifficult actualDifficultName;
         public Vector3 enemyStartPosition
@@ -51,12 +56,17 @@ namespace RiverAttack
             gameObject.name = enemy.name;
 
             enemyStartPosition = transform.position;
+            actualEnemyStatus = EnemyStatus.Paused;
             isDestroyed = false;
         }
         protected virtual void OnEnable()
         {
             SetInitialReferences();
             gamePlayManager.EventResetEnemies += OnInitializeEnemy;
+        }
+        void Start()
+        {
+            actualEnemyStatus = EnemyStatus.Active;
         }
         protected virtual void OnDisable()
         {
@@ -79,6 +89,7 @@ namespace RiverAttack
             {
                 Utils.Tools.ToggleChildren(this.transform, true);
                 transform.position = enemyStartPosition;
+                actualEnemyStatus = EnemyStatus.Active;
                 isDestroyed = false;
             }
         }
@@ -86,6 +97,7 @@ namespace RiverAttack
     #region Calls
         public void CallEventDestroyEnemy()
         {
+            actualEnemyStatus = EnemyStatus.Paused;
             EventDestroyEnemy?.Invoke();
         }
         public void CallEventEnemiesMasterMovement(Vector3 pos)
@@ -98,6 +110,7 @@ namespace RiverAttack
         }
         public void CallEventDestroyEnemy(PlayerMaster playerMaster)
         {
+            actualEnemyStatus = EnemyStatus.Paused;
             EventDestroyEnemy?.Invoke();
             EventPlayerDestroyEnemy?.Invoke(playerMaster);
         }

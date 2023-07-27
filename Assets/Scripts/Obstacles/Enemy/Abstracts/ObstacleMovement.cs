@@ -1,10 +1,8 @@
-﻿using System;
-using GD.MinMaxSlider;
-using UnityEngine;
+﻿using UnityEngine;
 using Utils;
 namespace RiverAttack
 {
-    public abstract class ObstacleMovement : MonoBehaviour,IMove
+    public abstract class ObstacleMovement : ObstacleDetectApproach,IMove
     {
         [SerializeField]
         protected internal bool canMove;
@@ -16,6 +14,7 @@ namespace RiverAttack
         public enum Directions { None, Up, Right, Down, Left, Forward, Backward, Free }
         [SerializeField]
         protected internal Directions directions;
+        Directions m_StartDirection;
         [SerializeField]
         protected internal Vector3 moveFreeDirection;
         protected Vector3 facingDirection;
@@ -25,24 +24,11 @@ namespace RiverAttack
         float m_ElapsedTime = 0f;
         [SerializeField]
         protected internal AnimationCurve animationCurve;
-        [Header("Start Move By Player Approach")]
-        [Tooltip("If the enemy has versions with and without player approach, it is recommended to use a different Enemy SO.")]
-        [SerializeField] protected internal float playerApproachRadius;
-        [SerializeField, Range(.1f, 5)] public float timeToCheck = 2f;
-        [SerializeField, MinMaxSlider(0f,20f)] protected internal Vector2 playerApproachRadiusRandom;
-
-        #region GizmoSettings
-        [Header("Gizmo Settings")]
-        [SerializeField]
-        Color gizmoColor = new Color(255, 0, 0, 150);
-        #endregion
-
-        Directions startDirection;
 
         #region UNITYMETHODS
         void Awake()
         {
-            startDirection = directions;
+            m_StartDirection = directions;
         }
   #endregion
         
@@ -83,7 +69,7 @@ namespace RiverAttack
         {
             canMove = playerApproachRadius == 0 && playerApproachRadiusRandom == Vector2.zero;
             isMoving = false;
-            directions = startDirection;
+            directions = m_StartDirection;
             facingDirection = SetDirection(directions);
             
         }
@@ -101,13 +87,6 @@ namespace RiverAttack
                 Directions.Free => moveFreeDirection,
                 _ => Vector3.zero
             };
-        }
-        void OnDrawGizmosSelected()
-        {
-            if (playerApproachRadius <= 0 && playerApproachRadiusRandom.y <= 0) return;
-            float radius = playerApproachRadius;
-            Gizmos.color = gizmoColor;
-            Gizmos.DrawWireSphere(center: transform.position, radius);
         }
     }
 }
