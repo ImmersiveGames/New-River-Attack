@@ -78,7 +78,7 @@ namespace RiverAttack
             bomb.transform.localPosition = transform.localPosition + bombOffset;
             bomb.SetActive(true);
             m_PlayerMaster.CallEventPlayerBomb();
-            LogBomb(1);
+            LogBomb(-1);
         }
         public void UnExecute()
         {
@@ -91,7 +91,7 @@ namespace RiverAttack
         void LogBomb(int bomb)
         {
             GamePlaySettings.instance.bombSpent += bomb;
-            m_PlayerMaster.GetPlayersSettings().bombs -= bomb;
+            m_PlayerMaster.GetPlayersSettings().bombs += bomb;
         }
     }
 }

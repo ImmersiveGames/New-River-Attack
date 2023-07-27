@@ -55,6 +55,9 @@ namespace RiverAttack
         public event PowerUpEventHandler EventRapidFire;
         public delegate void GameManagerRestartPlayer(int lives);
         public event GameManagerRestartPlayer EventRestartPlayer;
+
+        public delegate void GamePlayManagerEventUIHandler(int value);
+        public event GamePlayManagerEventUIHandler EventUIScore;
         public delegate void CollectableEventHandle(CollectibleScriptable collectibles);
         public event CollectableEventHandle EventCollectItem;
         public delegate void ShakeCamEventHandle(float power, float inTime);
@@ -285,6 +288,11 @@ namespace RiverAttack
         public void CallEventResetPlayers()
         {
             EventResetPlayers?.Invoke();
+        }
+
+        public void CallEventUIScore(int value)
+        {
+            EventUIScore?.Invoke(value);
         }
 
         public void CallEventCheckPoint(Vector3 position)

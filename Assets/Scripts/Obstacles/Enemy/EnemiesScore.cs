@@ -5,6 +5,7 @@ namespace RiverAttack
     [RequireComponent(typeof(EnemiesMaster))]
     public class EnemiesScore : MonoBehaviour
     {
+        GamePlayManager m_GamePlayManager;
         EnemiesMaster m_EnemyMaster;
         EnemiesDifficulty m_EnemyDifficulties;
 
@@ -23,6 +24,7 @@ namespace RiverAttack
         protected virtual void SetInitialReferences()
         {
             m_EnemyMaster = GetComponent<EnemiesMaster>();
+            m_GamePlayManager = GamePlayManager.instance;
             if (GetComponent<EnemiesDifficulty>())
             {
                 m_EnemyDifficulties = GetComponent<EnemiesDifficulty>();
@@ -39,6 +41,7 @@ namespace RiverAttack
             }
             if (playerMaster == null) return;
             playerMaster.GetPlayersSettings().score += (int)(score);
+            m_GamePlayManager.CallEventUIScore((int)score);
         }
         void Log(int score)
         {
