@@ -88,9 +88,10 @@ namespace RiverAttack
         {
             throw new NotImplementedException();
         }
-        static void LogBomb(int bomb)
+        void LogBomb(int bomb)
         {
             GamePlaySettings.instance.bombSpent += bomb;
+            m_PlayerMaster.GetPlayersSettings().bombs -= bomb;
         }
     }
 }
