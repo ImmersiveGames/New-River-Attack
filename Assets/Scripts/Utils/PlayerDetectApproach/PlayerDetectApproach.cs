@@ -18,23 +18,23 @@ namespace Utils
             m_Distance = patrolDistance;
         }
 
-        public bool TargetApproach<T>(LayerMask targetLayer, int maxColliders = 5)
+        public Transform TargetApproach<T>(LayerMask targetLayer, int maxColliders = 5)
         {
             var results = new Collider[maxColliders];
             int size = Physics.OverlapSphereNonAlloc(m_PositionReference, m_Distance, results, targetLayer);
-            if (size < 1) return false;
+            if (size < 1) return null;
             for (int i = 0; i < size; i++)
             {
                 if (typeof(T) == typeof(PlayerMaster))
                 {
-                    return results[i].GetComponentInParent<PlayerMaster>();
+                    return results[i].GetComponentInParent<PlayerMaster>().transform;
                 }
                 if (typeof(T) == typeof(EnemiesMaster))
                 {
-                    return results[i].GetComponentInParent<EnemiesMaster>();
+                    return results[i].GetComponentInParent<EnemiesMaster>().transform;
                 }
             }
-            return false;
+            return null;
         }
     }
 }

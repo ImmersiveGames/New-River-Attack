@@ -15,6 +15,11 @@ namespace RiverAttack
         
         
         #region UNITYMETHODS
+        void Awake()
+        {
+            startDirection = directions;
+            obstacleMovementState = MovementState.Paused;
+        }
         void OnEnable()
         {
             SetInitialReferences();
@@ -74,11 +79,11 @@ namespace RiverAttack
             m_GamePlayManager = GamePlayManager.instance;
             
         }
-        protected void HasPlayerApproach()
+        protected override void HasPlayerApproach()
         {
             m_EnemiesMaster.canMove = canMove = FindTarget<PlayerMaster>(GameManager.instance.layerPlayer);
         }
-        void DifficultUpdates()
+        protected override void DifficultUpdates()
         {
             m_EnemyDifficult = m_EnemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(m_EnemiesMaster.getDifficultName);
             moveVelocity = m_EnemiesMaster.enemy.velocity * m_EnemyDifficult.multiplyEnemiesSpeedy;
@@ -87,14 +92,7 @@ namespace RiverAttack
             if(m_EnemiesMaster.enemy.radiusToApproach != 0 && m_EnemyDifficult.multiplyPlayerDistanceRadius != 0)
                 playerApproachRadius = m_EnemiesMaster.enemy.radiusToApproach * m_EnemyDifficult.multiplyPlayerDistanceRadius;
         }
-
-        float SetPlayerApproachRadius()
-        {
-            if (playerApproachRadiusRandom != Vector2.zero)
-                playerApproachRadius = randomRangeDetect;
-           
-            return playerApproachRadius;
-        }
+        
         void FlipMe()
         {
             m_AlreadyCollided = true;
@@ -132,6 +130,5 @@ namespace RiverAttack
             enemy.velocity = moveVelocity;
             enemy.radiusToApproach = playerApproachRadius;
         }
-        
     }
 }

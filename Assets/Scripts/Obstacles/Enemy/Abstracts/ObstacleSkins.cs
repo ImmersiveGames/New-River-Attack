@@ -17,15 +17,7 @@ namespace RiverAttack
 
         public int indexSkin { get { return indexStartSkin; } set { indexStartSkin = value; } }
         public GameObject[] enemiesSkins { get { return skins; } set { skins = value; } }
-
-        protected void SetLayers(LayerMask layerMask)
-        {
-            foreach (var skin in enemiesSkins)
-            {
-                int novoLayer = Mathf.RoundToInt(Mathf.Log(layerMask.value, 2));
-                skin.layer = novoLayer;
-            }
-        }
+        
         private protected void LoadDefaultSkin()
         {
             //m_MyCollider = GetComponent<Collider>();

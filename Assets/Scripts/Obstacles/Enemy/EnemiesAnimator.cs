@@ -66,7 +66,6 @@ namespace RiverAttack
 
         void ResetAnimation()
         {
-            Debug.Log("RESET ANIMATON: "+ m_Animator);
             if (m_Animator == null) return;
             if(!string.IsNullOrEmpty(onMove))
                 m_Animator.SetBool(onMove, false);

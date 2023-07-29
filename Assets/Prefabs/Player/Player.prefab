@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 7735193164345113819}
   - component: {fileID: 1243797748221074779}
   - component: {fileID: 2847503330682514847}
-  - component: {fileID: 1454929694160534396}
   - component: {fileID: 2938584616496795991}
+  - component: {fileID: 1454929694160534396}
   - component: {fileID: 8957561622807004078}
   - component: {fileID: 2895308431917710512}
   - component: {fileID: 1867910898741857105}
@@ -45,7 +45,7 @@ Transform:
   m_Children:
   - {fileID: 9202941358234982187}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &7373340704458670615
 AudioSource:
@@ -230,6 +230,18 @@ MonoBehaviour:
   collectiblesCatchList: []
   playerMovementStatus: 0
   playerSettings: {fileID: 11400000, guid: c11a8f0b743164845ab2754709110c91, type: 2}
+--- !u!114 &2938584616496795991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409879802783298609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a70e14d6b6df702459170b98aff032f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1454929694160534396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,18 +257,8 @@ MonoBehaviour:
   bullet: {fileID: 1779806388395306, guid: db9dfd6a009dac4489263be4e1d00d8d, type: 3}
   startPool: 10
   autoShoot: 0
---- !u!114 &2938584616496795991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409879802783298609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a70e14d6b6df702459170b98aff032f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  bulletSpeed: 100
+  bulletLifeTime: 0
 --- !u!114 &8957561622807004078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,7 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStartLives: 3
   playerLivesMax: 9
-  timeoutReSpawn: 1.8
+  timeoutReSpawn: 2
   reSpawnInSavePoint: 0
   scoreForExtraLife: 0
   playerLives: 0

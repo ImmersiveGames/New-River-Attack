@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Utils;
 using UnityEngine;
 
 namespace RiverAttack
@@ -19,10 +20,11 @@ namespace RiverAttack
         public bool ShouldEnemyBeReady() => isDestroyed == false && actualEnemyStatus == EnemyStatus.Active;
         [SerializeField]
         EnemiesSetDifficulty.EnemyDifficult actualDifficultName;
-        public Vector3 enemyStartPosition
+        const float DESTROY_DELAY = 0.1f;
+        Vector3 enemyStartPosition
         {
             get;
-            private set;
+            set;
         }
 
         public EnemiesSetDifficulty.EnemyDifficult getDifficultName
@@ -62,6 +64,8 @@ namespace RiverAttack
         protected virtual void OnEnable()
         {
             SetInitialReferences();
+            //Tools.SetLayersRecursively(GameManager.instance.layerEnemies, transform);
+            gamePlayManager.EventStartPlayGame += OnInitializeEnemy;
             gamePlayManager.EventResetEnemies += OnInitializeEnemy;
         }
         void Start()
@@ -70,6 +74,7 @@ namespace RiverAttack
         }
         protected virtual void OnDisable()
         {
+            gamePlayManager.EventStartPlayGame -= OnInitializeEnemy;
             gamePlayManager.EventResetEnemies -= OnInitializeEnemy;
         }
   #endregion
@@ -84,10 +89,10 @@ namespace RiverAttack
         void OnInitializeEnemy()
         {
             if (!enemy.canRespawn && isDestroyed)
-                Destroy(gameObject, 0.1f);
+                Destroy(gameObject, DESTROY_DELAY);
             else
             {
-                Utils.Tools.ToggleChildren(this.transform, true);
+                Utils.Tools.ToggleChildren(transform);
                 transform.position = enemyStartPosition;
                 actualEnemyStatus = EnemyStatus.Active;
                 isDestroyed = false;
@@ -95,11 +100,7 @@ namespace RiverAttack
         }
 
     #region Calls
-        public void CallEventDestroyEnemy()
-        {
-            actualEnemyStatus = EnemyStatus.Paused;
-            EventDestroyEnemy?.Invoke();
-        }
+        
         public void CallEventEnemiesMasterMovement(Vector3 pos)
         {
             EventEnemiesMasterMovement?.Invoke(pos);
@@ -114,7 +115,6 @@ namespace RiverAttack
             EventDestroyEnemy?.Invoke();
             EventPlayerDestroyEnemy?.Invoke(playerMaster);
         }
-
         public void CallEventChangeSkin()
         {
             EventChangeSkin?.Invoke();

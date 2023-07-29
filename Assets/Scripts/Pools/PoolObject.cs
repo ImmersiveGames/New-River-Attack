@@ -69,5 +69,10 @@ namespace Utils
             var localRotation = transform.localRotation;
             gameObject.transform.localRotation = new Quaternion(localRotation.x, localRotation.y, localRotation.z, localRotation.w);
         }
+
+        public Transform GetRoot()
+        {
+            return m_MyRoot.transform;
+        }
     }
 }

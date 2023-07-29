@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using GD.MinMaxSlider;
 using UnityEngine;
 namespace Utils
 {
@@ -66,8 +67,8 @@ namespace Utils
     {
         [SerializeField]
         public GameObject item;
-        [SerializeField, Tools.MinMaxRangeAttribute(0, 1)]
-        private Tools.FloatRanged sortChance;
+        [SerializeField, MinMaxSlider(0, 1)]
+        private Vector2 sortChance;
         [SerializeField, Range(1, 100)]
         public int itemQuantity;
         public float realChance;
@@ -76,7 +77,7 @@ namespace Utils
         {
             get
             {
-                realChance = (sortChance.minValue != 0) ? Random.Range(sortChance.minValue, sortChance.maxValue) : sortChance.maxValue;
+                realChance = (sortChance.x != 0) ? Random.Range(sortChance.x, sortChance.y) : sortChance.y;
                 return realChance;
             }
         }

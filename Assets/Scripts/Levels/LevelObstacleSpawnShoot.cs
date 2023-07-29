@@ -21,11 +21,11 @@ namespace RiverAttack
             var obstacleShoot = spawnMaster.getPrefab.GetComponent<EnemiesShoot>();
             if (obstacleShoot == null)
                 return;
-            bulletSpeedy = obstacleShoot.bulletSpeedy;
+            /*bulletSpeedy = obstacleShoot.bulletSpeedy;
             cadenceShoot = obstacleShoot.cadenceShoot;
             var enemiesShoot = obstacleShoot;
-            startPool = enemiesShoot.poolStart;
-            playerTarget = enemiesShoot.hasTarget;
+            startPool = enemiesShoot.startPool;
+            playerTarget = enemiesShoot.hasTarget;*/
         }
     }
 }

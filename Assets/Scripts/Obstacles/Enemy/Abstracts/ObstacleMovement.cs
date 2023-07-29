@@ -2,19 +2,20 @@
 using Utils;
 namespace RiverAttack
 {
-    public abstract class ObstacleMovement : ObstacleDetectApproach,IMove
+    public abstract class ObstacleMovement : ObstacleDetectApproach, IMove
     {
         [SerializeField]
         protected internal bool canMove;
-        [SerializeField] bool isMoving;
+        protected enum MovementState { Paused, Moving, Patrolling }
+        [SerializeField] protected MovementState obstacleMovementState;
         [SerializeField]
         protected internal bool canMoveByApproach;
-        
+
         [SerializeField] internal float moveVelocity;
         public enum Directions { None, Up, Right, Down, Left, Forward, Backward, Free }
         [SerializeField]
         protected internal Directions directions;
-        Directions m_StartDirection;
+        protected Directions startDirection;
         [SerializeField]
         protected internal Vector3 moveFreeDirection;
         protected Vector3 facingDirection;
@@ -25,25 +26,32 @@ namespace RiverAttack
         [SerializeField]
         protected internal AnimationCurve animationCurve;
 
-        #region UNITYMETHODS
-        void Awake()
-        {
-            m_StartDirection = directions;
-        }
-  #endregion
-        
+        void SetInitialReferences(){}
+
         public void Move(Vector3 direction, float velocity)
         {
-            isMoving = true;
             transform.Translate(direction * (velocity * Time.deltaTime));
         }
         public void StopMove()
         {
-            isMoving = false;
             directions = Directions.None;
+            obstacleMovementState = MovementState.Paused;
             facingDirection = SetDirection(directions);
         }
 
+        public void StartMove()
+        {
+            directions = startDirection;
+            obstacleMovementState = MovementState.Moving;
+            facingDirection = SetDirection(directions);
+        }
+        public virtual void ResetMovement()
+        {
+            canMove = playerApproachRadius == 0 && playerApproachRadiusRandom == Vector2.zero;
+            obstacleMovementState = MovementState.Paused;
+            directions = startDirection;
+            facingDirection = SetDirection(directions);
+        }
         protected void MoveCurveAnimation(Vector3 direction, float velocity, float duration, AnimationCurve curve)
         {
             m_ElapsedTime += Time.deltaTime;
@@ -57,21 +65,12 @@ namespace RiverAttack
 
             // Usa a curva de animação para obter a interpolação de movimento
             float curveValue = curve.Evaluate(curveFactor);
-            
+
             transform.Translate(direction * (curveValue * (velocity * Time.deltaTime)));
         }
         public bool ShouldMoving()
         {
-            return canMove;
-        }
-
-        public virtual void ResetMovement()
-        {
-            canMove = playerApproachRadius == 0 && playerApproachRadiusRandom == Vector2.zero;
-            isMoving = false;
-            directions = m_StartDirection;
-            facingDirection = SetDirection(directions);
-            
+            return obstacleMovementState != MovementState.Paused && obstacleMovementState != MovementState.Patrolling;
         }
         private protected Vector3 SetDirection(Directions dir)
         {

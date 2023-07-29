@@ -1,22 +1,51 @@
 using UnityEngine;
+using Utils;
 namespace RiverAttack
 {
-    public class Bullets : MonoBehaviour
+    public class Bullets : MonoBehaviour, IPoolable
     {
-        [SerializeField] protected AudioEventSample audioShoot;
-        protected internal float shootVelocity;
-        protected internal PlayerMaster ownerShoot;
-        [Header("Life Time")]
-        [SerializeField] protected bool bulletLifeTime = false;
-        [SerializeField] protected float lifeTime = 2f;
-        protected float startTime;
-        public void SetOwner(PlayerMaster owner)
+        [SerializeField]
+        protected AudioEventSample audioShoot;
+        protected float bulletSpeed;
+        bool m_HasBulletLifeTime;
+        protected float bulletLifeTime;
+        
+        Transform m_MyPool;
+
+        public void Init(float speed,float lifetime = 0)
         {
-            ownerShoot = owner;
+            SetBulletSpeed(speed);
+            SetBulletLifeTime(lifetime);
         }
-        public PlayerMaster GetOwner()
+
+        void SetBulletSpeed(float speed)
         {
-            return ownerShoot;
+            bulletSpeed = speed;
+        }
+
+        void SetBulletLifeTime(float lifetime)
+        {
+            m_HasBulletLifeTime = lifetime > 0;
+            bulletLifeTime = lifetime;
+        }
+
+        public void SetMyPool(Transform pool)
+        {
+            m_MyPool = pool;
+        }
+        protected void AutoDestroyMe(float timer)
+        {
+            if (m_HasBulletLifeTime && Time.time >= timer)
+            {
+                DestroyMe();
+            }
+        }
+        protected void DestroyMe()
+        {
+            //TODO: Voltar o Tiro para o pool identificar qual meu Pool;
+            gameObject.SetActive(false);
+            gameObject.transform.SetParent(m_MyPool);
+            gameObject.transform.SetAsLastSibling();
         }
     }
 }

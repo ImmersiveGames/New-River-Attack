@@ -1,23 +1,24 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utils;
-
 namespace RiverAttack
 {
     [RequireComponent(typeof(PlayerMaster))]
     public class PlayerShoot : MonoBehaviour, ICommand, IHasPool
     {
-        // ReSharper disable once StringLiteralTypo
         [Tooltip("Identifica se o jogador em modo rapidfire")]
         float m_ShootCadence;
-        [Tooltip("Objeto disparado pelo player")]
+        
         [SerializeField]
         GameObject bullet;
         [SerializeField]
         int startPool;
         [SerializeField]
         bool autoShoot;
+
+        [Header("Bullet Settings")]
+        [SerializeField] float bulletSpeed;
+        [SerializeField] float bulletLifeTime;
 
         //private ControllerMap controllerMap;
         float m_NextShoot;
@@ -31,16 +32,17 @@ namespace RiverAttack
         {
             m_PlayersInputActions = new PlayersInputActions();
         }
-        void Start()
-        {
-            m_PlayersInputActions = m_PlayerMaster.playersInputActions;
-            m_PlayersInputActions.Player.Shoot.performed += Execute;
-        }
         void OnEnable()
         {
             SetInitialReferences();
             StartMyPool();
         }
+        void Start()
+        {
+            m_PlayersInputActions = m_PlayerMaster.playersInputActions;
+            m_PlayersInputActions.Player.Shoot.performed += Execute;
+        }
+        
         void FixedUpdate()
         {
             if(autoShoot) Execute();
@@ -62,13 +64,12 @@ namespace RiverAttack
             if (!(m_ShootCadence <= 0))
                 return;
             m_PlayerMaster.CallEventPlayerShoot();
-
             m_ShootCadence = m_PlayerSettings.cadenceShoot;
             Fire();
         }
         public void Execute(InputAction.CallbackContext callbackContext)
         {
-            if (!m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.ShouldPlayerBeReady())
+            if (!m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.ShouldPlayerBeReady() || autoShoot)
                 return;
             m_PlayerMaster.CallEventPlayerShoot();
             Fire();
@@ -77,7 +78,6 @@ namespace RiverAttack
         {
             m_MyShoot = PoolObjectManager.GetObject(this);
             m_MyShoot.transform.parent = null;
-            m_MyShoot.GetComponent<BulletPlayer>().ownerShoot = m_PlayerMaster;
             var transform1 = transform;
             var transformPosition = transform1.localPosition;
             var transformRotation = transform1.rotation;
@@ -95,6 +95,14 @@ namespace RiverAttack
         public void StartMyPool(bool isPersistent = false)
         {
             PoolObjectManager.CreatePool(this, bullet, startPool, transform, isPersistent);
+            var pool = PoolObjectManager.GetPool(this);
+            for (int i = 0; i < pool.childCount; i++)
+            {
+                var bulletPlayer = pool.GetChild(i).GetComponent<BulletPlayer>();
+                bulletPlayer.ownerShoot = m_PlayerMaster;
+                bulletPlayer.SetMyPool(pool);
+                bulletPlayer.Init(bulletSpeed, bulletLifeTime);
+            }
         }
     }
 }

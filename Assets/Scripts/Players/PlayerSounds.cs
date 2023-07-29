@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 namespace RiverAttack
@@ -37,6 +38,12 @@ namespace RiverAttack
             m_GamePlayManager.EventPausePlayGame += SoundStop;
             m_GamePlayManager.EventCompletePath += SoundStop;
         }
+        void Update()
+        {
+            if (m_GamePlayManager.shouldBePlayingGame)
+                return;
+            SoundStop();
+        }
         void OnDisable()
         {
             m_PlayerMaster.EventPlayerMasterControllerMovement -= SoundEngine;
@@ -53,7 +60,6 @@ namespace RiverAttack
 
         void SoundEngine(Vector2 dir)
         {
-            if (audioEngineLoop == null || m_PlayerMaster.ShouldPlayerMove() == false) return;
             if (dir.y > 0 && m_PlayerMaster.playerMovementStatus != PlayerMaster.MovementStatus.Accelerate)
             {
                 m_PlayerMaster.playerMovementStatus = PlayerMaster.MovementStatus.Accelerate;
@@ -76,7 +82,7 @@ namespace RiverAttack
                 }
                 default:
                 {
-                    if (m_PlayerMaster.ShouldPlayerMove() && !m_AudioSource.isPlaying && m_PlayerMaster.playerMovementStatus == PlayerMaster.MovementStatus.None)
+                    if (m_PlayerMaster.ShouldPlayerBeReady() && !m_AudioSource.isPlaying && m_PlayerMaster.playerMovementStatus == PlayerMaster.MovementStatus.None)
                     {
                         //StopAllCoroutines();
                         audioEngineLoop.Play(m_AudioSource);

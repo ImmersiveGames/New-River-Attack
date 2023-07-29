@@ -68,6 +68,7 @@ namespace RiverAttack
             else
             {
                 StopAllCoroutines();
+                m_GamePlayMaster.CallEventEnemyDestroyPlayer();
                 StartCoroutine(ReSpawn());
                 Debug.Log("Chamou corrotina respawn");
             }
@@ -88,7 +89,7 @@ namespace RiverAttack
             m_PlayerMaster.CallEventPlayerMasterReSpawn();
             m_GamePlayMaster.CallEventResetEnemies();
             SetRespawnPosition(transform.localPosition.z);
-            m_GamePlayMaster.GamePlayPause(false);
+            m_GamePlayMaster.SetGamePlayPause(false);
             m_PlayerMaster.SetActualPlayerStateMovement(PlayerMaster.MovementStatus.None);
             
             m_PlayerMaster.SetPlayerReady();

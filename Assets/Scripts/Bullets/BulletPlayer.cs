@@ -5,32 +5,25 @@ namespace RiverAttack
     public class BulletPlayer : Bullets
     {
          #region Variable Private Inspector
-        Transform m_MyPool;
+         protected internal PlayerMaster ownerShoot;
+         float m_StartTime;
         #endregion
 
         #region UnityMethods
-        void Awake()
-        {
-            ownerShoot = GetComponentInParent<PlayerMaster>();
-            shootVelocity = ownerShoot.GetPlayersSettings().shootVelocity;
-        }
         void OnEnable()
         {
             var audioSource = GetComponent<AudioSource>();
             audioShoot.Play(audioSource);
-        }
-        void Start()
-        {
-            startTime = Time.time + lifeTime;
+            m_StartTime = Time.time + bulletLifeTime;
         }
         void FixedUpdate()
         {
             MoveShoot();
-            AutoDestroy();
+            AutoDestroyMe(m_StartTime);
         }
         void OnTriggerEnter(Collider collision)
         {
-            if (collision.GetComponentInParent<PlayerMaster>() || collision.GetComponentInParent<Bullets>() ) return;
+            if (collision.GetComponentInParent<PlayerMaster>() || collision.GetComponentInParent<BulletPlayer>() || collision.GetComponentInParent<BulletPlayerBomb>()) return;
             var hitCollectable = collision.transform.GetComponentInParent<EnemiesMaster>();
             if (hitCollectable == null && hitCollectable.enemy is CollectibleScriptable) return;
             DestroyMe();
@@ -41,17 +34,13 @@ namespace RiverAttack
             Invoke(nameof(DestroyMe), .01f);
         }
         #endregion
-
         
-        public void SetSpeedShoot(double speedy)
-        {
-            shootVelocity = (float)speedy;
-        }
+        
         void MoveShoot()
         {
             if (GamePlayManager.instance.shouldBePlayingGame)
             {
-                float speedy = shootVelocity * Time.deltaTime;
+                float speedy = bulletSpeed * Time.deltaTime;
                 transform.Translate(Vector3.forward * speedy);
             }
             else
@@ -60,20 +49,7 @@ namespace RiverAttack
             }
         }
 
-        void AutoDestroy()
-        {
-            if (bulletLifeTime && Time.time >= startTime)
-            {
-                DestroyMe();
-            }
-        }
-        void DestroyMe()
-        {
-            //Destroy(this.gameObject);
-
-            gameObject.SetActive(false);
-            gameObject.transform.SetParent(m_MyPool);
-            gameObject.transform.SetAsLastSibling();
-        }
+        
+        
     }
 }

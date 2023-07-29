@@ -21,7 +21,7 @@ namespace Shopping
         [Header("Carousel"), SerializeField]
         bool infinityLooping;
         [SerializeField]
-        float spaceBetweenPanels = 0, maxPosition = 0;
+        float spaceBetweenPanels, maxPosition;
 
         PlayerSettings m_ActivePlayer;
         ShopCarousel m_Shop;

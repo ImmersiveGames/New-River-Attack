@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 using System.Collections.Generic;
-using Newtonsoft.Json.Bson;
+using Utils;
 namespace RiverAttack
 {
     public class PlayerMaster : MonoBehaviour
@@ -14,16 +13,14 @@ namespace RiverAttack
         public enum MovementStatus { None, Paused, Accelerate, Reduce }
         int subWealth { get;
             set; }
-        int idPlayer { get;
-            set; }
-        [SerializeField] float lastSavePosition = 0f;
+        [SerializeField] float lastSavePosition;
         protected internal PlayersInputActions playersInputActions;
         GamePlayManager m_GamePlayManager;
         GameManager m_GameManager;
         
 
     #region SerilizedField
-        [SerializeField] public bool isPlayerDead = false;
+        [SerializeField] public bool isPlayerDead;
         [SerializeField]
         List<EnemiesResults> enemiesHitList;
         [SerializeField]
@@ -64,22 +61,42 @@ namespace RiverAttack
         #region UNITYMETHODS
         void Awake()
         {
+            SetInitialReferences();
             playersInputActions = new PlayersInputActions();
             playersInputActions.Enable();
+            m_GamePlayManager.AddPlayerToGamePlayManager(this);
+            m_GameManager.AddActivePlayerObject(transform);
+        }
+
+        void OnEnable()
+        {
+            m_GamePlayManager.EventStartPlayGame += SetPlayerReady;
+            Tools.SetLayersRecursively(GameManager.instance.layerPlayer, transform);
+        }
+        void Start()
+        {
+            Init();
+        }
+
+        void OnDisable()
+        {
+            m_GamePlayManager.EventStartPlayGame -= SetPlayerReady;
+        }
+  #endregion
+        void SetInitialReferences()
+        {
             enemiesHitList = new List<EnemiesResults>();
             playerMovementStatus = MovementStatus.Paused;
             m_GamePlayManager = GamePlayManager.instance;
             m_GameManager = GameManager.instance;
-            m_GamePlayManager.AddPlayerToGamePlayManager(this);
-            m_GameManager.AddActivePlayerObject(transform);
             lastSavePosition = transform.position.z;
         }
-        void Start()
+        public bool ShouldPlayerBeReady() => isPlayerDead == false && playerMovementStatus != MovementStatus.Paused;
+        public void SetPlayerReady()
         {
-            
-            Init();
+            isPlayerDead = false;
+            playerMovementStatus = MovementStatus.None;
         }
-  #endregion
         void Init()
         {
             isPlayerDead = false;
@@ -88,9 +105,7 @@ namespace RiverAttack
         }
         public void Init(PlayerSettings player, int id)
         {
-            isPlayerDead = false;
-            int novoLayer = Mathf.RoundToInt(Mathf.Log(GameManager.instance.layerPlayer.value, 2));
-            gameObject.layer = novoLayer;
+            Init();
             /*idPlayer = id;
             playerSettings = player;
             name = playerSettings.name;
@@ -115,22 +130,13 @@ namespace RiverAttack
         {
             return playerSettings;
         }
-
-        public bool ShouldPlayerMove() => isPlayerDead == false;
-        public bool ShouldPlayerBeReady() => isPlayerDead == false && playerMovementStatus != MovementStatus.Paused;
-        public MovementStatus GetActualPlayerStateMovement()
-        { 
-            return playerMovementStatus;
-        }
+        
         public void SetActualPlayerStateMovement(MovementStatus status)
         {
             playerMovementStatus = status;
         }
 
-        protected internal void SetPlayerReady()
-        {
-            isPlayerDead = false;
-        }
+        
 
         protected internal float GetLastSavePosition() => lastSavePosition;
         public void AddEnemiesHitList(EnemiesScriptable obstacle, int qnt = 1)
@@ -226,8 +232,6 @@ namespace RiverAttack
         }
 
         //Old Calls
-        
-        
         
         protected internal void CallEventPlayerBomb()
         {

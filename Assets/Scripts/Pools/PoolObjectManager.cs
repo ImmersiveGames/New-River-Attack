@@ -22,5 +22,9 @@ namespace Utils
             //Find the right pool and ask it for an object.
             return ObjectPools[objName].GetObject();
         }
+        public static Transform GetPool(IHasPool objName)
+        {
+            return ObjectPools[objName].GetRoot();
+        }
     }
 }

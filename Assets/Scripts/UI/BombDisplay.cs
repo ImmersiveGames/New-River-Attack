@@ -6,12 +6,11 @@ namespace RiverAttack
     public class BombDisplay : MonoBehaviour
     {
         [SerializeField] PlayerSettings playerSettings;
-        [SerializeField] TMP_Text bombAmoutText;
+        [SerializeField] TMP_Text textBombAmount;
 
         void Update()
         {
-            bombAmoutText.text = "X " + playerSettings.bombs.ToString();
-            Debug.Log("X " + playerSettings.bombs.ToString());
+            textBombAmount.text = "X " + playerSettings.bombs.ToString();
         }
     }
 }

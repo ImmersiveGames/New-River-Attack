@@ -54,7 +54,7 @@ namespace RiverAttack
 
         void UpdateDistance()
         {
-            if (m_PlayerMaster.ShouldPlayerMove())
+            if (m_PlayerMaster.ShouldPlayerBeReady())
                 pathDistance = (int)(transform.position.z / cadenceDistance) - distanceOffset;
         }
 

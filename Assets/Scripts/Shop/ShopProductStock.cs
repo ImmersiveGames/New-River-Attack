@@ -19,7 +19,6 @@ namespace Shopping
             if (quantity < 0)
                 quantity = 0;
         }
-
         public bool AvailableToSelect(PlayerSettings player)
         {
             return PlayerAlreadyBuy(player) && shopProduct.ShouldBeConsume(player);

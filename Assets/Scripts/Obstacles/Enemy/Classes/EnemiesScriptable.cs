@@ -11,6 +11,7 @@ namespace RiverAttack
         //public LocalizationString translateName;
         public float velocity;
         public float radiusToApproach;
+        public float shootCadence;
         public string fbScore;
         public int enemyScore;
         public Sprite spriteIcon;

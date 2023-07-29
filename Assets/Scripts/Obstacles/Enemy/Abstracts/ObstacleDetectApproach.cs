@@ -20,17 +20,26 @@ namespace RiverAttack
         public Color gizmoColor = new Color(255, 0, 0, 150);
         #endregion
 
-        protected float randomRangeDetect
+        float randomRangeDetect
         {
             get { return Random.Range(playerApproachRadiusRandom.x, playerApproachRadiusRandom.y); }
         }
-        protected bool FindTarget<T>(LayerMask layer)
+        protected Transform FindTarget<T>(LayerMask layer)
         {
             m_PlayerDetectApproach ??= new PlayerDetectApproach(transform.position, playerApproachRadius);
             m_PlayerDetectApproach.UpdatePatrolDistance(playerApproachRadius);
             return m_PlayerDetectApproach.TargetApproach<T>(layer);
         }
         
+        protected float SetPlayerApproachRadius()
+        {
+            if (playerApproachRadiusRandom != Vector2.zero)
+                playerApproachRadius = randomRangeDetect;
+            return playerApproachRadius;
+        }
+        protected abstract void DifficultUpdates();
+        protected abstract void HasPlayerApproach();
+
         void OnDrawGizmosSelected()
         {
             if (playerApproachRadius <= 0 && playerApproachRadiusRandom.y <= 0) return;

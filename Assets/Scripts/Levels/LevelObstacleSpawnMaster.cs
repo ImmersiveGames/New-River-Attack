@@ -73,12 +73,12 @@ namespace RiverAttack
                 }
                 if (GetComponent<LevelObstacleSpawnShoot>() && obstacleShoot)
                 {
-                    var spawnShoot = GetComponent<LevelObstacleSpawnShoot>();
-                    obstacleShoot.bulletSpeedy = spawnShoot.bulletSpeedy;
-                    obstacleShoot.cadenceShoot = spawnShoot.cadenceShoot;
+                    /*var spawnShoot = GetComponent<LevelObstacleSpawnShoot>();
+                    obstacleShoot.bulletSpeed = spawnShoot.bulletSpeedy;
+                    obstacleShoot.shootCadence = spawnShoot.cadenceShoot;
                     var enemiesShoot = obstacleShoot;
-                    enemiesShoot.poolStart = spawnShoot.startPool;
-                    enemiesShoot.hasTarget = spawnShoot.playerTarget;
+                    enemiesShoot.startPool = spawnShoot.startPool;
+                    enemiesShoot.hasTarget = spawnShoot.playerTarget;*/
                 }
                 /*if (GetComponent<LevelObstacleSpawnShootApproach>() && obstacleDetectApproach)
                 {

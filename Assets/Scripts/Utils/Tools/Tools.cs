@@ -138,22 +138,16 @@ namespace Utils
                 Object.Destroy(child.gameObject);
             }
         }
-        public class MinMaxRangeAttribute : Attribute
+        public static void SetLayersRecursively(LayerMask layerMask, Transform itemTransform)
         {
-            public MinMaxRangeAttribute(float min, float max)
+            int novoLayer = Mathf.RoundToInt(Mathf.Log(layerMask.value, 2));
+            if(itemTransform.gameObject.layer != novoLayer)
+                itemTransform.gameObject.layer = novoLayer;
+            for (int i = 0; i < itemTransform.childCount; i++)
             {
-                this.min = min;
-                this.max = max;
+                var child = itemTransform.GetChild(i);
+                SetLayersRecursively(layerMask, child);
             }
-            public float min { get; private set; }
-            public float max { get; private set; }
-        }
-
-        [Serializable]
-        public struct FloatRanged
-        {
-            public float minValue;
-            public float maxValue;
         }
     }
 }

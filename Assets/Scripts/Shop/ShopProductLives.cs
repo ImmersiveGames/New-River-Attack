@@ -18,7 +18,6 @@ namespace RiverAttack
         {
             return player.lives + quantity <= player.maxLives;
         }
-
         public override void ConsumeProduct(PlayerSettings player)
         {
             player.lives += quantity;

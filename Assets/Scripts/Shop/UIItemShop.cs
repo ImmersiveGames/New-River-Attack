@@ -72,7 +72,7 @@ namespace Shopping
         void SetupBuyButton(PlayerSettings player)
         {
             btnBuy.gameObject.SetActive(true);
-            btnBuy.interactable = false || productInStock.AvailableForBuy(player);
+            btnBuy.interactable = productInStock.AvailableForBuy(player);
             if (productInStock.PlayerAlreadyBuy(player) && !productInStock.shopProduct.isConsumable)
                 btnBuy.gameObject.SetActive(false);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Utils;
 namespace RiverAttack
 {
     public class EnemiesSkins : ObstacleSkins
@@ -10,7 +11,7 @@ namespace RiverAttack
         void Awake()
                 {
                     SetInitialReferences();
-                    SetLayers(GameManager.instance.layerEnemies);
+                    Tools.SetLayersRecursively(GameManager.instance.layerEnemies, transform);
                     m_EnemiesMaster.CallEventChangeSkin();
                 }
         void OnEnable()

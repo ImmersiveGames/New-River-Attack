@@ -17,10 +17,10 @@ namespace RiverAttack
         }
         protected override void OnTriggerEnter(Collider collision)
         {
-            if ((collision.GetComponentInParent<PlayerMaster>() || collision.GetComponent<Bullets>()) && enemiesMaster.enemy.canDestruct)
-            {
-                HitThis(collision);
-            }
+            if ((!collision.GetComponentInParent<PlayerMaster>() && !collision.GetComponent<Bullets>()) || !enemiesMaster.enemy.canDestruct)
+                return;
+            if (collision.GetComponent<BulletEnemy>()) return;
+            HitThis(collision);
         }
         private void OnDisable()
         {

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utils;
@@ -6,6 +7,8 @@ namespace RiverAttack
 {
     public class PlayerController : MonoBehaviour
     {
+        GameManager m_GameManager;
+        GamePlayManager m_GamePlayManager;
         PlayerMaster m_PlayerMaster;
         PlayersInputActions m_PlayersInputActions;
 
@@ -21,15 +24,11 @@ namespace RiverAttack
         #region UNITYMETHODS
         void Awake()
         {
-            m_PlayerMaster = GetComponent<PlayerMaster>();
-            m_PlayerSettings = m_PlayerMaster.GetPlayersSettings();
-            
-
             m_AutoMovement = GameSettings.instance.autoMovement;
-            m_MovementSpeed = m_PlayerSettings.mySpeedy;
-            m_MultiplyVelocityUp = m_PlayerSettings.multiplyVelocityUp;
-            m_MultiplyVelocityDown = m_PlayerSettings.multiplyVelocityDown;            
-
+        }
+        void OnEnable()
+        {
+            SetInitialReferences();
             
         }
 
@@ -43,13 +42,14 @@ namespace RiverAttack
 
         void FixedUpdate()
         {
-            if (GameManager.instance.GetActualGameState() != GameManager.States.GamePlay || GameManager.instance.HasGameStopped())
+            if(!m_GamePlayManager.shouldBePlayingGame && !m_PlayerMaster.ShouldPlayerBeReady()) return;
+            if (m_GameManager.GetActualGameState() != GameManager.States.GamePlay || m_GameManager.isGameStopped || m_GamePlayManager.isGamePlayPause)
             {
                 m_PlayerMaster.SetActualPlayerStateMovement(PlayerMaster.MovementStatus.Paused);
                 return;
             }
-
-            //m_PlayerMaster.SetActualPlayerStateMovement(PlayerMaster.MovementStatus.None);
+            if(m_PlayerMaster.playerMovementStatus == PlayerMaster.MovementStatus.Paused )
+                m_PlayerMaster.SetActualPlayerStateMovement(PlayerMaster.MovementStatus.None);
 
             float axisAutoMovement = m_InputVector.y switch
             {
@@ -59,13 +59,22 @@ namespace RiverAttack
             };
 
             var moveDir = new Vector3(m_InputVector.x, 0, axisAutoMovement);
-            if (m_PlayerMaster.ShouldPlayerMove())
+            if (m_PlayerMaster.ShouldPlayerBeReady())
                 transform.position += moveDir * (m_MovementSpeed * Time.deltaTime);
 
             m_PlayerMaster.CallEventPlayerMasterControllerMovement(m_InputVector);
         }
 
         #endregion
+
+        void SetInitialReferences()
+        {
+            m_GameManager = GameManager.instance;
+            m_GamePlayManager = GamePlayManager.instance;
+            m_PlayerMaster = GetComponent<PlayerMaster>();
+            m_PlayerSettings = m_PlayerMaster.GetPlayersSettings();
+            SetValuesFromPlayerSettings(m_PlayerSettings);
+        }
 
         public Vector2 GetMovementVector2Normalized()
         {
@@ -80,6 +89,13 @@ namespace RiverAttack
         void EndTouchMove(InputAction.CallbackContext context) 
         {
             m_InputVector = Vector2.zero;
+        }
+
+        void SetValuesFromPlayerSettings(PlayerSettings settings)
+        {
+            m_MovementSpeed = settings.mySpeedy;
+            m_MultiplyVelocityUp = settings.multiplyVelocityUp;
+            m_MultiplyVelocityDown = settings.multiplyVelocityDown;
         }
     }
 }

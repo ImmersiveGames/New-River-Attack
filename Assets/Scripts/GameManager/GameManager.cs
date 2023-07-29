@@ -40,29 +40,19 @@ namespace RiverAttack
         protected internal List<Transform> playerObjectAvailableList;
         private Dictionary<string, object> m_GameplayDefault = new Dictionary<string, object>();
 
+        GamePlayManager m_GamePlayManager;
+
         //private GameManagerSaves gameSaves;
 
     #region UNITYMETHODS
         void Awake()
         {
-            //states = States.Menu;
-            isGameFinish = false;
-            isGameOver = false;
-            isGameStopped = false;
+            SetupGame();
         }
-        private void Start()
+        void OnEnable()
         {
-            //GameInput.Instance.OnPauseAction += GameInput_onPauseAction;
-            /*gameplayDefault.Add("config_resetSaves", false);
-            Firebase.RemoteConfig.FirebaseRemoteConfig.SetDefaults(gameplayDefault);
-            Firebase.RemoteConfig.FirebaseRemoteConfig.ActivateFetched();
-            bool resetSaves = Firebase.RemoteConfig.FirebaseRemoteConfig.GetValue("config_resetSaves").BooleanValue;
-            if (resetSaves)
-                gameSaves.SaveGameClear();
-            gameSaves.LoadGamePlay(gamePlayLog);
-            levelsFinish = gameSaves.LoadLevelComplete("levelComplete");
-            firebase = new GameManagerFirebase();
-            StartCoroutine(LoadAsyncScene());*/
+            SetInitialReferences();
+            
         }
         void Update()
         {
@@ -77,6 +67,7 @@ namespace RiverAttack
                     if (countdownToStartTimer <= 0)
                     {
                         actualGameState = States.GamePlay;
+                        m_GamePlayManager.CallEventStartPlayGame();
                     }
                     break;
                 case States.InitialAnimation:
@@ -99,6 +90,12 @@ namespace RiverAttack
             }
         }
         #endregion
+
+        void SetInitialReferences()
+        {
+            m_GamePlayManager = GamePlayManager.instance;
+        }
+
         public void ChangeStatesGamePlay(States newStates = States.GamePlay)
         {
             actualGameState = newStates;
@@ -108,29 +105,15 @@ namespace RiverAttack
             return actualGameState;
         }
 
-        public bool HasGameStopped()
-        {
-            return isGameStopped;
-        }
-
         public bool GetGameOver()
         {
             return isGameOver;
         }
 
-        void GameInput_onStopAction(object sender, EventArgs e)
-        {
-            ToggleStopGame();
-        }
-
-        private void OnEnable()
-        {
-            //gameSaves = GameManagerSaves.Instance;
-        }
-
-
         public void SetupGame()
         {
+            //actualGameState = States.Menu;
+            isGameFinish = false;
             isGameOver = false;
             isGameStopped = false;
         }
@@ -140,18 +123,7 @@ namespace RiverAttack
             isGameStopped = !isGameStopped;
             Time.timeScale = isGameStopped ? 0f : 1f;
         }
-
-        public IEnumerator LoadAsyncScene()
-        {
-            /*FadeScenesManager.Instance.loadAsync.SetActive(true);
-            while (firebase.dependencyStatus != Firebase.DependencyStatus.Available)
-            {
-                yield return null;
-            }
-            FadeScenesManager.Instance.loadAsync.SetActive(false);*/
-            return null;
-        }
-
+        
         public Transform GetActivePlayerTransform(int num = 0)
         {
             return playerObjectAvailableList[num];
@@ -162,10 +134,5 @@ namespace RiverAttack
             playerObjectAvailableList.Add(activePlayer);
             
         }
-        /*private void OnDisable()
-        {
-            gamePlayLog.totalTime += Time.unscaledTime;
-            gameSaves.SaveGamePlay(gamePlayLog);
-        }*/
     }
 }

@@ -1,50 +1,51 @@
 using UnityEngine;
-using Utils;
 namespace RiverAttack
 {
-    [RequireComponent(typeof(Collider), typeof(AudioSource))]
-    public class BulletEnemy : Bullets, IPoolable
+    public class BulletEnemy : Bullets
     {
-        [HideInInspector]
-        public Vector3 shootDirection;
-        Collider m_Collider;
-        AudioSource m_AudioSource;
-#region UNITYMETHODS
+        #region Variable Private Inspector
+        protected internal EnemiesMaster ownerShoot;
+        float m_StartTime;
+        
+        #endregion
+        
+        #region UnityMethods
         void OnEnable()
         {
-            SetInitialReferences();
-            audioShoot.Play(m_AudioSource);
-            m_Collider.enabled = true;
-            Invoke(nameof(DisableShoot), lifeTime);
+            var audioSource = GetComponent<AudioSource>();
+            audioShoot.Play(audioSource);
+            m_StartTime = Time.time + bulletLifeTime;
+            
+            GamePlayManager.instance.EventEnemyDestroyPlayer += DestroyMe;
         }
         void FixedUpdate()
         {
-            float speedy = shootVelocity * Time.deltaTime;
-            transform.Translate(shootDirection * speedy);
+            MoveShoot();
+            AutoDestroyMe(m_StartTime);
+        }
+        void OnTriggerEnter(Collider collision)
+        {
+            if ((collision.GetComponentInParent<EnemiesMaster>() && !collision.GetComponentInParent<CollectiblesMaster>())|| collision.GetComponentInParent<BulletEnemy>() ) return;
+            DestroyMe();
         }
         void OnBecameInvisible()
         {
-            DisableShoot();
+            Invoke(nameof(DestroyMe), .01f);
         }
-        void OnTriggerEnter(Collider other)
-        {
-            if (other.GetComponent<PlayerMaster>() == null && !other.GetComponent<BulletPlayer>())
-                return;
-            gameObject.SetActive(false);
-            m_Collider.enabled = false;
-        }
-  #endregion
-        void SetInitialReferences()
-        {
-            m_Collider = GetComponent<Collider>();
-            m_AudioSource = GetComponent<AudioSource>();
-        }
-
-        void DisableShoot()
-        {
-            gameObject.SetActive(false);
-            m_Collider.enabled = false;
-        }
+        #endregion
         
+        void MoveShoot()
+        {
+            if (GamePlayManager.instance.shouldBePlayingGame)
+            {
+                float speedy = bulletSpeed * Time.deltaTime;
+                transform.Translate(Vector3.forward * speedy);
+                //look at target.
+            }
+            else
+            {
+                DestroyMe();
+            }
+        }
     }
 }

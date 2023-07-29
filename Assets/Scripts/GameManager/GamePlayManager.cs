@@ -8,13 +8,13 @@ namespace RiverAttack
         [SerializeField]
         bool gameBeat;
         [SerializeField]
-        bool gamePaused;
+        bool gamePlayPaused;
         [SerializeField]
         bool completePath;
         [SerializeField]
         bool godMode;
         public bool getGodMode { get { return godMode; } }
-        public bool isGamePause { get { return gamePaused; } }
+        public bool isGamePlayPause { get { return gamePlayPaused; } }
         public bool isGameBeat { get { return gameBeat; } }
 
         [Header("Level Settings"), SerializeField]
@@ -38,6 +38,7 @@ namespace RiverAttack
 
     #region Delegates
         public delegate void GamePlayManagerEventHandler();
+        public event GamePlayManagerEventHandler EventStartPlayGame;
         public event GamePlayManagerEventHandler EventPausePlayGame;
         public event GamePlayManagerEventHandler EventUnPausePlayGame;
         public event GamePlayManagerEventHandler EventCompletePath;
@@ -45,6 +46,7 @@ namespace RiverAttack
         public event GamePlayManagerEventHandler EventGameOver;
         public event GamePlayManagerEventHandler EventShouldContinue;
         public event GamePlayManagerEventHandler EventStartPath;
+        public event GamePlayManagerEventHandler EventEnemyDestroyPlayer;
         public event GamePlayManagerEventHandler EventResetEnemies;
         public event GamePlayManagerEventHandler EventResetPlayers;
         public event GamePlayManagerEventHandler EventUICollectable;
@@ -64,15 +66,18 @@ namespace RiverAttack
         public delegate void ShakeCamEventHandle(float power, float inTime);
         public event ShakeCamEventHandle EventShakeCam;
     #endregion
+    
 #region UnityMethods
         void Awake()
         {
             playersMasterList = new List<PlayerMaster>();
+            gamePlayPaused = true;
+            gameBeat = false;
+            completePath = false;
         }
         void OnEnable()
         {
             SetInitialReferences();
-            completePath = false;
             var levelRoot = new GameObject();
             m_ActualPath = 0;
             if (actualLevel != null)
@@ -83,17 +88,19 @@ namespace RiverAttack
                 m_GamePlayAudio.PlayBGM(actualBGM); 
             }
             //SpawnPlayers(numPlayers.Length);
+            EventStartPlayGame += StartPlayingGame;
             EventCheckPlayerPosition += CheckPoolLevel;
             //m_GameplayDefault.Add("config_gamePlay_godmod", false);
         }
         
         void OnDisable()
         {
+            EventStartPlayGame -= StartPlayingGame;
             EventCheckPlayerPosition -= CheckPoolLevel;
             m_GamePlayAudio.StopBGM();
             StopAllCoroutines();
         }
-  #endregion
+#endregion
         void SetInitialReferences()
         {
             m_GameManager = GameManager.instance;
@@ -104,11 +111,90 @@ namespace RiverAttack
                 m_GameManager.actualLevel = classicLevel;
             }*/
         }
-        public void GamePlayPause(bool setPause)
+
+        void StartPlayingGame()
         {
-            gamePaused = setPause;
+            gamePlayPaused = false;
+        }
+        public bool shouldBePlayingGame
+        {
+            get
+            {
+                return (!m_GameManager.isGameOver && !completePath && !m_GameManager.isGameStopped && !gamePlayPaused);
+            }
+        }
+ 
+        public void SetGamePlayPause(bool setPause)
+        {
+            gamePlayPaused = setPause;
+        }
+
+        public void AddPlayerToGamePlayManager(PlayerMaster playerMaster)
+        {
+            playersMasterList.Add(playerMaster);
+        }
+
+        public PlayerMaster GetPlayerMasterByIndex(int indexPlayer)
+        {
+            return playersMasterList[indexPlayer];
+        }
+
+        public int HighScorePlayers()
+        {
+            if (listPlayer is not { Count: > 0 }) return 0;
+            int score = 0;
+            foreach (var pl in listPlayer.Where(pl => score < pl.GetComponent<PlayerMaster>().GetPlayersSettings().score))
+            {
+                score = (int)pl.GetComponent<PlayerMaster>().GetPlayersSettings().score;
+            }
+            return score;
+        }
+
+        public void SaveAllPlayers()
+        {
+            Debug.Log("AQUI SALVA O JOGO");
+            /*for (int i = 0; i < numPlayers.Length; i++)
+            {
+                GameManagerSaves.Instance.SavePlayer(numPlayers[i]);
+            }*/
+        }
+
+        public bool haveAnyPlayMasterBeReady
+        {
+            get
+            {
+                bool anyReady = false;
+                foreach (var playerMaster in playersMasterList)
+                {
+                    anyReady = playerMaster.ShouldPlayerBeReady();
+                }
+                return anyReady;
+            }
         }
         
+        public bool shouldBeInGameOver
+        {
+            get
+            {
+                return (m_GameManager.isGameOver && !m_GameManager.isGameStopped && !gamePlayPaused);
+            }
+        }
+
+        public bool shouldBeFinishPath
+        {
+            get
+            {
+                return (completePath && !gamePlayPaused && !m_GameManager.isGameOver && !m_GameManager.isGameStopped);
+            }
+        }
+
+        public bool shouldFinishGame
+        {
+            get
+            {
+                return (gameBeat && completePath && !m_GameManager.isGameOver && !m_GameManager.isGameStopped);
+            }
+        }
         #region Multiplayer
         public Transform GetPlayerById(int id)
         {
@@ -142,17 +228,7 @@ namespace RiverAttack
             }
         }
         #endregion
-
-        public void AddPlayerToGamePlayManager(PlayerMaster playerMaster)
-        {
-            playersMasterList.Add(playerMaster);
-        }
-
-        public PlayerMaster GetPlayerMasterByIndex(int indexPlayer)
-        {
-            return playersMasterList[indexPlayer];
-        } 
-        
+        #region LevelBuilder
         public Levels GetActualLevel()
         {
             return actualLevel;
@@ -168,89 +244,43 @@ namespace RiverAttack
             actualLevel.CallUpdatePoolLevel(m_ActualPath);
             m_ActualPath++;
         }
-        #region LevelBuilder
-        
-  #endregion
-        
-
-        public int HighScorePlayers()
-        {
-            if (listPlayer is not { Count: > 0 }) return 0;
-            int score = 0;
-            foreach (var pl in listPlayer.Where(pl => score < pl.GetComponent<PlayerMaster>().GetPlayersSettings().score))
-            {
-                score = (int)pl.GetComponent<PlayerMaster>().GetPlayersSettings().score;
-            }
-            return score;
-        }
-
-        public void SaveAllPlayers()
-        {
-            Debug.Log("AQUI SALVA O JOGO");
-            /*for (int i = 0; i < numPlayers.Length; i++)
-            {
-                GameManagerSaves.Instance.SavePlayer(numPlayers[i]);
-            }*/
-        }
-
-        public bool haveAnyPlayMasterBeReady
-        {
-            get
-            {
-                return listPlayer.Any(t => t.GetComponent<PlayerMaster>().ShouldPlayerBeReady());
-            }
-        }
-
         public bool shouldStartPath
         {
             get
             {
-                return (gamePaused && !m_GameManager.isGameStopped && !m_GameManager.isGameOver && !gameBeat && !completePath);
+                return (gamePlayPaused && !m_GameManager.isGameStopped && !m_GameManager.isGameOver && !gameBeat && !completePath);
             }
         }
+    #endregion
 
-        public bool shouldBePlayingGame
+        #region Calls
+        public void CallEventStartPlayGame()
         {
-            get
-            {
-                return m_GameManager.isGameStopped || gamePaused || (!m_GameManager.isGameOver && !completePath);
-            }
+            EventStartPlayGame?.Invoke();
         }
-
-        public bool shouldBeInGameOver
+        public void CallEventResetEnemies()
         {
-            get
-            {
-                return (m_GameManager.isGameOver && !m_GameManager.isGameStopped && !gamePaused);
-            }
+            EventResetEnemies?.Invoke();
         }
-
-        public bool shouldBeFinishPath
+        public void CallEventEnemyDestroyPlayer()
         {
-            get
-            {
-                return (completePath && !gamePaused && !m_GameManager.isGameOver && !m_GameManager.isGameStopped);
-            }
+            EventEnemyDestroyPlayer?.Invoke();
         }
-
-        public bool shouldFinishGame
+        public void CallEventUIScore(int score)
         {
-            get
-            {
-                return (gameBeat && completePath && !m_GameManager.isGameOver && !m_GameManager.isGameStopped);
-            }
+            EventUIScore?.Invoke(score);
         }
-
-    #region Calls
+        
+        //Old Call
         public void CallEventPausePlayGame()
         {
-            gamePaused = true;
+            gamePlayPaused = true;
             EventPausePlayGame?.Invoke();
         }
 
         public void CallEventUnPausePlayGame()
         {
-            gamePaused = false;
+            gamePlayPaused = false;
             EventUnPausePlayGame?.Invoke();
         }
 
@@ -282,20 +312,14 @@ namespace RiverAttack
             EventStartPath?.Invoke();
         }
 
-        public void CallEventResetEnemies()
-        {
-            EventResetEnemies?.Invoke();
-        }
+        
 
         public void CallEventResetPlayers()
         {
             EventResetPlayers?.Invoke();
         }
 
-        public void CallEventUIScore(int score)
-        {
-            EventUIScore?.Invoke(score);
-        }
+        
 
         public void CallEventCheckPoint(Vector3 position)
         {
@@ -326,6 +350,7 @@ namespace RiverAttack
         {
             EventShakeCam?.Invoke(power, inTime);
         }
-    #endregion
+        #endregion
+        
     }
 }
