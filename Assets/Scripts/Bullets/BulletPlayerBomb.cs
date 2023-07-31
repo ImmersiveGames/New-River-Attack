@@ -69,7 +69,7 @@ namespace RiverAttack
             var sphere = (SphereCollider)m_Collider;
             sphere.radius = Mathf.Lerp(0.5f, radiusSize, (float)m_TParam);
         }
-        void DestroyMe()
+        new void DestroyMe()
         {
             GameObject o;
             (o = gameObject).SetActive(false);

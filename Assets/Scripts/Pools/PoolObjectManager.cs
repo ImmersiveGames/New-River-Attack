@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using RiverAttack;
 using UnityEngine;
 namespace Utils
 {
@@ -21,6 +22,18 @@ namespace Utils
         {
             //Find the right pool and ask it for an object.
             return ObjectPools[objName].GetObject();
+        }
+        public static GameObject GetObject<T>(IHasPool objName, ObjectMaster objMaster)
+        {
+            //Find the right pool and ask it for an object.
+            var go = ObjectPools[objName].GetObject();
+            var bullet = go.GetComponent<T>() as Bullets;
+            if (bullet == null) return go;
+            if(!bullet.haveAPool)
+                bullet.SetMyPool(ObjectPools[objName].GetRoot());
+            if(!bullet.ownerShoot)
+                bullet.ownerShoot = objMaster;
+            return go;
         }
         public static Transform GetPool(IHasPool objName)
         {

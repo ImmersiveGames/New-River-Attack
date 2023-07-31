@@ -5,8 +5,7 @@ namespace RiverAttack
     public class BulletPlayer : Bullets
     {
          #region Variable Private Inspector
-         protected internal PlayerMaster ownerShoot;
-         float m_StartTime;
+        float m_StartTime;
         #endregion
 
         #region UnityMethods

@@ -12,7 +12,7 @@ namespace RiverAttack
         [SerializeField] protected internal float playerApproachRadius;
         [SerializeField, Range(.1f, 5)] public float timeToCheck = 2f;
         [SerializeField, MinMaxSlider(0f,20f)] protected internal Vector2 playerApproachRadiusRandom;
-
+        protected float startApproachRadius;
         PlayerDetectApproach m_PlayerDetectApproach;
         
         #region GizmoSettings

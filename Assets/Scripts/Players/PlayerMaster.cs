@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Utils;
 namespace RiverAttack
 {
-    public class PlayerMaster : MonoBehaviour
+    public class PlayerMaster : ObjectMaster
     {
         float m_AutoMovement;
         float m_MovementSpeed;
@@ -136,8 +136,6 @@ namespace RiverAttack
             playerMovementStatus = status;
         }
 
-        
-
         protected internal float GetLastSavePosition() => lastSavePosition;
         public void AddEnemiesHitList(EnemiesScriptable obstacle, int qnt = 1)
         {
@@ -230,13 +228,16 @@ namespace RiverAttack
         {           
             EventPlayerMasterControllerMovement?.Invoke(dir);
         }
-
-        //Old Calls
-        
         protected internal void CallEventPlayerBomb()
         {
             EventPlayerBomb?.Invoke();
         }
+        protected internal void CallEventPlayerAddLive()
+        {
+            EventPlayerAddLive?.Invoke();
+        }
+
+        //Old Calls
         
         protected internal void CallEventIncreaseHealth(int health)
         {
@@ -246,11 +247,6 @@ namespace RiverAttack
         {
             EventDecreaseHealth?.Invoke(health);
         }
-        protected internal void CallEventPlayerAddLive()
-        {
-            EventPlayerAddLive?.Invoke();
-        }
-        
         public void CallEventChangeSkin(ShopProductSkin skin)
         {
             EventChangeSkin?.Invoke(skin);

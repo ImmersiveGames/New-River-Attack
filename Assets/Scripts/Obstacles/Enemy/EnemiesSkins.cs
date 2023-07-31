@@ -16,7 +16,6 @@ namespace RiverAttack
                 }
         void OnEnable()
         {
-            m_GamePlayManager = GamePlayManager.instance;
             LoadDefaultSkin();
             m_GamePlayManager.EventResetEnemies += ResetSkinPosition;
         }
@@ -27,6 +26,7 @@ namespace RiverAttack
   #endregion
         void SetInitialReferences()
         {
+            m_GamePlayManager = GamePlayManager.instance;
             m_EnemiesMaster = GetComponent<EnemiesMaster>();
         }
         void ResetSkinPosition()

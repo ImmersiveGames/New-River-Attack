@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Utils;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace RiverAttack
 {
-    public class EnemiesMaster : MonoBehaviour
+    public class EnemiesMaster : ObjectMaster
     {
         public EnemiesScriptable enemy;
         public bool isDestroyed;
@@ -17,7 +14,13 @@ namespace RiverAttack
         protected internal enum EnemyStatus { Paused, Active }
         [SerializeField]
         protected internal EnemyStatus actualEnemyStatus;
-        public bool ShouldEnemyBeReady() => isDestroyed == false && actualEnemyStatus == EnemyStatus.Active;
+        public bool shouldEnemyBeReady
+        {
+            get
+            {
+                return isDestroyed == false && actualEnemyStatus == EnemyStatus.Active;
+            }
+        }
         [SerializeField]
         EnemiesSetDifficulty.EnemyDifficult actualDifficultName;
         const float DESTROY_DELAY = 0.1f;
@@ -55,7 +58,7 @@ namespace RiverAttack
         #region UNITY METHODS
         void Awake()
         {
-            gameObject.name = enemy.name;
+            //gameObject.name = enemy.name;
 
             enemyStartPosition = transform.position;
             actualEnemyStatus = EnemyStatus.Paused;

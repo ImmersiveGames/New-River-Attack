@@ -4,7 +4,7 @@ namespace RiverAttack
     public class BulletEnemy : Bullets
     {
         #region Variable Private Inspector
-        protected internal EnemiesMaster ownerShoot;
+        
         float m_StartTime;
         
         #endregion

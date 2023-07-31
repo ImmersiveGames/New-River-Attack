@@ -9,7 +9,7 @@ namespace RiverAttack
         protected float bulletSpeed;
         bool m_HasBulletLifeTime;
         protected float bulletLifeTime;
-        
+        protected internal ObjectMaster ownerShoot;
         Transform m_MyPool;
 
         public void Init(float speed,float lifetime = 0)
@@ -17,6 +17,7 @@ namespace RiverAttack
             SetBulletSpeed(speed);
             SetBulletLifeTime(lifetime);
         }
+        
 
         void SetBulletSpeed(float speed)
         {
@@ -28,7 +29,10 @@ namespace RiverAttack
             m_HasBulletLifeTime = lifetime > 0;
             bulletLifeTime = lifetime;
         }
-
+        public bool haveAPool
+        {
+            get { return m_MyPool; }
+        }
         public void SetMyPool(Transform pool)
         {
             m_MyPool = pool;

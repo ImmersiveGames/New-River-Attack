@@ -22,7 +22,6 @@ namespace RiverAttack
             m_EnemyMaster.EventDestroyEnemy += ExplodeAnimation;
             m_EnemyMaster.EventEnemiesMasterMovement += MovementAnimation;
             m_EnemyMaster.EventEnemiesMasterFlipEnemies += EnemiesMasterFlipAnimation;
-            m_EnemyMaster.EventChangeSkin += SetInitialReferences;
             m_GamePlayManager.EventResetEnemies += ResetAnimation;
         }
         protected virtual void OnDisable()
@@ -30,7 +29,6 @@ namespace RiverAttack
             m_EnemyMaster.EventDestroyEnemy -= ExplodeAnimation;
             m_EnemyMaster.EventEnemiesMasterMovement -= MovementAnimation;
             m_EnemyMaster.EventEnemiesMasterFlipEnemies -= EnemiesMasterFlipAnimation;
-            m_EnemyMaster.EventChangeSkin -= SetInitialReferences;
             m_GamePlayManager.EventResetEnemies -= ResetAnimation;
         }
   #endregion

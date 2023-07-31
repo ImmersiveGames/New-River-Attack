@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Utils;
 namespace RiverAttack
 {
@@ -7,8 +6,6 @@ namespace RiverAttack
     public class EnemiesShoot : ObstacleDetectApproach, IShoot, IHasPool
     {
         [Tooltip("Identifica se o jogador em modo rapidfire")]
-        [SerializeField] bool canShoot;
-        [SerializeField] bool canShootByApproach;
         enum ShootState
         {
             Hold,
@@ -19,6 +16,7 @@ namespace RiverAttack
         [SerializeField] GameObject bullet;
         [SerializeField] int startPool;
         [SerializeField] float shootCadence;
+        float m_ShootCadence;
         const float START_TO_SHOOT = 0.2f;
         [SerializeField] Transform target;
         
@@ -29,54 +27,52 @@ namespace RiverAttack
         [SerializeField] float bulletLifeTime;
 
         //private ControllerMap controllerMap;
-        float m_NextShoot;
         GameObject m_MyShoot;
         Transform m_SpawnPoint;
         GamePlayManager m_GamePlayManager;
         EnemiesMaster m_EnemiesMaster;
         EnemiesSetDifficulty m_EnemyDifficult;
-        Renderer m_Renderer;
+        MeshRenderer m_Renderer;
 
         #region UNITY METHODS
         void OnEnable()
         {
             SetInitialReferences();
-            activeShootState = (canShoot) ? ShootState.Shooting : ShootState.Hold;
-            activeShootState = (canShootByApproach) ? ShootState.Patrolling : activeShootState;
+            activeShootState = SetActualShootState();
             m_EnemiesMaster.EventDestroyEnemy += StopFire;
             m_GamePlayManager.EventEnemyDestroyPlayer += StopFire;
             m_GamePlayManager.EventResetEnemies += StartFire;
-            StartMyPool();
         }
         void Start()
         {
+            StartMyPool();
             playerApproachRadius = SetPlayerApproachRadius();
             if (m_EnemiesMaster == null) return;
-            LogInitialShootStatus(m_EnemiesMaster.enemy);
-            
-            canShoot = playerApproachRadius == 0;
-            
             if (m_EnemiesMaster.enemy == null || m_EnemiesMaster.enemy.enemiesSetDifficultyListSo == null) return;
             DifficultUpdates();
-            
-            if (playerApproachRadius != 0) InvokeRepeating(nameof(HasPlayerApproach), 0, timeToCheck);
+            //if (playerApproachRadius != 0) InvokeRepeating(nameof(HasPlayerApproach), 0, timeToCheck);
         }
         void OnBecameVisible()
         {
+            activeShootState = SetActualShootState();
             if (IsInvoking(nameof(Fire))) return;
             InvokeRepeating(nameof(Fire), START_TO_SHOOT, shootCadence);
         }
         void OnBecameInvisible()
         {
+            //activeShootState = SetActualShootState();
             CancelInvoke(nameof(Fire));
         }
-        void LateUpdate()
+        void Update()
         {
-            if (!canShoot || !GamePlayManager.instance.shouldBePlayingGame || activeShootState != ShootState.Shooting || m_EnemiesMaster.isDestroyed) return;
-            if (m_EnemiesMaster != null && m_EnemyDifficult.enemyDifficult != m_EnemiesMaster.getDifficultName)
+            if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldEnemyBeReady || m_EnemiesMaster.isDestroyed) return;
+            if (m_EnemyDifficult.enemyDifficult != m_EnemiesMaster.getDifficultName)
                 DifficultUpdates();
-            activeShootState = ShootState.Shooting;
-            Fire();
+
+            if (activeShootState != ShootState.Patrolling) return;
+            if (!m_Renderer.isVisible) return;
+            HasPlayerApproach();
+            Debug.Log("Patrulhando: "+ transform.name);
         }
         void OnDisable()
         {
@@ -93,25 +89,67 @@ namespace RiverAttack
             m_GamePlayManager = GamePlayManager.instance;
             m_EnemiesMaster = GetComponent<EnemiesMaster>();
             m_SpawnPoint = GetComponentInChildren<EnemiesShootSpawn>().transform ? GetComponentInChildren<EnemiesShootSpawn>().transform : transform;
-            
+            activeShootState = ShootState.Hold;
+            m_ShootCadence = shootCadence;
+            startApproachRadius = SetPlayerApproachRadius();
         }
         public void Fire()
         {
-            if (!shouldBeFire || !m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.ShouldEnemyBeReady())
-                return;
-            m_MyShoot = PoolObjectManager.GetObject(this);
-            m_MyShoot.transform.parent = null;
-            var transform1 = m_SpawnPoint;
-            var transformPosition = transform1.position;
-            var transformRotation = transform1.rotation;
-            m_MyShoot.transform.position = new Vector3(transformPosition.x, transformPosition.y, transformPosition.z);
-            m_MyShoot.transform.rotation = new Quaternion(transformRotation.x, transformRotation.y, transformRotation.z, transformRotation.w);
-        }
-        public void SetTarget(Transform toTarget)
-        {
-            target = toTarget;
+            ///////
+            /// Mudar o tempo do Fire esta somando as duas cadencia quando esta em patrulling
+            /// 
+            //activeShootState = SetActualShootState();
+            Debug.Log(" Attempt to FIRE: " + transform.name);
+            if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldEnemyBeReady || m_EnemiesMaster.isDestroyed) return;
+            if (!shouldBeFire) return;
+            if (playerApproachRadius == 0 && playerApproachRadiusRandom == Vector2.zero)
+                activeShootState = ShootState.Shooting;
+            if (shouldBeFireByApproach) activeShootState = (target)? ShootState.Shooting:ShootState.Patrolling;
+            if (activeShootState != ShootState.Shooting) return;
+
+            Debug.Log("FIRE: "+ transform.name);
+            //Pick a bullet
+            m_MyShoot = PoolObjectManager.GetObject<BulletEnemy>(this, m_EnemiesMaster);
+            //setting bullet entity
+            var myBullet = m_MyShoot.GetComponent<BulletEnemy>();
+            myBullet.Init(bulletSpeed, bulletLifeTime);
+            //Deattached bullet
+            var myShootTransform = m_MyShoot.transform;
+            myShootTransform.parent = null;
+            TransformBullets(ref myShootTransform, m_SpawnPoint);
+            /*
+            
+            // O jogo permite atirar.
+            //Checar se o inimigo pode atirar
+            if (!shouldBeFire || !shouldBeFireByApproach) return;
+            if (shouldBeFireByApproach && activeShootState == ShootState.Patrolling && target == null) return;
+            activeShootState = ShootState.Shooting;
+                Debug.Log("FIRE");
+            //Pick a bullet
+            m_MyShoot = PoolObjectManager.GetObject<BulletEnemy>(this, m_EnemiesMaster);
+            //setting bullet entity
+            var myBullet = m_MyShoot.GetComponent<BulletEnemy>();
+            myBullet.Init(bulletSpeed, bulletLifeTime);
+            //Deattached bullet
+            var myShootTransform = m_MyShoot.transform;
+            myShootTransform.parent = null;
+            TransformBullets(ref myShootTransform, m_SpawnPoint);
+
+            bulletEnemy.spawnPoint = spawnPoint.position;
+                bulletEnemy.target = target;*/
+            /*if (hasTarget)
+            bulletEnemy.transform.LookAt(target); */
         }
 
+        void TransformBullets(ref Transform transformBullet, Transform transformSpawn)
+        {
+            if (transformSpawn == null) transformSpawn = transform;
+            var transformPosition = transformSpawn.position;
+            var transformRotation = transformSpawn.rotation;
+            var bulletTransform = transformBullet;
+            bulletTransform.position = new Vector3(transformPosition.x, transformPosition.y, transformPosition.z);
+            bulletTransform.rotation = new Quaternion(transformRotation.x, transformRotation.y, transformRotation.z, transformRotation.w);
+        }
         void StopFire()
         {
             CancelInvoke(nameof(Fire));
@@ -126,46 +164,43 @@ namespace RiverAttack
         {
             get
             {
-                return shootCadence > 0 && bulletSpeed > 0 && activeShootState == ShootState.Shooting;
+                return shootCadence > 0 && bulletSpeed > 0;
+            }
+        }
+        bool shouldBeFireByApproach
+        {
+            get
+            {
+                return shouldBeFire && (playerApproachRadius != 0 || playerApproachRadiusRandom != Vector2.zero);
             }
         }
         public void StartMyPool(bool isPersistent = false)
         {
             PoolObjectManager.CreatePool(this, bullet, startPool, transform, isPersistent);
-            var pool = PoolObjectManager.GetPool(this);
-            for (int i = 0; i < pool.childCount; i++)
-            {
-                var bulletEnemy = pool.GetChild(i).GetComponent<BulletEnemy>();
-                bulletEnemy.ownerShoot = m_EnemiesMaster;
-                bulletEnemy.SetMyPool(pool);
-                bulletEnemy.Init(bulletSpeed, bulletLifeTime);
-                pool.GetChild(i).transform.position = m_SpawnPoint.transform.position;
-                pool.GetChild(i).transform.rotation = m_SpawnPoint.transform.rotation;
-                /*bulletEnemy.spawnPoint = spawnPoint.position;
-                bulletEnemy.target = target;*/
-                /*if (hasTarget)
-                bulletEnemy.transform.LookAt(target); */
-            }
+        }
+        public void SetTarget(Transform toTarget)
+        {
+            target = toTarget;
         }
         protected override void HasPlayerApproach()
         {
             SetTarget(FindTarget<PlayerMaster>(GameManager.instance.layerPlayer));
-            canShoot = target != null;
         }
         protected override void DifficultUpdates()
         {
             m_EnemyDifficult = m_EnemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(m_EnemiesMaster.getDifficultName);
-            shootCadence = m_EnemiesMaster.enemy.shootCadence * m_EnemyDifficult.multiplyEnemiesShootCadence;
-            
-            if (canShootByApproach == false || (m_EnemiesMaster.enemy.radiusToApproach == 0 || playerApproachRadius == 0)) return;
-            if(m_EnemiesMaster.enemy.radiusToApproach != 0 && m_EnemyDifficult.multiplyPlayerDistanceRadius != 0)
-                playerApproachRadius = m_EnemiesMaster.enemy.radiusToApproach * m_EnemyDifficult.multiplyPlayerDistanceRadius;
+            shootCadence = m_ShootCadence * m_EnemyDifficult.multiplyEnemiesShootCadence;
+            playerApproachRadius = startApproachRadius * m_EnemyDifficult.multiplyPlayerDistanceRadius;
         }
-        void LogInitialShootStatus(EnemiesScriptable enemy)
+
+        ShootState SetActualShootState(ShootState forceChange = ShootState.Hold)
         {
-            enemy.shootCadence = shootCadence;
-            enemy.radiusToApproach = playerApproachRadius;
+            if (forceChange != ShootState.Hold) return forceChange;
+            if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldEnemyBeReady) return ShootState.Hold;
+            if(shouldBeFire) forceChange = ShootState.Shooting;
+            if (shouldBeFireByApproach) forceChange = ShootState.Patrolling;
+            return forceChange;
         }
-    
+
     }
 }
