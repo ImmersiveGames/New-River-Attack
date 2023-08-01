@@ -1,7 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Threading.Tasks;
 using RiverAttack;
 using Utils;
+using TMPro;
+using System.Collections.Generic;
 
 namespace Shopping
 {
@@ -10,6 +15,8 @@ namespace Shopping
         [SerializeField]
         Transform contentShop;
         [SerializeField]
+        ScrollRect scrollBarShop;
+        [SerializeField]
         GameObject objProduct;
         [SerializeField]
         RectTransform refCenter;
@@ -17,15 +24,22 @@ namespace Shopping
         ListShopStock productStock;
         [SerializeField]
         GameObject productForward, productBackward;
+        [SerializeField]
+        TMP_Text refuggiesText;
 
         [Header("Carousel"), SerializeField]
         bool infinityLooping;
         [SerializeField]
         float spaceBetweenPanels, maxPosition;
 
+ 
+        PlayersInputActions m_inputSystem;
         PlayerSettings m_ActivePlayer;
+        EventSystem m_EventSystem;
         ShopCarousel m_Shop;
         Task m_Task;
+
+        List<PlayerMaster> playerMasterList;
 
         public delegate void GeneralUpdateButtons(PlayerSettings player, ShopProductStock item);
         public GeneralUpdateButtons eventButtonSelect;
@@ -37,30 +51,41 @@ namespace Shopping
             //SaveGame.DeleteAll();
             SetInitialReferences();
             SetupShop();
+            scrollBarShop.horizontalScrollbar.numberOfSteps = m_Shop.getProducts.Length;
         }
 
         void Start()
         {
-            productForward.SetActive(true);
-            productBackward.SetActive(true);
-            if (m_Shop.getActualProduct == 0 && !infinityLooping)
-            {
-                productBackward.SetActive(false);
-            }
+            RefuggieDisplayUpdate();
+
+            m_inputSystem.UI_Controlls.BuyButton.performed += ctx => BuyButton(ctx);
+            m_inputSystem.UI_Controlls.SelectButton.performed += ctx => SelectButton(ctx);
+            m_inputSystem.UI_Controlls.LeftSelection.performed += ctx => ButtonNavegation(-1);
+            m_inputSystem.UI_Controlls.RightSelection.performed += ctx => ButtonNavegation(1);
         }
+
         void LateUpdate()
         {
-            m_Shop?.Update();
+            ButtonNavegation(0);
+            //m_Shop?.Update();
         }
         void OnDisable()
         {
             //GameManagerSaves.Instance.SavePlayer(activePlayer);
+            m_inputSystem = new PlayersInputActions();
+            m_inputSystem.UI_Controlls.Disable();
         }
   #endregion
         void SetInitialReferences()
         {
-            var activePlayer = GameManager.instance.GetActivePlayerTransform(0);
-            m_ActivePlayer = activePlayer.GetComponent<PlayerMaster>().GetPlayersSettings();
+            playerMasterList = GamePlayManager.instance.playersMasterList;
+
+            m_ActivePlayer = GamePlayManager.instance.GetPlayerSettingsByMultiPlayerId(0);
+            m_EventSystem = EventSystem.current;
+
+            m_inputSystem = new PlayersInputActions();
+            m_inputSystem.UI_Controlls.Enable();                  
+
             //GameManagerSaves.Instance.LoadPlayer(ref activePlayer);
             //activePlayer.LoadValues();
         }
@@ -91,22 +116,39 @@ namespace Shopping
             product.shopProduct.ConsumeProduct(player);
             product.RemoveStock(1);
             CallEventButtonBuy(player, product);
+            RefuggieDisplayUpdate();
         }
         void SelectThisItem(PlayerSettings player, ShopProductStock shopProductStock)
         {
             shopProductStock.shopProduct.ConsumeProduct(player);
             CallEventButtonSelect(player, shopProductStock);
+
+            foreach (PlayerMaster playerMaster in playerMasterList) 
+            {
+                playerMaster.CallEventChangeSkin(player.playerSkin);
+            }
+
         }
 
         public void ButtonNavegation(int next)
         {
             m_Shop.ButtonNavegation(next);
+
+            //Debug.Log(m_Shop.getActualProduct);
+            //Debug.Log(m_Shop.getProducts.Length);
+
+            float scrollbarValue = ((float)m_Shop.getActualProduct) / ((float)m_Shop.getProducts.Length -1);
+            //Debug.Log(scrollbarValue);
+
+            scrollBarShop.horizontalScrollbar.value = scrollbarValue;
+
             if (!infinityLooping)
             {
                 if (m_Shop.getActualProduct == 0)
                 {
                     productBackward.SetActive(false);
                     productForward.SetActive(true);
+                    //m_EventSystem.SetSelectedGameObject(productForward);
                 }
                 else
                 {
@@ -116,13 +158,18 @@ namespace Shopping
                 if (m_Shop.getProducts.Length - 1 != m_Shop.getActualProduct) return;
                 productBackward.SetActive(true);
                 productForward.SetActive(false);
+                //m_EventSystem.SetSelectedGameObject(productBackward);
             }
             else
             {
                 productBackward.SetActive(true);
                 productForward.SetActive(true);
             }
+        }
 
+        void RefuggieDisplayUpdate() 
+        {
+            refuggiesText.text = m_ActivePlayer.wealth.ToString();
         }
 
         public void CallEventButtonSelect(PlayerSettings player, ShopProductStock item)
@@ -133,5 +180,21 @@ namespace Shopping
         {
             eventButtonBuy?.Invoke(player, item);
         }
+
+        void BuyButton(InputAction.CallbackContext context) 
+        {
+            Debug.Log("Comprar o item");
+            var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
+            BuyThisItem(m_ActivePlayer, item.productInStock);
+        }
+
+        void SelectButton(InputAction.CallbackContext context)
+        {
+            Debug.Log("Selecionar o item");
+            
+            var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
+            SelectThisItem(m_ActivePlayer, item.productInStock);
+        }
+
     }
 }

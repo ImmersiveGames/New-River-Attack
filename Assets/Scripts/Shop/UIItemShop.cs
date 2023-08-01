@@ -1,17 +1,18 @@
 ﻿using RiverAttack;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace Shopping
 {
     public class UIItemShop : MonoBehaviour
     {
         [SerializeField, Header("Product Display")]
-        Text productName;
+        TMP_Text productName;
         [SerializeField]
-        Text productDescription;
+        TMP_Text productDescription;
         [SerializeField]
-        Text productPrice;
+        TMP_Text productPrice;
         [SerializeField]
         Image productImage;
         [SerializeField]
@@ -48,7 +49,7 @@ namespace Shopping
             productInStock = stockProduct;
             var shopProduct = stockProduct.shopProduct;
             productName.text = shopProduct.name;
-            productDescription.text = shopProduct.descriptionItem;
+            //productDescription.text = shopProduct.descriptionItem;
             productPrice.text = shopProduct.priceItem.ToString();
             productImage.sprite = shopProduct.spriteItem;
         }

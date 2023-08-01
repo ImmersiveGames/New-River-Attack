@@ -27,7 +27,7 @@ namespace Shopping
         bool m_Dragging = false;
         bool m_TargetNearestButton = true;
         //private Vector2 productSize;
-    #endregion
+        #endregion
 
         #region UNITY METHODS
         public void Update()
@@ -85,13 +85,13 @@ namespace Shopping
                 }
             }
 
-            if (m_Dragging)  return;
+            if (m_Dragging) return;
             if (Direction == CarouselDirection.Horizontal)
                 LerpToProduct(-getProducts[getActualProduct].GetComponent<RectTransform>().anchoredPosition.x);
             if (Direction == CarouselDirection.Vertical)
                 LerpToProduct(-getProducts[getActualProduct].GetComponent<RectTransform>().anchoredPosition.y);
 
-            Canvas.ForceUpdateCanvases();
+            //Canvas.ForceUpdateCanvases();
         }
         void Drag(bool drag)
         {
@@ -119,12 +119,12 @@ namespace Shopping
                 if (item.GetComponent<UIItemShop>() != null)
                     item.GetComponent<UIItemShop>().SetupDisplay(productStocks[i]);
                 item.transform.localPosition += (Vector3)distanceGap;
-                Canvas.ForceUpdateCanvases();
+                //Canvas.ForceUpdateCanvases();
                 //productSize = item.GetComponent<RectTransform>().rect.size;
                 distanceGap += VectorCarouselDirection(item.GetComponent<RectTransform>().rect.size, spaceBetweenPanels);
                 getProducts[i] = item;
             }
-            Canvas.ForceUpdateCanvases();
+            //Canvas.ForceUpdateCanvases();
             // pegas a distancia entre botões
             m_ProductDistance = (int)Mathf.Abs(VectorDistance(getProducts[1].GetComponent<RectTransform>().anchoredPosition, getProducts[0].GetComponent<RectTransform>().anchoredPosition));
             //maxposition = productDistance * 1.8f;
@@ -143,11 +143,11 @@ namespace Shopping
             else
             {
                 if (getActualProduct < 0)
-                    getActualProduct = getProducts.Length - 1;
-                if (getActualProduct > getProducts.Length - 1)
                     getActualProduct = 0;
+                if (getActualProduct > getProducts.Length - 1)
+                    getActualProduct = getProducts.Length - 1;
             }
-            Canvas.ForceUpdateCanvases();
+            //Canvas.ForceUpdateCanvases();
             //targetNearestButton = true;
         }
 

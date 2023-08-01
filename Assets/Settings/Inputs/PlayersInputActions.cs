@@ -55,6 +55,15 @@ namespace RiverAttack
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""1f4253a5-5081-4ef8-a36f-cfc07c42ee46"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -277,6 +286,182 @@ namespace RiverAttack
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c52b2ff1-beca-49d2-b643-03e191220068"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC;Mobile"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ed48359b-b227-4591-8986-0c7cb9c8f5b2"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI_Controlls"",
+            ""id"": ""f85c31d3-07d1-4e65-a95f-8382e3a66cdd"",
+            ""actions"": [
+                {
+                    ""name"": ""BuyButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""d4723a7f-eb4f-4a39-ba76-8b6e436d51ed"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""e66faeb4-5f21-42c8-b306-669f883bd032"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftSelection"",
+                    ""type"": ""Button"",
+                    ""id"": ""9764b246-24bb-4fa4-87ea-079779ca18c2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RightSelection"",
+                    ""type"": ""Button"",
+                    ""id"": ""209793d0-4570-4a8a-a136-42485a504f80"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1f8f2e9a-3d57-4e72-abb4-dfdb85ebf842"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC;Mobile"",
+                    ""action"": ""BuyButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a2f570c-a09a-4d84-a87a-37037c25e8f2"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""BuyButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ba1c1af3-560a-401c-b5d5-9f7b4a99e0b6"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile;PC"",
+                    ""action"": ""SelectButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86ea53cc-c2bd-4fd0-a749-b56103369db9"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c4c8f3c6-33a4-415a-b9d4-88d24f696f94"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile;PC"",
+                    ""action"": ""LeftSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5c57e146-1e24-43ce-807e-c435c456b633"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""LeftSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e71eddf-04b9-48ce-baca-84036567fa02"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c016fb2a-d0bb-494f-96f3-0b4546432b6e"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""RightSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""812a4dfb-e3d0-4744-8a06-3d96642b2b9d"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC;Mobile"",
+                    ""action"": ""RightSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc80e582-6ab7-4d43-ba57-4a9bed911c38"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -321,6 +506,13 @@ namespace RiverAttack
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Bomb = m_Player.FindAction("Bomb", throwIfNotFound: true);
             m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
+            m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+            // UI_Controlls
+            m_UI_Controlls = asset.FindActionMap("UI_Controlls", throwIfNotFound: true);
+            m_UI_Controlls_BuyButton = m_UI_Controlls.FindAction("BuyButton", throwIfNotFound: true);
+            m_UI_Controlls_SelectButton = m_UI_Controlls.FindAction("SelectButton", throwIfNotFound: true);
+            m_UI_Controlls_LeftSelection = m_UI_Controlls.FindAction("LeftSelection", throwIfNotFound: true);
+            m_UI_Controlls_RightSelection = m_UI_Controlls.FindAction("RightSelection", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -385,6 +577,7 @@ namespace RiverAttack
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Bomb;
         private readonly InputAction m_Player_Shoot;
+        private readonly InputAction m_Player_Pause;
         public struct PlayerActions
         {
             private @PlayersInputActions m_Wrapper;
@@ -392,6 +585,7 @@ namespace RiverAttack
             public InputAction @Move => m_Wrapper.m_Player_Move;
             public InputAction @Bomb => m_Wrapper.m_Player_Bomb;
             public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
+            public InputAction @Pause => m_Wrapper.m_Player_Pause;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -410,6 +604,9 @@ namespace RiverAttack
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -423,6 +620,9 @@ namespace RiverAttack
                 @Shoot.started -= instance.OnShoot;
                 @Shoot.performed -= instance.OnShoot;
                 @Shoot.canceled -= instance.OnShoot;
+                @Pause.started -= instance.OnPause;
+                @Pause.performed -= instance.OnPause;
+                @Pause.canceled -= instance.OnPause;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -440,6 +640,76 @@ namespace RiverAttack
             }
         }
         public PlayerActions @Player => new PlayerActions(this);
+
+        // UI_Controlls
+        private readonly InputActionMap m_UI_Controlls;
+        private List<IUI_ControllsActions> m_UI_ControllsActionsCallbackInterfaces = new List<IUI_ControllsActions>();
+        private readonly InputAction m_UI_Controlls_BuyButton;
+        private readonly InputAction m_UI_Controlls_SelectButton;
+        private readonly InputAction m_UI_Controlls_LeftSelection;
+        private readonly InputAction m_UI_Controlls_RightSelection;
+        public struct UI_ControllsActions
+        {
+            private @PlayersInputActions m_Wrapper;
+            public UI_ControllsActions(@PlayersInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @BuyButton => m_Wrapper.m_UI_Controlls_BuyButton;
+            public InputAction @SelectButton => m_Wrapper.m_UI_Controlls_SelectButton;
+            public InputAction @LeftSelection => m_Wrapper.m_UI_Controlls_LeftSelection;
+            public InputAction @RightSelection => m_Wrapper.m_UI_Controlls_RightSelection;
+            public InputActionMap Get() { return m_Wrapper.m_UI_Controlls; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(UI_ControllsActions set) { return set.Get(); }
+            public void AddCallbacks(IUI_ControllsActions instance)
+            {
+                if (instance == null || m_Wrapper.m_UI_ControllsActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_UI_ControllsActionsCallbackInterfaces.Add(instance);
+                @BuyButton.started += instance.OnBuyButton;
+                @BuyButton.performed += instance.OnBuyButton;
+                @BuyButton.canceled += instance.OnBuyButton;
+                @SelectButton.started += instance.OnSelectButton;
+                @SelectButton.performed += instance.OnSelectButton;
+                @SelectButton.canceled += instance.OnSelectButton;
+                @LeftSelection.started += instance.OnLeftSelection;
+                @LeftSelection.performed += instance.OnLeftSelection;
+                @LeftSelection.canceled += instance.OnLeftSelection;
+                @RightSelection.started += instance.OnRightSelection;
+                @RightSelection.performed += instance.OnRightSelection;
+                @RightSelection.canceled += instance.OnRightSelection;
+            }
+
+            private void UnregisterCallbacks(IUI_ControllsActions instance)
+            {
+                @BuyButton.started -= instance.OnBuyButton;
+                @BuyButton.performed -= instance.OnBuyButton;
+                @BuyButton.canceled -= instance.OnBuyButton;
+                @SelectButton.started -= instance.OnSelectButton;
+                @SelectButton.performed -= instance.OnSelectButton;
+                @SelectButton.canceled -= instance.OnSelectButton;
+                @LeftSelection.started -= instance.OnLeftSelection;
+                @LeftSelection.performed -= instance.OnLeftSelection;
+                @LeftSelection.canceled -= instance.OnLeftSelection;
+                @RightSelection.started -= instance.OnRightSelection;
+                @RightSelection.performed -= instance.OnRightSelection;
+                @RightSelection.canceled -= instance.OnRightSelection;
+            }
+
+            public void RemoveCallbacks(IUI_ControllsActions instance)
+            {
+                if (m_Wrapper.m_UI_ControllsActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IUI_ControllsActions instance)
+            {
+                foreach (var item in m_Wrapper.m_UI_ControllsActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_UI_ControllsActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public UI_ControllsActions @UI_Controlls => new UI_ControllsActions(this);
         private int m_MobileSchemeIndex = -1;
         public InputControlScheme MobileScheme
         {
@@ -463,6 +733,14 @@ namespace RiverAttack
             void OnMove(InputAction.CallbackContext context);
             void OnBomb(InputAction.CallbackContext context);
             void OnShoot(InputAction.CallbackContext context);
+            void OnPause(InputAction.CallbackContext context);
+        }
+        public interface IUI_ControllsActions
+        {
+            void OnBuyButton(InputAction.CallbackContext context);
+            void OnSelectButton(InputAction.CallbackContext context);
+            void OnLeftSelection(InputAction.CallbackContext context);
+            void OnRightSelection(InputAction.CallbackContext context);
         }
     }
 }
