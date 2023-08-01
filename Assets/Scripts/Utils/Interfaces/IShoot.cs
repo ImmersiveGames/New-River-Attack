@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using RiverAttack;
 namespace Utils
 {
     public interface IShoot
     {
-        void Fire();
-        void SetTarget(Transform toTarget);
+        void EnterState();
+        void UpdateState(IHasPool myPool, EnemiesMaster enemyMaster);
+        void ExitState();
+        void Fire(IHasPool myPool, EnemiesMaster enemyMaster);
+        //void SetTarget(Transform toTarget);
     }
 }

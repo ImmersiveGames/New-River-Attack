@@ -38,12 +38,6 @@ namespace RiverAttack
             m_GamePlayManager.EventPausePlayGame += SoundStop;
             m_GamePlayManager.EventCompletePath += SoundStop;
         }
-        void Update()
-        {
-            if (m_GamePlayManager.shouldBePlayingGame)
-                return;
-            SoundStop();
-        }
         void OnDisable()
         {
             m_PlayerMaster.EventPlayerMasterControllerMovement -= SoundEngine;
@@ -60,6 +54,7 @@ namespace RiverAttack
 
         void SoundEngine(Vector2 dir)
         {
+            if (!m_PlayerMaster.ShouldPlayerBeReady()) return;
             if (dir.y > 0 && m_PlayerMaster.playerMovementStatus != PlayerMaster.MovementStatus.Accelerate)
             {
                 m_PlayerMaster.playerMovementStatus = PlayerMaster.MovementStatus.Accelerate;

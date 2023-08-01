@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
@@ -74,9 +73,10 @@ namespace RiverAttack
                     Debug.Log("GameOver");
                     break;
                 case States.GamePlay:
-                    Debug.Log("Começou o jogo");
+                    //Debug.Log("Começou o jogo");
                     break;
                 case States.GameOver:
+                    isGameOver = true;
                     Debug.Log("GameOver");
                     break;
                 case States.Results:

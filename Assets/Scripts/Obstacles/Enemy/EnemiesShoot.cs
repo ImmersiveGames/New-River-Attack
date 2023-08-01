@@ -1,11 +1,121 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Utils;
 namespace RiverAttack
 {
     [RequireComponent(typeof(EnemiesMaster),typeof(Renderer))]
-    public class EnemiesShoot : ObstacleDetectApproach, IShoot, IHasPool
+    public class EnemiesShoot : ObstacleDetectApproach, IHasPool
     {
-        [Tooltip("Identifica se o jogador em modo rapidfire")]
+        const float START_TO_SHOOT = 0.2f;
+        [SerializeField] GameObject bullet;
+        [SerializeField] int startPool;
+        [SerializeField] float shootCadence;
+        [Header("Bullet Settings")]
+        [SerializeField]
+        float bulletSpeed;
+        [SerializeField] float bulletLifeTime;
+        Transform m_Target;
+
+        #region IShoots
+        StateShoot m_StateShoot = new StateShoot();
+        StateShootHold m_StateShootHold = new StateShootHold();
+        StateShootPatrol m_StateShootPatrol = new StateShootPatrol();
+  #endregion
+        private IShoot m_ActualState;
+        
+        GamePlayManager m_GamePlayManager;
+        EnemiesMaster m_EnemiesMaster;
+        EnemiesSetDifficulty m_EnemyDifficult;
+        MeshRenderer m_Renderer;
+        Transform m_SpawnPoint;
+
+        #region UNITYMETHODS
+        void OnEnable()
+        {
+            SetInitialReferences();
+            m_StateShoot.SetBullet(shootCadence, bulletSpeed,bulletLifeTime);
+            m_SpawnPoint = GetComponentInChildren<EnemiesShootSpawn>().transform ? GetComponentInChildren<EnemiesShootSpawn>().transform : transform;
+            m_StateShoot.SetSpawnPoint(m_SpawnPoint);
+            m_EnemiesMaster.EventDestroyEnemy += StopFire;
+            m_GamePlayManager.EventEnemyDestroyPlayer += StopFire;
+            //m_GamePlayManager.EventResetEnemies += StartFire;
+        }
+        void Start()
+        {
+            // setup inicial do status
+            StartMyPool();
+            ChangeState(m_StateShootHold);
+        }
+
+        void LateUpdate()
+        {
+            if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldEnemyBeReady || m_EnemiesMaster.isDestroyed || !m_Renderer.isVisible)
+                return;
+            switch (shouldBeFire)
+            {
+                case true when shouldBeFireByApproach && !m_Target:
+                    ChangeState(m_StateShootPatrol);
+                    break;
+                case true:
+                    ChangeState(m_StateShoot);
+                    break;
+                case false:
+                    ChangeState(m_StateShootHold);
+                    break;
+            }
+            m_ActualState.UpdateState(this, m_EnemiesMaster);
+        }
+        void OnDisable()
+        {
+            m_EnemiesMaster.EventDestroyEnemy -= StopFire;
+            //m_GamePlayManager.EventEnemyDestroyPlayer -= StopFire;
+            //m_GamePlayManager.EventResetEnemies -= StartFire;
+        }
+  #endregion
+        void SetInitialReferences()
+        {
+            m_Renderer = GetComponent<MeshRenderer>();
+            if (m_Renderer == null)
+                m_Renderer = gameObject.AddComponent<MeshRenderer>();
+            m_GamePlayManager = GamePlayManager.instance;
+            m_EnemiesMaster = GetComponent<EnemiesMaster>();
+            m_SpawnPoint = GetComponentInChildren<EnemiesShootSpawn>().transform ? GetComponentInChildren<EnemiesShootSpawn>().transform : transform;
+        }
+        void ChangeState(IShoot newState)
+        {
+            if (m_ActualState == newState) return;
+            m_ActualState?.ExitState();
+
+            m_ActualState = newState;
+            m_ActualState?.EnterState();
+        }
+        
+        void StopFire()
+        {
+            m_Target = null;
+            ChangeState(m_StateShootHold);
+        }
+        bool shouldBeFire
+        {
+            get
+            {
+                return shootCadence > 0 && bulletSpeed > 0;
+            }
+        }
+        bool shouldBeFireByApproach
+        {
+            get
+            {
+                return playerApproachRadius != 0 || playerApproachRadiusRandom != Vector2.zero;
+            }
+        }
+        protected override void DifficultUpdates() { }
+        protected override void HasPlayerApproach() { }
+        public void StartMyPool(bool isPersistent = false)
+        {
+            PoolObjectManager.CreatePool(this, bullet, startPool, transform, isPersistent);
+        }
+        /*[Tooltip("Identifica se o jogador em modo rapidfire")]
         enum ShootState
         {
             Hold,
@@ -13,8 +123,7 @@ namespace RiverAttack
             Patrolling
         }
         [SerializeField] ShootState activeShootState;
-        [SerializeField] GameObject bullet;
-        [SerializeField] int startPool;
+        
         [SerializeField] float shootCadence;
         float m_ShootCadence;
         const float START_TO_SHOOT = 0.2f;
@@ -108,15 +217,7 @@ namespace RiverAttack
             if (activeShootState != ShootState.Shooting) return;
 
             Debug.Log("FIRE: "+ transform.name);
-            //Pick a bullet
-            m_MyShoot = PoolObjectManager.GetObject<BulletEnemy>(this, m_EnemiesMaster);
-            //setting bullet entity
-            var myBullet = m_MyShoot.GetComponent<BulletEnemy>();
-            myBullet.Init(bulletSpeed, bulletLifeTime);
-            //Deattached bullet
-            var myShootTransform = m_MyShoot.transform;
-            myShootTransform.parent = null;
-            TransformBullets(ref myShootTransform, m_SpawnPoint);
+            
             /*
             
             // O jogo permite atirar.
@@ -136,9 +237,9 @@ namespace RiverAttack
             TransformBullets(ref myShootTransform, m_SpawnPoint);
 
             bulletEnemy.spawnPoint = spawnPoint.position;
-                bulletEnemy.target = target;*/
+                bulletEnemy.target = target;#1#
             /*if (hasTarget)
-            bulletEnemy.transform.LookAt(target); */
+            bulletEnemy.transform.LookAt(target); #1#
         }
 
         void TransformBullets(ref Transform transformBullet, Transform transformSpawn)
@@ -174,10 +275,7 @@ namespace RiverAttack
                 return shouldBeFire && (playerApproachRadius != 0 || playerApproachRadiusRandom != Vector2.zero);
             }
         }
-        public void StartMyPool(bool isPersistent = false)
-        {
-            PoolObjectManager.CreatePool(this, bullet, startPool, transform, isPersistent);
-        }
+        
         public void SetTarget(Transform toTarget)
         {
             target = toTarget;
@@ -200,7 +298,7 @@ namespace RiverAttack
             if(shouldBeFire) forceChange = ShootState.Shooting;
             if (shouldBeFireByApproach) forceChange = ShootState.Patrolling;
             return forceChange;
-        }
+        }*/
 
     }
 }

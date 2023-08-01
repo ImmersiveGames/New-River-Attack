@@ -67,8 +67,8 @@ namespace RiverAttack
             }
             else
             {
-                StopAllCoroutines();
                 m_GamePlayMaster.CallEventEnemyDestroyPlayer();
+                StopAllCoroutines();
                 StartCoroutine(ReSpawn());
                 Debug.Log("Chamou corrotina respawn");
             }
@@ -82,18 +82,18 @@ namespace RiverAttack
 
         IEnumerator ReSpawn()
         {
+            m_GamePlayMaster.SetGamePlayPause(true);
             m_PlayerMaster.SetActualPlayerStateMovement(PlayerMaster.MovementStatus.Paused);
             yield return new WaitForSeconds(timeoutReSpawn);
-            if (!m_GamePlayMaster.shouldBePlayingGame)
-                yield break;
+            /*if (!m_GamePlayMaster.shouldBePlayingGame)
+                yield break;*/
             m_PlayerMaster.CallEventPlayerMasterReSpawn();
             m_GamePlayMaster.CallEventResetEnemies();
             SetRespawnPosition(transform.localPosition.z);
-            m_GamePlayMaster.SetGamePlayPause(false);
             m_PlayerMaster.SetActualPlayerStateMovement(PlayerMaster.MovementStatus.None);
             
             m_PlayerMaster.SetPlayerReady();
-            //gamePlayMaster.CallEventUnPausePlayGame();
+            m_GamePlayMaster.CallEventUnPausePlayGame();
         }
         void GainExtraLive()
         {

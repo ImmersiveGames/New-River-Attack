@@ -297,8 +297,8 @@ namespace RiverAttack
         }
         public void CallEventGameOver()
         {
-            //m_GameManager.isGameOver = true;
-            //GamePlayAudio.instance.StopBGM();
+            m_GameManager.isGameOver = true;
+            GamePlayAudio.instance.StopBGM();
             EventGameOver?.Invoke();
         }
 

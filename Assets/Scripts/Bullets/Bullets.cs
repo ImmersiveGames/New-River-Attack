@@ -46,8 +46,11 @@ namespace RiverAttack
         }
         protected void DestroyMe()
         {
+            Debug.Log("DestroyMe");
             //TODO: Voltar o Tiro para o pool identificar qual meu Pool;
             gameObject.SetActive(false);
+            if (!m_MyPool)
+                return;
             gameObject.transform.SetParent(m_MyPool);
             gameObject.transform.SetAsLastSibling();
         }
