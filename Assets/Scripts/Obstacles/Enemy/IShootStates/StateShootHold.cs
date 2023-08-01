@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 namespace RiverAttack
 {
     public class StateShootHold : IShoot
     {
-        public void EnterState()
+        public void EnterState(EnemiesMaster enemyMaster)
         {
             Debug.Log("Estado: Hold - Entrando");
             // Coloque aqui as ações a serem executadas ao entrar no estado "Hold"
         }
-        public void UpdateState(IHasPool myPool, EnemiesMaster enemyMaster)
+        public void UpdateState()
         {
             // Coloque aqui o código para Hold
             Debug.Log("Hold!");
@@ -21,7 +19,7 @@ namespace RiverAttack
             Debug.Log("Estado: Hold - Saindo");
             // Coloque aqui as ações a serem executadas ao sair do estado "hold"
         }
-        public void Fire(IHasPool myPool, EnemiesMaster enemyMaster)
+        public void Fire()
         {
             throw new System.NotImplementedException();
         }

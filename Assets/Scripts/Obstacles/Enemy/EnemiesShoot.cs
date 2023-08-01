@@ -1,12 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Utils;
 namespace RiverAttack
 {
     [RequireComponent(typeof(EnemiesMaster),typeof(Renderer))]
     public class EnemiesShoot : ObstacleDetectApproach, IHasPool
     {
-        const float START_TO_SHOOT = 0.2f;
         [SerializeField] GameObject bullet;
         [SerializeField] int startPool;
         [SerializeField] float shootCadence;
@@ -33,9 +31,6 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
-            m_StateShoot.SetBullet(shootCadence, bulletSpeed,bulletLifeTime);
-            m_SpawnPoint = GetComponentInChildren<EnemiesShootSpawn>().transform ? GetComponentInChildren<EnemiesShootSpawn>().transform : transform;
-            m_StateShoot.SetSpawnPoint(m_SpawnPoint);
             m_EnemiesMaster.EventDestroyEnemy += StopFire;
             m_GamePlayManager.EventEnemyDestroyPlayer += StopFire;
             //m_GamePlayManager.EventResetEnemies += StartFire;
@@ -54,21 +49,24 @@ namespace RiverAttack
             switch (shouldBeFire)
             {
                 case true when shouldBeFireByApproach && !m_Target:
+                    m_Target = null;
                     ChangeState(m_StateShootPatrol);
+                    m_Target = m_StateShootPatrol.target;
                     break;
                 case true:
                     ChangeState(m_StateShoot);
                     break;
                 case false:
+                    m_Target = null;
                     ChangeState(m_StateShootHold);
                     break;
             }
-            m_ActualState.UpdateState(this, m_EnemiesMaster);
+            m_ActualState.UpdateState();
         }
         void OnDisable()
         {
             m_EnemiesMaster.EventDestroyEnemy -= StopFire;
-            //m_GamePlayManager.EventEnemyDestroyPlayer -= StopFire;
+            m_GamePlayManager.EventEnemyDestroyPlayer -= StopFire;
             //m_GamePlayManager.EventResetEnemies -= StartFire;
         }
   #endregion
@@ -80,6 +78,11 @@ namespace RiverAttack
             m_GamePlayManager = GamePlayManager.instance;
             m_EnemiesMaster = GetComponent<EnemiesMaster>();
             m_SpawnPoint = GetComponentInChildren<EnemiesShootSpawn>().transform ? GetComponentInChildren<EnemiesShootSpawn>().transform : transform;
+            // Set States
+            playerApproachRadius = SetPlayerApproachRadius();
+            m_StateShootPatrol.SetPatrol(playerApproachRadius,timeToCheck);
+            m_StateShoot.SetBullet(shootCadence, bulletSpeed,bulletLifeTime, this);
+            m_StateShoot.SetSpawnPoint(m_SpawnPoint);
         }
         void ChangeState(IShoot newState)
         {
@@ -87,7 +90,7 @@ namespace RiverAttack
             m_ActualState?.ExitState();
 
             m_ActualState = newState;
-            m_ActualState?.EnterState();
+            m_ActualState?.EnterState(m_EnemiesMaster);
         }
         
         void StopFire()
@@ -109,8 +112,6 @@ namespace RiverAttack
                 return playerApproachRadius != 0 || playerApproachRadiusRandom != Vector2.zero;
             }
         }
-        protected override void DifficultUpdates() { }
-        protected override void HasPlayerApproach() { }
         public void StartMyPool(bool isPersistent = false)
         {
             PoolObjectManager.CreatePool(this, bullet, startPool, transform, isPersistent);

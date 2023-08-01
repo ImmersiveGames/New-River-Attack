@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2516296704643808230}
   - component: {fileID: 7373340704458670615}
   - component: {fileID: 4826701001567984415}
-  - component: {fileID: 7735193164345113819}
   - component: {fileID: 1243797748221074779}
   - component: {fileID: 2847503330682514847}
   - component: {fileID: 2938584616496795991}
@@ -24,6 +23,7 @@ GameObject:
   - component: {fileID: 4344647296005993252}
   - component: {fileID: 5420935127651274328}
   - component: {fileID: 3031737086699250233}
+  - component: {fileID: 2422452412683354287}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -170,27 +170,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &7735193164345113819
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409879802783298609}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &1243797748221074779
 Animator:
   serializedVersion: 5
@@ -380,6 +359,19 @@ MonoBehaviour:
   alertHp: 20
   playerAlert: {fileID: 11400000, guid: f51e38365f07e734b81c2cca635af183, type: 2}
   reduceFuelCadence: 0.5
+--- !u!114 &2422452412683354287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409879802783298609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb87334726dc25459b60ca6128d25c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSkin: {fileID: 11400000, guid: 6e1a4d837797d5f498cfd39ef9e8ccb0, type: 2}
 --- !u!1001 &9198280591296938339
 PrefabInstance:
   m_ObjectHideFlags: 0

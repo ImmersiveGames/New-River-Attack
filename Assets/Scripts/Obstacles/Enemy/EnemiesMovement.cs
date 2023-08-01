@@ -79,11 +79,11 @@ namespace RiverAttack
             m_GamePlayManager = GamePlayManager.instance;
             
         }
-        protected override void HasPlayerApproach()
+        protected void HasPlayerApproach()
         {
             m_EnemiesMaster.canMove = canMove = FindTarget<PlayerMaster>(GameManager.instance.layerPlayer);
         }
-        protected override void DifficultUpdates()
+        void DifficultUpdates()
         {
             m_EnemyDifficult = m_EnemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(m_EnemiesMaster.getDifficultName);
             moveVelocity = m_EnemiesMaster.enemy.velocity * m_EnemyDifficult.multiplyEnemiesSpeedy;

@@ -17,13 +17,5 @@ namespace RiverAttack
             animationCurve = om.animationCurve;
             canMove = om.canMove;
         }
-        protected override void DifficultUpdates()
-        {
-            throw new System.NotImplementedException();
-        }
-        protected override void HasPlayerApproach()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

@@ -87,9 +87,10 @@ namespace RiverAttack
             yield return new WaitForSeconds(timeoutReSpawn);
             /*if (!m_GamePlayMaster.shouldBePlayingGame)
                 yield break;*/
+            SetRespawnPosition(transform.localPosition.z);
             m_PlayerMaster.CallEventPlayerMasterReSpawn();
             m_GamePlayMaster.CallEventResetEnemies();
-            SetRespawnPosition(transform.localPosition.z);
+            
             m_PlayerMaster.SetActualPlayerStateMovement(PlayerMaster.MovementStatus.None);
             
             m_PlayerMaster.SetPlayerReady();

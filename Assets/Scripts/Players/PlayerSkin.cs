@@ -46,10 +46,10 @@ namespace RiverAttack
             m_MySkin = Instantiate(skin.getSkin, transform);
             m_MySkin.transform.SetAsFirstSibling();
             m_PlayerMaster.GetPlayersSettings().playerSkin = skin;
-            if (m_MySkin.GetComponent<Collider>())
+            /*if (m_MySkin.GetComponent<Collider>())
             {
                 Tools.CopyComponent(m_MySkin.GetComponentInChildren<Collider>(), gameObject);
-            }
+            }*/
         }
         void DisableSkin()
         {

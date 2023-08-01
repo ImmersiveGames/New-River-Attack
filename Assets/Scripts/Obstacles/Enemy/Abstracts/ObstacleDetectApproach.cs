@@ -37,9 +37,6 @@ namespace RiverAttack
                 playerApproachRadius = randomRangeDetect;
             return playerApproachRadius;
         }
-        protected abstract void DifficultUpdates();
-        protected abstract void HasPlayerApproach();
-
         void OnDrawGizmosSelected()
         {
             if (playerApproachRadius <= 0 && playerApproachRadiusRandom.y <= 0) return;

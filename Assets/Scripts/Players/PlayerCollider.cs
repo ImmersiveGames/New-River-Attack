@@ -3,7 +3,7 @@ namespace RiverAttack
 {
     [RequireComponent(typeof(PlayerMaster))]
     [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(Collider))]
+
     public class PlayerCollider : MonoBehaviour
     {
     #region Variable Private References
@@ -15,9 +15,9 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
-            m_PlayerMaster.EventPlayerMasterOnDestroy += ColliderOff; // desliga o collider quando destroy o player
-            m_PlayerMaster.EventPlayerMasterReSpawn += ColliderOn;   // liga o collider quando reinicia o player
-            m_GamePlayManager.EventCompletePath += ColliderOff;
+            //m_PlayerMaster.EventPlayerMasterOnDestroy += ColliderOff; // desliga o collider quando destroy o player
+            //m_PlayerMaster.EventPlayerMasterReSpawn += ColliderOn;   // liga o collider quando reinicia o player
+            //m_GamePlayManager.EventCompletePath += ColliderOff;
         }
         void OnTriggerEnter(Collider collision)
         {
@@ -39,7 +39,7 @@ namespace RiverAttack
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_PlayerMaster = GetComponent<PlayerMaster>();
-            m_Collider = GetComponent<Collider>();
+            m_Collider = GetComponentInChildren<Collider>();
         }
 
         void ColliderOn()

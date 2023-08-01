@@ -10,31 +10,38 @@ namespace RiverAttack
         float m_BulletSpeed;
         float m_BulletLifeTime;
         Transform m_SpawnPoint;
+        EnemiesMaster m_EnemiesMaster;
+        EnemiesSetDifficulty m_EnemiesSetDifficulty;
+        IHasPool m_MyPool;
    
-        public void SetBullet(float cadence, float bulletSpeed, float bulletLifeTime)
+        protected internal void SetBullet(float cadence, float bulletSpeed, float bulletLifeTime, IHasPool myPool)
         {
             m_StartCadence = m_Cadence = cadence;
             m_BulletSpeed = bulletSpeed;
             m_BulletLifeTime = bulletLifeTime;
+            m_MyPool = myPool;
         }
-        public void SetSpawnPoint(Transform spawnPoint)
+        protected internal void SetSpawnPoint(Transform spawnPoint)
         {
             m_SpawnPoint = spawnPoint;
         }
-    
-        public void EnterState()
+
+        public void EnterState(EnemiesMaster enemyMaster)
         {
             Debug.Log("Estado: Shoot - Entrando");
-            // Coloque aqui as ações a serem executadas ao entrar no estado atirar
+            m_EnemiesMaster = enemyMaster;
+            if (!m_EnemiesMaster.enemy || m_EnemiesMaster.enemy.enemiesSetDifficultyListSo) return;
+            m_EnemiesSetDifficulty = m_EnemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(m_EnemiesMaster.getDifficultName);
+            m_Cadence = m_StartCadence * m_EnemiesSetDifficulty.multiplyEnemiesShootCadence;
         }
-        public void UpdateState(IHasPool myPool, EnemiesMaster master)
+        public void UpdateState()
         {
             //Debug.Log("Attempt Shoot!");
             m_Cadence -= Time.deltaTime;
             if (!(m_Cadence <= 0))
                 return;
             m_Cadence = m_StartCadence;
-            Fire(myPool, master);
+            Fire();
 
         }
         public void ExitState()
@@ -42,14 +49,14 @@ namespace RiverAttack
             Debug.Log("Estado: Shoot - Saindo");
             // Coloque aqui as ações a serem executadas ao sair do estado atirar
         }
-        public void Fire(IHasPool myPool, EnemiesMaster master)
+        public void Fire()
         {
             Debug.Log("Shoot!");
-            var myShoot = PoolObjectManager.GetObject(myPool);
+            var myShoot = PoolObjectManager.GetObject(m_MyPool);
             //setting bullet entity
             var myBullet = myShoot.GetComponent<BulletEnemy>();
-            myBullet.SetMyPool(PoolObjectManager.GetPool(myPool));
-            myBullet.ownerShoot = master;
+            myBullet.SetMyPool(PoolObjectManager.GetPool(m_MyPool));
+            myBullet.ownerShoot = m_EnemiesMaster;
             myBullet.Init(m_BulletSpeed, m_BulletLifeTime);
             //Deattached bullet
             var myShootTransform = m_SpawnPoint;

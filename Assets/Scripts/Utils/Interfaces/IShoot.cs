@@ -3,10 +3,10 @@ namespace Utils
 {
     public interface IShoot
     {
-        void EnterState();
-        void UpdateState(IHasPool myPool, EnemiesMaster enemyMaster);
+        void EnterState(EnemiesMaster enemiesMaster);
+        void UpdateState();
         void ExitState();
-        void Fire(IHasPool myPool, EnemiesMaster enemyMaster);
+        void Fire();
         //void SetTarget(Transform toTarget);
     }
 }
