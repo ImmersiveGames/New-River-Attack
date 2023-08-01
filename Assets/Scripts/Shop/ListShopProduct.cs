@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace Shopping
 {
-    [CreateAssetMenu(fileName = "ListShopProducts", menuName = "Shopping/List/ListProduct", order = 101)]
+    [CreateAssetMenu(fileName = "ListShopProducts", menuName = "RiverAttack/Shopping/List/ListProduct", order = 101)]
+    [System.Serializable]
     public class ListShopProduct : ScriptableObject
     {
 #if UNITY_EDITOR
