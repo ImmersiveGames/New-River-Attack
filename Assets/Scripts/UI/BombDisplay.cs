@@ -7,6 +7,7 @@ namespace RiverAttack
     {
         [SerializeField] PlayerSettings playerSettings;
         [SerializeField] TMP_Text textBombAmount;
+        
 
         void Update()
         {

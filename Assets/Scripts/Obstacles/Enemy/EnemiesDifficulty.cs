@@ -46,11 +46,5 @@ namespace RiverAttack
                 myDifficulty = m_EnemyMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByScore((int)(GamePlayManager.instance.HighScorePlayers()));
             }
         }
-
-        
-        public EnemiesSetDifficultyListSo GetDifficultList()
-        {
-            return m_EnemiesSetDifficultList;
-        }
     }
 }
