@@ -48,7 +48,6 @@ namespace RiverAttack
             }
             if (m_Animator == null || string.IsNullOrEmpty(onMove) || !m_Animator.gameObject.activeSelf)
                 return;
-
             m_Animator.SetBool(onMove, pos != Vector3.zero);
         }
 

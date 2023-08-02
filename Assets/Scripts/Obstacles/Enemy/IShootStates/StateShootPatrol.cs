@@ -10,6 +10,7 @@ namespace RiverAttack
         EnemiesMaster m_EnemiesMaster;
         EnemiesSetDifficulty m_EnemiesSetDifficulty;
         public Transform target;
+        PlayerDetectApproach m_PlayerDetectApproach;
         protected internal void SetPatrol(float approachRadius, float timeToCheck)
         {
             m_PlayerApproachRadius = m_StartApproachRadius = approachRadius;
@@ -26,8 +27,11 @@ namespace RiverAttack
         }
         public void UpdateState()
         {
-            var results = new Collider[2];
             var position = m_EnemiesMaster.transform.position;
+            
+            //TODO: Quando o inimigo morre, precisa resetar o target também.
+            
+            /*var results = new Collider[2];
             int size = Physics.OverlapSphereNonAlloc(position, m_PlayerApproachRadius, results, GameManager.instance.layerPlayer);
             if (size < 1) return;
             for (int i = 0; i < size; i++)
@@ -35,7 +39,9 @@ namespace RiverAttack
                 Debug.Log("GIRO: "+ i + "Result"+results[i]);
                 var player = results[i].GetComponentInParent<PlayerMaster>();
                 target = player ? player.transform : null;
-            }
+            }*/
+            m_PlayerDetectApproach ??= new PlayerDetectApproach(position, m_PlayerApproachRadius);
+            target =  m_PlayerDetectApproach.TargetApproach<PlayerMaster>(GameManager.instance.layerPlayer);
         }
         public void ExitState()
         {

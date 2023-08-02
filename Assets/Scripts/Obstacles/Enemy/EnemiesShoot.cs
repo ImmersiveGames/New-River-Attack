@@ -2,7 +2,7 @@
 using Utils;
 namespace RiverAttack
 {
-    [RequireComponent(typeof(EnemiesMaster),typeof(Renderer))]
+    [RequireComponent(typeof(EnemiesMaster))]
     public class EnemiesShoot : ObstacleDetectApproach, IHasPool
     {
         [SerializeField] GameObject bullet;
@@ -12,19 +12,19 @@ namespace RiverAttack
         [SerializeField]
         float bulletSpeed;
         [SerializeField] float bulletLifeTime;
-        Transform m_Target;
 
         #region IShoots
         readonly StateShoot m_StateShoot = new StateShoot();
         readonly StateShootHold m_StateShootHold = new StateShootHold();
         readonly StateShootPatrol m_StateShootPatrol = new StateShootPatrol();
-  #endregion
-        IShoot m_ActualState;
+        IShoot m_ActualState;  
+    #endregion
+        
         
         GamePlayManager m_GamePlayManager;
         EnemiesMaster m_EnemiesMaster;
         EnemiesSetDifficulty m_EnemyDifficult;
-        MeshRenderer m_Renderer;
+        
         Transform m_SpawnPoint;
 
         #region UNITYMETHODS
@@ -33,7 +33,6 @@ namespace RiverAttack
             SetInitialReferences();
             m_EnemiesMaster.EventDestroyEnemy += StopFire;
             m_GamePlayManager.EventEnemyDestroyPlayer += StopFire;
-            //m_GamePlayManager.EventResetEnemies += StartFire;
         }
         void Start()
         {
@@ -48,7 +47,7 @@ namespace RiverAttack
                 return;
             switch (shouldBeFire)
             {
-                case true when shouldBeFireByApproach && !m_Target:
+                case true when shouldBeApproach && !m_Target:
                     m_Target = null;
                     ChangeState(m_StateShootPatrol);
                     m_Target = m_StateShootPatrol.target;
@@ -67,19 +66,15 @@ namespace RiverAttack
         {
             m_EnemiesMaster.EventDestroyEnemy -= StopFire;
             m_GamePlayManager.EventEnemyDestroyPlayer -= StopFire;
-            //m_GamePlayManager.EventResetEnemies -= StartFire;
         }
   #endregion
-        void SetInitialReferences()
+        protected override void SetInitialReferences()
         {
-            m_Renderer = GetComponent<MeshRenderer>();
-            if (m_Renderer == null)
-                m_Renderer = gameObject.AddComponent<MeshRenderer>();
+            base.SetInitialReferences();
             m_GamePlayManager = GamePlayManager.instance;
             m_EnemiesMaster = GetComponent<EnemiesMaster>();
             m_SpawnPoint = GetComponentInChildren<EnemiesShootSpawn>().transform ? GetComponentInChildren<EnemiesShootSpawn>().transform : transform;
             // Set States
-            playerApproachRadius = SetPlayerApproachRadius();
             m_StateShootPatrol.SetPatrol(playerApproachRadius,timeToCheck);
             m_StateShoot.SetBullet(shootCadence, bulletSpeed,bulletLifeTime, this);
             m_StateShoot.SetSpawnPoint(m_SpawnPoint);
@@ -103,13 +98,6 @@ namespace RiverAttack
             get
             {
                 return shootCadence > 0 && bulletSpeed > 0;
-            }
-        }
-        bool shouldBeFireByApproach
-        {
-            get
-            {
-                return playerApproachRadius != 0 || playerApproachRadiusRandom != Vector2.zero;
             }
         }
         public void StartMyPool(bool isPersistent = false)

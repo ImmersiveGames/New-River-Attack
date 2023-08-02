@@ -7,9 +7,6 @@ namespace RiverAttack
         public EnemiesScriptable enemy;
         public bool isDestroyed;
         public bool goalLevel;
-        public bool ignoreWall;
-        public bool ignoreEnemies;
-        internal bool canMove;
 
         protected internal enum EnemyStatus { Paused, Active }
         [SerializeField]

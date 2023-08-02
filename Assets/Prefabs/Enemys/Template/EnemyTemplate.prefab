@@ -20,6 +20,8 @@ GameObject:
   - component: {fileID: 9200479897418373190}
   - component: {fileID: 6421188239924259748}
   - component: {fileID: 8470113045675620300}
+  - component: {fileID: 1604458344605076990}
+  - component: {fileID: -8132964597673927898}
   m_Layer: 3
   m_Name: EnemyTemplate
   m_TagString: Untagged
@@ -40,7 +42,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &4183145737086533858
 Rigidbody:
@@ -182,6 +184,7 @@ MonoBehaviour:
   goalLevel: 0
   ignoreWall: 0
   ignoreEnemies: 0
+  actualEnemyStatus: 0
   actualDifficultName: 0
 --- !u!114 &953354039740420313
 MonoBehaviour:
@@ -219,10 +222,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52bf8fb9a8b7a8d40b3fa035f4b95a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerApproachRadius: 0
+  timeToCheck: 0
+  playerApproachRadiusRandom: {x: 0, y: 0}
+  gizmoColor: {r: 255, g: 0, b: 0, a: 150}
   canMove: 0
-  isMoving: 0
+  obstacleMovementState: 0
+  canMoveByApproach: 0
   moveVelocity: 0
-  moveDirection: {x: 0, y: 0, z: 0}
   directions: 0
   moveFreeDirection: {x: 0, y: 0, z: 0}
   animationDuration: 0
@@ -232,10 +239,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  playerApproachRadius: 0
-  timeToCheck: 0
-  playerApproachRadiusRandom: {x: 0, y: 0}
-  gizmoColor: {r: 255, g: 0, b: 0, a: 150}
   hasAnimationFlip: 0
 --- !u!114 &578047918151501529
 MonoBehaviour:
@@ -306,3 +309,66 @@ MonoBehaviour:
   explosionTrigger: 
   onMove: 
   onFlip: 
+--- !u!23 &1604458344605076990
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504127474328815682}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-8132964597673927898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504127474328815682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b41819c0ad060ce43acdc2d3b8d62e7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerApproachRadius: 0
+  timeToCheck: 2
+  playerApproachRadiusRandom: {x: 0, y: 0}
+  gizmoColor: {r: 255, g: 0, b: 0, a: 150}
+  bullet: {fileID: 1153674050946406, guid: 96c3e2b69c987b5458ed58e9d0514a6e, type: 3}
+  startPool: 0
+  shootCadence: 0
+  bulletSpeed: 0
+  bulletLifeTime: 0

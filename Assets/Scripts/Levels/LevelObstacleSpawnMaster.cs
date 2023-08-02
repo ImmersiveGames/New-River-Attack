@@ -40,8 +40,8 @@ namespace RiverAttack
             var enemy = Instantiate(prefab[sort], transform1.position, transform1.rotation, transform1.parent);
             if (persistPrefab)
             {
-                enemy.GetComponent<EnemiesMaster>().ignoreWall = ignoreWall;
-                enemy.GetComponent<EnemiesMaster>().ignoreEnemies = ignoreEnemies;
+                /*enemy.GetComponent<EnemiesMaster>().ignoreWall = ignoreWall;
+                enemy.GetComponent<EnemiesMaster>().ignoreEnemies = ignoreEnemies;*/
                 var obstacleMovement = enemy.GetComponent<ObstacleMovement>();
                 //var obstacleMoveByApproach = enemy.GetComponent<ObstacleMoveByApproach>();
                 var obstacleSkins = enemy.GetComponent<ObstacleSkins>();
@@ -49,11 +49,11 @@ namespace RiverAttack
                 var obstacleDetectApproach = enemy.GetComponent<ObstacleDetectApproach>();
                 if (GetComponent<LevelObstacleSpawnMovement>() && obstacleMovement)
                 {
-                    var spawnMovement = GetComponent<LevelObstacleSpawnMovement>();
+                    /*var spawnMovement = GetComponent<LevelObstacleSpawnMovement>();
                     obstacleMovement.canMove = spawnMovement.canMove;
                     obstacleMovement.moveVelocity = spawnMovement.moveVelocity;
                     obstacleMovement.moveFreeDirection = spawnMovement.moveFreeDirection;
-                    obstacleMovement.animationCurve = spawnMovement.animationCurve;
+                    obstacleMovement.animationCurve = spawnMovement.animationCurve;*/
                 }
                 /*if (GetComponent<LevelObstacleSpawnMoveApproach>() && obstacleMoveByApproach)
                 {
@@ -109,8 +109,8 @@ namespace RiverAttack
         void LoadPrefab()
         {
             if (prefab is not { Length: > 0 }) return;
-            ignoreWall = prefab[viewIdPrefab].GetComponent<EnemiesMaster>().ignoreWall;
-            ignoreEnemies = prefab[viewIdPrefab].GetComponent<EnemiesMaster>().ignoreEnemies;
+            /*ignoreWall = prefab[viewIdPrefab].GetComponent<EnemiesMaster>().ignoreWall;
+            ignoreEnemies = prefab[viewIdPrefab].GetComponent<EnemiesMaster>().ignoreEnemies;*/
         }
 
     #region DrawGizmos

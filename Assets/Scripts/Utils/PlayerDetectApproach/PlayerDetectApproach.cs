@@ -22,25 +22,21 @@ namespace Utils
         {
             var results = new Collider[maxColliders];
             int size = Physics.OverlapSphereNonAlloc(m_PositionReference, m_Distance, results, targetLayer);
-            //Debug.Log("SIZE: "+ size + results[0] +" 1 "+ results[1] +" 2 "+ results[2] +" 3 "+ results[3] +" 4 "+ results[4]+" DISTANCE "+m_Distance);
             Transform target = null;
-            if (size < 1) {return null;}
-            foreach (var t in results)
+            if (size < 1) return null;
+            
+            for (int i = 0; i < size; i++)
             {
-                Debug.Log("COLLIDES: "+ t +" Referencia: "+m_PositionReference+" Distancia: "+m_Distance);
+                Debug.Log("COLLIDES: "+ results[i] +" Referencia: "+m_PositionReference+" Distancia: "+m_Distance);
                 if (typeof(T) == typeof(PlayerMaster))
                 {
-                    target = t.GetComponentInParent<PlayerMaster>().transform;
+                    target = results[i].GetComponentInParent<PlayerMaster>().transform;
                     break;
                 }
-                if (typeof(T) == typeof(EnemiesMaster))
-                {
-                    target = t.GetComponentInParent<EnemiesMaster>().transform;
-                    break;
-                }
+                if (typeof(T) != typeof(EnemiesMaster)) continue;
+                target = results[i].GetComponentInParent<EnemiesMaster>().transform;
+                break;
             }
-
-            return null;
             return target;
         }
     }

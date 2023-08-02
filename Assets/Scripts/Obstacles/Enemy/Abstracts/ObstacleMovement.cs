@@ -2,9 +2,9 @@
 using Utils;
 namespace RiverAttack
 {
-    public abstract class ObstacleMovement : ObstacleDetectApproach, IMove
+    public abstract class ObstacleMovement : MonoBehaviour
     {
-        [SerializeField]
+        /*[SerializeField]
         protected internal bool canMove;
         protected enum MovementState { Paused, Moving, Patrolling }
         [SerializeField] protected MovementState obstacleMovementState;
@@ -86,6 +86,6 @@ namespace RiverAttack
                 Directions.Free => moveFreeDirection,
                 _ => Vector3.zero
             };
-        }
+        }*/
     }
 }

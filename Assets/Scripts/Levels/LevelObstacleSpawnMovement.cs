@@ -11,11 +11,11 @@ namespace RiverAttack
             var spawnMaster = GetComponent<LevelObstacleSpawnMaster>();
             var om = spawnMaster.getPrefab.GetComponent<ObstacleMovement>();
             if (om == null) return;
-            directions = om.directions;
+            /*directions = om.directions;
             moveFreeDirection = om.moveFreeDirection;
             moveVelocity = om.moveVelocity;
             animationCurve = om.animationCurve;
-            canMove = om.canMove;
+            canMove = om.canMove;*/
         }
     }
 }

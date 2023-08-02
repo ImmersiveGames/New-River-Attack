@@ -1,12 +1,12 @@
+using RiverAttack;
 using UnityEngine;
 namespace  Utils
 {
     public interface IMove
     {
-        abstract void Move(Vector3 direction, float velocity);
-        abstract void StopMove();
-        abstract bool ShouldMoving();
-        abstract void ResetMovement();
+        void EnterState(EnemiesMaster enemiesMaster);
+        void UpdateState(Transform transform, Vector3 direction);
+        void ExitState();
     }
 }
 
