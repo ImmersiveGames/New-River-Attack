@@ -30,14 +30,19 @@ namespace Shopping
         [Header("Carousel"), SerializeField]
         bool infinityLooping;
         [SerializeField]
-        float spaceBetweenPanels, maxPosition;
-
+        float spaceBetweenPanels = 0, maxPosition = 0;
+        [SerializeField]
+        Color selectedColor;
+        [SerializeField]
+        Color normalColor;
  
         PlayersInputActions m_inputSystem;
         PlayerSettings m_ActivePlayer;
         EventSystem m_EventSystem;
         ShopCarousel m_Shop;
         Task m_Task;
+        int lastSelectedSkin = 0;
+
 
         List<PlayerMaster> playerMasterList;
 
@@ -128,6 +133,13 @@ namespace Shopping
                 playerMaster.CallEventChangeSkin(player.playerSkin);
             }
 
+            var lastSelectBTN = m_Shop.getProducts[lastSelectedSkin].GetComponent<UIItemShop>().getSelectButton;
+            lastSelectBTN.GetComponent<Image>().color = normalColor;
+
+            var selectBTN = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>().getSelectButton;
+            selectBTN.GetComponent<Image>().color = selectedColor;
+
+            lastSelectedSkin = m_Shop.getActualProduct;
         }
 
         public void ButtonNavegation(int next)
@@ -185,6 +197,13 @@ namespace Shopping
         {
             Debug.Log("Comprar o item");
             var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
+
+            if (item.productInStock.PlayerAlreadyBuy(m_ActivePlayer))
+            {
+                Debug.Log("Player já tem o produto. Venda não concluida.");
+                return;
+            }
+            
             BuyThisItem(m_ActivePlayer, item.productInStock);
         }
 
@@ -193,6 +212,13 @@ namespace Shopping
             Debug.Log("Selecionar o item");
             
             var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
+
+            if (!item.productInStock.PlayerAlreadyBuy(m_ActivePlayer))
+            {
+                Debug.Log("Player Não tem o produto. Seleção não concluida.");
+                return;
+            }
+
             SelectThisItem(m_ActivePlayer, item.productInStock);
         }
 
