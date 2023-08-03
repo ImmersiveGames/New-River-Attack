@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace RiverAttack
 {
-    [RequireComponent(typeof(Renderer))]
+    [RequireComponent(typeof(MeshRenderer))]
     public abstract class ObstacleDetectApproach : MonoBehaviour
     {
         [Header("Start Move By Player Approach")]
@@ -15,8 +15,8 @@ namespace RiverAttack
         [SerializeField, MinMaxSlider(0f,20f)] protected internal Vector2 playerApproachRadiusRandom;
         protected float startApproachRadius;
         PlayerDetectApproach m_PlayerDetectApproach;
-        protected MeshRenderer m_Renderer;
-        protected Transform m_Target;
+        protected MeshRenderer meshRenderer;
+        protected Transform target;
         
         #region GizmoSettings
         [Header("Gizmo Settings")]
@@ -25,9 +25,7 @@ namespace RiverAttack
 
         protected virtual void SetInitialReferences()
         {
-            m_Renderer = GetComponent<MeshRenderer>();
-            if (m_Renderer == null)
-                m_Renderer = gameObject.AddComponent<MeshRenderer>();
+            meshRenderer = GetComponent<MeshRenderer>();
             playerApproachRadius = SetPlayerApproachRadius();
         }
 

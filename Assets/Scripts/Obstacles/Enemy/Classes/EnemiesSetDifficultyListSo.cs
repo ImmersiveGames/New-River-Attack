@@ -29,8 +29,12 @@ namespace RiverAttack
         [Range(0, 10)]
         public float multiplyEnemiesSpeedy;
         [Range(0, 10)]
-        public float multiplyPlayerDistanceRadius;
+        public float multiplyPlayerDistanceRadiusToShoot;
+        [Range(0, 10)]
+        public float multiplyPlayerDistanceRadiusToMove;
         [Range(0, 10)]
         public float multiplyEnemiesShootCadence;
+        [Range(0, 10)]
+        public float multiplyEnemiesShootSpeedy;
     }
 }

@@ -7,25 +7,31 @@ namespace RiverAttack
     {
         [SerializeField] GameObject bullet;
         [SerializeField] int startPool;
-        [SerializeField] float shootCadence;
+        [SerializeField] internal float shootCadence;
         [Header("Bullet Settings")]
         [SerializeField]
-        float bulletSpeed;
-        [SerializeField] float bulletLifeTime;
+        internal float bulletSpeed;
+        [SerializeField] internal float bulletLifeTime;
 
         #region IShoots
-        readonly StateShoot m_StateShoot = new StateShoot();
-        readonly StateShootHold m_StateShootHold = new StateShootHold();
-        readonly StateShootPatrol m_StateShootPatrol = new StateShootPatrol();
+        readonly StateShoot m_StateShoot;
+        readonly StateShootHold m_StateShootHold;
+        readonly StateShootPatrol m_StateShootPatrol;
         IShoot m_ActualState;  
     #endregion
-        
-        
+
         GamePlayManager m_GamePlayManager;
         EnemiesMaster m_EnemiesMaster;
         EnemiesSetDifficulty m_EnemyDifficult;
+
+        internal Transform spawnPoint;
         
-        Transform m_SpawnPoint;
+        public EnemiesShoot()
+        {
+            m_StateShoot = new StateShoot(this);
+            m_StateShootHold = new StateShootHold();
+            m_StateShootPatrol = new StateShootPatrol(this, null);
+        }
 
         #region UNITYMETHODS
         void OnEnable()
@@ -43,20 +49,20 @@ namespace RiverAttack
 
         void Update()
         {
-            if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldEnemyBeReady || m_EnemiesMaster.isDestroyed || !m_Renderer.isVisible)
+            if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldEnemyBeReady || m_EnemiesMaster.isDestroyed || !meshRenderer.isVisible)
                 return;
             switch (shouldBeFire)
             {
-                case true when shouldBeApproach && !m_Target:
-                    m_Target = null;
+                case true when shouldBeApproach && !target:
+                    target = null;
                     ChangeState(m_StateShootPatrol);
-                    m_Target = m_StateShootPatrol.target;
+                    target = m_StateShootPatrol.target;
                     break;
                 case true:
                     ChangeState(m_StateShoot);
                     break;
                 case false:
-                    m_Target = null;
+                    target = null;
                     ChangeState(m_StateShootHold);
                     break;
             }
@@ -73,11 +79,7 @@ namespace RiverAttack
             base.SetInitialReferences();
             m_GamePlayManager = GamePlayManager.instance;
             m_EnemiesMaster = GetComponent<EnemiesMaster>();
-            m_SpawnPoint = GetComponentInChildren<EnemiesShootSpawn>().transform ? GetComponentInChildren<EnemiesShootSpawn>().transform : transform;
-            // Set States
-            m_StateShootPatrol.SetPatrol(playerApproachRadius,timeToCheck);
-            m_StateShoot.SetBullet(shootCadence, bulletSpeed,bulletLifeTime, this);
-            m_StateShoot.SetSpawnPoint(m_SpawnPoint);
+            spawnPoint = GetComponentInChildren<EnemiesShootSpawn>().transform ? GetComponentInChildren<EnemiesShootSpawn>().transform : transform;
         }
         void ChangeState(IShoot newState)
         {
@@ -90,7 +92,7 @@ namespace RiverAttack
         
         void StopFire()
         {
-            m_Target = null;
+            target = null;
             ChangeState(m_StateShootHold);
         }
         bool shouldBeFire
