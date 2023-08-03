@@ -103,9 +103,9 @@ namespace RiverAttack
   #endregion
         protected override void SetInitialReferences()
         {
-            base.SetInitialReferences();
             m_GamePlayManager = GamePlayManager.instance;
             m_EnemiesMaster = GetComponent<EnemiesMaster>();
+            base.SetInitialReferences();
         }
         void ChangeState(IMove newState)
         {

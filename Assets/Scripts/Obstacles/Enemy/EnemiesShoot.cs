@@ -45,6 +45,7 @@ namespace RiverAttack
             // setup inicial do status
             StartMyPool();
             ChangeState(m_StateShootHold);
+            spawnPoint = GetComponentInChildren<EnemiesShootSpawn>().transform ? GetComponentInChildren<EnemiesShootSpawn>().transform : transform;
         }
 
         void Update()
@@ -79,7 +80,8 @@ namespace RiverAttack
             base.SetInitialReferences();
             m_GamePlayManager = GamePlayManager.instance;
             m_EnemiesMaster = GetComponent<EnemiesMaster>();
-            spawnPoint = GetComponentInChildren<EnemiesShootSpawn>().transform ? GetComponentInChildren<EnemiesShootSpawn>().transform : transform;
+            
+            Debug.Log("Transform"+spawnPoint);
         }
         void ChangeState(IShoot newState)
         {

@@ -7,26 +7,29 @@ namespace RiverAttack
     {
         float m_Cadence;
         float m_BulletSpeed;
-        readonly float m_StartCadence;
-        readonly float m_StartBulletSpeed;
-        readonly float m_BulletLifeTime;
-        readonly Transform m_SpawnPoint;
+        float m_StartCadence;
+        float m_StartBulletSpeed;
+        float m_BulletLifeTime;
+        Transform m_SpawnPoint;
+        readonly EnemiesShoot m_EnemiesShoot;
         EnemiesMaster m_EnemiesMaster;
         EnemiesSetDifficulty m_EnemiesSetDifficulty;
         readonly IHasPool m_MyPool;
 
         public StateShoot(EnemiesShoot enemiesShoot)
         {
-            m_StartCadence = m_Cadence = enemiesShoot.shootCadence;
-            m_StartBulletSpeed = enemiesShoot.bulletSpeed;
-            m_BulletLifeTime = enemiesShoot.bulletLifeTime;
+            m_EnemiesShoot = enemiesShoot;
             m_MyPool = enemiesShoot;
-            m_SpawnPoint = enemiesShoot.spawnPoint;
         }
         
         public void EnterState(EnemiesMaster enemyMaster)
         {
-            //Debug.Log("Estado: Shoot - Entrando");
+            m_StartCadence = m_Cadence = m_EnemiesShoot.shootCadence;
+            m_StartBulletSpeed = m_EnemiesShoot.bulletSpeed;
+            m_BulletLifeTime = m_EnemiesShoot.bulletLifeTime;
+            m_SpawnPoint = m_EnemiesShoot.spawnPoint;
+            
+            //Debug.Log("Estado: Shoot - Entrando" + m_EnemiesShoot.shootCadence);
             m_EnemiesMaster = enemyMaster;
             if (!m_EnemiesMaster.enemy && !m_EnemiesMaster.enemy.enemiesSetDifficultyListSo) return;
             m_EnemiesSetDifficulty = m_EnemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(m_EnemiesMaster.getDifficultName);
@@ -35,9 +38,9 @@ namespace RiverAttack
         }
         public void UpdateState()
         {
-            //Debug.Log("Attempt Shoot!");
+           // Debug.Log("Attempt Shoot!" + m_Cadence);
             m_Cadence -= Time.deltaTime;
-            if (!(m_Cadence <= 0))
+            if (!(m_Cadence <= 0.01f))
                 return;
             m_Cadence = m_StartCadence;
             Fire();
@@ -47,7 +50,7 @@ namespace RiverAttack
             //Debug.Log("Estado: Shoot - Saindo");
             // Coloque aqui as ações a serem executadas ao sair do estado atirar
         }
-        public void Fire()
+        void Fire()
         {
             //Debug.Log("Shoot!");
             var myShoot = PoolObjectManager.GetObject(m_MyPool);
