@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using Utils;
 namespace RiverAttack
 {
@@ -37,10 +38,13 @@ namespace RiverAttack
         public GamePlaySettings gamePlayLog;
         [SerializeField]
         protected internal List<Transform> playerObjectAvailableList;
-        
+
         [Header("Menus")]
-        
-        
+        [SerializeField]Transform Menu;
+        [SerializeField]Transform Touch;
+        [SerializeField]Transform Hud;
+        [SerializeField]Transform BaseScenary;
+        [SerializeField]PlayableDirector StartCutScene;
         
         private Dictionary<string, object> m_GameplayDefault = new Dictionary<string, object>();
 
@@ -63,7 +67,8 @@ namespace RiverAttack
             switch (actualGameState)
             {
                 case States.Menu:
-                    Debug.Log("Menu");
+                    Debug.Log("Menu+Settings");
+                    SetupMenuInitial();
                     break;
                 case States.WaitGamePlay:
                     // Animação de entrada
@@ -121,6 +126,29 @@ namespace RiverAttack
             isGameFinish = false;
             isGameOver = false;
             isGameStopped = false;
+        }
+
+        void SetupMenuInitial()
+        {
+            Menu.gameObject.SetActive(true);
+            Touch.gameObject.SetActive(false);
+            Hud.gameObject.SetActive(false);
+            BaseScenary.gameObject.SetActive(false);
+            isGameStopped = true;
+            m_GamePlayManager.SetGamePlayPause(true);
+            foreach (var player in playerObjectAvailableList)
+            {
+                player.gameObject.SetActive(true);
+            }
+        }
+
+        public void ButtonNewGame()
+        {
+            ChangeStatesGamePlay(States.WaitGamePlay);
+            isGameStopped = false;
+            BaseScenary.gameObject.SetActive(true);
+            m_GamePlayManager.SetGamePlayPause(true);
+            StartCutScene.Play();
         }
 
         void ToggleStopGame()

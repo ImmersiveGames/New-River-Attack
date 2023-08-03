@@ -24,11 +24,25 @@ namespace RiverAttack
         }
         void OnDisable()
         {
-            if (m_PlayerMaster)
+            //if (m_PlayerMaster)
                 m_PlayerMaster.EventPlayerMasterControllerMovement -= ActiveTrailsOnMovement;
             m_GamePlayManager.EventCompletePath -= EnableTrails;
         }
+        void OnDestroy()
+        {
+            m_GamePlayManager.EventCompletePath -= EnableTrails;
+        }
   #endregion
+
+        public void RestTrail()
+        {
+            m_GamePlayManager.EventCompletePath -= EnableTrails;
+            if (m_PlayerMaster)
+                m_PlayerMaster.EventPlayerMasterControllerMovement += ActiveTrailsOnMovement;
+            m_TrailRenderer = GetComponentsInChildren<TrailRenderer>();
+            m_GamePlayManager.EventCompletePath += EnableTrails;
+            SetTrails(false);
+        }
         void SetInitialReferences()
         {
             m_PlayerMaster = GetComponentInParent<PlayerMaster>();

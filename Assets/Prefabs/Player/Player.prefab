@@ -20,17 +20,17 @@ GameObject:
   - component: {fileID: 1867910898741857105}
   - component: {fileID: 7102336100269651067}
   - component: {fileID: 965690163096126669}
+  - component: {fileID: 2422452412683354287}
   - component: {fileID: 4344647296005993252}
   - component: {fileID: 5420935127651274328}
   - component: {fileID: 3031737086699250233}
-  - component: {fileID: 2422452412683354287}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2516296704643808230
 Transform:
   m_ObjectHideFlags: 0
@@ -45,7 +45,7 @@ Transform:
   m_Children:
   - {fileID: 9202941358234982187}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &7373340704458670615
 AudioSource:
@@ -312,6 +312,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particlePrefab: {fileID: 1471142367968716, guid: fa95fafd8ce16b045bef9998c0084598, type: 3}
   timeoutDestroy: 2
+--- !u!114 &2422452412683354287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409879802783298609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb87334726dc25459b60ca6128d25c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSkin: {fileID: 11400000, guid: 6e1a4d837797d5f498cfd39ef9e8ccb0, type: 2}
 --- !u!114 &4344647296005993252
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,19 +372,6 @@ MonoBehaviour:
   alertHp: 20
   playerAlert: {fileID: 11400000, guid: f51e38365f07e734b81c2cca635af183, type: 2}
   reduceFuelCadence: 0.5
---- !u!114 &2422452412683354287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409879802783298609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: feb87334726dc25459b60ca6128d25c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultSkin: {fileID: 11400000, guid: 6e1a4d837797d5f498cfd39ef9e8ccb0, type: 2}
 --- !u!1001 &9198280591296938339
 PrefabInstance:
   m_ObjectHideFlags: 0

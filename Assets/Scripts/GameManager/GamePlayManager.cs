@@ -14,7 +14,14 @@ namespace RiverAttack
         [SerializeField]
         bool godMode;
         public bool getGodMode { get { return godMode; } }
-        public bool isGamePlayPause { get { return gamePlayPaused; } }
+        public bool isGamePlayPause
+        {
+            get { return gamePlayPaused; }
+            set
+            {
+                gamePlayPaused = value;
+            }
+        }
         public bool isGameBeat { get { return gameBeat; } }
 
         [Header("Level Settings"), SerializeField]
@@ -158,6 +165,16 @@ namespace RiverAttack
                 GameManagerSaves.Instance.SavePlayer(numPlayers[i]);
             }*/
         }
+
+        public void ButtonPauseGame()
+        {
+            gamePlayPaused = !gamePlayPaused;
+            if(gamePlayPaused)
+                CallEventPausePlayGame();
+            else
+                CallEventUnPausePlayGame();
+        }
+        
 
         public bool haveAnyPlayMasterBeReady
         {

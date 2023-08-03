@@ -37,14 +37,14 @@ namespace Shopping
         Color normalColor;
  
         PlayersInputActions m_inputSystem;
-        PlayerSettings m_ActivePlayer;
+        PlayerSettings m_PlayerSettings;
         EventSystem m_EventSystem;
         ShopCarousel m_Shop;
         Task m_Task;
         int lastSelectedSkin = 0;
 
 
-        List<PlayerMaster> playerMasterList;
+        List<PlayerMaster> playerMasterList = new List<PlayerMaster>();
 
         public delegate void GeneralUpdateButtons(PlayerSettings player, ShopProductStock item);
         public GeneralUpdateButtons eventButtonSelect;
@@ -83,9 +83,11 @@ namespace Shopping
   #endregion
         void SetInitialReferences()
         {
-            playerMasterList = GamePlayManager.instance.playersMasterList;
-
-            m_ActivePlayer = GamePlayManager.instance.GetPlayerSettingsByMultiPlayerId(0);
+            var playerMaster = GameManager.instance.playerObjectAvailableList[0].GetComponent<PlayerMaster>();
+            playerMasterList.Add(playerMaster);
+            m_PlayerSettings = playerMaster.GetPlayersSettings();
+            
+            
             m_EventSystem = EventSystem.current;
 
             m_inputSystem = new PlayersInputActions();
@@ -108,9 +110,9 @@ namespace Shopping
             {
                 var item = t.GetComponent<UIItemShop>();
                 if (!item) continue;
-                item.SetupButtons(m_ActivePlayer);
-                item.getBuyButton.onClick.AddListener(delegate { BuyThisItem(m_ActivePlayer, item.productInStock); });
-                item.getSelectButton.onClick.AddListener(delegate { SelectThisItem(m_ActivePlayer, item.productInStock); });
+                item.SetupButtons(m_PlayerSettings);
+                item.getBuyButton.onClick.AddListener(delegate { BuyThisItem(m_PlayerSettings, item.productInStock); });
+                item.getSelectButton.onClick.AddListener(delegate { SelectThisItem(m_PlayerSettings, item.productInStock); });
             }
         }
 
@@ -181,7 +183,7 @@ namespace Shopping
 
         void RefuggieDisplayUpdate() 
         {
-            refuggiesText.text = m_ActivePlayer.wealth.ToString();
+            refuggiesText.text = m_PlayerSettings.wealth.ToString();
         }
 
         public void CallEventButtonSelect(PlayerSettings player, ShopProductStock item)
@@ -198,13 +200,13 @@ namespace Shopping
             Debug.Log("Comprar o item");
             var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
 
-            if (item.productInStock.PlayerAlreadyBuy(m_ActivePlayer))
+            if (item.productInStock.PlayerAlreadyBuy(m_PlayerSettings))
             {
                 Debug.Log("Player já tem o produto. Venda não concluida.");
                 return;
             }
             
-            BuyThisItem(m_ActivePlayer, item.productInStock);
+            BuyThisItem(m_PlayerSettings, item.productInStock);
         }
 
         void SelectButton(InputAction.CallbackContext context)
@@ -213,13 +215,13 @@ namespace Shopping
             
             var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
 
-            if (!item.productInStock.PlayerAlreadyBuy(m_ActivePlayer))
+            if (!item.productInStock.PlayerAlreadyBuy(m_PlayerSettings))
             {
                 Debug.Log("Player Não tem o produto. Seleção não concluida.");
                 return;
             }
 
-            SelectThisItem(m_ActivePlayer, item.productInStock);
+            SelectThisItem(m_PlayerSettings, item.productInStock);
         }
 
     }
