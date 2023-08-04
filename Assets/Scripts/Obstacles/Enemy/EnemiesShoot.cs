@@ -80,8 +80,6 @@ namespace RiverAttack
             base.SetInitialReferences();
             m_GamePlayManager = GamePlayManager.instance;
             m_EnemiesMaster = GetComponent<EnemiesMaster>();
-            
-            Debug.Log("Transform"+spawnPoint);
         }
         void ChangeState(IShoot newState)
         {

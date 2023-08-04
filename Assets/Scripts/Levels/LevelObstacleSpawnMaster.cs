@@ -42,19 +42,19 @@ namespace RiverAttack
             {
                 /*enemy.GetComponent<EnemiesMaster>().ignoreWall = ignoreWall;
                 enemy.GetComponent<EnemiesMaster>().ignoreEnemies = ignoreEnemies;*/
-                var obstacleMovement = enemy.GetComponent<ObstacleMovement>();
+               // var obstacleMovement = enemy.GetComponent<ObstacleMovement>();
                 //var obstacleMoveByApproach = enemy.GetComponent<ObstacleMoveByApproach>();
                 var obstacleSkins = enemy.GetComponent<ObstacleSkins>();
                 var obstacleShoot = enemy.GetComponent<EnemiesShoot>();
                 var obstacleDetectApproach = enemy.GetComponent<ObstacleDetectApproach>();
-                if (GetComponent<LevelObstacleSpawnMovement>() && obstacleMovement)
-                {
+                //if (GetComponent<LevelObstacleSpawnMovement>() && obstacleMovement)
+               // {
                     /*var spawnMovement = GetComponent<LevelObstacleSpawnMovement>();
                     obstacleMovement.canMove = spawnMovement.canMove;
                     obstacleMovement.moveVelocity = spawnMovement.moveVelocity;
                     obstacleMovement.moveFreeDirection = spawnMovement.moveFreeDirection;
                     obstacleMovement.animationCurve = spawnMovement.animationCurve;*/
-                }
+                //}
                 /*if (GetComponent<LevelObstacleSpawnMoveApproach>() && obstacleMoveByApproach)
                 {
                     var spawnMoveApproach = GetComponent<LevelObstacleSpawnMoveApproach>();

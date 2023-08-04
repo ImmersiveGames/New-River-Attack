@@ -131,10 +131,10 @@ namespace RiverAttack
 
         void SetupMenuInitial()
         {
-            Menu.gameObject.SetActive(true);
-            Touch.gameObject.SetActive(false);
-            Hud.gameObject.SetActive(false);
-            BaseScenary.gameObject.SetActive(false);
+            if(Menu != null)Menu.gameObject.SetActive(true);
+            if(Touch != null)Touch.gameObject.SetActive(false);
+            if(Hud != null)Hud.gameObject.SetActive(false);
+            if(BaseScenary != null)BaseScenary.gameObject.SetActive(false);
             isGameStopped = true;
             m_GamePlayManager.SetGamePlayPause(true);
             foreach (var player in playerObjectAvailableList)

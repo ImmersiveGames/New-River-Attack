@@ -11,9 +11,7 @@ namespace RiverAttack
         [Header("Start Move By Player Approach")]
         [Tooltip("If the enemy has versions with and without player approach, it is recommended to use a different Enemy SO.")]
         [SerializeField] protected internal float playerApproachRadius;
-        [SerializeField, Range(.1f, 5)] public float timeToCheck = 2f;
         [SerializeField, MinMaxSlider(0f,20f)] protected internal Vector2 playerApproachRadiusRandom;
-        protected float startApproachRadius;
         PlayerDetectApproach m_PlayerDetectApproach;
         protected MeshRenderer meshRenderer;
         protected Transform target;
@@ -25,7 +23,7 @@ namespace RiverAttack
 
         protected virtual void SetInitialReferences()
         {
-            meshRenderer = GetComponent<MeshRenderer>();
+            meshRenderer = GetComponentInChildren<MeshRenderer>();
             playerApproachRadius = SetPlayerApproachRadius();
         }
 
@@ -46,8 +44,8 @@ namespace RiverAttack
                 return playerApproachRadius != 0 || playerApproachRadiusRandom != Vector2.zero;
             }
         }
-        
-        protected float SetPlayerApproachRadius()
+
+        float SetPlayerApproachRadius()
         {
             if (playerApproachRadiusRandom != Vector2.zero)
                 playerApproachRadius = randomRangeDetect;

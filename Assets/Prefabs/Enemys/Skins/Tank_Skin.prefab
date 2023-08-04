@@ -26,14 +26,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5227714819580041900}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4651055153121131342}
   - {fileID: 219490714700109812}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6363716412731962758
 MeshFilter:
@@ -135,8 +136,7 @@ Transform:
   m_LocalPosition: {x: 0.1, y: 1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4651055153121131342}
+  m_Children: []
   m_Father: {fileID: 6252415275296240662}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 4651055153121131342}
   - component: {fileID: 516671835786785432}
   - component: {fileID: 1634192159578006851}
+  - component: {fileID: 7210019321615958638}
   m_Layer: 3
   m_Name: Canhao
   m_TagString: Untagged
@@ -215,13 +216,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6681837103009547063}
-  m_LocalRotation: {x: 9.512044e-16, y: 8.726646e-18, z: 8.726646e-18, w: 1}
-  m_LocalPosition: {x: 0.5791858, y: -0.15954894, z: 0.00064663973}
+  m_LocalRotation: {x: 9.512044e-16, y: -0, z: 8.726662e-18, w: 1}
+  m_LocalPosition: {x: 0.67918575, y: 0.94045115, z: 0.0006466506}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 219490714700109812}
-  m_RootOrder: 0
+  m_Father: {fileID: 6252415275296240662}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &516671835786785432
 MeshFilter:
@@ -273,3 +274,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7210019321615958638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6681837103009547063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b6c36dfcb36ef46b8f3cb99b0ecc37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

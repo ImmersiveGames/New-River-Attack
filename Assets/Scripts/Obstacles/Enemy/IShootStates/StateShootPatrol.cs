@@ -4,17 +4,18 @@ namespace RiverAttack
 {
     public class StateShootPatrol : IShoot
     {
-        readonly float m_StartApproachRadius;
+        float m_StartApproachRadius;
         float m_PlayerApproachRadius;
         EnemiesMaster m_EnemiesMaster;
         EnemiesSetDifficulty m_EnemiesSetDifficulty;
         public Transform target;
         PlayerDetectApproach m_PlayerDetectApproach;
+        readonly ObstacleDetectApproach m_ObstacleDetectApproach;
         
         public StateShootPatrol(ObstacleDetectApproach enemiesShoot, Transform target)
         {
             this.target = target;
-            m_PlayerApproachRadius = m_StartApproachRadius = enemiesShoot.playerApproachRadius;
+            m_ObstacleDetectApproach = enemiesShoot;
         }
 
         public void EnterState(EnemiesMaster enemyMaster)
@@ -22,6 +23,7 @@ namespace RiverAttack
             target = null;
             //Debug.Log("Estado: Patrol - Entrando: " + enemyMaster.enemy);
             m_EnemiesMaster = enemyMaster;
+            m_PlayerApproachRadius = m_StartApproachRadius = m_ObstacleDetectApproach.playerApproachRadius;
             if (!m_EnemiesMaster.enemy && !m_EnemiesMaster.enemy.enemiesSetDifficultyListSo) return;
             m_EnemiesSetDifficulty = m_EnemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(m_EnemiesMaster.getDifficultName);
             m_PlayerApproachRadius = m_StartApproachRadius * m_EnemiesSetDifficulty.multiplyPlayerDistanceRadiusToShoot;

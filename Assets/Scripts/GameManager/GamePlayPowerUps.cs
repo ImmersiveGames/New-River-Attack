@@ -6,12 +6,13 @@ namespace RiverAttack
     public class GamePlayPowerUps : Singleton<GamePlayPowerUps>
     {
         //ATENÇÃO NÃO ACEITA EVENTS PORQUE ELE NÃO VAI APRA A MEMORIA CHAMANDO PELO SCRIPTABLE
+        //Este script precisa estar num prefab fora de scene geralmente _GamePlayEffects_
         public static PlayerSettings target;
         [Header("RapidFire PowerUp")]
         [Range(0.1f, 2)]
         public float minRapidFire = 0.1f;
 
-        public void SetTarget(PlayerSettings player)
+        public void SetPowerUpTarget(PlayerSettings player)
         {
             target = player;
         }
@@ -35,9 +36,8 @@ namespace RiverAttack
         {
             if (target == null) return;
             if (target.actualHp < target.maxHp)
-                target.actualHp += (int)amount;
+                target.actualHp += amount;
         }
-
 
         public void GainBomb(int amount)
         {

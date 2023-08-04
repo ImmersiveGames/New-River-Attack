@@ -2,7 +2,7 @@
 
 namespace RiverAttack
 {
-    [RequireComponent(typeof(LevelObstacleSpawnMaster))]
+    /*[RequireComponent(typeof(LevelObstacleSpawnMaster))]
     public class LevelObstacleSpawnMovement : ObstacleMovement
     {
         [ContextMenu("LoadPrefab")]
@@ -15,7 +15,7 @@ namespace RiverAttack
             moveFreeDirection = om.moveFreeDirection;
             moveVelocity = om.moveVelocity;
             animationCurve = om.animationCurve;
-            canMove = om.canMove;*/
+            canMove = om.canMove;#1#
         }
-    }
+    }*/
 }

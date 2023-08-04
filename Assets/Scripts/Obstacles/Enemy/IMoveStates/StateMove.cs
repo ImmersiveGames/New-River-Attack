@@ -19,6 +19,7 @@ namespace RiverAttack
         }
         public void EnterState(EnemiesMaster enemiesMaster)
         {
+            //Debug.Log("Estado: MOVE - Entrando: ");
             if (enemiesMaster.enemy && enemiesMaster.enemy.enemiesSetDifficultyListSo)
             {
                 m_EnemiesSetDifficulty = enemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(enemiesMaster.getDifficultName);
@@ -27,16 +28,15 @@ namespace RiverAttack
             m_MoveVelocity = m_EnemiesMovement.moveVelocity * m_MultiplyEnemiesSpeedy;
             m_VectorDirection = m_EnemiesMovement.SetDirection(m_EnemiesMovement.startDirection);
             enemiesMaster.CallEventEnemiesMasterMovement(m_VectorDirection);
-            //Debug.Log("Estado: MOVE - Entrando: " + m_VectorDirection);
         }
         public void UpdateState(Transform transform, Vector3 direction)
         {
-            //Debug.Log("Estado: MOVE - UPDATE" + m_MoveVelocity);
+           // Debug.Log("Estado: MOVE - UPDATE" + m_MoveVelocity);
             Move(transform, direction, m_MoveVelocity);
         }
         public void ExitState()
         {
-            //Debug.Log("Estado: MOVE - Exit");
+           // Debug.Log("Estado: MOVE - Exit");
         }
         void Move(Transform objMove, Vector3 direction, float velocity)
         {

@@ -5,32 +5,34 @@ namespace RiverAttack
     public class StateMovePatrol : IMove
     {
         public Transform target;
-        readonly float m_StartApproachRadius;
+        float m_StartApproachRadius;
         float m_PlayerApproachRadius;
 
         EnemiesMaster m_EnemiesMaster;
         EnemiesSetDifficulty m_EnemiesSetDifficulty;
         PlayerDetectApproach m_PlayerDetectApproach;
+        readonly ObstacleDetectApproach m_ObstacleDetectApproach;
         
         public StateMovePatrol(ObstacleDetectApproach enemiesMovement, Transform target)
         {
             this.target = target;
-            m_PlayerApproachRadius = m_StartApproachRadius = enemiesMovement.playerApproachRadius;
+            m_ObstacleDetectApproach = enemiesMovement;
         }
         public void EnterState(EnemiesMaster enemiesMaster)
         {
+            //Debug.Log("Estado: Patrol - Enter: " + m_ObstacleDetectApproach.playerApproachRadius);
             target = null;
             m_EnemiesMaster = enemiesMaster;
+            m_PlayerApproachRadius = m_StartApproachRadius = m_ObstacleDetectApproach.playerApproachRadius;
+            
             if (!m_EnemiesMaster.enemy && !m_EnemiesMaster.enemy.enemiesSetDifficultyListSo) return;
             m_EnemiesSetDifficulty = m_EnemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(m_EnemiesMaster.getDifficultName);
             m_PlayerApproachRadius = m_StartApproachRadius * m_EnemiesSetDifficulty.multiplyPlayerDistanceRadiusToMove;
-            //Debug.Log("Estado: Patrol - Enter");
         }
         public void UpdateState(Transform transform, Vector3 direction)
         {
-            //Debug.Log("Estado: Patrol - Update");
-            var position = m_EnemiesMaster.transform.position;
-            
+            var position = transform.position;
+            //Debug.Log("Estado: Patrol - Update: "+ m_PlayerApproachRadius);
             //TODO: Quando o inimigo morre, precisa resetar o target também.
             
             m_PlayerDetectApproach ??= new PlayerDetectApproach(position, m_PlayerApproachRadius);
