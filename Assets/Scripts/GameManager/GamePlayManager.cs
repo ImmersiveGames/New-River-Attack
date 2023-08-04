@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
+
 namespace RiverAttack
 {
     public class GamePlayManager : Utils.Singleton<GamePlayManager>
@@ -37,6 +40,8 @@ namespace RiverAttack
 
         public List<PlayerMaster> playersMasterList;
         int m_ActualPath;
+
+        PlayersInputActions m_inputSystem;
 
         GameManager m_GameManager;
         GameSettings m_GameSettings;
@@ -117,6 +122,9 @@ namespace RiverAttack
             {
                 m_GameManager.actualLevel = classicLevel;
             }*/
+            m_inputSystem = new PlayersInputActions();
+            m_inputSystem.Player.Enable();
+            m_inputSystem.Player.Pause.performed += ctx => ControllerButtonPauseGame();
         }
 
         void StartPlayingGame()
@@ -174,7 +182,16 @@ namespace RiverAttack
             else
                 CallEventUnPausePlayGame();
         }
-        
+
+        private void ControllerButtonPauseGame() 
+        {          
+            if (m_GameManager.GetActualGameState() != GameManager.States.GamePlay) return;
+
+            if (gamePlayPaused) return;
+
+            Button pauseBtn = m_GameManager.pauseButton.gameObject.GetComponent<Button>();
+            pauseBtn.onClick.Invoke();           
+        }
 
         public bool haveAnyPlayMasterBeReady
         {

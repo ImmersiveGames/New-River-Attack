@@ -124,6 +124,9 @@ namespace Shopping
             product.RemoveStock(1);
             CallEventButtonBuy(player, product);
             RefuggieDisplayUpdate();
+
+            var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
+            item.getSelectButton.interactable = true;
         }
         void SelectThisItem(PlayerSettings player, ShopProductStock shopProductStock)
         {

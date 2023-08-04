@@ -11,17 +11,21 @@ namespace RiverAttack
         private GameObject iconLives;
         [SerializeField]
         private Sprite defaultSprite;
+        [SerializeField]
+        private Transform livesParent;
 
         private int lives;
         private GamePlayManager gamePlay;
         private PlayerMaster playerMaster;
-        private void Start()
+        private void OnEnable()
         {
+            //Debug.Log("Habilitei");
             SetInitialReferences();
-            CreateLiveIcon(this.transform, lives);
+            SetLivesUI();
             playerMaster.EventPlayerMasterReSpawn += UpdateUI;
             playerMaster.EventPlayerMasterOnDestroy += UpdateUI;
             playerMaster.EventPlayerAddLive += UpdateUI;
+            playerMaster.EventChangeSkin += UpdateUI;
         }
 
         private void SetInitialReferences()
@@ -44,20 +48,29 @@ namespace RiverAttack
             Invoke("SetLivesUI", .1f);
         }
 
-        private void SetLivesUI()
+        private void UpdateUI(ShopProductSkin skin) 
         {
-            int i = this.transform.childCount;
+            ClearLiveIcon(livesParent);
+            SetLivesUI();
+        }
+
+        private void SetLivesUI()
+        {           
+
+            //Debug.Log("Vou tentar Criar os icones");
+            int i = livesParent.childCount;
 
             if (i < lives)
             {
-                CreateLiveIcon(this.transform, lives - i);
+                //Debug.Log("Chamando a criação dos icones");
+                CreateLiveIcon(livesParent, lives - i);
             }
             for (int x = 0; x < i; x++)
             {
                 if (x < lives)
-                    this.transform.GetChild(x).gameObject.SetActive(true);
+                    livesParent.GetChild(x).gameObject.SetActive(true);
                 else
-                    this.transform.GetChild(x).gameObject.SetActive(false);
+                    livesParent.GetChild(x).gameObject.SetActive(false);
             }
         }
         private void CreateLiveIcon(Transform parent, int quant)
@@ -66,6 +79,18 @@ namespace RiverAttack
             {
                 GameObject icon = Instantiate(iconLives, parent);
                 icon.GetComponent<Image>().sprite = playerMaster.GetPlayersSettings().playerSkin.hubSprite;
+                //Debug.Log("icone criado");
+            }
+
+        }
+
+        private void ClearLiveIcon(Transform parent)
+        {
+            //Debug.Log("Clear Skin");
+            for (int x = 0; x < parent.childCount; x++)
+            {
+                Destroy(parent.GetChild(x).gameObject);
+                //Debug.Log("Skin Destroyed");
             }
         }
     }

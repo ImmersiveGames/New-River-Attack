@@ -40,11 +40,12 @@ namespace RiverAttack
         protected internal List<Transform> playerObjectAvailableList;
 
         [Header("Menus")]
-        [SerializeField]Transform Menu;
-        [SerializeField]Transform Touch;
-        [SerializeField]Transform Hud;
-        [SerializeField]Transform BaseScenary;
-        [SerializeField]PlayableDirector StartCutScene;
+        [SerializeField] Transform Menu;
+        [SerializeField] Transform Touch;
+        [SerializeField] Transform Hud;
+        [SerializeField] Transform BaseScenary;
+        [SerializeField] public Transform pauseButton;
+        [SerializeField] PlayableDirector StartCutScene;
         
         private Dictionary<string, object> m_GameplayDefault = new Dictionary<string, object>();
 
