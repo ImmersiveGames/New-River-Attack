@@ -2,11 +2,10 @@
 using UnityEngine;
 namespace RiverAttack
 {
-    [RequireComponent(typeof(EnemiesMaster))]
     public class EnemiesSound : MonoBehaviour
     {
 
-        EnemiesMaster m_EnemyMaster;
+        ObstacleMaster m_ObstacleMaster;
         protected AudioSource audioSource;
         [SerializeField]
         AudioEventSample enemyExplodeAudio;
@@ -17,19 +16,19 @@ namespace RiverAttack
         protected virtual void OnEnable()
         {
             SetInitialReferences();
-            m_EnemyMaster.EventDestroyEnemy += ExplodeSound;
+            m_ObstacleMaster.EventDestroyObject += ExplodeSound;
             m_GamePlayManager.EventResetEnemies += StopSound;
         }
         protected virtual void OnDisable()
         {
-            m_EnemyMaster.EventDestroyEnemy -= ExplodeSound;
+            m_ObstacleMaster.EventDestroyObject -= ExplodeSound;
             m_GamePlayManager.EventResetEnemies -= StopSound;
         }
   #endregion
 
         protected virtual void SetInitialReferences()
         {
-            m_EnemyMaster = GetComponent<EnemiesMaster>();
+            m_ObstacleMaster = GetComponent<ObstacleMaster>();
             audioSource = GetComponentInChildren<AudioSource>();
             m_GamePlayManager = GamePlayManager.instance;
         }

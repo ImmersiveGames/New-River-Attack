@@ -14,19 +14,23 @@ namespace RiverAttack
         #region UNITYMETHODS
         protected override void OnTriggerEnter(Collider collision)
         {
-            if (!collision.GetComponent<BulletPlayer>() || !enemiesMaster.enemy.canDestruct)
-                return;
+            if (!collision.GetComponent<BulletPlayer>() || !obstacleMaster.enemy.canDestruct) return;
             HitThis(collision);
         }
 
         void OnTriggerExit(Collider collision)
         {
-            if (!collision.GetComponentInParent<PlayerMaster>()) return;
+            var playerMaster = collision.GetComponentInParent<PlayerMaster>();
+            if (!playerMaster) return;
+            playerMaster.inEffectArea = false;
             m_EffectAreaMaster.CallEventExitAreaEffect();
         }
         void OnTriggerStay(Collider collision)
         {
-            if (!collision.GetComponentInParent<PlayerMaster>()) return;
+            var playerMaster = collision.GetComponentInParent<PlayerMaster>();
+            if (!playerMaster) return;
+            if (!playerMaster.inEffectArea) playerMaster.inEffectArea = true;
+            Debug.Log($"Colidiu: {playerMaster}");
             CollectThis(collision);
         }
         #endregion

@@ -1,6 +1,6 @@
 namespace RiverAttack
 {
-    public class EffectAreaMaster : EnemiesMaster
+    public class EffectAreaMaster : ObstacleMaster
     {
         public event GeneralEventHandler EventEnterAreaEffect;
         public event GeneralEventHandler EventExitAreaEffect;

@@ -3,7 +3,6 @@ using Utils;
 
 namespace RiverAttack
 {
-    [RequireComponent(typeof(EnemiesMaster))]
     public class EnemiesParticle : MonoBehaviour
     {
         [SerializeField]
@@ -11,23 +10,23 @@ namespace RiverAttack
         [SerializeField]
         float timeoutDestroy;
 
-        EnemiesMaster m_EnemiesMaster;
+        ObstacleMaster m_ObstacleMaster;
 
         #region UNITY METHODS
         void OnEnable()
         {
             SetInitialReferences();
-            m_EnemiesMaster.EventDestroyEnemy += ParticleExplosion;
+            m_ObstacleMaster.EventDestroyObject += ParticleExplosion;
         }
         void OnDisable()
         {
-            m_EnemiesMaster.EventDestroyEnemy -= ParticleExplosion;
+            m_ObstacleMaster.EventDestroyObject -= ParticleExplosion;
         }
   #endregion
 
         void SetInitialReferences()
         {
-            m_EnemiesMaster = GetComponent<EnemiesMaster>();
+            m_ObstacleMaster = GetComponent<ObstacleMaster>();
             // find children with Particles
         }
 

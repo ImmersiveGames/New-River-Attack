@@ -32,7 +32,7 @@ namespace RiverAttack
             //Debug.Log("Estado: Shoot - Entrando" + m_EnemiesShoot.shootCadence);
             m_EnemiesMaster = enemyMaster;
             if (!m_EnemiesMaster.enemy && !m_EnemiesMaster.enemy.enemiesSetDifficultyListSo) return;
-            m_EnemiesSetDifficulty = m_EnemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(m_EnemiesMaster.getDifficultName);
+            m_EnemiesSetDifficulty = m_EnemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(m_EnemiesMaster.actualDifficultName);
             m_Cadence = m_StartCadence * m_EnemiesSetDifficulty.multiplyEnemiesShootCadence;
             m_BulletSpeed = m_StartBulletSpeed * m_EnemiesSetDifficulty.multiplyEnemiesShootSpeedy;
         }

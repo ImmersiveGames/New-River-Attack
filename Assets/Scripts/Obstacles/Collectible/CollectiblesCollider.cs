@@ -3,7 +3,6 @@ using Utils;
 
 namespace RiverAttack
 {
-    [RequireComponent(typeof(CollectiblesMaster))]
     public class CollectiblesCollider : EnemiesCollider
     {
         CollectiblesMaster m_CollectiblesMaster;
@@ -54,21 +53,21 @@ namespace RiverAttack
             playerMaster.AddCollectiblesList(m_Collectible);
             if (playerPowerUp != null && m_CollectiblesMaster.collectibles.getPowerUp != null)
                 playerPowerUp.ActivatePowerUp(m_CollectiblesMaster.collectibles.getPowerUp);
-            enemiesMaster.isDestroyed = true;
+            obstacleMaster.isDestroyed = true;
             m_CollectiblesMaster.CallCollectibleEvent(playerMaster);
-            gamePlay.CallEventCollectable(m_Collectible);
+            gamePlayManager.CallEventCollectable(m_Collectible);
         }
 
         public override void HitThis(Collider collision)
         {
-            enemiesMaster.isDestroyed = true;
+            obstacleMaster.isDestroyed = true;
             var playerMaster = WhoHit(collision);
             if(playerMaster == null)
                 playerMaster = WhoHit(collision);
             ColliderOff();
             playerMaster.AddHitList(m_Collectible);
             // Quem desativa o rander é o animation de explosão
-            enemiesMaster.CallEventDestroyEnemy(playerMaster);
+            obstacleMaster.CallEventDestroyEnemy(playerMaster);
             ShouldSavePoint();
             //ShouldCompleteMission();
         }

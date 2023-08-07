@@ -5,14 +5,14 @@ namespace RiverAttack
 {
     public class EnemiesSkins : ObstacleSkins
     {
-        EnemiesMaster m_EnemiesMaster;
+        ObstacleMaster m_ObstacleMaster;
         GamePlayManager m_GamePlayManager;
         #region UNITY METHODS
         void Awake()
                 {
                     SetInitialReferences();
                     Tools.SetLayersRecursively(GameManager.instance.layerEnemies, transform);
-                    m_EnemiesMaster.CallEventChangeSkin();
+                    m_ObstacleMaster.CallEventChangeSkin();
                 }
         void OnEnable()
         {
@@ -27,7 +27,7 @@ namespace RiverAttack
         void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
-            m_EnemiesMaster = GetComponent<EnemiesMaster>();
+            m_ObstacleMaster = GetComponent<ObstacleMaster>();
         }
         void ResetSkinPosition()
         {

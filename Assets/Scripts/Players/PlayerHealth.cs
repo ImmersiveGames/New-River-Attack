@@ -85,7 +85,8 @@ namespace RiverAttack
 
         void ReduceFuel(int fuel)
         {
-            m_PlayerSettings.actualHp -= fuel;
+            if(!m_PlayerMaster.inEffectArea)
+                m_PlayerSettings.actualHp -= fuel;
             if (m_PlayerSettings.actualHp > 0) return;
             m_PlayerSettings.actualHp = 0;
             m_PlayerMaster.CallEventPlayerMasterOnDestroy();
