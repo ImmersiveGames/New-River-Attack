@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace RiverAttack
 {
@@ -12,25 +10,25 @@ namespace RiverAttack
         protected override void OnEnable()
         {
             base.OnEnable();
-            if (enemiesMaster.enemy.canRespawn)
-                gamePlay.EventResetEnemies += ColliderOn;
+            if (obstacleMaster.enemy.canRespawn)
+                gamePlayManager.EventResetEnemies += ColliderOn;
         }
         protected override void OnTriggerEnter(Collider collision)
         {
-            if ((!collision.GetComponentInParent<PlayerMaster>() && !collision.GetComponent<Bullets>()) || !enemiesMaster.enemy.canDestruct)
+            if (!collision.GetComponentInParent<PlayerMaster>() && !collision.GetComponent<Bullets>() || !obstacleMaster.enemy.canDestruct)
                 return;
             if (collision.GetComponent<BulletEnemy>()) return;
             HitThis(collision);
         }
         private void OnDisable()
         {
-            if (enemiesMaster.enemy.canRespawn)
-                gamePlay.EventResetEnemies -= ColliderOn;
+            if (obstacleMaster.enemy.canRespawn)
+                gamePlayManager.EventResetEnemies -= ColliderOn;
         }
         private void OnDestroy()
         {
-            if (enemiesMaster.enemy.canRespawn)
-                gamePlay.EventResetEnemies -= ColliderOn;
+            if (obstacleMaster.enemy.canRespawn)
+                gamePlayManager.EventResetEnemies -= ColliderOn;
         }
   #endregion
         protected override void SetInitialReferences()
@@ -41,11 +39,11 @@ namespace RiverAttack
 
         public override void HitThis(Collider collision)
         {
-            enemiesMaster.isDestroyed = true;
+            obstacleMaster.isDestroyed = true;
             var playerMaster = WhoHit(collision);
             ColliderOff();
             // Quem desativa o rander é o animation de explosão
-            enemiesMaster.CallEventDestroyEnemy(playerMaster);
+            obstacleMaster.CallEventDestroyEnemy(playerMaster);
             ShouldSavePoint();
             playerMaster.CallEventPlayerMasterCollider();
             //ShouldCompleteMission();

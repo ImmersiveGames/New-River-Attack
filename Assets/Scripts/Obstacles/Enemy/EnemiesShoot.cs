@@ -37,7 +37,7 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
-            m_EnemiesMaster.EventDestroyEnemy += StopFire;
+            m_EnemiesMaster.EventDestroyObject += StopFire;
             m_GamePlayManager.EventEnemyDestroyPlayer += StopFire;
         }
         void Start()
@@ -50,7 +50,7 @@ namespace RiverAttack
 
         void Update()
         {
-            if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldEnemyBeReady || m_EnemiesMaster.isDestroyed || !meshRenderer.isVisible)
+            if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldObstacleBeReady || m_EnemiesMaster.isDestroyed || !meshRenderer.isVisible)
                 return;
             switch (shouldBeFire)
             {
@@ -71,7 +71,7 @@ namespace RiverAttack
         }
         void OnDisable()
         {
-            m_EnemiesMaster.EventDestroyEnemy -= StopFire;
+            m_EnemiesMaster.EventDestroyObject -= StopFire;
             m_GamePlayManager.EventEnemyDestroyPlayer -= StopFire;
         }
   #endregion

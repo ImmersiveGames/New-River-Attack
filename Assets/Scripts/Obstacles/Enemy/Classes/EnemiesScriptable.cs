@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Serialization;
 namespace RiverAttack
 {
     [CreateAssetMenu(fileName = "Enemy", menuName = "RiverAttack/Enemy", order = 1)]
@@ -20,5 +21,6 @@ namespace RiverAttack
         public bool canRespawn;
         public bool canDestruct;
         public bool isCheckInPoint;
+        public bool isFinishLevel;
     }
 }

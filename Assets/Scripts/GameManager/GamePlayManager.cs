@@ -151,7 +151,7 @@ namespace RiverAttack
 
         public PlayerMaster GetPlayerMasterByIndex(int indexPlayer)
         {
-            return playersMasterList[indexPlayer];
+            return playersMasterList.Count <= 0 ? null : playersMasterList[indexPlayer];
         }
 
         public int HighScorePlayers()

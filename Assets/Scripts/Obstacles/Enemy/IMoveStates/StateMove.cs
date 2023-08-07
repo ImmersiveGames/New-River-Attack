@@ -22,7 +22,7 @@ namespace RiverAttack
             //Debug.Log("Estado: MOVE - Entrando: ");
             if (enemiesMaster.enemy && enemiesMaster.enemy.enemiesSetDifficultyListSo)
             {
-                m_EnemiesSetDifficulty = enemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(enemiesMaster.getDifficultName);
+                m_EnemiesSetDifficulty = enemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(enemiesMaster.actualDifficultName);
                 m_MultiplyEnemiesSpeedy = m_EnemiesSetDifficulty.multiplyEnemiesSpeedy;
             }
             m_MoveVelocity = m_EnemiesMovement.moveVelocity * m_MultiplyEnemiesSpeedy;
