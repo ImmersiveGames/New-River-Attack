@@ -26,6 +26,8 @@ namespace Shopping
         GameObject productForward, productBackward;
         [SerializeField]
         TMP_Text refuggiesText;
+        [SerializeField]
+        AudioMenuOptions m_audio;
 
         [Header("Carousel"), SerializeField]
         bool infinityLooping;
@@ -55,13 +57,21 @@ namespace Shopping
         {
             //SaveGame.DeleteAll();
             SetInitialReferences();
+            SetControllsInput();
             SetupShop();
             scrollBarShop.horizontalScrollbar.numberOfSteps = m_Shop.getProducts.Length;
         }
 
         void Start()
         {
-            RefuggieDisplayUpdate();
+            RefuggieDisplayUpdate();            
+        }
+
+        private void SetControllsInput()
+        {
+            m_inputSystem = new PlayersInputActions();
+            m_inputSystem.UI_Controlls.Enable();
+            Debug.Log("Habilitei os controles");
 
             m_inputSystem.UI_Controlls.BuyButton.performed += ctx => BuyButton(ctx);
             m_inputSystem.UI_Controlls.SelectButton.performed += ctx => SelectButton(ctx);
@@ -77,8 +87,8 @@ namespace Shopping
         void OnDisable()
         {
             //GameManagerSaves.Instance.SavePlayer(activePlayer);
-            m_inputSystem = new PlayersInputActions();
             m_inputSystem.UI_Controlls.Disable();
+            Debug.Log("Desabilitei os controles");
         }
   #endregion
         void SetInitialReferences()
@@ -86,12 +96,10 @@ namespace Shopping
             var playerMaster = GameManager.instance.playerObjectAvailableList[0].GetComponent<PlayerMaster>();
             playerMasterList.Add(playerMaster);
             m_PlayerSettings = playerMaster.GetPlayersSettings();
-            
-            
+                        
             m_EventSystem = EventSystem.current;
 
-            m_inputSystem = new PlayersInputActions();
-            m_inputSystem.UI_Controlls.Enable();                  
+              
 
             //GameManagerSaves.Instance.LoadPlayer(ref activePlayer);
             //activePlayer.LoadValues();
@@ -113,6 +121,9 @@ namespace Shopping
                 item.SetupButtons(m_PlayerSettings);
                 item.getBuyButton.onClick.AddListener(delegate { BuyThisItem(m_PlayerSettings, item.productInStock); });
                 item.getSelectButton.onClick.AddListener(delegate { SelectThisItem(m_PlayerSettings, item.productInStock); });
+                
+                if (item.getSelectButton.interactable == false) 
+                    item.getSelectButton.GetComponent<Image>().color = selectedColor;
             }
         }
 
@@ -127,6 +138,8 @@ namespace Shopping
 
             var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
             item.getSelectButton.interactable = true;
+
+            m_audio.PlayClickSFX();
         }
         void SelectThisItem(PlayerSettings player, ShopProductStock shopProductStock)
         {
@@ -145,10 +158,14 @@ namespace Shopping
             selectBTN.GetComponent<Image>().color = selectedColor;
 
             lastSelectedSkin = m_Shop.getActualProduct;
+
+            m_audio.PlayClickSFX();
         }
 
         public void ButtonNavegation(int next)
         {
+            //m_audio.PlayClickSFX();
+
             m_Shop.ButtonNavegation(next);
 
             //Debug.Log(m_Shop.getActualProduct);
@@ -181,7 +198,7 @@ namespace Shopping
             {
                 productBackward.SetActive(true);
                 productForward.SetActive(true);
-            }
+            }  
         }
 
         void RefuggieDisplayUpdate() 

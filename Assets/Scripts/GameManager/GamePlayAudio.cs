@@ -8,7 +8,17 @@ namespace RiverAttack
     public class GamePlayAudio : Singleton<GamePlayAudio>
     {
         public AudioMixerSnapshot[] audioMixerSnapshots;
-        public enum LevelType { Grass = 4, Forest = 2, Antique = 0, Desert = 1, Ice = 3, Swamp = 7, Hub = 5, MainTheme = 6 }
+        public enum LevelType 
+        {
+            MainTheme = 0,
+            Hub = 1,            
+            Grass = 2,
+            Forest = 3,
+            Swamp = 4,
+            Antique = 5,
+            Desert = 6,
+            Ice = 7,  
+        }
         public LevelType levelType;
         [SerializeField]
         AudioSource audioSource;
@@ -16,9 +26,24 @@ namespace RiverAttack
         List<AudioEventSample> listBGM;
         bool m_InFadeIn, m_InFadeOut;
 
+        LevelType currentPlaying;
+
         #region UNITYMETHODS
-        void Update()
+
+        void Start()
         {
+            currentPlaying = levelType;
+            ChangeBGM(levelType, 0.5f);
+        }
+        void Update()
+        {    
+            if (levelType != currentPlaying) 
+            {
+                ChangeBGM(levelType, 0.5f);
+                currentPlaying = levelType;
+            }
+                
+
             if (Time.timeScale <= 0)
             {
                 PauseBGM();

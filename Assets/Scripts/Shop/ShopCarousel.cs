@@ -124,6 +124,7 @@ namespace Shopping
                 distanceGap += VectorCarouselDirection(item.GetComponent<RectTransform>().rect.size, spaceBetweenPanels);
                 getProducts[i] = item;
             }
+
             //Canvas.ForceUpdateCanvases();
             // pegas a distancia entre botões
             m_ProductDistance = (int)Mathf.Abs(VectorDistance(getProducts[1].GetComponent<RectTransform>().anchoredPosition, getProducts[0].GetComponent<RectTransform>().anchoredPosition));
