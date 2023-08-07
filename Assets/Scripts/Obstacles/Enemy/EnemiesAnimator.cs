@@ -4,14 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace RiverAttack
 {
-    [RequireComponent(typeof(EnemiesMaster))]
     public class EnemiesAnimator : MonoBehaviour
     {
         public string explosionTrigger;
         public string onMove;
         public string onFlip;
 
-        EnemiesMaster m_EnemyMaster;
+        ObstacleMaster m_ObstacleMaster;
         Animator m_Animator;
         GamePlayManager m_GamePlayManager;
 
@@ -19,16 +18,16 @@ namespace RiverAttack
         protected virtual void OnEnable()
         {
             SetInitialReferences();
-            m_EnemyMaster.EventDestroyEnemy += ExplodeAnimation;
-            m_EnemyMaster.EventEnemiesMasterMovement += MovementAnimation;
-            m_EnemyMaster.EventEnemiesMasterFlipEnemies += EnemiesMasterFlipAnimation;
+            m_ObstacleMaster.EventDestroyObject += ExplodeAnimation;
+            m_ObstacleMaster.EventObjectMasterMovement += MovementAnimation;
+            m_ObstacleMaster.EventObjectMasterFlipEnemies += ObjectMasterFlipObstaclesMasterFlipAnimation;
             m_GamePlayManager.EventResetEnemies += ResetAnimation;
         }
         protected virtual void OnDisable()
         {
-            m_EnemyMaster.EventDestroyEnemy -= ExplodeAnimation;
-            m_EnemyMaster.EventEnemiesMasterMovement -= MovementAnimation;
-            m_EnemyMaster.EventEnemiesMasterFlipEnemies -= EnemiesMasterFlipAnimation;
+            m_ObstacleMaster.EventDestroyObject -= ExplodeAnimation;
+            m_ObstacleMaster.EventObjectMasterMovement -= MovementAnimation;
+            m_ObstacleMaster.EventObjectMasterFlipEnemies -= ObjectMasterFlipObstaclesMasterFlipAnimation;
             m_GamePlayManager.EventResetEnemies -= ResetAnimation;
         }
   #endregion
@@ -36,7 +35,7 @@ namespace RiverAttack
         protected virtual void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
-            m_EnemyMaster = GetComponent<EnemiesMaster>();
+            m_ObstacleMaster = GetComponent<ObstacleMaster>();
             m_Animator = GetComponentInChildren<Animator>();
         }
 
@@ -51,7 +50,7 @@ namespace RiverAttack
             m_Animator.SetBool(onMove, pos != Vector3.zero);
         }
 
-        void EnemiesMasterFlipAnimation(Vector3 face)
+        void ObjectMasterFlipObstaclesMasterFlipAnimation(Vector3 face)
         {
             if (m_Animator == null)
             {
@@ -66,8 +65,8 @@ namespace RiverAttack
             if (m_Animator == null) return;
             if(!string.IsNullOrEmpty(onMove))
                 m_Animator.SetBool(onMove, false);
-            if(!string.IsNullOrEmpty(onMove))
-                m_Animator.SetBool(onMove, false);
+            if(!string.IsNullOrEmpty(onFlip))
+                m_Animator.SetBool(onFlip, false);
         }
 
         void ExplodeAnimation()

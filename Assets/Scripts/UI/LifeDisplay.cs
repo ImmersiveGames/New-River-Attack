@@ -6,85 +6,85 @@ namespace RiverAttack
     public class LifeDisplay : MonoBehaviour
     {
         [SerializeField]
-        private int playerIndex;
+        int playerIndex;
         [SerializeField]
-        private GameObject iconLives;
+        GameObject iconLives;
         [SerializeField]
-        private Sprite defaultSprite;
+        Sprite defaultSprite;
         [SerializeField]
-        private Transform livesParent;
+        Transform livesParent;
 
-        private int lives;
-        private GamePlayManager gamePlay;
-        private PlayerMaster playerMaster;
+        int m_Lives;
+        GamePlayManager m_GamePlayManager;
+        PlayerMaster m_PlayerMaster;
         private void OnEnable()
         {
             //Debug.Log("Habilitei");
             SetInitialReferences();
             SetLivesUI();
-            playerMaster.EventPlayerMasterReSpawn += UpdateUI;
-            playerMaster.EventPlayerMasterOnDestroy += UpdateUI;
-            playerMaster.EventPlayerAddLive += UpdateUI;
-            playerMaster.EventChangeSkin += UpdateUI;
+            if (m_PlayerMaster == null) return;
+            m_PlayerMaster.EventPlayerMasterReSpawn += UpdateUI;
+            m_PlayerMaster.EventPlayerMasterOnDestroy += UpdateUI;
+            m_PlayerMaster.EventPlayerAddLive += UpdateUI;
+            m_PlayerMaster.EventChangeSkin += UpdateUI;
         }
 
-        private void SetInitialReferences()
+        void SetInitialReferences()
         {
-            gamePlay = GamePlayManager.instance;
-            playerMaster = gamePlay.GetPlayerMasterByIndex(playerIndex);            
-            lives = (int)playerMaster.GetPlayersSettings().lives;         
+            m_GamePlayManager = GamePlayManager.instance;
+            m_PlayerMaster = m_GamePlayManager.GetPlayerMasterByIndex(playerIndex);
+            if (m_PlayerMaster == null) return;
+            m_Lives = m_PlayerMaster.GetPlayersSettings().lives;         
         }
 
-        private void OnDisable()
+        void OnDisable()
         {
-            playerMaster.EventPlayerMasterOnDestroy -= UpdateUI;
-            playerMaster.EventPlayerMasterReSpawn -= UpdateUI;
-            playerMaster.EventPlayerAddLive -= UpdateUI;
+            if (m_PlayerMaster == null) return;
+            m_PlayerMaster.EventPlayerMasterOnDestroy -= UpdateUI;
+            m_PlayerMaster.EventPlayerMasterReSpawn -= UpdateUI;
+            m_PlayerMaster.EventPlayerAddLive -= UpdateUI;
         }
 
-        private void UpdateUI()
+        void UpdateUI()
         {
-            lives = (int)playerMaster.GetPlayersSettings().lives;
-            Invoke("SetLivesUI", .1f);
+            m_Lives = (int)m_PlayerMaster.GetPlayersSettings().lives;
+            Invoke(nameof(SetLivesUI), .1f);
         }
 
-        private void UpdateUI(ShopProductSkin skin) 
+        void UpdateUI(ShopProductSkin skin) 
         {
             ClearLiveIcon(livesParent);
             SetLivesUI();
         }
 
-        private void SetLivesUI()
+        void SetLivesUI()
         {           
 
             //Debug.Log("Vou tentar Criar os icones");
             int i = livesParent.childCount;
 
-            if (i < lives)
+            if (i < m_Lives)
             {
-                //Debug.Log("Chamando a criação dos icones");
-                CreateLiveIcon(livesParent, lives - i);
+                //Debug.Log("Chamando a criaÃ§Ã£o dos icones");
+                CreateLiveIcon(livesParent, m_Lives - i);
             }
             for (int x = 0; x < i; x++)
             {
-                if (x < lives)
-                    livesParent.GetChild(x).gameObject.SetActive(true);
-                else
-                    livesParent.GetChild(x).gameObject.SetActive(false);
+                livesParent.GetChild(x).gameObject.SetActive(x < m_Lives);
             }
         }
-        private void CreateLiveIcon(Transform parent, int quant)
+        void CreateLiveIcon(Transform parent, int quantity)
         {
-            for (int x = 0; x < quant; x++)
+            for (int x = 0; x < quantity; x++)
             {
-                GameObject icon = Instantiate(iconLives, parent);
-                icon.GetComponent<Image>().sprite = playerMaster.GetPlayersSettings().playerSkin.hubSprite;
+                var icon = Instantiate(iconLives, parent);
+                icon.GetComponent<Image>().sprite = m_PlayerMaster.GetPlayersSettings().playerSkin.hubSprite;
                 //Debug.Log("icone criado");
             }
 
         }
 
-        private void ClearLiveIcon(Transform parent)
+        static void ClearLiveIcon(Transform parent)
         {
             //Debug.Log("Clear Skin");
             for (int x = 0; x < parent.childCount; x++)

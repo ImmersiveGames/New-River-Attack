@@ -17,6 +17,8 @@ namespace RiverAttack
         protected internal PlayersInputActions playersInputActions;
         GamePlayManager m_GamePlayManager;
         GameManager m_GameManager;
+
+        protected internal bool inEffectArea;
         
 
     #region SerilizedField

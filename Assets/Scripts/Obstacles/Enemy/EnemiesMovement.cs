@@ -58,7 +58,7 @@ namespace RiverAttack
         }
         void Update()
         {
-            if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldEnemyBeReady || m_EnemiesMaster.isDestroyed || !meshRenderer.isVisible)
+            if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldObstacleBeReady || m_EnemiesMaster.isDestroyed || !meshRenderer.isVisible)
                 return;
             switch (shouldBeMoving)
             {
@@ -80,7 +80,7 @@ namespace RiverAttack
         void OnTriggerEnter(Collider other)
         {
             if (!m_GamePlayManager.shouldBePlayingGame || 
-                !m_EnemiesMaster.shouldEnemyBeReady || 
+                !m_EnemiesMaster.shouldObstacleBeReady || 
                 m_EnemiesMaster.isDestroyed || 
                 !meshRenderer.isVisible || m_ActualState != m_StateMove || m_InCollision) return;
             

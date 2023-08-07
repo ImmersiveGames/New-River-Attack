@@ -19,11 +19,11 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
-            m_EnemyMaster.EventDestroyEnemy += DropItem;
+            m_EnemyMaster.EventDestroyObject += DropItem;
         }
         void OnDisable()
         {
-            m_EnemyMaster.EventDestroyEnemy -= DropItem;
+            m_EnemyMaster.EventDestroyObject -= DropItem;
         }
   #endregion
 

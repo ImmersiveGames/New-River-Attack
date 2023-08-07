@@ -2,123 +2,45 @@
 
 namespace RiverAttack
 {
-    public class EnemiesMaster : ObjectMaster
+    public class EnemiesMaster : ObstacleMaster
     {
-        public EnemiesScriptable enemy;
-        public bool isDestroyed;
-        public bool goalLevel;
+        EnemiesSetDifficultyListSo m_EnemiesSetDifficultList;
 
-        protected internal enum EnemyStatus { Paused, Active }
-        [SerializeField]
-        protected internal EnemyStatus actualEnemyStatus;
-        public bool shouldEnemyBeReady
+        public EnemiesSetDifficulty.EnemyDifficult actualDifficultName;
+        public static EnemiesSetDifficulty myDifficulty { get; private set; }
+
+        #region UNITYMETHODS
+        protected override void Awake()
         {
-            get
-            {
-                return isDestroyed == false && actualEnemyStatus == EnemyStatus.Active;
-            }
+            base.Awake();
+            m_EnemiesSetDifficultList = enemy.enemiesSetDifficultyListSo;
+            if (m_EnemiesSetDifficultList != null)
+                myDifficulty = m_EnemiesSetDifficultList.GetDifficultByEnemyDifficult(actualDifficultName);
         }
-        [SerializeField]
-        EnemiesSetDifficulty.EnemyDifficult actualDifficultName;
-        const float DESTROY_DELAY = 0.1f;
-        Vector3 enemyStartPosition
+        protected override void OnEnable()
         {
-            get;
-            set;
+            base.OnEnable();
+            ChangeDifficulty();
+            EventDestroyObject += ChangeDifficulty;
         }
 
-        public EnemiesSetDifficulty.EnemyDifficult getDifficultName
-        {
-            get
-            {
-                return actualDifficultName;
-            }
-            private set
-            {
-                actualDifficultName = value;
-            }
-        }
-
-        private protected GamePlayManager gamePlayManager;
-
-        #region Delegates
-        public delegate void GeneralEventHandler();
-        public event GeneralEventHandler EventDestroyEnemy;
-        public event GeneralEventHandler EventChangeSkin;
-        public delegate void MovementEventHandler(Vector3 pos);
-        public event MovementEventHandler EventEnemiesMasterMovement;
-        public event MovementEventHandler EventEnemiesMasterFlipEnemies;
-        public delegate void EnemyEventHandler(PlayerMaster playerMaster);
-        public event EnemyEventHandler EventPlayerDestroyEnemy;
-  #endregion
-
-        #region UNITY METHODS
-        void Awake()
-        {
-            //gameObject.name = enemy.name;
-
-            enemyStartPosition = transform.position;
-            actualEnemyStatus = EnemyStatus.Paused;
-            isDestroyed = false;
-        }
-        protected virtual void OnEnable()
-        {
-            SetInitialReferences();
-            //Tools.SetLayersRecursively(GameManager.instance.layerEnemies, transform);
-            gamePlayManager.EventStartPlayGame += OnInitializeEnemy;
-            gamePlayManager.EventResetEnemies += OnInitializeEnemy;
-        }
         void Start()
         {
-            actualEnemyStatus = EnemyStatus.Active;
+            ChangeDifficulty();
         }
-        protected virtual void OnDisable()
+        protected override void OnDisable()
         {
-            gamePlayManager.EventStartPlayGame -= OnInitializeEnemy;
-            gamePlayManager.EventResetEnemies -= OnInitializeEnemy;
+            base.OnDisable();
+            EventDestroyObject -= ChangeDifficulty;
         }
   #endregion
-        
-        protected virtual void SetInitialReferences()
+        void ChangeDifficulty()
         {
-            gamePlayManager = GamePlayManager.instance;
-            int novoLayer = Mathf.RoundToInt(Mathf.Log(GameManager.instance.layerEnemies.value, 2));
-            gameObject.layer = novoLayer;
-        }
-
-        void OnInitializeEnemy()
-        {
-            if (!enemy.canRespawn && isDestroyed)
-                Destroy(gameObject, DESTROY_DELAY);
-            else
+            if (m_EnemiesSetDifficultList != null)
             {
-                Utils.Tools.ToggleChildren(transform);
-                transform.position = enemyStartPosition;
-                actualEnemyStatus = EnemyStatus.Active;
-                isDestroyed = false;
+                myDifficulty = enemy.enemiesSetDifficultyListSo.GetDifficultByScore(gamePlayManager.HighScorePlayers());
             }
         }
 
-    #region Calls
-        
-        public void CallEventEnemiesMasterMovement(Vector3 pos)
-        {
-            EventEnemiesMasterMovement?.Invoke(pos);
-        }
-        public void CallEventEnemiesMasterFlipEnemies(Vector3 pos)
-        {
-            EventEnemiesMasterFlipEnemies?.Invoke(pos);
-        }
-        public void CallEventDestroyEnemy(PlayerMaster playerMaster)
-        {
-            actualEnemyStatus = EnemyStatus.Paused;
-            EventDestroyEnemy?.Invoke();
-            EventPlayerDestroyEnemy?.Invoke(playerMaster);
-        }
-        public void CallEventChangeSkin()
-        {
-            EventChangeSkin?.Invoke();
-        }
-    #endregion
     }
 }

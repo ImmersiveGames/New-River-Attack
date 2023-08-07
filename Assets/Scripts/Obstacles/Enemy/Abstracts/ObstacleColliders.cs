@@ -1,13 +1,10 @@
 ﻿using UnityEngine;
 namespace RiverAttack
 {
-    [RequireComponent(typeof(EnemiesMaster))]
     public abstract class ObstacleColliders : MonoBehaviour
     {
-        protected EnemiesMaster enemiesMaster;
-        protected GamePlayManager gamePlay;
-        GameSettings m_GameSettings;
-        GameManager m_GameManager;
+        protected ObstacleMaster obstacleMaster;
+        protected GamePlayManager gamePlayManager;
 
         #region UNITY METHODS
         protected virtual void OnEnable()
@@ -19,10 +16,8 @@ namespace RiverAttack
 
         protected virtual void SetInitialReferences()
         {
-            enemiesMaster = GetComponent<EnemiesMaster>();
-            m_GameSettings = GameSettings.instance;
-            gamePlay = GamePlayManager.instance;
-            m_GameManager = GameManager.instance;
+            gamePlayManager = GamePlayManager.instance;
+            obstacleMaster = GetComponent<ObstacleMaster>();
         }
       
         public virtual void HitThis(Collider collision) { }
@@ -35,19 +30,19 @@ namespace RiverAttack
         {
             if (collision.GetComponentInParent<PlayerMaster>())
             {
-                collision.GetComponentInParent<PlayerMaster>().AddEnemiesHitList(enemiesMaster.enemy);
+                collision.GetComponentInParent<PlayerMaster>().AddEnemiesHitList(obstacleMaster.enemy);
                 return collision.GetComponentInParent<PlayerMaster>();
             }
             var ownerShoot = collision.GetComponent<BulletPlayer>().ownerShoot as PlayerMaster;
             if (ownerShoot == null) return null;
-            ownerShoot.AddEnemiesHitList(enemiesMaster.enemy);
+            ownerShoot.AddEnemiesHitList(obstacleMaster.enemy);
             return ownerShoot;
         }
         
         protected void ShouldSavePoint()
         {
-            if (enemiesMaster.enemy.isCheckInPoint)
-                gamePlay.CallEventCheckPoint(transform.position);
+            if (obstacleMaster.enemy.isCheckInPoint)
+                gamePlayManager.CallEventCheckPoint(transform.position);
         }
     }
 }
