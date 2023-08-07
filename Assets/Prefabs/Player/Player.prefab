@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 4344647296005993252}
   - component: {fileID: 5420935127651274328}
   - component: {fileID: 3031737086699250233}
+  - component: {fileID: 2758532654683650245}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -45,7 +46,7 @@ Transform:
   m_Children:
   - {fileID: 9202941358234982187}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &7373340704458670615
 AudioSource:
@@ -372,6 +373,19 @@ MonoBehaviour:
   alertHp: 20
   playerAlert: {fileID: 11400000, guid: f51e38365f07e734b81c2cca635af183, type: 2}
   reduceFuelCadence: 0.5
+--- !u!114 &2758532654683650245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409879802783298609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb87334726dc25459b60ca6128d25c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSkin: {fileID: 11400000, guid: f646de4d9bc93414d9e3278aebc4af7a, type: 2}
 --- !u!1001 &9198280591296938339
 PrefabInstance:
   m_ObjectHideFlags: 0
