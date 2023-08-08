@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 namespace RiverAttack
 {
@@ -63,8 +61,6 @@ namespace RiverAttack
         protected virtual void SetInitialReferences()
         {
             gamePlayManager = GamePlayManager.instance;
-            int novoLayer = Mathf.RoundToInt(Mathf.Log(GameManager.instance.layerEnemies.value, 2));
-            gameObject.layer = novoLayer;
         }
 
         void OnInitializeEnemy()

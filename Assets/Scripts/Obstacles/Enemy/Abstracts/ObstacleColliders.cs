@@ -33,7 +33,7 @@ namespace RiverAttack
                 collision.GetComponentInParent<PlayerMaster>().AddEnemiesHitList(obstacleMaster.enemy);
                 return collision.GetComponentInParent<PlayerMaster>();
             }
-            var ownerShoot = collision.GetComponent<BulletPlayer>().ownerShoot as PlayerMaster;
+            var ownerShoot = collision.GetComponent<Bullets>().ownerShoot as PlayerMaster;
             if (ownerShoot == null) return null;
             ownerShoot.AddEnemiesHitList(obstacleMaster.enemy);
             return ownerShoot;

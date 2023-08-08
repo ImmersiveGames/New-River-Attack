@@ -14,7 +14,8 @@ namespace RiverAttack
         #region UNITYMETHODS
         protected override void OnTriggerEnter(Collider collision)
         {
-            if (!collision.GetComponent<BulletPlayer>() || !obstacleMaster.enemy.canDestruct) return;
+            if (!collision.GetComponent<Bullets>() || !obstacleMaster.enemy.canDestruct) return;
+            if (!collision.GetComponent<BulletEnemy>()) return;
             HitThis(collision);
         }
 
@@ -30,7 +31,6 @@ namespace RiverAttack
             var playerMaster = collision.GetComponentInParent<PlayerMaster>();
             if (!playerMaster) return;
             if (!playerMaster.inEffectArea) playerMaster.inEffectArea = true;
-            Debug.Log($"Colidiu: {playerMaster}");
             CollectThis(collision);
         }
         #endregion

@@ -24,6 +24,7 @@ namespace RiverAttack
         {
             if (collision.GetComponentInParent<PlayerMaster>() || collision.GetComponentInParent<BulletPlayer>() || collision.GetComponentInParent<BulletPlayerBomb>()) return;
             var hitCollectable = collision.transform.GetComponentInParent<EnemiesMaster>();
+            Debug.Log($"Collider: {hitCollectable}");
             if (hitCollectable == null && hitCollectable.enemy is CollectibleScriptable) return;
             DestroyMe();
         }

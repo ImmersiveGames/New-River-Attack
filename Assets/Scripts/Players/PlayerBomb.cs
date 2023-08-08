@@ -19,7 +19,7 @@ namespace RiverAttack
         GamePlayManager m_GamePlayManager;
         PlayersInputActions m_PlayersInputActions;
         
-        public int quantityBomb { get { return (int)bombQuantity; } }
+        public int quantityBomb { get { return bombQuantity; } }
 
         #region UNITY METHODS
         void Awake()
@@ -76,13 +76,14 @@ namespace RiverAttack
             bombQuantity -= 1;
             var bomb = Instantiate(prefabBomb);
             bomb.transform.localPosition = transform.localPosition + bombOffset;
+            bomb.GetComponent<Bullets>().ownerShoot = m_PlayerMaster;
             bomb.SetActive(true);
             m_PlayerMaster.CallEventPlayerBomb();
             LogBomb(-1);
         }
         public void UnExecute()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
         public void UnExecute(InputAction.CallbackContext callbackContext)
         {
