@@ -23,7 +23,7 @@ namespace RiverAttack
         void OnTriggerEnter(Collider collision)
         {
             if (collision.GetComponentInParent<PlayerMaster>() || collision.GetComponentInParent<BulletPlayer>() || collision.GetComponentInParent<BulletPlayerBomb>()) return;
-            var hitCollectable = collision.transform.GetComponentInParent<EnemiesMaster>();
+            var hitCollectable = collision.transform.GetComponentInParent<ObstacleMaster>();
             Debug.Log($"Collider: {hitCollectable}");
             if (hitCollectable == null && hitCollectable.enemy is CollectibleScriptable) return;
             DestroyMe();

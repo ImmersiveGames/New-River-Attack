@@ -15,7 +15,7 @@ namespace RiverAttack
         protected override void OnTriggerEnter(Collider collision)
         {
             if (!collision.GetComponent<Bullets>() || !obstacleMaster.enemy.canDestruct) return;
-            if (!collision.GetComponent<BulletEnemy>()) return;
+            if (collision.GetComponent<BulletEnemy>()) return;
             HitThis(collision);
         }
 

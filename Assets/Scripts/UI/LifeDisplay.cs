@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,15 +12,14 @@ namespace RiverAttack
         GameObject iconLives;
         [SerializeField]
         Sprite defaultSprite;
-        [SerializeField]
-        Transform livesParent;
 
         int m_Lives;
         GamePlayManager m_GamePlayManager;
         PlayerMaster m_PlayerMaster;
-        private void OnEnable()
+
+        
+        void OnEnable()
         {
-            //Debug.Log("Habilitei");
             SetInitialReferences();
             SetLivesUI();
             if (m_PlayerMaster == null) return;
@@ -33,6 +33,7 @@ namespace RiverAttack
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_PlayerMaster = m_GamePlayManager.GetPlayerMasterByIndex(playerIndex);
+            Debug.Log($"Initial: " + m_PlayerMaster);
             if (m_PlayerMaster == null) return;
             m_Lives = m_PlayerMaster.GetPlayersSettings().lives;         
         }
@@ -47,13 +48,13 @@ namespace RiverAttack
 
         void UpdateUI()
         {
-            m_Lives = (int)m_PlayerMaster.GetPlayersSettings().lives;
+            m_Lives = m_PlayerMaster.GetPlayersSettings().lives;
             Invoke(nameof(SetLivesUI), .1f);
         }
 
         void UpdateUI(ShopProductSkin skin) 
         {
-            ClearLiveIcon(livesParent);
+            ClearLiveIcon(transform);
             SetLivesUI();
         }
 
@@ -61,16 +62,16 @@ namespace RiverAttack
         {           
 
             //Debug.Log("Vou tentar Criar os icones");
-            int i = livesParent.childCount;
+            int i = transform.childCount;
 
             if (i < m_Lives)
             {
                 //Debug.Log("Chamando a criação dos icones");
-                CreateLiveIcon(livesParent, m_Lives - i);
+                CreateLiveIcon(transform, m_Lives - i);
             }
             for (int x = 0; x < i; x++)
             {
-                livesParent.GetChild(x).gameObject.SetActive(x < m_Lives);
+                transform.GetChild(x).gameObject.SetActive(x < m_Lives);
             }
         }
         void CreateLiveIcon(Transform parent, int quantity)
@@ -93,6 +94,7 @@ namespace RiverAttack
                 //Debug.Log("Skin Destroyed");
             }
         }
+        
     }
 
 }

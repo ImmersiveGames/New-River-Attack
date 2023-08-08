@@ -9,13 +9,17 @@ namespace RiverAttack
         TrailRenderer[] m_TrailRenderer;
 
         #region UNITY METHODS
+        void Awake()
+        {
+            SetInitialReferences();
+        }
         void Start()
         {
             OnEnable();
         }
         void OnEnable()
         {
-            SetInitialReferences();
+            
             if (m_PlayerMaster)
                 m_PlayerMaster.EventPlayerMasterControllerMovement += ActiveTrailsOnMovement;
             m_TrailRenderer = GetComponentsInChildren<TrailRenderer>();

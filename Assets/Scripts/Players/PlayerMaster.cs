@@ -66,12 +66,11 @@ namespace RiverAttack
             SetInitialReferences();
             playersInputActions = new PlayersInputActions();
             playersInputActions.Enable();
-            
+            m_GamePlayManager.AddPlayerToGamePlayManager(this);
         }
 
         void OnEnable()
         {
-            m_GamePlayManager.AddPlayerToGamePlayManager(this);
             m_GameManager.AddActivePlayerObject(transform);
             m_GamePlayManager.EventStartPlayGame += SetPlayerReady;
             Tools.SetLayersRecursively(GameManager.instance.layerPlayer, transform);
