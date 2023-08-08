@@ -75,8 +75,8 @@ namespace Shopping
 
             m_inputSystem.UI_Controlls.BuyButton.performed += ctx => BuyButton(ctx);
             m_inputSystem.UI_Controlls.SelectButton.performed += ctx => SelectButton(ctx);
-            m_inputSystem.UI_Controlls.LeftSelection.performed += ctx => ButtonNavegation(-1);
-            m_inputSystem.UI_Controlls.RightSelection.performed += ctx => ButtonNavegation(1);
+            m_inputSystem.UI_Controlls.LeftSelection.performed += ctx => ControllerNavigationArrows(-1);
+            m_inputSystem.UI_Controlls.RightSelection.performed += ctx => ControllerNavigationArrows(1);
         }
 
         void LateUpdate()
@@ -97,9 +97,7 @@ namespace Shopping
             playerMasterList.Add(playerMaster);
             m_PlayerSettings = playerMaster.GetPlayersSettings();
                         
-            m_EventSystem = EventSystem.current;
-
-              
+            m_EventSystem = EventSystem.current;                        
 
             //GameManagerSaves.Instance.LoadPlayer(ref activePlayer);
             //activePlayer.LoadValues();
@@ -242,6 +240,15 @@ namespace Shopping
             }
 
             SelectThisItem(m_PlayerSettings, item.productInStock);
+        }
+
+        void ControllerNavigationArrows(int value) 
+        {
+            if (value == -1) 
+                productBackward.GetComponent<Button>().onClick.Invoke();
+            else if (value == 1)
+                productForward.GetComponent<Button>().onClick.Invoke();
+
         }
 
     }
