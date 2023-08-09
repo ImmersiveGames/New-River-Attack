@@ -31,7 +31,7 @@ namespace RiverAttack
             var playerMaster = collision.GetComponentInParent<PlayerMaster>();
             if (!playerMaster) return;
             if (!playerMaster.inEffectArea) playerMaster.inEffectArea = true;
-            CollectThis(collision);
+            CollectThis(playerMaster);
         }
         #endregion
 
@@ -41,16 +41,16 @@ namespace RiverAttack
             m_EffectAreaMaster = GetComponent<EffectAreaMaster>();
             m_EffectArea = (EffectAreaScriptable)m_EffectAreaMaster.enemy;
         }
-        public override void HitThis(Collider collision)
+        protected override void HitThis(Collider collision)
         {
             m_EffectAreaMaster.isDestroyed = true;
             var playerMaster = WhoHit(collision);
             m_EffectAreaMaster.CallEventDestroyEnemy(playerMaster);
             ShouldSavePoint();
         }
-        public override void CollectThis(Collider collision)
+        void CollectThis(PlayerMaster collision)
         {
-            var player = collision.GetComponentInParent<PlayerMaster>().GetPlayersSettings();
+            var player = collision.GetPlayersSettings();
             if (m_Timer <= 0)
             {
                 m_EffectArea.EffectAreaStart(player);

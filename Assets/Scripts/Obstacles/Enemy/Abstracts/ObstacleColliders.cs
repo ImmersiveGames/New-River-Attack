@@ -3,6 +3,7 @@ namespace RiverAttack
 {
     public abstract class ObstacleColliders : MonoBehaviour
     {
+        Collider[] m_MyCollider;
         protected ObstacleMaster obstacleMaster;
         protected GamePlayManager gamePlayManager;
 
@@ -10,22 +11,31 @@ namespace RiverAttack
         protected virtual void OnEnable()
         {
             SetInitialReferences();
+            if (obstacleMaster.enemy.canRespawn)
+                gamePlayManager.EventResetEnemies += ColliderOn;
         }
-        protected virtual void OnTriggerEnter(Collider collision) { }
-  #endregion
+        protected abstract void OnTriggerEnter(Collider collision);
+        
+        void OnDisable()
+        {
+            if (obstacleMaster.enemy.canRespawn)
+                gamePlayManager.EventResetEnemies -= ColliderOn;
+        }
+        void OnDestroy()
+        {
+            if (obstacleMaster.enemy.canRespawn)
+                gamePlayManager.EventResetEnemies -= ColliderOn;
+        }
+        #endregion
 
         protected virtual void SetInitialReferences()
         {
             gamePlayManager = GamePlayManager.instance;
             obstacleMaster = GetComponent<ObstacleMaster>();
+            m_MyCollider = GetComponentsInChildren<Collider>();
         }
-      
-        public virtual void HitThis(Collider collision) { }
+        protected abstract void HitThis(Collider collision);
 
-        //public virtual void HitThis(Collider collision, PlayerMaster playerM = null) { }
-
-        public virtual void CollectThis(Collider collision) { }
-        
         protected PlayerMaster WhoHit(Collider collision)
         {
             if (collision.GetComponentInParent<PlayerMaster>())
@@ -43,6 +53,23 @@ namespace RiverAttack
         {
             if (obstacleMaster.enemy.isCheckInPoint)
                 gamePlayManager.CallEventCheckPoint(transform.position);
+        }
+        protected void ColliderOff()
+        {
+            int length = m_MyCollider.Length;
+            for (int i = 0; i < length; i++)
+            {
+                m_MyCollider[i].enabled = false;
+            }
+        }
+        protected void ColliderOn()
+        {
+            if (m_MyCollider == null)  return;
+            int length = m_MyCollider.Length;
+            for (int i = 0; i < length; i++)
+            {
+                m_MyCollider[i].enabled = true;
+            }
         }
     }
 }

@@ -3,20 +3,9 @@ namespace RiverAttack
 {
     public class CollectiblesMaster : EnemiesMaster
     {
-        [SerializeField] CollectibleScriptable collectibleScriptable;
+        internal CollectibleScriptable collectibleScriptable;
         public event GeneralEventHandler ShowOnScreen;
         public event EnemyEventHandler CollectibleEvent;
-        internal CollectibleScriptable collectibles
-        {
-            get
-            {
-                return collectibleScriptable;
-            }
-            private set
-            {
-                collectibleScriptable = value;
-            }
-        }
 
     #region UNITYMETHODS
         protected override void OnEnable()

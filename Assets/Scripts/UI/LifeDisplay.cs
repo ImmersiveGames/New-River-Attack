@@ -33,7 +33,6 @@ namespace RiverAttack
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_PlayerMaster = m_GamePlayManager.GetPlayerMasterByIndex(playerIndex);
-            Debug.Log($"Initial: " + m_PlayerMaster);
             if (m_PlayerMaster == null) return;
             m_Lives = m_PlayerMaster.GetPlayersSettings().lives;         
         }

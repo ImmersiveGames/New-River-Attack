@@ -3,8 +3,6 @@ namespace RiverAttack
 {
     public class CollectiblesScore : EnemiesScore
     {
-        [SerializeField]
-        protected int scoreCollect;
         CollectiblesMaster m_CollectiblesMaster;
 
         #region UNITY METHODS
@@ -28,7 +26,7 @@ namespace RiverAttack
         
         void SetCollScore(PlayerMaster playerMaster)
         {
-            playerMaster.GetPlayersSettings().score += scoreCollect;
+            playerMaster.GetPlayersSettings().score += obstacleMaster.enemy.enemyScore;
         }
     }
 }
