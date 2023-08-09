@@ -19,6 +19,8 @@ namespace RiverAttack
 
         public void RapidFireStart(float amount)
         {
+            Debug.Log("Ativou RapidFire");
+            //TODO: Ajustar RapidFire
             if (target == null) return;
             float buff = (target.speedyShoot + amount < minRapidFire) ? minRapidFire : target.speedyShoot + amount;
             target.speedyShoot = buff;
@@ -27,6 +29,7 @@ namespace RiverAttack
 
         public void RapidFireEnd(float amount)
         {
+            Debug.Log("Parou o RapidFire");
             if (target == null) return;
             target.speedyShoot = amount;
             GamePlayManager.instance.CallEventRapidFire(false);
