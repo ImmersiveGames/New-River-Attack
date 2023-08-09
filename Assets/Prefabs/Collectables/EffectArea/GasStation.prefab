@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 945441580871462752, guid: 620c79879ffe18b40bfaf7bc7ad2cb8e, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 945441580871462752, guid: 620c79879ffe18b40bfaf7bc7ad2cb8e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -87,18 +87,43 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7862625810167417025, guid: 620c79879ffe18b40bfaf7bc7ad2cb8e, type: 3}
     - {fileID: 3907779655820985928, guid: 620c79879ffe18b40bfaf7bc7ad2cb8e, type: 3}
+    - {fileID: 8470113045675620300, guid: 620c79879ffe18b40bfaf7bc7ad2cb8e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 945441580871462752, guid: 620c79879ffe18b40bfaf7bc7ad2cb8e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2047572362260661777}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1504127474328815682, guid: 620c79879ffe18b40bfaf7bc7ad2cb8e, type: 3}
+      insertIndex: 6
+      addedObject: {fileID: 503181643487022781}
   m_SourcePrefab: {fileID: 100100000, guid: 620c79879ffe18b40bfaf7bc7ad2cb8e, type: 3}
 --- !u!4 &7768721085901103260 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 945441580871462752, guid: 620c79879ffe18b40bfaf7bc7ad2cb8e, type: 3}
   m_PrefabInstance: {fileID: 7408114284036804604}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8219442359331751870 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1504127474328815682, guid: 620c79879ffe18b40bfaf7bc7ad2cb8e, type: 3}
+  m_PrefabInstance: {fileID: 7408114284036804604}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &503181643487022781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8219442359331751870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8cbb05ad99f4546ab70934e8bbf628, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionTrigger: 
+  onMove: 
+  onFlip: 
+  onFueling: Fueling
 --- !u!1001 &9062624518636549232
 PrefabInstance:
   m_ObjectHideFlags: 0

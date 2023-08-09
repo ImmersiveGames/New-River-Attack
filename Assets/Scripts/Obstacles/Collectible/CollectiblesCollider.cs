@@ -6,7 +6,7 @@ namespace RiverAttack
     public class CollectiblesCollider : EnemiesCollider
     {
         CollectiblesMaster m_CollectiblesMaster;
-        private CollectibleScriptable m_Collectible;
+        CollectibleScriptable m_Collectible;
 
         #region UNITY METHODS
         protected override void OnEnable()

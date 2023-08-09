@@ -8,7 +8,7 @@ namespace RiverAttack
         public string onFlip;
 
         ObstacleMaster m_ObstacleMaster;
-        Animator m_Animator;
+        protected Animator animator;
         GamePlayManager m_GamePlayManager;
 
         #region UNITY METHODS
@@ -33,51 +33,51 @@ namespace RiverAttack
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_ObstacleMaster = GetComponent<ObstacleMaster>();
-            m_Animator = GetComponentInChildren<Animator>();
+            animator = GetComponentInChildren<Animator>();
         }
 
         void MovementAnimation(Vector3 pos)
         {
-            if (m_Animator == null)
+            if (animator == null)
             {
-                m_Animator = GetComponentInChildren<Animator>();
+                animator = GetComponentInChildren<Animator>();
             }
-            if (m_Animator == null || string.IsNullOrEmpty(onMove) || !m_Animator.gameObject.activeSelf)
+            if (animator == null || string.IsNullOrEmpty(onMove) || !animator.gameObject.activeSelf)
                 return;
-            m_Animator.SetBool(onMove, pos != Vector3.zero);
+            animator.SetBool(onMove, pos != Vector3.zero);
         }
 
         void ObjectMasterFlipObstaclesMasterFlipAnimation(Vector3 face)
         {
-            if (m_Animator == null)
+            if (animator == null)
             {
-                m_Animator = GetComponentInChildren<Animator>();
+                animator = GetComponentInChildren<Animator>();
             }
-            if (m_Animator != null && !string.IsNullOrEmpty(onFlip))
-                m_Animator.SetBool(onFlip, !m_Animator.GetBool(onFlip));
+            if (animator != null && !string.IsNullOrEmpty(onFlip))
+                animator.SetBool(onFlip, !animator.GetBool(onFlip));
         }
 
-        void ResetAnimation()
+        internal virtual void ResetAnimation()
         {
-            if (m_Animator == null) return;
+            if (animator == null) return;
             if(!string.IsNullOrEmpty(onMove))
-                m_Animator.SetBool(onMove, false);
+                animator.SetBool(onMove, false);
             if(!string.IsNullOrEmpty(onFlip))
-                m_Animator.SetBool(onFlip, false);
+                animator.SetBool(onFlip, false);
         }
 
         void ExplodeAnimation()
         {
-            if (m_Animator != null && !string.IsNullOrEmpty(explosionTrigger))
+            if (animator != null && !string.IsNullOrEmpty(explosionTrigger))
             {
-                m_Animator.SetBool(explosionTrigger, true);
+                animator.SetBool(explosionTrigger, true);
             }
         }
         protected void RemoveAnimation()
         {
-            if (m_Animator != null && GetComponent<SpriteRenderer>())
+            if (animator != null && GetComponent<SpriteRenderer>())
                 GetComponent<SpriteRenderer>().enabled = false;
-            if (m_Animator != null && GetComponent<MeshRenderer>())
+            if (animator != null && GetComponent<MeshRenderer>())
                 GetComponent<MeshRenderer>().enabled = false;
             if (transform.childCount <= 0) return;
             for (int i = 0; i < transform.childCount; i++)
