@@ -32,7 +32,7 @@ namespace RiverAttack
 
         void UpdateRefuggieDisplay() 
         {
-            refuggiesText.text = " X " + playerSettings.wealth.ToString();
+            refuggiesText.text = playerSettings.wealth.ToString();
         }
     }
 }
