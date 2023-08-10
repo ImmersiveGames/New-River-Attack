@@ -71,6 +71,7 @@ namespace Utils
         private Vector2 sortChance;
         [SerializeField, Range(1, 100)]
         public int itemQuantity;
+        [HideInInspector]
         public float realChance;
 
         public float sortChances
