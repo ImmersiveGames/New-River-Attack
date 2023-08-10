@@ -45,7 +45,7 @@ namespace RiverAttack
         lastPosition = transform.position;
 
         // Exibe a distância percorrida e convertida no console
-        Debug.Log($"Distância percorrida no eixo Z: {distanciaPercorridaZ} unidades | Distância convertida: {distanciaConvertida} {unidadeDeMedida}");
+        //Debug.Log($"Distância percorrida no eixo Z: {distanciaPercorridaZ} unidades | Distância convertida: {distanciaConvertida} {unidadeDeMedida}");
     }
 
     void OnApplicationQuit()

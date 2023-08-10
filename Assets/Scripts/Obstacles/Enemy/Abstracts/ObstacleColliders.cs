@@ -21,11 +21,11 @@ namespace RiverAttack
             if (obstacleMaster.enemy.canRespawn)
                 gamePlayManager.EventResetEnemies -= ColliderOn;
         }
-        void OnDestroy()
+        /*void OnDestroy()
         {
             if (obstacleMaster.enemy.canRespawn)
                 gamePlayManager.EventResetEnemies -= ColliderOn;
-        }
+        }*/
         #endregion
 
         protected virtual void SetInitialReferences()
@@ -62,8 +62,9 @@ namespace RiverAttack
                 m_MyCollider[i].enabled = false;
             }
         }
-        protected void ColliderOn()
+        void ColliderOn()
         {
+            Debug.Log($"Collider: {m_MyCollider}");
             if (m_MyCollider == null)  return;
             int length = m_MyCollider.Length;
             for (int i = 0; i < length; i++)

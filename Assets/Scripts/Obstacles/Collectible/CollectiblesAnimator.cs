@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace RiverAttack
 {
@@ -14,6 +15,11 @@ namespace RiverAttack
         {
             base.OnEnable();
             m_CollectiblesMaster.CollectibleEvent += CollectAnimation;
+        }
+
+        void Start()
+        {
+            animator = GetComponentInChildren<Animator>();
         }
         protected override void OnDisable()
         {

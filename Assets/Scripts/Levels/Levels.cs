@@ -49,8 +49,11 @@ namespace RiverAttack
             levelMilestones = new List<Vector3>();
 
             FixedPath(ref nextBound, pathStart, myRoot);
+            
+            Debug.Log($"Path Start: {nextBound}");
             for (int i = 0; i < numPatches; i++)
             {
+                Debug.Log($"Path Start: {nextBound}");
                 SetEnemies(nextBound, i, myRoot);
                 m_PoolLevels.Add(BuildPath(ref nextBound, levelSet[i].levelPaths, myRoot));
                 if (maxLevels > i)
@@ -72,6 +75,7 @@ namespace RiverAttack
             var patch = Instantiate(nextPath, myRoot);
             patch.SetActive(false);
             var bound = MashTriangulation.GetChildRenderBounds(patch);
+            Debug.Log($"Tamanho do Trecho: {bound.size}");
             patch.transform.position = nextBound;
             nextBound += new Vector3(levelOffset.x, levelOffset.y, bound.size.z);
             levelMilestones.Add(nextBound);

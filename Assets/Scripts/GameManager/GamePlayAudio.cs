@@ -25,23 +25,23 @@ namespace RiverAttack
         [SerializeField]
         List<AudioEventSample> listBGM;
         bool m_InFadeIn, m_InFadeOut;
-
-        LevelType currentPlaying;
+[SerializeField]
+        LevelType m_CurrentPlaying;
 
         #region UNITYMETHODS
 
         void Start()
         {
-            currentPlaying = levelType;
+            m_CurrentPlaying = levelType;
             ChangeBGM(levelType, 0.5f);
         }
         void Update()
         {    
-            if (levelType != currentPlaying) 
+            /*if (levelType != m_CurrentPlaying) 
             {
                 ChangeBGM(levelType, 0.5f);
-                currentPlaying = levelType;
-            }
+                m_CurrentPlaying = levelType;
+            }*/
                 
 
             if (Time.timeScale <= 0)

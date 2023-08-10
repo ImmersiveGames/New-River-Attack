@@ -41,7 +41,7 @@ namespace RiverAttack
         public List<PlayerMaster> playersMasterList;
         int m_ActualPath;
 
-        PlayersInputActions m_inputSystem;
+        PlayersInputActions m_InputSystem;
 
         GameManager m_GameManager;
         GameSettings m_GameSettings;
@@ -97,6 +97,7 @@ namespace RiverAttack
                 levelRoot.name = actualLevel.levelName;
                 actualLevel.CreateLevel(levelRoot.transform);
                 actualBGM = actualLevel.startLevelBGM;
+                m_GamePlayAudio.levelType = actualBGM;
                 m_GamePlayAudio.PlayBGM(actualBGM); 
             }
             //SpawnPlayers(numPlayers.Length);
@@ -122,9 +123,9 @@ namespace RiverAttack
             {
                 m_GameManager.actualLevel = classicLevel;
             }*/
-            m_inputSystem = new PlayersInputActions();
-            m_inputSystem.Player.Enable();
-            m_inputSystem.Player.Pause.performed += ctx => ControllerButtonPauseGame();
+            m_InputSystem = new PlayersInputActions();
+            m_InputSystem.Player.Enable();
+            m_InputSystem.Player.Pause.performed += ctx => ControllerButtonPauseGame();
         }
 
         void StartPlayingGame()
@@ -189,7 +190,7 @@ namespace RiverAttack
 
             if (gamePlayPaused) return;
 
-            Button pauseBtn = m_GameManager.pauseButton.gameObject.GetComponent<Button>();
+            var pauseBtn = m_GameManager.pauseButton.gameObject.GetComponent<Button>();
             pauseBtn.onClick.Invoke();           
         }
 

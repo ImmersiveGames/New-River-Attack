@@ -11,7 +11,7 @@ namespace RiverAttack
         void Awake()
                 {
                     SetInitialReferences();
-                    Tools.SetLayersRecursively(GameManager.instance.layerEnemies, transform);
+                    //Tools.SetLayersRecursively(GameManager.instance.layerEnemies, transform);
                     m_ObstacleMaster.CallEventChangeSkin();
                 }
         void OnEnable()
