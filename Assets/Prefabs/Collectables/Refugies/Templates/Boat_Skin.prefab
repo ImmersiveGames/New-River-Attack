@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8677030578156663285}
   - component: {fileID: 2513942936506478390}
   - component: {fileID: 4514254046125955713}
-  - component: {fileID: 5681564667413078600}
+  - component: {fileID: 3340299219312666522}
   m_Layer: 7
   m_Name: Boat_Skin
   m_TagString: Untagged
@@ -35,7 +35,7 @@ Transform:
   - {fileID: 4924480476122744133}
   - {fileID: 8651549638149917666}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8677030578156663285
 MeshFilter:
@@ -108,8 +108,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!135 &5681564667413078600
-SphereCollider:
+--- !u!65 &3340299219312666522
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -127,8 +127,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.99
-  m_Center: {x: 0, y: 0.38999996, z: 0.133}
+  m_Size: {x: 1.6, y: 5, z: 2}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!1 &7526338005427926676
 GameObject:
   m_ObjectHideFlags: 0
