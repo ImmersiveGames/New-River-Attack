@@ -6,7 +6,7 @@ namespace RiverAttack
     [RequireComponent(typeof(PlayerMaster))]
     public class PlayerShoot : MonoBehaviour, ICommand, IHasPool
     {
-        [Tooltip("Identifica se o jogador em modo rapidfire")]
+        /*[Tooltip("Identifica se o jogador em modo rapidfire")]
         float m_ShootCadence;
         
         [SerializeField]
@@ -103,6 +103,26 @@ namespace RiverAttack
                 bulletPlayer.SetMyPool(pool);
                 bulletPlayer.Init(bulletSpeed, bulletLifeTime);
             }
+        }*/
+        public void Execute()
+        {
+            throw new System.NotImplementedException();
+        }
+        public void Execute(InputAction.CallbackContext callbackContext)
+        {
+            throw new System.NotImplementedException();
+        }
+        public void UnExecute()
+        {
+            throw new System.NotImplementedException();
+        }
+        public void UnExecute(InputAction.CallbackContext callbackContext)
+        {
+            throw new System.NotImplementedException();
+        }
+        public void StartMyPool(bool isPersistent = false)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

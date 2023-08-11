@@ -5,7 +5,7 @@ namespace RiverAttack
 {
     public class CollectiblesCollider : ObstacleColliders
     {
-        CollectiblesMaster m_CollectiblesMaster;
+        /*CollectiblesMaster m_CollectiblesMaster;
         CollectibleScriptable m_Collectible;
 
         #region UNITY METHODS
@@ -71,6 +71,6 @@ namespace RiverAttack
             obstacleMaster.CallEventDestroyEnemy(playerMaster);
             ShouldSavePoint();
             //ShouldCompleteMission();
-        }
+        }*/
     }
 }

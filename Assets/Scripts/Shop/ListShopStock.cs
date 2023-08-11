@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Shopping
 {
@@ -9,7 +10,7 @@ namespace Shopping
     {
 #if UNITY_EDITOR
         [Multiline]
-        public string DeveloperDescription = "";
+        public string developerDescription = "";
 #endif
         public List<ShopProductStock> value = new List<ShopProductStock>();
 

@@ -5,6 +5,7 @@ namespace RiverAttack
     public class EnemiesCollider : ObstacleColliders
     {
 
+        /*
         #region UNITY METHODS
         protected override void OnTriggerEnter(Collider collision)
         {
@@ -25,7 +26,7 @@ namespace RiverAttack
             ShouldSavePoint();
             playerMaster.CallEventPlayerMasterCollider();
             //ShouldCompleteMission();
-        }
+        }*/
         
     }
 }

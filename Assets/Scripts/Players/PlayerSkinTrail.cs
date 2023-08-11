@@ -4,7 +4,7 @@ namespace RiverAttack
 {
     public class PlayerSkinTrail : MonoBehaviour
     {
-        PlayerMaster m_PlayerMaster;
+        /*PlayerMaster m_PlayerMaster;
         GamePlayManager m_GamePlayManager;
         TrailRenderer[] m_TrailRenderer;
 
@@ -78,6 +78,6 @@ namespace RiverAttack
             {
                 t.enabled = true;
             }
-        }
+        }*/
     }
 }

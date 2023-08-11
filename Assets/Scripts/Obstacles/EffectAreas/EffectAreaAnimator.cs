@@ -3,7 +3,7 @@ namespace RiverAttack
 {
     public class EffectAreaAnimator : EnemiesAnimator
     {
-        public string onFueling;
+        /*public string onFueling;
         // Start is called before the first frame update
 
         #region UNIYMETHODS
@@ -35,6 +35,6 @@ namespace RiverAttack
             base.ResetAnimation();
             if(!string.IsNullOrEmpty(onFueling))
                 animator.SetBool(onFueling, false);
-        }
+        }*/
     }
 }

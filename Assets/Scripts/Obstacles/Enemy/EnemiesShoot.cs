@@ -5,7 +5,7 @@ namespace RiverAttack
     [RequireComponent(typeof(EnemiesMaster))]
     public class EnemiesShoot : ObstacleDetectApproach, IHasPool
     {
-        [SerializeField] GameObject bullet;
+        /*[SerializeField] GameObject bullet;
         [SerializeField] int startPool;
         [SerializeField] internal float shootCadence;
         [Header("Bullet Settings")]
@@ -105,6 +105,10 @@ namespace RiverAttack
         public void StartMyPool(bool isPersistent = false)
         {
             PoolObjectManager.CreatePool(this, bullet, startPool, transform, isPersistent);
+        }*/
+        public void StartMyPool(bool isPersistent = false)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

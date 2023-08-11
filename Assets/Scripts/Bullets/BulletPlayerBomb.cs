@@ -5,7 +5,7 @@ namespace RiverAttack
 {
     public class BulletPlayerBomb : Bullets
     {
-        [SerializeField]
+        /*[SerializeField]
         ParticleSystem pSystem;
         [SerializeField]
         float radiusSize;
@@ -74,6 +74,6 @@ namespace RiverAttack
             GameObject o;
             (o = gameObject).SetActive(false);
             Destroy(o);
-        }
+        }*/
     }
 }

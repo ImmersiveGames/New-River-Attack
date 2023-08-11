@@ -7,7 +7,7 @@ namespace RiverAttack
     public class CollectiblesAnimator : EnemiesAnimator
     {
 
-        public string collectTrigger;
+        /*public string collectTrigger;
         CollectiblesMaster m_CollectiblesMaster;
 
         #region UNITY METHODS
@@ -37,6 +37,6 @@ namespace RiverAttack
         {
             base.SetInitialReferences();
             m_CollectiblesMaster = GetComponent<CollectiblesMaster>();
-        }
+        }*/
     }
 }

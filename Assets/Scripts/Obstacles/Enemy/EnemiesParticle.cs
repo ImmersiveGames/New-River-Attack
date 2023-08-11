@@ -5,7 +5,7 @@ namespace RiverAttack
 {
     public class EnemiesParticle : MonoBehaviour
     {
-        [SerializeField]
+        /*[SerializeField]
         GameObject particlePrefab;
         [SerializeField]
         float timeoutDestroy;
@@ -35,6 +35,6 @@ namespace RiverAttack
             Tools.ToggleChildren(this.transform, false);
             var go = Instantiate(particlePrefab, transform);
             Destroy(go, timeoutDestroy);
-        }
+        }*/
     }
 }

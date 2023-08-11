@@ -2,12 +2,37 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 using UnityEngine.InputSystem;
 
 namespace RiverAttack
 {
-    public class GamePlayManager : Utils.Singleton<GamePlayManager>
+    public class GamePlayManager : Singleton<GamePlayManager>
     {
+        [SerializeField]
+        bool isGamePaused, completePath, godMode;
+        
+        internal bool getGamePaused { get { return isGamePaused; } }
+        internal bool getGodMode { get { return godMode; } }
+        
+        [Header("Level Settings"), SerializeField]
+        public List<Levels> levelsFinish = new List<Levels>();
+        [SerializeField]
+        public Levels actualLevel;
+        
+        
+        PlayersInputActions m_InputSystem;
+        
+        public void PauseGame()
+        {
+            isGamePaused = true;
+        }
+        public void UnPauseGame()
+        {
+            isGamePaused = false;
+        }
+        public bool shouldBePlayingGame { get { return (!isGamePaused && !completePath); } }
+        /*
         [SerializeField]
         bool gameBeat;
         [SerializeField]
@@ -122,7 +147,7 @@ namespace RiverAttack
             /*if (m_GameSettings.gameMode.modeId == m_GameSettings.GetGameModes(0).modeId)
             {
                 m_GameManager.actualLevel = classicLevel;
-            }*/
+            }#1#
             m_InputSystem = new PlayersInputActions();
             m_InputSystem.Player.Enable();
             m_InputSystem.Player.Pause.performed += ctx => ControllerButtonPauseGame();
@@ -172,7 +197,7 @@ namespace RiverAttack
             /*for (int i = 0; i < numPlayers.Length; i++)
             {
                 GameManagerSaves.Instance.SavePlayer(numPlayers[i]);
-            }*/
+            }#1#
         }
 
         public void ButtonPauseGame()
@@ -386,6 +411,7 @@ namespace RiverAttack
             EventShakeCam?.Invoke(power, inTime);
         }
         #endregion
-        
+        */
+
     }
 }

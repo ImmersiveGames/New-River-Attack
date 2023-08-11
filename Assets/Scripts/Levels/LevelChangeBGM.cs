@@ -4,7 +4,7 @@ namespace RiverAttack
 {
     public class LevelChangeBGM : MonoBehaviour
     {
-        public GamePlayAudio.LevelType idBgMtoChange;
+        /*public GamePlayAudio.LevelType idBgMtoChange;
         public float speedy;
         GamePlayAudio m_PlayAudio;
         GamePlayManager m_PlayMaster;
@@ -23,7 +23,7 @@ namespace RiverAttack
             m_PlayMaster.actualBGM = idBgMtoChange;
             GetComponent<Collider>().enabled = false;
         }
-  #endregion
+  #endregion*/
         
     }
 }

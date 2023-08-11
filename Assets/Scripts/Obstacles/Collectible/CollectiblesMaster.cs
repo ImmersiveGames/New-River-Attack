@@ -3,7 +3,7 @@ namespace RiverAttack
 {
     public class CollectiblesMaster : EnemiesMaster
     {
-        internal CollectibleScriptable collectibleScriptable;
+        /*internal CollectibleScriptable collectibleScriptable;
         public event GeneralEventHandler ShowOnScreen;
         public event EnemyEventHandler CollectibleEvent;
 
@@ -41,6 +41,6 @@ namespace RiverAttack
         {
             if (collectibleScriptable.getPowerUp)
                 Destroy(gameObject);
-        }
+        }*/
     }
 }

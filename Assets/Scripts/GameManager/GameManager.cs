@@ -1,13 +1,105 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using Utils;
 namespace RiverAttack
 {
+    public abstract class GameState
+    {
+        public abstract void EnterState();
+        public abstract void UpdateState();
+        public abstract void ExitState();
+    }
+    
+    public enum LevelTypes {Menu = 0, Hub = 1, Grass = 2, Forest = 3, Swamp = 4, Antique = 5, Desert = 6, Ice = 7, GameOver=8, Complete =9, HUD = 10 }
     public class GameManager : Singleton<GameManager>
     {
-        [SerializeField] internal bool isGameOver;
+        
+        GameState m_CurrentState;
+        GameState m_NextState;
+        
+        public PanelManager startMenu;
+
+        public float fadeDurationEnter = 0.5f;
+        public float fadeDurationExit = 0.5f;
+        
+        [Header("Layer Settings")]
+        public LayerMask layerPlayer;
+        public LayerMask layerEnemies;
+        public LayerMask layerCollection;
+        public LayerMask layerWall;
+
+        [Header("Player Settings")]
+        public GameObject playerPrefab;
+        public List<PlayerSettings> playerSettingsList = new List<PlayerSettings>();
+        [SerializeField] List<PlayerMaster> initializedPlayerMasters = new List<PlayerMaster>();
+
+        [Header("CutScenes Settings")]
+        public GameObject openCutScenePrefab;
+        public GameObject endCutScenePrefab;
+
+        #region UnityMethods
+        void Start()
+        {
+            ChangeState(new GameStateMenu(startMenu));
+        }
+        void Update()
+        {
+            m_CurrentState?.UpdateState();
+
+            // Exemplo de mudança de estado (pode ser em resposta a alguma condição)
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                ChangeState(new GameStateOpenCutScene(startMenu));
+            }
+        }
+  #endregion
+
+        void ChangeState(GameState newState)
+        {
+            m_NextState = newState;
+
+            if (m_CurrentState != null)
+            {
+                StartCoroutine(PerformStateTransition(m_CurrentState, m_NextState));
+            }
+            else
+            {
+                m_CurrentState = m_NextState;
+                m_CurrentState.EnterState();
+            }
+        }
+        
+        IEnumerator PerformStateTransition(GameState actualState, GameState nextState)
+        {
+            // Implemente o efeito de fade out aqui
+            yield return new WaitForSeconds(fadeDurationEnter);
+
+            actualState.ExitState();
+            yield return new WaitForSeconds(fadeDurationExit);
+
+            m_CurrentState = nextState;
+            m_CurrentState.EnterState();
+        }
+
+        public void InstantiatePlayers()
+        {
+            if (initializedPlayerMasters.Count != 0) 
+                return;
+            initializedPlayerMasters.Add(Instantiate(playerPrefab).GetComponent<PlayerMaster>());
+            initializedPlayerMasters[^1].SetPlayerSettingsToPlayMaster(playerSettingsList[^1]);
+
+        }
+
+        #region Buttons Actions
+        public void BtnNewGame()
+        {
+            ChangeState(new GameStateOpenCutScene(startMenu));
+        }
+  #endregion
+        /*[SerializeField] internal bool isGameOver;
         [SerializeField] internal bool isGameStopped;
         [SerializeField] private bool isGameFinish;
         [Header("Layer Names")]
@@ -167,6 +259,6 @@ namespace RiverAttack
         {
             playerObjectAvailableList.Add(activePlayer);
             
-        }
+        }*/
     }
 }

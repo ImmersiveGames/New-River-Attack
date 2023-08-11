@@ -4,6 +4,7 @@ namespace RiverAttack
 {
     public class LevelFinish : MonoBehaviour
     {
+        /*
         GamePlayManager m_GamePlayManager;
         #region UNITY METHODS
         void OnEnable()
@@ -19,6 +20,7 @@ namespace RiverAttack
             m_GamePlayManager.CallEventCompletePath();
         }
   #endregion
+  */
         
     }
 }

@@ -3,7 +3,7 @@ namespace RiverAttack
 {
     public abstract class ObstacleColliders : MonoBehaviour
     {
-        Collider[] m_MyCollider;
+        /*Collider[] m_MyCollider;
         protected ObstacleMaster obstacleMaster;
         protected GamePlayManager gamePlayManager;
 
@@ -25,7 +25,7 @@ namespace RiverAttack
         {
             if (obstacleMaster.enemy.canRespawn)
                 gamePlayManager.EventResetEnemies -= ColliderOn;
-        }*/
+        }#1#
         #endregion
 
         protected virtual void SetInitialReferences()
@@ -71,6 +71,6 @@ namespace RiverAttack
             {
                 m_MyCollider[i].enabled = true;
             }
-        }
+        }*/
     }
 }

@@ -8,6 +8,34 @@ namespace Utils
 {
     public static class Tools
     {
+        [Serializable]
+        public class SerializableDictionary<TKey, TValue>
+        {
+            [SerializeField]
+            List<TKey> keys = new List<TKey>();
+    
+            [SerializeField]
+            List<TValue> values = new List<TValue>();
+    
+            public void Add(TKey key, TValue value)
+            {
+                keys.Add(key);
+                values.Add(value);
+            }
+    
+            public bool TryGetValue(TKey key, out TValue value)
+            {
+                int index = keys.IndexOf(key);
+                if (index != -1)
+                {
+                    value = values[index];
+                    return true;
+                }
+        
+                value = default(TValue);
+                return false;
+            }
+        }
         public static List<T> ScriptableListToList<T>(List<int> listId, List<T> scriptableList) where T : ScriptableObject
         {
             var defaultList = new List<T>();

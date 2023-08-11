@@ -4,7 +4,7 @@ namespace RiverAttack
 {
     public class EnemiesScore : MonoBehaviour
     {
-        GamePlayManager m_GamePlayManager;
+        /*GamePlayManager m_GamePlayManager;
         protected ObstacleMaster obstacleMaster;
 
         #region UNITY METHODS
@@ -42,7 +42,7 @@ namespace RiverAttack
         {
             if (score > GamePlaySettings.instance.totalScore)
                 GamePlaySettings.instance.totalScore = score;
-        }
+        }*/
         
     }
 }

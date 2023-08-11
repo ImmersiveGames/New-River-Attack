@@ -7,7 +7,7 @@ namespace RiverAttack
     [RequireComponent(typeof(PlayerMaster))]
     [RequireComponent(typeof(AudioSource))]
     public class PlayerSounds : MonoBehaviour
-    {
+    {/*
     #region Variable Private Inspector
         [SerializeField]
         AudioEventSample audioEngineLoop;
@@ -107,6 +107,6 @@ namespace RiverAttack
         {
             StopAllCoroutines();
             m_AudioSource.Stop();
-        }
+        }*/
     }
 }

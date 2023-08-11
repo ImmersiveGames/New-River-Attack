@@ -5,7 +5,7 @@ namespace RiverAttack
 {
     public class EnemiesSkins : ObstacleSkins
     {
-        ObstacleMaster m_ObstacleMaster;
+        /*ObstacleMaster m_ObstacleMaster;
         GamePlayManager m_GamePlayManager;
         #region UNITY METHODS
         void Awake()
@@ -35,6 +35,6 @@ namespace RiverAttack
             var transform1 = go.transform;
             transform1.localPosition = Vector3.zero;
             transform1.localRotation = Quaternion.identity;
-        }
+        }*/
     }
 }

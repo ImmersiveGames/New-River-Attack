@@ -4,9 +4,8 @@ using UnityEngine;
 
 namespace RiverAttack
 {
-    [RequireComponent(typeof(PlayerMaster))]
     public class PlayerLives : MonoBehaviour
-    {
+    {/*
         [SerializeField] int playerStartLives = 3;
         [SerializeField] int playerLivesMax = 9;
         [SerializeField] float timeoutReSpawn = 1.8f;
@@ -86,7 +85,7 @@ namespace RiverAttack
             m_PlayerMaster.SetActualPlayerStateMovement(PlayerMaster.MovementStatus.Paused);
             yield return new WaitForSeconds(timeoutReSpawn);
             /*if (!m_GamePlayMaster.shouldBePlayingGame)
-                yield break;*/
+                yield break;#1#
             SetRespawnPosition(transform.localPosition.z);
 
             m_PlayerMaster.CallEventPlayerMasterReSpawn();
@@ -115,7 +114,7 @@ namespace RiverAttack
             else
                 playerLives = m_PlayerSettings.lives += life;
             GamePlaySettings.instance.livesSpent += life * 1;
-        }
+        }*/
         
     }
 }

@@ -5,7 +5,7 @@ namespace RiverAttack
     public class EnemiesSound : MonoBehaviour
     {
 
-        ObstacleMaster m_ObstacleMaster;
+        /*ObstacleMaster m_ObstacleMaster;
         protected AudioSource audioSource;
         [SerializeField]
         AudioEventSample enemyExplodeAudio;
@@ -41,6 +41,6 @@ namespace RiverAttack
         {
             if (audioSource != null && enemyExplodeAudio != null)
                 enemyExplodeAudio.Play(audioSource);
-        }
+        }*/
     }
 }

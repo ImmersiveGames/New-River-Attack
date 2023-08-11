@@ -6,7 +6,7 @@ namespace RiverAttack
     [CreateAssetMenu(fileName = "PowerUp", menuName = "RiverAttack/PowerUp", order = 3)]
     public class PowerUp : ScriptableObject
     {
-        [Header("PowerUp Set")]
+        /*[Header("PowerUp Set")]
         [SerializeField]
         public new string name;
         [SerializeField]
@@ -35,6 +35,6 @@ namespace RiverAttack
         {
             GamePlayPowerUps.target = player;
             endAction?.Invoke();
-        }
+        }*/
     }
 }

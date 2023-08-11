@@ -5,7 +5,7 @@ namespace RiverAttack
 {
     public class PlayerParticles : MonoBehaviour
     {
-        [SerializeField]
+        /*[SerializeField]
         GameObject particlePrefab;
         [SerializeField]
         float timeoutDestroy;
@@ -41,6 +41,6 @@ namespace RiverAttack
         void RestoreChildren()
         {
             Tools.ToggleChildren(transform, true);
-        }
+        }*/
     }
 }

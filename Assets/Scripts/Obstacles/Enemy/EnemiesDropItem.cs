@@ -5,7 +5,7 @@ namespace RiverAttack
 {
     public class EnemiesDropItem : MonoBehaviour
     {
-        [SerializeField]
+        /*[SerializeField]
         ListDropItems itemsVariables;
         [SerializeField]
         float timeToAutoDestroy;
@@ -52,6 +52,6 @@ namespace RiverAttack
         void DestroyDrop()
         {
             Destroy(m_ItemDrop);
-        }
+        }*/
     }
 }

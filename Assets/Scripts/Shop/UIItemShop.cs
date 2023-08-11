@@ -60,12 +60,12 @@ namespace Shopping
             SetupSelectButton(player);
         }
 
-        void UpdateBuyButton(PlayerSettings player, ShopProductStock product)
+        void UpdateBuyButton(PlayerSettings player)
         {
             SetupButtons(player);
         }
 
-        void SelectThisItem(PlayerSettings player, ShopProductStock product)
+        void SelectThisItem(PlayerSettings player)
         {
             SetupButtons(player);
         }

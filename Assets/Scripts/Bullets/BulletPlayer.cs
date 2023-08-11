@@ -4,7 +4,7 @@ namespace RiverAttack
 {
     public class BulletPlayer : Bullets
     {
-         #region Variable Private Inspector
+         /*#region Variable Private Inspector
         float m_StartTime;
         #endregion
 
@@ -47,7 +47,7 @@ namespace RiverAttack
             {
                 DestroyMe();
             }
-        }
+        }*/
 
         
         

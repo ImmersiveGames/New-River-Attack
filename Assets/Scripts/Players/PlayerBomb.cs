@@ -6,7 +6,7 @@ namespace RiverAttack
 {
     public class PlayerBomb : MonoBehaviour, ICommand
     {
-        [SerializeField]
+        /*[SerializeField]
         int bombQuantity;
         [SerializeField]
         Vector3 bombOffset;
@@ -93,6 +93,22 @@ namespace RiverAttack
         {
             GamePlaySettings.instance.bombSpent += bomb;
             m_PlayerMaster.GetPlayersSettings().bombs += bomb;
+        }*/
+        public void Execute()
+        {
+            throw new NotImplementedException();
+        }
+        public void Execute(InputAction.CallbackContext callbackContext)
+        {
+            throw new NotImplementedException();
+        }
+        public void UnExecute()
+        {
+            throw new NotImplementedException();
+        }
+        public void UnExecute(InputAction.CallbackContext callbackContext)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -6,7 +6,10 @@ namespace RiverAttack
     [CreateAssetMenu(fileName = "GameSettings", menuName = "RiverAttack/GameSettings", order = 0)]
     public class GameSettings : SingletonScriptableObject<GameSettings>
     {
-        [Header("Options")]
+        [Header("Options Preferences")]
+        public float musicVolume;
+        public float sfxVolume;
+        /*[Header("Options")]
         public float autoMovement;
         public int maxContinue;
         public int continues;
@@ -21,7 +24,7 @@ namespace RiverAttack
             // Carregando a referencia da primeira scene
 
             /*ChangeGameScene(SceneManager.GetActiveScene().buildIndex);
-            previousScene = actualScene;*/
+            previousScene = actualScene;#1#
         }
   #endregion
 
@@ -64,7 +67,7 @@ namespace RiverAttack
                 throw;
             }
         }
-  #endregion
+  #endregion*/
 
         
     }

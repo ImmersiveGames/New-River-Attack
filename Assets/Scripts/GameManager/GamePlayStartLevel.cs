@@ -5,7 +5,7 @@ namespace RiverAttack
 {
     public class GamePlayStartLevel : MonoBehaviour
     {
-        [SerializeField]
+        /*[SerializeField]
         GameObject panelStartText;
         [Header("Move Player Start")]
         [SerializeField]
@@ -115,7 +115,7 @@ namespace RiverAttack
             /*
             PanelSplashText splash;
             if (splash = panelStartText.GetComponent<PanelSplashText>())
-                splash.SetSplashText(splashText);*/
+                splash.SetSplashText(splashText);#1#
         }
 
         /*private void SplashScreen(LocalizationString splashText, string animeParm)
@@ -123,7 +123,7 @@ namespace RiverAttack
             LocalizationTranslate translate = new LocalizationTranslate(LocalizationSettings.Instance.GetActualLanguage());
             string txt = translate.Translate(splashText, LocalizationTranslate.StringFormat.AllUpcase);
             SplashScreen(txt, animeParm);
-        }*/
+        }#1#
 
         static IEnumerator MoveToPosition(Transform transform, Vector3 position, float timeToMove)
         {
@@ -135,6 +135,6 @@ namespace RiverAttack
                 transform.position = Vector3.Lerp(currentPos, position, t);
                 yield return null;
             }
-        }
+        }*/
     }
 }

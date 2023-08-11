@@ -4,7 +4,7 @@ namespace RiverAttack
 {
     public class StateMovePatrol : IMove
     {
-        public Transform target;
+        /*public Transform target;
         float m_StartApproachRadius;
         float m_PlayerApproachRadius;
 
@@ -42,6 +42,18 @@ namespace RiverAttack
         {
             target = null;
             //Debug.Log("Estado: Patrol - Exit");
+        }*/
+        public void EnterState(EnemiesMaster enemiesMaster)
+        {
+            throw new System.NotImplementedException();
+        }
+        public void UpdateState(Transform transform, Vector3 direction)
+        {
+            throw new System.NotImplementedException();
+        }
+        public void ExitState()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

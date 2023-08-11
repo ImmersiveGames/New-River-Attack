@@ -3,7 +3,7 @@ namespace RiverAttack
 {
     public class EnemiesAnimator : MonoBehaviour
     {
-        public string explosionTrigger;
+        /*public string explosionTrigger;
         public string onMove;
         public string onFlip;
 
@@ -84,6 +84,6 @@ namespace RiverAttack
             {
                 transform.GetChild(i).gameObject.SetActive(false);
             }
-        }
+        }*/
     }
 }

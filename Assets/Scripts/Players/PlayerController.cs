@@ -7,7 +7,7 @@ namespace RiverAttack
 {
     public class PlayerController : MonoBehaviour
     {
-        GameManager m_GameManager;
+        /*GameManager m_GameManager;
         GamePlayManager m_GamePlayManager;
         PlayerMaster m_PlayerMaster;
         PlayersInputActions m_PlayersInputActions;
@@ -96,6 +96,6 @@ namespace RiverAttack
             m_MovementSpeed = settings.mySpeedy;
             m_MultiplyVelocityUp = settings.multiplyVelocityUp;
             m_MultiplyVelocityDown = settings.multiplyVelocityDown;
-        }
+        }*/
     }
 }

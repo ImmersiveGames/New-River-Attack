@@ -5,7 +5,7 @@ namespace RiverAttack
 {
     public class EffectAreaSound : EnemiesSound
     {
-        EffectAreaMaster m_EffectAreaMaster;
+        /*EffectAreaMaster m_EffectAreaMaster;
         [SerializeField]
         AudioEventSample effectAreaSound;
         [SerializeField]
@@ -41,7 +41,7 @@ namespace RiverAttack
         {
             if ((!audioSource && !effectAreaSound) && !audioSource.isPlaying) return;
             effectAreaExitSound.Play(audioSource);
-        }
+        }*/
     }
 }
 

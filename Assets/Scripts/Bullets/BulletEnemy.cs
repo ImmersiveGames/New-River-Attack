@@ -3,7 +3,7 @@ namespace RiverAttack
 {
     public class BulletEnemy : Bullets
     {
-        #region Variable Private Inspector
+        /*#region Variable Private Inspector
         
         float m_StartTime;
         
@@ -46,6 +46,6 @@ namespace RiverAttack
             {
                 DestroyMe();
             }
-        }
+        }*/
     }
 }

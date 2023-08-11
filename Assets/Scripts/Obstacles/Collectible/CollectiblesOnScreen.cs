@@ -5,7 +5,7 @@ namespace RiverAttack
     [RequireComponent(typeof(Renderer))]
     public class CollectiblesOnScreen : MonoBehaviour
     {
-        CollectiblesMaster m_CollectiblesMaster;
+        /*CollectiblesMaster m_CollectiblesMaster;
 
         #region UNITY METHODS
         void OnEnable()
@@ -18,6 +18,7 @@ namespace RiverAttack
             m_CollectiblesMaster.CallShowOnScreen();
         }
   #endregion
+  */
 
     }
 }

@@ -3,7 +3,7 @@ namespace RiverAttack
 {
     public class CollectiblesScore : EnemiesScore
     {
-        CollectiblesMaster m_CollectiblesMaster;
+        /*CollectiblesMaster m_CollectiblesMaster;
 
         #region UNITY METHODS
         protected override void OnEnable()
@@ -27,7 +27,7 @@ namespace RiverAttack
         void SetCollScore(PlayerMaster playerMaster)
         {
             playerMaster.GetPlayersSettings().score += obstacleMaster.enemy.enemyScore;
-        }
+        }*/
     }
 }
 

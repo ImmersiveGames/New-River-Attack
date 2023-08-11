@@ -130,7 +130,7 @@ namespace Shopping
             m_ProductDistance = (int)Mathf.Abs(VectorDistance(getProducts[1].GetComponent<RectTransform>().anchoredPosition, getProducts[0].GetComponent<RectTransform>().anchoredPosition));
             //maxposition = productDistance * 1.8f;
         }
-        public void ButtonNavegation(int next)
+        public void ButtonNavigation(int next)
         {
             m_TargetNearestButton = false;
             getActualProduct += next;

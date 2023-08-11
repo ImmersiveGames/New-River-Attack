@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
@@ -11,26 +9,34 @@ namespace RiverAttack
         [Header("Audio Options References")]
         [SerializeField] AudioMixer mixerGroup;
         [SerializeField] Slider musicVolumeSlider;
+        [SerializeField, Range(0.0001f, 1f)] float defaultMusicVolume = .5f;
         [SerializeField] Slider sfxVolumeSlider;
+        [SerializeField, Range(0.0001f, 1f)] float defaultSfxVolume = .5f;
 
-        [Header("Menu SFX")]
-        [SerializeField] AudioClip clickSound;
-        [SerializeField] AudioSource audioSource;
 
-        // Start is called before the first frame update
+        AudioSource m_AudioSource;
+        GameSettings m_GameSettings;
+
+        #region UNITYMETHODS
+        void OnEnable()
+        {
+            m_GameSettings = GameSettings.instance;
+            musicVolumeSlider.value =  (m_GameSettings.musicVolume == 0)? defaultMusicVolume :  m_GameSettings.musicVolume;
+            sfxVolumeSlider.value = (m_GameSettings.sfxVolume == 0)? defaultSfxVolume :  m_GameSettings.sfxVolume;
+        }
         void Start()
         {
             SetMusicVolume();
-            SetSFXVolume();
+            SetSfxVolume();
         }
-
-        // Update is called once per frame
-        void Update()
+        void OnDisable()
         {
-
+            m_GameSettings.musicVolume = musicVolumeSlider.value;
+            m_GameSettings.sfxVolume = sfxVolumeSlider.value;
         }
+  #endregion
 
-        public void SetMusicVolume() 
+        public void SetMusicVolume()
         {
             float volume = Mathf.Log10(musicVolumeSlider.value) * 20f;
             
@@ -39,18 +45,13 @@ namespace RiverAttack
             //Debug.Log("Volume da Musica: " + volume.ToString());
         }
 
-        public void SetSFXVolume()
+        public void SetSfxVolume()
         {
             float volume = Mathf.Log10(sfxVolumeSlider.value) * 20f;
 
             mixerGroup.SetFloat("SFXVolume", volume);
 
-            Debug.Log("Volume de SFX: " + volume.ToString());
-        }
-
-        public void PlayClickSFX() 
-        {
-            audioSource.PlayOneShot(clickSound);
+            //Debug.Log("Volume de SFX: " + volume.ToString());
         }
 
     }

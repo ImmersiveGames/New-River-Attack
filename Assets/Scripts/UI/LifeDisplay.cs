@@ -6,7 +6,7 @@ namespace RiverAttack
 {
     public class LifeDisplay : MonoBehaviour
     {
-        [SerializeField]
+        /*[SerializeField]
         int playerIndex;
         [SerializeField]
         GameObject iconLives;
@@ -92,7 +92,7 @@ namespace RiverAttack
                 Destroy(parent.GetChild(x).gameObject);
                 //Debug.Log("Skin Destroyed");
             }
-        }
+        }*/
         
     }
 

@@ -14,7 +14,7 @@ namespace RiverAttack
 
         public void EffectAreaStart(PlayerSettings player)
         {
-            GamePlayPowerUps.target = player;
+           // GamePlayPowerUps.target = player;
             effectAreaActions?.Invoke();
         }
     }

@@ -4,7 +4,7 @@ namespace RiverAttack
 {
     [RequireComponent(typeof(PlayerMaster))]
     public class PlayerHealth : MonoBehaviour
-    {
+    {/*
     #region Variable Private Inspector
         [Header("Fuel")]
         [SerializeField]
@@ -102,6 +102,6 @@ namespace RiverAttack
         void PlayerSetup()
         {
             m_PlayerSettings.actualHp = m_PlayerSettings.maxHp;
-        }
+        }*/
     }
 }

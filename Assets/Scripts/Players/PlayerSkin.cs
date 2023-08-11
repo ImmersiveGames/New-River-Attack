@@ -7,7 +7,7 @@ namespace RiverAttack
     [RequireComponent(typeof(PlayerMaster))]
     public class PlayerSkin : MonoBehaviour
     {
-        [SerializeField]
+        /*[SerializeField]
         ShopProductSkin defaultSkin;
         GameObject m_MySkin;
         PlayerMaster m_PlayerMaster;
@@ -55,7 +55,7 @@ namespace RiverAttack
             /*if (m_MySkin.GetComponent<Collider>())
             {
                 Tools.CopyComponent(m_MySkin.GetComponentInChildren<Collider>(), gameObject);
-            }*/
+            }#1#
         }
         void DisableSkin()
         {
@@ -64,6 +64,6 @@ namespace RiverAttack
         void EnableSkin()
         {
             m_MySkin.SetActive(true);
-        }
+        }*/
     }
 }

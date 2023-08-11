@@ -6,7 +6,7 @@ namespace RiverAttack
 
     public class PlayerCollider : MonoBehaviour
     {
-    #region Variable Private References
+    /*#region Variable Private References
         PlayerMaster m_PlayerMaster;
         GamePlayManager m_GamePlayManager;
         Collider m_Collider;
@@ -54,6 +54,6 @@ namespace RiverAttack
         void ColliderOff()
         {
             m_Collider.enabled = false;
-        }
+        }*/
     }
 }

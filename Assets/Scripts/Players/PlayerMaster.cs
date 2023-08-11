@@ -1,11 +1,26 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Serialization;
 using Utils;
 namespace RiverAttack
 {
     public class PlayerMaster : ObjectMaster
     {
-        float m_AutoMovement;
+        
+        PlayerSettings m_PlayerSettings;
+        
+        public void SetPlayerSettingsToPlayMaster(PlayerSettings playerSettings)
+        {
+            this.m_PlayerSettings = playerSettings;
+        }
+        public PlayerSettings getPlayerSettings
+        {
+            get
+            {
+                return m_PlayerSettings;
+            }
+        }
+        /*float m_AutoMovement;
         float m_MovementSpeed;
         float m_MultiplyVelocityUp;
         float m_MultiplyVelocityDown;
@@ -125,7 +140,7 @@ namespace RiverAttack
                 GameManager.Instance.levelsFinish.Count <= 0)
                 playerSettings.score.SetValue(0);
             GameManagerSaves.Instance.LoadPlayer(ref playerSettings);
-            //playerSettings.LoadValues(); */
+            //playerSettings.LoadValues(); #1#
         }
         
         public PlayerSettings GetPlayersSettings()
@@ -178,7 +193,7 @@ namespace RiverAttack
                     new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterLevelName, gamePlay.GetActualLevel().GetName), new Firebase.Analytics.Parameter("Milstone", gamePlay.GetActualPath())
                 };
                 Firebase.Analytics.FirebaseAnalytics.LogEvent("FinishPath", FinishPath);
-            }*/
+            }#1#
             //GameManagerSaves.Instance.SavePlayer(playerSettings);
             //playerSettings.SaveValues();
         }
@@ -254,6 +269,7 @@ namespace RiverAttack
             EventChangeSkin?.Invoke(skin);
         }
   #endregion
-       
+  */
+
     }
 }

@@ -9,13 +9,13 @@ namespace RiverAttack
     [System.Serializable]
     public class Levels : ScriptableObject
     {
-        public string levelName;
+        /*public string levelName;
         /*[SerializeField]
-        public LocalizationString translateName;*/
+        public LocalizationString translateName;#1#
         [Multiline]
         public string levelDescription;
         /*[SerializeField]
-        public LocalizationString translateDedescription;*/
+        public LocalizationString translateDedescription;#1#
         public Sprite levelIcon;
         public Vector3 levelIconPos;
         public GamePlayAudio.LevelType startLevelBGM;
@@ -132,7 +132,7 @@ namespace RiverAttack
         public bool CheckIfLocked(List<Levels> finishList)
         {
             return previousLevel.Count > 0 && previousLevel.All(t => finishList.Count < 1 || !finishList.Contains(t));
-        }
+        }*/
     }
 
     [System.Serializable]

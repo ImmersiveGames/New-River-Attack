@@ -4,7 +4,7 @@ namespace RiverAttack
 {
     public class EffectAreaCollider : EnemiesCollider
     {
-        EffectAreaMaster m_EffectAreaMaster;
+        /*EffectAreaMaster m_EffectAreaMaster;
         EffectAreaScriptable m_EffectArea;
         [SerializeField]
         float timeToAccess;
@@ -58,7 +58,7 @@ namespace RiverAttack
                 m_Timer = timeToAccess;
             }
             m_Timer -= Time.deltaTime;
-        }
+        }*/
     }
 }
 

@@ -5,7 +5,7 @@ namespace RiverAttack
 {
     public class ScoreDisplay : MonoBehaviour
     {
-        [SerializeField] PlayerSettings playerSettings;
+        /*[SerializeField] PlayerSettings playerSettings;
         [SerializeField] TMP_Text scoreText;
 
         private GamePlayManager gamePlay;
@@ -36,6 +36,6 @@ namespace RiverAttack
         void UpdateScoreDisplay(int scoreValue) 
         {
             scoreText.text = "Score: " + scoreValue;
-        }
+        }*/
     }
 }

@@ -3,7 +3,7 @@ namespace RiverAttack
 {
     [RequireComponent(typeof(CollectiblesMaster))]
     public class CollectiblesSound : EnemiesSound
-    {
+    {/*
         [SerializeField]
         private AudioEventSample collectSound;
         [SerializeField]
@@ -41,7 +41,7 @@ namespace RiverAttack
         {
             if (audioSource != null && collectSound != null)
                 collectSound.Play(audioSource);
-        }
+        }*/
     }
 }
 

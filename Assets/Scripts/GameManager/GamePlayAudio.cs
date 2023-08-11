@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,61 @@ namespace RiverAttack
 {
     public class GamePlayAudio : Singleton<GamePlayAudio>
     {
-        public AudioMixerSnapshot[] audioMixerSnapshots;
+        [SerializeField] AudioSource BGMAudioSource;
+        [SerializeField] Tools.SerializableDictionary<LevelTypes, AudioEventSample> BGMLevels = new Tools.SerializableDictionary<LevelTypes, AudioEventSample>();
+        [Header("Menu SFX")]
+        [SerializeField] AudioClip clickSound;
+
+        #region UNITYMETHODS
+        void Awake()
+        {
+            BGMAudioSource = GetComponentInParent<AudioSource>();
+        }
+  #endregion
+        public void PlayBGM(LevelTypes typeLevel)
+        {
+            BGMLevels.TryGetValue(typeLevel, out var audioSource);
+            audioSource.Play(BGMAudioSource);
+        }
+        IEnumerator PlayBGM(AudioSource source, AudioEvent track, float time)
+        {
+            if (source.isPlaying)
+                yield return StartCoroutine(FadeAudio(source, time, source.volume, 0));
+            track.Play(source);
+        }
+        public void ChangeBGM(LevelTypes typeLevel, float time)
+        {
+            BGMLevels.TryGetValue(typeLevel, out var audioSource);
+            StartCoroutine(PlayBGM(BGMAudioSource, audioSource, time));
+        }
+        static void PlayOneShot(AudioSource audioSource, AudioClip audioClip)
+        {
+            audioSource.PlayOneShot(audioClip);
+        }
+        public void PlayClickSfx(AudioSource audioSource)
+        {
+            PlayOneShot(audioSource, clickSound);
+        }
+        public void StopBGM()
+        {
+            if (BGMAudioSource != null)
+                BGMAudioSource.Stop();
+        }
+        static IEnumerator FadeAudio(AudioSource source, float timer, float starts, float ends)
+        {
+            float i = 0.0F;
+            float step = 1.0F / timer;
+            while (i <= 1.0F)
+            {
+                i += step * Time.deltaTime;
+                source.volume = Mathf.Lerp(starts, ends, i);
+                yield return new WaitForSeconds(step * Time.deltaTime);
+            }
+            if (ends <= 0)
+                source.Stop();
+        }
+
+        /*public AudioMixerSnapshot[] audioMixerSnapshots;
         public enum LevelType 
         {
             MainTheme = 0,
@@ -41,7 +96,7 @@ namespace RiverAttack
             {
                 ChangeBGM(levelType, 0.5f);
                 m_CurrentPlaying = levelType;
-            }*/
+            }#1#
                 
 
             if (Time.timeScale <= 0)
@@ -109,6 +164,6 @@ namespace RiverAttack
             }
             if (ends <= 0)
                 source.Stop();
-        }
+        }*/
     }
 }

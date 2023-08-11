@@ -5,7 +5,7 @@ namespace RiverAttack
 {
     [RequireComponent(typeof(EnemiesMaster))]
     public class EnemiesMovement : ObstacleDetectApproach
-    {
+    {/*
         
         [Header("Movement Settings")]
         [SerializeField] bool ignoreWalls;
@@ -164,7 +164,7 @@ namespace RiverAttack
             if (vector3 == new Vector3(0, 0, -1))
                 return Directions.Back;
             return vector3 != Vector3.zero ? Directions.Free : Directions.None;
-        }
+        }*/
         
     }
 }

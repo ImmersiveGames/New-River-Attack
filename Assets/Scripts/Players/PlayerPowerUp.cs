@@ -5,7 +5,7 @@ namespace RiverAttack
     [RequireComponent(typeof(PlayerMaster))]
     public class PlayerPowerUp : MonoBehaviour
     {
-        readonly Dictionary<PowerUp, float> m_ActivePowerUps = new Dictionary<PowerUp, float>();
+        /*readonly Dictionary<PowerUp, float> m_ActivePowerUps = new Dictionary<PowerUp, float>();
         List<PowerUp> m_Keys = new List<PowerUp>();
 
         PlayerMaster m_PlayerMaster;
@@ -99,7 +99,7 @@ namespace RiverAttack
             }
             if (!onlyEffect)
                 m_ActivePowerUps.Clear();
-        }
+        }*/
 
     }
 }

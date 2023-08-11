@@ -2,7 +2,7 @@ namespace RiverAttack
 {
     public class EffectAreaMaster : ObstacleMaster
     {
-        public event GeneralEventHandler EventEnterAreaEffect;
+        /*public event GeneralEventHandler EventEnterAreaEffect;
         public event GeneralEventHandler EventExitAreaEffect;
 
         public void CallEventAreaEffect()
@@ -13,7 +13,7 @@ namespace RiverAttack
         public void CallEventExitAreaEffect()
         {
             EventExitAreaEffect?.Invoke();
-        }
+        }*/
     }
 }
 

@@ -5,7 +5,7 @@ namespace RiverAttack
     [RequireComponent(typeof(PlayerMaster))]
     [RequireComponent(typeof(Animator))]
     public class PlayerAnimator : MonoBehaviour
-    {
+    {/*
     #region Variables Private References
         PlayerMaster m_PlayerMaster;
         Animator m_Animator;
@@ -34,6 +34,6 @@ namespace RiverAttack
         {
             m_Animator.SetFloat(DirX, dir.x);
             m_Animator.SetFloat(DirY, dir.y);
-        }
+        }*/
     }
 }

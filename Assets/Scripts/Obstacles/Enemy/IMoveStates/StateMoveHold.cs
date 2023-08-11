@@ -5,7 +5,7 @@ namespace RiverAttack
 {
     public class StateMoveHold : IMove
     {
-        readonly EnemiesMovement m_EnemiesMovement;
+        /*readonly EnemiesMovement m_EnemiesMovement;
         Vector3 m_VectorDirection;
         public StateMoveHold(EnemiesMovement enemiesMovement)
         {
@@ -24,6 +24,18 @@ namespace RiverAttack
         public void ExitState()
         {
             Debug.Log("Estado: HOLD - Exit");
+        }*/
+        public void EnterState(EnemiesMaster enemiesMaster)
+        {
+            throw new System.NotImplementedException();
+        }
+        public void UpdateState(Transform transform, Vector3 direction)
+        {
+            throw new System.NotImplementedException();
+        }
+        public void ExitState()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

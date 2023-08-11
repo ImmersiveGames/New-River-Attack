@@ -5,7 +5,7 @@ namespace RiverAttack
 {
     public class StateMove : IMove
     {
-        readonly EnemiesMovement m_EnemiesMovement;
+        /*readonly EnemiesMovement m_EnemiesMovement;
         float m_ElapsedTime = 0f;
         float m_MoveVelocity;
         float m_MultiplyEnemiesSpeedy;
@@ -58,6 +58,18 @@ namespace RiverAttack
 
             // Usa a curva de animação para obter a interpolação de movimento
             return curve.Evaluate(curveFactor);
+        }*/
+        public void EnterState(EnemiesMaster enemiesMaster)
+        {
+            throw new System.NotImplementedException();
+        }
+        public void UpdateState(Transform transform, Vector3 direction)
+        {
+            throw new System.NotImplementedException();
+        }
+        public void ExitState()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

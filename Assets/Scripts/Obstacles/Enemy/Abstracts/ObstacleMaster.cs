@@ -3,7 +3,7 @@ namespace RiverAttack
 {
     public class ObstacleMaster : ObjectMaster
     {
-        const float DESTROY_DELAY = 0.1f;
+        /*const float DESTROY_DELAY = 0.1f;
         public EnemiesScriptable enemy;
         public bool isDestroyed;
         protected internal enum EnemyStatus { Paused, Active }
@@ -96,7 +96,7 @@ namespace RiverAttack
         {
             EventChangeSkin?.Invoke();
         }
-    #endregion
+    #endregion*/
     } 
 }
 
