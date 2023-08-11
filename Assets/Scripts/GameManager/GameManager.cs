@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Playables;
 using Utils;
@@ -35,7 +36,10 @@ namespace RiverAttack
         public GameObject playerPrefab;
         public List<PlayerSettings> playerSettingsList = new List<PlayerSettings>();
         [SerializeField] List<PlayerMaster> initializedPlayerMasters = new List<PlayerMaster>();
-
+        
+        [Header("Camera Virtual Settings"), SerializeField]
+        CinemachineVirtualCamera virtualCamera;
+        
         [Header("CutScenes Settings")]
         public GameObject openCutScenePrefab;
         public GameObject endCutScenePrefab;
@@ -88,9 +92,15 @@ namespace RiverAttack
         {
             if (initializedPlayerMasters.Count != 0) 
                 return;
-            initializedPlayerMasters.Add(Instantiate(playerPrefab).GetComponent<PlayerMaster>());
+            var playerObject = Instantiate(playerPrefab);
+            initializedPlayerMasters.Add(playerObject.GetComponent<PlayerMaster>());
             initializedPlayerMasters[^1].SetPlayerSettingsToPlayMaster(playerSettingsList[^1]);
-
+            SetFollowVirtualCam(playerObject.transform);
+        }
+        
+        void SetFollowVirtualCam(Transform follow)
+        {
+            virtualCamera.Follow = follow;
         }
 
         #region Buttons Actions

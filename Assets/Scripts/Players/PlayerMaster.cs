@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Serialization;
@@ -8,10 +9,17 @@ namespace RiverAttack
     {
         
         PlayerSettings m_PlayerSettings;
+
+        #region UNITYMETHOD
+        void OnEnable()
+        {
+            throw new NotImplementedException();
+        }
+  #endregion
         
         public void SetPlayerSettingsToPlayMaster(PlayerSettings playerSettings)
         {
-            this.m_PlayerSettings = playerSettings;
+            m_PlayerSettings = playerSettings;
         }
         public PlayerSettings getPlayerSettings
         {
@@ -19,6 +27,11 @@ namespace RiverAttack
             {
                 return m_PlayerSettings;
             }
+        }
+
+        public void PlayerStartSetup()
+        {
+            
         }
         /*float m_AutoMovement;
         float m_MovementSpeed;

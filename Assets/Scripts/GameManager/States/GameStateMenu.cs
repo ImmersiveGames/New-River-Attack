@@ -32,6 +32,7 @@ namespace RiverAttack
             var gameManager = GameManager.instance;
             gameManager.InstantiatePlayers();
             var gamePlayManager = GamePlayManager.instance;
+            //Adicionar Player na Camera virtual
             gamePlayManager.PauseGame();
             //Aplicar Fade
             Debug.Log($"Saindo no Estado: Menu");
