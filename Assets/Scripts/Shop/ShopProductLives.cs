@@ -16,7 +16,7 @@ namespace RiverAttack
   #endregion
         public override bool ShouldBeConsume(PlayerSettings player)
         {
-            return player.lives + quantity <= player.maxLives;
+            return player.lives + quantity <= GameSettings.instance.maxLives;
         }
         public override void ConsumeProduct(PlayerSettings player)
         {

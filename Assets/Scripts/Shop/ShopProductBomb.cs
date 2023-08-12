@@ -17,7 +17,7 @@ namespace RiverAttack
   #endregion
         public override bool ShouldBeConsume(PlayerSettings player)
         {
-            return player.bombs + quantity <= player.maxBombs;
+            return player.bombs + quantity <= GameSettings.instance.maxBombs;
         }
 
         public override void ConsumeProduct(PlayerSettings player)

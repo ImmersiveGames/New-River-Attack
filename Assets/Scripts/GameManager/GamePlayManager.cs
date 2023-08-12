@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace RiverAttack
 {
@@ -11,7 +13,8 @@ namespace RiverAttack
     {
         [SerializeField]
         bool isGamePaused, completePath, godMode;
-        
+        [SerializeField]
+        GameSettings gameSettings;
         internal bool getGamePaused { get { return isGamePaused; } }
         internal bool getGodMode { get { return godMode; } }
         
@@ -20,9 +23,27 @@ namespace RiverAttack
         [SerializeField]
         public Levels actualLevel;
         
-        
+        GameManager m_GameManager;
         PlayersInputActions m_InputSystem;
-        
+        #region Delegates
+        internal delegate void UiUpdateEventHandler(int value);
+        internal event UiUpdateEventHandler EventUpdateScore;
+        internal event UiUpdateEventHandler EventUpdateDistance;
+        internal event UiUpdateEventHandler EventUpdateRefugees;
+        internal event UiUpdateEventHandler EventUpdateBombs;
+        internal event UiUpdateEventHandler EventUpdateLives;
+        #endregion
+
+        #region UNITYMETHODS
+        void OnEnable()
+        {
+            m_GameManager = GameManager.instance;
+        }
+  #endregion
+        public GameSettings getGameSettings
+        {
+            get { return gameSettings; }
+        }
         public void PauseGame()
         {
             isGamePaused = true;
@@ -32,6 +53,34 @@ namespace RiverAttack
             isGamePaused = false;
         }
         public bool shouldBePlayingGame { get { return (!isGamePaused && !completePath); } }
+
+        public PlayerSettings GetNoPlayerPlayerSettings(int playerIndex = 0)
+        {
+            return m_GameManager.playerSettingsList.Count > 0 ? m_GameManager.playerSettingsList[playerIndex] : null;
+        }
+        
+        #region Calls
+        protected internal void OnEventUpdateScore(int value)
+        {
+            EventUpdateScore?.Invoke(value);
+        }
+        protected internal void OnEventUpdateDistance(int value)
+        {
+            EventUpdateDistance?.Invoke(value);
+        }
+        protected internal void OnEventUpdateRefugees(int value)
+        {
+            EventUpdateRefugees?.Invoke(value);
+        }
+        protected internal void OnEventUpdateBombs(int value)
+        {
+            EventUpdateBombs?.Invoke(value);
+        }
+        protected internal void OnEventUpdateLives(int value)
+        {
+            EventUpdateLives?.Invoke(value);
+        }
+  #endregion
         /*
         [SerializeField]
         bool gameBeat;
@@ -412,6 +461,6 @@ namespace RiverAttack
         }
         #endregion
         */
-
+        
     }
 }

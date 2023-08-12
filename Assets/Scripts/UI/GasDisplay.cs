@@ -5,29 +5,44 @@ namespace RiverAttack
 {
     public class GasDisplay : MonoBehaviour
     {
-        [SerializeField] PlayerSettings playerSettings;
         [SerializeField] Image gasBarImage;
- 
         [SerializeField] Color highGasColor;        
         [SerializeField] Color mediumGasColor;        
         [SerializeField] Color lowGasColor;
 
-        float mediumGasValue = 0.6f;
-        float lowGasValue = 0.2f;
+        const float MEDIUM_GAS_VALUE = 0.6f;
+        const float LOW_GAS_VALUE = 0.2f;
+        
+        GamePlayManager m_GamePlayManager;
+        PlayerSettings m_PlayerSettings;
 
+        #region UNITYMETHODS
+        void OnEnable()
+        {
+            SetInitialReferences();
+        }
         void Update()
         {
             UpdateDisplay();
         }
+  #endregion
+        void SetInitialReferences()
+        {
+            m_GamePlayManager = GamePlayManager.instance;
+            m_PlayerSettings = m_GamePlayManager.GetNoPlayerPlayerSettings();
+        }
 
         void UpdateDisplay() 
         {
-            float gasAmount = ((float)playerSettings.actualHp) / 100;
+            float gasAmount = ((float)m_PlayerSettings.actualHp) / 100;
             gasBarImage.fillAmount = gasAmount ;
 
-            if (gasAmount < mediumGasValue && gasAmount > lowGasValue) gasBarImage.color = mediumGasColor;
-            else if (gasAmount <= lowGasValue) gasBarImage.color = lowGasColor;
-            else gasBarImage.color = highGasColor;
+            gasBarImage.color = gasAmount switch
+            {
+                < MEDIUM_GAS_VALUE and > LOW_GAS_VALUE => mediumGasColor,
+                <= LOW_GAS_VALUE => lowGasColor,
+                _ => highGasColor
+            };
         }
     }
 }

@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Playables;
+
 using Utils;
+using Object = UnityEngine.Object;
 namespace RiverAttack
 {
     public abstract class GameState
@@ -34,20 +36,21 @@ namespace RiverAttack
 
         [Header("Player Settings")]
         public GameObject playerPrefab;
+        public Vector3 spawnPlayerPosition;
         public List<PlayerSettings> playerSettingsList = new List<PlayerSettings>();
         [SerializeField] List<PlayerMaster> initializedPlayerMasters = new List<PlayerMaster>();
-        
-        [Header("Camera Virtual Settings"), SerializeField]
+
+        [Header("Camera Settings"), SerializeField]
         CinemachineVirtualCamera virtualCamera;
-        
+
         [Header("CutScenes Settings")]
-        public GameObject openCutScenePrefab;
-        public GameObject endCutScenePrefab;
+        [SerializeField] PlayableDirector openCutDirector;
+        
 
         #region UnityMethods
         void Start()
         {
-            ChangeState(new GameStateMenu(startMenu));
+            ChangeState(new GameStateMenu());
         }
         void Update()
         {
@@ -56,12 +59,12 @@ namespace RiverAttack
             // Exemplo de mudança de estado (pode ser em resposta a alguma condição)
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                ChangeState(new GameStateOpenCutScene(startMenu));
+                ChangeState(new GameStateOpenCutScene(openCutDirector));
             }
         }
   #endregion
 
-        void ChangeState(GameState newState)
+        internal void ChangeState(GameState newState)
         {
             m_NextState = newState;
 
@@ -92,12 +95,39 @@ namespace RiverAttack
         {
             if (initializedPlayerMasters.Count != 0) 
                 return;
-            var playerObject = Instantiate(playerPrefab);
-            initializedPlayerMasters.Add(playerObject.GetComponent<PlayerMaster>());
-            initializedPlayerMasters[^1].SetPlayerSettingsToPlayMaster(playerSettingsList[^1]);
+            var playerSettings = playerSettingsList[^1];
+            var playerObject = Instantiate(playerPrefab,spawnPlayerPosition, quaternion.identity);
+            playerObject.name = playerSettings.name;
+            var playerMaster = playerObject.GetComponent<PlayerMaster>();
+            playerMaster.SetPlayerSettingsToPlayMaster(playerSettings);
+            initializedPlayerMasters.Add(playerMaster);
+            // Atualiza a cutscene com o animator do jogador;
+            ChangeBindingReference("Animation Track", playerMaster.GetPlayerAnimator());
+            // Coloca o player como Follow da camra
             SetFollowVirtualCam(playerObject.transform);
         }
-        
+
+        void ChangeBindingReference(string track, Object animator)
+        {
+            foreach (var playableBinding in openCutDirector.playableAsset.outputs)
+            {
+                if (playableBinding.streamName != track)
+                    continue;
+                var bindingReference = openCutDirector.GetGenericBinding(playableBinding.sourceObject);
+
+                if (bindingReference == null)
+                {
+                    // Substituir a referência nula pelo Animator desejado
+                    openCutDirector.SetGenericBinding(playableBinding.sourceObject, animator);
+                }
+            }
+        }
+
+        public void PlayOpenCutScene()
+        {
+            openCutDirector.Play();
+        }
+
         void SetFollowVirtualCam(Transform follow)
         {
             virtualCamera.Follow = follow;
@@ -106,7 +136,7 @@ namespace RiverAttack
         #region Buttons Actions
         public void BtnNewGame()
         {
-            ChangeState(new GameStateOpenCutScene(startMenu));
+            ChangeState(new GameStateOpenCutScene(openCutDirector));
         }
   #endregion
         /*[SerializeField] internal bool isGameOver;

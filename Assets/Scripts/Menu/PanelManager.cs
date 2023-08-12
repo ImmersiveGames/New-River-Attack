@@ -7,6 +7,8 @@ namespace RiverAttack
     public class PanelManager : MonoBehaviour
     {
         [SerializeField]
+        Transform menuParent;
+        [SerializeField]
         List<Transform> menuPrincipal = new List<Transform>();
         [SerializeField]
         int startIndex;
@@ -19,18 +21,20 @@ namespace RiverAttack
         #region UNITYMETHODS
         void Awake()
         {
-            m_AudioSource = GetComponentInChildren<AudioSource>();
+            m_AudioSource = GetComponent<AudioSource>();
         }
         void OnEnable()
         {
             m_GameManager = GameManager.instance;
             m_GamePlayAudio = GamePlayAudio.instance;
             ResetStartMenu();
+            
         }
         #endregion
 
         public void ResetStartMenu()
         {
+            menuParent.gameObject.SetActive(true);
             menuHud.gameObject.SetActive(false);
             menuControl.gameObject.SetActive(false);
             foreach (var t in menuPrincipal)
@@ -42,12 +46,32 @@ namespace RiverAttack
 
         public void StartGameHUD()
         {
-            /*foreach (var t in menuPrincipal)
+            foreach (var t in menuPrincipal)
             {
                 t.gameObject.SetActive(false);
             }
+            menuParent.gameObject.SetActive(false);
             menuHud.gameObject.SetActive(true);
-            menuControl.gameObject.SetActive(true);*/
+            menuControl.gameObject.SetActive(true);
+        }
+
+        public void PauseGameMenu(int menuPauseIndex)
+        {
+            GamePlayManager.instance.PauseGame();
+            menuParent.gameObject.SetActive(true);
+            menuHud.gameObject.SetActive(false);
+            menuControl.gameObject.SetActive(false);
+            foreach (var t in menuPrincipal)
+            {
+                t.gameObject.SetActive(false);
+            }
+            menuPrincipal[menuPauseIndex].gameObject.SetActive(true);
+        }
+        
+        public void UnPauseGameMenu()
+        {
+            GamePlayManager.instance.UnPauseGame();
+            StartGameHUD();
         }
         
         #region Buttons Actions

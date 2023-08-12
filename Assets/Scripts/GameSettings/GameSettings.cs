@@ -6,6 +6,15 @@ namespace RiverAttack
     [CreateAssetMenu(fileName = "GameSettings", menuName = "RiverAttack/GameSettings", order = 0)]
     public class GameSettings : SingletonScriptableObject<GameSettings>
     {
+        [Header("PLayer Start Settings")]
+        public int maxBombs;
+        public int startBombs;
+        public int maxHp;
+        public int startHp;
+        public int maxLives;
+        public int startLives;
+        
+        
         [Header("Options Preferences")]
         public float musicVolume;
         public float sfxVolume;

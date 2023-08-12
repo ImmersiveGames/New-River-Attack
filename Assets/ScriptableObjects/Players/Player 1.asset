@@ -14,13 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Player 1
   score: 0
-  spawnPosition: {x: 0, y: 0, z: 0}
-  spawnRotation: {x: 0, y: 0, z: 0}
-  playerSkin: {fileID: 11400000, guid: b9a18311d11449c48b52404583b7104d, type: 2}
-  wealth: 900
+  distance: 0
+  actualHp: 100
+  lives: 3
+  bombs: 3
+  wealth: 0
   listProducts:
   - {fileID: 11400000, guid: 6e1a4d837797d5f498cfd39ef9e8ccb0, type: 2}
   - {fileID: 11400000, guid: b9a18311d11449c48b52404583b7104d, type: 2}
+  spawnPosition: {x: 0, y: 0, z: 0}
+  spawnRotation: {x: 0, y: 0, z: 0}
+  playerSkin: {fileID: 11400000, guid: b9a18311d11449c48b52404583b7104d, type: 2}
   mySpeedy: 10
   myAgility: 20
   speedHorizontal: 1
@@ -30,11 +34,3 @@ MonoBehaviour:
   cadenceShoot: 1
   shootVelocity: 100
   speedyShoot: 0
-  maxHp: 100
-  actualHp: 100
-  startLives: 3
-  maxLives: 9
-  lives: 3
-  startBombs: 3
-  bombs: 3
-  maxBombs: 5

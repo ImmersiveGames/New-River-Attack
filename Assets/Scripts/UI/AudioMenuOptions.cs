@@ -39,21 +39,20 @@ namespace RiverAttack
         public void SetMusicVolume()
         {
             float volume = Mathf.Log10(musicVolumeSlider.value) * 20f;
-            
+            m_GameSettings.musicVolume = musicVolumeSlider.value;
             mixerGroup.SetFloat("MusicVolume", volume);
-
+            
             //Debug.Log("Volume da Musica: " + volume.ToString());
         }
 
-        public void SetSfxVolume()
+        void SetSfxVolume()
         {
             float volume = Mathf.Log10(sfxVolumeSlider.value) * 20f;
-
+            m_GameSettings.sfxVolume = sfxVolumeSlider.value;
             mixerGroup.SetFloat("SFXVolume", volume);
 
             //Debug.Log("Volume de SFX: " + volume.ToString());
         }
-
     }
 }
 

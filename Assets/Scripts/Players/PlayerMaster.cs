@@ -7,31 +7,59 @@ namespace RiverAttack
 {
     public class PlayerMaster : ObjectMaster
     {
-        
-        PlayerSettings m_PlayerSettings;
+
+        Animator m_Animator;
+        GamePlayManager m_GamePlayManager;
+        GameSettings m_GameSettings;
 
         #region UNITYMETHOD
-        void OnEnable()
+        void Awake()
         {
-            throw new NotImplementedException();
+            m_Animator = GetComponent<Animator>();
+            m_GamePlayManager = GamePlayManager.instance;
+            m_GameSettings = m_GamePlayManager.getGameSettings;
+        }
+        void Start()
+        {
+            PlayerStartSetup();
         }
   #endregion
         
         public void SetPlayerSettingsToPlayMaster(PlayerSettings playerSettings)
         {
-            m_PlayerSettings = playerSettings;
+            getPlayerSettings = playerSettings;
         }
-        public PlayerSettings getPlayerSettings
+       PlayerSettings getPlayerSettings
         {
-            get
-            {
-                return m_PlayerSettings;
-            }
+            get;
+            set;
+        }
+        public Animator GetPlayerAnimator()
+        {
+            return m_Animator;
         }
 
-        public void PlayerStartSetup()
+        internal void PlayerStartSetup()
         {
-            
+            getPlayerSettings.score = 0;
+            m_GamePlayManager.OnEventUpdateScore(getPlayerSettings.score);
+            getPlayerSettings.distance = 0;
+            m_GamePlayManager.OnEventUpdateDistance((int)getPlayerSettings.distance);
+            getPlayerSettings.wealth = 0;
+            m_GamePlayManager.OnEventUpdateRefugees(getPlayerSettings.wealth);
+            getPlayerSettings.bombs = m_GameSettings.startBombs;
+            m_GamePlayManager.OnEventUpdateBombs(getPlayerSettings.bombs);
+            getPlayerSettings.actualHp = m_GameSettings.startHp;
+            getPlayerSettings.lives = m_GameSettings.startLives;
+            m_GamePlayManager.OnEventUpdateLives(getPlayerSettings.lives);
+        }
+
+        public void PlayerUpdate()
+        {
+            //No Update Score;
+            // Update MaxDistance;
+            // Update actual Refugees;
+            // Update actual bombs;
         }
         /*float m_AutoMovement;
         float m_MovementSpeed;

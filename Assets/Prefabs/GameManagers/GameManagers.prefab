@@ -47,6 +47,7 @@ MonoBehaviour:
   isGamePaused: 0
   completePath: 0
   godMode: 0
+  gameSettings: {fileID: 11400000, guid: db36c8f305b070e4286b509243b94647, type: 2}
   levelsFinish: []
   actualLevel: {fileID: 0}
 --- !u!1 &5268167171390560247
@@ -113,14 +114,12 @@ MonoBehaviour:
     m_Bits: 256
   playerPrefab: {fileID: 409879802783298609, guid: 060c0640ee0816b46994f8281ca9b242,
     type: 3}
+  spawnPlayerPosition: {x: 0, y: 0, z: -40}
   playerSettingsList:
   - {fileID: 11400000, guid: c11a8f0b743164845ab2754709110c91, type: 2}
   initializedPlayerMasters: []
   virtualCamera: {fileID: 0}
-  openCutScenePrefab: {fileID: 8200121542077843528, guid: 72380529ef7121844b090dc3574fc485,
-    type: 3}
-  endCutScenePrefab: {fileID: 5238053789920986484, guid: 422284e1bac7bd248838869de6e2b789,
-    type: 3}
+  openCutDirector: {fileID: 0}
 --- !u!82 &8049963609754037770
 AudioSource:
   m_ObjectHideFlags: 0

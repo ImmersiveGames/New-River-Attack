@@ -1,25 +1,23 @@
-﻿using System.Transactions;
-using UnityEngine;
+﻿using UnityEngine;
 namespace RiverAttack
 {
     public class GameStateMenu : GameState
     {
-        readonly PanelManager m_PanelManager;
         const float TIME_TO_FADE_BGM = 0.2f;
-        internal GameStateMenu(PanelManager panelManager)
+        readonly GameManager m_GameManager;
+        internal GameStateMenu()
         {
-            m_PanelManager = panelManager;
+            m_GameManager = GameManager.instance;
         }
 
         public override void EnterState()
         {
-            //Aplicar Fade
-            //Muda Para Musica De Menu
+            var gamePlayManager = GamePlayManager.instance;
+            gamePlayManager.PauseGame();
             GamePlayAudio.instance.ChangeBGM(LevelTypes.Menu, TIME_TO_FADE_BGM);
-            //Pausa o Jogo.
-            //Abre A UI
+
             Debug.Log($"Entra no Estado: Menu");
-            m_PanelManager.ResetStartMenu();
+            m_GameManager.startMenu.ResetStartMenu();
         }
         public override void UpdateState()
         {
@@ -27,14 +25,9 @@ namespace RiverAttack
         }
         public override void ExitState()
         {
-            //Despausa o Jogo
-            //Instancia os Players
-            var gameManager = GameManager.instance;
-            gameManager.InstantiatePlayers();
-            var gamePlayManager = GamePlayManager.instance;
-            //Adicionar Player na Camera virtual
-            gamePlayManager.PauseGame();
-            //Aplicar Fade
+            GamePlayAudio.instance.ChangeBGM(LevelTypes.Grass, TIME_TO_FADE_BGM);
+            m_GameManager.InstantiatePlayers();
+
             Debug.Log($"Saindo no Estado: Menu");
         }
     }
