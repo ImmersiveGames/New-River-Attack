@@ -1,14 +1,9 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using System.Threading.Tasks;
 using RiverAttack;
 using Utils;
 using TMPro;
-using System.Collections.Generic;
-using UnityEngine.Serialization;
 
 namespace Shopping
 {
@@ -33,10 +28,8 @@ namespace Shopping
         bool infinityLooping;
         [SerializeField]
         float spaceBetweenPanels = 0, maxPosition = 0;
-        [SerializeField]
-        Color selectedColor;
-        [SerializeField]
-        Color normalColor;
+        public Color selectedColor;
+        public Color normalColor;
         
         int m_LastSelectedSkin = 0;
         
@@ -77,7 +70,7 @@ namespace Shopping
             if(m_AudioSource == null) Debug.LogWarning("Componente de Audio não encontrado.");
         }
         
-        private void SetControllersInput()
+        void SetControllersInput()
         {
             m_InputSystem = new PlayersInputActions();
             m_InputSystem.UI_Controlls.Enable();

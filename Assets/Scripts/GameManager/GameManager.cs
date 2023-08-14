@@ -19,8 +19,7 @@ namespace RiverAttack
     public enum LevelTypes {Menu = 0, Hub = 1, Grass = 2, Forest = 3, Swamp = 4, Antique = 5, Desert = 6, Ice = 7, GameOver=8, Complete =9, HUD = 10 }
     public class GameManager : Singleton<GameManager>
     {
-        
-        GameState m_CurrentState;
+
         GameState m_NextState;
         
         public PanelManager startMenu;
@@ -54,7 +53,7 @@ namespace RiverAttack
         }
         void Update()
         {
-            m_CurrentState?.UpdateState();
+            currentGameState?.UpdateState();
 
             // Exemplo de mudança de estado (pode ser em resposta a alguma condição)
             if (Input.GetKeyDown(KeyCode.Space))
@@ -63,19 +62,41 @@ namespace RiverAttack
             }
         }
   #endregion
-
+        public GameState currentGameState
+        {
+            get;
+            private set;
+        }
         internal void ChangeState(GameState newState)
         {
             m_NextState = newState;
 
-            if (m_CurrentState != null)
+            if (currentGameState != null)
             {
-                StartCoroutine(PerformStateTransition(m_CurrentState, m_NextState));
+                StartCoroutine(PerformStateTransition(currentGameState, m_NextState));
             }
             else
             {
-                m_CurrentState = m_NextState;
-                m_CurrentState.EnterState();
+                currentGameState = m_NextState;
+                currentGameState.EnterState();
+            }
+        }
+        public void PauseGame()
+        {
+            ChangeState(new GameStatePause());
+        }
+        public void UnPauseGame()
+        {
+            ChangeState(new GameStatePlayGame());
+        }
+
+        public void ReloadPlayers()
+        {
+            if(initializedPlayerMasters.Count <= 0) return;
+            foreach (var playerMaster in initializedPlayerMasters)
+            {
+                playerMaster.gameObject.SetActive(false);
+                playerMaster.gameObject.SetActive(true);
             }
         }
         
@@ -87,8 +108,8 @@ namespace RiverAttack
             actualState.ExitState();
             yield return new WaitForSeconds(fadeDurationExit);
 
-            m_CurrentState = nextState;
-            m_CurrentState.EnterState();
+            currentGameState = nextState;
+            currentGameState.EnterState();
         }
 
         public void InstantiatePlayers()

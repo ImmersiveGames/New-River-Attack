@@ -27,54 +27,36 @@ namespace RiverAttack
         {
             m_GameManager = GameManager.instance;
             m_GamePlayAudio = GamePlayAudio.instance;
-            ResetStartMenu();
-            
         }
         #endregion
 
-        public void ResetStartMenu()
+        public void SetMenuHudControl(bool active)
         {
-            menuParent.gameObject.SetActive(true);
-            menuHud.gameObject.SetActive(false);
-            menuControl.gameObject.SetActive(false);
-            foreach (var t in menuPrincipal)
-            {
-                t.gameObject.SetActive(false);
-            }
-            menuPrincipal[startIndex].gameObject.SetActive(true);
+            menuHud.gameObject.SetActive(active);
+            menuControl.gameObject.SetActive(active);
         }
 
-        public void StartGameHUD()
+        public void SetMenuPrincipal(int indexStart, bool active)
         {
+            menuParent.gameObject.SetActive(active);
             foreach (var t in menuPrincipal)
             {
                 t.gameObject.SetActive(false);
             }
-            menuParent.gameObject.SetActive(false);
-            menuHud.gameObject.SetActive(true);
-            menuControl.gameObject.SetActive(true);
+            if(active)
+                menuPrincipal[indexStart].gameObject.SetActive(true);
         }
 
-        public void PauseGameMenu(int menuPauseIndex)
-        {
-            GamePlayManager.instance.PauseGame();
-            menuParent.gameObject.SetActive(true);
-            menuHud.gameObject.SetActive(false);
-            menuControl.gameObject.SetActive(false);
-            foreach (var t in menuPrincipal)
-            {
-                t.gameObject.SetActive(false);
-            }
-            menuPrincipal[menuPauseIndex].gameObject.SetActive(true);
-        }
-        
-        public void UnPauseGameMenu()
-        {
-            GamePlayManager.instance.UnPauseGame();
-            StartGameHUD();
-        }
-        
         #region Buttons Actions
+
+        public void ButtonGamePause()
+        {
+            m_GameManager.PauseGame();
+        }
+        public void ButtonGameUnPause()
+        {
+            m_GameManager.UnPauseGame();
+        }
         public void ButtonQuitApplication()
         {
             Application.Quit();
