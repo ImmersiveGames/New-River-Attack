@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using RiverAttack;
 using UnityEngine;
 namespace Utils
 {
@@ -52,13 +50,13 @@ namespace Utils
             <param name="flipy">flipar na vertical</param>
             <returns>uma nova lista com os vertices flipados</returns>
         */
-        public static List<Vector2> FlipVertices(List<Vector2> vertices2D, bool flipx = true, bool flipy = false)
+        public static List<Vector2> FlipVertices(List<Vector2> vertices2D, bool flipX = true, bool flipY = false)
         {
             var flipVertices2D = new List<Vector2>();
             for (int i = 0; i < vertices2D.Count; i++)
             {
-                float nx = (flipx) ? -vertices2D[i].x : vertices2D[i].x;
-                float ny = (flipy) ? -vertices2D[i].y : vertices2D[i].y;
+                float nx = (flipX) ? -vertices2D[i].x : vertices2D[i].x;
+                float ny = (flipY) ? -vertices2D[i].y : vertices2D[i].y;
                 flipVertices2D.Add(new Vector2(nx, ny));
             }
             return flipVertices2D;
@@ -72,8 +70,9 @@ namespace Utils
                 return bounds;
             foreach (var t in render)
             {
-                if (!t.gameObject.GetComponent<WallsMaster>()) continue;
-                //Debug.Log("Render: " + render[i].bounds);
+                //if (!t.gameObject.GetComponent<WallsMaster>()) continue;
+                if (!t.gameObject.CompareTag("Wall")) continue;
+                //Debug.Log("Render: " + t.bounds);
                 bounds.Encapsulate(t.bounds);
             }
             return bounds;

@@ -8,11 +8,13 @@ namespace RiverAttack
         const float TOLERANCE = 0.08f;
         readonly PlayableDirector m_PlayableDirector;
         readonly GameManager m_GameManager;
+        //readonly GamePlayManager m_GamePlayManager;
    
         internal GameStateOpenCutScene(PlayableDirector playableDirector)
         {
             m_PlayableDirector = playableDirector;
             m_GameManager = GameManager.instance;
+            //m_GamePlayManager = GamePlayManager.instance;
         }
         public override void EnterState()
         {

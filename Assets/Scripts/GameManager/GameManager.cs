@@ -15,8 +15,8 @@ namespace RiverAttack
         public abstract void UpdateState();
         public abstract void ExitState();
     }
-    
-    public enum LevelTypes {Menu = 0, Hub = 1, Grass = 2, Forest = 3, Swamp = 4, Antique = 5, Desert = 6, Ice = 7, GameOver=8, Complete =9, HUD = 10 }
+
+    public enum LevelTypes { Menu = 0, Hub = 1, Grass = 2, Forest = 3, Swamp = 4, Antique = 5, Desert = 6, Ice = 7, GameOver=8, Complete =9, HUD = 10 }
     public class GameManager : Singleton<GameManager>
     {
 

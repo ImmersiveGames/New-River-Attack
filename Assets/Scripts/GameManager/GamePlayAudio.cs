@@ -1,28 +1,25 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 using Utils;
 namespace RiverAttack
 {
     public class GamePlayAudio : Singleton<GamePlayAudio>
     {
-        [SerializeField] AudioSource BGMAudioSource;
-        [SerializeField] Tools.SerializableDictionary<LevelTypes, AudioEventSample> BGMLevels = new Tools.SerializableDictionary<LevelTypes, AudioEventSample>();
+        [SerializeField] AudioSource bgmAudioSource;
+        [SerializeField] Tools.SerializableDictionary<LevelTypes, AudioEventSample> bgmLevels = new Tools.SerializableDictionary<LevelTypes, AudioEventSample>();
         [Header("Menu SFX")]
         [SerializeField] AudioClip clickSound;
 
         #region UNITYMETHODS
         void Awake()
         {
-            BGMAudioSource = GetComponentInParent<AudioSource>();
+            bgmAudioSource = GetComponentInParent<AudioSource>();
         }
   #endregion
         public void PlayBGM(LevelTypes typeLevel)
         {
-            BGMLevels.TryGetValue(typeLevel, out var audioSource);
-            audioSource.Play(BGMAudioSource);
+            bgmLevels.TryGetValue(typeLevel, out var audioSource);
+            audioSource.Play(bgmAudioSource);
         }
         IEnumerator PlayBGM(AudioSource source, AudioEvent track, float time)
         {
@@ -32,8 +29,8 @@ namespace RiverAttack
         }
         public void ChangeBGM(LevelTypes typeLevel, float time)
         {
-            BGMLevels.TryGetValue(typeLevel, out var audioSource);
-            StartCoroutine(PlayBGM(BGMAudioSource, audioSource, time));
+            bgmLevels.TryGetValue(typeLevel, out var audioSource);
+            StartCoroutine(PlayBGM(bgmAudioSource, audioSource, time));
         }
         static void PlayOneShot(AudioSource audioSource, AudioClip audioClip)
         {
@@ -45,8 +42,8 @@ namespace RiverAttack
         }
         public void StopBGM()
         {
-            if (BGMAudioSource != null)
-                BGMAudioSource.Stop();
+            if (bgmAudioSource != null)
+                bgmAudioSource.Stop();
         }
         static IEnumerator FadeAudio(AudioSource source, float timer, float starts, float ends)
         {

@@ -12,15 +12,15 @@ namespace RiverAttack
     public class GamePlayManager : Singleton<GamePlayManager>
     {
         [SerializeField]
-        bool isGamePaused, completePath, godMode;
+        bool isGamePaused;
+        [SerializeField] internal bool completePath;
+        [SerializeField]
+        bool godMode;
         [SerializeField]
         GameSettings gameSettings;
         internal bool getGodMode { get { return godMode; } }
         
-        [Header("Level Settings"), SerializeField]
-        public List<Levels> levelsFinish = new List<Levels>();
-        [SerializeField]
-        public Levels actualLevel;
+        
         
         GameManager m_GameManager;
         PlayersInputActions m_InputSystem;
@@ -50,6 +50,7 @@ namespace RiverAttack
         {
             return m_GameManager.playerSettingsList.Count > 0 ? m_GameManager.playerSettingsList[playerIndex] : null;
         }
+        
         
         #region Calls
         protected internal void OnEventUpdateScore(int value)

@@ -9,15 +9,23 @@ namespace RiverAttack
         [SerializeField]
         public int pathDistance;
         [SerializeField]
+        public float shootSpent;
+        [SerializeField]
         public int livesSpent;
         [SerializeField]
         public int fuelSpent;
+        [SerializeField]
+        public int fuelStocked;
         [SerializeField]
         public int bombSpent;
         [SerializeField]
         public int totalScore;
         [SerializeField]
-        public float totalTime;
+        public float timeSpent;
+        [SerializeField]
+        public int playerDieWall;
+        [SerializeField]
+        public int playerDieFuelEmpty;
         [SerializeField]
         public List<EnemiesResults> hitEnemiesResultsList;
 
