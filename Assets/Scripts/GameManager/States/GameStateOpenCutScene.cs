@@ -17,8 +17,9 @@ namespace RiverAttack
         public override void EnterState()
         {
             m_GameManager.PlayOpenCutScene();
-            m_GameManager.startMenu.StartGameHUD();
-
+            m_GameManager.startMenu.SetMenuPrincipal(1,false);
+            m_GameManager.startMenu.SetMenuHudControl(false);
+            
             Debug.Log($"Entra no Estado: CutScene");
         }
         public override void UpdateState()
@@ -28,19 +29,10 @@ namespace RiverAttack
                 Debug.LogWarning("O PlayableDirector não foi atribuído.");
                 return;
             }
-
-            // Verificar se a animação está tocando
-            if (m_PlayableDirector.state == PlayState.Playing)
-            {
-                Debug.Log("A animação está tocando.");
-            }
-
             // Verificar se a animação já terminou
-            if (m_PlayableDirector.time >= m_PlayableDirector.duration - TOLERANCE)
-            {
-                Debug.Log($"ACABOU O TEMPO");
-                GameManager.instance.ChangeState(new GameStatePlayGame());
-            }
+            if (!(m_PlayableDirector.time >= m_PlayableDirector.duration - TOLERANCE))
+                return;
+            m_GameManager.ChangeState(new GameStatePlayGame());
             //Debug.Log($"Rodando no Estado: CutScene {m_PlayableDirector.time} e {m_PlayableDirector.duration}");
         }
         public override void ExitState()

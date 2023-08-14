@@ -15,7 +15,6 @@ namespace RiverAttack
         bool isGamePaused, completePath, godMode;
         [SerializeField]
         GameSettings gameSettings;
-        internal bool getGamePaused { get { return isGamePaused; } }
         internal bool getGodMode { get { return godMode; } }
         
         [Header("Level Settings"), SerializeField]
@@ -44,15 +43,8 @@ namespace RiverAttack
         {
             get { return gameSettings; }
         }
-        public void PauseGame()
-        {
-            isGamePaused = true;
-        }
-        public void UnPauseGame()
-        {
-            isGamePaused = false;
-        }
-        public bool shouldBePlayingGame { get { return (!isGamePaused && !completePath); } }
+        
+        public bool shouldBePlayingGame { get { return (m_GameManager.currentGameState is GameStatePlayGame  && !completePath); } }
 
         public PlayerSettings GetNoPlayerPlayerSettings(int playerIndex = 0)
         {

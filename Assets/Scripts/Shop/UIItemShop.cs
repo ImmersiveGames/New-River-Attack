@@ -9,8 +9,8 @@ namespace Shopping
     {
         [SerializeField, Header("Product Display")]
         TMP_Text productName;
-        [SerializeField]
-        TMP_Text productDescription;
+        //[SerializeField]
+        //TMP_Text productDescription;
         [SerializeField]
         TMP_Text productPrice;
         [SerializeField]

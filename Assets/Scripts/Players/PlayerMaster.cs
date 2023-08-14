@@ -29,7 +29,7 @@ namespace RiverAttack
         {
             getPlayerSettings = playerSettings;
         }
-       PlayerSettings getPlayerSettings
+        internal PlayerSettings getPlayerSettings
         {
             get;
             set;
@@ -39,12 +39,13 @@ namespace RiverAttack
             return m_Animator;
         }
 
-        internal void PlayerStartSetup()
+        void PlayerStartSetup()
         {
             getPlayerSettings.score = 0;
             m_GamePlayManager.OnEventUpdateScore(getPlayerSettings.score);
             getPlayerSettings.distance = 0;
-            m_GamePlayManager.OnEventUpdateDistance((int)getPlayerSettings.distance);
+            int distInt = Mathf.FloorToInt(getPlayerSettings.distance);
+            m_GamePlayManager.OnEventUpdateDistance(distInt);
             getPlayerSettings.wealth = 0;
             m_GamePlayManager.OnEventUpdateRefugees(getPlayerSettings.wealth);
             getPlayerSettings.bombs = m_GameSettings.startBombs;

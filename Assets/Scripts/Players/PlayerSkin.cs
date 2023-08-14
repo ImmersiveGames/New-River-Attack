@@ -1,12 +1,40 @@
-﻿using System;
-using UnityEngine;
-using Utils;
+﻿using UnityEngine;
 
 namespace RiverAttack
 {
     [RequireComponent(typeof(PlayerMaster))]
     public class PlayerSkin : MonoBehaviour
     {
+        PlayerMaster m_PlayerMaster;
+
+        #region UNITYMETHODS
+        void OnEnable()
+        {
+            SetInitialReferences();
+            if (m_PlayerMaster != null ? m_PlayerMaster.getPlayerSettings : null)
+            {
+                ChangePlayerSkin(m_PlayerMaster.getPlayerSettings.playerSkin);
+            }
+        }
+        void Start()
+        {
+            ChangePlayerSkin(m_PlayerMaster.getPlayerSettings.playerSkin);
+        }
+  #endregion
+        void SetInitialReferences()
+        {
+            m_PlayerMaster = GetComponent<PlayerMaster>();
+        }
+
+        void ChangePlayerSkin(ShopProductSkin skin)
+        {
+            if (transform.GetChild(0))
+                DestroyImmediate(transform.GetChild(0).gameObject);
+            var mySkin = Instantiate(skin.getSkin, transform);
+            mySkin.transform.SetAsFirstSibling();
+            m_PlayerMaster.getPlayerSettings.playerSkin = skin;
+            GamePlayManager.instance.OnEventUpdateLives(m_PlayerMaster.getPlayerSettings.lives);
+        }
         /*[SerializeField]
         ShopProductSkin defaultSkin;
         GameObject m_MySkin;

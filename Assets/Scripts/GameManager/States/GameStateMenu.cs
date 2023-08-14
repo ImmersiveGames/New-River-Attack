@@ -11,13 +11,11 @@ namespace RiverAttack
         }
 
         public override void EnterState()
-        {
-            var gamePlayManager = GamePlayManager.instance;
-            gamePlayManager.PauseGame();
-            GamePlayAudio.instance.ChangeBGM(LevelTypes.Menu, TIME_TO_FADE_BGM);
-
+        { 
             Debug.Log($"Entra no Estado: Menu");
-            m_GameManager.startMenu.ResetStartMenu();
+            GamePlayAudio.instance.ChangeBGM(LevelTypes.Menu, TIME_TO_FADE_BGM);
+            m_GameManager.startMenu.SetMenuPrincipal(0,true);
+            m_GameManager.startMenu.SetMenuHudControl(false);
         }
         public override void UpdateState()
         {
@@ -25,10 +23,9 @@ namespace RiverAttack
         }
         public override void ExitState()
         {
+            Debug.Log($"Saindo no Estado: Menu");
             GamePlayAudio.instance.ChangeBGM(LevelTypes.Grass, TIME_TO_FADE_BGM);
             m_GameManager.InstantiatePlayers();
-
-            Debug.Log($"Saindo no Estado: Menu");
         }
     }
 }
