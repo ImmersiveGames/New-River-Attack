@@ -7,10 +7,21 @@ namespace RiverAttack
 {
     public class PlayerMaster : ObjectMaster
     {
-
+        [SerializeField] internal PlayerSettings getPlayerSettings;
+        
+        protected internal PlayersInputActions playersInputActions;
+        [SerializeField] protected bool isPlayerDead;
+        public enum MovementStatus { None, Paused, Accelerate, Reduce }
+        [SerializeField] protected internal MovementStatus playerMovementStatus;
+        
         Animator m_Animator;
         GamePlayManager m_GamePlayManager;
         GameSettings m_GameSettings;
+        #region Delagetes
+        
+        public delegate void ControllerEventHandler(Vector2 dir);
+        public event ControllerEventHandler EventPlayerMasterControllerMovement;
+        #endregion
 
         #region UNITYMETHOD
         void Awake()
@@ -18,22 +29,23 @@ namespace RiverAttack
             m_Animator = GetComponent<Animator>();
             m_GamePlayManager = GamePlayManager.instance;
             m_GameSettings = m_GamePlayManager.getGameSettings;
+            playersInputActions = new PlayersInputActions();
+            playersInputActions.Enable();
         }
+        
         void Start()
         {
             PlayerStartSetup();
         }
   #endregion
+
+        public bool shouldPlayerBeReady { get { return isPlayerDead == false && playerMovementStatus != MovementStatus.Paused; } } 
         
         public void SetPlayerSettingsToPlayMaster(PlayerSettings playerSettings)
         {
             getPlayerSettings = playerSettings;
         }
-        internal PlayerSettings getPlayerSettings
-        {
-            get;
-            set;
-        }
+        
         public Animator GetPlayerAnimator()
         {
             return m_Animator;
@@ -41,6 +53,8 @@ namespace RiverAttack
 
         void PlayerStartSetup()
         {
+            isPlayerDead = false;
+            playerMovementStatus = MovementStatus.Paused;
             getPlayerSettings.score = 0;
             m_GamePlayManager.OnEventUpdateScore(getPlayerSettings.score);
             getPlayerSettings.distance = 0;
@@ -57,11 +71,19 @@ namespace RiverAttack
 
         public void PlayerUpdate()
         {
+            playerMovementStatus = MovementStatus.None;
             //No Update Score;
             // Update MaxDistance;
             // Update actual Refugees;
             // Update actual bombs;
         }
+
+        #region Calls
+        protected internal virtual void OnEventPlayerMasterControllerMovement(Vector2 dir)
+        {
+            EventPlayerMasterControllerMovement?.Invoke(dir);
+        }
+  #endregion
         /*float m_AutoMovement;
         float m_MovementSpeed;
         float m_MultiplyVelocityUp;
@@ -313,5 +335,6 @@ namespace RiverAttack
   #endregion
   */
 
+        
     }
 }

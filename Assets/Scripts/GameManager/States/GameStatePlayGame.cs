@@ -13,7 +13,8 @@ namespace RiverAttack
             m_GameManager.startMenu.SetMenuPrincipal(1,false);
             m_GameManager.startMenu.SetMenuHudControl(true);
             Debug.Log($"Entra no Estado: PlayGame");
-            m_GameManager.ReloadPlayers();
+            m_GameManager.ActivePlayers(true);
+            m_GameManager.UnPausedMovementPlayers();
         }
         public override void UpdateState()
         {
@@ -21,6 +22,7 @@ namespace RiverAttack
         }
         public override void ExitState()
         {
+            m_GameManager.ActivePlayers(false);
             Debug.Log($"Sai do Estado: PlayGame");
         }
     }

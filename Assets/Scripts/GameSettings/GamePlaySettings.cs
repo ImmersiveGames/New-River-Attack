@@ -7,7 +7,9 @@ namespace RiverAttack
     public class GamePlaySettings : SingletonScriptableObject<GamePlaySettings>
     {
         [SerializeField]
-        public int pathDistance;
+        public float pathDistance;
+        [SerializeField]
+        public float maxPathDistance;
         [SerializeField]
         public float shootSpent;
         [SerializeField]

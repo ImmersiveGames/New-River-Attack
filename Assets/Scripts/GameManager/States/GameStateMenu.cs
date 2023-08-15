@@ -25,7 +25,6 @@ namespace RiverAttack
         {
             Debug.Log($"Saindo no Estado: Menu");
             GamePlayAudio.instance.ChangeBGM(LevelTypes.Grass, TIME_TO_FADE_BGM);
-            m_GameManager.InstantiatePlayers();
         }
     }
 }

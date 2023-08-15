@@ -18,7 +18,6 @@ namespace RiverAttack
             SetBulletLifeTime(lifetime);
         }
         
-
         void SetBulletSpeed(float speed)
         {
             bulletSpeed = speed;
@@ -27,7 +26,7 @@ namespace RiverAttack
         void SetBulletLifeTime(float lifetime)
         {
             m_HasBulletLifeTime = lifetime > 0;
-            bulletLifeTime = lifetime;
+            bulletLifeTime = lifetime + Time.time;
         }
         public bool haveAPool
         {
@@ -46,8 +45,6 @@ namespace RiverAttack
         }
         protected void DestroyMe()
         {
-            //Debug.Log("DestroyMe");
-            //TODO: Voltar o Tiro para o pool identificar qual meu Pool;
             gameObject.SetActive(false);
             if (!m_MyPool)
                 return;

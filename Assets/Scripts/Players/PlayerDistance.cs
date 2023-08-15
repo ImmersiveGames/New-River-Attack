@@ -1,124 +1,85 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace RiverAttack
 {
-    [RequireComponent(typeof(PlayerMaster))]
     public class PlayerDistance : MonoBehaviour
-    {
-        public float conversaoXParaY = 10.0f; // Valor de conversão
-    public string unidadeDeMedida = "KM"; // Unidade de medida
-    public float offsetInicial = 0.0f; // Offset para o início da distância
+    { 
+        public float conversion = 10.0f;
+        public string unitValue = "KM";
+        public float offsetInicial = 0.0f;
+        
+        Vector3 m_LastPosition; 
+        float m_TravelledDistance; 
+        float m_ConvertDistance; 
+        float m_LastConvertDistance;
+        float m_MaxTravelledDistance;
 
-    Vector3 lastPosition;
-    float distanciaPercorridaZ;
-    float distanciaConvertida;
-    float maxDistanciaPercorridaZ; // Ponto mais distante alcançado
-
-    const string MaxDistanciaKey = "MaxDistanciaKey"; // Chave para o valor máximo da distância
-
-    void Start()
-    {
-        lastPosition = transform.position;
-        distanciaPercorridaZ = offsetInicial;
-        LoadMaxDistancia();
-    }
-
-    void Update()
-    {
-        // Calcula a distância percorrida no eixo Z desde o último frame
-        float distanciaZ = Mathf.Abs(transform.position.z - lastPosition.z);
-
-        // Verifica se a distância é positiva (movimento para frente)
-        if (distanciaZ > 0)
-        {
-            // Adiciona a distância ao registro total
-            distanciaPercorridaZ += distanciaZ;
-
-            // Atualiza o ponto mais distante alcançado
-            maxDistanciaPercorridaZ = Mathf.Max(maxDistanciaPercorridaZ, distanciaPercorridaZ);
-        }
-
-        // Calcula a distância convertida com base na conversão configurada
-        distanciaConvertida = maxDistanciaPercorridaZ / conversaoXParaY;
-
-        // Atualiza a posição anterior
-        lastPosition = transform.position;
-
-        // Exibe a distância percorrida e convertida no console
-        //Debug.Log($"Distância percorrida no eixo Z: {distanciaPercorridaZ} unidades | Distância convertida: {distanciaConvertida} {unidadeDeMedida}");
-    }
-
-    void OnApplicationQuit()
-    {
-        SaveMaxDistancia();
-    }
-
-    private void SaveMaxDistancia()
-    {
-        PlayerPrefs.SetFloat(MaxDistanciaKey, maxDistanciaPercorridaZ);
-        PlayerPrefs.Save();
-    }
-
-    void LoadMaxDistancia()
-    {
-        maxDistanciaPercorridaZ = PlayerPrefs.GetFloat(MaxDistanciaKey, offsetInicial);
-    }
-        /*[SerializeField] float cadenceDistance;
         GamePlayManager m_GamePlayManager;
         PlayerMaster m_PlayerMaster;
-        int distanceOffset { get; set; }
-        [SerializeField] int pathDistance;
+        PlayerSettings m_PlayerSettings;
 
-        [SerializeField] float checkTime = 2;
-        [SerializeField] float lifeTime;
-
-    #region UNITYMETHODS
-        void Awake()
-        {
-            pathDistance = 0;
-        }
+        #region UNITYMETHODS
         void OnEnable()
         {
-            SetInitialReferences();
-            m_PlayerMaster.EventPlayerMasterReSpawn += ClearDistance;
-            m_GamePlayManager.EventCheckPoint += Log;
+            m_GamePlayManager = GamePlayManager.instance;
+            m_PlayerMaster = GetComponent<PlayerMaster>();
+            m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
         }
-        void LateUpdate()
+        void Start()
         {
-            UpdateDistance();
-            if (!(Time.time > lifeTime))
-                return;
-            lifeTime = Time.time + checkTime;
-            m_GamePlayManager.CallEventCheckPlayerPosition(transform.position);
+            offsetInicial += GameManager.instance.spawnPlayerPosition.z;
+            m_LastPosition = transform.position;
+            m_TravelledDistance = offsetInicial;
+            LoadMaxDistancia();
+        }
+        void Update()
+        {
+            // Calcula a distância percorrida no eixo Z desde o último frame
+            float distanciaZ = Mathf.Abs(transform.position.z - m_LastPosition.z);
+            
+            if (transform.position.z < 0 && distanciaZ <= 0 && !m_PlayerMaster.shouldPlayerBeReady) return;
+
+            m_TravelledDistance += distanciaZ;
+
+            // Atualiza o ponto mais distante alcançado
+            m_MaxTravelledDistance = Mathf.Max(m_MaxTravelledDistance, m_TravelledDistance);
+
+            // Calcula a distância convertida com base na conversão configurada
+            m_ConvertDistance = m_MaxTravelledDistance / conversion;
+            
+            int convertDistanceInt = Mathf.FloorToInt(m_ConvertDistance);
+            if (convertDistanceInt > Mathf.FloorToInt(m_LastConvertDistance))
+            {
+                // Atualiza o valor anterior com o valor atual
+                m_LastConvertDistance = m_ConvertDistance;
+                m_GamePlayManager.OnEventUpdateDistance(Mathf.FloorToInt(m_ConvertDistance));
+            }
+
+            // Atualiza a posição anterior
+            m_LastPosition = transform.position;
         }
         void OnDisable()
         {
-            m_PlayerMaster.EventPlayerMasterReSpawn -= ClearDistance;
-            m_GamePlayManager.EventCheckPoint -= Log;
+            LogGamePlay(m_TravelledDistance,m_MaxTravelledDistance);
+        }
+        void OnApplicationQuit()
+        {
+            m_PlayerSettings.distance = m_MaxTravelledDistance;
         }
   #endregion
-        void SetInitialReferences()
+        void LoadMaxDistancia()
         {
-            m_PlayerMaster = GetComponent<PlayerMaster>();
-            m_GamePlayManager = GamePlayManager.instance;
-            distanceOffset = (int)(m_GamePlayManager.GetActualLevel().levelMilestones[0].z / cadenceDistance);
-            lifeTime = Time.time + checkTime;
+            float settingDistance = m_PlayerMaster.getPlayerSettings.distance;
+            m_MaxTravelledDistance = (settingDistance != 0) ? settingDistance : 0;
+            m_ConvertDistance = m_MaxTravelledDistance / conversion;
+            m_GamePlayManager.OnEventUpdateDistance(Mathf.FloorToInt(m_ConvertDistance));
         }
 
-        void Log(Vector3 position)
+        static void LogGamePlay(float distance, float maxDistance)
         {
-            GamePlaySettings.instance.pathDistance = pathDistance;
+            GamePlaySettings.instance.maxPathDistance = maxDistance;
+            GamePlaySettings.instance.pathDistance += distance;
         }
-
-        void UpdateDistance()
-        {
-            if (m_PlayerMaster.ShouldPlayerBeReady())
-                pathDistance = (int)(transform.position.z / cadenceDistance) - distanceOffset;
-        }
-
-        void ClearDistance()
-        {
-            pathDistance = (int)(transform.position.z / cadenceDistance) - distanceOffset;
-        }*/
     }
 }

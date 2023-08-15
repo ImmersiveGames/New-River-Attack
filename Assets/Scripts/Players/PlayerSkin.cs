@@ -28,10 +28,17 @@ namespace RiverAttack
 
         void ChangePlayerSkin(ShopProductSkin skin)
         {
-            if (transform.GetChild(0))
-                DestroyImmediate(transform.GetChild(0).gameObject);
+            var playerSkinTrail = GetComponent<PlayerSkinTrail>();
+            playerSkinTrail.enabled = false;
+            var children = GetComponentInChildren<PlayerSkinAttach>();
+            if (children == true)
+            {
+                int siblingIndex = children.transform.GetSiblingIndex();
+                DestroyImmediate(transform.GetChild(siblingIndex).gameObject);
+            }
             var mySkin = Instantiate(skin.getSkin, transform);
             mySkin.transform.SetAsFirstSibling();
+            playerSkinTrail.enabled = true;
             m_PlayerMaster.getPlayerSettings.playerSkin = skin;
             GamePlayManager.instance.OnEventUpdateLives(m_PlayerMaster.getPlayerSettings.lives);
         }

@@ -20,6 +20,7 @@ namespace RiverAttack
     public class GameManager : Singleton<GameManager>
     {
 
+        bool onTransition = false;
         GameState m_NextState;
         
         public PanelManager startMenu;
@@ -44,7 +45,6 @@ namespace RiverAttack
 
         [Header("CutScenes Settings")]
         [SerializeField] PlayableDirector openCutDirector;
-        
 
         #region UnityMethods
         void Start()
@@ -54,12 +54,7 @@ namespace RiverAttack
         void Update()
         {
             currentGameState?.UpdateState();
-
-            // Exemplo de mudança de estado (pode ser em resposta a alguma condição)
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                ChangeState(new GameStateOpenCutScene(openCutDirector));
-            }
+            
         }
   #endregion
         public GameState currentGameState
@@ -70,9 +65,10 @@ namespace RiverAttack
         internal void ChangeState(GameState newState)
         {
             m_NextState = newState;
-
+            if (onTransition) return;
             if (currentGameState != null)
             {
+                onTransition = true;
                 StartCoroutine(PerformStateTransition(currentGameState, m_NextState));
             }
             else
@@ -90,16 +86,32 @@ namespace RiverAttack
             ChangeState(new GameStatePlayGame());
         }
 
-        public void ReloadPlayers()
+        public void ActivePlayers(bool active)
         {
             if(initializedPlayerMasters.Count <= 0) return;
             foreach (var playerMaster in initializedPlayerMasters)
             {
-                playerMaster.gameObject.SetActive(false);
-                playerMaster.gameObject.SetActive(true);
+                playerMaster.gameObject.SetActive(active);
+            }
+        }
+
+        public void UnPausedMovementPlayers()
+        {
+            if(initializedPlayerMasters.Count <= 0) return;
+            foreach (var playerMaster in initializedPlayerMasters)
+            {
+                playerMaster.playerMovementStatus = PlayerMaster.MovementStatus.None;
             }
         }
         
+        void ChangeState(GameState actualState, GameState nextState)
+        {
+            actualState.ExitState();
+
+            currentGameState = nextState;
+            currentGameState.EnterState();
+        }
+
         IEnumerator PerformStateTransition(GameState actualState, GameState nextState)
         {
             // Implemente o efeito de fade out aqui
@@ -110,6 +122,7 @@ namespace RiverAttack
 
             currentGameState = nextState;
             currentGameState.EnterState();
+            onTransition = false;
         }
 
         public void InstantiatePlayers()
@@ -159,7 +172,7 @@ namespace RiverAttack
         {
             ChangeState(new GameStateOpenCutScene(openCutDirector));
         }
-  #endregion
+        #endregion
         /*[SerializeField] internal bool isGameOver;
         [SerializeField] internal bool isGameStopped;
         [SerializeField] private bool isGameFinish;

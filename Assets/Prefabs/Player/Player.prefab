@@ -58,7 +58,8 @@ AudioSource:
   m_GameObject: {fileID: 409879802783298609}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -6258226486721703383, guid: 58d7b5e9bc02ca541be53445706aa66a, type: 2}
+  OutputAudioMixerGroup: {fileID: -6258226486721703383, guid: 58d7b5e9bc02ca541be53445706aa66a,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 3877bee093d966b4bb08e3f3a9a9754c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -205,12 +206,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 214c32e9f97e6fd4198d91096268ae16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastSavePosition: 0
+  getPlayerSettings: {fileID: 11400000, guid: c11a8f0b743164845ab2754709110c91, type: 2}
   isPlayerDead: 0
-  enemiesHitList: []
-  collectiblesCatchList: []
   playerMovementStatus: 0
-  playerSettings: {fileID: 11400000, guid: c11a8f0b743164845ab2754709110c91, type: 2}
 --- !u!114 &2938584616496795991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,10 +233,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c19e0e674b6c5b040b15576f4551fa8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1779806388395306, guid: db9dfd6a009dac4489263be4e1d00d8d, type: 3}
-  startPool: 10
-  autoShoot: 0
-  bulletSpeed: 100
+  prefabBullet: {fileID: 1779806388395306, guid: db9dfd6a009dac4489263be4e1d00d8d,
+    type: 3}
+  startBulletPool: 10
+  bulletSpeed: 50
   bulletLifeTime: 0
 --- !u!114 &8957561622807004078
 MonoBehaviour:
@@ -252,12 +250,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e85c1d75684e5fc489a57deb4c322019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioEngineLoop: {fileID: 11400000, guid: 35fd9e29ddc3370499058fe2e505c046, type: 2}
-  audioStartAccelEngine: {fileID: 11400000, guid: b2a4d86f0189c2f4083de4fd9fd96706, type: 2}
-  audioEngineAccelerator: {fileID: 11400000, guid: 6df5a62c9a8bb2e4dbfc15d19c37361f, type: 2}
-  audioDeceleratorEngine: {fileID: 11400000, guid: e273b88a0890dc94d8a81aeb581bde01, type: 2}
-  enginePitchDown: 0.5
-  audioPlayerExplosion: {fileID: 11400000, guid: f429f93540d29df47bdbf827fedb2d19, type: 2}
 --- !u!114 &2895308431917710512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,12 +286,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55193ee4619879145bdce786130d6a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStartLives: 3
-  playerLivesMax: 9
-  timeoutReSpawn: 2
-  reSpawnInSavePoint: 0
-  scoreForExtraLife: 0
-  playerLives: 0
 --- !u!114 &965690163096126669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,8 +298,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab402b752d677cc4b96901de3ae78f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particlePrefab: {fileID: 1471142367968716, guid: fa95fafd8ce16b045bef9998c0084598, type: 3}
-  timeoutDestroy: 2
 --- !u!114 &2422452412683354287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,7 +310,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb87334726dc25459b60ca6128d25c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSkin: {fileID: 11400000, guid: 6e1a4d837797d5f498cfd39ef9e8ccb0, type: 2}
 --- !u!114 &8431203082856941492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,12 +346,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bdd139d0a500d14fad37b863e053691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombQuantity: 0
-  bombOffset: {x: 0, y: -0.5, z: 1.5}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 648
-  prefabBomb: {fileID: 1252923162750986, guid: d97546fc6d8e6cc45aaa1ac03610a78e, type: 3}
 --- !u!114 &3031737086699250233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,11 +358,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ce02d27e8895b047a5001e0179c479d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoDecreaseHp: 1
-  reduceFuelRate: 1
-  alertHp: 20
-  playerAlert: {fileID: 11400000, guid: f51e38365f07e734b81c2cca635af183, type: 2}
-  reduceFuelCadence: 0.5
 --- !u!114 &5777917476924346899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,8 +370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f736b251207c5429db453951bd82bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conversaoXParaY: 10
-  unidadeDeMedida: KM
+  conversion: 10
+  unitValue: KM
   offsetInicial: 0
 --- !u!1001 &6832920869040571033
 PrefabInstance:
@@ -464,6 +436,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 1c8be256ff275624e8f388c8521f4aa5, type: 3}
 --- !u!4 &6828257765698524369 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4979762900964936, guid: 1c8be256ff275624e8f388c8521f4aa5, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4979762900964936, guid: 1c8be256ff275624e8f388c8521f4aa5,
+    type: 3}
   m_PrefabInstance: {fileID: 6832920869040571033}
   m_PrefabAsset: {fileID: 0}

@@ -19,11 +19,7 @@ namespace RiverAttack
         [Header("Shopping")]
         public int wealth;
         public List<ShopProduct> listProducts;
-
-
-
-
-
+        [Header("Respawn Settings")]
         public Vector3 spawnPosition;
         public Vector3 spawnRotation;
         [Header("Skin Settings")]
@@ -41,9 +37,10 @@ namespace RiverAttack
         [Range(.01f, 1f)]
         public float multiplyVelocityDown;
         public float cadenceShoot;
-        public float shootVelocity = 10f;
+        public float shootVelocity;
+        public float shootLifeTime;
         [Header("PowerUP Effects")]
-        public float speedyShoot;
+        public float cadenceShootPowerUp;
 
     }
 }
