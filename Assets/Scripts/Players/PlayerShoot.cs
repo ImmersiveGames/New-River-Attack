@@ -24,6 +24,7 @@ namespace RiverAttack
         GamePlayManager m_GamePlayManager;
         PlayerMaster m_PlayerMaster;
         PlayerSettings m_PlayerSettings;
+        static GamePlaySettings _gamePlaySettings;
 
         #region UNITYMETHODS
         void Awake()
@@ -49,6 +50,7 @@ namespace RiverAttack
         
         void SetInitialReferences()
         {
+            _gamePlaySettings = GamePlaySettings.instance;
             m_GamePlayManager = GamePlayManager.instance;
             m_PlayerMaster = GetComponent<PlayerMaster>();
             m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
@@ -98,7 +100,7 @@ namespace RiverAttack
         }
         static void LogGamePlay()
         {
-            GamePlaySettings.instance.shootSpent += 1;
+            _gamePlaySettings.shootSpent += 1;
         }
         
     }

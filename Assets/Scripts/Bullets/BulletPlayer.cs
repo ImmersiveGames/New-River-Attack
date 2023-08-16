@@ -4,9 +4,11 @@ namespace RiverAttack
 {
     public class BulletPlayer : Bullets
     {
+        GamePlayManager m_GamePlayManager;
         #region UnityMethods
         void OnEnable()
         {
+            m_GamePlayManager = GamePlayManager.instance;
             var audioSource = GetComponent<AudioSource>();
             audioShoot.Play(audioSource);
             TransformSpawnPosition(transform.root.GetComponentInChildren<PlayerSkinAttach>().transform);
@@ -26,14 +28,13 @@ namespace RiverAttack
         }
         void OnBecameInvisible()
         {
-            //DestroyMe();
             Invoke(nameof(DestroyMe), .01f);
         }
         #endregion
 
         void MoveShoot()
         {
-            if (GamePlayManager.instance.shouldBePlayingGame)
+            if (m_GamePlayManager.shouldBePlayingGame)
             {
                 float speedy = bulletSpeed * Time.deltaTime;
                 transform.Translate(Vector3.forward * speedy);

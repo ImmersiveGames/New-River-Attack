@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 namespace RiverAttack
 {
     [CreateAssetMenu(fileName = "GameSettings", menuName = "RiverAttack/GameSettings", order = 0)]
@@ -9,8 +10,8 @@ namespace RiverAttack
         [Header("PLayer Start Settings")]
         public int maxBombs;
         public int startBombs;
-        public int maxHp;
-        public int startHp;
+        public int maxFuel;
+        public int startFuel;
         public int maxLives;
         public int startLives;
         
@@ -18,7 +19,8 @@ namespace RiverAttack
         [Header("Options Preferences")]
         public float musicVolume;
         public float sfxVolume;
-        /*[Header("Options")]
+        /*
+        [Header("Options")]game
         public float autoMovement;
         public int maxContinue;
         public int continues;

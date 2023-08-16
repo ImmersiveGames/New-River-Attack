@@ -30,7 +30,7 @@ namespace RiverAttack
         }
         void FixedUpdate()
         {
-            if(!m_GamePlayManager.shouldBePlayingGame && !m_PlayerMaster.shouldPlayerBeReady) return;
+            if(!m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady) return;
             
             float axisAutoMovement = m_InputVector.y switch
             {
@@ -54,7 +54,7 @@ namespace RiverAttack
         }
         void SetValuesFromPlayerSettings(PlayerSettings settings)
         {
-            //TODO: >>Provavelmente<< aqui é o melhor local para fazer alteração de powerUp
+            //TODO: >>Provavelmente<< aqui é o melhor local para fazer alteração de valores usando o powerUp
             m_AutoMovement = settings.speedVertical;
             m_MovementSpeed = settings.mySpeedy;
             m_MultiplyVelocityUp = settings.multiplyVelocityUp;

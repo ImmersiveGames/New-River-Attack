@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace RiverAttack
 {
-
     [CreateAssetMenu(fileName = "GamePlaySettings", menuName = "RiverAttack/GamePlaySettings", order = 2)]
     public class GamePlaySettings : SingletonScriptableObject<GamePlaySettings>
     {
@@ -27,6 +26,8 @@ namespace RiverAttack
         [SerializeField]
         public int playerDieWall;
         [SerializeField]
+        public int playerDieBullet;
+        [SerializeField]
         public int playerDieFuelEmpty;
         [SerializeField]
         public List<EnemiesResults> hitEnemiesResultsList;
@@ -35,6 +36,13 @@ namespace RiverAttack
         {
             var item = hitEnemiesResultsList.Find(x => x.enemy == enemy);
             return item?.quantity ?? 0;
+        }
+
+        public void LogGameCollect(EnemiesScriptable enemies, int quantity, EnemiesResults.CollisionType collisionType)
+        {
+            hitEnemiesResultsList.Add(new EnemiesResults(
+                enemies, quantity, collisionType
+            ));
         }
     }
 }

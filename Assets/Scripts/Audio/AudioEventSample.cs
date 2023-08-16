@@ -12,8 +12,6 @@ namespace RiverAttack
         [SerializeField]
         public AudioMixerGroup audioMixerGroup;
 
-        //TODO: Habilitar para Grupo de MIXagem;
-
         public override void Play(AudioSource source)
         {
             if (audioSample?.audioClip == null) return;

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Serialization;
@@ -8,17 +9,29 @@ namespace RiverAttack
     public class PlayerMaster : ObjectMaster
     {
         [SerializeField] internal PlayerSettings getPlayerSettings;
-        
-        protected internal PlayersInputActions playersInputActions;
         [SerializeField] protected bool isPlayerDead;
+        [SerializeField] float timeoutReSpawn;
+        [FormerlySerializedAs("particlePrefab")]
+        [SerializeField]
+        GameObject deadParticlePrefab;
+        [SerializeField]
+        float timeoutDestroy;
         public enum MovementStatus { None, Paused, Accelerate, Reduce }
         [SerializeField] protected internal MovementStatus playerMovementStatus;
         
+        protected internal PlayersInputActions playersInputActions;
+        protected internal bool inEffectArea;
+        
         Animator m_Animator;
+        GamePlaySettings m_GamePlaySettings;
         GamePlayManager m_GamePlayManager;
+        GameManager m_GameManager;
         GameSettings m_GameSettings;
         #region Delagetes
-        
+        public delegate void GeneralEventHandler();
+        public event GeneralEventHandler EventPlayerMasterHit;
+        public event GeneralEventHandler EventPlayerMasterRespawn;
+
         public delegate void ControllerEventHandler(Vector2 dir);
         public event ControllerEventHandler EventPlayerMasterControllerMovement;
         #endregion
@@ -29,6 +42,8 @@ namespace RiverAttack
             m_Animator = GetComponent<Animator>();
             m_GamePlayManager = GamePlayManager.instance;
             m_GameSettings = m_GamePlayManager.getGameSettings;
+            m_GameManager = GameManager.instance;
+            m_GamePlaySettings = m_GamePlayManager.gamePlaySettings;
             playersInputActions = new PlayersInputActions();
             playersInputActions.Enable();
         }
@@ -36,6 +51,15 @@ namespace RiverAttack
         void Start()
         {
             PlayerStartSetup();
+        }
+        void OnTriggerEnter(Collider other)
+        {
+            if (!other.GetComponentInParent<WallsMaster>() && !other.GetComponentInParent<EnemiesMaster>() && !other.GetComponent<BulletEnemy>()) return;
+            if (other.GetComponentInParent<CollectiblesMaster>() != null) return;
+            if (m_GamePlayManager.getGodMode) return;
+            LogGamePlay(other);
+            //return;
+            OnEventPlayerMasterHit();
         }
   #endregion
 
@@ -53,6 +77,9 @@ namespace RiverAttack
 
         void PlayerStartSetup()
         {
+            inEffectArea = false;
+            getPlayerSettings.spawnPosition = transform.position;
+            getPlayerSettings.spawnPosition.z = 0;
             isPlayerDead = false;
             playerMovementStatus = MovementStatus.Paused;
             getPlayerSettings.score = 0;
@@ -64,22 +91,89 @@ namespace RiverAttack
             m_GamePlayManager.OnEventUpdateRefugees(getPlayerSettings.wealth);
             getPlayerSettings.bombs = m_GameSettings.startBombs;
             m_GamePlayManager.OnEventUpdateBombs(getPlayerSettings.bombs);
-            getPlayerSettings.actualHp = m_GameSettings.startHp;
+            getPlayerSettings.actualFuel = m_GameSettings.startFuel;
             getPlayerSettings.lives = m_GameSettings.startLives;
             m_GamePlayManager.OnEventUpdateLives(getPlayerSettings.lives);
         }
 
-        public void PlayerUpdate()
+        void KillPlayer()
         {
+            isPlayerDead = true;
+            playerMovementStatus = MovementStatus.Paused;
+            Tools.ToggleChildren(transform, false);
+            var go = Instantiate(deadParticlePrefab, transform);
+            Destroy(go, timeoutDestroy);
+        }
+
+        void ChangeGameOver()
+        {
+            m_GameManager.ChangeState(new GameStateGameOver());
+        }
+
+        void TryRespawn()
+        {
+            if (getPlayerSettings.lives <= 0)
+            {
+                Invoke(nameof(ChangeGameOver), timeoutReSpawn / 2);
+                return;
+            }
+            Invoke(nameof(Reposition), timeoutReSpawn/2);
+        }
+
+        void Reposition()
+        {
+            Debug.Log("Respawn Player");
+            var transform1 = transform;
+            transform1.position = getPlayerSettings.spawnPosition;
+            transform1.rotation = getPlayerSettings.spawnRotation;
+            
+            Tools.ToggleChildren(transform1);
+            getPlayerSettings.actualFuel = m_GameSettings.startFuel;
+            OnEventPlayerMasterRespawn();
+            Invoke(nameof(ReSpawn), timeoutReSpawn);
+        }
+        void ReSpawn()
+        {
+            isPlayerDead = false;
             playerMovementStatus = MovementStatus.None;
-            //No Update Score;
-            // Update MaxDistance;
-            // Update actual Refugees;
-            // Update actual bombs;
+        }
+
+        void LogGamePlay(Component component)
+        {
+            var walls = component.GetComponentInParent<WallsMaster>();
+            var enemies = component.GetComponentInParent<ObstacleMaster>();
+            var bullet = component.GetComponent<BulletEnemy>();
+
+            if (walls != null)
+            {
+                m_GamePlaySettings.playerDieWall += 1;
+            }
+            if (bullet != null)
+            {
+                m_GamePlaySettings.playerDieBullet += 1;
+            }
+            if (enemies != null && enemies is CollectiblesMaster or EffectAreaMaster)
+            {
+                m_GamePlaySettings.LogGameCollect(enemies.enemy, 1, EnemiesResults.CollisionType.Collected);
+            } else if (enemies != null)
+            {
+                m_GamePlaySettings.LogGameCollect(enemies.enemy, 1, EnemiesResults.CollisionType.Collider);
+            }
         }
 
         #region Calls
-        protected internal virtual void OnEventPlayerMasterControllerMovement(Vector2 dir)
+        protected internal void OnEventPlayerMasterHit()
+        {
+            KillPlayer();
+            EventPlayerMasterHit?.Invoke();
+            TryRespawn();
+        }
+        protected virtual void OnEventPlayerMasterRespawn()
+        {
+            EventPlayerMasterRespawn?.Invoke();
+        }
+
+        protected internal void OnEventPlayerMasterControllerMovement(Vector2 dir)
         {
             EventPlayerMasterControllerMovement?.Invoke(dir);
         }
@@ -334,7 +428,6 @@ namespace RiverAttack
         }
   #endregion
   */
-
         
     }
 }

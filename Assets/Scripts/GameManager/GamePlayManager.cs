@@ -11,15 +11,15 @@ namespace RiverAttack
 {
     public class GamePlayManager : Singleton<GamePlayManager>
     {
-        [SerializeField]
-        bool isGamePaused;
         [SerializeField] internal bool completePath;
         [SerializeField]
         bool godMode;
         [SerializeField]
         GameSettings gameSettings;
         internal bool getGodMode { get { return godMode; } }
-        
+        [FormerlySerializedAs("GamePlaySettings")]
+        [SerializeField]
+        internal GamePlaySettings gamePlaySettings;
         
         
         GameManager m_GameManager;
@@ -31,6 +31,13 @@ namespace RiverAttack
         internal event UiUpdateEventHandler EventUpdateRefugees;
         internal event UiUpdateEventHandler EventUpdateBombs;
         internal event UiUpdateEventHandler EventUpdateLives;
+        
+        public delegate void CollectableEventHandle(CollectibleScriptable collectibles);
+        public event CollectableEventHandle EventCollectItem;
+        
+        public delegate void ShakeCamEventHandle(float power, float inTime);
+        public event ShakeCamEventHandle EventShakeCam;
+        
         #endregion
 
         #region UNITYMETHODS
@@ -50,8 +57,8 @@ namespace RiverAttack
         {
             return m_GameManager.playerSettingsList.Count > 0 ? m_GameManager.playerSettingsList[playerIndex] : null;
         }
-        
-        
+
+
         #region Calls
         protected internal void OnEventUpdateScore(int value)
         {
@@ -72,6 +79,14 @@ namespace RiverAttack
         protected internal void OnEventUpdateLives(int value)
         {
             EventUpdateLives?.Invoke(value);
+        }
+        protected internal void OnEventCollectItem(CollectibleScriptable collectibles)
+        {
+            EventCollectItem?.Invoke(collectibles);
+        }
+        protected internal void OnEventShakeCam(float power, float intime)
+        {
+            EventShakeCam?.Invoke(power, intime);
         }
   #endregion
         /*
@@ -454,6 +469,8 @@ namespace RiverAttack
         }
         #endregion
         */
+
+
         
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4643521754961465179}
   - component: {fileID: 7922585038901495631}
   - component: {fileID: 6283592518095151070}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Bullets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6254687583062293449}
   - component: {fileID: 1635130920266073523}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 920173545919489587}
   - component: {fileID: 855163781417724434}
   - component: {fileID: 5506678696497880108}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: PowerUp_RapidFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,8 @@ AudioSource:
   m_GameObject: {fileID: 1998141662189031224}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 3956588867677979082, guid: 58d7b5e9bc02ca541be53445706aa66a, type: 2}
+  OutputAudioMixerGroup: {fileID: 3956588867677979082, guid: 58d7b5e9bc02ca541be53445706aa66a,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -384,9 +385,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 0e3a04fb02492a44eb96d2a1fa70bb42, type: 2}
-  isDestroyed: 0
-  actualEnemyStatus: 0
-  actualDifficultName: 0
 --- !u!114 &920173545919489587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,9 +421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3d133428b09b8498a8aefdd5ece47f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyExplodeAudio: {fileID: 11400000, guid: 999c3629fff6df6419914d2e2384598c, type: 2}
-  collectSound: {fileID: 11400000, guid: c419407ce5ebd1c4ab00db6d57a50cd5, type: 2}
-  showSound: {fileID: 0}
 --- !u!1 &3807855959200345326
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,7 +431,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7654296567553701436}
   - component: {fileID: 1655878552521256692}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: RapidFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}

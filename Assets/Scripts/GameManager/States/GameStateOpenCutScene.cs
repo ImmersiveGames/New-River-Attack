@@ -4,7 +4,6 @@ namespace RiverAttack
 {
     public class GameStateOpenCutScene: GameState
     {
-        const float TIME_TO_FADE_BGM = 0.2f;
         const float TOLERANCE = 1f;
         readonly PlayableDirector m_PlayableDirector;
         readonly GameManager m_GameManager;
@@ -16,25 +15,22 @@ namespace RiverAttack
         }
         public override void EnterState()
         {
+            Debug.Log($"Entra no Estado: CutScene");
+            
             m_GameManager.InstantiatePlayers();
             m_GameManager.PlayOpenCutScene();
             m_GameManager.startMenu.SetMenuPrincipal(1,false);
             m_GameManager.startMenu.SetMenuHudControl(false);
-            
-            Debug.Log($"Entra no Estado: CutScene");
         }
         public override void UpdateState()
         {
-            if (m_PlayableDirector == null)
-            {
-                Debug.LogWarning("O PlayableDirector não foi atribuído.");
-                return;
-            }
+            Debug.Log($"Rodando no Estado: CutScene");
+            if (m_PlayableDirector == null) return;
+            
             // Verificar se a animação já terminou
             if (!(m_PlayableDirector.time >= m_PlayableDirector.duration - TOLERANCE))
                 return;
             m_GameManager.ChangeState(new GameStatePlayGame());
-            Debug.Log($"Rodando no Estado: CutScene");
         }
         public override void ExitState()
         {

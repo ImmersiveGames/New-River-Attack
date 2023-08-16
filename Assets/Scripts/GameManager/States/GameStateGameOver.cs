@@ -1,19 +1,21 @@
-﻿namespace RiverAttack
+﻿using UnityEngine;
+namespace RiverAttack
 {
     public class GameStateGameOver : GameState
     {
-
+        const float TIME_TO_FADE_BGM = 0.1f;
         public override void EnterState()
         {
-            throw new System.NotImplementedException();
+            Debug.Log($"Entra no Estado: GameOver");
+            GamePlayAudio.instance.ChangeBGM(LevelTypes.GameOver, TIME_TO_FADE_BGM);
         }
         public override void UpdateState()
         {
-            throw new System.NotImplementedException();
+            Debug.Log($"GameOver");
         }
         public override void ExitState()
         {
-            throw new System.NotImplementedException();
+            Debug.Log($"Saida no Estado: GameOver");
         }
     }
 }

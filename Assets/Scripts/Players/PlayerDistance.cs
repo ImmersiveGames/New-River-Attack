@@ -1,13 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace RiverAttack
 {
     public class PlayerDistance : MonoBehaviour
     { 
-        public float conversion = 10.0f;
-        public string unitValue = "KM";
-        public float offsetInicial = 0.0f;
+        public float conversion;
+        public float offsetInicial;
         
         Vector3 m_LastPosition; 
         float m_TravelledDistance; 
@@ -18,11 +16,13 @@ namespace RiverAttack
         GamePlayManager m_GamePlayManager;
         PlayerMaster m_PlayerMaster;
         PlayerSettings m_PlayerSettings;
+        GamePlaySettings m_GamePlaySettings;
 
         #region UNITYMETHODS
         void OnEnable()
         {
             m_GamePlayManager = GamePlayManager.instance;
+            m_GamePlaySettings = m_GamePlayManager.gamePlaySettings;
             m_PlayerMaster = GetComponent<PlayerMaster>();
             m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
         }
@@ -76,10 +76,10 @@ namespace RiverAttack
             m_GamePlayManager.OnEventUpdateDistance(Mathf.FloorToInt(m_ConvertDistance));
         }
 
-        static void LogGamePlay(float distance, float maxDistance)
+        void LogGamePlay(float distance, float maxDistance)
         {
-            GamePlaySettings.instance.maxPathDistance = maxDistance;
-            GamePlaySettings.instance.pathDistance += distance;
+            m_GamePlaySettings.maxPathDistance = maxDistance;
+            m_GamePlaySettings.pathDistance += distance;
         }
     }
 }

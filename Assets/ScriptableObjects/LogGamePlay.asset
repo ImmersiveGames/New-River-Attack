@@ -12,14 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb70e9537387564daab822389fd40d4, type: 3}
   m_Name: LogGamePlay
   m_EditorClassIdentifier: 
-  pathDistance: 0
-  livesSpent: -21
-  fuelSpent: 520
+  pathDistance: 231.5523
+  maxPathDistance: 67.50577
+  shootSpent: 5
+  livesSpent: 2
+  fuelSpent: 76
+  fuelStocked: 0
   bombSpent: 0
   totalScore: 0
-  totalTime: 0
+  timeSpent: 0
+  playerDieWall: 0
+  playerDieBullet: 0
+  playerDieFuelEmpty: 0
   hitEnemiesResultsList:
-  - enemy: {fileID: 11400000, guid: 470845e1184cf1d4abf8d32f7e8cd85b, type: 2}
-    quantity: 0
   - enemy: {fileID: 11400000, guid: 697746d822be856439f7c3f8eb2516e6, type: 2}
-    quantity: 5
+    quantity: 1
+    collisionType: 2
+  - enemy: {fileID: 11400000, guid: 276faab9f9ae836498b6902d391a55c6, type: 2}
+    quantity: 1
+    collisionType: 2

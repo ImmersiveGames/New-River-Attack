@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Shopping;
+using UnityEngine.Serialization;
 
 namespace RiverAttack
 {
@@ -12,8 +13,8 @@ namespace RiverAttack
         public new string name;
         public int score;
         public float distance;
-        [Header("Player Lives e HP")]
-        public int actualHp;
+        [Header("Player Lives e Fuel")]
+        public int actualFuel;
         public int lives;
         public int bombs;
         [Header("Shopping")]
@@ -21,7 +22,7 @@ namespace RiverAttack
         public List<ShopProduct> listProducts;
         [Header("Respawn Settings")]
         public Vector3 spawnPosition;
-        public Vector3 spawnRotation;
+        public Quaternion spawnRotation;
         [Header("Skin Settings")]
         public ShopProductSkin playerSkin;
         

@@ -7,7 +7,7 @@ namespace RiverAttack
     public class PanelManager : MonoBehaviour
     {
         [SerializeField]
-        Transform menuParent;
+        Transform menuParent,menuFade;
         [SerializeField]
         List<Transform> menuPrincipal = new List<Transform>();
         [SerializeField]
@@ -17,11 +17,15 @@ namespace RiverAttack
         GameManager m_GameManager;
         GamePlayAudio m_GamePlayAudio;
         AudioSource m_AudioSource;
+        Animator m_Animator;
+        static readonly int FadeIn = Animator.StringToHash("FadeOut");
+        static readonly int FadeOut = Animator.StringToHash("FadeIn");
 
         #region UNITYMETHODS
         void Awake()
         {
             m_AudioSource = GetComponent<AudioSource>();
+            m_Animator = GetComponent<Animator>();
         }
         void OnEnable()
         {
@@ -34,6 +38,7 @@ namespace RiverAttack
         {
             menuHud.gameObject.SetActive(active);
             menuControl.gameObject.SetActive(active);
+            //menuFade.gameObject.SetActive(false);
         }
 
         public void SetMenuPrincipal(int indexStart, bool active)
@@ -45,6 +50,16 @@ namespace RiverAttack
             }
             if(active)
                 menuPrincipal[indexStart].gameObject.SetActive(true);
+            //menuFade.gameObject.SetActive(false);
+        }
+
+        public void PerformFadeOut()
+        {
+            m_Animator.SetTrigger( FadeOut);
+        }
+        public void PerformFadeIn()
+        {
+            m_Animator.SetTrigger( FadeIn);
         }
 
         #region Buttons Actions

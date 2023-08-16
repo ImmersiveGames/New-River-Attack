@@ -4,11 +4,8 @@ using UnityEngine;
 
 namespace RiverAttack
 {
-    [RequireComponent(typeof(PlayerMaster))]
-    [RequireComponent(typeof(AudioSource))]
     public class PlayerSounds : MonoBehaviour
-    {/*
-    #region Variable Private Inspector
+    {
         [SerializeField]
         AudioEventSample audioEngineLoop;
         [SerializeField]
@@ -21,40 +18,37 @@ namespace RiverAttack
         float enginePitchDown = .5f;
         [SerializeField]
         AudioEventSample audioPlayerExplosion;
-    #endregion
-
-    #region Variable Private References
+        
         PlayerMaster m_PlayerMaster;
         AudioSource m_AudioSource;
-        GamePlayManager m_GamePlayManager;
-    #endregion
+        //GamePlayManager m_GamePlayManager;
 
         #region UNITY METHODS
         void OnEnable()
         {
             SetInitialReferences();
             m_PlayerMaster.EventPlayerMasterControllerMovement += SoundEngine;
-            m_PlayerMaster.EventPlayerMasterOnDestroy += SoundExplosion;
-            m_GamePlayManager.EventPausePlayGame += SoundStop;
-            m_GamePlayManager.EventCompletePath += SoundStop;
+            m_PlayerMaster.EventPlayerMasterHit += SoundExplosion;
+           /* m_GamePlayManager.EventPausePlayGame += SoundStop;
+            m_GamePlayManager.EventCompletePath += SoundStop;*/
         }
         void OnDisable()
         {
             m_PlayerMaster.EventPlayerMasterControllerMovement -= SoundEngine;
-            m_PlayerMaster.EventPlayerMasterOnDestroy -= SoundExplosion;
-            m_GamePlayManager.EventPausePlayGame -= SoundStop;
+            m_PlayerMaster.EventPlayerMasterHit -= SoundExplosion;
+            /*m_GamePlayManager.EventPausePlayGame -= SoundStop;*/
         }
   #endregion
         void SetInitialReferences()
         {
             m_PlayerMaster = GetComponent<PlayerMaster>();
             m_AudioSource = GetComponent<AudioSource>();
-            m_GamePlayManager = GamePlayManager.instance;
+            //m_GamePlayManager = GamePlayManager.instance;
         }
 
         void SoundEngine(Vector2 dir)
         {
-            if (!m_PlayerMaster.ShouldPlayerBeReady()) return;
+            if (!m_PlayerMaster.shouldPlayerBeReady) return;
             if (dir.y > 0 && m_PlayerMaster.playerMovementStatus != PlayerMaster.MovementStatus.Accelerate)
             {
                 m_PlayerMaster.playerMovementStatus = PlayerMaster.MovementStatus.Accelerate;
@@ -77,7 +71,7 @@ namespace RiverAttack
                 }
                 default:
                 {
-                    if (m_PlayerMaster.ShouldPlayerBeReady() && !m_AudioSource.isPlaying && m_PlayerMaster.playerMovementStatus == PlayerMaster.MovementStatus.None)
+                    if (m_PlayerMaster.shouldPlayerBeReady && !m_AudioSource.isPlaying && m_PlayerMaster.playerMovementStatus == PlayerMaster.MovementStatus.None)
                     {
                         //StopAllCoroutines();
                         audioEngineLoop.Play(m_AudioSource);
@@ -103,7 +97,7 @@ namespace RiverAttack
             StopAllCoroutines();
             audioPlayerExplosion.Play(m_AudioSource);
         }
-        void SoundStop()
+        /*void SoundStop()
         {
             StopAllCoroutines();
             m_AudioSource.Stop();

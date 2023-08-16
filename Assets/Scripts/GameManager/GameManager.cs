@@ -20,7 +20,7 @@ namespace RiverAttack
     public class GameManager : Singleton<GameManager>
     {
 
-        bool onTransition = false;
+        bool m_OnTransition = false;
         GameState m_NextState;
         
         public PanelManager startMenu;
@@ -65,11 +65,19 @@ namespace RiverAttack
         internal void ChangeState(GameState newState)
         {
             m_NextState = newState;
-            if (onTransition) return;
+            if (m_OnTransition) return;
             if (currentGameState != null)
             {
-                onTransition = true;
-                StartCoroutine(PerformStateTransition(currentGameState, m_NextState));
+                if (currentGameState is GameStateOpenCutScene)
+                {
+                    ChangeState(currentGameState, m_NextState);
+                }
+                else
+                {
+                    m_OnTransition = true;
+                    StartCoroutine(PerformStateTransition(currentGameState, m_NextState));
+                }
+                
             }
             else
             {
@@ -114,15 +122,20 @@ namespace RiverAttack
 
         IEnumerator PerformStateTransition(GameState actualState, GameState nextState)
         {
+            Debug.Log($"Start Coroutine");
             // Implemente o efeito de fade out aqui
+            startMenu.PerformFadeOut();
+            
             yield return new WaitForSeconds(fadeDurationEnter);
 
             actualState.ExitState();
             yield return new WaitForSeconds(fadeDurationExit);
+            // Implemente o efeito de fade in aqui
+            startMenu.PerformFadeIn();
 
             currentGameState = nextState;
             currentGameState.EnterState();
-            onTransition = false;
+            m_OnTransition = false;
         }
 
         public void InstantiatePlayers()
@@ -173,25 +186,7 @@ namespace RiverAttack
             ChangeState(new GameStateOpenCutScene(openCutDirector));
         }
         #endregion
-        /*[SerializeField] internal bool isGameOver;
-        [SerializeField] internal bool isGameStopped;
-        [SerializeField] private bool isGameFinish;
-        [Header("Layer Names")]
-        public LayerMask layerPlayer;
-        public LayerMask layerEnemies;
-        public LayerMask layerCollection;
-        public LayerMask layerWall;
-        
-        public enum States
-        {
-            Menu,
-            InitialAnimation,
-            WaitGamePlay,
-            GamePlay,
-            GameOver,
-            Results,
-            Credits
-        }
+        /*
         [Header("Game States")]
         [SerializeField]
         States actualGameState;

@@ -14,20 +14,11 @@ namespace RiverAttack
 
         public void Init(float speed,float lifetime = 0)
         {
-            SetBulletSpeed(speed);
-            SetBulletLifeTime(lifetime);
-        }
-        
-        void SetBulletSpeed(float speed)
-        {
             bulletSpeed = speed;
-        }
-
-        void SetBulletLifeTime(float lifetime)
-        {
             m_HasBulletLifeTime = lifetime > 0;
             bulletLifeTime = lifetime + Time.time;
         }
+        
         public bool haveAPool
         {
             get { return m_MyPool; }
