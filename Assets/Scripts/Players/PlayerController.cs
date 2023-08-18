@@ -39,6 +39,13 @@ namespace RiverAttack
                 _ => m_AutoMovement
             };
 
+            m_PlayerMaster.playerMovementStatus = m_InputVector.y switch
+            {
+                > 0 => PlayerMaster.MovementStatus.Accelerate,
+                < 0 => PlayerMaster.MovementStatus.Reduce,
+                _ => PlayerMaster.MovementStatus.None
+            };
+
             var moveDir = new Vector3(m_InputVector.x, 0, axisAutoMovement);
             
             transform.position += moveDir * (m_MovementSpeed * Time.deltaTime);

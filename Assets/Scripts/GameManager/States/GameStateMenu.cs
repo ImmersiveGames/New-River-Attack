@@ -24,7 +24,6 @@ namespace RiverAttack
         public override void ExitState()
         {
             Debug.Log($"Saindo no Estado: Menu");
-            GamePlayAudio.instance.ChangeBGM(LevelTypes.Grass, TIME_TO_FADE_BGM);
         }
     }
 }

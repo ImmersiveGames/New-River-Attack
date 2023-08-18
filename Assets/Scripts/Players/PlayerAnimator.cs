@@ -15,10 +15,12 @@ namespace RiverAttack
         {
             SetInitialReferences();
             m_PlayerMaster.EventPlayerMasterControllerMovement += AnimationMovement;
+            m_PlayerMaster.EventPlayerMasterRespawn += AnimationReset;
         }
         void OnDisable()
         {
             m_PlayerMaster.EventPlayerMasterControllerMovement -= AnimationMovement;
+            m_PlayerMaster.EventPlayerMasterRespawn -= AnimationReset;
         }
   #endregion
         void SetInitialReferences()
@@ -30,6 +32,12 @@ namespace RiverAttack
         {
             m_Animator.SetFloat(m_DirX, dir.x);
             m_Animator.SetFloat(m_DirY, dir.y);
+        }
+
+        void AnimationReset()
+        {
+            m_Animator.SetFloat(m_DirX, 0);
+            m_Animator.SetFloat(m_DirY, 0);
         }
     }
 }

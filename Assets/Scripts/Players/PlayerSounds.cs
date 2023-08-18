@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace RiverAttack
@@ -18,6 +17,9 @@ namespace RiverAttack
         float enginePitchDown = .5f;
         [SerializeField]
         AudioEventSample audioPlayerExplosion;
+
+        bool m_OnAccelerate;
+        bool m_OnDecelerate;
         
         PlayerMaster m_PlayerMaster;
         AudioSource m_AudioSource;
@@ -36,7 +38,9 @@ namespace RiverAttack
         {
             m_PlayerMaster.EventPlayerMasterControllerMovement -= SoundEngine;
             m_PlayerMaster.EventPlayerMasterHit -= SoundExplosion;
-            /*m_GamePlayManager.EventPausePlayGame -= SoundStop;*/
+            /*
+             * m_GamePlayManager.EventPausePlayGame -= SoundStop;
+             */
         }
   #endregion
         void SetInitialReferences()
@@ -49,46 +53,49 @@ namespace RiverAttack
         void SoundEngine(Vector2 dir)
         {
             if (!m_PlayerMaster.shouldPlayerBeReady) return;
-            if (dir.y > 0 && m_PlayerMaster.playerMovementStatus != PlayerMaster.MovementStatus.Accelerate)
-            {
-                m_PlayerMaster.playerMovementStatus = PlayerMaster.MovementStatus.Accelerate;
-                StartCoroutine(ChangeEngine(audioStartAccelEngine, audioEngineAccelerator));
-            }
             switch (dir.y)
             {
-                case < 0 when m_PlayerMaster.playerMovementStatus != PlayerMaster.MovementStatus.Reduce:
-                    m_PlayerMaster.playerMovementStatus = PlayerMaster.MovementStatus.Reduce;
+                case > 0 when m_OnAccelerate == false:
+                    m_OnAccelerate = true;
+                    StartCoroutine(ChangeEngine(audioStartAccelEngine, audioEngineAccelerator));
+                    break;
+                case < 0 when m_OnDecelerate == false:
+                    m_OnDecelerate = true;
+                    audioDeceleratorEngine.Play(m_AudioSource);
                     AudioEventSample.UpdateChangePith(m_AudioSource, audioEngineLoop.audioSample.pitch.y, enginePitchDown);
                     break;
-                case 0 when m_PlayerMaster.playerMovementStatus != PlayerMaster.MovementStatus.None:
-                {
-                    if (m_PlayerMaster.playerMovementStatus == PlayerMaster.MovementStatus.Accelerate)
-                        StartCoroutine(ChangeEngine(audioDeceleratorEngine, audioEngineLoop));
-                    if (m_PlayerMaster.playerMovementStatus == PlayerMaster.MovementStatus.Reduce)
-                        AudioEventSample.UpdateChangePith(m_AudioSource, m_AudioSource.pitch, audioEngineLoop.audioSample.pitch.y);
-                    m_PlayerMaster.playerMovementStatus = PlayerMaster.MovementStatus.None;
+                case 0 when (m_OnAccelerate || m_OnDecelerate):
+                    m_OnAccelerate = false;
+                    m_OnDecelerate = false;
+                    StartCoroutine(FadeOutAudio(m_AudioSource, audioEngineLoop.getVolume, 0.01f));
                     break;
-                }
-                default:
-                {
-                    if (m_PlayerMaster.shouldPlayerBeReady && !m_AudioSource.isPlaying && m_PlayerMaster.playerMovementStatus == PlayerMaster.MovementStatus.None)
-                    {
-                        //StopAllCoroutines();
-                        audioEngineLoop.Play(m_AudioSource);
-                    }
-                    break;
-                }
             }
-        }
 
-        IEnumerator ChangeEngine(AudioEvent audioStart, AudioEvent audioFix)
+            if(!m_AudioSource.isPlaying)
+                audioEngineLoop.Play(m_AudioSource);
+        }
+        
+        IEnumerator ChangeEngine(AudioEventSample audioStart, AudioEvent audioFix)
         {
             audioStart.Play(m_AudioSource);
-            while (m_AudioSource.isPlaying)
+            while (audioStart.IsPlaying(m_AudioSource))
             {
                 yield return null;
             }
             audioFix.Play(m_AudioSource);
+        }
+
+        static IEnumerator FadeOutAudio(AudioSource source,float initialVolume, float fadeOutDuration)
+        {
+            float elapsedTime = 0.0f;
+            while (elapsedTime < fadeOutDuration)
+            {
+                source.volume = Mathf.Lerp(initialVolume, 0, elapsedTime / fadeOutDuration);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+            source.Stop();
+            source.volume = initialVolume; // Restaurar o volume original
         }
 
         void SoundExplosion()
@@ -97,10 +104,12 @@ namespace RiverAttack
             StopAllCoroutines();
             audioPlayerExplosion.Play(m_AudioSource);
         }
-        /*void SoundStop()
+        /*
+         void SoundStop()
         {
             StopAllCoroutines();
             m_AudioSource.Stop();
-        }*/
+        }
+        */
     }
 }

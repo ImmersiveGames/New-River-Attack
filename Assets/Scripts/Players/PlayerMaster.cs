@@ -52,6 +52,7 @@ namespace RiverAttack
         void Start()
         {
             PlayerStartSetup();
+            MyDebugStart();
         }
         void OnTriggerEnter(Collider other)
         {
@@ -82,7 +83,6 @@ namespace RiverAttack
             getPlayerSettings.spawnPosition = transform.position;
             getPlayerSettings.spawnPosition.z = 0;
             isPlayerDead = false;
-            playerMovementStatus = MovementStatus.Paused;
             getPlayerSettings.score = 0;
             m_GamePlayManager.OnEventUpdateScore(getPlayerSettings.score);
             getPlayerSettings.distance = 0;
@@ -182,6 +182,12 @@ namespace RiverAttack
             EventPlayerMasterControllerMovement?.Invoke(dir);
         }
   #endregion
+
+        void MyDebugStart()
+        {
+            if (!m_GameManager.debugMode) return;
+            transform.position = Vector3.zero;
+        }
         /*float m_AutoMovement;
         float m_MovementSpeed;
         float m_MultiplyVelocityUp;

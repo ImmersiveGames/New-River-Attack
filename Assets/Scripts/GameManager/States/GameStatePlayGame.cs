@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 namespace RiverAttack
 {
     public class GameStatePlayGame: GameState
