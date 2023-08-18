@@ -1,3 +1,4 @@
+using UnityEngine;
 namespace RiverAttack
 {
     public class EffectAreaMaster : ObstacleMaster
@@ -14,6 +15,10 @@ namespace RiverAttack
         {
             EventExitAreaEffect?.Invoke();
         }*/
+        protected override void HitThis(Collider collision)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
 

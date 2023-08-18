@@ -6,21 +6,22 @@ using UnityEngine.Serialization;
 using Utils;
 namespace RiverAttack
 {
-    public class PlayerMaster : ObjectMaster
+    public sealed class PlayerMaster : ObjectMaster
     {
         [SerializeField] internal PlayerSettings getPlayerSettings;
-        [SerializeField] protected bool isPlayerDead;
+        [Header("Player Destroy Settings")]
+        [SerializeField]
+        bool isPlayerDead;
         [SerializeField] float timeoutReSpawn;
-        [FormerlySerializedAs("particlePrefab")]
         [SerializeField]
         GameObject deadParticlePrefab;
         [SerializeField]
-        float timeoutDestroy;
+        float timeoutDestroyExplosion;
         public enum MovementStatus { None, Paused, Accelerate, Reduce }
-        [SerializeField] protected internal MovementStatus playerMovementStatus;
-        
-        protected internal PlayersInputActions playersInputActions;
-        protected internal bool inEffectArea;
+        [SerializeField] internal MovementStatus playerMovementStatus;
+
+        internal PlayersInputActions playersInputActions;
+        internal bool inEffectArea;
         
         Animator m_Animator;
         GamePlaySettings m_GamePlaySettings;
@@ -102,7 +103,7 @@ namespace RiverAttack
             playerMovementStatus = MovementStatus.Paused;
             Tools.ToggleChildren(transform, false);
             var go = Instantiate(deadParticlePrefab, transform);
-            Destroy(go, timeoutDestroy);
+            Destroy(go, timeoutDestroyExplosion);
         }
 
         void ChangeGameOver()
@@ -134,9 +135,12 @@ namespace RiverAttack
         }
         void ReSpawn()
         {
+            m_GamePlayManager.OnEventActivateEnemiesMaster();
             isPlayerDead = false;
             playerMovementStatus = MovementStatus.None;
         }
+
+        
 
         void LogGamePlay(Component component)
         {
@@ -154,26 +158,26 @@ namespace RiverAttack
             }
             if (enemies != null && enemies is CollectiblesMaster or EffectAreaMaster)
             {
-                m_GamePlaySettings.LogGameCollect(enemies.enemy, 1, EnemiesResults.CollisionType.Collected);
+                m_GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, getPlayerSettings, enemies.enemy,1, CollisionType.Collected);
             } else if (enemies != null)
             {
-                m_GamePlaySettings.LogGameCollect(enemies.enemy, 1, EnemiesResults.CollisionType.Collider);
+                m_GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, getPlayerSettings, enemies.enemy,1, CollisionType.Collider);
             }
         }
 
         #region Calls
-        protected internal void OnEventPlayerMasterHit()
+        internal void OnEventPlayerMasterHit()
         {
             KillPlayer();
             EventPlayerMasterHit?.Invoke();
             TryRespawn();
         }
-        protected virtual void OnEventPlayerMasterRespawn()
+        void OnEventPlayerMasterRespawn()
         {
             EventPlayerMasterRespawn?.Invoke();
         }
 
-        protected internal void OnEventPlayerMasterControllerMovement(Vector2 dir)
+        internal void OnEventPlayerMasterControllerMovement(Vector2 dir)
         {
             EventPlayerMasterControllerMovement?.Invoke(dir);
         }

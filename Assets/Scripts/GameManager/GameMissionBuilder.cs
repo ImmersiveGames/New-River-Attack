@@ -39,7 +39,7 @@ namespace RiverAttack
             poolPathLevels = new List<GameObject>();
             poolEnemyLevels = new List<GameObject>();
             pathMilestones = new List<float>();
-
+            if (GameManager.instance.debugMode) return;
             StartBuildMission(actualLevel);
         }
   #endregion

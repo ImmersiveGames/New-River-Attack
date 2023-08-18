@@ -8,7 +8,7 @@ namespace RiverAttack
     [RequireComponent(typeof(MeshRenderer))]
     public abstract class ObstacleDetectApproach : MonoBehaviour
     {
-        [Header("Start Move By Player Approach")]
+        /*[Header("Start Move By Player Approach")]
         [Tooltip("If the enemy has versions with and without player approach, it is recommended to use a different Enemy SO.")]
         [SerializeField] protected internal float playerApproachRadius;
         [SerializeField, MinMaxSlider(0f,20f)] protected internal Vector2 playerApproachRadiusRandom;
@@ -57,6 +57,6 @@ namespace RiverAttack
             float radius = playerApproachRadius;
             Gizmos.color = gizmoColor;
             Gizmos.DrawWireSphere(center: transform.position, radius);
-        }
+        }*/
     }
 }

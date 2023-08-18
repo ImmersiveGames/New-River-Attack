@@ -16,7 +16,6 @@ namespace RiverAttack
         public override void EnterState()
         {
             Debug.Log($"Entra no Estado: CutScene");
-            
             m_GameManager.InstantiatePlayers();
             m_GameManager.PlayOpenCutScene();
             m_GameManager.startMenu.SetMenuPrincipal(1,false);

@@ -6,7 +6,7 @@ namespace RiverAttack
 {
     public abstract class ObstacleSkins : MonoBehaviour
     {
-        [SerializeField]
+        /*[SerializeField]
         int indexStartSkin;
         public bool randomSkin;
         [SerializeField]
@@ -35,12 +35,12 @@ namespace RiverAttack
             go.transform.SetAsFirstSibling();
             //go.transform.position = Vector3.zero;
             //go.transform.rotation = quaternion.identity;
-            /*var goCollider = go.GetComponentInChildren<Collider>();
+            var goCollider = go.GetComponentInChildren<Collider>();
             if ((m_MyCollider && goCollider) && (m_MyCollider != goCollider))
             {
                 Utils.Tools.CopyComponent<Collider>(goCollider, gameObject);
-            }*/
-        }
+            }
+        }*/
         
     }
 }

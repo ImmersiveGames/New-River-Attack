@@ -17,7 +17,6 @@ namespace RiverAttack
         [SerializeField]
         GameSettings gameSettings;
         internal bool getGodMode { get { return godMode; } }
-        [FormerlySerializedAs("GamePlaySettings")]
         [SerializeField]
         internal GamePlaySettings gamePlaySettings;
         
@@ -25,6 +24,9 @@ namespace RiverAttack
         GameManager m_GameManager;
         PlayersInputActions m_InputSystem;
         #region Delegates
+        public delegate void GeneralEventHandler();
+        internal event GeneralEventHandler EventActivateEnemiesMaster;
+        internal event GeneralEventHandler EventDeactivateEnemiesMaster;
         internal delegate void UiUpdateEventHandler(int value);
         internal event UiUpdateEventHandler EventUpdateScore;
         internal event UiUpdateEventHandler EventUpdateDistance;
@@ -57,9 +59,37 @@ namespace RiverAttack
         {
             return m_GameManager.playerSettingsList.Count > 0 ? m_GameManager.playerSettingsList[playerIndex] : null;
         }
-
+        public void AddResultList(List<LogResults> list, PlayerSettings playerSettings, EnemiesScriptable enemy, int qnt, CollisionType collisionType)
+        {
+            var itemResults = list.Find(x => x.player == playerSettings && x.enemy == enemy && x.collisionType == collisionType);
+            if (itemResults != null)
+            {
+                if (enemy is CollectibleScriptable collectibles)
+                {
+                    if (itemResults.quantity + qnt < collectibles.maxCollectible)
+                        itemResults.quantity += qnt;
+                    else
+                        itemResults.quantity = collectibles.maxCollectible;
+                }
+                else
+                    itemResults.quantity += qnt;
+            }
+            else
+            {
+                var newItemResults = new LogResults(playerSettings, enemy, qnt, collisionType);
+                list.Add(newItemResults);
+            }
+        }
 
         #region Calls
+        protected internal void OnEventActivateEnemiesMaster()
+        {
+            EventActivateEnemiesMaster?.Invoke();
+        }
+        protected internal void OnEventDeactivateEnemiesMaster()
+        {
+            EventDeactivateEnemiesMaster?.Invoke();
+        }
         protected internal void OnEventUpdateScore(int value)
         {
             EventUpdateScore?.Invoke(value);
@@ -469,6 +499,8 @@ namespace RiverAttack
         }
         #endregion
         */
+
+
 
 
         

@@ -4,7 +4,7 @@ using Cinemachine;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Playables;
-
+using UnityEngine.Serialization;
 using Utils;
 using Object = UnityEngine.Object;
 namespace RiverAttack
@@ -20,6 +20,7 @@ namespace RiverAttack
     public class GameManager : Singleton<GameManager>
     {
 
+        public bool debugMode;
         bool m_OnTransition = false;
         GameState m_NextState;
         
@@ -49,6 +50,11 @@ namespace RiverAttack
         #region UnityMethods
         void Start()
         {
+            if (debugMode)
+            {
+                ChangeState(new GameStatePlayGame());
+                return;
+            }
             ChangeState(new GameStateMenu());
         }
         void Update()
@@ -101,6 +107,10 @@ namespace RiverAttack
             {
                 playerMaster.gameObject.SetActive(active);
             }
+        }
+        public bool haveAnyPlayerInitialized
+        {
+            get { return initializedPlayerMasters.Count > 0; }
         }
 
         public void UnPausedMovementPlayers()

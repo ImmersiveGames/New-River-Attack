@@ -1,48 +1,49 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 namespace RiverAttack
 {
     [CreateAssetMenu(fileName = "GamePlaySettings", menuName = "RiverAttack/GamePlaySettings", order = 2)]
     public class GamePlaySettings : SingletonScriptableObject<GamePlaySettings>
     {
-        [SerializeField]
         public float pathDistance;
-        [SerializeField]
         public float maxPathDistance;
-        [SerializeField]
         public float shootSpent;
-        [SerializeField]
         public int livesSpent;
-        [SerializeField]
         public int fuelSpent;
-        [SerializeField]
         public int fuelStocked;
-        [SerializeField]
         public int bombSpent;
-        [SerializeField]
         public int totalScore;
-        [SerializeField]
         public float timeSpent;
-        [SerializeField]
         public int playerDieWall;
-        [SerializeField]
         public int playerDieBullet;
-        [SerializeField]
         public int playerDieFuelEmpty;
-        [SerializeField]
-        public List<EnemiesResults> hitEnemiesResultsList;
+        public List<LogResults> hitEnemiesResultsList;
 
         public int GetEnemiesHit(EnemiesScriptable enemy)
         {
             var item = hitEnemiesResultsList.Find(x => x.enemy == enemy);
             return item?.quantity ?? 0;
         }
+    }
+    public enum CollisionType
+    {
+        Shoot, Bomb, Collider, Collected
+    }
+    [System.Serializable]
+    public class LogResults
+    {
+        public PlayerSettings player;
+        public EnemiesScriptable enemy;
+        public int quantity;
+        public CollisionType collisionType;
 
-        public void LogGameCollect(EnemiesScriptable enemies, int quantity, EnemiesResults.CollisionType collisionType)
+        public LogResults(PlayerSettings player, EnemiesScriptable enemy, int quantity, CollisionType collision)
         {
-            hitEnemiesResultsList.Add(new EnemiesResults(
-                enemies, quantity, collisionType
-            ));
+            this.player = player;
+            this.enemy = enemy;
+            this.quantity = quantity;
+            this.collisionType = collision;
         }
     }
 }

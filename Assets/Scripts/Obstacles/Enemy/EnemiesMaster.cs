@@ -4,6 +4,8 @@ namespace RiverAttack
 {
     public class EnemiesMaster : ObstacleMaster
     {
+        
+        
         /*EnemiesSetDifficultyListSo m_EnemiesSetDifficultList;
 
         public EnemiesSetDifficulty.EnemyDifficult actualDifficultName;
@@ -42,5 +44,9 @@ namespace RiverAttack
             }
         }*/
 
+        protected override void HitThis(Collider collision)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
