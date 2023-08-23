@@ -4,30 +4,63 @@ namespace RiverAttack
 {
     public class EffectAreaMaster : ObstacleMaster
     {
+        float m_Timer;
+        float m_TimeToAccess;
+        EffectAreaScriptable m_EffectArea;
+
+        #region Events
         public event GeneralEventHandler EventEnterAreaEffect;
         public event GeneralEventHandler EventExitAreaEffect;
-
+  #endregion
+        
+        
         #region UNITYMETHODS
-        internal override void OnTriggerEnter(Collider other)
+        void OnTriggerExit(Collider collision)
         {
-            base.OnTriggerEnter(other);
-            Debug.Log("Direto do effeito");
+            var playerMaster = collision.GetComponentInParent<PlayerMaster>();
+            if (!playerMaster) return;
+            playerMaster.inEffectArea = false;
+            OnEventExitAreaEffect();
         }
-        void OnTriggerExit(Collider other)
+        void OnTriggerStay(Collider collision)
         {
-            throw new NotImplementedException();
+            var playerMaster = collision.GetComponentInParent<PlayerMaster>();
+            if (!playerMaster) return;
+            if (!playerMaster.inEffectArea) playerMaster.inEffectArea = true;
+            CollectThis(playerMaster);
         }
   #endregion
+        protected override void SetInitialReferences()
+        {
+            base.SetInitialReferences();
+            m_EffectArea = enemy as EffectAreaScriptable;
+            if (m_EffectArea != null)
+                m_TimeToAccess = m_EffectArea.timeToAccess;
+        }
+        void CollectThis(PlayerMaster collision)
+        {
+            var player = collision.getPlayerSettings;
+            if (m_Timer <= 0)
+            {
+                m_EffectArea.EffectAreaStart(player);
+                OnEventAreaEffect();
+                m_Timer = m_TimeToAccess;
+            }
+            m_Timer -= Time.deltaTime;
+        }
 
-        public void OnEventAreaEffect()
+        #region Calls
+        void OnEventAreaEffect()
         {
             EventEnterAreaEffect?.Invoke();
         }
 
-        public void OnEventExitAreaEffect()
+        void OnEventExitAreaEffect()
         {
             EventExitAreaEffect?.Invoke();
         }
+  #endregion
+        
     }
 }
 

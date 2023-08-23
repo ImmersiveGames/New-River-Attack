@@ -3,11 +3,24 @@ namespace RiverAttack
 {
     public class CollectiblesMaster : ObstacleMaster
     {
+        CollectibleScriptable collectibleScriptable;
+
+        #region UNITYMETHODS
+        
         internal override void OnTriggerEnter(Collider other)
         {
             base.OnTriggerEnter(other);
-            //Colettar
+            Debug.Log("Coletou");
         }
+        
+  #endregion
+        
+        protected override void SetInitialReferences()
+        {
+            base.SetInitialReferences();
+            collectibleScriptable = enemy as CollectibleScriptable;
+        }
+        
         /*internal CollectibleScriptable collectibleScriptable;
         public event GeneralEventHandler ShowOnScreen;
         public event EnemyEventHandler CollectibleEvent;

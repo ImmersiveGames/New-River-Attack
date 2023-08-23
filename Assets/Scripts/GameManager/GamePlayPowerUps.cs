@@ -12,8 +12,16 @@ namespace RiverAttack
         public void RecoveryFuel(int amount)
         {
             if (target == null) return;
-            if (target.actualFuel < GameSettings.instance.maxFuel)
-                target.actualFuel += amount;
+            if (target.actualFuel >= GameSettings.instance.maxFuel) return;
+                
+            target.actualFuel += amount;
+            GamePLayLogFuel(amount);
+        }
+
+        static void GamePLayLogFuel(int fuel)
+        {
+            var gamePlaySettings = GamePlaySettings.instance;
+            gamePlaySettings.fuelStocked += fuel;
         }
         /*
         [Header("RapidFire PowerUp")]

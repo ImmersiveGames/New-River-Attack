@@ -9,12 +9,12 @@ namespace RiverAttack
     {
         [Header("Effect Area Settings")]
         public int maxCollectible;
-        [SerializeField]
+        public float timeToAccess;
         public UnityEvent effectAreaActions;
 
         public void EffectAreaStart(PlayerSettings player)
         {
-           // GamePlayPowerUps.target = player;
+            GamePlayPowerUps.target = player;
             effectAreaActions?.Invoke();
         }
     }

@@ -2,7 +2,7 @@
 
 namespace RiverAttack
 {
-    public abstract class ObstacleSkins : MonoBehaviour
+    public class ObstacleSkins : MonoBehaviour
     {
         [SerializeField]
         int indexStartSkin;

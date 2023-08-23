@@ -16,8 +16,7 @@ GameObject:
   - component: {fileID: 8565951570408733136}
   - component: {fileID: 3689870222650831993}
   - component: {fileID: 3203169697471734320}
-  - component: {fileID: 645659421277202776}
-  - component: {fileID: 8278581500336141944}
+  - component: {fileID: 1270950310170998582}
   - component: {fileID: 8004285134093069000}
   m_Layer: 9
   m_Name: Refugies
@@ -178,7 +177,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 349e0fb78d9f62a4c85071cb521916e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  enemy: {fileID: 11400000, guid: 470845e1184cf1d4abf8d32f7e8cd85b, type: 2}
+  deadParticlePrefab: {fileID: 1795330444146210, guid: 139f769fdedea1c42b49a2c24ffbde00,
+    type: 3}
+  timeoutDestroyExplosion: 1.7
+  isDestroyed: 0
 --- !u!114 &4222479239778995317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51a4860303711447ad04d5ea5231670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onMove: 
+  onFlip: 
 --- !u!114 &3689870222650831993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,7 +232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3d133428b09b8498a8aefdd5ece47f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &645659421277202776
+  enemyExplodeAudio: {fileID: 0}
+--- !u!114 &1270950310170998582
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,23 +242,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2310220796174392091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a109c0c1c143f4dbf76b0ce248d7ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8278581500336141944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2310220796174392091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cd5220d622d07b49a85064a33f314c5, type: 3}
+  m_Script: {fileID: 11500000, guid: e85dace111d475348a232163b97ac3b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   indexStartSkin: 0
-  randomSkin: 0
+  randomSkin: 1
   skins:
   - {fileID: 705473027370111095, guid: be235aecf93e4cb4f8c31b9e046ff876, type: 3}
   - {fileID: 6466265109516669393, guid: 9230b038cf2305b45afcc2184f384a6f, type: 3}
