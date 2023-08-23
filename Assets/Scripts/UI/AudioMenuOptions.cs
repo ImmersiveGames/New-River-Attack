@@ -45,7 +45,7 @@ namespace RiverAttack
             //Debug.Log("Volume da Musica: " + volume.ToString());
         }
 
-        void SetSfxVolume()
+        public void SetSfxVolume()
         {
             float volume = Mathf.Log10(sfxVolumeSlider.value) * 20f;
             m_GameSettings.sfxVolume = sfxVolumeSlider.value;
