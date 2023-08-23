@@ -4,7 +4,7 @@ namespace RiverAttack
 {
     public class StateShootPatrol : IShoot
     {
-        /*float m_StartApproachRadius;
+        float m_StartApproachRadius;
         float m_PlayerApproachRadius;
         EnemiesMaster m_EnemiesMaster;
         EnemiesSetDifficulty m_EnemiesSetDifficulty;
@@ -42,18 +42,6 @@ namespace RiverAttack
             target = null;
             //Debug.Log("Estado: Patrol - Saindo");
             // Coloque aqui as ações a serem executadas ao sair do estado Patrol
-        }*/
-        public void EnterState(EnemiesMaster enemiesMaster)
-        {
-            throw new System.NotImplementedException();
-        }
-        public void UpdateState()
-        {
-            throw new System.NotImplementedException();
-        }
-        public void ExitState()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

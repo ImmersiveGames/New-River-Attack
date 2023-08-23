@@ -90,7 +90,8 @@ namespace RiverAttack
         {
             m_CanExecuteAction = false;
             
-            //TODO: Um bom local para o RapidFire mudar o coulddown;
+            //TODO: Quando o tiro acerta precisa passar pelo cooldown?
+            //TODO: Um bom local para o RapidFire mudar o coolddown;
             yield return new WaitForSeconds(m_ShootCadence);
             m_CanExecuteAction = true;
         }

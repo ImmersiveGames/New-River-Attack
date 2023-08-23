@@ -56,7 +56,7 @@ namespace RiverAttack
                 return;
             m_BombQuantity += collectibles.amountCollectables;
             m_PlayerSettings.bombs = m_BombQuantity;
-            m_GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, m_PlayerSettings, collectibles,collectibles.amountCollectables, CollisionType.Collected);
+            GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, m_PlayerSettings, collectibles,collectibles.amountCollectables, CollisionType.Collected);
         }
         public void Execute(InputAction.CallbackContext callbackContext)
         {

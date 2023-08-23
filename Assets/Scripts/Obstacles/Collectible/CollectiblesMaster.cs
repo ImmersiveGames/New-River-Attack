@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
 namespace RiverAttack
 {
-    public class CollectiblesMaster : EnemiesMaster
+    public class CollectiblesMaster : ObstacleMaster
     {
+        internal override void OnTriggerEnter(Collider other)
+        {
+            base.OnTriggerEnter(other);
+            //Colettar
+        }
         /*internal CollectibleScriptable collectibleScriptable;
         public event GeneralEventHandler ShowOnScreen;
         public event EnemyEventHandler CollectibleEvent;

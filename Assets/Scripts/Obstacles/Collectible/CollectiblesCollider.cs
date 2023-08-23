@@ -3,7 +3,7 @@ using Utils;
 
 namespace RiverAttack
 {
-    public class CollectiblesCollider : ObstacleColliders
+    public class CollectiblesCollider : MonoBehaviour
     {
         /*CollectiblesMaster m_CollectiblesMaster;
         CollectibleScriptable m_Collectible;

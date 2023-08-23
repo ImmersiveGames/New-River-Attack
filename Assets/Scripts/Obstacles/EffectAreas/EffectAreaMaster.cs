@@ -1,23 +1,32 @@
+using System;
 using UnityEngine;
 namespace RiverAttack
 {
     public class EffectAreaMaster : ObstacleMaster
     {
-        /*public event GeneralEventHandler EventEnterAreaEffect;
+        public event GeneralEventHandler EventEnterAreaEffect;
         public event GeneralEventHandler EventExitAreaEffect;
 
-        public void CallEventAreaEffect()
+        #region UNITYMETHODS
+        internal override void OnTriggerEnter(Collider other)
+        {
+            base.OnTriggerEnter(other);
+            Debug.Log("Direto do effeito");
+        }
+        void OnTriggerExit(Collider other)
+        {
+            throw new NotImplementedException();
+        }
+  #endregion
+
+        public void OnEventAreaEffect()
         {
             EventEnterAreaEffect?.Invoke();
         }
 
-        public void CallEventExitAreaEffect()
+        public void OnEventExitAreaEffect()
         {
             EventExitAreaEffect?.Invoke();
-        }*/
-        protected override void HitThis(Collider collision)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

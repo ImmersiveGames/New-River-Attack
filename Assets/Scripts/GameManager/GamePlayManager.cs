@@ -19,14 +19,17 @@ namespace RiverAttack
         internal bool getGodMode { get { return godMode; } }
         [SerializeField]
         internal GamePlaySettings gamePlaySettings;
-        
-        
+
+        protected internal bool playerDead;
+
         GameManager m_GameManager;
         PlayersInputActions m_InputSystem;
         #region Delegates
         public delegate void GeneralEventHandler();
         internal event GeneralEventHandler EventActivateEnemiesMaster;
         internal event GeneralEventHandler EventDeactivateEnemiesMaster;
+        internal event GeneralEventHandler EventReSpawnEnemiesMaster;
+        internal event GeneralEventHandler EventEnemiesMasterKillPlayer;
         internal delegate void UiUpdateEventHandler(int value);
         internal event UiUpdateEventHandler EventUpdateScore;
         internal event UiUpdateEventHandler EventUpdateDistance;
@@ -59,7 +62,7 @@ namespace RiverAttack
         {
             return m_GameManager.playerSettingsList.Count > 0 ? m_GameManager.playerSettingsList[playerIndex] : null;
         }
-        public void AddResultList(List<LogResults> list, PlayerSettings playerSettings, EnemiesScriptable enemy, int qnt, CollisionType collisionType)
+        public static void AddResultList(List<LogResults> list, PlayerSettings playerSettings, EnemiesScriptable enemy, int qnt, CollisionType collisionType)
         {
             var itemResults = list.Find(x => x.player == playerSettings && x.enemy == enemy && x.collisionType == collisionType);
             if (itemResults != null)
@@ -80,6 +83,16 @@ namespace RiverAttack
                 list.Add(newItemResults);
             }
         }
+        public int HighScorePlayers()
+        {
+            if (m_GameManager.haveAnyPlayerInitialized == false) return 0;
+            int score = 0;
+            foreach (var pl in m_GameManager.initializedPlayerMasters.Where(pl => score < pl.GetComponent<PlayerMaster>().getPlayerSettings.score))
+            {
+                score += (int)pl.GetComponent<PlayerMaster>().getPlayerSettings.score;
+            }
+            return score;
+        }
 
         #region Calls
         protected internal void OnEventActivateEnemiesMaster()
@@ -89,6 +102,14 @@ namespace RiverAttack
         protected internal void OnEventDeactivateEnemiesMaster()
         {
             EventDeactivateEnemiesMaster?.Invoke();
+        }
+        protected internal void OnEventReSpawnEnemiesMaster()
+        {
+            EventReSpawnEnemiesMaster?.Invoke();
+        }
+        protected internal void OnEventEnemiesMasterKillPlayer()
+        {
+            EventEnemiesMasterKillPlayer?.Invoke();
         }
         protected internal void OnEventUpdateScore(int value)
         {
@@ -499,9 +520,6 @@ namespace RiverAttack
         }
         #endregion
         */
-
-
-
 
         
     }

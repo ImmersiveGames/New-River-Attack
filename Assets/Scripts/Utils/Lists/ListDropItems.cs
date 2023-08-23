@@ -38,9 +38,9 @@ namespace Utils
         public ItemsDrop TakeRandomItem(float range)
         {
             //Debug.Log("ItemsDrop: OK");
-            int n = value.Count;
+            int powerUpListCount = value.Count;
             float realNum = 0;
-            switch (n)
+            switch (powerUpListCount)
             {
                 case <= 0:
                     return new ItemsDrop();
@@ -49,13 +49,14 @@ namespace Utils
                     return value[0];
             }
             float totals = value.Sum(x => x.sortChances);
-            var orderByDescending = value.OrderByDescending(x => x.realChance);
-            for (int i = 0; i < n; i++)
+            value.Sort((a, b) => b.sortChances.CompareTo(a.sortChances));
+            //var orderByDescending = value.OrderByDescending(x => x.realChance);
+            foreach (var dropItem in value)
             {
-                value[i].SetRealChance(totals);
-                realNum += value[i].realSort;
+                dropItem.SetRealChance(totals);
+                realNum += dropItem.realSort;
                 //Debug.Log("Real Chance: " + Value[i].realsort);
-                if (realNum >= range) return value[i];
+                if (realNum >= range) return dropItem;
             }
             //Debug.Log("Real Numero : " + realnum);
             return new ItemsDrop();

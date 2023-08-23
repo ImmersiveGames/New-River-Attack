@@ -1,11 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 namespace RiverAttack
 {
     public class EnemiesSound : MonoBehaviour
     {
 
-        /*ObstacleMaster m_ObstacleMaster;
+        ObstacleMaster m_ObstacleMaster;
         protected AudioSource audioSource;
         [SerializeField]
         AudioEventSample enemyExplodeAudio;
@@ -16,13 +15,12 @@ namespace RiverAttack
         protected virtual void OnEnable()
         {
             SetInitialReferences();
-            m_ObstacleMaster.EventDestroyObject += ExplodeSound;
-            m_GamePlayManager.EventResetEnemies += StopSound;
+            m_ObstacleMaster.EventObstacleMasterHit += ExplodeSound;
+            m_GamePlayManager.EventDeactivateEnemiesMaster += StopSound;
         }
         protected virtual void OnDisable()
         {
-            m_ObstacleMaster.EventDestroyObject -= ExplodeSound;
-            m_GamePlayManager.EventResetEnemies -= StopSound;
+            m_ObstacleMaster.EventObstacleMasterHit -= ExplodeSound;
         }
   #endregion
 
@@ -34,13 +32,13 @@ namespace RiverAttack
         }
         void StopSound()
         {
-            if (audioSource != null && audioSource.isPlaying)
+            if (!audioSource.isPlaying) return;
                 audioSource.Stop();
         }
         void ExplodeSound()
         {
             if (audioSource != null && enemyExplodeAudio != null)
                 enemyExplodeAudio.Play(audioSource);
-        }*/
+        }
     }
 }

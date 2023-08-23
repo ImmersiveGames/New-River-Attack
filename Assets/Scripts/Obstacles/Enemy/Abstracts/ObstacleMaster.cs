@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Utils;
@@ -20,12 +18,16 @@ namespace RiverAttack
         Vector3 m_ObjectStartPosition;
         Quaternion m_ObjectStartRotate;
         Vector3 m_ObjectStartScale;
-        GamePlayManager m_GamePlayManager;
+        protected GamePlayManager gamePlayManager;
         GamePlaySettings m_GamePlaySettings;
 
         #region Events
-        protected delegate void GeneralEventHandler();
-        protected event GeneralEventHandler EventObstacleMasterHit;
+        public delegate void GeneralEventHandler();
+        protected internal event GeneralEventHandler EventObstacleMasterHit;
+        public delegate void PlayerSettingsEventHandler(PlayerSettings playerSettings);
+        protected internal event PlayerSettingsEventHandler EventObstacleScore;
+        public delegate void MovementEventHandler(Vector3 dir);
+        protected internal event MovementEventHandler EventObstacleMovement;
   #endregion
 
         #region UNITYMETHODS
@@ -39,35 +41,33 @@ namespace RiverAttack
         internal virtual void OnEnable()
         {
             SetInitialReferences();
-            m_GamePlayManager.EventActivateEnemiesMaster += ActiveObject;
-            m_GamePlayManager.EventDeactivateEnemiesMaster += DeactivateObject;
+            gamePlayManager.EventActivateEnemiesMaster += ActiveObject;
+            gamePlayManager.EventDeactivateEnemiesMaster += DeactivateObject;
+            gamePlayManager.EventReSpawnEnemiesMaster += TryRespawn;
             StartObstacle();
         }
         internal virtual void OnTriggerEnter(Collider other)
         {
-            if (!shouldObstacleBeReady) return;
-            var bullet = other.GetComponent<Bullets>();
-            if (bullet)
-            {
-                KillByBullets(bullet);
-            }
+            if (other == null || !shouldObstacleBeReady || !enemy.canDestruct) return;
+            ComponentToKill(other.GetComponent<BulletPlayer>(), CollisionType.Shoot);
         }
-        internal virtual void OnDisable()
+        void OnDisable()
         {
             m_IsActive = false;
         }
         internal virtual void OnDestroy()
         {
-            m_GamePlayManager.EventActivateEnemiesMaster -= ActiveObject;
-            m_GamePlayManager.EventDeactivateEnemiesMaster -= DeactivateObject;
+            gamePlayManager.EventActivateEnemiesMaster -= ActiveObject;
+            gamePlayManager.EventDeactivateEnemiesMaster -= DeactivateObject;
+            gamePlayManager.EventReSpawnEnemiesMaster -= TryRespawn;
         }
   #endregion
         protected virtual void SetInitialReferences()
         {
-            m_GamePlayManager = GamePlayManager.instance;
-            m_GamePlaySettings = m_GamePlayManager.gamePlaySettings;
+            gamePlayManager = GamePlayManager.instance;
+            m_GamePlaySettings = gamePlayManager.gamePlaySettings;
         }
-        protected virtual bool shouldObstacleBeReady
+        public virtual bool shouldObstacleBeReady
         {
             get { return isDestroyed == false && m_IsActive; }
         }
@@ -81,14 +81,15 @@ namespace RiverAttack
             objTransform.localScale = m_ObjectStartScale;
         }
 
-        protected virtual void KillByBullets(Component bullets)
+        protected void ComponentToKill(Component other, CollisionType collisionType)
         {
-            if (!enemy.canDestruct) return;
-            var playerMaster = WhoHit(bullets);
+            if (other == null) return;
+            var playerMaster = WhoHit(other);
             OnEventObstacleMasterHit();
-            m_GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy,1, CollisionType.Shoot);
+            OnEventObstacleScore(playerMaster.getPlayerSettings);
+            ShouldSavePoint(playerMaster.getPlayerSettings);
+            GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy,1, collisionType);
         }
-        protected abstract void HitThis(Collider collision);
         static PlayerMaster WhoHit(Component other)
         {
             return other switch
@@ -99,7 +100,7 @@ namespace RiverAttack
             };
         }
 
-        protected virtual void KillObstacle()
+        protected virtual void DestroyObstacle()
         {
             isDestroyed = true;
             m_IsActive = false;
@@ -111,7 +112,7 @@ namespace RiverAttack
         {
             if (!enemy.canRespawn) return;
             StartObstacle();
-
+            Tools.ToggleChildren(transform);
         }
 
         protected virtual void ActiveObject()
@@ -122,13 +123,25 @@ namespace RiverAttack
         {
             m_IsActive = false;
         }
-
+        void ShouldSavePoint(PlayerSettings playerSettings)
+        {
+            if (enemy.isCheckInPoint)
+                playerSettings.spawnPosition.z = transform.position.z;
+        }
 
         #region Calls
-        protected virtual void OnEventObstacleMasterHit()
+        void OnEventObstacleMasterHit()
         {
-            KillObstacle();
+            DestroyObstacle();
             EventObstacleMasterHit?.Invoke();
+        }
+        void OnEventObstacleScore(PlayerSettings playerSettings)
+        {
+            EventObstacleScore?.Invoke(playerSettings);
+        }
+        protected internal virtual void OnEventObstacleMovement(Vector3 dir)
+        {
+            EventObstacleMovement?.Invoke(dir);
         }
   #endregion
         /*const float DESTROY_DELAY = 0.1f;

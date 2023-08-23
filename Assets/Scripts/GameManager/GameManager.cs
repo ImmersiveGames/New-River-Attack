@@ -39,7 +39,7 @@ namespace RiverAttack
         public GameObject playerPrefab;
         public Vector3 spawnPlayerPosition;
         public List<PlayerSettings> playerSettingsList = new List<PlayerSettings>();
-        [SerializeField] List<PlayerMaster> initializedPlayerMasters = new List<PlayerMaster>();
+        [SerializeField] internal List<PlayerMaster> initializedPlayerMasters = new List<PlayerMaster>();
 
         [Header("Camera Settings"), SerializeField]
         CinemachineVirtualCamera virtualCamera;

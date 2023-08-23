@@ -23,7 +23,7 @@ namespace RiverAttack
         }
         public override void UpdateState()
         {
-            Debug.Log($"PlayGame!");
+            //Debug.Log($"PlayGame!");
         }
         public override void ExitState()
         {

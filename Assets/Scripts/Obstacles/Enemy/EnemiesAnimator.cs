@@ -1,79 +1,71 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 namespace RiverAttack
 {
     public class EnemiesAnimator : MonoBehaviour
     {
-        /*public string explosionTrigger;
         public string onMove;
         public string onFlip;
-
-        ObstacleMaster m_ObstacleMaster;
-        protected Animator animator;
+        
+        EnemiesMaster m_EnemiesMaster;
+        Animator m_Animator;
         GamePlayManager m_GamePlayManager;
 
         #region UNITY METHODS
         protected virtual void OnEnable()
         {
             SetInitialReferences();
-            m_ObstacleMaster.EventDestroyObject += ExplodeAnimation;
-            m_ObstacleMaster.EventObjectMasterMovement += MovementAnimation;
-            m_ObstacleMaster.EventObjectMasterFlipEnemies += ObjectMasterFlipObstaclesMasterFlipAnimation;
-            m_GamePlayManager.EventResetEnemies += ResetAnimation;
+            // TODO: Precisa reiniciar a animação depois que morre sem perder o animator.
+            m_EnemiesMaster.EventObstacleMovement += ObjectMasterMoveAnimation;
+            m_EnemiesMaster.EventObjectMasterFlipEnemies += ObjectMasterFlipEnemiesMasterFlipAnimation;
+            m_GamePlayManager.EventReSpawnEnemiesMaster += ResetAnimation;
+            
         }
         protected virtual void OnDisable()
         {
-            m_ObstacleMaster.EventDestroyObject -= ExplodeAnimation;
-            m_ObstacleMaster.EventObjectMasterMovement -= MovementAnimation;
-            m_ObstacleMaster.EventObjectMasterFlipEnemies -= ObjectMasterFlipObstaclesMasterFlipAnimation;
-            m_GamePlayManager.EventResetEnemies -= ResetAnimation;
+            m_EnemiesMaster.EventObstacleMovement -= ObjectMasterMoveAnimation;
+            m_EnemiesMaster.EventObjectMasterFlipEnemies -= ObjectMasterFlipEnemiesMasterFlipAnimation;
+            m_GamePlayManager.EventReSpawnEnemiesMaster -= ResetAnimation;
         }
   #endregion
 
         protected virtual void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
-            m_ObstacleMaster = GetComponent<ObstacleMaster>();
-            animator = GetComponentInChildren<Animator>();
+            m_EnemiesMaster =  GetComponent<EnemiesMaster>();
+            m_Animator = GetComponentInChildren<Animator>();
         }
-
-        void MovementAnimation(Vector3 pos)
+        void ObjectMasterMoveAnimation(Vector3 dir)
         {
-            if (animator == null)
+            if (m_Animator == null)
             {
-                animator = GetComponentInChildren<Animator>();
+                m_Animator = GetComponentInChildren<Animator>();
             }
-            if (animator == null || string.IsNullOrEmpty(onMove) || !animator.gameObject.activeSelf)
-                return;
-            animator.SetBool(onMove, pos != Vector3.zero);
+            if (m_Animator != null && !string.IsNullOrEmpty(onMove))
+                m_Animator.SetBool(onMove, dir != Vector3.zero);
         }
-
-        void ObjectMasterFlipObstaclesMasterFlipAnimation(Vector3 face)
+        void ObjectMasterFlipEnemiesMasterFlipAnimation()
         {
-            if (animator == null)
+            if (m_Animator == null)
             {
-                animator = GetComponentInChildren<Animator>();
+                m_Animator = GetComponentInChildren<Animator>();
             }
-            if (animator != null && !string.IsNullOrEmpty(onFlip))
-                animator.SetBool(onFlip, !animator.GetBool(onFlip));
+            if (m_Animator != null && !string.IsNullOrEmpty(onFlip))
+                m_Animator.SetBool(onFlip, !m_Animator.GetBool(onFlip));
         }
 
-        internal virtual void ResetAnimation()
+        protected virtual void ResetAnimation()
         {
-            if (animator == null) return;
+            //Debug.Log($"Reset Animator: {m_Animator}");
+            if (m_Animator == null) return;
             if(!string.IsNullOrEmpty(onMove))
-                animator.SetBool(onMove, false);
+                m_Animator.SetBool(onMove, false);
             if(!string.IsNullOrEmpty(onFlip))
-                animator.SetBool(onFlip, false);
+                m_Animator.SetBool(onFlip, false);
+            //Forçando a Animação de movimento a reiniciar, normalmente é o eixo do movimento, mas como a variavel não entra neste escopo, força o movimento com true depois de revive-lo.
+            m_Animator.SetBool(onMove, true);
         }
-
-        void ExplodeAnimation()
-        {
-            if (animator != null && !string.IsNullOrEmpty(explosionTrigger))
-            {
-                animator.SetBool(explosionTrigger, true);
-            }
-        }
-        protected void RemoveAnimation()
+        /*protected void RemoveAnimation()
         {
             if (animator != null && GetComponent<SpriteRenderer>())
                 GetComponent<SpriteRenderer>().enabled = false;

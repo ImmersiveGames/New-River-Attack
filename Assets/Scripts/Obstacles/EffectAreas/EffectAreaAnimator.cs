@@ -1,16 +1,30 @@
 using UnityEngine;
 namespace RiverAttack
 {
-    public class EffectAreaAnimator : EnemiesAnimator
+    public sealed class EffectAreaAnimator : MonoBehaviour
     {
-        /*public string onFueling;
+        public string onFueling;
+        Animator m_Animator;
+        
+        GamePlayManager m_GamePlayManager;
+        EffectAreaMaster m_EffectAreaMaster;
         // Start is called before the first frame update
 
         #region UNIYMETHODS
+        void OnEnable()
+        {
+            SetInitialReferences();
+            m_GamePlayManager.EventReSpawnEnemiesMaster += ResetAnimation;
+            
+        }
+         void OnDisable()
+        {
+            m_GamePlayManager.EventReSpawnEnemiesMaster -= ResetAnimation;
+        }
         void OnTriggerEnter(Collider other)
         {
             if (!other.GetComponentInParent<PlayerMaster>()) return;
-                OnFuelingAnimation(true);
+            OnFuelingAnimation(true);
         }
         void OnTriggerExit(Collider other)
         {
@@ -18,23 +32,27 @@ namespace RiverAttack
             OnFuelingAnimation(false);
         }
         #endregion
-
+        void SetInitialReferences()
+        {
+            m_GamePlayManager = GamePlayManager.instance;
+            m_EffectAreaMaster =  GetComponent<EffectAreaMaster>();
+            m_Animator = GetComponentInChildren<Animator>();
+        }
         void OnFuelingAnimation(bool activeBool)
         {
-            if (!animator)
+            /*if (!m_Animator)
             {
-                animator = GetComponentInChildren<Animator>();
+                m_Animator = GetComponentInChildren<Animator>();
             }
-            if (animator == null || string.IsNullOrEmpty(onFueling) || !animator.gameObject.activeSelf)
-                return;
-            animator.SetBool(onFueling,activeBool );
+            if (m_Animator == null || string.IsNullOrEmpty(onFueling) || !m_Animator.gameObject.activeSelf)
+                return;*/
+            m_Animator.SetBool(onFueling, activeBool);
         }
 
-        internal override void ResetAnimation()
+        void ResetAnimation()
         {
-            base.ResetAnimation();
-            if(!string.IsNullOrEmpty(onFueling))
-                animator.SetBool(onFueling, false);
-        }*/
+            if (!string.IsNullOrEmpty(onFueling))
+                m_Animator.SetBool(onFueling, false);
+        }
     }
 }

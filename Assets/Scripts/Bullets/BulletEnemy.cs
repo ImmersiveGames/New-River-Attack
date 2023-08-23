@@ -3,7 +3,7 @@ namespace RiverAttack
 {
     public class BulletEnemy : Bullets
     {
-        /*#region Variable Private Inspector
+        #region Variable Private Inspector
         
         float m_StartTime;
         
@@ -12,11 +12,12 @@ namespace RiverAttack
         #region UnityMethods
         void OnEnable()
         {
+            GamePlayManager.instance.EventEnemiesMasterKillPlayer += DestroyMe;
+            if (GamePlayManager.instance.playerDead) return;
             var audioSource = GetComponent<AudioSource>();
             audioShoot.Play(audioSource);
             m_StartTime = Time.time + bulletLifeTime;
             
-            GamePlayManager.instance.EventEnemyDestroyPlayer += DestroyMe;
         }
         void FixedUpdate()
         {
@@ -46,6 +47,6 @@ namespace RiverAttack
             {
                 DestroyMe();
             }
-        }*/
+        }
     }
 }

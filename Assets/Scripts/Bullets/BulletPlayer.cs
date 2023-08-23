@@ -21,10 +21,12 @@ namespace RiverAttack
         void OnTriggerEnter(Collider collision)
         {
             if (collision.GetComponentInParent<PlayerMaster>() || collision.GetComponentInParent<BulletPlayer>() || collision.GetComponentInParent<BulletPlayerBomb>()) return;
-            var hitCollectable = collision.transform.GetComponentInParent<ObstacleMaster>();
+            var obstacleMaster = collision.GetComponent<ObstacleMaster>();
+            if (obstacleMaster != null && !obstacleMaster.enemy.canDestruct) return;
+            //var hitCollectable = collision.GetComponentInParent<ObstacleMaster>();
             //Debug.Log($"Collider: {hitCollectable}");
             //if (hitCollectable == null && hitCollectable.enemy is CollectibleScriptable) return;
-            //DestroyMe();
+            DestroyMe();
         }
         void OnBecameInvisible()
         {

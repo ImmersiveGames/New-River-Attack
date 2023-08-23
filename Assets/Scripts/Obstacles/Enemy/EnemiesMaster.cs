@@ -4,49 +4,58 @@ namespace RiverAttack
 {
     public class EnemiesMaster : ObstacleMaster
     {
-        
-        
-        /*EnemiesSetDifficultyListSo m_EnemiesSetDifficultList;
+        EnemiesSetDifficultyListSo m_EnemiesSetDifficultList;
 
         public EnemiesSetDifficulty.EnemyDifficult actualDifficultName;
         public static EnemiesSetDifficulty myDifficulty { get; private set; }
+        
+        #region Delegates
+        protected internal event GeneralEventHandler EventObjectMasterFlipEnemies;
+        #endregion
 
         #region UNITYMETHODS
-        protected override void Awake()
+        
+
+        internal override void Awake()
         {
-            base.Awake();
+            base.Awake(); 
             m_EnemiesSetDifficultList = enemy.enemiesSetDifficultyListSo;
             if (m_EnemiesSetDifficultList != null)
                 myDifficulty = m_EnemiesSetDifficultList.GetDifficultByEnemyDifficult(actualDifficultName);
         }
-        protected override void OnEnable()
+        internal override void OnEnable()
         {
             base.OnEnable();
             ChangeDifficulty();
-            EventDestroyObject += ChangeDifficulty;
+            EventObstacleMasterHit += ChangeDifficulty;
         }
-
-        void Start()
+        internal override void OnTriggerEnter(Collider other)
         {
-            ChangeDifficulty();
+            base.OnTriggerEnter(other);
+            Debug.Log("Entrou aqui");
+            if (other.GetComponent <BulletPlayer>()) return;
+            ComponentToKill(other.GetComponentInParent<PlayerMaster>(), CollisionType.Collider);
         }
-        protected override void OnDisable()
+        void OnDisable()
         {
-            base.OnDisable();
-            EventDestroyObject -= ChangeDifficulty;
+            EventObstacleMasterHit -= ChangeDifficulty;
         }
-  #endregion
+          #endregion
+        
         void ChangeDifficulty()
         {
             if (m_EnemiesSetDifficultList != null)
             {
                 myDifficulty = enemy.enemiesSetDifficultyListSo.GetDifficultByScore(gamePlayManager.HighScorePlayers());
             }
-        }*/
-
-        protected override void HitThis(Collider collision)
-        {
-            throw new System.NotImplementedException();
         }
+
+        #region Calls
+        protected internal virtual void OnEventObjectMasterFlipEnemies()
+        {
+            EventObjectMasterFlipEnemies?.Invoke();
+        }
+  #endregion
+        
     }
 }

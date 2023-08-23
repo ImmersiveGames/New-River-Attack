@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
 using UnityEngine;
-using System.Collections.Generic;
-using UnityEngine.Serialization;
 using Utils;
 namespace RiverAttack
 {
@@ -22,7 +18,7 @@ namespace RiverAttack
 
         internal PlayersInputActions playersInputActions;
         internal bool inEffectArea;
-        
+
         Animator m_Animator;
         GamePlaySettings m_GamePlaySettings;
         GamePlayManager m_GamePlayManager;
@@ -48,7 +44,7 @@ namespace RiverAttack
             playersInputActions = new PlayersInputActions();
             playersInputActions.Enable();
         }
-        
+
         void Start()
         {
             PlayerStartSetup();
@@ -65,13 +61,13 @@ namespace RiverAttack
         }
   #endregion
 
-        public bool shouldPlayerBeReady { get { return isPlayerDead == false && playerMovementStatus != MovementStatus.Paused; } } 
-        
+        public bool shouldPlayerBeReady { get { return isPlayerDead == false && playerMovementStatus != MovementStatus.Paused; } }
+
         public void SetPlayerSettingsToPlayMaster(PlayerSettings playerSettings)
         {
             getPlayerSettings = playerSettings;
         }
-        
+
         public Animator GetPlayerAnimator()
         {
             return m_Animator;
@@ -99,8 +95,11 @@ namespace RiverAttack
 
         void KillPlayer()
         {
-            isPlayerDead = true;
+            m_GamePlayManager.playerDead = isPlayerDead = true;
             playerMovementStatus = MovementStatus.Paused;
+            
+            m_GamePlayManager.OnEventEnemiesMasterKillPlayer();
+            
             Tools.ToggleChildren(transform, false);
             var go = Instantiate(deadParticlePrefab, transform);
             Destroy(go, timeoutDestroyExplosion);
@@ -118,16 +117,16 @@ namespace RiverAttack
                 Invoke(nameof(ChangeGameOver), timeoutReSpawn / 2);
                 return;
             }
-            Invoke(nameof(Reposition), timeoutReSpawn/2);
+            Invoke(nameof(Reposition), timeoutReSpawn / 2);
         }
 
         void Reposition()
         {
-            Debug.Log("Respawn Player");
+            //Debug.Log("Respawn Player");
             var transform1 = transform;
             transform1.position = getPlayerSettings.spawnPosition;
             transform1.rotation = getPlayerSettings.spawnRotation;
-            
+            m_GamePlayManager.OnEventReSpawnEnemiesMaster();
             Tools.ToggleChildren(transform1);
             getPlayerSettings.actualFuel = m_GameSettings.startFuel;
             OnEventPlayerMasterRespawn();
@@ -140,7 +139,7 @@ namespace RiverAttack
             playerMovementStatus = MovementStatus.None;
         }
 
-        
+
 
         void LogGamePlay(Component component)
         {
@@ -158,10 +157,11 @@ namespace RiverAttack
             }
             if (enemies != null && enemies is CollectiblesMaster or EffectAreaMaster)
             {
-                m_GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, getPlayerSettings, enemies.enemy,1, CollisionType.Collected);
-            } else if (enemies != null)
+                GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, getPlayerSettings, enemies.enemy, 1, CollisionType.Collected);
+            }
+            else if (enemies != null)
             {
-                m_GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, getPlayerSettings, enemies.enemy,1, CollisionType.Collider);
+                GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, getPlayerSettings, enemies.enemy, 1, CollisionType.Collider);
             }
         }
 
@@ -174,6 +174,7 @@ namespace RiverAttack
         }
         void OnEventPlayerMasterRespawn()
         {
+            m_GamePlayManager.playerDead = false;
             EventPlayerMasterRespawn?.Invoke();
         }
 
@@ -438,6 +439,6 @@ namespace RiverAttack
         }
   #endregion
   */
-        
+
     }
 }

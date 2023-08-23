@@ -6,7 +6,7 @@ namespace RiverAttack
     public class StateShoot : IShoot
     {
         IShoot m_ShootImplementation;
-        /*float m_Cadence;
+        float m_Cadence;
         float m_BulletSpeed;
         float m_StartCadence;
         float m_StartBulletSpeed;
@@ -53,6 +53,7 @@ namespace RiverAttack
         }
         void Fire()
         {
+            if (GamePlayManager.instance.playerDead) return;
             //Debug.Log("Shoot!");
             var myShoot = PoolObjectManager.GetObject(m_MyPool);
             //setting bullet entity
@@ -66,18 +67,6 @@ namespace RiverAttack
    
             myShoot.transform.position = new Vector3(transformPosition.x, transformPosition.y, transformPosition.z);
             myShoot.transform.rotation = new Quaternion(transformRotation.x, transformRotation.y, transformRotation.z, transformRotation.w);
-        }*/
-        public void EnterState(EnemiesMaster enemiesMaster)
-        {
-            m_ShootImplementation.EnterState(enemiesMaster);
-        }
-        public void UpdateState()
-        {
-            m_ShootImplementation.UpdateState();
-        }
-        public void ExitState()
-        {
-            m_ShootImplementation.ExitState();
         }
     }
 }

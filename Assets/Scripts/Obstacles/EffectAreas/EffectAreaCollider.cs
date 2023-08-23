@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace RiverAttack
 {
-    public class EffectAreaCollider : EnemiesCollider
+    public class EffectAreaCollider : MonoBehaviour
     {
         /*EffectAreaMaster m_EffectAreaMaster;
         EffectAreaScriptable m_EffectArea;

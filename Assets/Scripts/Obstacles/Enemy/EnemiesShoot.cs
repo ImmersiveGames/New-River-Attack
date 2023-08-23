@@ -2,10 +2,9 @@
 using Utils;
 namespace RiverAttack
 {
-    [RequireComponent(typeof(EnemiesMaster))]
     public class EnemiesShoot : ObstacleDetectApproach, IHasPool
     {
-        /*[SerializeField] GameObject bullet;
+        [SerializeField] GameObject bullet;
         [SerializeField] int startPool;
         [SerializeField] internal float shootCadence;
         [Header("Bullet Settings")]
@@ -37,8 +36,8 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
-            m_EnemiesMaster.EventDestroyObject += StopFire;
-            m_GamePlayManager.EventEnemyDestroyPlayer += StopFire;
+            m_EnemiesMaster.EventObstacleMasterHit += StopFire;
+            m_GamePlayManager.EventEnemiesMasterKillPlayer += StopFire;
         }
         void Start()
         {
@@ -71,8 +70,8 @@ namespace RiverAttack
         }
         void OnDisable()
         {
-            m_EnemiesMaster.EventDestroyObject -= StopFire;
-            m_GamePlayManager.EventEnemyDestroyPlayer -= StopFire;
+            m_EnemiesMaster.EventObstacleMasterHit -= StopFire;
+            m_GamePlayManager.EventEnemiesMasterKillPlayer -= StopFire;
         }
   #endregion
         protected override void SetInitialReferences()
@@ -105,10 +104,6 @@ namespace RiverAttack
         public void StartMyPool(bool isPersistent = false)
         {
             PoolObjectManager.CreatePool(this, bullet, startPool, transform, isPersistent);
-        }*/
-        public void StartMyPool(bool isPersistent = false)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

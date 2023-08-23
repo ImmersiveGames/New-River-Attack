@@ -5,7 +5,7 @@ namespace RiverAttack
 {
     public class StateMove : IMove
     {
-        /*readonly EnemiesMovement m_EnemiesMovement;
+        readonly EnemiesMovement m_EnemiesMovement;
         float m_ElapsedTime = 0f;
         float m_MoveVelocity;
         float m_MultiplyEnemiesSpeedy;
@@ -19,24 +19,26 @@ namespace RiverAttack
         }
         public void EnterState(EnemiesMaster enemiesMaster)
         {
-            //Debug.Log("Estado: MOVE - Entrando: ");
+            Debug.Log("Estado: MOVE - Entrando: ");
+            m_MoveVelocity = m_EnemiesMovement.moveVelocity * m_MultiplyEnemiesSpeedy;
+            m_VectorDirection = m_EnemiesMovement.SetDirection(m_EnemiesMovement.startDirection);
+       
             if (enemiesMaster.enemy && enemiesMaster.enemy.enemiesSetDifficultyListSo)
             {
                 m_EnemiesSetDifficulty = enemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(enemiesMaster.actualDifficultName);
                 m_MultiplyEnemiesSpeedy = m_EnemiesSetDifficulty.multiplyEnemiesSpeedy;
-            }
-            m_MoveVelocity = m_EnemiesMovement.moveVelocity * m_MultiplyEnemiesSpeedy;
-            m_VectorDirection = m_EnemiesMovement.SetDirection(m_EnemiesMovement.startDirection);
-            enemiesMaster.CallEventEnemiesMasterMovement(m_VectorDirection);
+            }            
+             
+            enemiesMaster.OnEventObstacleMovement(m_VectorDirection);
         }
         public void UpdateState(Transform transform, Vector3 direction)
         {
-           // Debug.Log("Estado: MOVE - UPDATE" + m_MoveVelocity);
+           //Debug.Log("Estado: MOVE - UPDATE" + m_MoveVelocity);
             Move(transform, direction, m_MoveVelocity);
         }
         public void ExitState()
         {
-           // Debug.Log("Estado: MOVE - Exit");
+            Debug.Log("Estado: MOVE - Exit");
         }
         void Move(Transform objMove, Vector3 direction, float velocity)
         {
@@ -58,18 +60,6 @@ namespace RiverAttack
 
             // Usa a curva de animação para obter a interpolação de movimento
             return curve.Evaluate(curveFactor);
-        }*/
-        public void EnterState(EnemiesMaster enemiesMaster)
-        {
-            throw new System.NotImplementedException();
-        }
-        public void UpdateState(Transform transform, Vector3 direction)
-        {
-            throw new System.NotImplementedException();
-        }
-        public void ExitState()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

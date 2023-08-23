@@ -4,45 +4,44 @@ namespace RiverAttack
 {
     public class EnemiesScore : MonoBehaviour
     {
-        /*GamePlayManager m_GamePlayManager;
-        protected ObstacleMaster obstacleMaster;
-
+        GamePlayManager m_GamePlayManager;
+        ObstacleMaster m_ObstacleMaster;
         #region UNITY METHODS
         protected virtual void OnEnable()
         {
             SetInitialReferences();
-            obstacleMaster.EventPlayerDestroyObject += SetScore;
+            m_ObstacleMaster.EventObstacleScore += SetScore;
         }
         protected virtual void OnDisable()
         {
-            obstacleMaster.EventPlayerDestroyObject -= SetScore;
+            m_ObstacleMaster.EventObstacleScore -= SetScore;
         }
   #endregion
 
         protected virtual void SetInitialReferences()
         {
-            obstacleMaster = GetComponent<ObstacleMaster>();
+            m_ObstacleMaster = GetComponent<ObstacleMaster>();
             m_GamePlayManager = GamePlayManager.instance;
-
         }
-        void SetScore(PlayerMaster playerMaster)
+        void SetScore(PlayerSettings playerSettings)
         {
-            float score = obstacleMaster.enemy.enemyScore;
+            float score = m_ObstacleMaster.enemy.enemyScore;
             if (EnemiesMaster.myDifficulty.multiplyScore > 0)
             {
                 var myDifficulty = EnemiesMaster.myDifficulty;
                 if (myDifficulty.multiplyScore > 0)
                     score *= myDifficulty.multiplyScore;
             }
-            if (playerMaster == null) return;
-            playerMaster.GetPlayersSettings().score += (int)(score);
-            m_GamePlayManager.CallEventUIScore(playerMaster.GetPlayersSettings().score);
+            if (playerSettings == null) return;
+            playerSettings.score += (int)(score);
+            m_GamePlayManager.OnEventUpdateScore(playerSettings.score);
+            LogGamePlay(playerSettings.score);
         }
-        void Log(int score)
+        static void LogGamePlay(int score)
         {
             if (score > GamePlaySettings.instance.totalScore)
                 GamePlaySettings.instance.totalScore = score;
-        }*/
+        }
         
     }
 }
