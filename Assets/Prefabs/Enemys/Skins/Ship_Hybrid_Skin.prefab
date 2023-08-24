@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2610244241445896043}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -0.07, y: 0.25, z: 0.22}
-  m_LocalScale: {x: 1.5, y: 1.6, z: 1}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalScale: {x: 1.8, y: 1.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 765928816558482205}
@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 765928816558482205}
   - component: {fileID: 1892228575586532512}
+  - component: {fileID: 2466512037902767208}
   m_Layer: 7
   m_Name: Ship_Hybrid_Skin
   m_TagString: Untagged
@@ -141,6 +142,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.46, y: 1.62, z: 1.38}
   m_Center: {x: 0, y: 0.81, z: 0}
+--- !u!95 &2466512037902767208
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4118453991773427652}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bdb45ca9fa422d64884ff58b2ccfda5f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7077936268626334448
 GameObject:
   m_ObjectHideFlags: 0
