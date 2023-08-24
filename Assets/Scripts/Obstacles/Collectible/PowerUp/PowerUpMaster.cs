@@ -17,7 +17,6 @@ namespace RiverAttack
             {
                 name += "(" + collectibleScriptable.powerUp.name + ")";
             }
-            
         }
 
         void ComponentToPowerUp(PlayerPowerUp playerPowerUp)

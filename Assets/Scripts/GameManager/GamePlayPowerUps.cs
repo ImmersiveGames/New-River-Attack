@@ -57,6 +57,7 @@ namespace RiverAttack
             {
                 target.bombs += amount;
             }
+            GamePlayManager.instance.OnEventUpdateBombs(target.bombs);
         }
     }
 }
