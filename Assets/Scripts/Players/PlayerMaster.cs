@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 namespace RiverAttack
@@ -15,6 +16,9 @@ namespace RiverAttack
         float timeoutDestroyExplosion;
         public enum MovementStatus { None, Paused, Accelerate, Reduce }
         [SerializeField] internal MovementStatus playerMovementStatus;
+        
+        [SerializeField]
+        internal List<LogPlayerCollectables> collectableList;
 
         internal PlayersInputActions playersInputActions;
         internal bool inEffectArea;

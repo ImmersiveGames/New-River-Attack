@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 using Utils;
 
 namespace RiverAttack
@@ -23,10 +24,11 @@ namespace RiverAttack
             var gamePlaySettings = GamePlaySettings.instance;
             gamePlaySettings.fuelStocked += fuel;
         }
-        /*
+    
+        [FormerlySerializedAs("minRapidFire")]
         [Header("RapidFire PowerUp")]
-        [Range(0.1f, 2)]
-        public float minRapidFire = 0.1f;
+        [Range(0.1f, 1f)]
+        public float cadenceRapidFireMin;
 
         public void SetPowerUpTarget(PlayerSettings player)
         {
@@ -35,27 +37,18 @@ namespace RiverAttack
 
         public void RapidFireStart(float amount)
         {
-            Debug.Log("Ativou RapidFire");
             //TODO: Ajustar RapidFire
             if (target == null) return;
-            float buff = (target.speedyShoot + amount < minRapidFire) ? minRapidFire : target.speedyShoot + amount;
-            target.speedyShoot = buff;
-            GamePlayManager.instance.CallEventRapidFire(true);
+            float buff = (amount < cadenceRapidFireMin) ? cadenceRapidFireMin : amount;
+            target.cadenceShootPowerUp = buff;
+            //GamePlayManager.instance.CallEventRapidFire(true);
         }
 
         public void RapidFireEnd(float amount)
         {
-            Debug.Log("Parou o RapidFire");
             if (target == null) return;
-            target.speedyShoot = amount;
-            GamePlayManager.instance.CallEventRapidFire(false);
-        }
-
-        public void RecoveryFuel(int amount)
-        {
-            if (target == null) return;
-            if (target.actualHp < target.maxHp)
-                target.actualHp += amount;
+            target.cadenceShootPowerUp = amount;
+            //GamePlayManager.instance.CallEventRapidFire(false);
         }
 
         public void GainBomb(int amount)
@@ -64,6 +57,6 @@ namespace RiverAttack
             {
                 target.bombs += amount;
             }
-        }*/
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace RiverAttack
 {
-    public class EnemiesMaster : ObstacleMaster
+    public sealed class EnemiesMaster : ObstacleMaster
     {
         EnemiesSetDifficultyListSo m_EnemiesSetDifficultList;
 
@@ -10,7 +10,7 @@ namespace RiverAttack
         public static EnemiesSetDifficulty myDifficulty { get; private set; }
         
         #region Delegates
-        protected internal event GeneralEventHandler EventObjectMasterFlipEnemies;
+        internal event GeneralEventHandler EventObjectMasterFlipEnemies;
         #endregion
 
         #region UNITYMETHODS
@@ -51,7 +51,7 @@ namespace RiverAttack
         }
 
         #region Calls
-        protected internal virtual void OnEventObjectMasterFlipEnemies()
+        internal void OnEventObjectMasterFlipEnemies()
         {
             EventObjectMasterFlipEnemies?.Invoke();
         }

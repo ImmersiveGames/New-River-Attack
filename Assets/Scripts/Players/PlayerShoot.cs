@@ -71,7 +71,10 @@ namespace RiverAttack
         {
             if (!m_CanExecuteAction || !m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady)
                 return;
+            m_GamePlayManager.OnEventPlayerPushButtonShoot();
             m_ShootCadence = m_PlayerSettings.cadenceShoot;
+            if (m_PlayerSettings.cadenceShootPowerUp != 0)
+                m_ShootCadence = m_PlayerSettings.cadenceShootPowerUp;
             Fire();
             StartCoroutine(Cooldown());
 
@@ -91,7 +94,6 @@ namespace RiverAttack
             m_CanExecuteAction = false;
             
             //TODO: Quando o tiro acerta precisa passar pelo cooldown?
-            //TODO: Um bom local para o RapidFire mudar o coolddown;
             yield return new WaitForSeconds(m_ShootCadence);
             m_CanExecuteAction = true;
         }

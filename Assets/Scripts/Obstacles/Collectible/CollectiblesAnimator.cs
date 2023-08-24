@@ -1,42 +1,41 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace RiverAttack
 {
-    [RequireComponent(typeof(CollectiblesMaster))]
-    public class CollectiblesAnimator : EnemiesAnimator
+    public class CollectiblesAnimator : MonoBehaviour
     {
-
-        /*public string collectTrigger;
+        [SerializeField]string collectTrigger;
+        
         CollectiblesMaster m_CollectiblesMaster;
+        Animator m_Animator;
 
         #region UNITY METHODS
-        protected override void OnEnable()
+        protected void OnEnable()
         {
-            base.OnEnable();
-            m_CollectiblesMaster.CollectibleEvent += CollectAnimation;
+            SetInitialReferences();
+            m_CollectiblesMaster.EventCollectItem += CollectAnimation;
         }
-
-        void Start()
+        void OnDisable()
         {
-            animator = GetComponentInChildren<Animator>();
-        }
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-            m_CollectiblesMaster.CollectibleEvent -= CollectAnimation;
+            m_CollectiblesMaster.EventCollectItem -= CollectAnimation;
         }
   #endregion
 
-        void CollectAnimation(PlayerMaster playerMaster)
+        void CollectAnimation(PlayerSettings playerSettings)
         {
-            //implementar animação de coletar
-            RemoveAnimation();
+            //TODO:implementar animação de coletar
+            if (m_Animator == null)
+            {
+                m_Animator = GetComponentInChildren<Animator>();
+            }
+            if (m_Animator != null && !string.IsNullOrEmpty(collectTrigger))
+                m_Animator.SetTrigger(collectTrigger);
         }
-        protected override void SetInitialReferences()
+        void SetInitialReferences()
         {
-            base.SetInitialReferences();
             m_CollectiblesMaster = GetComponent<CollectiblesMaster>();
-        }*/
+            m_Animator = GetComponentInChildren<Animator>();
+            
+        }
     }
 }

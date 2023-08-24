@@ -58,17 +58,17 @@ namespace RiverAttack
         
         public void ActivatePowerUp(PowerUp powerUp)
         {
-            //Debug.Log("AQUI: "+ powerup.name);
+            //Debug.Log("AQUI: "+ powerUp.name);
             ClearActivePowerUps(powerUp.canAccumulateEffects);
             if (!m_ActivePowerUps.ContainsKey(powerUp))
             {
-                //Debug.Log("Não tem esse powerup na lista");
+                Debug.Log("Não tem esse power Up na lista");
                 powerUp.PowerUpStart(m_PlayerMaster.getPlayerSettings);
                 m_ActivePowerUps.Add(powerUp, powerUp.duration);
             }
             else
             {
-                //Debug.Log("Ja tem esse power Up adiciona tempo");
+                Debug.Log("Ja tem esse power Up adiciona tempo");
                 if (powerUp.canAccumulateDuration)
                     m_ActivePowerUps[powerUp] += powerUp.duration;
                 else
@@ -80,12 +80,13 @@ namespace RiverAttack
         // Calls the end action of each powerup and clears them from the activePowerups
         void ClearActivePowerUps(bool onlyEffect = false) //(Player target, bool onlyeffect = false)
         {
-            //Debug.Log("Can Acumulate: "+ onlyeffect);
+            Debug.Log($"Can Accumulate Effect: {onlyEffect}");
             foreach (var powerUp in m_ActivePowerUps)
             {
+                Debug.Log($"Power up =  {powerUp}");
                 if (onlyEffect && !powerUp.Key.canAccumulateEffects)
                     return;
-                //Debug.Log("Termina o Powerup");
+                Debug.Log($"Termina o Power up {powerUp}");
                 powerUp.Key.PowerUpEnd(m_PlayerMaster.getPlayerSettings);
             }
             if (!onlyEffect)

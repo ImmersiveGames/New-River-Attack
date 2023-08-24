@@ -14,12 +14,12 @@ namespace RiverAttack
         float timeoutDestroyExplosion;
         public bool isDestroyed;
 
-        bool m_IsActive;
+        protected bool isActive;
         Vector3 m_ObjectStartPosition;
         Quaternion m_ObjectStartRotate;
         Vector3 m_ObjectStartScale;
         protected GamePlayManager gamePlayManager;
-        GamePlaySettings m_GamePlaySettings;
+        protected GamePlaySettings gamePlaySettings;
 
         #region Events
         public delegate void GeneralEventHandler();
@@ -53,7 +53,7 @@ namespace RiverAttack
         }
         void OnDisable()
         {
-            m_IsActive = false;
+            isActive = false;
         }
         internal virtual void OnDestroy()
         {
@@ -65,16 +65,16 @@ namespace RiverAttack
         protected virtual void SetInitialReferences()
         {
             gamePlayManager = GamePlayManager.instance;
-            m_GamePlaySettings = gamePlayManager.gamePlaySettings;
+            gamePlaySettings = gamePlayManager.gamePlaySettings;
         }
         public virtual bool shouldObstacleBeReady
         {
-            get { return isDestroyed == false && m_IsActive; }
+            get { return isDestroyed == false && isActive; }
         }
         protected virtual void StartObstacle()
         {
             isDestroyed = false;
-            m_IsActive = false;
+            isActive = false;
             var objTransform = transform;
             objTransform.position = m_ObjectStartPosition;
             objTransform.rotation = m_ObjectStartRotate;
@@ -88,9 +88,9 @@ namespace RiverAttack
             OnEventObstacleMasterHit();
             OnEventObstacleScore(playerMaster.getPlayerSettings);
             ShouldSavePoint(playerMaster.getPlayerSettings);
-            GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy,1, collisionType);
+            GamePlayManager.AddResultList(gamePlaySettings.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy,1, collisionType);
         }
-        static PlayerMaster WhoHit(Component other)
+        internal static PlayerMaster WhoHit(Component other)
         {
             return other switch
             {
@@ -103,7 +103,7 @@ namespace RiverAttack
         protected virtual void DestroyObstacle()
         {
             isDestroyed = true;
-            m_IsActive = false;
+            isActive = false;
             Tools.ToggleChildren(transform, false);
             var explosion = Instantiate(deadParticlePrefab, transform);
             Destroy(explosion, timeoutDestroyExplosion);
@@ -117,13 +117,13 @@ namespace RiverAttack
 
         protected virtual void ActiveObject()
         {
-            m_IsActive = true;
+            isActive = true;
         }
         protected virtual void DeactivateObject()
         {
-            m_IsActive = false;
+            isActive = false;
         }
-        void ShouldSavePoint(PlayerSettings playerSettings)
+        protected void ShouldSavePoint(PlayerSettings playerSettings)
         {
             if (enemy.isCheckInPoint)
                 playerSettings.spawnPosition.z = transform.position.z;
@@ -144,101 +144,7 @@ namespace RiverAttack
             EventObstacleMovement?.Invoke(dir);
         }
   #endregion
-        /*const float DESTROY_DELAY = 0.1f;
-        
-        public bool isDestroyed;
-        protected internal enum EnemyStatus { Paused, Active }
-        [SerializeField]
-        protected internal EnemyStatus actualEnemyStatus;
 
-        Vector3 m_ObjectStartPosition;
-        
-        private protected GamePlayManager gamePlayManager;
-        
-        #region Delegates
-        public delegate void GeneralEventHandler();
-        public event GeneralEventHandler EventDestroyObject;
-        public event GeneralEventHandler EventChangeSkin;
-        public delegate void MovementEventHandler(Vector3 pos);
-        public event MovementEventHandler EventObjectMasterMovement;
-        public event MovementEventHandler EventObjectMasterFlipEnemies;
-        public delegate void EnemyEventHandler(PlayerMaster playerMaster);
-        public event EnemyEventHandler EventPlayerDestroyObject;
-        #endregion
-        
-        #region UNITY METHODS
-        protected virtual void Awake()
-        { 
-            m_ObjectStartPosition = transform.position;
-            actualEnemyStatus = EnemyStatus.Paused;
-            isDestroyed = false;
-        }
-        protected virtual void OnEnable()
-        {
-            SetInitialReferences();
-            //Tools.SetLayersRecursively(GameManager.instance.layerEnemies, transform);
-            gamePlayManager.EventStartPlayGame += OnInitializeEnemy;
-            gamePlayManager.EventResetEnemies += OnInitializeEnemy;
-        }
-        void Start()
-        {
-            actualEnemyStatus = EnemyStatus.Active;
-        }
-        protected virtual void OnDisable()
-        {
-            gamePlayManager.EventStartPlayGame -= OnInitializeEnemy;
-            gamePlayManager.EventResetEnemies -= OnInitializeEnemy;
-        }
-        #endregion
-        
-        public bool shouldObstacleBeReady
-        {
-            get
-            {
-                return isDestroyed == false && actualEnemyStatus == EnemyStatus.Active;
-            }
-        }
-        
-        protected virtual void SetInitialReferences()
-        {
-            gamePlayManager = GamePlayManager.instance;
-        }
-
-        void OnInitializeEnemy()
-        {
-            if (!enemy.canRespawn && isDestroyed)
-                Destroy(gameObject, DESTROY_DELAY);
-            else
-            {
-                Utils.Tools.ToggleChildren(transform);
-                transform.position = m_ObjectStartPosition;
-                actualEnemyStatus = EnemyStatus.Active;
-                isDestroyed = false;
-            }
-        }
-        
-        #region Calls
-        
-        public void CallEventEnemiesMasterMovement(Vector3 pos)
-        {
-            EventObjectMasterMovement?.Invoke(pos);
-        }
-        public void CallEventEnemiesMasterFlipEnemies(Vector3 pos)
-        {
-            EventObjectMasterFlipEnemies?.Invoke(pos);
-        }
-        public void CallEventDestroyEnemy(PlayerMaster playerMaster)
-        {
-            actualEnemyStatus = EnemyStatus.Paused;
-            EventDestroyObject?.Invoke();
-            EventPlayerDestroyObject?.Invoke(playerMaster);
-        }
-        public void CallEventChangeSkin()
-        {
-            EventChangeSkin?.Invoke();
-        }
-    #endregion*/
-        
     } 
 }
 

@@ -62,6 +62,7 @@ namespace RiverAttack
         {
             if (m_BombQuantity <= 0 || !m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady)
                 return;
+            m_GamePlayManager.OnEventPlayerPushButtonBomb();
             m_BombQuantity -= 1;
             var bomb = Instantiate(prefabBomb);
             bomb.transform.localPosition = transform.localPosition + bombOffset;

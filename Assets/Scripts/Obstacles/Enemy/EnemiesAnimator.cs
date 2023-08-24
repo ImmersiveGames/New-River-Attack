@@ -12,16 +12,17 @@ namespace RiverAttack
         GamePlayManager m_GamePlayManager;
 
         #region UNITY METHODS
-        protected virtual void OnEnable()
+        void OnEnable()
         {
             SetInitialReferences();
             // TODO: Precisa reiniciar a animação depois que morre sem perder o animator.
+            
             m_EnemiesMaster.EventObstacleMovement += ObjectMasterMoveAnimation;
             m_EnemiesMaster.EventObjectMasterFlipEnemies += ObjectMasterFlipEnemiesMasterFlipAnimation;
             m_GamePlayManager.EventReSpawnEnemiesMaster += ResetAnimation;
             
         }
-        protected virtual void OnDisable()
+        void OnDisable()
         {
             m_EnemiesMaster.EventObstacleMovement -= ObjectMasterMoveAnimation;
             m_EnemiesMaster.EventObjectMasterFlipEnemies -= ObjectMasterFlipEnemiesMasterFlipAnimation;
@@ -29,7 +30,7 @@ namespace RiverAttack
         }
   #endregion
 
-        protected virtual void SetInitialReferences()
+        void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_EnemiesMaster =  GetComponent<EnemiesMaster>();
@@ -54,7 +55,7 @@ namespace RiverAttack
                 m_Animator.SetBool(onFlip, !m_Animator.GetBool(onFlip));
         }
 
-        protected virtual void ResetAnimation()
+         void ResetAnimation()
         {
             //Debug.Log($"Reset Animator: {m_Animator}");
             if (m_Animator == null) return;
@@ -65,17 +66,5 @@ namespace RiverAttack
             //Forçando a Animação de movimento a reiniciar, normalmente é o eixo do movimento, mas como a variavel não entra neste escopo, força o movimento com true depois de revive-lo.
             m_Animator.SetBool(onMove, true);
         }
-        /*protected void RemoveAnimation()
-        {
-            if (animator != null && GetComponent<SpriteRenderer>())
-                GetComponent<SpriteRenderer>().enabled = false;
-            if (animator != null && GetComponent<MeshRenderer>())
-                GetComponent<MeshRenderer>().enabled = false;
-            if (transform.childCount <= 0) return;
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                transform.GetChild(i).gameObject.SetActive(false);
-            }
-        }*/
     }
 }

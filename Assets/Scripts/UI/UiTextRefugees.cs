@@ -32,9 +32,9 @@ namespace RiverAttack
             m_TMPTextRefugees = GetComponent<TMP_Text>();
         }
 
-        void UpdateRefugees(int distance)
+        void UpdateRefugees(int refugie)
         {
-            m_TMPTextRefugees.text = distance.ToString();
+            m_TMPTextRefugees.text = refugie.ToString();
             
         }
     }
