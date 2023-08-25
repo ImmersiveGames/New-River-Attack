@@ -34,6 +34,9 @@ namespace RiverAttack
         internal event UiUpdateEventHandler EventUpdateRefugees;
         internal event UiUpdateEventHandler EventUpdateBombs;
         internal event UiUpdateEventHandler EventUpdateLives;
+
+        internal delegate void BuildPatchHandler(float position);
+        internal event BuildPatchHandler EventBuildPathUpdate;
         
         public delegate void CollectableEventHandle(CollectibleScriptable collectibles);
         public event CollectableEventHandle EventCollectItem;
@@ -146,6 +149,11 @@ namespace RiverAttack
         {
             EventShakeCam?.Invoke(power, intime);
         }
+        internal void OnEventBuildPathUpdate(float position)
+        {
+            EventBuildPathUpdate?.Invoke(position);
+        }
   #endregion
-       }
+        
+    }
 }

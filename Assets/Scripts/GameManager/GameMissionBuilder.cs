@@ -8,15 +8,16 @@ namespace RiverAttack
     {
         [Header("Level Settings"), SerializeField]
         Levels actualLevel;
-        int m_ActualPathIndex;
         [SerializeField]
-        int maxLevels = 8;
-        
+        int actualPathIndex;
+        [SerializeField]
+        int maxLevels;
+
         [Header("Level HUB Settings")]
         public List<Levels> levelsFinishList = new List<Levels>();
         [SerializeField]
         List<Levels> previousLevelList = new List<Levels>();
-        
+
         [Header("INTERNAL SETTINGS")]
         [SerializeField]
         List<float> pathMilestones = new List<float>();
@@ -33,6 +34,7 @@ namespace RiverAttack
         void OnEnable()
         {
             m_GamePlayManager = GamePlayManager.instance;
+            m_GamePlayManager.EventBuildPathUpdate += BuildNextPathForPoolLevel;
         }
         void Start()
         {
@@ -43,29 +45,29 @@ namespace RiverAttack
             StartBuildMission(actualLevel);
         }
   #endregion
-        
+
         void StartBuildMission(Levels level)
         {
             var levelRoot = new GameObject();
-            m_ActualPathIndex = 0;
+            actualPathIndex = 0;
             levelRoot.name = level.levelName;
             CreateLevel(level, levelRoot.transform);
         }
-        
+
         void CreateLevel(Levels level, Transform myRoot = null)
         {
             if (level.setLevelList.Count <= 0) return;
             var nextBound = new Vector3(level.levelOffset.x, level.levelOffset.y, level.levelOffset.z);
             int numPatches = level.setLevelList.Count;
-            
+
             FixedPath(ref nextBound, level.pathStart, myRoot);
             //Debug.Log($"Path Start: {nextBound}");
-           
+
             for (int i = 0; i < numPatches; i++)
             {
                 //Debug.Log($"Path Next Start: {nextBound}");
                 nextBound.x = level.levelOffset.x;
-                BuildEnemies(nextBound,level.setLevelList[i], i, myRoot);
+                BuildEnemies(nextBound, level.setLevelList[i], i, myRoot);
                 nextBound.x = level.levelOffset.x;
                 poolPathLevels.Add(BuildPath(ref nextBound, level.setLevelList[i].levelPaths, myRoot));
                 if (maxLevels > i)
@@ -104,20 +106,24 @@ namespace RiverAttack
             poolEnemyLevels.Add(enemies);
         }
         // TODO:Quando ele pode ser chamado? Player morre? Player passa uma Ponte parece ser o ideal
-        void CheckPoolLevel(float posZ)
+        void BuildNextPathForPoolLevel(float posZ)
         {
-            if (m_GamePlayManager.completePath || !(pathMilestones[m_ActualPathIndex] - posZ <= 0))
+            if (m_GamePlayManager.completePath || !(pathMilestones[actualPathIndex] - posZ <= 0))
                 return;
-            UpdatePoolLevel(poolPathLevels, m_ActualPathIndex);
-            UpdatePoolLevel(poolEnemyLevels, m_ActualPathIndex);
-            m_ActualPathIndex++;
+            Tools.EqualizeLists(ref poolPathLevels, ref poolEnemyLevels);
+            UpdatePoolLevel(poolPathLevels, actualPathIndex);
+            UpdatePoolLevel(poolEnemyLevels, actualPathIndex);
+            actualPathIndex++;
         }
 
         void UpdatePoolLevel(IReadOnlyList<GameObject> pool, int actualHandle)
         {
-            int activeIndex = actualHandle + (maxLevels - 1);
-            int deactivateIndex = actualHandle - (maxLevels - 1);
-            int removeIndex = actualHandle - (maxLevels - 2);
+            int eixo = Mathf.CeilToInt(maxLevels / 2f);
+            int activeIndex = (actualHandle + 1) % pool.Count;
+            int deactivateIndex = activeIndex - eixo;
+            int removeIndex = activeIndex - eixo - 1;
+
+            //Debug.Log($"Index atual: {actualHandle}, Active: {activeIndex}, Deactive: {deactivateIndex}, Remove {removeIndex}");
 
             if (activeIndex < pool.Count && !pool[activeIndex].activeInHierarchy)
                 pool[activeIndex].SetActive(true);
@@ -128,8 +134,5 @@ namespace RiverAttack
             if (removeIndex >= 0 && removeIndex < pool.Count - maxLevels && !pool[removeIndex].activeInHierarchy)
                 Destroy(pool[removeIndex]);
         }
-    
     }
 }
-
-

@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Serialization;
 namespace RiverAttack
 {
     [CreateAssetMenu(fileName = "Enemy", menuName = "RiverAttack/Enemy", order = 1)]
@@ -10,9 +9,9 @@ namespace RiverAttack
         [Header("Default Settings")]
         public new string name;
         //public LocalizationString translateName;
-        public float velocity;
-        public float radiusToApproach;
-        public float shootCadence;
+        //public float velocity;
+        //public float radiusToApproach;
+        //public float shootCadence;
         public int enemyScore;
         public Sprite spriteIcon;
         public AudioMixerGroup enemyAudioMixerGroup;

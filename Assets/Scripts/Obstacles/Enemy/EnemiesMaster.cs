@@ -36,8 +36,9 @@ namespace RiverAttack
             if (other.GetComponent <BulletPlayer>()) return;
             ComponentToKill(other.GetComponentInParent<PlayerMaster>(), CollisionType.Collider);
         }
-        void OnDisable()
+        internal override void OnDisable()
         {
+            base.OnDisable();
             EventObstacleMasterHit -= ChangeDifficulty;
         }
           #endregion

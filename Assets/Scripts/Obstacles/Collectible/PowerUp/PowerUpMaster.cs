@@ -3,6 +3,19 @@ namespace RiverAttack
 {
     public class PowerUpMaster : CollectiblesMaster
     {
+
+        #region UNITYMETHODS
+        internal override void OnEnable()
+        {
+            base.OnEnable();
+            gamePlayManager.EventReSpawnEnemiesMaster += DestroyPowerUp;
+        }
+        internal override void OnDisable()
+        {
+            base.OnDisable();
+            gamePlayManager.EventReSpawnEnemiesMaster -= DestroyPowerUp;
+        }
+  #endregion
         internal override void OnTriggerEnter(Collider other)
         {
             base.OnTriggerEnter(other);
@@ -18,7 +31,10 @@ namespace RiverAttack
                 name += "(" + collectibleScriptable.powerUp.name + ")";
             }
         }
-
+        void DestroyPowerUp()
+        {
+            DestroyImmediate(gameObject);
+        }
         void ComponentToPowerUp(PlayerPowerUp playerPowerUp)
         {
             if (playerPowerUp != null && collectibleScriptable.powerUp != null)

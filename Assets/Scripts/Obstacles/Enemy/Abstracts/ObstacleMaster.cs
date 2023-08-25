@@ -51,7 +51,7 @@ namespace RiverAttack
             if (other == null || !shouldObstacleBeReady || !enemy.canDestruct) return;
             ComponentToKill(other.GetComponent<BulletPlayer>(), CollisionType.Shoot);
         }
-        void OnDisable()
+        internal virtual void OnDisable()
         {
             isActive = false;
         }
@@ -125,8 +125,12 @@ namespace RiverAttack
         }
         protected void ShouldSavePoint(PlayerSettings playerSettings)
         {
-            if (enemy.isCheckInPoint)
-                playerSettings.spawnPosition.z = transform.position.z;
+            if (!enemy.isCheckInPoint) 
+                return;
+            var transform1 = transform;
+            var position = transform1.position;
+            playerSettings.spawnPosition.z = position.z;
+            gamePlayManager.OnEventBuildPathUpdate(position.z);
         }
 
         #region Calls

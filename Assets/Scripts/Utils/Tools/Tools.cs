@@ -177,5 +177,19 @@ namespace Utils
                 SetLayersRecursively(layerMask, child);
             }
         }
+
+        public static void EqualizeLists<T>(ref List<T> listA, ref List<T> listB) where T : new()
+        {
+            int maxSize = Mathf.Max(listA.Count, listB.Count);
+            while (listA.Count < maxSize)
+            {
+                listA.Add(new T()); // Preencha com um elemento vazio (pode ser qualquer valor que você considere vazio)
+            }
+
+            while (listB.Count < maxSize)
+            {
+                listB.Add(new T());
+            }
+        }
     }
 }
