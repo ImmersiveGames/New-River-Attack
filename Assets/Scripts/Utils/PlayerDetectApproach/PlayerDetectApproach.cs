@@ -23,7 +23,7 @@ namespace Utils
             var results = new Collider[maxColliders];
             int size = Physics.OverlapSphereNonAlloc(m_PositionReference, m_Distance, results, targetLayer);
             if (size < 1) return null;
-            
+
             for (int i = 0; i < size; i++)
             {
                 //Debug.Log("COLLIDES: "+ results[i] +" Referencia: "+m_PositionReference+" Distancia: "+m_Distance);
@@ -34,4 +34,3 @@ namespace Utils
         }
     }
 }
-

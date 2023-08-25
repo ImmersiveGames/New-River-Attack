@@ -33,7 +33,7 @@ namespace RiverAttack
         void StopSound()
         {
             if (!audioSource.isPlaying) return;
-                audioSource.Stop();
+            audioSource.Stop();
         }
         void ExplodeSound()
         {

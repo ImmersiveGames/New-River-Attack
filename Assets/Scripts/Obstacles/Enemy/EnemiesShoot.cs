@@ -16,7 +16,7 @@ namespace RiverAttack
         readonly StateShoot m_StateShoot;
         readonly StateShootHold m_StateShootHold;
         readonly StateShootPatrol m_StateShootPatrol;
-        IShoot m_ActualState;  
+        IShoot m_ActualState;
     #endregion
 
         GamePlayManager m_GamePlayManager;
@@ -24,7 +24,7 @@ namespace RiverAttack
         EnemiesSetDifficulty m_EnemyDifficult;
 
         internal Transform spawnPoint;
-        
+
         public EnemiesShoot()
         {
             m_StateShoot = new StateShoot(this);
@@ -88,7 +88,7 @@ namespace RiverAttack
             m_ActualState = newState;
             m_ActualState?.EnterState(m_EnemiesMaster);
         }
-        
+
         void StopFire()
         {
             target = null;

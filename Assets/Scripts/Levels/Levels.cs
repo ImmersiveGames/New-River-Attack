@@ -15,18 +15,18 @@ namespace RiverAttack
         public string developerDescription = "";
 #endif
         public bool beatGame;
-        
+
         [Header("HUD Settings")]
         public Sprite levelIcon;
         public Vector3 levelIconPos;
-        
+
         [Header("Build Settings")]
         public LevelTypes bgmLevel;
         [SerializeField] internal GameObject pathStart;
         [SerializeField] internal GameObject pathEnd;
         [SerializeField] internal Vector3 levelOffset;
         [SerializeField] internal List<LevelsSetup> setLevelList;
-        
+
         /*        
         public bool CheckIfComplete(List<Levels> finishList)
         {

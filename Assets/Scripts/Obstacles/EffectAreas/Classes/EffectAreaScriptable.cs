@@ -4,7 +4,6 @@ using UnityEngine.Events;
 namespace RiverAttack
 {
     [CreateAssetMenu(fileName = "GasStation", menuName = "RiverAttack/EffectArea", order = 5)]
-
     public class EffectAreaScriptable : EnemiesScriptable
     {
         [Header("Effect Area Settings")]
@@ -19,5 +18,3 @@ namespace RiverAttack
         }
     }
 }
-
-

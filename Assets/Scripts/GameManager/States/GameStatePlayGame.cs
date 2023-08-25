@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace RiverAttack
 {
-    public class GameStatePlayGame: GameState
+    public class GameStatePlayGame : GameState
     {
         readonly GameManager m_GameManager;
         readonly GamePlayManager m_GamePlayManager;
@@ -13,9 +13,9 @@ namespace RiverAttack
         public override void EnterState()
         {
             Debug.Log($"Entra no Estado: PlayGame");
-            m_GameManager.startMenu.SetMenuPrincipal(1,false);
+            m_GameManager.startMenu.SetMenuPrincipal(1, false);
             m_GameManager.startMenu.SetMenuHudControl(true);
-            if(!m_GameManager.haveAnyPlayerInitialized)
+            if (!m_GameManager.haveAnyPlayerInitialized)
                 m_GameManager.InstantiatePlayers();
             m_GameManager.ActivePlayers(true);
             m_GameManager.UnPausedMovementPlayers();

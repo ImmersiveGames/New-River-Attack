@@ -81,7 +81,7 @@ namespace Shopping
         void SetupSelectButton(PlayerSettings player)
         {
             btnSelect.gameObject.SetActive(!productInStock.AvailableForBuy(player));
-            btnSelect.interactable = false || productInStock.AvailableToSelect(player);
+            btnSelect.interactable = productInStock.AvailableToSelect(player);
             if (productInStock.shopProduct.isConsumable)
                 btnSelect.gameObject.SetActive(false);
             //Debug.Log(myproductStock.shopProduct.GetName + "  Ativo: " + myproductStock.shopProduct.ShouldBeConsume(player));

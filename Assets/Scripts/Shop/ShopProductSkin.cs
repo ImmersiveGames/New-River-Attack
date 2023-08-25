@@ -19,7 +19,7 @@ namespace RiverAttack
             isConsumable = false;
         }
   #endregion
-        
+
         public override bool ShouldBeConsume(PlayerSettings player)
         {
             return player.playerSkin != this;

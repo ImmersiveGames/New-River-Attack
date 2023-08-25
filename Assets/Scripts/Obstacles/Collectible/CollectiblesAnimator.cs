@@ -4,8 +4,8 @@ namespace RiverAttack
 {
     public class CollectiblesAnimator : MonoBehaviour
     {
-        [SerializeField]string collectTrigger;
-        
+        [SerializeField] string collectTrigger;
+
         CollectiblesMaster m_CollectiblesMaster;
         Animator m_Animator;
 
@@ -35,7 +35,7 @@ namespace RiverAttack
         {
             m_CollectiblesMaster = GetComponent<CollectiblesMaster>();
             m_Animator = GetComponentInChildren<Animator>();
-            
+
         }
     }
 }

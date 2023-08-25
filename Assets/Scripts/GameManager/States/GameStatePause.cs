@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 namespace RiverAttack
 {
-    public class GameStatePause: GameState
+    public class GameStatePause : GameState
     {
         readonly GameManager m_GameManager;
         public GameStatePause()
@@ -10,7 +10,7 @@ namespace RiverAttack
         }
         public override void EnterState()
         {
-            m_GameManager.startMenu.SetMenuPrincipal(1,true);
+            m_GameManager.startMenu.SetMenuPrincipal(1, true);
             m_GameManager.startMenu.SetMenuHudControl(false);
             Debug.Log($"Entra no Estado: Pause");
         }

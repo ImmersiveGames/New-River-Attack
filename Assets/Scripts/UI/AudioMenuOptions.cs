@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 
-namespace RiverAttack 
+namespace RiverAttack
 {
     public class AudioMenuOptions : MonoBehaviour
     {
@@ -21,8 +21,8 @@ namespace RiverAttack
         void OnEnable()
         {
             m_GameSettings = GameSettings.instance;
-            musicVolumeSlider.value =  (m_GameSettings.musicVolume == 0)? defaultMusicVolume :  m_GameSettings.musicVolume;
-            sfxVolumeSlider.value = (m_GameSettings.sfxVolume == 0)? defaultSfxVolume :  m_GameSettings.sfxVolume;
+            musicVolumeSlider.value = (m_GameSettings.musicVolume == 0) ? defaultMusicVolume : m_GameSettings.musicVolume;
+            sfxVolumeSlider.value = (m_GameSettings.sfxVolume == 0) ? defaultSfxVolume : m_GameSettings.sfxVolume;
         }
         void Start()
         {
@@ -41,7 +41,7 @@ namespace RiverAttack
             float volume = Mathf.Log10(musicVolumeSlider.value) * 20f;
             m_GameSettings.musicVolume = musicVolumeSlider.value;
             mixerGroup.SetFloat("MusicVolume", volume);
-            
+
             //Debug.Log("Volume da Musica: " + volume.ToString());
         }
 
@@ -55,5 +55,3 @@ namespace RiverAttack
         }
     }
 }
-
-

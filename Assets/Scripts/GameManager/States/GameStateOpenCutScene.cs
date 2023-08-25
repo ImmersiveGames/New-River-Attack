@@ -2,7 +2,7 @@
 using UnityEngine.Playables;
 namespace RiverAttack
 {
-    public class GameStateOpenCutScene: GameState
+    public class GameStateOpenCutScene : GameState
     {
         const float TOLERANCE = 1f;
         readonly PlayableDirector m_PlayableDirector;
@@ -18,14 +18,14 @@ namespace RiverAttack
             Debug.Log($"Entra no Estado: CutScene");
             m_GameManager.InstantiatePlayers();
             m_GameManager.PlayOpenCutScene();
-            m_GameManager.startMenu.SetMenuPrincipal(1,false);
+            m_GameManager.startMenu.SetMenuPrincipal(1, false);
             m_GameManager.startMenu.SetMenuHudControl(false);
         }
         public override void UpdateState()
         {
             Debug.Log($"Rodando no Estado: CutScene");
             if (m_PlayableDirector == null) return;
-            
+
             // Verificar se a animação já terminou
             if (!(m_PlayableDirector.time >= m_PlayableDirector.duration - TOLERANCE))
                 return;

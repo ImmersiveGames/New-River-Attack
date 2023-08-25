@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 namespace RiverAttack
 {
@@ -34,7 +32,7 @@ namespace RiverAttack
         void SoundAreaEffect()
         {
             if ((!audioSource && !effectAreaSound) || audioSource.isPlaying) return;
-                effectAreaSound.Play(audioSource);
+            effectAreaSound.Play(audioSource);
         }
 
         void StopSoundAreaEffect()
@@ -44,4 +42,3 @@ namespace RiverAttack
         }
     }
 }
-

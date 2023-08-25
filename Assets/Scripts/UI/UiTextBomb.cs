@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-namespace RiverAttack 
+namespace RiverAttack
 {
     public class UiTextBomb : MonoBehaviour
     {
@@ -38,4 +38,3 @@ namespace RiverAttack
         }
     }
 }
-

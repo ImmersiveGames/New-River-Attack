@@ -37,13 +37,12 @@ namespace RiverAttack
 
         internal delegate void BuildPatchHandler(float position);
         internal event BuildPatchHandler EventBuildPathUpdate;
-        
+
         public delegate void CollectableEventHandle(CollectibleScriptable collectibles);
         public event CollectableEventHandle EventCollectItem;
-        
+
         public delegate void ShakeCamEventHandle(float power, float inTime);
         public event ShakeCamEventHandle EventShakeCam;
-        
         #endregion
 
         #region UNITYMETHODS
@@ -56,8 +55,8 @@ namespace RiverAttack
         {
             get { return gameSettings; }
         }
-        
-        public bool shouldBePlayingGame { get { return (m_GameManager.currentGameState is GameStatePlayGame  && !completePath); } }
+
+        public bool shouldBePlayingGame { get { return (m_GameManager.currentGameState is GameStatePlayGame && !completePath); } }
 
         public PlayerSettings GetNoPlayerPlayerSettings(int playerIndex = 0)
         {
@@ -92,7 +91,7 @@ namespace RiverAttack
             {
                 score += pl.GetComponent<PlayerMaster>().getPlayerSettings.score;
             }
-            
+
             return score;
         }
 
@@ -154,6 +153,6 @@ namespace RiverAttack
             EventBuildPathUpdate?.Invoke(position);
         }
   #endregion
-        
+
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Shopping
 {
@@ -60,7 +59,7 @@ namespace Shopping
         public bool Contains(ShopProduct shopProduct)
         {
             var inStock = value.Find(x => x.shopProduct == shopProduct);
-            return (inStock.shopProduct != null) ? true : false;
+            return inStock.shopProduct != null;
         }
 
         public bool Contains(ShopProductStock shopStock)

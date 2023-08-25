@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 namespace RiverAttack
 {
@@ -12,8 +11,7 @@ namespace RiverAttack
         public event GeneralEventHandler EventEnterAreaEffect;
         public event GeneralEventHandler EventExitAreaEffect;
   #endregion
-        
-        
+
         #region UNITYMETHODS
         void OnTriggerExit(Collider collision)
         {
@@ -60,7 +58,6 @@ namespace RiverAttack
             EventExitAreaEffect?.Invoke();
         }
   #endregion
-        
+
     }
 }
-

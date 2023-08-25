@@ -13,16 +13,16 @@ namespace Utils
         {
             [SerializeField]
             List<TKey> keys = new List<TKey>();
-    
+
             [SerializeField]
             List<TValue> values = new List<TValue>();
-    
+
             public void Add(TKey key, TValue value)
             {
                 keys.Add(key);
                 values.Add(value);
             }
-    
+
             public bool TryGetValue(TKey key, out TValue value)
             {
                 int index = keys.IndexOf(key);
@@ -31,7 +31,7 @@ namespace Utils
                     value = values[index];
                     return true;
                 }
-        
+
                 value = default(TValue);
                 return false;
             }
@@ -169,7 +169,7 @@ namespace Utils
         public static void SetLayersRecursively(LayerMask layerMask, Transform itemTransform)
         {
             int novoLayer = Mathf.RoundToInt(Mathf.Log(layerMask.value, 2));
-            if(itemTransform.gameObject.layer != novoLayer)
+            if (itemTransform.gameObject.layer != novoLayer)
                 itemTransform.gameObject.layer = novoLayer;
             for (int i = 0; i < itemTransform.childCount; i++)
             {

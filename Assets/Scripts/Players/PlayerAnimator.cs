@@ -6,7 +6,7 @@ namespace RiverAttack
     {
         readonly int m_DirX = Animator.StringToHash("DirX");
         readonly int m_DirY = Animator.StringToHash("DirY");
-        
+
         Animator m_Animator;
         PlayerMaster m_PlayerMaster;
 

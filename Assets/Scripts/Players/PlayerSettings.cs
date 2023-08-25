@@ -25,7 +25,7 @@ namespace RiverAttack
         public Quaternion spawnRotation;
         [Header("Skin Settings")]
         public ShopProductSkin playerSkin;
-        
+
         [Header("Player")]
         public float mySpeedy;
         public float myAgility;

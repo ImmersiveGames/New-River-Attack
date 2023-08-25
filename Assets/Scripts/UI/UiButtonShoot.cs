@@ -16,7 +16,7 @@ namespace RiverAttack
 
         void ActionShoot()
         {
-            Debug.Log($"Animator {m_Animator}");
+            //Debug.Log($"Animator {m_Animator}");
             if (m_Animator != null)
             {
                 m_Animator.SetTrigger(IsPressed);

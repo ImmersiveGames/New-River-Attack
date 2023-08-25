@@ -8,17 +8,15 @@ namespace RiverAttack
 
         public EnemiesSetDifficulty.EnemyDifficult actualDifficultName;
         public static EnemiesSetDifficulty myDifficulty { get; private set; }
-        
+
         #region Delegates
         internal event GeneralEventHandler EventObjectMasterFlipEnemies;
         #endregion
 
         #region UNITYMETHODS
-        
-
         internal override void Awake()
         {
-            base.Awake(); 
+            base.Awake();
             m_EnemiesSetDifficultList = enemy.enemiesSetDifficultyListSo;
             if (m_EnemiesSetDifficultList != null)
                 myDifficulty = m_EnemiesSetDifficultList.GetDifficultByEnemyDifficult(actualDifficultName);
@@ -33,7 +31,7 @@ namespace RiverAttack
         {
             base.OnTriggerEnter(other);
             Debug.Log("Entrou aqui");
-            if (other.GetComponent <BulletPlayer>()) return;
+            if (other.GetComponent<BulletPlayer>()) return;
             ComponentToKill(other.GetComponentInParent<PlayerMaster>(), CollisionType.Collider);
         }
         internal override void OnDisable()
@@ -42,7 +40,7 @@ namespace RiverAttack
             EventObstacleMasterHit -= ChangeDifficulty;
         }
           #endregion
-        
+
         void ChangeDifficulty()
         {
             if (m_EnemiesSetDifficultList != null)
@@ -57,6 +55,6 @@ namespace RiverAttack
             EventObjectMasterFlipEnemies?.Invoke();
         }
   #endregion
-        
+
     }
 }

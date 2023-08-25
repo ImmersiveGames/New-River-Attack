@@ -11,7 +11,7 @@ namespace RiverAttack
         public Transform target;
         PlayerDetectApproach m_PlayerDetectApproach;
         readonly ObstacleDetectApproach m_ObstacleDetectApproach;
-        
+
         public StateShootPatrol(ObstacleDetectApproach enemiesShoot, Transform target)
         {
             this.target = target;
@@ -31,11 +31,11 @@ namespace RiverAttack
         public void UpdateState()
         {
             var position = m_EnemiesMaster.transform.position;
-            
+
             //TODO: Quando o inimigo morre, precisa resetar o target também.
-            
+
             m_PlayerDetectApproach ??= new PlayerDetectApproach(position, m_PlayerApproachRadius);
-            target =  m_PlayerDetectApproach.TargetApproach<PlayerMaster>(GameManager.instance.layerPlayer);
+            target = m_PlayerDetectApproach.TargetApproach<PlayerMaster>(GameManager.instance.layerPlayer);
         }
         public void ExitState()
         {

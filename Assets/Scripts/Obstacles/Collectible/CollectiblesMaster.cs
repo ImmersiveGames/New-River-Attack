@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Utils;
 namespace RiverAttack
@@ -15,7 +14,6 @@ namespace RiverAttack
   #endregion
 
         #region UNITYMETHODS
-        
         internal override void OnTriggerEnter(Collider other)
         {
             if (other.GetComponent<Bullets>())
@@ -23,18 +21,17 @@ namespace RiverAttack
                 base.OnTriggerEnter(other);
                 return;
             }
-            ComponentToCollect(other.GetComponentInParent<PlayerMaster>(), CollisionType.Collected);
+            ComponentToCollect(other.GetComponentInParent<PlayerMaster>());
         }
-        
   #endregion
-        
+
         protected override void SetInitialReferences()
         {
             base.SetInitialReferences();
             collectibleScriptable = enemy as CollectibleScriptable;
         }
 
-        void ComponentToCollect(Component other, CollisionType collisionType)
+        void ComponentToCollect(Component other)
         {
             if (other == null) return;
             var playerMaster = WhoHit(other);
@@ -51,7 +48,7 @@ namespace RiverAttack
             ShouldSavePoint(playerMaster.getPlayerSettings);
             AddCollectList(collectableList, collectibleScriptable, collectibleScriptable.amountCollectables);
             CollectWealth(playerMaster.getPlayerSettings, collectibleScriptable.amountCollectables);
-            GamePlayManager.AddResultList(gamePlaySettings.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy,collectibleScriptable.amountCollectables, CollisionType.Collected);
+            GamePlayManager.AddResultList(gamePlaySettings.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy, collectibleScriptable.amountCollectables, CollisionType.Collected);
         }
         static void AddCollectList(List<LogPlayerCollectables> list, CollectibleScriptable collectible, int qnt)
         {
@@ -94,48 +91,7 @@ namespace RiverAttack
             EventObstacleMaxCollectReached?.Invoke(collectable);
         }
   #endregion
-        
-        /*internal CollectibleScriptable collectibleScriptable;
-        public event GeneralEventHandler ShowOnScreen;
-        public event EnemyEventHandler CollectibleEvent;
 
-    #region UNITYMETHODS
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-            gamePlayManager.EventResetEnemies += DestroyCollectable;
-        }
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-            gamePlayManager.EventResetEnemies -= DestroyCollectable;
-        }
-  #endregion
-        protected override void SetInitialReferences()
-        {
-            base.SetInitialReferences();
-            gameObject.layer = LayerMask.NameToLayer("Collections");
-            collectibleScriptable = (CollectibleScriptable)enemy;
-            if (collectibleScriptable.getPowerUp)
-            {
-                name += "(" + collectibleScriptable.getPowerUp.name + ")";
-            }
-        }
-        public void CallCollectibleEvent(PlayerMaster playerMaster)
-        {
-            CollectibleEvent?.Invoke(playerMaster);
-        }
-        public void CallShowOnScreen()
-        {
-            ShowOnScreen?.Invoke();
-        }
-        void DestroyCollectable()
-        {
-            if (collectibleScriptable.getPowerUp)
-                Destroy(gameObject);
-        }*/
-
-        
     }
 
     [System.Serializable]

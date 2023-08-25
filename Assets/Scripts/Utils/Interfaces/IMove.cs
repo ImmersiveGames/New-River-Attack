@@ -1,6 +1,6 @@
 using RiverAttack;
 using UnityEngine;
-namespace  Utils
+namespace Utils
 {
     public interface IMove
     {
@@ -9,4 +9,3 @@ namespace  Utils
         void ExitState();
     }
 }
-

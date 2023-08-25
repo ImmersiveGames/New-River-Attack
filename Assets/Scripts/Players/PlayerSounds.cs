@@ -20,7 +20,7 @@ namespace RiverAttack
 
         bool m_OnAccelerate;
         bool m_OnDecelerate;
-        
+
         PlayerMaster m_PlayerMaster;
         AudioSource m_AudioSource;
         //GamePlayManager m_GamePlayManager;
@@ -31,8 +31,8 @@ namespace RiverAttack
             SetInitialReferences();
             m_PlayerMaster.EventPlayerMasterControllerMovement += SoundEngine;
             m_PlayerMaster.EventPlayerMasterHit += SoundExplosion;
-           /* m_GamePlayManager.EventPausePlayGame += SoundStop;
-            m_GamePlayManager.EventCompletePath += SoundStop;*/
+            /* m_GamePlayManager.EventPausePlayGame += SoundStop;
+             m_GamePlayManager.EventCompletePath += SoundStop;*/
         }
         void OnDisable()
         {
@@ -71,10 +71,10 @@ namespace RiverAttack
                     break;
             }
 
-            if(!m_AudioSource.isPlaying)
+            if (!m_AudioSource.isPlaying)
                 audioEngineLoop.Play(m_AudioSource);
         }
-        
+
         IEnumerator ChangeEngine(AudioEventSample audioStart, AudioEvent audioFix)
         {
             audioStart.Play(m_AudioSource);
@@ -85,7 +85,7 @@ namespace RiverAttack
             audioFix.Play(m_AudioSource);
         }
 
-        static IEnumerator FadeOutAudio(AudioSource source,float initialVolume, float fadeOutDuration)
+        static IEnumerator FadeOutAudio(AudioSource source, float initialVolume, float fadeOutDuration)
         {
             float elapsedTime = 0.0f;
             while (elapsedTime < fadeOutDuration)
@@ -104,12 +104,5 @@ namespace RiverAttack
             StopAllCoroutines();
             audioPlayerExplosion.Play(m_AudioSource);
         }
-        /*
-         void SoundStop()
-        {
-            StopAllCoroutines();
-            m_AudioSource.Stop();
-        }
-        */
     }
 }

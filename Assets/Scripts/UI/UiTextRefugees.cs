@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace RiverAttack 
+namespace RiverAttack
 {
     public class UiTextRefugees : MonoBehaviour
     {
@@ -42,4 +42,3 @@ namespace RiverAttack
         }
     }
 }
-

@@ -16,13 +16,13 @@
             m_CollectiblesMaster.EventCollectItem -= SetCollScore;
         }
   #endregion
-       
+
         protected override void SetInitialReferences()
         {
             base.SetInitialReferences();
             m_CollectiblesMaster = GetComponent<CollectiblesMaster>();
         }
-        
+
         void SetCollScore(PlayerSettings playerSettings)
         {
             float score = m_CollectiblesMaster.collectibleScriptable.collectValuable;
@@ -40,4 +40,3 @@
         }
     }
 }
-

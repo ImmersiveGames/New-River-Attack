@@ -180,7 +180,7 @@ namespace Shopping
             };
         }
 
-        private float VectorDistance(Vector3 anchor1, Vector3 anchor0)
+        float VectorDistance(Vector3 anchor1, Vector3 anchor0)
         {
             return Direction switch
             {
@@ -190,7 +190,7 @@ namespace Shopping
             };
         }
 
-        private void ClearShopping(int count)
+        void ClearShopping(int count)
         {
             for (int i = 0; i < m_ContentProduct.childCount; i++)
             {

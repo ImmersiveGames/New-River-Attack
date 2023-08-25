@@ -9,7 +9,7 @@ namespace RiverAttack
         float m_MovementSpeed;
         float m_MultiplyVelocityUp;
         float m_MultiplyVelocityDown;
-        
+
         Vector2 m_InputVector;
         PlayersInputActions m_PlayersInputActions;
         PlayerMaster m_PlayerMaster;
@@ -26,12 +26,12 @@ namespace RiverAttack
             m_PlayersInputActions = m_PlayerMaster.playersInputActions;
             m_PlayersInputActions.Enable();
             m_PlayersInputActions.Player.Move.performed += TouchMove;
-            m_PlayersInputActions.Player.Move.canceled += EndTouchMove; 
+            m_PlayersInputActions.Player.Move.canceled += EndTouchMove;
         }
         void FixedUpdate()
         {
-            if(!m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady) return;
-            
+            if (!m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady) return;
+
             float axisAutoMovement = m_InputVector.y switch
             {
                 > 0 => m_MultiplyVelocityUp,
@@ -52,7 +52,7 @@ namespace RiverAttack
             m_PlayerMaster.OnEventPlayerMasterControllerMovement(m_InputVector);
         }
   #endregion
-        
+
         void SetInitialReferences()
         {
             m_PlayerMaster = GetComponent<PlayerMaster>();
@@ -66,12 +66,12 @@ namespace RiverAttack
             m_MultiplyVelocityUp = settings.multiplyVelocityUp;
             m_MultiplyVelocityDown = settings.multiplyVelocityDown;
         }
-        void TouchMove(InputAction.CallbackContext context) 
+        void TouchMove(InputAction.CallbackContext context)
         {
-            m_InputVector = context.ReadValue<Vector2>().normalized; 
+            m_InputVector = context.ReadValue<Vector2>().normalized;
         }
 
-        void EndTouchMove(InputAction.CallbackContext context) 
+        void EndTouchMove(InputAction.CallbackContext context)
         {
             m_InputVector = Vector2.zero;
         }

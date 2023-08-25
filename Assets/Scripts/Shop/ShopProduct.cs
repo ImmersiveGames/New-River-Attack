@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using RiverAttack;
-namespace  Shopping
+namespace Shopping
 {
     [System.Serializable]
     public abstract class ShopProduct : ScriptableObject
     {
-    
+
         public new string name;
         /*
         public LocalizationString translateName;*/

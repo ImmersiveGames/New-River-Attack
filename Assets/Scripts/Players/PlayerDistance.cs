@@ -3,13 +3,13 @@
 namespace RiverAttack
 {
     public class PlayerDistance : MonoBehaviour
-    { 
+    {
         public float conversion;
         public float offsetInicial;
-        
-        Vector3 m_LastPosition; 
-        float m_TravelledDistance; 
-        float m_ConvertDistance; 
+
+        Vector3 m_LastPosition;
+        float m_TravelledDistance;
+        float m_ConvertDistance;
         float m_LastConvertDistance;
         float m_MaxTravelledDistance;
 
@@ -37,7 +37,7 @@ namespace RiverAttack
         {
             // Calcula a distância percorrida no eixo Z desde o último frame
             float distanciaZ = Mathf.Abs(transform.position.z - m_LastPosition.z);
-            
+
             if (transform.position.z < 0 && distanciaZ <= 0 && !m_PlayerMaster.shouldPlayerBeReady) return;
 
             m_TravelledDistance += distanciaZ;
@@ -47,7 +47,7 @@ namespace RiverAttack
 
             // Calcula a distância convertida com base na conversão configurada
             m_ConvertDistance = m_MaxTravelledDistance / conversion;
-            
+
             int convertDistanceInt = Mathf.FloorToInt(m_ConvertDistance);
             if (convertDistanceInt > Mathf.FloorToInt(m_LastConvertDistance))
             {
@@ -61,7 +61,7 @@ namespace RiverAttack
         }
         void OnDisable()
         {
-            LogGamePlay(m_TravelledDistance,m_MaxTravelledDistance);
+            LogGamePlay(m_TravelledDistance, m_MaxTravelledDistance);
         }
         void OnApplicationQuit()
         {

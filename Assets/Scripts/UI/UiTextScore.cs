@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace RiverAttack 
+namespace RiverAttack
 {
     public class UiTextScore : MonoBehaviour
     {
@@ -35,7 +35,7 @@ namespace RiverAttack
         void UpdateScore(int score)
         {
             m_TMPTextScore.text = score.ToString();
-            
+
         }
     }
 }

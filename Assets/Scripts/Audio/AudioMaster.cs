@@ -32,11 +32,6 @@ namespace RiverAttack
             if (playOnEnable)
                 PlayBGM();
         }
-        //private void OnDisable()
-        //{ 
-        //    if(playOnEnable)
-        //    StopBGM();
-        //}
   #endregion
 
         void PlayBGM()

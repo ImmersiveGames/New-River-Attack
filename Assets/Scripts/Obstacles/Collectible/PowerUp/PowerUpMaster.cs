@@ -20,7 +20,7 @@ namespace RiverAttack
         {
             base.OnTriggerEnter(other);
             var playerPowerUp = other.GetComponentInParent<PlayerPowerUp>();
-            if(other == null) return;
+            if (other == null) return;
             ComponentToPowerUp(playerPowerUp);
         }
         protected override void SetInitialReferences()

@@ -9,12 +9,12 @@ namespace RiverAttack
         //ATENÇÃO NÃO ACEITA EVENTS PORQUE ELE NÃO VAI APRA A MEMORIA CHAMANDO PELO SCRIPTABLE
         //Este script precisa estar num prefab fora de scene geralmente _GamePlayEffects_
         public static PlayerSettings target;
-        
+
         public void RecoveryFuel(int amount)
         {
             if (target == null) return;
             if (target.actualFuel >= GameSettings.instance.maxFuel) return;
-                
+
             target.actualFuel += amount;
             GamePLayLogFuel(amount);
         }
@@ -24,7 +24,7 @@ namespace RiverAttack
             var gamePlaySettings = GamePlaySettings.instance;
             gamePlaySettings.fuelStocked += fuel;
         }
-    
+
         [FormerlySerializedAs("minRapidFire")]
         [Header("RapidFire PowerUp")]
         [Range(0.1f, 1f)]

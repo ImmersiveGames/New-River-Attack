@@ -23,16 +23,16 @@ namespace Shopping
         TMP_Text wealthTMPText;
         [SerializeField]
         GameObject productForward, productBackward;
-        
+
         [Header("Carousel"), SerializeField]
         bool infinityLooping;
         [SerializeField]
-        float spaceBetweenPanels = 0, maxPosition = 0;
+        float spaceBetweenPanels, maxPosition;
         public Color selectedColor;
         public Color normalColor;
-        
-        int m_LastSelectedSkin = 0;
-        
+
+        int m_LastSelectedSkin;
+
         ShopCarousel m_Shop;
         AudioSource m_AudioSource;
         GamePlayAudio m_GamePlayAudio;
@@ -43,9 +43,8 @@ namespace Shopping
         public delegate void GeneralUpdateButtons(PlayerSettings player);
         public GeneralUpdateButtons eventButtonSelect;
         public GeneralUpdateButtons eventButtonBuy;
-        
+
         //TODO: Diferenciar que está atualmente Selecionado e as que são possiveis de compra.
-        
   #endregion
         #region UNITYMETHODS
         void OnEnable()
@@ -67,9 +66,9 @@ namespace Shopping
         {
             m_GamePlayAudio = GamePlayAudio.instance;
             m_AudioSource = GetComponentInParent<AudioSource>();
-            if(m_AudioSource == null) Debug.LogWarning("Componente de Audio não encontrado.");
+            if (m_AudioSource == null) Debug.LogWarning("Componente de Audio não encontrado.");
         }
-        
+
         void SetControllersInput()
         {
             m_InputSystem = new PlayersInputActions();
@@ -78,8 +77,8 @@ namespace Shopping
 
             m_InputSystem.UI_Controlls.BuyButton.performed += BuyInputButton;
             m_InputSystem.UI_Controlls.SelectButton.performed += SelectButton;
-            m_InputSystem.UI_Controlls.LeftSelection.performed += ctx => ControllerNavigationArrows(-1);
-            m_InputSystem.UI_Controlls.RightSelection.performed += ctx => ControllerNavigationArrows(1);
+            m_InputSystem.UI_Controlls.LeftSelection.performed += _ => ControllerNavigationArrows(-1);
+            m_InputSystem.UI_Controlls.RightSelection.performed += _ => ControllerNavigationArrows(1);
         }
         void SetupShop(PlayerSettings playerSettings)
         {
@@ -98,8 +97,8 @@ namespace Shopping
                 item.SetupButtons(playerSettings);
                 item.getBuyButton.onClick.AddListener(delegate { BuyThisItem(playerSettings, item.productInStock); });
                 item.getSelectButton.onClick.AddListener(delegate { SelectThisItem(playerSettings, item.productInStock); });
-                
-                if (item.getSelectButton.interactable == false) 
+
+                if (item.getSelectButton.interactable == false)
                     item.getSelectButton.GetComponent<Image>().color = selectedColor;
             }
         }
@@ -114,7 +113,7 @@ namespace Shopping
 
             var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
             item.getSelectButton.interactable = true;
-            
+
             m_GamePlayAudio.PlayClickSfx(m_AudioSource);
         }
         void SelectThisItem(PlayerSettings player, ShopProductStock shopProductStock)
@@ -133,33 +132,33 @@ namespace Shopping
 
             m_GamePlayAudio.PlayClickSfx(m_AudioSource);
         }
-        void WealthDisplayUpdate(int wealth) 
+        void WealthDisplayUpdate(int wealth)
         {
             wealthTMPText.text = wealth.ToString();
         }
 
         #region INPUT BUTTONS
-        void BuyInputButton(InputAction.CallbackContext context) 
+        void BuyInputButton(InputAction.CallbackContext context)
         {
             //Debug.Log("Comprar o item");
             var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
 
             if (item.productInStock.PlayerAlreadyBuy(m_ActivePlayer))
             {
-               // Debug.Log("Player já tem o produto. Venda não concluida.");
+                // Debug.Log("Player já tem o produto. Venda não concluida.");
                 return;
             }
             BuyThisItem(m_ActivePlayer, item.productInStock);
         }
         void SelectButton(InputAction.CallbackContext context)
         {
-           // Debug.Log("Selecionar o item");
-            
+            // Debug.Log("Selecionar o item");
+
             var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
 
             if (!item.productInStock.PlayerAlreadyBuy(m_ActivePlayer))
             {
-               // Debug.Log("Player Não tem o produto. Seleção não concluida.");
+                // Debug.Log("Player Não tem o produto. Seleção não concluida.");
                 return;
             }
 
@@ -186,7 +185,7 @@ namespace Shopping
             //Debug.Log(m_Shop.getActualProduct);
             //Debug.Log(m_Shop.getProducts.Length);
 
-            float scrollbarValue = ((float)m_Shop.getActualProduct) / ((float)m_Shop.getProducts.Length -1);
+            float scrollbarValue = ((float)m_Shop.getActualProduct) / ((float)m_Shop.getProducts.Length - 1);
             //Debug.Log(scrollbarValue);
 
             scrollBarShop.horizontalScrollbar.value = scrollbarValue;
@@ -213,7 +212,7 @@ namespace Shopping
             {
                 productBackward.SetActive(true);
                 productForward.SetActive(true);
-            }  
+            }
         }
   #endregion
 

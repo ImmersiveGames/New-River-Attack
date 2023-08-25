@@ -12,13 +12,13 @@ namespace RiverAttack
         protected internal ObjectMaster ownerShoot;
         Transform m_MyPool;
 
-        public void Init(float speed,float lifetime = 0)
+        public void Init(float speed, float lifetime = 0)
         {
             bulletSpeed = speed;
             m_HasBulletLifeTime = lifetime > 0;
             bulletLifeTime = lifetime + Time.time;
         }
-        
+
         public bool haveAPool
         {
             get { return m_MyPool; }

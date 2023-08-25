@@ -43,6 +43,6 @@ namespace RiverAttack
             if (score > GamePlaySettings.instance.totalScore)
                 GamePlaySettings.instance.totalScore = score;
         }
-        
+
     }
 }

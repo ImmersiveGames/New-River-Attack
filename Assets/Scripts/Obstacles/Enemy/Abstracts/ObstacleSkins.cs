@@ -17,7 +17,7 @@ namespace RiverAttack
 
         void LoadDefaultSkin()
         {
-            if (skins == null)  return;
+            if (skins == null) return;
             if (randomSkin && skins.Length > 1)
                 indexStartSkin = Random.Range(0, skins.Length);
             if (transform.GetChild(0))

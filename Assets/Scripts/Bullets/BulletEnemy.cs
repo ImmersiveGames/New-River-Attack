@@ -3,13 +3,9 @@ namespace RiverAttack
 {
     public class BulletEnemy : Bullets
     {
-        #region Variable Private Inspector
-        
         float m_StartTime;
-        
-        #endregion
-        
-        #region UnityMethods
+
+        #region UNITYMETHODS
         void OnEnable()
         {
             GamePlayManager.instance.EventEnemiesMasterKillPlayer += DestroyMe;
@@ -17,7 +13,7 @@ namespace RiverAttack
             var audioSource = GetComponent<AudioSource>();
             audioShoot.Play(audioSource);
             m_StartTime = Time.time + bulletLifeTime;
-            
+
         }
         void FixedUpdate()
         {
@@ -26,7 +22,7 @@ namespace RiverAttack
         }
         void OnTriggerEnter(Collider collision)
         {
-            if ((collision.GetComponentInParent<EnemiesMaster>() && !collision.GetComponentInParent<CollectiblesMaster>())|| collision.GetComponentInParent<BulletEnemy>() ) return;
+            if ((collision.GetComponentInParent<EnemiesMaster>() && !collision.GetComponentInParent<CollectiblesMaster>()) || collision.GetComponentInParent<BulletEnemy>()) return;
             DestroyMe();
         }
         void OnBecameInvisible()
@@ -34,7 +30,7 @@ namespace RiverAttack
             Invoke(nameof(DestroyMe), .01f);
         }
         #endregion
-        
+
         void MoveShoot()
         {
             if (GamePlayManager.instance.shouldBePlayingGame)

@@ -11,10 +11,10 @@ namespace RiverAttack
         }
 
         public override void EnterState()
-        { 
+        {
             Debug.Log($"Entra no Estado: Menu");
             GamePlayAudio.instance.ChangeBGM(LevelTypes.Menu, TIME_TO_FADE_BGM);
-            m_GameManager.startMenu.SetMenuPrincipal(0,true);
+            m_GameManager.startMenu.SetMenuPrincipal(0, true);
             m_GameManager.startMenu.SetMenuHudControl(false);
         }
         public override void UpdateState()

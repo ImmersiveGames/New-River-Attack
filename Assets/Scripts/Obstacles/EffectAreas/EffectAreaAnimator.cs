@@ -5,7 +5,7 @@ namespace RiverAttack
     {
         public string onFueling;
         Animator m_Animator;
-        
+
         GamePlayManager m_GamePlayManager;
         EffectAreaMaster m_EffectAreaMaster;
         // Start is called before the first frame update
@@ -15,9 +15,9 @@ namespace RiverAttack
         {
             SetInitialReferences();
             m_GamePlayManager.EventReSpawnEnemiesMaster += ResetAnimation;
-            
+
         }
-         void OnDisable()
+        void OnDisable()
         {
             m_GamePlayManager.EventReSpawnEnemiesMaster -= ResetAnimation;
         }
@@ -35,7 +35,7 @@ namespace RiverAttack
         void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
-            m_EffectAreaMaster =  GetComponent<EffectAreaMaster>();
+            m_EffectAreaMaster = GetComponent<EffectAreaMaster>();
             m_Animator = GetComponentInChildren<Animator>();
         }
         void OnFuelingAnimation(bool activeBool)

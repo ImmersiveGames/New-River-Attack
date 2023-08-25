@@ -1,19 +1,20 @@
-﻿namespace RiverAttack
+﻿using UnityEngine;
+namespace RiverAttack
 {
-    public class GameStateEndGame: GameState
+    public class GameStateEndGame : GameState
     {
 
         public override void EnterState()
         {
-            throw new System.NotImplementedException();
+            Debug.Log($"Entra no Estado: EndGame");
         }
         public override void UpdateState()
         {
-            throw new System.NotImplementedException();
+            Debug.Log($"End Game - Credits");
         }
         public override void ExitState()
         {
-            throw new System.NotImplementedException();
+            Debug.Log($"Saida no Estado: End Game");
         }
     }
 }

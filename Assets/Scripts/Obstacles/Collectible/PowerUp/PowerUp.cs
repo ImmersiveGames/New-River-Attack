@@ -15,7 +15,7 @@ namespace RiverAttack
         public UnityEvent startAction;
         [SerializeField]
         public UnityEvent endAction;
-        
+
         public void PowerUpStart(PlayerSettings player)
         {
             GamePlayPowerUps.target = player;

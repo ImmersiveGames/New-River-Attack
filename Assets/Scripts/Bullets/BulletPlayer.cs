@@ -24,8 +24,6 @@ namespace RiverAttack
             var obstacleMaster = collision.GetComponent<ObstacleMaster>();
             if (obstacleMaster != null && !obstacleMaster.enemy.canDestruct) return;
             if (collision.GetComponentInParent<PowerUpMaster>()) return;
-            //Debug.Log($"Collider: {hitCollectable}");
-            //if (hitCollectable == null && hitCollectable.enemy is CollectibleScriptable) return;
             DestroyMe();
         }
         void OnBecameInvisible()

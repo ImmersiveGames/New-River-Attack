@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 namespace RiverAttack
 {
@@ -43,7 +42,7 @@ namespace RiverAttack
             this.player = player;
             this.enemy = enemy;
             this.quantity = quantity;
-            this.collisionType = collision;
+            collisionType = collision;
         }
     }
 }

@@ -5,7 +5,7 @@ namespace RiverAttack
     public class PlayerPowerUp : MonoBehaviour
     {
         readonly Dictionary<PowerUp, float> m_ActivePowerUps = new Dictionary<PowerUp, float>();
-        
+
         List<PowerUp> m_Keys = new List<PowerUp>();
         PlayerMaster m_PlayerMaster;
 
@@ -28,7 +28,7 @@ namespace RiverAttack
         {
             m_PlayerMaster = GetComponent<PlayerMaster>();
         }
-        
+
         void HandleGlobalPowerUps()
         {
             bool changed = false;
@@ -55,7 +55,7 @@ namespace RiverAttack
                 m_Keys = new List<PowerUp>(m_ActivePowerUps.Keys);
             }
         }
-        
+
         public void ActivatePowerUp(PowerUp powerUp)
         {
             //Debug.Log("AQUI: "+ powerUp.name);
@@ -76,7 +76,7 @@ namespace RiverAttack
             }
             m_Keys = new List<PowerUp>(m_ActivePowerUps.Keys);
         }
-        
+
         // Calls the end action of each powerup and clears them from the activePowerups
         void ClearActivePowerUps(bool onlyEffect = false) //(Player target, bool onlyeffect = false)
         {
@@ -96,11 +96,6 @@ namespace RiverAttack
         {
             ClearActivePowerUps();
         }
-        
-        /*
-        CollectibleScriptable m_Collectibles;
-        GamePlayPowerUps m_GamePlayPowerUps;
-        */
 
     }
 }

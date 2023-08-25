@@ -50,6 +50,7 @@ namespace RiverAttack
         {
             if (other == null || !shouldObstacleBeReady || !enemy.canDestruct) return;
             ComponentToKill(other.GetComponent<BulletPlayer>(), CollisionType.Shoot);
+            ComponentToKill(other.GetComponent<BulletPlayerBomb>(), CollisionType.Bomb);
         }
         internal virtual void OnDisable()
         {
@@ -88,7 +89,7 @@ namespace RiverAttack
             OnEventObstacleMasterHit();
             OnEventObstacleScore(playerMaster.getPlayerSettings);
             ShouldSavePoint(playerMaster.getPlayerSettings);
-            GamePlayManager.AddResultList(gamePlaySettings.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy,1, collisionType);
+            GamePlayManager.AddResultList(gamePlaySettings.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy, 1, collisionType);
         }
         internal static PlayerMaster WhoHit(Component other)
         {
@@ -125,7 +126,7 @@ namespace RiverAttack
         }
         protected void ShouldSavePoint(PlayerSettings playerSettings)
         {
-            if (!enemy.isCheckInPoint) 
+            if (!enemy.isCheckInPoint)
                 return;
             var transform1 = transform;
             var position = transform1.position;
@@ -149,6 +150,5 @@ namespace RiverAttack
         }
   #endregion
 
-    } 
+    }
 }
-

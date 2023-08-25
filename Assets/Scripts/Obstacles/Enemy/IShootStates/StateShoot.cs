@@ -22,14 +22,14 @@ namespace RiverAttack
             m_EnemiesShoot = enemiesShoot;
             m_MyPool = enemiesShoot;
         }
-        
+
         public void EnterState(EnemiesMaster enemyMaster)
         {
             m_StartCadence = m_Cadence = m_EnemiesShoot.shootCadence;
             m_StartBulletSpeed = m_EnemiesShoot.bulletSpeed;
             m_BulletLifeTime = m_EnemiesShoot.bulletLifeTime;
             m_SpawnPoint = m_EnemiesShoot.spawnPoint;
-            
+
             //Debug.Log("Estado: Shoot - Entrando" + m_EnemiesShoot.shootCadence);
             m_EnemiesMaster = enemyMaster;
             if (!m_EnemiesMaster.enemy && !m_EnemiesMaster.enemy.enemiesSetDifficultyListSo) return;
@@ -39,7 +39,7 @@ namespace RiverAttack
         }
         public void UpdateState()
         {
-           // Debug.Log("Attempt Shoot!" + m_Cadence);
+            // Debug.Log("Attempt Shoot!" + m_Cadence);
             m_Cadence -= Time.deltaTime;
             if (!(m_Cadence <= 0.01f))
                 return;
@@ -64,7 +64,7 @@ namespace RiverAttack
             //Deattached bullet
             var transformPosition = m_SpawnPoint.position;
             var transformRotation = m_SpawnPoint.rotation;
-   
+
             myShoot.transform.position = new Vector3(transformPosition.x, transformPosition.y, transformPosition.z);
             myShoot.transform.rotation = new Quaternion(transformRotation.x, transformRotation.y, transformRotation.z, transformRotation.w);
         }

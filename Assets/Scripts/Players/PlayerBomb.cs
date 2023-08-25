@@ -12,7 +12,7 @@ namespace RiverAttack
         Vector3 bombOffset;
         [SerializeField]
         GameObject prefabBomb;
-        
+
         PlayerMaster m_PlayerMaster;
         GamePlayManager m_GamePlayManager;
         PlayerSettings m_PlayerSettings;
@@ -42,7 +42,7 @@ namespace RiverAttack
             m_GamePlayManager.EventCollectItem -= CollectBombs;
         }
   #endregion
-        
+
         void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
@@ -56,7 +56,7 @@ namespace RiverAttack
                 return;
             m_BombQuantity += collectibles.amountCollectables;
             m_PlayerSettings.bombs = m_BombQuantity;
-            GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, m_PlayerSettings, collectibles,collectibles.amountCollectables, CollisionType.Collected);
+            GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, m_PlayerSettings, collectibles, collectibles.amountCollectables, CollisionType.Collected);
         }
         public void Execute(InputAction.CallbackContext callbackContext)
         {
@@ -75,7 +75,7 @@ namespace RiverAttack
         {
             throw new NotImplementedException();
         }
-        
+
         void LogGamePlay(int bomb)
         {
             m_GamePlaySettings.bombSpent += bomb;
