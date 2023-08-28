@@ -10,6 +10,7 @@ namespace RiverAttack
         [SerializeField] internal bool completePath;
         [SerializeField]
         bool godMode;
+        [SerializeField] public bool godModeSpeed;
         [SerializeField]
         GameSettings gameSettings;
         internal bool getGodMode { get { return godMode; } }

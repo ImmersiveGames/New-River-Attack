@@ -37,6 +37,7 @@ namespace RiverAttack
         }
         void ObjectMasterMoveAnimation(Vector3 dir)
         {
+            //TODO: BUG Na Pausa, esta resetando a animação, não pode.
             if (m_Animator == null)
             {
                 m_Animator = GetComponentInChildren<Animator>();
@@ -63,7 +64,8 @@ namespace RiverAttack
             if (!string.IsNullOrEmpty(onFlip))
                 m_Animator.SetBool(onFlip, false);
             //Forçando a Animação de movimento a reiniciar, normalmente é o eixo do movimento, mas como a variavel não entra neste escopo, força o movimento com true depois de revive-lo.
-            m_Animator.SetBool(onMove, true);
+            if (!string.IsNullOrEmpty(onMove)) 
+                m_Animator.SetBool(onMove, true);
         }
     }
 }

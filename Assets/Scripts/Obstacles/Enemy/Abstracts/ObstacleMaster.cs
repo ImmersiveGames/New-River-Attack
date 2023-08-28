@@ -131,6 +131,7 @@ namespace RiverAttack
             var transform1 = transform;
             var position = transform1.position;
             playerSettings.spawnPosition.z = position.z;
+            playerSettings.spawnPosition.x = position.x;
             gamePlayManager.OnEventBuildPathUpdate(position.z);
         }
 
