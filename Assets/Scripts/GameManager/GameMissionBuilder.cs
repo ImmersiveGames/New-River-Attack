@@ -44,6 +44,10 @@ namespace RiverAttack
             if (GameManager.instance.debugMode) return;
             StartBuildMission(actualLevel);
         }
+        void OnDisable()
+        {
+            m_GamePlayManager.EventBuildPathUpdate -= BuildNextPathForPoolLevel;
+        }
   #endregion
 
         void StartBuildMission(Levels level)
@@ -75,6 +79,7 @@ namespace RiverAttack
             }
             if (level.pathEnd == null) return;
             //Todo Corrigir no Update das fazes quando for as ultimas.
+            nextBound.x = level.levelOffset.x;
             FixedPath(ref nextBound, level.pathEnd, myRoot);
         }
         void FixedPath(ref Vector3 nextBound, GameObject nextPath, Transform myRoot)
@@ -120,11 +125,13 @@ namespace RiverAttack
         void UpdatePoolLevel(IReadOnlyList<GameObject> pool, int actualHandle)
         {
             int eixo = Mathf.CeilToInt(maxLevels / 2f);
-            int activeIndex = (actualHandle + 1) % pool.Count;
-            int deactivateIndex = activeIndex - eixo;
-            int removeIndex = activeIndex - eixo - 1;
+            int activeIndex = (actualHandle + 1) % pool.Count + eixo;
+            int deactivateIndex = actualHandle - eixo;
+            int removeIndex = actualHandle - eixo - 1;
 
-            //Debug.Log($"Index atual: {actualHandle}, Active: {activeIndex}, Deactive: {deactivateIndex}, Remove {removeIndex}");
+            Debug.Log($"Index atual: {actualHandle}, Active: {activeIndex}, Desactive: {deactivateIndex}, Remove {removeIndex}");
+            
+            if (activeIndex > pool.Count) return;
 
             if (activeIndex < pool.Count && !pool[activeIndex].activeInHierarchy)
                 pool[activeIndex].SetActive(true);

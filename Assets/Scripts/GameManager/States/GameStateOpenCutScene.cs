@@ -15,7 +15,7 @@ namespace RiverAttack
         }
         public override void EnterState()
         {
-            Debug.Log($"Entra no Estado: CutScene");
+            //Debug.Log($"Entra no Estado: CutScene");
             m_GameManager.InstantiatePlayers();
             m_GameManager.PlayOpenCutScene();
             m_GameManager.startMenu.SetMenuPrincipal(1, false);
@@ -23,7 +23,7 @@ namespace RiverAttack
         }
         public override void UpdateState()
         {
-            Debug.Log($"Rodando no Estado: CutScene");
+           // Debug.Log($"Rodando no Estado: CutScene");
             if (m_PlayableDirector == null) return;
 
             // Verificar se a animação já terminou
@@ -33,7 +33,7 @@ namespace RiverAttack
         }
         public override void ExitState()
         {
-            Debug.Log($"Saindo no Estado: CutScene");
+            //Debug.Log($"Saindo no Estado: CutScene");
         }
     }
 }

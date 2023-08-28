@@ -19,7 +19,7 @@ namespace RiverAttack
         }
         public void EnterState(EnemiesMaster enemiesMaster)
         {
-            Debug.Log("Estado: MOVE - Entrando: ");
+           // Debug.Log("Estado: MOVE - Entrando: ");
             m_MoveVelocity = m_EnemiesMovement.moveVelocity * m_MultiplyEnemiesSpeedy;
             m_VectorDirection = m_EnemiesMovement.SetDirection(m_EnemiesMovement.startDirection);
 
@@ -38,7 +38,7 @@ namespace RiverAttack
         }
         public void ExitState()
         {
-            Debug.Log("Estado: MOVE - Exit");
+           // Debug.Log("Estado: MOVE - Exit");
         }
         void Move(Transform objMove, Vector3 direction, float velocity)
         {

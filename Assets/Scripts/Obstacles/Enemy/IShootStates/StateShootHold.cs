@@ -6,17 +6,17 @@ namespace RiverAttack
     {
         public void EnterState(EnemiesMaster enemyMaster)
         {
-            Debug.Log("Estado: ShootHold - Entrando");
+           // Debug.Log("Estado: ShootHold - Entrando");
             // Coloque aqui as ações a serem executadas ao entrar no estado "Hold"
         }
         public void UpdateState()
         {
             // Coloque aqui o código para Hold
-            Debug.Log("Shoot Hold!");
+           // Debug.Log("Shoot Hold!");
         }
         public void ExitState()
         {
-            Debug.Log("Estado: Shoot Hold - Saindo");
+           // Debug.Log("Estado: Shoot Hold - Saindo");
             // Coloque aqui as ações a serem executadas ao sair do estado "hold"
         }
     }

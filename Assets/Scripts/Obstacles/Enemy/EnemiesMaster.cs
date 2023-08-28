@@ -30,7 +30,6 @@ namespace RiverAttack
         internal override void OnTriggerEnter(Collider other)
         {
             base.OnTriggerEnter(other);
-            Debug.Log("Entrou aqui");
             if (other.GetComponent<BulletPlayer>()) return;
             ComponentToKill(other.GetComponentInParent<PlayerMaster>(), CollisionType.Collider);
         }

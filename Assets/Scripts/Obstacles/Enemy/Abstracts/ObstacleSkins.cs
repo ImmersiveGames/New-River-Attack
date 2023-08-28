@@ -10,7 +10,7 @@ namespace RiverAttack
         [SerializeField]
         protected GameObject[] skins;
 
-        void OnEnable()
+        void Start()
         {
             LoadDefaultSkin();
         }

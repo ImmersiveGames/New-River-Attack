@@ -12,7 +12,7 @@ namespace RiverAttack
         }
         public override void EnterState()
         {
-            Debug.Log($"Entra no Estado: PlayGame");
+           // Debug.Log($"Entra no Estado: PlayGame");
             m_GameManager.startMenu.SetMenuPrincipal(1, false);
             m_GameManager.startMenu.SetMenuHudControl(true);
             if (!m_GameManager.haveAnyPlayerInitialized)
@@ -29,7 +29,7 @@ namespace RiverAttack
         {
             m_GamePlayManager.OnEventDeactivateEnemiesMaster();
             m_GameManager.ActivePlayers(false);
-            Debug.Log($"Sai do Estado: PlayGame");
+            //Debug.Log($"Sai do Estado: PlayGame");
         }
     }
 }

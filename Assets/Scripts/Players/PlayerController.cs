@@ -47,6 +47,7 @@ namespace RiverAttack
             };
 
             var moveDir = new Vector3(m_InputVector.x, 0, axisAutoMovement);
+            if (m_GamePlayManager.getGodMode) moveDir *= 4;
             transform.position += moveDir * (m_MovementSpeed * Time.deltaTime);
 
             m_PlayerMaster.OnEventPlayerMasterControllerMovement(m_InputVector);

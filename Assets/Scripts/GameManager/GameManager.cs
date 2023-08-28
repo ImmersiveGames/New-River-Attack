@@ -127,7 +127,7 @@ namespace RiverAttack
 
         IEnumerator PerformStateTransition(GameState actualState, GameState nextState)
         {
-            Debug.Log($"Start Coroutine");
+            //Debug.Log($"Start Coroutine");
             // Implemente o efeito de fade out aqui
             startMenu.PerformFadeOut();
 
