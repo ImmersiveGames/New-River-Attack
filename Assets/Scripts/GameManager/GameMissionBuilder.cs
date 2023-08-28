@@ -108,6 +108,7 @@ namespace RiverAttack
         // TODO:Quando ele pode ser chamado? Player morre? Player passa uma Ponte parece ser o ideal
         void BuildNextPathForPoolLevel(float posZ)
         {
+            if (pathMilestones.Count <=0) return;
             if (m_GamePlayManager.completePath || !(pathMilestones[actualPathIndex] - posZ <= 0))
                 return;
             Tools.EqualizeLists(ref poolPathLevels, ref poolEnemyLevels);
