@@ -6,6 +6,7 @@ namespace RiverAttack
         float m_Timer;
         float m_TimeToAccess;
         EffectAreaScriptable m_EffectArea;
+        PlayerMaster m_PlayerMaster;
 
         #region Events
         public event GeneralEventHandler EventEnterAreaEffect;
@@ -15,17 +16,21 @@ namespace RiverAttack
         #region UNITYMETHODS
         void OnTriggerExit(Collider collision)
         {
-            var playerMaster = collision.GetComponentInParent<PlayerMaster>();
-            if (!playerMaster) return;
-            playerMaster.inEffectArea = false;
+            if(m_PlayerMaster == null)
+                m_PlayerMaster = collision.GetComponentInParent<PlayerMaster>();
+            if (!m_PlayerMaster) return;
+            if (!m_PlayerMaster.shouldPlayerBeReady) return;
+            m_PlayerMaster.inEffectArea = false;
             OnEventExitAreaEffect();
         }
         void OnTriggerStay(Collider collision)
         {
-            var playerMaster = collision.GetComponentInParent<PlayerMaster>();
-            if (!playerMaster) return;
-            if (!playerMaster.inEffectArea) playerMaster.inEffectArea = true;
-            CollectThis(playerMaster);
+            if(m_PlayerMaster == null)
+                m_PlayerMaster = collision.GetComponentInParent<PlayerMaster>();
+            if (!m_PlayerMaster) return;
+            if (!m_PlayerMaster.shouldPlayerBeReady) return;
+            if (!m_PlayerMaster.inEffectArea) m_PlayerMaster.inEffectArea = true;
+            CollectThis(m_PlayerMaster);
         }
   #endregion
         protected override void SetInitialReferences()

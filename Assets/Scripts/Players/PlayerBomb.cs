@@ -7,7 +7,6 @@ namespace RiverAttack
     public class PlayerBomb : MonoBehaviour, ICommand
     {
         [Header("Bomb Settings")]
-        int m_BombQuantity;
         [SerializeField]
         Vector3 bombOffset;
         [SerializeField]
@@ -27,20 +26,18 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
-            m_GamePlayManager.EventCollectItem += CollectBombs;
-            //TODO: Verificar a melhor forma de atualizar as bonbas.
+            //m_GamePlayManager.EventCollectItem += CollectBombs;
         }
         void Start()
         {
             m_PlayersInputActions = m_PlayerMaster.playersInputActions;
-            m_BombQuantity = GameSettings.instance.startBombs;
-            m_PlayerSettings.bombs = m_BombQuantity;
+            m_PlayerSettings.bombs = GameSettings.instance.startBombs;
             m_PlayersInputActions.Player.Bomb.performed += Execute;
         }
-        void OnDisable()
+        /*void OnDisable()
         {
             m_GamePlayManager.EventCollectItem -= CollectBombs;
-        }
+        }*/
   #endregion
 
         void SetInitialReferences()
@@ -50,36 +47,37 @@ namespace RiverAttack
             m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
             m_GamePlaySettings = m_GamePlayManager.gamePlaySettings;
         }
-        void CollectBombs(CollectibleScriptable collectibles)
+        /*void CollectBombs(CollectibleScriptable collectibles)
         {
-            if (m_BombQuantity > collectibles.maxCollectible)
+            Debug.Log($"Collect{m_PlayerSettings.bombs}");
+            if (m_PlayerSettings.bombs >= collectibles.maxCollectible)
                 return;
-            m_BombQuantity += collectibles.amountCollectables;
-            m_PlayerSettings.bombs = m_BombQuantity;
+            m_PlayerSettings.bombs += collectibles.amountCollectables;
             GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, m_PlayerSettings, collectibles, collectibles.amountCollectables, CollisionType.Collected);
-        }
+        }*/
         public void Execute(InputAction.CallbackContext callbackContext)
         {
-            if (m_BombQuantity <= 0 || !m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady)
+            Debug.Log($"Collect{m_PlayerSettings.bombs}");
+            if (m_PlayerSettings.bombs <= 0 || !m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady)
                 return;
             m_GamePlayManager.OnEventPlayerPushButtonBomb();
-            m_BombQuantity -= 1;
+            m_PlayerSettings.bombs -= 1;
             var bomb = Instantiate(prefabBomb);
             bomb.transform.localPosition = transform.localPosition + bombOffset;
             bomb.GetComponent<Bullets>().ownerShoot = m_PlayerMaster;
             bomb.SetActive(true);
-            m_GamePlayManager.OnEventUpdateBombs(m_BombQuantity);
+            m_GamePlayManager.OnEventUpdateBombs(m_PlayerSettings.bombs);
             LogGamePlay(1);
         }
         public void UnExecute(InputAction.CallbackContext callbackContext)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         void LogGamePlay(int bomb)
         {
             m_GamePlaySettings.bombSpent += bomb;
-            m_PlayerSettings.bombs -= bomb;
+            //m_PlayerSettings.bombs -= bomb;
         }
 
         /*

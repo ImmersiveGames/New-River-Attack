@@ -14,8 +14,6 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
-            // TODO: Precisa reiniciar a animação depois que morre sem perder o animator.
-
             m_EnemiesMaster.EventObstacleMovement += ObjectMasterMoveAnimation;
             m_EnemiesMaster.EventObjectMasterFlipEnemies += ObjectMasterFlipEnemiesMasterFlipAnimation;
             m_GamePlayManager.EventReSpawnEnemiesMaster += ResetAnimation;

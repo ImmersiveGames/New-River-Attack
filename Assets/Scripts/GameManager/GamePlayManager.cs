@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -39,8 +40,8 @@ namespace RiverAttack
         internal delegate void BuildPatchHandler(float position);
         internal event BuildPatchHandler EventBuildPathUpdate;
 
-        public delegate void CollectableEventHandle(CollectibleScriptable collectibles);
-        public event CollectableEventHandle EventCollectItem;
+        /*public delegate void CollectableEventHandle(CollectibleScriptable collectibles);
+        public event CollectableEventHandle EventCollectItem;*/
 
         public delegate void ShakeCamEventHandle(float power, float inTime);
         public event ShakeCamEventHandle EventShakeCam;
@@ -57,6 +58,18 @@ namespace RiverAttack
             get { return gameSettings; }
         }
 
+        public void OnStartGame()
+        {
+            StartCoroutine(StartGamePlay());
+        }
+
+        IEnumerator StartGamePlay()
+        {
+            yield return new WaitForSeconds(2f);
+            m_GameManager.ActivePlayers(true);
+            m_GameManager.UnPausedMovementPlayers();
+            OnEventActivateEnemiesMaster();
+        }
         public bool shouldBePlayingGame { get { return (m_GameManager.currentGameState is GameStatePlayGame && !completePath); } }
 
         public PlayerSettings GetNoPlayerPlayerSettings(int playerIndex = 0)
@@ -141,10 +154,10 @@ namespace RiverAttack
         {
             EventUpdateLives?.Invoke(value);
         }
-        internal void OnEventCollectItem(CollectibleScriptable collectibles)
+        /*internal void OnEventCollectItem(CollectibleScriptable collectibles)
         {
             EventCollectItem?.Invoke(collectibles);
-        }
+        }*/
         internal void OnEventShakeCam(float power, float intime)
         {
             EventShakeCam?.Invoke(power, intime);

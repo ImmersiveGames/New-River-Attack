@@ -33,9 +33,6 @@ namespace RiverAttack
         {
             //Debug.Log("Estado: Patrol - Update: "+ m_PlayerApproachRadius);
             var position = transform.position;
-            //
-            //TODO: Quando o inimigo morre, precisa resetar o target também.
-
             m_PlayerDetectApproach ??= new PlayerDetectApproach(position, m_PlayerApproachRadius);
             target = m_PlayerDetectApproach.TargetApproach<PlayerMaster>(GameManager.instance.layerPlayer);
             //Debug.Log("target: "+ target);

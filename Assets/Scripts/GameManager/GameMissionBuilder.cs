@@ -110,7 +110,7 @@ namespace RiverAttack
                 enemies.SetActive(true);
             poolEnemyLevels.Add(enemies);
         }
-        // TODO:Quando ele pode ser chamado? Player morre? Player passa uma Ponte parece ser o ideal
+   
         void BuildNextPathForPoolLevel(float posZ)
         {
             if (pathMilestones.Count <=0) return;
@@ -129,7 +129,7 @@ namespace RiverAttack
             int deactivateIndex = actualHandle - eixo;
             int removeIndex = actualHandle - eixo - 1;
 
-            Debug.Log($"Index atual: {actualHandle}, Active: {activeIndex}, Desactive: {deactivateIndex}, Remove {removeIndex}");
+//            Debug.Log($"Index atual: {actualHandle}, Active: {activeIndex}, Desactive: {deactivateIndex}, Remove {removeIndex}");
             
             if (activeIndex > pool.Count) return;
 

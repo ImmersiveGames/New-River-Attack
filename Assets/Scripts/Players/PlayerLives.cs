@@ -14,10 +14,12 @@ namespace RiverAttack
         {
             SetInitialReferences();
             m_PlayerMaster.EventPlayerMasterHit += LoseLive;
+            m_GamePlayManager.EventUpdateScore += CheckNewLives;
         }
         void OnDisable()
         {
             m_PlayerMaster.EventPlayerMasterHit -= LoseLive;
+            m_GamePlayManager.EventUpdateScore -= CheckNewLives;
         }
   #endregion
         void SetInitialReferences()
@@ -34,10 +36,18 @@ namespace RiverAttack
             LogGamePlay(1);
             m_GamePlayManager.OnEventUpdateLives(m_PlayerSettings.lives);
         }
+        void CheckNewLives(int score)
+        {
+            int scoreToLive = GameSettings.instance.multiplyScoreForLives;
+            if (score < m_PlayerMaster.nextScoreForLive) return;
+            if (m_PlayerSettings.lives > GameSettings.instance.maxLives) return;
+            m_PlayerMaster.nextScoreForLive += scoreToLive;
+            m_PlayerSettings.lives++;
+            m_GamePlayManager.OnEventUpdateLives(m_PlayerSettings.lives);
+        }
         void LogGamePlay(int live)
         {
             m_GamePlaySettings.livesSpent += live;
         }
-
     }
 }

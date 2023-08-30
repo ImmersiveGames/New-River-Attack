@@ -80,13 +80,13 @@ namespace RiverAttack
         // Calls the end action of each powerup and clears them from the activePowerups
         void ClearActivePowerUps(bool onlyEffect = false) //(Player target, bool onlyeffect = false)
         {
-            Debug.Log($"Can Accumulate Effect: {onlyEffect}");
+            //Debug.Log($"Can Accumulate Effect: {onlyEffect}");
             foreach (var powerUp in m_ActivePowerUps)
             {
-                Debug.Log($"Power up =  {powerUp}");
+               // Debug.Log($"Power up =  {powerUp}");
                 if (onlyEffect && !powerUp.Key.canAccumulateEffects)
                     return;
-                Debug.Log($"Termina o Power up {powerUp}");
+                //Debug.Log($"Termina o Power up {powerUp}");
                 powerUp.Key.PowerUpEnd(m_PlayerMaster.getPlayerSettings);
             }
             if (!onlyEffect)

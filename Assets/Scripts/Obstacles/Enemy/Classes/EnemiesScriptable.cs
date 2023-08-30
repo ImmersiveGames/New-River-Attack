@@ -1,5 +1,7 @@
+using GD.MinMaxSlider;
 using UnityEngine;
 using UnityEngine.Audio;
+using Utils;
 namespace RiverAttack
 {
     [CreateAssetMenu(fileName = "Enemy", menuName = "RiverAttack/Enemy", order = 1)]
@@ -13,6 +15,8 @@ namespace RiverAttack
         //public float radiusToApproach;
         //public float shootCadence;
         public int enemyScore;
+        [Header("Drop Items")]
+        public ListDropItems listDropItems;
         public Sprite spriteIcon;
         public AudioMixerGroup enemyAudioMixerGroup;
         public EnemiesSetDifficultyListSo enemiesSetDifficultyListSo;

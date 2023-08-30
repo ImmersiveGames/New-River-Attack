@@ -92,14 +92,13 @@ namespace RiverAttack
         IEnumerator Cooldown()
         {
             m_CanExecuteAction = false;
-            
-            //TODO: Quando o tiro acerta precisa passar pelo cooldown?
+
             yield return new WaitForSeconds(m_ShootCadence);
             m_CanExecuteAction = true;
         }
         public void UnExecute(InputAction.CallbackContext callbackContext)
         {
-            throw new System.NotImplementedException();
+            
         }
         static void LogGamePlay()
         {

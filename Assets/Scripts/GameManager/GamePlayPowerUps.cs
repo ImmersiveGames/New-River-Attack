@@ -37,7 +37,7 @@ namespace RiverAttack
 
         public void RapidFireStart(float amount)
         {
-            //TODO: Ajustar RapidFire
+            //TODO: Ajustar RapidFire - Forma visual e auditivo para o power up
             if (target == null) return;
             float buff = (amount < cadenceRapidFireMin) ? cadenceRapidFireMin : amount;
             target.cadenceShootPowerUp = buff;

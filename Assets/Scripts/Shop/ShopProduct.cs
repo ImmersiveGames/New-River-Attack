@@ -14,7 +14,7 @@ namespace Shopping
         public string descriptionItem;
         /*
         public LocalizationString translateDesc;*/
-        public string refPriceFirebase;
+        //public string refPriceFirebase;
         public int priceItem;
         public bool isConsumable;
 

@@ -22,6 +22,7 @@ namespace RiverAttack
 
         internal PlayersInputActions playersInputActions;
         internal bool inEffectArea;
+        internal int nextScoreForLive;
 
         Animator m_Animator;
         GamePlaySettings m_GamePlaySettings;

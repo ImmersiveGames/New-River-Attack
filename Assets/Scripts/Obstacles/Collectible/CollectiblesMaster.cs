@@ -37,12 +37,17 @@ namespace RiverAttack
             var playerMaster = WhoHit(other);
             // pode coletar?
             var collectableList = playerMaster.collectableList;
-            var results = collectableList.Find(x => x.collectable == collectibleScriptable);
-
-            if (results != null && collectibleScriptable.maxCollectible != 0 && results.quantity >= collectibleScriptable.maxCollectible)
+            if (collectableList.Count != 0)
             {
-                OnEventObstacleMaxCollectReached(collectibleScriptable);
-                return;
+                Debug.Log($"List {collectableList.Count}");
+                var results = collectableList.Find(x => x.collectable == collectibleScriptable);
+                if (collectibleScriptable.maxCollectible > 0 && results.quantity >= collectibleScriptable.maxCollectible)
+                {
+                    Debug.Log($"Atingi o Máximo {results.quantity}");
+                    OnEventObstacleMaxCollectReached(collectibleScriptable);
+                    return;
+                }
+                // Ja tem algo na lista
             }
             OnEventCollectItem(playerMaster.getPlayerSettings);
             ShouldSavePoint(playerMaster.getPlayerSettings);

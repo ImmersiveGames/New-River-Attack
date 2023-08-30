@@ -17,9 +17,8 @@ namespace RiverAttack
             m_GameManager.startMenu.SetMenuHudControl(true);
             if (!m_GameManager.haveAnyPlayerInitialized)
                 m_GameManager.InstantiatePlayers();
-            m_GameManager.ActivePlayers(true);
-            m_GameManager.UnPausedMovementPlayers();
-            m_GamePlayManager.OnEventActivateEnemiesMaster();
+            //TODO: dar mais tempo para o pause;
+            m_GamePlayManager.OnStartGame();
         }
         public override void UpdateState()
         {
