@@ -71,6 +71,20 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-5977683430191091278
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: dc24edd1ca7b9fc458594ed205ba1020
+  m_EffectName: Attenuation
+  m_MixLevel: 53fd7a325713da24fabcfd9de607a154
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &-4893442427274219791
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -180,6 +194,7 @@ AudioMixerGroupController:
   - {fileID: -2697733098434850853}
   - {fileID: 6452914717034506527}
   - {fileID: 3956588867677979082}
+  - {fileID: 8099360514035002655}
   m_Volume: 444b440199dcaec45a97c805205918c4
   m_Pitch: 9fc9fbf468371954482b28873e6f8907
   m_Send: 00000000000000000000000000000000
@@ -239,6 +254,7 @@ AudioMixerController:
     - eccb0b91f09768f4dac1feee515e3dad
     - 5e9db08f03240e34cbb44a210f3b9881
     - b481e3fd5877d6545858d0907c208627
+    - 63a072871fe8a32479640499f2565332
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -542,6 +558,25 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -4893442427274219791}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &8099360514035002655
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GasStationSFX
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 63a072871fe8a32479640499f2565332
+  m_Children: []
+  m_Volume: 8ff96a8b336df5b40a35a0c8db7f54fe
+  m_Pitch: 51048dd4f14cdf444886705359a5fb28
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -5977683430191091278}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0

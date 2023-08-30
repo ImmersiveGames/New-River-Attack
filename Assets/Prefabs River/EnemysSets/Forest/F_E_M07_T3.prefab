@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4188043875839398
 Transform:
   m_ObjectHideFlags: 0
@@ -57,7 +57,7 @@ Transform:
   - {fileID: 2254120769745575104}
   - {fileID: 7425205281059052491}
   - {fileID: 5221747886685870835}
-  - {fileID: 2194020105069045152}
+  - {fileID: 5410160639056335607}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -366,6 +366,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6213119912320506274, guid: e79c8c4e3633654468ab64611bfdcb4d,
+        type: 3}
+      propertyPath: randomSkin
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -445,6 +450,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hovercraft
       objectReference: {fileID: 0}
+    - target: {fileID: 4976036328383054663, guid: b1a67df328a672746acd05f72d6809fe,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976036328383054663, guid: b1a67df328a672746acd05f72d6809fe,
+        type: 3}
+      propertyPath: playerApproachRadius
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -464,6 +479,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4188043875839398}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6993330570392249019, guid: 46ef0fbe414912f409ed55d671576604,
+        type: 3}
+      propertyPath: indexStartSkin
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
       propertyPath: m_RootOrder
@@ -543,51 +567,63 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4188043875839398}
     m_Modifications:
-    - target: {fileID: 1987537875089244, guid: b3403642130034f02b78fe0a0b34cc86, type: 3}
+    - target: {fileID: 5745343212014747517, guid: a97b4f883fc1a544d9f5653b133d603d,
+        type: 3}
       propertyPath: m_Name
-      value: Forest_Bridge_Metal
+      value: Forest_Bridge_Big
       objectReference: {fileID: 0}
-    - target: {fileID: 4499391805198750, guid: b3403642130034f02b78fe0a0b34cc86, type: 3}
+    - target: {fileID: 6154597609441158857, guid: a97b4f883fc1a544d9f5653b133d603d,
+        type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4499391805198750, guid: b3403642130034f02b78fe0a0b34cc86, type: 3}
+    - target: {fileID: 6154597609441158857, guid: a97b4f883fc1a544d9f5653b133d603d,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 4499391805198750, guid: b3403642130034f02b78fe0a0b34cc86, type: 3}
+    - target: {fileID: 6154597609441158857, guid: a97b4f883fc1a544d9f5653b133d603d,
+        type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4499391805198750, guid: b3403642130034f02b78fe0a0b34cc86, type: 3}
+    - target: {fileID: 6154597609441158857, guid: a97b4f883fc1a544d9f5653b133d603d,
+        type: 3}
       propertyPath: m_LocalPosition.z
       value: 195
       objectReference: {fileID: 0}
-    - target: {fileID: 4499391805198750, guid: b3403642130034f02b78fe0a0b34cc86, type: 3}
+    - target: {fileID: 6154597609441158857, guid: a97b4f883fc1a544d9f5653b133d603d,
+        type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4499391805198750, guid: b3403642130034f02b78fe0a0b34cc86, type: 3}
+    - target: {fileID: 6154597609441158857, guid: a97b4f883fc1a544d9f5653b133d603d,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4499391805198750, guid: b3403642130034f02b78fe0a0b34cc86, type: 3}
+    - target: {fileID: 6154597609441158857, guid: a97b4f883fc1a544d9f5653b133d603d,
+        type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4499391805198750, guid: b3403642130034f02b78fe0a0b34cc86, type: 3}
+    - target: {fileID: 6154597609441158857, guid: a97b4f883fc1a544d9f5653b133d603d,
+        type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4499391805198750, guid: b3403642130034f02b78fe0a0b34cc86, type: 3}
+    - target: {fileID: 6154597609441158857, guid: a97b4f883fc1a544d9f5653b133d603d,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4499391805198750, guid: b3403642130034f02b78fe0a0b34cc86, type: 3}
+    - target: {fileID: 6154597609441158857, guid: a97b4f883fc1a544d9f5653b133d603d,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4499391805198750, guid: b3403642130034f02b78fe0a0b34cc86, type: 3}
+    - target: {fileID: 6154597609441158857, guid: a97b4f883fc1a544d9f5653b133d603d,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
@@ -595,10 +631,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b3403642130034f02b78fe0a0b34cc86, type: 3}
---- !u!4 &2194020105069045152 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: a97b4f883fc1a544d9f5653b133d603d, type: 3}
+--- !u!4 &5410160639056335607 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4499391805198750, guid: b3403642130034f02b78fe0a0b34cc86,
+  m_CorrespondingSourceObject: {fileID: 6154597609441158857, guid: a97b4f883fc1a544d9f5653b133d603d,
     type: 3}
   m_PrefabInstance: {fileID: 2196988630943511614}
   m_PrefabAsset: {fileID: 0}
@@ -610,6 +646,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4188043875839398}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6993330570392249019, guid: 46ef0fbe414912f409ed55d671576604,
+        type: 3}
+      propertyPath: indexStartSkin
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
       propertyPath: m_RootOrder
@@ -689,6 +734,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4188043875839398}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6993330570392249019, guid: 46ef0fbe414912f409ed55d671576604,
+        type: 3}
+      propertyPath: indexStartSkin
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
       propertyPath: m_RootOrder
@@ -1005,6 +1059,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4188043875839398}
     m_Modifications:
+    - target: {fileID: 3977965907477994150, guid: e79c8c4e3633654468ab64611bfdcb4d,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5511964204438554026, guid: e79c8c4e3633654468ab64611bfdcb4d,
         type: 3}
       propertyPath: m_Name
@@ -1064,6 +1123,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213119912320506274, guid: e79c8c4e3633654468ab64611bfdcb4d,
+        type: 3}
+      propertyPath: randomSkin
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1143,6 +1207,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hovercraft
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976036328383054663, guid: b1a67df328a672746acd05f72d6809fe,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976036328383054663, guid: b1a67df328a672746acd05f72d6809fe,
+        type: 3}
+      propertyPath: playerApproachRadius
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1460,6 +1534,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hovercraft
       objectReference: {fileID: 0}
+    - target: {fileID: 4976036328383054663, guid: b1a67df328a672746acd05f72d6809fe,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976036328383054663, guid: b1a67df328a672746acd05f72d6809fe,
+        type: 3}
+      propertyPath: playerApproachRadius
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1479,6 +1563,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4188043875839398}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6993330570392249019, guid: 46ef0fbe414912f409ed55d671576604,
+        type: 3}
+      propertyPath: indexStartSkin
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
       propertyPath: m_RootOrder
@@ -1618,6 +1711,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hovercraft
       objectReference: {fileID: 0}
+    - target: {fileID: 4976036328383054663, guid: b1a67df328a672746acd05f72d6809fe,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976036328383054663, guid: b1a67df328a672746acd05f72d6809fe,
+        type: 3}
+      propertyPath: playerApproachRadius
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1695,6 +1798,16 @@ PrefabInstance:
     - target: {fileID: 1639211701591471776, guid: 2f731691095ed48468c9190dca34d1c8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373321320407240334, guid: 2f731691095ed48468c9190dca34d1c8,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373321320407240334, guid: 2f731691095ed48468c9190dca34d1c8,
+        type: 3}
+      propertyPath: playerApproachRadius
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1776,6 +1889,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hovercraft
       objectReference: {fileID: 0}
+    - target: {fileID: 4976036328383054663, guid: b1a67df328a672746acd05f72d6809fe,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976036328383054663, guid: b1a67df328a672746acd05f72d6809fe,
+        type: 3}
+      propertyPath: playerApproachRadius
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1855,6 +1978,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hovercraft
       objectReference: {fileID: 0}
+    - target: {fileID: 4976036328383054663, guid: b1a67df328a672746acd05f72d6809fe,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976036328383054663, guid: b1a67df328a672746acd05f72d6809fe,
+        type: 3}
+      propertyPath: playerApproachRadius
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1874,6 +2007,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4188043875839398}
     m_Modifications:
+    - target: {fileID: 3977965907477994150, guid: e79c8c4e3633654468ab64611bfdcb4d,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5511964204438554026, guid: e79c8c4e3633654468ab64611bfdcb4d,
         type: 3}
       propertyPath: m_Name
@@ -1933,6 +2071,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213119912320506274, guid: e79c8c4e3633654468ab64611bfdcb4d,
+        type: 3}
+      propertyPath: randomSkin
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2032,6 +2175,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4188043875839398}
     m_Modifications:
+    - target: {fileID: 3977965907477994150, guid: e79c8c4e3633654468ab64611bfdcb4d,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5511964204438554026, guid: e79c8c4e3633654468ab64611bfdcb4d,
         type: 3}
       propertyPath: m_Name
@@ -2092,6 +2240,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6213119912320506274, guid: e79c8c4e3633654468ab64611bfdcb4d,
+        type: 3}
+      propertyPath: randomSkin
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2111,6 +2264,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4188043875839398}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6993330570392249019, guid: 46ef0fbe414912f409ed55d671576604,
+        type: 3}
+      propertyPath: indexStartSkin
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
       propertyPath: m_RootOrder
@@ -2250,6 +2412,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hovercraft
       objectReference: {fileID: 0}
+    - target: {fileID: 4976036328383054663, guid: b1a67df328a672746acd05f72d6809fe,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976036328383054663, guid: b1a67df328a672746acd05f72d6809fe,
+        type: 3}
+      propertyPath: playerApproachRadius
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2348,6 +2520,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4188043875839398}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6993330570392249019, guid: 46ef0fbe414912f409ed55d671576604,
+        type: 3}
+      propertyPath: indexStartSkin
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
       propertyPath: m_RootOrder
