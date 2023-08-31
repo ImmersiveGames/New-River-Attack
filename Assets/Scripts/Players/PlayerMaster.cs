@@ -72,6 +72,10 @@ namespace RiverAttack
         {
             getPlayerSettings = playerSettings;
         }
+        public bool CanCollect()
+        {
+            return getPlayerSettings.bombs < GameSettings.instance.maxBombs;
+        }
 
         public Animator GetPlayerAnimator()
         {

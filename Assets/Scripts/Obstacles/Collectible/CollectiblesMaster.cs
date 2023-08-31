@@ -39,16 +39,17 @@ namespace RiverAttack
             var collectableList = playerMaster.collectableList;
             if (collectableList.Count != 0)
             {
-                Debug.Log($"List {collectableList.Count}");
                 var results = collectableList.Find(x => x.collectable == collectibleScriptable);
                 if (collectibleScriptable.maxCollectible > 0 && results.quantity >= collectibleScriptable.maxCollectible)
                 {
-                    Debug.Log($"Atingi o Máximo {results.quantity}");
                     OnEventObstacleMaxCollectReached(collectibleScriptable);
                     return;
                 }
                 // Ja tem algo na lista
             }
+            if(collectibleScriptable == gamePlayManager.refilBomb && playerMaster.getPlayerSettings.bombs >= GameSettings.instance.maxBombs)
+                return;
+            
             OnEventCollectItem(playerMaster.getPlayerSettings);
             ShouldSavePoint(playerMaster.getPlayerSettings);
             AddCollectList(collectableList, collectibleScriptable, collectibleScriptable.amountCollectables);

@@ -8,7 +8,7 @@ namespace RiverAttack
     public class GameSettings : SingletonScriptableObject<GameSettings>
     {
         [Header("PLayer Start Settings")]
-        //public int maxBombs;
+        public int maxBombs;
         public int startBombs;
         public int maxFuel;
         public int startFuel;

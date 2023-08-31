@@ -53,10 +53,10 @@ namespace RiverAttack
 
         public void GainBomb(int amount)
         {
-            if (target != null)
-            {
-                target.bombs += amount;
-            }
+            int maxBomb = GameSettings.instance.maxBombs;
+            if (target == null || target.bombs >= maxBomb)
+                return;
+            target.bombs = (target.bombs + amount >= maxBomb) ? maxBomb : target.bombs + amount;
             GamePlayManager.instance.OnEventUpdateBombs(target.bombs);
         }
     }

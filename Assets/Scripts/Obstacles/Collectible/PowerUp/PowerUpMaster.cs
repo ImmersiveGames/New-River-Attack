@@ -37,7 +37,7 @@ namespace RiverAttack
         }
         void ComponentToPowerUp(PlayerPowerUp playerPowerUp)
         {
-            if (playerPowerUp != null && collectibleScriptable.powerUp != null)
+            if (playerPowerUp == null || collectibleScriptable.powerUp == null) return;
                 playerPowerUp.ActivatePowerUp(collectibleScriptable.powerUp);
         }
     }

@@ -17,7 +17,9 @@ namespace RiverAttack
         internal bool getGodMode { get { return godMode; } }
         [SerializeField]
         internal GamePlaySettings gamePlaySettings;
-
+        [Header("Power Up References")]
+        public CollectibleScriptable refilBomb;
+        
         internal bool playerDead;
 
         GameManager m_GameManager;

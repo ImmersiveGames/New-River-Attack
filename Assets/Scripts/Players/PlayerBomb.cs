@@ -47,6 +47,7 @@ namespace RiverAttack
             m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
             m_GamePlaySettings = m_GamePlayManager.gamePlaySettings;
         }
+        
         /*void CollectBombs(CollectibleScriptable collectibles)
         {
             Debug.Log($"Collect{m_PlayerSettings.bombs}");
