@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using UnityEngine.Playables;
+﻿using UnityEngine.Playables;
 namespace RiverAttack
 {
     public class GameStateOpenCutScene : GameState
     {
+        const float TIME_TO_FADE_BGM = 0.1f;
         const float TOLERANCE = 1f;
         readonly PlayableDirector m_PlayableDirector;
         readonly GameManager m_GameManager;
@@ -18,6 +18,8 @@ namespace RiverAttack
             //Debug.Log($"Entra no Estado: CutScene");
             m_GameManager.InstantiatePlayers();
             m_GameManager.PlayOpenCutScene();
+            //Iniciar a BGM
+            GamePlayAudio.instance.ChangeBGM(GamePlayManager.instance.actualLevels.bgmStartLevel,TIME_TO_FADE_BGM);
             m_GameManager.startMenu.SetMenuPrincipal(1, false);
             m_GameManager.startMenu.SetMenuHudControl(false);
         }

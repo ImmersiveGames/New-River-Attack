@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utils;
+using MeshRenderer = UnityEngine.MeshRenderer;
 namespace RiverAttack
 {
     [RequireComponent(typeof(PlayerMaster))]
@@ -16,6 +17,8 @@ namespace RiverAttack
         [Header("Bullets Settings")]
         [SerializeField] float bulletSpeed;
         [SerializeField] float bulletLifeTime;
+        public Color bulletColor;
+        public Color rapidFireColor;
         
         float m_ShootCadence;
         bool m_CanExecuteAction;
@@ -86,6 +89,11 @@ namespace RiverAttack
             bulletPlayer.SetMyPool(PoolObjectManager.GetPool(this));
             bulletPlayer.ownerShoot = m_PlayerMaster;
             bulletPlayer.Init(m_PlayerSettings.shootVelocity, m_PlayerSettings.shootLifeTime);
+            var meshRenderer = bulletPlayer.GetComponent<MeshRenderer>();
+            //TODO: Animação no tiro e um feedback auditivo para o tiro;
+            if (meshRenderer != null)
+                meshRenderer.material.color = (m_PlayerSettings.onRapidFire) ? rapidFireColor : bulletColor;
+            
             myShoot.transform.parent = null;
             LogGamePlay();
         }

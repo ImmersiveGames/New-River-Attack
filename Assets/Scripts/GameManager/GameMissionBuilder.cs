@@ -6,6 +6,8 @@ namespace RiverAttack
 {
     public class GameMissionBuilder : MonoBehaviour
     {
+        const float TIME_TO_FADE_BGM = 0.1f;
+        
         [Header("Level Settings"), SerializeField]
         Levels actualLevel;
         [SerializeField]
@@ -15,8 +17,8 @@ namespace RiverAttack
 
         [Header("Level HUB Settings")]
         public List<Levels> levelsFinishList = new List<Levels>();
-        [SerializeField]
-        List<Levels> previousLevelList = new List<Levels>();
+        /*[SerializeField]
+        List<Levels> previousLevelList = new List<Levels>(); // este só é usado para constatar a HUD*/
 
         [Header("INTERNAL SETTINGS")]
         [SerializeField]
@@ -54,6 +56,7 @@ namespace RiverAttack
         {
             var levelRoot = new GameObject();
             actualPathIndex = 0;
+            m_GamePlayManager.actualLevels = actualLevel;
             levelRoot.name = level.levelName;
             CreateLevel(level, levelRoot.transform);
         }
@@ -78,7 +81,7 @@ namespace RiverAttack
                     poolPathLevels[i].SetActive(true);
             }
             if (level.pathEnd == null) return;
-            //Todo Corrigir no Update das fazes quando for as ultimas.
+            //TODO: Refazer o fim de faze para não spawnar desde o inicio (ou talvez sim mesmmo qu ele crie o fim longe dos espaços)
             nextBound.x = level.levelOffset.x;
             FixedPath(ref nextBound, level.pathEnd, myRoot);
         }
@@ -110,13 +113,16 @@ namespace RiverAttack
                 enemies.SetActive(true);
             poolEnemyLevels.Add(enemies);
         }
-   
+
         void BuildNextPathForPoolLevel(float posZ)
         {
-            if (pathMilestones.Count <=0) return;
+            if (pathMilestones.Count <= 0) return;
             if (m_GamePlayManager.completePath || !(pathMilestones[actualPathIndex] - posZ <= 0))
                 return;
             Tools.EqualizeLists(ref poolPathLevels, ref poolEnemyLevels);
+
+            //Debug.Log($"Muda o BGM para: {actualLevel.setLevelList[actualPathIndex].bgmLevel}");
+            GamePlayAudio.instance.ChangeBGM(actualLevel.setLevelList[actualPathIndex].bgmLevel, TIME_TO_FADE_BGM);
             UpdatePoolLevel(poolPathLevels, actualPathIndex);
             UpdatePoolLevel(poolEnemyLevels, actualPathIndex);
             actualPathIndex++;
@@ -130,7 +136,7 @@ namespace RiverAttack
             int removeIndex = actualHandle - eixo - 1;
 
 //            Debug.Log($"Index atual: {actualHandle}, Active: {activeIndex}, Desactive: {deactivateIndex}, Remove {removeIndex}");
-            
+
             if (activeIndex > pool.Count) return;
 
             if (activeIndex < pool.Count && !pool[activeIndex].activeInHierarchy)

@@ -52,5 +52,6 @@ namespace RiverAttack
             var rotation = spawnTransform.rotation;
             myTransform.rotation = new Quaternion(rotation.x, rotation.y, rotation.z, rotation.w);
         }
+
     }
 }

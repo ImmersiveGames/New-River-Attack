@@ -34,6 +34,9 @@ namespace RiverAttack
         public event GeneralEventHandler EventPlayerMasterHit;
         public event GeneralEventHandler EventPlayerMasterRespawn;
 
+        public delegate void PowerUpActiveHandler(bool active);
+        public event PowerUpActiveHandler EventPowerUpRapidFire;
+
         public delegate void ControllerEventHandler(Vector2 dir);
         public event ControllerEventHandler EventPlayerMasterControllerMovement;
         #endregion
@@ -191,6 +194,10 @@ namespace RiverAttack
         {
             EventPlayerMasterControllerMovement?.Invoke(dir);
         }
+        void OnEventPowerUpRapidFire(bool active)
+        {
+            EventPowerUpRapidFire?.Invoke(active);
+        }
   #endregion
 
         void MyDebugStart()
@@ -198,5 +205,6 @@ namespace RiverAttack
             if (!m_GameManager.debugMode) return;
             transform.position = Vector3.zero;
         }
+        
     }
 }

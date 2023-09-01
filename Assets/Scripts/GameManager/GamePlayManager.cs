@@ -19,7 +19,8 @@ namespace RiverAttack
         internal GamePlaySettings gamePlaySettings;
         [Header("Power Up References")]
         public CollectibleScriptable refilBomb;
-        
+
+        internal Levels actualLevels;
         internal bool playerDead;
 
         GameManager m_GameManager;

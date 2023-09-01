@@ -42,6 +42,7 @@ namespace RiverAttack
         public float shootLifeTime;
         [Header("PowerUP Effects")]
         public float cadenceShootPowerUp;
+        public bool onRapidFire;
 
     }
 }

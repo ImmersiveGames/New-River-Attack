@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 using Utils;
 
 namespace RiverAttack
@@ -24,8 +23,7 @@ namespace RiverAttack
             var gamePlaySettings = GamePlaySettings.instance;
             gamePlaySettings.fuelStocked += fuel;
         }
-
-        [FormerlySerializedAs("minRapidFire")]
+        
         [Header("RapidFire PowerUp")]
         [Range(0.1f, 1f)]
         public float cadenceRapidFireMin;
@@ -41,13 +39,16 @@ namespace RiverAttack
             if (target == null) return;
             float buff = (amount < cadenceRapidFireMin) ? cadenceRapidFireMin : amount;
             target.cadenceShootPowerUp = buff;
-            //GamePlayManager.instance.CallEventRapidFire(true);
+            target.onRapidFire = true;
+            GamePlayAudio.instance.AccelPinch(true);
         }
 
         public void RapidFireEnd(float amount)
         {
             if (target == null) return;
             target.cadenceShootPowerUp = amount;
+            target.onRapidFire = false;
+            GamePlayAudio.instance.AccelPinch(false);
             //GamePlayManager.instance.CallEventRapidFire(false);
         }
 

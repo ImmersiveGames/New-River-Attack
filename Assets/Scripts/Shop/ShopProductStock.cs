@@ -31,7 +31,7 @@ namespace Shopping
 
         public bool AvailableForBuy(PlayerSettings player)
         {
-            return AvailableInStock() && HaveMoneyToBuy(player) && (PlayerAlreadyBuy(player) && shopProduct.isConsumable || !PlayerAlreadyBuy(player));
+            return (AvailableInStock() && HaveMoneyToBuy(player) && (PlayerAlreadyBuy(player) && shopProduct.isConsumable) || !PlayerAlreadyBuy(player));
         }
 
         public bool HaveMoneyToBuy(PlayerSettings player)

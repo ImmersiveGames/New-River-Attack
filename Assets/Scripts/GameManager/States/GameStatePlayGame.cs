@@ -1,4 +1,3 @@
-using UnityEngine;
 namespace RiverAttack
 {
     public class GameStatePlayGame : GameState
@@ -17,6 +16,7 @@ namespace RiverAttack
             m_GameManager.startMenu.SetMenuHudControl(true);
             if (!m_GameManager.haveAnyPlayerInitialized)
                 m_GameManager.InstantiatePlayers();
+
             //TODO: dar mais tempo para o pause;
             m_GamePlayManager.OnStartGame();
         }

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using Utils;
+using UnityEngine.Serialization;
 
 namespace RiverAttack
 {
@@ -19,9 +18,9 @@ namespace RiverAttack
         [Header("HUD Settings")]
         public Sprite levelIcon;
         public Vector3 levelIconPos;
-
+        
         [Header("Build Settings")]
-        public LevelTypes bgmLevel;
+        public LevelTypes bgmStartLevel;
         [SerializeField] internal GameObject pathStart;
         [SerializeField] internal GameObject pathEnd;
         [SerializeField] internal Vector3 levelOffset;
@@ -54,5 +53,6 @@ namespace RiverAttack
     {
         public GameObject levelPaths;
         public GameObject enemiesSets;
+        public LevelTypes bgmLevel;
     }
 }
