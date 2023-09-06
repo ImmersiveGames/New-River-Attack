@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 namespace RiverAttack
 {
     public class BulletEnemy : Bullets

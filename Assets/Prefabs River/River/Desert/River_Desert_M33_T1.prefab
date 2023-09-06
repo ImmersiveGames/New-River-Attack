@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4261229101062774}
   - component: {fileID: 33292613265155144}
   - component: {fileID: 23254911723910562}
-  - component: {fileID: 65985380929189300}
   m_Layer: 0
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -84,27 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65985380929189300
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1000474798663058}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1006295498393532
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +343,6 @@ GameObject:
   - component: {fileID: 4098082121557966}
   - component: {fileID: 33372502098478446}
   - component: {fileID: 23321513139641414}
-  - component: {fileID: 65832058471199820}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -438,27 +415,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65832058471199820
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020158785097862}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1023575268264548
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,7 +469,7 @@ GameObject:
   - component: {fileID: 65959232060406004}
   m_Layer: 0
   m_Name: Desert_Isle_Stone
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -738,7 +694,6 @@ GameObject:
   - component: {fileID: 4907366104980776}
   - component: {fileID: 33209830240750148}
   - component: {fileID: 23983654210714928}
-  - component: {fileID: 65566535790763160}
   m_Layer: 0
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -811,27 +766,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65566535790763160
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1046567689029280}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1051280102540022
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,7 +792,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1051280102540022}
   m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -25, y: 0, z: 0}
+  m_LocalPosition: {x: -25, y: 2.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1173,6 +1107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4479273766226250}
+  - component: {fileID: 3056772388267474222}
   m_Layer: 0
   m_Name: Linha_16
   m_TagString: Untagged
@@ -1205,6 +1140,18 @@ Transform:
   m_Father: {fileID: 4795745584742474}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3056772388267474222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1078105965028258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1090684586546650
 GameObject:
   m_ObjectHideFlags: 0
@@ -1465,7 +1412,6 @@ GameObject:
   - component: {fileID: 4577873150224690}
   - component: {fileID: 33075133048454766}
   - component: {fileID: 23709291289557504}
-  - component: {fileID: 65987132187196344}
   m_Layer: 0
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -1538,27 +1484,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65987132187196344
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1098596140108032}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1100486526638966
 GameObject:
   m_ObjectHideFlags: 0
@@ -1573,7 +1498,7 @@ GameObject:
   - component: {fileID: 65020410897240162}
   m_Layer: 0
   m_Name: Desert_Isle_Solo
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1924,7 +1849,6 @@ GameObject:
   - component: {fileID: 4958391939310768}
   - component: {fileID: 33831930055857156}
   - component: {fileID: 23911185699323530}
-  - component: {fileID: 65460294499152472}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -1997,27 +1921,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65460294499152472
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1139467551835924}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1141166611238440
 GameObject:
   m_ObjectHideFlags: 0
@@ -2110,6 +2013,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4620473167337782}
+  - component: {fileID: 2965165529594199949}
   m_Layer: 0
   m_Name: Linha_13
   m_TagString: Untagged
@@ -2142,6 +2046,18 @@ Transform:
   m_Father: {fileID: 4795745584742474}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2965165529594199949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141503911513154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1156257175782474
 GameObject:
   m_ObjectHideFlags: 0
@@ -2565,7 +2481,6 @@ GameObject:
   - component: {fileID: 4598711944201604}
   - component: {fileID: 33477772797788890}
   - component: {fileID: 23287169898861238}
-  - component: {fileID: 65936362776119526}
   m_Layer: 0
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -2638,27 +2553,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65936362776119526
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1189174952753622}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1191747961415314
 GameObject:
   m_ObjectHideFlags: 0
@@ -2762,8 +2656,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
+  m_Size: {x: 5.0026517, y: 6, z: 200}
+  m_Center: {x: 2.4986742, y: 3, z: -95}
 --- !u!1 &1195643100016146
 GameObject:
   m_ObjectHideFlags: 0
@@ -2775,7 +2669,6 @@ GameObject:
   - component: {fileID: 4822314223559908}
   - component: {fileID: 33474681443533038}
   - component: {fileID: 23539238711239338}
-  - component: {fileID: 65787237085127112}
   m_Layer: 0
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -2848,27 +2741,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65787237085127112
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1195643100016146}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1201071005325524
 GameObject:
   m_ObjectHideFlags: 0
@@ -3461,7 +3333,6 @@ GameObject:
   - component: {fileID: 4261066766684496}
   - component: {fileID: 33524128489973038}
   - component: {fileID: 23775004133037576}
-  - component: {fileID: 65564785992245820}
   m_Layer: 0
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -3534,27 +3405,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65564785992245820
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1235637448788104}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1245714657493514
 GameObject:
   m_ObjectHideFlags: 0
@@ -3647,6 +3497,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4659365200939712}
+  - component: {fileID: 8094925970850090254}
   m_Layer: 0
   m_Name: Linha_01
   m_TagString: Untagged
@@ -3678,6 +3529,18 @@ Transform:
   m_Father: {fileID: 4795745584742474}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8094925970850090254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247352487220610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1247414861227830
 GameObject:
   m_ObjectHideFlags: 0
@@ -3978,7 +3841,6 @@ GameObject:
   - component: {fileID: 4855197817028746}
   - component: {fileID: 33932592957177412}
   - component: {fileID: 23198479682551724}
-  - component: {fileID: 65655927909685626}
   m_Layer: 0
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -4051,27 +3913,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65655927909685626
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1271521376824744}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1276951332249398
 GameObject:
   m_ObjectHideFlags: 0
@@ -4415,7 +4256,6 @@ GameObject:
   - component: {fileID: 4348733260561120}
   - component: {fileID: 33631068323710416}
   - component: {fileID: 23055505655798820}
-  - component: {fileID: 65215487727078854}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -4488,27 +4328,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65215487727078854
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1303544053202974}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1311436881301050
 GameObject:
   m_ObjectHideFlags: 0
@@ -4520,7 +4339,6 @@ GameObject:
   - component: {fileID: 4184287883752094}
   - component: {fileID: 33239845756437348}
   - component: {fileID: 23730510809557454}
-  - component: {fileID: 65125397904189210}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -4593,27 +4411,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65125397904189210
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1311436881301050}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1311676212707510
 GameObject:
   m_ObjectHideFlags: 0
@@ -5123,7 +4920,6 @@ GameObject:
   - component: {fileID: 4683681714614004}
   - component: {fileID: 33360407990377362}
   - component: {fileID: 23624562512067906}
-  - component: {fileID: 65670736372080156}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -5196,27 +4992,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65670736372080156
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1345743403517352}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1350091398572006
 GameObject:
   m_ObjectHideFlags: 0
@@ -5226,6 +5001,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4767696568415458}
+  - component: {fileID: 3695571377386984165}
   m_Layer: 0
   m_Name: Linha_19
   m_TagString: Untagged
@@ -5258,6 +5034,18 @@ Transform:
   m_Father: {fileID: 4795745584742474}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3695571377386984165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350091398572006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1350390899991598
 GameObject:
   m_ObjectHideFlags: 0
@@ -5352,7 +5140,6 @@ GameObject:
   - component: {fileID: 4385223034766984}
   - component: {fileID: 33844132144256964}
   - component: {fileID: 23875835651566956}
-  - component: {fileID: 65149949742603096}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -5425,27 +5212,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65149949742603096
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1351898137747308}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1359560369921044
 GameObject:
   m_ObjectHideFlags: 0
@@ -5872,7 +5638,6 @@ GameObject:
   - component: {fileID: 4015734273723706}
   - component: {fileID: 33510640411885730}
   - component: {fileID: 23402801835558970}
-  - component: {fileID: 65234934941436590}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -5945,27 +5710,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65234934941436590
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1379211399415956}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1384538477689596
 GameObject:
   m_ObjectHideFlags: 0
@@ -5977,7 +5721,6 @@ GameObject:
   - component: {fileID: 4280736027595818}
   - component: {fileID: 33083765922193966}
   - component: {fileID: 23778727525186592}
-  - component: {fileID: 65393281251536218}
   m_Layer: 0
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -6050,27 +5793,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65393281251536218
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1384538477689596}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1385396898668826
 GameObject:
   m_ObjectHideFlags: 0
@@ -6082,7 +5804,6 @@ GameObject:
   - component: {fileID: 4419649032480122}
   - component: {fileID: 33130304812142342}
   - component: {fileID: 23232367811875804}
-  - component: {fileID: 65841669619361020}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -6155,27 +5876,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65841669619361020
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385396898668826}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1386584516534080
 GameObject:
   m_ObjectHideFlags: 0
@@ -6204,9 +5904,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4949487207006168}
   - {fileID: 4805219958143292}
-  - {fileID: 4655240876118300}
   m_Father: {fileID: 4795745584742474}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6304,7 +6002,6 @@ GameObject:
   - component: {fileID: 4089112010110048}
   - component: {fileID: 33472829153852620}
   - component: {fileID: 23123714054174994}
-  - component: {fileID: 65159991695064454}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -6377,60 +6074,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65159991695064454
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1398646358115816}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
---- !u!1 &1401870115528966
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4655240876118300}
-  m_Layer: 0
-  m_Name: Linha_16
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4655240876118300
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401870115528966}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 155}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4596395672223218}
-  - {fileID: 4255346869678570}
-  m_Father: {fileID: 4928439717070780}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1409594923324568
 GameObject:
   m_ObjectHideFlags: 0
@@ -6608,7 +6251,6 @@ GameObject:
   - component: {fileID: 4662606087110912}
   - component: {fileID: 33837677001128296}
   - component: {fileID: 23909905168419690}
-  - component: {fileID: 65259979797653702}
   m_Layer: 0
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -6681,27 +6323,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65259979797653702
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1413579126872710}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1416077223006294
 GameObject:
   m_ObjectHideFlags: 0
@@ -6894,7 +6515,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1419903137358318}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -15, y: 1.5, z: 0}
+  m_LocalPosition: {x: -15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7377,10 +6998,9 @@ GameObject:
   - component: {fileID: 4255346869678570}
   - component: {fileID: 33028598582006734}
   - component: {fileID: 23228182963967496}
-  - component: {fileID: 65202331499524792}
   m_Layer: 0
   m_Name: Desert_Ravine_Stone (1)
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7392,13 +7012,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1454122538131776}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 5, y: 3.5, z: 3.8}
-  m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
+  m_LocalRotation: {x: -0.00000004214685, y: 0.7071068, z: -0.00000004214685, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 3.5000005, z: 3.8000026}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4655240876118300}
-  m_RootOrder: 1
+  m_Father: {fileID: 4121484279171594}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &33028598582006734
 MeshFilter:
@@ -7450,27 +7070,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65202331499524792
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1454122538131776}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 8.1, y: 4, z: 5.778463}
-  m_Center: {x: -0.15312243, y: -0.16797674, z: 0.2824812}
 --- !u!1 &1457108918874562
 GameObject:
   m_ObjectHideFlags: 0
@@ -7657,8 +7256,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
+  m_Size: {x: 5.0026517, y: 6, z: 200}
+  m_Center: {x: 2.4986742, y: 3, z: 95}
 --- !u!1 &1460144151305404
 GameObject:
   m_ObjectHideFlags: 0
@@ -8002,7 +7601,6 @@ GameObject:
   - component: {fileID: 4411352163997190}
   - component: {fileID: 33692940907406444}
   - component: {fileID: 23824765695154372}
-  - component: {fileID: 65105808711154686}
   m_Layer: 0
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -8075,27 +7673,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65105808711154686
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1476542021571636}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1480308283605018
 GameObject:
   m_ObjectHideFlags: 0
@@ -8312,7 +7889,7 @@ Transform:
   - {fileID: 4350030807444848}
   - {fileID: 4928439717070780}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1492672729296698
 GameObject:
@@ -8325,7 +7902,6 @@ GameObject:
   - component: {fileID: 4065361308913738}
   - component: {fileID: 33004018442499180}
   - component: {fileID: 23151123757154072}
-  - component: {fileID: 65064768784411150}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -8398,27 +7974,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65064768784411150
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1492672729296698}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1494537556161516
 GameObject:
   m_ObjectHideFlags: 0
@@ -8470,7 +8025,6 @@ GameObject:
   - component: {fileID: 4851002637366234}
   - component: {fileID: 33240755824882816}
   - component: {fileID: 23420048901763108}
-  - component: {fileID: 65987057996759744}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -8543,27 +8097,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65987057996759744
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1496681877159514}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1497758635474260
 GameObject:
   m_ObjectHideFlags: 0
@@ -8573,6 +8106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4453472162380584}
+  - component: {fileID: 761449360274320770}
   m_Layer: 0
   m_Name: Linha_07
   m_TagString: Untagged
@@ -8605,6 +8139,18 @@ Transform:
   m_Father: {fileID: 4795745584742474}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &761449360274320770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497758635474260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1498350215022212
 GameObject:
   m_ObjectHideFlags: 0
@@ -9237,7 +8783,6 @@ GameObject:
   - component: {fileID: 4552744046249486}
   - component: {fileID: 33481513368747916}
   - component: {fileID: 23517859149844116}
-  - component: {fileID: 65755623586591412}
   m_Layer: 0
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -9310,27 +8855,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65755623586591412
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1539020872434690}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1539525389431180
 GameObject:
   m_ObjectHideFlags: 0
@@ -9663,37 +9187,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &1554809304757638
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4949487207006168}
-  m_Layer: 0
-  m_Name: Linha_4
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4949487207006168
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554809304757638}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 35}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4928439717070780}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1559973319771760
 GameObject:
   m_ObjectHideFlags: 0
@@ -10369,10 +9862,9 @@ GameObject:
   - component: {fileID: 4596395672223218}
   - component: {fileID: 33776929278382646}
   - component: {fileID: 23548467198494728}
-  - component: {fileID: 65036520368673612}
   m_Layer: 0
   m_Name: Desert_Ravine_Stone
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10384,13 +9876,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1580702601406706}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 5, y: 3.5, z: -3.8}
+  m_LocalRotation: {x: -0.00000004214685, y: -0.7071068, z: 0.00000004214685, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 3.4999995, z: -3.8000035}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4655240876118300}
-  m_RootOrder: 0
+  m_Father: {fileID: 4121484279171594}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &33776929278382646
 MeshFilter:
@@ -10442,27 +9934,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65036520368673612
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1580702601406706}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 8.1, y: 4, z: 5.778463}
-  m_Center: {x: -0.15312243, y: -0.16797674, z: 0.2824812}
 --- !u!1 &1581174575134760
 GameObject:
   m_ObjectHideFlags: 0
@@ -11138,7 +10609,6 @@ GameObject:
   - component: {fileID: 4467299648388964}
   - component: {fileID: 33560732412657892}
   - component: {fileID: 23722882799759770}
-  - component: {fileID: 65799442942772892}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -11211,27 +10681,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65799442942772892
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1637957073308200}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1641690534745564
 GameObject:
   m_ObjectHideFlags: 0
@@ -11532,7 +10981,6 @@ GameObject:
   - component: {fileID: 4938476700078434}
   - component: {fileID: 33163428611110628}
   - component: {fileID: 23436049172667086}
-  - component: {fileID: 65743918229273698}
   m_Layer: 0
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -11605,27 +11053,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65743918229273698
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1658496707440548}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1660854768926158
 GameObject:
   m_ObjectHideFlags: 0
@@ -11637,7 +11064,6 @@ GameObject:
   - component: {fileID: 4106220470876312}
   - component: {fileID: 33200694155106202}
   - component: {fileID: 23677145662444636}
-  - component: {fileID: 65074215166116270}
   m_Layer: 0
   m_Name: Desert_Bank_2 (1)
   m_TagString: Wall
@@ -11710,27 +11136,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65074215166116270
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1660854768926158}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1666913085355120
 GameObject:
   m_ObjectHideFlags: 0
@@ -11989,6 +11394,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4732894073999962}
+  - component: {fileID: 6437027779298852464}
   m_Layer: 0
   m_Name: Linha_03
   m_TagString: Untagged
@@ -12017,10 +11423,23 @@ Transform:
   - {fileID: 4582721242332222}
   - {fileID: 4261229101062774}
   - {fileID: 4411352163997190}
+  - {fileID: 7740303770023815882}
   - {fileID: 4961291547818334}
   m_Father: {fileID: 4795745584742474}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6437027779298852464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679770747500528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1680931269205224
 GameObject:
   m_ObjectHideFlags: 0
@@ -12198,7 +11617,6 @@ GameObject:
   - component: {fileID: 4046090610501080}
   - component: {fileID: 33731838780216914}
   - component: {fileID: 23123907813980630}
-  - component: {fileID: 65034116950175984}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -12271,27 +11689,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65034116950175984
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1685374805147618}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1694851260701432
 GameObject:
   m_ObjectHideFlags: 0
@@ -12303,7 +11700,6 @@ GameObject:
   - component: {fileID: 4744297247462528}
   - component: {fileID: 33158881202926768}
   - component: {fileID: 23413894892337086}
-  - component: {fileID: 65977853620457166}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -12376,27 +11772,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65977853620457166
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1694851260701432}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1696890279795782
 GameObject:
   m_ObjectHideFlags: 0
@@ -12411,7 +11786,7 @@ GameObject:
   - component: {fileID: 65025962318417974}
   m_Layer: 0
   m_Name: Desert_Isle_Solo
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12427,7 +11802,9 @@ Transform:
   m_LocalPosition: {x: 5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4596395672223218}
+  - {fileID: 4255346869678570}
   m_Father: {fileID: 4479273766226250}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12500,8 +11877,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.6858807, y: 6, z: 6.5374556}
-  m_Center: {x: 0.18313658, y: 2, z: 0.23238993}
+  m_Size: {x: 7.5, y: 10, z: 12}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &1707646181095586
 GameObject:
   m_ObjectHideFlags: 0
@@ -12596,7 +11973,6 @@ GameObject:
   - component: {fileID: 4337393733646902}
   - component: {fileID: 33828580177557368}
   - component: {fileID: 23534063449422712}
-  - component: {fileID: 65232100050472788}
   m_Layer: 0
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -12669,27 +12045,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65232100050472788
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1729001218507496}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1732140807421370
 GameObject:
   m_ObjectHideFlags: 0
@@ -12950,7 +12305,6 @@ GameObject:
   - component: {fileID: 4844807256313844}
   - component: {fileID: 33290020715972424}
   - component: {fileID: 23951987429038700}
-  - component: {fileID: 65390828526627538}
   m_Layer: 0
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -13023,27 +12377,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65390828526627538
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1749794978202980}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1752565668887536
 GameObject:
   m_ObjectHideFlags: 0
@@ -13055,7 +12388,6 @@ GameObject:
   - component: {fileID: 4993231426177242}
   - component: {fileID: 33946327465811176}
   - component: {fileID: 23997363348381678}
-  - component: {fileID: 65570728758471316}
   m_Layer: 0
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -13128,27 +12460,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65570728758471316
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1752565668887536}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1752651365360322
 GameObject:
   m_ObjectHideFlags: 0
@@ -13163,7 +12474,7 @@ GameObject:
   - component: {fileID: 65702969371402520}
   m_Layer: 0
   m_Name: Desert_Isle_Stone
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13453,7 +12764,6 @@ GameObject:
   - component: {fileID: 4546444900211292}
   - component: {fileID: 33926006297409062}
   - component: {fileID: 23151160064833754}
-  - component: {fileID: 65150428111551766}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -13526,27 +12836,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65150428111551766
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757122020655396}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1764899826936008
 GameObject:
   m_ObjectHideFlags: 0
@@ -13558,7 +12847,6 @@ GameObject:
   - component: {fileID: 4222581259174268}
   - component: {fileID: 33771466895645198}
   - component: {fileID: 23136192612242720}
-  - component: {fileID: 65738582504872832}
   m_Layer: 0
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -13631,27 +12919,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65738582504872832
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1764899826936008}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1772034436448244
 GameObject:
   m_ObjectHideFlags: 0
@@ -14284,7 +13551,6 @@ GameObject:
   - component: {fileID: 4354624132356384}
   - component: {fileID: 33212858520757902}
   - component: {fileID: 23178818105960680}
-  - component: {fileID: 65177204001292986}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -14357,27 +13623,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65177204001292986
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1804751003763874}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1806478930360434
 GameObject:
   m_ObjectHideFlags: 0
@@ -14389,7 +13634,6 @@ GameObject:
   - component: {fileID: 4247254528783252}
   - component: {fileID: 33855612452076926}
   - component: {fileID: 23540160768188920}
-  - component: {fileID: 65814527183457800}
   m_Layer: 0
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -14462,27 +13706,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65814527183457800
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1806478930360434}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1809046281302160
 GameObject:
   m_ObjectHideFlags: 0
@@ -15241,7 +14464,6 @@ GameObject:
   - component: {fileID: 4779713374167902}
   - component: {fileID: 33839932601521816}
   - component: {fileID: 23608616455605192}
-  - component: {fileID: 65064213393537386}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -15314,27 +14536,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65064213393537386
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1853226921016566}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1858668869121292
 GameObject:
   m_ObjectHideFlags: 0
@@ -15550,6 +14751,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4637694934156542}
+  - component: {fileID: 6333991520706044232}
   m_Layer: 0
   m_Name: Linha_10
   m_TagString: Untagged
@@ -15582,6 +14784,18 @@ Transform:
   m_Father: {fileID: 4795745584742474}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6333991520706044232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1874460248807510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1875957466346656
 GameObject:
   m_ObjectHideFlags: 0
@@ -16006,6 +15220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4288826276549050}
+  - component: {fileID: 1428053102894229913}
   m_Layer: 0
   m_Name: Linha_02
   m_TagString: Untagged
@@ -16038,6 +15253,18 @@ Transform:
   m_Father: {fileID: 4795745584742474}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1428053102894229913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884824541574960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1885791109136012
 GameObject:
   m_ObjectHideFlags: 0
@@ -16580,7 +15807,6 @@ GameObject:
   - component: {fileID: 4580010484300668}
   - component: {fileID: 33467821560854586}
   - component: {fileID: 23571228627818922}
-  - component: {fileID: 65858379469533144}
   m_Layer: 0
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -16653,27 +15879,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65858379469533144
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1919795199874420}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1937761714187306
 GameObject:
   m_ObjectHideFlags: 0
@@ -16977,7 +16182,7 @@ GameObject:
   - component: {fileID: 65585495518051628}
   m_Layer: 0
   m_Name: Desert_Ravine_Stone
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17066,8 +16271,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.1, y: 4, z: 5.778463}
-  m_Center: {x: -0.15312243, y: -0.16797674, z: 0.2824812}
+  m_Size: {x: 3, y: 4, z: 5.778463}
+  m_Center: {x: -2.39, y: -0.16797674, z: 0.2824812}
 --- !u!1 &1954939340773300
 GameObject:
   m_ObjectHideFlags: 0
@@ -17162,7 +16367,6 @@ GameObject:
   - component: {fileID: 4015412161252912}
   - component: {fileID: 33364900283335370}
   - component: {fileID: 23413548457469956}
-  - component: {fileID: 65584319502424288}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -17235,27 +16439,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65584319502424288
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1958053219352534}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1961117866790112
 GameObject:
   m_ObjectHideFlags: 0
@@ -17270,7 +16453,7 @@ GameObject:
   - component: {fileID: 65703408437845810}
   m_Layer: 0
   m_Name: Desert_Ravine_Stone (1)
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17359,8 +16542,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.1, y: 4, z: 5.778463}
-  m_Center: {x: -0.15312243, y: -0.16797674, z: 0.2824812}
+  m_Size: {x: 3, y: 4, z: 5.778463}
+  m_Center: {x: -2.63, y: -0.16797674, z: 0.2824812}
 --- !u!1 &1961615672677900
 GameObject:
   m_ObjectHideFlags: 0
@@ -17827,7 +17010,6 @@ GameObject:
   - component: {fileID: 4518129420386322}
   - component: {fileID: 33069662490489556}
   - component: {fileID: 23013829120110354}
-  - component: {fileID: 65600630016696084}
   m_Layer: 0
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -17900,24 +17082,70 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65600630016696084
-BoxCollider:
+--- !u!1001 &7738863668583853386
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4732894073999962}
+    m_Modifications:
+    - target: {fileID: 1844573463542818, guid: 7071234b7af80e64bb1e299a66ef3a2b, type: 3}
+      propertyPath: m_Name
+      value: Skin_Desert_Stone_Bridges_Medium
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189988681877376, guid: 7071234b7af80e64bb1e299a66ef3a2b, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189988681877376, guid: 7071234b7af80e64bb1e299a66ef3a2b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189988681877376, guid: 7071234b7af80e64bb1e299a66ef3a2b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189988681877376, guid: 7071234b7af80e64bb1e299a66ef3a2b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189988681877376, guid: 7071234b7af80e64bb1e299a66ef3a2b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189988681877376, guid: 7071234b7af80e64bb1e299a66ef3a2b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189988681877376, guid: 7071234b7af80e64bb1e299a66ef3a2b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189988681877376, guid: 7071234b7af80e64bb1e299a66ef3a2b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189988681877376, guid: 7071234b7af80e64bb1e299a66ef3a2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189988681877376, guid: 7071234b7af80e64bb1e299a66ef3a2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189988681877376, guid: 7071234b7af80e64bb1e299a66ef3a2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7071234b7af80e64bb1e299a66ef3a2b, type: 3}
+--- !u!4 &7740303770023815882 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4189988681877376, guid: 7071234b7af80e64bb1e299a66ef3a2b,
+    type: 3}
+  m_PrefabInstance: {fileID: 7738863668583853386}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1998046790585466}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}

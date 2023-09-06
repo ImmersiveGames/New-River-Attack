@@ -32,7 +32,7 @@ namespace RiverAttack
             m_EnemyMaster = GetComponent<EnemiesMaster>();
             m_ItemsVariables = m_EnemyMaster.enemy.listDropItems;
         }
-        //TODO: implementar Dropar mais de 1 item e pois precisa alterar a poição;
+        //TODO: implementar Dropar mais de 1 item e pois precisa alterar a posição;
         void DropItem()
         {
             if (dropChance.y <= 0 || m_ItemsVariables == null) return;

@@ -81,7 +81,7 @@ namespace RiverAttack
                     poolPathLevels[i].SetActive(true);
             }
             if (level.pathEnd == null) return;
-            //TODO: Refazer o fim de faze para não spawnar desde o inicio (ou talvez sim mesmmo qu ele crie o fim longe dos espaços)
+            //TODO: Refazer o fim de fase para não spawnar desde o inicio (ou talvez sim mesmmo que ele crie o fim longe dos espaços)
             nextBound.x = level.levelOffset.x;
             FixedPath(ref nextBound, level.pathEnd, myRoot);
         }

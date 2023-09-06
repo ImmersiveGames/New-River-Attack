@@ -14,6 +14,7 @@ namespace RiverAttack
             base.OnEnable();
             m_EffectAreaMaster.EventEnterAreaEffect += SoundAreaEffect;
             m_EffectAreaMaster.EventExitAreaEffect += StopSoundAreaEffect;
+            GamePlayManager.instance.EventOtherEnemiesKillPlayer += StopSoundArea;
         }
 
         protected override void OnDisable()
@@ -21,6 +22,7 @@ namespace RiverAttack
             base.OnDisable();
             m_EffectAreaMaster.EventEnterAreaEffect -= SoundAreaEffect;
             m_EffectAreaMaster.EventExitAreaEffect -= StopSoundAreaEffect;
+            GamePlayManager.instance.EventOtherEnemiesKillPlayer -= StopSoundArea;
         }
 
         protected override void SetInitialReferences()
@@ -39,6 +41,12 @@ namespace RiverAttack
         {
             if ((!audioSource && !effectAreaSound) && !audioSource.isPlaying) return;
             effectAreaExitSound.Play(audioSource);
+        }
+
+        void StopSoundArea()
+        {
+            if ((!audioSource && !effectAreaSound) && !audioSource.isPlaying) return;
+            audioSource.Stop();
         }
     }
 }

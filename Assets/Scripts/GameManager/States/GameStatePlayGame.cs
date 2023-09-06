@@ -26,8 +26,9 @@ namespace RiverAttack
         }
         public override void ExitState()
         {
-            m_GamePlayManager.OnEventDeactivateEnemiesMaster();
             m_GameManager.ActivePlayers(false);
+            m_GamePlayManager.OnEventDeactivateEnemiesMaster();
+            
             //Debug.Log($"Sai do Estado: PlayGame");
         }
     }

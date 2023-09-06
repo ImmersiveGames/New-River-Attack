@@ -32,6 +32,7 @@ namespace RiverAttack
             base.OnTriggerEnter(other);
             if (other.GetComponent<BulletPlayer>()) return;
             ComponentToKill(other.GetComponentInParent<PlayerMaster>(), CollisionType.Collider);
+            GamePlayManager.instance.OnEventOtherEnemiesKillPlayer();
         }
         internal override void OnDisable()
         {

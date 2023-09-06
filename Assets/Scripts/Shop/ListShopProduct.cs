@@ -5,7 +5,7 @@ namespace Shopping
 {
     [CreateAssetMenu(fileName = "ListShopProducts", menuName = "RiverAttack/Shopping/List/ListProduct", order = 101)]
     [System.Serializable]
-    public class ListShopProduct : ScriptableObject
+    public class ListShopProductxxx : ScriptableObject
     {
 #if UNITY_EDITOR
         [Multiline]
