@@ -22,7 +22,12 @@ namespace RiverAttack
         }
         void OnTriggerEnter(Collider collision)
         {
-            if ((collision.GetComponentInParent<EnemiesMaster>() && !collision.GetComponentInParent<CollectiblesMaster>()) || collision.GetComponentInParent<BulletEnemy>()) return;
+            if ((collision.GetComponentInParent<EnemiesMaster>() && !collision.GetComponentInParent<CollectiblesMaster>()) ||
+                collision.GetComponentInParent<BulletEnemy>()) return;
+            
+            if (collision.GetComponentInParent<WallsMaster>() ||
+                collision.GetComponentInParent<EffectAreaMaster>()) return;
+            
             DestroyMe();
         }
         void OnBecameInvisible()
