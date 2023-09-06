@@ -84,7 +84,7 @@ Transform:
   - {fileID: 6013914597207046549}
   - {fileID: 7879154615844904466}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4195329419193379460
 MonoBehaviour:
@@ -116,7 +116,7 @@ MonoBehaviour:
     m_Bits: 256
   playerPrefab: {fileID: 409879802783298609, guid: 060c0640ee0816b46994f8281ca9b242,
     type: 3}
-  spawnPlayerPosition: {x: 0, y: 0, z: -50}
+  spawnPlayerPosition: {x: 0, y: 2, z: -50}
   playerSettingsList:
   - {fileID: 11400000, guid: c11a8f0b743164845ab2754709110c91, type: 2}
   initializedPlayerMasters: []
@@ -136,7 +136,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 1.5
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -327,7 +327,6 @@ MonoBehaviour:
   actualPathIndex: 0
   maxLevels: 5
   levelsFinishList: []
-  previousLevelList: []
   pathMilestones: []
   poolPathLevels: []
   poolEnemyLevels: []

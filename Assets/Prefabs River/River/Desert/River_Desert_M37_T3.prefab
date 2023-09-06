@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4586714796472322}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4272409932830564}
-  m_Layer: 0
+  - component: {fileID: 7553384211424298549}
+  m_Layer: 8
   m_Name: Linha_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,11 +79,21 @@ Transform:
   - {fileID: 4324223053634582}
   - {fileID: 4548616343428968}
   - {fileID: 4922252975823590}
-  - {fileID: 4224476026091410}
-  - {fileID: 4399993490453640}
   m_Father: {fileID: 4834469677164412}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7553384211424298549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004652577717080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1012831751068006
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +105,7 @@ GameObject:
   - component: {fileID: 4360104317071604}
   - component: {fileID: 33809013010624478}
   - component: {fileID: 23754506628012714}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +188,7 @@ GameObject:
   - component: {fileID: 4459625305642818}
   - component: {fileID: 33196695220144666}
   - component: {fileID: 23126195749681206}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +272,7 @@ GameObject:
   - component: {fileID: 33563806031950324}
   - component: {fileID: 23390624067184576}
   - component: {fileID: 65750776021866888}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -352,8 +363,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.27663, y: 6, z: 10}
-  m_Center: {x: 3.361685, y: 3, z: 0}
+  m_Size: {x: 3.27663, y: 6, z: 30}
+  m_Center: {x: 3.361685, y: 3, z: -10}
 --- !u!1 &1029520468771998
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +374,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4799000857437834}
-  m_Layer: 0
+  - component: {fileID: 7061975871194636040}
+  m_Layer: 8
   m_Name: Linha_19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -391,11 +403,21 @@ Transform:
   - {fileID: 4729012781697784}
   - {fileID: 4924329816296144}
   - {fileID: 4368402306570622}
-  - {fileID: 4338605190502928}
-  - {fileID: 4114871513026562}
   m_Father: {fileID: 4834469677164412}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7061975871194636040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029520468771998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1031261553676506
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,8 +430,7 @@ GameObject:
   - component: {fileID: 33345869544237648}
   - component: {fileID: 23550809001015486}
   - component: {fileID: 65236247158954320}
-  - component: {fileID: 65171347804419678}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Curve
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -500,29 +521,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 3.2192879}
-  m_Center: {x: 0, y: 3, z: 3.390356}
---- !u!65 &65171347804419678
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1031261553676506}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.3884163, y: 6, z: 10}
-  m_Center: {x: -3.3057919, y: 3, z: 0}
+  m_Size: {x: 15, y: 6, z: 17}
+  m_Center: {x: 1, y: 3, z: 10}
 --- !u!1 &1034857375044902
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,9 +534,7 @@ GameObject:
   - component: {fileID: 4323263107661380}
   - component: {fileID: 33897327807182668}
   - component: {fileID: 23655089723851188}
-  - component: {fileID: 65365733823053014}
-  - component: {fileID: 65709365170001798}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Curve
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -608,48 +606,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65365733823053014
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1034857375044902}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 3.2192879}
-  m_Center: {x: 0, y: 3, z: 3.390356}
---- !u!65 &65709365170001798
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1034857375044902}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.3884163, y: 6, z: 10}
-  m_Center: {x: -3.3057919, y: 3, z: 0}
 --- !u!1 &1040280438526844
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,8 +617,7 @@ GameObject:
   - component: {fileID: 4944078463263836}
   - component: {fileID: 33307533730545268}
   - component: {fileID: 23626605628191614}
-  - component: {fileID: 65848572553206652}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_M
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -735,27 +690,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65848572553206652
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1040280438526844}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.889312, y: 6, z: 10}
-  m_Center: {x: 0.1284578, y: 3, z: 0}
 --- !u!1 &1041057381783732
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,7 +701,7 @@ GameObject:
   - component: {fileID: 4647532253565634}
   - component: {fileID: 33365423138601624}
   - component: {fileID: 23213301966026254}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -850,8 +784,7 @@ GameObject:
   - component: {fileID: 4170497896742590}
   - component: {fileID: 33788983415601510}
   - component: {fileID: 23800700481793704}
-  - component: {fileID: 65455908009114402}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -923,27 +856,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65455908009114402
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1041714662777336}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1046090173039924
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,7 +867,7 @@ GameObject:
   - component: {fileID: 4856584947068112}
   - component: {fileID: 33991364002675928}
   - component: {fileID: 23353333884508150}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1038,7 +950,7 @@ GameObject:
   - component: {fileID: 4631375933923212}
   - component: {fileID: 33504452369100056}
   - component: {fileID: 23297374291945130}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1121,8 +1033,7 @@ GameObject:
   - component: {fileID: 4012513269423416}
   - component: {fileID: 33146533552368448}
   - component: {fileID: 23348956061349870}
-  - component: {fileID: 65315245407841196}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank_2 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1194,27 +1105,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65315245407841196
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1052057636359580}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1056061075147250
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,7 +1116,7 @@ GameObject:
   - component: {fileID: 4088091183825894}
   - component: {fileID: 33751290699435106}
   - component: {fileID: 23511726694073628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1309,8 +1199,7 @@ GameObject:
   - component: {fileID: 4909992325142216}
   - component: {fileID: 33629338643554332}
   - component: {fileID: 23092305457680652}
-  - component: {fileID: 65195983759492618}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_Solo
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1324,13 +1213,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1059620393710506}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -5, y: 0, z: 5}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -5, y: 0, z: 30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4639402986637122}
-  m_RootOrder: 11
+  m_Father: {fileID: 4774267208332674}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &33629338643554332
 MeshFilter:
@@ -1382,27 +1271,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65195983759492618
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1059620393710506}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.6858807, y: 6, z: 6.5374556}
-  m_Center: {x: 0.18313658, y: 3, z: 0.23238993}
 --- !u!1 &1060273261928890
 GameObject:
   m_ObjectHideFlags: 0
@@ -1412,7 +1280,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4743592234214496}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1454,7 +1322,7 @@ GameObject:
   - component: {fileID: 4142016298688978}
   - component: {fileID: 33380586838814926}
   - component: {fileID: 23665830071498838}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1537,7 +1405,7 @@ GameObject:
   - component: {fileID: 4268388771126046}
   - component: {fileID: 33662967854410038}
   - component: {fileID: 23890618994538966}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1620,7 +1488,7 @@ GameObject:
   - component: {fileID: 4370646944555004}
   - component: {fileID: 33257318113571752}
   - component: {fileID: 23030228566924984}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1703,7 +1571,7 @@ GameObject:
   - component: {fileID: 4263144600159040}
   - component: {fileID: 33524001351851770}
   - component: {fileID: 23102099014181512}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1786,7 +1654,7 @@ GameObject:
   - component: {fileID: 4254403482422236}
   - component: {fileID: 33267111893077074}
   - component: {fileID: 23166109217698776}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1869,8 +1737,7 @@ GameObject:
   - component: {fileID: 4399993490453640}
   - component: {fileID: 33714765731572388}
   - component: {fileID: 23515079113500264}
-  - component: {fileID: 65199853220116332}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_Solo (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1885,12 +1752,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091004408951714}
   m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: 0, z: 5}
+  m_LocalPosition: {x: 10, y: 0, z: 120}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4272409932830564}
-  m_RootOrder: 11
+  m_Father: {fileID: 4774267208332674}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33714765731572388
 MeshFilter:
@@ -1942,27 +1809,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65199853220116332
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1091004408951714}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.6858807, y: 6, z: 6.5374556}
-  m_Center: {x: 0.18313658, y: 3, z: 0.23238993}
 --- !u!1 &1091044352638620
 GameObject:
   m_ObjectHideFlags: 0
@@ -1974,7 +1820,7 @@ GameObject:
   - component: {fileID: 4302571783370694}
   - component: {fileID: 33141831626175150}
   - component: {fileID: 23264711629046272}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2057,7 +1903,7 @@ GameObject:
   - component: {fileID: 4691058771314270}
   - component: {fileID: 33387452727601736}
   - component: {fileID: 23389328035441624}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2140,7 +1986,7 @@ GameObject:
   - component: {fileID: 4347908414569416}
   - component: {fileID: 33635599179353152}
   - component: {fileID: 23800730166825568}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2223,7 +2069,7 @@ GameObject:
   - component: {fileID: 4327296667914362}
   - component: {fileID: 33393548708080322}
   - component: {fileID: 23935931478144928}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2306,9 +2152,8 @@ GameObject:
   - component: {fileID: 4368402306570622}
   - component: {fileID: 33561379701865716}
   - component: {fileID: 23887162606324736}
-  - component: {fileID: 65455810724231528}
   - component: {fileID: 65917565082241136}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Curve (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2380,27 +2225,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65455810724231528
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1112352336433688}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 3.2192879}
-  m_Center: {x: 0, y: 3, z: 3.390356}
 --- !u!65 &65917565082241136
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2420,8 +2244,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.3884163, y: 6, z: 10}
-  m_Center: {x: -3.3057919, y: 3, z: 0}
+  m_Size: {x: 3.3884163, y: 6, z: 13}
+  m_Center: {x: -3.3057919, y: 3, z: -1}
 --- !u!1 &1113453934892498
 GameObject:
   m_ObjectHideFlags: 0
@@ -2433,7 +2257,7 @@ GameObject:
   - component: {fileID: 4397527251270198}
   - component: {fileID: 33956150962450734}
   - component: {fileID: 23091351839678628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2517,7 +2341,7 @@ GameObject:
   - component: {fileID: 33465004515656070}
   - component: {fileID: 23418052037885726}
   - component: {fileID: 65389549538755642}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2622,7 +2446,7 @@ GameObject:
   - component: {fileID: 33751237502522428}
   - component: {fileID: 23866530225931666}
   - component: {fileID: 65314671133591326}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank_2 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2713,8 +2537,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
+  m_Size: {x: 7, y: 6, z: 18}
+  m_Center: {x: 4.87, y: 3, z: 0}
 --- !u!1 &1132326989571924
 GameObject:
   m_ObjectHideFlags: 0
@@ -2727,7 +2551,7 @@ GameObject:
   - component: {fileID: 33304639015460162}
   - component: {fileID: 23054733110661072}
   - component: {fileID: 65447079498974868}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank_2 (14)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2818,8 +2642,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
+  m_Size: {x: 17, y: 6, z: 13}
+  m_Center: {x: 10, y: 3, z: 1.73}
 --- !u!1 &1141765920967422
 GameObject:
   m_ObjectHideFlags: 0
@@ -2831,7 +2655,7 @@ GameObject:
   - component: {fileID: 4230227382589260}
   - component: {fileID: 33262795777238394}
   - component: {fileID: 23044726931720020}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2912,7 +2736,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4624622947230676}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Stone_Bridge_Big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2927,15 +2751,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143012035064000}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 5}
+  m_LocalPosition: {x: 5, y: 0, z: 30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4999777765633556}
   - {fileID: 4804389609172990}
   - {fileID: 4703952279559764}
-  m_Father: {fileID: 4639402986637122}
-  m_RootOrder: 13
+  m_Father: {fileID: 4774267208332674}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1146143935437150
 GameObject:
@@ -2948,8 +2772,7 @@ GameObject:
   - component: {fileID: 4324223053634582}
   - component: {fileID: 33097062216715564}
   - component: {fileID: 23029546511177938}
-  - component: {fileID: 65120980716867480}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3021,27 +2844,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65120980716867480
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1146143935437150}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1151454408308864
 GameObject:
   m_ObjectHideFlags: 0
@@ -3053,8 +2855,7 @@ GameObject:
   - component: {fileID: 4319349746781900}
   - component: {fileID: 33319092366319292}
   - component: {fileID: 23856643679147280}
-  - component: {fileID: 65056563253073326}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3126,27 +2927,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65056563253073326
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1151454408308864}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1154245527971086
 GameObject:
   m_ObjectHideFlags: 0
@@ -3158,7 +2938,7 @@ GameObject:
   - component: {fileID: 4472273352185030}
   - component: {fileID: 33362948170615620}
   - component: {fileID: 23887306480441176}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3241,7 +3021,7 @@ GameObject:
   - component: {fileID: 4855963325518294}
   - component: {fileID: 33079401793267412}
   - component: {fileID: 23564347992801370}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3324,8 +3104,7 @@ GameObject:
   - component: {fileID: 4788130234360038}
   - component: {fileID: 33290253527185114}
   - component: {fileID: 23310923636046468}
-  - component: {fileID: 65145354108432166}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3397,27 +3176,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65145354108432166
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159961075797470}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1162544999070062
 GameObject:
   m_ObjectHideFlags: 0
@@ -3429,7 +3187,7 @@ GameObject:
   - component: {fileID: 4926877579026046}
   - component: {fileID: 33444140932490262}
   - component: {fileID: 23683750839177860}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3512,7 +3270,7 @@ GameObject:
   - component: {fileID: 4915729621997824}
   - component: {fileID: 33119736534663322}
   - component: {fileID: 23574518870489608}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3595,7 +3353,7 @@ GameObject:
   - component: {fileID: 4876629262754108}
   - component: {fileID: 33657625389098096}
   - component: {fileID: 23738988494328850}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3678,7 +3436,7 @@ GameObject:
   - component: {fileID: 4430919842546448}
   - component: {fileID: 33563547010726850}
   - component: {fileID: 23039111800090230}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3761,8 +3519,7 @@ GameObject:
   - component: {fileID: 4387207149390356}
   - component: {fileID: 33134392019564006}
   - component: {fileID: 23269073827767242}
-  - component: {fileID: 65523253155147876}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_M
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3835,27 +3592,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65523253155147876
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1173720532314422}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.889312, y: 6, z: 10}
-  m_Center: {x: 0.1284578, y: 3, z: 0}
 --- !u!1 &1176305832028454
 GameObject:
   m_ObjectHideFlags: 0
@@ -3867,9 +3603,7 @@ GameObject:
   - component: {fileID: 4548616343428968}
   - component: {fileID: 33067379095903944}
   - component: {fileID: 23047515220518534}
-  - component: {fileID: 65996847686347632}
-  - component: {fileID: 65242999280426640}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Curve
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3941,48 +3675,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65996847686347632
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1176305832028454}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 3.2192879}
-  m_Center: {x: 0, y: 3, z: 3.390356}
---- !u!65 &65242999280426640
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1176305832028454}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.3884163, y: 6, z: 10}
-  m_Center: {x: -3.3057919, y: 3, z: 0}
 --- !u!1 &1183136151901456
 GameObject:
   m_ObjectHideFlags: 0
@@ -3994,7 +3686,7 @@ GameObject:
   - component: {fileID: 4916321761199498}
   - component: {fileID: 33468603936434026}
   - component: {fileID: 23657087262850040}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4077,8 +3769,7 @@ GameObject:
   - component: {fileID: 4248759647018218}
   - component: {fileID: 33510081185843048}
   - component: {fileID: 23032262286947068}
-  - component: {fileID: 65720193820695110}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4150,27 +3841,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65720193820695110
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184241172155372}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1187803619891440
 GameObject:
   m_ObjectHideFlags: 0
@@ -4182,7 +3852,7 @@ GameObject:
   - component: {fileID: 4906514848478178}
   - component: {fileID: 33012450104836588}
   - component: {fileID: 23034742827831170}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4265,7 +3935,7 @@ GameObject:
   - component: {fileID: 4131078081711450}
   - component: {fileID: 33627006711022762}
   - component: {fileID: 23193290049099086}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4348,7 +4018,7 @@ GameObject:
   - component: {fileID: 4052493488878600}
   - component: {fileID: 33469023666434414}
   - component: {fileID: 23783121484809814}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4431,7 +4101,7 @@ GameObject:
   - component: {fileID: 4331546143389342}
   - component: {fileID: 33426759035596108}
   - component: {fileID: 23150774269229668}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4512,7 +4182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4705922391226510}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Stone_Bridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4547,8 +4217,7 @@ GameObject:
   - component: {fileID: 4364583134476342}
   - component: {fileID: 33360015858522044}
   - component: {fileID: 23396696309645148}
-  - component: {fileID: 65245257972036916}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_M
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4621,27 +4290,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65245257972036916
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1194968329833530}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.889312, y: 6, z: 10}
-  m_Center: {x: 0.1284578, y: 3, z: 0}
 --- !u!1 &1196764925719572
 GameObject:
   m_ObjectHideFlags: 0
@@ -4653,7 +4301,7 @@ GameObject:
   - component: {fileID: 4922758731318956}
   - component: {fileID: 33161350163947684}
   - component: {fileID: 23193660740609934}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4736,8 +4384,7 @@ GameObject:
   - component: {fileID: 4224476026091410}
   - component: {fileID: 33868483150834720}
   - component: {fileID: 23003585507882462}
-  - component: {fileID: 65964586302171396}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_Solo
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4752,12 +4399,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1202376982999560}
   m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10, y: 0, z: -5}
+  m_LocalPosition: {x: -10, y: 0, z: 110}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4272409932830564}
-  m_RootOrder: 10
+  m_Father: {fileID: 4774267208332674}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33868483150834720
 MeshFilter:
@@ -4809,27 +4456,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65964586302171396
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202376982999560}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.6858807, y: 6, z: 6.5374556}
-  m_Center: {x: 0.18313658, y: 3, z: 0.23238993}
 --- !u!1 &1203282903433382
 GameObject:
   m_ObjectHideFlags: 0
@@ -4839,7 +4465,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4552154080508340}
-  m_Layer: 0
+  - component: {fileID: 519159585704270574}
+  m_Layer: 8
   m_Name: Linha_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4871,6 +4498,18 @@ Transform:
   m_Father: {fileID: 4834469677164412}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519159585704270574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203282903433382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1206165894930962
 GameObject:
   m_ObjectHideFlags: 0
@@ -4882,8 +4521,7 @@ GameObject:
   - component: {fileID: 4069825004415546}
   - component: {fileID: 33656147588586130}
   - component: {fileID: 23242702982480930}
-  - component: {fileID: 65408448325980818}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_Stone (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4898,12 +4536,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1206165894930962}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 10, y: 0, z: -5}
+  m_LocalPosition: {x: 10, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4774414906664170}
-  m_RootOrder: 11
+  m_Father: {fileID: 4774267208332674}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33656147588586130
 MeshFilter:
@@ -4955,27 +4593,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65408448325980818
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1206165894930962}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.8552384, y: 6, z: 3.0794559}
-  m_Center: {x: -0.029138803, y: 3, z: -0.72722983}
 --- !u!1 &1211763309164724
 GameObject:
   m_ObjectHideFlags: 0
@@ -4987,7 +4604,7 @@ GameObject:
   - component: {fileID: 4394264072373046}
   - component: {fileID: 33611906964168962}
   - component: {fileID: 23922304240238680}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5070,7 +4687,7 @@ GameObject:
   - component: {fileID: 4113053503197582}
   - component: {fileID: 33363679295928344}
   - component: {fileID: 23453268559031270}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5153,7 +4770,7 @@ GameObject:
   - component: {fileID: 4485208970644034}
   - component: {fileID: 33350762645704900}
   - component: {fileID: 23329467058976042}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5236,7 +4853,7 @@ GameObject:
   - component: {fileID: 4513754773740054}
   - component: {fileID: 33631880929321160}
   - component: {fileID: 23140335608767020}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5319,7 +4936,7 @@ GameObject:
   - component: {fileID: 4343337350264930}
   - component: {fileID: 33698935382793718}
   - component: {fileID: 23563567228998002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5402,7 +5019,7 @@ GameObject:
   - component: {fileID: 4073514420442648}
   - component: {fileID: 33972526934225362}
   - component: {fileID: 23951386977912700}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Stone_Bridge_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5485,8 +5102,7 @@ GameObject:
   - component: {fileID: 4258804443885726}
   - component: {fileID: 33664590728933412}
   - component: {fileID: 23951907677077074}
-  - component: {fileID: 65203165471475804}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5558,27 +5174,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65203165471475804
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1245302373589642}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1246391558311956
 GameObject:
   m_ObjectHideFlags: 0
@@ -5590,7 +5185,7 @@ GameObject:
   - component: {fileID: 4950509944098108}
   - component: {fileID: 33654960786781136}
   - component: {fileID: 23928092800206340}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5673,7 +5268,7 @@ GameObject:
   - component: {fileID: 4188324820971564}
   - component: {fileID: 33661184646199336}
   - component: {fileID: 23347980764948792}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5756,7 +5351,7 @@ GameObject:
   - component: {fileID: 4989568523227618}
   - component: {fileID: 33110152007134970}
   - component: {fileID: 23707153819633664}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5839,8 +5434,7 @@ GameObject:
   - component: {fileID: 4434464204025628}
   - component: {fileID: 33165871992397278}
   - component: {fileID: 23788523971047962}
-  - component: {fileID: 65666476444844420}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5912,27 +5506,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65666476444844420
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1257201724406308}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1267983893508576
 GameObject:
   m_ObjectHideFlags: 0
@@ -5942,7 +5515,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4389645123407320}
-  m_Layer: 0
+  - component: {fileID: 3525744914050141746}
+  m_Layer: 8
   m_Name: Linha_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5970,12 +5544,22 @@ Transform:
   - {fileID: 4268388771126046}
   - {fileID: 4850090721697456}
   - {fileID: 4564486712009494}
-  - {fileID: 4104846362699638}
   - {fileID: 4584533031485178}
-  - {fileID: 4876513231813908}
   m_Father: {fileID: 4834469677164412}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3525744914050141746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267983893508576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1273612918517052
 GameObject:
   m_ObjectHideFlags: 0
@@ -5987,7 +5571,7 @@ GameObject:
   - component: {fileID: 4141131996761886}
   - component: {fileID: 33648819817481616}
   - component: {fileID: 23013866476352578}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6070,7 +5654,7 @@ GameObject:
   - component: {fileID: 4313408907574976}
   - component: {fileID: 33167394967772750}
   - component: {fileID: 23529007819794504}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Stone_Bridge_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6151,7 +5735,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4668630622776474}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6193,8 +5777,7 @@ GameObject:
   - component: {fileID: 4770049742303590}
   - component: {fileID: 33157872311616328}
   - component: {fileID: 23416855431566020}
-  - component: {fileID: 65343252806531802}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6266,27 +5849,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65343252806531802
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1286792806531474}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1293853820237576
 GameObject:
   m_ObjectHideFlags: 0
@@ -6298,8 +5860,7 @@ GameObject:
   - component: {fileID: 4104846362699638}
   - component: {fileID: 33287609611848346}
   - component: {fileID: 23379073146753600}
-  - component: {fileID: 65067881833657890}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_Stone
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6313,13 +5874,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293853820237576}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 20, y: 0, z: -5}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 20, y: 0, z: 40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4389645123407320}
-  m_RootOrder: 9
+  m_Father: {fileID: 4774267208332674}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33287609611848346
 MeshFilter:
@@ -6371,27 +5932,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65067881833657890
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1293853820237576}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.8552384, y: 6, z: 3.0794559}
-  m_Center: {x: -0.029138803, y: 3, z: -0.72722983}
 --- !u!1 &1297390428425172
 GameObject:
   m_ObjectHideFlags: 0
@@ -6403,7 +5943,7 @@ GameObject:
   - component: {fileID: 4776448507098998}
   - component: {fileID: 33794975914658124}
   - component: {fileID: 23358767409626216}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6486,7 +6026,7 @@ GameObject:
   - component: {fileID: 4397293682877748}
   - component: {fileID: 33133808266271862}
   - component: {fileID: 23043086510733954}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6569,7 +6109,7 @@ GameObject:
   - component: {fileID: 4967010851766516}
   - component: {fileID: 33581892021836746}
   - component: {fileID: 23777929579358200}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6652,8 +6192,7 @@ GameObject:
   - component: {fileID: 4964395689050834}
   - component: {fileID: 33281885057313024}
   - component: {fileID: 23913754910543634}
-  - component: {fileID: 65730670791187948}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6725,27 +6264,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65730670791187948
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1312202098320122}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1313046409498702
 GameObject:
   m_ObjectHideFlags: 0
@@ -6757,8 +6275,7 @@ GameObject:
   - component: {fileID: 4147832453444158}
   - component: {fileID: 33255473881842242}
   - component: {fileID: 23705410016016660}
-  - component: {fileID: 65124288172593888}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_Solo
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6772,13 +6289,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1313046409498702}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 10, y: 0, z: -5}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 10, y: 0, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4477945155725742}
-  m_RootOrder: 11
+  m_Father: {fileID: 4774267208332674}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &33255473881842242
 MeshFilter:
@@ -6830,27 +6347,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65124288172593888
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1313046409498702}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.6858807, y: 6, z: 6.5374556}
-  m_Center: {x: 0.18313658, y: 3, z: 0.23238993}
 --- !u!1 &1325372212847570
 GameObject:
   m_ObjectHideFlags: 0
@@ -6862,7 +6358,7 @@ GameObject:
   - component: {fileID: 4034293272618048}
   - component: {fileID: 33044877860262978}
   - component: {fileID: 23350950772947392}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6945,7 +6441,7 @@ GameObject:
   - component: {fileID: 4786545655103928}
   - component: {fileID: 33958876107947894}
   - component: {fileID: 23443828238338252}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7028,7 +6524,7 @@ GameObject:
   - component: {fileID: 4686649218647052}
   - component: {fileID: 33666287404086302}
   - component: {fileID: 23441801659018028}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7111,7 +6607,7 @@ GameObject:
   - component: {fileID: 4574676164794522}
   - component: {fileID: 33778986464931894}
   - component: {fileID: 23635578315250684}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7194,7 +6690,7 @@ GameObject:
   - component: {fileID: 4624490443735474}
   - component: {fileID: 33233345496651896}
   - component: {fileID: 23451083267165588}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7275,7 +6771,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4639402986637122}
-  m_Layer: 0
+  - component: {fileID: 2551510217539450934}
+  m_Layer: 8
   m_Name: Linha_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7305,12 +6802,21 @@ Transform:
   - {fileID: 4220053021838024}
   - {fileID: 4905131851046636}
   - {fileID: 4972369344715810}
-  - {fileID: 4909992325142216}
-  - {fileID: 4368771360886616}
-  - {fileID: 4624622947230676}
   m_Father: {fileID: 4834469677164412}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2551510217539450934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348518023314478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1358301456291878
 GameObject:
   m_ObjectHideFlags: 0
@@ -7322,8 +6828,7 @@ GameObject:
   - component: {fileID: 4170283994853700}
   - component: {fileID: 33406006840701338}
   - component: {fileID: 23554623012972682}
-  - component: {fileID: 65160262618923730}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7395,27 +6900,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65160262618923730
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1358301456291878}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1364024949020020
 GameObject:
   m_ObjectHideFlags: 0
@@ -7427,9 +6911,7 @@ GameObject:
   - component: {fileID: 4118464669133412}
   - component: {fileID: 33564454789264252}
   - component: {fileID: 23059338256745896}
-  - component: {fileID: 65231533789710428}
-  - component: {fileID: 65168792163891068}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Curve (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7501,48 +6983,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65231533789710428
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1364024949020020}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 3.2192879}
-  m_Center: {x: 0, y: 3, z: 3.390356}
---- !u!65 &65168792163891068
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1364024949020020}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.3884163, y: 6, z: 10}
-  m_Center: {x: -3.3057919, y: 3, z: 0}
 --- !u!1 &1368089157592576
 GameObject:
   m_ObjectHideFlags: 0
@@ -7554,7 +6994,7 @@ GameObject:
   - component: {fileID: 4574285426348452}
   - component: {fileID: 33277075710165136}
   - component: {fileID: 23864680523659704}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7637,7 +7077,7 @@ GameObject:
   - component: {fileID: 4055318758378414}
   - component: {fileID: 33352031974891716}
   - component: {fileID: 23983987142043228}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7720,7 +7160,7 @@ GameObject:
   - component: {fileID: 4478677986393022}
   - component: {fileID: 33457152916401088}
   - component: {fileID: 23560300281815592}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7803,8 +7243,7 @@ GameObject:
   - component: {fileID: 4734901520004004}
   - component: {fileID: 33351769557716186}
   - component: {fileID: 23932628341890854}
-  - component: {fileID: 65384797013207606}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7876,27 +7315,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65384797013207606
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1370466329860910}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1373625802812928
 GameObject:
   m_ObjectHideFlags: 0
@@ -7908,8 +7326,7 @@ GameObject:
   - component: {fileID: 4614441941264372}
   - component: {fileID: 33603482110996080}
   - component: {fileID: 23943260578183808}
-  - component: {fileID: 65177713186731566}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7981,27 +7398,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65177713186731566
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1373625802812928}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1379637672060414
 GameObject:
   m_ObjectHideFlags: 0
@@ -8013,7 +7409,7 @@ GameObject:
   - component: {fileID: 4445729232107132}
   - component: {fileID: 33809979692513060}
   - component: {fileID: 23853477863009120}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8096,7 +7492,7 @@ GameObject:
   - component: {fileID: 4529973625499546}
   - component: {fileID: 33411212276093084}
   - component: {fileID: 23290139297715098}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8179,7 +7575,7 @@ GameObject:
   - component: {fileID: 4728358929502630}
   - component: {fileID: 33293433482001672}
   - component: {fileID: 23675153644210002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8262,7 +7658,7 @@ GameObject:
   - component: {fileID: 4115772339792668}
   - component: {fileID: 33862886703402484}
   - component: {fileID: 23637556728622152}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8345,7 +7741,7 @@ GameObject:
   - component: {fileID: 4467992129835162}
   - component: {fileID: 33799560296482574}
   - component: {fileID: 23328329382592012}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8428,7 +7824,7 @@ GameObject:
   - component: {fileID: 4217109706610624}
   - component: {fileID: 33878397481057972}
   - component: {fileID: 23052265878821186}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (8)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8511,8 +7907,7 @@ GameObject:
   - component: {fileID: 4306048182955406}
   - component: {fileID: 33839879897479668}
   - component: {fileID: 23942590221501210}
-  - component: {fileID: 65419207026692486}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8584,27 +7979,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65419207026692486
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1407921142109522}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 4.9, z: 10}
-  m_Center: {x: 0, y: 2.45, z: 0}
 --- !u!1 &1409547960464248
 GameObject:
   m_ObjectHideFlags: 0
@@ -8617,8 +7991,7 @@ GameObject:
   - component: {fileID: 33942783943941840}
   - component: {fileID: 23829107524332006}
   - component: {fileID: 65104443536872902}
-  - component: {fileID: 65530287206220176}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Curve
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8709,29 +8082,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 3.2192879}
-  m_Center: {x: 0, y: 3, z: 3.390356}
---- !u!65 &65530287206220176
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1409547960464248}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.3884163, y: 6, z: 10}
-  m_Center: {x: -3.3057919, y: 3, z: 0}
+  m_Size: {x: 13, y: 6, z: 3.2192879}
+  m_Center: {x: 1, y: 3, z: 3.390356}
 --- !u!1 &1414974419825814
 GameObject:
   m_ObjectHideFlags: 0
@@ -8743,7 +8095,7 @@ GameObject:
   - component: {fileID: 4320508850024162}
   - component: {fileID: 33664907784090604}
   - component: {fileID: 23152052916744092}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8826,7 +8178,7 @@ GameObject:
   - component: {fileID: 4824710267204956}
   - component: {fileID: 33449529304428840}
   - component: {fileID: 23359382356171728}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8909,7 +8261,7 @@ GameObject:
   - component: {fileID: 4922252975823590}
   - component: {fileID: 33539121280154832}
   - component: {fileID: 23244864511627916}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8992,7 +8344,7 @@ GameObject:
   - component: {fileID: 4838752669134708}
   - component: {fileID: 33962431721801444}
   - component: {fileID: 23095967081892498}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9075,9 +8427,8 @@ GameObject:
   - component: {fileID: 4889353529719558}
   - component: {fileID: 33922148633155350}
   - component: {fileID: 23836039894531886}
-  - component: {fileID: 65555778771503916}
   - component: {fileID: 65841660419648056}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Curve
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9149,27 +8500,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65555778771503916
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1430516383449090}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 3.2192879}
-  m_Center: {x: 0, y: 3, z: 3.390356}
 --- !u!65 &65841660419648056
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9189,8 +8519,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.3884163, y: 6, z: 10}
-  m_Center: {x: -3.3057919, y: 3, z: 0}
+  m_Size: {x: 3.3884163, y: 6, z: 150}
+  m_Center: {x: -3.3057919, y: 3, z: -70}
 --- !u!1 &1431750077556774
 GameObject:
   m_ObjectHideFlags: 0
@@ -9202,7 +8532,7 @@ GameObject:
   - component: {fileID: 4604384242819326}
   - component: {fileID: 33645516818450358}
   - component: {fileID: 23076865489753816}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9285,7 +8615,7 @@ GameObject:
   - component: {fileID: 4042912808566164}
   - component: {fileID: 33794262274473330}
   - component: {fileID: 23060990706355512}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9368,7 +8698,7 @@ GameObject:
   - component: {fileID: 4022396678527124}
   - component: {fileID: 33435562041392252}
   - component: {fileID: 23193048297427664}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9451,8 +8781,7 @@ GameObject:
   - component: {fileID: 4368771360886616}
   - component: {fileID: 33437693444166128}
   - component: {fileID: 23556438164725476}
-  - component: {fileID: 65342442686224898}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_Solo (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9466,13 +8795,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1441067995579900}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 15, y: 0, z: 5}
-  m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 15, y: 0, z: 30}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4639402986637122}
-  m_RootOrder: 12
+  m_Father: {fileID: 4774267208332674}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &33437693444166128
 MeshFilter:
@@ -9524,27 +8853,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65342442686224898
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1441067995579900}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.6858807, y: 6, z: 6.5374556}
-  m_Center: {x: 0.18313658, y: 3, z: 0.23238993}
 --- !u!1 &1448118984060388
 GameObject:
   m_ObjectHideFlags: 0
@@ -9556,7 +8864,7 @@ GameObject:
   - component: {fileID: 4071616716286358}
   - component: {fileID: 33098818284545626}
   - component: {fileID: 23784592621103884}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9639,7 +8947,7 @@ GameObject:
   - component: {fileID: 4469641066933366}
   - component: {fileID: 33015731877937230}
   - component: {fileID: 23458817856507244}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9722,7 +9030,7 @@ GameObject:
   - component: {fileID: 4903883103207798}
   - component: {fileID: 33951643338572056}
   - component: {fileID: 23535412875634842}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9805,7 +9113,7 @@ GameObject:
   - component: {fileID: 4426871368026196}
   - component: {fileID: 33603734416360650}
   - component: {fileID: 23584520824361202}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9888,9 +9196,7 @@ GameObject:
   - component: {fileID: 4220053021838024}
   - component: {fileID: 33872283965677202}
   - component: {fileID: 23417750457437646}
-  - component: {fileID: 65163177354413766}
-  - component: {fileID: 65667535346016246}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Curve (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9962,48 +9268,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65163177354413766
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463319436852276}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 3.2192879}
-  m_Center: {x: 0, y: 3, z: 3.390356}
---- !u!65 &65667535346016246
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1463319436852276}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.3884163, y: 6, z: 10}
-  m_Center: {x: -3.3057919, y: 3, z: 0}
 --- !u!1 &1468774249024124
 GameObject:
   m_ObjectHideFlags: 0
@@ -10015,7 +9279,7 @@ GameObject:
   - component: {fileID: 4204594680569098}
   - component: {fileID: 33957934046638556}
   - component: {fileID: 23945536638450922}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Stone_Bridge_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10098,8 +9362,7 @@ GameObject:
   - component: {fileID: 4880605006028950}
   - component: {fileID: 33069683015554204}
   - component: {fileID: 23676410492304404}
-  - component: {fileID: 65954393253606488}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10171,27 +9434,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65954393253606488
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1471671161248708}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 2, z: 0}
 --- !u!1 &1475430171049118
 GameObject:
   m_ObjectHideFlags: 0
@@ -10201,7 +9443,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4372096843116026}
-  m_Layer: 0
+  - component: {fileID: 3953086246953424071}
+  m_Layer: 8
   m_Name: Linha_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10230,10 +9473,21 @@ Transform:
   - {fileID: 4523213504860748}
   - {fileID: 4252135781949428}
   - {fileID: 4118464669133412}
-  - {fileID: 4905371677919186}
   m_Father: {fileID: 4834469677164412}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3953086246953424071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475430171049118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1480170201186526
 GameObject:
   m_ObjectHideFlags: 0
@@ -10245,8 +9499,7 @@ GameObject:
   - component: {fileID: 4507456243227684}
   - component: {fileID: 33847402539917434}
   - component: {fileID: 23446413076247810}
-  - component: {fileID: 65441156310460396}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_Stone
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10261,12 +9514,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1480170201186526}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4774414906664170}
-  m_RootOrder: 10
+  m_Father: {fileID: 4774267208332674}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33847402539917434
 MeshFilter:
@@ -10318,27 +9571,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65441156310460396
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1480170201186526}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.8552384, y: 6, z: 3.0794559}
-  m_Center: {x: -0.029138803, y: 3, z: -0.72722983}
 --- !u!1 &1484795960600248
 GameObject:
   m_ObjectHideFlags: 0
@@ -10351,7 +9583,7 @@ GameObject:
   - component: {fileID: 33416674546588624}
   - component: {fileID: 23294965063841992}
   - component: {fileID: 65365949306394022}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10443,8 +9675,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.8893123, y: 6, z: 5.6640663}
-  m_Center: {x: 0.12845778, y: 3, z: 2.1679668}
+  m_Size: {x: 4.8893123, y: 6, z: 20}
+  m_Center: {x: 0.12845778, y: 3, z: 10}
 --- !u!1 &1484974457770844
 GameObject:
   m_ObjectHideFlags: 0
@@ -10456,7 +9688,7 @@ GameObject:
   - component: {fileID: 4697379343740110}
   - component: {fileID: 33672922816079086}
   - component: {fileID: 23811814717561916}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10539,8 +9771,7 @@ GameObject:
   - component: {fileID: 4790486511556338}
   - component: {fileID: 33340443607323140}
   - component: {fileID: 23343537925666574}
-  - component: {fileID: 65449399525694260}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10612,27 +9843,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65449399525694260
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1488476639172092}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.6010823, y: 6, z: 10}
-  m_Center: {x: 3.1994581, y: 3, z: 0.00000003206895}
 --- !u!1 &1490001943879082
 GameObject:
   m_ObjectHideFlags: 0
@@ -10644,7 +9854,7 @@ GameObject:
   - component: {fileID: 4389698100544618}
   - component: {fileID: 33941912446959234}
   - component: {fileID: 23159825162783900}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10727,7 +9937,7 @@ GameObject:
   - component: {fileID: 4969450126891382}
   - component: {fileID: 33200683777172688}
   - component: {fileID: 23828307183016702}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10810,7 +10020,7 @@ GameObject:
   - component: {fileID: 4873446425384566}
   - component: {fileID: 33032573226632196}
   - component: {fileID: 23718045970260248}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10891,7 +10101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4557020652814980}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10933,7 +10143,7 @@ GameObject:
   - component: {fileID: 4379859882564366}
   - component: {fileID: 33734393919814264}
   - component: {fileID: 23665360309718854}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11016,7 +10226,7 @@ GameObject:
   - component: {fileID: 4551136970092410}
   - component: {fileID: 33306396027367792}
   - component: {fileID: 23241831388786496}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11097,7 +10307,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4834469677164412}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: River_Desert_M37_T3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11138,7 +10348,7 @@ Transform:
   - {fileID: 4002122002977144}
   - {fileID: 4774267208332674}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1522562499789628
 GameObject:
@@ -11151,7 +10361,7 @@ GameObject:
   - component: {fileID: 4450011866423644}
   - component: {fileID: 33797031431814022}
   - component: {fileID: 23048592362899844}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11234,8 +10444,7 @@ GameObject:
   - component: {fileID: 4020846687502722}
   - component: {fileID: 33735000365015252}
   - component: {fileID: 23881830805945170}
-  - component: {fileID: 65146549378086442}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Desert_Bank '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11307,27 +10516,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65146549378086442
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1522860631437264}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.6010823, y: 6, z: 10}
-  m_Center: {x: 3.1994581, y: 3, z: 0.00000003206895}
 --- !u!1 &1525534407006740
 GameObject:
   m_ObjectHideFlags: 0
@@ -11339,7 +10527,7 @@ GameObject:
   - component: {fileID: 4090352836830184}
   - component: {fileID: 33552283887022402}
   - component: {fileID: 23247807111019802}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11422,7 +10610,7 @@ GameObject:
   - component: {fileID: 4140325583113126}
   - component: {fileID: 33781345272792384}
   - component: {fileID: 23503636552004370}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11505,8 +10693,7 @@ GameObject:
   - component: {fileID: 4849199399691168}
   - component: {fileID: 33726397176359298}
   - component: {fileID: 23732994438272364}
-  - component: {fileID: 65088823949307908}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11578,27 +10765,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65088823949307908
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1543740658210988}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1543882174257110
 GameObject:
   m_ObjectHideFlags: 0
@@ -11611,7 +10777,7 @@ GameObject:
   - component: {fileID: 33510705625435152}
   - component: {fileID: 23615137157318718}
   - component: {fileID: 65617879869315368}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11702,8 +10868,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
+  m_Size: {x: 7, y: 6, z: 18}
+  m_Center: {x: 4.91, y: 3, z: 1}
 --- !u!1 &1552396922097424
 GameObject:
   m_ObjectHideFlags: 0
@@ -11715,7 +10881,7 @@ GameObject:
   - component: {fileID: 4553751376270998}
   - component: {fileID: 33288891773982638}
   - component: {fileID: 23427167888088618}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Stone_Bridge_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11798,7 +10964,7 @@ GameObject:
   - component: {fileID: 4992206906813382}
   - component: {fileID: 33447966746079652}
   - component: {fileID: 23931110690274040}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11881,7 +11047,7 @@ GameObject:
   - component: {fileID: 4795137848853388}
   - component: {fileID: 33571972357404170}
   - component: {fileID: 23417216278922706}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11962,7 +11128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4186211348352076}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12004,7 +11170,7 @@ GameObject:
   - component: {fileID: 4510719902513000}
   - component: {fileID: 33052923419122288}
   - component: {fileID: 23615221035337850}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12087,7 +11253,7 @@ GameObject:
   - component: {fileID: 4378721807799208}
   - component: {fileID: 33589981157344420}
   - component: {fileID: 23150571067777186}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12170,7 +11336,7 @@ GameObject:
   - component: {fileID: 4729012781697784}
   - component: {fileID: 33828068654614118}
   - component: {fileID: 23681460627803760}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12253,7 +11419,7 @@ GameObject:
   - component: {fileID: 4170222131999332}
   - component: {fileID: 33865667786133818}
   - component: {fileID: 23018813709544818}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12337,7 +11503,7 @@ GameObject:
   - component: {fileID: 33060581969818104}
   - component: {fileID: 23174032088567622}
   - component: {fileID: 65043770547792614}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12428,8 +11594,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
+  m_Size: {x: 7, y: 6, z: 25}
+  m_Center: {x: 5.24, y: 3, z: 4}
 --- !u!1 &1590879201887114
 GameObject:
   m_ObjectHideFlags: 0
@@ -12441,8 +11607,7 @@ GameObject:
   - component: {fileID: 4234654471384048}
   - component: {fileID: 33332353540952054}
   - component: {fileID: 23299596865984942}
-  - component: {fileID: 65667801444592344}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12514,27 +11679,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65667801444592344
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1590879201887114}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1591875228630144
 GameObject:
   m_ObjectHideFlags: 0
@@ -12547,7 +11691,7 @@ GameObject:
   - component: {fileID: 33980981668130258}
   - component: {fileID: 23068774351283638}
   - component: {fileID: 65418154077013258}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_SF (3)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12639,8 +11783,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.8893123, y: 6, z: 5.6640663}
-  m_Center: {x: 0.12845778, y: 3, z: 2.1679668}
+  m_Size: {x: 4.8893123, y: 6, z: 20}
+  m_Center: {x: 0.12845778, y: 3, z: 10}
 --- !u!1 &1598241984325510
 GameObject:
   m_ObjectHideFlags: 0
@@ -12652,7 +11796,7 @@ GameObject:
   - component: {fileID: 4879061082596756}
   - component: {fileID: 33995930353784422}
   - component: {fileID: 23810734231778604}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12735,7 +11879,7 @@ GameObject:
   - component: {fileID: 4114400567340680}
   - component: {fileID: 33655715138361548}
   - component: {fileID: 23862356256762078}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12816,7 +11960,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4999777765633556}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Stone_Bridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12851,7 +11995,7 @@ GameObject:
   - component: {fileID: 4213995756781940}
   - component: {fileID: 33509187363279624}
   - component: {fileID: 23221627136879360}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12934,8 +12078,7 @@ GameObject:
   - component: {fileID: 4114394979788362}
   - component: {fileID: 33092936359041426}
   - component: {fileID: 23651199132601150}
-  - component: {fileID: 65206947611326446}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13007,27 +12150,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65206947611326446
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606885284515084}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.8893123, y: 6, z: 5.6640663}
-  m_Center: {x: 0.12845778, y: 3, z: 2.1679668}
 --- !u!1 &1607497847571284
 GameObject:
   m_ObjectHideFlags: 0
@@ -13039,7 +12161,7 @@ GameObject:
   - component: {fileID: 4319513384009252}
   - component: {fileID: 33691995749521212}
   - component: {fileID: 23118450574013048}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13122,8 +12244,7 @@ GameObject:
   - component: {fileID: 4905371677919186}
   - component: {fileID: 33616628322075736}
   - component: {fileID: 23987152580762826}
-  - component: {fileID: 65629359600231006}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_Solo
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13137,13 +12258,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1607850663038740}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 10, y: 0, z: -5}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 10, y: 0, z: 100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4372096843116026}
-  m_RootOrder: 10
+  m_Father: {fileID: 4774267208332674}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33616628322075736
 MeshFilter:
@@ -13195,27 +12316,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65629359600231006
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1607850663038740}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.6858807, y: 6, z: 6.5374556}
-  m_Center: {x: 0.18313658, y: 3, z: 0.23238993}
 --- !u!1 &1609562495213866
 GameObject:
   m_ObjectHideFlags: 0
@@ -13227,7 +12327,7 @@ GameObject:
   - component: {fileID: 4142832149495940}
   - component: {fileID: 33173573495132472}
   - component: {fileID: 23711066710172604}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13310,7 +12410,7 @@ GameObject:
   - component: {fileID: 4762235012194326}
   - component: {fileID: 33864745129565318}
   - component: {fileID: 23553117688780204}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13393,7 +12493,7 @@ GameObject:
   - component: {fileID: 4214936308295390}
   - component: {fileID: 33107149562436114}
   - component: {fileID: 23599320681818500}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13476,7 +12576,7 @@ GameObject:
   - component: {fileID: 4142887060853730}
   - component: {fileID: 33081257229045952}
   - component: {fileID: 23540734492313104}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13559,7 +12659,7 @@ GameObject:
   - component: {fileID: 4685392285426378}
   - component: {fileID: 33639464689101774}
   - component: {fileID: 23346370883866420}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13642,7 +12742,7 @@ GameObject:
   - component: {fileID: 4917258407404216}
   - component: {fileID: 33247120639066062}
   - component: {fileID: 23343105084538948}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13725,7 +12825,7 @@ GameObject:
   - component: {fileID: 4749912211352182}
   - component: {fileID: 33562566076413778}
   - component: {fileID: 23861460757372482}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13808,7 +12908,7 @@ GameObject:
   - component: {fileID: 4554912282726684}
   - component: {fileID: 33288011833560496}
   - component: {fileID: 23394973965437962}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13891,7 +12991,7 @@ GameObject:
   - component: {fileID: 4967353430033808}
   - component: {fileID: 33465384733747460}
   - component: {fileID: 23227752712650556}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13974,7 +13074,7 @@ GameObject:
   - component: {fileID: 4495690941357994}
   - component: {fileID: 33983453072229356}
   - component: {fileID: 23266775700969442}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Stone_Bridge_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14057,7 +13157,7 @@ GameObject:
   - component: {fileID: 4092443469095732}
   - component: {fileID: 33830007258040202}
   - component: {fileID: 23347828610405294}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14140,7 +13240,7 @@ GameObject:
   - component: {fileID: 4703952279559764}
   - component: {fileID: 33170356202054816}
   - component: {fileID: 23808457670164598}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Stone_Bridge_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14223,8 +13323,7 @@ GameObject:
   - component: {fileID: 4042272860332372}
   - component: {fileID: 33693810922088130}
   - component: {fileID: 23307823656276420}
-  - component: {fileID: 65261004298476546}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14296,27 +13395,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65261004298476546
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1663292622448096}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1667708127264580
 GameObject:
   m_ObjectHideFlags: 0
@@ -14328,8 +13406,7 @@ GameObject:
   - component: {fileID: 4634592832537194}
   - component: {fileID: 33361802045163152}
   - component: {fileID: 23449712009953262}
-  - component: {fileID: 65703988544773228}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14401,27 +13478,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65703988544773228
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1667708127264580}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1675367380219306
 GameObject:
   m_ObjectHideFlags: 0
@@ -14433,8 +13489,7 @@ GameObject:
   - component: {fileID: 4523213504860748}
   - component: {fileID: 33396163462560604}
   - component: {fileID: 23156147686801064}
-  - component: {fileID: 65930290811315686}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14506,27 +13561,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65930290811315686
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675367380219306}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1677988972806868
 GameObject:
   m_ObjectHideFlags: 0
@@ -14538,7 +13572,7 @@ GameObject:
   - component: {fileID: 4376668235527820}
   - component: {fileID: 33039618298755166}
   - component: {fileID: 23452927594521346}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14619,7 +13653,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4136572157730504}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14662,7 +13696,7 @@ GameObject:
   - component: {fileID: 33939189391275880}
   - component: {fileID: 23089863752262548}
   - component: {fileID: 65400386813045642}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14766,7 +13800,7 @@ GameObject:
   - component: {fileID: 4466099099334512}
   - component: {fileID: 33238104757693536}
   - component: {fileID: 23697652265942558}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14847,7 +13881,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4477945155725742}
-  m_Layer: 0
+  - component: {fileID: 5485580262550292173}
+  m_Layer: 8
   m_Name: Linha_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14877,10 +13912,21 @@ Transform:
   - {fileID: 4734901520004004}
   - {fileID: 4563251579120026}
   - {fileID: 4012513269423416}
-  - {fileID: 4147832453444158}
   m_Father: {fileID: 4834469677164412}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5485580262550292173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704087537198638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1706811614232064
 GameObject:
   m_ObjectHideFlags: 0
@@ -14892,7 +13938,7 @@ GameObject:
   - component: {fileID: 4778904445907904}
   - component: {fileID: 33365767030836578}
   - component: {fileID: 23598639975192032}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14973,7 +14019,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4876513231813908}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Stone_Bridge_Big (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14988,15 +14034,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1707522753432790}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 21.12, y: 1.37, z: 5}
+  m_LocalPosition: {x: 21.12, y: 1.37, z: 50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4705922391226510}
   - {fileID: 4495690941357994}
   - {fileID: 4978084939998434}
-  m_Father: {fileID: 4389645123407320}
-  m_RootOrder: 11
+  m_Father: {fileID: 4774267208332674}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1709609226340418
 GameObject:
@@ -15009,7 +14055,7 @@ GameObject:
   - component: {fileID: 4499738145992882}
   - component: {fileID: 33188777229741590}
   - component: {fileID: 23184830210655052}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15092,7 +14138,7 @@ GameObject:
   - component: {fileID: 4658726367756510}
   - component: {fileID: 33325274257833988}
   - component: {fileID: 23432915311829582}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15175,7 +14221,7 @@ GameObject:
   - component: {fileID: 4106986235546686}
   - component: {fileID: 33434805678512126}
   - component: {fileID: 23167197687117454}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (3)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15258,7 +14304,7 @@ GameObject:
   - component: {fileID: 4436205150862256}
   - component: {fileID: 33930504742691446}
   - component: {fileID: 23077508122398184}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15341,8 +14387,7 @@ GameObject:
   - component: {fileID: 4114871513026562}
   - component: {fileID: 33168928660830734}
   - component: {fileID: 23371121919732684}
-  - component: {fileID: 65188481146103498}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_Solo (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15357,12 +14402,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1725045633482312}
   m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10, y: 0, z: 5}
+  m_LocalPosition: {x: -10, y: 0, z: 190}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4799000857437834}
-  m_RootOrder: 10
+  m_Father: {fileID: 4774267208332674}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33168928660830734
 MeshFilter:
@@ -15414,27 +14459,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65188481146103498
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1725045633482312}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.6858807, y: 6, z: 6.5374556}
-  m_Center: {x: 0.18313658, y: 3, z: 0.23238993}
 --- !u!1 &1728517676253932
 GameObject:
   m_ObjectHideFlags: 0
@@ -15446,7 +14470,7 @@ GameObject:
   - component: {fileID: 4096721948603094}
   - component: {fileID: 33245684477095036}
   - component: {fileID: 23118124331361548}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15529,7 +14553,7 @@ GameObject:
   - component: {fileID: 4000968274025700}
   - component: {fileID: 33904069672511872}
   - component: {fileID: 23232849731940256}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15612,8 +14636,7 @@ GameObject:
   - component: {fileID: 4662054116166830}
   - component: {fileID: 33538920411389766}
   - component: {fileID: 23551571505520658}
-  - component: {fileID: 65692396644273440}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15685,27 +14708,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65692396644273440
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1743470732711680}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 2, z: 0}
 --- !u!1 &1753018248398162
 GameObject:
   m_ObjectHideFlags: 0
@@ -15717,7 +14719,7 @@ GameObject:
   - component: {fileID: 4850090721697456}
   - component: {fileID: 33737108673369126}
   - component: {fileID: 23920051512665540}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15800,7 +14802,7 @@ GameObject:
   - component: {fileID: 4160126893005608}
   - component: {fileID: 33983134356611560}
   - component: {fileID: 23709673842392438}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15883,7 +14885,7 @@ GameObject:
   - component: {fileID: 4801898167713710}
   - component: {fileID: 33331468658348460}
   - component: {fileID: 23637303293608530}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15966,7 +14968,7 @@ GameObject:
   - component: {fileID: 4176528753832328}
   - component: {fileID: 33657992054047280}
   - component: {fileID: 23147059983243786}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16049,8 +15051,7 @@ GameObject:
   - component: {fileID: 4605109939201022}
   - component: {fileID: 33936429011285420}
   - component: {fileID: 23169256797362080}
-  - component: {fileID: 65892988421478064}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16122,27 +15123,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65892988421478064
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1760495857180826}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 4.9, z: 10}
-  m_Center: {x: 0, y: 2.45, z: 0}
 --- !u!1 &1763242163109994
 GameObject:
   m_ObjectHideFlags: 0
@@ -16155,7 +15135,7 @@ GameObject:
   - component: {fileID: 33828100526444824}
   - component: {fileID: 23419057393320532}
   - component: {fileID: 65011337653542560}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_SF (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16247,8 +15227,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.8893123, y: 6, z: 5.6640663}
-  m_Center: {x: 0.12845778, y: 3, z: 2.1679668}
+  m_Size: {x: 4.8893123, y: 6, z: 20}
+  m_Center: {x: 0.12845778, y: 3, z: 10}
 --- !u!1 &1766217153043324
 GameObject:
   m_ObjectHideFlags: 0
@@ -16261,7 +15241,7 @@ GameObject:
   - component: {fileID: 33991998101118930}
   - component: {fileID: 23480807498590244}
   - component: {fileID: 65371552215850376}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16352,8 +15332,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
+  m_Size: {x: 5.0026517, y: 6, z: 20}
+  m_Center: {x: 2.4986742, y: 3, z: 5.09}
 --- !u!1 &1772631380041222
 GameObject:
   m_ObjectHideFlags: 0
@@ -16365,7 +15345,7 @@ GameObject:
   - component: {fileID: 4432560878023172}
   - component: {fileID: 33506589438039880}
   - component: {fileID: 23108525480681218}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16448,7 +15428,7 @@ GameObject:
   - component: {fileID: 4654326401923228}
   - component: {fileID: 33025637780846458}
   - component: {fileID: 23918933421689084}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16531,8 +15511,7 @@ GameObject:
   - component: {fileID: 4800538440987736}
   - component: {fileID: 33863475025612144}
   - component: {fileID: 23264058932002156}
-  - component: {fileID: 65711858934872286}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16604,27 +15583,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65711858934872286
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1779650616232124}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.8893123, y: 6, z: 5.6640663}
-  m_Center: {x: 0.12845778, y: 3, z: 2.1679668}
 --- !u!1 &1781808899528460
 GameObject:
   m_ObjectHideFlags: 0
@@ -16636,8 +15594,7 @@ GameObject:
   - component: {fileID: 4051539516469154}
   - component: {fileID: 33997969567528466}
   - component: {fileID: 23146812168985510}
-  - component: {fileID: 65000828546417172}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16709,27 +15666,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65000828546417172
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1781808899528460}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1782332960625082
 GameObject:
   m_ObjectHideFlags: 0
@@ -16742,7 +15678,7 @@ GameObject:
   - component: {fileID: 33237165694039624}
   - component: {fileID: 23165391818078740}
   - component: {fileID: 65792110809943010}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16833,8 +15769,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.27663, y: 6, z: 10}
-  m_Center: {x: 3.361685, y: 3, z: 0}
+  m_Size: {x: 3.27663, y: 6, z: 30}
+  m_Center: {x: 3.361685, y: 3, z: 10}
 --- !u!1 &1787743851671646
 GameObject:
   m_ObjectHideFlags: 0
@@ -16846,7 +15782,7 @@ GameObject:
   - component: {fileID: 4843815914488508}
   - component: {fileID: 33072523325296260}
   - component: {fileID: 23146225699100790}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16927,7 +15863,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4851413143336660}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16971,9 +15907,7 @@ GameObject:
   - component: {fileID: 4081318683271282}
   - component: {fileID: 33625417097942782}
   - component: {fileID: 23835296885992662}
-  - component: {fileID: 65197047060477196}
-  - component: {fileID: 65591678213722048}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Curve
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17045,48 +15979,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65197047060477196
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1790652026804494}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 3.2192879}
-  m_Center: {x: 0, y: 3, z: 3.390356}
---- !u!65 &65591678213722048
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1790652026804494}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.3884163, y: 6, z: 10}
-  m_Center: {x: -3.3057919, y: 3, z: 0}
 --- !u!1 &1793582198222544
 GameObject:
   m_ObjectHideFlags: 0
@@ -17098,7 +15990,7 @@ GameObject:
   - component: {fileID: 4187858734907606}
   - component: {fileID: 33913757430141328}
   - component: {fileID: 23410191097011326}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17181,8 +16073,7 @@ GameObject:
   - component: {fileID: 4260932040802522}
   - component: {fileID: 33427355586107838}
   - component: {fileID: 23816162118967204}
-  - component: {fileID: 65376394991536250}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17254,27 +16145,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65376394991536250
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1794346057858914}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.8893123, y: 6, z: 5.6640663}
-  m_Center: {x: 0.12845778, y: 3, z: 2.1679668}
 --- !u!1 &1795206720820120
 GameObject:
   m_ObjectHideFlags: 0
@@ -17286,8 +16156,7 @@ GameObject:
   - component: {fileID: 4834237406156190}
   - component: {fileID: 33483177157694610}
   - component: {fileID: 23261958845083068}
-  - component: {fileID: 65843820092038398}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17359,27 +16228,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65843820092038398
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1795206720820120}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 2, z: 0}
 --- !u!1 &1796192817937800
 GameObject:
   m_ObjectHideFlags: 0
@@ -17391,7 +16239,7 @@ GameObject:
   - component: {fileID: 4312528480840654}
   - component: {fileID: 33833152058998996}
   - component: {fileID: 23481775273631574}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17472,7 +16320,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4774414906664170}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17501,8 +16349,6 @@ Transform:
   - {fileID: 4396119469929256}
   - {fileID: 4170283994853700}
   - {fileID: 4020846687502722}
-  - {fileID: 4507456243227684}
-  - {fileID: 4069825004415546}
   m_Father: {fileID: 4834469677164412}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -17515,7 +16361,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4011924533700370}
-  m_Layer: 0
+  - component: {fileID: 2264243415554733323}
+  m_Layer: 8
   m_Name: Linha_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17546,6 +16393,18 @@ Transform:
   m_Father: {fileID: 4834469677164412}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2264243415554733323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804467036054828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1815365119924316
 GameObject:
   m_ObjectHideFlags: 0
@@ -17557,7 +16416,7 @@ GameObject:
   - component: {fileID: 4823034966285756}
   - component: {fileID: 33834720651840238}
   - component: {fileID: 23398455491910490}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17640,8 +16499,7 @@ GameObject:
   - component: {fileID: 4603964653921694}
   - component: {fileID: 33212216603265568}
   - component: {fileID: 23014676531977926}
-  - component: {fileID: 65766953988467910}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17713,27 +16571,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65766953988467910
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1823479698014284}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.8893123, y: 6, z: 5.6640663}
-  m_Center: {x: 0.12845778, y: 3, z: 2.1679668}
 --- !u!1 &1829571334807670
 GameObject:
   m_ObjectHideFlags: 0
@@ -17745,7 +16582,7 @@ GameObject:
   - component: {fileID: 4155738253889982}
   - component: {fileID: 33153871661503228}
   - component: {fileID: 23111901025280488}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17828,7 +16665,7 @@ GameObject:
   - component: {fileID: 4978084939998434}
   - component: {fileID: 33672647626933406}
   - component: {fileID: 23516788831581410}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Stone_Bridge_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17909,7 +16746,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4165969692126874}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17951,7 +16788,7 @@ GameObject:
   - component: {fileID: 4951684091366844}
   - component: {fileID: 33731374870568802}
   - component: {fileID: 23225948782224274}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18034,8 +16871,7 @@ GameObject:
   - component: {fileID: 4296520257004036}
   - component: {fileID: 33309579961423222}
   - component: {fileID: 23861512094510350}
-  - component: {fileID: 65804529811964634}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18107,27 +16943,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65804529811964634
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840668221977894}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1847370718661726
 GameObject:
   m_ObjectHideFlags: 0
@@ -18139,7 +16954,7 @@ GameObject:
   - component: {fileID: 4841656895918086}
   - component: {fileID: 33065709872100994}
   - component: {fileID: 23828312749633114}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18222,7 +17037,7 @@ GameObject:
   - component: {fileID: 4257239754943828}
   - component: {fileID: 33983045689698352}
   - component: {fileID: 23985901064012848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18303,7 +17118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4795739615058058}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18346,7 +17161,7 @@ GameObject:
   - component: {fileID: 33699489022249336}
   - component: {fileID: 23387540229119580}
   - component: {fileID: 65505159620619076}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18437,8 +17252,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
+  m_Size: {x: 15, y: 6, z: 17}
+  m_Center: {x: 8.91, y: 3, z: 0.2}
 --- !u!1 &1856829168361536
 GameObject:
   m_ObjectHideFlags: 0
@@ -18450,9 +17265,7 @@ GameObject:
   - component: {fileID: 4564486712009494}
   - component: {fileID: 33223270232907798}
   - component: {fileID: 23485514917589372}
-  - component: {fileID: 65393372908680892}
-  - component: {fileID: 65780966898416608}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Curve (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18524,48 +17337,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65393372908680892
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1856829168361536}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 3.2192879}
-  m_Center: {x: 0, y: 3, z: 3.390356}
---- !u!65 &65780966898416608
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1856829168361536}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.3884163, y: 6, z: 10}
-  m_Center: {x: -3.3057919, y: 3, z: 0}
 --- !u!1 &1858455690579010
 GameObject:
   m_ObjectHideFlags: 0
@@ -18577,8 +17348,7 @@ GameObject:
   - component: {fileID: 4338605190502928}
   - component: {fileID: 33335767860540578}
   - component: {fileID: 23377539781224620}
-  - component: {fileID: 65894894472125328}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_Solo
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18593,12 +17363,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1858455690579010}
   m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20, y: 0, z: 5}
+  m_LocalPosition: {x: 20, y: 0, z: 190}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4799000857437834}
-  m_RootOrder: 9
+  m_Father: {fileID: 4774267208332674}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33335767860540578
 MeshFilter:
@@ -18650,27 +17420,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65894894472125328
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1858455690579010}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.6858807, y: 6, z: 6.5374556}
-  m_Center: {x: 0.18313658, y: 3, z: 0.23238993}
 --- !u!1 &1863189174958076
 GameObject:
   m_ObjectHideFlags: 0
@@ -18682,7 +17431,7 @@ GameObject:
   - component: {fileID: 4077299878815156}
   - component: {fileID: 33925401302200396}
   - component: {fileID: 23000935989614778}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18767,7 +17516,7 @@ GameObject:
   - component: {fileID: 23781389196789702}
   - component: {fileID: 65939204467746938}
   - component: {fileID: 65705508489867538}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Curve
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18879,8 +17628,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.3884163, y: 6, z: 10}
-  m_Center: {x: -3.3057919, y: 3, z: 0}
+  m_Size: {x: 3.3884163, y: 6, z: 140}
+  m_Center: {x: -3.3057919, y: 3, z: -65}
 --- !u!1 &1867826590742004
 GameObject:
   m_ObjectHideFlags: 0
@@ -18892,8 +17641,7 @@ GameObject:
   - component: {fileID: 4460837115579914}
   - component: {fileID: 33347079573983666}
   - component: {fileID: 23672398348776010}
-  - component: {fileID: 65089104896235364}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18965,27 +17713,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65089104896235364
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1867826590742004}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 2, z: 0}
 --- !u!1 &1873569191420034
 GameObject:
   m_ObjectHideFlags: 0
@@ -18997,8 +17724,7 @@ GameObject:
   - component: {fileID: 4950117852895060}
   - component: {fileID: 33140018967511638}
   - component: {fileID: 23553387923037184}
-  - component: {fileID: 65915517090704308}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19070,27 +17796,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65915517090704308
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1873569191420034}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1873634601889684
 GameObject:
   m_ObjectHideFlags: 0
@@ -19102,7 +17807,7 @@ GameObject:
   - component: {fileID: 4495666084677870}
   - component: {fileID: 33830696085171814}
   - component: {fileID: 23051569341107602}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19185,8 +17890,7 @@ GameObject:
   - component: {fileID: 4396119469929256}
   - component: {fileID: 33791012210816414}
   - component: {fileID: 23536938690482480}
-  - component: {fileID: 65828756455878808}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19258,27 +17962,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65828756455878808
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1878450542605118}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
 --- !u!1 &1883420265024186
 GameObject:
   m_ObjectHideFlags: 0
@@ -19290,7 +17973,7 @@ GameObject:
   - component: {fileID: 4348431594019354}
   - component: {fileID: 33479297059801012}
   - component: {fileID: 23174357136878518}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19373,8 +18056,7 @@ GameObject:
   - component: {fileID: 4803192476948878}
   - component: {fileID: 33086102145142134}
   - component: {fileID: 23157987681205178}
-  - component: {fileID: 65740531600436422}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19446,27 +18128,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65740531600436422
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1888056480045654}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 2, z: 0}
 --- !u!1 &1890070826683590
 GameObject:
   m_ObjectHideFlags: 0
@@ -19476,7 +18137,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4002122002977144}
-  m_Layer: 0
+  - component: {fileID: 9104889096056614260}
+  m_Layer: 8
   m_Name: Linha_20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19507,6 +18169,18 @@ Transform:
   m_Father: {fileID: 4834469677164412}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9104889096056614260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890070826683590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1896702220043346
 GameObject:
   m_ObjectHideFlags: 0
@@ -19518,7 +18192,7 @@ GameObject:
   - component: {fileID: 4988952082006714}
   - component: {fileID: 33378772570594368}
   - component: {fileID: 23302458594265250}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19601,8 +18275,7 @@ GameObject:
   - component: {fileID: 4886253420658972}
   - component: {fileID: 33860213614814588}
   - component: {fileID: 23687341071913272}
-  - component: {fileID: 65914943119889416}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank_2 (15)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19674,27 +18347,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65914943119889416
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1904044071352026}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
 --- !u!1 &1904398118517190
 GameObject:
   m_ObjectHideFlags: 0
@@ -19706,7 +18358,7 @@ GameObject:
   - component: {fileID: 4491490078880522}
   - component: {fileID: 33104683238074016}
   - component: {fileID: 23202413755087664}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19789,7 +18441,7 @@ GameObject:
   - component: {fileID: 4450304394709342}
   - component: {fileID: 33731522998113702}
   - component: {fileID: 23077884683296002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19873,7 +18525,7 @@ GameObject:
   - component: {fileID: 33382844737749344}
   - component: {fileID: 23351280033484442}
   - component: {fileID: 65310923046994468}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19964,8 +18616,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 3, z: 0}
+  m_Size: {x: 8, y: 6, z: 35}
+  m_Center: {x: 4, y: 3, z: -10}
 --- !u!1 &1912742977664190
 GameObject:
   m_ObjectHideFlags: 0
@@ -19977,7 +18629,7 @@ GameObject:
   - component: {fileID: 4847483390446276}
   - component: {fileID: 33777529757935372}
   - component: {fileID: 23256486449274178}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20060,8 +18712,7 @@ GameObject:
   - component: {fileID: 4599401805843882}
   - component: {fileID: 33770544106701078}
   - component: {fileID: 23909493519803510}
-  - component: {fileID: 65589086891616944}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20133,27 +18784,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65589086891616944
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1916026011326018}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 10}
-  m_Center: {x: 2.4986742, y: 2, z: 0}
 --- !u!1 &1919790957853470
 GameObject:
   m_ObjectHideFlags: 0
@@ -20165,7 +18795,7 @@ GameObject:
   - component: {fileID: 4553730134676938}
   - component: {fileID: 33918903611152422}
   - component: {fileID: 23117183989610022}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20248,7 +18878,7 @@ GameObject:
   - component: {fileID: 4898494157640232}
   - component: {fileID: 33129735022736680}
   - component: {fileID: 23448181985958428}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20331,7 +18961,7 @@ GameObject:
   - component: {fileID: 4819470670640880}
   - component: {fileID: 33307577705999270}
   - component: {fileID: 23895963579213694}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20412,7 +19042,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4859659222334000}
-  m_Layer: 0
+  - component: {fileID: 4603720335805041928}
+  m_Layer: 8
   m_Name: Linha_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20445,6 +19076,18 @@ Transform:
   m_Father: {fileID: 4834469677164412}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4603720335805041928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926223786093908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1931769751517416
 GameObject:
   m_ObjectHideFlags: 0
@@ -20456,7 +19099,7 @@ GameObject:
   - component: {fileID: 4175204343315200}
   - component: {fileID: 33447322792238986}
   - component: {fileID: 23252539995355846}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20539,7 +19182,7 @@ GameObject:
   - component: {fileID: 4651287434565102}
   - component: {fileID: 33518798684851116}
   - component: {fileID: 23131850876714022}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20622,7 +19265,7 @@ GameObject:
   - component: {fileID: 4184734283952662}
   - component: {fileID: 33330625901984436}
   - component: {fileID: 23795249076614810}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20705,8 +19348,7 @@ GameObject:
   - component: {fileID: 4433135711202154}
   - component: {fileID: 33692229235868764}
   - component: {fileID: 23589688485231618}
-  - component: {fileID: 65405347394371380}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_M
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20779,27 +19421,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65405347394371380
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1947576493076442}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.889312, y: 6, z: 10}
-  m_Center: {x: 0.1284578, y: 3, z: 0}
 --- !u!1 &1955285330333788
 GameObject:
   m_ObjectHideFlags: 0
@@ -20811,7 +19432,7 @@ GameObject:
   - component: {fileID: 4591750572111064}
   - component: {fileID: 33947380026680936}
   - component: {fileID: 23857714541133004}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20895,7 +19516,7 @@ GameObject:
   - component: {fileID: 33607233101525108}
   - component: {fileID: 23742373241539052}
   - component: {fileID: 65478704224759198}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Bank_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20986,8 +19607,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.5952406, y: 6, z: 10}
-  m_Center: {x: 2.7023797, y: 3, z: 0}
+  m_Size: {x: 8, y: 6, z: 25}
+  m_Center: {x: 4.88, y: 3, z: -4}
 --- !u!1 &1965897768481810
 GameObject:
   m_ObjectHideFlags: 0
@@ -20999,7 +19620,7 @@ GameObject:
   - component: {fileID: 4434371289082452}
   - component: {fileID: 33170083508826288}
   - component: {fileID: 23122232682368254}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21080,7 +19701,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4774267208332674}
-  m_Layer: 0
+  - component: {fileID: 5354604978779103557}
+  m_Layer: 8
   m_Name: Decoration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21103,9 +19725,34 @@ Transform:
   - {fileID: 4208159603991824}
   - {fileID: 4487311141313628}
   - {fileID: 4485243992130086}
+  - {fileID: 4507456243227684}
+  - {fileID: 4069825004415546}
+  - {fileID: 4909992325142216}
+  - {fileID: 4368771360886616}
+  - {fileID: 4624622947230676}
+  - {fileID: 4104846362699638}
+  - {fileID: 4876513231813908}
+  - {fileID: 4147832453444158}
+  - {fileID: 4905371677919186}
+  - {fileID: 4224476026091410}
+  - {fileID: 4399993490453640}
+  - {fileID: 4338605190502928}
+  - {fileID: 4114871513026562}
   m_Father: {fileID: 4834469677164412}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5354604978779103557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1970117173982932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1975266757847468
 GameObject:
   m_ObjectHideFlags: 0
@@ -21118,7 +19765,7 @@ GameObject:
   - component: {fileID: 33302974207908844}
   - component: {fileID: 23756806945002244}
   - component: {fileID: 65500373080771250}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Isle_SF (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21210,8 +19857,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.8893123, y: 6, z: 5.6640663}
-  m_Center: {x: 0.12845778, y: 3, z: 2.1679668}
+  m_Size: {x: 4.8893123, y: 6, z: 20}
+  m_Center: {x: 0.12845778, y: 3, z: 10}
 --- !u!1 &1985743707846542
 GameObject:
   m_ObjectHideFlags: 0
@@ -21223,7 +19870,7 @@ GameObject:
   - component: {fileID: 4517916404350982}
   - component: {fileID: 33517146624127498}
   - component: {fileID: 23900871297304314}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21306,9 +19953,7 @@ GameObject:
   - component: {fileID: 4906930643229390}
   - component: {fileID: 33351849227035050}
   - component: {fileID: 23249981136661736}
-  - component: {fileID: 65761545997563260}
-  - component: {fileID: 65558258421323788}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Curve
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21380,48 +20025,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65761545997563260
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1989755644453348}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 3.2192879}
-  m_Center: {x: 0, y: 3, z: 3.390356}
---- !u!65 &65558258421323788
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1989755644453348}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.3884163, y: 6, z: 10}
-  m_Center: {x: -3.3057919, y: 3, z: 0}
 --- !u!1 &1993196105147280
 GameObject:
   m_ObjectHideFlags: 0
@@ -21433,7 +20036,7 @@ GameObject:
   - component: {fileID: 4994185587752584}
   - component: {fileID: 33740776156273656}
   - component: {fileID: 23585764716136246}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Ravine
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21516,7 +20119,7 @@ GameObject:
   - component: {fileID: 4798014528021886}
   - component: {fileID: 33913300886408046}
   - component: {fileID: 23967199899576656}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21599,7 +20202,7 @@ GameObject:
   - component: {fileID: 4804389609172990}
   - component: {fileID: 33980404360224306}
   - component: {fileID: 23230931929086344}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Desert_Stone_Bridge_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
