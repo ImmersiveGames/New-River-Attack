@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4640713604880914}
   - component: {fileID: 33419815442451496}
   - component: {fileID: 23681151410930342}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4721297322207330}
   - component: {fileID: 33170740804943190}
   - component: {fileID: 23381414612341870}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 4008390991533424}
   - component: {fileID: 33455608171231120}
   - component: {fileID: 23080335420593072}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 4975568738980688}
   - component: {fileID: 33515238666029544}
   - component: {fileID: 23891876840519538}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 4757548594130944}
   - component: {fileID: 33833576752642528}
   - component: {fileID: 23269811281593444}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 4874655384941032}
   - component: {fileID: 33339992902431098}
   - component: {fileID: 23133064708960462}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 4152231866534968}
   - component: {fileID: 33408360631840686}
   - component: {fileID: 23694527110893764}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -592,8 +592,7 @@ GameObject:
   - component: {fileID: 4611286830464524}
   - component: {fileID: 33379985005458670}
   - component: {fileID: 23505496239507820}
-  - component: {fileID: 65265822998275432}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -665,27 +664,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65265822998275432
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1023000970165208}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6, y: 0.2, z: 10}
-  m_Center: {x: 2, y: 0.2, z: 0}
 --- !u!1 &1035606924281596
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,7 +675,7 @@ GameObject:
   - component: {fileID: 4906666424253198}
   - component: {fileID: 33410141117481234}
   - component: {fileID: 23029495029756654}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -778,7 +756,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4208298323235034}
-  m_Layer: 0
+  - component: {fileID: 2393471610625117033}
+  m_Layer: 8
   m_Name: Linha18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -811,6 +790,18 @@ Transform:
   m_Father: {fileID: 4097422760553934}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2393471610625117033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037068331586640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1053054632806948
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,7 +813,7 @@ GameObject:
   - component: {fileID: 4549390862514120}
   - component: {fileID: 33902980140651012}
   - component: {fileID: 23419559238260472}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -905,7 +896,7 @@ GameObject:
   - component: {fileID: 4708157442999476}
   - component: {fileID: 33814484603077786}
   - component: {fileID: 23318866720288398}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -988,7 +979,7 @@ GameObject:
   - component: {fileID: 4982829757927266}
   - component: {fileID: 33963110922182396}
   - component: {fileID: 23534360981676502}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1071,7 +1062,7 @@ GameObject:
   - component: {fileID: 4279711753429734}
   - component: {fileID: 33255017685016116}
   - component: {fileID: 23432626143345998}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1154,7 +1145,7 @@ GameObject:
   - component: {fileID: 4547451583970118}
   - component: {fileID: 33061168822175242}
   - component: {fileID: 23321811314830250}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1237,7 +1228,7 @@ GameObject:
   - component: {fileID: 4907439101855418}
   - component: {fileID: 33394246434569388}
   - component: {fileID: 23685167964628130}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1318,7 +1309,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4680393720936010}
-  m_Layer: 0
+  - component: {fileID: 6048918365047333273}
+  m_Layer: 8
   m_Name: Linha03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1351,6 +1343,18 @@ Transform:
   m_Father: {fileID: 4097422760553934}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6048918365047333273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076365984558160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1077640661026912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1362,7 +1366,7 @@ GameObject:
   - component: {fileID: 4819142947258226}
   - component: {fileID: 33838976636052880}
   - component: {fileID: 23093113489114204}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1445,8 +1449,7 @@ GameObject:
   - component: {fileID: 4723461650327710}
   - component: {fileID: 33604272293840890}
   - component: {fileID: 23821072911282270}
-  - component: {fileID: 65376154192136934}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1518,27 +1521,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65376154192136934
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1082566527885188}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.3, y: 6, z: 10}
-  m_Center: {x: 2.35, y: 3, z: 0}
 --- !u!1 &1085028364460940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1550,7 +1532,7 @@ GameObject:
   - component: {fileID: 4095361837086674}
   - component: {fileID: 33891668423723442}
   - component: {fileID: 23894161942461600}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1631,7 +1613,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4227116275830950}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1674,7 +1656,7 @@ GameObject:
   - component: {fileID: 4356953090236426}
   - component: {fileID: 33429915078293818}
   - component: {fileID: 23211722132531478}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1758,7 +1740,7 @@ GameObject:
   - component: {fileID: 33512034331207204}
   - component: {fileID: 23599148832538876}
   - component: {fileID: 65527119623374374}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Iceberg_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1862,7 +1844,7 @@ GameObject:
   - component: {fileID: 4208901698749452}
   - component: {fileID: 33956016362949752}
   - component: {fileID: 23318989887119634}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1943,7 +1925,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4916216254678066}
-  m_Layer: 0
+  - component: {fileID: 2399376001402805943}
+  m_Layer: 8
   m_Name: Linha01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1976,6 +1959,18 @@ Transform:
   m_Father: {fileID: 4097422760553934}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2399376001402805943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102701080211988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1102910877586954
 GameObject:
   m_ObjectHideFlags: 0
@@ -1987,7 +1982,7 @@ GameObject:
   - component: {fileID: 4718977748622916}
   - component: {fileID: 33784296693969616}
   - component: {fileID: 23533970718467332}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2070,7 +2065,7 @@ GameObject:
   - component: {fileID: 4749483776075420}
   - component: {fileID: 33765433721953676}
   - component: {fileID: 23075114504700618}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2153,7 +2148,7 @@ GameObject:
   - component: {fileID: 4842696793939270}
   - component: {fileID: 33067385684713130}
   - component: {fileID: 23452517516751908}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2236,7 +2231,7 @@ GameObject:
   - component: {fileID: 4669770576248144}
   - component: {fileID: 33325378526508990}
   - component: {fileID: 23318382544640812}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2319,7 +2314,7 @@ GameObject:
   - component: {fileID: 4641347459640364}
   - component: {fileID: 33678554830040072}
   - component: {fileID: 23230343650294390}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2402,8 +2397,7 @@ GameObject:
   - component: {fileID: 4180066180070816}
   - component: {fileID: 33522629944516460}
   - component: {fileID: 23482556229874716}
-  - component: {fileID: 65182813414847116}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2475,27 +2469,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65182813414847116
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1110027889069980}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6, y: 0.2, z: 10}
-  m_Center: {x: 2, y: 0.2, z: 0}
 --- !u!1 &1118386699774802
 GameObject:
   m_ObjectHideFlags: 0
@@ -2507,8 +2480,7 @@ GameObject:
   - component: {fileID: 4468445111395580}
   - component: {fileID: 33105218694548716}
   - component: {fileID: 23041840359118652}
-  - component: {fileID: 65567813077631738}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2580,27 +2552,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65567813077631738
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1118386699774802}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6, y: 0.2, z: 10}
-  m_Center: {x: 2, y: 0.2, z: 0}
 --- !u!1 &1119639181921830
 GameObject:
   m_ObjectHideFlags: 0
@@ -2612,7 +2563,7 @@ GameObject:
   - component: {fileID: 4594826357212062}
   - component: {fileID: 33757496956774032}
   - component: {fileID: 23528054561484096}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2695,7 +2646,7 @@ GameObject:
   - component: {fileID: 4437191798670314}
   - component: {fileID: 33915343745405036}
   - component: {fileID: 23776616692510802}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2778,7 +2729,7 @@ GameObject:
   - component: {fileID: 4597008312798054}
   - component: {fileID: 33046098402935590}
   - component: {fileID: 23899955643863422}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2864,7 +2815,7 @@ GameObject:
   - component: {fileID: 65086556549806800}
   - component: {fileID: 65316932430375684}
   - component: {fileID: 65600610268359018}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Curve
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3011,7 +2962,7 @@ GameObject:
   - component: {fileID: 33860504596843352}
   - component: {fileID: 23866032666791216}
   - component: {fileID: 7708736305721313719}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3102,8 +3053,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10.000008, y: 6, z: 10.000008}
-  m_Center: {x: 0.0000052452087, y: 3, z: -0.0000054836273}
+  m_Size: {x: 15, y: 6, z: 30}
+  m_Center: {x: -2, y: 3, z: 10}
 --- !u!1 &1139017551087118
 GameObject:
   m_ObjectHideFlags: 0
@@ -3115,7 +3066,7 @@ GameObject:
   - component: {fileID: 4756704803520568}
   - component: {fileID: 33103976081402824}
   - component: {fileID: 23249777831142934}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3199,9 +3150,9 @@ GameObject:
   - component: {fileID: 33760045610645606}
   - component: {fileID: 23704370862358310}
   - component: {fileID: 65788821263453970}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Iceberg
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3303,7 +3254,7 @@ GameObject:
   - component: {fileID: 4231276028823062}
   - component: {fileID: 33945218605895010}
   - component: {fileID: 23579899515528510}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3386,7 +3337,7 @@ GameObject:
   - component: {fileID: 4991406515046812}
   - component: {fileID: 33059065900658750}
   - component: {fileID: 23291411373266106}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3469,7 +3420,7 @@ GameObject:
   - component: {fileID: 4149752300999756}
   - component: {fileID: 33327337673786776}
   - component: {fileID: 23364022918571656}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3552,7 +3503,7 @@ GameObject:
   - component: {fileID: 4881079279200266}
   - component: {fileID: 33477986419753238}
   - component: {fileID: 23122445533109162}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3635,7 +3586,7 @@ GameObject:
   - component: {fileID: 4111179968642270}
   - component: {fileID: 33388153275634118}
   - component: {fileID: 23857915679642442}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3718,7 +3669,7 @@ GameObject:
   - component: {fileID: 4444714200521618}
   - component: {fileID: 33534952784981264}
   - component: {fileID: 23450898131430878}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3801,7 +3752,7 @@ GameObject:
   - component: {fileID: 4457942951101958}
   - component: {fileID: 33732758353205326}
   - component: {fileID: 23204778771332150}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3884,7 +3835,7 @@ GameObject:
   - component: {fileID: 4097831721842698}
   - component: {fileID: 33086118702875758}
   - component: {fileID: 23713600835607914}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3967,7 +3918,7 @@ GameObject:
   - component: {fileID: 4786092574862888}
   - component: {fileID: 33331947706472830}
   - component: {fileID: 23799040825952712}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4050,7 +4001,7 @@ GameObject:
   - component: {fileID: 4303265461557514}
   - component: {fileID: 33042193873531664}
   - component: {fileID: 23001845131592798}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4134,7 +4085,7 @@ GameObject:
   - component: {fileID: 33381012569023404}
   - component: {fileID: 23986289935056062}
   - component: {fileID: 65076125218739680}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4238,7 +4189,7 @@ GameObject:
   - component: {fileID: 4084010513462034}
   - component: {fileID: 33539159253806784}
   - component: {fileID: 23466465357567526}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4321,7 +4272,7 @@ GameObject:
   - component: {fileID: 4981461833227596}
   - component: {fileID: 33021586471324344}
   - component: {fileID: 23837527715119732}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4407,9 +4358,9 @@ GameObject:
   - component: {fileID: 65714856577049196}
   - component: {fileID: 65547323555657410}
   - component: {fileID: 65296557200222554}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Curve
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4555,7 +4506,7 @@ GameObject:
   - component: {fileID: 4727021388105428}
   - component: {fileID: 33020425929172876}
   - component: {fileID: 23240150869119166}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4638,7 +4589,7 @@ GameObject:
   - component: {fileID: 4567198976669592}
   - component: {fileID: 33521879639823040}
   - component: {fileID: 23420782264998762}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4721,7 +4672,7 @@ GameObject:
   - component: {fileID: 4315080717885742}
   - component: {fileID: 33970167485599494}
   - component: {fileID: 23910587843143284}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4804,7 +4755,7 @@ GameObject:
   - component: {fileID: 4434438647908010}
   - component: {fileID: 33101811194446258}
   - component: {fileID: 23391075612015790}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4887,8 +4838,7 @@ GameObject:
   - component: {fileID: 4650577319364514}
   - component: {fileID: 33373612728910548}
   - component: {fileID: 23476093900419062}
-  - component: {fileID: 65408045691775426}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4960,27 +4910,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65408045691775426
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1214971420001408}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6, y: 0.2, z: 10}
-  m_Center: {x: 2, y: 0.2, z: 0}
 --- !u!1 &1219334085842624
 GameObject:
   m_ObjectHideFlags: 0
@@ -4992,7 +4921,7 @@ GameObject:
   - component: {fileID: 4336711390681962}
   - component: {fileID: 33079804894083208}
   - component: {fileID: 23064113231100700}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5075,7 +5004,7 @@ GameObject:
   - component: {fileID: 4294236321983718}
   - component: {fileID: 33829178561261838}
   - component: {fileID: 23356425512971722}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5158,7 +5087,7 @@ GameObject:
   - component: {fileID: 4295106355261256}
   - component: {fileID: 33439588485693426}
   - component: {fileID: 23412143729864846}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5244,7 +5173,7 @@ GameObject:
   - component: {fileID: 65103275878289576}
   - component: {fileID: 65623341800869670}
   - component: {fileID: 65570308530323474}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Curve (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5391,7 +5320,7 @@ GameObject:
   - component: {fileID: 4709616560677670}
   - component: {fileID: 33583235216843458}
   - component: {fileID: 23620579707125606}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5474,7 +5403,7 @@ GameObject:
   - component: {fileID: 4603230060838052}
   - component: {fileID: 33575185399678854}
   - component: {fileID: 23055262063656734}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Metal_Bridge_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5559,7 +5488,7 @@ GameObject:
   - component: {fileID: 33019969203318972}
   - component: {fileID: 23517238758087294}
   - component: {fileID: 65561376979189828}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5663,7 +5592,7 @@ GameObject:
   - component: {fileID: 4216220498384742}
   - component: {fileID: 33581718249774942}
   - component: {fileID: 23862352319108714}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5749,7 +5678,7 @@ GameObject:
   - component: {fileID: 65337714872168370}
   - component: {fileID: 65784053863296656}
   - component: {fileID: 65952423605361092}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Curve
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5895,7 +5824,7 @@ GameObject:
   - component: {fileID: 4769545758073956}
   - component: {fileID: 33463670344434504}
   - component: {fileID: 23019025019193186}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5978,7 +5907,7 @@ GameObject:
   - component: {fileID: 4188120395569978}
   - component: {fileID: 33539017488601402}
   - component: {fileID: 23240341810311444}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6061,7 +5990,7 @@ GameObject:
   - component: {fileID: 4260169374223954}
   - component: {fileID: 33099440555876510}
   - component: {fileID: 23109244703461700}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Metal_Bridge_M (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6144,7 +6073,7 @@ GameObject:
   - component: {fileID: 4786086079170848}
   - component: {fileID: 33794297455024334}
   - component: {fileID: 23320950028260364}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6227,7 +6156,7 @@ GameObject:
   - component: {fileID: 4225740365344346}
   - component: {fileID: 33149646561006232}
   - component: {fileID: 23908257682625768}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6313,7 +6242,7 @@ GameObject:
   - component: {fileID: 65252015317331910}
   - component: {fileID: 65272696071631004}
   - component: {fileID: 65566685863827852}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Curve
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6460,7 +6389,7 @@ GameObject:
   - component: {fileID: 4444424681860176}
   - component: {fileID: 33602466583662950}
   - component: {fileID: 23060139493503404}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6544,7 +6473,7 @@ GameObject:
   - component: {fileID: 33919451742748996}
   - component: {fileID: 23559755777337712}
   - component: {fileID: 65858157455920460}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base_04
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6650,7 +6579,7 @@ GameObject:
   - component: {fileID: 4462454298668486}
   - component: {fileID: 33922290329501468}
   - component: {fileID: 23831326269778572}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6733,7 +6662,7 @@ GameObject:
   - component: {fileID: 4635665073302384}
   - component: {fileID: 33013056762935472}
   - component: {fileID: 23444592746990118}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6816,7 +6745,7 @@ GameObject:
   - component: {fileID: 4843214458126496}
   - component: {fileID: 33887683657684810}
   - component: {fileID: 23075168102361744}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6899,7 +6828,7 @@ GameObject:
   - component: {fileID: 4678039412049532}
   - component: {fileID: 33488902084324330}
   - component: {fileID: 23047992477832810}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6980,7 +6909,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4859991960929590}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7023,7 +6952,7 @@ GameObject:
   - component: {fileID: 4451547004131930}
   - component: {fileID: 33990468813789782}
   - component: {fileID: 23195863688844626}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7106,7 +7035,7 @@ GameObject:
   - component: {fileID: 4488457736175572}
   - component: {fileID: 33707358703220136}
   - component: {fileID: 23422598280996260}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7189,7 +7118,7 @@ GameObject:
   - component: {fileID: 4027269600608748}
   - component: {fileID: 33690153462281380}
   - component: {fileID: 23771806935715020}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7270,7 +7199,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4097422760553934}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_River_M45_T1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7311,7 +7240,7 @@ Transform:
   - {fileID: 4565639126330080}
   - {fileID: 4106692467810906}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1317444560919880
 GameObject:
@@ -7324,7 +7253,7 @@ GameObject:
   - component: {fileID: 4146420288728938}
   - component: {fileID: 33993220605798982}
   - component: {fileID: 23137404714353672}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7407,7 +7336,7 @@ GameObject:
   - component: {fileID: 4523100805515820}
   - component: {fileID: 33664883357042756}
   - component: {fileID: 23705345684395102}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7490,7 +7419,7 @@ GameObject:
   - component: {fileID: 4380320789660178}
   - component: {fileID: 33642557717013542}
   - component: {fileID: 23097494526102014}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7573,7 +7502,7 @@ GameObject:
   - component: {fileID: 4142682052395668}
   - component: {fileID: 33049836969014882}
   - component: {fileID: 23394055186907594}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7656,7 +7585,7 @@ GameObject:
   - component: {fileID: 4992651030271898}
   - component: {fileID: 33455713213858726}
   - component: {fileID: 23048462578361772}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7739,7 +7668,7 @@ GameObject:
   - component: {fileID: 4923817906505482}
   - component: {fileID: 33960223195983796}
   - component: {fileID: 23736239369305660}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7822,7 +7751,7 @@ GameObject:
   - component: {fileID: 4800679088173960}
   - component: {fileID: 33654112332136672}
   - component: {fileID: 23101573497916524}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7905,8 +7834,7 @@ GameObject:
   - component: {fileID: 4101572052012000}
   - component: {fileID: 33586591839278078}
   - component: {fileID: 23217219162965740}
-  - component: {fileID: 65475007117875302}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7978,27 +7906,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65475007117875302
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1338530022117324}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.3, y: 6, z: 10}
-  m_Center: {x: 2.35, y: 3, z: 0}
 --- !u!1 &1343094606683156
 GameObject:
   m_ObjectHideFlags: 0
@@ -8010,7 +7917,7 @@ GameObject:
   - component: {fileID: 4782364462620144}
   - component: {fileID: 33849741348098940}
   - component: {fileID: 23999617979416914}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8093,7 +8000,7 @@ GameObject:
   - component: {fileID: 4791283279242572}
   - component: {fileID: 33747152714620380}
   - component: {fileID: 23942770813207450}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8177,7 +8084,7 @@ GameObject:
   - component: {fileID: 33272568519374324}
   - component: {fileID: 23350357309351630}
   - component: {fileID: 1241785976525517127}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8268,8 +8175,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10.000008, y: 6, z: 10.000008}
-  m_Center: {x: 0.0000052452087, y: 3, z: -0.0000054836273}
+  m_Size: {x: 15, y: 6, z: 30}
+  m_Center: {x: 2, y: 3, z: 10}
 --- !u!1 &1364345403782382
 GameObject:
   m_ObjectHideFlags: 0
@@ -8281,7 +8188,7 @@ GameObject:
   - component: {fileID: 4808368944951552}
   - component: {fileID: 33788546552044156}
   - component: {fileID: 23806546238515716}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8365,7 +8272,7 @@ GameObject:
   - component: {fileID: 33881763068335330}
   - component: {fileID: 23489413080020372}
   - component: {fileID: 65457018847309910}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base_04
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8470,7 +8377,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4413396073079450}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8513,7 +8420,7 @@ GameObject:
   - component: {fileID: 4121915921733050}
   - component: {fileID: 33137160408392082}
   - component: {fileID: 23110388555237828}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8596,8 +8503,7 @@ GameObject:
   - component: {fileID: 4747328682953186}
   - component: {fileID: 33580880718322112}
   - component: {fileID: 23300615532584014}
-  - component: {fileID: 65345659169424038}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8669,27 +8575,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65345659169424038
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1372494092358130}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6, y: 0.2, z: 10}
-  m_Center: {x: 2, y: 0.2, z: 0}
 --- !u!1 &1374268562285362
 GameObject:
   m_ObjectHideFlags: 0
@@ -8699,7 +8584,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4628429385100458}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8741,7 +8626,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4190948068697628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8784,7 +8669,7 @@ GameObject:
   - component: {fileID: 4661466915119566}
   - component: {fileID: 33893348702620330}
   - component: {fileID: 23761184255907382}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8867,7 +8752,7 @@ GameObject:
   - component: {fileID: 4114996955699352}
   - component: {fileID: 33876009063386408}
   - component: {fileID: 23495071830128976}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8950,7 +8835,7 @@ GameObject:
   - component: {fileID: 4248615930242824}
   - component: {fileID: 33619451758312048}
   - component: {fileID: 23848465008699754}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9033,8 +8918,7 @@ GameObject:
   - component: {fileID: 4114317684556734}
   - component: {fileID: 33095882084246538}
   - component: {fileID: 23276411257100054}
-  - component: {fileID: 65708660755326608}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9106,27 +8990,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65708660755326608
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1404330053906632}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6, y: 0.2, z: 10}
-  m_Center: {x: 2, y: 0.2, z: 0}
 --- !u!1 &1409972139444534
 GameObject:
   m_ObjectHideFlags: 0
@@ -9138,7 +9001,7 @@ GameObject:
   - component: {fileID: 4582564878609356}
   - component: {fileID: 33413651011393888}
   - component: {fileID: 23023980202498810}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9221,7 +9084,7 @@ GameObject:
   - component: {fileID: 4757356634417942}
   - component: {fileID: 33215197436121984}
   - component: {fileID: 23588457408262960}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9302,7 +9165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4238546958774674}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9345,7 +9208,7 @@ GameObject:
   - component: {fileID: 4908938387884942}
   - component: {fileID: 33129232028255574}
   - component: {fileID: 23565090767142206}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9428,7 +9291,7 @@ GameObject:
   - component: {fileID: 4829226814086370}
   - component: {fileID: 33219296093093692}
   - component: {fileID: 23387262905894524}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9511,7 +9374,7 @@ GameObject:
   - component: {fileID: 4609704539229198}
   - component: {fileID: 33730276415292444}
   - component: {fileID: 23968110068070080}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9594,7 +9457,7 @@ GameObject:
   - component: {fileID: 4258544615999246}
   - component: {fileID: 33219104811611828}
   - component: {fileID: 23147881392872030}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9677,7 +9540,7 @@ GameObject:
   - component: {fileID: 4230942201011258}
   - component: {fileID: 33799834102248088}
   - component: {fileID: 23812405398326260}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9760,7 +9623,7 @@ GameObject:
   - component: {fileID: 4805641936080924}
   - component: {fileID: 33413134031853190}
   - component: {fileID: 23707007420519534}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Metal_Bridge_M (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9844,7 +9707,7 @@ GameObject:
   - component: {fileID: 4165360577854412}
   - component: {fileID: 33131533853560470}
   - component: {fileID: 23041037373551298}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9927,7 +9790,7 @@ GameObject:
   - component: {fileID: 4823374605289680}
   - component: {fileID: 33416549202400140}
   - component: {fileID: 23221686944760932}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10010,7 +9873,7 @@ GameObject:
   - component: {fileID: 4247346770408136}
   - component: {fileID: 33683815871963848}
   - component: {fileID: 23754626802993250}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10093,7 +9956,7 @@ GameObject:
   - component: {fileID: 4941476309404072}
   - component: {fileID: 33277862303662432}
   - component: {fileID: 23821786878304214}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10176,7 +10039,7 @@ GameObject:
   - component: {fileID: 4978621235046214}
   - component: {fileID: 33983331800633528}
   - component: {fileID: 23266432760716460}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10259,7 +10122,7 @@ GameObject:
   - component: {fileID: 4053305731140746}
   - component: {fileID: 33427020313409078}
   - component: {fileID: 23623033091863284}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10342,7 +10205,7 @@ GameObject:
   - component: {fileID: 4872215760514178}
   - component: {fileID: 33048970763436130}
   - component: {fileID: 23019499221603524}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10425,7 +10288,7 @@ GameObject:
   - component: {fileID: 4457805267815694}
   - component: {fileID: 33513494589988256}
   - component: {fileID: 23768663827961280}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10508,7 +10371,7 @@ GameObject:
   - component: {fileID: 4693839545776050}
   - component: {fileID: 33061787329601018}
   - component: {fileID: 23684163468185696}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10591,7 +10454,7 @@ GameObject:
   - component: {fileID: 4985991165011744}
   - component: {fileID: 33977604600793906}
   - component: {fileID: 23891334541683736}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10674,7 +10537,7 @@ GameObject:
   - component: {fileID: 4081695614381230}
   - component: {fileID: 33777420415643756}
   - component: {fileID: 23765262682502966}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10757,7 +10620,7 @@ GameObject:
   - component: {fileID: 4551115230039364}
   - component: {fileID: 33496772804932160}
   - component: {fileID: 23635734208090772}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10841,7 +10704,7 @@ GameObject:
   - component: {fileID: 33504938098790768}
   - component: {fileID: 23804703891179356}
   - component: {fileID: 65673666388396178}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base_04
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10947,7 +10810,7 @@ GameObject:
   - component: {fileID: 4666446641249492}
   - component: {fileID: 33584185057794192}
   - component: {fileID: 23001269089782158}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11030,7 +10893,7 @@ GameObject:
   - component: {fileID: 4805799262614492}
   - component: {fileID: 33312963802288862}
   - component: {fileID: 23839038828093216}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11113,7 +10976,7 @@ GameObject:
   - component: {fileID: 4284440674885936}
   - component: {fileID: 33650124389201790}
   - component: {fileID: 23210570012938276}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11197,7 +11060,7 @@ GameObject:
   - component: {fileID: 33324300010957476}
   - component: {fileID: 23654681346982206}
   - component: {fileID: 65587254901784272}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base_04
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11304,7 +11167,7 @@ GameObject:
   - component: {fileID: 33044008309663460}
   - component: {fileID: 23523572530315692}
   - component: {fileID: 65315176762263184}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Iceberg_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11409,7 +11272,7 @@ GameObject:
   - component: {fileID: 4431001518270486}
   - component: {fileID: 33011693005831888}
   - component: {fileID: 23568959739730080}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11490,7 +11353,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4106206893221672}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11534,9 +11397,9 @@ GameObject:
   - component: {fileID: 33073042141254728}
   - component: {fileID: 23740220043085768}
   - component: {fileID: 65927182027935686}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Iceberg
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11638,8 +11501,7 @@ GameObject:
   - component: {fileID: 4535281679067766}
   - component: {fileID: 33028444404558516}
   - component: {fileID: 23161195812382024}
-  - component: {fileID: 65484388366046526}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11711,27 +11573,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65484388366046526
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1509800868470162}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.3, y: 6, z: 10}
-  m_Center: {x: 2.35, y: 3, z: 0}
 --- !u!1 &1510945383673918
 GameObject:
   m_ObjectHideFlags: 0
@@ -11743,7 +11584,7 @@ GameObject:
   - component: {fileID: 4670432310962642}
   - component: {fileID: 33475419435940950}
   - component: {fileID: 23512241952647546}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11826,7 +11667,7 @@ GameObject:
   - component: {fileID: 4913809901699322}
   - component: {fileID: 33839920651342684}
   - component: {fileID: 23601356039986502}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11909,7 +11750,7 @@ GameObject:
   - component: {fileID: 4795707495720682}
   - component: {fileID: 33233582326284750}
   - component: {fileID: 23548519111906168}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11992,7 +11833,7 @@ GameObject:
   - component: {fileID: 4908728916553074}
   - component: {fileID: 33074203296425658}
   - component: {fileID: 23933055530083066}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12075,7 +11916,7 @@ GameObject:
   - component: {fileID: 4962861385965934}
   - component: {fileID: 33458574727575516}
   - component: {fileID: 23506956008986764}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12158,7 +11999,7 @@ GameObject:
   - component: {fileID: 4908820098507234}
   - component: {fileID: 33152083001451904}
   - component: {fileID: 23336748388896002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Metal_Bridge_M (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12241,7 +12082,7 @@ GameObject:
   - component: {fileID: 4068924790318112}
   - component: {fileID: 33931710377979548}
   - component: {fileID: 23553356183520788}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12324,7 +12165,7 @@ GameObject:
   - component: {fileID: 4210242197002014}
   - component: {fileID: 33712429701492650}
   - component: {fileID: 23851656669724668}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12407,7 +12248,7 @@ GameObject:
   - component: {fileID: 4482693165569726}
   - component: {fileID: 33232198163890956}
   - component: {fileID: 23692185783419470}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12490,7 +12331,7 @@ GameObject:
   - component: {fileID: 4700878691663178}
   - component: {fileID: 33516267153325342}
   - component: {fileID: 23361443820659242}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12574,7 +12415,7 @@ GameObject:
   - component: {fileID: 33150945069264130}
   - component: {fileID: 23115066036304254}
   - component: {fileID: 65644761485280174}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12665,8 +12506,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.3, y: 6, z: 10}
-  m_Center: {x: 2.35, y: 3, z: 0}
+  m_Size: {x: 10, y: 6, z: 6}
+  m_Center: {x: 5, y: 3, z: 2}
 --- !u!1 &1560040442256242
 GameObject:
   m_ObjectHideFlags: 0
@@ -12678,7 +12519,7 @@ GameObject:
   - component: {fileID: 4825729111935390}
   - component: {fileID: 33587990595293774}
   - component: {fileID: 23328316688696246}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12761,8 +12602,7 @@ GameObject:
   - component: {fileID: 4284266342212858}
   - component: {fileID: 33407925102293786}
   - component: {fileID: 23798091693436636}
-  - component: {fileID: 65947128263221504}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12834,27 +12674,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65947128263221504
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1565826639429628}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.3, y: 6, z: 10}
-  m_Center: {x: 2.35, y: 3, z: 0}
 --- !u!1 &1571976090376780
 GameObject:
   m_ObjectHideFlags: 0
@@ -12864,7 +12683,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4005942136291640}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12905,7 +12724,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4108336611077144}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12948,7 +12767,7 @@ GameObject:
   - component: {fileID: 4209572870538284}
   - component: {fileID: 33467311796794642}
   - component: {fileID: 23979958166942942}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13031,7 +12850,7 @@ GameObject:
   - component: {fileID: 4869696312175284}
   - component: {fileID: 33364135411272712}
   - component: {fileID: 23927425859415290}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13114,8 +12933,7 @@ GameObject:
   - component: {fileID: 4555726387393632}
   - component: {fileID: 33125601430034658}
   - component: {fileID: 23361803588899102}
-  - component: {fileID: 65024349509299768}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13187,27 +13005,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65024349509299768
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1597015416916390}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.3, y: 6, z: 10}
-  m_Center: {x: 2.35, y: 3, z: 0}
 --- !u!1 &1599776055271996
 GameObject:
   m_ObjectHideFlags: 0
@@ -13219,7 +13016,7 @@ GameObject:
   - component: {fileID: 4509197341737482}
   - component: {fileID: 33568803180621642}
   - component: {fileID: 23198053470424064}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Metal_Bridge_M (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13303,7 +13100,7 @@ GameObject:
   - component: {fileID: 4723002447303982}
   - component: {fileID: 33151951632125822}
   - component: {fileID: 23259847557647204}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13384,7 +13181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4023475705188788}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13427,7 +13224,7 @@ GameObject:
   - component: {fileID: 4346122697047086}
   - component: {fileID: 33653767133882836}
   - component: {fileID: 23044208415313712}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13510,8 +13307,7 @@ GameObject:
   - component: {fileID: 4107217590191294}
   - component: {fileID: 33715273261535712}
   - component: {fileID: 23444362146678512}
-  - component: {fileID: 65268603276513704}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13583,27 +13379,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65268603276513704
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1612014716479632}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.3, y: 6, z: 10}
-  m_Center: {x: 2.35, y: 3, z: 0}
 --- !u!1 &1617305516895084
 GameObject:
   m_ObjectHideFlags: 0
@@ -13615,7 +13390,7 @@ GameObject:
   - component: {fileID: 4285311236012632}
   - component: {fileID: 33008553912307234}
   - component: {fileID: 23737245769045418}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13698,7 +13473,7 @@ GameObject:
   - component: {fileID: 4444813321968516}
   - component: {fileID: 33186328592921152}
   - component: {fileID: 23772706733677848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13781,7 +13556,7 @@ GameObject:
   - component: {fileID: 4188751110156004}
   - component: {fileID: 33132127683740020}
   - component: {fileID: 23975260367190176}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13864,7 +13639,7 @@ GameObject:
   - component: {fileID: 4915684726487752}
   - component: {fileID: 33099080498159312}
   - component: {fileID: 23862811225441510}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13947,7 +13722,7 @@ GameObject:
   - component: {fileID: 4651077702891482}
   - component: {fileID: 33748178622618106}
   - component: {fileID: 23170159486738480}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14033,7 +13808,7 @@ GameObject:
   - component: {fileID: 65288552208648786}
   - component: {fileID: 65134451953307990}
   - component: {fileID: 65060016870840080}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Curve
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14181,7 +13956,7 @@ GameObject:
   - component: {fileID: 4902730548425360}
   - component: {fileID: 33540903308245162}
   - component: {fileID: 23549172201040822}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14264,7 +14039,7 @@ GameObject:
   - component: {fileID: 4435556796690006}
   - component: {fileID: 33603558615043210}
   - component: {fileID: 23445279746122174}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14347,7 +14122,7 @@ GameObject:
   - component: {fileID: 4415519168416832}
   - component: {fileID: 33114806530494544}
   - component: {fileID: 23526279353038634}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14428,7 +14203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4565639126330080}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14474,7 +14249,7 @@ GameObject:
   - component: {fileID: 4566177455173366}
   - component: {fileID: 33820111951681976}
   - component: {fileID: 23505190923163640}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14557,7 +14332,7 @@ GameObject:
   - component: {fileID: 4044211352908456}
   - component: {fileID: 33473655907120758}
   - component: {fileID: 23711249869096814}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14640,7 +14415,7 @@ GameObject:
   - component: {fileID: 4124518623478928}
   - component: {fileID: 33282252856945432}
   - component: {fileID: 23702285513884982}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14723,7 +14498,7 @@ GameObject:
   - component: {fileID: 4208627350057092}
   - component: {fileID: 33619779822445748}
   - component: {fileID: 23532615788411298}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14806,7 +14581,7 @@ GameObject:
   - component: {fileID: 4316816766064696}
   - component: {fileID: 33039681978593888}
   - component: {fileID: 23684678340328802}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14889,7 +14664,7 @@ GameObject:
   - component: {fileID: 4887209923771900}
   - component: {fileID: 33903227888166544}
   - component: {fileID: 23960941774901266}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14972,8 +14747,7 @@ GameObject:
   - component: {fileID: 4357063907187736}
   - component: {fileID: 33063997958463208}
   - component: {fileID: 23135278902710856}
-  - component: {fileID: 65582510755815558}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15045,27 +14819,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65582510755815558
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700340220276494}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.3, y: 6, z: 10}
-  m_Center: {x: 2.35, y: 3, z: 0}
 --- !u!1 &1703667324265970
 GameObject:
   m_ObjectHideFlags: 0
@@ -15077,7 +14830,7 @@ GameObject:
   - component: {fileID: 4151642370688912}
   - component: {fileID: 33097342115038430}
   - component: {fileID: 23219331352560922}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15161,9 +14914,9 @@ GameObject:
   - component: {fileID: 33114421866399290}
   - component: {fileID: 23866018154263926}
   - component: {fileID: 65911295059849538}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Iceberg_2
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15266,7 +15019,7 @@ GameObject:
   - component: {fileID: 4152679557691452}
   - component: {fileID: 33033260607371598}
   - component: {fileID: 23199345484029286}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15349,8 +15102,7 @@ GameObject:
   - component: {fileID: 4334719358482464}
   - component: {fileID: 33767326658238694}
   - component: {fileID: 23603481558022406}
-  - component: {fileID: 65457225696779202}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15422,27 +15174,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65457225696779202
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1723039782448300}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6, y: 0.2, z: 10}
-  m_Center: {x: 2, y: 0.2, z: 0}
 --- !u!1 &1724163310078384
 GameObject:
   m_ObjectHideFlags: 0
@@ -15454,7 +15185,7 @@ GameObject:
   - component: {fileID: 4962750294717832}
   - component: {fileID: 33009954879158728}
   - component: {fileID: 23088063447411384}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15537,7 +15268,7 @@ GameObject:
   - component: {fileID: 4389804664077484}
   - component: {fileID: 33641804116565698}
   - component: {fileID: 23032283461270668}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15620,7 +15351,7 @@ GameObject:
   - component: {fileID: 4704538644414536}
   - component: {fileID: 33133174630270750}
   - component: {fileID: 23719171883376150}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15703,7 +15434,7 @@ GameObject:
   - component: {fileID: 4356796089665992}
   - component: {fileID: 33310417271558406}
   - component: {fileID: 23027066715257780}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15786,7 +15517,7 @@ GameObject:
   - component: {fileID: 4724948519336090}
   - component: {fileID: 33469858950905912}
   - component: {fileID: 23239710751162606}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15869,7 +15600,7 @@ GameObject:
   - component: {fileID: 4980706408733680}
   - component: {fileID: 33285513745482304}
   - component: {fileID: 23805287745446262}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15952,7 +15683,7 @@ GameObject:
   - component: {fileID: 4888972002634188}
   - component: {fileID: 33363875355413708}
   - component: {fileID: 23004371054311700}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16035,7 +15766,7 @@ GameObject:
   - component: {fileID: 4245222590635684}
   - component: {fileID: 33577416673751644}
   - component: {fileID: 23212428992497690}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16119,7 +15850,7 @@ GameObject:
   - component: {fileID: 33519389523168736}
   - component: {fileID: 23930118005258040}
   - component: {fileID: 65971976566320794}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Iceberg_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16224,7 +15955,7 @@ GameObject:
   - component: {fileID: 4372552879528964}
   - component: {fileID: 33625194301653144}
   - component: {fileID: 23768905814088616}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16307,7 +16038,7 @@ GameObject:
   - component: {fileID: 4660041304477716}
   - component: {fileID: 33272673401860142}
   - component: {fileID: 23379793296699710}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16390,7 +16121,7 @@ GameObject:
   - component: {fileID: 4909612773004492}
   - component: {fileID: 33183873061397726}
   - component: {fileID: 23672004746074522}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16473,7 +16204,7 @@ GameObject:
   - component: {fileID: 4289889767897356}
   - component: {fileID: 33338392314123432}
   - component: {fileID: 23203855774629034}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16556,7 +16287,7 @@ GameObject:
   - component: {fileID: 4224964796737446}
   - component: {fileID: 33655889099764756}
   - component: {fileID: 23317295619414008}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16639,8 +16370,7 @@ GameObject:
   - component: {fileID: 4618069133494808}
   - component: {fileID: 33820307512368286}
   - component: {fileID: 23409856174584366}
-  - component: {fileID: 3488726742604038721}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16712,27 +16442,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3488726742604038721
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1771521766520884}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.000008, y: 6, z: 10.000008}
-  m_Center: {x: 0.0000052452087, y: 3, z: -0.0000054836273}
 --- !u!1 &1779206016793650
 GameObject:
   m_ObjectHideFlags: 0
@@ -16744,7 +16453,7 @@ GameObject:
   - component: {fileID: 4927775840387086}
   - component: {fileID: 33853400628352094}
   - component: {fileID: 23740334315960002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16827,7 +16536,7 @@ GameObject:
   - component: {fileID: 4367943795342748}
   - component: {fileID: 33956422495713384}
   - component: {fileID: 23796124361761400}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16908,7 +16617,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4106692467810906}
-  m_Layer: 0
+  - component: {fileID: 7544930039685320021}
+  m_Layer: 8
   m_Name: Decoration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16936,6 +16646,18 @@ Transform:
   m_Father: {fileID: 4097422760553934}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7544930039685320021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787528340733702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1789114144051568
 GameObject:
   m_ObjectHideFlags: 0
@@ -16945,7 +16667,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4022193151324430}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16988,7 +16710,7 @@ GameObject:
   - component: {fileID: 4961615995619404}
   - component: {fileID: 33477290900437324}
   - component: {fileID: 23335435181762044}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17071,7 +16793,7 @@ GameObject:
   - component: {fileID: 4575677737039038}
   - component: {fileID: 33598143741558316}
   - component: {fileID: 23775705928184450}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17154,7 +16876,7 @@ GameObject:
   - component: {fileID: 4137385876234158}
   - component: {fileID: 33938905860366194}
   - component: {fileID: 23820998590218760}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17237,7 +16959,7 @@ GameObject:
   - component: {fileID: 4416873124987178}
   - component: {fileID: 33836628024929156}
   - component: {fileID: 23666332424811146}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17320,7 +17042,7 @@ GameObject:
   - component: {fileID: 4429950972080872}
   - component: {fileID: 33399352791456596}
   - component: {fileID: 23721551579727394}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17404,9 +17126,9 @@ GameObject:
   - component: {fileID: 33548507295069176}
   - component: {fileID: 23601492417741832}
   - component: {fileID: 65675681390729282}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Iceberg (2)
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17508,7 +17230,7 @@ GameObject:
   - component: {fileID: 4592880397129240}
   - component: {fileID: 33822782426563624}
   - component: {fileID: 23637203621745302}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17589,7 +17311,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4380839693419480}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17632,7 +17354,7 @@ GameObject:
   - component: {fileID: 4358817414845606}
   - component: {fileID: 33028817940785458}
   - component: {fileID: 23412545384742190}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17715,7 +17437,7 @@ GameObject:
   - component: {fileID: 4894325869542218}
   - component: {fileID: 33935342028616414}
   - component: {fileID: 23095392426360424}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17798,7 +17520,7 @@ GameObject:
   - component: {fileID: 4941668579499790}
   - component: {fileID: 33242626319810952}
   - component: {fileID: 23027260760699618}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17881,8 +17603,7 @@ GameObject:
   - component: {fileID: 4288126720001232}
   - component: {fileID: 33442329390189660}
   - component: {fileID: 23376211407143908}
-  - component: {fileID: 65865885500318190}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17954,27 +17675,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65865885500318190
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836255892422798}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.000008, y: 6, z: 10.000008}
-  m_Center: {x: 0.0000052452087, y: 3, z: -0.0000054836273}
 --- !u!1 &1837022510681700
 GameObject:
   m_ObjectHideFlags: 0
@@ -17986,7 +17686,7 @@ GameObject:
   - component: {fileID: 4903670929668958}
   - component: {fileID: 33120778279933396}
   - component: {fileID: 23137872040818700}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18069,7 +17769,7 @@ GameObject:
   - component: {fileID: 4892681118993800}
   - component: {fileID: 33992625820741436}
   - component: {fileID: 23620581042469954}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18150,7 +17850,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4781698208965884}
-  m_Layer: 0
+  - component: {fileID: 1453223418427053419}
+  m_Layer: 8
   m_Name: Linha04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18182,6 +17883,18 @@ Transform:
   m_Father: {fileID: 4097422760553934}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1453223418427053419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842284712727310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1843985897281186
 GameObject:
   m_ObjectHideFlags: 0
@@ -18191,7 +17904,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4667763943494638}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18237,7 +17950,7 @@ GameObject:
   - component: {fileID: 65242844811345368}
   - component: {fileID: 65734765789852846}
   - component: {fileID: 65183506678901752}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Curve
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18384,7 +18097,7 @@ GameObject:
   - component: {fileID: 4865598166543348}
   - component: {fileID: 33936705281144862}
   - component: {fileID: 23083525352518946}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18467,7 +18180,7 @@ GameObject:
   - component: {fileID: 4935792016333868}
   - component: {fileID: 33445525742353904}
   - component: {fileID: 23307074087421808}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18550,7 +18263,7 @@ GameObject:
   - component: {fileID: 4656514767955692}
   - component: {fileID: 33517942306323820}
   - component: {fileID: 23249470719167174}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18633,7 +18346,7 @@ GameObject:
   - component: {fileID: 4637364855216372}
   - component: {fileID: 33377360136904796}
   - component: {fileID: 23467053988395940}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18716,7 +18429,7 @@ GameObject:
   - component: {fileID: 4446321875750800}
   - component: {fileID: 33953003425489402}
   - component: {fileID: 23958552359133008}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18797,7 +18510,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4298511035681616}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18840,7 +18553,7 @@ GameObject:
   - component: {fileID: 4049273103882824}
   - component: {fileID: 33330492461091452}
   - component: {fileID: 23844006598514402}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18923,7 +18636,7 @@ GameObject:
   - component: {fileID: 4670530798582110}
   - component: {fileID: 33056177520561800}
   - component: {fileID: 23789472374428468}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19006,7 +18719,7 @@ GameObject:
   - component: {fileID: 4341183198590840}
   - component: {fileID: 33073455594340832}
   - component: {fileID: 23006469301215586}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19089,7 +18802,7 @@ GameObject:
   - component: {fileID: 4483852127870716}
   - component: {fileID: 33459996232441134}
   - component: {fileID: 23895512174170838}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19172,7 +18885,7 @@ GameObject:
   - component: {fileID: 4737531075937792}
   - component: {fileID: 33562773116398638}
   - component: {fileID: 23537150692289250}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19255,7 +18968,7 @@ GameObject:
   - component: {fileID: 4212505618718844}
   - component: {fileID: 33776427771090644}
   - component: {fileID: 23682120492307678}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Metal_Bridge_M (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19339,8 +19052,7 @@ GameObject:
   - component: {fileID: 4500121830272818}
   - component: {fileID: 33368285037760238}
   - component: {fileID: 23735929814041012}
-  - component: {fileID: 65797270181258114}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19412,27 +19124,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65797270181258114
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1907526821894456}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6, y: 0.2, z: 10}
-  m_Center: {x: 2, y: 0.2, z: 0}
 --- !u!1 &1909654900149048
 GameObject:
   m_ObjectHideFlags: 0
@@ -19444,7 +19135,7 @@ GameObject:
   - component: {fileID: 4240895640268504}
   - component: {fileID: 33125556620261422}
   - component: {fileID: 23064978611538580}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19527,7 +19218,7 @@ GameObject:
   - component: {fileID: 4934380371527606}
   - component: {fileID: 33685165610494682}
   - component: {fileID: 23543345065497448}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19610,7 +19301,7 @@ GameObject:
   - component: {fileID: 4807594800994768}
   - component: {fileID: 33318001076174452}
   - component: {fileID: 23367186149915232}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19693,7 +19384,7 @@ GameObject:
   - component: {fileID: 4253176908799224}
   - component: {fileID: 33865501759379250}
   - component: {fileID: 23547117922648698}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19776,7 +19467,7 @@ GameObject:
   - component: {fileID: 4463862252807876}
   - component: {fileID: 33571001623038080}
   - component: {fileID: 23488540373759064}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19859,7 +19550,7 @@ GameObject:
   - component: {fileID: 4136643456634690}
   - component: {fileID: 33419919396903592}
   - component: {fileID: 23949716975220652}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19942,7 +19633,7 @@ GameObject:
   - component: {fileID: 4460929236012476}
   - component: {fileID: 33082312796149870}
   - component: {fileID: 23194667766007578}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20025,7 +19716,7 @@ GameObject:
   - component: {fileID: 4498583834399308}
   - component: {fileID: 33282447075832870}
   - component: {fileID: 23579149456619222}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20108,7 +19799,7 @@ GameObject:
   - component: {fileID: 4577254907675838}
   - component: {fileID: 33402575158062252}
   - component: {fileID: 23362444154502526}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20191,7 +19882,7 @@ GameObject:
   - component: {fileID: 4018605305558018}
   - component: {fileID: 33914038958655990}
   - component: {fileID: 23413468819489442}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20275,7 +19966,7 @@ GameObject:
   - component: {fileID: 33349768651860220}
   - component: {fileID: 23108256557483344}
   - component: {fileID: 65312887278274456}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20366,8 +20057,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.3, y: 6, z: 10}
-  m_Center: {x: 2.35, y: 3, z: 0}
+  m_Size: {x: 10, y: 6, z: 6}
+  m_Center: {x: 5, y: 3, z: -2}
 --- !u!1 &1941590494179546
 GameObject:
   m_ObjectHideFlags: 0
@@ -20380,9 +20071,9 @@ GameObject:
   - component: {fileID: 33869283180606388}
   - component: {fileID: 23677922748815186}
   - component: {fileID: 65702333847993066}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Iceberg (1)
-  m_TagString: Wall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20484,7 +20175,7 @@ GameObject:
   - component: {fileID: 4012352534622614}
   - component: {fileID: 33160087465203428}
   - component: {fileID: 23139576725850058}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20567,7 +20258,7 @@ GameObject:
   - component: {fileID: 4382579077588018}
   - component: {fileID: 33598807290680558}
   - component: {fileID: 23325230289103024}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20650,7 +20341,7 @@ GameObject:
   - component: {fileID: 4771832291580466}
   - component: {fileID: 33059305235339064}
   - component: {fileID: 23272945374807350}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20733,7 +20424,7 @@ GameObject:
   - component: {fileID: 4470196722803078}
   - component: {fileID: 33075326283899284}
   - component: {fileID: 23843016044815810}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20816,8 +20507,7 @@ GameObject:
   - component: {fileID: 4898474590252462}
   - component: {fileID: 33926815406687862}
   - component: {fileID: 23001444775210132}
-  - component: {fileID: 65246109805306110}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20889,27 +20579,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65246109805306110
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1967606206853596}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.3, y: 6, z: 10}
-  m_Center: {x: 2.35, y: 3, z: 0}
 --- !u!1 &1967769658414656
 GameObject:
   m_ObjectHideFlags: 0
@@ -20921,7 +20590,7 @@ GameObject:
   - component: {fileID: 4716552065231244}
   - component: {fileID: 33112678199292854}
   - component: {fileID: 23655231671703296}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21004,7 +20673,7 @@ GameObject:
   - component: {fileID: 4634364290538682}
   - component: {fileID: 33585518950334134}
   - component: {fileID: 23186013886568332}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21088,7 +20757,7 @@ GameObject:
   - component: {fileID: 33699683341086338}
   - component: {fileID: 23187442917927682}
   - component: {fileID: 65828543686176906}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21179,8 +20848,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.3, y: 6, z: 10}
-  m_Center: {x: 2.35, y: 3, z: 0}
+  m_Size: {x: 5.3, y: 6, z: 28}
+  m_Center: {x: 2.35, y: 3, z: 9}
 --- !u!1 &1974451955593636
 GameObject:
   m_ObjectHideFlags: 0
@@ -21192,7 +20861,7 @@ GameObject:
   - component: {fileID: 4203382401062996}
   - component: {fileID: 33075862617509076}
   - component: {fileID: 23623493077184574}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21273,7 +20942,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4555284087742174}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21320,7 +20989,7 @@ GameObject:
   - component: {fileID: 65370465030188756}
   - component: {fileID: 65566868314156838}
   - component: {fileID: 65565207215461046}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Curve
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21466,7 +21135,7 @@ GameObject:
   - component: {fileID: 4068888756310532}
   - component: {fileID: 33874498678135986}
   - component: {fileID: 23815055679140846}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21549,7 +21218,7 @@ GameObject:
   - component: {fileID: 4256460145129756}
   - component: {fileID: 33814839474554586}
   - component: {fileID: 23907114750286436}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21633,7 +21302,7 @@ GameObject:
   - component: {fileID: 33526726088122274}
   - component: {fileID: 23695247771244766}
   - component: {fileID: 65284374153131480}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Ravine_2
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21724,8 +21393,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.3, y: 6, z: 10}
-  m_Center: {x: 2.35, y: 3, z: 0}
+  m_Size: {x: 5.3, y: 6, z: 28}
+  m_Center: {x: 2.35, y: 3, z: -9}
 --- !u!1 &1993407735849990
 GameObject:
   m_ObjectHideFlags: 0
@@ -21737,8 +21406,7 @@ GameObject:
   - component: {fileID: 4996124223832466}
   - component: {fileID: 33050742996299190}
   - component: {fileID: 23600894848569114}
-  - component: {fileID: 65251856812230274}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21810,27 +21478,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65251856812230274
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1993407735849990}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 6, y: 0.2, z: 10}
-  m_Center: {x: 2, y: 0.2, z: 0}
 --- !u!1 &1999228387760430
 GameObject:
   m_ObjectHideFlags: 0
@@ -21842,7 +21489,7 @@ GameObject:
   - component: {fileID: 4269534802712194}
   - component: {fileID: 33620743804288124}
   - component: {fileID: 23052809570333990}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
