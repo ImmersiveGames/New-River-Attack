@@ -21,6 +21,7 @@ namespace RiverAttack
         protected virtual void OnDisable()
         {
             m_ObstacleMaster.EventObstacleMasterHit -= ExplodeSound;
+            m_GamePlayManager.EventDeactivateEnemiesMaster -= StopSound;
         }
   #endregion
 

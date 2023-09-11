@@ -4,26 +4,23 @@ namespace RiverAttack
 {
     public class LevelChangeBGM : MonoBehaviour
     {
-        /*public GamePlayAudio.LevelType idBgMtoChange;
-        public float speedy;
+        const float TIME_TO_FADE_BGM = 0.1f;
         GamePlayAudio m_PlayAudio;
         GamePlayManager m_PlayMaster;
         #region UNITY METHODS
         void OnEnable()
         {
-            m_PlayMaster = GamePlayManager.instance;
             m_PlayAudio = GamePlayAudio.instance;
+            m_PlayMaster = GamePlayManager.instance;
         }
 
         void OnTriggerEnter(Collider other)
         {
             if (!other.GetComponentInParent<PlayerMaster>()) return;
-            //Debug.Log("Colidiu");
-            GamePlayAudio.instance.ChangeBGM(idBgMtoChange, speedy);
-            m_PlayMaster.actualBGM = idBgMtoChange;
-            GetComponent<Collider>().enabled = false;
+            Debug.Log($"Stat Music: {GamePlayManager.instance.actualLevels.bgmStartLevel}");
+            m_PlayMaster.OnEventBuildPathUpdate(transform.position.z);
         }
-  #endregion*/
+  #endregion
         
     }
 }
