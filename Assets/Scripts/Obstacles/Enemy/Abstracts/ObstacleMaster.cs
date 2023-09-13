@@ -54,7 +54,7 @@ namespace RiverAttack
         }
         internal virtual void OnDisable()
         {
-            isActive = false;
+            //isActive = false;
         }
         internal virtual void OnDestroy()
         {
@@ -75,7 +75,7 @@ namespace RiverAttack
         protected virtual void StartObstacle()
         {
             isDestroyed = false;
-            isActive = false;
+            isActive = true;
             var objTransform = transform;
             objTransform.position = m_ObjectStartPosition;
             objTransform.rotation = m_ObjectStartRotate;

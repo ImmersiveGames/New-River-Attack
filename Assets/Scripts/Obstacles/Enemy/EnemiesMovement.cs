@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Utils;
 
 namespace RiverAttack
@@ -46,6 +47,7 @@ namespace RiverAttack
             SetInitialReferences();
             m_GamePlayManager.EventActivateEnemiesMaster += ResetEnemyMovement;
         }
+       
         void Start()
         {
             ChangeState(m_StateMoveHold);
