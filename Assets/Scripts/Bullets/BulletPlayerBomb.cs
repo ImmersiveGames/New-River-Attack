@@ -60,7 +60,7 @@ namespace RiverAttack
         void ExpandCollider()
         {
             m_TParam += Time.deltaTime * radiusSpeed;
-            m_GamePlayManager.OnEventShakeCam(shakeForce, shakeTime);
+            CameraShake.instance.ShakeCamera(shakeForce, shakeTime);
 
 //TODO: Arrumar nova forma de vibrar o celular
 #if UNITY_ANDROID && !UNITY_EDITOR

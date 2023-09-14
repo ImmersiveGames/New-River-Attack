@@ -140,7 +140,17 @@ namespace RiverAttack
 
             currentGameState = nextState;
             currentGameState.EnterState();
+            if (currentGameState is GameStateGameOver)
+            {
+                Invoke(nameof(GameOverState), .8f);
+            }
             m_OnTransition = false;
+        }
+
+        void GameOverState()
+        {
+            var curr = currentGameState as GameStateGameOver;
+            curr?.GameOverState();
         }
 
         public void InstantiatePlayers()

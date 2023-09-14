@@ -1,27 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using Utils;
 
 namespace RiverAttack 
 {
-    public class CameraShake : MonoBehaviour
+    public class CameraShake : Singleton<CameraShake>
     {
-        public static CameraShake Instance { get; private set; }
+
+        CinemachineVirtualCamera m_MyVirtualCamera;
+        CinemachineBasicMultiChannelPerlin m_CineMachineBasicMultiChannelPerlin;
         
-        CinemachineVirtualCamera myVirtualCamera;
-        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin;
-        
-        float shakeTimer;
-        float shakeTimerTotal;
-        float startingIntensity;
+        float m_ShakeTimer;
+        float m_ShakeTimerTotal;
+        float m_StartingIntensity;
 
         // Start is called before the first frame update
         void Awake()
         {
-            Instance = this;
-            myVirtualCamera = GetComponent<CinemachineVirtualCamera>();
-            cinemachineBasicMultiChannelPerlin = myVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            m_MyVirtualCamera = GetComponent<CinemachineVirtualCamera>();
+            m_CineMachineBasicMultiChannelPerlin = m_MyVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         }
 
         // Update is called once per frame
@@ -32,25 +29,24 @@ namespace RiverAttack
 
         public void ShakeCamera(float intensity, float time) 
         {
-            cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
-            startingIntensity = intensity;
+            m_CineMachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
+            m_StartingIntensity = intensity;
             
-            shakeTimerTotal = time;
-            shakeTimer = time;
+            m_ShakeTimerTotal = time;
+            m_ShakeTimer = time;
         }
 
-        void ShakeTimer() 
+        void ShakeTimer()
         {
-            if (shakeTimer > 0) 
-            {
-                shakeTimer -= Time.deltaTime;
+            if (!(m_ShakeTimer > 0))
+                return;
+            m_ShakeTimer -= Time.deltaTime;
 
-                cinemachineBasicMultiChannelPerlin =
-                    myVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            m_CineMachineBasicMultiChannelPerlin =
+                m_MyVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
-                cinemachineBasicMultiChannelPerlin.m_AmplitudeGain =
-                    Mathf.Lerp(startingIntensity, 0f, (1 - (shakeTimer / shakeTimerTotal)));
-            }            
+            m_CineMachineBasicMultiChannelPerlin.m_AmplitudeGain =
+                Mathf.Lerp(m_StartingIntensity, 0f, (1 - (m_ShakeTimer / m_ShakeTimerTotal)));
         }
     }
 }

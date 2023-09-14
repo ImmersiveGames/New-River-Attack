@@ -12,6 +12,12 @@ namespace RiverAttack
         [SerializeField]
         GameObject prefabBomb;
 
+        [Header("Camera Shake"), SerializeField]
+        float shakeIntensity;
+        [SerializeField]
+        float shakeTime;
+
+
         PlayerMaster m_PlayerMaster;
         GamePlayManager m_GamePlayManager;
         PlayerSettings m_PlayerSettings;
@@ -26,7 +32,6 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
-            //m_GamePlayManager.EventCollectItem += CollectBombs;
         }
         void Start()
         {
@@ -34,10 +39,6 @@ namespace RiverAttack
             m_PlayerSettings.bombs = GameSettings.instance.startBombs;
             m_PlayersInputActions.Player.Bomb.performed += Execute;
         }
-        /*void OnDisable()
-        {
-            m_GamePlayManager.EventCollectItem -= CollectBombs;
-        }*/
   #endregion
 
         void SetInitialReferences()
@@ -48,21 +49,13 @@ namespace RiverAttack
             m_GamePlaySettings = m_GamePlayManager.gamePlaySettings;
         }
         
-        /*void CollectBombs(CollectibleScriptable collectibles)
-        {
-            Debug.Log($"Collect{m_PlayerSettings.bombs}");
-            if (m_PlayerSettings.bombs >= collectibles.maxCollectible)
-                return;
-            m_PlayerSettings.bombs += collectibles.amountCollectables;
-            GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, m_PlayerSettings, collectibles, collectibles.amountCollectables, CollisionType.Collected);
-        }*/
         public void Execute(InputAction.CallbackContext callbackContext)
         {
-            Debug.Log($"Collect{m_PlayerSettings.bombs}");
+           //Debug.Log($"Collect{m_PlayerSettings.bombs}");
             if (m_PlayerSettings.bombs <= 0 || !m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady)
                 return;
             
-            CameraShake.Instance.ShakeCamera(5f, 0.2f);
+            
 
             m_GamePlayManager.OnEventPlayerPushButtonBomb();
             m_PlayerSettings.bombs -= 1;
@@ -81,7 +74,6 @@ namespace RiverAttack
         void LogGamePlay(int bomb)
         {
             m_GamePlaySettings.bombSpent += bomb;
-            //m_PlayerSettings.bombs -= bomb;
         }
 
         /*

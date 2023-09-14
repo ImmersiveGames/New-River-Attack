@@ -6,9 +6,11 @@ namespace RiverAttack
     public class GamePlayAudio : Singleton<GamePlayAudio>
     {
         [SerializeField] AudioSource bgmAudioSource;
+        [SerializeField] protected AudioSource voiceAudioSource;
         [SerializeField] Tools.SerializableDictionary<LevelTypes, AudioEventSample> bgmLevels = new Tools.SerializableDictionary<LevelTypes, AudioEventSample>();
         [Header("Menu SFX")]
         [SerializeField] AudioClip clickSound;
+        [SerializeField] public AudioClip missionFailSound;
         float m_DefaultPitch;
 
         #region UNITYMETHODS
@@ -37,6 +39,11 @@ namespace RiverAttack
             bgmAudioSource.volume = audioSource.getVolume;
             StartCoroutine(PlayBGM(bgmAudioSource, audioSource, time));
         }
+
+        public void PlayVoice(AudioClip audioClip)
+        {
+            PlayOneShot(voiceAudioSource,audioClip);
+        }
         static void PlayOneShot(AudioSource audioSource, AudioClip audioClip)
         {
             audioSource.PlayOneShot(audioClip);
@@ -50,7 +57,7 @@ namespace RiverAttack
             if (bgmAudioSource != null)
                 bgmAudioSource.Stop();
         }
-        
+
         public void AccelPinch(bool change)
         {
             if (change)
