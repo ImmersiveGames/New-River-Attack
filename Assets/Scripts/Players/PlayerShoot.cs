@@ -96,6 +96,9 @@ namespace RiverAttack
             
             myShoot.transform.parent = null;
             LogGamePlay();
+
+            
+
         }
         IEnumerator Cooldown()
         {

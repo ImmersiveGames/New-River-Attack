@@ -61,6 +61,9 @@ namespace RiverAttack
             Debug.Log($"Collect{m_PlayerSettings.bombs}");
             if (m_PlayerSettings.bombs <= 0 || !m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady)
                 return;
+            
+            CameraShake.Instance.ShakeCamera(5f, 0.2f);
+
             m_GamePlayManager.OnEventPlayerPushButtonBomb();
             m_PlayerSettings.bombs -= 1;
             var bomb = Instantiate(prefabBomb);
