@@ -183,10 +183,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 40
-  field of view: 26
+  far clip plane: 100
+  field of view: 30
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 15.01
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -209,8 +209,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 39, z: -25}
+  m_LocalRotation: {x: 0.46174863, y: 0, z: 0, w: 0.8870109}
+  m_LocalPosition: {x: 0, y: 45.568287, z: -22.094086}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -425,6 +425,79 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &627965685
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 92477111617855608, guid: 7b0c5bb372da82542b23e9d314fe4a14,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 92477111617855608, guid: 7b0c5bb372da82542b23e9d314fe4a14,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 92477111617855608, guid: 7b0c5bb372da82542b23e9d314fe4a14,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 92477111617855608, guid: 7b0c5bb372da82542b23e9d314fe4a14,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 92477111617855608, guid: 7b0c5bb372da82542b23e9d314fe4a14,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 92477111617855608, guid: 7b0c5bb372da82542b23e9d314fe4a14,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 92477111617855608, guid: 7b0c5bb372da82542b23e9d314fe4a14,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 92477111617855608, guid: 7b0c5bb372da82542b23e9d314fe4a14,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 92477111617855608, guid: 7b0c5bb372da82542b23e9d314fe4a14,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 92477111617855608, guid: 7b0c5bb372da82542b23e9d314fe4a14,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 92477111617855608, guid: 7b0c5bb372da82542b23e9d314fe4a14,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1998141662189031224, guid: 7b0c5bb372da82542b23e9d314fe4a14,
+        type: 3}
+      propertyPath: m_Name
+      value: PowerUp_RapidFire
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7b0c5bb372da82542b23e9d314fe4a14, type: 3}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,6 +565,18 @@ PlayableDirector:
     type: 3}
   m_PrefabInstance: {fileID: 2027847270}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1515822112 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6347317353179874629, guid: de06160820b7b774ea974476b68d2f65,
+    type: 3}
+  m_PrefabInstance: {fileID: 5378173242911239574}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2027847270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -668,6 +753,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 79309596176963398, guid: de06160820b7b774ea974476b68d2f65,
+        type: 3}
+      propertyPath: rapidFireImage
+      value: 
+      objectReference: {fileID: 1515822112}
     - target: {fileID: 1947623888303454417, guid: de06160820b7b774ea974476b68d2f65,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -733,6 +823,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_New
       objectReference: {fileID: 0}
+    - target: {fileID: 6347317353179874629, guid: de06160820b7b774ea974476b68d2f65,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -749,17 +844,17 @@ PrefabInstance:
     - target: {fileID: 2996767954218473026, guid: 065609105772a834aa8f89040f3ab329,
         type: 3}
       propertyPath: godMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2996767954218473026, guid: 065609105772a834aa8f89040f3ab329,
         type: 3}
       propertyPath: godModeSpeed
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4195329419193379460, guid: 065609105772a834aa8f89040f3ab329,
         type: 3}
       propertyPath: debugMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4195329419193379460, guid: 065609105772a834aa8f89040f3ab329,
         type: 3}

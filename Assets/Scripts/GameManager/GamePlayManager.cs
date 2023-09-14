@@ -35,6 +35,8 @@ namespace RiverAttack
         internal event GeneralEventHandler EventPlayerPushButtonShoot;
         internal event GeneralEventHandler EventPlayerPushButtonBomb;
         internal delegate void UiUpdateEventHandler(int value);
+        internal event GeneralEventHandler EventStartRapidFire;
+        internal event GeneralEventHandler EventEndRapidFire;
         internal event UiUpdateEventHandler EventUpdateScore;
         internal event UiUpdateEventHandler EventUpdateDistance;
         internal event UiUpdateEventHandler EventUpdateRefugees;
@@ -43,6 +45,7 @@ namespace RiverAttack
 
         internal delegate void BuildPatchHandler(float position);
         internal event BuildPatchHandler EventBuildPathUpdate;
+
 
         /*public delegate void CollectableEventHandle(CollectibleScriptable collectibles);
         public event CollectableEventHandle EventCollectItem;*/
@@ -174,7 +177,17 @@ namespace RiverAttack
         {
             EventBuildPathUpdate?.Invoke(position);
         }
+        internal void OnEventRapidFire()
+        {
+            EventStartRapidFire?.Invoke();
+        }
+        internal void OnEventEndRapidFire()
+        {
+            EventEndRapidFire?.Invoke();
+        }
   #endregion
+
+
         
     }
 }
