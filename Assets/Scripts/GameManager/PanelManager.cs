@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RiverAttack
 {
@@ -8,9 +9,13 @@ namespace RiverAttack
         [SerializeField]
         Transform menuParent, menuFade;
         [SerializeField]
+        Image backgroundImage, logoImage;
+        [SerializeField]
         List<Transform> menuPrincipal = new List<Transform>();
         [SerializeField]
         Transform menuHud, menuControl;
+        [SerializeField]
+        Transform menuGameOver;
         GameManager m_GameManager;
         GamePlayAudio m_GamePlayAudio;
         AudioSource m_AudioSource;
@@ -35,12 +40,29 @@ namespace RiverAttack
         {
             menuHud.gameObject.SetActive(active);
             menuControl.gameObject.SetActive(active);
+            menuGameOver.gameObject.SetActive(false);
+            
             //menuFade.gameObject.SetActive(false);
+        }
+        public void SetMenuGameOver()
+        {
+            menuHud.gameObject.SetActive(false);
+            menuParent.gameObject.SetActive(true);
+            backgroundImage.enabled = false;
+            logoImage.enabled = false;
+            foreach (var t in menuPrincipal)
+            {
+                t.gameObject.SetActive(false);
+            }
+            menuGameOver.gameObject.SetActive(true);
         }
 
         public void SetMenuPrincipal(int indexStart, bool active)
         {
             menuParent.gameObject.SetActive(active);
+            menuGameOver.gameObject.SetActive(false);
+            backgroundImage.enabled = true;
+            logoImage.enabled = true;
             foreach (var t in menuPrincipal)
             {
                 t.gameObject.SetActive(false);
