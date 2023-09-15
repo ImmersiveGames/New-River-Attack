@@ -131,15 +131,15 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2883223684442258829, guid: ecdbd9bd376b93a4f951d01750e41865,
+        type: 3}
+      propertyPath: m_SceneBindings.Array.data[1].value
+      value: 
+      objectReference: {fileID: 330585548}
     - target: {fileID: 5383067415692955754, guid: ecdbd9bd376b93a4f951d01750e41865,
         type: 3}
       propertyPath: m_Name
       value: EndAnimDirector
-      objectReference: {fileID: 0}
-    - target: {fileID: 5383067415692955754, guid: ecdbd9bd376b93a4f951d01750e41865,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6280954205476536652, guid: ecdbd9bd376b93a4f951d01750e41865,
         type: 3}
@@ -201,6 +201,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecdbd9bd376b93a4f951d01750e41865, type: 3}
+--- !u!320 &132457260 stripped
+PlayableDirector:
+  m_CorrespondingSourceObject: {fileID: 2883223684442258829, guid: ecdbd9bd376b93a4f951d01750e41865,
+    type: 3}
+  m_PrefabInstance: {fileID: 132457259}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,14 +857,14 @@ PrefabInstance:
       objectReference: {fileID: 464165118}
     - target: {fileID: 4195329419193379460, guid: 065609105772a834aa8f89040f3ab329,
         type: 3}
+      propertyPath: endCutDirector
+      value: 
+      objectReference: {fileID: 132457260}
+    - target: {fileID: 4195329419193379460, guid: 065609105772a834aa8f89040f3ab329,
+        type: 3}
       propertyPath: openCutDirector
       value: 
       objectReference: {fileID: 1152889801}
-    - target: {fileID: 4509361059872672040, guid: 065609105772a834aa8f89040f3ab329,
-        type: 3}
-      propertyPath: m_Name
-      value: AudioSFXVoices
-      objectReference: {fileID: 0}
     - target: {fileID: 5268167171390560247, guid: 065609105772a834aa8f89040f3ab329,
         type: 3}
       propertyPath: m_Name

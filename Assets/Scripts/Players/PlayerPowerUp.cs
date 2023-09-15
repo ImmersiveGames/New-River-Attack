@@ -62,13 +62,13 @@ namespace RiverAttack
             ClearActivePowerUps(powerUp.canAccumulateEffects);
             if (!m_ActivePowerUps.ContainsKey(powerUp))
             {
-                Debug.Log("Não tem esse power Up na lista");
+               // Debug.Log("Não tem esse power Up na lista");
                 powerUp.PowerUpStart(m_PlayerMaster.getPlayerSettings);
                 m_ActivePowerUps.Add(powerUp, powerUp.duration);
             }
             else
             {
-                Debug.Log("Ja tem esse power Up adiciona tempo");
+                //Debug.Log("Ja tem esse power Up adiciona tempo");
                 if (powerUp.canAccumulateDuration)
                     m_ActivePowerUps[powerUp] += powerUp.duration;
                 else

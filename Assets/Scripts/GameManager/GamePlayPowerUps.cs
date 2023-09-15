@@ -40,8 +40,10 @@ namespace RiverAttack
             if (target == null) return;
             float buff = (amount < cadenceRapidFireMin) ? cadenceRapidFireMin : amount;
             target.cadenceShootPowerUp = buff;
-            target.onRapidFire = true;
+            if (target.onRapidFire)
+                return;
             GamePlayAudio.instance.AccelPinch(true);
+            target.onRapidFire = true;
         }
 
         public void RapidFireEnd(float amount)
@@ -61,6 +63,15 @@ namespace RiverAttack
                 return;
             target.bombs = (target.bombs + amount >= maxBomb) ? maxBomb : target.bombs + amount;
             GamePlayManager.instance.OnEventUpdateBombs(target.bombs);
+        }
+        
+        public void GainLive(int amount)
+        {
+            int maxLives = GameSettings.instance.maxLives;
+            if (target == null || target.lives >= maxLives)
+                return;
+            target.lives = (target.lives + amount >= maxLives) ? maxLives : target.lives + amount;
+            GamePlayManager.instance.OnEventUpdateLives(target.lives);
         }
     }
 }

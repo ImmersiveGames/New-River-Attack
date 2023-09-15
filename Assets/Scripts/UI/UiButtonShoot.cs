@@ -20,7 +20,6 @@ namespace RiverAttack
         }
         void Start()
         {
-            Debug.Log($"inicia");
             rapidFireImage.enabled = false;
             m_GamePlayManager.EventStartRapidFire += StartRapidFire;
             m_GamePlayManager.EventEndRapidFire += EndRapidFire;
@@ -28,7 +27,6 @@ namespace RiverAttack
 
         void ActionShoot()
         {
-            //Debug.Log($"Animator {m_Animator}");
             if (m_Animator != null)
             {
                 m_Animator.SetTrigger(IsPressed);
@@ -37,12 +35,10 @@ namespace RiverAttack
 
         void StartRapidFire()
         {
-             Debug.Log($"LIGA ESSA MERDA");   
-             rapidFireImage.enabled = true;
+            rapidFireImage.enabled = true;
         }
         void EndRapidFire()
         {
-            Debug.Log($"DESLIGA ESSA MERDA"); 
             rapidFireImage.enabled = false;
         }
 

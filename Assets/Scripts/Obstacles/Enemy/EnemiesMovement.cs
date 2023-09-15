@@ -68,7 +68,7 @@ namespace RiverAttack
             var newDirection = GetDirection(m_VectorDirection);
             m_VectorDirection = SetDirection(newDirection);
             m_EnemiesMaster.OnEventObjectMasterFlipEnemies();
-            Invoke(nameof(ColliderPermission), 0.5f);
+            m_InCollision = false;
         }
         void Update()
         {
