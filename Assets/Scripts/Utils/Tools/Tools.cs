@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cinemachine;
 using UnityEngine;
+using UnityEngine.Playables;
 using Object = UnityEngine.Object;
 
 namespace Utils
@@ -175,6 +177,27 @@ namespace Utils
             {
                 var child = itemTransform.GetChild(i);
                 SetLayersRecursively(layerMask, child);
+            }
+        }
+
+        public static void SetFollowVirtualCam(CinemachineVirtualCamera virtualCamera, Transform follow)
+        {
+            virtualCamera.Follow = follow;
+        }
+
+        public static void ChangeBindingReference(string track, Object animator, PlayableDirector playableDirector)
+        {
+            foreach (var playableBinding in playableDirector.playableAsset.outputs)
+            {
+                if (playableBinding.streamName != track)
+                    continue;
+                var bindingReference = playableDirector.GetGenericBinding(playableBinding.sourceObject);
+
+                if (bindingReference == null)
+                {
+                    // Substituir a referência nula pelo Animator desejado
+                    playableDirector.SetGenericBinding(playableBinding.sourceObject, animator);
+                }
             }
         }
 

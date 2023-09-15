@@ -38,11 +38,13 @@ namespace RiverAttack
         public List<PlayerSettings> playerSettingsList = new List<PlayerSettings>();
         [SerializeField] internal List<PlayerMaster> initializedPlayerMasters = new List<PlayerMaster>();
 
-        [Header("Camera Settings"), SerializeField]
-        CinemachineVirtualCamera virtualCamera;
+        [Header("Camera Settings"), SerializeField] internal CinemachineVirtualCamera virtualCamera;
 
         [Header("CutScenes Settings")]
-        [SerializeField] PlayableDirector openCutDirector;
+        [SerializeField]
+        internal PlayableDirector openCutDirector;
+        [SerializeField]
+        internal PlayableDirector endCutDirector;
 
         #region UnityMethods
         void Start()
@@ -67,6 +69,7 @@ namespace RiverAttack
         }
         internal void ChangeState(GameState newState)
         {
+            //TODO: melhorar para fazer o state saltar as transições na entrada e na saida. talvez colocar na criação uma bolian para decidir
             var nState = newState;
             if (m_OnTransition) return;
             if (currentGameState != null)
@@ -77,7 +80,7 @@ namespace RiverAttack
                 }
                 else
                 {
-                    if (newState is GameStateGameOver)
+                    if (newState is GameStateGameOver or GameStateEndCutScene)
                     {
                         ChangeState(currentGameState, newState);
                     }
@@ -174,25 +177,14 @@ namespace RiverAttack
             playerMaster.SetPlayerSettingsToPlayMaster(playerSettings);
             initializedPlayerMasters.Add(playerMaster);
             // Atualiza a cutscene com o animator do jogador;
-            ChangeBindingReference("Animation Track", playerMaster.GetPlayerAnimator());
+            Tools.ChangeBindingReference("Animation Track", playerMaster.GetPlayerAnimator(), openCutDirector);
             // Coloca o player como Follow da camra
-            SetFollowVirtualCam(playerObject.transform);
+            Tools.SetFollowVirtualCam(virtualCamera, playerObject.transform);
         }
 
-        void ChangeBindingReference(string track, Object animator)
+        public void PlayEndCutScene()
         {
-            foreach (var playableBinding in openCutDirector.playableAsset.outputs)
-            {
-                if (playableBinding.streamName != track)
-                    continue;
-                var bindingReference = openCutDirector.GetGenericBinding(playableBinding.sourceObject);
-
-                if (bindingReference == null)
-                {
-                    // Substituir a referência nula pelo Animator desejado
-                    openCutDirector.SetGenericBinding(playableBinding.sourceObject, animator);
-                }
-            }
+            endCutDirector.Play();
         }
 
         public void PlayOpenCutScene()
@@ -204,10 +196,7 @@ namespace RiverAttack
             openCutDirector.Play();
         }
 
-        void SetFollowVirtualCam(Transform follow)
-        {
-            virtualCamera.Follow = follow;
-        }
+        
 
         #region Buttons Actions
         public void BtnNewGame()

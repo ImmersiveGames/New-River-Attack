@@ -1,14 +1,16 @@
-﻿using UnityEngine.Playables;
+﻿using UnityEngine;
+using UnityEngine.Playables;
+using Utils;
 namespace RiverAttack
 {
-    public class GameStateOpenCutScene : GameState
+    public class GameStateEndCutScene : GameState
     {
         const float TIME_TO_FADE_BGM = 0.1f;
         const float TOLERANCE = 1f;
         readonly PlayableDirector m_PlayableDirector;
         readonly GameManager m_GameManager;
 
-        internal GameStateOpenCutScene(PlayableDirector playableDirector)
+        internal GameStateEndCutScene(PlayableDirector playableDirector)
         {
             m_PlayableDirector = playableDirector;
             m_GameManager = GameManager.instance;
@@ -16,13 +18,18 @@ namespace RiverAttack
         public override void EnterState()
         {
             //Debug.Log($"Entra no Estado: CutScene");
-            m_GameManager.openCutDirector.gameObject.SetActive(true);
-            m_GameManager.InstantiatePlayers();
-            m_GameManager.PlayOpenCutScene();
-            //Iniciar a BGM
-            GamePlayAudio.instance.ChangeBGM(GamePlayManager.instance.actualLevels.bgmStartLevel, TIME_TO_FADE_BGM);
+            
+            var playerMaster = m_GameManager.initializedPlayerMasters[0];
+            var playerAnimator = (playerMaster.gameObject).GetComponent<Animator>();
+            m_GameManager.endCutDirector.gameObject.SetActive(true);
             m_GameManager.startMenu.SetMenuPrincipal(1, false);
             m_GameManager.startMenu.SetMenuHudControl(false);
+            Tools.ChangeBindingReference("Animation Track", playerAnimator, m_GameManager.endCutDirector);
+            // Coloca o player como Follow da camra
+            Tools.SetFollowVirtualCam(m_GameManager.virtualCamera, playerMaster.transform);
+            //Iniciar a BGM
+            GamePlayAudio.instance.ChangeBGM(GamePlayManager.instance.actualLevels.bgmStartLevel, TIME_TO_FADE_BGM);
+            
         }
 
         public override void UpdateState()
@@ -37,7 +44,7 @@ namespace RiverAttack
         }
         public override void ExitState()
         {
-            m_GameManager.openCutDirector.gameObject.SetActive(false);
+            m_GameManager.endCutDirector.gameObject.SetActive(false);
             //Debug.Log($"Saindo no Estado: CutScene");
         }
     }
