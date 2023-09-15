@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using Utils;
 namespace RiverAttack
@@ -11,12 +10,6 @@ namespace RiverAttack
         Vector3 bombOffset;
         [SerializeField]
         GameObject prefabBomb;
-
-        [Header("Camera Shake"), SerializeField]
-        float shakeIntensity;
-        [SerializeField]
-        float shakeTime;
-
 
         PlayerMaster m_PlayerMaster;
         GamePlayManager m_GamePlayManager;
@@ -52,12 +45,9 @@ namespace RiverAttack
         public void Execute(InputAction.CallbackContext callbackContext)
         {
            //Debug.Log($"Collect{m_PlayerSettings.bombs}");
-            if (m_PlayerSettings.bombs <= 0 || !m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady)
-                return;
-            
-            
-
-            m_GamePlayManager.OnEventPlayerPushButtonBomb();
+           if (m_PlayerSettings.bombs <= 0 || !m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady)
+               return;
+           m_GamePlayManager.OnEventPlayerPushButtonBomb();
             m_PlayerSettings.bombs -= 1;
             var bomb = Instantiate(prefabBomb);
             bomb.transform.localPosition = transform.localPosition + bombOffset;
