@@ -4,6 +4,7 @@ using Cinemachine;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 using Utils;
 using Object = UnityEngine.Object;
 namespace RiverAttack
@@ -66,6 +67,7 @@ namespace RiverAttack
         }
         internal void ChangeState(GameState newState)
         {
+            var nState = newState;
             if (m_OnTransition) return;
             if (currentGameState != null)
             {
@@ -75,8 +77,15 @@ namespace RiverAttack
                 }
                 else
                 {
-                    m_OnTransition = true;
-                    StartCoroutine(PerformStateTransition(currentGameState, newState));
+                    if (newState is GameStateGameOver)
+                    {
+                        ChangeState(currentGameState, newState);
+                    }
+                    else
+                    {
+                        m_OnTransition = true;
+                        StartCoroutine(PerformStateTransition(currentGameState, newState));
+                    }
                 }
 
             }
@@ -123,6 +132,10 @@ namespace RiverAttack
 
             currentGameState = nextState;
             currentGameState.EnterState();
+            if (currentGameState is GameStateGameOver)
+            {
+                Invoke(nameof(GameOverState), .2f);
+            }
         }
 
         IEnumerator PerformStateTransition(GameState actualState, GameState nextState)
@@ -140,10 +153,7 @@ namespace RiverAttack
 
             currentGameState = nextState;
             currentGameState.EnterState();
-            if (currentGameState is GameStateGameOver)
-            {
-                Invoke(nameof(GameOverState), .8f);
-            }
+            
             m_OnTransition = false;
         }
 
@@ -199,6 +209,12 @@ namespace RiverAttack
         public void BtnNewGame()
         {
             ChangeState(new GameStateOpenCutScene(openCutDirector));
+        }
+
+        public void BtnGameRestart()
+        {
+            int cenaAtual = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(cenaAtual);
         }
         #endregion
 

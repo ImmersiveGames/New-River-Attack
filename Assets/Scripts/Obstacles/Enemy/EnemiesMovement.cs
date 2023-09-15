@@ -68,7 +68,7 @@ namespace RiverAttack
             var newDirection = GetDirection(m_VectorDirection);
             m_VectorDirection = SetDirection(newDirection);
             m_EnemiesMaster.OnEventObjectMasterFlipEnemies();
-            m_InCollision = false;
+            Invoke(nameof(ColliderPermission), 0.5f);
         }
         void Update()
         {
@@ -107,6 +107,11 @@ namespace RiverAttack
 
             m_ActualState = newState;
             m_ActualState?.EnterState(m_EnemiesMaster);
+        }
+
+        void ColliderPermission()
+        {
+            m_InCollision = false;
         }
         void ResetEnemyMovement()
         {
