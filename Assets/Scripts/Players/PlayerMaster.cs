@@ -14,7 +14,14 @@ namespace RiverAttack
         GameObject deadParticlePrefab;
         [SerializeField]
         float timeoutDestroyExplosion;
+        [Header("Shake Camera")]
+        [SerializeField]
+        float shakeIntensity;
+        [SerializeField]
+        float shakeTime;
+
         public enum MovementStatus { None, Paused, Accelerate, Reduce }
+        [Header("Movement")]
         [SerializeField] internal MovementStatus playerMovementStatus;
 
         [SerializeField]
@@ -109,7 +116,7 @@ namespace RiverAttack
         {
             m_GamePlayManager.playerDead = isPlayerDead = true;
             playerMovementStatus = MovementStatus.Paused;
-
+            CameraShake.instance.ShakeCamera(shakeIntensity,shakeTime);
             m_GamePlayManager.OnEventEnemiesMasterKillPlayer();
 
             Tools.ToggleChildren(transform, false);

@@ -19,10 +19,11 @@ namespace RiverAttack
             m_GameManager.InstantiatePlayers();
             m_GameManager.PlayOpenCutScene();
             //Iniciar a BGM
-            GamePlayAudio.instance.ChangeBGM(GamePlayManager.instance.actualLevels.bgmStartLevel,TIME_TO_FADE_BGM);
+            GamePlayAudio.instance.ChangeBGM(GamePlayManager.instance.actualLevels.bgmStartLevel, TIME_TO_FADE_BGM);
             m_GameManager.startMenu.SetMenuPrincipal(1, false);
             m_GameManager.startMenu.SetMenuHudControl(false);
         }
+
         public override void UpdateState()
         {
            // Debug.Log($"Rodando no Estado: CutScene");

@@ -197,6 +197,10 @@ namespace RiverAttack
 
         public void PlayOpenCutScene()
         {
+            Invoke(nameof(InvokePlayOpenCutScene),0.2f);
+        }
+        void InvokePlayOpenCutScene()
+        {
             openCutDirector.Play();
         }
 

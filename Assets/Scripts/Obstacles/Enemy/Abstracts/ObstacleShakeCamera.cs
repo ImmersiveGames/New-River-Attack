@@ -23,7 +23,7 @@ public class ObstacleShakeCamera : MonoBehaviour
     {
         m_ObstacleMaster.EventObstacleMasterHit -= ShakeCamOnExplode;
     }
-  #endregion
+    #endregion
 
     void ShakeCamOnExplode()
     {
