@@ -28,8 +28,7 @@ namespace RiverAttack
             // Coloca o player como Follow da camra
             Tools.SetFollowVirtualCam(m_GameManager.virtualCamera, playerMaster.transform);
             //Iniciar a BGM
-            GamePlayAudio.instance.ChangeBGM(GamePlayManager.instance.actualLevels.bgmStartLevel, TIME_TO_FADE_BGM);
-            
+            GamePlayAudio.instance.ChangeBGM(LevelTypes.Complete, TIME_TO_FADE_BGM);
         }
 
         public override void UpdateState()

@@ -7,7 +7,7 @@ namespace RiverAttack
     {
         [SerializeField] AudioSource bgmAudioSource;
         [SerializeField] protected AudioSource voiceAudioSource;
-        [SerializeField] Tools.SerializableDictionary<LevelTypes, AudioEventSample> bgmLevels = new Tools.SerializableDictionary<LevelTypes, AudioEventSample>();
+        [SerializeField] internal Tools.SerializableDictionary<LevelTypes, AudioEventSample> bgmLevels = new Tools.SerializableDictionary<LevelTypes, AudioEventSample>();
         [Header("Menu SFX")]
         [SerializeField] AudioClip clickSound;
         [SerializeField] public AudioClip missionFailSound;
