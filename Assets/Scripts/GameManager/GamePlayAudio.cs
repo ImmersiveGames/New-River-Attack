@@ -11,7 +11,6 @@ namespace RiverAttack
         [Header("Menu SFX")]
         [SerializeField] AudioClip clickSound;
         [SerializeField] public AudioClip missionFailSound;
-        float m_DefaultPitch;
 
         #region UNITYMETHODS
         void Awake()
@@ -58,18 +57,9 @@ namespace RiverAttack
                 bgmAudioSource.Stop();
         }
 
-        public void AccelPinch(bool change)
+        public void AccelPinch(float accel)
         {
-            if (change)
-            {
-                m_DefaultPitch = bgmAudioSource.pitch;
-                float newPitch = m_DefaultPitch * 1.3f;
-                StartCoroutine(FadePitch(bgmAudioSource, 0.1f, m_DefaultPitch, newPitch));
-            }
-            else
-            {
-                StartCoroutine(FadePitch(bgmAudioSource, 0.1f, bgmAudioSource.pitch, m_DefaultPitch));
-            }
+            StartCoroutine(FadePitch(bgmAudioSource, 0.1f, bgmAudioSource.pitch, accel));
         }
 
         static IEnumerator FadePitch(AudioSource source, float timer, float starts, float ends)

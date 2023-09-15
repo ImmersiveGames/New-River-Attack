@@ -90,6 +90,7 @@ namespace RiverAttack
             OnEventObstacleScore(playerMaster.getPlayerSettings);
             ShouldSavePoint(playerMaster.getPlayerSettings);
             GamePlayManager.AddResultList(gamePlaySettings.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy, 1, collisionType);
+            ShouldFinishGame();
         }
         internal static PlayerMaster WhoHit(Component other)
         {
@@ -133,6 +134,12 @@ namespace RiverAttack
             playerSettings.spawnPosition.z = position.z;
             playerSettings.spawnPosition.x = position.x;
             gamePlayManager.OnEventBuildPathUpdate(position.z);
+        }
+
+        void ShouldFinishGame()
+        {
+            if (!enemy.isFinishLevel) return;
+            gamePlayManager.readyToFinish = true;
         }
 
         #region Calls

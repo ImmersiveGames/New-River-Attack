@@ -1,4 +1,3 @@
-using GD.MinMaxSlider;
 using UnityEngine;
 using UnityEngine.Audio;
 using Utils;

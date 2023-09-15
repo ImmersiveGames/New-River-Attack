@@ -9,6 +9,7 @@ namespace RiverAttack
     public sealed class GamePlayManager : Singleton<GamePlayManager>
     {
         [SerializeField] internal bool completePath;
+        [SerializeField] internal bool readyToFinish;
         [SerializeField]
         bool godMode;
         [SerializeField] public bool godModeSpeed;
@@ -108,6 +109,20 @@ namespace RiverAttack
             }
 
             return score;
+        }
+
+        public void CompletePathEndCutScene()
+        {
+            GamePlayAudio.instance.ChangeBGM(LevelTypes.Complete, 0.1f);
+            m_GameManager.endCutDirector.gameObject.SetActive(true);
+            m_GameManager.startMenu.SetMenuPrincipal(1, false);
+            m_GameManager.startMenu.SetMenuHudControl(false);
+            Invoke(nameof(ChangeEndGame), 0.2f);
+        }
+
+        void ChangeEndGame()
+        {
+            m_GameManager.ChangeState(new GameStateEndGame());
         }
 
         #region Calls

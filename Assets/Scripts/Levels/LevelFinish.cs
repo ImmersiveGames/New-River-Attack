@@ -4,7 +4,6 @@ namespace RiverAttack
 {
     public class LevelFinish : MonoBehaviour
     {
-        /*
         GamePlayManager m_GamePlayManager;
         #region UNITY METHODS
         void OnEnable()
@@ -14,13 +13,12 @@ namespace RiverAttack
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponent<PlayerMaster>() == null) return;
-            if (!m_GamePlayManager.levelsFinish.Contains(m_GamePlayManager.actualLevel))
-                m_GamePlayManager.levelsFinish.Add(m_GamePlayManager.actualLevel);
-            m_GamePlayManager.CallEventCompletePath();
+            if (other.GetComponentInParent<PlayerMaster>() == null) return;
+            if (m_GamePlayManager.readyToFinish != true) return;
+            //m_GamePlayManager.completePath = true;
+            m_GamePlayManager.CompletePathEndCutScene();
         }
   #endregion
-  */
         
     }
 }

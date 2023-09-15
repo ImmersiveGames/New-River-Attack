@@ -83,6 +83,7 @@ namespace RiverAttack
             if (level.pathEnd == null) return;
             //TODO: Refazer o fim de fase para não spawnar desde o inicio (ou talvez sim mesmmo que ele crie o fim longe dos espaços)
             nextBound.x = level.levelOffset.x;
+            GameManager.instance.endCutDirector.transform.position = nextBound;
             FixedPath(ref nextBound, level.pathEnd, myRoot);
         }
         void FixedPath(ref Vector3 nextBound, GameObject nextPath, Transform myRoot)

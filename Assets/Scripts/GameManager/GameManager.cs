@@ -178,6 +178,7 @@ namespace RiverAttack
             initializedPlayerMasters.Add(playerMaster);
             // Atualiza a cutscene com o animator do jogador;
             Tools.ChangeBindingReference("Animation Track", playerMaster.GetPlayerAnimator(), openCutDirector);
+            Tools.ChangeBindingReference("Animation Track", playerMaster.GetPlayerAnimator(), endCutDirector);
             // Coloca o player como Follow da camra
             Tools.SetFollowVirtualCam(virtualCamera, playerObject.transform);
         }
