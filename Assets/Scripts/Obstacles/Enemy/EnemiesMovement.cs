@@ -61,6 +61,7 @@ namespace RiverAttack
 
             if ((other.GetComponentInParent<WallsMaster>() && ignoreWalls) ||
                 (other.GetComponentInParent<EnemiesMaster>() && ignoreEnemies) ||
+                other.GetComponentInParent<CollectiblesMaster>() ||
                 other.GetComponentInParent<PlayerMaster>()) return;
 
             m_InCollision = true;
