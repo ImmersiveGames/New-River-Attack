@@ -75,6 +75,10 @@ namespace Shopping
             btnBuy.gameObject.SetActive(true);
             Debug.Log($"Available to buy: {productInStock.shopProduct.name} , {productInStock.AvailableForBuy(player)}");
             btnBuy.interactable = productInStock.AvailableForBuy(player);
+            if (btnBuy.interactable)
+            {
+                btnBuy.GetComponent<Image>().color = ShopMaster.instance.buyerColor;
+            }
             if (productInStock.PlayerAlreadyBuy(player) && !productInStock.shopProduct.isConsumable)
                 btnBuy.gameObject.SetActive(false);
         }

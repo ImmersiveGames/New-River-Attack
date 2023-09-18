@@ -29,6 +29,7 @@ namespace Shopping
         [SerializeField]
         float spaceBetweenPanels, maxPosition;
         public Color selectedColor;
+        public Color buyerColor;
         public Color normalColor;
 
         int m_LastSelectedSkin;
@@ -100,6 +101,8 @@ namespace Shopping
 
                 if (item.getSelectButton.interactable == false)
                     item.getSelectButton.GetComponent<Image>().color = selectedColor;
+                if (item.getBuyButton.interactable)
+                    item.getBuyButton.GetComponent<Image>().color = buyerColor;
             }
         }
         void BuyThisItem(PlayerSettings player, ShopProductStock product)
@@ -146,10 +149,6 @@ namespace Shopping
             Debug.Log("Comprar o item");
             var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
 
-            /*if (item.productInStock.PlayerAlreadyBuy(m_ActivePlayer))
-                return;
-            if (!item.productInStock.HaveMoneyToBuy(m_ActivePlayer)) 
-                return;*/
             BuyThisItem(m_ActivePlayer, item.productInStock);
         }
         void SelectButton(InputAction.CallbackContext context)
