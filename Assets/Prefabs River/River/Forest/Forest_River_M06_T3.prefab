@@ -94,8 +94,6 @@ GameObject:
   - component: {fileID: 4582790616252682}
   - component: {fileID: 33075116864041064}
   - component: {fileID: 23689253131815776}
-  - component: {fileID: 65871062701657340}
-  - component: {fileID: 65265100131949208}
   m_Layer: 8
   m_Name: Forest_Bank_Curve (1)
   m_TagString: Wall
@@ -168,48 +166,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65871062701657340
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1005088459879136}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.634324, y: 6, z: 10}
-  m_Center: {x: -3.182838, y: 2, z: 0}
---- !u!65 &65265100131949208
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1005088459879136}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 4.2724123}
-  m_Center: {x: 0, y: 2, z: 2.872291}
 --- !u!1 &1005282895330796
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,8 +354,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
+  m_Size: {x: 6, y: 6, z: 18}
+  m_Center: {x: 0, y: 3, z: -7}
 --- !u!1 &1021706701082502
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,7 +534,6 @@ GameObject:
   - component: {fileID: 4040712047560768}
   - component: {fileID: 33958184686152018}
   - component: {fileID: 23800277223987506}
-  - component: {fileID: 65221082366299644}
   m_Layer: 8
   m_Name: Forest_Isle_M
   m_TagString: Wall
@@ -652,27 +607,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65221082366299644
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1025365814635270}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1027278180350004
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,6 +740,7 @@ GameObject:
   - component: {fileID: 33793790104509776}
   - component: {fileID: 23018162915645980}
   - component: {fileID: 65370996386683868}
+  - component: {fileID: 8793697928371548776}
   m_Layer: 8
   m_Name: Forest_Isle_SF
   m_TagString: Wall
@@ -897,8 +832,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
+  m_Size: {x: 5, y: 6, z: 15}
+  m_Center: {x: 0, y: 3, z: -4}
+--- !u!65 &8793697928371548776
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035449017328960}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 0.2, z: 18}
+  m_Center: {x: 0, y: 0.2, z: -3.77}
 --- !u!1 &1040803632029052
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,7 +1033,6 @@ GameObject:
   - component: {fileID: 4541960283456090}
   - component: {fileID: 33674502364425734}
   - component: {fileID: 23279401886272366}
-  - component: {fileID: 65224895285977832}
   m_Layer: 8
   m_Name: Forest_Bank (3)
   m_TagString: Wall
@@ -1151,27 +1106,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65224895285977832
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1051191215258974}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1059564009267960
 GameObject:
   m_ObjectHideFlags: 0
@@ -1561,8 +1495,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
+  m_Size: {x: 6, y: 6, z: 18}
+  m_Center: {x: 0, y: 3, z: -7}
 --- !u!1 &1077228367025588
 GameObject:
   m_ObjectHideFlags: 0
@@ -1657,7 +1591,6 @@ GameObject:
   - component: {fileID: 4768570914716468}
   - component: {fileID: 33641733655529812}
   - component: {fileID: 23261914945867760}
-  - component: {fileID: 65030974930731436}
   m_Layer: 8
   m_Name: Forest_Bank (2)
   m_TagString: Wall
@@ -1731,27 +1664,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65030974930731436
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1078993432986040}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1087229772419470
 GameObject:
   m_ObjectHideFlags: 0
@@ -2098,7 +2010,6 @@ GameObject:
   - component: {fileID: 4091367117262638}
   - component: {fileID: 33744142630388322}
   - component: {fileID: 23208983874425994}
-  - component: {fileID: 65138611612394494}
   m_Layer: 8
   m_Name: Forest_Bank (2)
   m_TagString: Wall
@@ -2172,27 +2083,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65138611612394494
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1096524981323654}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1104636016042886
 GameObject:
   m_ObjectHideFlags: 0
@@ -2825,7 +2715,6 @@ GameObject:
   - component: {fileID: 4375087985332118}
   - component: {fileID: 33247623483210402}
   - component: {fileID: 23768028155717548}
-  - component: {fileID: 65655706177082160}
   m_Layer: 8
   m_Name: Forest_Bank (3)
   m_TagString: Wall
@@ -2899,27 +2788,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65655706177082160
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1130575724564796}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1138628699299362
 GameObject:
   m_ObjectHideFlags: 0
@@ -3265,7 +3133,6 @@ GameObject:
   - component: {fileID: 4168456674751258}
   - component: {fileID: 33349496324139322}
   - component: {fileID: 23292273751283736}
-  - component: {fileID: 65277708178352296}
   m_Layer: 8
   m_Name: Forest_Bank (2)
   m_TagString: Wall
@@ -3339,27 +3206,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65277708178352296
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1147051228269320}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1148672791328658
 GameObject:
   m_ObjectHideFlags: 0
@@ -3371,7 +3217,6 @@ GameObject:
   - component: {fileID: 4565051679211348}
   - component: {fileID: 33971751012741476}
   - component: {fileID: 23116114541815498}
-  - component: {fileID: 65071836990562106}
   m_Layer: 8
   m_Name: Forest_Isle_M
   m_TagString: Wall
@@ -3444,27 +3289,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65071836990562106
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1148672791328658}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1151937478886494
 GameObject:
   m_ObjectHideFlags: 0
@@ -4059,7 +3883,6 @@ GameObject:
   - component: {fileID: 4256678360123416}
   - component: {fileID: 33018800466566932}
   - component: {fileID: 23395698069780408}
-  - component: {fileID: 65025342658254106}
   m_Layer: 8
   m_Name: Forest_Isle_M
   m_TagString: Wall
@@ -4133,27 +3956,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65025342658254106
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186562460551390}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1193899247238900
 GameObject:
   m_ObjectHideFlags: 0
@@ -4165,7 +3967,6 @@ GameObject:
   - component: {fileID: 4627951003400318}
   - component: {fileID: 33055819196598900}
   - component: {fileID: 23442331651215436}
-  - component: {fileID: 65107089517420040}
   m_Layer: 8
   m_Name: Forest_Bank (2)
   m_TagString: Wall
@@ -4239,27 +4040,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65107089517420040
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1193899247238900}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1194367610085466
 GameObject:
   m_ObjectHideFlags: 0
@@ -4439,7 +4219,6 @@ GameObject:
   - component: {fileID: 4810821627630308}
   - component: {fileID: 33750570685557108}
   - component: {fileID: 23618561095854940}
-  - component: {fileID: 65705259742304926}
   m_Layer: 8
   m_Name: Forest_Bank (2)
   m_TagString: Wall
@@ -4513,27 +4292,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65705259742304926
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1200570708308144}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1204938226287526
 GameObject:
   m_ObjectHideFlags: 0
@@ -4794,7 +4552,6 @@ GameObject:
   - component: {fileID: 4451307577628486}
   - component: {fileID: 33656911906312014}
   - component: {fileID: 23348288258393962}
-  - component: {fileID: 65489843282404834}
   m_Layer: 8
   m_Name: Forest_Bank (3)
   m_TagString: Wall
@@ -4868,27 +4625,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65489843282404834
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1214405967555486}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1217926405638210
 GameObject:
   m_ObjectHideFlags: 0
@@ -4900,7 +4636,8 @@ GameObject:
   - component: {fileID: 4675377337409068}
   - component: {fileID: 33375912896275234}
   - component: {fileID: 23159417202072620}
-  - component: {fileID: 65306566884518366}
+  - component: {fileID: 2220838910545749685}
+  - component: {fileID: 8018640466607614035}
   m_Layer: 8
   m_Name: Forest_Bank (3)
   m_TagString: Wall
@@ -4974,7 +4711,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65306566884518366
+--- !u!65 &2220838910545749685
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4993,8 +4730,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
+  m_Size: {x: 6.8999934, y: 6, z: 130}
+  m_Center: {x: -5, y: 3, z: -60}
+--- !u!65 &8018640466607614035
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217926405638210}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.8999934, y: 0.2, z: 130}
+  m_Center: {x: -1.5499947, y: 0.2, z: -60}
 --- !u!1 &1218914569787874
 GameObject:
   m_ObjectHideFlags: 0
@@ -5723,8 +5481,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
+  m_Size: {x: 6, y: 6, z: 20}
+  m_Center: {x: 0, y: 3, z: -8}
 --- !u!1 &1249363917860550
 GameObject:
   m_ObjectHideFlags: 0
@@ -6525,7 +6283,6 @@ GameObject:
   - component: {fileID: 4861642560543272}
   - component: {fileID: 33456561812588364}
   - component: {fileID: 23701809071487596}
-  - component: {fileID: 65221985988366434}
   m_Layer: 8
   m_Name: Forest_Bank (2)
   m_TagString: Wall
@@ -6599,27 +6356,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65221985988366434
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1270860098240772}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1273743300288580
 GameObject:
   m_ObjectHideFlags: 0
@@ -6963,7 +6699,6 @@ GameObject:
   - component: {fileID: 4312618127227944}
   - component: {fileID: 33902765479987810}
   - component: {fileID: 23529659022905962}
-  - component: {fileID: 65247631236461864}
   m_Layer: 8
   m_Name: Forest_Isle_SF
   m_TagString: Wall
@@ -7036,27 +6771,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65247631236461864
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1288178797116660}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
 --- !u!1 &1288525939485796
 GameObject:
   m_ObjectHideFlags: 0
@@ -7487,6 +7201,7 @@ GameObject:
   - component: {fileID: 33780004809321628}
   - component: {fileID: 23216958041056724}
   - component: {fileID: 65674779508038494}
+  - component: {fileID: 7456238385941962870}
   m_Layer: 8
   m_Name: Forest_Isle_SF
   m_TagString: Wall
@@ -7578,8 +7293,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
+  m_Size: {x: 5, y: 6, z: 14}
+  m_Center: {x: 0, y: 3, z: -5}
+--- !u!65 &7456238385941962870
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311573574182658}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 0.2, z: 18}
+  m_Center: {x: 0, y: 0.2, z: -4}
 --- !u!1 &1312830683678078
 GameObject:
   m_ObjectHideFlags: 0
@@ -7876,8 +7612,6 @@ GameObject:
   - component: {fileID: 4842876720363792}
   - component: {fileID: 33405473983215788}
   - component: {fileID: 23436814075475978}
-  - component: {fileID: 65809553288099280}
-  - component: {fileID: 65783543287541228}
   m_Layer: 8
   m_Name: Forest_Bank_Curve (1)
   m_TagString: Wall
@@ -7950,48 +7684,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65809553288099280
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330347076711062}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.634324, y: 6, z: 10}
-  m_Center: {x: -3.182838, y: 2, z: 0}
---- !u!65 &65783543287541228
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330347076711062}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 4.2724123}
-  m_Center: {x: 0, y: 2, z: 2.872291}
 --- !u!1 &1330411674477552
 GameObject:
   m_ObjectHideFlags: 0
@@ -8171,7 +7863,6 @@ GameObject:
   - component: {fileID: 4279675332625184}
   - component: {fileID: 33374031731314428}
   - component: {fileID: 23646349274792600}
-  - component: {fileID: 65688295706640672}
   m_Layer: 8
   m_Name: Forest_Bank (2)
   m_TagString: Wall
@@ -8245,27 +7936,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65688295706640672
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1347139488244606}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1348180729120650
 GameObject:
   m_ObjectHideFlags: 0
@@ -8527,7 +8197,6 @@ GameObject:
   - component: {fileID: 4383744765263382}
   - component: {fileID: 33389953898078486}
   - component: {fileID: 23537839641818750}
-  - component: {fileID: 65452249599348200}
   m_Layer: 8
   m_Name: Forest_Bank (2)
   m_TagString: Wall
@@ -8601,27 +8270,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65452249599348200
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355916156430784}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1356252462495930
 GameObject:
   m_ObjectHideFlags: 0
@@ -8716,7 +8364,6 @@ GameObject:
   - component: {fileID: 4708221317694224}
   - component: {fileID: 33078281512113700}
   - component: {fileID: 23976434169412654}
-  - component: {fileID: 65126964396086268}
   m_Layer: 8
   m_Name: Forest_Bank (3)
   m_TagString: Wall
@@ -8790,27 +8437,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65126964396086268
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1357134082017646}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1357477886589010
 GameObject:
   m_ObjectHideFlags: 0
@@ -8998,8 +8624,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
+  m_Size: {x: 5, y: 6, z: 18}
+  m_Center: {x: 0, y: 3, z: -6}
 --- !u!1 &1359866714120016
 GameObject:
   m_ObjectHideFlags: 0
@@ -9012,6 +8638,7 @@ GameObject:
   - component: {fileID: 33807407597116682}
   - component: {fileID: 23125031931198440}
   - component: {fileID: 65481353427101760}
+  - component: {fileID: 1194192622096779853}
   m_Layer: 8
   m_Name: Forest_Bank (2)
   m_TagString: Wall
@@ -9104,8 +8731,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
+  m_Size: {x: 4, y: 6, z: 30}
+  m_Center: {x: -3, y: 3, z: 10}
+--- !u!65 &1194192622096779853
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359866714120016}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.8999934, y: 0.2, z: 30}
+  m_Center: {x: -1.5499947, y: 0.2, z: 10}
 --- !u!1 &1373882053362412
 GameObject:
   m_ObjectHideFlags: 0
@@ -9748,8 +9396,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
+  m_Size: {x: 7, y: 6, z: 20}
+  m_Center: {x: 0, y: 3, z: -5}
 --- !u!1 &1409794411990658
 GameObject:
   m_ObjectHideFlags: 0
@@ -9845,7 +9493,6 @@ GameObject:
   - component: {fileID: 4781701505794012}
   - component: {fileID: 33283715732484990}
   - component: {fileID: 23251183870104784}
-  - component: {fileID: 65520977809926822}
   m_Layer: 8
   m_Name: Forest_Isle_SF
   m_TagString: Wall
@@ -9918,27 +9565,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65520977809926822
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1415572468883122}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
 --- !u!1 &1415866051371494
 GameObject:
   m_ObjectHideFlags: 0
@@ -9950,7 +9576,6 @@ GameObject:
   - component: {fileID: 4262861487647918}
   - component: {fileID: 33100766522043938}
   - component: {fileID: 23445143106030916}
-  - component: {fileID: 65383839824251856}
   m_Layer: 8
   m_Name: Forest_Bank (2)
   m_TagString: Wall
@@ -10024,27 +9649,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65383839824251856
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1415866051371494}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1418982746026482
 GameObject:
   m_ObjectHideFlags: 0
@@ -10429,7 +10033,6 @@ GameObject:
   - component: {fileID: 4597867245828922}
   - component: {fileID: 33481837212527012}
   - component: {fileID: 23659340738227418}
-  - component: {fileID: 65375425059647202}
   m_Layer: 8
   m_Name: Forest_Isle_M
   m_TagString: Wall
@@ -10502,27 +10105,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65375425059647202
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1438079328975174}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1439424884800248
 GameObject:
   m_ObjectHideFlags: 0
@@ -10626,8 +10208,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
+  m_Size: {x: 5, y: 6, z: 20}
+  m_Center: {x: 0, y: 3, z: -7}
 --- !u!1 &1445931505619376
 GameObject:
   m_ObjectHideFlags: 0
@@ -11057,7 +10639,6 @@ GameObject:
   - component: {fileID: 4019303944345004}
   - component: {fileID: 33945402139311698}
   - component: {fileID: 23324646888460922}
-  - component: {fileID: 65707736459916466}
   m_Layer: 8
   m_Name: Forest_Bank (3)
   m_TagString: Wall
@@ -11131,27 +10712,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65707736459916466
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1469569886417040}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1475460212059652
 GameObject:
   m_ObjectHideFlags: 0
@@ -11368,7 +10928,6 @@ GameObject:
   - component: {fileID: 4581397402297324}
   - component: {fileID: 33296665269700786}
   - component: {fileID: 23735847700131794}
-  - component: {fileID: 65017973762023328}
   m_Layer: 8
   m_Name: Forest_Isle_M
   m_TagString: Wall
@@ -11442,27 +11001,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65017973762023328
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1499517453060356}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1501716242067096
 GameObject:
   m_ObjectHideFlags: 0
@@ -11557,7 +11095,6 @@ GameObject:
   - component: {fileID: 4199179682821330}
   - component: {fileID: 33478095363666486}
   - component: {fileID: 23312471889751412}
-  - component: {fileID: 65556258291365338}
   m_Layer: 8
   m_Name: Forest_Bank (3)
   m_TagString: Wall
@@ -11631,27 +11168,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65556258291365338
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1504990314864070}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1508098459647424
 GameObject:
   m_ObjectHideFlags: 0
@@ -12174,8 +11690,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
+  m_Size: {x: 6, y: 6, z: 20}
+  m_Center: {x: 0, y: 3, z: -8}
 --- !u!1 &1542747888898434
 GameObject:
   m_ObjectHideFlags: 0
@@ -12520,7 +12036,6 @@ GameObject:
   - component: {fileID: 4452001596450648}
   - component: {fileID: 33202165125645750}
   - component: {fileID: 23469460276933242}
-  - component: {fileID: 65006542850582152}
   m_Layer: 8
   m_Name: Forest_Bank (3)
   m_TagString: Wall
@@ -12594,27 +12109,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65006542850582152
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1561361989397136}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1567728128546434
 GameObject:
   m_ObjectHideFlags: 0
@@ -12970,8 +12464,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
+  m_Size: {x: 4, y: 6, z: 20}
+  m_Center: {x: -3, y: 3, z: 5}
 --- !u!1 &1576511077700908
 GameObject:
   m_ObjectHideFlags: 0
@@ -12983,7 +12477,6 @@ GameObject:
   - component: {fileID: 4822524951326326}
   - component: {fileID: 33500794877325368}
   - component: {fileID: 23898248479407004}
-  - component: {fileID: 65827975236356030}
   m_Layer: 8
   m_Name: Forest_Bank (3)
   m_TagString: Wall
@@ -13057,27 +12550,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65827975236356030
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1576511077700908}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1579278114953330
 GameObject:
   m_ObjectHideFlags: 0
@@ -13173,7 +12645,6 @@ GameObject:
   - component: {fileID: 4815496742159630}
   - component: {fileID: 33791578636047490}
   - component: {fileID: 23111546642401126}
-  - component: {fileID: 65993606673421080}
   m_Layer: 8
   m_Name: Forest_Bank (2)
   m_TagString: Wall
@@ -13247,27 +12718,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65993606673421080
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1592454540860850}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1605278467191810
 GameObject:
   m_ObjectHideFlags: 0
@@ -13448,6 +12898,7 @@ GameObject:
   - component: {fileID: 33813496350469220}
   - component: {fileID: 23104919243485458}
   - component: {fileID: 65723816796556186}
+  - component: {fileID: 3610897782593210448}
   m_Layer: 8
   m_Name: Forest_Isle_SF
   m_TagString: Wall
@@ -13539,8 +12990,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
+  m_Size: {x: 5, y: 6, z: 22}
+  m_Center: {x: 0, y: 3, z: -9}
+--- !u!65 &3610897782593210448
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608998456262102}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10.000007, y: 0.2, z: 27}
+  m_Center: {x: 0.000005722046, y: 0.2, z: -8.74}
 --- !u!1 &1612093128346198
 GameObject:
   m_ObjectHideFlags: 0
@@ -13718,7 +13190,6 @@ GameObject:
   - component: {fileID: 4366054477861592}
   - component: {fileID: 33323422530423670}
   - component: {fileID: 23547774956573480}
-  - component: {fileID: 65096742842525468}
   m_Layer: 8
   m_Name: Forest_Isle_SF
   m_TagString: Wall
@@ -13791,27 +13262,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65096742842525468
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1615588772103644}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
 --- !u!1 &1632044874428718
 GameObject:
   m_ObjectHideFlags: 0
@@ -14408,7 +13858,6 @@ GameObject:
   - component: {fileID: 4139580355035680}
   - component: {fileID: 33807127072532400}
   - component: {fileID: 23636712256668390}
-  - component: {fileID: 65690943641540124}
   m_Layer: 8
   m_Name: Forest_Bank (3)
   m_TagString: Wall
@@ -14482,27 +13931,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65690943641540124
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1660606583673834}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1660947348572210
 GameObject:
   m_ObjectHideFlags: 0
@@ -14514,7 +13942,6 @@ GameObject:
   - component: {fileID: 4281597586051330}
   - component: {fileID: 33111439708785820}
   - component: {fileID: 23969197625357464}
-  - component: {fileID: 65531880998132032}
   m_Layer: 8
   m_Name: Forest_Bank (2)
   m_TagString: Wall
@@ -14588,27 +14015,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65531880998132032
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1660947348572210}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1661109799126958
 GameObject:
   m_ObjectHideFlags: 0
@@ -14741,7 +14147,8 @@ GameObject:
   - component: {fileID: 4896462773145354}
   - component: {fileID: 33770725032965708}
   - component: {fileID: 23429597738778248}
-  - component: {fileID: 65132395963889384}
+  - component: {fileID: 8523036978219881385}
+  - component: {fileID: 8671219769082035590}
   m_Layer: 8
   m_Name: Forest_Bank (2)
   m_TagString: Wall
@@ -14815,7 +14222,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65132395963889384
+--- !u!65 &8523036978219881385
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14834,8 +14241,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
+  m_Size: {x: 6.8999934, y: 6, z: 130}
+  m_Center: {x: -5, y: 3, z: 60}
+--- !u!65 &8671219769082035590
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673127518926636}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.8999934, y: 0.2, z: 130}
+  m_Center: {x: -1.5499947, y: 0.2, z: 60}
 --- !u!1 &1675056228448894
 GameObject:
   m_ObjectHideFlags: 0
@@ -15354,8 +14782,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
+  m_Size: {x: 5, y: 6, z: 26}
+  m_Center: {x: 0, y: 3, z: -10}
 --- !u!1 &1701821061769328
 GameObject:
   m_ObjectHideFlags: 0
@@ -15618,7 +15046,6 @@ GameObject:
   - component: {fileID: 4970570562154636}
   - component: {fileID: 33236016318777708}
   - component: {fileID: 23710250746770436}
-  - component: {fileID: 65084619529937282}
   m_Layer: 8
   m_Name: Forest_Bank (2)
   m_TagString: Wall
@@ -15692,27 +15119,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65084619529937282
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1710358968369852}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1714740901844274
 GameObject:
   m_ObjectHideFlags: 0
@@ -15808,10 +15214,7 @@ GameObject:
   - component: {fileID: 4300098767479294}
   - component: {fileID: 33725545349613300}
   - component: {fileID: 23157373218653106}
-  - component: {fileID: 65751360566080268}
-  - component: {fileID: 65118060285526510}
   - component: {fileID: 65658634624688922}
-  - component: {fileID: 65227536862693958}
   m_Layer: 8
   m_Name: Forest_Bank_Curve
   m_TagString: Wall
@@ -15885,48 +15288,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65751360566080268
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715158811783460}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.634324, y: 6, z: 10}
-  m_Center: {x: -3.182838, y: 3, z: 0}
---- !u!65 &65118060285526510
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715158811783460}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 4.2724123}
-  m_Center: {x: 0, y: 3, z: 2.872291}
 --- !u!65 &65658634624688922
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15946,28 +15307,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 0.1, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &65227536862693958
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1715158811783460}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 0.1, z: 10}
+  m_Size: {x: 10, y: 0.2, z: 10}
   m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1 &1716073867019930
 GameObject:
@@ -15980,7 +15320,6 @@ GameObject:
   - component: {fileID: 4743294923101402}
   - component: {fileID: 33088692274246402}
   - component: {fileID: 23434740600898052}
-  - component: {fileID: 65460489444631966}
   m_Layer: 8
   m_Name: Forest_Isle_SF
   m_TagString: Wall
@@ -16053,27 +15392,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65460489444631966
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1716073867019930}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
 --- !u!1 &1723725634689140
 GameObject:
   m_ObjectHideFlags: 0
@@ -16168,8 +15486,6 @@ GameObject:
   - component: {fileID: 4255088879028760}
   - component: {fileID: 33316188212334430}
   - component: {fileID: 23090866105485994}
-  - component: {fileID: 65196229331139740}
-  - component: {fileID: 65520201983504816}
   m_Layer: 8
   m_Name: Forest_Bank_Curve
   m_TagString: Wall
@@ -16242,48 +15558,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65196229331139740
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1725716363743640}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.634324, y: 6, z: 10}
-  m_Center: {x: -3.182838, y: 2, z: 0}
---- !u!65 &65520201983504816
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1725716363743640}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 4.2724123}
-  m_Center: {x: 0, y: 2, z: 2.872291}
 --- !u!1 &1732770655587740
 GameObject:
   m_ObjectHideFlags: 0
@@ -16461,7 +15735,6 @@ GameObject:
   - component: {fileID: 4084371262143406}
   - component: {fileID: 33289790089827570}
   - component: {fileID: 23608826259960784}
-  - component: {fileID: 65597717351143696}
   m_Layer: 8
   m_Name: Forest_Isle_SF (1)
   m_TagString: Wall
@@ -16534,27 +15807,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65597717351143696
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733119591616384}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
 --- !u!1 &1737670152881240
 GameObject:
   m_ObjectHideFlags: 0
@@ -16566,7 +15818,6 @@ GameObject:
   - component: {fileID: 4763601926079802}
   - component: {fileID: 33203628554699508}
   - component: {fileID: 23788853613249794}
-  - component: {fileID: 65418838323208976}
   m_Layer: 8
   m_Name: Forest_Bank (3)
   m_TagString: Wall
@@ -16640,27 +15891,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65418838323208976
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1737670152881240}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1740192690487576
 GameObject:
   m_ObjectHideFlags: 0
@@ -16673,6 +15903,7 @@ GameObject:
   - component: {fileID: 33855235596840120}
   - component: {fileID: 23934848467418980}
   - component: {fileID: 65339124325091938}
+  - component: {fileID: 6250383851914281633}
   m_Layer: 8
   m_Name: Forest_Bank (3)
   m_TagString: Wall
@@ -16765,8 +15996,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
+  m_Size: {x: 4, y: 6, z: 30}
+  m_Center: {x: -3, y: 3, z: -10}
+--- !u!65 &6250383851914281633
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740192690487576}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.8999934, y: 0.2, z: 30}
+  m_Center: {x: -1.5499947, y: 0.2, z: -10}
 --- !u!1 &1756379833929086
 GameObject:
   m_ObjectHideFlags: 0
@@ -17289,8 +16541,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
+  m_Size: {x: 7, y: 6, z: 20}
+  m_Center: {x: 0, y: 3, z: 5}
 --- !u!1 &1773574939091718
 GameObject:
   m_ObjectHideFlags: 0
@@ -17506,6 +16758,7 @@ GameObject:
   - component: {fileID: 33199905936531440}
   - component: {fileID: 23729456753118586}
   - component: {fileID: 65991266983015680}
+  - component: {fileID: 2209621584178942789}
   m_Layer: 8
   m_Name: Forest_Isle_SF
   m_TagString: Wall
@@ -17597,8 +16850,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
+  m_Size: {x: 5, y: 6, z: 14}
+  m_Center: {x: 0, y: 3, z: -5}
+--- !u!65 &2209621584178942789
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782874287025648}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 0.2, z: 18}
+  m_Center: {x: 0, y: 0.2, z: -4}
 --- !u!1 &1784979385402064
 GameObject:
   m_ObjectHideFlags: 0
@@ -17814,7 +17088,6 @@ GameObject:
   - component: {fileID: 4970688688453830}
   - component: {fileID: 33774661420350666}
   - component: {fileID: 23306694423848936}
-  - component: {fileID: 65582640848232014}
   m_Layer: 8
   m_Name: Forest_Bank (3)
   m_TagString: Wall
@@ -17888,27 +17161,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65582640848232014
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1789803849415576}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1790193586276456
 GameObject:
   m_ObjectHideFlags: 0
@@ -18338,7 +17590,6 @@ GameObject:
   - component: {fileID: 4583239133402240}
   - component: {fileID: 33188782631450696}
   - component: {fileID: 23966458189773594}
-  - component: {fileID: 65134036412065412}
   m_Layer: 8
   m_Name: Forest_Isle_M (1)
   m_TagString: Wall
@@ -18411,27 +17662,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65134036412065412
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1802405118958686}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1803519548373240
 GameObject:
   m_ObjectHideFlags: 0
@@ -19101,7 +18331,6 @@ GameObject:
   - component: {fileID: 4703622103110316}
   - component: {fileID: 33246560930209100}
   - component: {fileID: 23761892517239090}
-  - component: {fileID: 65061078457079432}
   m_Layer: 8
   m_Name: Forest_Isle_M
   m_TagString: Wall
@@ -19175,27 +18404,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65061078457079432
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1830559683243050}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1835902939948404
 GameObject:
   m_ObjectHideFlags: 0
@@ -19244,7 +18452,6 @@ GameObject:
   - component: {fileID: 4659009963457258}
   - component: {fileID: 33237007491059460}
   - component: {fileID: 23658997033891790}
-  - component: {fileID: 65163686361182392}
   m_Layer: 8
   m_Name: Forest_Bank (3)
   m_TagString: Wall
@@ -19318,27 +18525,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65163686361182392
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840706391767250}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1843789008025704
 GameObject:
   m_ObjectHideFlags: 0
@@ -19934,7 +19120,6 @@ GameObject:
   - component: {fileID: 4572079479957146}
   - component: {fileID: 33267154447462416}
   - component: {fileID: 23997660885804118}
-  - component: {fileID: 65787437137884160}
   m_Layer: 8
   m_Name: Forest_Bank (2)
   m_TagString: Wall
@@ -20008,27 +19193,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65787437137884160
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1863539020605294}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1865413643872996
 GameObject:
   m_ObjectHideFlags: 0
@@ -20040,7 +19204,6 @@ GameObject:
   - component: {fileID: 4425682045288550}
   - component: {fileID: 33478502211418360}
   - component: {fileID: 23984512879766428}
-  - component: {fileID: 65466392199141494}
   m_Layer: 8
   m_Name: Forest_Isle_SF
   m_TagString: Wall
@@ -20113,27 +19276,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65466392199141494
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1865413643872996}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
 --- !u!1 &1873527142487816
 GameObject:
   m_ObjectHideFlags: 0
@@ -20229,7 +19371,6 @@ GameObject:
   - component: {fileID: 4467611699380786}
   - component: {fileID: 33715421920298332}
   - component: {fileID: 23619520172289224}
-  - component: {fileID: 65424373293823732}
   m_Layer: 8
   m_Name: Forest_Bank (2)
   m_TagString: Wall
@@ -20303,27 +19444,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65424373293823732
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1876456910581018}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1878374735712782
 GameObject:
   m_ObjectHideFlags: 0
@@ -20454,7 +19574,6 @@ GameObject:
   - component: {fileID: 4748248723583112}
   - component: {fileID: 33802537206403752}
   - component: {fileID: 23794501967017348}
-  - component: {fileID: 65645489827877866}
   m_Layer: 8
   m_Name: Forest_Bank (2)
   m_TagString: Wall
@@ -20528,27 +19647,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65645489827877866
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886311024494290}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1887326798678014
 GameObject:
   m_ObjectHideFlags: 0
@@ -20644,7 +19742,6 @@ GameObject:
   - component: {fileID: 4254249785496120}
   - component: {fileID: 33645660143097044}
   - component: {fileID: 23950967618801982}
-  - component: {fileID: 65473310641355282}
   m_Layer: 8
   m_Name: Forest_Isle_M
   m_TagString: Wall
@@ -20718,27 +19815,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65473310641355282
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1887745817132966}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1888539501518354
 GameObject:
   m_ObjectHideFlags: 0
@@ -20833,7 +19909,6 @@ GameObject:
   - component: {fileID: 4229111367308840}
   - component: {fileID: 33788725870197298}
   - component: {fileID: 23577939138481002}
-  - component: {fileID: 65311527030465478}
   m_Layer: 8
   m_Name: Forest_Bank (3)
   m_TagString: Wall
@@ -20907,27 +19982,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65311527030465478
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1895048199632946}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1898114754447988
 GameObject:
   m_ObjectHideFlags: 0
@@ -20939,7 +19993,6 @@ GameObject:
   - component: {fileID: 4270619463355294}
   - component: {fileID: 33993042725850850}
   - component: {fileID: 23877219772951210}
-  - component: {fileID: 65228455583469268}
   m_Layer: 8
   m_Name: Forest_Isle_M
   m_TagString: Wall
@@ -21013,27 +20066,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65228455583469268
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1898114754447988}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1905042458497388
 GameObject:
   m_ObjectHideFlags: 0
@@ -21128,7 +20160,6 @@ GameObject:
   - component: {fileID: 4626243345582664}
   - component: {fileID: 33011702155794160}
   - component: {fileID: 23003518407384430}
-  - component: {fileID: 65998866520129870}
   m_Layer: 8
   m_Name: Forest_Bank (3)
   m_TagString: Wall
@@ -21202,27 +20233,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65998866520129870
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1907192118776192}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
 --- !u!1 &1912175581656334
 GameObject:
   m_ObjectHideFlags: 0
@@ -21318,8 +20328,6 @@ GameObject:
   - component: {fileID: 4259957397011460}
   - component: {fileID: 33226838940940392}
   - component: {fileID: 23641075509443408}
-  - component: {fileID: 65254723256982836}
-  - component: {fileID: 65684348809796356}
   m_Layer: 8
   m_Name: Forest_Bank_Curve
   m_TagString: Wall
@@ -21392,48 +20400,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65254723256982836
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912383204480912}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.634324, y: 6, z: 10}
-  m_Center: {x: -3.182838, y: 2, z: 0}
---- !u!65 &65684348809796356
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912383204480912}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 4.2724123}
-  m_Center: {x: 0, y: 2, z: 2.872291}
 --- !u!1 &1916433852523866
 GameObject:
   m_ObjectHideFlags: 0
@@ -22140,6 +21106,7 @@ GameObject:
   - component: {fileID: 33951616922387774}
   - component: {fileID: 23243394902748026}
   - component: {fileID: 65750381268511918}
+  - component: {fileID: 8957095760943163582}
   m_Layer: 8
   m_Name: Forest_Isle_SF
   m_TagString: Wall
@@ -22231,8 +21198,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
+  m_Size: {x: 5, y: 6, z: 44}
+  m_Center: {x: 0, y: 3, z: -18.5}
+--- !u!65 &8957095760943163582
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944422960779002}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10.000007, y: 0.2, z: 50}
+  m_Center: {x: 0.000005722046, y: 0.2, z: -20}
 --- !u!1 &1945743139201726
 GameObject:
   m_ObjectHideFlags: 0
@@ -22488,7 +21476,7 @@ Transform:
   - {fileID: 4848934854915548}
   - {fileID: 4445232851631534}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2927808531800201570
 MonoBehaviour:
@@ -22513,7 +21501,6 @@ GameObject:
   - component: {fileID: 4361440408197746}
   - component: {fileID: 33693103424704480}
   - component: {fileID: 23166120138018020}
-  - component: {fileID: 65283028318523102}
   m_Layer: 8
   m_Name: Forest_Isle_SF (2)
   m_TagString: Wall
@@ -22529,7 +21516,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1960955298785064}
   m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: -31.22}
+  m_LocalPosition: {x: 5, y: -0, z: -31.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22586,27 +21573,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65283028318523102
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1960955298785064}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
 --- !u!1 &1961384538387558
 GameObject:
   m_ObjectHideFlags: 0
@@ -23035,6 +22001,7 @@ GameObject:
   - component: {fileID: 33454362111166066}
   - component: {fileID: 23366396999919756}
   - component: {fileID: 65435185106343028}
+  - component: {fileID: 391292174528526944}
   m_Layer: 8
   m_Name: Forest_Bank (2)
   m_TagString: Wall
@@ -23127,8 +22094,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 6, z: 10}
-  m_Center: {x: -3, y: 3, z: 0}
+  m_Size: {x: 4, y: 6, z: 20}
+  m_Center: {x: -3, y: 3, z: 5}
+--- !u!65 &391292174528526944
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981481715167660}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.8999934, y: 0.2, z: 20}
+  m_Center: {x: -1.5499947, y: 0.2, z: 5}
 --- !u!1 &1988540630948738
 GameObject:
   m_ObjectHideFlags: 0
@@ -23223,7 +22211,6 @@ GameObject:
   - component: {fileID: 4965322439387632}
   - component: {fileID: 33129790341317960}
   - component: {fileID: 23086194032773918}
-  - component: {fileID: 65328107426721166}
   m_Layer: 8
   m_Name: Forest_Isle_SF
   m_TagString: Wall
@@ -23296,27 +22283,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65328107426721166
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1989253108409716}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7, y: 6, z: 8}
-  m_Center: {x: 0, y: 3, z: -1}
 --- !u!1 &1994671666539122
 GameObject:
   m_ObjectHideFlags: 0
