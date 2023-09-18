@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
@@ -29,6 +30,8 @@ namespace RiverAttack
 
         internal PlayersInputActions playersInputActions;
         internal bool inEffectArea;
+        [SerializeField]
+        internal bool inPowerUp;
         internal int nextScoreForLive;
 
         Animator m_Animator;
@@ -58,6 +61,12 @@ namespace RiverAttack
             m_GamePlaySettings = m_GamePlayManager.gamePlaySettings;
             playersInputActions = new PlayersInputActions();
             playersInputActions.Enable();
+        }
+
+        void OnEnable()
+        {
+            m_GamePlayManager.EventStartRapidFire += () => inPowerUp = true;
+            m_GamePlayManager.EventEndRapidFire += () => inPowerUp = false;
         }
 
         void Start()

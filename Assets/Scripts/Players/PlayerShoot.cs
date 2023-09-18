@@ -92,7 +92,7 @@ namespace RiverAttack
             var meshRenderer = bulletPlayer.GetComponent<MeshRenderer>();
             //TODO: Animação no tiro e um feedback auditivo para o tiro;
             if (meshRenderer != null)
-                meshRenderer.material.color = (m_PlayerSettings.onRapidFire) ? rapidFireColor : bulletColor;
+                meshRenderer.material.color = (m_PlayerMaster.inPowerUp) ? rapidFireColor : bulletColor;
             
             myShoot.transform.parent = null;
             LogGamePlay();

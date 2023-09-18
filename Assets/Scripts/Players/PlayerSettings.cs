@@ -43,7 +43,7 @@ namespace RiverAttack
         [Header("PowerUP Effects")]
         public float cadenceShootPowerUp;
         public float accelPinch;
-        public bool onRapidFire;
+        //public bool onRapidFire;
 
     }
 }

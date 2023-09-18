@@ -104,6 +104,8 @@ namespace Shopping
         }
         void BuyThisItem(PlayerSettings player, ShopProductStock product)
         {
+            if (!product.AvailableInStock() || !product.HaveMoneyToBuy(player))
+                return;
             player.listProducts.Add(product.shopProduct);
             player.wealth += -product.shopProduct.priceItem;
             product.shopProduct.ConsumeProduct(player);
@@ -115,6 +117,7 @@ namespace Shopping
             item.getSelectButton.interactable = true;
 
             m_GamePlayAudio.PlayClickSfx(m_AudioSource);
+
         }
         void SelectThisItem(PlayerSettings player, ShopProductStock shopProductStock)
         {
@@ -140,14 +143,13 @@ namespace Shopping
         #region INPUT BUTTONS
         void BuyInputButton(InputAction.CallbackContext context)
         {
-            //Debug.Log("Comprar o item");
+            Debug.Log("Comprar o item");
             var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
 
-            if (item.productInStock.PlayerAlreadyBuy(m_ActivePlayer))
-            {
-                // Debug.Log("Player já tem o produto. Venda não concluida.");
+            /*if (item.productInStock.PlayerAlreadyBuy(m_ActivePlayer))
                 return;
-            }
+            if (!item.productInStock.HaveMoneyToBuy(m_ActivePlayer)) 
+                return;*/
             BuyThisItem(m_ActivePlayer, item.productInStock);
         }
         void SelectButton(InputAction.CallbackContext context)

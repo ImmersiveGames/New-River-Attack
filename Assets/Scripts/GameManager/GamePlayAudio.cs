@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using Utils;
@@ -16,6 +17,7 @@ namespace RiverAttack
         void Awake()
         {
             bgmAudioSource = GetComponentInParent<AudioSource>();
+            bgmAudioSource.pitch = 1;
         }
   #endregion
         public void PlayBGM(LevelTypes typeLevel)
@@ -59,7 +61,8 @@ namespace RiverAttack
 
         public void AccelPinch(float accel)
         {
-            StartCoroutine(FadePitch(bgmAudioSource, 0.1f, bgmAudioSource.pitch, accel));
+            if(Math.Abs(accel - bgmAudioSource.pitch) > 0.01f)
+                StartCoroutine(FadePitch(bgmAudioSource, 0.1f, bgmAudioSource.pitch, accel));
         }
 
         static IEnumerator FadePitch(AudioSource source, float timer, float starts, float ends)

@@ -73,6 +73,7 @@ namespace Shopping
         void SetupBuyButton(PlayerSettings player)
         {
             btnBuy.gameObject.SetActive(true);
+            Debug.Log($"Available to buy: {productInStock.shopProduct.name} , {productInStock.AvailableForBuy(player)}");
             btnBuy.interactable = productInStock.AvailableForBuy(player);
             if (productInStock.PlayerAlreadyBuy(player) && !productInStock.shopProduct.isConsumable)
                 btnBuy.gameObject.SetActive(false);
@@ -80,8 +81,12 @@ namespace Shopping
 
         void SetupSelectButton(PlayerSettings player)
         {
-            btnSelect.gameObject.SetActive(!productInStock.AvailableForBuy(player));
-            btnSelect.interactable = productInStock.AvailableToSelect(player);
+            btnSelect.gameObject.SetActive(true);
+            if (!productInStock.PlayerAlreadyBuy(player) && !productInStock.shopProduct.isConsumable)
+            {
+                btnSelect.gameObject.SetActive(false);
+            }
+            btnSelect.interactable = productInStock.AvailableToSelect(player) ;
             if (productInStock.shopProduct.isConsumable)
                 btnSelect.gameObject.SetActive(false);
             //Debug.Log(myproductStock.shopProduct.GetName + "  Ativo: " + myproductStock.shopProduct.ShouldBeConsume(player));

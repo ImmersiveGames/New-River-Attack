@@ -36,24 +36,20 @@ namespace RiverAttack
         public void RapidFireStart(float amount)
         {
         if (target == null) return;
- 
-            Debug.Log("AUMENTA");
-            //TODO: Ajustar RapidFire - Animação da HUD
-            GamePlayManager.instance.OnEventRapidFire();
+        
             float buff = (amount < cadenceRapidFireMin) ? cadenceRapidFireMin : amount;
             target.cadenceShootPowerUp = buff;
-            //GamePlayAudio.instance.AccelPinch(1.4f);
-            target.onRapidFire = true;
+            if(!GameManager.instance.initializedPlayerMasters[0].inPowerUp)
+                GamePlayAudio.instance.AccelPinch(1.4f);
+            GamePlayManager.instance.OnEventRapidFire();
         }
 
         public void RapidFireEnd(float amount)
         {
             if (target == null) return;
-            target.cadenceShootPowerUp = amount;
-            target.onRapidFire = false;
-            //GamePlayAudio.instance.AccelPinch(1f);
             GamePlayManager.instance.OnEventEndRapidFire();
-            //GamePlayManager.instance.CallEventRapidFire(false);
+            target.cadenceShootPowerUp = amount;
+            GamePlayAudio.instance.AccelPinch(1f);
         }
 
         public void GainBomb(int amount)
