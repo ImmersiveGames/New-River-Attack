@@ -1,6 +1,5 @@
 using UnityEngine.Audio;
 using UnityEngine;
-using GD.MinMaxSlider;
 namespace RiverAttack
 {
 
@@ -11,8 +10,6 @@ namespace RiverAttack
         public AudioEventClip audioSample;
         [SerializeField]
         public AudioMixerGroup audioMixerGroup;
-
-        //TODO: Habilitar para Grupo de MIXagem;
 
         public override void Play(AudioSource source)
         {

@@ -2,21 +2,18 @@
 using UnityEngine;
 namespace RiverAttack
 {
-    [RequireComponent(typeof(PlayerMaster))]
     public class PlayerPowerUp : MonoBehaviour
     {
         readonly Dictionary<PowerUp, float> m_ActivePowerUps = new Dictionary<PowerUp, float>();
+
         List<PowerUp> m_Keys = new List<PowerUp>();
-
         PlayerMaster m_PlayerMaster;
-        CollectibleScriptable m_Collectibles;
-        GamePlayPowerUps m_GamePlayPowerUps;
 
-        #region UNITY METHODS
-        private void OnEnable()
+        #region UNITYMETHODS
+        void OnEnable()
         {
             SetInitialReferences();
-            m_PlayerMaster.EventPlayerMasterReSpawn += ResetPowerUp;
+            m_PlayerMaster.EventPlayerMasterRespawn += ResetPowerUp;
         }
         void Update()
         {
@@ -24,9 +21,8 @@ namespace RiverAttack
         }
         void OnDisable()
         {
-            m_PlayerMaster.EventPlayerMasterReSpawn -= ResetPowerUp;
+            m_PlayerMaster.EventPlayerMasterRespawn -= ResetPowerUp;
         }
-        
   #endregion
         void SetInitialReferences()
         {
@@ -50,7 +46,7 @@ namespace RiverAttack
                     {
                         changed = true;
                         m_ActivePowerUps.Remove(powerUp);
-                        powerUp.PowerUpEnd(playerMaster.GetPlayersSettings());
+                        powerUp.PowerUpEnd(playerMaster.getPlayerSettings);
                     }
                 }
             }
@@ -59,15 +55,15 @@ namespace RiverAttack
                 m_Keys = new List<PowerUp>(m_ActivePowerUps.Keys);
             }
         }
-        
-        public void ActivatePowerUp(PowerUp powerUp) //, Player target)
+
+        public void ActivatePowerUp(PowerUp powerUp)
         {
-            //Debug.Log("AQUI: "+ powerup.name);
+            //Debug.Log("AQUI: "+ powerUp.name);
             ClearActivePowerUps(powerUp.canAccumulateEffects);
             if (!m_ActivePowerUps.ContainsKey(powerUp))
             {
-                //Debug.Log("Não tem esse powerup na lista");
-                powerUp.PowerUpStart(m_PlayerMaster.GetPlayersSettings());
+               // Debug.Log("Não tem esse power Up na lista");
+                powerUp.PowerUpStart(m_PlayerMaster.getPlayerSettings);
                 m_ActivePowerUps.Add(powerUp, powerUp.duration);
             }
             else
@@ -81,24 +77,24 @@ namespace RiverAttack
             m_Keys = new List<PowerUp>(m_ActivePowerUps.Keys);
         }
 
-        void ResetPowerUp()
-        {
-            ClearActivePowerUps();
-        }
-
         // Calls the end action of each powerup and clears them from the activePowerups
         void ClearActivePowerUps(bool onlyEffect = false) //(Player target, bool onlyeffect = false)
         {
-            //Debug.Log("Can Acumulate: "+ onlyeffect);
+            //Debug.Log($"Can Accumulate Effect: {onlyEffect}");
             foreach (var powerUp in m_ActivePowerUps)
             {
+               // Debug.Log($"Power up =  {powerUp}");
                 if (onlyEffect && !powerUp.Key.canAccumulateEffects)
                     return;
-                //Debug.Log("Termina o Powerup");
-                powerUp.Key.PowerUpEnd(m_PlayerMaster.GetPlayersSettings());
+                //Debug.Log($"Termina o Power up {powerUp}");
+                powerUp.Key.PowerUpEnd(m_PlayerMaster.getPlayerSettings);
             }
             if (!onlyEffect)
                 m_ActivePowerUps.Clear();
+        }
+        void ResetPowerUp()
+        {
+            ClearActivePowerUps();
         }
 
     }

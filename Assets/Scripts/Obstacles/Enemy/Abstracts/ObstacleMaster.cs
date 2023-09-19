@@ -1,102 +1,162 @@
 using UnityEngine;
+using UnityEngine.Serialization;
+using Utils;
 namespace RiverAttack
 {
-    public class ObstacleMaster : ObjectMaster
+    public abstract class ObstacleMaster : ObjectMaster
     {
-        const float DESTROY_DELAY = 0.1f;
         public EnemiesScriptable enemy;
-        public bool isDestroyed;
-        protected internal enum EnemyStatus { Paused, Active }
+        [Header("Enemy Destroy Settings")]
         [SerializeField]
-        protected internal EnemyStatus actualEnemyStatus;
+        GameObject deadParticlePrefab;
+        [FormerlySerializedAs("timeoutDestroy")]
+        [SerializeField]
+        float timeoutDestroyExplosion;
+        public bool isDestroyed;
 
+        protected bool isActive;
         Vector3 m_ObjectStartPosition;
-        
-        private protected GamePlayManager gamePlayManager;
-        
-        #region Delegates
+        Quaternion m_ObjectStartRotate;
+        Vector3 m_ObjectStartScale;
+        protected GamePlayManager gamePlayManager;
+        protected GamePlaySettings gamePlaySettings;
+
+        #region Events
         public delegate void GeneralEventHandler();
-        public event GeneralEventHandler EventDestroyObject;
-        public event GeneralEventHandler EventChangeSkin;
-        public delegate void MovementEventHandler(Vector3 pos);
-        public event MovementEventHandler EventObjectMasterMovement;
-        public event MovementEventHandler EventObjectMasterFlipEnemies;
-        public delegate void EnemyEventHandler(PlayerMaster playerMaster);
-        public event EnemyEventHandler EventPlayerDestroyObject;
-        #endregion
-        
-        #region UNITY METHODS
-        protected virtual void Awake()
-        { 
-            m_ObjectStartPosition = transform.position;
-            actualEnemyStatus = EnemyStatus.Paused;
-            isDestroyed = false;
+        protected internal event GeneralEventHandler EventObstacleMasterHit;
+        public delegate void PlayerSettingsEventHandler(PlayerSettings playerSettings);
+        protected internal event PlayerSettingsEventHandler EventObstacleScore;
+        public delegate void MovementEventHandler(Vector3 dir);
+        protected internal event MovementEventHandler EventObstacleMovement;
+  #endregion
+
+        #region UNITYMETHODS
+        internal virtual void Awake()
+        {
+            var objTransform = transform;
+            m_ObjectStartPosition = objTransform.position;
+            m_ObjectStartRotate = objTransform.rotation;
+            m_ObjectStartScale = objTransform.localScale;
         }
-        protected virtual void OnEnable()
+        internal virtual void OnEnable()
         {
             SetInitialReferences();
-            //Tools.SetLayersRecursively(GameManager.instance.layerEnemies, transform);
-            gamePlayManager.EventStartPlayGame += OnInitializeEnemy;
-            gamePlayManager.EventResetEnemies += OnInitializeEnemy;
+            gamePlayManager.EventActivateEnemiesMaster += ActiveObject;
+            gamePlayManager.EventDeactivateEnemiesMaster += DeactivateObject;
+            gamePlayManager.EventReSpawnEnemiesMaster += TryRespawn;
+            StartObstacle();
         }
-        void Start()
+        internal virtual void OnTriggerEnter(Collider other)
         {
-            actualEnemyStatus = EnemyStatus.Active;
+            if (other == null || !shouldObstacleBeReady || !enemy.canDestruct) return;
+            ComponentToKill(other.GetComponent<BulletPlayer>(), CollisionType.Shoot);
+            ComponentToKill(other.GetComponent<BulletPlayerBomb>(), CollisionType.Bomb);
         }
-        protected virtual void OnDisable()
+        internal virtual void OnDisable()
         {
-            gamePlayManager.EventStartPlayGame -= OnInitializeEnemy;
-            gamePlayManager.EventResetEnemies -= OnInitializeEnemy;
+            //isActive = false;
         }
-        #endregion
-        
-        public bool shouldObstacleBeReady
+        internal virtual void OnDestroy()
         {
-            get
-            {
-                return isDestroyed == false && actualEnemyStatus == EnemyStatus.Active;
-            }
+            gamePlayManager.EventActivateEnemiesMaster -= ActiveObject;
+            gamePlayManager.EventDeactivateEnemiesMaster -= DeactivateObject;
+            gamePlayManager.EventReSpawnEnemiesMaster -= TryRespawn;
         }
-        
+  #endregion
         protected virtual void SetInitialReferences()
         {
             gamePlayManager = GamePlayManager.instance;
+            gamePlaySettings = gamePlayManager.gamePlaySettings;
+        }
+        public virtual bool shouldObstacleBeReady
+        {
+            get { return isDestroyed == false && isActive; }
+        }
+        protected virtual void StartObstacle()
+        {
+            isDestroyed = false;
+            isActive = true;
+            var objTransform = transform;
+            objTransform.position = m_ObjectStartPosition;
+            objTransform.rotation = m_ObjectStartRotate;
+            objTransform.localScale = m_ObjectStartScale;
         }
 
-        void OnInitializeEnemy()
+        protected void ComponentToKill(Component other, CollisionType collisionType)
         {
-            if (!enemy.canRespawn && isDestroyed)
-                Destroy(gameObject, DESTROY_DELAY);
-            else
+            if (other == null) return;
+            var playerMaster = WhoHit(other);
+            OnEventObstacleMasterHit();
+            OnEventObstacleScore(playerMaster.getPlayerSettings);
+            ShouldSavePoint(playerMaster.getPlayerSettings);
+            GamePlayManager.AddResultList(gamePlaySettings.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy, 1, collisionType);
+            ShouldFinishGame();
+        }
+        internal static PlayerMaster WhoHit(Component other)
+        {
+            return other switch
             {
-                Utils.Tools.ToggleChildren(transform);
-                transform.position = m_ObjectStartPosition;
-                actualEnemyStatus = EnemyStatus.Active;
-                isDestroyed = false;
-            }
+                Bullets bullet => bullet.ownerShoot as PlayerMaster,
+                PlayerMaster player => player,
+                _ => null
+            };
         }
-        
-        #region Calls
-        
-        public void CallEventEnemiesMasterMovement(Vector3 pos)
-        {
-            EventObjectMasterMovement?.Invoke(pos);
-        }
-        public void CallEventEnemiesMasterFlipEnemies(Vector3 pos)
-        {
-            EventObjectMasterFlipEnemies?.Invoke(pos);
-        }
-        public void CallEventDestroyEnemy(PlayerMaster playerMaster)
-        {
-            actualEnemyStatus = EnemyStatus.Paused;
-            EventDestroyObject?.Invoke();
-            EventPlayerDestroyObject?.Invoke(playerMaster);
-        }
-        public void CallEventChangeSkin()
-        {
-            EventChangeSkin?.Invoke();
-        }
-    #endregion
-    } 
-}
 
+        protected virtual void DestroyObstacle()
+        {
+            isDestroyed = true;
+            isActive = false;
+            Tools.ToggleChildren(transform, false);
+            var explosion = Instantiate(deadParticlePrefab, transform);
+            Destroy(explosion, timeoutDestroyExplosion);
+        }
+        void TryRespawn()
+        {
+            if (!enemy.canRespawn) return;
+            StartObstacle();
+            Tools.ToggleChildren(transform);
+        }
+
+        protected virtual void ActiveObject()
+        {
+            isActive = true;
+        }
+        protected virtual void DeactivateObject()
+        {
+            isActive = false;
+        }
+        protected void ShouldSavePoint(PlayerSettings playerSettings)
+        {
+            if (!enemy.isCheckInPoint)
+                return;
+            var transform1 = transform;
+            var position = transform1.position;
+            playerSettings.spawnPosition.z = position.z;
+            playerSettings.spawnPosition.x = position.x;
+            gamePlayManager.OnEventBuildPathUpdate(position.z);
+        }
+
+        void ShouldFinishGame()
+        {
+            if (!enemy.isFinishLevel) return;
+            gamePlayManager.readyToFinish = true;
+        }
+
+        #region Calls
+        void OnEventObstacleMasterHit()
+        {
+            DestroyObstacle();
+            EventObstacleMasterHit?.Invoke();
+        }
+        void OnEventObstacleScore(PlayerSettings playerSettings)
+        {
+            EventObstacleScore?.Invoke(playerSettings);
+        }
+        protected internal virtual void OnEventObstacleMovement(Vector3 dir)
+        {
+            EventObstacleMovement?.Invoke(dir);
+        }
+  #endregion
+
+    }
+}

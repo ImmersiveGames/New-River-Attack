@@ -13,18 +13,17 @@ namespace RiverAttack
         }
         public void EnterState(EnemiesMaster enemiesMaster)
         {
-            Debug.Log("Estado: HOLD - Entrando ");
+            //Debug.Log("Estado: HOLD - Entrando ");
             m_VectorDirection = m_EnemiesMovement.SetDirection(EnemiesMovement.Directions.None);
-            enemiesMaster.CallEventEnemiesMasterMovement(m_VectorDirection);
+            enemiesMaster.OnEventObstacleMovement(m_VectorDirection);
         }
         public void UpdateState(Transform transform, Vector3 direction)
         {
-            Debug.Log("Estado: HOLD - UPDATE");
+            //Debug.Log("Estado: HOLD - UPDATE");
         }
         public void ExitState()
         {
-            Debug.Log("Estado: HOLD - Exit");
+           // Debug.Log("Estado: HOLD - Exit");
         }
     }
 }
-

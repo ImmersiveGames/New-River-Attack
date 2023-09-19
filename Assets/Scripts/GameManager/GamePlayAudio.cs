@@ -1,102 +1,83 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 using Utils;
 namespace RiverAttack
 {
     public class GamePlayAudio : Singleton<GamePlayAudio>
     {
-        public AudioMixerSnapshot[] audioMixerSnapshots;
-        public enum LevelType 
-        {
-            MainTheme = 0,
-            Hub = 1,            
-            Grass = 2,
-            Forest = 3,
-            Swamp = 4,
-            Antique = 5,
-            Desert = 6,
-            Ice = 7,  
-        }
-        public LevelType levelType;
-        [SerializeField]
-        AudioSource audioSource;
-        [SerializeField]
-        List<AudioEventSample> listBGM;
-        bool m_InFadeIn, m_InFadeOut;
-[SerializeField]
-        LevelType m_CurrentPlaying;
+        [SerializeField] AudioSource bgmAudioSource;
+        [SerializeField] protected AudioSource voiceAudioSource;
+        [SerializeField] internal Tools.SerializableDictionary<LevelTypes, AudioEventSample> bgmLevels = new Tools.SerializableDictionary<LevelTypes, AudioEventSample>();
+        [Header("Menu SFX")]
+        [SerializeField] AudioClip clickSound;
+        [SerializeField] public AudioClip missionFailSound;
 
         #region UNITYMETHODS
-
-        void Start()
+        void Awake()
         {
-            m_CurrentPlaying = levelType;
-            ChangeBGM(levelType, 0.5f);
+            bgmAudioSource = GetComponentInParent<AudioSource>();
+            bgmAudioSource.pitch = 1;
         }
-        void Update()
-        {    
-            /*if (levelType != m_CurrentPlaying) 
-            {
-                ChangeBGM(levelType, 0.5f);
-                m_CurrentPlaying = levelType;
-            }*/
-                
-
-            if (Time.timeScale <= 0)
-            {
-                PauseBGM();
-            }
-            else
-            {
-                UnPauseBGM();
-            }
-        }
-        protected override void OnDestroy() { }
   #endregion
-
-        void PauseBGM()
+        public void PlayBGM(LevelTypes typeLevel)
         {
-            if (audioMixerSnapshots.Length > 1)
-                audioMixerSnapshots[1].TransitionTo(0);
+            bgmLevels.TryGetValue(typeLevel, out var audioSource);
+            audioSource.Play(bgmAudioSource);
         }
-        void UnPauseBGM()
-        {
-            if (audioMixerSnapshots.Length > 0)
-                audioMixerSnapshots[0].TransitionTo(0);
-        }
-        public void PlayBGM(LevelType typeLevel)
-        {
-            int i = (int)typeLevel;
-            listBGM[i].Play(audioSource);
-        }
-
-        public void ChangeBGM(LevelType typeLevel, float time)
-        {
-            int i = (int)typeLevel;
-            //Debug.Log("Troca");
-            StartCoroutine(PlayBGM(audioSource, listBGM[i], time));
-        }
-
-        public void ChangeBGM(AudioEventSample track, float time)
-        {
-            StartCoroutine(PlayBGM(audioSource, track, time));
-        }
-
-        IEnumerator PlayBGM(AudioSource source, AudioEventSample track, float time)
+        IEnumerator PlayBGM(AudioSource source, AudioEvent track, float time)
         {
             if (source.isPlaying)
                 yield return StartCoroutine(FadeAudio(source, time, source.volume, 0));
             track.Play(source);
         }
-
-        public void StopBGM()
+        public void ChangeBGM(LevelTypes typeLevel, float time)
         {
-            if (audioSource != null)
-                audioSource.Stop();
+            bgmLevels.TryGetValue(typeLevel, out var audioSource);
+            if (bgmAudioSource.isPlaying && bgmAudioSource.clip == audioSource.audioSample.audioClip)
+                return;
+            bgmAudioSource.pitch = audioSource.getPitch;
+            bgmAudioSource.volume = audioSource.getVolume;
+            StartCoroutine(PlayBGM(bgmAudioSource, audioSource, time));
         }
 
+        public void PlayVoice(AudioClip audioClip)
+        {
+            PlayOneShot(voiceAudioSource,audioClip);
+        }
+        static void PlayOneShot(AudioSource audioSource, AudioClip audioClip)
+        {
+            audioSource.PlayOneShot(audioClip);
+        }
+        public void PlayClickSfx(AudioSource audioSource)
+        {
+            PlayOneShot(audioSource, clickSound);
+        }
+        public void StopBGM()
+        {
+            if (bgmAudioSource != null)
+                bgmAudioSource.Stop();
+        }
+
+        public void AccelPinch(float accel)
+        {
+            if(Math.Abs(accel - bgmAudioSource.pitch) > 0.01f)
+                StartCoroutine(FadePitch(bgmAudioSource, 0.1f, bgmAudioSource.pitch, accel));
+        }
+
+        static IEnumerator FadePitch(AudioSource source, float timer, float starts, float ends)
+        {
+            float i = 0.0F;
+            float step = 1.0F / timer;
+            while (i <= 1.0F)
+            {
+                i += step * Time.deltaTime;
+                source.pitch = Mathf.Lerp(starts, ends, i);
+                yield return new WaitForSeconds(step * Time.deltaTime);
+            }
+            if (ends <= 0)
+                source.Stop();
+        }
         static IEnumerator FadeAudio(AudioSource source, float timer, float starts, float ends)
         {
             float i = 0.0F;

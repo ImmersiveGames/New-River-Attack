@@ -1,12 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using System.Threading.Tasks;
 using RiverAttack;
 using Utils;
 using TMPro;
-using System.Collections.Generic;
 
 namespace Shopping
 {
@@ -15,94 +12,76 @@ namespace Shopping
         [SerializeField]
         Transform contentShop;
         [SerializeField]
-        ScrollRect scrollBarShop;
-        [SerializeField]
         GameObject objProduct;
         [SerializeField]
         RectTransform refCenter;
         [SerializeField]
         ListShopStock productStock;
         [SerializeField]
+        ScrollRect scrollBarShop;
+        [SerializeField]
+        TMP_Text wealthTMPText;
+        [SerializeField]
         GameObject productForward, productBackward;
-        [SerializeField]
-        TMP_Text refuggiesText;
-        [SerializeField]
-        AudioMenuOptions m_audio;
 
         [Header("Carousel"), SerializeField]
         bool infinityLooping;
         [SerializeField]
-        float spaceBetweenPanels = 0, maxPosition = 0;
-        [SerializeField]
-        Color selectedColor;
-        [SerializeField]
-        Color normalColor;
- 
-        PlayersInputActions m_inputSystem;
-        PlayerSettings m_PlayerSettings;
-        EventSystem m_EventSystem;
+        float spaceBetweenPanels, maxPosition;
+        public Color selectedColor;
+        public Color buyerColor;
+        public Color normalColor;
+
+        int m_LastSelectedSkin;
+
         ShopCarousel m_Shop;
-        Task m_Task;
-        int lastSelectedSkin = 0;
+        AudioSource m_AudioSource;
+        GamePlayAudio m_GamePlayAudio;
+        PlayersInputActions m_InputSystem;
+        PlayerSettings m_ActivePlayer;
 
-
-        List<PlayerMaster> playerMasterList = new List<PlayerMaster>();
-
-        public delegate void GeneralUpdateButtons(PlayerSettings player, ShopProductStock item);
+        #region Delegates
+        public delegate void GeneralUpdateButtons(PlayerSettings player);
         public GeneralUpdateButtons eventButtonSelect;
         public GeneralUpdateButtons eventButtonBuy;
 
-        #region UNITY METHODS
+        //TODO: Diferenciar que está atualmente Selecionado e as que são possiveis de compra.
+  #endregion
+        #region UNITYMETHODS
         void OnEnable()
         {
-            //SaveGame.DeleteAll();
             SetInitialReferences();
-            SetControllsInput();
-            SetupShop();
+            m_ActivePlayer = GameManager.instance.playerSettingsList[0];
+            SetControllersInput();
+            WealthDisplayUpdate(m_ActivePlayer.wealth);
+            SetupShop(m_ActivePlayer);
             scrollBarShop.horizontalScrollbar.numberOfSteps = m_Shop.getProducts.Length;
-        }
-
-        void Start()
-        {
-            RefuggieDisplayUpdate();            
-        }
-
-        private void SetControllsInput()
-        {
-            m_inputSystem = new PlayersInputActions();
-            m_inputSystem.UI_Controlls.Enable();
-            Debug.Log("Habilitei os controles");
-
-            m_inputSystem.UI_Controlls.BuyButton.performed += ctx => BuyButton(ctx);
-            m_inputSystem.UI_Controlls.SelectButton.performed += ctx => SelectButton(ctx);
-            m_inputSystem.UI_Controlls.LeftSelection.performed += ctx => ControllerNavigationArrows(-1);
-            m_inputSystem.UI_Controlls.RightSelection.performed += ctx => ControllerNavigationArrows(1);
-        }
-
-        void LateUpdate()
-        {
-            ButtonNavegation(0);
-            //m_Shop?.Update();
         }
         void OnDisable()
         {
-            //GameManagerSaves.Instance.SavePlayer(activePlayer);
-            m_inputSystem.UI_Controlls.Disable();
-            Debug.Log("Desabilitei os controles");
+            m_InputSystem.UI_Controlls.Disable();
+            //Debug.Log("Desabilitei os controles");
         }
   #endregion
         void SetInitialReferences()
         {
-            var playerMaster = GameManager.instance.playerObjectAvailableList[0].GetComponent<PlayerMaster>();
-            playerMasterList.Add(playerMaster);
-            m_PlayerSettings = playerMaster.GetPlayersSettings();
-                        
-            m_EventSystem = EventSystem.current;                        
-
-            //GameManagerSaves.Instance.LoadPlayer(ref activePlayer);
-            //activePlayer.LoadValues();
+            m_GamePlayAudio = GamePlayAudio.instance;
+            m_AudioSource = GetComponentInParent<AudioSource>();
+            if (m_AudioSource == null) Debug.LogWarning("Componente de Audio não encontrado.");
         }
-        void SetupShop()
+
+        void SetControllersInput()
+        {
+            m_InputSystem = new PlayersInputActions();
+            m_InputSystem.UI_Controlls.Enable();
+            //Debug.Log("Habilitei os controles");
+
+            m_InputSystem.UI_Controlls.BuyButton.performed += BuyInputButton;
+            m_InputSystem.UI_Controlls.SelectButton.performed += SelectButton;
+            m_InputSystem.UI_Controlls.LeftSelection.performed += _ => ControllerNavigationArrows(-1);
+            m_InputSystem.UI_Controlls.RightSelection.performed += _ => ControllerNavigationArrows(1);
+        }
+        void SetupShop(PlayerSettings playerSettings)
         {
             m_Shop = new ShopCarousel(contentShop, objProduct, refCenter)
             {
@@ -116,60 +95,98 @@ namespace Shopping
             {
                 var item = t.GetComponent<UIItemShop>();
                 if (!item) continue;
-                item.SetupButtons(m_PlayerSettings);
-                item.getBuyButton.onClick.AddListener(delegate { BuyThisItem(m_PlayerSettings, item.productInStock); });
-                item.getSelectButton.onClick.AddListener(delegate { SelectThisItem(m_PlayerSettings, item.productInStock); });
-                
-                if (item.getSelectButton.interactable == false) 
+                item.SetupButtons(playerSettings);
+                item.getBuyButton.onClick.AddListener(delegate { BuyThisItem(playerSettings, item.productInStock); });
+                item.getSelectButton.onClick.AddListener(delegate { SelectThisItem(playerSettings, item.productInStock); });
+
+                if (item.getSelectButton.interactable == false)
                     item.getSelectButton.GetComponent<Image>().color = selectedColor;
+                if (item.getBuyButton.interactable)
+                    item.getBuyButton.GetComponent<Image>().color = buyerColor;
             }
         }
-
         void BuyThisItem(PlayerSettings player, ShopProductStock product)
         {
+            if (!product.AvailableInStock() || !product.HaveMoneyToBuy(player))
+                return;
             player.listProducts.Add(product.shopProduct);
             player.wealth += -product.shopProduct.priceItem;
             product.shopProduct.ConsumeProduct(player);
             product.RemoveStock(1);
-            CallEventButtonBuy(player, product);
-            RefuggieDisplayUpdate();
+            CallEventButtonBuy(player);
+            WealthDisplayUpdate(player.wealth);
 
             var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
             item.getSelectButton.interactable = true;
 
-            m_audio.PlayClickSFX();
+            m_GamePlayAudio.PlayClickSfx(m_AudioSource);
+
         }
         void SelectThisItem(PlayerSettings player, ShopProductStock shopProductStock)
         {
             shopProductStock.shopProduct.ConsumeProduct(player);
-            CallEventButtonSelect(player, shopProductStock);
+            player.playerSkin = shopProductStock.shopProduct as ShopProductSkin;
+            CallEventButtonSelect(player);
 
-            foreach (PlayerMaster playerMaster in playerMasterList) 
-            {
-                playerMaster.CallEventChangeSkin(player.playerSkin);
-            }
+            var lastSelectBtn = m_Shop.getProducts[m_LastSelectedSkin].GetComponent<UIItemShop>().getSelectButton;
+            lastSelectBtn.GetComponent<Image>().color = normalColor;
 
-            var lastSelectBTN = m_Shop.getProducts[lastSelectedSkin].GetComponent<UIItemShop>().getSelectButton;
-            lastSelectBTN.GetComponent<Image>().color = normalColor;
+            var selectBtn = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>().getSelectButton;
+            selectBtn.GetComponent<Image>().color = selectedColor;
 
-            var selectBTN = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>().getSelectButton;
-            selectBTN.GetComponent<Image>().color = selectedColor;
+            m_LastSelectedSkin = m_Shop.getActualProduct;
 
-            lastSelectedSkin = m_Shop.getActualProduct;
-
-            m_audio.PlayClickSFX();
+            m_GamePlayAudio.PlayClickSfx(m_AudioSource);
+        }
+        void WealthDisplayUpdate(int wealth)
+        {
+            wealthTMPText.text = wealth.ToString();
         }
 
-        public void ButtonNavegation(int next)
+        #region INPUT BUTTONS
+        void BuyInputButton(InputAction.CallbackContext context)
         {
-            //m_audio.PlayClickSFX();
+            Debug.Log("Comprar o item");
+            var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
 
-            m_Shop.ButtonNavegation(next);
+            BuyThisItem(m_ActivePlayer, item.productInStock);
+        }
+        void SelectButton(InputAction.CallbackContext context)
+        {
+            // Debug.Log("Selecionar o item");
+
+            var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
+
+            if (!item.productInStock.PlayerAlreadyBuy(m_ActivePlayer))
+            {
+                // Debug.Log("Player Não tem o produto. Seleção não concluida.");
+                return;
+            }
+
+            SelectThisItem(m_ActivePlayer, item.productInStock);
+        }
+        void ControllerNavigationArrows(int value)
+        {
+            switch (value)
+            {
+                case -1:
+                    productBackward.GetComponent<Button>().onClick.Invoke();
+                    break;
+                case 1:
+                    productForward.GetComponent<Button>().onClick.Invoke();
+                    break;
+            }
+        }
+        public void ButtonNavigation(int next)
+        {
+            m_GamePlayAudio.PlayClickSfx(m_AudioSource);
+
+            m_Shop.ButtonNavigation(next);
 
             //Debug.Log(m_Shop.getActualProduct);
             //Debug.Log(m_Shop.getProducts.Length);
 
-            float scrollbarValue = ((float)m_Shop.getActualProduct) / ((float)m_Shop.getProducts.Length -1);
+            float scrollbarValue = ((float)m_Shop.getActualProduct) / ((float)m_Shop.getProducts.Length - 1);
             //Debug.Log(scrollbarValue);
 
             scrollBarShop.horizontalScrollbar.value = scrollbarValue;
@@ -196,60 +213,20 @@ namespace Shopping
             {
                 productBackward.SetActive(true);
                 productForward.SetActive(true);
-            }  
-        }
-
-        void RefuggieDisplayUpdate() 
-        {
-            refuggiesText.text = m_PlayerSettings.wealth.ToString();
-        }
-
-        public void CallEventButtonSelect(PlayerSettings player, ShopProductStock item)
-        {
-            eventButtonSelect?.Invoke(player, item);
-        }
-        public void CallEventButtonBuy(PlayerSettings player, ShopProductStock item)
-        {
-            eventButtonBuy?.Invoke(player, item);
-        }
-
-        void BuyButton(InputAction.CallbackContext context) 
-        {
-            Debug.Log("Comprar o item");
-            var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
-
-            if (item.productInStock.PlayerAlreadyBuy(m_PlayerSettings))
-            {
-                Debug.Log("Player já tem o produto. Venda não concluida.");
-                return;
             }
-            
-            BuyThisItem(m_PlayerSettings, item.productInStock);
         }
+  #endregion
 
-        void SelectButton(InputAction.CallbackContext context)
+        #region Calls
+        void CallEventButtonSelect(PlayerSettings player)
         {
-            Debug.Log("Selecionar o item");
-            
-            var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
-
-            if (!item.productInStock.PlayerAlreadyBuy(m_PlayerSettings))
-            {
-                Debug.Log("Player Não tem o produto. Seleção não concluida.");
-                return;
-            }
-
-            SelectThisItem(m_PlayerSettings, item.productInStock);
+            eventButtonSelect?.Invoke(player);
         }
-
-        void ControllerNavigationArrows(int value) 
+        void CallEventButtonBuy(PlayerSettings player)
         {
-            if (value == -1) 
-                productBackward.GetComponent<Button>().onClick.Invoke();
-            else if (value == 1)
-                productForward.GetComponent<Button>().onClick.Invoke();
-
+            eventButtonBuy?.Invoke(player);
         }
+  #endregion
 
     }
 }

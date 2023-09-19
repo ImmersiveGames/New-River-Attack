@@ -2,7 +2,6 @@
 using Utils;
 namespace RiverAttack
 {
-    [RequireComponent(typeof(EnemiesMaster))]
     public class EnemiesShoot : ObstacleDetectApproach, IHasPool
     {
         [SerializeField] GameObject bullet;
@@ -17,7 +16,7 @@ namespace RiverAttack
         readonly StateShoot m_StateShoot;
         readonly StateShootHold m_StateShootHold;
         readonly StateShootPatrol m_StateShootPatrol;
-        IShoot m_ActualState;  
+        IShoot m_ActualState;
     #endregion
 
         GamePlayManager m_GamePlayManager;
@@ -25,7 +24,7 @@ namespace RiverAttack
         EnemiesSetDifficulty m_EnemyDifficult;
 
         internal Transform spawnPoint;
-        
+
         public EnemiesShoot()
         {
             m_StateShoot = new StateShoot(this);
@@ -37,8 +36,8 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
-            m_EnemiesMaster.EventDestroyObject += StopFire;
-            m_GamePlayManager.EventEnemyDestroyPlayer += StopFire;
+            m_EnemiesMaster.EventObstacleMasterHit += StopFire;
+            m_GamePlayManager.EventEnemiesMasterKillPlayer += StopFire;
         }
         void Start()
         {
@@ -71,8 +70,8 @@ namespace RiverAttack
         }
         void OnDisable()
         {
-            m_EnemiesMaster.EventDestroyObject -= StopFire;
-            m_GamePlayManager.EventEnemyDestroyPlayer -= StopFire;
+            m_EnemiesMaster.EventObstacleMasterHit -= StopFire;
+            m_GamePlayManager.EventEnemiesMasterKillPlayer -= StopFire;
         }
   #endregion
         protected override void SetInitialReferences()
@@ -89,7 +88,7 @@ namespace RiverAttack
             m_ActualState = newState;
             m_ActualState?.EnterState(m_EnemiesMaster);
         }
-        
+
         void StopFire()
         {
             target = null;

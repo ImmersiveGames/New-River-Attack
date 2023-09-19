@@ -1,259 +1,226 @@
-using UnityEngine;
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Utils;
 namespace RiverAttack
 {
-    public class PlayerMaster : ObjectMaster
+    public sealed class PlayerMaster : ObjectMaster
     {
-        float m_AutoMovement;
-        float m_MovementSpeed;
-        float m_MultiplyVelocityUp;
-        float m_MultiplyVelocityDown;
+        [SerializeField] internal PlayerSettings getPlayerSettings;
+        [Header("Player Destroy Settings")]
+        [SerializeField]
+        bool isPlayerDead;
+        [SerializeField] float timeoutReSpawn;
+        [SerializeField]
+        GameObject deadParticlePrefab;
+        [SerializeField]
+        float timeoutDestroyExplosion;
+        [Header("Shake Camera")]
+        [SerializeField]
+        float shakeIntensity;
+        [SerializeField]
+        float shakeTime;
 
         public enum MovementStatus { None, Paused, Accelerate, Reduce }
-        int subWealth { get;
-            set; }
-        [SerializeField] float lastSavePosition;
-        protected internal PlayersInputActions playersInputActions;
+        [Header("Movement")]
+        [SerializeField] internal MovementStatus playerMovementStatus;
+
+        [SerializeField]
+        internal List<LogPlayerCollectables> collectableList;
+
+        internal PlayersInputActions playersInputActions;
+        internal bool inEffectArea;
+        [SerializeField]
+        internal bool inPowerUp;
+        internal int nextScoreForLive;
+
+        Animator m_Animator;
+        GamePlaySettings m_GamePlaySettings;
         GamePlayManager m_GamePlayManager;
         GameManager m_GameManager;
-
-        protected internal bool inEffectArea;
-        
-
-    #region SerilizedField
-        [SerializeField] public bool isPlayerDead;
-        [SerializeField]
-        List<EnemiesResults> enemiesHitList;
-        [SerializeField]
-        List<EnemiesResults> collectiblesCatchList;
-        [SerializeField]
-        protected internal MovementStatus playerMovementStatus;
-        [SerializeField] PlayerSettings playerSettings;
-  #endregion
-
-        
-    #region Delagetes
-        
-        //New Delegates
+        GameSettings m_GameSettings;
+        #region Delagetes
         public delegate void GeneralEventHandler();
-        public event GeneralEventHandler EventPlayerMasterPlayerShoot;
-        public event GeneralEventHandler EventPlayerMasterCollider;
-        public event GeneralEventHandler EventPlayerMasterOnDestroy;
-        public event GeneralEventHandler EventPlayerMasterReSpawn;
-        
+        public event GeneralEventHandler EventPlayerMasterHit;
+        public event GeneralEventHandler EventPlayerMasterRespawn;
+
+        public delegate void PowerUpActiveHandler(bool active);
+        public event PowerUpActiveHandler EventPowerUpRapidFire;
+
         public delegate void ControllerEventHandler(Vector2 dir);
         public event ControllerEventHandler EventPlayerMasterControllerMovement;
-        
-        //Old Delegates
+        #endregion
 
-        
-        public event GeneralEventHandler EventPlayerBomb;
-        public event GeneralEventHandler EventPlayerAddLive;
-        
-        public delegate void HealthEventHandler(int health);
-        public event HealthEventHandler EventIncreaseHealth;
-        public event HealthEventHandler EventDecreaseHealth;
-
-        public delegate void SkinChangeEventHandler(ShopProductSkin skin);
-        public event SkinChangeEventHandler EventChangeSkin;
-    #endregion
-        
-
-        #region UNITYMETHODS
+        #region UNITYMETHOD
         void Awake()
         {
-            SetInitialReferences();
+            m_Animator = GetComponent<Animator>();
+            m_GamePlayManager = GamePlayManager.instance;
+            m_GameSettings = m_GamePlayManager.getGameSettings;
+            m_GameManager = GameManager.instance;
+            m_GamePlaySettings = m_GamePlayManager.gamePlaySettings;
             playersInputActions = new PlayersInputActions();
             playersInputActions.Enable();
-            m_GamePlayManager.AddPlayerToGamePlayManager(this);
         }
 
         void OnEnable()
         {
-            m_GameManager.AddActivePlayerObject(transform);
-            m_GamePlayManager.EventStartPlayGame += SetPlayerReady;
-            Tools.SetLayersRecursively(GameManager.instance.layerPlayer, transform);
-        }
-        void Start()
-        {
-            Init();
+            m_GamePlayManager.EventStartRapidFire += () => inPowerUp = true;
+            m_GamePlayManager.EventEndRapidFire += () => inPowerUp = false;
         }
 
-        void OnDisable()
+        void Start()
         {
-            m_GamePlayManager.EventStartPlayGame -= SetPlayerReady;
+            PlayerStartSetup();
+            MyDebugStart();
+        }
+        void OnTriggerEnter(Collider other)
+        {
+            if (!other.GetComponentInParent<WallsMaster>() && !other.GetComponentInParent<EnemiesMaster>() && !other.GetComponent<BulletEnemy>()) return;
+            if (other.GetComponentInParent<CollectiblesMaster>() != null) return;
+            if (m_GamePlayManager.getGodMode) return;
+            LogGamePlay(other);
+            //return;
+            OnEventPlayerMasterHit();
         }
   #endregion
-        void SetInitialReferences()
+
+        public bool shouldPlayerBeReady { get { return isPlayerDead == false && playerMovementStatus != MovementStatus.Paused; } }
+
+        public void SetPlayerSettingsToPlayMaster(PlayerSettings playerSettings)
         {
-            enemiesHitList = new List<EnemiesResults>();
-            playerMovementStatus = MovementStatus.Paused;
-            m_GamePlayManager = GamePlayManager.instance;
-            m_GameManager = GameManager.instance;
-            lastSavePosition = transform.position.z;
+            getPlayerSettings = playerSettings;
         }
-        public bool ShouldPlayerBeReady() => isPlayerDead == false && playerMovementStatus != MovementStatus.Paused;
-        public void SetPlayerReady()
+        public bool CanCollect()
         {
+            return getPlayerSettings.bombs < GameSettings.instance.maxBombs;
+        }
+
+        public Animator GetPlayerAnimator()
+        {
+            return m_Animator;
+        }
+
+        void PlayerStartSetup()
+        {
+            inEffectArea = false;
+            getPlayerSettings.spawnPosition = transform.position;
+            getPlayerSettings.spawnPosition.z = 0;
+            isPlayerDead = false;
+            getPlayerSettings.score = 0;
+            m_GamePlayManager.OnEventUpdateScore(getPlayerSettings.score);
+            getPlayerSettings.distance = 0;
+            int distInt = Mathf.FloorToInt(getPlayerSettings.distance);
+            m_GamePlayManager.OnEventUpdateDistance(distInt);
+            getPlayerSettings.wealth = 0;
+            m_GamePlayManager.OnEventUpdateRefugees(getPlayerSettings.wealth);
+            getPlayerSettings.bombs = m_GameSettings.startBombs;
+            m_GamePlayManager.OnEventUpdateBombs(getPlayerSettings.bombs);
+            getPlayerSettings.actualFuel = m_GameSettings.startFuel;
+            getPlayerSettings.lives = m_GameSettings.startLives;
+            m_GamePlayManager.OnEventUpdateLives(getPlayerSettings.lives);
+        }
+
+        void KillPlayer()
+        {
+            m_GamePlayManager.playerDead = isPlayerDead = true;
+            playerMovementStatus = MovementStatus.Paused;
+            CameraShake.instance.ShakeCamera(shakeIntensity,shakeTime);
+            m_GamePlayManager.OnEventEnemiesMasterKillPlayer();
+
+            Tools.ToggleChildren(transform, false);
+            var go = Instantiate(deadParticlePrefab, transform);
+            Destroy(go, timeoutDestroyExplosion);
+        }
+
+        void ChangeGameOver()
+        {
+            m_GameManager.ChangeState(new GameStateGameOver());
+        }
+
+        void TryRespawn()
+        {
+            if (getPlayerSettings.lives <= 0)
+            {
+                Invoke(nameof(ChangeGameOver), timeoutReSpawn / 2);
+                return;
+            }
+            Invoke(nameof(Reposition), timeoutReSpawn / 2);
+        }
+
+        void Reposition()
+        {
+            //Debug.Log("Respawn Player");
+            var transform1 = transform;
+            transform1.position = getPlayerSettings.spawnPosition;
+            transform1.rotation = getPlayerSettings.spawnRotation;
+            m_GamePlayManager.OnEventReSpawnEnemiesMaster();
+            Tools.ToggleChildren(transform1);
+            getPlayerSettings.actualFuel = m_GameSettings.startFuel;
+            OnEventPlayerMasterRespawn();
+            Invoke(nameof(ReSpawn), timeoutReSpawn);
+        }
+        void ReSpawn()
+        {
+            m_GamePlayManager.OnEventActivateEnemiesMaster();
             isPlayerDead = false;
             playerMovementStatus = MovementStatus.None;
         }
-        void Init()
-        {
-            isPlayerDead = false;
-            int novoLayer = Mathf.RoundToInt(Mathf.Log(GameManager.instance.layerPlayer.value, 2));
-            gameObject.layer = novoLayer;
-        }
-        public void Init(PlayerSettings player, int id)
-        {
-            Init();
-            /*idPlayer = id;
-            playerSettings = player;
-            name = playerSettings.name;
-            var gameSettings = GameSettings.instance;
-            gameObject.layer = gameSettings.layerPlayer;
-            m_StartPlayerPosition = playerSettings.spawnPosition;
-            transform.position = playerSettings.spawnPosition;
-            transform.rotation = Quaternion.Euler(playerSettings.spawnRotation);
-            playerSettings.lives = playerSettings.startLives;
-            if (playerSettings.lives <= 0 && gameSettings.gameMode.modeId == gameSettings.GetGameModes(0).modeId)
-                playerSettings.InitPlayer();
-            else if (playerSettings.lives.Value <= 0 && gameSettings.gameMode.modeId != gameSettings.GetGameModes(0).modeId)
-                playerSettings.ChangeLife(1);
-            if (gameSettings.gameMode.modeId == gameSettings.GetGameModes(0).modeId ||
-                GameManager.Instance.levelsFinish.Count <= 0)
-                playerSettings.score.SetValue(0);
-            GameManagerSaves.Instance.LoadPlayer(ref playerSettings);
-            //playerSettings.LoadValues(); */
-        }
-        
-        public PlayerSettings GetPlayersSettings()
-        {
-            return playerSettings;
-        }
-        
-        public void SetActualPlayerStateMovement(MovementStatus status)
-        {
-            playerMovementStatus = status;
-        }
 
-        protected internal float GetLastSavePosition() => lastSavePosition;
-        public void AddEnemiesHitList(EnemiesScriptable obstacle, int qnt = 1)
-        {
-            AddResultList(enemiesHitList, obstacle, qnt);
-            AddResultList(GamePlaySettings.instance.hitEnemiesResultsList, obstacle, qnt);
-        }
 
-        static void AddResultList(List<EnemiesResults> list, EnemiesScriptable enemy, int qnt = 1)
+
+        void LogGamePlay(Component component)
         {
-            var itemResults = list.Find(x => x.enemy == enemy);
-            if (itemResults != null)
+            var walls = component.GetComponentInParent<WallsMaster>();
+            var enemies = component.GetComponentInParent<ObstacleMaster>();
+            var bullet = component.GetComponent<BulletEnemy>();
+
+            if (walls != null)
             {
-                if (enemy.GetType() == typeof(CollectibleScriptable))
-                {
-                    var collectibles = (CollectibleScriptable)enemy;
-                    if (itemResults.quantity + qnt < collectibles.maxCollectible)
-                        itemResults.quantity += qnt;
-                    else
-                        itemResults.quantity = collectibles.maxCollectible;
-                }
-                else
-                    itemResults.quantity += qnt;
+                m_GamePlaySettings.playerDieWall += 1;
             }
-            else
+            if (bullet != null)
             {
-                itemResults = new EnemiesResults(enemy, qnt);
-                list.Add(itemResults);
+                m_GamePlaySettings.playerDieBullet += 1;
             }
-        }
-        public void UpdateSavePoint(Vector3 position)
-        {
-            //m_PlayerStartPosition = new Vector3(position.x, transform.position.y, position.z);
-            //SaveWealth();
-            /*if (GameManager.Instance.firebase.MyFirebaseApp != null && GameManager.Instance.firebase.dependencyStatus == Firebase.DependencyStatus.Available)
+            if (enemies != null && enemies is CollectiblesMaster or EffectAreaMaster)
             {
-                Firebase.Analytics.Parameter[] FinishPath =
-                {
-                    new Firebase.Analytics.Parameter(Firebase.Analytics.FirebaseAnalytics.ParameterLevelName, gamePlay.GetActualLevel().GetName), new Firebase.Analytics.Parameter("Milstone", gamePlay.GetActualPath())
-                };
-                Firebase.Analytics.FirebaseAnalytics.LogEvent("FinishPath", FinishPath);
-            }*/
-            //GameManagerSaves.Instance.SavePlayer(playerSettings);
-            //playerSettings.SaveValues();
-        }
-        public bool CouldCollectItem(int max, CollectibleScriptable collectible)
-        {
-            var itemResults = collectiblesCatchList.Find(x => x.enemy == collectible);
-            if (itemResults == null)
-                return true;
-            return max == 0 || itemResults.quantity < max;
-        }
-        public void AddCollectiblesList(CollectibleScriptable collectibles, int qnt = 1)
-        {
-            if (collectibles.collectValuable != 0)
-            {
-                subWealth += collectibles.collectValuable;
+                GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, getPlayerSettings, enemies.enemy, 1, CollisionType.Collected);
             }
-            AddResultList(collectiblesCatchList, collectibles, qnt);
-        }
-        public void AddHitList(EnemiesScriptable obstacle, int qnt = 1)
-        {
-            AddResultList(enemiesHitList, obstacle, qnt);
-            AddResultList(GamePlaySettings.instance.hitEnemiesResultsList, obstacle, qnt);
+            else if (enemies != null)
+            {
+                GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, getPlayerSettings, enemies.enemy, 1, CollisionType.Collider);
+            }
         }
 
         #region Calls
-        
-        //new Calls
-        protected internal void CallEventPlayerShoot()
+        internal void OnEventPlayerMasterHit()
         {
-            EventPlayerMasterPlayerShoot?.Invoke();
-            
+            KillPlayer();
+            EventPlayerMasterHit?.Invoke();
+            TryRespawn();
         }
-        protected internal void CallEventPlayerMasterCollider()
+        void OnEventPlayerMasterRespawn()
         {
-            EventPlayerMasterCollider?.Invoke();
-        }
-        protected internal void CallEventPlayerMasterOnDestroy()
-        {
-            playerMovementStatus = MovementStatus.Paused;
-            isPlayerDead = true;
-            EventPlayerMasterOnDestroy?.Invoke();
-        }
-        protected internal void CallEventPlayerMasterReSpawn()
-        {
-            EventPlayerMasterReSpawn?.Invoke();
-        }
-        
-        public void CallEventPlayerMasterControllerMovement(Vector2 dir)
-        {           
-            EventPlayerMasterControllerMovement?.Invoke(dir);
-        }
-        protected internal void CallEventPlayerBomb()
-        {
-            EventPlayerBomb?.Invoke();
-        }
-        protected internal void CallEventPlayerAddLive()
-        {
-            EventPlayerAddLive?.Invoke();
+            m_GamePlayManager.playerDead = false;
+            EventPlayerMasterRespawn?.Invoke();
         }
 
-        //Old Calls
-        
-        protected internal void CallEventIncreaseHealth(int health)
+        internal void OnEventPlayerMasterControllerMovement(Vector2 dir)
         {
-            EventIncreaseHealth?.Invoke(health);
+            EventPlayerMasterControllerMovement?.Invoke(dir);
         }
-        protected internal void CallEventDecreaseHealth(int health)
+        void OnEventPowerUpRapidFire(bool active)
         {
-            EventDecreaseHealth?.Invoke(health);
-        }
-        public void CallEventChangeSkin(ShopProductSkin skin)
-        {
-            EventChangeSkin?.Invoke(skin);
+            EventPowerUpRapidFire?.Invoke(active);
         }
   #endregion
-       
+
+        void MyDebugStart()
+        {
+            if (!m_GameManager.debugMode) return;
+            transform.position = Vector3.zero;
+        }
+        
     }
 }

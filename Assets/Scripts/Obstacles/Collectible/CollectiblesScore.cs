@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-namespace RiverAttack
+﻿namespace RiverAttack
 {
     public class CollectiblesScore : EnemiesScore
     {
@@ -9,25 +8,35 @@ namespace RiverAttack
         protected override void OnEnable()
         {
             base.OnEnable();
-            m_CollectiblesMaster.CollectibleEvent += SetCollScore;
+            m_CollectiblesMaster.EventCollectItem += SetCollScore;
         }
         protected override void OnDisable()
         {
             base.OnDisable();
-            m_CollectiblesMaster.CollectibleEvent -= SetCollScore;
+            m_CollectiblesMaster.EventCollectItem -= SetCollScore;
         }
   #endregion
-       
+
         protected override void SetInitialReferences()
         {
             base.SetInitialReferences();
             m_CollectiblesMaster = GetComponent<CollectiblesMaster>();
         }
-        
-        void SetCollScore(PlayerMaster playerMaster)
+
+        void SetCollScore(PlayerSettings playerSettings)
         {
-            playerMaster.GetPlayersSettings().score += obstacleMaster.enemy.enemyScore;
+            float score = m_CollectiblesMaster.collectibleScriptable.collectValuable;
+            if (score == 0) return;
+            if (EnemiesMaster.myDifficulty.multiplyScore > 0)
+            {
+                var myDifficulty = EnemiesMaster.myDifficulty;
+                if (myDifficulty.multiplyScore > 0)
+                    score *= myDifficulty.multiplyScore;
+            }
+            if (playerSettings == null) return;
+            playerSettings.score += (int)(score);
+            gamePlayManager.OnEventUpdateScore(playerSettings.score);
+            LogGamePlay(playerSettings.score);
         }
     }
 }
-

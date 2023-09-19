@@ -1,172 +1,216 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 using Utils;
+using Object = UnityEngine.Object;
 namespace RiverAttack
 {
+    public abstract class GameState
+    {
+        public abstract void EnterState();
+        public abstract void UpdateState();
+        public abstract void ExitState();
+    }
+
+    public enum LevelTypes { Menu = 0, Hub = 1, Grass = 2, Forest = 3, Swamp = 4, Antique = 5, Desert = 6, Ice = 7, GameOver = 8, Complete = 9, HUD = 10 }
     public class GameManager : Singleton<GameManager>
     {
-        [SerializeField] internal bool isGameOver;
-        [SerializeField] internal bool isGameStopped;
-        [SerializeField] private bool isGameFinish;
-        [Header("Layer Names")]
+        public bool debugMode;
+        bool m_OnTransition;
+        public PanelManager startMenu;
+
+        public float fadeDurationEnter = 0.5f;
+        public float fadeDurationExit = 0.5f;
+
+        [Header("Layer Settings")]
         public LayerMask layerPlayer;
         public LayerMask layerEnemies;
         public LayerMask layerCollection;
         public LayerMask layerWall;
-        
-        public enum States
+
+        [Header("Player Settings")]
+        public GameObject playerPrefab;
+        public Vector3 spawnPlayerPosition;
+        public List<PlayerSettings> playerSettingsList = new List<PlayerSettings>();
+        [SerializeField] internal List<PlayerMaster> initializedPlayerMasters = new List<PlayerMaster>();
+
+        [Header("Camera Settings"), SerializeField] internal CinemachineVirtualCamera virtualCamera;
+
+        [Header("CutScenes Settings")]
+        [SerializeField]
+        internal PlayableDirector openCutDirector;
+        [SerializeField]
+        internal PlayableDirector endCutDirector;
+
+        #region UnityMethods
+        void Start()
         {
-            Menu,
-            InitialAnimation,
-            WaitGamePlay,
-            GamePlay,
-            GameOver,
-            Results,
-            Credits
-        }
-        [Header("Game States")]
-        [SerializeField]
-        States actualGameState;
-        [SerializeField]
-        float countdownToStartTimer = 3f;
-        [Header("Game Settings")]
-        [SerializeField]
-        GameSettings gameSettings;
-        [SerializeField]
-        public GamePlaySettings gamePlayLog;
-        [SerializeField]
-        protected internal List<Transform> playerObjectAvailableList;
-
-        [Header("Menus")]
-        [SerializeField] Transform Menu;
-        [SerializeField] Transform Touch;
-        [SerializeField] Transform Hud;
-        [SerializeField] Transform BaseScenary;
-        [SerializeField] public Transform pauseButton;
-        [SerializeField] PlayableDirector StartCutScene;
-        
-        private Dictionary<string, object> m_GameplayDefault = new Dictionary<string, object>();
-
-        GamePlayManager m_GamePlayManager;
-
-        //private GameManagerSaves gameSaves;
-
-    #region UNITYMETHODS
-        void Awake()
-        {
-            SetupGame();
-        }
-        void OnEnable()
-        {
-            SetInitialReferences();
-            
+            if (debugMode)
+            {
+                ChangeState(new GameStatePlayGame());
+                return;
+            }
+            ChangeState(new GameStateMenu());
         }
         void Update()
         {
-            switch (actualGameState)
+            currentGameState?.UpdateState();
+
+        }
+  #endregion
+        public GameState currentGameState
+        {
+            get;
+            private set;
+        }
+        internal void ChangeState(GameState newState)
+        {
+            //TODO: melhorar para fazer o state saltar as transições na entrada e na saida. talvez colocar na criação uma bolian para decidir
+            var nState = newState;
+            if (m_OnTransition) return;
+            if (currentGameState != null)
             {
-                case States.Menu:
-                    Debug.Log("Menu+Settings");
-                    SetupMenuInitial();
-                    break;
-                case States.WaitGamePlay:
-                    // Animação de entrada
-                    countdownToStartTimer -= Time.deltaTime;
-                    if (countdownToStartTimer <= 0)
+                if (currentGameState is GameStateOpenCutScene)
+                {
+                    ChangeState(currentGameState, newState);
+                }
+                else
+                {
+                    if (newState is GameStateGameOver or GameStateEndCutScene)
                     {
-                        actualGameState = States.GamePlay;
-                        m_GamePlayManager.CallEventStartPlayGame();
+                        ChangeState(currentGameState, newState);
                     }
-                    break;
-                case States.InitialAnimation:
-                    Debug.Log("GameOver");
-                    break;
-                case States.GamePlay:
-                    //Debug.Log("Começou o jogo");
-                    break;
-                case States.GameOver:
-                    isGameOver = true;
-                    Debug.Log("GameOver");
-                    break;
-                case States.Results:
-                    Debug.Log("Resultados  do jogo");
-                    break;
-                case States.Credits:
-                    Debug.Log("Sobe os Creditos");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                    else
+                    {
+                        m_OnTransition = true;
+                        StartCoroutine(PerformStateTransition(currentGameState, newState));
+                    }
+                }
+
             }
+            else
+            {
+                currentGameState = newState;
+                currentGameState.EnterState();
+            }
+        }
+        public void PauseGame()
+        {
+            ChangeState(new GameStatePause());
+        }
+        public void UnPauseGame()
+        {
+            ChangeState(new GameStatePlayGame());
+        }
+
+        public void ActivePlayers(bool active)
+        {
+            if (initializedPlayerMasters.Count <= 0) return;
+            foreach (var playerMaster in initializedPlayerMasters)
+            {
+                playerMaster.gameObject.SetActive(active);
+            }
+        }
+        public bool haveAnyPlayerInitialized
+        {
+            get { return initializedPlayerMasters.Count > 0; }
+        }
+
+        public void UnPausedMovementPlayers()
+        {
+            if (initializedPlayerMasters.Count <= 0) return;
+            foreach (var playerMaster in initializedPlayerMasters)
+            {
+                playerMaster.playerMovementStatus = PlayerMaster.MovementStatus.None;
+            }
+        }
+
+        void ChangeState(GameState actualState, GameState nextState)
+        {
+            actualState.ExitState();
+
+            currentGameState = nextState;
+            currentGameState.EnterState();
+            if (currentGameState is GameStateGameOver)
+            {
+                Invoke(nameof(GameOverState), .2f);
+            }
+        }
+
+        IEnumerator PerformStateTransition(GameState actualState, GameState nextState)
+        {
+            //Debug.Log($"Start Coroutine");
+            // Implemente o efeito de fade out aqui
+            startMenu.PerformFadeOut();
+
+            yield return new WaitForSeconds(fadeDurationEnter);
+
+            actualState.ExitState();
+            yield return new WaitForSeconds(fadeDurationExit);
+            // Implemente o efeito de fade in aqui
+            startMenu.PerformFadeIn();
+
+            currentGameState = nextState;
+            currentGameState.EnterState();
+            
+            m_OnTransition = false;
+        }
+
+        void GameOverState()
+        {
+            var curr = currentGameState as GameStateGameOver;
+            curr?.GameOverState();
+        }
+
+        public void InstantiatePlayers()
+        {
+            if (initializedPlayerMasters.Count != 0)
+                return;
+            var playerSettings = playerSettingsList[^1];
+            var playerObject = Instantiate(playerPrefab, spawnPlayerPosition, quaternion.identity);
+            playerObject.name = playerSettings.name;
+            var playerMaster = playerObject.GetComponent<PlayerMaster>();
+            playerMaster.SetPlayerSettingsToPlayMaster(playerSettings);
+            initializedPlayerMasters.Add(playerMaster);
+            // Atualiza a cutscene com o animator do jogador;
+            Tools.ChangeBindingReference("Animation Track", playerMaster.GetPlayerAnimator(), openCutDirector);
+            Tools.ChangeBindingReference("Animation Track", playerMaster.GetPlayerAnimator(), endCutDirector);
+            // Coloca o player como Follow da camra
+            Tools.SetFollowVirtualCam(virtualCamera, playerObject.transform);
+        }
+
+        public void PlayEndCutScene()
+        {
+            endCutDirector.Play();
+        }
+
+        public void PlayOpenCutScene()
+        {
+            Invoke(nameof(InvokePlayOpenCutScene),0.2f);
+        }
+        void InvokePlayOpenCutScene()
+        {
+            openCutDirector.Play();
+        }
+
+        
+
+        #region Buttons Actions
+        public void BtnNewGame()
+        {
+            ChangeState(new GameStateOpenCutScene(openCutDirector));
+        }
+
+        public void BtnGameRestart()
+        {
+            int cenaAtual = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(cenaAtual);
         }
         #endregion
 
-        void SetInitialReferences()
-        {
-            m_GamePlayManager = GamePlayManager.instance;
-        }
-
-        public void ChangeStatesGamePlay(States newStates = States.GamePlay)
-        {
-            actualGameState = newStates;
-        }
-        public States GetActualGameState()
-        {
-            return actualGameState;
-        }
-
-        public bool GetGameOver()
-        {
-            return isGameOver;
-        }
-
-        public void SetupGame()
-        {
-            //actualGameState = States.Menu;
-            isGameFinish = false;
-            isGameOver = false;
-            isGameStopped = false;
-        }
-
-        void SetupMenuInitial()
-        {
-            if(Menu != null)Menu.gameObject.SetActive(true);
-            if(Touch != null)Touch.gameObject.SetActive(false);
-            if(Hud != null)Hud.gameObject.SetActive(false);
-            if(BaseScenary != null)BaseScenary.gameObject.SetActive(false);
-            isGameStopped = true;
-            m_GamePlayManager.SetGamePlayPause(true);
-            foreach (var player in playerObjectAvailableList)
-            {
-                player.gameObject.SetActive(true);
-            }
-        }
-
-        public void ButtonNewGame()
-        {
-            ChangeStatesGamePlay(States.WaitGamePlay);
-            isGameStopped = false;
-            BaseScenary.gameObject.SetActive(true);
-            m_GamePlayManager.SetGamePlayPause(true);
-            StartCutScene.Play();
-        }
-
-        void ToggleStopGame()
-        {
-            isGameStopped = !isGameStopped;
-            Time.timeScale = isGameStopped ? 0f : 1f;
-        }
-        
-        public Transform GetActivePlayerTransform(int num = 0)
-        {
-            return playerObjectAvailableList[num];
-        }
-
-        internal void AddActivePlayerObject(Transform activePlayer)
-        {
-            playerObjectAvailableList.Add(activePlayer);
-            
-        }
     }
 }

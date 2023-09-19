@@ -4,41 +4,37 @@ namespace RiverAttack
 {
     public class BulletPlayer : Bullets
     {
-         #region Variable Private Inspector
-        float m_StartTime;
-        #endregion
-
+        GamePlayManager m_GamePlayManager;
         #region UnityMethods
         void OnEnable()
         {
+            m_GamePlayManager = GamePlayManager.instance;
             var audioSource = GetComponent<AudioSource>();
             audioShoot.Play(audioSource);
-            m_StartTime = Time.time + bulletLifeTime;
+            TransformSpawnPosition(transform.root.GetComponentInChildren<PlayerSkinAttach>().transform);
         }
         void FixedUpdate()
         {
             MoveShoot();
-            AutoDestroyMe(m_StartTime);
+            AutoDestroyMe(bulletLifeTime);
         }
         void OnTriggerEnter(Collider collision)
         {
-            if (collision.GetComponentInParent<PlayerMaster>() || collision.GetComponentInParent<BulletPlayer>() || collision.GetComponentInParent<BulletPlayerBomb>()) return;
-            var hitCollectable = collision.transform.GetComponentInParent<ObstacleMaster>();
-            //Debug.Log($"Collider: {hitCollectable}");
-            if (hitCollectable == null && hitCollectable.enemy is CollectibleScriptable) return;
+            if (collision.GetComponentInParent<PlayerMaster>() || collision.GetComponentInParent<BulletPlayer>() || collision.GetComponentInParent<BulletPlayerBomb>() || collision.GetComponent<LevelChangeBGM>()) return;
+            var obstacleMaster = collision.GetComponent<ObstacleMaster>();
+            if (obstacleMaster != null && !obstacleMaster.enemy.canDestruct) return;
+            if (collision.GetComponentInParent<PowerUpMaster>()) return;
             DestroyMe();
         }
         void OnBecameInvisible()
         {
-            //DestroyMe();
             Invoke(nameof(DestroyMe), .01f);
         }
         #endregion
-        
-        
+
         void MoveShoot()
         {
-            if (GamePlayManager.instance.shouldBePlayingGame)
+            if (m_GamePlayManager.shouldBePlayingGame)
             {
                 float speedy = bulletSpeed * Time.deltaTime;
                 transform.Translate(Vector3.forward * speedy);
@@ -48,8 +44,14 @@ namespace RiverAttack
                 DestroyMe();
             }
         }
+        void TransformSpawnPosition(Transform spawnTransform)
+        {
+            var myTransform = transform;
+            var position = spawnTransform.position;
+            myTransform.position = new Vector3(position.x, position.y, position.z);
+            var rotation = spawnTransform.rotation;
+            myTransform.rotation = new Quaternion(rotation.x, rotation.y, rotation.z, rotation.w);
+        }
 
-        
-        
     }
 }

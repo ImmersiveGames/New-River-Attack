@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 4331878798115298}
   - component: {fileID: 33305220092609194}
   - component: {fileID: 23537963625098982}
-  - component: {fileID: 65886632118599488}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -84,27 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65886632118599488
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1001037200117960}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1003651509068942
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,8 +94,7 @@ GameObject:
   - component: {fileID: 4150415832360676}
   - component: {fileID: 33396795623064052}
   - component: {fileID: 23397791223981884}
-  - component: {fileID: 65382121549627750}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -189,27 +166,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65382121549627750
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1003651509068942}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1004715029582456
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,7 +177,7 @@ GameObject:
   - component: {fileID: 4315355289598866}
   - component: {fileID: 33767195770107432}
   - component: {fileID: 23566009873980024}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +260,7 @@ GameObject:
   - component: {fileID: 4262892522445308}
   - component: {fileID: 33537163524389350}
   - component: {fileID: 23516500332677166}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,7 +341,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4988259386287526}
-  m_Layer: 0
+  - component: {fileID: 7243146080765835538}
+  m_Layer: 8
   m_Name: Swamp_River_M12_T1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -428,6 +385,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7243146080765835538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007768909135686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1009327701427344
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +408,7 @@ GameObject:
   - component: {fileID: 4545522695516018}
   - component: {fileID: 33602322796730686}
   - component: {fileID: 23403203100201300}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -522,7 +491,7 @@ GameObject:
   - component: {fileID: 4937599254112184}
   - component: {fileID: 33050313020707490}
   - component: {fileID: 23542959755159298}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -605,7 +574,7 @@ GameObject:
   - component: {fileID: 4385736130613890}
   - component: {fileID: 33470848933981150}
   - component: {fileID: 23143358568645476}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -688,7 +657,7 @@ GameObject:
   - component: {fileID: 4992821908257332}
   - component: {fileID: 33065496878660368}
   - component: {fileID: 23926324218483436}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -771,7 +740,7 @@ GameObject:
   - component: {fileID: 4101098447178778}
   - component: {fileID: 33676760088626822}
   - component: {fileID: 23787756505466828}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -854,7 +823,7 @@ GameObject:
   - component: {fileID: 4203286613805644}
   - component: {fileID: 33442706433248918}
   - component: {fileID: 23972030559426288}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -937,7 +906,7 @@ GameObject:
   - component: {fileID: 4965935994504010}
   - component: {fileID: 33233185626787780}
   - component: {fileID: 23116486632484946}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1021,7 +990,7 @@ GameObject:
   - component: {fileID: 4825733237425520}
   - component: {fileID: 33691439626613212}
   - component: {fileID: 23882683639796986}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1102,7 +1071,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4547653123100986}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1148,7 +1117,7 @@ GameObject:
   - component: {fileID: 4909746515866030}
   - component: {fileID: 33540167989958810}
   - component: {fileID: 23967829520968124}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1231,7 +1200,7 @@ GameObject:
   - component: {fileID: 4785745757707798}
   - component: {fileID: 33223765762685040}
   - component: {fileID: 23185584262912458}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1314,7 +1283,7 @@ GameObject:
   - component: {fileID: 4079171409505480}
   - component: {fileID: 33143444379922278}
   - component: {fileID: 23882456180040004}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1397,7 +1366,7 @@ GameObject:
   - component: {fileID: 4496401722295070}
   - component: {fileID: 33653910317246444}
   - component: {fileID: 23787850385805446}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1480,7 +1449,7 @@ GameObject:
   - component: {fileID: 4669649792111100}
   - component: {fileID: 33880338714940462}
   - component: {fileID: 23327207541349226}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1564,8 +1533,7 @@ GameObject:
   - component: {fileID: 4899865338018060}
   - component: {fileID: 33033046885382004}
   - component: {fileID: 23655530627765450}
-  - component: {fileID: 65625126527984256}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1637,27 +1605,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65625126527984256
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1035070702254210}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1039497467037950
 GameObject:
   m_ObjectHideFlags: 0
@@ -1669,7 +1616,7 @@ GameObject:
   - component: {fileID: 4207844229172616}
   - component: {fileID: 33975013767594244}
   - component: {fileID: 23794364207533284}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1752,7 +1699,7 @@ GameObject:
   - component: {fileID: 4400514546423076}
   - component: {fileID: 33098198270852854}
   - component: {fileID: 23295337625385320}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1835,7 +1782,7 @@ GameObject:
   - component: {fileID: 4069282279503614}
   - component: {fileID: 33251574406559504}
   - component: {fileID: 23371107293628036}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1918,7 +1865,7 @@ GameObject:
   - component: {fileID: 4024690184326458}
   - component: {fileID: 33401044358223020}
   - component: {fileID: 23473983133265072}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2001,8 +1948,7 @@ GameObject:
   - component: {fileID: 4113262246675284}
   - component: {fileID: 33105027559212580}
   - component: {fileID: 23512456828739288}
-  - component: {fileID: 65613276562990684}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2074,27 +2020,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65613276562990684
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1050319370663906}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1050684088606248
 GameObject:
   m_ObjectHideFlags: 0
@@ -2106,7 +2031,7 @@ GameObject:
   - component: {fileID: 4648101615159260}
   - component: {fileID: 33919448661129922}
   - component: {fileID: 23810359419675988}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2190,7 +2115,7 @@ GameObject:
   - component: {fileID: 4210910439268998}
   - component: {fileID: 33927355797093716}
   - component: {fileID: 23312283151248316}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2273,7 +2198,7 @@ GameObject:
   - component: {fileID: 4844224202191400}
   - component: {fileID: 33906830728202966}
   - component: {fileID: 23517094356984856}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2356,7 +2281,7 @@ GameObject:
   - component: {fileID: 4543408627284782}
   - component: {fileID: 33326056031992452}
   - component: {fileID: 23970586914251300}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2440,7 +2365,7 @@ GameObject:
   - component: {fileID: 4757011027782402}
   - component: {fileID: 33875776957666640}
   - component: {fileID: 23568768066325540}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2523,7 +2448,7 @@ GameObject:
   - component: {fileID: 4732228281028118}
   - component: {fileID: 33567394840596146}
   - component: {fileID: 23150677534490750}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2606,7 +2531,7 @@ GameObject:
   - component: {fileID: 4544545531176548}
   - component: {fileID: 33231778598169464}
   - component: {fileID: 23472546286986980}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2689,7 +2614,7 @@ GameObject:
   - component: {fileID: 4614052444243102}
   - component: {fileID: 33042502059615486}
   - component: {fileID: 23675182603567106}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2772,7 +2697,7 @@ GameObject:
   - component: {fileID: 4789042332210616}
   - component: {fileID: 33804045794141692}
   - component: {fileID: 23284058500353542}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2856,7 +2781,7 @@ GameObject:
   - component: {fileID: 4572680220757214}
   - component: {fileID: 33245812404646274}
   - component: {fileID: 23403756447119500}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2940,7 +2865,7 @@ GameObject:
   - component: {fileID: 4857359113215356}
   - component: {fileID: 33268216084202070}
   - component: {fileID: 23792586025184728}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3023,7 +2948,7 @@ GameObject:
   - component: {fileID: 4053827845433902}
   - component: {fileID: 33131273854685912}
   - component: {fileID: 23253668386095556}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3107,7 +3032,7 @@ GameObject:
   - component: {fileID: 4236431194134362}
   - component: {fileID: 33111523118303848}
   - component: {fileID: 23895057192224400}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3190,7 +3115,7 @@ GameObject:
   - component: {fileID: 4055209385516714}
   - component: {fileID: 33288365233127824}
   - component: {fileID: 23304489723037010}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3273,7 +3198,7 @@ GameObject:
   - component: {fileID: 4249842606246958}
   - component: {fileID: 33106541918930676}
   - component: {fileID: 23886753466978776}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3356,7 +3281,7 @@ GameObject:
   - component: {fileID: 4937360253236052}
   - component: {fileID: 33841296773145622}
   - component: {fileID: 23299433367157858}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3439,7 +3364,7 @@ GameObject:
   - component: {fileID: 4734675924428510}
   - component: {fileID: 33952412176136296}
   - component: {fileID: 23533796138097218}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3522,7 +3447,7 @@ GameObject:
   - component: {fileID: 4401834609262558}
   - component: {fileID: 33843762729662094}
   - component: {fileID: 23465310261739488}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3605,7 +3530,7 @@ GameObject:
   - component: {fileID: 4080718254396762}
   - component: {fileID: 33532410430694088}
   - component: {fileID: 23407113790704966}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3688,7 +3613,7 @@ GameObject:
   - component: {fileID: 4882481093788404}
   - component: {fileID: 33296260799609718}
   - component: {fileID: 23960713733258818}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3772,7 +3697,7 @@ GameObject:
   - component: {fileID: 33888266200530954}
   - component: {fileID: 23119713347790052}
   - component: {fileID: 65631120826084912}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3863,8 +3788,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
+  m_Size: {x: 5, y: 6, z: 190}
+  m_Center: {x: -6, y: 3, z: 90}
 --- !u!1 &1132288872159114
 GameObject:
   m_ObjectHideFlags: 0
@@ -3876,8 +3801,7 @@ GameObject:
   - component: {fileID: 4828708967838418}
   - component: {fileID: 33248746806542166}
   - component: {fileID: 23524686678728286}
-  - component: {fileID: 65516798703012070}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3949,27 +3873,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65516798703012070
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1132288872159114}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1132426292333410
 GameObject:
   m_ObjectHideFlags: 0
@@ -3981,8 +3884,7 @@ GameObject:
   - component: {fileID: 4251555680034862}
   - component: {fileID: 33378857726144572}
   - component: {fileID: 23411890684656700}
-  - component: {fileID: 65254650634767112}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4054,27 +3956,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65254650634767112
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1132426292333410}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1132656102474266
 GameObject:
   m_ObjectHideFlags: 0
@@ -4086,7 +3967,7 @@ GameObject:
   - component: {fileID: 4682902446043776}
   - component: {fileID: 33656811530077470}
   - component: {fileID: 23122662084696344}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4169,7 +4050,7 @@ GameObject:
   - component: {fileID: 4168691851647856}
   - component: {fileID: 33406933443593206}
   - component: {fileID: 23109830439585806}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4252,7 +4133,7 @@ GameObject:
   - component: {fileID: 4605964589168792}
   - component: {fileID: 33362730156093202}
   - component: {fileID: 23955748137899310}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4336,7 +4217,7 @@ GameObject:
   - component: {fileID: 4358553556764710}
   - component: {fileID: 33449816287528884}
   - component: {fileID: 23382220245757442}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4417,7 +4298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4662990905110686}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4459,7 +4340,7 @@ GameObject:
   - component: {fileID: 4401614246306338}
   - component: {fileID: 33885983683438678}
   - component: {fileID: 23599354081445736}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4542,7 +4423,7 @@ GameObject:
   - component: {fileID: 4174524137523952}
   - component: {fileID: 33717183173827406}
   - component: {fileID: 23977846508327396}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4626,7 +4507,7 @@ GameObject:
   - component: {fileID: 4623657915685900}
   - component: {fileID: 33883016147962908}
   - component: {fileID: 23697410679140686}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4709,7 +4590,7 @@ GameObject:
   - component: {fileID: 4557948147462444}
   - component: {fileID: 33188260612079184}
   - component: {fileID: 23881300932766622}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4792,7 +4673,7 @@ GameObject:
   - component: {fileID: 4835923566026802}
   - component: {fileID: 33457339577621286}
   - component: {fileID: 23292601456558478}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4875,7 +4756,7 @@ GameObject:
   - component: {fileID: 4677008606196122}
   - component: {fileID: 33791004787626836}
   - component: {fileID: 23549120633165476}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4956,7 +4837,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4220545246716038}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5002,8 +4883,7 @@ GameObject:
   - component: {fileID: 4435886469368370}
   - component: {fileID: 33795623001056384}
   - component: {fileID: 23649038774080924}
-  - component: {fileID: 65707845751966064}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5075,27 +4955,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65707845751966064
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1158896424803548}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1161277105918664
 GameObject:
   m_ObjectHideFlags: 0
@@ -5107,7 +4966,7 @@ GameObject:
   - component: {fileID: 4897316640965140}
   - component: {fileID: 33562655021210722}
   - component: {fileID: 23105199472683866}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5190,8 +5049,7 @@ GameObject:
   - component: {fileID: 4419509061331728}
   - component: {fileID: 33498037215199536}
   - component: {fileID: 23550695513133086}
-  - component: {fileID: 65611465832084302}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5263,27 +5121,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65611465832084302
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1162351962663418}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1162951520482858
 GameObject:
   m_ObjectHideFlags: 0
@@ -5295,7 +5132,7 @@ GameObject:
   - component: {fileID: 4522591561409522}
   - component: {fileID: 33349090989546918}
   - component: {fileID: 23288361792428740}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5378,7 +5215,7 @@ GameObject:
   - component: {fileID: 4273793952515604}
   - component: {fileID: 33974232283154494}
   - component: {fileID: 23486027732997782}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5462,8 +5299,7 @@ GameObject:
   - component: {fileID: 4000645920864986}
   - component: {fileID: 33431660060556612}
   - component: {fileID: 23051447626724834}
-  - component: {fileID: 65322272149323654}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5535,27 +5371,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65322272149323654
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1169452379534698}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1170291605421386
 GameObject:
   m_ObjectHideFlags: 0
@@ -5567,7 +5382,7 @@ GameObject:
   - component: {fileID: 4212802597497720}
   - component: {fileID: 33582673707808008}
   - component: {fileID: 23037699023000132}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5650,7 +5465,7 @@ GameObject:
   - component: {fileID: 4743242247763228}
   - component: {fileID: 33593836531397786}
   - component: {fileID: 23576986798173442}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5734,8 +5549,7 @@ GameObject:
   - component: {fileID: 4182837702635270}
   - component: {fileID: 33653223394157568}
   - component: {fileID: 23150369735101760}
-  - component: {fileID: 65949917182468684}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5807,27 +5621,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65949917182468684
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186183077623962}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1191360362763306
 GameObject:
   m_ObjectHideFlags: 0
@@ -5839,7 +5632,7 @@ GameObject:
   - component: {fileID: 4106438202756654}
   - component: {fileID: 33509088184582466}
   - component: {fileID: 23816562398413388}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5920,7 +5713,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4922716381434224}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5964,8 +5757,7 @@ GameObject:
   - component: {fileID: 4904258931930738}
   - component: {fileID: 33406009240444434}
   - component: {fileID: 23745627976362374}
-  - component: {fileID: 65147302241496308}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6037,27 +5829,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65147302241496308
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1199453348798400}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1204378979813628
 GameObject:
   m_ObjectHideFlags: 0
@@ -6069,7 +5840,7 @@ GameObject:
   - component: {fileID: 4413457620427538}
   - component: {fileID: 33428668171981404}
   - component: {fileID: 23162022442655546}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6152,7 +5923,7 @@ GameObject:
   - component: {fileID: 4711628325861576}
   - component: {fileID: 33482377408638266}
   - component: {fileID: 23394725215923308}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6235,7 +6006,7 @@ GameObject:
   - component: {fileID: 4787393421716198}
   - component: {fileID: 33063259049718604}
   - component: {fileID: 23898529169628620}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6318,7 +6089,7 @@ GameObject:
   - component: {fileID: 4657066626648926}
   - component: {fileID: 33275285133834144}
   - component: {fileID: 23908352580061260}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6401,7 +6172,7 @@ GameObject:
   - component: {fileID: 4687564916170068}
   - component: {fileID: 33104063914073248}
   - component: {fileID: 23457790006166834}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6484,7 +6255,7 @@ GameObject:
   - component: {fileID: 4792296889391478}
   - component: {fileID: 33014388231215788}
   - component: {fileID: 23156868498690366}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6567,7 +6338,7 @@ GameObject:
   - component: {fileID: 4827295096947360}
   - component: {fileID: 33922093873743584}
   - component: {fileID: 23368816375895260}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6648,7 +6419,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4178347256095612}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6692,7 +6463,7 @@ GameObject:
   - component: {fileID: 4014708541683002}
   - component: {fileID: 33376278244832176}
   - component: {fileID: 23141659247978004}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6773,7 +6544,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4748633172640986}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6819,7 +6590,7 @@ GameObject:
   - component: {fileID: 4499358195652354}
   - component: {fileID: 33826844716847532}
   - component: {fileID: 23668210240143822}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6902,7 +6673,7 @@ GameObject:
   - component: {fileID: 4696112444655796}
   - component: {fileID: 33448819981088854}
   - component: {fileID: 23170271230776180}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6985,7 +6756,7 @@ GameObject:
   - component: {fileID: 4960932567714666}
   - component: {fileID: 33172561224666976}
   - component: {fileID: 23554060000861586}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7068,7 +6839,7 @@ GameObject:
   - component: {fileID: 4080129504044358}
   - component: {fileID: 33726493810806850}
   - component: {fileID: 23058346659967554}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7149,7 +6920,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4430208805236462}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7193,7 +6964,7 @@ GameObject:
   - component: {fileID: 4862843711307584}
   - component: {fileID: 33025391867762354}
   - component: {fileID: 23695995682304600}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7276,7 +7047,7 @@ GameObject:
   - component: {fileID: 4524332732805446}
   - component: {fileID: 33345689274525920}
   - component: {fileID: 23653841392599716}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7359,7 +7130,7 @@ GameObject:
   - component: {fileID: 4087811915349060}
   - component: {fileID: 33285041937431076}
   - component: {fileID: 23585656432997530}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7442,8 +7213,7 @@ GameObject:
   - component: {fileID: 4087580366512542}
   - component: {fileID: 33718463509065938}
   - component: {fileID: 23963929302545872}
-  - component: {fileID: 65851461221304362}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7515,27 +7285,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65851461221304362
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1277516389470164}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1277922652451556
 GameObject:
   m_ObjectHideFlags: 0
@@ -7547,7 +7296,7 @@ GameObject:
   - component: {fileID: 4339195372799746}
   - component: {fileID: 33475370366029058}
   - component: {fileID: 23357982539731750}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7631,7 +7380,7 @@ GameObject:
   - component: {fileID: 4129670945285852}
   - component: {fileID: 33451862150614240}
   - component: {fileID: 23189037795969126}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7714,7 +7463,7 @@ GameObject:
   - component: {fileID: 4521336336114572}
   - component: {fileID: 33444142265773210}
   - component: {fileID: 23708743997086958}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7797,7 +7546,7 @@ GameObject:
   - component: {fileID: 4047874936953216}
   - component: {fileID: 33775108244953524}
   - component: {fileID: 23782339758860332}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7880,7 +7629,7 @@ GameObject:
   - component: {fileID: 4261666168974528}
   - component: {fileID: 33389299888853340}
   - component: {fileID: 23036190206129728}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7963,7 +7712,7 @@ GameObject:
   - component: {fileID: 4003857362957898}
   - component: {fileID: 33463507744840140}
   - component: {fileID: 23503256713389482}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8046,8 +7795,7 @@ GameObject:
   - component: {fileID: 4741787805054058}
   - component: {fileID: 33196409231868208}
   - component: {fileID: 23143299684634564}
-  - component: {fileID: 65290346205718196}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8119,27 +7867,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65290346205718196
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1289204896160038}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1292220848124918
 GameObject:
   m_ObjectHideFlags: 0
@@ -8151,7 +7878,7 @@ GameObject:
   - component: {fileID: 4846646701330182}
   - component: {fileID: 33338335423635432}
   - component: {fileID: 23843130267844746}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8234,7 +7961,7 @@ GameObject:
   - component: {fileID: 4582868916484984}
   - component: {fileID: 33192626309011112}
   - component: {fileID: 23784169140956104}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8317,8 +8044,7 @@ GameObject:
   - component: {fileID: 4520604533465262}
   - component: {fileID: 33417242511652822}
   - component: {fileID: 23129010906038072}
-  - component: {fileID: 65061642262151470}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8390,27 +8116,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65061642262151470
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1309468233853304}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1316229890709300
 GameObject:
   m_ObjectHideFlags: 0
@@ -8422,7 +8127,7 @@ GameObject:
   - component: {fileID: 4760246695712684}
   - component: {fileID: 33965072610198314}
   - component: {fileID: 23594485600067638}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8505,7 +8210,7 @@ GameObject:
   - component: {fileID: 4966968058213974}
   - component: {fileID: 33365253119593778}
   - component: {fileID: 23800076298559416}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8589,7 +8294,7 @@ GameObject:
   - component: {fileID: 4258491447873802}
   - component: {fileID: 33881500577380692}
   - component: {fileID: 23531228760907078}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8672,7 +8377,7 @@ GameObject:
   - component: {fileID: 4132204441218288}
   - component: {fileID: 33441412573653222}
   - component: {fileID: 23856561455974884}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8755,8 +8460,7 @@ GameObject:
   - component: {fileID: 4558544081893010}
   - component: {fileID: 33778119076016044}
   - component: {fileID: 23580187113187516}
-  - component: {fileID: 65802858978360570}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8828,27 +8532,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65802858978360570
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1326307309131972}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1331478768362912
 GameObject:
   m_ObjectHideFlags: 0
@@ -8860,7 +8543,7 @@ GameObject:
   - component: {fileID: 4898290989135118}
   - component: {fileID: 33673976617629028}
   - component: {fileID: 23230255161710494}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8943,7 +8626,7 @@ GameObject:
   - component: {fileID: 4455749800768438}
   - component: {fileID: 33286769399755982}
   - component: {fileID: 23180569792478720}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9027,7 +8710,7 @@ GameObject:
   - component: {fileID: 4983796668439584}
   - component: {fileID: 33021161260008914}
   - component: {fileID: 23635884479982236}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9111,7 +8794,7 @@ GameObject:
   - component: {fileID: 4709125053030258}
   - component: {fileID: 33841792104848656}
   - component: {fileID: 23317183141853980}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9194,7 +8877,7 @@ GameObject:
   - component: {fileID: 4386612668649818}
   - component: {fileID: 33441201393489698}
   - component: {fileID: 23089140406740368}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9277,8 +8960,7 @@ GameObject:
   - component: {fileID: 4608957028394040}
   - component: {fileID: 33325780049561652}
   - component: {fileID: 23074169308023648}
-  - component: {fileID: 65031288475910128}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9350,27 +9032,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65031288475910128
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1369239809572986}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1370156057755872
 GameObject:
   m_ObjectHideFlags: 0
@@ -9382,7 +9043,7 @@ GameObject:
   - component: {fileID: 4494915002813782}
   - component: {fileID: 33612940670280812}
   - component: {fileID: 23291209700248776}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9463,7 +9124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4633930971486524}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9507,7 +9168,7 @@ GameObject:
   - component: {fileID: 4661894314399036}
   - component: {fileID: 33957025260469228}
   - component: {fileID: 23191164669938416}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9590,7 +9251,7 @@ GameObject:
   - component: {fileID: 4037796717573278}
   - component: {fileID: 33847468707025376}
   - component: {fileID: 23756621700332766}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9673,8 +9334,7 @@ GameObject:
   - component: {fileID: 4375618220413516}
   - component: {fileID: 33865137877153678}
   - component: {fileID: 23977212939565384}
-  - component: {fileID: 65683520713957858}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9746,27 +9406,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65683520713957858
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1389932682342396}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1390453992710002
 GameObject:
   m_ObjectHideFlags: 0
@@ -9778,7 +9417,7 @@ GameObject:
   - component: {fileID: 4950822893723064}
   - component: {fileID: 33770074247207060}
   - component: {fileID: 23678539015749162}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9861,7 +9500,7 @@ GameObject:
   - component: {fileID: 4301630167884032}
   - component: {fileID: 33634553614339350}
   - component: {fileID: 23117170874469200}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9944,7 +9583,7 @@ GameObject:
   - component: {fileID: 4261704690662676}
   - component: {fileID: 33744709478891838}
   - component: {fileID: 23779382871855914}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10027,7 +9666,7 @@ GameObject:
   - component: {fileID: 4184819296769644}
   - component: {fileID: 33498092430373196}
   - component: {fileID: 23841178994458856}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10110,7 +9749,7 @@ GameObject:
   - component: {fileID: 4154979498588702}
   - component: {fileID: 33229476731693386}
   - component: {fileID: 23081973692800960}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10193,7 +9832,7 @@ GameObject:
   - component: {fileID: 4073776232887058}
   - component: {fileID: 33804091268456896}
   - component: {fileID: 23680279536512830}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10276,7 +9915,7 @@ GameObject:
   - component: {fileID: 4089231190145282}
   - component: {fileID: 33450394772814856}
   - component: {fileID: 23429425324550870}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10357,7 +9996,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4934732078346030}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10399,7 +10038,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4711842302783272}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10446,7 +10085,7 @@ GameObject:
   - component: {fileID: 33354591042120350}
   - component: {fileID: 23795737788064020}
   - component: {fileID: 65387208948605446}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10537,8 +10176,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
+  m_Size: {x: 5, y: 6, z: 190}
+  m_Center: {x: -6, y: 3, z: -90}
 --- !u!1 &1429732811685070
 GameObject:
   m_ObjectHideFlags: 0
@@ -10550,7 +10189,7 @@ GameObject:
   - component: {fileID: 4095071622632256}
   - component: {fileID: 33499784140195316}
   - component: {fileID: 23317293099505188}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10633,7 +10272,7 @@ GameObject:
   - component: {fileID: 4467346007085562}
   - component: {fileID: 33629719476725154}
   - component: {fileID: 23117093430121910}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10716,7 +10355,7 @@ GameObject:
   - component: {fileID: 4778474296835930}
   - component: {fileID: 33950024918431044}
   - component: {fileID: 23998954680727118}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10800,7 +10439,7 @@ GameObject:
   - component: {fileID: 33550494114355020}
   - component: {fileID: 23349778341897312}
   - component: {fileID: 65500350520929186}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass_collider
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10891,8 +10530,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 0.90000004, z: 10}
-  m_Center: {x: 0, y: 0.45000002, z: 0}
+  m_Size: {x: 10, y: 6, z: 10}
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1437562728769142
 GameObject:
   m_ObjectHideFlags: 0
@@ -10904,7 +10543,7 @@ GameObject:
   - component: {fileID: 4855611754028232}
   - component: {fileID: 33155628631396242}
   - component: {fileID: 23219783052603676}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10987,7 +10626,7 @@ GameObject:
   - component: {fileID: 4875645505005680}
   - component: {fileID: 33447963051312816}
   - component: {fileID: 23273927394977802}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11071,7 +10710,7 @@ GameObject:
   - component: {fileID: 4600351526319018}
   - component: {fileID: 33469936650555122}
   - component: {fileID: 23249169012588108}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11154,7 +10793,7 @@ GameObject:
   - component: {fileID: 4618252461374920}
   - component: {fileID: 33467636500839304}
   - component: {fileID: 23166187264507956}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11237,8 +10876,7 @@ GameObject:
   - component: {fileID: 4434825629773638}
   - component: {fileID: 33031948673598514}
   - component: {fileID: 23230975781094980}
-  - component: {fileID: 65299438061709786}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11310,27 +10948,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65299438061709786
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1444394474222430}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1444419296859442
 GameObject:
   m_ObjectHideFlags: 0
@@ -11342,7 +10959,7 @@ GameObject:
   - component: {fileID: 4562842769501324}
   - component: {fileID: 33268865570721716}
   - component: {fileID: 23395183942883970}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11425,7 +11042,7 @@ GameObject:
   - component: {fileID: 4192481862217814}
   - component: {fileID: 33117538330513010}
   - component: {fileID: 23681618590234240}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11506,7 +11123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4836067058674238}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11552,7 +11169,7 @@ GameObject:
   - component: {fileID: 4336301867503698}
   - component: {fileID: 33986591772432904}
   - component: {fileID: 23388048503100946}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11635,7 +11252,7 @@ GameObject:
   - component: {fileID: 4631724931327646}
   - component: {fileID: 33909959925937374}
   - component: {fileID: 23124173423158570}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11718,7 +11335,7 @@ GameObject:
   - component: {fileID: 4849937760135218}
   - component: {fileID: 33317535741011960}
   - component: {fileID: 23164419640701010}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11799,7 +11416,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4816669773085994}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11845,7 +11462,7 @@ GameObject:
   - component: {fileID: 4222788196974610}
   - component: {fileID: 33539890506658284}
   - component: {fileID: 23602145903026698}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11929,7 +11546,7 @@ GameObject:
   - component: {fileID: 4750882916713152}
   - component: {fileID: 33193869942769338}
   - component: {fileID: 23818658808483416}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12012,7 +11629,7 @@ GameObject:
   - component: {fileID: 4676695336595410}
   - component: {fileID: 33633877616403858}
   - component: {fileID: 23981310628323994}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12096,7 +11713,7 @@ GameObject:
   - component: {fileID: 4106848017722234}
   - component: {fileID: 33304137469498110}
   - component: {fileID: 23147589032634298}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12179,7 +11796,7 @@ GameObject:
   - component: {fileID: 4972947616673898}
   - component: {fileID: 33017668616865246}
   - component: {fileID: 23476907938644086}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12263,8 +11880,7 @@ GameObject:
   - component: {fileID: 4899213812661218}
   - component: {fileID: 33931180024096048}
   - component: {fileID: 23506234177569062}
-  - component: {fileID: 65912240923949702}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12336,27 +11952,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65912240923949702
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1481356901988356}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1484996780567084
 GameObject:
   m_ObjectHideFlags: 0
@@ -12368,7 +11963,7 @@ GameObject:
   - component: {fileID: 4180578073511204}
   - component: {fileID: 33197212188169840}
   - component: {fileID: 23174493201786988}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12451,7 +12046,7 @@ GameObject:
   - component: {fileID: 4935107715158144}
   - component: {fileID: 33619276041607776}
   - component: {fileID: 23211273933038904}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12534,7 +12129,7 @@ GameObject:
   - component: {fileID: 4088539644719202}
   - component: {fileID: 33801022704764800}
   - component: {fileID: 23542205008548044}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12617,7 +12212,7 @@ GameObject:
   - component: {fileID: 4588326498706270}
   - component: {fileID: 33363201839125314}
   - component: {fileID: 23017079568513810}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12700,7 +12295,7 @@ GameObject:
   - component: {fileID: 4641117528807366}
   - component: {fileID: 33383428835060056}
   - component: {fileID: 23273199328412158}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12784,7 +12379,7 @@ GameObject:
   - component: {fileID: 4993657596939354}
   - component: {fileID: 33109073703336306}
   - component: {fileID: 23807034976451600}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12867,7 +12462,7 @@ GameObject:
   - component: {fileID: 4740928508074368}
   - component: {fileID: 33233214818276906}
   - component: {fileID: 23071462867475476}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12950,7 +12545,7 @@ GameObject:
   - component: {fileID: 4910727503714372}
   - component: {fileID: 33981914900025896}
   - component: {fileID: 23444561266885240}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13033,7 +12628,7 @@ GameObject:
   - component: {fileID: 4741482230420494}
   - component: {fileID: 33120687127775590}
   - component: {fileID: 23189818759633050}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13114,7 +12709,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4315788906365002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13156,7 +12751,7 @@ GameObject:
   - component: {fileID: 4294621201675378}
   - component: {fileID: 33167185020024692}
   - component: {fileID: 23192546839409188}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13240,7 +12835,7 @@ GameObject:
   - component: {fileID: 4153888670670344}
   - component: {fileID: 33359350752292548}
   - component: {fileID: 23252926613252680}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13323,7 +12918,7 @@ GameObject:
   - component: {fileID: 4519590915897156}
   - component: {fileID: 33703848424370098}
   - component: {fileID: 23048500603558782}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13407,7 +13002,7 @@ GameObject:
   - component: {fileID: 4452183474345892}
   - component: {fileID: 33195169831370236}
   - component: {fileID: 23113564859198466}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13491,7 +13086,7 @@ GameObject:
   - component: {fileID: 4843940935276640}
   - component: {fileID: 33936783584342222}
   - component: {fileID: 23106286940181696}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13574,7 +13169,7 @@ GameObject:
   - component: {fileID: 4502670686155440}
   - component: {fileID: 33888577138515210}
   - component: {fileID: 23203438651206502}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13657,7 +13252,7 @@ GameObject:
   - component: {fileID: 4363747284115732}
   - component: {fileID: 33733009367378752}
   - component: {fileID: 23553513745496904}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13738,7 +13333,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4545275050178572}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13782,7 +13377,7 @@ GameObject:
   - component: {fileID: 4409756438925764}
   - component: {fileID: 33529390795532758}
   - component: {fileID: 23951414875585860}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13865,8 +13460,7 @@ GameObject:
   - component: {fileID: 4007905056556030}
   - component: {fileID: 33523805983867532}
   - component: {fileID: 23842702926815570}
-  - component: {fileID: 65531589352289618}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13938,27 +13532,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65531589352289618
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1561151626330088}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1564809342813042
 GameObject:
   m_ObjectHideFlags: 0
@@ -13970,7 +13543,7 @@ GameObject:
   - component: {fileID: 4742305845985636}
   - component: {fileID: 33915991310654436}
   - component: {fileID: 23655141826262626}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14053,7 +13626,7 @@ GameObject:
   - component: {fileID: 4134845177498830}
   - component: {fileID: 33220841320719972}
   - component: {fileID: 23587717610161044}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14136,7 +13709,7 @@ GameObject:
   - component: {fileID: 4112816795178144}
   - component: {fileID: 33905419427384504}
   - component: {fileID: 23969119660376556}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14219,7 +13792,7 @@ GameObject:
   - component: {fileID: 4588534380030334}
   - component: {fileID: 33467321464088664}
   - component: {fileID: 23472494674715136}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14302,7 +13875,7 @@ GameObject:
   - component: {fileID: 4561016202645460}
   - component: {fileID: 33345057157100340}
   - component: {fileID: 23351271971997078}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14385,7 +13958,7 @@ GameObject:
   - component: {fileID: 4036628638707408}
   - component: {fileID: 33596340813457990}
   - component: {fileID: 23130531979505574}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14468,7 +14041,7 @@ GameObject:
   - component: {fileID: 4525360699866538}
   - component: {fileID: 33692210217865768}
   - component: {fileID: 23253752267153868}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14551,7 +14124,7 @@ GameObject:
   - component: {fileID: 4178919720349928}
   - component: {fileID: 33342742682692654}
   - component: {fileID: 23032981981763146}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14634,7 +14207,7 @@ GameObject:
   - component: {fileID: 4154008220280916}
   - component: {fileID: 33962209382790384}
   - component: {fileID: 23030631609136730}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14717,7 +14290,7 @@ GameObject:
   - component: {fileID: 4957016582346658}
   - component: {fileID: 33233037416869878}
   - component: {fileID: 23716573053642110}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14800,7 +14373,7 @@ GameObject:
   - component: {fileID: 4850313360993716}
   - component: {fileID: 33597376331425128}
   - component: {fileID: 23123473328591248}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14883,7 +14456,7 @@ GameObject:
   - component: {fileID: 4703837796206020}
   - component: {fileID: 33602995396162406}
   - component: {fileID: 23237131098455692}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14967,7 +14540,7 @@ GameObject:
   - component: {fileID: 4243980141830130}
   - component: {fileID: 33880526314572750}
   - component: {fileID: 23256496771018664}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15050,7 +14623,7 @@ GameObject:
   - component: {fileID: 4542020868673928}
   - component: {fileID: 33040539882480600}
   - component: {fileID: 23749607485572234}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15133,7 +14706,7 @@ GameObject:
   - component: {fileID: 4427550787302602}
   - component: {fileID: 33527038007988300}
   - component: {fileID: 23414102077437660}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15217,7 +14790,7 @@ GameObject:
   - component: {fileID: 4363491703940216}
   - component: {fileID: 33805977365175864}
   - component: {fileID: 23523021759019170}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15300,7 +14873,7 @@ GameObject:
   - component: {fileID: 4409623473543886}
   - component: {fileID: 33601656327184466}
   - component: {fileID: 23058201537532316}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15384,7 +14957,7 @@ GameObject:
   - component: {fileID: 4785109805962702}
   - component: {fileID: 33613454271960696}
   - component: {fileID: 23199633455559992}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15467,7 +15040,7 @@ GameObject:
   - component: {fileID: 4659249605371938}
   - component: {fileID: 33070182016044370}
   - component: {fileID: 23245977197187220}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15550,8 +15123,7 @@ GameObject:
   - component: {fileID: 4921308529518918}
   - component: {fileID: 33710363513924300}
   - component: {fileID: 23697366692706372}
-  - component: {fileID: 65542182234832206}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15623,27 +15195,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65542182234832206
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627513126208260}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1629715100427686
 GameObject:
   m_ObjectHideFlags: 0
@@ -15655,7 +15206,7 @@ GameObject:
   - component: {fileID: 4830765987881736}
   - component: {fileID: 33395757670112544}
   - component: {fileID: 23492117964214960}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15738,7 +15289,7 @@ GameObject:
   - component: {fileID: 4501346062094740}
   - component: {fileID: 33380844277531310}
   - component: {fileID: 23474324316754974}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15821,7 +15372,7 @@ GameObject:
   - component: {fileID: 4435154025419256}
   - component: {fileID: 33980517405411066}
   - component: {fileID: 23417574245103160}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15904,7 +15455,7 @@ GameObject:
   - component: {fileID: 4771698650205330}
   - component: {fileID: 33485982317818990}
   - component: {fileID: 23735490775055320}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15987,8 +15538,7 @@ GameObject:
   - component: {fileID: 4906288811302746}
   - component: {fileID: 33070735650159730}
   - component: {fileID: 23412155505182248}
-  - component: {fileID: 65220088864802920}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16060,27 +15610,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65220088864802920
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1644653086676326}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1653563165406864
 GameObject:
   m_ObjectHideFlags: 0
@@ -16092,7 +15621,7 @@ GameObject:
   - component: {fileID: 4814203543302324}
   - component: {fileID: 33589700911354074}
   - component: {fileID: 23448378479197706}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16175,7 +15704,7 @@ GameObject:
   - component: {fileID: 4723428125949712}
   - component: {fileID: 33976501454124236}
   - component: {fileID: 23971959991341408}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16258,8 +15787,7 @@ GameObject:
   - component: {fileID: 4555615392052274}
   - component: {fileID: 33526982180384302}
   - component: {fileID: 23102776882342424}
-  - component: {fileID: 65488169866025820}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16331,27 +15859,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65488169866025820
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1667473136348950}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1670929834757298
 GameObject:
   m_ObjectHideFlags: 0
@@ -16363,7 +15870,7 @@ GameObject:
   - component: {fileID: 4836974806097762}
   - component: {fileID: 33183164000034060}
   - component: {fileID: 23844960645428096}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16446,8 +15953,7 @@ GameObject:
   - component: {fileID: 4370580184645966}
   - component: {fileID: 33908307520023100}
   - component: {fileID: 23499747816936366}
-  - component: {fileID: 65901454533530778}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16519,27 +16025,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65901454533530778
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1674828296935320}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1676121806597624
 GameObject:
   m_ObjectHideFlags: 0
@@ -16551,8 +16036,7 @@ GameObject:
   - component: {fileID: 4332239244773404}
   - component: {fileID: 33238650071790248}
   - component: {fileID: 23137983366324504}
-  - component: {fileID: 65900336937152660}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16624,27 +16108,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65900336937152660
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1676121806597624}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1678818755929680
 GameObject:
   m_ObjectHideFlags: 0
@@ -16656,7 +16119,7 @@ GameObject:
   - component: {fileID: 4683944961167786}
   - component: {fileID: 33073039352271130}
   - component: {fileID: 23234036489030452}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16739,8 +16202,7 @@ GameObject:
   - component: {fileID: 4467471889107122}
   - component: {fileID: 33906492465268124}
   - component: {fileID: 23757143401738894}
-  - component: {fileID: 65701114961597640}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16812,27 +16274,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65701114961597640
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1680428779134316}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1680655425153670
 GameObject:
   m_ObjectHideFlags: 0
@@ -16844,7 +16285,7 @@ GameObject:
   - component: {fileID: 4992284582201246}
   - component: {fileID: 33586526743445022}
   - component: {fileID: 23275292063716422}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16928,7 +16369,7 @@ GameObject:
   - component: {fileID: 33379147519218188}
   - component: {fileID: 23261779890864778}
   - component: {fileID: 65587895651078944}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17019,8 +16460,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
+  m_Size: {x: 3, y: 6, z: 10}
+  m_Center: {x: -3.5, y: 3, z: 0}
 --- !u!1 &1685925853527834
 GameObject:
   m_ObjectHideFlags: 0
@@ -17032,7 +16473,7 @@ GameObject:
   - component: {fileID: 4452285882340298}
   - component: {fileID: 33349221153045860}
   - component: {fileID: 23404176284469770}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17115,7 +16556,7 @@ GameObject:
   - component: {fileID: 4630965328558986}
   - component: {fileID: 33590917881978416}
   - component: {fileID: 23513268720039338}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17199,8 +16640,7 @@ GameObject:
   - component: {fileID: 4912498655475796}
   - component: {fileID: 33862948194923394}
   - component: {fileID: 23172983861890588}
-  - component: {fileID: 65625152192382338}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17272,27 +16712,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65625152192382338
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1692561840681522}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1693472743879826
 GameObject:
   m_ObjectHideFlags: 0
@@ -17304,7 +16723,7 @@ GameObject:
   - component: {fileID: 4881446935093962}
   - component: {fileID: 33665531067337700}
   - component: {fileID: 23436908285442858}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17387,7 +16806,7 @@ GameObject:
   - component: {fileID: 4611149551241072}
   - component: {fileID: 33666674187715178}
   - component: {fileID: 23399532003133582}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17470,7 +16889,7 @@ GameObject:
   - component: {fileID: 4433912627062366}
   - component: {fileID: 33672703681770184}
   - component: {fileID: 23946279679597548}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17553,7 +16972,7 @@ GameObject:
   - component: {fileID: 4655380403180166}
   - component: {fileID: 33510127952575642}
   - component: {fileID: 23309114539893230}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17636,7 +17055,7 @@ GameObject:
   - component: {fileID: 4377452909362934}
   - component: {fileID: 33818162640084250}
   - component: {fileID: 23146333330508734}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17719,7 +17138,7 @@ GameObject:
   - component: {fileID: 4138337842100324}
   - component: {fileID: 33528823805411168}
   - component: {fileID: 23080380281218280}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17802,7 +17221,7 @@ GameObject:
   - component: {fileID: 4030851526746098}
   - component: {fileID: 33442109189224532}
   - component: {fileID: 23800984881301522}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17886,8 +17305,7 @@ GameObject:
   - component: {fileID: 4567580763624550}
   - component: {fileID: 33573569474989402}
   - component: {fileID: 23575005968724080}
-  - component: {fileID: 65424326908461542}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17959,27 +17377,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65424326908461542
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1708922622263010}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1713118106574990
 GameObject:
   m_ObjectHideFlags: 0
@@ -17992,7 +17389,7 @@ GameObject:
   - component: {fileID: 33599792165438214}
   - component: {fileID: 23614882244161650}
   - component: {fileID: 65662690919070580}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass_collider
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18083,8 +17480,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 0.90000004, z: 10}
-  m_Center: {x: 0, y: 0.45000002, z: 0}
+  m_Size: {x: 10, y: 6, z: 10}
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1719075452489594
 GameObject:
   m_ObjectHideFlags: 0
@@ -18094,7 +17491,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4555393908491922}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18138,7 +17535,7 @@ GameObject:
   - component: {fileID: 4540357817464268}
   - component: {fileID: 33032347720518364}
   - component: {fileID: 23892662589570222}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18221,7 +17618,7 @@ GameObject:
   - component: {fileID: 4344489718601950}
   - component: {fileID: 33245975529611454}
   - component: {fileID: 23483412894378546}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18305,7 +17702,7 @@ GameObject:
   - component: {fileID: 4998113275777696}
   - component: {fileID: 33913064684007858}
   - component: {fileID: 23292816979959380}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18389,8 +17786,7 @@ GameObject:
   - component: {fileID: 4519160569095248}
   - component: {fileID: 33371852280285748}
   - component: {fileID: 23116771072189498}
-  - component: {fileID: 65092925793886884}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18462,27 +17858,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65092925793886884
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1730889362557590}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1741783443224398
 GameObject:
   m_ObjectHideFlags: 0
@@ -18492,7 +17867,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4656567592585340}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18538,7 +17913,7 @@ GameObject:
   - component: {fileID: 4134867968644286}
   - component: {fileID: 33045016480208144}
   - component: {fileID: 23306954397254220}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18619,7 +17994,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4218842510431730}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18665,7 +18040,7 @@ GameObject:
   - component: {fileID: 4568946919716252}
   - component: {fileID: 33159231465111680}
   - component: {fileID: 23475332234331782}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18748,7 +18123,7 @@ GameObject:
   - component: {fileID: 4200499984609420}
   - component: {fileID: 33792161365781602}
   - component: {fileID: 23053621891345080}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18831,7 +18206,7 @@ GameObject:
   - component: {fileID: 4899790818825732}
   - component: {fileID: 33372021573139274}
   - component: {fileID: 23215348612530670}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18914,7 +18289,7 @@ GameObject:
   - component: {fileID: 4444840067383772}
   - component: {fileID: 33073452387956444}
   - component: {fileID: 23058020908625236}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18997,7 +18372,7 @@ GameObject:
   - component: {fileID: 4015147508143122}
   - component: {fileID: 33771253385665788}
   - component: {fileID: 23594347377511496}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19081,8 +18456,7 @@ GameObject:
   - component: {fileID: 4640958454266322}
   - component: {fileID: 33840283461010708}
   - component: {fileID: 23054102289934170}
-  - component: {fileID: 65878150315855808}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19154,27 +18528,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65878150315855808
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1761940068968228}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1765692163837650
 GameObject:
   m_ObjectHideFlags: 0
@@ -19186,7 +18539,7 @@ GameObject:
   - component: {fileID: 4022998240499496}
   - component: {fileID: 33822444389409696}
   - component: {fileID: 23587325426125190}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19269,7 +18622,7 @@ GameObject:
   - component: {fileID: 4665255240744364}
   - component: {fileID: 33046410593555916}
   - component: {fileID: 23258195396316112}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19352,7 +18705,7 @@ GameObject:
   - component: {fileID: 4425861608937136}
   - component: {fileID: 33393441178636556}
   - component: {fileID: 23153468383293854}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19435,8 +18788,7 @@ GameObject:
   - component: {fileID: 4897220630093836}
   - component: {fileID: 33889851247350130}
   - component: {fileID: 23492998580747002}
-  - component: {fileID: 65833200454787312}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19508,27 +18860,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65833200454787312
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1776692857575582}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1782451206350436
 GameObject:
   m_ObjectHideFlags: 0
@@ -19540,8 +18871,7 @@ GameObject:
   - component: {fileID: 4471519086114822}
   - component: {fileID: 33541247376278166}
   - component: {fileID: 23447796405856440}
-  - component: {fileID: 65165516169832640}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19613,27 +18943,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65165516169832640
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782451206350436}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1782915544829162
 GameObject:
   m_ObjectHideFlags: 0
@@ -19645,7 +18954,7 @@ GameObject:
   - component: {fileID: 4992791604234124}
   - component: {fileID: 33291466184183716}
   - component: {fileID: 23876637017704526}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19728,7 +19037,7 @@ GameObject:
   - component: {fileID: 4084579355581528}
   - component: {fileID: 33940239796696394}
   - component: {fileID: 23534776646629904}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19809,7 +19118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4691588626549758}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19854,8 +19163,7 @@ GameObject:
   - component: {fileID: 4582491760910480}
   - component: {fileID: 33546622812359546}
   - component: {fileID: 23136065793444562}
-  - component: {fileID: 65543261832691346}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19927,27 +19235,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65543261832691346
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1787336746392762}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1790174929799498
 GameObject:
   m_ObjectHideFlags: 0
@@ -19959,7 +19246,7 @@ GameObject:
   - component: {fileID: 4483652409049546}
   - component: {fileID: 33278963263590922}
   - component: {fileID: 23639922155424670}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20042,7 +19329,7 @@ GameObject:
   - component: {fileID: 4115834072718268}
   - component: {fileID: 33246008689652450}
   - component: {fileID: 23626301360746868}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20125,8 +19412,7 @@ GameObject:
   - component: {fileID: 4804652373492110}
   - component: {fileID: 33628291856938912}
   - component: {fileID: 23362339431329816}
-  - component: {fileID: 65492515493047660}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20198,27 +19484,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65492515493047660
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1801222886851632}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1804566452683800
 GameObject:
   m_ObjectHideFlags: 0
@@ -20230,7 +19495,7 @@ GameObject:
   - component: {fileID: 4818940211783438}
   - component: {fileID: 33271916416770640}
   - component: {fileID: 23149252216885488}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20311,7 +19576,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4920775185142292}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20357,7 +19622,7 @@ GameObject:
   - component: {fileID: 4205963827319056}
   - component: {fileID: 33152336871737812}
   - component: {fileID: 23747606259937916}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20439,7 +19704,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4548477824079516}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20485,7 +19750,7 @@ GameObject:
   - component: {fileID: 4042012323899774}
   - component: {fileID: 33202014595138080}
   - component: {fileID: 23363907490588470}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20568,7 +19833,7 @@ GameObject:
   - component: {fileID: 4320823773858638}
   - component: {fileID: 33710607126506562}
   - component: {fileID: 23756568275107040}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20651,7 +19916,7 @@ GameObject:
   - component: {fileID: 4018179223330400}
   - component: {fileID: 33308307390715542}
   - component: {fileID: 23592268816242274}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20734,7 +19999,7 @@ GameObject:
   - component: {fileID: 4038824611400708}
   - component: {fileID: 33246694613239918}
   - component: {fileID: 23863610392809076}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20817,7 +20082,7 @@ GameObject:
   - component: {fileID: 4298651184986054}
   - component: {fileID: 33607020275398722}
   - component: {fileID: 23509324584969228}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20900,7 +20165,7 @@ GameObject:
   - component: {fileID: 4138703254902280}
   - component: {fileID: 33318741587195816}
   - component: {fileID: 23893296178711962}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20983,7 +20248,7 @@ GameObject:
   - component: {fileID: 4260331800750028}
   - component: {fileID: 33959888896179776}
   - component: {fileID: 23381123342980048}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21066,7 +20331,7 @@ GameObject:
   - component: {fileID: 4930922602574408}
   - component: {fileID: 33600538998330394}
   - component: {fileID: 23344188023573240}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21149,7 +20414,7 @@ GameObject:
   - component: {fileID: 4134105041130910}
   - component: {fileID: 33459817398229586}
   - component: {fileID: 23185971733488208}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21232,7 +20497,7 @@ GameObject:
   - component: {fileID: 4795689922007920}
   - component: {fileID: 33617651556636428}
   - component: {fileID: 23703680414640434}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21316,7 +20581,7 @@ GameObject:
   - component: {fileID: 4108111666085374}
   - component: {fileID: 33525289713161530}
   - component: {fileID: 23157059534821672}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21399,7 +20664,7 @@ GameObject:
   - component: {fileID: 4703606949136064}
   - component: {fileID: 33632485071754332}
   - component: {fileID: 23240838941315104}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21482,7 +20747,7 @@ GameObject:
   - component: {fileID: 4696191283548102}
   - component: {fileID: 33109161088513432}
   - component: {fileID: 23007537755652170}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21565,7 +20830,7 @@ GameObject:
   - component: {fileID: 4516240522247622}
   - component: {fileID: 33731607892219814}
   - component: {fileID: 23709004571729214}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21648,7 +20913,7 @@ GameObject:
   - component: {fileID: 4109943687207030}
   - component: {fileID: 33870936432109506}
   - component: {fileID: 23549345071618614}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21732,7 +20997,7 @@ GameObject:
   - component: {fileID: 4442100792384976}
   - component: {fileID: 33532069253867966}
   - component: {fileID: 23665748903382574}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21815,7 +21080,7 @@ GameObject:
   - component: {fileID: 4827188546088502}
   - component: {fileID: 33592652892015886}
   - component: {fileID: 23629682338647968}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21898,7 +21163,7 @@ GameObject:
   - component: {fileID: 4328250101133252}
   - component: {fileID: 33253277514538400}
   - component: {fileID: 23039195932530492}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21979,7 +21244,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4910543524835438}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Laterais
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22014,7 +21279,7 @@ GameObject:
   - component: {fileID: 4184062811593910}
   - component: {fileID: 33662629998260430}
   - component: {fileID: 23423088175726776}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -22098,7 +21363,7 @@ GameObject:
   - component: {fileID: 4594934293664096}
   - component: {fileID: 33136470474288892}
   - component: {fileID: 23766544168832176}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22181,8 +21446,7 @@ GameObject:
   - component: {fileID: 4310985155601122}
   - component: {fileID: 33904655255357084}
   - component: {fileID: 23588462580771900}
-  - component: {fileID: 65416183556999052}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -22254,27 +21518,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65416183556999052
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1881351172914716}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1886557452116194
 GameObject:
   m_ObjectHideFlags: 0
@@ -22286,7 +21529,7 @@ GameObject:
   - component: {fileID: 4079663503080092}
   - component: {fileID: 33861582936551744}
   - component: {fileID: 23231994199590176}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -22370,7 +21613,7 @@ GameObject:
   - component: {fileID: 4341421252144214}
   - component: {fileID: 33029424411414472}
   - component: {fileID: 23759575878075878}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -22454,7 +21697,7 @@ GameObject:
   - component: {fileID: 4886141965799564}
   - component: {fileID: 33662718036971264}
   - component: {fileID: 23775708267138034}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22537,7 +21780,7 @@ GameObject:
   - component: {fileID: 4061414269187436}
   - component: {fileID: 33891099651482094}
   - component: {fileID: 23851694316994068}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22620,7 +21863,7 @@ GameObject:
   - component: {fileID: 4453883141868234}
   - component: {fileID: 33187482248118488}
   - component: {fileID: 23880431918069436}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -22703,7 +21946,7 @@ GameObject:
   - component: {fileID: 4484202932406524}
   - component: {fileID: 33461303857211164}
   - component: {fileID: 23618044282574956}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22786,7 +22029,7 @@ GameObject:
   - component: {fileID: 4109376380485568}
   - component: {fileID: 33826059046091480}
   - component: {fileID: 23527799148577972}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -22869,7 +22112,7 @@ GameObject:
   - component: {fileID: 4327879039025970}
   - component: {fileID: 33342468854783816}
   - component: {fileID: 23281854918186618}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22952,7 +22195,7 @@ GameObject:
   - component: {fileID: 4235992692037366}
   - component: {fileID: 33390055866715362}
   - component: {fileID: 23103852216396734}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23035,7 +22278,7 @@ GameObject:
   - component: {fileID: 4305868654062468}
   - component: {fileID: 33990227638277714}
   - component: {fileID: 23079341375526208}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23118,7 +22361,7 @@ GameObject:
   - component: {fileID: 4312372498425780}
   - component: {fileID: 33418539700085664}
   - component: {fileID: 23001242176415424}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -23201,7 +22444,7 @@ GameObject:
   - component: {fileID: 4769386449331506}
   - component: {fileID: 33050768642652770}
   - component: {fileID: 23225399352319056}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_Dry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23284,7 +22527,7 @@ GameObject:
   - component: {fileID: 4831677061234240}
   - component: {fileID: 33464981783503318}
   - component: {fileID: 23879517542721392}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23367,7 +22610,7 @@ GameObject:
   - component: {fileID: 4737916482038616}
   - component: {fileID: 33711156654838444}
   - component: {fileID: 23841672900133454}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -23450,7 +22693,7 @@ GameObject:
   - component: {fileID: 4939579012937256}
   - component: {fileID: 33571532668733820}
   - component: {fileID: 23091296439458244}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23533,7 +22776,7 @@ GameObject:
   - component: {fileID: 4318109707447780}
   - component: {fileID: 33693465899441042}
   - component: {fileID: 23354460856443092}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23616,7 +22859,7 @@ GameObject:
   - component: {fileID: 4257925648070320}
   - component: {fileID: 33597069536617266}
   - component: {fileID: 23987556807501524}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23699,7 +22942,7 @@ GameObject:
   - component: {fileID: 4067635754144332}
   - component: {fileID: 33369507126848846}
   - component: {fileID: 23547018721573336}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23782,7 +23025,7 @@ GameObject:
   - component: {fileID: 4158275489443762}
   - component: {fileID: 33980690441886852}
   - component: {fileID: 23639480349286628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -23865,7 +23108,7 @@ GameObject:
   - component: {fileID: 4204124094416878}
   - component: {fileID: 33964057906032318}
   - component: {fileID: 23372132932685090}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23948,8 +23191,7 @@ GameObject:
   - component: {fileID: 4075463342854006}
   - component: {fileID: 33319527469892824}
   - component: {fileID: 23267813602031774}
-  - component: {fileID: 65753648062847504}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -24021,27 +23263,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65753648062847504
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1967486381260480}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
 --- !u!1 &1976075444967178
 GameObject:
   m_ObjectHideFlags: 0
@@ -24053,7 +23274,7 @@ GameObject:
   - component: {fileID: 4248123011508064}
   - component: {fileID: 33898837805974000}
   - component: {fileID: 23771275164761036}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -24136,7 +23357,7 @@ GameObject:
   - component: {fileID: 4693760899964900}
   - component: {fileID: 33585517537504526}
   - component: {fileID: 23785475451613858}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Tree_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24219,7 +23440,7 @@ GameObject:
   - component: {fileID: 4655007329726366}
   - component: {fileID: 33374850346865258}
   - component: {fileID: 23756545905777766}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -24302,7 +23523,7 @@ GameObject:
   - component: {fileID: 4586550407929072}
   - component: {fileID: 33089703819502678}
   - component: {fileID: 23081979941791202}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -24385,7 +23606,7 @@ GameObject:
   - component: {fileID: 4013019159529562}
   - component: {fileID: 33591749477938268}
   - component: {fileID: 23072732776004528}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -24469,7 +23690,7 @@ GameObject:
   - component: {fileID: 4245750544406240}
   - component: {fileID: 33105946681512748}
   - component: {fileID: 23557574722342706}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24552,7 +23773,7 @@ GameObject:
   - component: {fileID: 4704383825681668}
   - component: {fileID: 33725574849068450}
   - component: {fileID: 23685471777803200}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24635,7 +23856,7 @@ GameObject:
   - component: {fileID: 4198927467436052}
   - component: {fileID: 33389303094205476}
   - component: {fileID: 23596360150023600}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Grass
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -24718,7 +23939,7 @@ GameObject:
   - component: {fileID: 4586089353819370}
   - component: {fileID: 33693598001755232}
   - component: {fileID: 23403992426716250}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24802,7 +24023,7 @@ GameObject:
   - component: {fileID: 33469063987235520}
   - component: {fileID: 23484707365523054}
   - component: {fileID: 65113046861174454}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Swamp_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -24893,5 +24114,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.2, y: 2, z: 10}
-  m_Center: {x: -2.4, y: 1, z: 0}
+  m_Size: {x: 3, y: 6, z: 10}
+  m_Center: {x: -3.5, y: 3, z: 0}

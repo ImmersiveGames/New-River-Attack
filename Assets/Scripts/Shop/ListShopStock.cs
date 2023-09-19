@@ -9,7 +9,7 @@ namespace Shopping
     {
 #if UNITY_EDITOR
         [Multiline]
-        public string DeveloperDescription = "";
+        public string developerDescription = "";
 #endif
         public List<ShopProductStock> value = new List<ShopProductStock>();
 
@@ -59,7 +59,7 @@ namespace Shopping
         public bool Contains(ShopProduct shopProduct)
         {
             var inStock = value.Find(x => x.shopProduct == shopProduct);
-            return (inStock.shopProduct != null) ? true : false;
+            return inStock.shopProduct != null;
         }
 
         public bool Contains(ShopProductStock shopStock)

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4756292550622648}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 4713506348729150}
   - component: {fileID: 33509673684352816}
   - component: {fileID: 23682713382581372}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bridge_GPX (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4133888926481374}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 4973883121008706}
   - component: {fileID: 33271427416485632}
   - component: {fileID: 23101259856741402}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 4525736008462028}
   - component: {fileID: 33531937650578954}
   - component: {fileID: 23228285206682780}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 4406714663959972}
   - component: {fileID: 33592712475604012}
   - component: {fileID: 23647679663503362}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -412,7 +412,7 @@ GameObject:
   - component: {fileID: 4584664887358022}
   - component: {fileID: 33897177427233018}
   - component: {fileID: 23122917379707068}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -495,7 +495,7 @@ GameObject:
   - component: {fileID: 4495927986294854}
   - component: {fileID: 33725354726532792}
   - component: {fileID: 23857915130665622}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -580,7 +580,7 @@ GameObject:
   - component: {fileID: 23734983785304924}
   - component: {fileID: 65865624491587600}
   - component: {fileID: 65892049956851408}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_Isle_Bank_02
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -594,14 +594,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1015972762900594}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -5, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4692336610147866}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &33883703278426012
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -671,8 +671,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.398439, y: 6, z: 5.260277}
-  m_Center: {x: 0.8007803, y: 1.15, z: -2.3698616}
+  m_Size: {x: 9, y: 6, z: 3.5}
+  m_Center: {x: 0.2, y: 3, z: -3.5}
 --- !u!65 &65892049956851408
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -692,8 +692,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.322646, y: 6, z: 9.6}
-  m_Center: {x: 2.338677, y: 1.15, z: -0.19999981}
+  m_Size: {x: 2.5, y: 6, z: 9}
+  m_Center: {x: 3.5, y: 3, z: -0.2}
 --- !u!1 &1016468006016916
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,8 +705,7 @@ GameObject:
   - component: {fileID: 4219047543888148}
   - component: {fileID: 33243792539156298}
   - component: {fileID: 23154896855651792}
-  - component: {fileID: 65812871442465412}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -778,27 +777,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65812871442465412
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1016468006016916}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1019137175035152
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,7 +786,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4128834450994696}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -845,7 +823,7 @@ GameObject:
   - component: {fileID: 4594493527779432}
   - component: {fileID: 33673165132234194}
   - component: {fileID: 23558620242313336}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -928,7 +906,7 @@ GameObject:
   - component: {fileID: 4150791422436728}
   - component: {fileID: 33088743699030726}
   - component: {fileID: 23913499336321770}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1011,7 +989,7 @@ GameObject:
   - component: {fileID: 4243593534284844}
   - component: {fileID: 33721271136529472}
   - component: {fileID: 23081831289169788}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1094,7 +1072,7 @@ GameObject:
   - component: {fileID: 4073456553767846}
   - component: {fileID: 33012461081033978}
   - component: {fileID: 23954531245938692}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1177,7 +1155,7 @@ GameObject:
   - component: {fileID: 4794795117869974}
   - component: {fileID: 33211206095245896}
   - component: {fileID: 23891817654843834}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1258,7 +1236,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4907914921456198}
-  m_Layer: 0
+  - component: {fileID: 6417297936124946658}
+  m_Layer: 8
   m_Name: Grass_River_M03_T3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1301,6 +1280,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6417297936124946658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031392107387084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1031717414111590
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,7 +1304,7 @@ GameObject:
   - component: {fileID: 33546616930964240}
   - component: {fileID: 23165740425391346}
   - component: {fileID: 65765397250757356}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1404,8 +1395,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
+  m_Size: {x: 10, y: 6, z: 50}
+  m_Center: {x: 0, y: 3, z: 10}
 --- !u!1 &1032208987653418
 GameObject:
   m_ObjectHideFlags: 0
@@ -1418,7 +1409,7 @@ GameObject:
   - component: {fileID: 33964544590189170}
   - component: {fileID: 23865897911246640}
   - component: {fileID: 65250880903006360}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_Bridge_Land_03
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1434,7 +1425,7 @@ Transform:
   m_GameObject: {fileID: 1032208987653418}
   m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 20, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4242734334601468}
@@ -1509,8 +1500,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
+  m_Size: {x: 10, y: 6, z: 30}
+  m_Center: {x: 0, y: 3, z: -10}
 --- !u!1 &1035713649359078
 GameObject:
   m_ObjectHideFlags: 0
@@ -1522,7 +1513,7 @@ GameObject:
   - component: {fileID: 4979902377219356}
   - component: {fileID: 33698281479682330}
   - component: {fileID: 23553025380214928}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1605,7 +1596,7 @@ GameObject:
   - component: {fileID: 4819013537551300}
   - component: {fileID: 33196850997193312}
   - component: {fileID: 23422485091837362}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_02 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1686,7 +1677,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4029541210100064}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vilage (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1723,7 +1714,7 @@ GameObject:
   - component: {fileID: 4746387075634396}
   - component: {fileID: 33553748303179654}
   - component: {fileID: 23011967579984792}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1804,7 +1795,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4692336610147866}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1841,7 +1832,7 @@ GameObject:
   - component: {fileID: 4319885056310668}
   - component: {fileID: 33081033115100152}
   - component: {fileID: 23398818576821138}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1924,7 +1915,7 @@ GameObject:
   - component: {fileID: 4914377822848470}
   - component: {fileID: 33871197853109294}
   - component: {fileID: 23404583792881512}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_River_Bank_RL_01
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2005,7 +1996,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4259800531407728}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vilage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2042,7 +2033,7 @@ GameObject:
   - component: {fileID: 4950823100298834}
   - component: {fileID: 33055736573279042}
   - component: {fileID: 23932159164294006}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tree_03 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2123,7 +2114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4457694455767536}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2160,7 +2151,7 @@ GameObject:
   - component: {fileID: 33220412041275940}
   - component: {fileID: 23652653290913946}
   - component: {fileID: 65923340924570460}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_Bridge_Land_03
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2251,8 +2242,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
+  m_Size: {x: 10, y: 6, z: 30}
+  m_Center: {x: 0, y: 3, z: -10}
 --- !u!1 &1064613252391328
 GameObject:
   m_ObjectHideFlags: 0
@@ -2264,7 +2255,7 @@ GameObject:
   - component: {fileID: 4005938401624530}
   - component: {fileID: 33084313962706348}
   - component: {fileID: 23529640200514200}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2345,7 +2336,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4206226706273472}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2382,7 +2373,7 @@ GameObject:
   - component: {fileID: 4121802046597178}
   - component: {fileID: 33486828381806966}
   - component: {fileID: 23074872510826562}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2465,7 +2456,7 @@ GameObject:
   - component: {fileID: 4414904311882784}
   - component: {fileID: 33462825691332526}
   - component: {fileID: 23161089923301612}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2546,7 +2537,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4368479624585192}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2582,7 +2573,7 @@ GameObject:
   - component: {fileID: 4532199201306544}
   - component: {fileID: 33257472542532332}
   - component: {fileID: 23596755810357962}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2665,7 +2656,7 @@ GameObject:
   - component: {fileID: 4251570144289270}
   - component: {fileID: 33496211477072652}
   - component: {fileID: 23219267155477786}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2748,7 +2739,7 @@ GameObject:
   - component: {fileID: 4935936560815618}
   - component: {fileID: 33328557499701424}
   - component: {fileID: 23012659235506802}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2831,7 +2822,7 @@ GameObject:
   - component: {fileID: 4501503628675614}
   - component: {fileID: 33015037011224474}
   - component: {fileID: 23081601211120566}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2914,7 +2905,7 @@ GameObject:
   - component: {fileID: 4968864870183266}
   - component: {fileID: 33838469686933784}
   - component: {fileID: 23291677609394194}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2997,7 +2988,7 @@ GameObject:
   - component: {fileID: 4163588343907598}
   - component: {fileID: 33380890516635482}
   - component: {fileID: 23553690649563142}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_02 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3080,7 +3071,7 @@ GameObject:
   - component: {fileID: 4336836548852768}
   - component: {fileID: 33589632080317960}
   - component: {fileID: 23571907245693744}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tree_03 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3163,7 +3154,7 @@ GameObject:
   - component: {fileID: 4180444598684446}
   - component: {fileID: 33733105987433714}
   - component: {fileID: 23326807352436862}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3246,8 +3237,7 @@ GameObject:
   - component: {fileID: 4955755158257496}
   - component: {fileID: 33057493005812122}
   - component: {fileID: 23260008669901054}
-  - component: {fileID: 65099693949170726}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3319,27 +3309,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65099693949170726
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1115462881495000}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1116587111710212
 GameObject:
   m_ObjectHideFlags: 0
@@ -3351,7 +3320,7 @@ GameObject:
   - component: {fileID: 4901404267999562}
   - component: {fileID: 33363221950787756}
   - component: {fileID: 23165763201132140}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_02 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3434,7 +3403,7 @@ GameObject:
   - component: {fileID: 4593078023837920}
   - component: {fileID: 33148114372514848}
   - component: {fileID: 23268789478550482}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3517,7 +3486,7 @@ GameObject:
   - component: {fileID: 4940876955911090}
   - component: {fileID: 33295361150223300}
   - component: {fileID: 23774694197417766}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3598,7 +3567,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4248656829257072}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3635,7 +3604,7 @@ GameObject:
   - component: {fileID: 4842702453885056}
   - component: {fileID: 33896766500473190}
   - component: {fileID: 23468339550139326}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3718,7 +3687,7 @@ GameObject:
   - component: {fileID: 4937203331757378}
   - component: {fileID: 33145002728239158}
   - component: {fileID: 23099889847358446}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3801,7 +3770,7 @@ GameObject:
   - component: {fileID: 4564862757042642}
   - component: {fileID: 33782822598351454}
   - component: {fileID: 23778899007697720}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3884,7 +3853,7 @@ GameObject:
   - component: {fileID: 4151741106729106}
   - component: {fileID: 33177911297186460}
   - component: {fileID: 23150875317958906}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_River_Bank_RL_01
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3967,7 +3936,7 @@ GameObject:
   - component: {fileID: 4800904490116662}
   - component: {fileID: 33359211204543116}
   - component: {fileID: 23114828978328004}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4050,7 +4019,7 @@ GameObject:
   - component: {fileID: 4898425295063974}
   - component: {fileID: 33295629190029226}
   - component: {fileID: 23514993221528904}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4133,7 +4102,7 @@ GameObject:
   - component: {fileID: 4838053845013604}
   - component: {fileID: 33812532728466838}
   - component: {fileID: 23073425731624008}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4216,7 +4185,7 @@ GameObject:
   - component: {fileID: 4755777594226102}
   - component: {fileID: 33070290161419588}
   - component: {fileID: 23834571503445656}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bridge_GPX (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4300,7 +4269,7 @@ GameObject:
   - component: {fileID: 4749107410672456}
   - component: {fileID: 33873810907382934}
   - component: {fileID: 23225651576632502}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4383,7 +4352,7 @@ GameObject:
   - component: {fileID: 4440562554073712}
   - component: {fileID: 33914449747959340}
   - component: {fileID: 23954382399736758}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4466,7 +4435,7 @@ GameObject:
   - component: {fileID: 4847559976774396}
   - component: {fileID: 33574140614806684}
   - component: {fileID: 23074709666233248}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tree_03 (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4549,7 +4518,7 @@ GameObject:
   - component: {fileID: 4993810307287342}
   - component: {fileID: 33584002022259152}
   - component: {fileID: 23471304009487578}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4632,7 +4601,7 @@ GameObject:
   - component: {fileID: 4719785962384488}
   - component: {fileID: 33436190143492766}
   - component: {fileID: 23559836459184352}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4715,7 +4684,7 @@ GameObject:
   - component: {fileID: 4732133618311238}
   - component: {fileID: 33772401671354162}
   - component: {fileID: 23264290455078198}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4798,7 +4767,7 @@ GameObject:
   - component: {fileID: 4025793018473926}
   - component: {fileID: 33119105205819196}
   - component: {fileID: 23246214621485848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4881,7 +4850,7 @@ GameObject:
   - component: {fileID: 4242201640320000}
   - component: {fileID: 33444825409891520}
   - component: {fileID: 23244569662818380}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4964,7 +4933,7 @@ GameObject:
   - component: {fileID: 4609833157431572}
   - component: {fileID: 33885876840180530}
   - component: {fileID: 23469739374096788}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5047,7 +5016,7 @@ GameObject:
   - component: {fileID: 4513050123217924}
   - component: {fileID: 33224492805018980}
   - component: {fileID: 23601304587140038}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5130,7 +5099,7 @@ GameObject:
   - component: {fileID: 4469903401371646}
   - component: {fileID: 33749955205599380}
   - component: {fileID: 23518196338442450}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5213,8 +5182,7 @@ GameObject:
   - component: {fileID: 4243641750134404}
   - component: {fileID: 33584483314687908}
   - component: {fileID: 23315557642902602}
-  - component: {fileID: 65508725396731500}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5286,27 +5254,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65508725396731500
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1193175727166378}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1196855579614752
 GameObject:
   m_ObjectHideFlags: 0
@@ -5316,7 +5263,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4770206220026470}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5352,7 +5299,7 @@ GameObject:
   - component: {fileID: 4334187185807806}
   - component: {fileID: 33593684342322756}
   - component: {fileID: 23452765897442232}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5433,7 +5380,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4434160931584098}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5469,7 +5416,7 @@ GameObject:
   - component: {fileID: 4851641767099562}
   - component: {fileID: 33855139469373008}
   - component: {fileID: 23091317697405660}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tree_03 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5552,7 +5499,7 @@ GameObject:
   - component: {fileID: 4274409324320480}
   - component: {fileID: 33384542749306590}
   - component: {fileID: 23920820782827932}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5635,7 +5582,7 @@ GameObject:
   - component: {fileID: 4840434388385848}
   - component: {fileID: 33092658883418528}
   - component: {fileID: 23954875308641460}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_02 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5718,7 +5665,7 @@ GameObject:
   - component: {fileID: 4692725504926890}
   - component: {fileID: 33377965569354562}
   - component: {fileID: 23505853142667160}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5801,7 +5748,7 @@ GameObject:
   - component: {fileID: 4417678088177920}
   - component: {fileID: 33503317406773946}
   - component: {fileID: 23460813462614012}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5884,8 +5831,7 @@ GameObject:
   - component: {fileID: 4441503593956186}
   - component: {fileID: 33607412480372664}
   - component: {fileID: 23166626345747248}
-  - component: {fileID: 65406884538957742}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5957,27 +5903,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65406884538957742
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1230541408823772}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1231396728436148
 GameObject:
   m_ObjectHideFlags: 0
@@ -5989,7 +5914,7 @@ GameObject:
   - component: {fileID: 4129010758687668}
   - component: {fileID: 33579858050235384}
   - component: {fileID: 23933271596669482}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_River_Bank_RL_01
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6073,7 +5998,7 @@ GameObject:
   - component: {fileID: 33920621444095690}
   - component: {fileID: 23860029107764588}
   - component: {fileID: 65373740741918942}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6164,8 +6089,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
+  m_Size: {x: 10, y: 6, z: 60}
+  m_Center: {x: 0, y: 3, z: 25}
 --- !u!1 &1242562344799748
 GameObject:
   m_ObjectHideFlags: 0
@@ -6177,7 +6102,7 @@ GameObject:
   - component: {fileID: 4503595361611106}
   - component: {fileID: 33651148557232840}
   - component: {fileID: 23059588260296018}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6260,7 +6185,7 @@ GameObject:
   - component: {fileID: 4899153978316600}
   - component: {fileID: 33599655491451382}
   - component: {fileID: 23447312106340412}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bridge_GPX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6342,7 +6267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4233437165033888}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vilage (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6375,7 +6300,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4542733897436986}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6414,7 +6339,7 @@ GameObject:
   - component: {fileID: 23522198434147842}
   - component: {fileID: 65482141606574436}
   - component: {fileID: 65137647456506038}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_Isle_Bank_02 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6428,14 +6353,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1253730640849652}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -5, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4301528875016790}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33192316793468138
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6505,8 +6430,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.398439, y: 6, z: 5.260277}
-  m_Center: {x: 0.8007803, y: 1.15, z: -2.3698616}
+  m_Size: {x: 8.398439, y: 6, z: 2.5}
+  m_Center: {x: 0.8007803, y: 3, z: -3.5}
 --- !u!65 &65137647456506038
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6526,8 +6451,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.322646, y: 6, z: 9.6}
-  m_Center: {x: 2.338677, y: 1.15, z: -0.19999981}
+  m_Size: {x: 3.5, y: 6, z: 9}
+  m_Center: {x: 3.5, y: 3, z: -0.2}
 --- !u!1 &1258530346766404
 GameObject:
   m_ObjectHideFlags: 0
@@ -6539,7 +6464,7 @@ GameObject:
   - component: {fileID: 4512459978857932}
   - component: {fileID: 33935544524575714}
   - component: {fileID: 23923940267832784}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tree_03 (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6623,7 +6548,7 @@ GameObject:
   - component: {fileID: 33226720320112228}
   - component: {fileID: 23760407142480344}
   - component: {fileID: 65448887559966254}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6714,8 +6639,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
+  m_Size: {x: 10, y: 6, z: 60}
+  m_Center: {x: 0, y: 3, z: 25}
 --- !u!1 &1263005624375960
 GameObject:
   m_ObjectHideFlags: 0
@@ -6727,7 +6652,7 @@ GameObject:
   - component: {fileID: 4744118945783276}
   - component: {fileID: 33884612252839236}
   - component: {fileID: 23642194277063082}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6810,7 +6735,7 @@ GameObject:
   - component: {fileID: 4185943902085842}
   - component: {fileID: 33976287166729100}
   - component: {fileID: 23329566123034360}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6893,7 +6818,7 @@ GameObject:
   - component: {fileID: 4459567501222712}
   - component: {fileID: 33654202032961092}
   - component: {fileID: 23692340596290786}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6974,7 +6899,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4809125136273812}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vilage (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7015,7 +6940,7 @@ GameObject:
   - component: {fileID: 4025064636660848}
   - component: {fileID: 33315712390619496}
   - component: {fileID: 23218932484014614}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7098,8 +7023,7 @@ GameObject:
   - component: {fileID: 4183971874720150}
   - component: {fileID: 33457377762020562}
   - component: {fileID: 23011325858734380}
-  - component: {fileID: 65515610775143884}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7171,27 +7095,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65515610775143884
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1277419855811854}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1278890859038924
 GameObject:
   m_ObjectHideFlags: 0
@@ -7201,7 +7104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4882478482243138}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vilage (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7242,7 +7145,7 @@ GameObject:
   - component: {fileID: 4141962537672426}
   - component: {fileID: 33483140358228470}
   - component: {fileID: 23513688135776130}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7325,7 +7228,7 @@ GameObject:
   - component: {fileID: 4339785130657186}
   - component: {fileID: 33748629609695050}
   - component: {fileID: 23656634025013092}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7408,7 +7311,7 @@ GameObject:
   - component: {fileID: 4358569056535656}
   - component: {fileID: 33611897731578072}
   - component: {fileID: 23898080591219966}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7489,7 +7392,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4833501340367330}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vilage (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7524,7 +7427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4301528875016790}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7559,7 +7462,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4462517040284484}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vilage (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7594,7 +7497,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4062172331978266}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7630,7 +7533,7 @@ GameObject:
   - component: {fileID: 4549432441010184}
   - component: {fileID: 33755442875989010}
   - component: {fileID: 23880771972901438}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_02 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7711,7 +7614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4922413989042804}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vilage (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7750,7 +7653,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4100818352871626}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vilage (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7791,7 +7694,7 @@ GameObject:
   - component: {fileID: 4608249661459630}
   - component: {fileID: 33166168005712164}
   - component: {fileID: 23846457457673676}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7874,7 +7777,7 @@ GameObject:
   - component: {fileID: 4697259386082050}
   - component: {fileID: 33143786072404580}
   - component: {fileID: 23916309944131726}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7957,7 +7860,7 @@ GameObject:
   - component: {fileID: 4930551297790916}
   - component: {fileID: 33302591180884068}
   - component: {fileID: 23079912761743762}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_02 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8040,7 +7943,7 @@ GameObject:
   - component: {fileID: 4415005749012088}
   - component: {fileID: 33851488200367210}
   - component: {fileID: 23179136340166682}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8123,7 +8026,7 @@ GameObject:
   - component: {fileID: 4073659791705482}
   - component: {fileID: 33013025539604596}
   - component: {fileID: 23639754895615864}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8206,7 +8109,7 @@ GameObject:
   - component: {fileID: 4332575979170024}
   - component: {fileID: 33119667507784290}
   - component: {fileID: 23077094290077552}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8289,7 +8192,7 @@ GameObject:
   - component: {fileID: 4873554523861582}
   - component: {fileID: 33138947563745608}
   - component: {fileID: 23671317812365946}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_02 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8372,7 +8275,7 @@ GameObject:
   - component: {fileID: 4739504312126226}
   - component: {fileID: 33636556549515600}
   - component: {fileID: 23372187922542246}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8455,7 +8358,7 @@ GameObject:
   - component: {fileID: 4341702408630992}
   - component: {fileID: 33806844388677618}
   - component: {fileID: 23300884828199294}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8538,7 +8441,7 @@ GameObject:
   - component: {fileID: 4785059669945818}
   - component: {fileID: 33472925967699114}
   - component: {fileID: 23600146881286022}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8621,7 +8524,7 @@ GameObject:
   - component: {fileID: 4362807896183394}
   - component: {fileID: 33779743524640542}
   - component: {fileID: 23071053441765404}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8704,7 +8607,7 @@ GameObject:
   - component: {fileID: 4533845985392728}
   - component: {fileID: 33448953279755524}
   - component: {fileID: 23909156604939496}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8787,7 +8690,7 @@ GameObject:
   - component: {fileID: 4749957131767082}
   - component: {fileID: 33983494770993298}
   - component: {fileID: 23512043355003466}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8870,7 +8773,7 @@ GameObject:
   - component: {fileID: 4261682899581678}
   - component: {fileID: 33696496611647120}
   - component: {fileID: 23559369976836036}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8954,7 +8857,7 @@ GameObject:
   - component: {fileID: 33016513977588104}
   - component: {fileID: 23552265119069938}
   - component: {fileID: 65550343818746850}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9045,8 +8948,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
+  m_Size: {x: 10, y: 6, z: 40}
+  m_Center: {x: 0, y: 3, z: 15}
 --- !u!1 &1338898741439236
 GameObject:
   m_ObjectHideFlags: 0
@@ -9056,7 +8959,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4306852933050778}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9093,7 +8996,7 @@ GameObject:
   - component: {fileID: 4579758843882080}
   - component: {fileID: 33350134969036484}
   - component: {fileID: 23855954902399770}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tree_03 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9176,7 +9079,7 @@ GameObject:
   - component: {fileID: 4411681100402412}
   - component: {fileID: 33494367729065916}
   - component: {fileID: 23499783372625954}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9259,7 +9162,7 @@ GameObject:
   - component: {fileID: 4624676353126502}
   - component: {fileID: 33713868157512424}
   - component: {fileID: 23902367750086056}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9342,7 +9245,7 @@ GameObject:
   - component: {fileID: 4747311130361196}
   - component: {fileID: 33441616299148378}
   - component: {fileID: 23646128364242488}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9423,7 +9326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4574588799082136}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9460,7 +9363,7 @@ GameObject:
   - component: {fileID: 4484483647172374}
   - component: {fileID: 33997080182963990}
   - component: {fileID: 23911141956173446}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9543,7 +9446,7 @@ GameObject:
   - component: {fileID: 4285015860017720}
   - component: {fileID: 33757570746730688}
   - component: {fileID: 23017877750746680}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9626,7 +9529,7 @@ GameObject:
   - component: {fileID: 4028157380032598}
   - component: {fileID: 33725576372298022}
   - component: {fileID: 23143255815700080}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bridge_GPX (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9708,7 +9611,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4316979311524940}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9744,7 +9647,7 @@ GameObject:
   - component: {fileID: 4732913021509522}
   - component: {fileID: 33581490376928514}
   - component: {fileID: 23249529785801632}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9827,7 +9730,7 @@ GameObject:
   - component: {fileID: 4437615416519982}
   - component: {fileID: 33820792931293608}
   - component: {fileID: 23225566006112264}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9910,7 +9813,7 @@ GameObject:
   - component: {fileID: 4805518028374678}
   - component: {fileID: 33902430267306310}
   - component: {fileID: 23834667682905670}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9991,7 +9894,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4446232385187608}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10027,7 +9930,7 @@ GameObject:
   - component: {fileID: 4243858636685724}
   - component: {fileID: 33010679772232398}
   - component: {fileID: 23940364219581630}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10110,7 +10013,7 @@ GameObject:
   - component: {fileID: 4447697965667174}
   - component: {fileID: 33609491475689356}
   - component: {fileID: 23467814840542292}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10191,7 +10094,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4481633812691274}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10227,7 +10130,7 @@ GameObject:
   - component: {fileID: 4931082591519392}
   - component: {fileID: 33897753244331688}
   - component: {fileID: 23297801384913764}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10310,7 +10213,7 @@ GameObject:
   - component: {fileID: 4275888474806354}
   - component: {fileID: 33739053143658902}
   - component: {fileID: 23970996909842922}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10395,7 +10298,7 @@ GameObject:
   - component: {fileID: 23404034425549470}
   - component: {fileID: 65006666869622164}
   - component: {fileID: 65727618957645854}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_Isle_Bank_02
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10486,8 +10389,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.398439, y: 6, z: 5.260277}
-  m_Center: {x: 0.8007803, y: 1.15, z: -2.3698616}
+  m_Size: {x: 9, y: 6, z: 3.5}
+  m_Center: {x: 0.2, y: 3, z: -3.5}
 --- !u!65 &65727618957645854
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10507,8 +10410,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.322646, y: 6, z: 9.6}
-  m_Center: {x: 2.338677, y: 1.15, z: -0.19999981}
+  m_Size: {x: 2.5, y: 6, z: 9}
+  m_Center: {x: 3.5, y: 3, z: -0.2}
 --- !u!1 &1398720372280324
 GameObject:
   m_ObjectHideFlags: 0
@@ -10518,7 +10421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4035910764884066}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Decoration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10553,7 +10456,7 @@ GameObject:
   - component: {fileID: 4985088133583140}
   - component: {fileID: 33710955756628572}
   - component: {fileID: 23347172267783592}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10636,7 +10539,7 @@ GameObject:
   - component: {fileID: 4273258035326198}
   - component: {fileID: 33296409992745072}
   - component: {fileID: 23914549715284658}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10717,7 +10620,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4368057691725528}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10753,7 +10656,7 @@ GameObject:
   - component: {fileID: 4398800650291718}
   - component: {fileID: 33498165692822368}
   - component: {fileID: 23435217477905888}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10836,7 +10739,7 @@ GameObject:
   - component: {fileID: 4248081793230750}
   - component: {fileID: 33089453654976058}
   - component: {fileID: 23604425823251296}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10919,7 +10822,7 @@ GameObject:
   - component: {fileID: 4021737694440464}
   - component: {fileID: 33407240326551994}
   - component: {fileID: 23180355797869936}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_River_Bank_RL_01
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11002,8 +10905,7 @@ GameObject:
   - component: {fileID: 4377898659560712}
   - component: {fileID: 33851906055221436}
   - component: {fileID: 23458884916083028}
-  - component: {fileID: 65346863175161894}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11075,27 +10977,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65346863175161894
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1427293485358920}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1432471698143436
 GameObject:
   m_ObjectHideFlags: 0
@@ -11105,7 +10986,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4728110316678524}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11141,7 +11022,7 @@ GameObject:
   - component: {fileID: 4754332954999114}
   - component: {fileID: 33225825977374242}
   - component: {fileID: 23556623210816606}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11225,7 +11106,7 @@ GameObject:
   - component: {fileID: 33472748606659332}
   - component: {fileID: 23806943250275844}
   - component: {fileID: 65457710673606104}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11316,8 +11197,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
+  m_Size: {x: 10, y: 6, z: 50}
+  m_Center: {x: 0, y: 3, z: 10}
 --- !u!1 &1444789884869898
 GameObject:
   m_ObjectHideFlags: 0
@@ -11327,7 +11208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4338217792861086}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11362,7 +11243,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4634726884890654}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11398,7 +11279,7 @@ GameObject:
   - component: {fileID: 4281876599902462}
   - component: {fileID: 33809422560447636}
   - component: {fileID: 23743192651401604}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11481,7 +11362,7 @@ GameObject:
   - component: {fileID: 4340225718357340}
   - component: {fileID: 33234790711923620}
   - component: {fileID: 23351862053536306}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11564,7 +11445,7 @@ GameObject:
   - component: {fileID: 4420799066632620}
   - component: {fileID: 33904749140021318}
   - component: {fileID: 23308335718896912}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11645,7 +11526,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4712566647305236}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11682,7 +11563,7 @@ GameObject:
   - component: {fileID: 4402402236295778}
   - component: {fileID: 33256013718700296}
   - component: {fileID: 23796696917209906}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_River_Bank_RL_01
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11765,7 +11646,7 @@ GameObject:
   - component: {fileID: 4943527034023144}
   - component: {fileID: 33175146060723206}
   - component: {fileID: 23458105761716936}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tree_03 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11848,7 +11729,7 @@ GameObject:
   - component: {fileID: 4188328433841992}
   - component: {fileID: 33182096112118982}
   - component: {fileID: 23294550912399440}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11931,7 +11812,7 @@ GameObject:
   - component: {fileID: 4651728590258976}
   - component: {fileID: 33876544632016822}
   - component: {fileID: 23736152506825266}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12014,7 +11895,7 @@ GameObject:
   - component: {fileID: 4020181635377130}
   - component: {fileID: 33790909042677340}
   - component: {fileID: 23878167177156050}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12097,7 +11978,7 @@ GameObject:
   - component: {fileID: 4031656030171100}
   - component: {fileID: 33098504185456516}
   - component: {fileID: 23110551751101338}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_02 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12178,7 +12059,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4816772059135152}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12212,7 +12093,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4481042473166008}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12250,7 +12131,7 @@ GameObject:
   - component: {fileID: 4667199117081676}
   - component: {fileID: 33761695910952664}
   - component: {fileID: 23909308184444666}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_River_Bank_RL_01
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12333,7 +12214,7 @@ GameObject:
   - component: {fileID: 4551328733058040}
   - component: {fileID: 33516208380526302}
   - component: {fileID: 23049161658244934}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12414,7 +12295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4429595502353862}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12448,7 +12329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4576965828191382}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12482,7 +12363,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4842565139578204}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12516,7 +12397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4739203257551718}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12552,7 +12433,7 @@ GameObject:
   - component: {fileID: 4715564919837034}
   - component: {fileID: 33166269731841092}
   - component: {fileID: 23292259731588442}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tree_03 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12635,8 +12516,7 @@ GameObject:
   - component: {fileID: 4985219069353192}
   - component: {fileID: 33811657586766964}
   - component: {fileID: 23085548851731806}
-  - component: {fileID: 65072148180472656}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12708,27 +12588,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65072148180472656
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514356115946010}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1518238161229696
 GameObject:
   m_ObjectHideFlags: 0
@@ -12740,9 +12599,7 @@ GameObject:
   - component: {fileID: 4201780906256892}
   - component: {fileID: 33368132629292842}
   - component: {fileID: 23490419251965294}
-  - component: {fileID: 65237573598940468}
-  - component: {fileID: 65666824534016750}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_Isle_Bank_02
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12756,14 +12613,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1518238161229696}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -5, y: 0.1, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4844086075422840}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &33368132629292842
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -12814,48 +12671,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65237573598940468
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1518238161229696}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 8.398439, y: 6, z: 5.260277}
-  m_Center: {x: 0.8007803, y: 1.15, z: -2.3698616}
---- !u!65 &65666824534016750
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1518238161229696}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.322646, y: 6, z: 9.6}
-  m_Center: {x: 2.338677, y: 1.15, z: -0.19999981}
 --- !u!1 &1525427394343672
 GameObject:
   m_ObjectHideFlags: 0
@@ -12867,7 +12682,7 @@ GameObject:
   - component: {fileID: 4527520687112014}
   - component: {fileID: 33605610130853226}
   - component: {fileID: 23704784570675528}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12950,7 +12765,7 @@ GameObject:
   - component: {fileID: 4287511584098010}
   - component: {fileID: 33854709288917780}
   - component: {fileID: 23324730796753880}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13033,7 +12848,7 @@ GameObject:
   - component: {fileID: 4887751835525444}
   - component: {fileID: 33858596471490264}
   - component: {fileID: 23595232236081284}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13116,8 +12931,7 @@ GameObject:
   - component: {fileID: 4854332261944450}
   - component: {fileID: 33230715102702944}
   - component: {fileID: 23387551863633704}
-  - component: {fileID: 65033175792490826}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13189,27 +13003,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65033175792490826
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1534634292449152}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1535599943278440
 GameObject:
   m_ObjectHideFlags: 0
@@ -13221,7 +13014,7 @@ GameObject:
   - component: {fileID: 4224278175357328}
   - component: {fileID: 33229007599908344}
   - component: {fileID: 23711615668781972}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13304,7 +13097,7 @@ GameObject:
   - component: {fileID: 4881044161895390}
   - component: {fileID: 33555808520495038}
   - component: {fileID: 23188979589979748}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13387,8 +13180,7 @@ GameObject:
   - component: {fileID: 4253408816262516}
   - component: {fileID: 33936266812295076}
   - component: {fileID: 23599030654475268}
-  - component: {fileID: 65141712973106728}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13460,27 +13252,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65141712973106728
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540726143123476}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1542711393280566
 GameObject:
   m_ObjectHideFlags: 0
@@ -13492,7 +13263,7 @@ GameObject:
   - component: {fileID: 4306815057763374}
   - component: {fileID: 33894284108323918}
   - component: {fileID: 23483961719460086}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13573,7 +13344,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4951824069102398}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13609,7 +13380,7 @@ GameObject:
   - component: {fileID: 4077556208070910}
   - component: {fileID: 33750002652946630}
   - component: {fileID: 23804090845645312}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13692,7 +13463,7 @@ GameObject:
   - component: {fileID: 4533318725945230}
   - component: {fileID: 33915507538581512}
   - component: {fileID: 23061344900428056}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13773,7 +13544,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4098991452479946}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13809,8 +13580,7 @@ GameObject:
   - component: {fileID: 4097873561159076}
   - component: {fileID: 33347312480016384}
   - component: {fileID: 23561754528288956}
-  - component: {fileID: 65916732863279860}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13882,27 +13652,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65916732863279860
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1561790753673232}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1567655122948844
 GameObject:
   m_ObjectHideFlags: 0
@@ -13914,7 +13663,7 @@ GameObject:
   - component: {fileID: 4319480858852772}
   - component: {fileID: 33429511886928522}
   - component: {fileID: 23305212704219630}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13997,7 +13746,7 @@ GameObject:
   - component: {fileID: 4159700241329680}
   - component: {fileID: 33705069131861918}
   - component: {fileID: 23212815555468756}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14078,7 +13827,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4160263722058402}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14114,7 +13863,7 @@ GameObject:
   - component: {fileID: 4482098241308566}
   - component: {fileID: 33480523035799776}
   - component: {fileID: 23464909263331320}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14195,7 +13944,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4604336629762316}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14232,7 +13981,7 @@ GameObject:
   - component: {fileID: 4387517397509436}
   - component: {fileID: 33421745292851138}
   - component: {fileID: 23589131725620166}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14315,7 +14064,7 @@ GameObject:
   - component: {fileID: 4578971036877888}
   - component: {fileID: 33365827646863080}
   - component: {fileID: 23984065866240522}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_River_Bank_RL_01
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14398,7 +14147,7 @@ GameObject:
   - component: {fileID: 4359707225088820}
   - component: {fileID: 33090632025733170}
   - component: {fileID: 23383436390578550}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14481,7 +14230,7 @@ GameObject:
   - component: {fileID: 4473907164967514}
   - component: {fileID: 33666695150980352}
   - component: {fileID: 23734823796011500}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14564,7 +14313,7 @@ GameObject:
   - component: {fileID: 4650609167530858}
   - component: {fileID: 33402801916691700}
   - component: {fileID: 23804432376746208}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14645,7 +14394,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4609042448994106}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14682,7 +14431,7 @@ GameObject:
   - component: {fileID: 4602159241101226}
   - component: {fileID: 33326170098608562}
   - component: {fileID: 23874309834908940}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14765,7 +14514,7 @@ GameObject:
   - component: {fileID: 4532814894723214}
   - component: {fileID: 33512986654510196}
   - component: {fileID: 23152607997755440}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14848,7 +14597,7 @@ GameObject:
   - component: {fileID: 4943134962804570}
   - component: {fileID: 33107272167992540}
   - component: {fileID: 23360364530010922}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14931,8 +14680,7 @@ GameObject:
   - component: {fileID: 4381671189628590}
   - component: {fileID: 33314145243287082}
   - component: {fileID: 23220720874185368}
-  - component: {fileID: 65549503042248762}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15004,27 +14752,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65549503042248762
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1611088093901540}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1612672032086572
 GameObject:
   m_ObjectHideFlags: 0
@@ -15036,7 +14763,7 @@ GameObject:
   - component: {fileID: 4050628865447840}
   - component: {fileID: 33397542858572016}
   - component: {fileID: 23085047412224848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15119,8 +14846,7 @@ GameObject:
   - component: {fileID: 4448832114778698}
   - component: {fileID: 33268348000416860}
   - component: {fileID: 23686128081268286}
-  - component: {fileID: 65053238145630426}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15192,27 +14918,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65053238145630426
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1613201125445622}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1618221498773882
 GameObject:
   m_ObjectHideFlags: 0
@@ -15224,8 +14929,7 @@ GameObject:
   - component: {fileID: 4779104626587098}
   - component: {fileID: 33775316220634820}
   - component: {fileID: 23675580174698178}
-  - component: {fileID: 65069395886903012}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15297,27 +15001,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65069395886903012
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1618221498773882}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1623347464699498
 GameObject:
   m_ObjectHideFlags: 0
@@ -15329,7 +15012,7 @@ GameObject:
   - component: {fileID: 4736580027088522}
   - component: {fileID: 33677460510561888}
   - component: {fileID: 23228857498107280}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15410,7 +15093,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4708640586232698}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15446,7 +15129,7 @@ GameObject:
   - component: {fileID: 4382633815459786}
   - component: {fileID: 33606845652360540}
   - component: {fileID: 23585975263819334}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15529,7 +15212,7 @@ GameObject:
   - component: {fileID: 4505406838325362}
   - component: {fileID: 33237046651247708}
   - component: {fileID: 23139345207664790}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15612,7 +15295,7 @@ GameObject:
   - component: {fileID: 4760108526175014}
   - component: {fileID: 33924379911520678}
   - component: {fileID: 23248204654946098}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15695,7 +15378,7 @@ GameObject:
   - component: {fileID: 4340447370425686}
   - component: {fileID: 33524968174584018}
   - component: {fileID: 23695812205369216}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_02 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15778,7 +15461,7 @@ GameObject:
   - component: {fileID: 4189178773670848}
   - component: {fileID: 33926201207969816}
   - component: {fileID: 23560905660565518}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tree_03 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15861,7 +15544,7 @@ GameObject:
   - component: {fileID: 4694904192917196}
   - component: {fileID: 33409127877067330}
   - component: {fileID: 23854403350145978}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15944,7 +15627,7 @@ GameObject:
   - component: {fileID: 4765530064761516}
   - component: {fileID: 33625066045770024}
   - component: {fileID: 23603280657386932}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16027,7 +15710,7 @@ GameObject:
   - component: {fileID: 4954937724954436}
   - component: {fileID: 33610150870006546}
   - component: {fileID: 23664491130874792}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16110,7 +15793,7 @@ GameObject:
   - component: {fileID: 4094879843378774}
   - component: {fileID: 33637760903550800}
   - component: {fileID: 23312373407967954}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16193,7 +15876,7 @@ GameObject:
   - component: {fileID: 4769333377947680}
   - component: {fileID: 33956358314669760}
   - component: {fileID: 23293676153902656}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16276,7 +15959,7 @@ GameObject:
   - component: {fileID: 4867090725470686}
   - component: {fileID: 33685928248329728}
   - component: {fileID: 23551143604553436}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16359,7 +16042,7 @@ GameObject:
   - component: {fileID: 4586221244805518}
   - component: {fileID: 33324237933379408}
   - component: {fileID: 23948171041241016}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16442,7 +16125,7 @@ GameObject:
   - component: {fileID: 4249371551424140}
   - component: {fileID: 33955590977508240}
   - component: {fileID: 23924108989874402}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16525,7 +16208,7 @@ GameObject:
   - component: {fileID: 4742311191489864}
   - component: {fileID: 33836410966879106}
   - component: {fileID: 23728478211980132}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_02 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16608,7 +16291,7 @@ GameObject:
   - component: {fileID: 4341232179217842}
   - component: {fileID: 33626766143664370}
   - component: {fileID: 23765710593574420}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16689,7 +16372,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4471155862865270}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16725,7 +16408,7 @@ GameObject:
   - component: {fileID: 4278900725949196}
   - component: {fileID: 33839330753638980}
   - component: {fileID: 23129465705811602}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_River_Bank_RL_01
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16808,7 +16491,7 @@ GameObject:
   - component: {fileID: 4465205252542942}
   - component: {fileID: 33246383914398548}
   - component: {fileID: 23113276593316736}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16891,7 +16574,7 @@ GameObject:
   - component: {fileID: 4429071822989436}
   - component: {fileID: 33163152871947418}
   - component: {fileID: 23389963385922994}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16974,7 +16657,7 @@ GameObject:
   - component: {fileID: 4866995081152500}
   - component: {fileID: 33321850329501540}
   - component: {fileID: 23251078017349962}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17055,7 +16738,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4131137150893180}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vilage (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17096,7 +16779,7 @@ GameObject:
   - component: {fileID: 4289613029353122}
   - component: {fileID: 33289991914301814}
   - component: {fileID: 23122033583645410}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17179,7 +16862,7 @@ GameObject:
   - component: {fileID: 4756240185151848}
   - component: {fileID: 33045774860116040}
   - component: {fileID: 23479795109167570}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bridge_GPX (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17261,7 +16944,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4049241532648696}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17299,7 +16982,7 @@ GameObject:
   - component: {fileID: 23433143032959778}
   - component: {fileID: 65922048954632474}
   - component: {fileID: 65629662970933258}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_Isle_Bank_02
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17390,8 +17073,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.398439, y: 6, z: 5.260277}
-  m_Center: {x: 0.8007803, y: 1.15, z: -2.3698616}
+  m_Size: {x: 9, y: 6, z: 3.5}
+  m_Center: {x: 0.2, y: 3, z: -3.5}
 --- !u!65 &65629662970933258
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17411,8 +17094,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.322646, y: 6, z: 9.6}
-  m_Center: {x: 2.338677, y: 1.15, z: -0.19999981}
+  m_Size: {x: 2.5, y: 6, z: 9}
+  m_Center: {x: 3.5, y: 3, z: -0.2}
 --- !u!1 &1716828400241078
 GameObject:
   m_ObjectHideFlags: 0
@@ -17424,7 +17107,7 @@ GameObject:
   - component: {fileID: 4257946778694462}
   - component: {fileID: 33718492575089834}
   - component: {fileID: 23891852077941186}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tree_03 (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17507,7 +17190,7 @@ GameObject:
   - component: {fileID: 4733195381249766}
   - component: {fileID: 33060704432813132}
   - component: {fileID: 23742249300483870}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17590,7 +17273,7 @@ GameObject:
   - component: {fileID: 4070103311700590}
   - component: {fileID: 33291675819515982}
   - component: {fileID: 23921154709949202}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17671,7 +17354,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4333748405850584}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17707,8 +17390,7 @@ GameObject:
   - component: {fileID: 4979239816496418}
   - component: {fileID: 33470486924112132}
   - component: {fileID: 23536489053720514}
-  - component: {fileID: 65342428726433568}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17780,27 +17462,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65342428726433568
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733151416192930}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1735093230149426
 GameObject:
   m_ObjectHideFlags: 0
@@ -17812,7 +17473,7 @@ GameObject:
   - component: {fileID: 4276642029639062}
   - component: {fileID: 33366458033478752}
   - component: {fileID: 23171286540011994}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17895,7 +17556,7 @@ GameObject:
   - component: {fileID: 4231605682742802}
   - component: {fileID: 33708785806810746}
   - component: {fileID: 23870544116692584}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17978,7 +17639,7 @@ GameObject:
   - component: {fileID: 4965289640576120}
   - component: {fileID: 33923890277743572}
   - component: {fileID: 23370230286556816}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18059,7 +17720,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4532789205272712}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18093,7 +17754,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4454935779144436}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18129,7 +17790,7 @@ GameObject:
   - component: {fileID: 4837516827553886}
   - component: {fileID: 33262669334196270}
   - component: {fileID: 23405641563201732}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18210,7 +17871,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4277563534469832}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18249,7 +17910,7 @@ GameObject:
   - component: {fileID: 23783219495329922}
   - component: {fileID: 65741762175347996}
   - component: {fileID: 65656698663516642}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_Isle_Bank_02
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18340,8 +18001,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.398439, y: 6, z: 5.260277}
-  m_Center: {x: 0.8007803, y: 1.15, z: -2.3698616}
+  m_Size: {x: 9, y: 6, z: 3.5}
+  m_Center: {x: 0.2, y: 3, z: -3.5}
 --- !u!65 &65656698663516642
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18361,8 +18022,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.322646, y: 6, z: 9.6}
-  m_Center: {x: 2.338677, y: 1.15, z: -0.19999981}
+  m_Size: {x: 2.5, y: 6, z: 9}
+  m_Center: {x: 3.5, y: 3, z: -0.2}
 --- !u!1 &1768298491246122
 GameObject:
   m_ObjectHideFlags: 0
@@ -18374,9 +18035,7 @@ GameObject:
   - component: {fileID: 4001697081358032}
   - component: {fileID: 33135200253983428}
   - component: {fileID: 23807940883763760}
-  - component: {fileID: 65689882277048888}
-  - component: {fileID: 65580394203574180}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_Isle_Bank_02
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18448,48 +18107,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65689882277048888
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768298491246122}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 8.398439, y: 6, z: 5.260277}
-  m_Center: {x: 0.8007803, y: 1.15, z: -2.3698616}
---- !u!65 &65580394203574180
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1768298491246122}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 5.322646, y: 6, z: 9.6}
-  m_Center: {x: 2.338677, y: 1.15, z: -0.19999981}
 --- !u!1 &1773236160340362
 GameObject:
   m_ObjectHideFlags: 0
@@ -18501,7 +18118,7 @@ GameObject:
   - component: {fileID: 4462292441012506}
   - component: {fileID: 33978845527281354}
   - component: {fileID: 23351525137340106}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18584,7 +18201,7 @@ GameObject:
   - component: {fileID: 4032914103935200}
   - component: {fileID: 33470900310739104}
   - component: {fileID: 23853623106933458}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18667,7 +18284,7 @@ GameObject:
   - component: {fileID: 4437816270851900}
   - component: {fileID: 33638591473469978}
   - component: {fileID: 23671628437673698}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18748,7 +18365,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4006230810863486}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vilage (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18779,7 +18396,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4627270073558004}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vilage (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18814,7 +18431,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4779272309674252}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18851,7 +18468,7 @@ GameObject:
   - component: {fileID: 4630969459240470}
   - component: {fileID: 33011514417145370}
   - component: {fileID: 23286706127593780}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18932,7 +18549,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4770535305501794}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18968,7 +18585,7 @@ GameObject:
   - component: {fileID: 4228336690433290}
   - component: {fileID: 33573465003803166}
   - component: {fileID: 23503073171571632}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19051,7 +18668,7 @@ GameObject:
   - component: {fileID: 4108224771613194}
   - component: {fileID: 33924130059181252}
   - component: {fileID: 23036138273649606}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19134,7 +18751,7 @@ GameObject:
   - component: {fileID: 4052685376304868}
   - component: {fileID: 33987107485889904}
   - component: {fileID: 23204129470105426}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_River_Bank_RL_01
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19217,7 +18834,7 @@ GameObject:
   - component: {fileID: 4863468386662090}
   - component: {fileID: 33259225367718964}
   - component: {fileID: 23122807201078876}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19298,7 +18915,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124520556182660}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Trees
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19345,7 +18962,7 @@ GameObject:
   - component: {fileID: 4632187108087458}
   - component: {fileID: 33380203651321588}
   - component: {fileID: 23555714993723180}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19428,7 +19045,7 @@ GameObject:
   - component: {fileID: 4781678904537330}
   - component: {fileID: 33365954956005030}
   - component: {fileID: 23937241653280762}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tree_03 (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19509,7 +19126,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4128607232288114}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19547,7 +19164,7 @@ GameObject:
   - component: {fileID: 4269862762702154}
   - component: {fileID: 33741833394043438}
   - component: {fileID: 23618262172265336}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19630,7 +19247,7 @@ GameObject:
   - component: {fileID: 4672108309484018}
   - component: {fileID: 33192383672623976}
   - component: {fileID: 23269284758450106}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19711,7 +19328,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4964970302315120}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19747,8 +19364,7 @@ GameObject:
   - component: {fileID: 4683948954868914}
   - component: {fileID: 33033494031073620}
   - component: {fileID: 23519038711518790}
-  - component: {fileID: 65139362532684334}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19820,27 +19436,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65139362532684334
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1797713533896760}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1799014207962370
 GameObject:
   m_ObjectHideFlags: 0
@@ -19852,7 +19447,7 @@ GameObject:
   - component: {fileID: 4918099143362384}
   - component: {fileID: 33002362024511438}
   - component: {fileID: 23996772857843022}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19935,7 +19530,7 @@ GameObject:
   - component: {fileID: 4528398601251922}
   - component: {fileID: 33777110533827972}
   - component: {fileID: 23703756456907762}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20016,7 +19611,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4421559260768394}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20054,7 +19649,7 @@ GameObject:
   - component: {fileID: 33845123678005632}
   - component: {fileID: 23716408648066880}
   - component: {fileID: 65087748973408008}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20145,8 +19740,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
+  m_Size: {x: 10, y: 6, z: 40}
+  m_Center: {x: 0, y: 3, z: 15}
 --- !u!1 &1806396245570338
 GameObject:
   m_ObjectHideFlags: 0
@@ -20158,7 +19753,7 @@ GameObject:
   - component: {fileID: 4892211343372872}
   - component: {fileID: 33138995121304682}
   - component: {fileID: 23805621846776268}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20241,7 +19836,7 @@ GameObject:
   - component: {fileID: 4685523074770090}
   - component: {fileID: 33057148053405758}
   - component: {fileID: 23166926311201984}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20324,8 +19919,7 @@ GameObject:
   - component: {fileID: 4499325735815532}
   - component: {fileID: 33514703596687972}
   - component: {fileID: 23426148077761898}
-  - component: {fileID: 65298986941638842}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20397,27 +19991,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65298986941638842
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1810394394269540}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1814104568244724
 GameObject:
   m_ObjectHideFlags: 0
@@ -20429,8 +20002,7 @@ GameObject:
   - component: {fileID: 4261349832430678}
   - component: {fileID: 33519886953187396}
   - component: {fileID: 23761061742145600}
-  - component: {fileID: 65266339026044754}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20502,27 +20074,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65266339026044754
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814104568244724}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1815681564407486
 GameObject:
   m_ObjectHideFlags: 0
@@ -20534,7 +20085,7 @@ GameObject:
   - component: {fileID: 4829588293490192}
   - component: {fileID: 33765190724281438}
   - component: {fileID: 23657932981970130}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20617,7 +20168,7 @@ GameObject:
   - component: {fileID: 4603982754773976}
   - component: {fileID: 33372083169490480}
   - component: {fileID: 23410517074290156}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20700,7 +20251,7 @@ GameObject:
   - component: {fileID: 4291231026671652}
   - component: {fileID: 33770143284555062}
   - component: {fileID: 23386872339299062}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20783,7 +20334,7 @@ GameObject:
   - component: {fileID: 4501174169886902}
   - component: {fileID: 33799297765398108}
   - component: {fileID: 23353657712046850}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20866,8 +20417,7 @@ GameObject:
   - component: {fileID: 4968262814039960}
   - component: {fileID: 33792394448114536}
   - component: {fileID: 23369388489203090}
-  - component: {fileID: 65344394637022180}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20939,27 +20489,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65344394637022180
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840712005110094}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1841987288936852
 GameObject:
   m_ObjectHideFlags: 0
@@ -20969,7 +20498,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4711699988521048}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21006,7 +20535,7 @@ GameObject:
   - component: {fileID: 4710094565025876}
   - component: {fileID: 33409639966003184}
   - component: {fileID: 23721140749945520}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21089,7 +20618,7 @@ GameObject:
   - component: {fileID: 4470308236323610}
   - component: {fileID: 33507261641647162}
   - component: {fileID: 23263448962166186}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21172,8 +20701,7 @@ GameObject:
   - component: {fileID: 4132462537133248}
   - component: {fileID: 33127037467861262}
   - component: {fileID: 23607224794578942}
-  - component: {fileID: 65807765394588136}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21245,27 +20773,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65807765394588136
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1845697096880196}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1845865700482816
 GameObject:
   m_ObjectHideFlags: 0
@@ -21275,7 +20782,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4013186168554670}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21309,7 +20816,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4053394468377216}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21345,8 +20852,7 @@ GameObject:
   - component: {fileID: 4882572830307112}
   - component: {fileID: 33574332866900512}
   - component: {fileID: 23793185181592510}
-  - component: {fileID: 65281513131792488}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21418,27 +20924,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65281513131792488
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1850020497494978}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.000008, y: 6, z: 10.000008}
-  m_Center: {x: 0.0000054836273, y: 2, z: -0.0000054836273}
 --- !u!1 &1854445700596966
 GameObject:
   m_ObjectHideFlags: 0
@@ -21448,7 +20933,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4844086075422840}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21486,8 +20971,7 @@ GameObject:
   - component: {fileID: 4996056107025718}
   - component: {fileID: 33416093856475030}
   - component: {fileID: 23745612302559906}
-  - component: {fileID: 65434483894507154}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21559,27 +21043,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65434483894507154
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1855251867434154}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.000008, y: 6, z: 10.000008}
-  m_Center: {x: 0.0000054836273, y: 2, z: -0.0000054836273}
 --- !u!1 &1861855561914518
 GameObject:
   m_ObjectHideFlags: 0
@@ -21589,7 +21052,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4976230794147896}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21624,7 +21087,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4369763989281386}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vilage (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21665,7 +21128,7 @@ GameObject:
   - component: {fileID: 4441826191780646}
   - component: {fileID: 33833270674199822}
   - component: {fileID: 23964177208074756}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_River_Bank_RL_01
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21748,7 +21211,7 @@ GameObject:
   - component: {fileID: 4101720045987476}
   - component: {fileID: 33869619377631598}
   - component: {fileID: 23409146194522066}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21831,7 +21294,7 @@ GameObject:
   - component: {fileID: 4102204258158096}
   - component: {fileID: 33425379345821762}
   - component: {fileID: 23174384538629820}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21914,7 +21377,7 @@ GameObject:
   - component: {fileID: 4113299578371478}
   - component: {fileID: 33236890303123738}
   - component: {fileID: 23980936173989906}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21997,7 +21460,7 @@ GameObject:
   - component: {fileID: 4415934262648282}
   - component: {fileID: 33942774275490646}
   - component: {fileID: 23110263845214072}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -22078,7 +21541,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4928607900346234}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vilages
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22123,7 +21586,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4213872175356858}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22159,7 +21622,7 @@ GameObject:
   - component: {fileID: 4107392134272716}
   - component: {fileID: 33009067849326822}
   - component: {fileID: 23902351832793466}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22242,7 +21705,7 @@ GameObject:
   - component: {fileID: 4124740979605402}
   - component: {fileID: 33406994145616756}
   - component: {fileID: 23281272227011374}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bridge_GPX (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22325,7 +21788,7 @@ GameObject:
   - component: {fileID: 4294620451655584}
   - component: {fileID: 33879304955757536}
   - component: {fileID: 23676319906856808}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -22408,7 +21871,7 @@ GameObject:
   - component: {fileID: 4128135556597834}
   - component: {fileID: 33220437729811914}
   - component: {fileID: 23983662066545732}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tree_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22491,8 +21954,7 @@ GameObject:
   - component: {fileID: 4490841520379064}
   - component: {fileID: 33085502672147522}
   - component: {fileID: 23166756362646758}
-  - component: {fileID: 65905045823706062}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -22564,27 +22026,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65905045823706062
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908518797828156}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1911338399230862
 GameObject:
   m_ObjectHideFlags: 0
@@ -22594,7 +22035,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4332643725595122}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22630,7 +22071,7 @@ GameObject:
   - component: {fileID: 4949477535975190}
   - component: {fileID: 33004364089704912}
   - component: {fileID: 23053311184377326}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22713,7 +22154,7 @@ GameObject:
   - component: {fileID: 4745750978850124}
   - component: {fileID: 33669774348373762}
   - component: {fileID: 23095273651373720}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22796,7 +22237,7 @@ GameObject:
   - component: {fileID: 4583139048189798}
   - component: {fileID: 33128838990706912}
   - component: {fileID: 23113006874486858}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -22877,7 +22318,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4154949061075008}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vilage (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22914,7 +22355,7 @@ GameObject:
   - component: {fileID: 4232449630525166}
   - component: {fileID: 33926199088926736}
   - component: {fileID: 23111582018223552}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22995,7 +22436,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4724448744629080}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23031,7 +22472,7 @@ GameObject:
   - component: {fileID: 4199654915722696}
   - component: {fileID: 33851937180680206}
   - component: {fileID: 23472117193100276}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tree_03 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23114,7 +22555,7 @@ GameObject:
   - component: {fileID: 4108442464349660}
   - component: {fileID: 33723667815844734}
   - component: {fileID: 23669680320393212}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23195,7 +22636,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4051355977553858}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23231,7 +22672,7 @@ GameObject:
   - component: {fileID: 4146813974312792}
   - component: {fileID: 33798343486693962}
   - component: {fileID: 23152225623912910}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -23314,8 +22755,7 @@ GameObject:
   - component: {fileID: 4549022820194166}
   - component: {fileID: 33013572286976558}
   - component: {fileID: 23870595797489112}
-  - component: {fileID: 65071773704583746}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile Collider
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -23387,27 +22827,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65071773704583746
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1936421477255714}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1939797605943142
 GameObject:
   m_ObjectHideFlags: 0
@@ -23419,7 +22838,7 @@ GameObject:
   - component: {fileID: 4502195384460864}
   - component: {fileID: 33368281932634492}
   - component: {fileID: 23242790048323040}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -23502,7 +22921,7 @@ GameObject:
   - component: {fileID: 4351468580517744}
   - component: {fileID: 33015964880668908}
   - component: {fileID: 23320899344424886}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile_02 '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -23585,7 +23004,7 @@ GameObject:
   - component: {fileID: 4286281704083806}
   - component: {fileID: 33452060943931652}
   - component: {fileID: 23589719055451734}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23668,7 +23087,7 @@ GameObject:
   - component: {fileID: 4177742820154068}
   - component: {fileID: 33480273157604640}
   - component: {fileID: 23112533329711158}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23751,7 +23170,7 @@ GameObject:
   - component: {fileID: 4341340747943432}
   - component: {fileID: 33388415817899302}
   - component: {fileID: 23601177911305148}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tree_03 (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23834,8 +23253,7 @@ GameObject:
   - component: {fileID: 4456438218087872}
   - component: {fileID: 33859973268911376}
   - component: {fileID: 23880723504345584}
-  - component: {fileID: 65594718831842820}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -23907,27 +23325,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65594718831842820
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1947953603489922}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
 --- !u!1 &1951662978219256
 GameObject:
   m_ObjectHideFlags: 0
@@ -23940,7 +23337,7 @@ GameObject:
   - component: {fileID: 33770704995795696}
   - component: {fileID: 23634191355894472}
   - component: {fileID: 65355257988333336}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -24027,12 +23424,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
+  m_Size: {x: 10, y: 6, z: 20}
+  m_Center: {x: 0, y: 3, z: 5}
 --- !u!1 &1951709247274030
 GameObject:
   m_ObjectHideFlags: 0
@@ -24042,7 +23439,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4856715254418106}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24077,7 +23474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4242734334601468}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24114,7 +23511,7 @@ GameObject:
   - component: {fileID: 4875704694031320}
   - component: {fileID: 33927544697296726}
   - component: {fileID: 23025794485849042}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -24197,7 +23594,7 @@ GameObject:
   - component: {fileID: 4178248647522996}
   - component: {fileID: 33878961099026512}
   - component: {fileID: 23653964525362610}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24280,7 +23677,7 @@ GameObject:
   - component: {fileID: 4465243527046324}
   - component: {fileID: 33729327072191510}
   - component: {fileID: 23360697265410150}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Water_Tile_pattern_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24363,7 +23760,7 @@ GameObject:
   - component: {fileID: 4858955324442096}
   - component: {fileID: 33843537045777510}
   - component: {fileID: 23705407067226636}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24444,7 +23841,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4979770585596660}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24482,7 +23879,7 @@ GameObject:
   - component: {fileID: 23493939885725476}
   - component: {fileID: 65459678905850672}
   - component: {fileID: 65453596698075938}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_Isle_Bank_02 (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -24496,14 +23893,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1960598736239696}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -5, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4338217792861086}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33724359081309180
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -24573,8 +23970,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8.398439, y: 6, z: 5.260277}
-  m_Center: {x: 0.8007803, y: 1.15, z: -2.3698616}
+  m_Size: {x: 9, y: 6, z: 2.5}
+  m_Center: {x: 0.5, y: 3, z: -3.76}
 --- !u!65 &65453596698075938
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24594,8 +23991,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.322646, y: 6, z: 9.6}
-  m_Center: {x: 2.338677, y: 1.15, z: -0.19999981}
+  m_Size: {x: 3.56, y: 6, z: 9.6}
+  m_Center: {x: 2.87, y: 3, z: -0.19999981}
 --- !u!1 &1961072382678124
 GameObject:
   m_ObjectHideFlags: 0
@@ -24607,7 +24004,7 @@ GameObject:
   - component: {fileID: 4911126906428294}
   - component: {fileID: 33811693733824468}
   - component: {fileID: 23538301937197726}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24691,7 +24088,7 @@ GameObject:
   - component: {fileID: 33173205710539760}
   - component: {fileID: 23015706938397972}
   - component: {fileID: 65096192672423148}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -24778,12 +24175,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 1.15, z: 0}
+  m_Size: {x: 10, y: 6, z: 20}
+  m_Center: {x: 0, y: 3, z: 5}
 --- !u!1 &1974991319762806
 GameObject:
   m_ObjectHideFlags: 0
@@ -24795,7 +24192,7 @@ GameObject:
   - component: {fileID: 4399246637443068}
   - component: {fileID: 33354591755308092}
   - component: {fileID: 23930562798359924}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Grass_Tile '
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -24878,7 +24275,7 @@ GameObject:
   - component: {fileID: 4684088058923834}
   - component: {fileID: 33526346364870492}
   - component: {fileID: 23148820244451528}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -24961,7 +24358,7 @@ GameObject:
   - component: {fileID: 4266321365736400}
   - component: {fileID: 33462820101855420}
   - component: {fileID: 23097042153339522}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin_02 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25044,7 +24441,7 @@ GameObject:
   - component: {fileID: 4739525892045136}
   - component: {fileID: 33177558599866014}
   - component: {fileID: 23125636889626632}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Cabin (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25125,7 +24522,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4261902073276708}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25159,7 +24556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4624782004481384}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25195,7 +24592,7 @@ GameObject:
   - component: {fileID: 4839562169174232}
   - component: {fileID: 33209585862807586}
   - component: {fileID: 23789216120926890}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grass_Tile_03
   m_TagString: Wall
   m_Icon: {fileID: 0}

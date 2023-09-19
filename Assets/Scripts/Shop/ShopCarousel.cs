@@ -130,7 +130,7 @@ namespace Shopping
             m_ProductDistance = (int)Mathf.Abs(VectorDistance(getProducts[1].GetComponent<RectTransform>().anchoredPosition, getProducts[0].GetComponent<RectTransform>().anchoredPosition));
             //maxposition = productDistance * 1.8f;
         }
-        public void ButtonNavegation(int next)
+        public void ButtonNavigation(int next)
         {
             m_TargetNearestButton = false;
             getActualProduct += next;
@@ -180,7 +180,7 @@ namespace Shopping
             };
         }
 
-        private float VectorDistance(Vector3 anchor1, Vector3 anchor0)
+        float VectorDistance(Vector3 anchor1, Vector3 anchor0)
         {
             return Direction switch
             {
@@ -190,7 +190,7 @@ namespace Shopping
             };
         }
 
-        private void ClearShopping(int count)
+        void ClearShopping(int count)
         {
             for (int i = 0; i < m_ContentProduct.childCount; i++)
             {

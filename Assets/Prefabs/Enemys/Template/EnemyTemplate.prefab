@@ -12,16 +12,15 @@ GameObject:
   - component: {fileID: 4183145737086533858}
   - component: {fileID: 4988319252790527843}
   - component: {fileID: 5098405757653915416}
-  - component: {fileID: 953354039740420313}
   - component: {fileID: 8040410916055668558}
-  - component: {fileID: 578047918151501529}
   - component: {fileID: 6263680019441384205}
-  - component: {fileID: 9200479897418373190}
   - component: {fileID: -8132964597673927898}
   - component: {fileID: 6421188239924259748}
   - component: {fileID: 8470113045675620300}
+  - component: {fileID: 9013518650734585950}
+  - component: {fileID: 1051795495417664586}
   - component: {fileID: 1604458344605076990}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: EnemyTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +78,8 @@ AudioSource:
   m_GameObject: {fileID: 1504127474328815682}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 1826209515656138388, guid: 58d7b5e9bc02ca541be53445706aa66a, type: 2}
+  OutputAudioMixerGroup: {fileID: 1826209515656138388, guid: 58d7b5e9bc02ca541be53445706aa66a,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -179,21 +179,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
+  deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
+    type: 3}
+  timeoutDestroyExplosion: 2
   isDestroyed: 0
-  actualEnemyStatus: 0
   actualDifficultName: 0
---- !u!114 &953354039740420313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1504127474328815682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 835ac01f8be85e845b38db1766a1e635, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8040410916055668558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +202,8 @@ MonoBehaviour:
   ignoreWalls: 0
   ignoreEnemies: 0
   moveVelocity: 0
+  startDirection: 0
+  freeVectorDirection: {x: 0, y: 0, z: 0}
   animationDuration: 0
   animationCurve:
     serializedVersion: 2
@@ -219,22 +211,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  startDirection: 0
-  freeVectorDirection: {x: 0, y: 0, z: 0}
---- !u!114 &578047918151501529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1504127474328815682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96a109c0c1c143f4dbf76b0ce248d7ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  particlePrefab: {fileID: 0}
-  timeoutDestroy: 0
 --- !u!114 &6263680019441384205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,21 +223,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0139ee20f45fc64a8ee2a64e0e66b09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &9200479897418373190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1504127474328815682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cd5220d622d07b49a85064a33f314c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  indexStartSkin: 0
-  randomSkin: 0
-  skins: []
 --- !u!114 &-8132964597673927898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,7 +238,7 @@ MonoBehaviour:
   playerApproachRadius: 0
   playerApproachRadiusRandom: {x: 0, y: 0}
   gizmoColor: {r: 255, g: 0, b: 0, a: 150}
-  bullet: {fileID: 1153674050946406, guid: 96c3e2b69c987b5458ed58e9d0514a6e, type: 3}
+  bullet: {fileID: 0}
   startPool: 0
   shootCadence: 0
   bulletSpeed: 0
@@ -307,9 +268,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455e9578ac64bc9419948b1bd205a107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionTrigger: 
   onMove: 
   onFlip: 
+--- !u!114 &9013518650734585950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504127474328815682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 588577f4492752c438e1740073bb732b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropHeight: 0.2
+  timeToAutoDestroy: 5
+  dropChance: {x: 0, y: 0.2}
+--- !u!114 &1051795495417664586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504127474328815682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e85dace111d475348a232163b97ac3b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indexStartSkin: 0
+  randomSkin: 0
+  skins: []
 --- !u!23 &1604458344605076990
 MeshRenderer:
   m_ObjectHideFlags: 0

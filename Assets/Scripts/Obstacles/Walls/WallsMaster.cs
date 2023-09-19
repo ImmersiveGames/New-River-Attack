@@ -4,10 +4,10 @@ namespace RiverAttack
 {
     public class WallsMaster : MonoBehaviour
     {
-        void OnEnable()
+        /*void OnEnable()
         {
             Tools.SetLayersRecursively(GameManager.instance.layerWall, transform);
-        }
+        }*/
 
     }
 }

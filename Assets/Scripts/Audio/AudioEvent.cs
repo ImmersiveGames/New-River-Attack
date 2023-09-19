@@ -14,9 +14,9 @@ namespace RiverAttack
     {
         public string name;
         public AudioClip audioClip;
-        [MinMaxSlider(0f,1f)]
+        [MinMaxSlider(0f, 1f)]
         public Vector2 volume;
-        [MinMaxSlider(-3f,3f)]
+        [MinMaxSlider(-3f, 3f)]
         public Vector2 pitch;
         public bool loop;
     }

@@ -1,82 +1,42 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 namespace RiverAttack
 {
     public class PlayerSkinTrail : MonoBehaviour
     {
-        PlayerMaster m_PlayerMaster;
-        GamePlayManager m_GamePlayManager;
         TrailRenderer[] m_TrailRenderer;
+        [Range(0f, 1f)] const float RANGE_AXIS_Y = 0.2f;
 
-        #region UNITY METHODS
-        void Awake()
-        {
-            SetInitialReferences();
-        }
-        void Start()
-        {
-            OnEnable();
-        }
+        PlayerMaster m_PlayerMaster;
+
+        #region UNITYMETHODS
         void OnEnable()
         {
-            
-            if (m_PlayerMaster)
-                m_PlayerMaster.EventPlayerMasterControllerMovement += ActiveTrailsOnMovement;
+            m_PlayerMaster = GetComponent<PlayerMaster>();
             m_TrailRenderer = GetComponentsInChildren<TrailRenderer>();
-            m_GamePlayManager.EventCompletePath += EnableTrails;
-            SetTrails(false);
+            m_PlayerMaster.EventPlayerMasterControllerMovement += ActiveTrailsOnMovement;
         }
         void OnDisable()
         {
-            //if (m_PlayerMaster)
-                m_PlayerMaster.EventPlayerMasterControllerMovement -= ActiveTrailsOnMovement;
-            m_GamePlayManager.EventCompletePath -= EnableTrails;
-        }
-        void OnDestroy()
-        {
-            m_GamePlayManager.EventCompletePath -= EnableTrails;
+            m_PlayerMaster.EventPlayerMasterControllerMovement -= ActiveTrailsOnMovement;
         }
   #endregion
-
-        public void RestTrail()
+        void SetTrails(bool setting)
         {
-            m_GamePlayManager.EventCompletePath -= EnableTrails;
-            if (m_PlayerMaster)
-                m_PlayerMaster.EventPlayerMasterControllerMovement += ActiveTrailsOnMovement;
-            m_TrailRenderer = GetComponentsInChildren<TrailRenderer>();
-            m_GamePlayManager.EventCompletePath += EnableTrails;
-            SetTrails(false);
-        }
-        void SetInitialReferences()
-        {
-            m_PlayerMaster = GetComponentInParent<PlayerMaster>();
-            m_GamePlayManager = GamePlayManager.instance;
+            foreach (var t in m_TrailRenderer)
+            {
+                t.enabled = setting;
+            }
         }
         void ActiveTrailsOnMovement(Vector2 dir)
         {
             switch (dir.y)
             {
-                case > 0:
+                case > RANGE_AXIS_Y:
                     SetTrails(true);
                     break;
-                case <= 0:
+                case <= RANGE_AXIS_Y:
                     SetTrails(false);
                     break;
-            }
-        }
-        void SetTrails(bool setting)
-        {
-            foreach (var t in m_TrailRenderer)
-            {
-                //t.emitting = setting;
-                t.enabled = setting;
-            }
-        }
-        void EnableTrails()
-        {
-            foreach (var t in m_TrailRenderer)
-            {
-                t.enabled = true;
             }
         }
     }

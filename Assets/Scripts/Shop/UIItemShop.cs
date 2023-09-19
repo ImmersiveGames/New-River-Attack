@@ -9,8 +9,8 @@ namespace Shopping
     {
         [SerializeField, Header("Product Display")]
         TMP_Text productName;
-        [SerializeField]
-        TMP_Text productDescription;
+        //[SerializeField]
+        //TMP_Text productDescription;
         [SerializeField]
         TMP_Text productPrice;
         [SerializeField]
@@ -60,12 +60,12 @@ namespace Shopping
             SetupSelectButton(player);
         }
 
-        void UpdateBuyButton(PlayerSettings player, ShopProductStock product)
+        void UpdateBuyButton(PlayerSettings player)
         {
             SetupButtons(player);
         }
 
-        void SelectThisItem(PlayerSettings player, ShopProductStock product)
+        void SelectThisItem(PlayerSettings player)
         {
             SetupButtons(player);
         }
@@ -73,15 +73,24 @@ namespace Shopping
         void SetupBuyButton(PlayerSettings player)
         {
             btnBuy.gameObject.SetActive(true);
+            Debug.Log($"Available to buy: {productInStock.shopProduct.name} , {productInStock.AvailableForBuy(player)}");
             btnBuy.interactable = productInStock.AvailableForBuy(player);
+            if (btnBuy.interactable)
+            {
+                btnBuy.GetComponent<Image>().color = ShopMaster.instance.buyerColor;
+            }
             if (productInStock.PlayerAlreadyBuy(player) && !productInStock.shopProduct.isConsumable)
                 btnBuy.gameObject.SetActive(false);
         }
 
         void SetupSelectButton(PlayerSettings player)
         {
-            btnSelect.gameObject.SetActive(!productInStock.AvailableForBuy(player));
-            btnSelect.interactable = false || productInStock.AvailableToSelect(player);
+            btnSelect.gameObject.SetActive(true);
+            if (!productInStock.PlayerAlreadyBuy(player) && !productInStock.shopProduct.isConsumable)
+            {
+                btnSelect.gameObject.SetActive(false);
+            }
+            btnSelect.interactable = productInStock.AvailableToSelect(player) ;
             if (productInStock.shopProduct.isConsumable)
                 btnSelect.gameObject.SetActive(false);
             //Debug.Log(myproductStock.shopProduct.GetName + "  Ativo: " + myproductStock.shopProduct.ShouldBeConsume(player));

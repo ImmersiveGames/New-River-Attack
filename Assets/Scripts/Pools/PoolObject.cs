@@ -1,29 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
-// ReSharper disable ConditionIsAlwaysTrueOrFalse
 namespace Utils
 {
     public class PoolObject
     {
         readonly List<GameObject> m_PooledObjects;
         readonly GameObject m_PooledObj;
-         //int m_InitialPoolSize;
-         readonly Transform m_MyRoot; 
-         Transform m_Target;
+        readonly Transform m_MyRoot;
+        Transform m_Target;
 
         public PoolObject(GameObject prefab, int initialPoolSize, Transform myRoot, bool persistent = false)
         {
             m_PooledObjects = new List<GameObject>();
-            if (m_MyRoot == null)
-            {
-                m_MyRoot = new GameObject("Pool(" + myRoot.root.name + ")").transform;
-                m_MyRoot.SetParent(myRoot);
-                m_MyRoot.SetAsLastSibling();
-                var transform = m_MyRoot.transform;
-                transform.localPosition = Vector3.zero;
-                transform.localRotation = Quaternion.identity;
-            }
-            
+            m_MyRoot = new GameObject("Pool(" + myRoot.root.name + ")").transform;
+            m_MyRoot.SetParent(myRoot);
+            m_MyRoot.SetAsLastSibling();
+            var transform = m_MyRoot.transform;
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+
             for (int i = 0; i < initialPoolSize; i++)
             {
                 CreateObject(prefab, m_MyRoot);
@@ -31,7 +26,6 @@ namespace Utils
             if (persistent)
                 Object.DontDestroyOnLoad(myRoot);
             m_PooledObj = prefab;
-            //m_InitialPoolSize = initialPoolSize;
         }
 
         GameObject CreateObject(GameObject prefab, Transform poolRoot)

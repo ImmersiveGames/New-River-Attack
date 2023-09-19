@@ -12,23 +12,13 @@ namespace RiverAttack
         protected internal ObjectMaster ownerShoot;
         Transform m_MyPool;
 
-        public void Init(float speed,float lifetime = 0)
-        {
-            SetBulletSpeed(speed);
-            SetBulletLifeTime(lifetime);
-        }
-        
-
-        void SetBulletSpeed(float speed)
+        public void Init(float speed, float lifetime = 0)
         {
             bulletSpeed = speed;
+            m_HasBulletLifeTime = lifetime > 0;
+            bulletLifeTime = lifetime + Time.time;
         }
 
-        void SetBulletLifeTime(float lifetime)
-        {
-            m_HasBulletLifeTime = lifetime > 0;
-            bulletLifeTime = lifetime;
-        }
         public bool haveAPool
         {
             get { return m_MyPool; }
@@ -46,8 +36,6 @@ namespace RiverAttack
         }
         protected void DestroyMe()
         {
-            //Debug.Log("DestroyMe");
-            //TODO: Voltar o Tiro para o pool identificar qual meu Pool;
             gameObject.SetActive(false);
             if (!m_MyPool)
                 return;

@@ -7,7 +7,7 @@ namespace RiverAttack
     public class EnemiesSetDifficultyListSo : ScriptableObject
     {
         public List<EnemiesSetDifficulty> enemiesSetDifficulties;
-        
+
         public EnemiesSetDifficulty GetDifficultByScore(int score)
         {
             return enemiesSetDifficulties.Find(x => x.scoreToChange >= (score));
@@ -22,7 +22,7 @@ namespace RiverAttack
     [System.Serializable]
     public struct EnemiesSetDifficulty
     {
-        public enum EnemyDifficult {Easy,Normal,Hard}
+        public enum EnemyDifficult { Easy, Normal, Hard }
         public EnemyDifficult enemyDifficult;
         public float multiplyScore;
         public int scoreToChange;

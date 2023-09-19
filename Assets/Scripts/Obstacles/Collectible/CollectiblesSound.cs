@@ -1,27 +1,28 @@
 ﻿using UnityEngine;
 namespace RiverAttack
 {
-    [RequireComponent(typeof(CollectiblesMaster))]
     public class CollectiblesSound : EnemiesSound
     {
         [SerializeField]
-        private AudioEventSample collectSound;
+        AudioEventSample collectSound;
         [SerializeField]
-        private AudioEventSample showSound;
+        AudioEventSample showSound;
         CollectiblesMaster m_CollectiblesMaster;
 
         #region UNITY METHODS
         protected override void OnEnable()
         {
             base.OnEnable();
-            m_CollectiblesMaster.CollectibleEvent += CollectSound;
-            m_CollectiblesMaster.ShowOnScreen += ShowSound;
+            m_CollectiblesMaster.EventCollectItem += CollectSound;
+        }
+        void OnBecameVisible()
+        {
+            ShowSound();
         }
         protected override void OnDisable()
         {
             base.OnDisable();
-            m_CollectiblesMaster.CollectibleEvent -= CollectSound;
-            m_CollectiblesMaster.ShowOnScreen -= ShowSound;
+            m_CollectiblesMaster.EventCollectItem -= CollectSound;
         }
   #endregion
 
@@ -37,11 +38,10 @@ namespace RiverAttack
             m_CollectiblesMaster = GetComponent<CollectiblesMaster>();
         }
 
-        void CollectSound(PlayerMaster playerMaster)
+        void CollectSound(PlayerSettings playerSettings)
         {
             if (audioSource != null && collectSound != null)
                 collectSound.Play(audioSource);
         }
     }
 }
-

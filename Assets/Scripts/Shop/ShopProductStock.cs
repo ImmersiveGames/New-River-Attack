@@ -31,11 +31,22 @@ namespace Shopping
 
         public bool AvailableForBuy(PlayerSettings player)
         {
-            return AvailableInStock() && HaveMoneyToBuy(player) && (PlayerAlreadyBuy(player) && shopProduct.isConsumable || !PlayerAlreadyBuy(player));
+            // Debug.Log($"In stock {AvailableInStock()} - {shopProduct.name}");
+            // Debug.Log($"In Have Money to buy {HaveMoneyToBuy(player)} - {shopProduct.name}");
+            // Debug.Log($"Already BUY {PlayerAlreadyBuy(player)} - {shopProduct.name}");
+            // Debug.Log($"Consumível {shopProduct.isConsumable} - {shopProduct.name}");
+            if (AvailableInStock() && HaveMoneyToBuy(player))
+            {
+                return !PlayerAlreadyBuy(player) || shopProduct.isConsumable;
+            }
+            return false;
+            
+            // return (AvailableInStock() && HaveMoneyToBuy(player) && (PlayerAlreadyBuy(player) && shopProduct.isConsumable) || !PlayerAlreadyBuy(player));
         }
 
         public bool HaveMoneyToBuy(PlayerSettings player)
         {
+            Debug.Log($"Dinheiro {player.wealth}, {shopProduct.priceItem}");
             return player.wealth >= shopProduct.priceItem;
         }
         public bool PlayerAlreadyBuy(PlayerSettings player)
