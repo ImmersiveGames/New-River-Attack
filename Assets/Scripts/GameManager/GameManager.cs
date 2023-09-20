@@ -160,6 +160,16 @@ namespace RiverAttack
             m_OnTransition = false;
         }
 
+        public void RemoveAllPlayers()
+        {
+            if (initializedPlayerMasters.Count <= 0) return;
+            foreach (var playerMaster in initializedPlayerMasters)
+            {
+                DestroyImmediate(playerMaster.gameObject);
+            }
+            initializedPlayerMasters = new List<PlayerMaster>();
+        }
+
         void GameOverState()
         {
             var curr = currentGameState as GameStateGameOver;
@@ -183,11 +193,6 @@ namespace RiverAttack
             Tools.SetFollowVirtualCam(virtualCamera, playerObject.transform);
         }
 
-        public void PlayEndCutScene()
-        {
-            endCutDirector.Play();
-        }
-
         public void PlayOpenCutScene()
         {
             Invoke(nameof(InvokePlayOpenCutScene),0.2f);
@@ -207,8 +212,7 @@ namespace RiverAttack
 
         public void BtnGameRestart()
         {
-            int cenaAtual = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(cenaAtual);
+            ChangeState(new GameStateMenu());
         }
         #endregion
 

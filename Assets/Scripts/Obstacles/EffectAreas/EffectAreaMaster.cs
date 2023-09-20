@@ -43,7 +43,7 @@ namespace RiverAttack
         void CollectThis(PlayerMaster collision)
         {
             var player = collision.getPlayerSettings;
-            if (m_Timer <= 0)
+            if (m_Timer <= 0 && m_PlayerMaster.inEffectArea)
             {
                 m_EffectArea.EffectAreaStart(player);
                 OnEventAreaEffect();
@@ -54,8 +54,11 @@ namespace RiverAttack
 
         protected override void DestroyObstacle()
         {
-            m_PlayerMaster.inEffectArea = false;
-            OnEventExitAreaEffect();
+            if (m_PlayerMaster.inEffectArea)
+            {
+                m_PlayerMaster.inEffectArea = false;
+                OnEventExitAreaEffect();
+            }
             base.DestroyObstacle();
         }
 

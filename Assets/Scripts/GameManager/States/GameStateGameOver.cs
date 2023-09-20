@@ -32,6 +32,8 @@ namespace RiverAttack
         public override void ExitState()
         {
             Debug.Log($"Saida no Estado: GameOver");
+            m_GameManager.RemoveAllPlayers();
+            
         }
     }
 }

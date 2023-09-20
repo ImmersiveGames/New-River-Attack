@@ -17,7 +17,8 @@ namespace RiverAttack
         {
             //Debug.Log($"Entra no Estado: CutScene");
             m_GameManager.openCutDirector.gameObject.SetActive(true);
-            m_GameManager.InstantiatePlayers();
+            if (!m_GameManager.haveAnyPlayerInitialized)
+                m_GameManager.InstantiatePlayers();
             m_GameManager.PlayOpenCutScene();
             //Iniciar a BGM
             GamePlayAudio.instance.ChangeBGM(GamePlayManager.instance.actualLevels.bgmStartLevel, TIME_TO_FADE_BGM);
@@ -37,7 +38,6 @@ namespace RiverAttack
         }
         public override void ExitState()
         {
-            m_GameManager.openCutDirector.gameObject.SetActive(false);
             //Debug.Log($"Saindo no Estado: CutScene");
         }
     }

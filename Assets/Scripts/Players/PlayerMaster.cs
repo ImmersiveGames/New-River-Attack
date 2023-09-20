@@ -101,7 +101,7 @@ namespace RiverAttack
             return m_Animator;
         }
 
-        void PlayerStartSetup()
+        internal void PlayerStartSetup()
         {
             inEffectArea = false;
             getPlayerSettings.spawnPosition = transform.position;
