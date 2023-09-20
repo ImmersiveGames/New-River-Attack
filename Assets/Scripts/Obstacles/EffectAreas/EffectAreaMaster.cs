@@ -52,6 +52,13 @@ namespace RiverAttack
             m_Timer -= Time.deltaTime;
         }
 
+        protected override void DestroyObstacle()
+        {
+            m_PlayerMaster.inEffectArea = false;
+            OnEventExitAreaEffect();
+            base.DestroyObstacle();
+        }
+
         #region Calls
         void OnEventAreaEffect()
         {
