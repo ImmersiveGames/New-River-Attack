@@ -3802,8 +3802,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 3, y: 3, z: 6}
+  m_Size: {x: 20, y: 6, z: 5}
+  m_Center: {x: -2.5, y: 3, z: 5}
 --- !u!1 &1171086874453604
 GameObject:
   m_ObjectHideFlags: 0
@@ -6036,7 +6036,6 @@ GameObject:
   - component: {fileID: 4655235551745934}
   - component: {fileID: 33303552760079714}
   - component: {fileID: 23142161714747584}
-  - component: {fileID: 65034538850354466}
   m_Layer: 8
   m_Name: Desert_Curve (4)
   m_TagString: Wall
@@ -6109,27 +6108,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65034538850354466
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1324938292868122}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 14}
-  m_Center: {x: 0, y: 3, z: 9.43}
 --- !u!1 &1325192708092186
 GameObject:
   m_ObjectHideFlags: 0
@@ -8105,14 +8083,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1410649661861590}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -5, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4553286627082182}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33255801617848664
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -9856,7 +9834,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1507433943549058}
   m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15, y: 0, z: 65}
+  m_LocalPosition: {x: 15, y: 0, z: 65.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10506,6 +10484,7 @@ GameObject:
   - component: {fileID: 33672359185504200}
   - component: {fileID: 23393986001954058}
   - component: {fileID: 65481358753794036}
+  - component: {fileID: 1272041294879185365}
   m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -10597,8 +10576,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 200}
-  m_Center: {x: 2.4986742, y: 3, z: -95}
+  m_Size: {x: 5, y: 6, z: 200}
+  m_Center: {x: 5, y: 3, z: -95}
+--- !u!65 &1272041294879185365
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550942630589512}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.700008, y: 0.2, z: 200}
+  m_Center: {x: 1.6500046, y: 0.2, z: -95}
 --- !u!1 &1551403934673964
 GameObject:
   m_ObjectHideFlags: 0
@@ -10776,6 +10776,7 @@ GameObject:
   - component: {fileID: 4309389556593868}
   - component: {fileID: 33775870284199080}
   - component: {fileID: 23439156255582454}
+  - component: {fileID: 7430832323323171177}
   m_Layer: 8
   m_Name: Desert_Water
   m_TagString: Untagged
@@ -10848,6 +10849,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7430832323323171177
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555455500856676}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10.000007, y: 0.099998094, z: 10.000007}
+  m_Center: {x: 0.000005722046, y: 0.049994852, z: -0.000005722046}
 --- !u!1 &1557091069246464
 GameObject:
   m_ObjectHideFlags: 0
@@ -11984,7 +12006,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.6858807, y: 6, z: 6.5374556}
+  m_Size: {x: 4, y: 6, z: 6.5374556}
   m_Center: {x: 0.18313658, y: 2, z: 0.23238993}
 --- !u!1 &1621159764291102
 GameObject:
@@ -13356,7 +13378,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.6858807, y: 6, z: 6.5374556}
+  m_Size: {x: 4, y: 6, z: 6.5374556}
   m_Center: {x: 0.18313658, y: 3, z: 0.23238993}
 --- !u!1 &1687276691605622
 GameObject:
@@ -13453,6 +13475,7 @@ GameObject:
   - component: {fileID: 33942839166360306}
   - component: {fileID: 23194876335832590}
   - component: {fileID: 65962940913559876}
+  - component: {fileID: 2135305689320802229}
   m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -13544,8 +13567,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.0026517, y: 6, z: 200}
-  m_Center: {x: 2.4986742, y: 3, z: 95}
+  m_Size: {x: 5, y: 6, z: 200}
+  m_Center: {x: 5, y: 3, z: 95}
+--- !u!65 &2135305689320802229
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694793713057750}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.700008, y: 0.2, z: 200}
+  m_Center: {x: 1.6500046, y: 0.2, z: 95}
 --- !u!1 &1709523916380992
 GameObject:
   m_ObjectHideFlags: 0
@@ -14239,7 +14283,7 @@ Transform:
   - {fileID: 4341580786852486}
   - {fileID: 4592181802035460}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1728036222054486
 GameObject:
@@ -15623,8 +15667,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.8893123, y: 6, z: 22}
-  m_Center: {x: 0.12845778, y: 3, z: 10}
+  m_Size: {x: 3.39, y: 6, z: 22}
+  m_Center: {x: 0, y: 3, z: 10}
 --- !u!1 &1809946025288636
 GameObject:
   m_ObjectHideFlags: 0
@@ -17887,7 +17931,6 @@ GameObject:
   - component: {fileID: 4447364911766298}
   - component: {fileID: 33476393236568522}
   - component: {fileID: 23798389988176002}
-  - component: {fileID: 65895947706396660}
   m_Layer: 8
   m_Name: Desert_Curve (5)
   m_TagString: Wall
@@ -17960,27 +18003,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65895947706396660
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1936290403776280}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 16, y: 6, z: 10.0000105}
-  m_Center: {x: -9.09, y: 3, z: -0.0000054836287}
 --- !u!1 &1938642686405850
 GameObject:
   m_ObjectHideFlags: 0
@@ -18621,8 +18643,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.6858807, y: 6, z: 6.5374556}
-  m_Center: {x: 0.18313658, y: 3, z: 0.23238993}
+  m_Size: {x: 4, y: 6, z: 6}
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1978683611401882
 GameObject:
   m_ObjectHideFlags: 0
@@ -18726,7 +18748,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.6858807, y: 6, z: 6.5374556}
+  m_Size: {x: 4, y: 6, z: 6.5374556}
   m_Center: {x: 0.18313658, y: 3, z: 0.23238993}
 --- !u!1 &1983166269168744
 GameObject:
