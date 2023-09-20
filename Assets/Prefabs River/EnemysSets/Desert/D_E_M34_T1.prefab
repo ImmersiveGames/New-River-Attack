@@ -74,7 +74,7 @@ Transform:
   - {fileID: 7536318494912195952}
   - {fileID: 6094726585927423227}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &159800317906917706
 PrefabInstance:
@@ -84,6 +84,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4950242193805992}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
       propertyPath: m_RootOrder
@@ -222,6 +234,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ship_Transport Hybrid (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -462,13 +489,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
         type: 3}
+      propertyPath: moveVelocity
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
       propertyPath: startDirection
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
         type: 3}
       propertyPath: playerApproachRadius
-      value: 15
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -568,6 +610,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4950242193805992}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
       propertyPath: m_RootOrder
@@ -709,8 +763,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
         type: 3}
+      propertyPath: moveVelocity
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
       propertyPath: playerApproachRadius
-      value: 15
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -870,6 +939,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ship_Transport Hybrid (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -969,8 +1053,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 4950242193805992}
     m_Modifications:
     - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
       propertyPath: playerApproachRadiusRandom.x
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
       propertyPath: playerApproachRadiusRandom.y
@@ -1117,8 +1205,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
         type: 3}
+      propertyPath: moveVelocity
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
       propertyPath: playerApproachRadius
-      value: 15
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1201,13 +1304,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
         type: 3}
+      propertyPath: moveVelocity
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
       propertyPath: startDirection
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
         type: 3}
       propertyPath: playerApproachRadius
-      value: 15
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1229,8 +1347,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 4950242193805992}
     m_Modifications:
     - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
       propertyPath: playerApproachRadiusRandom.x
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
       propertyPath: playerApproachRadiusRandom.y
@@ -1315,6 +1437,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4950242193805992}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
       propertyPath: m_RootOrder
@@ -1394,6 +1528,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4950242193805992}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
       propertyPath: m_RootOrder
@@ -1535,8 +1681,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
         type: 3}
+      propertyPath: moveVelocity
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
       propertyPath: playerApproachRadius
-      value: 15
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1558,8 +1719,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 4950242193805992}
     m_Modifications:
     - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
       propertyPath: playerApproachRadius
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
@@ -1640,6 +1813,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4950242193805992}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
       propertyPath: m_RootOrder
@@ -1719,6 +1904,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4950242193805992}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
       propertyPath: m_RootOrder
@@ -1878,8 +2075,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 4950242193805992}
     m_Modifications:
     - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
       propertyPath: playerApproachRadius
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
@@ -1960,6 +2169,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4950242193805992}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
       propertyPath: m_RootOrder
@@ -2197,6 +2418,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4950242193805992}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
       propertyPath: m_RootOrder
@@ -2355,6 +2588,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4950242193805992}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
       propertyPath: m_RootOrder
@@ -2513,6 +2758,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4950242193805992}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
       propertyPath: m_RootOrder
@@ -2750,6 +3007,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4950242193805992}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
       propertyPath: m_RootOrder
@@ -3207,8 +3476,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8373321320407240334, guid: 2f731691095ed48468c9190dca34d1c8,
         type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373321320407240334, guid: 2f731691095ed48468c9190dca34d1c8,
+        type: 3}
       propertyPath: startDirection
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373321320407240334, guid: 2f731691095ed48468c9190dca34d1c8,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3388,8 +3667,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 4950242193805992}
     m_Modifications:
     - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
       propertyPath: playerApproachRadius
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 193888212885951, guid: 46ef0fbe414912f409ed55d671576604, type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: 46ef0fbe414912f409ed55d671576604,
         type: 3}
@@ -3609,6 +3900,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8373321320407240334, guid: 2f731691095ed48468c9190dca34d1c8,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373321320407240334, guid: 2f731691095ed48468c9190dca34d1c8,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3687,6 +3988,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ship_Transport Hybrid (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
