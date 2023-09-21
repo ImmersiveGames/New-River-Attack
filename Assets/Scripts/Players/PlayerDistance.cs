@@ -35,29 +35,27 @@ namespace RiverAttack
         }
         void Update()
         {
+            var position = transform.position;
             // Calcula a distância percorrida no eixo Z desde o último frame
-            float distanciaZ = Mathf.Abs(transform.position.z - m_LastPosition.z);
+            float distanceTraveledByFrame = position.z - m_LastPosition.z;
 
-            if (transform.position.z < 0 && distanciaZ <= 0 && !m_PlayerMaster.shouldPlayerBeReady) return;
+            // se a posição for maior que a inicial e não teveve nenhum movimento no ultimo frame e não ta permitindo joga então ignore; 
+            if (position.z < 0 && distanceTraveledByFrame <= 0 && !m_PlayerMaster.shouldPlayerBeReady) return;
 
-            m_TravelledDistance += distanciaZ;
+            m_TravelledDistance += distanceTraveledByFrame;
 
             // Atualiza o ponto mais distante alcançado
             m_MaxTravelledDistance = Mathf.Max(m_MaxTravelledDistance, m_TravelledDistance);
 
-            // Calcula a distância convertida com base na conversão configurada
-            m_ConvertDistance = m_MaxTravelledDistance / conversion;
-
-            int convertDistanceInt = Mathf.FloorToInt(m_ConvertDistance);
-            if (convertDistanceInt > Mathf.FloorToInt(m_LastConvertDistance))
+            if (m_TravelledDistance > m_LastConvertDistance)
             {
-                // Atualiza o valor anterior com o valor atual
-                m_LastConvertDistance = m_ConvertDistance;
-                m_GamePlayManager.OnEventUpdateDistance(Mathf.FloorToInt(m_ConvertDistance));
+                m_LastConvertDistance = m_TravelledDistance;
+                int convertDistanceInt = Mathf.FloorToInt(m_LastConvertDistance / conversion);
+                m_GamePlayManager.OnEventUpdateDistance(convertDistanceInt);
             }
-
-            // Atualiza a posição anterior
-            m_LastPosition = transform.position;
+            //Debug.Log($"Update Distance: Distancia Convertida :{m_TravelledDistance}, Last: {m_LastConvertDistance}, Position: {position.z}");
+            m_LastPosition = position;
+            
         }
         void OnDisable()
         {

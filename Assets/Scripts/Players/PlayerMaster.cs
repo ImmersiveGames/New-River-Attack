@@ -101,7 +101,7 @@ namespace RiverAttack
             return m_Animator;
         }
 
-        internal void PlayerStartSetup()
+        void PlayerStartSetup()
         {
             inEffectArea = false;
             getPlayerSettings.spawnPosition = transform.position;
@@ -112,7 +112,7 @@ namespace RiverAttack
             getPlayerSettings.distance = 0;
             int distInt = Mathf.FloorToInt(getPlayerSettings.distance);
             m_GamePlayManager.OnEventUpdateDistance(distInt);
-            getPlayerSettings.wealth = 0;
+            //getPlayerSettings.wealth = 0;
             m_GamePlayManager.OnEventUpdateRefugees(getPlayerSettings.wealth);
             getPlayerSettings.bombs = m_GameSettings.startBombs;
             m_GamePlayManager.OnEventUpdateBombs(getPlayerSettings.bombs);
