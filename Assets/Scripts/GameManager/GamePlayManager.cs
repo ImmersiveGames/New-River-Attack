@@ -33,6 +33,7 @@ namespace RiverAttack
         internal event GeneralEventHandler EventReSpawnEnemiesMaster;
         internal event GeneralEventHandler EventEnemiesMasterKillPlayer;
         internal event GeneralEventHandler EventOtherEnemiesKillPlayer;
+        internal event GeneralEventHandler EventEnemiesMasterForceRespawn;
         internal event GeneralEventHandler EventPlayerPushButtonShoot;
         internal event GeneralEventHandler EventPlayerPushButtonBomb;
         internal delegate void UiUpdateEventHandler(int value);
@@ -187,9 +188,11 @@ namespace RiverAttack
         {
             EventEndRapidFire?.Invoke();
         }
+        internal void OnEventEnemiesMasterForceRespawn()
+        {
+            EventEnemiesMasterForceRespawn?.Invoke();
+        }
   #endregion
-
-
         
     }
 }

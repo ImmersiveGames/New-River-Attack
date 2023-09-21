@@ -33,6 +33,7 @@ namespace RiverAttack
         {
             Debug.Log($"Saida no Estado: GameOver");
             m_GameManager.RemoveAllPlayers();
+            GamePlayManager.instance.OnEventEnemiesMasterForceRespawn();
             
         }
     }

@@ -6,7 +6,6 @@ namespace RiverAttack
         float m_Timer;
         float m_TimeToAccess;
         EffectAreaScriptable m_EffectArea;
-        PlayerMaster m_PlayerMaster;
 
         #region Events
         public event GeneralEventHandler EventEnterAreaEffect;

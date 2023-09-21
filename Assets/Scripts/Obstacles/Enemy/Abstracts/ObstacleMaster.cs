@@ -18,6 +18,7 @@ namespace RiverAttack
         Vector3 m_ObjectStartPosition;
         Quaternion m_ObjectStartRotate;
         Vector3 m_ObjectStartScale;
+        protected PlayerMaster m_PlayerMaster;
         protected GamePlayManager gamePlayManager;
         protected GamePlaySettings gamePlaySettings;
 
@@ -44,6 +45,8 @@ namespace RiverAttack
             gamePlayManager.EventActivateEnemiesMaster += ActiveObject;
             gamePlayManager.EventDeactivateEnemiesMaster += DeactivateObject;
             gamePlayManager.EventReSpawnEnemiesMaster += TryRespawn;
+            if(!enemy.canRespawn)
+                gamePlayManager.EventEnemiesMasterForceRespawn += ForceRespawn;
             StartObstacle();
         }
         internal virtual void OnTriggerEnter(Collider other)
@@ -61,6 +64,8 @@ namespace RiverAttack
             gamePlayManager.EventActivateEnemiesMaster -= ActiveObject;
             gamePlayManager.EventDeactivateEnemiesMaster -= DeactivateObject;
             gamePlayManager.EventReSpawnEnemiesMaster -= TryRespawn;
+            if(!enemy.canRespawn)
+                gamePlayManager.EventEnemiesMasterForceRespawn -= ForceRespawn;
         }
   #endregion
         protected virtual void SetInitialReferences()
@@ -85,11 +90,11 @@ namespace RiverAttack
         protected void ComponentToKill(Component other, CollisionType collisionType)
         {
             if (other == null) return;
-            var playerMaster = WhoHit(other);
+            m_PlayerMaster = WhoHit(other);
             OnEventObstacleMasterHit();
-            OnEventObstacleScore(playerMaster.getPlayerSettings);
-            ShouldSavePoint(playerMaster.getPlayerSettings);
-            GamePlayManager.AddResultList(gamePlaySettings.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy, 1, collisionType);
+            OnEventObstacleScore(m_PlayerMaster.getPlayerSettings);
+            ShouldSavePoint(m_PlayerMaster.getPlayerSettings);
+            GamePlayManager.AddResultList(gamePlaySettings.hitEnemiesResultsList, m_PlayerMaster.getPlayerSettings, enemy, 1, collisionType);
             ShouldFinishGame();
         }
         internal static PlayerMaster WhoHit(Component other)
@@ -113,6 +118,12 @@ namespace RiverAttack
         void TryRespawn()
         {
             if (!enemy.canRespawn) return;
+            StartObstacle();
+            Tools.ToggleChildren(transform);
+        }
+
+        void ForceRespawn()
+        {
             StartObstacle();
             Tools.ToggleChildren(transform);
         }
