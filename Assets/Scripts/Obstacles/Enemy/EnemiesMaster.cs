@@ -10,7 +10,7 @@ namespace RiverAttack
         public static EnemiesSetDifficulty myDifficulty { get; private set; }
 
         #region Delegates
-        internal event GeneralEventHandler EventObjectMasterFlipEnemies;
+        internal event MovementEventHandler EventObjectMasterFlipEnemies;
         #endregion
 
         #region UNITYMETHODS
@@ -34,9 +34,8 @@ namespace RiverAttack
             ComponentToKill(other.GetComponentInParent<PlayerMaster>(), CollisionType.Collider);
             GamePlayManager.instance.OnEventOtherEnemiesKillPlayer();
         }
-        internal override void OnDisable()
+        void OnDisable()
         {
-            base.OnDisable();
             EventObstacleMasterHit -= ChangeDifficulty;
         }
           #endregion
@@ -50,9 +49,9 @@ namespace RiverAttack
         }
 
         #region Calls
-        internal void OnEventObjectMasterFlipEnemies()
+        internal void OnEventObjectMasterFlipEnemies(bool active)
         {
-            EventObjectMasterFlipEnemies?.Invoke();
+            EventObjectMasterFlipEnemies?.Invoke(active);
         }
   #endregion
 

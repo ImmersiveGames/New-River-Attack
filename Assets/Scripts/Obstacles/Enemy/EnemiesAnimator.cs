@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 namespace RiverAttack
 {
     public class EnemiesAnimator : MonoBehaviour
@@ -14,15 +15,18 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
-            m_EnemiesMaster.EventObstacleMovement += ObjectMasterMoveAnimation;
-            m_EnemiesMaster.EventObjectMasterFlipEnemies += ObjectMasterFlipEnemiesMasterFlipAnimation;
+            m_EnemiesMaster.EventObstacleMovement += AnimationMove; 
+            m_EnemiesMaster.EventObjectMasterFlipEnemies += AnimationFlip;
             m_GamePlayManager.EventReSpawnEnemiesMaster += ResetAnimation;
 
         }
         void OnDisable()
         {
-            m_EnemiesMaster.EventObstacleMovement -= ObjectMasterMoveAnimation;
-            m_EnemiesMaster.EventObjectMasterFlipEnemies -= ObjectMasterFlipEnemiesMasterFlipAnimation;
+            m_EnemiesMaster.EventObstacleMovement -= AnimationMove;
+            m_EnemiesMaster.EventObjectMasterFlipEnemies -= AnimationFlip;
+        }
+        void OnDestroy()
+        {
             m_GamePlayManager.EventReSpawnEnemiesMaster -= ResetAnimation;
         }
   #endregion
@@ -33,24 +37,43 @@ namespace RiverAttack
             m_EnemiesMaster = GetComponent<EnemiesMaster>();
             m_Animator = GetComponentInChildren<Animator>();
         }
-        void ObjectMasterMoveAnimation(Vector3 dir)
+
+        void AnimationMove(bool active)
         {
-            //TODO: BUG Na Pausa, esta resetando a animação, não pode.
             if (m_Animator == null)
-            {
                 m_Animator = GetComponentInChildren<Animator>();
-            }
-            if (m_Animator != null && !string.IsNullOrEmpty(onMove))
-                m_Animator.SetBool(onMove, dir != Vector3.zero);
+            if (string.IsNullOrEmpty(onMove)) 
+                return;
+            m_Animator.SetBool(onMove, active);
         }
+
+        void AnimationFlip(bool active)
+        {
+            if (m_Animator == null)
+                m_Animator = GetComponentInChildren<Animator>();
+            if (string.IsNullOrEmpty(onFlip)) 
+                return;
+            m_Animator.SetBool(onFlip, !m_Animator.GetBool(onFlip));
+        }
+
+        void ResetAnimation()
+        {
+            if (m_Animator == null) return;
+            if (!string.IsNullOrEmpty(onMove))
+                m_Animator.SetBool(onMove, false);
+            if (!string.IsNullOrEmpty(onFlip))
+                m_Animator.SetBool(onFlip, false);
+        }
+        
+        /*
         void ObjectMasterFlipEnemiesMasterFlipAnimation()
         {
             if (m_Animator == null)
             {
                 m_Animator = GetComponentInChildren<Animator>();
             }
-            if (m_Animator != null && !string.IsNullOrEmpty(onFlip))
-                m_Animator.SetBool(onFlip, !m_Animator.GetBool(onFlip));
+            //if (m_Animator != null && !string.IsNullOrEmpty(onFlip))
+               // m_Animator.SetBool(onFlip, !m_Animator.GetBool(onFlip));
         }
 
         void ResetAnimation()
@@ -64,6 +87,6 @@ namespace RiverAttack
             //Forçando a Animação de movimento a reiniciar, normalmente é o eixo do movimento, mas como a variavel não entra neste escopo, força o movimento com true depois de revive-lo.
             if (!string.IsNullOrEmpty(onMove)) 
                 m_Animator.SetBool(onMove, true);
-        }
+        }*/
     }
 }

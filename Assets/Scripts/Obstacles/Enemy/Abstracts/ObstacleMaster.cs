@@ -13,12 +13,12 @@ namespace RiverAttack
         [SerializeField]
         float timeoutDestroyExplosion;
         public bool isDestroyed;
-
-        protected bool isActive;
+        [SerializeField]
+        internal bool isActive;
         Vector3 m_ObjectStartPosition;
         Quaternion m_ObjectStartRotate;
         Vector3 m_ObjectStartScale;
-        protected PlayerMaster m_PlayerMaster;
+        protected PlayerMaster playerMaster;
         protected GamePlayManager gamePlayManager;
         protected GamePlaySettings gamePlaySettings;
 
@@ -27,7 +27,7 @@ namespace RiverAttack
         protected internal event GeneralEventHandler EventObstacleMasterHit;
         public delegate void PlayerSettingsEventHandler(PlayerSettings playerSettings);
         protected internal event PlayerSettingsEventHandler EventObstacleScore;
-        public delegate void MovementEventHandler(Vector3 dir);
+        public delegate void MovementEventHandler(bool active);
         protected internal event MovementEventHandler EventObstacleMovement;
   #endregion
 
@@ -54,10 +54,6 @@ namespace RiverAttack
             if (other == null || !shouldObstacleBeReady || !enemy.canDestruct) return;
             ComponentToKill(other.GetComponent<BulletPlayer>(), CollisionType.Shoot);
             ComponentToKill(other.GetComponent<BulletPlayerBomb>(), CollisionType.Bomb);
-        }
-        internal virtual void OnDisable()
-        {
-            //isActive = false;
         }
         internal virtual void OnDestroy()
         {
@@ -90,11 +86,11 @@ namespace RiverAttack
         protected void ComponentToKill(Component other, CollisionType collisionType)
         {
             if (other == null) return;
-            m_PlayerMaster = WhoHit(other);
+            playerMaster = WhoHit(other);
             OnEventObstacleMasterHit();
-            OnEventObstacleScore(m_PlayerMaster.getPlayerSettings);
-            ShouldSavePoint(m_PlayerMaster.getPlayerSettings);
-            GamePlayManager.AddResultList(gamePlaySettings.hitEnemiesResultsList, m_PlayerMaster.getPlayerSettings, enemy, 1, collisionType);
+            OnEventObstacleScore(playerMaster.getPlayerSettings);
+            ShouldSavePoint(playerMaster.getPlayerSettings);
+            GamePlayManager.AddResultList(gamePlaySettings.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy, 1, collisionType);
             ShouldFinishGame();
         }
         internal static PlayerMaster WhoHit(Component other)
@@ -163,9 +159,9 @@ namespace RiverAttack
         {
             EventObstacleScore?.Invoke(playerSettings);
         }
-        protected internal virtual void OnEventObstacleMovement(Vector3 dir)
+        internal void OnEventObstacleMovement(bool active)
         {
-            EventObstacleMovement?.Invoke(dir);
+            EventObstacleMovement?.Invoke(active);
         }
   #endregion
 

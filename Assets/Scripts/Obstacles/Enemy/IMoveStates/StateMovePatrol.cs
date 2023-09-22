@@ -4,26 +4,25 @@ namespace RiverAttack
 {
     public class StateMovePatrol : IMove
     {
-        public Transform target;
+        Transform m_Target;
         float m_StartApproachRadius;
         float m_PlayerApproachRadius;
 
-        EnemiesMaster m_EnemiesMaster;
+        readonly EnemiesMaster m_EnemiesMaster;
         EnemiesSetDifficulty m_EnemiesSetDifficulty;
         PlayerDetectApproach m_PlayerDetectApproach;
-        readonly ObstacleDetectApproach m_ObstacleDetectApproach;
+        readonly EnemiesMovement m_EnemiesMovement;
 
-        public StateMovePatrol(ObstacleDetectApproach enemiesMovement, Transform target)
+        public StateMovePatrol(EnemiesMovement enemiesMovement, EnemiesMaster enemiesMaster)
         {
-            this.target = target;
-            m_ObstacleDetectApproach = enemiesMovement;
-        }
-        public void EnterState(EnemiesMaster enemiesMaster)
-        {
-            //Debug.Log("Estado: Patrol - Enter: " + m_ObstacleDetectApproach.playerApproachRadius);
-            target = null;
+            m_EnemiesMovement = enemiesMovement;
             m_EnemiesMaster = enemiesMaster;
-            m_PlayerApproachRadius = m_StartApproachRadius = m_ObstacleDetectApproach.playerApproachRadius;
+        }
+        public void EnterState()
+        {
+            //Debug.Log($"{m_EnemiesMaster.gameObject.name} Estado: Patrol - Enter");
+            m_Target = null;
+            m_PlayerApproachRadius = m_StartApproachRadius = m_EnemiesMovement.playerApproachRadius;
 
             if (!m_EnemiesMaster.enemy && !m_EnemiesMaster.enemy.enemiesSetDifficultyListSo) return;
             m_EnemiesSetDifficulty = m_EnemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(m_EnemiesMaster.actualDifficultName);
@@ -31,15 +30,16 @@ namespace RiverAttack
         }
         public void UpdateState(Transform transform, Vector3 direction)
         {
-            //Debug.Log("Estado: Patrol - Update: "+ m_PlayerApproachRadius);
+            //Debug.Log($"{transform.gameObject.name} Estado: Patrol - Update: "+ m_PlayerApproachRadius);
             var position = transform.position;
             m_PlayerDetectApproach ??= new PlayerDetectApproach(position, m_PlayerApproachRadius);
-            target = m_PlayerDetectApproach.TargetApproach<PlayerMaster>(GameManager.instance.layerPlayer);
-            //Debug.Log("target: "+ target);
+            m_Target = m_PlayerDetectApproach.TargetApproach<PlayerMaster>(GameManager.instance.layerPlayer);
+            if(m_Target)
+                m_EnemiesMovement.ChangeState(new StateMove(m_EnemiesMovement, m_EnemiesMaster));
         }
         public void ExitState()
         {
-            target = null;
+            m_Target = null;
             //Debug.Log("Estado: Patrol - Exit");
         }
     }

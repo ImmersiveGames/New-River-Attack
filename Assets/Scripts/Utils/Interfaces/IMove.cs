@@ -4,7 +4,7 @@ namespace Utils
 {
     public interface IMove
     {
-        void EnterState(EnemiesMaster enemiesMaster);
+        void EnterState();
         void UpdateState(Transform transform, Vector3 direction);
         void ExitState();
     }

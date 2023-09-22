@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Utils;
+using Random = UnityEngine.Random;
 
 namespace RiverAttack
 {
@@ -9,35 +10,22 @@ namespace RiverAttack
         [Header("Movement Settings")]
         [SerializeField] bool ignoreWalls;
         [SerializeField] bool ignoreEnemies;
-        [SerializeField] protected internal float moveVelocity;
+        [SerializeField] internal float moveVelocity;
         public enum Directions { None, Forward, Back, Up, Right, Down, Left, Free }
         [Header("Movement Directions")]
-        [SerializeField] public Directions startDirection;
+        [SerializeField] Directions startDirection;
+        Vector3 m_VectorDirection;
         public Vector3 freeVectorDirection;
         [Header("Movement with Animation Curve")]
-        [SerializeField] protected internal float animationDuration;
-        [SerializeField] public AnimationCurve animationCurve;
-
-        #region IMove
-        readonly StateMove m_StateMove;
-        readonly StateMoveHold m_StateMoveHold;
-        readonly StateMovePatrol m_StateMovePatrol;
-        public EnemiesMovement()
-        {
-            m_StateMove = new StateMove(this);
-            m_StateMoveHold = new StateMoveHold(this);
-            m_StateMovePatrol = new StateMovePatrol(this, null);
-        }
-    #endregion
-        bool m_InCollision;
-        Vector3 m_VectorDirection;
-        GamePlayManager m_GamePlayManager;
-        EnemiesMaster m_EnemiesMaster;
+        [SerializeField] internal float animationDuration;
+        [SerializeField] internal AnimationCurve animationCurve;
+   
         IMove m_ActualState;
+        EnemiesMaster m_EnemiesMaster;
+        GamePlayManager m_GamePlayManager;
+        bool m_InCollision;
 
-        bool shouldBeMoving { get { return moveVelocity > 0; } }
-
-        #region UNITYMETODS
+        #region UNITYMETHODS
         void Awake()
         {
             m_VectorDirection = SetDirection(startDirection);
@@ -45,82 +33,72 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
-            m_GamePlayManager.EventActivateEnemiesMaster += ResetEnemyMovement;
+            m_GamePlayManager.EventReSpawnEnemiesMaster += ResetEnemyMovement;
         }
-       
         void Start()
         {
-            ChangeState(m_StateMoveHold);
+            ChangeState(new StateMoveHold(this, m_EnemiesMaster));
         }
         void OnTriggerEnter(Collider other)
         {
-            if (!m_GamePlayManager.shouldBePlayingGame ||
-                !m_EnemiesMaster.shouldObstacleBeReady ||
-                m_EnemiesMaster.isDestroyed ||
-                !meshRenderer.isVisible || m_ActualState != m_StateMove || m_InCollision) return;
-
-            if ((other.GetComponentInParent<WallsMaster>() && ignoreWalls) ||
-                (other.GetComponentInParent<EnemiesMaster>() && ignoreEnemies) ||
-                other.GetComponentInParent<CollectiblesMaster>() ||
-                other.GetComponentInParent<PlayerMaster>()) return;
-
+            if (m_ActualState is not StateMove) return;
+            if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldObstacleBeReady || m_EnemiesMaster.isDestroyed || !meshRenderer.isVisible)
+                return;
+            if(m_InCollision || (other.GetComponentInParent<WallsMaster>() && ignoreWalls) || (other.GetComponentInParent<EnemiesMaster>() && ignoreEnemies)) 
+                return;
+            if (!other.GetComponentInParent<EnemiesMaster>() && !other.GetComponentInParent<WallsMaster>()) return;
+            
             m_InCollision = true;
             m_VectorDirection *= -1;
-            var newDirection = GetDirection(m_VectorDirection);
-            m_VectorDirection = SetDirection(newDirection);
-            m_EnemiesMaster.OnEventObjectMasterFlipEnemies();
+            m_EnemiesMaster.OnEventObjectMasterFlipEnemies(true);
+        }
+        void OnTriggerExit(Collider other)
+        {
+            if (m_ActualState is not StateMove) return;
+            if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldObstacleBeReady || m_EnemiesMaster.isDestroyed || !meshRenderer.isVisible)
+                return;
+            if(!m_InCollision || (other.GetComponentInParent<WallsMaster>() && ignoreWalls) || (other.GetComponentInParent<EnemiesMaster>() && ignoreEnemies)) 
+                return;
+            if (!other.GetComponentInParent<EnemiesMaster>() && !other.GetComponentInParent<WallsMaster>()) return;
             m_InCollision = false;
         }
         void Update()
         {
             if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldObstacleBeReady || m_EnemiesMaster.isDestroyed || !meshRenderer.isVisible)
                 return;
-
-            switch (shouldBeMoving)
-            {
-                case true when shouldBeApproach && !target:
-                    target = null;
-                    ChangeState(m_StateMovePatrol);
-                    target = m_StateMovePatrol.target;
-                    break;
-                case true:
-                    ChangeState(m_StateMove);
-                    break;
-                case false:
-                    target = null;
-                    ChangeState(m_StateMoveHold);
-                    break;
-            }
             m_ActualState.UpdateState(transform, m_VectorDirection);
         }
-        #endregion
 
+        void OnDisable()
+        {
+            
+        }
+  #endregion
         protected override void SetInitialReferences()
         {
+            base.SetInitialReferences();
             m_GamePlayManager = GamePlayManager.instance;
             m_EnemiesMaster = GetComponent<EnemiesMaster>();
-            base.SetInitialReferences();
         }
-        void ChangeState(IMove newState)
+        internal bool shouldBeMoving { get { return m_EnemiesMaster.isActive && moveVelocity > 0; } }
+        internal void ChangeState(IMove newState)
         {
             if (m_ActualState == newState) return;
             m_ActualState?.ExitState();
 
             m_ActualState = newState;
-            m_ActualState?.EnterState(m_EnemiesMaster);
+            m_ActualState?.EnterState();
         }
-
-        void ColliderPermission()
-        {
-            m_InCollision = false;
-        }
+        
         void ResetEnemyMovement()
         {
             m_VectorDirection = SetDirection(startDirection);
+            m_InCollision = false;
             target = null;
-            ChangeState(m_StateMoveHold);
+            ChangeState(new StateMoveHold(this, m_EnemiesMaster));
         }
-        public Vector3 SetDirection(Directions dir)
+
+        Vector3 SetDirection(Directions dir)
         {
             return dir switch
             {
@@ -135,6 +113,34 @@ namespace RiverAttack
                 _ => Vector3.zero
             };
         }
+
+        #region Gizmos
+        void OnDrawGizmosSelected()
+        {
+#if UNITY_EDITOR
+            
+            if (playerApproachRadius <= 0 && playerApproachRadiusRandom.y <= 0) return;
+            float newPlayerApproachRadius = playerApproachRadiusRandom != Vector2.zero ? Random.Range(playerApproachRadiusRandom.x, playerApproachRadiusRandom.y) : playerApproachRadius;
+            var enemiesMaster = GetComponent<EnemiesMaster>();
+            if (!enemiesMaster.enemy && !enemiesMaster.enemy.enemiesSetDifficultyListSo) return;
+            var difficult = enemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(enemiesMaster.actualDifficultName);
+            float realApproachRadius = newPlayerApproachRadius * difficult.multiplyPlayerDistanceRadiusToMove;
+            var position = transform.position;
+
+            // Código que será executado apenas no Editor
+            if (playerApproachRadiusRandom == Vector2.zero)
+            {
+                Gizmos.color = gizmoColor;
+                Gizmos.DrawWireSphere(center: position, realApproachRadius);
+            }
+            if(playerApproachRadiusRandom == Vector2.zero) return;
+            Gizmos.color = gizmoColor + new Color(0.2f, 0.2f, 0.2f);
+            Gizmos.DrawWireSphere(center: position, playerApproachRadiusRandom.x * difficult.multiplyPlayerDistanceRadiusToMove);
+            Gizmos.color = gizmoColor - new Color(0.2f, 0.2f, 0.2f);
+            Gizmos.DrawWireSphere(center: position, playerApproachRadiusRandom.y * difficult.multiplyPlayerDistanceRadiusToMove);
+#endif
+        }
+  #endregion
 
         static Directions GetDirection(Vector3 vector3)
         {
@@ -152,6 +158,5 @@ namespace RiverAttack
                 return Directions.Back;
             return vector3 != Vector3.zero ? Directions.Free : Directions.None;
         }
-
     }
 }

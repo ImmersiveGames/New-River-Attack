@@ -1,4 +1,5 @@
-﻿using GD.MinMaxSlider;
+﻿using System;
+using GD.MinMaxSlider;
 using UnityEngine;
 using Utils;
 using Random = UnityEngine.Random;
@@ -36,20 +37,11 @@ namespace RiverAttack
             m_PlayerDetectApproach.UpdatePatrolDistance(playerApproachRadius);
             return m_PlayerDetectApproach.TargetApproach<T>(layer);
         }
-        protected bool shouldBeApproach { get { return playerApproachRadius != 0 || playerApproachRadiusRandom != Vector2.zero; } }
+        protected internal bool shouldBeApproach { get { return playerApproachRadius != 0 || playerApproachRadiusRandom != Vector2.zero; } }
 
         float SetPlayerApproachRadius()
         {
-            if (playerApproachRadiusRandom != Vector2.zero)
-                playerApproachRadius = randomRangeDetect;
-            return playerApproachRadius;
-        }
-        void OnDrawGizmosSelected()
-        {
-            if (playerApproachRadius <= 0 && playerApproachRadiusRandom.y <= 0) return;
-            float radius = playerApproachRadius;
-            Gizmos.color = gizmoColor;
-            Gizmos.DrawWireSphere(center: transform.position, radius);
+            return playerApproachRadiusRandom != Vector2.zero ? randomRangeDetect : playerApproachRadius;
         }
     }
 }

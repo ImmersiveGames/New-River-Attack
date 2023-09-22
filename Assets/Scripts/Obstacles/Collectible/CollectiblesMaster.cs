@@ -34,9 +34,9 @@ namespace RiverAttack
         void ComponentToCollect(Component other)
         {
             if (other == null) return;
-            var playerMaster = WhoHit(other);
+            var whoHit = WhoHit(other);
             // pode coletar?
-            var collectableList = playerMaster.collectableList;
+            var collectableList = whoHit.collectableList;
             if (collectableList.Count != 0)
             {
                 var results = collectableList.Find(x => x.collectable == collectibleScriptable);
@@ -47,14 +47,14 @@ namespace RiverAttack
                 }
                 // Ja tem algo na lista
             }
-            if(collectibleScriptable == gamePlayManager.refilBomb && playerMaster.getPlayerSettings.bombs >= GameSettings.instance.maxBombs)
+            if(collectibleScriptable == gamePlayManager.refilBomb && whoHit.getPlayerSettings.bombs >= GameSettings.instance.maxBombs)
                 return;
             
-            OnEventCollectItem(playerMaster.getPlayerSettings);
-            ShouldSavePoint(playerMaster.getPlayerSettings);
+            OnEventCollectItem(whoHit.getPlayerSettings);
+            ShouldSavePoint(whoHit.getPlayerSettings);
             AddCollectList(collectableList, collectibleScriptable, collectibleScriptable.amountCollectables);
-            CollectWealth(playerMaster.getPlayerSettings, collectibleScriptable.amountCollectables);
-            GamePlayManager.AddResultList(gamePlaySettings.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy, collectibleScriptable.amountCollectables, CollisionType.Collected);
+            CollectWealth(whoHit.getPlayerSettings, collectibleScriptable.amountCollectables);
+            GamePlayManager.AddResultList(gamePlaySettings.hitEnemiesResultsList, whoHit.getPlayerSettings, enemy, collectibleScriptable.amountCollectables, CollisionType.Collected);
         }
         static void AddCollectList(List<LogPlayerCollectables> list, CollectibleScriptable collectible, int qnt)
         {
