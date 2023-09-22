@@ -120,8 +120,8 @@ namespace RiverAttack
 
         void ForceRespawn()
         {
-            StartObstacle();
             Tools.ToggleChildren(transform);
+            StartObstacle();
         }
 
         protected virtual void ActiveObject()

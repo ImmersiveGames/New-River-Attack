@@ -1,7 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Utils;
-using Random = UnityEngine.Random;
 
 namespace RiverAttack
 {
@@ -67,11 +65,6 @@ namespace RiverAttack
             if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldObstacleBeReady || m_EnemiesMaster.isDestroyed || !meshRenderer.isVisible)
                 return;
             m_ActualState.UpdateState(transform, m_VectorDirection);
-        }
-
-        void OnDisable()
-        {
-            
         }
   #endregion
         protected override void SetInitialReferences()
@@ -142,7 +135,7 @@ namespace RiverAttack
         }
   #endregion
 
-        static Directions GetDirection(Vector3 vector3)
+        /*static Directions GetDirection(Vector3 vector3)
         {
             if (vector3 == new Vector3(0, 1, 0))
                 return Directions.Up;
@@ -157,6 +150,6 @@ namespace RiverAttack
             if (vector3 == new Vector3(0, 0, -1))
                 return Directions.Back;
             return vector3 != Vector3.zero ? Directions.Free : Directions.None;
-        }
+        }*/
     }
 }
