@@ -71,7 +71,7 @@ namespace RiverAttack
             yield return new WaitForSeconds(2f);
             m_GameManager.ActivePlayers(true);
             m_GameManager.UnPausedMovementPlayers();
-            //OnEventActivateEnemiesMaster();
+            OnEventActivateEnemiesMaster();
         }
         public bool shouldBePlayingGame { get { return (m_GameManager.currentGameState is GameStatePlayGame && !completePath); } }
 

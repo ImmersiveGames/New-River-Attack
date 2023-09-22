@@ -12,15 +12,15 @@ namespace RiverAttack
         {
             m_GameManager.startMenu.SetMenuPrincipal(1, true);
             m_GameManager.startMenu.SetMenuHudControl(false);
-            Debug.Log($"Entra no Estado: Pause");
+            //Debug.Log($"Entra no Estado: Pause");
         }
         public override void UpdateState()
         {
-            Debug.Log($"Game Pausado!");
+            //Debug.Log($"Game Pausado!");
         }
         public override void ExitState()
         {
-            Debug.Log($"Sai do Estado: Pause");
+            //Debug.Log($"Sai do Estado: Pause");
         }
     }
 }

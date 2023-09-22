@@ -4,9 +4,7 @@ using Cinemachine;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Playables;
-using UnityEngine.SceneManagement;
 using Utils;
-using Object = UnityEngine.Object;
 namespace RiverAttack
 {
     public abstract class GameState
@@ -70,7 +68,6 @@ namespace RiverAttack
         internal void ChangeState(GameState newState)
         {
             //TODO: melhorar para fazer o state saltar as transições na entrada e na saida. talvez colocar na criação uma bolian para decidir
-            var nState = newState;
             if (m_OnTransition) return;
             if (currentGameState != null)
             {
@@ -212,7 +209,10 @@ namespace RiverAttack
 
         public void BtnGameRestart()
         {
+            GamePlayManager.instance.OnEventReSpawnEnemiesMaster();
+            GamePlayManager.instance.OnEventEnemiesMasterForceRespawn();
             ChangeState(new GameStateMenu());
+            GameMissionBuilder.instance.ResetBuildMission();
         }
         #endregion
 

@@ -14,7 +14,7 @@ namespace RiverAttack
         }
         public override void EnterState()
         {
-            Debug.Log($"Entra no Estado: GameOver");
+            //Debug.Log($"Entra no Estado: GameOver");
             m_GamePlayAudio.ChangeBGM(LevelTypes.GameOver, TIME_TO_FADE_BGM);
             
         }
@@ -27,14 +27,13 @@ namespace RiverAttack
         
         public override void UpdateState()
         {
-            Debug.Log($"GameOver");
+            //Debug.Log($"GameOver");
         }
         public override void ExitState()
         {
-            Debug.Log($"Saida no Estado: GameOver");
+            //Debug.Log($"Saida no Estado: GameOver");
             m_GameManager.RemoveAllPlayers();
             GamePlayManager.instance.OnEventEnemiesMasterForceRespawn();
-            
         }
     }
 }
