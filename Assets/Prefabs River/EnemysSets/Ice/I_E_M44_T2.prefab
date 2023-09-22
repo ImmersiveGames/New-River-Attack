@@ -71,7 +71,7 @@ Transform:
   - {fileID: 4235922629798946446}
   - {fileID: 2302250987007284557}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &23601901684801357
 PrefabInstance:
@@ -94,7 +94,7 @@ PrefabInstance:
     - target: {fileID: 2847906185337109353, guid: b1a67df328a672746acd05f72d6809fe,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2847906185337109353, guid: b1a67df328a672746acd05f72d6809fe,
         type: 3}
@@ -140,6 +140,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hovercraft (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976036328383054663, guid: b1a67df328a672746acd05f72d6809fe,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -220,6 +225,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hovercraft (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4976036328383054663, guid: b1a67df328a672746acd05f72d6809fe,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -299,6 +309,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ship_Transport Hybrid (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -318,6 +343,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4401719503468030}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: c6204e5668052b843947970a8596d396, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: c6204e5668052b843947970a8596d396,
         type: 3}
       propertyPath: m_RootOrder
@@ -555,6 +584,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4401719503468030}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: c6204e5668052b843947970a8596d396, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: c6204e5668052b843947970a8596d396,
         type: 3}
       propertyPath: m_RootOrder
@@ -871,6 +904,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4401719503468030}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: c6204e5668052b843947970a8596d396, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: c6204e5668052b843947970a8596d396,
         type: 3}
       propertyPath: m_RootOrder
@@ -963,7 +1000,7 @@ PrefabInstance:
     - target: {fileID: 2847906185337109353, guid: b1a67df328a672746acd05f72d6809fe,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2847906185337109353, guid: b1a67df328a672746acd05f72d6809fe,
         type: 3}
@@ -1009,6 +1046,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hovercraft (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976036328383054663, guid: b1a67df328a672746acd05f72d6809fe,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1089,6 +1131,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hovercraft (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4976036328383054663, guid: b1a67df328a672746acd05f72d6809fe,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1108,6 +1155,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4401719503468030}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: c6204e5668052b843947970a8596d396, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: c6204e5668052b843947970a8596d396,
         type: 3}
       propertyPath: m_RootOrder
@@ -1246,6 +1297,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ship_Transport Hybrid (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1424,6 +1490,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4401719503468030}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: c6204e5668052b843947970a8596d396, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: c6204e5668052b843947970a8596d396,
         type: 3}
       propertyPath: m_RootOrder
@@ -1503,6 +1573,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4401719503468030}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: c6204e5668052b843947970a8596d396, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: c6204e5668052b843947970a8596d396,
         type: 3}
       propertyPath: m_RootOrder
@@ -1642,6 +1716,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ship_Transport Hybrid (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1661,6 +1750,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4401719503468030}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: c6204e5668052b843947970a8596d396, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: c6204e5668052b843947970a8596d396,
         type: 3}
       propertyPath: m_RootOrder
@@ -1819,6 +1912,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4401719503468030}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: c6204e5668052b843947970a8596d396, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: c6204e5668052b843947970a8596d396,
         type: 3}
       propertyPath: m_RootOrder
@@ -1898,6 +1995,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4401719503468030}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: c6204e5668052b843947970a8596d396, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: c6204e5668052b843947970a8596d396,
         type: 3}
       propertyPath: m_RootOrder
@@ -1977,6 +2078,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4401719503468030}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: c6204e5668052b843947970a8596d396, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: c6204e5668052b843947970a8596d396,
         type: 3}
       propertyPath: m_RootOrder
@@ -2115,6 +2220,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ship_Transport Hybrid (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2293,6 +2413,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4401719503468030}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: c6204e5668052b843947970a8596d396, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: c6204e5668052b843947970a8596d396,
         type: 3}
       propertyPath: m_RootOrder
@@ -2517,6 +2641,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ship_Transport Hybrid (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2615,6 +2754,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4401719503468030}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: c6204e5668052b843947970a8596d396, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: c6204e5668052b843947970a8596d396,
         type: 3}
       propertyPath: m_RootOrder
@@ -2773,6 +2916,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4401719503468030}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: c6204e5668052b843947970a8596d396, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: c6204e5668052b843947970a8596d396,
         type: 3}
       propertyPath: m_RootOrder
@@ -2852,6 +2999,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4401719503468030}
     m_Modifications:
+    - target: {fileID: 193888212885951, guid: c6204e5668052b843947970a8596d396, type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7100792791116011921, guid: c6204e5668052b843947970a8596d396,
         type: 3}
       propertyPath: m_RootOrder
@@ -3148,6 +3299,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ship_Transport Hybrid (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: moveVelocity
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029937169501562962, guid: fb8fa48e6d04bd24b8ee807fe73a18bd,
+        type: 3}
+      propertyPath: playerApproachRadiusRandom.y
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

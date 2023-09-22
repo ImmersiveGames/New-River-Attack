@@ -1394,6 +1394,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4206251407737860}
+  - component: {fileID: 3680932605651184037}
   m_Layer: 8
   m_Name: Linha09
   m_TagString: Untagged
@@ -1427,6 +1428,18 @@ Transform:
   m_Father: {fileID: 4693717593302094}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3680932605651184037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074290678006808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1075117082547584
 GameObject:
   m_ObjectHideFlags: 0
@@ -2428,6 +2441,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4319372756423452}
+  - component: {fileID: 5759259985778106168}
   m_Layer: 8
   m_Name: Linha15
   m_TagString: Untagged
@@ -2461,6 +2475,18 @@ Transform:
   m_Father: {fileID: 4693717593302094}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5759259985778106168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142231084572326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1143558711589500
 GameObject:
   m_ObjectHideFlags: 0
@@ -3466,6 +3492,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4536001316124904}
+  - component: {fileID: 7784595593624612414}
   m_Layer: 8
   m_Name: Linha08
   m_TagString: Untagged
@@ -3499,6 +3526,18 @@ Transform:
   m_Father: {fileID: 4693717593302094}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7784595593624612414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1173862936744792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1177680603227258
 GameObject:
   m_ObjectHideFlags: 0
@@ -3593,9 +3632,7 @@ GameObject:
   - component: {fileID: 4742002625054208}
   - component: {fileID: 33540742096780288}
   - component: {fileID: 23575859211284758}
-  - component: {fileID: 65128517977667386}
-  - component: {fileID: 65545982555526510}
-  - component: {fileID: 65461102490816246}
+  - component: {fileID: 5362741971905278860}
   m_Layer: 8
   m_Name: Ice_Curve
   m_TagString: Wall
@@ -3668,7 +3705,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65128517977667386
+--- !u!65 &5362741971905278860
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3687,50 +3724,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5, y: 6, z: 8.179989}
-  m_Center: {x: -5, y: 3, z: 0.91000557}
---- !u!65 &65545982555526510
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179012348376758}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 15, y: 6, z: 2.7481298}
-  m_Center: {x: -5, y: 3, z: 3.625935}
---- !u!65 &65461102490816246
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179012348376758}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 9, y: 6, z: 2.7384508}
-  m_Center: {x: -5, y: 3, z: 0.8758973}
+  m_Size: {x: 4, y: 6, z: 10}
+  m_Center: {x: -5, y: 3, z: 2.5}
 --- !u!1 &1185574065578228
 GameObject:
   m_ObjectHideFlags: 0
@@ -4074,9 +4069,6 @@ GameObject:
   - component: {fileID: 4034117622639984}
   - component: {fileID: 33995056186516864}
   - component: {fileID: 23420340084477888}
-  - component: {fileID: 65390110746867544}
-  - component: {fileID: 65397455101026848}
-  - component: {fileID: 65164544706821654}
   m_Layer: 8
   m_Name: Ice_Curve (1)
   m_TagString: Wall
@@ -4149,69 +4141,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65390110746867544
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1196692893135070}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 25, y: 6, z: 8.179989}
-  m_Center: {x: -15, y: 3, z: 0.91000557}
---- !u!65 &65397455101026848
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1196692893135070}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 8.5956335, y: 6, z: 2.7481298}
-  m_Center: {x: -0.70218325, y: 3, z: 3.625935}
---- !u!65 &65164544706821654
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1196692893135070}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.96, y: 6, z: 2.7384508}
-  m_Center: {x: -1.4, y: 3, z: 0.8758973}
 --- !u!1 &1201854021205506
 GameObject:
   m_ObjectHideFlags: 0
@@ -4315,8 +4244,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.1513577, y: 3.6000001, z: 9.655228}
-  m_Center: {x: 0, y: 1.8000001, z: 0.17238617}
+  m_Size: {x: 3, y: 6, z: 7.9700365}
+  m_Center: {x: -2.4188212e-15, y: 3, z: -0.6702093}
 --- !u!1 &1213137562703022
 GameObject:
   m_ObjectHideFlags: 0
@@ -4494,6 +4423,7 @@ GameObject:
   - component: {fileID: 4790719002593474}
   - component: {fileID: 33351549227570420}
   - component: {fileID: 23805490858299582}
+  - component: {fileID: 5088845443424287376}
   m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
@@ -4566,6 +4496,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5088845443424287376
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215987821711698}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.60001, y: 0.2, z: 200}
+  m_Center: {x: 1.7000055, y: 0.2, z: -95}
 --- !u!1 &1222997164050104
 GameObject:
   m_ObjectHideFlags: 0
@@ -4848,6 +4799,7 @@ GameObject:
   - component: {fileID: 4119805928982298}
   - component: {fileID: 33897211161120226}
   - component: {fileID: 23304919664867560}
+  - component: {fileID: 3211772600802253294}
   m_Layer: 8
   m_Name: Ice_Base (2)
   m_TagString: Wall
@@ -4920,6 +4872,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3211772600802253294
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1257593809606186}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 13.32, y: 6, z: 26}
+  m_Center: {x: 0, y: 3, z: 5}
 --- !u!1 &1261846094216224
 GameObject:
   m_ObjectHideFlags: 0
@@ -5344,6 +5317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4155929088800922}
+  - component: {fileID: 7903553939949645823}
   m_Layer: 8
   m_Name: Linha04
   m_TagString: Untagged
@@ -5377,6 +5351,18 @@ Transform:
   m_Father: {fileID: 4693717593302094}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7903553939949645823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280335667514318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1284274580473332
 GameObject:
   m_ObjectHideFlags: 0
@@ -5388,9 +5374,7 @@ GameObject:
   - component: {fileID: 4723298171044194}
   - component: {fileID: 33760483050695642}
   - component: {fileID: 23256230046606848}
-  - component: {fileID: 65036274396415788}
-  - component: {fileID: 65650209438972196}
-  - component: {fileID: 65707318424849406}
+  - component: {fileID: 5038746945839575324}
   m_Layer: 8
   m_Name: Ice_Curve
   m_TagString: Wall
@@ -5463,7 +5447,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65036274396415788
+--- !u!65 &5038746945839575324
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5482,50 +5466,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.2716136, y: 6, z: 8.179989}
-  m_Center: {x: -3.3641932, y: 3, z: 0.91000557}
---- !u!65 &65650209438972196
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1284274580473332}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 8.5956335, y: 6, z: 2.7481298}
-  m_Center: {x: -0.70218325, y: 3, z: 3.625935}
---- !u!65 &65707318424849406
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1284274580473332}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.3975585, y: 6, z: 2.7384508}
-  m_Center: {x: -1.0289232, y: 3, z: 0.8758973}
+  m_Size: {x: 10, y: 6, z: 4}
+  m_Center: {x: -2.5, y: 3, z: 5}
 --- !u!1 &1284700834855430
 GameObject:
   m_ObjectHideFlags: 0
@@ -6782,9 +6724,6 @@ GameObject:
   - component: {fileID: 4663151157463036}
   - component: {fileID: 33238433696443230}
   - component: {fileID: 23157596285360952}
-  - component: {fileID: 65840527489113044}
-  - component: {fileID: 65544565399870554}
-  - component: {fileID: 65430793110920816}
   m_Layer: 8
   m_Name: Ice_Curve
   m_TagString: Wall
@@ -6857,69 +6796,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65840527489113044
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1352937124452768}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.2716136, y: 6, z: 8.179989}
-  m_Center: {x: -3.3641932, y: 3, z: 0.91000557}
---- !u!65 &65544565399870554
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1352937124452768}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 8.5956335, y: 6, z: 2.7481298}
-  m_Center: {x: -0.70218325, y: 3, z: 3.625935}
---- !u!65 &65430793110920816
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1352937124452768}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.3975585, y: 6, z: 2.7384508}
-  m_Center: {x: -1.0289232, y: 3, z: 0.8758973}
 --- !u!1 &1353670567061526
 GameObject:
   m_ObjectHideFlags: 0
@@ -6929,6 +6805,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4814343578237360}
+  - component: {fileID: 2785055871677425668}
   m_Layer: 8
   m_Name: Linha18
   m_TagString: Untagged
@@ -6963,6 +6840,18 @@ Transform:
   m_Father: {fileID: 4693717593302094}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2785055871677425668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353670567061526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1362259595910746
 GameObject:
   m_ObjectHideFlags: 0
@@ -6972,6 +6861,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4669017774934582}
+  - component: {fileID: 2167489883085841881}
   m_Layer: 8
   m_Name: Linha13
   m_TagString: Untagged
@@ -7005,6 +6895,18 @@ Transform:
   m_Father: {fileID: 4693717593302094}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2167489883085841881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362259595910746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1373700727124146
 GameObject:
   m_ObjectHideFlags: 0
@@ -7763,9 +7665,6 @@ GameObject:
   - component: {fileID: 4852802451763450}
   - component: {fileID: 33598088336961024}
   - component: {fileID: 23289767705795826}
-  - component: {fileID: 65143083091919458}
-  - component: {fileID: 65006046235364438}
-  - component: {fileID: 65247698178091354}
   m_Layer: 8
   m_Name: Ice_Curve
   m_TagString: Wall
@@ -7838,69 +7737,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65143083091919458
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1413853756637544}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.2716136, y: 6, z: 8.179989}
-  m_Center: {x: -3.3641932, y: 3, z: 0.91000557}
---- !u!65 &65006046235364438
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1413853756637544}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 8.5956335, y: 6, z: 2.7481298}
-  m_Center: {x: -0.70218325, y: 3, z: 3.625935}
---- !u!65 &65247698178091354
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1413853756637544}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.3975585, y: 6, z: 2.7384508}
-  m_Center: {x: -1.0289232, y: 3, z: 0.8758973}
 --- !u!1 &1415544616230078
 GameObject:
   m_ObjectHideFlags: 0
@@ -8576,9 +8412,6 @@ GameObject:
   - component: {fileID: 4518865948901402}
   - component: {fileID: 33370763043905942}
   - component: {fileID: 23885602734486156}
-  - component: {fileID: 65799650000883960}
-  - component: {fileID: 65168310466160598}
-  - component: {fileID: 65746069870242782}
   m_Layer: 8
   m_Name: Ice_Curve (1)
   m_TagString: Wall
@@ -8651,69 +8484,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65799650000883960
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1428129204468162}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.2716136, y: 6, z: 8.179989}
-  m_Center: {x: -3.3641932, y: 3, z: 0.91000557}
---- !u!65 &65168310466160598
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1428129204468162}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 8.5956335, y: 6, z: 2.7481298}
-  m_Center: {x: -0.70218325, y: 3, z: 3.625935}
---- !u!65 &65746069870242782
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1428129204468162}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.3975585, y: 6, z: 2.7384508}
-  m_Center: {x: -1.0289232, y: 3, z: 0.8758973}
 --- !u!1 &1429806170986574
 GameObject:
   m_ObjectHideFlags: 0
@@ -9055,6 +8825,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4617769103812328}
+  - component: {fileID: 9140504080456214771}
   m_Layer: 8
   m_Name: Linha10
   m_TagString: Untagged
@@ -9088,6 +8859,18 @@ Transform:
   m_Father: {fileID: 4693717593302094}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9140504080456214771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460950362450008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1462067292470630
 GameObject:
   m_ObjectHideFlags: 0
@@ -9938,7 +9721,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.4864442, y: 6, z: 6.57969}
+  m_Size: {x: 3, y: 6, z: 6.57969}
   m_Center: {x: -0.66094625, y: 3, z: -0.035676956}
 --- !u!1 &1502528058668012
 GameObject:
@@ -10947,10 +10730,7 @@ GameObject:
   - component: {fileID: 4622979305628470}
   - component: {fileID: 33451014165637382}
   - component: {fileID: 23105869841008852}
-  - component: {fileID: 65344593495570528}
-  - component: {fileID: 65496299672047892}
-  - component: {fileID: 65140749780219552}
-  - component: {fileID: 673058971841867383}
+  - component: {fileID: 3134972179314143569}
   m_Layer: 8
   m_Name: Ice_Curve
   m_TagString: Wall
@@ -11023,7 +10803,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65344593495570528
+--- !u!65 &3134972179314143569
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11042,71 +10822,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 9, y: 6, z: 19}
-  m_Center: {x: -7.23, y: 3, z: 3.16}
---- !u!65 &65496299672047892
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1542479389414900}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 8, y: 6, z: 3}
-  m_Center: {x: 0, y: 3, z: 4}
---- !u!65 &65140749780219552
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1542479389414900}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.5, y: 6, z: 8}
-  m_Center: {x: -1.7, y: 3, z: 3.5}
---- !u!65 &673058971841867383
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1542479389414900}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 7.5, y: 6, z: 3}
-  m_Center: {x: -8, y: 3, z: 13.36}
+  m_Size: {x: 10, y: 6, z: 3.411147}
+  m_Center: {x: -3.3000002, y: 3, z: 4.205574}
 --- !u!1 &1544738866443208
 GameObject:
   m_ObjectHideFlags: 0
@@ -11367,9 +11084,6 @@ GameObject:
   - component: {fileID: 4312555314416974}
   - component: {fileID: 33415031127674764}
   - component: {fileID: 23064107327139264}
-  - component: {fileID: 65675964292716562}
-  - component: {fileID: 65300810606312284}
-  - component: {fileID: 65186137875042336}
   m_Layer: 8
   m_Name: Ice_Curve (1)
   m_TagString: Wall
@@ -11442,69 +11156,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65675964292716562
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1546970638747510}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.2716136, y: 6, z: 8.179989}
-  m_Center: {x: -3.3641932, y: 3, z: 0.91000557}
---- !u!65 &65300810606312284
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1546970638747510}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 8.5956335, y: 6, z: 2.7481298}
-  m_Center: {x: -0.70218325, y: 3, z: 3.625935}
---- !u!65 &65186137875042336
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1546970638747510}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.3975585, y: 6, z: 2.7384508}
-  m_Center: {x: -1.0289232, y: 3, z: 0.8758973}
 --- !u!1 &1557227305500042
 GameObject:
   m_ObjectHideFlags: 0
@@ -12189,8 +11840,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.4864442, y: 4.1, z: 6.57969}
-  m_Center: {x: -0.66094625, y: 2.05, z: -0.035676956}
+  m_Size: {x: 2.584251, y: 6, z: 6.57969}
+  m_Center: {x: -0.45307183, y: 3, z: -0.035676956}
 --- !u!1 &1582670747937858
 GameObject:
   m_ObjectHideFlags: 0
@@ -13115,6 +12766,7 @@ GameObject:
   - component: {fileID: 4147032218759940}
   - component: {fileID: 33325434216108636}
   - component: {fileID: 23318049448449678}
+  - component: {fileID: 9153879261668415862}
   m_Layer: 8
   m_Name: Ice_Base (1)
   m_TagString: Wall
@@ -13187,6 +12839,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &9153879261668415862
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604037541984932}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10.000008, y: 6, z: 20}
+  m_Center: {x: 0, y: 3, z: 4.04}
 --- !u!1 &1604307542981702
 GameObject:
   m_ObjectHideFlags: 0
@@ -13888,6 +13561,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4749756577967850}
+  - component: {fileID: 5623358170598712377}
   m_Layer: 8
   m_Name: Linha03
   m_TagString: Untagged
@@ -13921,6 +13595,18 @@ Transform:
   m_Father: {fileID: 4693717593302094}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5623358170598712377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626166071315490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1626881242629910
 GameObject:
   m_ObjectHideFlags: 0
@@ -14743,8 +14429,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.4864442, y: 4.1, z: 6.57969}
-  m_Center: {x: -0.66094625, y: 2.05, z: -0.035676956}
+  m_Size: {x: 3, y: 6, z: 6.57969}
+  m_Center: {x: -0.66094625, y: 3, z: -0.035676956}
 --- !u!1 &1658603839854292
 GameObject:
   m_ObjectHideFlags: 0
@@ -14855,7 +14541,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1662427362518160}
   m_LocalRotation: {x: -0, y: 0.3721083, z: -0, w: 0.92818934}
-  m_LocalPosition: {x: 3.63, y: 0.01, z: 117.32}
+  m_LocalPosition: {x: 3.63, y: 0, z: 117.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14931,8 +14617,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.2729397, y: 3.6000001, z: 8.682087}
-  m_Center: {x: 0.10117408, y: 1.8000001, z: -0.31418878}
+  m_Size: {x: 3, y: 6, z: 7.6552954}
+  m_Center: {x: 0.10117411, y: 3, z: 0.19920649}
 --- !u!1 &1663838633675082
 GameObject:
   m_ObjectHideFlags: 0
@@ -16958,6 +16644,7 @@ GameObject:
   - component: {fileID: 4563541212090076}
   - component: {fileID: 33538266128065326}
   - component: {fileID: 23847632576598838}
+  - component: {fileID: 5661480297233303361}
   m_Layer: 8
   m_Name: Ice_Bank
   m_TagString: Wall
@@ -17030,6 +16717,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5661480297233303361
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745419842906258}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.60001, y: 0.2, z: 200}
+  m_Center: {x: 1.7000055, y: 0.2, z: 95}
 --- !u!1 &1750992855734578
 GameObject:
   m_ObjectHideFlags: 0
@@ -17786,6 +17494,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4602914044287994}
+  - component: {fileID: 2233161660848322930}
   m_Layer: 8
   m_Name: Linha19
   m_TagString: Untagged
@@ -17819,6 +17528,18 @@ Transform:
   m_Father: {fileID: 4693717593302094}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2233161660848322930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789335200207184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1791625665336434
 GameObject:
   m_ObjectHideFlags: 0
@@ -17869,7 +17590,7 @@ Transform:
   - {fileID: 4367098682345906}
   - {fileID: 7151128275753536426}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1792758647738166
 GameObject:
@@ -18546,9 +18267,7 @@ GameObject:
   - component: {fileID: 4014056083144064}
   - component: {fileID: 33049599319647390}
   - component: {fileID: 23848008099325814}
-  - component: {fileID: 65254277749218718}
-  - component: {fileID: 65706975718496482}
-  - component: {fileID: 65446567952043796}
+  - component: {fileID: 1072822536716435933}
   m_Layer: 8
   m_Name: Ice_Curve (1)
   m_TagString: Wall
@@ -18621,7 +18340,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65254277749218718
+--- !u!65 &1072822536716435933
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -18640,50 +18359,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.2716136, y: 6, z: 8.179989}
-  m_Center: {x: -3.3641932, y: 3, z: 0.91000557}
---- !u!65 &65706975718496482
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836170591877902}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 8.5956335, y: 6, z: 2.7481298}
-  m_Center: {x: -0.70218325, y: 3, z: 3.625935}
---- !u!65 &65446567952043796
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836170591877902}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.3975585, y: 6, z: 2.7384508}
-  m_Center: {x: -1.0289232, y: 3, z: 0.8758973}
+  m_Size: {x: 4, y: 6, z: 10}
+  m_Center: {x: -5, y: 3, z: 2.5}
 --- !u!1 &1837139390583922
 GameObject:
   m_ObjectHideFlags: 0
@@ -18942,6 +18619,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4158005569004824}
+  - component: {fileID: 5356451226866898891}
   m_Layer: 8
   m_Name: Linha12
   m_TagString: Untagged
@@ -18975,6 +18653,18 @@ Transform:
   m_Father: {fileID: 4693717593302094}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5356451226866898891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846406422445852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1852889429708634
 GameObject:
   m_ObjectHideFlags: 0
@@ -19704,6 +19394,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4367098682345906}
+  - component: {fileID: 8240169052564722335}
   m_Layer: 8
   m_Name: Linha20
   m_TagString: Untagged
@@ -19737,6 +19428,18 @@ Transform:
   m_Father: {fileID: 4693717593302094}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8240169052564722335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887406273789648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1888796355243164
 GameObject:
   m_ObjectHideFlags: 0
@@ -19840,8 +19543,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.1513577, y: 3.6000001, z: 9.655228}
-  m_Center: {x: 0, y: 1.8000001, z: 0.17238617}
+  m_Size: {x: 3, y: 6, z: 9.655228}
+  m_Center: {x: 0, y: 3, z: 0.17238617}
 --- !u!1 &1891736551551788
 GameObject:
   m_ObjectHideFlags: 0
@@ -19853,6 +19556,7 @@ GameObject:
   - component: {fileID: 4181855680566564}
   - component: {fileID: 33854704113881264}
   - component: {fileID: 23890516903313952}
+  - component: {fileID: 7231772054481298367}
   m_Layer: 8
   m_Name: Ice_Base (1)
   m_TagString: Wall
@@ -19925,6 +19629,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7231772054481298367
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891736551551788}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 13.32, y: 6, z: 26}
+  m_Center: {x: 0, y: 3, z: 5}
 --- !u!1 &1893964840879862
 GameObject:
   m_ObjectHideFlags: 0
@@ -20406,6 +20131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4097746649809638}
+  - component: {fileID: 8261152893193692761}
   m_Layer: 8
   m_Name: Linha14
   m_TagString: Untagged
@@ -20439,6 +20165,18 @@ Transform:
   m_Father: {fileID: 4693717593302094}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8261152893193692761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1917624860075908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1921369586731704
 GameObject:
   m_ObjectHideFlags: 0
@@ -20863,6 +20601,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4579986186521910}
+  - component: {fileID: 5075635291931160269}
   m_Layer: 8
   m_Name: Linha11
   m_TagString: Untagged
@@ -20896,6 +20635,18 @@ Transform:
   m_Father: {fileID: 4693717593302094}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5075635291931160269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954215230872930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1957321755549702
 GameObject:
   m_ObjectHideFlags: 0
@@ -21820,9 +21571,6 @@ GameObject:
   - component: {fileID: 4893224568812042}
   - component: {fileID: 33725159863068728}
   - component: {fileID: 23625412134783452}
-  - component: {fileID: 65520140099711508}
-  - component: {fileID: 65587094949412222}
-  - component: {fileID: 65565050493286188}
   m_Layer: 8
   m_Name: Ice_Curve
   m_TagString: Wall
@@ -21895,69 +21643,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65520140099711508
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1994847844030470}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.2716136, y: 6, z: 8.179989}
-  m_Center: {x: -3.3641932, y: 3, z: 0.91000557}
---- !u!65 &65587094949412222
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1994847844030470}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 8.5956335, y: 6, z: 25}
-  m_Center: {x: -0.70218325, y: 3, z: 15}
---- !u!65 &65565050493286188
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1994847844030470}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.3975585, y: 6, z: 2.7384508}
-  m_Center: {x: -1.0289232, y: 3, z: 0.8758973}
 --- !u!1 &692752696417381118
 GameObject:
   m_ObjectHideFlags: 0
