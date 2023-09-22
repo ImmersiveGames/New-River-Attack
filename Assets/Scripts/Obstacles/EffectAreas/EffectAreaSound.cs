@@ -22,7 +22,12 @@ namespace RiverAttack
             base.OnDisable();
             m_EffectAreaMaster.EventEnterAreaEffect -= SoundAreaEffect;
             m_EffectAreaMaster.EventExitAreaEffect -= StopSoundAreaEffect;
-            //GamePlayManager.instance.EventOtherEnemiesKillPlayer -= StopSoundArea;
+            
+        }
+        void OnDestroy()
+        {
+            if(GamePlayManager.instance)
+                GamePlayManager.instance.EventOtherEnemiesKillPlayer -= StopSoundArea;
         }
 
         protected override void SetInitialReferences()

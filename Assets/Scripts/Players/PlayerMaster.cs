@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
@@ -43,9 +42,6 @@ namespace RiverAttack
         public delegate void GeneralEventHandler();
         public event GeneralEventHandler EventPlayerMasterHit;
         public event GeneralEventHandler EventPlayerMasterRespawn;
-
-        public delegate void PowerUpActiveHandler(bool active);
-        public event PowerUpActiveHandler EventPowerUpRapidFire;
 
         public delegate void ControllerEventHandler(Vector2 dir);
         public event ControllerEventHandler EventPlayerMasterControllerMovement;
@@ -112,7 +108,7 @@ namespace RiverAttack
             getPlayerSettings.distance = 0;
             int distInt = Mathf.FloorToInt(getPlayerSettings.distance);
             m_GamePlayManager.OnEventUpdateDistance(distInt);
-            getPlayerSettings.wealth = 0;
+            //getPlayerSettings.wealth = 0;
             m_GamePlayManager.OnEventUpdateRefugees(getPlayerSettings.wealth);
             getPlayerSettings.bombs = m_GameSettings.startBombs;
             m_GamePlayManager.OnEventUpdateBombs(getPlayerSettings.bombs);
@@ -210,10 +206,6 @@ namespace RiverAttack
         {
             EventPlayerMasterControllerMovement?.Invoke(dir);
         }
-        void OnEventPowerUpRapidFire(bool active)
-        {
-            EventPowerUpRapidFire?.Invoke(active);
-        }
   #endregion
 
         void MyDebugStart()
@@ -221,6 +213,5 @@ namespace RiverAttack
             if (!m_GameManager.debugMode) return;
             transform.position = Vector3.zero;
         }
-        
     }
 }

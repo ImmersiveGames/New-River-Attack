@@ -23,7 +23,7 @@ namespace RiverAttack
 
         void CollectAnimation(PlayerSettings playerSettings)
         {
-            //TODO:implementar animação de coletar
+            //TODO: {enchancement} implementar uma animação de coletar
             if (m_Animator == null)
             {
                 m_Animator = GetComponentInChildren<Animator>();

@@ -4,7 +4,7 @@ using Utils;
 
 namespace RiverAttack
 {
-    public class GameMissionBuilder : MonoBehaviour
+    public class GameMissionBuilder : Singleton<GameMissionBuilder>
     {
         const float TIME_TO_FADE_BGM = 0.1f;
         
@@ -27,7 +27,7 @@ namespace RiverAttack
         List<GameObject> poolPathLevels = new List<GameObject>();
         [SerializeField]
         List<GameObject> poolEnemyLevels = new List<GameObject>();
-
+        GameObject m_LevelRoot;
         GamePlayManager m_GamePlayManager;
 
 
@@ -54,11 +54,11 @@ namespace RiverAttack
 
         void StartBuildMission(Levels level)
         {
-            var levelRoot = new GameObject();
+            m_LevelRoot = new GameObject();
             actualPathIndex = 0;
             m_GamePlayManager.actualLevels = actualLevel;
-            levelRoot.name = level.levelName;
-            CreateLevel(level, levelRoot.transform);
+            m_LevelRoot.name = level.levelName;
+            CreateLevel(level, m_LevelRoot.transform);
         }
 
         void CreateLevel(Levels level, Transform myRoot = null)
@@ -148,6 +148,15 @@ namespace RiverAttack
 
             if (removeIndex >= 0 && removeIndex < pool.Count - maxLevels && !pool[removeIndex].activeInHierarchy)
                 Destroy(pool[removeIndex]);
+        }
+
+        public void ResetBuildMission()
+        {
+            poolPathLevels = new List<GameObject>();
+            poolEnemyLevels = new List<GameObject>();
+            pathMilestones = new List<float>();
+            DestroyImmediate(m_LevelRoot);
+            StartBuildMission(actualLevel);
         }
     }
 }

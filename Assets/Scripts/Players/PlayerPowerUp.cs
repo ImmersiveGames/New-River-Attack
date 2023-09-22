@@ -13,6 +13,7 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
+            ClearActivePowerUps();
             m_PlayerMaster.EventPlayerMasterRespawn += ResetPowerUp;
         }
         void Update()

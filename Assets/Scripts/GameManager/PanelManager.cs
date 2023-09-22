@@ -46,6 +46,7 @@ namespace RiverAttack
         }
         public void SetMenuGameOver()
         {
+            menuControl.gameObject.SetActive(false);
             menuHud.gameObject.SetActive(false);
             menuParent.gameObject.SetActive(true);
             backgroundImage.enabled = false;

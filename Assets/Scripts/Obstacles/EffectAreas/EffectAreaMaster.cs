@@ -6,7 +6,6 @@ namespace RiverAttack
         float m_Timer;
         float m_TimeToAccess;
         EffectAreaScriptable m_EffectArea;
-        PlayerMaster m_PlayerMaster;
 
         #region Events
         public event GeneralEventHandler EventEnterAreaEffect;
@@ -16,21 +15,21 @@ namespace RiverAttack
         #region UNITYMETHODS
         void OnTriggerExit(Collider collision)
         {
-            if(m_PlayerMaster == null)
-                m_PlayerMaster = collision.GetComponentInParent<PlayerMaster>();
-            if (!m_PlayerMaster) return;
-            if (!m_PlayerMaster.shouldPlayerBeReady) return;
-            m_PlayerMaster.inEffectArea = false;
+            if(playerMaster == null)
+                playerMaster = collision.GetComponentInParent<PlayerMaster>();
+            if (!playerMaster) return;
+            if (!playerMaster.shouldPlayerBeReady) return;
+            playerMaster.inEffectArea = false;
             OnEventExitAreaEffect();
         }
         void OnTriggerStay(Collider collision)
         {
-            if(m_PlayerMaster == null)
-                m_PlayerMaster = collision.GetComponentInParent<PlayerMaster>();
-            if (!m_PlayerMaster) return;
-            if (!m_PlayerMaster.shouldPlayerBeReady) return;
-            if (!m_PlayerMaster.inEffectArea) m_PlayerMaster.inEffectArea = true;
-            CollectThis(m_PlayerMaster);
+            if(playerMaster == null)
+                playerMaster = collision.GetComponentInParent<PlayerMaster>();
+            if (!playerMaster) return;
+            if (!playerMaster.shouldPlayerBeReady) return;
+            if (!playerMaster.inEffectArea) playerMaster.inEffectArea = true;
+            CollectThis(playerMaster);
         }
   #endregion
         protected override void SetInitialReferences()
@@ -43,13 +42,23 @@ namespace RiverAttack
         void CollectThis(PlayerMaster collision)
         {
             var player = collision.getPlayerSettings;
-            if (m_Timer <= 0)
+            if (m_Timer <= 0 && playerMaster.inEffectArea)
             {
                 m_EffectArea.EffectAreaStart(player);
                 OnEventAreaEffect();
                 m_Timer = m_TimeToAccess;
             }
             m_Timer -= Time.deltaTime;
+        }
+
+        protected override void DestroyObstacle()
+        {
+            if (playerMaster.inEffectArea)
+            {
+                playerMaster.inEffectArea = false;
+                OnEventExitAreaEffect();
+            }
+            base.DestroyObstacle();
         }
 
         #region Calls

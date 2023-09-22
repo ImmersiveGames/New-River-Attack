@@ -9,11 +9,12 @@ namespace RiverAttack
         {
             base.OnEnable();
             gamePlayManager.EventReSpawnEnemiesMaster += DestroyPowerUp;
+            gamePlayManager.EventEnemiesMasterForceRespawn += DestroyPowerUp;
         }
-        internal override void OnDisable()
+        internal void OnDisable()
         {
-            base.OnDisable();
             gamePlayManager.EventReSpawnEnemiesMaster -= DestroyPowerUp;
+            gamePlayManager.EventEnemiesMasterForceRespawn -= DestroyPowerUp;
         }
   #endregion
         internal override void OnTriggerEnter(Collider other)

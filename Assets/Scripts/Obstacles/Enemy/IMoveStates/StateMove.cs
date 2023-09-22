@@ -6,40 +6,41 @@ namespace RiverAttack
     public class StateMove : IMove
     {
         readonly EnemiesMovement m_EnemiesMovement;
+        readonly EnemiesMaster m_EnemiesMaster;
         float m_ElapsedTime;
         float m_MoveVelocity;
         float m_MultiplyEnemiesSpeedy;
         Vector3 m_VectorDirection;
         EnemiesSetDifficulty m_EnemiesSetDifficulty;
 
-        public StateMove(EnemiesMovement enemiesMovement)
+        public StateMove(EnemiesMovement enemiesMovement, EnemiesMaster enemiesMaster)
         {
             m_EnemiesMovement = enemiesMovement;
             m_MultiplyEnemiesSpeedy = 1;
+            m_EnemiesMaster = enemiesMaster;
+            m_EnemiesMaster.OnEventObstacleMovement(true);
         }
-        public void EnterState(EnemiesMaster enemiesMaster)
+        public void EnterState()
         {
-           // Debug.Log("Estado: MOVE - Entrando: ");
-            m_MoveVelocity = m_EnemiesMovement.moveVelocity * m_MultiplyEnemiesSpeedy;
-            m_VectorDirection = m_EnemiesMovement.SetDirection(m_EnemiesMovement.startDirection);
-
-            if (enemiesMaster.enemy && enemiesMaster.enemy.enemiesSetDifficultyListSo)
-            {
-                m_EnemiesSetDifficulty = enemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(enemiesMaster.actualDifficultName);
-                m_MultiplyEnemiesSpeedy = m_EnemiesSetDifficulty.multiplyEnemiesSpeedy;
-            }
-
-            enemiesMaster.OnEventObstacleMovement(m_VectorDirection);
+           //Debug.Log($"{m_EnemiesMaster.gameObject.name} Estado: MOVE - Entrando ");
+           m_MoveVelocity = m_EnemiesMovement.moveVelocity * m_MultiplyEnemiesSpeedy;
+           if (!m_EnemiesMaster.enemy || !m_EnemiesMaster.enemy.enemiesSetDifficultyListSo)
+               return;
+           m_EnemiesSetDifficulty = m_EnemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(m_EnemiesMaster.actualDifficultName);
+           m_MultiplyEnemiesSpeedy = m_EnemiesSetDifficulty.multiplyEnemiesSpeedy;
         }
         public void UpdateState(Transform transform, Vector3 direction)
         {
-            //Debug.Log("Estado: MOVE - UPDATE" + m_MoveVelocity);
+            //Debug.Log($"{transform.gameObject.name} Estado: MOVE - UPDATE" + m_MoveVelocity);
             Move(transform, direction, m_MoveVelocity);
         }
         public void ExitState()
         {
            // Debug.Log("Estado: MOVE - Exit");
+           m_EnemiesMaster.OnEventObstacleMovement(false);
         }
+
+        
         void Move(Transform objMove, Vector3 direction, float velocity)
         {
             float curveValue = 1f;
@@ -61,5 +62,6 @@ namespace RiverAttack
             // Usa a curva de animação para obter a interpolação de movimento
             return curve.Evaluate(curveFactor);
         }
+        
     }
 }

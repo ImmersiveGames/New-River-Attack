@@ -1257,6 +1257,7 @@ GameObject:
   - component: {fileID: 33271747779001320}
   - component: {fileID: 23507421878932288}
   - component: {fileID: 65573811183763088}
+  - component: {fileID: 7694282193828464432}
   m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -1348,8 +1349,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.27663, y: 6, z: 200}
-  m_Center: {x: 3.361685, y: 3, z: 95}
+  m_Size: {x: 5, y: 6, z: 200}
+  m_Center: {x: 5, y: 3, z: 95}
+--- !u!65 &7694282193828464432
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090958346065950}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.700008, y: 0.2, z: 200}
+  m_Center: {x: 1.6500046, y: 0.2, z: 95}
 --- !u!1 &1097392974021302
 GameObject:
   m_ObjectHideFlags: 0
@@ -1361,7 +1383,6 @@ GameObject:
   - component: {fileID: 4359365861797046}
   - component: {fileID: 33177335033356262}
   - component: {fileID: 23508405861154384}
-  - component: {fileID: 65196400941969712}
   m_Layer: 8
   m_Name: Desert_Bank_2
   m_TagString: Wall
@@ -1434,27 +1455,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65196400941969712
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1097392974021302}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.6010823, y: 6, z: 10}
-  m_Center: {x: 3.1994581, y: 3, z: 0.00000003206895}
 --- !u!1 &1100998856687192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1964,6 +1964,7 @@ GameObject:
   - component: {fileID: 4223522736101852}
   - component: {fileID: 33105749342311408}
   - component: {fileID: 23574841143852888}
+  - component: {fileID: 849350799569236563}
   m_Layer: 8
   m_Name: Desert_Bank (1)
   m_TagString: Wall
@@ -2036,6 +2037,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &849350799569236563
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127506314911716}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.700008, y: 0.2, z: 30}
+  m_Center: {x: 1.6500046, y: 0.2, z: 10}
 --- !u!1 &1134957675783940
 GameObject:
   m_ObjectHideFlags: 0
@@ -3124,6 +3146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4138237884330396}
+  - component: {fileID: 7172000894440024605}
   m_Layer: 8
   m_Name: Linha_10
   m_TagString: Untagged
@@ -3155,6 +3178,18 @@ Transform:
   m_Father: {fileID: 4367150179486224}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7172000894440024605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192204522923174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1193864466457914
 GameObject:
   m_ObjectHideFlags: 0
@@ -3499,6 +3534,7 @@ GameObject:
   - component: {fileID: 33832614758178084}
   - component: {fileID: 23505555489737702}
   - component: {fileID: 65163788979131660}
+  - component: {fileID: 2364967782793028934}
   m_Layer: 8
   m_Name: Desert_Bank_2 (3)
   m_TagString: Wall
@@ -3590,8 +3626,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.6010823, y: 6, z: 95}
-  m_Center: {x: 3.1994581, y: 3, z: -42.5}
+  m_Size: {x: 5, y: 6, z: 90}
+  m_Center: {x: 5, y: 3, z: -40}
+--- !u!65 &2364967782793028934
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207434415484146}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.300005, y: 0.2, z: 90}
+  m_Center: {x: 1.8500061, y: 0.2, z: -40}
 --- !u!1 &1209503976003556
 GameObject:
   m_ObjectHideFlags: 0
@@ -3769,6 +3826,7 @@ GameObject:
   - component: {fileID: 4729538752532998}
   - component: {fileID: 33997716218209294}
   - component: {fileID: 23276116238269816}
+  - component: {fileID: 7677322269400628975}
   m_Layer: 8
   m_Name: Desert_Ravine (6)
   m_TagString: Wall
@@ -3841,6 +3899,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7677322269400628975
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209895501909592}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 52.29502, y: 6, z: 14}
+  m_Center: {x: 18.852491, y: 3, z: 4.0536395e-14}
 --- !u!1 &1212058327207200
 GameObject:
   m_ObjectHideFlags: 0
@@ -4016,6 +4095,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4006645145885806}
+  - component: {fileID: 1614905241175364797}
   m_Layer: 8
   m_Name: Linha_14
   m_TagString: Untagged
@@ -4047,6 +4127,18 @@ Transform:
   m_Father: {fileID: 4367150179486224}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1614905241175364797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216014952200032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1224588953137118
 GameObject:
   m_ObjectHideFlags: 0
@@ -4720,6 +4812,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4594204178686882}
+  - component: {fileID: 8060277897988541336}
   m_Layer: 8
   m_Name: Linha_02
   m_TagString: Untagged
@@ -4753,6 +4846,18 @@ Transform:
   m_Father: {fileID: 4367150179486224}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8060277897988541336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252540702296694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1254204729973628
 GameObject:
   m_ObjectHideFlags: 0
@@ -6092,6 +6197,7 @@ GameObject:
   - component: {fileID: 4587828238136048}
   - component: {fileID: 33744075993814530}
   - component: {fileID: 23787965948796662}
+  - component: {fileID: 941907502323135017}
   m_Layer: 8
   m_Name: Desert_Isle_Stone (1)
   m_TagString: Wall
@@ -6164,6 +6270,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &941907502323135017
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1313761104485918}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 6, z: 10}
+  m_Center: {x: 0, y: 3, z: 3}
 --- !u!1 &1325478583574972
 GameObject:
   m_ObjectHideFlags: 0
@@ -6258,6 +6385,7 @@ GameObject:
   - component: {fileID: 4103005121915448}
   - component: {fileID: 33435569094379276}
   - component: {fileID: 23375550119308878}
+  - component: {fileID: 4818798482157894546}
   m_Layer: 8
   m_Name: Desert_Isle_Stone
   m_TagString: Wall
@@ -6330,6 +6458,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4818798482157894546
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330462262410886}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 6, z: 10.000002}
+  m_Center: {x: 0, y: 3, z: 3}
 --- !u!1 &1333888114209904
 GameObject:
   m_ObjectHideFlags: 0
@@ -7170,6 +7319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4774452675667960}
   - component: {fileID: 6185144992766153484}
+  - component: {fileID: 2260763931790388333}
   m_Layer: 8
   m_Name: Linha_15
   m_TagString: Untagged
@@ -7204,6 +7354,18 @@ Transform:
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6185144992766153484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365223941680314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2260763931790388333
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7473,6 +7635,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4698134913916772}
+  - component: {fileID: 2610983655813669408}
   m_Layer: 8
   m_Name: Linha_19
   m_TagString: Untagged
@@ -7506,6 +7669,18 @@ Transform:
   m_Father: {fileID: 4367150179486224}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2610983655813669408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382281278821456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1389774371248000
 GameObject:
   m_ObjectHideFlags: 0
@@ -7932,8 +8107,6 @@ GameObject:
   - component: {fileID: 4784799026976824}
   - component: {fileID: 33019570397861422}
   - component: {fileID: 23648674553880636}
-  - component: {fileID: 65985257141079480}
-  - component: {fileID: 65246129968276266}
   m_Layer: 8
   m_Name: Desert_Curve
   m_TagString: Wall
@@ -8006,48 +8179,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65985257141079480
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429420281951400}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 13, y: 6, z: 7}
-  m_Center: {x: 1.48, y: 3, z: 4.55}
---- !u!65 &65246129968276266
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1429420281951400}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 53, y: 6, z: 16}
-  m_Center: {x: -28.5, y: 3, z: 0}
 --- !u!1 &1430864228266310
 GameObject:
   m_ObjectHideFlags: 0
@@ -8057,6 +8188,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4787237458189370}
+  - component: {fileID: 4578696926091357864}
   m_Layer: 8
   m_Name: Linha_16
   m_TagString: Untagged
@@ -8090,6 +8222,18 @@ Transform:
   m_Father: {fileID: 4367150179486224}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4578696926091357864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430864228266310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1438626917429590
 GameObject:
   m_ObjectHideFlags: 0
@@ -8431,6 +8575,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4377840319825048}
+  - component: {fileID: 8480792393955807890}
   m_Layer: 8
   m_Name: Linha_03
   m_TagString: Untagged
@@ -8464,6 +8609,18 @@ Transform:
   m_Father: {fileID: 4367150179486224}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8480792393955807890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453699791756542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1458874477274338
 GameObject:
   m_ObjectHideFlags: 0
@@ -8805,6 +8962,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4905024970919458}
+  - component: {fileID: 297778064464358847}
   m_Layer: 8
   m_Name: Linha_17
   m_TagString: Untagged
@@ -8838,6 +8996,18 @@ Transform:
   m_Father: {fileID: 4367150179486224}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &297778064464358847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465675162496844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1469328686359208
 GameObject:
   m_ObjectHideFlags: 0
@@ -10841,8 +11011,6 @@ GameObject:
   - component: {fileID: 4590297243575186}
   - component: {fileID: 33208870523288408}
   - component: {fileID: 23412032219430854}
-  - component: {fileID: 65533431155639502}
-  - component: {fileID: 65529697535938564}
   m_Layer: 8
   m_Name: Desert_Curve
   m_TagString: Wall
@@ -10915,48 +11083,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65533431155639502
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1559549377696918}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 3.2192879}
-  m_Center: {x: 0, y: 3, z: 3.390356}
---- !u!65 &65529697535938564
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1559549377696918}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.3884163, y: 6, z: 22}
-  m_Center: {x: -3.3057919, y: 3, z: -8.96}
 --- !u!1 &1570449549668944
 GameObject:
   m_ObjectHideFlags: 0
@@ -10966,6 +11092,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4036466818538404}
+  - component: {fileID: 4438386906786869746}
   m_Layer: 8
   m_Name: Linha_06
   m_TagString: Untagged
@@ -10999,6 +11126,18 @@ Transform:
   m_Father: {fileID: 4367150179486224}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4438386906786869746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570449549668944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1573316042804848
 GameObject:
   m_ObjectHideFlags: 0
@@ -11094,6 +11233,7 @@ GameObject:
   - component: {fileID: 33470756983607134}
   - component: {fileID: 23837339809144462}
   - component: {fileID: 65497034535473678}
+  - component: {fileID: 7982136600174455280}
   m_Layer: 8
   m_Name: Desert_Bank
   m_TagString: Wall
@@ -11185,8 +11325,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.6010823, y: 6, z: 200}
-  m_Center: {x: 3.1994581, y: 3, z: -95}
+  m_Size: {x: 5, y: 6, z: 200}
+  m_Center: {x: 5, y: 3, z: -95}
+--- !u!65 &7982136600174455280
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1583223828156110}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.700008, y: 0.2, z: 200}
+  m_Center: {x: 1.6500046, y: 0.2, z: -95}
 --- !u!1 &1584034629467090
 GameObject:
   m_ObjectHideFlags: 0
@@ -11528,6 +11689,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4543167848817164}
+  - component: {fileID: 5033014434301030418}
   m_Layer: 8
   m_Name: Linha_12
   m_TagString: Untagged
@@ -11561,6 +11723,18 @@ Transform:
   m_Father: {fileID: 4367150179486224}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5033014434301030418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587935570694770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1588768667885650
 GameObject:
   m_ObjectHideFlags: 0
@@ -11570,6 +11744,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4119140823329400}
+  - component: {fileID: 8256062884956653460}
   m_Layer: 8
   m_Name: Linha_20
   m_TagString: Untagged
@@ -11604,6 +11779,18 @@ Transform:
   m_Father: {fileID: 4367150179486224}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8256062884956653460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588768667885650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1591273805325894
 GameObject:
   m_ObjectHideFlags: 0
@@ -11862,6 +12049,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4077308794217232}
+  - component: {fileID: 9084390982106306694}
   m_Layer: 8
   m_Name: Linha_07
   m_TagString: Untagged
@@ -11895,6 +12083,18 @@ Transform:
   m_Father: {fileID: 4367150179486224}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9084390982106306694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602591004550862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1602972685230500
 GameObject:
   m_ObjectHideFlags: 0
@@ -11905,6 +12105,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4362347956553880}
   - component: {fileID: 4756429270091729697}
+  - component: {fileID: 4590570812023855464}
   m_Layer: 8
   m_Name: Linha_11
   m_TagString: Untagged
@@ -11939,6 +12140,18 @@ Transform:
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4756429270091729697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602972685230500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4590570812023855464
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13786,6 +13999,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4468865052825122}
   - component: {fileID: 6656117071310266423}
+  - component: {fileID: 7951396038402604425}
   m_Layer: 8
   m_Name: Linha_08
   m_TagString: Untagged
@@ -13820,6 +14034,18 @@ Transform:
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6656117071310266423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691919254814360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7951396038402604425
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14006,6 +14232,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4010539402815228}
+  - component: {fileID: 9113336582218417527}
   m_Layer: 8
   m_Name: Linha_09
   m_TagString: Untagged
@@ -14039,6 +14266,18 @@ Transform:
   m_Father: {fileID: 4367150179486224}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9113336582218417527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710685036107912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1713485333356100
 GameObject:
   m_ObjectHideFlags: 0
@@ -14629,6 +14868,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000953666501468}
+  - component: {fileID: 8509751534598923903}
   m_Layer: 8
   m_Name: Linha_04
   m_TagString: Untagged
@@ -14662,6 +14902,18 @@ Transform:
   m_Father: {fileID: 4367150179486224}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8509751534598923903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1749837841421036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1750326527425518
 GameObject:
   m_ObjectHideFlags: 0
@@ -14673,6 +14925,7 @@ GameObject:
   - component: {fileID: 4114941911924748}
   - component: {fileID: 33326318559353600}
   - component: {fileID: 23417229506333394}
+  - component: {fileID: 4260439543699999020}
   m_Layer: 8
   m_Name: Desert_Isle_Stone
   m_TagString: Wall
@@ -14745,6 +14998,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4260439543699999020
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750326527425518}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 6, z: 36}
+  m_Center: {x: 0, y: 3, z: 15}
 --- !u!1 &1754415930962116
 GameObject:
   m_ObjectHideFlags: 0
@@ -14838,6 +15112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4943913113874070}
   - component: {fileID: 2950723893742779844}
+  - component: {fileID: 603256555737146965}
   m_Layer: 8
   m_Name: Linha_01
   m_TagString: Untagged
@@ -14872,6 +15147,18 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2950723893742779844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755033216840632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &603256555737146965
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16095,7 +16382,7 @@ Transform:
   - {fileID: 4119140823329400}
   - {fileID: 4672872206275132}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1843527841042534
 GameObject:
@@ -16106,6 +16393,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4539520823265598}
+  - component: {fileID: 6421862178959996402}
   m_Layer: 8
   m_Name: Linha_13
   m_TagString: Untagged
@@ -16139,6 +16427,18 @@ Transform:
   m_Father: {fileID: 4367150179486224}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6421862178959996402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843527841042534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1843774306145650
 GameObject:
   m_ObjectHideFlags: 0
@@ -16316,6 +16616,7 @@ GameObject:
   - component: {fileID: 4866169276768952}
   - component: {fileID: 33141399822803666}
   - component: {fileID: 23779859952569808}
+  - component: {fileID: 7019849699787275379}
   m_Layer: 8
   m_Name: Desert_Isle_Stone
   m_TagString: Wall
@@ -16388,6 +16689,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7019849699787275379
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848471701549458}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4, y: 6, z: 14}
+  m_Center: {x: 0, y: 3, z: 4}
 --- !u!1 &1850224159047762
 GameObject:
   m_ObjectHideFlags: 0
@@ -17019,6 +17341,7 @@ GameObject:
   - component: {fileID: 33267460781279818}
   - component: {fileID: 23774469518203508}
   - component: {fileID: 65440363095112912}
+  - component: {fileID: 8911723115145658136}
   m_Layer: 8
   m_Name: Desert_Bank_2 (2)
   m_TagString: Wall
@@ -17110,8 +17433,29 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.6010823, y: 6, z: 72}
-  m_Center: {x: 3.1994581, y: 3, z: 32}
+  m_Size: {x: 5, y: 6, z: 70}
+  m_Center: {x: 5, y: 3, z: 30}
+--- !u!65 &8911723115145658136
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871414370627992}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.300005, y: 0.2, z: 70}
+  m_Center: {x: 1.8500061, y: 0.2, z: 30}
 --- !u!1 &1882155486637332
 GameObject:
   m_ObjectHideFlags: 0
@@ -17453,6 +17797,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4755193643784316}
+  - component: {fileID: 6471010449538951825}
   m_Layer: 8
   m_Name: Linha_05
   m_TagString: Untagged
@@ -17486,6 +17831,18 @@ Transform:
   m_Father: {fileID: 4367150179486224}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6471010449538951825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891927775109198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1898672415741656
 GameObject:
   m_ObjectHideFlags: 0
@@ -18078,6 +18435,7 @@ GameObject:
   - component: {fileID: 4066510385433106}
   - component: {fileID: 33340136606146900}
   - component: {fileID: 23783942508323600}
+  - component: {fileID: 3050838163758629372}
   m_Layer: 8
   m_Name: Desert_Isle_Stone
   m_TagString: Wall
@@ -18150,6 +18508,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3050838163758629372
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916929573437070}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 12, y: 8.3, z: 4}
+  m_Center: {x: -4, y: 4.15, z: 0}
 --- !u!1 &1918000624608302
 GameObject:
   m_ObjectHideFlags: 0
@@ -18657,6 +19036,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4571789771626044}
+  - component: {fileID: 237215657346339021}
   m_Layer: 8
   m_Name: Linha_18
   m_TagString: Untagged
@@ -18690,6 +19070,18 @@ Transform:
   m_Father: {fileID: 4367150179486224}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &237215657346339021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1949588092869968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1950532834670992
 GameObject:
   m_ObjectHideFlags: 0
@@ -18950,8 +19342,6 @@ GameObject:
   - component: {fileID: 4933246280047534}
   - component: {fileID: 33286941178632320}
   - component: {fileID: 23415553899638052}
-  - component: {fileID: 65694056091911148}
-  - component: {fileID: 65307744496534044}
   m_Layer: 8
   m_Name: Desert_Curve
   m_TagString: Wall
@@ -19024,48 +19414,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65694056091911148
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1954059808853186}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 7}
-  m_Center: {x: 2.99, y: 3, z: 4.66}
---- !u!65 &65307744496534044
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1954059808853186}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 8, y: 6, z: 35}
-  m_Center: {x: -5.18, y: 3, z: 9.96}
 --- !u!1 &1958451094513040
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,10 @@ namespace RiverAttack
             m_GamePlayManager = GamePlayManager.instance;
             var audioSource = GetComponent<AudioSource>();
             audioShoot.Play(audioSource);
-            TransformSpawnPosition(transform.root.GetComponentInChildren<PlayerSkinAttach>().transform);
+            var root = transform.root;
+            var spawnPos = root.GetComponentInChildren<PlayerSkinAttach>() ?? root.GetComponent<PlayerSkinAttach>();
+            if(spawnPos) 
+                TransformSpawnPosition(spawnPos.transform);
         }
         void FixedUpdate()
         {
