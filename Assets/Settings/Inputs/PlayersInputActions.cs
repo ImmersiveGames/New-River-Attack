@@ -311,6 +311,17 @@ namespace RiverAttack
                 },
                 {
                     ""name"": """",
+                    ""id"": ""3d19f989-e9df-4c16-bf4e-a02428e50418"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Bomb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""48ca84ef-a25e-466e-b3c9-ee00eb606c23"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
@@ -338,6 +349,17 @@ namespace RiverAttack
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mobile"",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a6265779-7432-4c76-82b0-1d756b20f3da"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile;PC"",
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
