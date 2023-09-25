@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.Localization.Settings;
 namespace RiverAttack
 {
     [CreateAssetMenu(fileName = "GameSettings", menuName = "RiverAttack/GameSettings", order = 0)]
@@ -18,7 +16,7 @@ namespace RiverAttack
         [Header("Options Preferences")]
         public float musicVolume;
         public float sfxVolume;
-
+        public int actualLocal;
         [Header("Game play Settings")]
         public int multiplyScoreForLives;
     }
