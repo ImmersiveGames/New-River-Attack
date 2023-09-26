@@ -53,7 +53,8 @@ namespace RiverAttack
             OnEventCollectItem(whoHit.getPlayerSettings);
             ShouldSavePoint(whoHit.getPlayerSettings);
             AddCollectList(collectableList, collectibleScriptable, collectibleScriptable.amountCollectables);
-            CollectWealth(whoHit.getPlayerSettings, collectibleScriptable.amountCollectables);
+            if(collectibleScriptable.powerUp == null)
+                CollectWealth(whoHit.getPlayerSettings, collectibleScriptable.amountCollectables);
             GamePlayManager.AddResultList(gamePlaySettings.hitEnemiesResultsList, whoHit.getPlayerSettings, enemy, collectibleScriptable.amountCollectables, CollisionType.Collected);
         }
         static void AddCollectList(List<LogPlayerCollectables> list, CollectibleScriptable collectible, int qnt)

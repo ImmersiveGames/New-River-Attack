@@ -198,8 +198,7 @@ namespace RiverAttack
         {
             openCutDirector.Play();
         }
-
-        
+       
 
         #region Buttons Actions
         public void BtnNewGame()
