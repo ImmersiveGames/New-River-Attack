@@ -46,7 +46,7 @@ namespace Shopping
 
         public bool HaveMoneyToBuy(PlayerSettings player)
         {
-            Debug.Log($"Dinheiro {player.wealth}, {shopProduct.priceItem}");
+            //Debug.Log($"Dinheiro {player.wealth}, {shopProduct.priceItem}");
             return player.wealth >= shopProduct.priceItem;
         }
         public bool PlayerAlreadyBuy(PlayerSettings player)
