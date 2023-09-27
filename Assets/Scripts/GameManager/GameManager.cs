@@ -57,7 +57,6 @@ namespace RiverAttack
         void Update()
         {
             currentGameState?.UpdateState();
-
         }
   #endregion
         public GameState currentGameState

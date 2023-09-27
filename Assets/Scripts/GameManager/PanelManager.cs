@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,7 +36,7 @@ namespace RiverAttack
             m_GamePlayAudio = GamePlayAudio.instance;
         }
         #endregion
-
+       
         public void SetMenuHudControl(bool active)
         {
             menuHud.gameObject.SetActive(active);

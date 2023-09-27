@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using System.Collections;
+using UnityEngine.EventSystems;
+using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 
 namespace RiverAttack
@@ -19,7 +21,7 @@ namespace RiverAttack
         [SerializeField] Button engBtn;
         [SerializeField] Button ptBrBtn;
         bool m_ActiveLocaleButton;
-        int m_ActualLocal;
+        Locale m_ActualLocal;
         AudioSource m_AudioSource;
         GameSettings m_GameSettings;
 
@@ -29,21 +31,21 @@ namespace RiverAttack
             m_GameSettings = GameSettings.instance;
             musicVolumeSlider.value = (m_GameSettings.musicVolume == 0) ? defaultMusicVolume : m_GameSettings.musicVolume;
             sfxVolumeSlider.value = (m_GameSettings.sfxVolume == 0) ? defaultSfxVolume : m_GameSettings.sfxVolume;
-            m_ActualLocal = m_GameSettings.actualLocal;
+            if (m_GameSettings.startLocale == null)
+                m_GameSettings.startLocale = LocalizationSettings.SelectedLocale;
+            m_ActualLocal = m_GameSettings.startLocale;
             SetLocaleButton(m_ActualLocal);
         }
         void Start()
         {
             SetMusicVolume();
             SetSfxVolume();
-            SetLocaleButton(m_ActualLocal);
-            ChangeLocale(m_ActualLocal);
         }
         void OnDisable()
         {
             m_GameSettings.musicVolume = musicVolumeSlider.value;
             m_GameSettings.sfxVolume = sfxVolumeSlider.value;
-            m_GameSettings.actualLocal = m_ActualLocal;
+            m_GameSettings.startLocale = m_ActualLocal;
         }
   #endregion
 
@@ -56,18 +58,23 @@ namespace RiverAttack
             //Debug.Log("Volume da Musica: " + volume.ToString());
         }
 
-        void SetLocaleButton(int actual)
+        void SetLocaleButton(Locale actualLocale)
         {
-            if (actual == 0)
+            //TODO: Fazer O Botão ser Selecionado
+            string localCode = actualLocale.Identifier.Code;
+            switch (localCode)
             {
-                engBtn.Select();
-            }
-            else
-            {
-                ptBrBtn.Select();
+                case "en":
+                    EventSystem.current.SetSelectedGameObject(engBtn.gameObject, new BaseEventData(EventSystem.current));
+                    //engBtn.Select();
+                    break;
+                case "pt-BR":
+                    EventSystem.current.SetSelectedGameObject(ptBrBtn.gameObject, new BaseEventData(EventSystem.current));
+                    //ptBrBtn.Select();
+                    break;
             }
         }
-        public void ChangeLocale(int localeId)
+        public void ButtonChangeLocale(int localeId)
         {
             if (m_ActiveLocaleButton) return;
             StartCoroutine(SetLocale(localeId));
@@ -77,9 +84,8 @@ namespace RiverAttack
             m_ActiveLocaleButton = true;
             yield return LocalizationSettings.InitializationOperation;
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeId];
+            m_ActualLocal = m_GameSettings.startLocale = LocalizationSettings.SelectedLocale;
             m_ActiveLocaleButton = false;
-            m_GameSettings.actualLocal = localeId;
-
         }
 
         public void SetSfxVolume()

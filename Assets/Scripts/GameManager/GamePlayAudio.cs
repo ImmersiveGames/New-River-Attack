@@ -1,17 +1,21 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 using Utils;
 namespace RiverAttack
 {
     public class GamePlayAudio : Singleton<GamePlayAudio>
     {
+        [SerializeField] public AudioMixer mixerGroup;
         [SerializeField] AudioSource bgmAudioSource;
         [SerializeField] protected AudioSource voiceAudioSource;
         [SerializeField] internal Tools.SerializableDictionary<LevelTypes, AudioEventSample> bgmLevels = new Tools.SerializableDictionary<LevelTypes, AudioEventSample>();
         [Header("Menu SFX")]
         [SerializeField] AudioClip clickSound;
         [SerializeField] public AudioClip missionFailSound;
+        
+        GameSettings m_GameSettings;
 
         #region UNITYMETHODS
         void Awake()
@@ -19,7 +23,20 @@ namespace RiverAttack
             bgmAudioSource = GetComponentInParent<AudioSource>();
             bgmAudioSource.pitch = 1;
         }
+        void Start()
+        {
+            m_GameSettings = GameSettings.instance;
+            SetOptionSound();
+        }
   #endregion
+
+        void SetOptionSound()
+        {
+            float volumeMusic = Mathf.Log10(m_GameSettings.musicVolume) * 20f;
+            float volumeSfx = Mathf.Log10(m_GameSettings.sfxVolume) * 20f;
+            mixerGroup.SetFloat("MusicVolume", volumeMusic);
+            mixerGroup.SetFloat("SFXVolume", volumeSfx);
+        }
         public void PlayBGM(LevelTypes typeLevel)
         {
             bgmLevels.TryGetValue(typeLevel, out var audioSource);

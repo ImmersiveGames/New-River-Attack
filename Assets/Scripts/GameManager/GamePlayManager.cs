@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using Utils;
 
 namespace RiverAttack
@@ -54,6 +56,7 @@ namespace RiverAttack
         void OnEnable()
         {
             m_GameManager = GameManager.instance;
+            //SetLocalization();
         }
   #endregion
         public GameSettings getGameSettings
@@ -124,6 +127,21 @@ namespace RiverAttack
         void ChangeEndGame()
         {
             m_GameManager.ChangeState(new GameStateEndGame());
+        }
+
+        void SetLocalization()
+        {
+            if(gameSettings.startLocale == null)
+                gameSettings.startLocale = LocalizationSettings.SelectedLocale;
+            StartCoroutine(SetLocale(gameSettings.startLocale));
+            Debug.Log($"LocalName: {gameSettings.startLocale.Identifier.Code}");
+        }
+        
+        IEnumerator SetLocale(Locale localActual)
+        {
+            yield return LocalizationSettings.InitializationOperation;
+            LocalizationSettings.SelectedLocale = localActual;
+            gameSettings.startLocale = LocalizationSettings.SelectedLocale;
         }
 
         #region Calls
