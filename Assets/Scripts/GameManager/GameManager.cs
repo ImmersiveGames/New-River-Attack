@@ -200,12 +200,12 @@ namespace RiverAttack
        
 
         #region Buttons Actions
-        public void BtnNewGame()
+        internal void BtnNewGame()
         {
             ChangeState(new GameStateOpenCutScene(openCutDirector));
         }
 
-        public void BtnGameRestart()
+        internal void BtnGameRestart()
         {
             GamePlayManager.instance.OnEventReSpawnEnemiesMaster();
             GamePlayManager.instance.OnEventEnemiesMasterForceRespawn();

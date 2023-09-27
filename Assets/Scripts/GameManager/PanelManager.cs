@@ -84,6 +84,15 @@ namespace RiverAttack
         }
 
         #region Buttons Actions
+
+        public void ButtonNewGame()
+        {
+            m_GameManager.BtnNewGame();
+        }
+        public void ButtonResetGame()
+        {
+            m_GameManager.BtnGameRestart();
+        }
         public void ButtonGamePause()
         {
             m_GameManager.PauseGame();
