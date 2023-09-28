@@ -4907,6 +4907,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4955376039709564}
+  - component: {fileID: 5754572953052246754}
+  - component: {fileID: 2433380162301541970}
+  - component: {fileID: 6686325207528982720}
   m_Layer: 0
   m_Name: Boto
   m_TagString: Untagged
@@ -4921,15 +4924,75 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296608770970500}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4501112717167946}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5754572953052246754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296608770970500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 512cbc7517fce964389f500f40bfb038, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 11400000, guid: 6152bccc9615a3f4abab3d669b95bb57, type: 2}
+  deadParticlePrefab: {fileID: 1471142367968716, guid: fa95fafd8ce16b045bef9998c0084598,
+    type: 3}
+  timeoutDestroyExplosion: 2
+  isDestroyed: 0
+  isActive: 0
+  actualDifficultName: 0
+--- !u!114 &2433380162301541970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296608770970500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52bf8fb9a8b7a8d40b3fa035f4b95a4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerApproachRadius: 10
+  playerApproachRadiusRandom: {x: 0, y: 0}
+  gizmoColor: {r: 255, g: 0, b: 0, a: 150}
+  ignoreWalls: 1
+  ignoreEnemies: 1
+  moveVelocity: 1
+  startDirection: 7
+  freeVectorDirection: {x: 0, y: 0, z: 0}
+  animationDuration: 0
+  animationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &6686325207528982720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296608770970500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455e9578ac64bc9419948b1bd205a107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onMove: Jump
+  onFlip: 
 --- !u!1 &1391620258977064
 GameObject:
   m_ObjectHideFlags: 0
