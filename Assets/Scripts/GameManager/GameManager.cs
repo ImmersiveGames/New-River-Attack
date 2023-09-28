@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using Utils;
 namespace RiverAttack
@@ -44,9 +46,22 @@ namespace RiverAttack
         [SerializeField]
         internal PlayableDirector endCutDirector;
 
+        GamePlayManager m_GamePlayManager;
+        PlayersInputActions m_InputSystem;
+
         #region UnityMethods
+        void Awake()
+        {
+            m_InputSystem = new PlayersInputActions();
+            m_InputSystem.Enable();
+        }
+        void OnEnable()
+        {
+            m_GamePlayManager = GamePlayManager.instance;
+        }
         void Start()
         {
+            m_InputSystem.Player.Pause.performed += ExecutePauseGame;
             if (debugMode)
             {
                 ChangeState(new GameStatePlayGame());
@@ -101,6 +116,17 @@ namespace RiverAttack
         public void UnPauseGame()
         {
             ChangeState(new GameStatePlayGame());
+        }
+        void ExecutePauseGame(InputAction.CallbackContext callbackContext)
+        {
+            if (currentGameState is GameStatePlayGame)
+            {
+                PauseGame();
+            }
+            if (currentGameState is GameStatePause)
+            {
+                UnPauseGame();
+            }
         }
 
         public void ActivePlayers(bool active)
@@ -207,8 +233,9 @@ namespace RiverAttack
 
         internal void BtnGameRestart()
         {
-            GamePlayManager.instance.OnEventReSpawnEnemiesMaster();
-            GamePlayManager.instance.OnEventEnemiesMasterForceRespawn();
+            m_GamePlayManager.OnEventReSpawnEnemiesMaster();
+            m_GamePlayManager.OnEventEnemiesMasterForceRespawn();
+            m_GamePlayManager.OnEventUpdateRefugees(playerSettingsList[0].wealth);
             ChangeState(new GameStateMenu());
             GameMissionBuilder.instance.ResetBuildMission();
         }

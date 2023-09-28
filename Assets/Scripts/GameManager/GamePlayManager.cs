@@ -27,7 +27,7 @@ namespace RiverAttack
         internal bool playerDead;
 
         GameManager m_GameManager;
-        PlayersInputActions m_InputSystem;
+
         #region Delegates
         public delegate void GeneralEventHandler();
         internal event GeneralEventHandler EventActivateEnemiesMaster;
@@ -143,6 +143,8 @@ namespace RiverAttack
             LocalizationSettings.SelectedLocale = localActual;
             gameSettings.startLocale = LocalizationSettings.SelectedLocale;
         }
+
+        
 
         #region Calls
         internal void OnEventActivateEnemiesMaster()
