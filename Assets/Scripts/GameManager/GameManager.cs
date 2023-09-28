@@ -6,6 +6,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
+using UnityEngine.UI;
 using Utils;
 namespace RiverAttack
 {
@@ -119,13 +120,14 @@ namespace RiverAttack
         }
         void ExecutePauseGame(InputAction.CallbackContext callbackContext)
         {
-            if (currentGameState is GameStatePlayGame)
+            switch (currentGameState)
             {
-                PauseGame();
-            }
-            if (currentGameState is GameStatePause)
-            {
-                UnPauseGame();
+                case GameStatePlayGame:
+                    startMenu.pauseButton.GetComponent<Button>().onClick.Invoke();
+                    break;
+                case GameStatePause:
+                    startMenu.continueButton.GetComponent<Button>().onClick.Invoke();
+                    break;
             }
         }
 

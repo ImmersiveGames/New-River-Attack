@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace RiverAttack
@@ -17,10 +17,13 @@ namespace RiverAttack
         Transform menuHud, menuControl;
         [SerializeField]
         Transform menuGameOver;
+        [SerializeField] internal GameObject pauseButton;
+        [SerializeField] internal GameObject continueButton;
         GameManager m_GameManager;
         GamePlayAudio m_GamePlayAudio;
         AudioSource m_AudioSource;
         Animator m_Animator;
+        
         static readonly int FadeIn = Animator.StringToHash("FadeOut");
         static readonly int FadeOut = Animator.StringToHash("FadeIn");
 
@@ -71,6 +74,7 @@ namespace RiverAttack
             }
             if (active)
                 menuPrincipal[indexStart].gameObject.SetActive(true);
+
             //menuFade.gameObject.SetActive(false);
         }
 
