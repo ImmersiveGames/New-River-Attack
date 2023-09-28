@@ -75,6 +75,36 @@ namespace RiverAttack
             currentGameState?.UpdateState();
         }
   #endregion
+
+        #region  Actions Application
+        void OnApplicationFocus(bool hasFocus)
+        {
+            if (hasFocus)
+            {
+                Time.timeScale = 1;
+            }
+            else
+            {
+                if (currentGameState is GameStatePlayGame)
+                    startMenu.pauseButton.GetComponent<Button>().onClick.Invoke();
+                Time.timeScale = 0;
+            }
+        }
+
+        void OnApplicationPause(bool pauseStatus)
+        {
+            if (pauseStatus)
+            {
+                if (currentGameState is GameStatePlayGame)
+                    startMenu.pauseButton.GetComponent<Button>().onClick.Invoke();
+                Time.timeScale = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
+        }
+  #endregion
         public GameState currentGameState
         {
             get;
