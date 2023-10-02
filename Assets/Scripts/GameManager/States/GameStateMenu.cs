@@ -8,6 +8,7 @@ namespace RiverAttack
         internal GameStateMenu()
         {
             m_GameManager = GameManager.instance;
+            m_GameManager.startMenu.menuPreFade.gameObject.SetActive(false);
         }
 
         public override void EnterState()

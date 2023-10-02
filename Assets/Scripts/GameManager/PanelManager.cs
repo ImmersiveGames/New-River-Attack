@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,6 +10,7 @@ namespace RiverAttack
     {
         [SerializeField]
         Transform menuParent, menuFade;
+        [SerializeField] internal Transform menuPreFade;
         [SerializeField]
         Image backgroundImage, logoImage;
         [SerializeField]
@@ -32,6 +34,7 @@ namespace RiverAttack
         {
             m_AudioSource = GetComponent<AudioSource>();
             m_Animator = GetComponent<Animator>();
+            menuPreFade.gameObject.SetActive(true);
         }
         void OnEnable()
         {
