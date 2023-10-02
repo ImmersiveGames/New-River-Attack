@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4993303665378146}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4577163635471464}
   - component: {fileID: 96429087360539450}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,8 @@ GameObject:
   - component: {fileID: 33545566547053426}
   - component: {fileID: 23882165582507740}
   - component: {fileID: 65524699877745752}
-  m_Layer: 0
+  - component: {fileID: 1914926506999011707}
+  m_Layer: 6
   m_Name: ArsenalVB10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,8 +213,9 @@ Transform:
   - {fileID: 4657416421047196}
   - {fileID: 4580542935351574}
   - {fileID: 4993303665378146}
+  - {fileID: 839973252434969057}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33545566547053426
 MeshFilter:
@@ -286,6 +288,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.82, y: 2, z: 1.8600001}
   m_Center: {x: 0, y: 0.040932804, z: -0.16206965}
+--- !u!114 &1914926506999011707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279098010007564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07a73a1360da2ab4cb64d7adeef1174d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1563941835547388
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,7 +310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4076618886804848}
   - component: {fileID: 96175056072679054}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +455,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4580542935351574}
   - component: {fileID: 212946057745127934}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -527,7 +541,7 @@ GameObject:
   - component: {fileID: 33054684558937682}
   - component: {fileID: 23360947262583164}
   - component: {fileID: 95287849250123690}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Helice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -620,3 +634,47 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &6400536732150413884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 839973252434969057}
+  - component: {fileID: 5086567177896506578}
+  m_Layer: 6
+  m_Name: ShootSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &839973252434969057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6400536732150413884}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.05, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4514800824071812}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5086567177896506578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6400536732150413884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa35c4f5bb619d4b9d3ea45666bf8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

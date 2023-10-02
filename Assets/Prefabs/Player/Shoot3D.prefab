@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4542065838949824}
   - component: {fileID: 212504993563804376}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,9 +98,10 @@ GameObject:
   - component: {fileID: 23909221895890296}
   - component: {fileID: 54173529144423252}
   - component: {fileID: 82821976668221034}
-  m_Layer: 11
+  - component: {fileID: -4193418232708378519}
+  m_Layer: 10
   m_Name: Shoot3D
-  m_TagString: Shoot
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,9 +114,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1779806388395306}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 1.86}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.5}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4542065838949824}
   m_Father: {fileID: 0}
@@ -228,8 +229,9 @@ AudioSource:
   m_GameObject: {fileID: 1779806388395306}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243173860761896096, guid: 9aea00f94f65f0342a3b2258886c502d, type: 2}
-  m_audioClip: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 5288483794940960326, guid: 58d7b5e9bc02ca541be53445706aa66a,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 663e59451aa214743a890d4b102c0ebb, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -284,7 +286,7 @@ AudioSource:
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
   spreadCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -314,4 +316,17 @@ AudioSource:
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 0
+    m_RotationOrder: 4
+--- !u!114 &-4193418232708378519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779806388395306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca93db8d0ae7c0448466b699af1286d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioShoot: {fileID: 11400000, guid: 5d7ffccbe05f5ca4eb20d77fe5e76769, type: 2}

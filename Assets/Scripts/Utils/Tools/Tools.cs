@@ -1,24 +1,43 @@
-﻿/* <summary>
-    Namespace:      Utils
-    Class:          Tools
-    Description:    Ferramentas de auxilio de funções estaticas
-    Author:         Renato Innocenti                    Date: 26/03/2018
-    Notes:          copyrights 2017-2018 (c) immersivegames.com.br - contato@immersivegames.com.br       
-    Revision History:
-    Name: v1.0           Date: 26/03/2018       Description: versão funcional
-    Name: v2.0           Date: 07/07/2023       Description: Atualização para v2022.3
-    </summary>
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cinemachine;
 using UnityEngine;
+using UnityEngine.Playables;
 using Object = UnityEngine.Object;
 
 namespace Utils
 {
     public static class Tools
     {
+        [Serializable]
+        public class SerializableDictionary<TKey, TValue>
+        {
+            [SerializeField]
+            List<TKey> keys = new List<TKey>();
+
+            [SerializeField]
+            List<TValue> values = new List<TValue>();
+
+            public void Add(TKey key, TValue value)
+            {
+                keys.Add(key);
+                values.Add(value);
+            }
+
+            public bool TryGetValue(TKey key, out TValue value)
+            {
+                int index = keys.IndexOf(key);
+                if (index != -1)
+                {
+                    value = values[index];
+                    return true;
+                }
+
+                value = default(TValue);
+                return false;
+            }
+        }
         public static List<T> ScriptableListToList<T>(List<int> listId, List<T> scriptableList) where T : ScriptableObject
         {
             var defaultList = new List<T>();
@@ -33,7 +52,7 @@ namespace Utils
             return defaultList;
         }
 
-        public static List<int> ListToScriptableList<T>(List<T> listProducts) where T : ScriptableObject
+        public static List<int> ListToScriptableList<T>(IEnumerable<T> listProducts) where T : ScriptableObject
         {
             return listProducts.Select(item => item.GetInstanceID()).ToList();
         }
@@ -117,7 +136,7 @@ namespace Utils
                 return new Vector2(width, height);
             }
         }
-        
+
 
         public static bool TryParseEnum<TEnum>(string aName, out TEnum aValue) where TEnum : struct
         {
@@ -147,6 +166,52 @@ namespace Utils
             foreach (Transform child in t)
             {
                 Object.Destroy(child.gameObject);
+            }
+        }
+        public static void SetLayersRecursively(LayerMask layerMask, Transform itemTransform)
+        {
+            int novoLayer = Mathf.RoundToInt(Mathf.Log(layerMask.value, 2));
+            if (itemTransform.gameObject.layer != novoLayer)
+                itemTransform.gameObject.layer = novoLayer;
+            for (int i = 0; i < itemTransform.childCount; i++)
+            {
+                var child = itemTransform.GetChild(i);
+                SetLayersRecursively(layerMask, child);
+            }
+        }
+
+        public static void SetFollowVirtualCam(CinemachineVirtualCamera virtualCamera, Transform follow)
+        {
+            virtualCamera.Follow = follow;
+        }
+
+        public static void ChangeBindingReference(string track, Object animator, PlayableDirector playableDirector)
+        {
+            foreach (var playableBinding in playableDirector.playableAsset.outputs)
+            {
+                if (playableBinding.streamName != track)
+                    continue;
+                var bindingReference = playableDirector.GetGenericBinding(playableBinding.sourceObject);
+
+                if (bindingReference == null)
+                {
+                    // Substituir a referência nula pelo Animator desejado
+                    playableDirector.SetGenericBinding(playableBinding.sourceObject, animator);
+                }
+            }
+        }
+
+        public static void EqualizeLists<T>(ref List<T> listA, ref List<T> listB) where T : new()
+        {
+            int maxSize = Mathf.Max(listA.Count, listB.Count);
+            while (listA.Count < maxSize)
+            {
+                listA.Add(new T()); // Preencha com um elemento vazio (pode ser qualquer valor que você considere vazio)
+            }
+
+            while (listB.Count < maxSize)
+            {
+                listB.Add(new T());
             }
         }
     }

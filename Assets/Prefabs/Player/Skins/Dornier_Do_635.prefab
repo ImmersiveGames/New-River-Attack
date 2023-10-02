@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4585274468835454}
   - component: {fileID: 96155696950743006}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 33657133549386966}
   - component: {fileID: 23971035241682864}
   - component: {fileID: 95820041861162042}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Helice_Direita_T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4905979398273644}
   - component: {fileID: 96584623852307828}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,7 +389,7 @@ GameObject:
   - component: {fileID: 33229633367994890}
   - component: {fileID: 23100025726618870}
   - component: {fileID: 95673160744871438}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Helice_Esquerda_T
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -494,7 +494,7 @@ GameObject:
   - component: {fileID: 33237088373567724}
   - component: {fileID: 23184541734214044}
   - component: {fileID: 95973130132207898}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Helice_Direita_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -599,7 +599,8 @@ GameObject:
   - component: {fileID: 33756561925267164}
   - component: {fileID: 23599648192990118}
   - component: {fileID: 65596141462847650}
-  m_Layer: 0
+  - component: {fileID: -5829366551834095835}
+  m_Layer: 6
   m_Name: Dornier_Do_635
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -624,8 +625,9 @@ Transform:
   - {fileID: 4308049939003884}
   - {fileID: 4442225924222766}
   - {fileID: 4212083698609862}
+  - {fileID: 2566353253187311336}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33756561925267164
 MeshFilter:
@@ -698,6 +700,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3, y: 2, z: 1.98}
   m_Center: {x: 0.0040084124, y: 0.38999975, z: 0.08914399}
+--- !u!114 &-5829366551834095835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690845229350170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07a73a1360da2ab4cb64d7adeef1174d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1750974634009106
 GameObject:
   m_ObjectHideFlags: 0
@@ -707,7 +721,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4212083698609862}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -741,7 +755,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4442225924222766}
   - component: {fileID: 212041565575342780}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -827,7 +841,7 @@ GameObject:
   - component: {fileID: 33090085021841444}
   - component: {fileID: 23824839187592236}
   - component: {fileID: 95755322867272880}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Helice_Esquerda_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -920,3 +934,47 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &7947473615398049685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2566353253187311336}
+  - component: {fileID: 9138222489364199168}
+  m_Layer: 6
+  m_Name: ShootSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2566353253187311336
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7947473615398049685}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4263480894607212}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9138222489364199168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7947473615398049685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa35c4f5bb619d4b9d3ea45666bf8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

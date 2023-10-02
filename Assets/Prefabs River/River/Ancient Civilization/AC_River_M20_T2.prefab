@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4099008737038108}
   - component: {fileID: 33667497971606960}
   - component: {fileID: 23226932907757944}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -25,15 +25,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1006945845632062}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 25, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4734459082677924}
   m_Father: {fileID: 4018633108066950}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33667497971606960
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4788668383555776}
   - component: {fileID: 33010842465951232}
   - component: {fileID: 23639300704409594}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,8 +179,7 @@ GameObject:
   - component: {fileID: 4299878822799140}
   - component: {fileID: 33312875190338248}
   - component: {fileID: 23399842699595896}
-  - component: {fileID: 65401249825415248}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -253,27 +252,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65401249825415248
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1008063126372194}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1012879161846498
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,8 +263,7 @@ GameObject:
   - component: {fileID: 4678632031930808}
   - component: {fileID: 33838789358814954}
   - component: {fileID: 23666786838433216}
-  - component: {fileID: 65316131576581110}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -359,27 +336,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65316131576581110
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1012879161846498}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1016175456382954
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +347,7 @@ GameObject:
   - component: {fileID: 4901692176426288}
   - component: {fileID: 33694997521617410}
   - component: {fileID: 23762310359037988}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -474,7 +430,7 @@ GameObject:
   - component: {fileID: 4345074615400094}
   - component: {fileID: 33610533971855072}
   - component: {fileID: 23261118026624592}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -557,8 +513,7 @@ GameObject:
   - component: {fileID: 4273288533366456}
   - component: {fileID: 33389103802995466}
   - component: {fileID: 23350967010336546}
-  - component: {fileID: 65359185299916504}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_M (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -631,27 +586,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65359185299916504
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1021606067964628}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1024773304718660
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,7 +597,7 @@ GameObject:
   - component: {fileID: 4859322887088880}
   - component: {fileID: 33546342799413150}
   - component: {fileID: 23157890846665804}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -747,7 +681,7 @@ GameObject:
   - component: {fileID: 4322278751145384}
   - component: {fileID: 33968165460417776}
   - component: {fileID: 23268874250755008}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -831,7 +765,7 @@ GameObject:
   - component: {fileID: 4578088617787492}
   - component: {fileID: 33533697215475480}
   - component: {fileID: 23444224186473578}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -914,7 +848,7 @@ GameObject:
   - component: {fileID: 4398083309696740}
   - component: {fileID: 33506559998157894}
   - component: {fileID: 23364563670641504}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Stone_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -995,7 +929,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4957480393968698}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_17
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1033,7 +967,7 @@ GameObject:
   - component: {fileID: 4644023270406670}
   - component: {fileID: 33894436999611168}
   - component: {fileID: 23975496847348632}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Ruins_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1115,7 +1049,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4461422006700432}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1151,8 +1085,7 @@ GameObject:
   - component: {fileID: 4768504113708024}
   - component: {fileID: 33516819443733938}
   - component: {fileID: 23497123461708716}
-  - component: {fileID: 65457527965174862}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_M (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1225,27 +1158,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65457527965174862
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1057844480730252}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1058988745005266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1257,8 +1169,7 @@ GameObject:
   - component: {fileID: 4986921537413730}
   - component: {fileID: 33019358354146346}
   - component: {fileID: 23720521581168474}
-  - component: {fileID: 65229044207844676}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_M
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1331,27 +1242,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65229044207844676
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1058988745005266}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1059261194186176
 GameObject:
   m_ObjectHideFlags: 0
@@ -1361,7 +1251,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4018633108066950}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1398,7 +1288,7 @@ GameObject:
   - component: {fileID: 33500243276979588}
   - component: {fileID: 23691147539076192}
   - component: {fileID: 65379404130691938}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1489,7 +1379,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
+  m_Size: {x: 3, y: 6, z: 8.581556}
   m_Center: {x: 0, y: 3, z: -0.70922184}
 --- !u!1 &1066195012574656
 GameObject:
@@ -1502,7 +1392,7 @@ GameObject:
   - component: {fileID: 4175357751255714}
   - component: {fileID: 33371033238535894}
   - component: {fileID: 23027457310558356}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1585,7 +1475,7 @@ GameObject:
   - component: {fileID: 4856091591273678}
   - component: {fileID: 33390123664702878}
   - component: {fileID: 23590780477723628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1667,7 +1557,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4206101033707962}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1703,7 +1593,7 @@ GameObject:
   - component: {fileID: 4413945627043226}
   - component: {fileID: 33993647696744474}
   - component: {fileID: 23848056995417544}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Ruins_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1786,7 +1676,7 @@ GameObject:
   - component: {fileID: 4135598493206374}
   - component: {fileID: 33807919555186356}
   - component: {fileID: 23322810579611400}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1869,7 +1759,7 @@ GameObject:
   - component: {fileID: 4463417192883330}
   - component: {fileID: 33694243227192230}
   - component: {fileID: 23736618915356044}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -1883,15 +1773,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1100856044067468}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 5, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4986788025696202}
   m_Father: {fileID: 4360255357841266}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33694243227192230
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1953,7 +1843,7 @@ GameObject:
   - component: {fileID: 4002902157836694}
   - component: {fileID: 33493123076792856}
   - component: {fileID: 23778766043031884}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2037,8 +1927,7 @@ GameObject:
   - component: {fileID: 4777040188664532}
   - component: {fileID: 33898333084484490}
   - component: {fileID: 23308265806151648}
-  - component: {fileID: 65619482159373208}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_M
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2110,27 +1999,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65619482159373208
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1107971776832726}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1109768706984970
 GameObject:
   m_ObjectHideFlags: 0
@@ -2142,7 +2010,7 @@ GameObject:
   - component: {fileID: 4317639761121180}
   - component: {fileID: 33187878419271154}
   - component: {fileID: 23692066852144604}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2225,7 +2093,7 @@ GameObject:
   - component: {fileID: 4390453669469078}
   - component: {fileID: 33036720603507624}
   - component: {fileID: 23947205561617284}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2307,7 +2175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4892008281811152}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2343,7 +2211,7 @@ GameObject:
   - component: {fileID: 4134356645730464}
   - component: {fileID: 33566893912977978}
   - component: {fileID: 23071686418750628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2427,8 +2295,7 @@ GameObject:
   - component: {fileID: 4216505877834954}
   - component: {fileID: 33623361430112158}
   - component: {fileID: 23197768995231444}
-  - component: {fileID: 65370750580357820}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2502,27 +2369,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65370750580357820
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1114762225259126}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1115694867188900
 GameObject:
   m_ObjectHideFlags: 0
@@ -2534,7 +2380,7 @@ GameObject:
   - component: {fileID: 4379061141943804}
   - component: {fileID: 33397897095802966}
   - component: {fileID: 23000957302838366}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2618,8 +2464,7 @@ GameObject:
   - component: {fileID: 4683389645616416}
   - component: {fileID: 33789028764700364}
   - component: {fileID: 23777185056054126}
-  - component: {fileID: 65877304588703706}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_M (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2692,27 +2537,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65877304588703706
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1116813167533864}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1119901528233690
 GameObject:
   m_ObjectHideFlags: 0
@@ -2724,7 +2548,7 @@ GameObject:
   - component: {fileID: 4903433536794408}
   - component: {fileID: 33890933398221454}
   - component: {fileID: 23564289154634836}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2808,7 +2632,7 @@ GameObject:
   - component: {fileID: 4591286313453460}
   - component: {fileID: 33739207924491772}
   - component: {fileID: 23316986635286828}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2891,8 +2715,7 @@ GameObject:
   - component: {fileID: 4292135935515748}
   - component: {fileID: 33633334743325068}
   - component: {fileID: 23906635083509722}
-  - component: {fileID: 65368036308022328}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -2965,27 +2788,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65368036308022328
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1127340245814068}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1137976809592994
 GameObject:
   m_ObjectHideFlags: 0
@@ -2997,7 +2799,7 @@ GameObject:
   - component: {fileID: 4761313275494918}
   - component: {fileID: 33687503922397948}
   - component: {fileID: 23280437580446840}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3081,7 +2883,7 @@ GameObject:
   - component: {fileID: 33077914294905046}
   - component: {fileID: 23252767263170886}
   - component: {fileID: 65294223334792320}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3172,8 +2974,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
+  m_Size: {x: 3, y: 6, z: 8}
+  m_Center: {x: 0, y: 3, z: -1}
 --- !u!1 &1140323056313736
 GameObject:
   m_ObjectHideFlags: 0
@@ -3185,7 +2987,7 @@ GameObject:
   - component: {fileID: 4498544695700282}
   - component: {fileID: 33026702527157316}
   - component: {fileID: 23119800516845412}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3269,7 +3071,7 @@ GameObject:
   - component: {fileID: 4226722390218752}
   - component: {fileID: 33507103808583068}
   - component: {fileID: 23412900034958984}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3353,7 +3155,7 @@ GameObject:
   - component: {fileID: 4132342918180692}
   - component: {fileID: 33691984547942796}
   - component: {fileID: 23485564918952992}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3437,8 +3239,7 @@ GameObject:
   - component: {fileID: 4816598927967790}
   - component: {fileID: 33831661325356754}
   - component: {fileID: 23555998521145642}
-  - component: {fileID: 65148315559619114}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_M
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3511,27 +3312,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65148315559619114
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1147970339304796}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1148753456421026
 GameObject:
   m_ObjectHideFlags: 0
@@ -3543,7 +3323,7 @@ GameObject:
   - component: {fileID: 4152239384717264}
   - component: {fileID: 33418631528180350}
   - component: {fileID: 23276727869623748}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3557,15 +3337,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148753456421026}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 25, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4013649524109798}
   m_Father: {fileID: 4892008281811152}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33418631528180350
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3627,7 +3407,7 @@ GameObject:
   - component: {fileID: 4158150393207584}
   - component: {fileID: 33586746549080520}
   - component: {fileID: 23032817961357726}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3711,7 +3491,7 @@ GameObject:
   - component: {fileID: 4839334255715974}
   - component: {fileID: 33632226105954016}
   - component: {fileID: 23265275019088246}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3795,7 +3575,7 @@ GameObject:
   - component: {fileID: 4263225134710342}
   - component: {fileID: 33422021816296668}
   - component: {fileID: 23726671275343822}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3878,7 +3658,7 @@ GameObject:
   - component: {fileID: 4222287585673638}
   - component: {fileID: 33675295578024128}
   - component: {fileID: 23043829817556554}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3963,7 +3743,7 @@ GameObject:
   - component: {fileID: 33401208366013596}
   - component: {fileID: 23799448292448808}
   - component: {fileID: 65383049821729600}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -3977,15 +3757,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172095078782588}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 25, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4564555582078296}
   m_Father: {fileID: 4206101033707962}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33401208366013596
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4055,8 +3835,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.6, y: 0.2, z: 10}
-  m_Center: {x: -2.7, y: 0.2, z: 0}
+  m_Size: {x: 4.6, y: 0.2, z: 200}
+  m_Center: {x: -2.7, y: 0.2, z: -95}
 --- !u!1 &1180252210140114
 GameObject:
   m_ObjectHideFlags: 0
@@ -4068,7 +3848,7 @@ GameObject:
   - component: {fileID: 4670061659119116}
   - component: {fileID: 33959237119096988}
   - component: {fileID: 23351449649357798}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4151,7 +3931,7 @@ GameObject:
   - component: {fileID: 4126502340420956}
   - component: {fileID: 33814608949726314}
   - component: {fileID: 23343605826525746}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4165,15 +3945,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182301524557406}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 25, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4553478080692164}
   m_Father: {fileID: 4687424321079732}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33814608949726314
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4235,7 +4015,8 @@ GameObject:
   - component: {fileID: 4406021720519962}
   - component: {fileID: 33638273410657716}
   - component: {fileID: 23764052691242630}
-  m_Layer: 0
+  - component: {fileID: 6546110025487584753}
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4308,6 +4089,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6546110025487584753
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189005415152904}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.6000066, y: 0.2, z: 200}
+  m_Center: {x: -2.6999948, y: 0.2, z: 75}
 --- !u!1 &1190787099703978
 GameObject:
   m_ObjectHideFlags: 0
@@ -4320,7 +4122,7 @@ GameObject:
   - component: {fileID: 33701365729284246}
   - component: {fileID: 23588355997615400}
   - component: {fileID: 65312255845760688}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -4413,8 +4215,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
+  m_Size: {x: 3, y: 6, z: 16}
+  m_Center: {x: 0, y: 3, z: 1}
 --- !u!1 &1194477377457052
 GameObject:
   m_ObjectHideFlags: 0
@@ -4426,7 +4228,7 @@ GameObject:
   - component: {fileID: 4600873005224940}
   - component: {fileID: 33414054505259660}
   - component: {fileID: 23203473273118478}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4508,7 +4310,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4053188458326764}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4546,7 +4348,7 @@ GameObject:
   - component: {fileID: 4026023522615912}
   - component: {fileID: 33008639223983794}
   - component: {fileID: 23541875081218922}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4630,7 +4432,7 @@ GameObject:
   - component: {fileID: 4143517141781590}
   - component: {fileID: 33547358659309000}
   - component: {fileID: 23622299309290728}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4714,7 +4516,7 @@ GameObject:
   - component: {fileID: 4468450485089678}
   - component: {fileID: 33660390694423012}
   - component: {fileID: 23440171720331798}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4798,7 +4600,7 @@ GameObject:
   - component: {fileID: 4220611918525582}
   - component: {fileID: 33230553532801130}
   - component: {fileID: 23205124241888348}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4882,7 +4684,7 @@ GameObject:
   - component: {fileID: 4816655300978816}
   - component: {fileID: 33502840723343808}
   - component: {fileID: 23594171936301318}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Ruins_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4965,7 +4767,7 @@ GameObject:
   - component: {fileID: 4169447288788832}
   - component: {fileID: 33495876527357670}
   - component: {fileID: 23823662059959180}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5049,7 +4851,7 @@ GameObject:
   - component: {fileID: 4535091433802728}
   - component: {fileID: 33226869879778952}
   - component: {fileID: 23007017758030242}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5133,7 +4935,7 @@ GameObject:
   - component: {fileID: 4721381860375306}
   - component: {fileID: 33092695529905308}
   - component: {fileID: 23365898732695016}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5217,7 +5019,7 @@ GameObject:
   - component: {fileID: 4514676579227636}
   - component: {fileID: 33368509300468218}
   - component: {fileID: 23816092473614116}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Ruins_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5231,7 +5033,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231966722088530}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1, y: 3.55, z: -0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5239,7 +5041,7 @@ Transform:
   - {fileID: 4831579160050436}
   m_Father: {fileID: 4906159290688934}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33368509300468218
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5301,7 +5103,7 @@ GameObject:
   - component: {fileID: 4361731595338210}
   - component: {fileID: 33281119023791742}
   - component: {fileID: 23926070508060838}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5385,7 +5187,7 @@ GameObject:
   - component: {fileID: 4360821115741132}
   - component: {fileID: 33278084617834522}
   - component: {fileID: 23475786999490034}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5470,7 +5272,7 @@ GameObject:
   - component: {fileID: 33576506197427812}
   - component: {fileID: 23138203583941256}
   - component: {fileID: 65162048834619590}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5575,7 +5377,7 @@ GameObject:
   - component: {fileID: 4157578631391044}
   - component: {fileID: 33890088195069488}
   - component: {fileID: 23850943003002836}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5658,7 +5460,7 @@ GameObject:
   - component: {fileID: 4604143620108350}
   - component: {fileID: 33443930399377590}
   - component: {fileID: 23922899475902498}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5742,7 +5544,7 @@ GameObject:
   - component: {fileID: 4923609854917790}
   - component: {fileID: 33905277628370426}
   - component: {fileID: 23961339317673284}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5826,7 +5628,7 @@ GameObject:
   - component: {fileID: 4446924591351910}
   - component: {fileID: 33388275972195188}
   - component: {fileID: 23751626585522030}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5910,7 +5712,7 @@ GameObject:
   - component: {fileID: 4490315541831286}
   - component: {fileID: 33801266122448544}
   - component: {fileID: 23875690798035488}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Stone_01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5991,7 +5793,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4647894782384330}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6027,8 +5829,7 @@ GameObject:
   - component: {fileID: 4622740919828528}
   - component: {fileID: 33809984060956068}
   - component: {fileID: 23694477331008732}
-  - component: {fileID: 65439475258124090}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6100,27 +5901,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65439475258124090
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258709288318990}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
 --- !u!1 &1260592458261340
 GameObject:
   m_ObjectHideFlags: 0
@@ -6132,7 +5912,7 @@ GameObject:
   - component: {fileID: 4506759124075954}
   - component: {fileID: 33742114844726630}
   - component: {fileID: 23922962502038666}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6216,8 +5996,7 @@ GameObject:
   - component: {fileID: 4914059012193034}
   - component: {fileID: 33127938010376594}
   - component: {fileID: 23426888741582660}
-  - component: {fileID: 65672742243957194}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_M
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6290,27 +6069,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65672742243957194
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262756483720012}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1269634966483306
 GameObject:
   m_ObjectHideFlags: 0
@@ -6322,7 +6080,7 @@ GameObject:
   - component: {fileID: 4192996655912922}
   - component: {fileID: 33231868947345556}
   - component: {fileID: 23809286540606478}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6405,8 +6163,7 @@ GameObject:
   - component: {fileID: 4025590115512020}
   - component: {fileID: 33534563349129276}
   - component: {fileID: 23857945641120962}
-  - component: {fileID: 65544062543849364}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6420,15 +6177,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1273997182120398}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 25, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4906159290688934}
   m_Father: {fileID: 4835093209130462}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33534563349129276
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6479,27 +6236,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65544062543849364
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273997182120398}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.6, y: 0.2, z: 10}
-  m_Center: {x: -2.7, y: 0.2, z: 0}
 --- !u!1 &1274993379851836
 GameObject:
   m_ObjectHideFlags: 0
@@ -6511,7 +6247,7 @@ GameObject:
   - component: {fileID: 4147681808313118}
   - component: {fileID: 33852523469344190}
   - component: {fileID: 23275723759278874}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6595,7 +6331,7 @@ GameObject:
   - component: {fileID: 33937495885662486}
   - component: {fileID: 23090985962038856}
   - component: {fileID: 65805129147953570}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6688,8 +6424,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
+  m_Size: {x: 10, y: 6, z: 30}
+  m_Center: {x: 0, y: 3, z: -10}
 --- !u!1 &1277588484815970
 GameObject:
   m_ObjectHideFlags: 0
@@ -6701,7 +6437,7 @@ GameObject:
   - component: {fileID: 4022939063737430}
   - component: {fileID: 33243066594600682}
   - component: {fileID: 23887146519380184}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Ruins_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6786,7 +6522,7 @@ GameObject:
   - component: {fileID: 33741871939116820}
   - component: {fileID: 23453790101947238}
   - component: {fileID: 65594392202117134}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6879,8 +6615,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
+  m_Size: {x: 3, y: 6, z: 26}
+  m_Center: {x: 0, y: 3, z: -10}
 --- !u!1 &1286571799874818
 GameObject:
   m_ObjectHideFlags: 0
@@ -6892,7 +6628,7 @@ GameObject:
   - component: {fileID: 4879006742699250}
   - component: {fileID: 33050892383217610}
   - component: {fileID: 23031530461975808}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6976,7 +6712,7 @@ GameObject:
   - component: {fileID: 4508437379475140}
   - component: {fileID: 33076196633336666}
   - component: {fileID: 23339721546640078}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7060,7 +6796,7 @@ GameObject:
   - component: {fileID: 4447100427639964}
   - component: {fileID: 33259973647837234}
   - component: {fileID: 23090018080336870}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7143,8 +6879,7 @@ GameObject:
   - component: {fileID: 4017418639279658}
   - component: {fileID: 33882343026215436}
   - component: {fileID: 23896638253047162}
-  - component: {fileID: 65612400915771126}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7217,27 +6952,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65612400915771126
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1296022281656008}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.6, y: 0.2, z: 10}
-  m_Center: {x: -2.7, y: 0.2, z: 0}
 --- !u!1 &1298363524127562
 GameObject:
   m_ObjectHideFlags: 0
@@ -7249,8 +6963,7 @@ GameObject:
   - component: {fileID: 4986854863927432}
   - component: {fileID: 33225116672023222}
   - component: {fileID: 23567699555734166}
-  - component: {fileID: 65246541574800142}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7322,27 +7035,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65246541574800142
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1298363524127562}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
 --- !u!1 &1302392026679422
 GameObject:
   m_ObjectHideFlags: 0
@@ -7355,7 +7047,7 @@ GameObject:
   - component: {fileID: 33880121849638168}
   - component: {fileID: 23223805878522920}
   - component: {fileID: 65918027517939694}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF (3)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7460,7 +7152,7 @@ GameObject:
   - component: {fileID: 4101975025630902}
   - component: {fileID: 33560287856626504}
   - component: {fileID: 23020484764695058}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7544,7 +7236,7 @@ GameObject:
   - component: {fileID: 4140991513191792}
   - component: {fileID: 33785701442980222}
   - component: {fileID: 23782362681779422}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7629,7 +7321,7 @@ GameObject:
   - component: {fileID: 33948940971622618}
   - component: {fileID: 23804257618076440}
   - component: {fileID: 65447657485358024}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7735,7 +7427,7 @@ GameObject:
   - component: {fileID: 4331728828007574}
   - component: {fileID: 33751772158431472}
   - component: {fileID: 23763192584064370}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_temple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7818,7 +7510,7 @@ GameObject:
   - component: {fileID: 4530863813672534}
   - component: {fileID: 33331623357281176}
   - component: {fileID: 23719731050630744}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7902,7 +7594,7 @@ GameObject:
   - component: {fileID: 4698465937696134}
   - component: {fileID: 33023345044785776}
   - component: {fileID: 23216767249230746}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base_M (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7985,8 +7677,7 @@ GameObject:
   - component: {fileID: 4940283286275838}
   - component: {fileID: 33685835125761296}
   - component: {fileID: 23700257354192858}
-  - component: {fileID: 65899649933177240}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8059,27 +7750,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65899649933177240
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1317872805211632}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1322333313984440
 GameObject:
   m_ObjectHideFlags: 0
@@ -8091,8 +7761,7 @@ GameObject:
   - component: {fileID: 4118530406115414}
   - component: {fileID: 33104330717282876}
   - component: {fileID: 23938349566173172}
-  - component: {fileID: 65528326322750724}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8165,27 +7834,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65528326322750724
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1322333313984440}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1322871475731974
 GameObject:
   m_ObjectHideFlags: 0
@@ -8198,7 +7846,7 @@ GameObject:
   - component: {fileID: 33022180790097682}
   - component: {fileID: 23929939189275402}
   - component: {fileID: 65259988179700504}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8291,7 +7939,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
+  m_Size: {x: 3, y: 6, z: 8.581556}
   m_Center: {x: 0, y: 3, z: -0.70922184}
 --- !u!1 &1326625158844134
 GameObject:
@@ -8304,8 +7952,7 @@ GameObject:
   - component: {fileID: 4867036264452828}
   - component: {fileID: 33663586821917340}
   - component: {fileID: 23079851498169086}
-  - component: {fileID: 65605346061999386}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8378,27 +8025,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65605346061999386
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1326625158844134}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1329239908279640
 GameObject:
   m_ObjectHideFlags: 0
@@ -8410,8 +8036,7 @@ GameObject:
   - component: {fileID: 4465835038135526}
   - component: {fileID: 33425985552912990}
   - component: {fileID: 23859133051456142}
-  - component: {fileID: 65345380887992700}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8484,27 +8109,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65345380887992700
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1329239908279640}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1335510338584230
 GameObject:
   m_ObjectHideFlags: 0
@@ -8517,7 +8121,7 @@ GameObject:
   - component: {fileID: 33099627559224084}
   - component: {fileID: 23084360312327600}
   - component: {fileID: 65002822215946896}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8609,8 +8213,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
+  m_Size: {x: 10, y: 6, z: 200}
+  m_Center: {x: 0, y: 3, z: -95}
 --- !u!1 &1337478759499350
 GameObject:
   m_ObjectHideFlags: 0
@@ -8622,7 +8226,7 @@ GameObject:
   - component: {fileID: 4085557500748016}
   - component: {fileID: 33874496715266554}
   - component: {fileID: 23609579057565882}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8636,15 +8240,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337478759499350}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 25, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4100875528142430}
   m_Father: {fileID: 4677842846947982}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33874496715266554
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8707,7 +8311,7 @@ GameObject:
   - component: {fileID: 33076240723338278}
   - component: {fileID: 23310750957824510}
   - component: {fileID: 65438910327492094}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8800,8 +8404,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
+  m_Size: {x: 3, y: 6, z: 36}
+  m_Center: {x: 0, y: 3, z: -15}
 --- !u!1 &1340336398828258
 GameObject:
   m_ObjectHideFlags: 0
@@ -8813,8 +8417,7 @@ GameObject:
   - component: {fileID: 4962028845831518}
   - component: {fileID: 33111315704287996}
   - component: {fileID: 23574670596551444}
-  - component: {fileID: 65109290087040818}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_M (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8887,27 +8490,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65109290087040818
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340336398828258}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1343465162142066
 GameObject:
   m_ObjectHideFlags: 0
@@ -8919,7 +8501,7 @@ GameObject:
   - component: {fileID: 4828859195572832}
   - component: {fileID: 33187273846233822}
   - component: {fileID: 23112906911470850}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9002,8 +8584,7 @@ GameObject:
   - component: {fileID: 4012593530321388}
   - component: {fileID: 33327210551417342}
   - component: {fileID: 23291083132562586}
-  - component: {fileID: 65375312060542948}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9075,27 +8656,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65375312060542948
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1359553422951170}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
 --- !u!1 &1360347623526708
 GameObject:
   m_ObjectHideFlags: 0
@@ -9107,8 +8667,7 @@ GameObject:
   - component: {fileID: 4553478080692164}
   - component: {fileID: 33818665326050834}
   - component: {fileID: 23174799896105454}
-  - component: {fileID: 65177283346193192}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9181,27 +8740,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65177283346193192
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1360347623526708}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1361958264558692
 GameObject:
   m_ObjectHideFlags: 0
@@ -9213,7 +8751,7 @@ GameObject:
   - component: {fileID: 4581224858845832}
   - component: {fileID: 33907989388947002}
   - component: {fileID: 23202906639481894}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9295,7 +8833,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4579462744189406}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9331,7 +8869,7 @@ GameObject:
   - component: {fileID: 4602457120578888}
   - component: {fileID: 33808518596800308}
   - component: {fileID: 23480207464712650}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9415,7 +8953,7 @@ GameObject:
   - component: {fileID: 4548825560029772}
   - component: {fileID: 33666531234316654}
   - component: {fileID: 23384113768430976}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -9429,15 +8967,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1369480228197798}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 25, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4299878822799140}
   m_Father: {fileID: 4957480393968698}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33666531234316654
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -9499,7 +9037,7 @@ GameObject:
   - component: {fileID: 4530642372959176}
   - component: {fileID: 33870173803963632}
   - component: {fileID: 23046174831148940}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9583,7 +9121,7 @@ GameObject:
   - component: {fileID: 4288733194989704}
   - component: {fileID: 33595829643460828}
   - component: {fileID: 23227147573153192}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9667,7 +9205,7 @@ GameObject:
   - component: {fileID: 4532827671033656}
   - component: {fileID: 33935410900700608}
   - component: {fileID: 23965189563527882}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9751,7 +9289,7 @@ GameObject:
   - component: {fileID: 4203225203521704}
   - component: {fileID: 33773490316875176}
   - component: {fileID: 23743907406753502}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9835,7 +9373,7 @@ GameObject:
   - component: {fileID: 4852240475321716}
   - component: {fileID: 33598685255747234}
   - component: {fileID: 23447224113355730}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Lhamas (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9916,7 +9454,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4677842846947982}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9954,7 +9492,7 @@ GameObject:
   - component: {fileID: 4282669708975676}
   - component: {fileID: 33643323910756520}
   - component: {fileID: 23309788485186656}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree_04 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10037,8 +9575,7 @@ GameObject:
   - component: {fileID: 4051034865540678}
   - component: {fileID: 33493167817351726}
   - component: {fileID: 23191348955515922}
-  - component: {fileID: 65473724638893640}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_M
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10111,27 +9648,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65473724638893640
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1419673679246044}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1422677062232006
 GameObject:
   m_ObjectHideFlags: 0
@@ -10141,7 +9657,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4253050453965828}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10177,7 +9693,7 @@ GameObject:
   - component: {fileID: 4542320725590738}
   - component: {fileID: 33878758830768798}
   - component: {fileID: 23641453797475148}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10261,7 +9777,7 @@ GameObject:
   - component: {fileID: 4779510551468162}
   - component: {fileID: 33485550689814574}
   - component: {fileID: 23885318100274092}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10275,15 +9791,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1438222117233436}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 25, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4735056112770606}
   m_Father: {fileID: 4579462744189406}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33485550689814574
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -10345,8 +9861,7 @@ GameObject:
   - component: {fileID: 4734459082677924}
   - component: {fileID: 33842931373700484}
   - component: {fileID: 23960507804376294}
-  - component: {fileID: 65480072500165180}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10419,27 +9934,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65480072500165180
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1444670714614062}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1452087969435728
 GameObject:
   m_ObjectHideFlags: 0
@@ -10451,7 +9945,7 @@ GameObject:
   - component: {fileID: 4293174202212316}
   - component: {fileID: 33217681911485960}
   - component: {fileID: 23113042026618524}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10535,7 +10029,7 @@ GameObject:
   - component: {fileID: 4795198057343958}
   - component: {fileID: 33727118623695086}
   - component: {fileID: 23978910012117814}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Stone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10616,7 +10110,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4303509934401650}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10654,7 +10148,7 @@ GameObject:
   - component: {fileID: 4695961825647030}
   - component: {fileID: 33385438407116020}
   - component: {fileID: 23516143739491342}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10739,7 +10233,7 @@ GameObject:
   - component: {fileID: 33982185991996936}
   - component: {fileID: 23348736362308864}
   - component: {fileID: 65124572279940976}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -10831,8 +10325,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
+  m_Size: {x: 3, y: 6, z: 26}
+  m_Center: {x: 0, y: 3, z: 10}
 --- !u!1 &1465598723832948
 GameObject:
   m_ObjectHideFlags: 0
@@ -10844,7 +10338,7 @@ GameObject:
   - component: {fileID: 4665090296145484}
   - component: {fileID: 33093955311319274}
   - component: {fileID: 23616922277332076}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Ruins_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10928,7 +10422,7 @@ GameObject:
   - component: {fileID: 4114532205711102}
   - component: {fileID: 33603328103808168}
   - component: {fileID: 23872916234611094}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11012,7 +10506,7 @@ GameObject:
   - component: {fileID: 4647583780565110}
   - component: {fileID: 33106271043431668}
   - component: {fileID: 23066399851671332}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11095,8 +10589,7 @@ GameObject:
   - component: {fileID: 4790189462887456}
   - component: {fileID: 33001141632160672}
   - component: {fileID: 23022668933849108}
-  - component: {fileID: 65526643438894510}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11169,27 +10662,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65526643438894510
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1469759847024380}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1471113813610630
 GameObject:
   m_ObjectHideFlags: 0
@@ -11201,7 +10673,7 @@ GameObject:
   - component: {fileID: 4727237761763030}
   - component: {fileID: 33922321196451268}
   - component: {fileID: 23945873597981270}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11282,7 +10754,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4588276934137508}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11320,7 +10792,7 @@ GameObject:
   - component: {fileID: 4223162846548992}
   - component: {fileID: 33249582956891750}
   - component: {fileID: 23110301806301502}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11404,7 +10876,7 @@ GameObject:
   - component: {fileID: 4695580358419096}
   - component: {fileID: 33920147402031088}
   - component: {fileID: 23239436380924398}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Lhamas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11487,7 +10959,7 @@ GameObject:
   - component: {fileID: 4145021261369168}
   - component: {fileID: 33252156030933748}
   - component: {fileID: 23467968049038660}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree_04 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11570,7 +11042,7 @@ GameObject:
   - component: {fileID: 4928801925904066}
   - component: {fileID: 33040028558076100}
   - component: {fileID: 23188924025052552}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -11654,7 +11126,7 @@ GameObject:
   - component: {fileID: 4042217065090498}
   - component: {fileID: 33998419879057356}
   - component: {fileID: 23275589741818138}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11738,7 +11210,7 @@ GameObject:
   - component: {fileID: 4259824391019858}
   - component: {fileID: 33832231866354080}
   - component: {fileID: 23987716066299830}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base_M (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11821,7 +11293,7 @@ GameObject:
   - component: {fileID: 4399784161269228}
   - component: {fileID: 33960522357011234}
   - component: {fileID: 23427775131781320}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11904,7 +11376,7 @@ GameObject:
   - component: {fileID: 4959727197174414}
   - component: {fileID: 33128760437191558}
   - component: {fileID: 23168316402331528}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11988,7 +11460,7 @@ GameObject:
   - component: {fileID: 33181696503391282}
   - component: {fileID: 23017547645001606}
   - component: {fileID: 65479313251819922}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12094,7 +11566,7 @@ GameObject:
   - component: {fileID: 4341291059304544}
   - component: {fileID: 33415952041297994}
   - component: {fileID: 23838668865583120}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12179,7 +11651,7 @@ GameObject:
   - component: {fileID: 33898647891372946}
   - component: {fileID: 23721040934769476}
   - component: {fileID: 65676073991034030}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12272,8 +11744,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
+  m_Size: {x: 3, y: 6, z: 36}
+  m_Center: {x: 0, y: 3, z: -15}
 --- !u!1 &1506750840613364
 GameObject:
   m_ObjectHideFlags: 0
@@ -12285,7 +11757,7 @@ GameObject:
   - component: {fileID: 4719445200227994}
   - component: {fileID: 33848293673260852}
   - component: {fileID: 23443708703563884}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12299,15 +11771,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1506750840613364}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 25, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4279741893183694}
   m_Father: {fileID: 4053188458326764}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33848293673260852
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -12369,8 +11841,7 @@ GameObject:
   - component: {fileID: 4666365051503136}
   - component: {fileID: 33878322805752286}
   - component: {fileID: 23405356098174660}
-  - component: {fileID: 65257732159308366}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_M (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12442,27 +11913,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65257732159308366
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1507121851559638}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1507915242453414
 GameObject:
   m_ObjectHideFlags: 0
@@ -12474,7 +11924,7 @@ GameObject:
   - component: {fileID: 4451365469658530}
   - component: {fileID: 33143796430581396}
   - component: {fileID: 23059653138129466}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12488,15 +11938,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1507915242453414}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 25, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4981039980693500}
   m_Father: {fileID: 4588276934137508}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33143796430581396
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -12558,7 +12008,7 @@ GameObject:
   - component: {fileID: 4543211681940728}
   - component: {fileID: 33574535000813366}
   - component: {fileID: 23298209162593300}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12643,7 +12093,7 @@ GameObject:
   - component: {fileID: 33456342853440496}
   - component: {fileID: 23569090477239426}
   - component: {fileID: 65715443817967878}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12736,8 +12186,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
+  m_Size: {x: 3, y: 6, z: 36}
+  m_Center: {x: 0, y: 3, z: -15}
 --- !u!1 &1513056669219300
 GameObject:
   m_ObjectHideFlags: 0
@@ -12749,7 +12199,7 @@ GameObject:
   - component: {fileID: 4019251207980090}
   - component: {fileID: 33257332643419618}
   - component: {fileID: 23555623983161262}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12832,8 +12282,7 @@ GameObject:
   - component: {fileID: 4279741893183694}
   - component: {fileID: 33959936742534510}
   - component: {fileID: 23887811788235118}
-  - component: {fileID: 65811855765932588}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -12905,27 +12354,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65811855765932588
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1513374165106112}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1520074298488182
 GameObject:
   m_ObjectHideFlags: 0
@@ -12935,7 +12363,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4129456596984012}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12969,7 +12397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4849180414696710}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13005,8 +12433,7 @@ GameObject:
   - component: {fileID: 4023150999710776}
   - component: {fileID: 33003927602241068}
   - component: {fileID: 23083336816719512}
-  - component: {fileID: 65023555215596124}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13079,27 +12506,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65023555215596124
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1523617970132996}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1523906411875426
 GameObject:
   m_ObjectHideFlags: 0
@@ -13111,7 +12517,7 @@ GameObject:
   - component: {fileID: 4064988861521958}
   - component: {fileID: 33383466702275666}
   - component: {fileID: 23191913962870906}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13195,8 +12601,7 @@ GameObject:
   - component: {fileID: 4100875528142430}
   - component: {fileID: 33533391810520214}
   - component: {fileID: 23926191340318150}
-  - component: {fileID: 65548224717507032}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13270,27 +12675,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65548224717507032
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524139157271748}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1527777627932600
 GameObject:
   m_ObjectHideFlags: 0
@@ -13302,7 +12686,7 @@ GameObject:
   - component: {fileID: 4683868012909558}
   - component: {fileID: 33305737268017666}
   - component: {fileID: 23275239660481006}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13385,7 +12769,7 @@ GameObject:
   - component: {fileID: 4626539842328696}
   - component: {fileID: 33314756784960682}
   - component: {fileID: 23883096321360844}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13468,7 +12852,7 @@ GameObject:
   - component: {fileID: 4353245932676824}
   - component: {fileID: 33841761557934802}
   - component: {fileID: 23592564788758286}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13552,7 +12936,7 @@ GameObject:
   - component: {fileID: 4771353568958552}
   - component: {fileID: 33510625834371744}
   - component: {fileID: 23572839997327890}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13636,8 +13020,7 @@ GameObject:
   - component: {fileID: 4390171294609196}
   - component: {fileID: 33597960080480360}
   - component: {fileID: 23445447639624722}
-  - component: {fileID: 65165542076536102}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13709,27 +13092,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65165542076536102
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540534334214150}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
 --- !u!1 &1545050781141300
 GameObject:
   m_ObjectHideFlags: 0
@@ -13741,7 +13103,7 @@ GameObject:
   - component: {fileID: 4779705419154844}
   - component: {fileID: 33201794891122518}
   - component: {fileID: 23638998800597352}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13824,8 +13186,7 @@ GameObject:
   - component: {fileID: 4012086311835928}
   - component: {fileID: 33122480179727460}
   - component: {fileID: 23371607957672380}
-  - component: {fileID: 65104438767536794}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -13898,27 +13259,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65104438767536794
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1545396646875964}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1550013522646610
 GameObject:
   m_ObjectHideFlags: 0
@@ -13930,7 +13270,7 @@ GameObject:
   - component: {fileID: 4242576302576122}
   - component: {fileID: 33942742213696528}
   - component: {fileID: 23796820564028248}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14014,7 +13354,7 @@ GameObject:
   - component: {fileID: 4282386863257414}
   - component: {fileID: 33563875690547492}
   - component: {fileID: 23496662448651864}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14098,8 +13438,7 @@ GameObject:
   - component: {fileID: 4517083454945112}
   - component: {fileID: 33430443200729850}
   - component: {fileID: 23780519485329354}
-  - component: {fileID: 65322149195406138}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14172,27 +13511,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65322149195406138
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1553881664390136}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1554009797621834
 GameObject:
   m_ObjectHideFlags: 0
@@ -14204,7 +13522,7 @@ GameObject:
   - component: {fileID: 4959913765968866}
   - component: {fileID: 33421812718490042}
   - component: {fileID: 23319695836050478}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14218,15 +13536,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554009797621834}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 25, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4678632031930808}
   m_Father: {fileID: 4849180414696710}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33421812718490042
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -14288,7 +13606,7 @@ GameObject:
   - component: {fileID: 4210025875929478}
   - component: {fileID: 33444519468637788}
   - component: {fileID: 23684105836467650}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_temple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14372,7 +13690,7 @@ GameObject:
   - component: {fileID: 33338380861721746}
   - component: {fileID: 23759781375711520}
   - component: {fileID: 65774192409151352}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14476,8 +13794,7 @@ GameObject:
   - component: {fileID: 4906159290688934}
   - component: {fileID: 33947383757427220}
   - component: {fileID: 23661338971721422}
-  - component: {fileID: 65509915542498980}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14550,27 +13867,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65509915542498980
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1558849143651088}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1564337355827554
 GameObject:
   m_ObjectHideFlags: 0
@@ -14582,7 +13878,7 @@ GameObject:
   - component: {fileID: 4208287118592712}
   - component: {fileID: 33384492395572576}
   - component: {fileID: 23675380943948872}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14596,15 +13892,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1564337355827554}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 25, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4662557734776992}
   m_Father: {fileID: 4647894782384330}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33384492395572576
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -14666,7 +13962,7 @@ GameObject:
   - component: {fileID: 4683392239498584}
   - component: {fileID: 33759452992880766}
   - component: {fileID: 23956211267038034}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14749,8 +14045,7 @@ GameObject:
   - component: {fileID: 4795666426476282}
   - component: {fileID: 33722000467713914}
   - component: {fileID: 23328101446211832}
-  - component: {fileID: 65444347755862218}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -14823,27 +14118,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65444347755862218
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1590431586897676}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
 --- !u!1 &1591114613835096
 GameObject:
   m_ObjectHideFlags: 0
@@ -14855,7 +14129,7 @@ GameObject:
   - component: {fileID: 4992471031575562}
   - component: {fileID: 33231378770094834}
   - component: {fileID: 23230350273062240}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14940,7 +14214,7 @@ GameObject:
   - component: {fileID: 33399456496261616}
   - component: {fileID: 23655256740508590}
   - component: {fileID: 65363724933405554}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15031,8 +14305,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
+  m_Size: {x: 3, y: 6, z: 16}
+  m_Center: {x: 0, y: 3, z: -5}
 --- !u!1 &1597445012443764
 GameObject:
   m_ObjectHideFlags: 0
@@ -15045,7 +14319,7 @@ GameObject:
   - component: {fileID: 33692575132958596}
   - component: {fileID: 23782468683463088}
   - component: {fileID: 65608031255547610}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15136,8 +14410,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
+  m_Size: {x: 3.5, y: 6, z: 26}
+  m_Center: {x: 0, y: 3, z: 8}
 --- !u!1 &1600275322155934
 GameObject:
   m_ObjectHideFlags: 0
@@ -15149,7 +14423,7 @@ GameObject:
   - component: {fileID: 4819895045858344}
   - component: {fileID: 33914831461968596}
   - component: {fileID: 23609963906277222}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base_M (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15233,7 +14507,7 @@ GameObject:
   - component: {fileID: 33930249764923920}
   - component: {fileID: 23993793227066672}
   - component: {fileID: 65543551070683392}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15324,7 +14598,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
+  m_Size: {x: 3, y: 6, z: 8.581556}
   m_Center: {x: 0, y: 3, z: -0.70922184}
 --- !u!1 &1612368982083624
 GameObject:
@@ -15337,8 +14611,7 @@ GameObject:
   - component: {fileID: 4013649524109798}
   - component: {fileID: 33806773477286876}
   - component: {fileID: 23036368120899998}
-  - component: {fileID: 65154282561273912}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15411,27 +14684,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65154282561273912
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1612368982083624}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1613144377417018
 GameObject:
   m_ObjectHideFlags: 0
@@ -15443,7 +14695,7 @@ GameObject:
   - component: {fileID: 4220809119806300}
   - component: {fileID: 33076742359790876}
   - component: {fileID: 23343297335886300}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Stone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15526,7 +14778,7 @@ GameObject:
   - component: {fileID: 4083154782273872}
   - component: {fileID: 33570039807940062}
   - component: {fileID: 23059401382524060}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15540,15 +14792,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613697269519118}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 25, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4109510003868116}
   m_Father: {fileID: 4129456596984012}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33570039807940062
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -15610,7 +14862,7 @@ GameObject:
   - component: {fileID: 4607721612770652}
   - component: {fileID: 33030951607944400}
   - component: {fileID: 23246194740265550}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree_04 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15693,8 +14945,7 @@ GameObject:
   - component: {fileID: 4981039980693500}
   - component: {fileID: 33221883652923102}
   - component: {fileID: 23648349385588544}
-  - component: {fileID: 65058819729929632}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15767,27 +15018,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65058819729929632
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1619744656282542}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1621054521519342
 GameObject:
   m_ObjectHideFlags: 0
@@ -15799,7 +15029,7 @@ GameObject:
   - component: {fileID: 4008126582210052}
   - component: {fileID: 33517479862518204}
   - component: {fileID: 23087048527102580}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15883,8 +15113,7 @@ GameObject:
   - component: {fileID: 4389324905652326}
   - component: {fileID: 33384757277916224}
   - component: {fileID: 23319585023435648}
-  - component: {fileID: 65819025094175218}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -15956,27 +15185,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65819025094175218
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1626560520610966}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
 --- !u!1 &1627618415467604
 GameObject:
   m_ObjectHideFlags: 0
@@ -15988,8 +15196,7 @@ GameObject:
   - component: {fileID: 4196535948983162}
   - component: {fileID: 33724506281713446}
   - component: {fileID: 23667065841501870}
-  - component: {fileID: 65351226180474032}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16061,27 +15268,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65351226180474032
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627618415467604}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
 --- !u!1 &1638790992120926
 GameObject:
   m_ObjectHideFlags: 0
@@ -16093,7 +15279,7 @@ GameObject:
   - component: {fileID: 4668813449322760}
   - component: {fileID: 33397247881444036}
   - component: {fileID: 23175994655428870}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16107,15 +15293,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1638790992120926}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 5, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4216505877834954}
   m_Father: {fileID: 4936231048335968}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33397247881444036
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -16177,8 +15363,7 @@ GameObject:
   - component: {fileID: 4144375352106838}
   - component: {fileID: 33816948170636640}
   - component: {fileID: 23075576562920428}
-  - component: {fileID: 65670579176450534}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16250,27 +15435,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65670579176450534
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1640731982608464}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1641931010423118
 GameObject:
   m_ObjectHideFlags: 0
@@ -16282,8 +15446,7 @@ GameObject:
   - component: {fileID: 4702949940829488}
   - component: {fileID: 33412858681405114}
   - component: {fileID: 23110059775566642}
-  - component: {fileID: 65631483978878390}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16356,27 +15519,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65631483978878390
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1641931010423118}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1645301298172824
 GameObject:
   m_ObjectHideFlags: 0
@@ -16388,7 +15530,7 @@ GameObject:
   - component: {fileID: 4264338926576446}
   - component: {fileID: 33164105979403030}
   - component: {fileID: 23707793943265014}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16472,8 +15614,7 @@ GameObject:
   - component: {fileID: 4552686618326878}
   - component: {fileID: 33467055576674758}
   - component: {fileID: 23847955296326406}
-  - component: {fileID: 65166076021061508}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16546,27 +15687,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65166076021061508
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1648013922649682}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1658336555366228
 GameObject:
   m_ObjectHideFlags: 0
@@ -16578,8 +15698,7 @@ GameObject:
   - component: {fileID: 4836701230078308}
   - component: {fileID: 33980346080802424}
   - component: {fileID: 23060469516158142}
-  - component: {fileID: 65832363466800306}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16652,27 +15771,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65832363466800306
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1658336555366228}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1662322653807500
 GameObject:
   m_ObjectHideFlags: 0
@@ -16684,7 +15782,7 @@ GameObject:
   - component: {fileID: 4831579160050436}
   - component: {fileID: 33774697332421346}
   - component: {fileID: 23804624613376752}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Ruins_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16767,8 +15865,7 @@ GameObject:
   - component: {fileID: 4415111846463222}
   - component: {fileID: 33982147795867566}
   - component: {fileID: 23738233034329752}
-  - component: {fileID: 65353633727836642}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_M
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16841,27 +15938,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65353633727836642
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1673872024934966}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1675971429045326
 GameObject:
   m_ObjectHideFlags: 0
@@ -16871,7 +15947,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4345528827195666}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16908,8 +15984,7 @@ GameObject:
   - component: {fileID: 4735056112770606}
   - component: {fileID: 33912532097871126}
   - component: {fileID: 23994997616256796}
-  - component: {fileID: 65625277468602504}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -16982,27 +16057,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65625277468602504
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1676376584959606}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1677914609106052
 GameObject:
   m_ObjectHideFlags: 0
@@ -17014,7 +16068,7 @@ GameObject:
   - component: {fileID: 4011030612577596}
   - component: {fileID: 33911076817394934}
   - component: {fileID: 23266454529351092}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17028,15 +16082,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1677914609106052}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 25, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4702949940829488}
   m_Father: {fileID: 4253050453965828}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33911076817394934
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -17099,7 +16153,7 @@ GameObject:
   - component: {fileID: 33671662169328040}
   - component: {fileID: 23846621415082162}
   - component: {fileID: 65686020964355444}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17191,8 +16245,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
+  m_Size: {x: 10, y: 6, z: 180}
+  m_Center: {x: 0, y: 3, z: 85}
 --- !u!1 &1692952206699662
 GameObject:
   m_ObjectHideFlags: 0
@@ -17204,7 +16258,7 @@ GameObject:
   - component: {fileID: 4980434978566276}
   - component: {fileID: 33385272436529116}
   - component: {fileID: 23084923384298800}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17287,7 +16341,7 @@ GameObject:
   - component: {fileID: 4168921406502152}
   - component: {fileID: 33432583497340004}
   - component: {fileID: 23093685752257402}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_temple_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17370,7 +16424,7 @@ GameObject:
   - component: {fileID: 4466710016085604}
   - component: {fileID: 33916233867153906}
   - component: {fileID: 23706234724659764}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Stone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17453,8 +16507,7 @@ GameObject:
   - component: {fileID: 4240953837941230}
   - component: {fileID: 33781280533198458}
   - component: {fileID: 23486444548791596}
-  - component: {fileID: 65416873730923812}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17526,27 +16579,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65416873730923812
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1695004742463254}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
 --- !u!1 &1696939555050998
 GameObject:
   m_ObjectHideFlags: 0
@@ -17558,7 +16590,7 @@ GameObject:
   - component: {fileID: 4901533260389068}
   - component: {fileID: 33933166830235912}
   - component: {fileID: 23079317802218946}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17642,7 +16674,7 @@ GameObject:
   - component: {fileID: 4173545242399104}
   - component: {fileID: 33488552212510592}
   - component: {fileID: 23121966067353052}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -17726,7 +16758,7 @@ GameObject:
   - component: {fileID: 4994811383651890}
   - component: {fileID: 33249248434128618}
   - component: {fileID: 23710911106471752}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17810,7 +16842,7 @@ GameObject:
   - component: {fileID: 4767273287353660}
   - component: {fileID: 33495893017835760}
   - component: {fileID: 23667271841363350}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17893,7 +16925,7 @@ GameObject:
   - component: {fileID: 4135215278025526}
   - component: {fileID: 33036629398095612}
   - component: {fileID: 23162061594391298}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Lhamas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17976,7 +17008,7 @@ GameObject:
   - component: {fileID: 4090098200659850}
   - component: {fileID: 33769284244878254}
   - component: {fileID: 23980678891193598}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Stone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18059,7 +17091,7 @@ GameObject:
   - component: {fileID: 4557958706759170}
   - component: {fileID: 33508295898770974}
   - component: {fileID: 23908852865708508}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_temple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18142,7 +17174,7 @@ GameObject:
   - component: {fileID: 4287390146801176}
   - component: {fileID: 33287713520484932}
   - component: {fileID: 23797102105594658}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18226,8 +17258,7 @@ GameObject:
   - component: {fileID: 4357960038711262}
   - component: {fileID: 33149626713406786}
   - component: {fileID: 23812560401507288}
-  - component: {fileID: 65315135306026344}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18300,27 +17331,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65315135306026344
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1720808171657450}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
 --- !u!1 &1722403754089712
 GameObject:
   m_ObjectHideFlags: 0
@@ -18332,8 +17342,7 @@ GameObject:
   - component: {fileID: 4522795691334428}
   - component: {fileID: 33267210479856094}
   - component: {fileID: 23394403930941068}
-  - component: {fileID: 65273283485391206}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18406,27 +17415,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65273283485391206
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1722403754089712}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1723111000796682
 GameObject:
   m_ObjectHideFlags: 0
@@ -18438,7 +17426,7 @@ GameObject:
   - component: {fileID: 4327674228436062}
   - component: {fileID: 33160358833992460}
   - component: {fileID: 23507132160648866}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18519,7 +17507,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4178659190112824}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_18
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18556,7 +17544,7 @@ GameObject:
   - component: {fileID: 4007468045560910}
   - component: {fileID: 33722321270864576}
   - component: {fileID: 23213036213835532}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18640,7 +17628,7 @@ GameObject:
   - component: {fileID: 4930008071400474}
   - component: {fileID: 33348778992883908}
   - component: {fileID: 23646122709223138}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Ruins_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18721,7 +17709,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4360255357841266}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_20
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18757,7 +17745,7 @@ GameObject:
   - component: {fileID: 4494509303239482}
   - component: {fileID: 33961144133906536}
   - component: {fileID: 23028407184578060}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18841,7 +17829,7 @@ GameObject:
   - component: {fileID: 4883752354721392}
   - component: {fileID: 33384784641748480}
   - component: {fileID: 23035007667021184}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18924,8 +17912,7 @@ GameObject:
   - component: {fileID: 4716786207359394}
   - component: {fileID: 33667132500555032}
   - component: {fileID: 23815716147374976}
-  - component: {fileID: 65412901464586588}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -18998,27 +17985,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65412901464586588
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733063401634618}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
 --- !u!1 &1734259691569888
 GameObject:
   m_ObjectHideFlags: 0
@@ -19030,7 +17996,7 @@ GameObject:
   - component: {fileID: 4164637826537894}
   - component: {fileID: 33531662144333938}
   - component: {fileID: 23224874106566086}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19114,7 +18080,7 @@ GameObject:
   - component: {fileID: 4749562280742028}
   - component: {fileID: 33065716507159372}
   - component: {fileID: 23362122112117030}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19197,8 +18163,7 @@ GameObject:
   - component: {fileID: 4109510003868116}
   - component: {fileID: 33722169563828622}
   - component: {fileID: 23727101986669268}
-  - component: {fileID: 65810929852642818}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19271,27 +18236,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65810929852642818
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1735609663757048}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1740569547763642
 GameObject:
   m_ObjectHideFlags: 0
@@ -19303,7 +18247,7 @@ GameObject:
   - component: {fileID: 4293028451069304}
   - component: {fileID: 33096386609343806}
   - component: {fileID: 23494180045702170}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19387,7 +18331,7 @@ GameObject:
   - component: {fileID: 4299783829976098}
   - component: {fileID: 33871445012194386}
   - component: {fileID: 23733677681641162}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19471,7 +18415,7 @@ GameObject:
   - component: {fileID: 4355708796511126}
   - component: {fileID: 33623904794542870}
   - component: {fileID: 23456265835000608}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Barna
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19554,7 +18498,7 @@ GameObject:
   - component: {fileID: 4819391766392628}
   - component: {fileID: 33561166891618848}
   - component: {fileID: 23913799670436736}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19638,7 +18582,7 @@ GameObject:
   - component: {fileID: 4558074164571306}
   - component: {fileID: 33696100471738300}
   - component: {fileID: 23095572318898018}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -19722,7 +18666,7 @@ GameObject:
   - component: {fileID: 4779678708980506}
   - component: {fileID: 33871647644169694}
   - component: {fileID: 23517111826166596}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19806,7 +18750,7 @@ GameObject:
   - component: {fileID: 4979118128552846}
   - component: {fileID: 33989355900678194}
   - component: {fileID: 23729722006188204}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19890,7 +18834,7 @@ GameObject:
   - component: {fileID: 4946767786074478}
   - component: {fileID: 33925018639732016}
   - component: {fileID: 23322577797353552}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19974,7 +18918,7 @@ GameObject:
   - component: {fileID: 33801919984279426}
   - component: {fileID: 23255281311796962}
   - component: {fileID: 65050727359886452}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20067,8 +19011,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
+  m_Size: {x: 3, y: 6, z: 36}
+  m_Center: {x: 0, y: 3, z: -15}
 --- !u!1 &1784118731391674
 GameObject:
   m_ObjectHideFlags: 0
@@ -20080,7 +19024,7 @@ GameObject:
   - component: {fileID: 4710593569893736}
   - component: {fileID: 33354020823573150}
   - component: {fileID: 23060333403907710}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20164,8 +19108,7 @@ GameObject:
   - component: {fileID: 4294821787469206}
   - component: {fileID: 33725023378518962}
   - component: {fileID: 23032493748354262}
-  - component: {fileID: 65261268326992094}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20237,27 +19180,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65261268326992094
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1784682211898146}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1785035384387148
 GameObject:
   m_ObjectHideFlags: 0
@@ -20269,7 +19191,7 @@ GameObject:
   - component: {fileID: 4689779039617190}
   - component: {fileID: 33216962649090328}
   - component: {fileID: 23197446068395882}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20352,7 +19274,7 @@ GameObject:
   - component: {fileID: 4427179655293984}
   - component: {fileID: 33582838568455362}
   - component: {fileID: 23289896540039736}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20436,8 +19358,7 @@ GameObject:
   - component: {fileID: 4451316808226166}
   - component: {fileID: 33341245662898436}
   - component: {fileID: 23943289396664942}
-  - component: {fileID: 65642270655329708}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20451,15 +19372,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1788380673905748}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 25, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4039116986762774}
   m_Father: {fileID: 4461422006700432}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33341245662898436
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -20510,27 +19431,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65642270655329708
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1788380673905748}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4.6, y: 0.2, z: 10}
-  m_Center: {x: -2.7, y: 0.2, z: 0}
 --- !u!1 &1793476722421574
 GameObject:
   m_ObjectHideFlags: 0
@@ -20543,7 +19443,7 @@ GameObject:
   - component: {fileID: 33918717750450308}
   - component: {fileID: 23909423681046352}
   - component: {fileID: 65600650490377846}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20635,8 +19535,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
+  m_Size: {x: 3, y: 6, z: 16}
+  m_Center: {x: 0, y: 3, z: -5}
 --- !u!1 &1800320721296974
 GameObject:
   m_ObjectHideFlags: 0
@@ -20646,7 +19546,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4835093209130462}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20683,7 +19583,7 @@ GameObject:
   - component: {fileID: 4867773552947528}
   - component: {fileID: 33544421868382036}
   - component: {fileID: 23730631332173388}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20766,7 +19666,7 @@ GameObject:
   - component: {fileID: 4733668268026858}
   - component: {fileID: 33563255310399090}
   - component: {fileID: 23927945106900218}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20850,8 +19750,7 @@ GameObject:
   - component: {fileID: 4739596218148384}
   - component: {fileID: 33864507170559364}
   - component: {fileID: 23096313858009350}
-  - component: {fileID: 65518155784470304}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -20924,27 +19823,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65518155784470304
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1814834140028312}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1834530878850060
 GameObject:
   m_ObjectHideFlags: 0
@@ -20956,8 +19834,7 @@ GameObject:
   - component: {fileID: 4986788025696202}
   - component: {fileID: 33276673218091734}
   - component: {fileID: 23858236257736570}
-  - component: {fileID: 65255168248987084}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21030,27 +19907,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65255168248987084
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834530878850060}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1835456467963934
 GameObject:
   m_ObjectHideFlags: 0
@@ -21062,8 +19918,7 @@ GameObject:
   - component: {fileID: 4605912892309194}
   - component: {fileID: 33808575303576716}
   - component: {fileID: 23450508952070072}
-  - component: {fileID: 65630645315602820}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21136,27 +19991,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65630645315602820
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1835456467963934}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1837989208944854
 GameObject:
   m_ObjectHideFlags: 0
@@ -21166,7 +20000,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4687424321079732}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21204,7 +20038,7 @@ GameObject:
   - component: {fileID: 4528446776034022}
   - component: {fileID: 33424483921927306}
   - component: {fileID: 23918048191941266}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21288,7 +20122,7 @@ GameObject:
   - component: {fileID: 4145376994870590}
   - component: {fileID: 33070294768041412}
   - component: {fileID: 23380114932944812}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21372,7 +20206,7 @@ GameObject:
   - component: {fileID: 4521508462325184}
   - component: {fileID: 33287040301047370}
   - component: {fileID: 23671200060052438}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21457,7 +20291,7 @@ GameObject:
   - component: {fileID: 4633733569508498}
   - component: {fileID: 33253545911445456}
   - component: {fileID: 23290829075936672}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21541,7 +20375,7 @@ GameObject:
   - component: {fileID: 4943759255458004}
   - component: {fileID: 33908895740755890}
   - component: {fileID: 23580770070512058}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21628,7 +20462,7 @@ GameObject:
   - component: {fileID: 4589023275475474}
   - component: {fileID: 33532795427042108}
   - component: {fileID: 23287426343772296}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21642,15 +20476,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1845310455622170}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 25, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4287970278565678}
   m_Father: {fileID: 4303509934401650}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33532795427042108
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -21712,7 +20546,7 @@ GameObject:
   - component: {fileID: 4292331524512850}
   - component: {fileID: 33103863987559712}
   - component: {fileID: 23517728239140848}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_temple_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21796,7 +20630,7 @@ GameObject:
   - component: {fileID: 33858384653436868}
   - component: {fileID: 23895599067212080}
   - component: {fileID: 65774566749267198}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -21889,8 +20723,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
+  m_Size: {x: 3, y: 6, z: 36}
+  m_Center: {x: 0, y: 3, z: -15}
 --- !u!1 &1849637415708792
 GameObject:
   m_ObjectHideFlags: 0
@@ -21902,7 +20736,7 @@ GameObject:
   - component: {fileID: 4202147152285616}
   - component: {fileID: 33715954332401194}
   - component: {fileID: 23513574656449914}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Stone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21985,8 +20819,7 @@ GameObject:
   - component: {fileID: 4690658347833266}
   - component: {fileID: 33376982953436044}
   - component: {fileID: 23569961491295156}
-  - component: {fileID: 65331409953191516}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -22059,27 +20892,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65331409953191516
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1850686424840898}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1850864673410118
 GameObject:
   m_ObjectHideFlags: 0
@@ -22091,7 +20903,7 @@ GameObject:
   - component: {fileID: 4486380323481022}
   - component: {fileID: 33974165442158910}
   - component: {fileID: 23887330560716232}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22175,7 +20987,7 @@ GameObject:
   - component: {fileID: 4120175027810804}
   - component: {fileID: 33988298308910646}
   - component: {fileID: 23028718989210082}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Stone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22258,7 +21070,7 @@ GameObject:
   - component: {fileID: 4170143551632824}
   - component: {fileID: 33682604947736640}
   - component: {fileID: 23059799801969286}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22342,7 +21154,7 @@ GameObject:
   - component: {fileID: 4558627256537838}
   - component: {fileID: 33682447793937892}
   - component: {fileID: 23420775160226370}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22426,7 +21238,7 @@ GameObject:
   - component: {fileID: 4424213839915856}
   - component: {fileID: 33902295854847832}
   - component: {fileID: 23008054514715104}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22510,7 +21322,7 @@ GameObject:
   - component: {fileID: 4392236467956520}
   - component: {fileID: 33105533227747012}
   - component: {fileID: 23320033138597894}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree_04 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22593,7 +21405,7 @@ GameObject:
   - component: {fileID: 4878640251942980}
   - component: {fileID: 33460764077876162}
   - component: {fileID: 23095869060331026}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22677,8 +21489,7 @@ GameObject:
   - component: {fileID: 4637441775819680}
   - component: {fileID: 33133886064054102}
   - component: {fileID: 23339656038113376}
-  - component: {fileID: 65426828172080280}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -22750,27 +21561,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65426828172080280
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1880037362693936}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
 --- !u!1 &1882757044740002
 GameObject:
   m_ObjectHideFlags: 0
@@ -22782,8 +21572,7 @@ GameObject:
   - component: {fileID: 4060359819484876}
   - component: {fileID: 33708458827358034}
   - component: {fileID: 23361836806097240}
-  - component: {fileID: 65738143077253376}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_M
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -22856,27 +21645,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65738143077253376
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1882757044740002}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1885102464370994
 GameObject:
   m_ObjectHideFlags: 0
@@ -22888,7 +21656,7 @@ GameObject:
   - component: {fileID: 4989901165045056}
   - component: {fileID: 33982532435515990}
   - component: {fileID: 23826020813225058}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22971,7 +21739,7 @@ GameObject:
   - component: {fileID: 4004997401581420}
   - component: {fileID: 33515678066900394}
   - component: {fileID: 23368556463826344}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23054,8 +21822,7 @@ GameObject:
   - component: {fileID: 4800072928694982}
   - component: {fileID: 33539882962974336}
   - component: {fileID: 23727664985651798}
-  - component: {fileID: 65264647832023534}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_M (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -23128,27 +21895,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65264647832023534
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1894767619257002}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1897302886390070
 GameObject:
   m_ObjectHideFlags: 0
@@ -23160,8 +21906,7 @@ GameObject:
   - component: {fileID: 4795028776514608}
   - component: {fileID: 33895755095396084}
   - component: {fileID: 23795408126296602}
-  - component: {fileID: 65477577692222002}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Isle_SF
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -23233,27 +21978,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65477577692222002
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1897302886390070}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.5, y: 6, z: 8.581556}
-  m_Center: {x: 0, y: 3, z: -0.70922184}
 --- !u!1 &1899685946562760
 GameObject:
   m_ObjectHideFlags: 0
@@ -23265,7 +21989,7 @@ GameObject:
   - component: {fileID: 4573673457249426}
   - component: {fileID: 33551448541175030}
   - component: {fileID: 23215768520720910}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23348,7 +22072,7 @@ GameObject:
   - component: {fileID: 4756135438969334}
   - component: {fileID: 33248442733771348}
   - component: {fileID: 23747540883432246}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23432,7 +22156,7 @@ GameObject:
   - component: {fileID: 4027806317075978}
   - component: {fileID: 33359620435885574}
   - component: {fileID: 23781827411684760}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23515,7 +22239,7 @@ GameObject:
   - component: {fileID: 4537557904283044}
   - component: {fileID: 33018540274410138}
   - component: {fileID: 23940395722563048}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23598,8 +22322,7 @@ GameObject:
   - component: {fileID: 4039116986762774}
   - component: {fileID: 33915434340318298}
   - component: {fileID: 23292335276115468}
-  - component: {fileID: 65081933021028350}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -23672,27 +22395,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65081933021028350
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1902708288887226}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1909563672049002
 GameObject:
   m_ObjectHideFlags: 0
@@ -23702,7 +22404,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4156974950640596}
-  m_Layer: 0
+  - component: {fileID: 4286915403667998340}
+  m_Layer: 8
   m_Name: AC_River_M20_T2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23744,6 +22447,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4286915403667998340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909563672049002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1912036930857304
 GameObject:
   m_ObjectHideFlags: 0
@@ -23755,7 +22470,7 @@ GameObject:
   - component: {fileID: 4432822144534694}
   - component: {fileID: 33934023460265232}
   - component: {fileID: 23454273483334818}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23838,7 +22553,7 @@ GameObject:
   - component: {fileID: 4715197449529198}
   - component: {fileID: 33630467547353868}
   - component: {fileID: 23787215921768276}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23922,7 +22637,7 @@ GameObject:
   - component: {fileID: 4359415178728124}
   - component: {fileID: 33734828429089106}
   - component: {fileID: 23556993594432270}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Ruins_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24005,7 +22720,7 @@ GameObject:
   - component: {fileID: 4632236811451148}
   - component: {fileID: 33872814253368162}
   - component: {fileID: 23671484382236598}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree_04 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24088,8 +22803,7 @@ GameObject:
   - component: {fileID: 4287970278565678}
   - component: {fileID: 33228100258602830}
   - component: {fileID: 23726912307674478}
-  - component: {fileID: 65972193891366108}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -24162,27 +22876,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65972193891366108
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917840182954456}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1920263704653594
 GameObject:
   m_ObjectHideFlags: 0
@@ -24194,7 +22887,7 @@ GameObject:
   - component: {fileID: 4724412756195954}
   - component: {fileID: 33081057191795070}
   - component: {fileID: 23065357175048384}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_Tree_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24277,7 +22970,7 @@ GameObject:
   - component: {fileID: 4675206166023710}
   - component: {fileID: 33617769953214088}
   - component: {fileID: 23471505832079050}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24361,8 +23054,7 @@ GameObject:
   - component: {fileID: 4662557734776992}
   - component: {fileID: 33786734817554268}
   - component: {fileID: 23287210112132920}
-  - component: {fileID: 65718819615761638}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -24435,27 +23127,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65718819615761638
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1929428465119064}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1930524334626766
 GameObject:
   m_ObjectHideFlags: 0
@@ -24467,7 +23138,7 @@ GameObject:
   - component: {fileID: 4981106882121196}
   - component: {fileID: 33634391122338408}
   - component: {fileID: 23457834976272892}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24551,7 +23222,7 @@ GameObject:
   - component: {fileID: 4126011877503076}
   - component: {fileID: 33423963293560808}
   - component: {fileID: 23859387483446104}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Stone_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24634,7 +23305,7 @@ GameObject:
   - component: {fileID: 4294334999941754}
   - component: {fileID: 33161105368618972}
   - component: {fileID: 23054956267628026}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24718,7 +23389,7 @@ GameObject:
   - component: {fileID: 4673271112319322}
   - component: {fileID: 33983319879216584}
   - component: {fileID: 23239666969970460}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Inca_temple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24799,7 +23470,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4936231048335968}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Linha_19
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24835,7 +23506,7 @@ GameObject:
   - component: {fileID: 4113558123596304}
   - component: {fileID: 33383384052561674}
   - component: {fileID: 23147599899429424}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24919,7 +23590,7 @@ GameObject:
   - component: {fileID: 4685390956246196}
   - component: {fileID: 33761388958167608}
   - component: {fileID: 23024022502482160}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -25003,7 +23674,7 @@ GameObject:
   - component: {fileID: 4299373651116524}
   - component: {fileID: 33540872926551902}
   - component: {fileID: 23917698409723772}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Stone_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25086,7 +23757,7 @@ GameObject:
   - component: {fileID: 4147193118595264}
   - component: {fileID: 33565103016825512}
   - component: {fileID: 23609913140002714}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -25170,7 +23841,7 @@ GameObject:
   - component: {fileID: 4617103994504714}
   - component: {fileID: 33417682939403380}
   - component: {fileID: 23897609044755352}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25255,8 +23926,7 @@ GameObject:
   - component: {fileID: 33052692567106880}
   - component: {fileID: 23423615438498876}
   - component: {fileID: 65264765044592118}
-  - component: {fileID: 65761081627571566}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank_Curve
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -25350,27 +24020,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.494299, y: 0.20000002, z: 10}
   m_Center: {x: -2.7528505, y: 0.2, z: 0}
---- !u!65 &65761081627571566
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1980716364629472}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 2.4537659}
-  m_Center: {x: 0, y: 3, z: -3.773117}
 --- !u!1 &1992059789272500
 GameObject:
   m_ObjectHideFlags: 0
@@ -25382,7 +24031,7 @@ GameObject:
   - component: {fileID: 4757729112770010}
   - component: {fileID: 33639836362476440}
   - component: {fileID: 23900011247869680}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -25396,15 +24045,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1992059789272500}
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 25, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4012086311835928}
   m_Father: {fileID: 4345528827195666}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &33639836362476440
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -25466,8 +24115,7 @@ GameObject:
   - component: {fileID: 4306040595650454}
   - component: {fileID: 33220078778247424}
   - component: {fileID: 23029613552603626}
-  - component: {fileID: 65678070915596516}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -25540,27 +24188,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65678070915596516
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1994535817375632}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 6, z: 10}
-  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &1996074407618264
 GameObject:
   m_ObjectHideFlags: 0
@@ -25572,7 +24199,7 @@ GameObject:
   - component: {fileID: 4522341335388292}
   - component: {fileID: 33460950468550168}
   - component: {fileID: 23631380257019648}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AC_Bank
   m_TagString: Wall
   m_Icon: {fileID: 0}
