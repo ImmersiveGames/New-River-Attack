@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1cf98777a9340d1bb9f9e101476b20f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuInicial: {fileID: 7325755181744623058}
+  menuInicial: {fileID: 7873486966654483933}
   menuPrincipal:
   - {fileID: 4749582580240930049}
   - {fileID: 362952822161610795}
@@ -57,6 +57,9 @@ MonoBehaviour:
   - {fileID: 4897942227744984603}
   - {fileID: 2865920778374985007}
   cursor: {fileID: 7325755181744623058}
+  panelHasCursor:
+  - {fileID: 4749582580240930049}
+  - {fileID: 2865920778374985007}
   fadeAnimator: {fileID: 4099569436616213514}
   screenWash: {fileID: 2447127907617979676}
   clickSound: {fileID: 8300000, guid: 60dbf964928d38640a721104250dd21c, type: 3}
@@ -833,7 +836,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
+    m_SelectOnUp: {fileID: 7787644191672505065}
     m_SelectOnDown: {fileID: 7020257057175784154}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -886,7 +889,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12446ef894c99d048a7f47aa72efc944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  haveCursor: 1
 --- !u!114 &3238333904643444114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1861,10 +1863,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 0
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 6545397451694231095}
+    m_SelectOnDown: {fileID: 8360845512210369395}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -2131,6 +2133,7 @@ GameObject:
   - component: {fileID: 7325755181744623058}
   - component: {fileID: 4819031613715307235}
   - component: {fileID: 6845891475044653865}
+  - component: {fileID: 2151097413267787018}
   m_Layer: 5
   m_Name: Cursor
   m_TagString: Untagged
@@ -2195,6 +2198,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2151097413267787018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3065799477617015644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 814cc4b877e24cd1a10ec988f0ff6fbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3223696033753526957
 GameObject:
   m_ObjectHideFlags: 0
@@ -4496,7 +4511,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 6137408932674107869}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 9127119134525512130}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -5510,8 +5525,8 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 8360845512210369395}
+    m_SelectOnDown: {fileID: 8428100767183852983}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -5541,7 +5556,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7259978408553343595}
         m_TargetAssemblyTypeName: RiverAttack.PanelPrincipal, Assembly-CSharp
-        m_MethodName: ButtonModoMission
+        m_MethodName: ButtonModeMission
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5706,7 +5721,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12446ef894c99d048a7f47aa72efc944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  haveCursor: 0
 --- !u!1 &5909518187729309558
 GameObject:
   m_ObjectHideFlags: 0
@@ -5913,7 +5927,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12446ef894c99d048a7f47aa72efc944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  haveCursor: 0
 --- !u!114 &8395904023450199868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6710,7 +6723,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 1
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -7277,7 +7290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12446ef894c99d048a7f47aa72efc944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  haveCursor: 0
 --- !u!114 &4882395034542577573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7629,8 +7641,8 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 8428100767183852983}
+    m_SelectOnDown: {fileID: 6545397451694231095}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -7660,7 +7672,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7259978408553343595}
         m_TargetAssemblyTypeName: RiverAttack.PanelPrincipal, Assembly-CSharp
-        m_MethodName: ButtonModoClassic
+        m_MethodName: ButtonModeClassic
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7682,7 +7694,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12446ef894c99d048a7f47aa72efc944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  haveCursor: 1
 --- !u!114 &2387071707164425750
 MonoBehaviour:
   m_ObjectHideFlags: 0
