@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using UnityEngine.Serialization;
 
 namespace RiverAttack
 {
@@ -23,17 +24,18 @@ namespace RiverAttack
         bool m_ActiveLocaleButton;
         Locale m_ActualLocal;
         AudioSource m_AudioSource;
-        GameSettings m_GameSettings;
+        [SerializeField]
+        GameSettings gameSettings;
 
         #region UNITYMETHODS
         void OnEnable()
         {
-            m_GameSettings = GameSettings.instance;
-            musicVolumeSlider.value = (m_GameSettings.musicVolume == 0) ? defaultMusicVolume : m_GameSettings.musicVolume;
-            sfxVolumeSlider.value = (m_GameSettings.sfxVolume == 0) ? defaultSfxVolume : m_GameSettings.sfxVolume;
-            if (m_GameSettings.startLocale == null)
-                m_GameSettings.startLocale = LocalizationSettings.SelectedLocale;
-            m_ActualLocal = m_GameSettings.startLocale;
+            gameSettings = GameSettings.instance;
+            musicVolumeSlider.value = (gameSettings.musicVolume == 0) ? defaultMusicVolume : gameSettings.musicVolume;
+            sfxVolumeSlider.value = (gameSettings.sfxVolume == 0) ? defaultSfxVolume : gameSettings.sfxVolume;
+            if (gameSettings.startLocale == null)
+                gameSettings.startLocale = LocalizationSettings.SelectedLocale;
+            m_ActualLocal = gameSettings.startLocale;
             SetLocaleButton(m_ActualLocal);
         }
         void Start()
@@ -43,16 +45,16 @@ namespace RiverAttack
         }
         void OnDisable()
         {
-            m_GameSettings.musicVolume = musicVolumeSlider.value;
-            m_GameSettings.sfxVolume = sfxVolumeSlider.value;
-            m_GameSettings.startLocale = m_ActualLocal;
+            gameSettings.musicVolume = musicVolumeSlider.value;
+            gameSettings.sfxVolume = sfxVolumeSlider.value;
+            gameSettings.startLocale = m_ActualLocal;
         }
   #endregion
 
         public void SetMusicVolume()
         {
             float volume = Mathf.Log10(musicVolumeSlider.value) * 20f;
-            m_GameSettings.musicVolume = musicVolumeSlider.value;
+            gameSettings.musicVolume = musicVolumeSlider.value;
             mixerGroup.SetFloat("MusicVolume", volume);
 
             //Debug.Log("Volume da Musica: " + volume.ToString());
@@ -84,14 +86,14 @@ namespace RiverAttack
             m_ActiveLocaleButton = true;
             yield return LocalizationSettings.InitializationOperation;
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeId];
-            m_ActualLocal = m_GameSettings.startLocale = LocalizationSettings.SelectedLocale;
+            m_ActualLocal = gameSettings.startLocale = LocalizationSettings.SelectedLocale;
             m_ActiveLocaleButton = false;
         }
 
         public void SetSfxVolume()
         {
             float volume = Mathf.Log10(sfxVolumeSlider.value) * 20f;
-            m_GameSettings.sfxVolume = sfxVolumeSlider.value;
+            gameSettings.sfxVolume = sfxVolumeSlider.value;
             mixerGroup.SetFloat("SFXVolume", volume);
 
             //Debug.Log("Volume de SFX: " + volume.ToString());

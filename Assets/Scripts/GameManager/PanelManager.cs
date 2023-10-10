@@ -114,7 +114,7 @@ namespace RiverAttack
         }
         public void PlayClickSfx()
         {
-            m_GamePlayAudio.PlayClickSfx(m_AudioSource);
+            //m_GamePlayAudio.PlayClickSfx(m_AudioSource);
         }
         #endregion
         

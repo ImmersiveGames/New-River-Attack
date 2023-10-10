@@ -12,7 +12,7 @@ namespace RiverAttack
         [SerializeField] protected AudioSource voiceAudioSource;
         [SerializeField] internal Tools.SerializableDictionary<LevelTypes, AudioEventSample> bgmLevels = new Tools.SerializableDictionary<LevelTypes, AudioEventSample>();
         [Header("Menu SFX")]
-        [SerializeField] AudioClip clickSound;
+        //[SerializeField] AudioClip clickSound;
         [SerializeField] public AudioClip missionFailSound;
         
         GameSettings m_GameSettings;
@@ -66,10 +66,10 @@ namespace RiverAttack
         {
             audioSource.PlayOneShot(audioClip);
         }
-        public void PlayClickSfx(AudioSource audioSource)
+        /*public void PlayClickSfx(AudioSource audioSource)
         {
             PlayOneShot(audioSource, clickSound);
-        }
+        }*/
         public void StopBGM()
         {
             if (bgmAudioSource != null)
