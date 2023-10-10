@@ -32,13 +32,14 @@ namespace Shopping
         public Color buyerColor;
         public Color normalColor;
 
+        public AudioClip clickSound;
+
         int m_LastSelectedSkin;
 
         ShopCarousel m_Shop;
         AudioSource m_AudioSource;
-        GamePlayAudio m_GamePlayAudio;
         PlayersInputActions m_InputSystem;
-        PlayerSettings m_ActivePlayer;
+        [SerializeField] PlayerSettings playerSettings;
 
         #region Delegates
         public delegate void GeneralUpdateButtons(PlayerSettings player);
@@ -51,21 +52,18 @@ namespace Shopping
         void OnEnable()
         {
             SetInitialReferences();
-            m_ActivePlayer = GameManager.instance.playerSettingsList[0];
             SetControllersInput();
-            WealthDisplayUpdate(m_ActivePlayer.wealth);
-            SetupShop(m_ActivePlayer);
+            WealthDisplayUpdate(playerSettings.wealth);
+            SetupShop(playerSettings);
             scrollBarShop.horizontalScrollbar.numberOfSteps = m_Shop.getProducts.Length;
         }
         void OnDisable()
         {
             m_InputSystem.UI_Controlls.Disable();
-            //Debug.Log("Desabilitei os controles");
         }
   #endregion
         void SetInitialReferences()
         {
-            m_GamePlayAudio = GamePlayAudio.instance;
             m_AudioSource = GetComponentInParent<AudioSource>();
             if (m_AudioSource == null) Debug.LogWarning("Componente de Audio não encontrado.");
         }
@@ -74,14 +72,13 @@ namespace Shopping
         {
             m_InputSystem = new PlayersInputActions();
             m_InputSystem.UI_Controlls.Enable();
-            //Debug.Log("Habilitei os controles");
 
             m_InputSystem.UI_Controlls.BuyButton.performed += BuyInputButton;
             m_InputSystem.UI_Controlls.SelectButton.performed += SelectButton;
             m_InputSystem.UI_Controlls.LeftSelection.performed += _ => ControllerNavigationArrows(-1);
             m_InputSystem.UI_Controlls.RightSelection.performed += _ => ControllerNavigationArrows(1);
         }
-        void SetupShop(PlayerSettings playerSettings)
+        void SetupShop(PlayerSettings player)
         {
             m_Shop = new ShopCarousel(contentShop, objProduct, refCenter)
             {
@@ -95,9 +92,9 @@ namespace Shopping
             {
                 var item = t.GetComponent<UIItemShop>();
                 if (!item) continue;
-                item.SetupButtons(playerSettings);
-                item.getBuyButton.onClick.AddListener(delegate { BuyThisItem(playerSettings, item.productInStock); });
-                item.getSelectButton.onClick.AddListener(delegate { SelectThisItem(playerSettings, item.productInStock); });
+                item.SetupButtons(player);
+                item.getBuyButton.onClick.AddListener(delegate { BuyThisItem(player, item.productInStock); });
+                item.getSelectButton.onClick.AddListener(delegate { SelectThisItem(player, item.productInStock); });
 
                 if (item.getSelectButton.interactable == false)
                     item.getSelectButton.GetComponent<Image>().color = selectedColor;
@@ -118,8 +115,8 @@ namespace Shopping
 
             var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
             item.getSelectButton.interactable = true;
-
-            m_GamePlayAudio.PlayClickSfx(m_AudioSource);
+            
+            m_AudioSource.PlayOneShot(clickSound);
 
         }
         void SelectThisItem(PlayerSettings player, ShopProductStock shopProductStock)
@@ -136,7 +133,7 @@ namespace Shopping
 
             m_LastSelectedSkin = m_Shop.getActualProduct;
 
-            m_GamePlayAudio.PlayClickSfx(m_AudioSource);
+            m_AudioSource.PlayOneShot(clickSound);
         }
         void WealthDisplayUpdate(int wealth)
         {
@@ -149,21 +146,19 @@ namespace Shopping
             Debug.Log("Comprar o item");
             var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
 
-            BuyThisItem(m_ActivePlayer, item.productInStock);
+            BuyThisItem(playerSettings, item.productInStock);
         }
         void SelectButton(InputAction.CallbackContext context)
         {
-            // Debug.Log("Selecionar o item");
 
             var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
 
-            if (!item.productInStock.PlayerAlreadyBuy(m_ActivePlayer))
+            if (!item.productInStock.PlayerAlreadyBuy(playerSettings))
             {
-                // Debug.Log("Player Não tem o produto. Seleção não concluida.");
                 return;
             }
 
-            SelectThisItem(m_ActivePlayer, item.productInStock);
+            SelectThisItem(playerSettings, item.productInStock);
         }
         void ControllerNavigationArrows(int value)
         {
@@ -179,15 +174,11 @@ namespace Shopping
         }
         public void ButtonNavigation(int next)
         {
-            m_GamePlayAudio.PlayClickSfx(m_AudioSource);
+            m_AudioSource.PlayOneShot(clickSound);
 
             m_Shop.ButtonNavigation(next);
 
-            //Debug.Log(m_Shop.getActualProduct);
-            //Debug.Log(m_Shop.getProducts.Length);
-
-            float scrollbarValue = ((float)m_Shop.getActualProduct) / ((float)m_Shop.getProducts.Length - 1);
-            //Debug.Log(scrollbarValue);
+            float scrollbarValue = (m_Shop.getActualProduct) / ((float)m_Shop.getProducts.Length - 1);
 
             scrollBarShop.horizontalScrollbar.value = scrollbarValue;
 
@@ -197,7 +188,6 @@ namespace Shopping
                 {
                     productBackward.SetActive(false);
                     productForward.SetActive(true);
-                    //m_EventSystem.SetSelectedGameObject(productForward);
                 }
                 else
                 {
@@ -207,7 +197,6 @@ namespace Shopping
                 if (m_Shop.getProducts.Length - 1 != m_Shop.getActualProduct) return;
                 productBackward.SetActive(true);
                 productForward.SetActive(false);
-                //m_EventSystem.SetSelectedGameObject(productBackward);
             }
             else
             {
