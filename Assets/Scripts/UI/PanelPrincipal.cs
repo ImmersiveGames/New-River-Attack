@@ -2,20 +2,16 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 namespace RiverAttack
 { 
     [RequireComponent(typeof(AudioSource))]
     public class PanelPrincipal : MonoBehaviour
     {
-        const int CURSOR_OFFSET_HORIZONTAL = 20;
         [Header("Menus")]
-        [SerializeField] Transform menuInicial;
+        [SerializeField] Transform menuInitial;
         [SerializeField] Transform[] menuPrincipal;
-        
-        [Header("Cursor")]
-        [SerializeField] RectTransform cursor;
-        [SerializeField] Transform[] panelHasCursor;
-        
+
         [Header("Menu Fades")]
         [SerializeField] Animator fadeAnimator;
         [SerializeField]Transform screenWash;
@@ -23,9 +19,7 @@ namespace RiverAttack
 
         [Header("Menu SFX")]
         [SerializeField] AudioClip clickSound;
-
-        GameObject m_ActualSelect;
-        bool hasCursor;
+        
         int m_LastIndex = 0;
         AudioSource m_AudioSource;
         static readonly int FadeIn = Animator.StringToHash("FadeIn");
@@ -35,7 +29,7 @@ namespace RiverAttack
         {
             m_AudioSource = GetComponent<AudioSource>();
             screenWash.gameObject.SetActive(true);
-            menuInicial.gameObject.SetActive(true);
+            menuInitial.gameObject.SetActive(true);
         }
 
         void OnEnable()
@@ -48,16 +42,7 @@ namespace RiverAttack
         {
             Invoke(nameof(DeactivateScreenWash),SCREEN_WASH_TIMER);
         }
-
-        void Update()
-        {
-            var button = EventSystem.current.currentSelectedGameObject;
-            if (m_ActualSelect == button)
-                return;
-            m_ActualSelect = button;
-            SetCursor(m_ActualSelect.GetComponent<RectTransform>());
-            Debug.Log($"Selecionado: {button.name} ");
-        }
+        
 
         void SetInternalMenu(int indexStart = 0)
         {
@@ -70,11 +55,6 @@ namespace RiverAttack
             var selectPanel = menuPrincipal[indexStart].gameObject;
             selectPanel.SetActive(true);
             SetSelectGameObject(selectPanel);
-            cursor.gameObject.SetActive(false);
-            hasCursor = Array.IndexOf(panelHasCursor, menuPrincipal[indexStart]) != -1;
- 
-            m_ActualSelect = EventSystem.current.currentSelectedGameObject;
-            SetCursor(m_ActualSelect.GetComponent<RectTransform>());
         }
 
         void SetSelectGameObject(GameObject goButton)
@@ -82,19 +62,11 @@ namespace RiverAttack
             var eventSystemFirstSelect = goButton.GetComponentInChildren<EventSystemFirstSelect>();
             eventSystemFirstSelect.Init();
         }
-
-        void SetCursor(RectTransform reference)
-        {
-            if (!hasCursor)
-                return;
-            cursor.gameObject.SetActive(true);
-            var uiCursor = cursor.GetComponent<UiCursor>();
-            uiCursor.SetCursor(reference, CURSOR_OFFSET_HORIZONTAL);
-        }
+        
         
         void SetMenuPrincipal()
         {
-            menuInicial.gameObject.SetActive(true);
+            menuInitial.gameObject.SetActive(true);
             SetInternalMenu();
         }
 
@@ -131,15 +103,23 @@ namespace RiverAttack
         {
             PlayClickSfx();
             PerformFadeOut();
-            SceneManager.LoadScene("HUB");
+            Invoke(nameof(LoadSceneHub),SCREEN_WASH_TIMER);
+            
         }
         public void ButtonModeClassic()
         {
             PlayClickSfx();
             PerformFadeOut();
+            Invoke(nameof(LoadSceneGamePlay),SCREEN_WASH_TIMER);
+        }
+        void LoadSceneHub()
+        {
+            SceneManager.LoadScene("HUB");
+        }
+        void LoadSceneGamePlay()
+        {
             SceneManager.LoadScene("GamePlay");
         }
-
         public void ButtonIndexChange(int indexMenu)
         {
             PlayClickSfx();
