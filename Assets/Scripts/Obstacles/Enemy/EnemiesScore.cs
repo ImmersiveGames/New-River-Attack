@@ -40,8 +40,8 @@ namespace RiverAttack
         }
         protected static void LogGamePlay(int score)
         {
-            if (score > GamePlaySettings.instance.totalScore)
-                GamePlaySettings.instance.totalScore = score;
+            if (score > GamePlayingLog.instance.totalScore)
+                GamePlayingLog.instance.totalScore = score;
         }
 
     }

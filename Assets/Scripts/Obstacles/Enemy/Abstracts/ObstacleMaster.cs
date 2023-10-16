@@ -20,7 +20,7 @@ namespace RiverAttack
         Vector3 m_ObjectStartScale;
         protected PlayerMaster playerMaster;
         protected GamePlayManager gamePlayManager;
-        protected GamePlaySettings gamePlaySettings;
+        protected GamePlayingLog gamePlayingLog;
 
         #region Events
         public delegate void GeneralEventHandler();
@@ -67,7 +67,7 @@ namespace RiverAttack
         protected virtual void SetInitialReferences()
         {
             gamePlayManager = GamePlayManager.instance;
-            gamePlaySettings = gamePlayManager.gamePlaySettings;
+            gamePlayingLog = gamePlayManager.gamePlayingLog;
         }
         public virtual bool shouldObstacleBeReady
         {
@@ -90,7 +90,7 @@ namespace RiverAttack
             OnEventObstacleMasterHit();
             OnEventObstacleScore(playerMaster.getPlayerSettings);
             ShouldSavePoint(playerMaster.getPlayerSettings);
-            GamePlayManager.AddResultList(gamePlaySettings.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy, 1, collisionType);
+            GamePlayManager.AddResultList(gamePlayingLog.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy, 1, collisionType);
             ShouldFinishGame();
         }
         internal static PlayerMaster WhoHit(Component other)

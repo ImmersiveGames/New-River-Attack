@@ -13,7 +13,7 @@ namespace RiverAttack
         public override void EnterState()
         {
             Debug.Log($"Entra no Estado: CutScene END");
-            m_GameManager.endCutDirector.gameObject.SetActive(false);
+            GameTimelineManager.instance.endCutDirector.gameObject.SetActive(false);
             
            /*var playerMaster = m_GameManager.initializedPlayerMasters[0];
             playerMaster.gameObject.SetActive(true);

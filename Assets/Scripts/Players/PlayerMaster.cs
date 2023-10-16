@@ -34,7 +34,7 @@ namespace RiverAttack
         internal int nextScoreForLive;
 
         Animator m_Animator;
-        GamePlaySettings m_GamePlaySettings;
+        GamePlayingLog m_GamePlayingLog;
         GamePlayManager m_GamePlayManager;
         GameManager m_GameManager;
         GameSettings m_GameSettings;
@@ -52,9 +52,9 @@ namespace RiverAttack
         {
             m_Animator = GetComponent<Animator>();
             m_GamePlayManager = GamePlayManager.instance;
-            m_GameSettings = m_GamePlayManager.getGameSettings;
+            m_GameSettings = GamePlayManager.getGameSettings;
             m_GameManager = GameManager.instance;
-            m_GamePlaySettings = m_GamePlayManager.gamePlaySettings;
+            m_GamePlayingLog = m_GamePlayManager.gamePlayingLog;
             playersInputActions = new PlayersInputActions();
             playersInputActions.Enable();
         }
@@ -173,19 +173,19 @@ namespace RiverAttack
 
             if (walls != null)
             {
-                m_GamePlaySettings.playerDieWall += 1;
+                m_GamePlayingLog.playerDieWall += 1;
             }
             if (bullet != null)
             {
-                m_GamePlaySettings.playerDieBullet += 1;
+                m_GamePlayingLog.playerDieBullet += 1;
             }
             if (enemies != null && enemies is CollectiblesMaster or EffectAreaMaster)
             {
-                GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, getPlayerSettings, enemies.enemy, 1, CollisionType.Collected);
+                GamePlayManager.AddResultList(m_GamePlayingLog.hitEnemiesResultsList, getPlayerSettings, enemies.enemy, 1, CollisionType.Collected);
             }
             else if (enemies != null)
             {
-                GamePlayManager.AddResultList(m_GamePlaySettings.hitEnemiesResultsList, getPlayerSettings, enemies.enemy, 1, CollisionType.Collider);
+                GamePlayManager.AddResultList(m_GamePlayingLog.hitEnemiesResultsList, getPlayerSettings, enemies.enemy, 1, CollisionType.Collider);
             }
         }
 

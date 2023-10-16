@@ -16,7 +16,7 @@ namespace RiverAttack
             if (other.GetComponentInParent<PlayerMaster>() == null) return;
             if (m_GamePlayManager.readyToFinish != true) return;
             //m_GamePlayManager.completePath = true;
-            m_GamePlayManager.CompletePathEndCutScene();
+            GameTimelineManager.instance.CompletePathEndCutScene();
         }
   #endregion
         

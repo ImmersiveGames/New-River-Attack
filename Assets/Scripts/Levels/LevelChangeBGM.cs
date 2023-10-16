@@ -5,12 +5,12 @@ namespace RiverAttack
     public class LevelChangeBGM : MonoBehaviour
     {
         const float TIME_TO_FADE_BGM = 0.1f;
-        GamePlayAudio m_PlayAudio;
+        GameAudioManager m_AudioManager;
         GamePlayManager m_PlayMaster;
         #region UNITY METHODS
         void OnEnable()
         {
-            m_PlayAudio = GamePlayAudio.instance;
+            m_AudioManager = GameAudioManager.instance;
             m_PlayMaster = GamePlayManager.instance;
         }
 

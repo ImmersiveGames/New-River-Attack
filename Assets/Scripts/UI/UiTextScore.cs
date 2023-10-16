@@ -28,7 +28,7 @@ namespace RiverAttack
         void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
-            m_PlayerSettings = m_GamePlayManager.GetNoPlayerPlayerSettings();
+            m_PlayerSettings = PlayerManager.instance.GetPlayerSettingsByIndex();
             m_TMPTextScore = GetComponent<TMP_Text>();
         }
 

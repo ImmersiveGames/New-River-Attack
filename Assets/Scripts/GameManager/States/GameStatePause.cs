@@ -10,8 +10,8 @@ namespace RiverAttack
         }
         public override void EnterState()
         {
-            m_GameManager.startMenu.SetMenuPrincipal(1, true);
-            m_GameManager.startMenu.SetMenuHudControl(false);
+            //m_GameManager.startMenu.SetMenuPrincipal();
+            //m_GameManager.startMenu.SetMenuHudControl(false);
             //Debug.Log($"Entra no Estado: Pause");
         }
         public override void UpdateState()

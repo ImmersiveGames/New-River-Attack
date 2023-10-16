@@ -5,35 +5,34 @@ using UnityEngine.Audio;
 using Utils;
 namespace RiverAttack
 {
-    public class GamePlayAudio : Singleton<GamePlayAudio>
+    [RequireComponent(typeof(AudioSource))]
+    public class GameAudioManager : Singleton<GameAudioManager>
     {
-        [SerializeField] public AudioMixer mixerGroup;
+        public AudioMixer mixerGroup;
         [SerializeField] AudioSource bgmAudioSource;
-        [SerializeField] protected AudioSource voiceAudioSource;
+        [SerializeField] protected AudioSource sfxAudioSource;
         [SerializeField] internal Tools.SerializableDictionary<LevelTypes, AudioEventSample> bgmLevels = new Tools.SerializableDictionary<LevelTypes, AudioEventSample>();
         [Header("Menu SFX")]
-        //[SerializeField] AudioClip clickSound;
-        [SerializeField] public AudioClip missionFailSound;
-        
+        public AudioClip missionFailSound;
+        public AudioClip missionSuccessSound;
         GameSettings m_GameSettings;
 
         #region UNITYMETHODS
         void Awake()
         {
-            bgmAudioSource = GetComponentInParent<AudioSource>();
             bgmAudioSource.pitch = 1;
         }
         void Start()
         {
             m_GameSettings = GameSettings.instance;
-            SetOptionSound();
+            RecoveryAudioSettings();
         }
   #endregion
 
-        void SetOptionSound()
+        void RecoveryAudioSettings()
         {
-            float volumeMusic = Mathf.Log10(m_GameSettings.musicVolume) * 20f;
-            float volumeSfx = Mathf.Log10(m_GameSettings.sfxVolume) * 20f;
+            float volumeMusic = Tools.SoundBase10(m_GameSettings.musicVolume);
+            float volumeSfx = Tools.SoundBase10(m_GameSettings.sfxVolume);
             mixerGroup.SetFloat("MusicVolume", volumeMusic);
             mixerGroup.SetFloat("SFXVolume", volumeSfx);
         }
@@ -60,16 +59,16 @@ namespace RiverAttack
 
         public void PlayVoice(AudioClip audioClip)
         {
-            PlayOneShot(voiceAudioSource,audioClip);
+            PlayOneShot(sfxAudioSource,audioClip);
         }
         static void PlayOneShot(AudioSource audioSource, AudioClip audioClip)
         {
             audioSource.PlayOneShot(audioClip);
         }
-        /*public void PlayClickSfx(AudioSource audioSource)
+        public void PlaySfx(AudioEvent audioEventSample)
         {
-            PlayOneShot(audioSource, clickSound);
-        }*/
+            audioEventSample.PlayOnShot(sfxAudioSource);
+        }
         public void StopBGM()
         {
             if (bgmAudioSource != null)

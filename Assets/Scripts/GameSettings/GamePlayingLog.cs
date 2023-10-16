@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace RiverAttack
 {
-    [CreateAssetMenu(fileName = "GamePlaySettings", menuName = "RiverAttack/GamePlaySettings", order = 2)]
-    public class GamePlaySettings : SingletonScriptableObject<GamePlaySettings>
+    [CreateAssetMenu(fileName = "GamePlayingLog", menuName = "RiverAttack/GamePlayingLog", order = 2)]
+    public class GamePlayingLog : SingletonScriptableObject<GamePlayingLog>
     {
         public float pathDistance;
         public float maxPathDistance;

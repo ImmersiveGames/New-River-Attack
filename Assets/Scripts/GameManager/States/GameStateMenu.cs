@@ -3,20 +3,20 @@ namespace RiverAttack
 {
     public class GameStateMenu : GameState
     {
-        const float TIME_TO_FADE_BGM = 0.2f;
+        const float TIME_TO_FADE_BGM = 0.01f;
         readonly GameManager m_GameManager;
         internal GameStateMenu()
         {
             m_GameManager = GameManager.instance;
-            m_GameManager.startMenu.menuPreFade.gameObject.SetActive(false);
+            //m_GameManager.startMenu.menuPreFade.gameObject.SetActive(false);
         }
 
         public override void EnterState()
         {
             //Debug.Log($"Entra no Estado: Menu");
-            GamePlayAudio.instance.ChangeBGM(LevelTypes.Menu, TIME_TO_FADE_BGM);
-            m_GameManager.startMenu.SetMenuPrincipal(0, true);
-            m_GameManager.startMenu.SetMenuHudControl(false);
+            GameAudioManager.instance.ChangeBGM(LevelTypes.Menu, TIME_TO_FADE_BGM);
+            //m_GameManager.startMenu.SetMenuPrincipal();
+            //m_GameManager.startMenu.SetMenuHudControl(false);
         }
         public override void UpdateState()
         {

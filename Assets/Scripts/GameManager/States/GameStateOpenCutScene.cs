@@ -1,29 +1,73 @@
-﻿using UnityEngine.Playables;
+﻿using System.Collections;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 namespace RiverAttack
 {
     public class GameStateOpenCutScene : GameState
     {
-        const float TIME_TO_FADE_BGM = 0.1f;
+        bool onScene;
+        string nameSceneToLoad = "HUB";
+        public override void EnterState()
+        {
+            Debug.Log($"Entra no Estado: CutScene");
+            StartLoadScene(nameSceneToLoad);
+        }
+
+        public override void UpdateState()
+        {
+            if (onScene) return;
+            Debug.Log($"CutScene!");
+        }
+        public override void ExitState()
+        {
+            Debug.Log($"Sai do Estado: CutScene");
+        }
+        
+        
+        void StartLoadScene(string nameScene)
+        {
+            nameSceneToLoad = nameScene;
+            SceneManager.sceneLoaded += LoadedScene;
+            SceneManager.LoadScene(nameSceneToLoad);
+        }
+
+        void LoadedScene(Scene scene, LoadSceneMode mode)
+        {
+            if (scene.name != nameSceneToLoad)
+                return;
+            SceneManager.sceneLoaded -= LoadedScene; // Remova o evento após o carregamento
+            Debug.Log("Cena carregada: " + scene.name);
+            // Faça qualquer coisa que você precisa fazer após o carregamento da cena aqui
+        }
+        
+        
+        
+       
+        /*const float TIME_TO_FADE_BGM = 0.1f;
         const float TOLERANCE = 1f;
         readonly PlayableDirector m_PlayableDirector;
         readonly GameManager m_GameManager;
+        readonly GamePlayManager m_GamePlayManager;
 
         internal GameStateOpenCutScene(PlayableDirector playableDirector)
         {
             m_PlayableDirector = playableDirector;
             m_GameManager = GameManager.instance;
+            m_GamePlayManager = GamePlayManager.instance;
         }
         public override void EnterState()
         {
             //Debug.Log($"Entra no Estado: CutScene");
             m_GameManager.openCutDirector.gameObject.SetActive(true);
-            if (!m_GameManager.haveAnyPlayerInitialized)
-                m_GameManager.InstantiatePlayers();
-            m_GameManager.PlayOpenCutScene();
+            if (!m_GamePlayManager.haveAnyPlayerInitialized)
+                m_GamePlayManager.InstantiatePlayers();
+            //m_GameManager.PlayOpenCutScene();
             //Iniciar a BGM
-            GamePlayAudio.instance.ChangeBGM(GamePlayManager.instance.actualLevels.bgmStartLevel, TIME_TO_FADE_BGM);
-            m_GameManager.startMenu.SetMenuPrincipal(1, false);
-            m_GameManager.startMenu.SetMenuHudControl(false);
+            GameAudioManager.instance.ChangeBGM(GamePlayManager.instance.actualLevels.bgmStartLevel, TIME_TO_FADE_BGM);
+            //m_GameManager.startMenu.SetMenuPrincipal();
+            //m_GameManager.startMenu.SetMenuHudControl(false);
         }
 
         public override void UpdateState()
@@ -39,6 +83,7 @@ namespace RiverAttack
         public override void ExitState()
         {
             //Debug.Log($"Saindo no Estado: CutScene");
-        }
+        }*/
+
     }
 }

@@ -2,24 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
 using Utils;
 
 namespace RiverAttack
 {
     public sealed class GamePlayManager : Singleton<GamePlayManager>
     {
+        
+        [Header("Level Settings")]
         [SerializeField] internal bool completePath;
         [SerializeField] internal bool readyToFinish;
-        [SerializeField]
-        bool godMode;
+        [Header("Debug Settings")]
+        [SerializeField] bool godMode;
         [SerializeField] public bool godModeSpeed;
-        [SerializeField]
-        GameSettings gameSettings;
+        
+        [SerializeField] internal GamePlayingLog gamePlayingLog;
         internal bool getGodMode { get { return godMode; } }
-        [SerializeField]
-        internal GamePlaySettings gamePlaySettings;
+        
         [Header("Power Up References")]
         public CollectibleScriptable refilBomb;
 
@@ -27,6 +26,7 @@ namespace RiverAttack
         internal bool playerDead;
 
         GameManager m_GameManager;
+        PlayerManager m_PlayerManager;
 
         #region Delegates
         public delegate void GeneralEventHandler();
@@ -56,13 +56,16 @@ namespace RiverAttack
         void OnEnable()
         {
             m_GameManager = GameManager.instance;
+            m_PlayerManager = PlayerManager.instance;
             //SetLocalization();
         }
   #endregion
-        public GameSettings getGameSettings
+        
+        public static GameSettings getGameSettings
         {
-            get { return gameSettings; }
+            get { return GameManager.instance.gameSettings; }
         }
+        
 
         public void OnStartGame()
         {
@@ -72,16 +75,13 @@ namespace RiverAttack
         IEnumerator StartGamePlay()
         {
             yield return new WaitForSeconds(2f);
-            m_GameManager.ActivePlayers(true);
-            m_GameManager.UnPausedMovementPlayers();
+            m_PlayerManager.ActivePlayers(true);
+            m_PlayerManager.UnPausedMovementPlayers();
             OnEventActivateEnemiesMaster();
         }
         public bool shouldBePlayingGame { get { return (m_GameManager.currentGameState is GameStatePlayGame && !completePath); } }
 
-        public PlayerSettings GetNoPlayerPlayerSettings(int playerIndex = 0)
-        {
-            return m_GameManager.playerSettingsList.Count > 0 ? m_GameManager.playerSettingsList[playerIndex] : null;
-        }
+        
         public static void AddResultList(List<LogResults> list, PlayerSettings playerSettings, EnemiesScriptable enemy, int qnt, CollisionType collisionType)
         {
             var itemResults = list.Find(x => x.player == playerSettings && x.enemy == enemy && x.collisionType == collisionType);
@@ -103,47 +103,6 @@ namespace RiverAttack
                 list.Add(newItemResults);
             }
         }
-        public int HighScorePlayers()
-        {
-            if (m_GameManager.haveAnyPlayerInitialized == false) return 0;
-            int score = 0;
-            foreach (var pl in m_GameManager.initializedPlayerMasters.Where(pl => score < pl.GetComponent<PlayerMaster>().getPlayerSettings.score))
-            {
-                score += pl.GetComponent<PlayerMaster>().getPlayerSettings.score;
-            }
-
-            return score;
-        }
-
-        public void CompletePathEndCutScene()
-        {
-            GamePlayAudio.instance.ChangeBGM(LevelTypes.Complete, 0.1f);
-            m_GameManager.endCutDirector.gameObject.SetActive(true);
-            m_GameManager.startMenu.SetMenuPrincipal(1, false);
-            m_GameManager.startMenu.SetMenuHudControl(false);
-            Invoke(nameof(ChangeEndGame), 0.2f);
-        }
-
-        void ChangeEndGame()
-        {
-            m_GameManager.ChangeState(new GameStateEndGame());
-        }
-
-        void SetLocalization()
-        {
-            if(gameSettings.startLocale == null)
-                gameSettings.startLocale = LocalizationSettings.SelectedLocale;
-            StartCoroutine(SetLocale(gameSettings.startLocale));
-            Debug.Log($"LocalName: {gameSettings.startLocale.Identifier.Code}");
-        }
-        
-        IEnumerator SetLocale(Locale localActual)
-        {
-            yield return LocalizationSettings.InitializationOperation;
-            LocalizationSettings.SelectedLocale = localActual;
-            gameSettings.startLocale = LocalizationSettings.SelectedLocale;
-        }
-
         
 
         #region Calls

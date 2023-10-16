@@ -8,7 +8,7 @@ namespace RiverAttack
 {
     public class PanelManager : MonoBehaviour
     {
-        [SerializeField]
+        /*[SerializeField]
         Transform menuParent, menuFade;
         [SerializeField] internal Transform menuPreFade;
         [SerializeField]
@@ -116,7 +116,7 @@ namespace RiverAttack
         {
             //m_GamePlayAudio.PlayClickSfx(m_AudioSource);
         }
-        #endregion
+        #endregion*/
         
     }
 }

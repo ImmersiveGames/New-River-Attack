@@ -83,7 +83,7 @@ namespace RiverAttack
             if (level.pathEnd == null) return;
             //TODO: Refazer o fim de fase para não spawnar desde o inicio (ou talvez sim mesmmo que ele crie o fim longe dos espaços)
             nextBound.x = level.levelOffset.x;
-            GameManager.instance.endCutDirector.transform.position = nextBound;
+            GameTimelineManager.instance.endCutDirector.transform.position = nextBound;
             FixedPath(ref nextBound, level.pathEnd, myRoot);
         }
         void FixedPath(ref Vector3 nextBound, GameObject nextPath, Transform myRoot)
@@ -123,7 +123,7 @@ namespace RiverAttack
             Tools.EqualizeLists(ref poolPathLevels, ref poolEnemyLevels);
 
             //Debug.Log($"Muda o BGM para: {actualLevel.setLevelList[actualPathIndex].bgmLevel}");
-            GamePlayAudio.instance.ChangeBGM(actualLevel.setLevelList[actualPathIndex].bgmLevel, TIME_TO_FADE_BGM);
+            GameAudioManager.instance.ChangeBGM(actualLevel.setLevelList[actualPathIndex].bgmLevel, TIME_TO_FADE_BGM);
             UpdatePoolLevel(poolPathLevels, actualPathIndex);
             UpdatePoolLevel(poolEnemyLevels, actualPathIndex);
             actualPathIndex++;

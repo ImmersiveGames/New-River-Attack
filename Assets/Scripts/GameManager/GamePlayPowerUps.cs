@@ -6,6 +6,7 @@ namespace RiverAttack
     public class GamePlayPowerUps : Singleton<GamePlayPowerUps>
     {
         //ATENÇÃO NÃO ACEITA EVENTS PORQUE ELE NÃO VAI APRA A MEMORIA CHAMANDO PELO SCRIPTABLE
+        // Ele tamb´[em não inicia então eventos Start, Awake também não funciona, precisa chamar via instance
         //Este script precisa estar num prefab fora de scene geralmente _GamePlayEffects_
         public static PlayerSettings target;
 
@@ -20,7 +21,7 @@ namespace RiverAttack
 
         static void GamePLayLogFuel(int fuel)
         {
-            var gamePlaySettings = GamePlaySettings.instance;
+            var gamePlaySettings = GamePlayingLog.instance;
             gamePlaySettings.fuelStocked += fuel;
         }
         
@@ -39,9 +40,11 @@ namespace RiverAttack
         
             float buff = (amount < cadenceRapidFireMin) ? cadenceRapidFireMin : amount;
             target.cadenceShootPowerUp = buff;
-            if(!GameManager.instance.initializedPlayerMasters[0].inPowerUp)
-                GamePlayAudio.instance.AccelPinch(1.4f);
-            GamePlayManager.instance.OnEventRapidFire();
+            var gamePlayManager = GamePlayManager.instance;
+            var playerManager = PlayerManager.instance;
+            if(!playerManager.initializedPlayerMasters[0].inPowerUp)
+                GameAudioManager.instance.AccelPinch(1.4f);
+            gamePlayManager.OnEventRapidFire();
         }
 
         public void RapidFireEnd(float amount)
@@ -49,7 +52,7 @@ namespace RiverAttack
             if (target == null) return;
             GamePlayManager.instance.OnEventEndRapidFire();
             target.cadenceShootPowerUp = amount;
-            GamePlayAudio.instance.AccelPinch(1f);
+            GameAudioManager.instance.AccelPinch(1f);
         }
 
         public void GainBomb(int amount)

@@ -44,7 +44,7 @@ namespace RiverAttack
         {
             if (m_EnemiesSetDifficultList != null)
             {
-                myDifficulty = enemy.enemiesSetDifficultyListSo.GetDifficultByScore(gamePlayManager.HighScorePlayers());
+                myDifficulty = enemy.enemiesSetDifficultyListSo.GetDifficultByScore(PlayerManager.instance.HighScorePlayers());
             }
         }
 

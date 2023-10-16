@@ -13,7 +13,7 @@ namespace RiverAttack
         float m_TimeLoop;
 
         GamePlayManager m_GamePlayManager;
-        GamePlaySettings m_GamePlaySettings;
+        GamePlayingLog m_GamePlayingLog;
         PlayerMaster m_PlayerMaster;
         PlayerSettings m_PlayerSettings;
 
@@ -47,20 +47,20 @@ namespace RiverAttack
             m_GamePlayManager = GamePlayManager.instance;
             m_PlayerMaster = GetComponent<PlayerMaster>();
             m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
-            m_GamePlaySettings = m_GamePlayManager.gamePlaySettings;
+            m_GamePlayingLog = m_GamePlayManager.gamePlayingLog;
         }
         void IncreaseFuel(int fuel)
         {
             m_PlayerSettings.actualFuel = fuel;
-            if (m_PlayerSettings.actualFuel > m_GamePlayManager.getGameSettings.maxFuel)
+            if (m_PlayerSettings.actualFuel > GamePlayManager.getGameSettings.maxFuel)
             {
-                m_PlayerSettings.actualFuel = m_GamePlayManager.getGameSettings.maxFuel;
+                m_PlayerSettings.actualFuel = GamePlayManager.getGameSettings.maxFuel;
             }
         }
 
         void LogGamePlay(int reduce)
         {
-            m_GamePlaySettings.fuelSpent += reduce;
+            m_GamePlayingLog.fuelSpent += reduce;
         }
     }
 }

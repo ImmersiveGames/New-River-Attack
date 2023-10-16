@@ -16,19 +16,19 @@ namespace RiverAttack
         GamePlayManager m_GamePlayManager;
         PlayerMaster m_PlayerMaster;
         PlayerSettings m_PlayerSettings;
-        GamePlaySettings m_GamePlaySettings;
+        GamePlayingLog m_GamePlayingLog;
 
         #region UNITYMETHODS
         void OnEnable()
         {
             m_GamePlayManager = GamePlayManager.instance;
-            m_GamePlaySettings = m_GamePlayManager.gamePlaySettings;
+            m_GamePlayingLog = m_GamePlayManager.gamePlayingLog;
             m_PlayerMaster = GetComponent<PlayerMaster>();
             m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
         }
         void Start()
         {
-            offsetInicial += GameManager.instance.spawnPlayerPosition.z;
+            offsetInicial += PlayerManager.instance.spawnPlayerPosition.z;
             m_LastPosition = transform.position;
             m_TravelledDistance = offsetInicial;
             LoadMaxDistancia();
@@ -76,8 +76,8 @@ namespace RiverAttack
 
         void LogGamePlay(float distance, float maxDistance)
         {
-            m_GamePlaySettings.maxPathDistance = maxDistance;
-            m_GamePlaySettings.pathDistance += distance;
+            m_GamePlayingLog.maxPathDistance = maxDistance;
+            m_GamePlayingLog.pathDistance += distance;
         }
     }
 }
