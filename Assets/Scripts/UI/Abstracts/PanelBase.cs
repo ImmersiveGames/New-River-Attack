@@ -12,24 +12,14 @@ namespace RiverAttack
         [SerializeField] protected Transform menuInitial;
         [SerializeField] Transform[] menuPrincipal;
         [SerializeField] internal GameSettings gameSettings;
-
-        [Header("Menu Fades")]
-        [SerializeField] protected Transform panelFade;
-        [SerializeField] Animator fadeAnimator;
-        protected float fadeInTime;
-        protected float fadeOutTime;
-
         [Header("Menu SFX")]
         [SerializeField] AudioEventSample clickSound;
 
         protected int lastIndex;
-        static readonly int FadeIn = Animator.StringToHash("FadeIn");
-        static readonly int FadeOut = Animator.StringToHash("FadeOut");
+        
 
         protected virtual void Awake()
         {
-            fadeInTime = Utils.Tools.GetAnimationTime(fadeAnimator, "FadeIn");
-            fadeOutTime = Utils.Tools.GetAnimationTime(fadeAnimator, "FadeOut");
             SetLocalization();
             //Debug.Log($"Tempos: {fadeInTime} , {fadeOutTime}");
         }
@@ -85,16 +75,7 @@ namespace RiverAttack
             LocalizationSettings.SelectedLocale = localActual;
             gameSettings.startLocale = LocalizationSettings.SelectedLocale;
         }
-
-
-        protected void PerformFadeOut()
-        {
-            fadeAnimator.SetTrigger(FadeOut);
-        }
-        protected void PerformFadeIn()
-        {
-            fadeAnimator.SetTrigger(FadeIn);
-        }
+        
         public void PlayClickSfx()
         {
             GameAudioManager.instance.PlaySfx(clickSound);

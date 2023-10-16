@@ -260,6 +260,18 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!95 &1870506443 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2075876262322048503, guid: 065609105772a834aa8f89040f3ab329,
+    type: 3}
+  m_PrefabInstance: {fileID: 3630449668861078715}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &1870506444 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5570961529508620018, guid: 065609105772a834aa8f89040f3ab329,
+    type: 3}
+  m_PrefabInstance: {fileID: 3630449668861078715}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2088713923
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,6 +462,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4920811813285075692, guid: 065609105772a834aa8f89040f3ab329,
         type: 3}
+      propertyPath: panelFade
+      value: 
+      objectReference: {fileID: 1870506444}
+    - target: {fileID: 4920811813285075692, guid: 065609105772a834aa8f89040f3ab329,
+        type: 3}
+      propertyPath: fadeAnimator
+      value: 
+      objectReference: {fileID: 1870506443}
+    - target: {fileID: 4920811813285075692, guid: 065609105772a834aa8f89040f3ab329,
+        type: 3}
       propertyPath: panelBaseGame
       value: 
       objectReference: {fileID: 2125775034}
@@ -526,6 +548,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuPrincipal
       objectReference: {fileID: 0}
+    - target: {fileID: 8343451847550770475, guid: cb729b5deb9869145a9b94354c1adeed,
+        type: 3}
+      propertyPath: panelFade
+      value: 
+      objectReference: {fileID: 1870506444}
+    - target: {fileID: 8343451847550770475, guid: cb729b5deb9869145a9b94354c1adeed,
+        type: 3}
+      propertyPath: fadeAnimator
+      value: 
+      objectReference: {fileID: 1870506443}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

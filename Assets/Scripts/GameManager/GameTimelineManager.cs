@@ -20,6 +20,8 @@ namespace RiverAttack
         void Awake()
         {
             m_GameManager = GameManager.instance;
+            openCutDirector.gameObject.SetActive(true);
+            endCutDirector.gameObject.SetActive(false);
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 namespace RiverAttack
 {
@@ -22,10 +23,8 @@ namespace RiverAttack
         {
             m_InputSystem = new PlayersInputActions();
             m_InputSystem.Enable();
-            m_CurrentGameState = GameManager.instance.currentGameState;
             base.Awake();
-            menuInitial.gameObject.SetActive(false);
-            hud.gameObject.SetActive(true);
+            StartMenuOnOpenScene();
         }
         void OnEnable()
         {
@@ -56,6 +55,19 @@ namespace RiverAttack
 
         }
         #endregion
+
+        public void StartMenuOnOpenScene()
+        {
+            m_CurrentGameState = GameManager.instance.currentGameState;
+            menuInitial.gameObject.SetActive(false);
+            hud.gameObject.SetActive(false);
+        }
+        public void StartMenuGame()
+        {
+            menuInitial.gameObject.SetActive(false);
+            hud.gameObject.SetActive(true);
+            
+        }
         public void SetMenuHudControl(bool active)
         {
             /*menuHud.gameObject.SetActive(active);

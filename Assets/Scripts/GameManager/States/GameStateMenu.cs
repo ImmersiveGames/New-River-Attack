@@ -4,12 +4,6 @@ namespace RiverAttack
     public class GameStateMenu : GameState
     {
         const float TIME_TO_FADE_BGM = 0.01f;
-        readonly GameManager m_GameManager;
-        internal GameStateMenu()
-        {
-            m_GameManager = GameManager.instance;
-            //m_GameManager.startMenu.menuPreFade.gameObject.SetActive(false);
-        }
 
         public override void EnterState()
         {
@@ -24,6 +18,7 @@ namespace RiverAttack
         }
         public override void ExitState()
         {
+            
             //Debug.Log($"Saindo no Estado: Menu");
         }
     }

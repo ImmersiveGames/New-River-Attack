@@ -1,9 +1,13 @@
+using System;
+using System.Collections;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 using Utils;
 namespace RiverAttack
 {
+    [RequireComponent(typeof(AudioSource))]
     public class GameManager : Singleton<GameManager>
     {
         /*
@@ -18,15 +22,28 @@ namespace RiverAttack
         
         [Header("Menus")]
         [SerializeField] PanelBase panelBaseGame;
+        [Header("Menu Fades")]
+        public Transform panelFade;
+        [SerializeField] Animator fadeAnimator;
+        internal float fadeInTime;
+        internal float fadeOutTime;
+        static readonly int FadeIn = Animator.StringToHash("FadeIn");
+        static readonly int FadeOut = Animator.StringToHash("FadeOut");
         public T PanelBase<T>() where T : class
         {
             return panelBaseGame as T;
         }
 
         bool m_IsChangeState;
+        internal bool loadSceneFinish;
         public GameState currentGameState { get; private set; }
 
         #region UNITYMETHODS
+        void Awake()
+        {
+            fadeInTime = Tools.GetAnimationTime(fadeAnimator, "FadeIn");
+            fadeOutTime = Tools.GetAnimationTime(fadeAnimator, "FadeOut");
+        }
         void Start()
         {
             ChangeState(new GameStateMenu());
@@ -50,6 +67,14 @@ namespace RiverAttack
             m_IsChangeState = false;
         }
         #endregion
+        protected internal void PerformFadeOut()
+        {
+            fadeAnimator.SetTrigger(FadeOut);
+        }
+        protected internal void PerformFadeIn()
+        {
+            fadeAnimator.SetTrigger(FadeIn);
+        }
         
         
         ///////////////////////////////////////////////////

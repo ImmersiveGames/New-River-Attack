@@ -1,50 +1,28 @@
-﻿using System.Collections;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.Playables;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 namespace RiverAttack
 {
     public class GameStateOpenCutScene : GameState
     {
-        bool onScene;
-        string nameSceneToLoad = "HUB";
+        const string NAME_SCENE_TO_LOAD = "GamePlay";
         public override void EnterState()
         {
             Debug.Log($"Entra no Estado: CutScene");
-            StartLoadScene(nameSceneToLoad);
+            TryLoadScene(NAME_SCENE_TO_LOAD);
         }
 
         public override void UpdateState()
         {
-            if (onScene) return;
+            if (!gameManager.loadSceneFinish) return;
             Debug.Log($"CutScene!");
         }
         public override void ExitState()
         {
             Debug.Log($"Sai do Estado: CutScene");
         }
-        
-        
-        void StartLoadScene(string nameScene)
-        {
-            nameSceneToLoad = nameScene;
-            SceneManager.sceneLoaded += LoadedScene;
-            SceneManager.LoadScene(nameSceneToLoad);
-        }
 
-        void LoadedScene(Scene scene, LoadSceneMode mode)
-        {
-            if (scene.name != nameSceneToLoad)
-                return;
-            SceneManager.sceneLoaded -= LoadedScene; // Remova o evento após o carregamento
-            Debug.Log("Cena carregada: " + scene.name);
-            // Faça qualquer coisa que você precisa fazer após o carregamento da cena aqui
-        }
         
-        
-        
-       
+
+
         /*const float TIME_TO_FADE_BGM = 0.1f;
         const float TOLERANCE = 1f;
         readonly PlayableDirector m_PlayableDirector;

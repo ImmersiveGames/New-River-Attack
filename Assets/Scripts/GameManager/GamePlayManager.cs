@@ -1,14 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utils;
 
 namespace RiverAttack
 {
     public sealed class GamePlayManager : Singleton<GamePlayManager>
     {
-        
+        [Header("Panels Settings")]
+        [SerializeField] PanelMenuGame panelMenuGame;
+            
         [Header("Level Settings")]
         [SerializeField] internal bool completePath;
         [SerializeField] internal bool readyToFinish;
@@ -53,14 +57,13 @@ namespace RiverAttack
         #endregion
 
         #region UNITYMETHODS
-        void OnEnable()
+        void Awake()
         {
             m_GameManager = GameManager.instance;
             m_PlayerManager = PlayerManager.instance;
-            //SetLocalization();
         }
   #endregion
-        
+        public bool shouldBePlayingGame { get { return (m_GameManager.currentGameState is GameStatePlayGame && !completePath); } }
         public static GameSettings getGameSettings
         {
             get { return GameManager.instance.gameSettings; }
@@ -79,7 +82,7 @@ namespace RiverAttack
             m_PlayerManager.UnPausedMovementPlayers();
             OnEventActivateEnemiesMaster();
         }
-        public bool shouldBePlayingGame { get { return (m_GameManager.currentGameState is GameStatePlayGame && !completePath); } }
+        
 
         
         public static void AddResultList(List<LogResults> list, PlayerSettings playerSettings, EnemiesScriptable enemy, int qnt, CollisionType collisionType)

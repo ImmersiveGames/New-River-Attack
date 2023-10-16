@@ -12,13 +12,14 @@ namespace RiverAttack
         protected override void Awake()
         {
             base.Awake();
+            m_GameManager = GameManager.instance;
             menuInitial.gameObject.SetActive(true);
             screenWash.gameObject.SetActive(true);
-            panelFade.gameObject.SetActive(true);
+            m_GameManager.panelFade.gameObject.SetActive(true);
         }
         void OnEnable()
         {
-            m_GameManager = GameManager.instance;
+            
             SetMenuPrincipal();
             lastIndex = 0;
         }
@@ -47,15 +48,13 @@ namespace RiverAttack
         public void ButtonModeMission()
         {
             PlayClickSfx();
-            PerformFadeOut();
-            Invoke(nameof(LoadSceneHub),fadeOutTime);
+            m_GameManager.PerformFadeOut();
         }
         public void ButtonModeClassic()
         {
             PlayClickSfx();
-            PerformFadeOut();
+            m_GameManager.PerformFadeOut();
             m_GameManager.ChangeState(new GameStateOpenCutScene());
-            //Invoke(nameof(LoadSceneGamePlay),fadeOutTime);
         }
         
         public void ButtonIndexChange(int indexMenu)
