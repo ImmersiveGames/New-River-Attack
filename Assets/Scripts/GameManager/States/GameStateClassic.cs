@@ -2,7 +2,10 @@
 {
     public class GameStateClassic : GameState
     {
-
+        public override void OnLoadState()
+        {
+            throw new System.NotImplementedException();
+        }
         public override void EnterState()
         {
    

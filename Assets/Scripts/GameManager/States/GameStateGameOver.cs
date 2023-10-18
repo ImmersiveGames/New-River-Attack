@@ -15,6 +15,10 @@ namespace RiverAttack
             m_PlayerManager = PlayerManager.instance;
             
         }
+        public override void OnLoadState()
+        {
+            throw new System.NotImplementedException();
+        }
         public override void EnterState()
         {
             //Debug.Log($"Entra no Estado: GameOver");

@@ -4,9 +4,14 @@ namespace RiverAttack
     public class GameStatePause : GameState
     {
         readonly GameManager m_GameManager;
+        
         public GameStatePause()
         {
             m_GameManager = GameManager.instance;
+        }
+        public override void OnLoadState()
+        {
+            throw new System.NotImplementedException();
         }
         public override void EnterState()
         {

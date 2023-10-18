@@ -33,8 +33,7 @@ namespace RiverAttack
         {
             return panelBaseGame as T;
         }
-
-        bool m_IsChangeState;
+        
         internal bool loadSceneFinish;
         public GameState currentGameState { get; private set; }
 
@@ -50,7 +49,7 @@ namespace RiverAttack
         }
         void Update()
         {
-            if(!m_IsChangeState)
+            if(!loadSceneFinish)
                 currentGameState?.UpdateState();
         }
         #endregion
@@ -60,11 +59,44 @@ namespace RiverAttack
         {
             if (currentGameState == nextState)
                 return;
-            m_IsChangeState = true;
+            loadSceneFinish = true;
             currentGameState?.ExitState();
             currentGameState = nextState;
             currentGameState?.EnterState();
-            m_IsChangeState = false;
+        }
+        
+        internal void ChangeState(GameState nextState, string nextSceneName)
+        {
+            loadSceneFinish = true;
+            StartCoroutine(LoadSceneAsync(nextState, nextSceneName));
+        }
+        IEnumerator LoadSceneAsync(GameState nextState,string nextSceneName)
+        {
+            if (currentGameState == nextState)
+                yield break;
+            PerformFadeOut();
+            var loadSceneAsync = SceneManager.LoadSceneAsync(nextSceneName);
+            loadSceneAsync.allowSceneActivation = false;
+            yield return new WaitForSeconds(fadeOutTime);
+            currentGameState?.ExitState();
+            currentGameState = nextState;
+            while (!loadSceneAsync.isDone)
+            {
+                // Verifique se a cena está 90% carregada.
+                if (loadSceneAsync.progress >= 0.9f)
+                {
+                    loadSceneAsync.allowSceneActivation = true;
+                    
+                    yield return new WaitForSeconds(.5f);
+                    currentGameState?.OnLoadState();
+                    yield return new WaitForSeconds(fadeInTime +.5f);
+                    PerformFadeIn();
+                    
+                    currentGameState?.EnterState();
+                    loadSceneFinish = false;
+                }
+                yield return null;
+            }
         }
         #endregion
         protected internal void PerformFadeOut()

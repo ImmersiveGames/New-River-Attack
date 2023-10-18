@@ -3,16 +3,26 @@ namespace RiverAttack
 {
     public class GameStateOpenCutScene : GameState
     {
-        const string NAME_SCENE_TO_LOAD = "GamePlay";
+        const float TIME_TO_FADE_BGM = 0.1f;
+        GamePlayManager m_GamePlayManager;
+        
+        public override void OnLoadState()
+        {
+            var gamePlayManager = GamePlayManager.instance;
+            gamePlayManager.actualLevels = gamePlayManager.classicLevels;
+            GameAudioManager.instance.ChangeBGM(gamePlayManager.actualLevels.bgmStartLevel, TIME_TO_FADE_BGM);
+            GameMissionBuilder.instance.StartBuildMission(gamePlayManager.actualLevels);
+            PlayerManager.instance.InstantiatePlayers();
+        }
         public override void EnterState()
         {
             Debug.Log($"Entra no Estado: CutScene");
-            TryLoadScene(NAME_SCENE_TO_LOAD);
+            GameTimelineManager.instance.openCutDirector.Play();
         }
 
         public override void UpdateState()
         {
-            if (!gameManager.loadSceneFinish) return;
+            if (GameManager.instance.loadSceneFinish) return;
             Debug.Log($"CutScene!");
         }
         public override void ExitState()

@@ -4,7 +4,10 @@ namespace RiverAttack
     public class GameStateMenu : GameState
     {
         const float TIME_TO_FADE_BGM = 0.01f;
-
+        public override void OnLoadState()
+        {
+            throw new System.NotImplementedException();
+        }
         public override void EnterState()
         {
             //Debug.Log($"Entra no Estado: Menu");
@@ -18,8 +21,8 @@ namespace RiverAttack
         }
         public override void ExitState()
         {
-            
             //Debug.Log($"Saindo no Estado: Menu");
+            
         }
     }
 }

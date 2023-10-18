@@ -9,7 +9,10 @@ namespace RiverAttack
         const float TOLERANCE = 1f;
         readonly PlayableDirector m_PlayableDirector;
         readonly GameManager m_GameManager;
-        
+        public override void OnLoadState()
+        {
+            throw new System.NotImplementedException();
+        }
         public override void EnterState()
         {
             Debug.Log($"Entra no Estado: CutScene END");

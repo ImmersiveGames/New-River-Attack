@@ -12,8 +12,10 @@ namespace RiverAttack
     {
         [Header("Panels Settings")]
         [SerializeField] PanelMenuGame panelMenuGame;
-            
+
         [Header("Level Settings")]
+        [SerializeField]
+        public Levels classicLevels;
         [SerializeField] internal bool completePath;
         [SerializeField] internal bool readyToFinish;
         [Header("Debug Settings")]

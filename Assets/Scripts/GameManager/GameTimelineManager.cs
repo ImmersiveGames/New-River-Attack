@@ -1,4 +1,5 @@
-﻿using Cinemachine;
+﻿using System;
+using Cinemachine;
 using Utils;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -23,8 +24,6 @@ namespace RiverAttack
             openCutDirector.gameObject.SetActive(true);
             endCutDirector.gameObject.SetActive(false);
         }
-
-
         public void InitializePLayerInTimeline(Transform playerTransform, Animator playerAnimator)
         {
             // Atualiza a cutscene com o animator do jogador;
@@ -32,6 +31,12 @@ namespace RiverAttack
             Tools.ChangeBindingReference("Animation Track", playerAnimator, endCutDirector);
             // Coloca o player como Follow da camra
             Tools.SetFollowVirtualCam(virtualCamera, playerTransform);
+        }
+
+        public void EndOpenCutScene()
+        {
+            Debug.Log("Fim da Time Line");
+            m_GameManager.ChangeState(new GameStatePlayGame());
         }
         
         public void CompletePathEndCutScene()

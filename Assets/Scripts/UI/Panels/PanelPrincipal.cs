@@ -4,6 +4,7 @@ namespace RiverAttack
     [RequireComponent(typeof(AudioSource))]
     public class PanelPrincipal : PanelBase
     {
+        const string NAME_SCENE_TO_LOAD = "GamePlay";
         [Header("Menu Fades")]
         [SerializeField]Transform screenWash;
         const float SCREEN_WASH_TIMER = 1f;
@@ -54,7 +55,7 @@ namespace RiverAttack
         {
             PlayClickSfx();
             m_GameManager.PerformFadeOut();
-            m_GameManager.ChangeState(new GameStateOpenCutScene());
+            m_GameManager.ChangeState(new GameStateOpenCutScene(), NAME_SCENE_TO_LOAD);
         }
         
         public void ButtonIndexChange(int indexMenu)

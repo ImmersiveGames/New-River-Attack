@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Utils;
@@ -11,7 +12,7 @@ namespace RiverAttack
         public Vector3 spawnPlayerPosition;
         public List<PlayerSettings> playerSettingsList = new List<PlayerSettings>();
         [SerializeField] internal List<PlayerMaster> initializedPlayerMasters = new List<PlayerMaster>();
-        
+
         public void InstantiatePlayers()
         {
             if (initializedPlayerMasters.Count != 0)
@@ -20,9 +21,10 @@ namespace RiverAttack
             var playerObject = Instantiate(playerPrefab, spawnPlayerPosition, Quaternion.identity);
             playerObject.name = playerSettings.name;
             var playerMaster = playerObject.GetComponent<PlayerMaster>();
+            GameTimelineManager.instance.InitializePLayerInTimeline(playerObject.transform, playerMaster.GetPlayerAnimator());
             playerMaster.SetPlayerSettingsToPlayMaster(playerSettings);
             initializedPlayerMasters.Add(playerMaster);
-            GameTimelineManager.instance.InitializePLayerInTimeline(playerObject.transform, playerMaster.GetPlayerAnimator());
+            
         }
         public void ActivePlayers(bool active)
         {

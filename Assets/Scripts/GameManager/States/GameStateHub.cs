@@ -3,7 +3,10 @@ namespace RiverAttack
 {
     public class GameStateHub: GameState
     {
-
+        public override void OnLoadState()
+        {
+            throw new System.NotImplementedException();
+        }
         public override void EnterState()
         {
             Debug.Log($"Entra no Estado: HUB");

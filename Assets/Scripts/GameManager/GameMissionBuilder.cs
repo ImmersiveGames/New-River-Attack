@@ -44,7 +44,7 @@ namespace RiverAttack
             poolEnemyLevels = new List<GameObject>();
             pathMilestones = new List<float>();
             if (GameManager.instance.debugMode) return;
-            StartBuildMission(actualLevel);
+            //StartBuildMission(actualLevel);
         }
         void OnDisable()
         {
@@ -52,11 +52,11 @@ namespace RiverAttack
         }
   #endregion
 
-        void StartBuildMission(Levels level)
+        internal void StartBuildMission(Levels level)
         {
             m_LevelRoot = new GameObject();
             actualPathIndex = 0;
-            m_GamePlayManager.actualLevels = actualLevel;
+            actualLevel = level;
             m_LevelRoot.name = level.levelName;
             CreateLevel(level, m_LevelRoot.transform);
         }

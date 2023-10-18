@@ -8,13 +8,17 @@ namespace RiverAttack
         {
             m_GamePlayManager = GamePlayManager.instance;
         }
+        public override void OnLoadState()
+        {
+            throw new System.NotImplementedException();
+        }
         public override void EnterState()
         {
            // Debug.Log($"Entra no Estado: PlayGame");
             //m_GameManager.PanelBase.SetMenuPrincipal();
             //m_GameManager.startMenu.SetMenuHudControl(true);
-            if (!m_PlayerManager.haveAnyPlayerInitialized)
-                m_PlayerManager.InstantiatePlayers();
+            /*if (!m_PlayerManager.haveAnyPlayerInitialized)
+                m_PlayerManager.InstantiatePlayers();*/
 
             //TODO: dar mais tempo para o pause;
             m_GamePlayManager.OnStartGame();

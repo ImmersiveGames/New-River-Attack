@@ -3,6 +3,10 @@ namespace RiverAttack
 {
     public class GameStateEndGame : GameState
     {
+        public override void OnLoadState()
+        {
+            throw new System.NotImplementedException();
+        }
 
         public override void EnterState()
         {
