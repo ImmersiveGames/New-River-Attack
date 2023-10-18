@@ -87,7 +87,7 @@ namespace RiverAttack
                 {
                     loadSceneAsync.allowSceneActivation = true;
                     
-                    yield return new WaitForSeconds(.5f);
+                    yield return new WaitForSeconds(1f);
                     currentGameState?.OnLoadState();
                     yield return new WaitForSeconds(fadeInTime +.5f);
                     PerformFadeIn();
