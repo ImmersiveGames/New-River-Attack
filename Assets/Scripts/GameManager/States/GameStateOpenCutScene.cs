@@ -9,7 +9,6 @@ namespace RiverAttack
         public override void OnLoadState()
         {
             var gamePlayManager = GamePlayManager.instance;
-            gamePlayManager.actualLevels = gamePlayManager.classicLevels;
             GameAudioManager.instance.ChangeBGM(gamePlayManager.actualLevels.bgmStartLevel, TIME_TO_FADE_BGM);
             GameMissionBuilder.instance.StartBuildMission(gamePlayManager.actualLevels);
             PlayerManager.instance.InstantiatePlayers();

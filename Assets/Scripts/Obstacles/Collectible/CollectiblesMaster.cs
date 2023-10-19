@@ -47,7 +47,7 @@ namespace RiverAttack
                 }
                 // Ja tem algo na lista
             }
-            if(collectibleScriptable == gamePlayManager.refilBomb && whoHit.getPlayerSettings.bombs >= GameSettings.instance.maxBombs)
+            if(collectibleScriptable == gamePlayManager.refillBomb && whoHit.getPlayerSettings.bombs >= GameSettings.instance.maxBombs)
                 return;
             
             OnEventCollectItem(whoHit.getPlayerSettings);

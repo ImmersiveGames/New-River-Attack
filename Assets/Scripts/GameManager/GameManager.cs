@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using Cinemachine;
 using UnityEngine;
-using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 using Utils;
 namespace RiverAttack
@@ -19,14 +16,16 @@ namespace RiverAttack
         [Header("Game Settings")]
         [SerializeField] internal GameSettings gameSettings;
         public LayerMask layerPlayer;
+        public enum GameModes{Classic,Mission}
+        internal GameModes gameModes;
         
         [Header("Menus")]
         [SerializeField] PanelBase panelBaseGame;
         [Header("Menu Fades")]
         public Transform panelFade;
         [SerializeField] Animator fadeAnimator;
-        internal float fadeInTime;
-        internal float fadeOutTime;
+        float m_FadeInTime;
+        float m_FadeOutTime;
         static readonly int FadeIn = Animator.StringToHash("FadeIn");
         static readonly int FadeOut = Animator.StringToHash("FadeOut");
         public T PanelBase<T>() where T : class
@@ -40,8 +39,8 @@ namespace RiverAttack
         #region UNITYMETHODS
         void Awake()
         {
-            fadeInTime = Tools.GetAnimationTime(fadeAnimator, "FadeIn");
-            fadeOutTime = Tools.GetAnimationTime(fadeAnimator, "FadeOut");
+            m_FadeInTime = Tools.GetAnimationTime(fadeAnimator, "FadeIn");
+            m_FadeOutTime = Tools.GetAnimationTime(fadeAnimator, "FadeOut");
         }
         void Start()
         {
@@ -77,7 +76,7 @@ namespace RiverAttack
             PerformFadeOut();
             var loadSceneAsync = SceneManager.LoadSceneAsync(nextSceneName);
             loadSceneAsync.allowSceneActivation = false;
-            yield return new WaitForSeconds(fadeOutTime);
+            yield return new WaitForSeconds(m_FadeOutTime);
             currentGameState?.ExitState();
             currentGameState = nextState;
             while (!loadSceneAsync.isDone)
@@ -89,7 +88,7 @@ namespace RiverAttack
                     
                     yield return new WaitForSeconds(1f);
                     currentGameState?.OnLoadState();
-                    yield return new WaitForSeconds(fadeInTime +.5f);
+                    yield return new WaitForSeconds(m_FadeInTime +.5f);
                     PerformFadeIn();
                     
                     currentGameState?.EnterState();

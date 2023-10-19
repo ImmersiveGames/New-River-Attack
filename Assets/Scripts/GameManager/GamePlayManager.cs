@@ -16,6 +16,8 @@ namespace RiverAttack
         [Header("Level Settings")]
         [SerializeField]
         public Levels classicLevels;
+        public ListLevels missionLevels;
+        [SerializeField] int missionIndex = 0;
         [SerializeField] internal bool completePath;
         [SerializeField] internal bool readyToFinish;
         [Header("Debug Settings")]
@@ -26,7 +28,7 @@ namespace RiverAttack
         internal bool getGodMode { get { return godMode; } }
         
         [Header("Power Up References")]
-        public CollectibleScriptable refilBomb;
+        public CollectibleScriptable refillBomb;
 
         internal Levels actualLevels;
         internal bool playerDead;
@@ -63,6 +65,7 @@ namespace RiverAttack
         {
             m_GameManager = GameManager.instance;
             m_PlayerManager = PlayerManager.instance;
+            actualLevels = GetLevel(GameManager.instance.gameModes, missionIndex);
         }
   #endregion
         public bool shouldBePlayingGame { get { return (m_GameManager.currentGameState is GameStatePlayGame && !completePath); } }
@@ -70,7 +73,16 @@ namespace RiverAttack
         {
             get { return GameManager.instance.gameSettings; }
         }
-        
+        Levels GetLevel(GameManager.GameModes gameModes, int index = 0)
+        {
+            var level = gameModes switch
+            {
+                GameManager.GameModes.Classic => classicLevels,
+                GameManager.GameModes.Mission => missionLevels.Index(index),
+                _ => classicLevels
+            };
+            return level;
+        }
 
         public void OnStartGame()
         {
