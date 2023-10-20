@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 namespace RiverAttack
-{ 
+{
     [RequireComponent(typeof(AudioSource))]
     public class PanelPrincipal : PanelBase
     {
-        const string NAME_SCENE_GAMEPLAY = "GamePlay";
-        const string NAME_SCENE_HUD = "HUD";
         [Header("Menu Fades")]
-        [SerializeField]Transform screenWash;
+        [SerializeField] Transform screenWash;
         const float SCREEN_WASH_TIMER = 1f;
         GameManager m_GameManager;
 #region UNITYMETHODS
@@ -15,19 +13,24 @@ namespace RiverAttack
         {
             base.Awake();
             m_GameManager = GameManager.instance;
+            if (!m_GameManager.panelBaseGame)
+            {
+                m_GameManager.panelBaseGame = this;
+            }
+            
             menuInitial.gameObject.SetActive(true);
             screenWash.gameObject.SetActive(true);
             m_GameManager.panelFade.gameObject.SetActive(true);
         }
         void OnEnable()
         {
-            
+
             SetMenuPrincipal();
             lastIndex = 0;
         }
         void Start()
         {
-            Invoke(nameof(DeactivateScreenWash),SCREEN_WASH_TIMER);
+            Invoke(nameof(DeactivateScreenWash), SCREEN_WASH_TIMER);
         }
   #endregion
         void DeactivateScreenWash()
@@ -42,28 +45,18 @@ namespace RiverAttack
             Application.Quit();
         }
 
-        public void ButtonBack()
-        {
-            PlayClickSfx();
-            SetInternalMenu(lastIndex);
-        }
+        
         public void ButtonModeMission()
         {
             PlayClickSfx();
             m_GameManager.gameModes = GameManager.GameModes.Mission;
-            m_GameManager.ChangeState(new GameStateHub(), NAME_SCENE_HUD);
+            m_GameManager.ChangeState(new GameStateHub(), GameManager.GameScenes.MissionHub.ToString());
         }
         public void ButtonModeClassic()
         {
             PlayClickSfx();
             m_GameManager.gameModes = GameManager.GameModes.Classic;
-            m_GameManager.ChangeState(new GameStateOpenCutScene(), NAME_SCENE_GAMEPLAY);
-        }
-        
-        public void ButtonIndexChange(int indexMenu)
-        {
-            PlayClickSfx();
-            SetInternalMenu(indexMenu);
+            m_GameManager.ChangeState(new GameStateOpenCutScene(), GameManager.GameScenes.GamePlay.ToString());
         }
   #endregion
     }

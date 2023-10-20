@@ -3,9 +3,10 @@ namespace RiverAttack
 {
     public class GameStateHub: GameState
     {
+        const float TIME_TO_FADE_BGM = 0.1f;
         public override void OnLoadState()
         {
-            throw new System.NotImplementedException();
+            GameAudioManager.instance.ChangeBGM(LevelTypes.Hub, TIME_TO_FADE_BGM);
         }
         public override void EnterState()
         {

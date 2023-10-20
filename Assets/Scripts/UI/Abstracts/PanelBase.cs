@@ -80,13 +80,15 @@ namespace RiverAttack
         {
             GameAudioManager.instance.PlaySfx(clickSound);
         }
-        protected void LoadSceneHub()
+        public void ButtonBack()
         {
-            SceneManager.LoadScene("HUB");
+            PlayClickSfx();
+            SetInternalMenu(lastIndex);
         }
-        protected void LoadSceneGamePlay()
+        public void ButtonIndexChange(int indexMenu)
         {
-            SceneManager.LoadScene("GamePlay");
+            PlayClickSfx();
+            SetInternalMenu(indexMenu);
         }
     }
 }

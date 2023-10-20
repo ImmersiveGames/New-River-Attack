@@ -47,7 +47,7 @@ namespace RiverAttack
             if (panelMenuGame != null)
             {
                 panelMenuGame.SetMenuPrincipal();
-                panelMenuGame.SetMenuHudControl(false);
+                //panelMenuGame.SetMenuHudControl(false);
             }
             Invoke(nameof(ChangeEndGame), 0.2f);
         }

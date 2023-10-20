@@ -6,11 +6,11 @@ namespace RiverAttack
         const float TIME_TO_FADE_BGM = 0.01f;
         public override void OnLoadState()
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
         public override void EnterState()
         {
-            //Debug.Log($"Entra no Estado: Menu");
+            Debug.Log($"Entra no Estado: Menu {GameManager.instance}");
             GameAudioManager.instance.ChangeBGM(LevelTypes.Menu, TIME_TO_FADE_BGM);
             //m_GameManager.startMenu.SetMenuPrincipal();
             //m_GameManager.startMenu.SetMenuHudControl(false);

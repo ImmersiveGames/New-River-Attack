@@ -11,7 +11,8 @@ namespace RiverAttack
     public sealed class GamePlayManager : Singleton<GamePlayManager>
     {
         [Header("Panels Settings")]
-        [SerializeField] PanelMenuGame panelMenuGame;
+        [SerializeField]
+        internal PanelMenuGame panelMenuGame;
 
         [Header("Level Settings")]
         [SerializeField]
@@ -63,6 +64,11 @@ namespace RiverAttack
         #region UNITYMETHODS
         void Awake()
         {
+            if (FindObjectsOfType(typeof(GamePlayManager)).Length > 1)
+            {
+                gameObject.SetActive(false);
+                Destroy(this);
+            }
             m_GameManager = GameManager.instance;
             m_PlayerManager = PlayerManager.instance;
             actualLevels = GetLevel(GameManager.instance.gameModes, missionIndex);
@@ -86,12 +92,16 @@ namespace RiverAttack
 
         public void OnStartGame()
         {
+            StartCoroutine(StartGamePlay(0));
+        }
+        public void OnRestartGame()
+        {
             StartCoroutine(StartGamePlay());
         }
 
-        IEnumerator StartGamePlay()
+        IEnumerator StartGamePlay(float timeWait = 2f)
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(timeWait);
             m_PlayerManager.ActivePlayers(true);
             m_PlayerManager.UnPausedMovementPlayers();
             OnEventActivateEnemiesMaster();

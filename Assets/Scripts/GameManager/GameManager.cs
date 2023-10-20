@@ -16,11 +16,14 @@ namespace RiverAttack
         [Header("Game Settings")]
         [SerializeField] internal GameSettings gameSettings;
         public LayerMask layerPlayer;
-        public enum GameModes{Classic,Mission}
+        public enum GameScenes {MainScene, MissionHub, GamePlay }
+        public GameScenes gameScenes;
+        public enum GameModes {Classic,Mission}
         internal GameModes gameModes;
         
         [Header("Menus")]
-        [SerializeField] PanelBase panelBaseGame;
+        [SerializeField]
+        public PanelBase panelBaseGame;
         [Header("Menu Fades")]
         public Transform panelFade;
         [SerializeField] Animator fadeAnimator;
@@ -37,8 +40,13 @@ namespace RiverAttack
         public GameState currentGameState { get; private set; }
 
         #region UNITYMETHODS
-        void Awake()
+        public void Awake()
         {
+            if (FindObjectsOfType(typeof(GameManager)).Length > 1)
+            {
+                gameObject.SetActive(false);
+                Destroy(this);
+            }
             m_FadeInTime = Tools.GetAnimationTime(fadeAnimator, "FadeIn");
             m_FadeOutTime = Tools.GetAnimationTime(fadeAnimator, "FadeOut");
         }
@@ -62,6 +70,7 @@ namespace RiverAttack
             currentGameState?.ExitState();
             currentGameState = nextState;
             currentGameState?.EnterState();
+            loadSceneFinish = false;
         }
         
         internal void ChangeState(GameState nextState, string nextSceneName)
@@ -98,16 +107,15 @@ namespace RiverAttack
             }
         }
         #endregion
-        protected internal void PerformFadeOut()
+        void PerformFadeOut()
         {
             fadeAnimator.SetTrigger(FadeOut);
         }
-        protected internal void PerformFadeIn()
+        void PerformFadeIn()
         {
             fadeAnimator.SetTrigger(FadeIn);
         }
-        
-        
+
         ///////////////////////////////////////////////////
 
         /*
