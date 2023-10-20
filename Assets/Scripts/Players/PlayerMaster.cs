@@ -121,7 +121,7 @@ namespace RiverAttack
         {
             m_GamePlayManager.playerDead = isPlayerDead = true;
             playerMovementStatus = MovementStatus.Paused;
-            CameraShake.instance.ShakeCamera(shakeIntensity,shakeTime);
+            CameraShake.ShakeCamera(shakeIntensity,shakeTime);
             m_GamePlayManager.OnEventEnemiesMasterKillPlayer();
 
             Tools.ToggleChildren(transform, false);

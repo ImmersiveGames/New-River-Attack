@@ -73,6 +73,11 @@ namespace RiverAttack
             m_PlayerManager = PlayerManager.instance;
             actualLevels = GetLevel(GameManager.instance.gameModes, missionIndex);
         }
+
+        protected override void OnDestroy()
+        {
+            //base.OnDestroy();
+        }
   #endregion
         public bool shouldBePlayingGame { get { return (m_GameManager.currentGameState is GameStatePlayGame && !completePath); } }
         public static GameSettings getGameSettings

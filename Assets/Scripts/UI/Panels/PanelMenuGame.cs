@@ -11,7 +11,7 @@ namespace RiverAttack
         [SerializeField] Transform background;
         [Header("HUD")]
         [SerializeField] Transform hud;
-        
+
         /*[Header("Buttons")]
         [SerializeField] internal GameObject pauseButton;
         [SerializeField] internal GameObject continueButton;*/
@@ -19,7 +19,7 @@ namespace RiverAttack
         GameState m_CurrentGameState;
         GameManager m_GameManager;
         PlayersInputActions m_InputSystem;
-        
+
 
         #region UNITYMETHODS
         protected override void Awake()
@@ -45,9 +45,9 @@ namespace RiverAttack
             m_InputSystem.Player.Pause.performed += ExecutePauseGame;
         }
         #endregion
-        
-        
-        #region  Actions Application
+
+
+        #region Actions Application
         protected override void OnApplicationFocus(bool hasFocus)
         {
             base.OnApplicationFocus(hasFocus);
@@ -107,7 +107,7 @@ namespace RiverAttack
         {
             m_GameManager.ChangeState(new GameStatePlayGame());
         }
-        
+
         void ExecutePauseGame(InputAction.CallbackContext callbackContext)
         {
             m_CurrentGameState = GameManager.instance.currentGameState;
@@ -126,6 +126,8 @@ namespace RiverAttack
         public void ButtonReturnInitialMenu()
         {
             PlayClickSfx();
+            StopAllCoroutines();
+            //TODO: desligar tudo para depois mudar a scena.
             m_GameManager.ChangeState(new GameStateMenu(), GameManager.GameScenes.MainScene.ToString());
         }
     }

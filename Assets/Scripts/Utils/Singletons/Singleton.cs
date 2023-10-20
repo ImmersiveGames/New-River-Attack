@@ -81,7 +81,7 @@ namespace Utils
         protected virtual void OnDestroy()
         {
             Debug.Log($"Destrui o singleton {typeof(T)}");
-            //_applicationIsQuitting = true;
+            _applicationIsQuitting = true;
         }
 
         public void SetApplicationIsQuitting()

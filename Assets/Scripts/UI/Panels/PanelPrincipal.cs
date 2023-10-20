@@ -33,6 +33,13 @@ namespace RiverAttack
             Invoke(nameof(DeactivateScreenWash), SCREEN_WASH_TIMER);
         }
   #endregion
+
+        protected override void SetInternalMenu(int indexStart = 0)
+        {
+            base.SetInternalMenu(indexStart);
+            
+            //TODO:Logica das cameras
+        }
         void DeactivateScreenWash()
         {
             screenWash.gameObject.SetActive(false);

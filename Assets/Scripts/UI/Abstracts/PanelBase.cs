@@ -34,7 +34,7 @@ namespace RiverAttack
             Time.timeScale = pauseStatus ? 0 : 1;
         }
         #endregion
-        protected void SetInternalMenu(int indexStart = 0)
+        protected virtual void SetInternalMenu(int indexStart = 0)
         {
             if (menuPrincipal.Length < 1) return;
             for (int i = 0; i < menuPrincipal.Length; i++)

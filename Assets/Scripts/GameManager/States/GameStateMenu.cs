@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Utils;
 namespace RiverAttack
 {
     public class GameStateMenu : GameState
@@ -6,14 +7,12 @@ namespace RiverAttack
         const float TIME_TO_FADE_BGM = 0.01f;
         public override void OnLoadState()
         {
-            //throw new System.NotImplementedException();
+           
         }
         public override void EnterState()
         {
-            Debug.Log($"Entra no Estado: Menu {GameManager.instance}");
+            Debug.Log($"Entra no Estado: Menu {Singleton<GameManager>.instance}");
             GameAudioManager.instance.ChangeBGM(LevelTypes.Menu, TIME_TO_FADE_BGM);
-            //m_GameManager.startMenu.SetMenuPrincipal();
-            //m_GameManager.startMenu.SetMenuHudControl(false);
         }
         public override void UpdateState()
         {

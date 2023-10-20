@@ -12,6 +12,11 @@ namespace RiverAttack
         public Vector3 spawnPlayerPosition;
         public List<PlayerSettings> playerSettingsList = new List<PlayerSettings>();
         [SerializeField] internal List<PlayerMaster> initializedPlayerMasters = new List<PlayerMaster>();
+        
+        protected override void OnDestroy()
+        {
+            //base.OnDestroy();
+        }
 
         public void InstantiatePlayers()
         {

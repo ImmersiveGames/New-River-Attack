@@ -24,6 +24,10 @@ namespace RiverAttack
             openCutDirector.gameObject.SetActive(true);
             endCutDirector.gameObject.SetActive(false);
         }
+        protected override void OnDestroy()
+        {
+            //base.OnDestroy();
+        }
         public void InitializePLayerInTimeline(Transform playerTransform, Animator playerAnimator)
         {
             // Atualiza a cutscene com o animator do jogador;

@@ -50,6 +50,10 @@ namespace RiverAttack
         {
             m_GamePlayManager.EventBuildPathUpdate -= BuildNextPathForPoolLevel;
         }
+        protected override void OnDestroy()
+        {
+            //base.OnDestroy();
+        }
   #endregion
 
         internal void StartBuildMission(Levels level)
