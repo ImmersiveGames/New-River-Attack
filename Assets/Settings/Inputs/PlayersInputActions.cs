@@ -564,6 +564,17 @@ namespace RiverAttack
                 },
                 {
                     ""name"": """",
+                    ""id"": ""e4626065-ce74-41fd-8aa2-133253e199b6"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""c016fb2a-d0bb-494f-96f3-0b4546432b6e"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
@@ -588,6 +599,17 @@ namespace RiverAttack
                     ""name"": """",
                     ""id"": ""fc80e582-6ab7-4d43-ba57-4a9bed911c38"",
                     ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7fbf6ac2-92c1-436f-b22f-9e778594fffc"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
