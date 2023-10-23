@@ -14,10 +14,10 @@ namespace RiverAttack
         [SerializeField]
         internal PanelMenuGame panelMenuGame;
 
-        [Header("Level Settings")]
+        /*[Header("Level Settings")]
         [SerializeField]
         public Levels classicLevels;
-        public ListLevels missionLevels;
+        public ListLevels missionLevels;*/
         [SerializeField] int missionIndex = 0;
         [SerializeField] internal bool completePath;
         [SerializeField] internal bool readyToFinish;
@@ -71,7 +71,7 @@ namespace RiverAttack
             }
             m_GameManager = GameManager.instance;
             m_PlayerManager = PlayerManager.instance;
-            actualLevels = GetLevel(GameManager.instance.gameModes, missionIndex);
+            actualLevels = m_GameManager.GetLevel(missionIndex);
         }
 
         protected override void OnDestroy()
@@ -83,16 +83,6 @@ namespace RiverAttack
         public static GameSettings getGameSettings
         {
             get { return GameManager.instance.gameSettings; }
-        }
-        Levels GetLevel(GameManager.GameModes gameModes, int index = 0)
-        {
-            var level = gameModes switch
-            {
-                GameManager.GameModes.Classic => classicLevels,
-                GameManager.GameModes.Mission => missionLevels.Index(index),
-                _ => classicLevels
-            };
-            return level;
         }
 
         public void OnStartGame()
@@ -113,7 +103,6 @@ namespace RiverAttack
         }
         
 
-        
         public static void AddResultList(List<LogResults> list, PlayerSettings playerSettings, EnemiesScriptable enemy, int qnt, CollisionType collisionType)
         {
             var itemResults = list.Find(x => x.player == playerSettings && x.enemy == enemy && x.collisionType == collisionType);

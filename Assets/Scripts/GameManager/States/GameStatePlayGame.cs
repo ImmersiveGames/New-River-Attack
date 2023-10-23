@@ -3,9 +3,6 @@ namespace RiverAttack
 {
     public class GameStatePlayGame : GameState
     {
-        readonly GamePlayManager m_GamePlayManager;
-        readonly PlayerManager m_PlayerManager;
-        
         public override void OnLoadState()
         {
             
@@ -14,11 +11,7 @@ namespace RiverAttack
         {
             GamePlayManager.instance.panelMenuGame.StartMenuGame();
            Debug.Log($"Entra no Estado: PlayGame");
-            //m_GameManager.PanelBase.SetMenuPrincipal();
-            //m_GameManager.startMenu.SetMenuHudControl(true);
-            /*if (!m_PlayerManager.haveAnyPlayerInitialized)
-                m_PlayerManager.InstantiatePlayers();*/
-
+            
             //TODO: dar mais tempo para o pause;
             GamePlayManager.instance.OnStartGame();
         }

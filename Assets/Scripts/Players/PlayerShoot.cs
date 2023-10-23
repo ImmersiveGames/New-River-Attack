@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -48,6 +49,10 @@ namespace RiverAttack
             m_PlayersInputActions.Enable();
             m_CanExecuteAction = true;
             m_PlayersInputActions.Player.Shoot.performed += Execute;
+        }
+        void OnDestroy()
+        {
+            m_PlayersInputActions.Player.Shoot.performed -= Execute;
         }
   #endregion
         

@@ -24,8 +24,6 @@ namespace RiverAttack
         #region UNITYMETHODS
         protected override void Awake()
         {
-            m_InputSystem = new PlayersInputActions();
-            m_InputSystem.Enable();
             m_GameManager = GameManager.instance;
             if (!m_GameManager.panelBaseGame)
             {
@@ -36,6 +34,8 @@ namespace RiverAttack
         }
         void OnEnable()
         {
+            m_InputSystem = new PlayersInputActions();
+            m_InputSystem.Enable();
             lastIndex = 0;
             // As ações quando chmar o menu, mas ele não precisa se auto configurar a unica coisa que precisa aqui é ativar a hud
         }
@@ -127,6 +127,9 @@ namespace RiverAttack
         {
             PlayClickSfx();
             StopAllCoroutines();
+            PlayerManager.instance.DestroyPlayers();
+            GameMissionBuilder.instance.ResetBuildMission();
+            m_InputSystem.Disable();
             //TODO: desligar tudo para depois mudar a scena.
             m_GameManager.ChangeState(new GameStateMenu(), GameManager.GameScenes.MainScene.ToString());
         }

@@ -39,6 +39,14 @@ namespace RiverAttack
                 playerMaster.gameObject.SetActive(active);
             }
         }
+        internal void DestroyPlayers()
+        {
+            foreach (var playerMaster in initializedPlayerMasters)
+            {
+                DestroyImmediate(playerMaster.gameObject);
+            }
+            initializedPlayerMasters = new List<PlayerMaster>();
+        }
         public bool haveAnyPlayerInitialized
         {
             get { return initializedPlayerMasters.Count > 0; }

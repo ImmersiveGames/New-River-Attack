@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace RiverAttack
@@ -30,6 +31,10 @@ namespace RiverAttack
             DestroyMe();
         }
         void OnBecameInvisible()
+        {
+            Invoke(nameof(DestroyMe), .01f);
+        }
+        void OnDisable()
         {
             Invoke(nameof(DestroyMe), .01f);
         }

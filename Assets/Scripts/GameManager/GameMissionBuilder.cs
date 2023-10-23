@@ -10,8 +10,7 @@ namespace RiverAttack
         
         [Header("Level Settings"), SerializeField]
         Levels actualLevel;
-        [SerializeField]
-        int actualPathIndex;
+        int m_ActualPathIndex;
         [SerializeField]
         int maxLevels;
 
@@ -59,7 +58,7 @@ namespace RiverAttack
         internal void StartBuildMission(Levels level)
         {
             m_LevelRoot = new GameObject();
-            actualPathIndex = 0;
+            m_ActualPathIndex = 0;
             actualLevel = level;
             m_LevelRoot.name = level.levelName;
             CreateLevel(level, m_LevelRoot.transform);
@@ -122,15 +121,15 @@ namespace RiverAttack
         void BuildNextPathForPoolLevel(float posZ)
         {
             if (pathMilestones.Count <= 0) return;
-            if (m_GamePlayManager.completePath || !(pathMilestones[actualPathIndex] - posZ <= 0))
+            if (m_GamePlayManager.completePath || !(pathMilestones[m_ActualPathIndex] - posZ <= 0))
                 return;
             Tools.EqualizeLists(ref poolPathLevels, ref poolEnemyLevels);
 
             //Debug.Log($"Muda o BGM para: {actualLevel.setLevelList[actualPathIndex].bgmLevel}");
-            GameAudioManager.instance.ChangeBGM(actualLevel.setLevelList[actualPathIndex].bgmLevel, TIME_TO_FADE_BGM);
-            UpdatePoolLevel(poolPathLevels, actualPathIndex);
-            UpdatePoolLevel(poolEnemyLevels, actualPathIndex);
-            actualPathIndex++;
+            GameAudioManager.instance.ChangeBGM(actualLevel.setLevelList[m_ActualPathIndex].bgmLevel, TIME_TO_FADE_BGM);
+            UpdatePoolLevel(poolPathLevels, m_ActualPathIndex);
+            UpdatePoolLevel(poolEnemyLevels, m_ActualPathIndex);
+            m_ActualPathIndex++;
         }
 
         void UpdatePoolLevel(IReadOnlyList<GameObject> pool, int actualHandle)
