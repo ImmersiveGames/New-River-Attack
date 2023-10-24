@@ -16,7 +16,8 @@ namespace RiverAttack
         public bool beatGame;
 
         [Header("HUD Settings")]
-        public Sprite levelIcon;
+        [SerializeField] internal GameObject hudPath;
+        [SerializeField] internal GameObject hudBridge;
         public Vector3 levelIconPos;
         
         [Header("Build Settings")]

@@ -11,6 +11,8 @@ namespace Utils
         [Multiline]
         public string developerDescription = "";
 #endif
+        public Vector3 offset = new Vector3();
+        public Sprite levelIcon;
         public List<Levels> value = new List<Levels>();
 
         public void SetValue(List<Levels> newValue)
