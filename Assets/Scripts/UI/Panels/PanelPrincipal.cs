@@ -32,9 +32,15 @@ namespace RiverAttack
         void DeactivateScreenWash()
         {
             screenWash.gameObject.SetActive(false);
+            PlayAnimation(0f);
         }
 
         #region Buttons
+        public void PlayAnimation(float animStartTime)
+        {
+            m_timelineManager.PlayAnimation(animStartTime);
+        }
+
         public void ButtonExit()
         {
             PlayClickSfx();
@@ -63,6 +69,8 @@ namespace RiverAttack
             PlayClickSfx();
             SetInternalMenu(indexMenu);
         }
+
+ 
   #endregion
     }
 }
