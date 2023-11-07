@@ -15,12 +15,11 @@ namespace RiverAttack
         }
         public override void UpdateState()
         {
-           // Debug.Log($"Rodando no Estado: Menu");
+           Debug.Log($"Rodando no Estado: Menu");
         }
         public override void ExitState()
         {
-            //Debug.Log($"Saindo no Estado: Menu");
-
+            Debug.Log($"Saindo no Estado: Menu");
         }
     }
 }

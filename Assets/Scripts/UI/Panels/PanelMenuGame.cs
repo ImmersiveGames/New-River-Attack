@@ -46,7 +46,7 @@ namespace RiverAttack
         }
         #endregion
 
-
+#if !UNITY_EDITOR
         #region Actions Application
         protected override void OnApplicationFocus(bool hasFocus)
         {
@@ -62,6 +62,7 @@ namespace RiverAttack
                 ButtonGamePause();
         }
         #endregion
+#endif
 
         void StartMenuOnOpenScene()
         {
@@ -85,6 +86,14 @@ namespace RiverAttack
             menuInitial.gameObject.SetActive(active);
             background.gameObject.SetActive(active);
             hud.gameObject.SetActive(!active);
+        }
+
+        public void SetMenuEndPath()
+        {
+            m_CurrentGameState = GameManager.instance.currentGameState;
+            menuInitial.gameObject.SetActive(false);
+            background.gameObject.SetActive(false);
+            hud.gameObject.SetActive(false);
         }
         public void SetMenuGameOver()
         {

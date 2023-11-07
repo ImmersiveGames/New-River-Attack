@@ -14,11 +14,7 @@ namespace RiverAttack
         [SerializeField]
         internal PanelMenuGame panelMenuGame;
 
-        /*[Header("Level Settings")]
-        [SerializeField]
-        public Levels classicLevels;
-        public ListLevels missionLevels;*/
-        [SerializeField] int missionIndex = 0;
+        [Header("Level Settings")]
         [SerializeField] internal bool completePath;
         [SerializeField] internal bool readyToFinish;
         [Header("Debug Settings")]
@@ -71,7 +67,7 @@ namespace RiverAttack
             }
             m_GameManager = GameManager.instance;
             m_PlayerManager = PlayerManager.instance;
-            actualLevels = m_GameManager.GetLevel(missionIndex);
+            actualLevels = m_GameManager.GetLevel();
         }
 
         protected override void OnDestroy()

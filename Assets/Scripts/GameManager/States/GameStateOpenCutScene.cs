@@ -6,7 +6,9 @@ namespace RiverAttack
         const float TIME_TO_FADE_BGM = 0.1f;
         public override void OnLoadState()
         {
-            var startLevel = GameManager.instance.GetLevel(0);
+            var startLevel = GameManager.instance.GetLevel();
+            
+            Debug.Log($"Start: {startLevel}");
             var startBgm = startLevel.bgmStartLevel;
             GameAudioManager.instance.ChangeBGM(startBgm, TIME_TO_FADE_BGM);
         }

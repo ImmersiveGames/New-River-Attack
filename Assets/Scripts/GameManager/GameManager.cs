@@ -17,7 +17,7 @@ namespace RiverAttack
         [SerializeField] internal GameSettings gameSettings;
         [SerializeField] float awaitLoad = .5f;
         public LayerMask layerPlayer;
-        public enum GameScenes {MainScene, MissionHub, GamePlay }
+        public enum GameScenes {MainScene, MissionHub, GamePlay, EndGameCredits }
         public GameScenes gameScenes;
         public enum GameModes {Classic,Mission}
         internal GameModes gameModes;
@@ -25,7 +25,6 @@ namespace RiverAttack
         [SerializeField]
         public Levels classicLevels;
         public ListLevels missionLevels;
-        
         [Header("Menus")]
         [SerializeField]
         public PanelBase panelBaseGame;
@@ -69,12 +68,12 @@ namespace RiverAttack
             //base.OnDestroy();
         }
         #endregion
-        public Levels GetLevel(int index = 0)
+        public Levels GetLevel()
         {
             var level = gameModes switch
             {
                 GameModes.Classic => classicLevels,
-                GameModes.Mission => missionLevels.Index(index),
+                GameModes.Mission => missionLevels.Index(GamePlayingLog.instance.lastMissionIndex),
                 _ => classicLevels
             };
             return level;
@@ -84,6 +83,7 @@ namespace RiverAttack
         {
             if (currentGameState == nextState)
                 return;
+            if(loadSceneFinish) return;
             loadSceneFinish = true;
             currentGameState?.ExitState();
             currentGameState = nextState;
@@ -93,6 +93,7 @@ namespace RiverAttack
         
         internal void ChangeState(GameState nextState, string nextSceneName)
         {
+            if(loadSceneFinish) return;
             loadSceneFinish = true;
             StartCoroutine(LoadSceneAsync(nextState, nextSceneName));
         }

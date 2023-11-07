@@ -42,8 +42,6 @@ namespace RiverAttack
             poolPathLevels = new List<GameObject>();
             poolEnemyLevels = new List<GameObject>();
             pathMilestones = new List<float>();
-            if (GameManager.instance.debugMode) return;
-            //StartBuildMission(actualLevel);
         }
         void OnDisable()
         {
@@ -83,6 +81,7 @@ namespace RiverAttack
                 if (maxLevels > i)
                     poolPathLevels[i].SetActive(true);
             }
+            SetFinishEnemy();
             if (level.pathEnd == null) return;
             //TODO: Refazer o fim de fase para não spawnar desde o inicio (ou talvez sim mesmmo que ele crie o fim longe dos espaços)
             nextBound.x = level.levelOffset.x;
@@ -132,12 +131,27 @@ namespace RiverAttack
             m_ActualPathIndex++;
         }
 
+        void SetFinishEnemy()
+        {
+            var lastPool = poolEnemyLevels[^1];
+            var bridges = lastPool.GetComponentInChildren<EnemiesBridges>();
+            if (bridges == null)
+            {
+                lastPool = poolEnemyLevels[^2];
+                bridges = lastPool.GetComponentInChildren<EnemiesBridges>();
+            }
+            if (bridges != null)
+            {
+                bridges.IsFinish();
+            }
+        }
+
         void UpdatePoolLevel(IReadOnlyList<GameObject> pool, int actualHandle)
         {
-            int eixo = Mathf.CeilToInt(maxLevels / 2f);
-            int activeIndex = (actualHandle + 1) % pool.Count + eixo;
-            int deactivateIndex = actualHandle - eixo;
-            int removeIndex = actualHandle - eixo - 1;
+            int axle = Mathf.CeilToInt(maxLevels / 2f);
+            int activeIndex = (actualHandle + 1) % pool.Count + axle;
+            int deactivateIndex = actualHandle - axle;
+            int removeIndex = actualHandle - axle - 1;
 
 //            Debug.Log($"Index atual: {actualHandle}, Active: {activeIndex}, Desactive: {deactivateIndex}, Remove {removeIndex}");
 

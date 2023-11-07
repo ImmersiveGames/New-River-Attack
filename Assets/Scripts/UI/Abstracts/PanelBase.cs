@@ -31,6 +31,7 @@ namespace RiverAttack
             SetLocalization();
             //Debug.Log($"Tempos: {fadeInTime} , {fadeOutTime}");
         }
+        
         #region Actions Application
         protected virtual void OnApplicationFocus(bool hasFocus)
         {
@@ -42,6 +43,7 @@ namespace RiverAttack
             Time.timeScale = pauseStatus ? 0 : 1;
         }
         #endregion
+        
         protected virtual void SetInternalMenu(int indexStart = 0)
         {
             if (menuPrincipal.Length < 1) return;

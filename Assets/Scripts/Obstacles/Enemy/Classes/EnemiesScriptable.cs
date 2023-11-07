@@ -22,6 +22,6 @@ namespace RiverAttack
         public bool canRespawn;
         public bool canDestruct;
         public bool isCheckInPoint;
-        public bool isFinishLevel;
+        //public bool isFinishLevel;
     }
 }

@@ -47,18 +47,21 @@ namespace RiverAttack
         {
             GameAudioManager.instance.ChangeBGM(LevelTypes.Complete, 0.1f);
             endCutDirector.gameObject.SetActive(true);
+            //endCutDirector.Play();
             var panelMenuGame = m_GameManager.PanelBase<PanelMenuGame>();
             if (panelMenuGame != null)
             {
-                panelMenuGame.SetMenuPrincipal();
-                //panelMenuGame.SetMenuHudControl(false);
+                panelMenuGame.SetMenuEndPath();
             }
-            Invoke(nameof(ChangeEndGame), 0.2f);
+            Invoke(nameof(ChangeEndGame), 3f);
         }
         
         void ChangeEndGame()
         {
-            m_GameManager.ChangeState(new GameStateEndGame());
+            if(m_GameManager.gameModes == GameManager.GameModes.Classic)
+                m_GameManager.ChangeState(new GameStateEndGame(), GameManager.GameScenes.EndGameCredits.ToString());
+            if(m_GameManager.gameModes == GameManager.GameModes.Mission)
+                m_GameManager.ChangeState(new GameStateEndGame(), GameManager.GameScenes.MissionHub.ToString());
         }
     }
 }
