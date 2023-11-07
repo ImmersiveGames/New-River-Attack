@@ -1,8 +1,11 @@
-﻿using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using System.Collections;
 using UnityEngine;
+using Cinemachine;
+
+
 namespace RiverAttack
 {
     [RequireComponent(typeof(AudioSource))]
@@ -11,12 +14,17 @@ namespace RiverAttack
         [Header("Menus")]
         [SerializeField] protected Transform menuInitial;
         [SerializeField] Transform[] menuPrincipal;
-        [SerializeField] internal GameSettings gameSettings;
+        [SerializeField] CinemachineBrain cinemachineBrain;
+        [SerializeField] CinemachineVirtualCameraBase[] menuCamera;
+        [SerializeField] internal GameSettings gameSettings;        
+
         [Header("Menu SFX")]
         [SerializeField] AudioEventSample clickSound;
 
-        protected int lastIndex;
-        
+        [Header("Animation")]
+        [SerializeField] protected TimeLineManager m_timelineManager;
+
+        protected int lastIndex;        
 
         protected virtual void Awake()
         {
@@ -37,6 +45,7 @@ namespace RiverAttack
         protected virtual void SetInternalMenu(int indexStart = 0)
         {
             if (menuPrincipal.Length < 1) return;
+
             for (int i = 0; i < menuPrincipal.Length; i++)
             {
                 lastIndex = (menuPrincipal[i].gameObject.activeSelf) ? i : 0;
@@ -44,7 +53,10 @@ namespace RiverAttack
             }
             var selectPanel = menuPrincipal[indexStart].gameObject;
             selectPanel.SetActive(true);
+
             SetSelectGameObject(selectPanel);
+
+            SwitchCamera(indexStart);
         }
 
         static void SetSelectGameObject(GameObject goButton)
@@ -80,6 +92,19 @@ namespace RiverAttack
         {
             GameAudioManager.instance.PlaySfx(clickSound);
         }
+
+        protected void SwitchCamera(int cameraIndex) 
+        {
+            foreach (CinemachineVirtualCameraBase virtualCam in menuCamera) 
+            {
+                virtualCam.Priority = 0;
+                virtualCam.gameObject.SetActive(false);
+            }
+
+            menuCamera[cameraIndex].Priority = 10;            
+            menuCamera[cameraIndex].gameObject.SetActive(true);            
+        }
+
         public void ButtonBack()
         {
             PlayClickSfx();
