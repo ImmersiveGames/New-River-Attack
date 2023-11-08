@@ -11,11 +11,10 @@ namespace RiverAttack
     public sealed class GamePlayManager : Singleton<GamePlayManager>
     {
         [Header("Panels Settings")]
-        [SerializeField] PanelMenuGame panelMenuGame;
+        [SerializeField]
+        internal PanelMenuGame panelMenuGame;
 
         [Header("Level Settings")]
-        [SerializeField]
-        public Levels classicLevels;
         [SerializeField] internal bool completePath;
         [SerializeField] internal bool readyToFinish;
         [Header("Debug Settings")]
@@ -26,7 +25,7 @@ namespace RiverAttack
         internal bool getGodMode { get { return godMode; } }
         
         [Header("Power Up References")]
-        public CollectibleScriptable refilBomb;
+        public CollectibleScriptable refillBomb;
 
         internal Levels actualLevels;
         internal bool playerDead;
@@ -61,8 +60,19 @@ namespace RiverAttack
         #region UNITYMETHODS
         void Awake()
         {
+            if (FindObjectsOfType(typeof(GamePlayManager)).Length > 1)
+            {
+                gameObject.SetActive(false);
+                Destroy(this);
+            }
             m_GameManager = GameManager.instance;
             m_PlayerManager = PlayerManager.instance;
+            actualLevels = m_GameManager.GetLevel();
+        }
+
+        protected override void OnDestroy()
+        {
+            //base.OnDestroy();
         }
   #endregion
         public bool shouldBePlayingGame { get { return (m_GameManager.currentGameState is GameStatePlayGame && !completePath); } }
@@ -70,23 +80,25 @@ namespace RiverAttack
         {
             get { return GameManager.instance.gameSettings; }
         }
-        
 
         public void OnStartGame()
+        {
+            StartCoroutine(StartGamePlay(0));
+        }
+        public void OnRestartGame()
         {
             StartCoroutine(StartGamePlay());
         }
 
-        IEnumerator StartGamePlay()
+        IEnumerator StartGamePlay(float timeWait = 2f)
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(timeWait);
             m_PlayerManager.ActivePlayers(true);
             m_PlayerManager.UnPausedMovementPlayers();
             OnEventActivateEnemiesMaster();
         }
         
 
-        
         public static void AddResultList(List<LogResults> list, PlayerSettings playerSettings, EnemiesScriptable enemy, int qnt, CollisionType collisionType)
         {
             var itemResults = list.Find(x => x.player == playerSettings && x.enemy == enemy && x.collisionType == collisionType);

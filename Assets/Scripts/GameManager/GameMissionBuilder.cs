@@ -10,8 +10,7 @@ namespace RiverAttack
         
         [Header("Level Settings"), SerializeField]
         Levels actualLevel;
-        [SerializeField]
-        int actualPathIndex;
+        int m_ActualPathIndex;
         [SerializeField]
         int maxLevels;
 
@@ -43,19 +42,21 @@ namespace RiverAttack
             poolPathLevels = new List<GameObject>();
             poolEnemyLevels = new List<GameObject>();
             pathMilestones = new List<float>();
-            if (GameManager.instance.debugMode) return;
-            //StartBuildMission(actualLevel);
         }
         void OnDisable()
         {
             m_GamePlayManager.EventBuildPathUpdate -= BuildNextPathForPoolLevel;
+        }
+        protected override void OnDestroy()
+        {
+            //base.OnDestroy();
         }
   #endregion
 
         internal void StartBuildMission(Levels level)
         {
             m_LevelRoot = new GameObject();
-            actualPathIndex = 0;
+            m_ActualPathIndex = 0;
             actualLevel = level;
             m_LevelRoot.name = level.levelName;
             CreateLevel(level, m_LevelRoot.transform);
@@ -80,6 +81,7 @@ namespace RiverAttack
                 if (maxLevels > i)
                     poolPathLevels[i].SetActive(true);
             }
+            SetFinishEnemy();
             if (level.pathEnd == null) return;
             //TODO: Refazer o fim de fase para não spawnar desde o inicio (ou talvez sim mesmmo que ele crie o fim longe dos espaços)
             nextBound.x = level.levelOffset.x;
@@ -118,23 +120,38 @@ namespace RiverAttack
         void BuildNextPathForPoolLevel(float posZ)
         {
             if (pathMilestones.Count <= 0) return;
-            if (m_GamePlayManager.completePath || !(pathMilestones[actualPathIndex] - posZ <= 0))
+            if (m_GamePlayManager.completePath || !(pathMilestones[m_ActualPathIndex] - posZ <= 0))
                 return;
             Tools.EqualizeLists(ref poolPathLevels, ref poolEnemyLevels);
 
             //Debug.Log($"Muda o BGM para: {actualLevel.setLevelList[actualPathIndex].bgmLevel}");
-            GameAudioManager.instance.ChangeBGM(actualLevel.setLevelList[actualPathIndex].bgmLevel, TIME_TO_FADE_BGM);
-            UpdatePoolLevel(poolPathLevels, actualPathIndex);
-            UpdatePoolLevel(poolEnemyLevels, actualPathIndex);
-            actualPathIndex++;
+            GameAudioManager.instance.ChangeBGM(actualLevel.setLevelList[m_ActualPathIndex].bgmLevel, TIME_TO_FADE_BGM);
+            UpdatePoolLevel(poolPathLevels, m_ActualPathIndex);
+            UpdatePoolLevel(poolEnemyLevels, m_ActualPathIndex);
+            m_ActualPathIndex++;
+        }
+
+        void SetFinishEnemy()
+        {
+            var lastPool = poolEnemyLevels[^1];
+            var bridges = lastPool.GetComponentInChildren<EnemiesBridges>();
+            if (bridges == null)
+            {
+                lastPool = poolEnemyLevels[^2];
+                bridges = lastPool.GetComponentInChildren<EnemiesBridges>();
+            }
+            if (bridges != null)
+            {
+                bridges.IsFinish();
+            }
         }
 
         void UpdatePoolLevel(IReadOnlyList<GameObject> pool, int actualHandle)
         {
-            int eixo = Mathf.CeilToInt(maxLevels / 2f);
-            int activeIndex = (actualHandle + 1) % pool.Count + eixo;
-            int deactivateIndex = actualHandle - eixo;
-            int removeIndex = actualHandle - eixo - 1;
+            int axle = Mathf.CeilToInt(maxLevels / 2f);
+            int activeIndex = (actualHandle + 1) % pool.Count + axle;
+            int deactivateIndex = actualHandle - axle;
+            int removeIndex = actualHandle - axle - 1;
 
 //            Debug.Log($"Index atual: {actualHandle}, Active: {activeIndex}, Desactive: {deactivateIndex}, Remove {removeIndex}");
 

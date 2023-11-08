@@ -5,7 +5,8 @@ namespace RiverAttack
     {
         public override void OnLoadState()
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
+            GameManager.instance.DestroyGamePlay();
         }
 
         public override void EnterState()

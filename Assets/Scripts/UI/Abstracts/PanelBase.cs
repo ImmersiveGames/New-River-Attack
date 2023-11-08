@@ -1,9 +1,10 @@
-﻿using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using System.Collections;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.Serialization;
 
 
 namespace RiverAttack
@@ -14,15 +15,14 @@ namespace RiverAttack
         [Header("Menus")]
         [SerializeField] protected Transform menuInitial;
         [SerializeField] Transform[] menuPrincipal;
-        [SerializeField] CinemachineBrain cinemachineBrain;
+        [SerializeField] CinemachineBrain cineMachineBrain;
         [SerializeField] CinemachineVirtualCameraBase[] menuCamera;
         [SerializeField] internal GameSettings gameSettings;        
 
         [Header("Menu SFX")]
         [SerializeField] AudioEventSample clickSound;
 
-        [Header("Animation")]
-        [SerializeField] protected TimeLineManager m_timelineManager;
+        
 
         protected int lastIndex;        
 
@@ -31,6 +31,7 @@ namespace RiverAttack
             SetLocalization();
             //Debug.Log($"Tempos: {fadeInTime} , {fadeOutTime}");
         }
+        
         #region Actions Application
         protected virtual void OnApplicationFocus(bool hasFocus)
         {
@@ -42,7 +43,8 @@ namespace RiverAttack
             Time.timeScale = pauseStatus ? 0 : 1;
         }
         #endregion
-        protected void SetInternalMenu(int indexStart = 0)
+        
+        protected virtual void SetInternalMenu(int indexStart = 0)
         {
             if (menuPrincipal.Length < 1) return;
 
@@ -53,10 +55,7 @@ namespace RiverAttack
             }
             var selectPanel = menuPrincipal[indexStart].gameObject;
             selectPanel.SetActive(true);
-
             SetSelectGameObject(selectPanel);
-
-            SwitchCamera(indexStart);
         }
 
         static void SetSelectGameObject(GameObject goButton)
@@ -105,13 +104,15 @@ namespace RiverAttack
             menuCamera[cameraIndex].gameObject.SetActive(true);            
         }
 
-        protected void LoadSceneHub()
+        public void ButtonBack()
         {
-            SceneManager.LoadScene("HUB");
+            PlayClickSfx();
+            SetInternalMenu(lastIndex);
         }
-        protected void LoadSceneGamePlay()
+        public void ButtonIndexChange(int indexMenu)
         {
-            SceneManager.LoadScene("GamePlay");
+            PlayClickSfx();
+            SetInternalMenu(indexMenu);
         }
     }
 }

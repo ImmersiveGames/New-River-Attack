@@ -17,6 +17,8 @@ namespace RiverAttack
         public int playerDieWall;
         public int playerDieBullet;
         public int playerDieFuelEmpty;
+        public int lastMissionIndex;
+        public int lastMissionFinishIndex;
         public List<LogResults> hitEnemiesResultsList;
 
         public int GetEnemiesHit(EnemiesScriptable enemy)

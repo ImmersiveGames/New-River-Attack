@@ -61,6 +61,10 @@ namespace Shopping
         {
             m_InputSystem.UI_Controlls.Disable();
         }
+        protected override void OnDestroy()
+        {
+            //base.OnDestroy();
+        }
   #endregion
         void SetInitialReferences()
         {

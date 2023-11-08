@@ -11,7 +11,7 @@ namespace RiverAttack
         readonly GameManager m_GameManager;
         public override void OnLoadState()
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
         public override void EnterState()
         {

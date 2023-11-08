@@ -7,27 +7,35 @@ namespace RiverAttack
     [RequireComponent(typeof(AudioSource))]
     public class PanelMenuGame : PanelBase
     {
+        [Header("Background")]
+        [SerializeField] Transform background;
         [Header("HUD")]
         [SerializeField] Transform hud;
-        
-        [Header("Buttons")]
+
+        /*[Header("Buttons")]
         [SerializeField] internal GameObject pauseButton;
-        [SerializeField] internal GameObject continueButton;
+        [SerializeField] internal GameObject continueButton;*/
 
         GameState m_CurrentGameState;
+        GameManager m_GameManager;
         PlayersInputActions m_InputSystem;
-        
+
 
         #region UNITYMETHODS
         protected override void Awake()
         {
-            m_InputSystem = new PlayersInputActions();
-            m_InputSystem.Enable();
+            m_GameManager = GameManager.instance;
+            if (!m_GameManager.panelBaseGame)
+            {
+                m_GameManager.panelBaseGame = this;
+            }
             base.Awake();
             StartMenuOnOpenScene();
         }
         void OnEnable()
         {
+            m_InputSystem = new PlayersInputActions();
+            m_InputSystem.Enable();
             lastIndex = 0;
             // As ações quando chmar o menu, mas ele não precisa se auto configurar a unica coisa que precisa aqui é ativar a hud
         }
@@ -37,44 +45,55 @@ namespace RiverAttack
             m_InputSystem.Player.Pause.performed += ExecutePauseGame;
         }
         #endregion
-        
-        
-        #region  Actions Application
+
+#if !UNITY_EDITOR
+        #region Actions Application
         protected override void OnApplicationFocus(bool hasFocus)
         {
             base.OnApplicationFocus(hasFocus);
             if (!hasFocus && GameManager.instance.currentGameState is GameStatePlayGame)
-                    pauseButton.GetComponent<Button>().onClick.Invoke();
+                ButtonGamePause();
         }
 
         protected override void OnApplicationPause(bool pauseStatus)
         {
             base.OnApplicationPause(pauseStatus);
             if (pauseStatus && GameManager.instance.currentGameState is GameStatePlayGame)
-                    pauseButton.GetComponent<Button>().onClick.Invoke();
-
+                ButtonGamePause();
         }
         #endregion
+#endif
 
-        public void StartMenuOnOpenScene()
+        void StartMenuOnOpenScene()
         {
             m_CurrentGameState = GameManager.instance.currentGameState;
+            SetInternalMenu();
             menuInitial.gameObject.SetActive(false);
             hud.gameObject.SetActive(false);
+            background.gameObject.SetActive(false);
         }
         public void StartMenuGame()
         {
+            m_CurrentGameState = GameManager.instance.currentGameState;
             menuInitial.gameObject.SetActive(false);
+            background.gameObject.SetActive(false);
             hud.gameObject.SetActive(true);
-            
         }
-        public void SetMenuHudControl(bool active)
+
+        public void PauseMenu(bool active)
         {
-            /*menuHud.gameObject.SetActive(active);
-            menuControl.gameObject.SetActive(active);
-            menuGameOver.gameObject.SetActive(false);
-            
-            //menuFade.gameObject.SetActive(false);*/
+            m_CurrentGameState = GameManager.instance.currentGameState;
+            menuInitial.gameObject.SetActive(active);
+            background.gameObject.SetActive(active);
+            hud.gameObject.SetActive(!active);
+        }
+
+        public void SetMenuEndPath()
+        {
+            m_CurrentGameState = GameManager.instance.currentGameState;
+            menuInitial.gameObject.SetActive(false);
+            background.gameObject.SetActive(false);
+            hud.gameObject.SetActive(false);
         }
         public void SetMenuGameOver()
         {
@@ -89,18 +108,39 @@ namespace RiverAttack
             }
             menuGameOver.gameObject.SetActive(true);*/
         }
-        
+        void ButtonGamePause()
+        {
+            m_GameManager.ChangeState(new GameStatePause());
+        }
+        public void ButtonGameUnPause()
+        {
+            m_GameManager.ChangeState(new GameStatePlayGame());
+        }
+
         void ExecutePauseGame(InputAction.CallbackContext callbackContext)
         {
+            m_CurrentGameState = GameManager.instance.currentGameState;
+            Debug.Log($"Pause: {m_CurrentGameState}");
             switch (m_CurrentGameState)
             {
                 case GameStatePlayGame:
-                    pauseButton.GetComponent<Button>().onClick.Invoke();
+                    ButtonGamePause();
                     break;
                 case GameStatePause:
-                    continueButton.GetComponent<Button>().onClick.Invoke();
+                    ButtonGameUnPause();
                     break;
             }
+        }
+
+        public void ButtonReturnInitialMenu()
+        {
+            PlayClickSfx();
+            StopAllCoroutines();
+            PlayerManager.instance.DestroyPlayers();
+            GameMissionBuilder.instance.ResetBuildMission();
+            m_InputSystem.Disable();
+            //TODO: desligar tudo para depois mudar a scena.
+            m_GameManager.ChangeState(new GameStateMenu(), GameManager.GameScenes.MainScene.ToString());
         }
     }
 }

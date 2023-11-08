@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 namespace RiverAttack
-{ 
+{
     [RequireComponent(typeof(AudioSource))]
     public class PanelPrincipal : PanelBase
     {
-        const string NAME_SCENE_TO_LOAD = "GamePlay";
+        [Header("Animation")]
+        [SerializeField] protected TimeLineManager timelineManager;
         [Header("Menu Fades")]
-        [SerializeField]Transform screenWash;
+        [SerializeField] Transform screenWash;
         const float SCREEN_WASH_TIMER = 1f;
         GameManager m_GameManager;
 #region UNITYMETHODS
@@ -14,21 +16,32 @@ namespace RiverAttack
         {
             base.Awake();
             m_GameManager = GameManager.instance;
+            if (!m_GameManager.panelBaseGame)
+            {
+                m_GameManager.panelBaseGame = this;
+            }
+            
             menuInitial.gameObject.SetActive(true);
             screenWash.gameObject.SetActive(true);
             m_GameManager.panelFade.gameObject.SetActive(true);
         }
         void OnEnable()
         {
-            
+
             SetMenuPrincipal();
             lastIndex = 0;
         }
         void Start()
         {
-            Invoke(nameof(DeactivateScreenWash),SCREEN_WASH_TIMER);
+            Invoke(nameof(DeactivateScreenWash), SCREEN_WASH_TIMER);
         }
   #endregion
+
+        protected override void SetInternalMenu(int indexStart = 0)
+        {
+            base.SetInternalMenu(indexStart);
+            SwitchCamera(indexStart);
+        }
         void DeactivateScreenWash()
         {
             screenWash.gameObject.SetActive(false);
@@ -38,7 +51,7 @@ namespace RiverAttack
         #region Buttons
         public void PlayAnimation(float animStartTime)
         {
-            m_timelineManager.PlayAnimation(animStartTime);
+            timelineManager.PlayAnimation(animStartTime);
         }
 
         public void ButtonExit()
@@ -47,27 +60,18 @@ namespace RiverAttack
             Application.Quit();
         }
 
-        public void ButtonBack()
-        {
-            PlayClickSfx();
-            SetInternalMenu(lastIndex);
-        }
+        
         public void ButtonModeMission()
         {
             PlayClickSfx();
-            m_GameManager.PerformFadeOut();
+            m_GameManager.gameModes = GameManager.GameModes.Mission;
+            m_GameManager.ChangeState(new GameStateHub(), GameManager.GameScenes.MissionHub.ToString());
         }
         public void ButtonModeClassic()
         {
             PlayClickSfx();
-            m_GameManager.PerformFadeOut();
-            m_GameManager.ChangeState(new GameStateOpenCutScene(), NAME_SCENE_TO_LOAD);
-        }
-        
-        public void ButtonIndexChange(int indexMenu)
-        {
-            PlayClickSfx();
-            SetInternalMenu(indexMenu);
+            m_GameManager.gameModes = GameManager.GameModes.Classic;
+            m_GameManager.ChangeState(new GameStateOpenCutScene(), GameManager.GameScenes.GamePlay.ToString());
         }
 
  

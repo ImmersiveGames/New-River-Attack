@@ -27,6 +27,6 @@ public class ObstacleShakeCamera : MonoBehaviour
 
     void ShakeCamOnExplode()
     {
-        CameraShake.instance.ShakeCamera(shakeIntensity, shakeTime);
+        CameraShake.ShakeCamera(shakeIntensity, shakeTime);
     }
 }

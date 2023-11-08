@@ -7,6 +7,7 @@ namespace RiverAttack
     {
         public EnemiesScriptable enemy;
         [Header("Enemy Destroy Settings")]
+        [SerializeField] internal bool isFinishLevel;
         [SerializeField]
         GameObject deadParticlePrefab;
         [FormerlySerializedAs("timeoutDestroy")]
@@ -145,7 +146,7 @@ namespace RiverAttack
 
         void ShouldFinishGame()
         {
-            if (!enemy.isFinishLevel) return;
+            if (!isFinishLevel) return;
             gamePlayManager.readyToFinish = true;
         }
 
