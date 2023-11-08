@@ -23,7 +23,7 @@ namespace RiverAttack
         {
             PlayerManager.instance.ActivePlayers(false);
             GamePlayManager.instance.OnEventDeactivateEnemiesMaster();
-            
+           
             Debug.Log($"Sai do Estado: PlayGame");
         }
     }

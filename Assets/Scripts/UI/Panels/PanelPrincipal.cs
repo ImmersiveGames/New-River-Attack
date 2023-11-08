@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 namespace RiverAttack
 {
     [RequireComponent(typeof(AudioSource))]
     public class PanelPrincipal : PanelBase
     {
+        [Header("Animation")]
+        [SerializeField] protected TimeLineManager timelineManager;
         [Header("Menu Fades")]
         [SerializeField] Transform screenWash;
         const float SCREEN_WASH_TIMER = 1f;
@@ -37,8 +40,7 @@ namespace RiverAttack
         protected override void SetInternalMenu(int indexStart = 0)
         {
             base.SetInternalMenu(indexStart);
-            
-            //TODO:Logica das cameras
+            SwitchCamera(indexStart);
         }
         void DeactivateScreenWash()
         {
@@ -49,7 +51,7 @@ namespace RiverAttack
         #region Buttons
         public void PlayAnimation(float animStartTime)
         {
-            m_timelineManager.PlayAnimation(animStartTime);
+            timelineManager.PlayAnimation(animStartTime);
         }
 
         public void ButtonExit()

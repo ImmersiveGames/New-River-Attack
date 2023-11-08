@@ -15,7 +15,7 @@ namespace RiverAttack
         public bool debugMode;
         [Header("Game Settings")]
         [SerializeField] internal GameSettings gameSettings;
-        [SerializeField] float awaitLoad = .5f;
+        [SerializeField] float awaitLoad = .6f;
         public LayerMask layerPlayer;
         public enum GameScenes {MainScene, MissionHub, GamePlay, EndGameCredits }
         public GameScenes gameScenes;
@@ -105,7 +105,7 @@ namespace RiverAttack
             var loadSceneAsync = SceneManager.LoadSceneAsync(nextSceneName);
             loadSceneAsync.allowSceneActivation = false;
             currentGameState?.ExitState();
-            yield return new WaitForSeconds(m_FadeOutTime +awaitLoad);
+            yield return new WaitForSeconds(m_FadeOutTime + awaitLoad);
             
             currentGameState = nextState;
             while (!loadSceneAsync.isDone)
@@ -123,6 +123,12 @@ namespace RiverAttack
                 }
                 yield return null;
             }
+        }
+
+        internal void DestroyGamePlay()
+        {
+         DestroyImmediate(PlayerManager.instance);
+         
         }
         #endregion
         void PerformFadeOut()

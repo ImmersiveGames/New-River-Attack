@@ -6,7 +6,6 @@ namespace RiverAttack
     {
         [SerializeField] internal Levels level;
         [SerializeField] internal int myIndex;
-        [SerializeField] GameObject shoot;
         [SerializeField] GameObject explosion;
         
         //Spawn um tiro na posição do Player, move até este objeto
@@ -30,7 +29,7 @@ namespace RiverAttack
             //move até este objeto
             //Desativa este objeto
             //Ativa a explosão
-            // Muda O Estatus para Open;
+            level.levelsStates = LevelsStates.Open;
             GameHubManager.instance.readyHub = true;
 
         }

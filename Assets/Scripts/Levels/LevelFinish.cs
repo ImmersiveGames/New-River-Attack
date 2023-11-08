@@ -16,6 +16,11 @@ namespace RiverAttack
             if (other.GetComponentInParent<PlayerMaster>() == null) return;
             if (m_GamePlayManager.readyToFinish != true) return;
             GameTimelineManager.instance.CompletePathEndCutScene();
+            // Update level compleate
+            
+            if(m_GamePlayManager.actualLevels.levelsStates != LevelsStates.Open) return;
+
+            m_GamePlayManager.actualLevels.levelsStates = LevelsStates.Complete;
         }
   #endregion
         
