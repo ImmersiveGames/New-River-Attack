@@ -31,6 +31,10 @@ namespace RiverAttack
                 GameManager.instance.ChangeState(new GameStateHub());
             }
         }
+        protected override void OnDestroy()
+        {
+            //base.OnDestroy();
+        }
         
   #endregion
 

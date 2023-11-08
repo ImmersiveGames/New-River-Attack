@@ -43,7 +43,7 @@ namespace RiverAttack
         {
             foreach (var playerMaster in initializedPlayerMasters)
             {
-                DestroyImmediate(playerMaster.gameObject);
+                Destroy(playerMaster.gameObject);
             }
             initializedPlayerMasters = new List<PlayerMaster>();
         }

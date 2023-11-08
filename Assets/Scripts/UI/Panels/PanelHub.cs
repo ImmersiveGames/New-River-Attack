@@ -11,6 +11,7 @@ namespace RiverAttack
         Levels m_ActualLevel;
         bool m_OneClickButton;
 
+        PlayersInputActions m_InputSystem;
         GameHubManager m_GameHubManager;
         void Awake()
         {
@@ -18,6 +19,8 @@ namespace RiverAttack
         }
         void OnEnable()
         {
+            m_InputSystem = new PlayersInputActions();
+            m_InputSystem.Enable();
             //TODO: Pegar o level salvo;
             nextIndex = GamePlayingLog.instance.lastMissionIndex;
             Debug.Log($"start index: {nextIndex}");
@@ -80,6 +83,13 @@ namespace RiverAttack
         public void PlayClickSfx()
         {
             GameAudioManager.instance.PlaySfx(clickSound);
+        }
+        public void ButtonReturnInitialMenu()
+        {
+            PlayClickSfx();
+            StopAllCoroutines();
+            //TODO: desligar tudo para depois mudar a scena.
+            GameManager.instance.ChangeState(new GameStateMenu(), GameManager.GameScenes.MainScene.ToString());
         }
     }
 }

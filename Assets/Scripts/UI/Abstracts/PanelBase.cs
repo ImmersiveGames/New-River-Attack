@@ -4,6 +4,7 @@ using UnityEngine.Localization.Settings;
 using System.Collections;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.Serialization;
 
 
 namespace RiverAttack
@@ -14,15 +15,14 @@ namespace RiverAttack
         [Header("Menus")]
         [SerializeField] protected Transform menuInitial;
         [SerializeField] Transform[] menuPrincipal;
-        [SerializeField] CinemachineBrain cinemachineBrain;
+        [SerializeField] CinemachineBrain cineMachineBrain;
         [SerializeField] CinemachineVirtualCameraBase[] menuCamera;
         [SerializeField] internal GameSettings gameSettings;        
 
         [Header("Menu SFX")]
         [SerializeField] AudioEventSample clickSound;
 
-        [Header("Animation")]
-        [SerializeField] protected TimeLineManager m_timelineManager;
+        
 
         protected int lastIndex;        
 
@@ -55,10 +55,7 @@ namespace RiverAttack
             }
             var selectPanel = menuPrincipal[indexStart].gameObject;
             selectPanel.SetActive(true);
-
             SetSelectGameObject(selectPanel);
-
-            SwitchCamera(indexStart);
         }
 
         static void SetSelectGameObject(GameObject goButton)

@@ -172,7 +172,7 @@ namespace RiverAttack
             poolPathLevels = new List<GameObject>();
             poolEnemyLevels = new List<GameObject>();
             pathMilestones = new List<float>();
-            DestroyImmediate(m_LevelRoot);
+            Destroy(m_LevelRoot);
             StartBuildMission(actualLevel);
         }
     }
