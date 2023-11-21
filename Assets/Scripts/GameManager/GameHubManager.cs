@@ -8,6 +8,7 @@ namespace RiverAttack
     {
         [SerializeField] internal ListLevels missionListLevels;
         [SerializeField] internal List<float> hubMilestones;
+        [SerializeField] PanelHub panelHub;
         [SerializeField] GamePlayingLog gamePlayingLog;
         public bool readyHub;
         [Header("HUB Icon Color")]
@@ -15,6 +16,7 @@ namespace RiverAttack
         public Color actualColor;
         public Color completeColor;
         public Color openColor;
+        
     #region UNITYMETHODS
         void Awake()
         {
@@ -38,15 +40,16 @@ namespace RiverAttack
         
   #endregion
 
-        #region Delagetas
+        #region Delagetes
+        
+        public delegate void HubEventNormalHandler();
+        internal event HubEventNormalHandler CompleteLevel;
         public delegate void HubEventHandler(int index);
         internal event HubEventHandler MissionIndex;
-        public delegate void IconEventHandler(LevelsStates states);
-        internal event IconEventHandler ChangeState;
+        /*public delegate void IconEventHandler(LevelsStates states);
+        internal event IconEventHandler ChangeState;*/
   #endregion
-
         
-
         public Color SetColorStates(LevelsStates levelsStates)
         {
             return levelsStates switch
@@ -58,15 +61,28 @@ namespace RiverAttack
                 _ => lockedColor
             };
         }
+
+        internal void MissionNextLevel()
+        {
+            gamePlayingLog.lastMissionIndex++;
+            gamePlayingLog.lastMissionFinishIndex++;
+            panelHub.ButtonNextMission(+1);
+        }
+        
+        internal void OnCheckCompleteLevel()
+        {
+            Debug.Log($"Checar se Algum Nivel foi completo");
+            CompleteLevel?.Invoke();
+        }
         
         internal void OnPlayerPosition(int index)
         {
             MissionIndex?.Invoke(index);
         }
 
-        internal void OnChangeState(LevelsStates states)
+        /*internal void OnChangeState(LevelsStates states)
         {
             ChangeState?.Invoke(states);
-        }
+        }*/
     }
 }

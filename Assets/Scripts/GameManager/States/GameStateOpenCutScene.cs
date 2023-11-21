@@ -7,7 +7,6 @@ namespace RiverAttack
         public override void OnLoadState()
         {
             var startLevel = GameManager.instance.GetLevel();
-            
             Debug.Log($"Start: {startLevel}");
             var startBgm = startLevel.bgmStartLevel;
             GameAudioManager.instance.ChangeBGM(startBgm, TIME_TO_FADE_BGM);
@@ -22,7 +21,7 @@ namespace RiverAttack
 
         public override void UpdateState()
         {
-            if (GameManager.instance.loadSceneFinish) return;
+            if (GameManager.instance.onLoadScene) return;
             Debug.Log($"CutScene!");
         }
         public override void ExitState()

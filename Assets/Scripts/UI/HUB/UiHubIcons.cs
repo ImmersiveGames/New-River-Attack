@@ -51,13 +51,21 @@ namespace RiverAttack
 
         void SetupMission(int indexMission)
         {
-            m_MissionIcon.color = m_GameHubManager.SetColorStates(LevelsStates.Open);
-            level.levelsStates = LevelsStates.Open;
             if (indexMission == myIndex)
             {
-                m_MissionIcon.color = m_GameHubManager.SetColorStates(LevelsStates.Actual);
-                level.levelsStates = LevelsStates.Actual;
+                if (level.levelsStates != LevelsStates.Complete)
+                {
+                    m_MissionIcon.color = m_GameHubManager.SetColorStates(LevelsStates.Actual);
+                    level.levelsStates = LevelsStates.Actual;
+                }
+                else
+                {
+                    m_MissionIcon.color = m_GameHubManager.SetColorStates(LevelsStates.Complete);
+                }
+                return;
             }
+            m_MissionIcon.color = m_GameHubManager.SetColorStates(LevelsStates.Open);
+            level.levelsStates = LevelsStates.Open;
             if (GamePlayingLog.instance.lastMissionFinishIndex >= myIndex)
                 return;
             m_MissionIcon.color = m_GameHubManager.SetColorStates(LevelsStates.Locked);

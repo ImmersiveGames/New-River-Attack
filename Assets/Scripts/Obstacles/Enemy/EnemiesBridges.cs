@@ -12,7 +12,6 @@ namespace RiverAttack
         public void IsFinish()
         {
             m_EnemiesMaster.isFinishLevel = true;
-            m_EnemiesMaster.enemy.isCheckInPoint = false;
         }
     }
 }

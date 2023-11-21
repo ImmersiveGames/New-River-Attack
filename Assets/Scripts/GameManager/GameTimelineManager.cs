@@ -61,7 +61,7 @@ namespace RiverAttack
             if(m_GameManager.gameModes == GameManager.GameModes.Classic)
                 m_GameManager.ChangeState(new GameStateEndGame(), GameManager.GameScenes.EndGameCredits.ToString());
             if(m_GameManager.gameModes == GameManager.GameModes.Mission)
-                m_GameManager.ChangeState(new GameStateEndGame(), GameManager.GameScenes.MissionHub.ToString());
+                m_GameManager.ChangeState(new GameStateHub(), GameManager.GameScenes.MissionHub.ToString());
         }
     }
 }

@@ -25,7 +25,6 @@ namespace RiverAttack
             nextIndex = GamePlayingLog.instance.lastMissionIndex;
             Debug.Log($"start index: {nextIndex}");
             m_ActualLevel = m_GameHubManager.missionListLevels.Index(nextIndex);
-            m_ActualLevel.levelsStates = LevelsStates.Actual;
             missionName.text = m_ActualLevel.levelName;
         }
 

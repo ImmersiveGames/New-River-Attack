@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.Playables;
-using Utils;
 namespace RiverAttack
 {
     public class GameStateEndCutScene : GameState
     {
-        const float TIME_TO_FADE_BGM = 0.1f;
-        const float TOLERANCE = 1f;
+        /*const float TIME_TO_FADE_BGM = 0.1f;
+        const float TOLERANCE = 1f;*/
         readonly PlayableDirector m_PlayableDirector;
         readonly GameManager m_GameManager;
         public override void OnLoadState()
@@ -15,7 +14,9 @@ namespace RiverAttack
         }
         public override void EnterState()
         {
-            Debug.Log($"Entra no Estado: CutScene END");
+            Debug.Log($"Enter State: CutScene END");
+            PlayerManager.instance.DestroyPlayers();
+            GameMissionBuilder.instance.ResetBuildMission();
             GameTimelineManager.instance.endCutDirector.gameObject.SetActive(false);
             
            /*var playerMaster = m_GameManager.initializedPlayerMasters[0];
@@ -33,7 +34,7 @@ namespace RiverAttack
 
         public override void UpdateState()
         {
-            Debug.Log($"Rodando no Estado: CutScene END");
+            Debug.Log($"Run State: CutScene END");
             /*if (m_PlayableDirector == null) return;
 
             // Verificar se a animação já terminou

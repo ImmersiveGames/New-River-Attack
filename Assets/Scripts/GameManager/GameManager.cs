@@ -40,7 +40,7 @@ namespace RiverAttack
             return panelBaseGame as T;
         }
         
-        internal bool loadSceneFinish;
+        internal bool onLoadScene;
         public GameState currentGameState { get; private set; }
 
         #region UNITYMETHODS
@@ -60,7 +60,7 @@ namespace RiverAttack
         }
         void Update()
         {
-            if(!loadSceneFinish)
+            if(!onLoadScene)
                 currentGameState?.UpdateState();
         }
         protected override void OnDestroy()
@@ -83,18 +83,18 @@ namespace RiverAttack
         {
             if (currentGameState == nextState)
                 return;
-            if(loadSceneFinish) return;
-            loadSceneFinish = true;
+            if(onLoadScene) return;
+            onLoadScene = true;
             currentGameState?.ExitState();
             currentGameState = nextState;
             currentGameState?.EnterState();
-            loadSceneFinish = false;
+            onLoadScene = false;
         }
         
         internal void ChangeState(GameState nextState, string nextSceneName)
         {
-            if(loadSceneFinish) return;
-            loadSceneFinish = true;
+            if(onLoadScene) return;
+            onLoadScene = true;
             StartCoroutine(LoadSceneAsync(nextState, nextSceneName));
         }
         IEnumerator LoadSceneAsync(GameState nextState,string nextSceneName)
@@ -119,7 +119,7 @@ namespace RiverAttack
                     PerformFadeIn();
                     
                     currentGameState?.EnterState();
-                    loadSceneFinish = false;
+                    onLoadScene = false;
                 }
                 yield return null;
             }
