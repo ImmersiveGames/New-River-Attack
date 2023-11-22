@@ -33,8 +33,15 @@ namespace RiverAttack
                 GameManager.instance.ChangeState(new GameStateHub());
             }
         }
+
+        void OnDisable()
+        {
+            readyHub = false;
+            //StopAllCoroutines();
+        }
         protected override void OnDestroy()
         {
+
             //base.OnDestroy();
         }
         
@@ -46,8 +53,6 @@ namespace RiverAttack
         internal event HubEventNormalHandler CompleteLevel;
         public delegate void HubEventHandler(int index);
         internal event HubEventHandler MissionIndex;
-        /*public delegate void IconEventHandler(LevelsStates states);
-        internal event IconEventHandler ChangeState;*/
   #endregion
         
         public Color SetColorStates(LevelsStates levelsStates)
@@ -71,7 +76,7 @@ namespace RiverAttack
         
         internal void OnCheckCompleteLevel()
         {
-            Debug.Log($"Checar se Algum Nivel foi completo");
+            //Debug.Log($"Checar se Algum Nivel foi completo");
             CompleteLevel?.Invoke();
         }
         
@@ -79,10 +84,5 @@ namespace RiverAttack
         {
             MissionIndex?.Invoke(index);
         }
-
-        /*internal void OnChangeState(LevelsStates states)
-        {
-            ChangeState?.Invoke(states);
-        }*/
     }
 }

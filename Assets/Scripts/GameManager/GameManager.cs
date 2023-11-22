@@ -125,7 +125,7 @@ namespace RiverAttack
             }
         }
 
-        internal void DestroyGamePlay()
+        internal static void DestroyGamePlay()
         {
          DestroyImmediate(PlayerManager.instance);
          

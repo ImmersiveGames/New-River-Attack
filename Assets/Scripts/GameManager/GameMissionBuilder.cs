@@ -50,6 +50,10 @@ namespace RiverAttack
         protected override void OnDestroy()
         {
             //base.OnDestroy();
+            poolPathLevels = new List<GameObject>();
+            poolEnemyLevels = new List<GameObject>();
+            pathMilestones = new List<float>();
+            Destroy(m_LevelRoot);
         }
   #endregion
 
@@ -131,9 +135,26 @@ namespace RiverAttack
             m_ActualPathIndex++;
         }
 
+        EnemiesBridges FindEnemyBridges()
+        {
+            for (int i = poolEnemyLevels.Count - 1; i >= 0; i--)
+            {
+                var lastPool = poolEnemyLevels[i];
+                var bridges = lastPool.GetComponentInChildren<EnemiesBridges>();
+                if (bridges != null) return bridges;
+            }
+            return null;
+        }
+
         void SetFinishEnemy()
         {
-            var lastPool = poolEnemyLevels[^1];
+
+            var finalBridge = FindEnemyBridges();
+            if (finalBridge != null)
+            {
+                finalBridge.IsFinish();
+            }
+            /*var lastPool = poolEnemyLevels[^1];
             var bridges = lastPool.GetComponentInChildren<EnemiesBridges>();
             if (bridges == null)
             {
@@ -143,7 +164,7 @@ namespace RiverAttack
             if (bridges != null)
             {
                 bridges.IsFinish();
-            }
+            }*/
         }
 
         void UpdatePoolLevel(IReadOnlyList<GameObject> pool, int actualHandle)

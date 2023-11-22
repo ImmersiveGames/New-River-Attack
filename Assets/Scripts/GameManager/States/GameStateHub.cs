@@ -4,7 +4,7 @@ namespace RiverAttack
     public class GameStateHub: GameState
     {
         const float TIME_TO_FADE_BGM = 0.1f;
-        bool m_CheckCompleteLevel = false;
+        bool m_CheckCompleteLevel;
         public override void OnLoadState()
         {
             GameManager.instance.gameModes = GameManager.GameModes.Mission;
@@ -26,8 +26,8 @@ namespace RiverAttack
         }
         public override void ExitState()
         {
-            GameHubManager.instance.readyHub = false;
             Debug.Log($"Sai do Estado: HUB");
+            System.GC.Collect();
         }
     }
 }

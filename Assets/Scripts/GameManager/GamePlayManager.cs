@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Utils;
 
 namespace RiverAttack
@@ -72,6 +69,8 @@ namespace RiverAttack
 
         protected override void OnDestroy()
         {
+            DestroyImmediate(m_PlayerManager);
+            StopAllCoroutines();
             //base.OnDestroy();
         }
   #endregion
@@ -97,7 +96,10 @@ namespace RiverAttack
             m_PlayerManager.UnPausedMovementPlayers();
             OnEventActivateEnemiesMaster();
         }
-        
+        public void GameOverMenu()
+        {
+            panelMenuGame.SetMenuGameOver();
+        }
 
         public static void AddResultList(List<LogResults> list, PlayerSettings playerSettings, EnemiesScriptable enemy, int qnt, CollisionType collisionType)
         {

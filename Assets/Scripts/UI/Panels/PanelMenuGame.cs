@@ -97,6 +97,10 @@ namespace RiverAttack
         }
         public void SetMenuGameOver()
         {
+            hud.gameObject.SetActive(false);
+            background.gameObject.SetActive(false);
+            menuInitial.gameObject.SetActive(true);
+            SetInternalMenu(menuPrincipal.Length - 1);
             /*menuControl.gameObject.SetActive(false);
             menuHud.gameObject.SetActive(false);
             menuParent.gameObject.SetActive(true);

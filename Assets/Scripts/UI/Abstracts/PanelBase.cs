@@ -14,7 +14,7 @@ namespace RiverAttack
     {
         [Header("Menus")]
         [SerializeField] protected Transform menuInitial;
-        [SerializeField] Transform[] menuPrincipal;
+        [SerializeField] protected Transform[] menuPrincipal;
         [SerializeField] CinemachineBrain cineMachineBrain;
         [SerializeField] CinemachineVirtualCameraBase[] menuCamera;
         [SerializeField] internal GameSettings gameSettings;        

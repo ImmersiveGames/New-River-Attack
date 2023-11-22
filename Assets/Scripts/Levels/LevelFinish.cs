@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace RiverAttack
@@ -17,11 +18,6 @@ namespace RiverAttack
             if (m_GamePlayManager.readyToFinish != true) return;
             m_GamePlayManager.actualLevels.levelsStates = LevelsStates.Complete;
             GameTimelineManager.instance.CompletePathEndCutScene();
-            // Update level compleate
-            
-            //if(m_GamePlayManager.actualLevels.levelsStates != LevelsStates.Actual) return;
-
-            
         }
   #endregion
         

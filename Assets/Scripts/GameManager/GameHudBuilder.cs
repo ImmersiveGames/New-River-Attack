@@ -78,7 +78,7 @@ namespace RiverAttack
         void DisableBuildMission()
         {
             poolPathLevels = new List<GameObject>();
-            DestroyImmediate(m_LevelRoot);
+            Destroy(m_LevelRoot);
         }
     }
 }

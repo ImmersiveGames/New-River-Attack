@@ -34,6 +34,7 @@ namespace RiverAttack
         }
         void OnDisable()
         {
+            if(GameHubManager.instance)
             GameHubManager.instance.CompleteLevel -= CheckLevelComplete;
         }
         void CheckLevelComplete()

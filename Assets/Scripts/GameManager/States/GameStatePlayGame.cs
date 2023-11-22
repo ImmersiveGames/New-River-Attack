@@ -25,6 +25,7 @@ namespace RiverAttack
             GamePlayManager.instance.OnEventDeactivateEnemiesMaster();
            
             Debug.Log($"Sai do Estado: PlayGame");
+            System.GC.Collect();
         }
     }
 }

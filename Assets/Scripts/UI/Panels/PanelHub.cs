@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 namespace RiverAttack
@@ -26,6 +27,11 @@ namespace RiverAttack
             Debug.Log($"start index: {nextIndex}");
             m_ActualLevel = m_GameHubManager.missionListLevels.Index(nextIndex);
             missionName.text = m_ActualLevel.levelName;
+        }
+
+        void OnDestroy()
+        {
+            Destroy(m_GameHubManager);
         }
 
         public void ButtonNextMission(int increment)
