@@ -715,6 +715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 470845e1184cf1d4abf8d32f7e8cd85b, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1795330444146210, guid: 139f769fdedea1c42b49a2c24ffbde00,
     type: 3}
   timeoutDestroyExplosion: 1.7
@@ -1112,6 +1113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: a0709a94617ca984bb9344a58aaf9b56, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
   timeoutDestroyExplosion: 2
@@ -1966,6 +1968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: a0709a94617ca984bb9344a58aaf9b56, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
   timeoutDestroyExplosion: 2
@@ -2768,6 +2771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: a0709a94617ca984bb9344a58aaf9b56, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
   timeoutDestroyExplosion: 2
@@ -3113,6 +3117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 276faab9f9ae836498b6902d391a55c6, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
   timeoutDestroyExplosion: 2
@@ -3643,6 +3648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 697746d822be856439f7c3f8eb2516e6, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
   timeoutDestroyExplosion: 2
@@ -4063,6 +4069,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 470845e1184cf1d4abf8d32f7e8cd85b, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1795330444146210, guid: 139f769fdedea1c42b49a2c24ffbde00,
     type: 3}
   timeoutDestroyExplosion: 1.7
@@ -4782,6 +4789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 697746d822be856439f7c3f8eb2516e6, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
   timeoutDestroyExplosion: 2
@@ -5124,6 +5132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 40a3642ec59ad174d9971c223a23d903, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: fa95fafd8ce16b045bef9998c0084598,
     type: 3}
   timeoutDestroyExplosion: 2.2
@@ -5523,6 +5532,7 @@ GameObject:
   - component: {fileID: 1051854702247434371}
   - component: {fileID: 6017705178954646370}
   - component: {fileID: 7767888840015565828}
+  - component: {fileID: 3492654088757551256}
   m_Layer: 7
   m_Name: Forest_Bridge_Big
   m_TagString: Untagged
@@ -5725,6 +5735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 93a6c1697087bbd4cb55cf77d1372140, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1813002411379386, guid: 9cc7d60d014839f4cb031aaf4b2a4162,
     type: 3}
   timeoutDestroyExplosion: 1.8
@@ -5786,6 +5797,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shakeIntensity: 6
   shakeTime: 0.2
+--- !u!114 &3492654088757551256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2743644956320993620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46ea3e76f83a4c0ca9117f5c42534c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2762611182338655140
 GameObject:
   m_ObjectHideFlags: 0
@@ -5966,6 +5989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: a0709a94617ca984bb9344a58aaf9b56, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
   timeoutDestroyExplosion: 2
@@ -6597,6 +6621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 470845e1184cf1d4abf8d32f7e8cd85b, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1795330444146210, guid: 139f769fdedea1c42b49a2c24ffbde00,
     type: 3}
   timeoutDestroyExplosion: 1.7
@@ -6972,6 +6997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: a0709a94617ca984bb9344a58aaf9b56, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
   timeoutDestroyExplosion: 2
@@ -7501,6 +7527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 40a3642ec59ad174d9971c223a23d903, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: fa95fafd8ce16b045bef9998c0084598,
     type: 3}
   timeoutDestroyExplosion: 2.2
@@ -9044,6 +9071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 276faab9f9ae836498b6902d391a55c6, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
   timeoutDestroyExplosion: 2
@@ -9526,6 +9554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 276faab9f9ae836498b6902d391a55c6, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
   timeoutDestroyExplosion: 2
@@ -10039,6 +10068,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: a0709a94617ca984bb9344a58aaf9b56, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
   timeoutDestroyExplosion: 2
@@ -10573,6 +10603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 697746d822be856439f7c3f8eb2516e6, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
   timeoutDestroyExplosion: 2
@@ -11464,6 +11495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 470845e1184cf1d4abf8d32f7e8cd85b, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1795330444146210, guid: 139f769fdedea1c42b49a2c24ffbde00,
     type: 3}
   timeoutDestroyExplosion: 1.7
@@ -11963,6 +11995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 470845e1184cf1d4abf8d32f7e8cd85b, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1795330444146210, guid: 139f769fdedea1c42b49a2c24ffbde00,
     type: 3}
   timeoutDestroyExplosion: 1.7
@@ -12611,6 +12644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 697746d822be856439f7c3f8eb2516e6, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
   timeoutDestroyExplosion: 2
@@ -13475,6 +13509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 697746d822be856439f7c3f8eb2516e6, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
   timeoutDestroyExplosion: 2
@@ -14071,6 +14106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 276faab9f9ae836498b6902d391a55c6, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
   timeoutDestroyExplosion: 2
@@ -14413,6 +14449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 40a3642ec59ad174d9971c223a23d903, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: fa95fafd8ce16b045bef9998c0084598,
     type: 3}
   timeoutDestroyExplosion: 2.2
@@ -15155,6 +15192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 470845e1184cf1d4abf8d32f7e8cd85b, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1795330444146210, guid: 139f769fdedea1c42b49a2c24ffbde00,
     type: 3}
   timeoutDestroyExplosion: 1.7
@@ -17473,6 +17511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 6612ffb0b1f32c5409e799cb7952b4a9, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
   timeoutDestroyExplosion: 2
