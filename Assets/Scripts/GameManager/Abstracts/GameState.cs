@@ -1,11 +1,9 @@
 ﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 namespace RiverAttack
 {
     public abstract class GameState
     {
-        public abstract void OnLoadState();
+        public abstract IEnumerator OnLoadState();
         public abstract void EnterState();
         public abstract void UpdateState();
         public abstract void ExitState();

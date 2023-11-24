@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Utils;
 namespace RiverAttack
 {
@@ -15,26 +16,24 @@ namespace RiverAttack
         public bool debugMode;
         [Header("Game Settings")]
         [SerializeField] internal GameSettings gameSettings;
-        [SerializeField] float awaitLoad = 0.5f;
         public LayerMask layerPlayer;
         public enum GameScenes {MainScene, MissionHub, GamePlay, EndGameCredits }
         public GameScenes gameScenes;
         public enum GameModes {Classic,Mission}
         internal GameModes gameModes;
         [Header("Level Settings")]
-        [SerializeField]
         public Levels classicLevels;
         public ListLevels missionLevels;
         [Header("Menus")]
         [SerializeField]
         public PanelBase panelBaseGame;
         [Header("Menu Fades")]
+        public string nameSceneTransition = "TransitionalScene";
         public Transform panelFade;
-        [SerializeField] Animator fadeAnimator;
-        float m_FadeInTime;
-        float m_FadeOutTime;
-        static readonly int FadeIn = Animator.StringToHash("FadeIn");
-        static readonly int FadeOut = Animator.StringToHash("FadeOut");
+        public Image fadeImage;
+        //[SerializeField] Animator fadeAnimator;
+        [SerializeField] float fadeInTime = 1f;
+        [SerializeField] float fadeOutTime = 1f;
         public T PanelBase<T>() where T : class
         {
             return panelBaseGame as T;
@@ -44,16 +43,6 @@ namespace RiverAttack
         public GameState currentGameState { get; private set; }
 
         #region UNITYMETHODS
-        public void Awake()
-        {
-            if (FindObjectsOfType(typeof(GameManager)).Length > 1)
-            {
-                gameObject.SetActive(false);
-                Destroy(this);
-            }
-            m_FadeInTime = Tools.GetAnimationTime(fadeAnimator, "FadeIn");
-            m_FadeOutTime = Tools.GetAnimationTime(fadeAnimator, "FadeOut");
-        }
         void Start()
         {
             ChangeState(new GameStateMenu());
@@ -101,43 +90,70 @@ namespace RiverAttack
         {
             if (currentGameState == nextState)
                 yield break;
-            PerformFadeOut();
-            var loadSceneAsync = SceneManager.LoadSceneAsync(nextSceneName);
-            loadSceneAsync.allowSceneActivation = false;
-            currentGameState?.ExitState();
-            yield return new WaitForSeconds(m_FadeOutTime + awaitLoad);
+            string unloadScene = SceneManager.GetActiveScene().name;
+            yield return StartCoroutine(FadeCanvas(false));
             
+            // Chamar a cena de transição
+            yield return SceneManager.LoadSceneAsync(nameSceneTransition, LoadSceneMode.Additive); // Carrega a cena de transição
+            
+            // chama o status de saida
+            currentGameState?.ExitState();
+
+            //Descarrega a scena aterior
+            SceneManager.UnloadSceneAsync(unloadScene);
+            while (SceneManager.GetSceneByName(unloadScene).isLoaded) {
+                yield return null; // Aguarda até que a cena anterior seja totalmente descarregada
+            }
             currentGameState = nextState;
-            while (!loadSceneAsync.isDone)
+            yield return currentGameState?.OnLoadState();
+            //Carregando a nova scene
+            var loadScene = SceneManager.LoadSceneAsync(nextSceneName);
+            loadScene.allowSceneActivation = false;
+            
+            // wait for the scene to load
+            while (!loadScene.isDone)
             {
-                // Verifique se a cena está 90% carregada.
-                if (loadSceneAsync.progress >= 0.9f)
+                if (loadScene.progress >= 0.9f)
                 {
-                    loadSceneAsync.allowSceneActivation = true;
-                    currentGameState?.OnLoadState();
-                    yield return new WaitForSeconds(m_FadeInTime + awaitLoad);
-                    PerformFadeIn();
                     
-                    currentGameState?.EnterState();
-                    onLoadScene = false;
+                    //Se precisar load bar
+                    break;
                 }
                 yield return null;
             }
+            loadScene.allowSceneActivation = true;
+            while (!loadScene.isDone)
+            {
+                yield return null;
+            } 
+            currentGameState?.EnterState();
+            //SceneManager.UnloadSceneAsync(nameSceneTransition);
+            yield return StartCoroutine(FadeCanvas(true));
+            /*while (SceneManager.GetSceneByName(nameSceneTransition).isLoaded) {
+                yield return null; // Aguarda até que a cena anterior seja totalmente descarregada
+            }*/
+            
+            onLoadScene = false;
         }
 
         internal static void DestroyGamePlay()
-        {
-         DestroyImmediate(PlayerManager.instance);
-         
+        { 
+            DestroyImmediate(PlayerManager.instance);
+        }
+        private IEnumerator FadeCanvas(bool faceIn) {
+            var corInitial = fadeImage.color;
+            float corAlpha = (faceIn) ? 0.0f : 1.0f; // in:out
+            var corFinal = new Color(corInitial.r, corInitial.g, corInitial.b, corAlpha);
+            float timeSpend = 0.0f;
+            float timeDuration = (faceIn) ? fadeInTime : fadeOutTime; // in:out 
+            
+            while (timeSpend < timeDuration) {
+                timeSpend += Time.deltaTime;
+                //Debug.Log($"FADE: {timeSpend}, {corInitial}, {corFinal}");
+                fadeImage.color = Color.Lerp(corInitial, corFinal, timeSpend / timeDuration);
+                yield return null;
+            }
         }
         #endregion
-        void PerformFadeOut()
-        {
-            fadeAnimator.SetTrigger(FadeOut);
-        }
-        void PerformFadeIn()
-        {
-            fadeAnimator.SetTrigger(FadeIn);
-        }
     }
 }

@@ -59,6 +59,7 @@ namespace RiverAttack
 
         internal void StartBuildMission(Levels level)
         {
+            //Debug.Log($"Construiu a scena?");
             m_LevelRoot = new GameObject();
             m_ActualPathIndex = 0;
             actualLevel = level;
@@ -68,6 +69,7 @@ namespace RiverAttack
 
         void CreateLevel(Levels level, Transform myRoot = null)
         {
+            Debug.Log($"Construiu a scena? {level}, {myRoot}");
             if (level.setLevelList.Count <= 0) return;
             var nextBound = new Vector3(level.levelOffset.x, level.levelOffset.y, level.levelOffset.z);
             int numPatches = level.setLevelList.Count;

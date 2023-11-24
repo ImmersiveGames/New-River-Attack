@@ -18,13 +18,11 @@ namespace RiverAttack
         GameSettings m_GameSettings;
 
         #region UNITYMETHODS
-        void Awake()
-        {
-            bgmAudioSource.pitch = 1;
-        }
+        
         void Start()
         {
             m_GameSettings = GameSettings.instance;
+            bgmAudioSource.pitch = 1;
             RecoveryAudioSettings();
         }
   #endregion

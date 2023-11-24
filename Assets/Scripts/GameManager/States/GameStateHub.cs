@@ -1,14 +1,17 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+
 namespace RiverAttack
 {
     public class GameStateHub: GameState
     {
         const float TIME_TO_FADE_BGM = 0.1f;
         bool m_CheckCompleteLevel;
-        public override void OnLoadState()
+        public override IEnumerator OnLoadState()
         {
             GameManager.instance.gameModes = GameManager.GameModes.Mission;
             GameAudioManager.instance.ChangeBGM(LevelTypes.Hub, TIME_TO_FADE_BGM);
+            yield return null;
         }
         public override void EnterState()
         {

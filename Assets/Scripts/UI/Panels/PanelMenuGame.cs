@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Playables;
-using UnityEngine.UI;
 namespace RiverAttack
 {
     [RequireComponent(typeof(AudioSource))]
@@ -20,17 +18,16 @@ namespace RiverAttack
         GameManager m_GameManager;
         PlayersInputActions m_InputSystem;
 
-
         #region UNITYMETHODS
         protected override void Awake()
         {
             m_GameManager = GameManager.instance;
+            //Garantir que este objeto seja o menu principal quando voltar para a tela de inicio
             if (!m_GameManager.panelBaseGame)
             {
                 m_GameManager.panelBaseGame = this;
             }
             base.Awake();
-            StartMenuOnOpenScene();
         }
         void OnEnable()
         {
@@ -43,6 +40,7 @@ namespace RiverAttack
         void Start()
         {
             m_InputSystem.Player.Pause.performed += ExecutePauseGame;
+            StartMenuOnOpenScene();
         }
         #endregion
 
@@ -66,7 +64,7 @@ namespace RiverAttack
 
         void StartMenuOnOpenScene()
         {
-            m_CurrentGameState = GameManager.instance.currentGameState;
+            m_CurrentGameState = m_GameManager.currentGameState;
             SetInternalMenu();
             menuInitial.gameObject.SetActive(false);
             hud.gameObject.SetActive(false);

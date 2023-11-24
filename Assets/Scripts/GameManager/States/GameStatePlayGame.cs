@@ -1,16 +1,17 @@
 using UnityEngine;
+using System.Collections;
 namespace RiverAttack
 {
     public class GameStatePlayGame : GameState
     {
-        public override void OnLoadState()
+        public override IEnumerator OnLoadState()
         {
-            
+            yield return null;
         }
         public override void EnterState()
         {
             GamePlayManager.instance.panelMenuGame.StartMenuGame();
-           Debug.Log($"Entra no Estado: PlayGame");
+            Debug.Log($"Entra no Estado: PlayGame");
             
             //TODO: dar mais tempo para o pause;
             GamePlayManager.instance.OnStartGame();

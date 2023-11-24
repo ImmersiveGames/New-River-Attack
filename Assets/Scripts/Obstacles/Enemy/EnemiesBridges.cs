@@ -4,14 +4,15 @@ namespace RiverAttack
     public class EnemiesBridges : MonoBehaviour
     {
         EnemiesMaster m_EnemiesMaster;
-        void OnEnable()
+        void Start()
         {
             m_EnemiesMaster = GetComponent<EnemiesMaster>();
         }
 
         public void IsFinish()
         {
-            m_EnemiesMaster.isFinishLevel = true;
+            if(m_EnemiesMaster)
+                m_EnemiesMaster.isFinishLevel = true;
         }
     }
 }

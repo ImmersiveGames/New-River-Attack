@@ -1,4 +1,5 @@
 ﻿
+using System.Collections;
 using UnityEngine;
 namespace RiverAttack
 {
@@ -16,15 +17,16 @@ namespace RiverAttack
             m_PlayerManager = PlayerManager.instance;
             
         }
-        public override void OnLoadState()
+        public override IEnumerator OnLoadState()
         {
             //throw new System.NotImplementedException();
+            m_GameAudioManager.ChangeBGM(LevelTypes.GameOver, TIME_TO_FADE_BGM);
+            m_GameAudioManager.PlayVoice(m_GameAudioManager.missionFailSound);
+            yield return null;
         }
         public override void EnterState()
         {
             Debug.Log($"Entra no Estado: GameOver");
-            m_GameAudioManager.ChangeBGM(LevelTypes.GameOver, TIME_TO_FADE_BGM);
-            m_GameAudioManager.PlayVoice(m_GameAudioManager.missionFailSound);
             m_GamePlayManager.GameOverMenu();
         }
         public override void UpdateState()

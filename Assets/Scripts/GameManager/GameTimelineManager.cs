@@ -18,7 +18,8 @@ namespace RiverAttack
 
         GameManager m_GameManager;
 
-        void Awake()
+        #region UNITYMETHODS
+        void Start()
         {
             m_GameManager = GameManager.instance;
             openCutDirector.gameObject.SetActive(true);
@@ -28,6 +29,7 @@ namespace RiverAttack
         {
             //base.OnDestroy();
         }
+  #endregion
         public void InitializePLayerInTimeline(Transform playerTransform, Animator playerAnimator)
         {
             // Atualiza a cutscene com o animator do jogador;

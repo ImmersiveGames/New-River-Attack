@@ -52,6 +52,9 @@ namespace RiverAttack
         internal delegate void BuildPatchHandler(float position);
         internal event BuildPatchHandler EventBuildPathUpdate;
 
+        internal delegate void UpdatePowerUpHandler(PowerUp powerUp, float timer);
+        internal event UpdatePowerUpHandler EventUpdatePowerUpDuration;
+
         #endregion
 
         #region UNITYMETHODS
@@ -189,6 +192,11 @@ namespace RiverAttack
         internal void OnEventEnemiesMasterForceRespawn()
         {
             EventEnemiesMasterForceRespawn?.Invoke();
+        }
+
+        internal void OnEventUpdatePowerUpDuration(PowerUp powerUp, float f)
+        {
+            EventUpdatePowerUpDuration?.Invoke(powerUp,f);
         }
   #endregion
         

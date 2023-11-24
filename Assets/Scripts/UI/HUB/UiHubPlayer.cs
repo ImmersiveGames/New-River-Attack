@@ -16,10 +16,11 @@ namespace RiverAttack
 
         void Awake()
         {
-            m_GameHubManager = GameHubManager.instance;
+            
         }
         void OnEnable()
         {
+            m_GameHubManager = GameHubManager.instance;
             if (GamePlayingLog.instance.lastMissionIndex == 0)
             {
                 transform.position = new Vector3(5f, 0, 5f);

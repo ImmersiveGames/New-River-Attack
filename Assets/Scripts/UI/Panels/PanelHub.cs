@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 namespace RiverAttack
@@ -14,12 +13,10 @@ namespace RiverAttack
 
         PlayersInputActions m_InputSystem;
         GameHubManager m_GameHubManager;
-        void Awake()
-        {
-            m_GameHubManager = GameHubManager.instance;
-        }
+        
         void OnEnable()
         {
+            m_GameHubManager = GameHubManager.instance;
             m_InputSystem = new PlayersInputActions();
             m_InputSystem.Enable();
             //TODO: Pegar o level salvo;

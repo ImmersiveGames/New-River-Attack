@@ -42,6 +42,7 @@ namespace RiverAttack
                     if (m_ActivePowerUps[powerUp] > 0)
                     {
                         m_ActivePowerUps[powerUp] -= Time.deltaTime;
+                        //Debug.Log($"POWERUP - Desc: {m_ActivePowerUps[powerUp]}");
                     }
                     else
                     {
@@ -75,6 +76,8 @@ namespace RiverAttack
                 else
                     m_ActivePowerUps[powerUp] = powerUp.duration;
             }
+            //Aqui parece um bom send para HUD
+            GamePlayManager.instance.OnEventUpdatePowerUpDuration(powerUp, m_ActivePowerUps[powerUp]);
             m_Keys = new List<PowerUp>(m_ActivePowerUps.Keys);
         }
 

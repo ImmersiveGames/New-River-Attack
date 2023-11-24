@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections;
 namespace RiverAttack
 {
     public class GameStatePause : GameState
     {
         
-        public override void OnLoadState()
+        public override IEnumerator OnLoadState()
         {
             //Debug.Log($"On Load Estado: Pause");
-            
+            yield return null;
         }
         public override void EnterState()
         {

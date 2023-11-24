@@ -1,12 +1,13 @@
-﻿using UnityEngine;
-using Utils;
+﻿using System.Collections;
+using UnityEngine;
 namespace RiverAttack
 {
     public class GameStateMenu : GameState
     {
         const float TIME_TO_FADE_BGM = 0.01f;
-        public override void OnLoadState()
+        public override IEnumerator OnLoadState()
         {
+            yield return null;
         }
         public override void EnterState()
         {
@@ -19,7 +20,7 @@ namespace RiverAttack
         }
         public override void ExitState()
         {
-            //Debug.Log($"Saindo no Estado: Menu");
+            Debug.Log($"Saindo no Estado: Menu");
         }
     }
 }

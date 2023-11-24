@@ -21,17 +21,16 @@ namespace RiverAttack
 
         [Header("Menu SFX")]
         [SerializeField] AudioEventSample clickSound;
+        protected int lastIndex; 
 
-        
-
-        protected int lastIndex;        
-
+        #region UNITYMETHODS
         protected virtual void Awake()
         {
             SetLocalization();
             //Debug.Log($"Tempos: {fadeInTime} , {fadeOutTime}");
         }
-        
+  #endregion
+
         #region Actions Application
         protected virtual void OnApplicationFocus(bool hasFocus)
         {

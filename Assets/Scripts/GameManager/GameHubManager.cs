@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils;
@@ -18,16 +17,11 @@ namespace RiverAttack
         public Color openColor;
         
     #region UNITYMETHODS
-        void Awake()
-        {
-            GameManager.instance.gameModes = GameManager.GameModes.Mission;
-            
-            if(!missionListLevels)
-                missionListLevels = GameManager.instance.missionLevels;
-        }
-        
         void Start()
         {
+            GameManager.instance.gameModes = GameManager.GameModes.Mission;
+            if(!missionListLevels)
+                missionListLevels = GameManager.instance.missionLevels;
             if (GameManager.instance.currentGameState is not GameStateHub)
             {
                 GameManager.instance.ChangeState(new GameStateHub());
@@ -37,13 +31,8 @@ namespace RiverAttack
         void OnDisable()
         {
             readyHub = false;
-            //StopAllCoroutines();
         }
-        protected override void OnDestroy()
-        {
-
-            //base.OnDestroy();
-        }
+        protected override void OnDestroy(){ }
         
   #endregion
 

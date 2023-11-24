@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿using System.Collections;
 using UnityEngine.Playables;
 namespace RiverAttack
 {
@@ -8,9 +8,10 @@ namespace RiverAttack
         const float TOLERANCE = 1f;*/
         readonly PlayableDirector m_PlayableDirector;
         readonly GameManager m_GameManager;
-        public override void OnLoadState()
+        public override IEnumerator OnLoadState()
         {
             //throw new System.NotImplementedException();
+            yield return null;
         }
         public override void EnterState()
         {

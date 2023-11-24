@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections;
 namespace RiverAttack
 {
     public class GameStateEndGame : GameState
     {
-        public override void OnLoadState()
+        public override IEnumerator OnLoadState()
         {
             //throw new System.NotImplementedException();
             GameManager.DestroyGamePlay();
+            yield return null;
         }
 
         public override void EnterState()
