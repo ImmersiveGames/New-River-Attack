@@ -101,11 +101,13 @@ namespace RiverAttack
 
             //Descarrega a scena aterior
             SceneManager.UnloadSceneAsync(unloadScene);
+            
+            currentGameState = nextState;
+            yield return currentGameState?.OnLoadState();
+            
             while (SceneManager.GetSceneByName(unloadScene).isLoaded) {
                 yield return null; // Aguarda até que a cena anterior seja totalmente descarregada
             }
-            currentGameState = nextState;
-            yield return currentGameState?.OnLoadState();
             //Carregando a nova scene
             var loadScene = SceneManager.LoadSceneAsync(nextSceneName);
             loadScene.allowSceneActivation = false;

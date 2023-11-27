@@ -40,6 +40,10 @@ namespace RiverAttack
         public void UpdateState()
         {
             // Debug.Log("Attempt Shoot!" + m_Cadence);
+            if (m_SpawnPoint == null)
+            {
+                
+            }
             m_Cadence -= Time.deltaTime;
             if (!(m_Cadence <= 0.01f))
                 return;

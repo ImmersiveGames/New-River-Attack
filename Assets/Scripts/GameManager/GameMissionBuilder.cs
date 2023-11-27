@@ -69,7 +69,7 @@ namespace RiverAttack
 
         void CreateLevel(Levels level, Transform myRoot = null)
         {
-            Debug.Log($"Construiu a scena? {level}, {myRoot}");
+            //Debug.Log($"Construiu a scena? {level}, {myRoot}");
             if (level.setLevelList.Count <= 0) return;
             var nextBound = new Vector3(level.levelOffset.x, level.levelOffset.y, level.levelOffset.z);
             int numPatches = level.setLevelList.Count;
@@ -150,8 +150,9 @@ namespace RiverAttack
 
         void SetFinishEnemy()
         {
-
             var finalBridge = FindEnemyBridges();
+            
+            //Debug.Log($"Final Bridges: {finalBridge}");
             if (finalBridge != null)
             {
                 finalBridge.IsFinish();
