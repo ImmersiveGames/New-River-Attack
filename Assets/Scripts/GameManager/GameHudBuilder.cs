@@ -66,7 +66,7 @@ namespace RiverAttack
                     levels = level
                 });
                 patch.GetComponentInChildren<UiHubBridges>().level = level;
-                patch.GetComponentInChildren<UiHubIcons>().level = level;
+                patch.GetComponentInChildren<UiHubIcons>().Initialization(level);
             }
             nextBound += new Vector3(0, 0, bound.size.z);
             return patch;

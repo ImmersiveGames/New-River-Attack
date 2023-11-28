@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 namespace RiverAttack
 {
@@ -8,6 +9,8 @@ namespace RiverAttack
         AudioEventSample effectAreaSound;
         [SerializeField]
         AudioEventSample effectAreaExitSound;
+        
+        PlayerMaster m_PlayerMaster;
 
         protected override void OnEnable()
         {
@@ -15,6 +18,15 @@ namespace RiverAttack
             m_EffectAreaMaster.EventEnterAreaEffect += SoundAreaEffect;
             m_EffectAreaMaster.EventExitAreaEffect += StopSoundAreaEffect;
             GamePlayManager.instance.EventOtherEnemiesKillPlayer += StopSoundArea;
+        }
+        void OnTriggerExit(Collider other)
+        {
+            if(m_PlayerMaster == null)
+                m_PlayerMaster = other.GetComponentInParent<PlayerMaster>();
+            if (!m_PlayerMaster) return;
+            m_PlayerMaster.inEffectArea = false;
+            if (!m_PlayerMaster.shouldPlayerBeReady) return;
+            StopSoundAreaEffect();
         }
 
         protected override void OnDisable()
@@ -26,6 +38,8 @@ namespace RiverAttack
         }
         void OnDestroy()
         {
+            m_EffectAreaMaster.EventEnterAreaEffect -= SoundAreaEffect;
+            m_EffectAreaMaster.EventExitAreaEffect -= StopSoundAreaEffect;
             if(GamePlayManager.instance)
                 GamePlayManager.instance.EventOtherEnemiesKillPlayer -= StopSoundArea;
         }

@@ -6,6 +6,7 @@ namespace RiverAttack
     {
         [SerializeField] public Levels level;
         Image m_MissionIcon;
+        
         [Header("HUB Icon Color")]
         public Color lockedColor = new Color(164,31,31,255);
         public Color actualColor = new Color(255,255,0,255);
@@ -24,6 +25,21 @@ namespace RiverAttack
             m_MissionIcon.color = SetColorStates(level.levelsStates);
         }
   #endregion
+
+        internal void Initialization(Levels levels)
+        {
+            level = levels;
+            if (levels.levelsStates == LevelsStates.Complete && GameHubManager.instance.gamePlayingLog.finishLevels.Contains(levels)) return;
+            level.levelsStates = LevelsStates.Locked;
+            if (GameHubManager.instance.gamePlayingLog.finishLevels.Contains(levels))
+            {
+                level.levelsStates = LevelsStates.Open;
+            }
+            if (GameHubManager.instance.gamePlayingLog.activeMission == levels)
+            {
+                level.levelsStates = LevelsStates.Actual;
+            }
+        }
         void SetUpMission(int index)
         {
             m_MissionIcon.color = SetColorStates(level.levelsStates);

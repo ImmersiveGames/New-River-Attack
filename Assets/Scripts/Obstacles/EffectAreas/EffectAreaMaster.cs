@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 namespace RiverAttack
 {
@@ -18,17 +19,17 @@ namespace RiverAttack
             if(playerMaster == null)
                 playerMaster = collision.GetComponentInParent<PlayerMaster>();
             if (!playerMaster) return;
-            if (!playerMaster.shouldPlayerBeReady) return;
             playerMaster.inEffectArea = false;
+            if (!playerMaster.shouldPlayerBeReady) return;
             OnEventExitAreaEffect();
         }
         void OnTriggerStay(Collider collision)
         {
             if(playerMaster == null)
                 playerMaster = collision.GetComponentInParent<PlayerMaster>();
-            if (!playerMaster) return;
-            if (!playerMaster.shouldPlayerBeReady) return;
-            if (!playerMaster.inEffectArea) playerMaster.inEffectArea = true;
+            if (!playerMaster || !playerMaster.shouldPlayerBeReady) return;
+            playerMaster.inEffectArea = true;
+            //if (!playerMaster.inEffectArea) playerMaster.inEffectArea = true;
             CollectThis(playerMaster);
         }
   #endregion
@@ -56,8 +57,9 @@ namespace RiverAttack
             if (playerMaster.inEffectArea)
             {
                 playerMaster.inEffectArea = false;
-                OnEventExitAreaEffect();
+                //OnEventExitAreaEffect();
             }
+            OnEventExitAreaEffect();
             base.DestroyObstacle();
         }
 

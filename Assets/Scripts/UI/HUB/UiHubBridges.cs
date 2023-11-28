@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using Utils;
 namespace RiverAttack
@@ -10,62 +11,29 @@ namespace RiverAttack
         [SerializeField] GameObject explosion;
         [SerializeField]  AudioEventSample enemyExplodeAudio;
 
-        void Start()
+        IEnumerator Start()
         {
-            if (GameHubManager.instance.gamePlayingLog.finishLevels.Contains(level))
+            if (!GameHubManager.instance.gamePlayingLog.finishLevels.Contains(level))
+                yield break;
+            if (level.levelsStates != LevelsStates.Complete)
             {
                 gameObject.SetActive(false);
+                yield break;
             }
-        }
-        
-        /*[SerializeField] internal Levels level;
-        [SerializeField] internal int myIndex;
-        
-
-        //Spawn um tiro na posição do Player, move até este objeto
-
-        void OnEnable()
-        {
-            GameHubManager.instance.CompleteLevel += CheckLevelComplete;
-        }
-        void Start()
-        {
-            if (GamePlayingLog.instance.lastMissionFinishIndex < myIndex)
-                return;
-            if (level.levelsStates == LevelsStates.Complete)
+            while (GameHubManager.instance.readyHub == false)
             {
-                GameHubManager.instance.readyHub = false;
-                return;
+                yield return null;
             }
-            if (myIndex >= GamePlayingLog.instance.lastMissionFinishIndex)
-                return;
-            gameObject.SetActive(false);
-            level.levelsStates = LevelsStates.Open;
-
-        }
-        void OnDisable()
-        {
-            if(GameHubManager.instance)
-            GameHubManager.instance.CompleteLevel -= CheckLevelComplete;
-        }
-        void CheckLevelComplete()
-        {
-            if (level.levelsStates != LevelsStates.Complete) return;
-            Invoke(nameof(ExplodeBridge), 1.5f);
-        }
-
-        void ExplodeBridge()
-        {
-            Debug.Log("Explode a ponte ai carinha");
-            //gameObject.SetActive(false);
+            GameHubManager.instance.readyHub = false;
+            yield return new WaitForSeconds(1f);
             Tools.ToggleChildren(transform, false);
             GameAudioManager.instance.PlaySfx(enemyExplodeAudio);
             var explosionGameObject = Instantiate(explosion, transform);
             Destroy(explosionGameObject, 1.8f);
             level.levelsStates = LevelsStates.Open;
-            GameHubManager.instance.MissionNextLevel();
-            GameHubManager.instance.readyHub = true;
-        }*/
-        
+            yield return new WaitForSeconds(1f);
+            GameHubManager.instance.CheckNextLevel();
+            yield return null;
+        }
     }
 }

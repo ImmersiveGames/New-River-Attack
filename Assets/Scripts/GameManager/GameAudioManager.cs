@@ -25,6 +25,10 @@ namespace RiverAttack
             bgmAudioSource.pitch = 1;
             RecoveryAudioSettings();
         }
+        protected override void OnDestroy()
+        {
+            //base.OnDestroy();
+        }
   #endregion
 
         void RecoveryAudioSettings()

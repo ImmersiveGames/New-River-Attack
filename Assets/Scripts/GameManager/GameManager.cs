@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -43,6 +44,13 @@ namespace RiverAttack
         public GameState currentGameState { get; private set; }
 
         #region UNITYMETHODS
+        void Awake()
+        {
+            if (FindObjectsOfType(typeof(GameManager)).Length <= 1)
+                return;
+            Debug.Log($"Tem dois, destroi");
+            Destroy(gameObject);
+        }
         void Start()
         {
             ChangeState(new GameStateMenu());
@@ -76,6 +84,7 @@ namespace RiverAttack
             onLoadScene = true;
             currentGameState?.ExitState();
             currentGameState = nextState;
+            StartCoroutine(currentGameState?.OnLoadState());
             currentGameState?.EnterState();
             onLoadScene = false;
         }
@@ -92,19 +101,15 @@ namespace RiverAttack
                 yield break;
             string unloadScene = SceneManager.GetActiveScene().name;
             yield return StartCoroutine(FadeCanvas(false));
-            
-            // Chamar a cena de transição
-            yield return SceneManager.LoadSceneAsync(nameSceneTransition, LoadSceneMode.Additive); // Carrega a cena de transição
-            
             // chama o status de saida
             currentGameState?.ExitState();
-
-            //Descarrega a scena aterior
-            SceneManager.UnloadSceneAsync(unloadScene);
-            
+            // Chamar a cena de transição
+            yield return SceneManager.LoadSceneAsync(nameSceneTransition, LoadSceneMode.Additive); // Carrega a cena de transição
             currentGameState = nextState;
             yield return currentGameState?.OnLoadState();
-            
+            //Descarrega a scena aterior
+            SceneManager.UnloadSceneAsync(unloadScene);
+
             while (SceneManager.GetSceneByName(unloadScene).isLoaded) {
                 yield return null; // Aguarda até que a cena anterior seja totalmente descarregada
             }
@@ -129,12 +134,10 @@ namespace RiverAttack
                 yield return null;
             } 
             currentGameState?.EnterState();
-            //SceneManager.UnloadSceneAsync(nameSceneTransition);
             yield return StartCoroutine(FadeCanvas(true));
-            /*while (SceneManager.GetSceneByName(nameSceneTransition).isLoaded) {
+            while (SceneManager.GetSceneByName(nameSceneTransition).isLoaded) {
                 yield return null; // Aguarda até que a cena anterior seja totalmente descarregada
-            }*/
-            
+            }
             onLoadScene = false;
         }
 

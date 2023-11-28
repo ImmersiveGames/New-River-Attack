@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using UnityEngine;
 namespace RiverAttack
 {
     public class GameStateOpenCutScene : GameState
@@ -15,7 +14,7 @@ namespace RiverAttack
         }
         public override void EnterState()
         {
-            Debug.Log($"Entra no Estado: CutScene");
+            //Debug.Log($"Entra no Estado: CutScene");
             GameMissionBuilder.instance.StartBuildMission(GamePlayManager.instance.actualLevels);
             PlayerManager.instance.InstantiatePlayers();
             GameTimelineManager.instance.openCutDirector.Play();

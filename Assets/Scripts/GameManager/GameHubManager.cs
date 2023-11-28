@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Utils;
 namespace RiverAttack
@@ -8,7 +7,8 @@ namespace RiverAttack
     public sealed class GameHubManager : Singleton<GameHubManager>
     {
         [SerializeField] internal List<HubMissions> missions;
-        [SerializeField] public GamePlayingLog gamePlayingLog;
+        public GamePlayingLog gamePlayingLog;
+        [SerializeField] PanelHub panelHub;
 
         internal bool readyHub;
         
@@ -23,6 +23,10 @@ namespace RiverAttack
             gamePlayingLog.activeMission = missions[0].levels;
             gamePlayingLog.finishLevels = new List<Levels>();
         }
+        protected override void OnDestroy()
+        {
+            //base.OnDestroy();
+        }
 
         void SetActualLevel(int index)
         {
@@ -30,79 +34,24 @@ namespace RiverAttack
             missions[index].levels.levelsStates = LevelsStates.Actual;
             gamePlayingLog.activeMission = missions[index].levels;
         }
+        internal void CheckNextLevel()
+        {
+            Debug.Log($"Verifica se existe uma proxima missão ou termina o jogo");
+            if (gamePlayingLog.activeMission == missions[^1].levels)
+            {
+                // Fim de jogo - chamar o fim do jogo
+                return;
+            }
+            panelHub.ButtonNextMission(+1);
+        }
 
         internal void OnChangeMission(int index)
         {
             SetActualLevel(index);
             ChangeMission?.Invoke(index);
         }
-        
-        
-        /*
-         [SerializeField] internal ListLevels missionListLevels;
-        [SerializeField] internal List<float> hubMilestones;
-        
-
-        [SerializeField] PanelHub panelHub;
-        [SerializeField] GamePlayingLog gamePlayingLog;
-        public bool readyHub;
-        
-        
-    #region UNITYMETHODS
-        void Start()
-        {
-            GameManager.instance.gameModes = GameManager.GameModes.Mission;
-            if(!missionListLevels)
-                missionListLevels = GameManager.instance.missionLevels;
-            if (GameManager.instance.currentGameState is not GameStateHub)
-            {
-                GameManager.instance.ChangeState(new GameStateHub());
-            }
-        }
-
-        void OnDisable()
-        {
-            readyHub = false;
-        }
-        protected override void OnDestroy(){ }
-        
-  #endregion
-
-        #region Delagetes
-        
-        public delegate void HubEventNormalHandler();
-        internal event HubEventNormalHandler CompleteLevel;
-        public delegate void HubEventHandler(int index);
-        internal event HubEventHandler MissionIndex;
-  #endregion
-        
-        
-
-        internal void MissionNextLevel()
-        {
-            if (gamePlayingLog.lastMissionIndex + 1 == hubMilestones.Count)
-            {
-                Debug.Log($"Não tem proxima fase");
-                return;
-            }
-            gamePlayingLog.lastMissionIndex++;
-            gamePlayingLog.lastMissionFinishIndex++;
-            panelHub.ButtonNextMission(+1);
-        }
-        
-        internal void OnCheckCompleteLevel()
-        {
-            //Debug.Log($"Checar se Algum Nivel foi completo");
-            CompleteLevel?.Invoke();
-        }
-        
-        internal void OnPlayerPosition(int index)
-        {
-            MissionIndex?.Invoke(index);
-        }
-        */
     }
-    [System.Serializable]
+    [Serializable]
     class HubMissions
     {
         public float position;
