@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 namespace RiverAttack
 {
     [CreateAssetMenu(fileName = "GamePlayingLog", menuName = "RiverAttack/GamePlayingLog", order = 2)]
@@ -17,8 +18,11 @@ namespace RiverAttack
         public int playerDieWall;
         public int playerDieBullet;
         public int playerDieFuelEmpty;
+        public Levels activeMission;
+        public List<Levels> finishLevels;
+        /*
         public int lastMissionIndex;
-        public int lastMissionFinishIndex;
+        public int lastMissionFinishIndex;*/
         public List<LogResults> hitEnemiesResultsList;
 
         public int GetEnemiesHit(EnemiesScriptable enemy)

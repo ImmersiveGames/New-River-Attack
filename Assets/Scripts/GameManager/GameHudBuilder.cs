@@ -15,7 +15,7 @@ namespace RiverAttack
 
         void OnEnable()
         {
-            StartBuildHUD(GameHubManager.instance.missionListLevels);
+            StartBuildHUD(GameManager.instance.missionLevels);
         }
 
         void OnDisable()
@@ -37,22 +37,7 @@ namespace RiverAttack
             {
                 var level = listHudLevels.Index(j);
                 if (level.hudPath == null) return;
-                poolPathLevels.Add(BuildPath(ref nextBound, level, level.hudPath, myRoot));
-                if (level)
-                {
-                    var icons = poolPathLevels[j].GetComponentInChildren<UiHubIcons>();
-                    var bridges = poolPathLevels[j].GetComponentInChildren<UiHubBridges>();
-                    if (icons)
-                    {
-                        icons.level = level;
-                        icons.myIndex = j;
-                    }
-                    if (bridges)
-                    {
-                        bridges.level = level;
-                        bridges.myIndex = j;
-                    }
-                }
+                poolPathLevels.Add(BuildPath(ref nextBound, level, myRoot));
                 poolPathLevels[j].SetActive(true);
             }
         }
@@ -63,15 +48,26 @@ namespace RiverAttack
             var path = BuildPath(ref nextBound, level, nextPath, myRoot);
             path.SetActive(true);
         }*/
-        GameObject BuildPath(ref Vector3 nextBound, Levels level, GameObject nextPath, Transform myRoot)
+        GameObject BuildPath(ref Vector3 nextBound, Levels level, Transform myRoot)
         {
-            var patch = Instantiate(nextPath, myRoot);
+            var patch = Instantiate(level.hudPath, myRoot);
             patch.SetActive(false);
             var bound = MashTriangulation.GetChildRenderBounds(patch);
             //Debug.Log($"Tamanho do Trecho: {bound.size}");
             patch.transform.position = nextBound;
-            float milestone = (level.dontCountMilestone) ? -1f : nextBound.z + PLAYER_OFFSET;
-            GameHubManager.instance.hubMilestones.Add(milestone);
+            
+            if (!level.dontCountMilestone)
+            {
+                // Inicialização congig dos trechos.
+                
+                GameHubManager.instance.missions.Add(new HubMissions
+                {
+                    position = nextBound.z + PLAYER_OFFSET,
+                    levels = level
+                });
+                patch.GetComponentInChildren<UiHubBridges>().level = level;
+                patch.GetComponentInChildren<UiHubIcons>().level = level;
+            }
             nextBound += new Vector3(0, 0, bound.size.z);
             return patch;
         }
@@ -81,4 +77,6 @@ namespace RiverAttack
             Destroy(m_LevelRoot);
         }
     }
+    
+    
 }

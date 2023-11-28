@@ -22,15 +22,14 @@ namespace RiverAttack
         {
             if (GameManager.instance.onLoadScene) return;
             Debug.Log($"Game HUB!");
-            if(!m_CheckCompleteLevel)
+            /*if(!m_CheckCompleteLevel)
                 GameHubManager.instance.OnCheckCompleteLevel();
-            m_CheckCompleteLevel = true;
+            m_CheckCompleteLevel = true;*/
 
         }
         public override void ExitState()
         {
             Debug.Log($"Sai do Estado: HUB");
-            System.GC.Collect();
         }
     }
 }

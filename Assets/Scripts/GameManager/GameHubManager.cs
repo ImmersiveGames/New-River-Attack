@@ -1,20 +1,52 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Utils;
 namespace RiverAttack
 {
     public sealed class GameHubManager : Singleton<GameHubManager>
     {
-        [SerializeField] internal ListLevels missionListLevels;
+        [SerializeField] internal List<HubMissions> missions;
+        [SerializeField] public GamePlayingLog gamePlayingLog;
+
+        internal bool readyHub;
+        
+        #region Delagetes
+        public delegate void HubEventHandler(int index);
+        internal event HubEventHandler ChangeMission;
+        #endregion
+        void Start()
+        {
+            if (gamePlayingLog.activeMission != null)
+                return;
+            gamePlayingLog.activeMission = missions[0].levels;
+            gamePlayingLog.finishLevels = new List<Levels>();
+        }
+
+        void SetActualLevel(int index)
+        {
+            gamePlayingLog.activeMission.levelsStates = gamePlayingLog.finishLevels.Contains(gamePlayingLog.activeMission) ? LevelsStates.Open : LevelsStates.Locked;
+            missions[index].levels.levelsStates = LevelsStates.Actual;
+            gamePlayingLog.activeMission = missions[index].levels;
+        }
+
+        internal void OnChangeMission(int index)
+        {
+            SetActualLevel(index);
+            ChangeMission?.Invoke(index);
+        }
+        
+        
+        /*
+         [SerializeField] internal ListLevels missionListLevels;
         [SerializeField] internal List<float> hubMilestones;
+        
+
         [SerializeField] PanelHub panelHub;
         [SerializeField] GamePlayingLog gamePlayingLog;
         public bool readyHub;
-        [Header("HUB Icon Color")]
-        public Color lockedColor;
-        public Color actualColor;
-        public Color completeColor;
-        public Color openColor;
+        
         
     #region UNITYMETHODS
         void Start()
@@ -44,20 +76,15 @@ namespace RiverAttack
         internal event HubEventHandler MissionIndex;
   #endregion
         
-        public Color SetColorStates(LevelsStates levelsStates)
-        {
-            return levelsStates switch
-            {
-                LevelsStates.Locked => lockedColor,
-                LevelsStates.Actual => actualColor,
-                LevelsStates.Complete => completeColor,
-                LevelsStates.Open => openColor,
-                _ => lockedColor
-            };
-        }
+        
 
         internal void MissionNextLevel()
         {
+            if (gamePlayingLog.lastMissionIndex + 1 == hubMilestones.Count)
+            {
+                Debug.Log($"Não tem proxima fase");
+                return;
+            }
             gamePlayingLog.lastMissionIndex++;
             gamePlayingLog.lastMissionFinishIndex++;
             panelHub.ButtonNextMission(+1);
@@ -73,5 +100,13 @@ namespace RiverAttack
         {
             MissionIndex?.Invoke(index);
         }
+        */
+    }
+    [System.Serializable]
+    class HubMissions
+    {
+        public float position;
+        public Levels levels;
     }
 }
+

@@ -7,9 +7,20 @@ namespace RiverAttack
     public class UiHubBridges : MonoBehaviour
     {
         [SerializeField] internal Levels level;
-        [SerializeField] internal int myIndex;
         [SerializeField] GameObject explosion;
         [SerializeField]  AudioEventSample enemyExplodeAudio;
+
+        void Start()
+        {
+            if (GameHubManager.instance.gamePlayingLog.finishLevels.Contains(level))
+            {
+                gameObject.SetActive(false);
+            }
+        }
+        
+        /*[SerializeField] internal Levels level;
+        [SerializeField] internal int myIndex;
+        
 
         //Spawn um tiro na posição do Player, move até este objeto
 
@@ -54,7 +65,7 @@ namespace RiverAttack
             level.levelsStates = LevelsStates.Open;
             GameHubManager.instance.MissionNextLevel();
             GameHubManager.instance.readyHub = true;
-        }
+        }*/
         
     }
 }

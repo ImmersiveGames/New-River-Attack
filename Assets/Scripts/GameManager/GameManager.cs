@@ -62,7 +62,7 @@ namespace RiverAttack
             var level = gameModes switch
             {
                 GameModes.Classic => classicLevels,
-                GameModes.Mission => missionLevels.Index(GamePlayingLog.instance.lastMissionIndex),
+                GameModes.Mission => GamePlayingLog.instance.activeMission,
                 _ => classicLevels
             };
             return level;

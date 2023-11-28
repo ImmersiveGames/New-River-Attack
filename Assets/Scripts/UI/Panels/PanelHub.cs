@@ -1,17 +1,69 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 namespace RiverAttack
 {
     public class PanelHub: MonoBehaviour
     {
-        [SerializeField] TextMeshProUGUI missionName;
+        [SerializeField] TMP_Text missionName;
         [SerializeField] AudioEvent clickSound;
         [SerializeField] int nextIndex;
+
+        PlayersInputActions m_InputSystem;
+        GameHubManager m_GameHubManager;
+
+        #region UNITYMETHODS
+        void OnEnable()
+        {
+            m_InputSystem = new PlayersInputActions();
+            m_InputSystem.Enable();
+            m_GameHubManager = GameHubManager.instance;
+        }
+
+        void Start()
+        {
+            m_GameHubManager.readyHub = true;
+            nextIndex = m_GameHubManager.missions.FindIndex(x => x.levels == m_GameHubManager.gamePlayingLog.activeMission);
+            missionName.text = m_GameHubManager.gamePlayingLog.activeMission.levelName;
+            Debug.Log($"Name {m_GameHubManager.gamePlayingLog.activeMission.levelName}");
+        }
+  #endregion
+
+        public void ButtonNextMission(int increment)
+        {
+            if (!m_GameHubManager.readyHub) return;
+            m_GameHubManager.readyHub = false;
+            GameAudioManager.instance.PlaySfx(clickSound);
+            nextIndex = GetHubIndex(nextIndex, increment, m_GameHubManager.missions, m_GameHubManager.gamePlayingLog.finishLevels);
+            m_GameHubManager.OnChangeMission(nextIndex);
+            missionName.text = GamePlayingLog.instance.activeMission.levelName;
+            Debug.Log($"Next Index: {nextIndex}");
+
+        }
+
+        static int GetHubIndex(int actual, int increment, IReadOnlyList<HubMissions> missions, ICollection<Levels> finish)
+        {
+            int realIndex = actual + increment;
+            int max = missions.Count;
+            if (realIndex >= max) return max - 1;
+            if (realIndex <= 0) return 0;
+            if(finish.Contains(missions[realIndex].levels)) return realIndex;
+            return !finish.Contains(missions[realIndex].levels) && finish.Contains(missions[actual].levels) ? realIndex :
+            actual;
+
+            
+            
+            //return realIndex > finish.Count ? actual : realIndex;
+            //return !finish.Contains(missions[realIndex].levels) ? actual : realIndex;
+        }
+
+        /*
         Levels m_ActualLevel;
         bool m_OneClickButton;
 
-        PlayersInputActions m_InputSystem;
+        
         GameHubManager m_GameHubManager;
         
         void OnEnable()
@@ -93,5 +145,6 @@ namespace RiverAttack
             //TODO: desligar tudo para depois mudar a scena.
             GameManager.instance.ChangeState(new GameStateMenu(), GameManager.GameScenes.MainScene.ToString());
         }
+        */
     }
 }
