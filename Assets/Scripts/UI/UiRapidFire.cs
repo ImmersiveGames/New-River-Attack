@@ -21,6 +21,8 @@ namespace RiverAttack
             m_GamePlayManager.EventStartRapidFire += StartRapidFire;
             m_GamePlayManager.EventEndRapidFire += EndRapidFire;
             m_GamePlayManager.EventUpdatePowerUpDuration += CountRapidFire;
+            m_GamePlayManager.EventEnemiesMasterKillPlayer += EndRapidFire;
+            m_GamePlayManager.EventOtherEnemiesKillPlayer += EndRapidFire;
         }
 
         void Start()
@@ -46,6 +48,8 @@ namespace RiverAttack
             m_GamePlayManager.EventStartRapidFire -= StartRapidFire;
             m_GamePlayManager.EventEndRapidFire -= EndRapidFire;
             m_GamePlayManager.EventUpdatePowerUpDuration -= CountRapidFire;
+            m_GamePlayManager.EventEnemiesMasterKillPlayer -= EndRapidFire;
+            m_GamePlayManager.EventOtherEnemiesKillPlayer -= EndRapidFire;
         }
   #endregion
 
