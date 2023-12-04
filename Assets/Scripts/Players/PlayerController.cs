@@ -61,7 +61,7 @@ namespace RiverAttack
         }
         void SetValuesFromPlayerSettings(PlayerSettings settings)
         {
-            m_AutoMovement = settings.speedVertical;
+            m_AutoMovement = (!m_GamePlayManager.bossFight) ? settings.speedVertical : 0;
             m_MovementSpeed = settings.mySpeedy;
             m_MultiplyVelocityUp = settings.multiplyVelocityUp;
             m_MultiplyVelocityDown = settings.multiplyVelocityDown;

@@ -1,39 +1,41 @@
 using UnityEngine;
-
-public class OceanMovement : MonoBehaviour
+namespace Utils
 {
-    public float tileMoveSpeed = 5f; // Ajuste a velocidade conforme necess·rio
-    public float boundaryZ = -10f; // Ajuste o ponto onde os tiles voltar„o para o inÌcio
-
-    private float tileSizeZ;
-
-    void Start()
+    public class OceanMovement : MonoBehaviour
     {
-        // ObtÈm o tamanho da malha do primeiro filho no eixo Z
-        MeshRenderer meshRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
-        tileSizeZ = meshRenderer.bounds.size.z;
-    }
+        public float tileMoveSpeed = 5f; // Ajuste a velocidade conforme necess√°rio
+        public float boundaryZ = -10f;   // Ajuste o ponto onde os tiles voltar√£o para o in√≠cio
 
-    void Update()
-    {
-        // Move cada tile para baixo no eixo Z
-        for (int i = 0; i < transform.childCount; i++)
+        private float m_TileSizeZ;
+
+        void Start()
         {
-            Transform tile = transform.GetChild(i);
-            tile.Translate(Vector3.back * tileMoveSpeed * Time.deltaTime);
+            // Obt√©m o tamanho da malha do primeiro filho no eixo Z
+            var meshRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
+            m_TileSizeZ = meshRenderer.bounds.size.z;
+        }
 
-            // Verifica se o tile ultrapassou o limite definido
-            if (tile.position.z < boundaryZ)
+        void Update()
+        {
+            // Move cada tile para baixo no eixo Z
+            for (int i = 0; i < transform.childCount; i++)
             {
-                // Reposiciona apenas o tile que ultrapassou o limite
-                ResetTilePosition(tile);
+                var tile = transform.GetChild(i);
+                tile.Translate(Vector3.back * (tileMoveSpeed * Time.deltaTime));
+
+                // Verifica se o tile ultrapassou o limite definido
+                if (tile.position.z < boundaryZ)
+                {
+                    // Reposiciona apenas o tile que ultrapassou o limite
+                    ResetTilePosition(tile);
+                }
             }
         }
-    }
 
-    void ResetTilePosition(Transform tile)
-    {
-        // Move o tile para o final da fila
-        tile.Translate(Vector3.forward * tileSizeZ * (transform.childCount - 1));
+        void ResetTilePosition(Transform tile)
+        {
+            // Move o tile para o final da fila
+            tile.Translate(Vector3.forward * (m_TileSizeZ * (transform.childCount - 1)));
+        }
     }
 }

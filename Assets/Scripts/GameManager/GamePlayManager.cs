@@ -26,6 +26,7 @@ namespace RiverAttack
 
         internal Levels actualLevels;
         internal bool playerDead;
+        internal bool bossFight;
 
         GameManager m_GameManager;
         PlayerManager m_PlayerManager;
@@ -68,6 +69,7 @@ namespace RiverAttack
             m_GameManager = GameManager.instance;
             m_PlayerManager = PlayerManager.instance;
             actualLevels = m_GameManager.GetLevel();
+            bossFight = actualLevels.bossFight;
         }
 
         protected override void OnDestroy()
@@ -77,7 +79,7 @@ namespace RiverAttack
             //base.OnDestroy();
         }
   #endregion
-        public bool shouldBePlayingGame { get { return (m_GameManager.currentGameState is GameStatePlayGame && !completePath); } }
+        public bool shouldBePlayingGame { get { return (m_GameManager.currentGameState is GameStatePlayGame or GameStatePlayGameBoss && !completePath); } }
         public static GameSettings getGameSettings
         {
             get { return GameManager.instance.gameSettings; }

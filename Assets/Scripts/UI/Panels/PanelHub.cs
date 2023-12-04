@@ -44,7 +44,9 @@ namespace RiverAttack
             if (!m_GameHubManager.readyHub) return;
             m_GameHubManager.readyHub = false;
             GameAudioManager.instance.PlaySfx(clickSound);
-            GameManager.instance.ChangeState(new GameStateOpenCutScene(), GameManager.GameScenes.GamePlay.ToString());
+            if(m_GameHubManager.gamePlayingLog.activeMission.bossFight){}
+            GameManager.instance.ChangeState(new GameStateOpenCutScene(), m_GameHubManager.gamePlayingLog.activeMission.bossFight ? 
+                GameManager.GameScenes.GamePlayBoss.ToString() : GameManager.GameScenes.GamePlay.ToString());
         }
         public void ButtonReturnInitialMenu()
         {

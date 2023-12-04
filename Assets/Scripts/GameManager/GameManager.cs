@@ -18,7 +18,7 @@ namespace RiverAttack
         [Header("Game Settings")]
         [SerializeField] internal GameSettings gameSettings;
         public LayerMask layerPlayer;
-        public enum GameScenes {MainScene, MissionHub, GamePlay, EndGameCredits }
+        public enum GameScenes {MainScene, MissionHub, GamePlay, GamePlayBoss, EndGameCredits }
         public GameScenes gameScenes;
         public enum GameModes {Classic,Mission}
         internal GameModes gameModes;
@@ -53,6 +53,11 @@ namespace RiverAttack
         }
         void Start()
         {
+            if (gameScenes is GameScenes.GamePlay)
+            {
+                gameModes = GameModes.Mission;
+                ChangeState(new GameStateOpenCutScene(), "GamePlayBoss");
+            }
             ChangeState(new GameStateMenu());
         }
         void Update()

@@ -49,14 +49,14 @@ namespace RiverAttack
         protected override void OnApplicationFocus(bool hasFocus)
         {
             base.OnApplicationFocus(hasFocus);
-            if (!hasFocus && GameManager.instance.currentGameState is GameStatePlayGame)
+            if (!hasFocus && GameManager.instance.currentGameState is GameStatePlayGame or GameStatePlayGameBoss)
                 ButtonGamePause();
         }
 
         protected override void OnApplicationPause(bool pauseStatus)
         {
             base.OnApplicationPause(pauseStatus);
-            if (pauseStatus && GameManager.instance.currentGameState is GameStatePlayGame)
+            if (pauseStatus && GameManager.instance.currentGameState is GameStatePlayGame or GameStatePlayGameBoss)
                 ButtonGamePause();
         }
         #endregion
@@ -126,6 +126,9 @@ namespace RiverAttack
             switch (m_CurrentGameState)
             {
                 case GameStatePlayGame:
+                    ButtonGamePause();
+                    break;
+                case GameStatePlayGameBoss:
                     ButtonGamePause();
                     break;
                 case GameStatePause:
