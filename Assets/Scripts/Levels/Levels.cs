@@ -15,6 +15,7 @@ namespace RiverAttack
 #endif
         public bool beatGame;
         public bool dontCountMilestone;
+        public bool bossFight;
 
         [Header("HUD Settings")]
         [SerializeField] internal GameObject hudPath;
@@ -26,27 +27,7 @@ namespace RiverAttack
         [SerializeField] internal GameObject pathEnd;
         [SerializeField] internal Vector3 levelOffset;
         [SerializeField] internal List<LevelsSetup> setLevelList;
-
-        /*        
-        public bool CheckIfComplete(List<Levels> finishList)
-        {
-            return finishList.Contains(this);
-        }
-
-        public bool CheckIfLastFinish(List<Levels> finishList)
-        {
-            return finishList[^1] == this;
-        }
-
-        public bool CheckIfUnlocked(Levels previous)
-        {
-            return previousLevel.Contains(previous);
-        }
-
-        public bool CheckIfLocked(List<Levels> finishList)
-        {
-            return previousLevel.Count > 0 && previousLevel.All(t => finishList.Count < 1 || !finishList.Contains(t));
-        }*/
+        
     }
     
     public enum LevelsStates
