@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using UnityEngine;
 namespace RiverAttack
 {
     public class GameStateOpenCutScene : GameState
@@ -15,7 +14,7 @@ namespace RiverAttack
         }
         public override void EnterState()
         {
-            Debug.Log($"Entra no Estado: CutScene");
+            //Debug.Log($"Entra no Estado: CutScene");
             GameMissionBuilder.instance.StartBuildMission(GamePlayManager.instance.actualLevels);
             PlayerManager.instance.InstantiatePlayers();
             if(!GamePlayManager.instance.actualLevels.bossFight)
@@ -31,12 +30,7 @@ namespace RiverAttack
         public override void UpdateState()
         {
             if (GameManager.instance.onLoadScene) return;
-            Debug.Log($"CutScene!");
-            if (GameManager.instance.GetLevel().bossFight)
-            {
-                GameManager.instance.ChangeState(new GameStatePlayGameBoss());
-            }
-            //GameManager.instance.ChangeState(new GameStatePlayGame());
+            //Debug.Log($"CutScene!");
         }
         public override void ExitState()
         {

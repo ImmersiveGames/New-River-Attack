@@ -5,6 +5,8 @@ namespace RiverAttack
     public class Bullets : MonoBehaviour, IPoolable
     {
         [SerializeField]
+        internal int powerFire = 1;
+        [SerializeField]
         protected AudioEventSample audioShoot;
         protected float bulletSpeed;
         bool m_HasBulletLifeTime;

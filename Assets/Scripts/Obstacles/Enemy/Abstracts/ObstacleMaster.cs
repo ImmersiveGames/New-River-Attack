@@ -84,7 +84,7 @@ namespace RiverAttack
             objTransform.localScale = m_ObjectStartScale;
         }
 
-        protected void ComponentToKill(Component other, CollisionType collisionType)
+        protected virtual void ComponentToKill(Component other, CollisionType collisionType)
         {
             if (other == null) return;
             playerMaster = WhoHit(other);
@@ -144,7 +144,7 @@ namespace RiverAttack
             gamePlayManager.OnEventBuildPathUpdate(position.z);
         }
 
-        void ShouldFinishGame()
+        protected void ShouldFinishGame()
         {
             if (!isFinishLevel) return;
             gamePlayManager.readyToFinish = true;

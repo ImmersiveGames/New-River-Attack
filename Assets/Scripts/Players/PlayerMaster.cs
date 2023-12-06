@@ -150,11 +150,12 @@ namespace RiverAttack
         {
             //Debug.Log("Respawn Player");
             var transform1 = transform;
-            transform1.position = getPlayerSettings.spawnPosition;
-            transform1.rotation = getPlayerSettings.spawnRotation;
+            transform1.position = m_GamePlayManager.bossFight ? transform1.position : getPlayerSettings.spawnPosition;
+            transform1.rotation = m_GamePlayManager.bossFight ? transform1.rotation : getPlayerSettings.spawnRotation;
             m_GamePlayManager.OnEventReSpawnEnemiesMaster();
             Tools.ToggleChildren(transform1);
             getPlayerSettings.actualFuel = m_GameSettings.startFuel;
+            //TODO: Animação de invulnerabilidade.
             OnEventPlayerMasterRespawn();
             Invoke(nameof(ReSpawn), timeoutReSpawn);
         }
@@ -163,9 +164,8 @@ namespace RiverAttack
             m_GamePlayManager.OnEventActivateEnemiesMaster();
             isPlayerDead = false;
             playerMovementStatus = MovementStatus.None;
+            //TODO: Desativar invunerabilidade
         }
-
-
 
         void LogGamePlay(Component component)
         {

@@ -9,16 +9,14 @@ namespace RiverAttack
     {
         [Header("Default Settings")]
         public new string name;
-        //public LocalizationString translateName;
-        //public float velocity;
-        //public float radiusToApproach;
-        //public float shootCadence;
         public int enemyScore;
-        [Header("Drop Items")]
-        public ListDropItems listDropItems;
         public Sprite spriteIcon;
         public AudioMixerGroup enemyAudioMixerGroup;
+        [Header("Drop Items")]
+        public ListDropItems listDropItems;
+        [Header("Difficulty Set")]
         public EnemiesSetDifficultyListSo enemiesSetDifficultyListSo;
+        [Header("Game Behaviors")]
         public bool canRespawn;
         public bool canDestruct;
         public bool isCheckInPoint;
