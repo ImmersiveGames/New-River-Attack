@@ -48,16 +48,30 @@ namespace RiverAttack
         {
             if (FindObjectsOfType(typeof(GameManager)).Length <= 1)
                 return;
-            Debug.Log($"Tem dois, destroi");
             Destroy(gameObject);
         }
         void Start()
         {
-            if (gameScenes is GameScenes.GamePlay)
+            Debug.Log($"GameScene: {gameScenes}");
+            switch (gameScenes)
             {
-                gameModes = GameModes.Mission;
-                ChangeState(new GameStateOpenCutScene(), "GamePlayBoss");
+
+                case GameScenes.MainScene:
+                    break;
+                case GameScenes.MissionHub:
+                    break;
+                case GameScenes.GamePlay:
+                    break;
+                case GameScenes.GamePlayBoss:
+                    gameModes = GameModes.Mission;
+                    ChangeState(new GameStateOpenCutScene(), "GamePlayBoss");
+                    break;
+                case GameScenes.EndGameCredits:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
+            
             ChangeState(new GameStateMenu());
         }
         void Update()

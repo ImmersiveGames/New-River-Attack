@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using RiverAttack;
+using UnityEngine;
 namespace Utils
 {
     public interface IBossBehavior

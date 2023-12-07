@@ -27,6 +27,7 @@ namespace RiverAttack
         internal Levels actualLevels;
         internal bool playerDead;
         internal bool bossFight;
+        internal BossMaster bossMaster;
 
         GameManager m_GameManager;
         PlayerManager m_PlayerManager;
@@ -69,7 +70,11 @@ namespace RiverAttack
             m_GameManager = GameManager.instance;
             m_PlayerManager = PlayerManager.instance;
             actualLevels = m_GameManager.GetLevel();
-            bossFight = actualLevels.bossFight;
+            if (actualLevels.bossFight)
+            {
+                bossFight = actualLevels.bossFight;
+            }
+            
         }
 
         protected override void OnDestroy()

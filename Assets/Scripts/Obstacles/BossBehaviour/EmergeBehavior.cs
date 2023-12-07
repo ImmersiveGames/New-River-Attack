@@ -5,6 +5,12 @@ namespace RiverAttack
     public class EmergeBehavior : IBossBehavior
     {
         bool m_Finished = false;
+        BossMaster m_BossMaster;
+
+        internal EmergeBehavior(BossMaster bossMaster)
+        {
+            m_BossMaster = bossMaster;
+        }
         public void Enter()
         {
             Debug.Log("Entrando no comportamento Emergir");

@@ -5,6 +5,12 @@ namespace RiverAttack
     public class SubEmergeBehavior: IBossBehavior
     {
         bool m_Finished = false;
+        BossMaster m_BossMaster;
+        
+        internal SubEmergeBehavior(BossMaster bossMaster)
+        {
+            m_BossMaster = bossMaster;
+        }
         public void Enter()
         {
             Debug.Log("Entrando no comportamento SubEmerge");

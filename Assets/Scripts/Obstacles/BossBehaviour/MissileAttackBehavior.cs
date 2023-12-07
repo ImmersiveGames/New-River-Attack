@@ -5,6 +5,11 @@ namespace RiverAttack
     public class MissileAttackBehavior: IBossBehavior
     {
         bool m_Finished = false;
+        BossMaster m_BossMaster;
+        internal MissileAttackBehavior(BossMaster bossMaster)
+        {
+            m_BossMaster = bossMaster;
+        }
         public void Enter()
         {
             Debug.Log("Entrando no comportamento MissileAttack");
