@@ -23,6 +23,8 @@ namespace Shopping
         TMP_Text wealthTMPText;
         [SerializeField]
         GameObject productForward, productBackward;
+        [SerializeField]
+        MenuPlayerSkinManager mainMenuPlayer;
 
         [Header("Carousel"), SerializeField]
         bool infinityLooping;
@@ -128,6 +130,7 @@ namespace Shopping
             shopProductStock.shopProduct.ConsumeProduct(player);
             player.playerSkin = shopProductStock.shopProduct as ShopProductSkin;
             CallEventButtonSelect(player);
+            mainMenuPlayer.ChangePlayerSkin();
 
             var lastSelectBtn = m_Shop.getProducts[m_LastSelectedSkin].GetComponent<UIItemShop>().getSelectButton;
             lastSelectBtn.GetComponent<Image>().color = normalColor;
