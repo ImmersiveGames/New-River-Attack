@@ -9,7 +9,10 @@ namespace RiverAttack
         float m_MovementSpeed;
         float m_MultiplyVelocityUp;
         float m_MultiplyVelocityDown;
+        
+        [SerializeField] float limitX = 30.0f; // Limite positivo ao longo do eixo X
 
+        
         Vector2 m_InputVector;
         PlayersInputActions m_PlayersInputActions;
         PlayerMaster m_PlayerMaster;
@@ -45,9 +48,14 @@ namespace RiverAttack
                 < 0 => PlayerMaster.MovementStatus.Reduce,
                 _ => PlayerMaster.MovementStatus.None
             };
-
+            
             var moveDir = new Vector3(m_InputVector.x, 0, axisAutoMovement);
             if (m_GamePlayManager.getGodMode && m_GamePlayManager.godModeSpeed) moveDir *= 4;
+            if (m_GamePlayManager.bossFight)
+            {
+                var nextPosition = transform.position + moveDir * (m_MovementSpeed * Time.deltaTime);
+                if (nextPosition.x >= limitX || nextPosition.x <= limitX * -1) return;
+            }
             transform.position += moveDir * (m_MovementSpeed * Time.deltaTime);
 
             m_PlayerMaster.OnEventPlayerMasterControllerMovement(m_InputVector);
@@ -63,8 +71,8 @@ namespace RiverAttack
         {
             m_AutoMovement = (!m_GamePlayManager.bossFight) ? settings.speedVertical : 0;
             m_MovementSpeed = settings.mySpeedy;
-            m_MultiplyVelocityUp = settings.multiplyVelocityUp;
-            m_MultiplyVelocityDown = settings.multiplyVelocityDown;
+            m_MultiplyVelocityUp = (!m_GamePlayManager.bossFight)? settings.multiplyVelocityUp : 0;
+            m_MultiplyVelocityDown = (!m_GamePlayManager.bossFight)? settings.multiplyVelocityDown : 0;
         }
         void TouchMove(InputAction.CallbackContext context)
         {

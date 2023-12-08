@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 namespace RiverAttack
 {
@@ -7,6 +8,9 @@ namespace RiverAttack
         [SerializeField] int bossHp;
         [SerializeField] int bossCycles;
         EnemiesBossScriptable m_BossScriptable;
+
+        internal Transform targetPlayer;
+        [SerializeField] internal float distanceTarget = 20.0f;
 
         #region Events
         protected internal event GeneralEventHandler EventBossHit;
@@ -18,9 +22,18 @@ namespace RiverAttack
             bossHp = m_BossScriptable!.maxHp;
             bossCycles = m_BossScriptable!.maxCycles;
             GamePlayManager.instance.bossMaster = this;
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
-        
+
+        void Start()
+        {
+            targetPlayer = PlayerManager.instance.GetTransformFirstPlayer();
+            var transform1 = transform;
+            var positionAhead = transform1.position;
+            var targetPosition = targetPlayer.position;
+            transform1.position = new Vector3(0f, 0.3f, targetPosition.z + distanceTarget);
+        }
+
         internal override void OnTriggerEnter(Collider other)
         {
             if (other == null || !shouldObstacleBeReady || !enemy.canDestruct) return;
@@ -53,29 +66,7 @@ namespace RiverAttack
 
         internal void MoveBoss(Vector3 targetPosition, BattleBossSubState positionBoss)
         {
-            const float targetDistance = 4.5f; // Distância entre o alvo e o objeto (pode ajustar conforme necessário)
-            var camPosition = Camera.main!.transform.position;
-            float targetPositionY = targetPosition.y;
-            gameObject.SetActive(true);
-            // Calcula a nova posição com base no lado desejado
-            switch (positionBoss)
-            {
-                case BattleBossSubState.Top:
-                    transform.position = new Vector3(camPosition.x, targetPositionY, camPosition.z + targetDistance);
-                    break;
-                case BattleBossSubState.Base:
-                    transform.position = new Vector3(camPosition.x, targetPositionY, camPosition.z + targetDistance);
-                    break;
-                case BattleBossSubState.Left:
-                    transform.position = new Vector3(camPosition.x, targetPositionY, camPosition.z + targetDistance);
-                    break;
-                case BattleBossSubState.Right:
-                    transform.position = new Vector3(camPosition.x, targetPositionY, camPosition.z + targetDistance);
-                    break;
-                default:
-                    Debug.Log("Lado inválido!");
-                    break;
-            }
+            
         }
 
         void DamageBoss(int damage)

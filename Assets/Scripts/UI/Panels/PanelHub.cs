@@ -12,6 +12,8 @@ namespace RiverAttack
         PlayersInputActions m_InputSystem;
         GameHubManager m_GameHubManager;
 
+        bool pushButtonStart;
+
         #region UNITYMETHODS
         void OnEnable()
         {
@@ -31,28 +33,35 @@ namespace RiverAttack
 
         public void ButtonNextMission(int increment)
         {
-            if (!m_GameHubManager.readyHub) return;
-            m_GameHubManager.readyHub = false;
+            if (!m_GameHubManager.readyHub || pushButtonStart) return;
+            pushButtonStart = true;
+            //m_GameHubManager.readyHub = false;
             GameAudioManager.instance.PlaySfx(clickSound);
             m_NextIndex = GetHubIndex(m_NextIndex, increment, m_GameHubManager.missions, m_GameHubManager.gamePlayingLog.finishLevels);
             m_GameHubManager.OnChangeMission(m_NextIndex);
             missionName.text = GamePlayingLog.instance.activeMission.levelName;
+            pushButtonStart = false;
+            
             //Debug.Log($"Next Index: {m_NextIndex}");
         }
         public void ButtonStartMission()
         {
-            if (!m_GameHubManager.readyHub) return;
-            m_GameHubManager.readyHub = false;
+            if (!m_GameHubManager.readyHub || pushButtonStart) return;
+            pushButtonStart = true;
             GameAudioManager.instance.PlaySfx(clickSound);
             if(m_GameHubManager.gamePlayingLog.activeMission.bossFight){}
             GameManager.instance.ChangeState(new GameStateOpenCutScene(), m_GameHubManager.gamePlayingLog.activeMission.bossFight ? 
                 GameManager.GameScenes.GamePlayBoss.ToString() : GameManager.GameScenes.GamePlay.ToString());
+            pushButtonStart = false;
         }
         public void ButtonReturnInitialMenu()
         {
+            if (!m_GameHubManager.readyHub || pushButtonStart) return;
+            pushButtonStart = true;
             GameAudioManager.instance.PlaySfx(clickSound);
             StopAllCoroutines();
             GameManager.instance.ChangeState(new GameStateMenu(), GameManager.GameScenes.MainScene.ToString());
+            pushButtonStart = false;
         }
 
         static int GetHubIndex(int actual, int increment, IReadOnlyList<HubMissions> missions, ICollection<Levels> finish)

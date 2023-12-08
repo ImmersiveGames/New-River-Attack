@@ -39,6 +39,10 @@ namespace RiverAttack
                 playerMaster.gameObject.SetActive(active);
             }
         }
+        internal Transform GetTransformFirstPlayer()
+        {
+            return initializedPlayerMasters[0].transform;
+        }
         internal void DestroyPlayers()
         {
             foreach (var playerMaster in initializedPlayerMasters)
