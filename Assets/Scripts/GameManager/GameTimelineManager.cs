@@ -41,12 +41,12 @@ namespace RiverAttack
 
         public void EndOpenCutScene()
         {
-            Debug.Log("Fim da Time Line");
+            //Debug.Log("Fim da Time Line");
             m_GameManager.ChangeState(new GameStatePlayGame());
         }
         public void EndOpenCutSceneBoss()
         {
-            Debug.Log("Fim da Time Line BossFight");
+            //Debug.Log("Fim da Time Line BossFight");
             m_GameManager.ChangeState(new GameStatePlayGameBoss());
         }
         

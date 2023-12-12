@@ -62,14 +62,14 @@ namespace RiverAttack
         }
         public override void EnterState()
         {
-            Debug.Log($"Entra no Estado: Boss Fight");
+            //Debug.Log($"Entra no Estado: Boss Fight");
             GamePlayManager.instance.panelMenuGame.StartMenuGame();
             GamePlayManager.instance.OnStartGame();
             m_PlayerMaster = PlayerManager.instance.initializedPlayerMasters[0];
         }
         public override void UpdateState()
         {
-            Debug.Log("Boss Fight!");
+            //Debug.Log("Boss Fight!");
             ExecuteCurrentBehavior();
             //Verificar gameover
         }
@@ -78,7 +78,7 @@ namespace RiverAttack
             PlayerManager.instance.ActivePlayers(false);
             GamePlayManager.instance.OnEventDeactivateEnemiesMaster();
            
-            Debug.Log($"Sai do Estado: Boss Fight");
+            //Debug.Log($"Sai do Estado: Boss Fight");
             m_BossMaster = null;
             m_PlayerMaster = null;
             System.GC.Collect();
@@ -103,9 +103,6 @@ namespace RiverAttack
         }
         void ChangeSubState(BattleBossSubState newSubState)
         {
-            Debug.Log($"ChangeSubState - newSubState: {newSubState}");
-            Debug.Log($"ChangeSubState - m_CurrentSubState: {m_CurrentSubState}");
-
             if (m_CurrentSubState != newSubState)
             {
                 // Se for um substatus diferente deve trocar e reiniciar
@@ -122,8 +119,8 @@ namespace RiverAttack
         }
         
         void ExecuteCurrentBehavior() {
-            Debug.Log($"m_CurrentSubState: {m_CurrentSubState}");
-            Debug.Log($"m_CurrentBehaviorIndex: {m_CurrentBehaviorIndex}");
+            /*Debug.Log($"m_CurrentSubState: {m_CurrentSubState}");
+            Debug.Log($"m_CurrentBehaviorIndex: {m_CurrentBehaviorIndex}");*/
 
             //Se for o primeiro e tiver null atualiza os comportamentos, se não for o primeiro verifica se é o ultimo comportamento apra alterar
             ChangeSubState(GetNextSubState());
@@ -140,9 +137,9 @@ namespace RiverAttack
                 m_BehaviorEnterExecuted = false;
             }
 
-            Debug.Log($"N# Behavior: {m_CurrentBehaviors.Length}");
+            /*Debug.Log($"N# Behavior: {m_CurrentBehaviors.Length}");
             Debug.Log($"m_BehaviorCompleted: {m_BehaviorCompleted}");
-            Debug.Log($"m_BehaviorEnterExecuted: {m_BehaviorEnterExecuted}");
+            Debug.Log($"m_BehaviorEnterExecuted: {m_BehaviorEnterExecuted}");*/
         }
     }
 }

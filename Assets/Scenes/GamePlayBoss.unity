@@ -272,7 +272,7 @@ Camera:
   far clip plane: 80
   field of view: 30
   orthographic: 0
-  orthographic size: 15.01
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -719,7 +719,7 @@ PrefabInstance:
     - target: {fileID: 8200121542077843528, guid: 551a0692153c84047b95ca3b5d72b038,
         type: 3}
       propertyPath: m_Name
-      value: StartAnimDirector 1
+      value: StartAnimDirectorBoss
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1498,7 +1498,7 @@ PrefabInstance:
     - target: {fileID: 6631028748223711138, guid: e9c9b5f0a065969498991ef00524861b,
         type: 3}
       propertyPath: godMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6631028748223711138, guid: e9c9b5f0a065969498991ef00524861b,
         type: 3}
@@ -1541,7 +1541,22 @@ MonoBehaviour:
   m_Events:
     m_Signals:
     - {fileID: 11400000, guid: 01da7c672d2c05a42b274b8be540037a, type: 2}
+    - {fileID: 11400000, guid: 9552c2288c667874381df6841a4de67a, type: 2}
     m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8585021699522785146}
+          m_TargetAssemblyTypeName: RiverAttack.GameTimelineManager, Assembly-CSharp
+          m_MethodName: EndOpenCutSceneBoss
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 8585021699522785146}

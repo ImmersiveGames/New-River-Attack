@@ -10,12 +10,6 @@ namespace RiverAttack
         float m_MultiplyVelocityUp;
         float m_MultiplyVelocityDown;
 
-        const float LIMIT_X = 28.0f;
-        const float LIMIT_Z_TOP = 40.0f;
-        const float LIMIT_Z_BOTTOM = 15.0f;
-        // Limite positivo ao longo do eixo X
-
-        
         Vector2 m_InputVector;
         PlayersInputActions m_PlayersInputActions;
         PlayerMaster m_PlayerMaster;
@@ -61,14 +55,14 @@ namespace RiverAttack
                 var nextPosition = transform.position + moveDir * (m_MovementSpeed * Time.deltaTime);
                 if (m_InputVector.x != 0)
                 {
-                    if (nextPosition.x is >= LIMIT_X or <= LIMIT_X * -1)
+                    if (nextPosition.x is >= GamePlayManager.LimitX or <= GamePlayManager.LimitX * -1)
                     {
                         axisX = 0;
                     }
                 }
                 if (m_InputVector.y != 0)
                 {
-                    if (nextPosition.z is >= LIMIT_Z_TOP or <= LIMIT_Z_BOTTOM)
+                    if (nextPosition.z is >= GamePlayManager.LimitZTop or <= GamePlayManager.LimitZBottom)
                     {
                         axisZ = 0;
                     }

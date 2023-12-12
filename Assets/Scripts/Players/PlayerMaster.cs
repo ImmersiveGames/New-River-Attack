@@ -9,6 +9,7 @@ namespace RiverAttack
         [Header("Player Destroy Settings")]
         [SerializeField]
         bool isPlayerDead;
+        internal bool invulnerability;
         [SerializeField] float timeoutReSpawn;
         [SerializeField]
         GameObject deadParticlePrefab;
@@ -72,9 +73,9 @@ namespace RiverAttack
         }
         void OnTriggerEnter(Collider other)
         {
-            if (!other.GetComponentInParent<WallsMaster>() && !other.GetComponentInParent<EnemiesMaster>() && !other.GetComponent<BulletEnemy>()) return;
+            if (!other.GetComponentInParent<WallsMaster>() && !other.GetComponentInParent<BossMaster>() && !other.GetComponentInParent<EnemiesMaster>() && !other.GetComponent<BulletEnemy>()) return;
             if (other.GetComponentInParent<CollectiblesMaster>() != null) return;
-            if (m_GamePlayManager.getGodMode) return;
+            if (m_GamePlayManager.getGodMode || invulnerability) return;
             LogGamePlay(other);
             //return;
             OnEventPlayerMasterHit();
@@ -121,8 +122,11 @@ namespace RiverAttack
 
         void KillPlayer()
         {
-            m_GamePlayManager.playerDead = isPlayerDead = true;
-            playerMovementStatus = MovementStatus.Paused;
+            m_GamePlayManager.playerDead = !m_GamePlayManager.bossFight;
+            isPlayerDead = !m_GamePlayManager.bossFight;
+            playerMovementStatus = m_GamePlayManager.bossFight ? MovementStatus.None : MovementStatus.Paused;
+            invulnerability = true;
+            //TODO: Ativar animação de invencibilidade do jogador
             CameraShake.ShakeCamera(shakeIntensity,shakeTime);
             m_GamePlayManager.OnEventEnemiesMasterKillPlayer();
 
@@ -155,15 +159,16 @@ namespace RiverAttack
             m_GamePlayManager.OnEventReSpawnEnemiesMaster();
             Tools.ToggleChildren(transform1);
             getPlayerSettings.actualFuel = m_GameSettings.startFuel;
-            //TODO: Animação de invulnerabilidade.
             OnEventPlayerMasterRespawn();
             Invoke(nameof(ReSpawn), timeoutReSpawn);
         }
         void ReSpawn()
         {
             m_GamePlayManager.OnEventActivateEnemiesMaster();
+            //TODO: Desativar animação de invencibilidade do jogador
             isPlayerDead = false;
             playerMovementStatus = MovementStatus.None;
+            invulnerability = false;
             //TODO: Desativar invunerabilidade
         }
 

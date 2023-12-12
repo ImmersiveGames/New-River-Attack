@@ -4,7 +4,7 @@ namespace RiverAttack
 {
     public class MissileAttackBehavior: IBossBehavior
     {
-        bool m_Finished = false;
+        bool m_Finished;
         BossMaster m_BossMaster;
         internal MissileAttackBehavior(BossMaster bossMaster)
         {

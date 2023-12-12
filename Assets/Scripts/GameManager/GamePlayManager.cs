@@ -28,6 +28,10 @@ namespace RiverAttack
         internal bool playerDead;
         internal bool bossFight;
         internal BossMaster bossMaster;
+        
+        internal const float LimitX = 28.0f;
+        internal const float LimitZTop = 40.0f;
+        internal const float LimitZBottom = 15.0f;
 
         GameManager m_GameManager;
         PlayerManager m_PlayerManager;

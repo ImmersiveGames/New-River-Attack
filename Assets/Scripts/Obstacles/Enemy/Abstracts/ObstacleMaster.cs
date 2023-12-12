@@ -151,7 +151,7 @@ namespace RiverAttack
         }
 
         #region Calls
-        void OnEventObstacleMasterHit()
+        internal void OnEventObstacleMasterHit()
         {
             DestroyObstacle();
             EventObstacleMasterHit?.Invoke();
