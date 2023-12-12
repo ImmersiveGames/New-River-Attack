@@ -5,19 +5,19 @@ namespace RiverAttack
     public class EmergeBehavior : IBossBehavior
     {
         bool m_Finished = false;
-        BossMaster m_BossMaster;
+        internal BossMaster bossMaster;
 
         internal EmergeBehavior(BossMaster bossMaster)
         {
-            m_BossMaster = bossMaster;
+            this.bossMaster = bossMaster;
         }
         public void Enter()
         {
-            Debug.Log($"Entrando no comportamento Emergir {m_BossMaster.targetPlayer}");
+            Debug.Log($"Entrando no comportamento Emergir {bossMaster.targetPlayer}");
             // Lógica de entrada para o comportamento Emergir
             m_Finished = false;
-            m_BossMaster.Invoke("m_BossMaster.MoveBoss(BattleBossSubState.Top)",2f);
-            
+            MoveBoss();
+
         }
         public void Update()
         {
@@ -37,6 +37,12 @@ namespace RiverAttack
         public bool IsFinished()
         {
             return m_Finished;
+        }
+
+
+        void MoveBoss()
+        {
+            bossMaster.MoveBoss(bossMaster.actualPosition);
         }
     }
 }

@@ -9,8 +9,11 @@ namespace RiverAttack
         float m_MovementSpeed;
         float m_MultiplyVelocityUp;
         float m_MultiplyVelocityDown;
-        
-        [SerializeField] float limitX = 30.0f; // Limite positivo ao longo do eixo X
+
+        const float LIMIT_X = 28.0f;
+        const float LIMIT_Z_TOP = 40.0f;
+        const float LIMIT_Z_BOTTOM = 15.0f;
+        // Limite positivo ao longo do eixo X
 
         
         Vector2 m_InputVector;
@@ -53,8 +56,24 @@ namespace RiverAttack
             if (m_GamePlayManager.getGodMode && m_GamePlayManager.godModeSpeed) moveDir *= 4;
             if (m_GamePlayManager.bossFight)
             {
+                float axisX = m_InputVector.x;
+                float axisZ = axisAutoMovement;
                 var nextPosition = transform.position + moveDir * (m_MovementSpeed * Time.deltaTime);
-                if (nextPosition.x >= limitX || nextPosition.x <= limitX * -1) return;
+                if (m_InputVector.x != 0)
+                {
+                    if (nextPosition.x is >= LIMIT_X or <= LIMIT_X * -1)
+                    {
+                        axisX = 0;
+                    }
+                }
+                if (m_InputVector.y != 0)
+                {
+                    if (nextPosition.z is >= LIMIT_Z_TOP or <= LIMIT_Z_BOTTOM)
+                    {
+                        axisZ = 0;
+                    }
+                }
+                moveDir = new Vector3(axisX, 0, axisZ);
             }
             transform.position += moveDir * (m_MovementSpeed * Time.deltaTime);
 
@@ -69,10 +88,10 @@ namespace RiverAttack
         }
         void SetValuesFromPlayerSettings(PlayerSettings settings)
         {
-            m_AutoMovement = (!m_GamePlayManager.bossFight) ? settings.speedVertical : 0;
+            m_AutoMovement = (!m_GamePlayManager.bossFight) ? settings.speedVertical : 0f;
             m_MovementSpeed = settings.mySpeedy;
-            m_MultiplyVelocityUp = (!m_GamePlayManager.bossFight)? settings.multiplyVelocityUp : 0;
-            m_MultiplyVelocityDown = (!m_GamePlayManager.bossFight)? settings.multiplyVelocityDown : 0;
+            m_MultiplyVelocityUp = (!m_GamePlayManager.bossFight)? settings.multiplyVelocityUp : 1f;
+            m_MultiplyVelocityDown = (!m_GamePlayManager.bossFight)? settings.multiplyVelocityDown : -1f;
         }
         void TouchMove(InputAction.CallbackContext context)
         {

@@ -9,11 +9,14 @@ namespace RiverAttack
         [SerializeField] int bossCycles;
         EnemiesBossScriptable m_BossScriptable;
 
+        internal BattleBossSubState actualPosition;
+
         internal Transform targetPlayer;
         [SerializeField] internal float distanceTarget = 20.0f;
 
         #region Events
         protected internal event GeneralEventHandler EventBossHit;
+        protected internal event GeneralEventHandler EventBossEmerge;
   #endregion
         internal override void Awake()
         {
@@ -22,6 +25,7 @@ namespace RiverAttack
             bossHp = m_BossScriptable!.maxHp;
             bossCycles = m_BossScriptable!.maxCycles;
             GamePlayManager.instance.bossMaster = this;
+            actualPosition = BattleBossSubState.Top;
         }
 
         void Start()
@@ -59,17 +63,17 @@ namespace RiverAttack
             ShouldFinishGame(); //<= Verifica se o jogo terminsou
         }
 
-        internal void MoveBoss(BattleBossSubState positionBoss)
+        public void MoveBoss(BattleBossSubState positionBoss)
         {
+            actualPosition = positionBoss;
             var transform1 = transform;
             var positionAhead = transform1.position;
             var targetPosition = targetPlayer.position;
-
             switch (positionBoss)
             {
-
                 case BattleBossSubState.Top:
-                    transform1.position = new Vector3(0f, 0.3f, targetPosition.z + distanceTarget);
+                    //transform1.position = new Vector3(targetPosition.x + distanceTarget, 0.3f, targetPosition.z );
+                    transform1.position = new Vector3(targetPosition.x, 0.3f, targetPosition.z + distanceTarget);
                     break;
                 case BattleBossSubState.Base:
                     break;
@@ -80,6 +84,8 @@ namespace RiverAttack
                 default:
                     throw new ArgumentOutOfRangeException(nameof(positionBoss), positionBoss, null);
             }
+            
+            Invoke(nameof(OnEventBossEmerge), 2f);
         }
 
         void DamageBoss(int damage)
@@ -91,6 +97,10 @@ namespace RiverAttack
         protected virtual void OnEventBossHit()
         {
             EventBossHit?.Invoke();
+        }
+        public void OnEventBossEmerge()
+        {
+            EventBossEmerge?.Invoke();
         }
     }
 }
