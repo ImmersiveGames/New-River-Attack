@@ -22,16 +22,11 @@ namespace RiverAttack
             bossHp = m_BossScriptable!.maxHp;
             bossCycles = m_BossScriptable!.maxCycles;
             GamePlayManager.instance.bossMaster = this;
-            //gameObject.SetActive(false);
         }
 
         void Start()
         {
             targetPlayer = PlayerManager.instance.GetTransformFirstPlayer();
-            var transform1 = transform;
-            var positionAhead = transform1.position;
-            var targetPosition = targetPlayer.position;
-            transform1.position = new Vector3(0f, 0.3f, targetPosition.z + distanceTarget);
         }
 
         internal override void OnTriggerEnter(Collider other)
@@ -64,9 +59,27 @@ namespace RiverAttack
             ShouldFinishGame(); //<= Verifica se o jogo terminsou
         }
 
-        internal void MoveBoss(Vector3 targetPosition, BattleBossSubState positionBoss)
+        internal void MoveBoss(BattleBossSubState positionBoss)
         {
-            
+            var transform1 = transform;
+            var positionAhead = transform1.position;
+            var targetPosition = targetPlayer.position;
+
+            switch (positionBoss)
+            {
+
+                case BattleBossSubState.Top:
+                    transform1.position = new Vector3(0f, 0.3f, targetPosition.z + distanceTarget);
+                    break;
+                case BattleBossSubState.Base:
+                    break;
+                case BattleBossSubState.Left:
+                    break;
+                case BattleBossSubState.Right:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(positionBoss), positionBoss, null);
+            }
         }
 
         void DamageBoss(int damage)

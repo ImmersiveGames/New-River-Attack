@@ -13,9 +13,11 @@ namespace RiverAttack
         }
         public void Enter()
         {
-            Debug.Log("Entrando no comportamento Emergir");
+            Debug.Log($"Entrando no comportamento Emergir {m_BossMaster.targetPlayer}");
             // Lógica de entrada para o comportamento Emergir
             m_Finished = false;
+            m_BossMaster.Invoke("m_BossMaster.MoveBoss(BattleBossSubState.Top)",2f);
+            
         }
         public void Update()
         {
