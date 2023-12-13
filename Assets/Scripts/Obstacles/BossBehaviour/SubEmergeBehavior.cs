@@ -4,8 +4,10 @@ namespace RiverAttack
 {
     public class SubEmergeBehavior: IBossBehavior
     {
-        bool m_Finished = false;
-        BossMaster m_BossMaster;
+        bool m_Finished;
+        readonly BossMaster m_BossMaster;
+        float m_CountTime;
+        const float TIME_LIMIT = 10f;
         
         internal SubEmergeBehavior(BossMaster bossMaster)
         {
@@ -16,21 +18,29 @@ namespace RiverAttack
             Debug.Log("Entrando no comportamento SubEmerge");
             // Lógica de entrada para o comportamento SubEmerge
             m_Finished = false;
+            m_BossMaster.BossInvulnerability(true);
+            m_BossMaster.Submerge();
         }
         public void Update()
         {
             Debug.Log("Atualizando comportamento SubEmerge");
-            // Lógica de atualização para o comportamento SubEmerge
+            m_CountTime += Time.deltaTime;
 
-            // Exemplo: Após um certo tempo ou condição, marcamos o comportamento como concluído
-            if (Input.GetKeyDown(KeyCode.P)) {
-                m_Finished = true;
-            }
+            if (!(m_CountTime >= TIME_LIMIT))
+                return;
+            m_CountTime = 0f;
+            m_BossMaster.BossInvulnerability(false);
+            FinishBehavior();
+            Debug.Log("O contador atingiu " + TIME_LIMIT + " segundos.");
         }
         public void Exit()
         {
             Debug.Log("Saindo do comportamento SubEmerge");
             // Lógica de saída para o comportamento SubEmerge
+        }
+        public void FinishBehavior()
+        {
+            m_Finished = true;
         }
         public bool IsFinished()
         {

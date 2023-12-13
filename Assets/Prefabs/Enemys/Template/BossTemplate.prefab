@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 4988319252790527843}
   - component: {fileID: 6238850805175663591}
   - component: {fileID: 7061663323343697610}
+  - component: {fileID: 5861639489914909881}
   - component: {fileID: 6263680019441384205}
-  - component: {fileID: 6421188239924259748}
   - component: {fileID: 1051795495417664586}
   - component: {fileID: 1604458344605076990}
   m_Layer: 7
@@ -177,12 +177,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: fd28be703c98b6445a0c18041abdd30a, type: 2}
-  isFinishLevel: 0
+  isFinishLevel: 1
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
   timeoutDestroyExplosion: 2
   isDestroyed: 0
-  isActive: 0
+  isActive: 1
   bossHp: 10
   bossCycles: 4
   distanceTarget: 20
@@ -199,6 +199,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onEmerge: Emerge
+  onSubmerge: Submerge
+  onGotHit: GotHit
+--- !u!114 &5861639489914909881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504127474328815682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e291c033be0496785b565195ebe06dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyExplodeAudio: {fileID: 11400000, guid: 6364d9cbea7706542bd1d734c7161ab1, type: 2}
+  bossHitAudio: {fileID: 11400000, guid: 7b8cf752ac052514dab12a5ddaa2e281, type: 2}
 --- !u!114 &6263680019441384205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,19 +227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0139ee20f45fc64a8ee2a64e0e66b09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6421188239924259748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1504127474328815682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04f639367ab900741ab41e4165f21e90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyExplodeAudio: {fileID: 0}
 --- !u!114 &1051795495417664586
 MonoBehaviour:
   m_ObjectHideFlags: 0

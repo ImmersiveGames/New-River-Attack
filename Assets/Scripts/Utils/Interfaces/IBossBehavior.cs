@@ -8,6 +8,7 @@ namespace Utils
         void Enter();
         void Update();
         void Exit();
+        void FinishBehavior();
         bool IsFinished(); 
     }
 }

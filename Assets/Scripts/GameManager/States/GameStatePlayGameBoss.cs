@@ -7,12 +7,11 @@ namespace RiverAttack
     public enum BattleBossSubState { Top, Base, Left, Right }
     public class GameStatePlayGameBoss : GameState
     {
-        BattleBossSubState m_CurrentSubState;
+        internal BattleBossSubState currentSubState;
         readonly Dictionary<BattleBossSubState, IBossBehavior[]> m_Behaviors;
 
         IBossBehavior[] m_CurrentBehaviors;
         int m_CurrentBehaviorIndex;
-        bool m_BehaviorCompleted;
         bool m_BehaviorEnterExecuted;
 
         BossMaster m_BossMaster;
@@ -20,10 +19,9 @@ namespace RiverAttack
 
         public GameStatePlayGameBoss() {
             // Inicializa o estado do BattleBoss como "Topo"
-            m_CurrentSubState = BattleBossSubState.Top;
+            currentSubState = BattleBossSubState.Top;
             m_CurrentBehaviorIndex = 0;
-            m_BehaviorCompleted = false;
-            
+
             m_BossMaster = GamePlayManager.instance.bossMaster;
             m_PlayerMaster = PlayerManager.instance.initializedPlayerMasters[0];
 
@@ -88,29 +86,29 @@ namespace RiverAttack
             // Verifica se todos os comportamentos do subestado atual foram concluídos
             if (m_CurrentBehaviors == null)
             {
-                m_CurrentBehaviors = m_Behaviors[m_CurrentSubState];
-                return m_CurrentSubState;
+                m_CurrentBehaviors = m_Behaviors[currentSubState];
+                return currentSubState;
             }
             if (m_CurrentBehaviorIndex < m_CurrentBehaviors.Length)
-                return m_CurrentSubState;
+                return currentSubState;
 
             int randomIndex = Random.Range(0, 4); // Sorteia um número aleatório entre 0 e 3 (4 possíveis estados)
 
             // Converte o número aleatório em um BattleBossSubState correspondente
             var nextState = (BattleBossSubState)randomIndex;
-
+            m_BossMaster.actualPosition = nextState;
+            Debug.Log($"RANDOM Position: {nextState}");
             return nextState;
         }
         void ChangeSubState(BattleBossSubState newSubState)
         {
-            if (m_CurrentSubState != newSubState)
+            if (currentSubState != newSubState)
             {
                 // Se for um substatus diferente deve trocar e reiniciar
-                m_CurrentSubState = newSubState;
-                m_BehaviorCompleted = false;
+                currentSubState = newSubState;
                 m_BehaviorEnterExecuted = false;
                 m_CurrentBehaviorIndex = 0;
-                m_CurrentBehaviors = m_Behaviors[m_CurrentSubState];
+                m_CurrentBehaviors = m_Behaviors[currentSubState];
             }
             if (m_BehaviorEnterExecuted)
                 return;
@@ -129,17 +127,21 @@ namespace RiverAttack
             {
                 m_CurrentBehaviors[m_CurrentBehaviorIndex].Update();
             }
-            if (m_CurrentBehaviors[m_CurrentBehaviorIndex].IsFinished())
-            {
-                // Se o comportamento se encerra executa o ultimo update e sua saida.
-                m_CurrentBehaviors[m_CurrentBehaviorIndex].Exit();
-                m_CurrentBehaviorIndex++;
-                m_BehaviorEnterExecuted = false;
-            }
+            if (!m_CurrentBehaviors[m_CurrentBehaviorIndex].IsFinished())
+                return;
+            // Se o comportamento se encerra executa o ultimo update e sua saida.
+            m_CurrentBehaviors[m_CurrentBehaviorIndex].Exit();
+            m_CurrentBehaviorIndex++;
+            m_BehaviorEnterExecuted = false;
 
             /*Debug.Log($"N# Behavior: {m_CurrentBehaviors.Length}");
             Debug.Log($"m_BehaviorCompleted: {m_BehaviorCompleted}");
             Debug.Log($"m_BehaviorEnterExecuted: {m_BehaviorEnterExecuted}");*/
+        }
+
+        internal void FinishBehavior()
+        {
+            m_CurrentBehaviors[m_CurrentBehaviorIndex].FinishBehavior();
         }
     }
 }

@@ -1,24 +1,28 @@
 ﻿using System;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using Utils;
 namespace RiverAttack
 {
     public class BossMaster: ObstacleMaster
     {
         const float HEIGHT_Y = 0.3f;
-        
+        [Header("Boss Fight")]
         [SerializeField] int bossHp;
         [SerializeField] int bossCycles;
-        EnemiesBossScriptable m_BossScriptable;
-        internal bool invulnerability;
 
         internal BattleBossSubState actualPosition;
 
         internal Transform targetPlayer;
         [SerializeField] internal float distanceTarget = 20.0f;
+
+        EnemiesBossScriptable m_BossScriptable;
+        Collider[] m_BossColliders;
         
         #region Events
         protected internal event GeneralEventHandler EventBossHit;
         protected internal event GeneralEventHandler EventBossEmerge;
+        protected internal event GeneralEventHandler EventBossSubmerge;
   #endregion
         internal override void Awake()
         {
@@ -33,35 +37,46 @@ namespace RiverAttack
         void Start()
         {
             targetPlayer = PlayerManager.instance.GetTransformFirstPlayer();
+            
         }
 
         internal override void OnTriggerEnter(Collider other)
         {
             //Debug.Log($" Coliders: {other}, {shouldObstacleBeReady}, {enemy.canDestruct}");
             if (other == null || !shouldObstacleBeReady || !enemy.canDestruct) return;
-            if (other.GetComponent<Bullets>())
-            {
-                ComponentToKill(other.GetComponent<BulletPlayer>(), CollisionType.Shoot);
-                ComponentToKill(other.GetComponent<BulletPlayerBomb>(), CollisionType.Bomb);
-            }
-            
+            if (!other.GetComponent<Bullets>()) return;
+            ComponentToKill(other.GetComponent<BulletPlayer>(), CollisionType.Shoot);
+            ComponentToKill(other.GetComponent<BulletPlayerBomb>(), CollisionType.Bomb);
+
             //GamePlayManager.instance.OnEventOtherEnemiesKillPlayer();
         }
 
         protected override void ComponentToKill(Component other, CollisionType collisionType)
         {
-            Debug.Log($" Coliders: {other}, {shouldObstacleBeReady}, {enemy.canDestruct}");
-            Debug.Log($" ColiderType: {collisionType}");
             if (other == null) return;
             playerMaster = WhoHit(other);
-            if (other.GetComponent<Bullets>())
+            Bullets bullet = null;
+            switch (collisionType)
             {
-                var bullet = other.GetComponent<BulletPlayer>();
-                var bomb = other.GetComponent<BulletPlayerBomb>();
-                DamageBoss(bullet.powerFire);
+                case CollisionType.Shoot:
+                    bullet = other.GetComponent<BulletPlayer>();
+                    break;
+                case CollisionType.Bomb:
+                    bullet = other.GetComponent<BulletPlayerBomb>();
+                    break;
+                case CollisionType.Collider:
+                    break;
+                case CollisionType.Collected:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(collisionType), collisionType, null);
             }
+            if (bullet == null) return;
+ 
+            DamageBoss(bullet.powerFire);
+
             //TODO: Organizar o esquema de ciclos e HP do Boss.
-            
+            Debug.Log($" Coliders: {other}, {bullet}, {enemy.canDestruct}");
             //OnEventObstacleMasterHit(); <= Efetivamente destroi o obstaculo
             //OnEventObstacleScore(playerMaster.getPlayerSettings); <= Envia para A HUD os resulfados
             //ShouldSavePoint(playerMaster.getPlayerSettings); ,= Verifica se salva a posição do player
@@ -85,12 +100,48 @@ namespace RiverAttack
             Invoke(nameof(OnEventBossEmerge), 2f);
         }
 
+        internal BossShoot GetBossShoot()
+        {
+            return GetComponent<BossShoot>();
+        }
+
+        internal void Submerge()
+        {
+            OnEventBossSubmerge();
+        }
+
         void DamageBoss(int damage)
         {
-            bossHp -= damage;
-            Debug.Log($"Acertou um tiro? {damage}");
             OnEventBossHit();
+            bossHp -= damage;
+            Debug.Log($"Acertou um tiro? {bossHp}");
+            if (bossHp > 0) return;
+            bossCycles--;
+            if (bossCycles <= 0)
+            {
+                Debug.Log($"FIM DE JOGO!!!!");
+                //TODO: Testa o fim do jogo
+                //TODO: Chama a animaão de destruição do Submarino
+                //TODO: Chama A conclusão da fase
+                //TODO: Testa o fim do jogo
+                return;
+            }
+            //Recarrega o ciclo
+            bossHp = m_BossScriptable!.maxHp;
+            var gameSubState = GameManager.instance.currentGameState as GameStatePlayGameBoss;
+            gameSubState?.FinishBehavior();
+
             //Checar as mudanças de ciclo
+        }
+
+        internal void BossInvulnerability(bool active)
+        {
+            m_BossColliders = GetComponentsInChildren<Collider>();
+            if (m_BossColliders == null) return;
+            foreach (var bossCollider in m_BossColliders)
+            {
+                bossCollider.enabled = !active;
+            }
         }
         protected virtual void OnEventBossHit()
         {
@@ -99,6 +150,10 @@ namespace RiverAttack
         public void OnEventBossEmerge()
         {
             EventBossEmerge?.Invoke();
+        }
+        void OnEventBossSubmerge()
+        {
+            EventBossSubmerge?.Invoke();
         }
     }
 }
