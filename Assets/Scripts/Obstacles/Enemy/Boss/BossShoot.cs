@@ -2,10 +2,16 @@
 using Utils;
 namespace RiverAttack
 {
-    public class BossShoot : ObstacleDetectApproach, IHasPool
+    public class BossShoot : MonoBehaviour, IHasPool
     {
         [SerializeField] GameObject bullet;
         [SerializeField] int startPool;
+        [SerializeField] internal float bulletLifeTime;
+        [SerializeField] internal float shootCadence;
+        
+        [Header("Bullet Settings")]
+        [SerializeField]
+        internal float bulletSpeed;
         
         BossMaster m_BossMaster;
         internal Transform spawnPoint;
@@ -19,9 +25,8 @@ namespace RiverAttack
             StartMyPool();
             spawnPoint = GetComponentInChildren<EnemiesShootSpawn>().transform ? GetComponentInChildren<EnemiesShootSpawn>().transform : transform;
         }
-        protected override void SetInitialReferences()
+        void SetInitialReferences()
         {
-            base.SetInitialReferences();
             m_BossMaster = GetComponent<BossMaster>();
         }
 
