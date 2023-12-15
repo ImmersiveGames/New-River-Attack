@@ -18,7 +18,7 @@ namespace RiverAttack
         {
             bulletSpeed = speed;
             m_HasBulletLifeTime = lifetime > 0;
-            bulletLifeTime = lifetime + Time.time;
+            bulletLifeTime = lifetime;
         }
 
         public bool haveAPool

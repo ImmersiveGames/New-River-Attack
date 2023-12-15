@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using RiverAttack;
 using UnityEngine;
 namespace Utils
@@ -17,6 +18,13 @@ namespace Utils
             var nPool = new PoolObject(prefab, initialPoolSize, poolRoot, persistent);
             ObjectPools.Add(typePool, nPool);
             return true;
+        }
+
+        public static async Task<GameObject> GetObjectAsync(IHasPool objName)
+        {
+            var tcs = new TaskCompletionSource<GameObject>();
+            tcs.SetResult(ObjectPools[objName].GetObject());
+            return await tcs.Task;
         }
         public static GameObject GetObject(IHasPool objName)
         {

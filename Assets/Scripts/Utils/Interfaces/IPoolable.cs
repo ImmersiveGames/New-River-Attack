@@ -5,6 +5,6 @@ namespace Utils
     }
     public interface IHasPool
     {
-        void StartMyPool(bool isPersistent = false);
+        void StartMyPool(int quantity, bool isPersistent = false);
     }
 }

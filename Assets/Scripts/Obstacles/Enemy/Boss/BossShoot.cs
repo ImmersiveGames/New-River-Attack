@@ -6,38 +6,25 @@ namespace RiverAttack
     {
         [SerializeField] GameObject bullet;
         [SerializeField] int startPool;
-        [SerializeField] internal float bulletLifeTime;
-        [SerializeField] internal float shootCadence;
-        
+
         [Header("Bullet Settings")]
-        [SerializeField]
-        internal float bulletSpeed;
         
-        BossMaster m_BossMaster;
         internal Transform spawnPoint;
-        void OnEnable()
-        {
-            SetInitialReferences();
-        }
         void Start()
         {
             // setup inicial do status
-            StartMyPool();
+            StartMyPool(startPool);
             spawnPoint = GetComponentInChildren<EnemiesShootSpawn>().transform ? GetComponentInChildren<EnemiesShootSpawn>().transform : transform;
         }
-        void SetInitialReferences()
+
+        internal GameObject getBullets
         {
-            m_BossMaster = GetComponent<BossMaster>();
+            get { return bullet; }
         }
 
-        internal GameObject GetBullets()
+        public void StartMyPool(int quantity, bool isPersistent = false)
         {
-            return bullet;
-        }
-
-        public void StartMyPool(bool isPersistent = false)
-        {
-            PoolObjectManager.CreatePool(this, bullet, startPool, transform, isPersistent);
+            PoolObjectManager.CreatePool(this, bullet, quantity, transform, isPersistent);
         }
     }
 }

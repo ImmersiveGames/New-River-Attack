@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Serialization;
 namespace RiverAttack
 {
     public class BulletBoss : Bullets
     {
         public Vector3 moveDirection;
-        float lerp = 5.0f;
-        
+        const float LERP = 5.0f;
+
         float m_StartTime;
 
         #region UNITYMETHODS
@@ -17,12 +18,16 @@ namespace RiverAttack
             var audioSource = GetComponent<AudioSource>();
             audioShoot.Play(audioSource);
             m_StartTime = Time.time + bulletLifeTime;
-
         }
-        void FixedUpdate()
+        void Start()
+        {
+            m_StartTime = Time.time + bulletLifeTime;
+        }
+        void Update()
         {
             MoveShoot(moveDirection);
-            AutoDestroyMe(m_StartTime);
+            if(m_StartTime > 0)
+                AutoDestroyMe(m_StartTime);
         }
         void OnTriggerEnter(Collider collision)
         {
@@ -39,69 +44,20 @@ namespace RiverAttack
             Invoke(nameof(DestroyMe), .01f);
         }
         #endregion
-
         void MoveShoot(Vector3 directionVector3)
         {
             if (GamePlayManager.instance.shouldBePlayingGame)
             {
-                //look at target.
-                
-                float speedy = bulletSpeed * Time.deltaTime;
-                transform.Translate(Vector3.forward * speedy);
                 moveDirection = directionVector3.normalized;
-                Vector3 newDirection = transform.position + moveDirection * bulletSpeed * Time.deltaTime;
-                transform.position = Vector3.Lerp(transform.position, newDirection, lerp * Time.deltaTime);
+                var position = transform.position;
+                var newDirection = position + moveDirection * (bulletSpeed * Time.deltaTime);
+                position = Vector3.Lerp(position, newDirection, LERP * Time.deltaTime);
+                transform.position = position;
             }
             else
             {
                 DestroyMe();
             }
         }
-        /*Vector3 moveDirection;
-        float suavizacao = 5.0f;
-        float m_StartTime;
-
-        #region UNITYMETHODS
-        void OnEnable()
-        {
-            //GamePlayManager.instance.EventEnemiesMasterKillPlayer += DestroyMe;
-            //if (GamePlayManager.instance.playerDead) return;
-            var audioSource = GetComponent<AudioSource>();
-            audioShoot.Play(audioSource);
-            m_StartTime = Time.time + bulletLifeTime;
-
-        }
-        void FixedUpdate()
-        {
-            MoveShoot(moveDirection);
-            //AutoDestroyMe(m_StartTime);
-        }
-        void OnTriggerEnter(Collider collision)
-        {
-            if (!collision.GetComponentInParent<PlayerMaster>()) return;
-            DestroyMe();
-        }
-        void OnBecameInvisible()
-        {
-            Invoke(nameof(DestroyMe), .01f);
-        }
-        #endregion
-        public void MoveShoot(Vector3 directionVector3)
-        {
-            if (GamePlayManager.instance.shouldBePlayingGame)
-            {
-                /*float speedy = bulletSpeed * Time.deltaTime;
-                transform.Translate(Vector3.forward * speedy);#1#
-                moveDirection = directionVector3.normalized;
-                Vector3 newDirection = transform.position + moveDirection * bulletSpeed * Time.deltaTime;
-                transform.position = Vector3.Lerp(transform.position, newDirection, suavizacao * Time.deltaTime);
-                //look at target.
-            }
-            else
-            {
-                DestroyMe();
-            }
-        }*/
-        
     }
 }

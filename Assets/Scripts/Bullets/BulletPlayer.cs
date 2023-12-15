@@ -6,6 +6,7 @@ namespace RiverAttack
     public class BulletPlayer : Bullets
     {
         GamePlayManager m_GamePlayManager;
+        float m_StartTime;
         #region UnityMethods
         void OnEnable()
         {
@@ -16,11 +17,12 @@ namespace RiverAttack
             var spawnPos = root.GetComponentInChildren<PlayerSkinAttach>() ?? root.GetComponent<PlayerSkinAttach>();
             if(spawnPos) 
                 TransformSpawnPosition(spawnPos.transform);
+            m_StartTime = Time.time + bulletLifeTime;
         }
         void FixedUpdate()
         {
             MoveShoot();
-            AutoDestroyMe(bulletLifeTime);
+            AutoDestroyMe(m_StartTime);
         }
         void OnTriggerEnter(Collider collision)
         {

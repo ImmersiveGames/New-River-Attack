@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-using UnityEngine.Localization.Settings;
 namespace RiverAttack
 {
     public class BulletEnemy : Bullets
@@ -14,7 +14,6 @@ namespace RiverAttack
             var audioSource = GetComponent<AudioSource>();
             audioShoot.Play(audioSource);
             m_StartTime = Time.time + bulletLifeTime;
-
         }
         void FixedUpdate()
         {

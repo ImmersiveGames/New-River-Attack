@@ -9,7 +9,7 @@ namespace Utils
         readonly Transform m_MyRoot;
         Transform m_Target;
 
-        public PoolObject(GameObject prefab, int initialPoolSize, Transform myRoot, bool persistent = false)
+        public PoolObject(GameObject prefab, int initialPoolSize, Transform myRoot, bool noTransform = false, bool persistent = false)
         {
             m_PooledObjects = new List<GameObject>();
             m_MyRoot = new GameObject("Pool(" + myRoot.root.name + ")").transform;

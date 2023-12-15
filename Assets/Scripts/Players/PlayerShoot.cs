@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -63,9 +62,9 @@ namespace RiverAttack
             m_PlayerMaster = GetComponent<PlayerMaster>();
             m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
         }
-        public void StartMyPool(bool isPersistent = false)
+        public void StartMyPool(int quantity, bool isPersistent = false)
         {
-            PoolObjectManager.CreatePool(this, prefabBullet, startBulletPool, transform, isPersistent);
+            PoolObjectManager.CreatePool(this, prefabBullet, quantity, transform, isPersistent);
             var pool = PoolObjectManager.GetPool(this);
             for (int i = 0; i < pool.childCount; i++)
             {
@@ -101,8 +100,6 @@ namespace RiverAttack
             
             myShoot.transform.parent = null;
             LogGamePlay();
-
-            
 
         }
         IEnumerator Cooldown()
