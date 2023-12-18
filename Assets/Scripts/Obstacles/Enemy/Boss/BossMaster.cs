@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
-using Utils;
 namespace RiverAttack
 {
     public class BossMaster: ObstacleMaster
