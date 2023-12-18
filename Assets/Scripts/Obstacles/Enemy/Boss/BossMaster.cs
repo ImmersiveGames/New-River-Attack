@@ -17,7 +17,7 @@ namespace RiverAttack
         [SerializeField] internal float distanceTarget = 20.0f;
 
         EnemiesBossScriptable m_BossScriptable;
-        Collider[] m_BossColliders;
+        
         
         #region Events
         protected internal event GeneralEventHandler EventBossHit;
@@ -37,7 +37,6 @@ namespace RiverAttack
         void Start()
         {
             targetPlayer = PlayerManager.instance.GetTransformFirstPlayer();
-            
         }
 
         internal override void OnTriggerEnter(Collider other)
@@ -47,7 +46,6 @@ namespace RiverAttack
             if (!other.GetComponent<Bullets>() || other.GetComponent<BulletBoss>()) return;
             ComponentToKill(other.GetComponent<BulletPlayer>(), CollisionType.Shoot);
             ComponentToKill(other.GetComponent<BulletPlayerBomb>(), CollisionType.Bomb);
-
             //GamePlayManager.instance.OnEventOtherEnemiesKillPlayer();
         }
 
@@ -114,7 +112,6 @@ namespace RiverAttack
         {
             OnEventBossHit();
             bossHp -= damage;
-            Debug.Log($"Acertou um tiro? {bossHp}");
             if (bossHp > 0) return;
             bossCycles--;
             if (bossCycles <= 0)
@@ -133,12 +130,12 @@ namespace RiverAttack
 
             //Checar as mudanças de ciclo
         }
+        
 
         internal void BossInvulnerability(bool active)
         {
-            m_BossColliders = GetComponentsInChildren<Collider>();
-            if (m_BossColliders == null) return;
-            foreach (var bossCollider in m_BossColliders)
+            myColliders ??= GetComponentsInChildren<Collider>();
+            foreach (var bossCollider in myColliders)
             {
                 bossCollider.enabled = !active;
             }

@@ -9,7 +9,7 @@ namespace RiverAttack
         [Header("Player Destroy Settings")]
         [SerializeField]
         bool isPlayerDead;
-        internal bool invulnerability;
+        bool m_Invulnerability;
         [SerializeField] float timeoutReSpawn;
         [SerializeField]
         GameObject deadParticlePrefab;
@@ -42,8 +42,10 @@ namespace RiverAttack
         #region Delagetes
         public delegate void GeneralEventHandler();
         public event GeneralEventHandler EventPlayerMasterHit;
+        public event GeneralEventHandler EventPlayerMasterUpdateSkin;
         public event GeneralEventHandler EventPlayerMasterRespawn;
-
+        public delegate void BoolEventHandler(bool active);
+        public event BoolEventHandler EventPlayerMasterBossHit;
         public delegate void ControllerEventHandler(Vector2 dir);
         public event ControllerEventHandler EventPlayerMasterControllerMovement;
         #endregion
@@ -75,7 +77,7 @@ namespace RiverAttack
         {
             if (!other.GetComponentInParent<WallsMaster>() && !other.GetComponentInParent<BossMaster>() && !other.GetComponentInParent<EnemiesMaster>() && !other.GetComponent<BulletEnemy>()&& !other.GetComponent<BulletBoss>()) return;
             if (other.GetComponentInParent<CollectiblesMaster>() != null) return;
-            if (m_GamePlayManager.getGodMode || invulnerability) return;
+            if (m_GamePlayManager.getGodMode || m_Invulnerability) return;
             LogGamePlay(other);
             //return;
             OnEventPlayerMasterHit();
@@ -125,11 +127,15 @@ namespace RiverAttack
             m_GamePlayManager.playerDead = !m_GamePlayManager.bossFight;
             isPlayerDead = !m_GamePlayManager.bossFight;
             playerMovementStatus = m_GamePlayManager.bossFight ? MovementStatus.None : MovementStatus.Paused;
-            invulnerability = true;
+            m_Invulnerability = true;
             //TODO: Ativar animação de invencibilidade do jogador
             CameraShake.ShakeCamera(shakeIntensity,shakeTime);
             m_GamePlayManager.OnEventEnemiesMasterKillPlayer();
-
+            if (m_GamePlayManager.bossFight)
+            {
+                OnEventPlayerMasterBossHit(true);
+                return;
+            }
             Tools.ToggleChildren(transform, false);
             var go = Instantiate(deadParticlePrefab, transform);
             Destroy(go, timeoutDestroyExplosion);
@@ -160,16 +166,16 @@ namespace RiverAttack
             Tools.ToggleChildren(transform1);
             getPlayerSettings.actualFuel = m_GameSettings.startFuel;
             OnEventPlayerMasterRespawn();
-            Invoke(nameof(ReSpawn), timeoutReSpawn);
+            float timeToRespawn = m_GamePlayManager.bossFight ? timeoutReSpawn/2 : timeoutReSpawn;
+            Invoke(nameof(ReSpawn), timeToRespawn);
         }
         void ReSpawn()
         {
             m_GamePlayManager.OnEventActivateEnemiesMaster();
-            //TODO: Desativar animação de invencibilidade do jogador
+            OnEventPlayerMasterBossHit(false);
             isPlayerDead = false;
             playerMovementStatus = MovementStatus.None;
-            invulnerability = false;
-            //TODO: Desativar invunerabilidade
+            m_Invulnerability = false;
         }
 
         void LogGamePlay(Component component)
@@ -213,6 +219,14 @@ namespace RiverAttack
         {
             EventPlayerMasterControllerMovement?.Invoke(dir);
         }
+        void OnEventPlayerMasterBossHit(bool active)
+        {
+            EventPlayerMasterBossHit?.Invoke(active);
+        }
+        internal void OnEventPlayerMasterUpdateSkin()
+        {
+            EventPlayerMasterUpdateSkin?.Invoke();
+        }
   #endregion
 
         void MyDebugStart()
@@ -220,5 +234,6 @@ namespace RiverAttack
             if (!m_GameManager.debugMode) return;
             transform.position = Vector3.zero;
         }
+        
     }
 }

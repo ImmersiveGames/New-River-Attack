@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 namespace RiverAttack
 {
@@ -10,25 +7,19 @@ namespace RiverAttack
         [SerializeField]
         PlayerSettings playerSettings;
 
-        GameObject playerSkin;
+        GameObject m_PlayerSkin;
         TrailRenderer[] m_TrailRenderer;
 
         // Start is called before the first frame update
         void Start()
         {
-            playerSkin = playerSettings.playerSkin.getSkin;
+            m_PlayerSkin = playerSettings.playerSkin.getSkin;
             ChangePlayerSkin();
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
 
         public void ChangePlayerSkin()
         {
-            playerSkin = playerSettings.playerSkin.getSkin;
+            m_PlayerSkin = playerSettings.playerSkin.getSkin;
 
             var children = GetComponentInChildren<PlayerSkinAttach>();
             if (children == true)
@@ -36,7 +27,7 @@ namespace RiverAttack
                 int siblingIndex = children.transform.GetSiblingIndex();
                 DestroyImmediate(transform.GetChild(siblingIndex).gameObject);
             }
-            var mySkin = Instantiate(playerSkin, transform);
+            var mySkin = Instantiate(m_PlayerSkin, transform);
             mySkin.transform.SetAsFirstSibling();
 
             TurnOffTrails();
@@ -46,7 +37,7 @@ namespace RiverAttack
         {
             m_TrailRenderer = GetComponentsInChildren<TrailRenderer>();
 
-            foreach(TrailRenderer trail in m_TrailRenderer)
+            foreach(var trail in m_TrailRenderer)
             {
                 trail.enabled = false;
             }

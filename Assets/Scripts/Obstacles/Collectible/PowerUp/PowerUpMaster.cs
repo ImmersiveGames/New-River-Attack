@@ -41,5 +41,10 @@ namespace RiverAttack
             if (playerPowerUp == null || collectibleScriptable.powerUp == null) return;
                 playerPowerUp.ActivatePowerUp(collectibleScriptable.powerUp);
         }
+        protected override void OnEventCollectItem(PlayerSettings playerSettings)
+        {
+            base.OnEventCollectItem(playerSettings);
+            ToggleChildren(false);
+        }
     }
 }

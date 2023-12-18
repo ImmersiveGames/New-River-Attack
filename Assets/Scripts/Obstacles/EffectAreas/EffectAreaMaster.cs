@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Object = UnityEngine.Object;
+
 namespace RiverAttack
 {
     public class EffectAreaMaster : ObstacleMaster
@@ -9,8 +8,8 @@ namespace RiverAttack
         float m_Timer;
         float m_TimeToAccess;
         EffectAreaScriptable m_EffectArea;
-        
-        List<PlayerMaster> m_PlayerMasterColliderList = new List<PlayerMaster>();
+
+        readonly List<PlayerMaster> m_PlayerMasterColliderList = new List<PlayerMaster>();
         Collider m_Collider;
         Collider[] m_Colliders;
 
@@ -89,7 +88,7 @@ namespace RiverAttack
 
             // Executa o overlap com base no raio calculado
             int numColliders = Physics.OverlapSphereNonAlloc(transform.position, radio, m_Colliders,GameManager.instance.layerPlayer);
-            Debug.Log($"Numero de colidder: {numColliders}");
+            //Debug.Log($"Numero de colidder: {numColliders}");
             for (int i = 0; i < numColliders; i++)
             {
                 var colliderPlayerMaster = m_Colliders[i].gameObject.GetComponentInParent<PlayerMaster>();

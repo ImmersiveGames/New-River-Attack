@@ -84,7 +84,11 @@ namespace RiverAttack
         {
             isDestroyed = true;
             isActive = false;
-            Tools.ToggleChildren(transform, false);
+        }
+
+        protected void ToggleChildren(bool active)
+        {
+            Tools.ToggleChildren(transform, active);
         }
 
         #region Calls

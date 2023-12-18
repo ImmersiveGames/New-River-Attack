@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Utils;
 namespace RiverAttack
 {
@@ -9,7 +6,7 @@ namespace RiverAttack
     {
         [SerializeField] Vector3 positionOffset;
         public float moveTime = 1.0f;
-        public float rotateTime = .5f;
+        //public float rotateTime = .5f;
         float m_Timer;
         Vector3 m_NextPosition;
         GameHubManager m_GameHubManager;

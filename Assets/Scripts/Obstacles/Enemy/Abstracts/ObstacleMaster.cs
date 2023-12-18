@@ -16,6 +16,7 @@ namespace RiverAttack
         public bool isDestroyed;
         [SerializeField]
         internal bool isActive;
+        internal Collider[] myColliders;
         Vector3 m_ObjectStartPosition;
         Quaternion m_ObjectStartRotate;
         Vector3 m_ObjectStartScale;
@@ -26,6 +27,7 @@ namespace RiverAttack
         #region Events
         public delegate void GeneralEventHandler();
         protected internal event GeneralEventHandler EventObstacleMasterHit;
+        protected internal event GeneralEventHandler EventObstacleUpdateSkin;
         public delegate void PlayerSettingsEventHandler(PlayerSettings playerSettings);
         protected internal event PlayerSettingsEventHandler EventObstacleScore;
         public delegate void MovementEventHandler(bool active);
@@ -70,11 +72,11 @@ namespace RiverAttack
             gamePlayManager = GamePlayManager.instance;
             gamePlayingLog = gamePlayManager.gamePlayingLog;
         }
-        public virtual bool shouldObstacleBeReady
+        public bool shouldObstacleBeReady
         {
             get { return isDestroyed == false && isActive; }
         }
-        protected virtual void StartObstacle()
+        void StartObstacle()
         {
             isDestroyed = false;
             isActive = true;
@@ -125,11 +127,11 @@ namespace RiverAttack
             StartObstacle();
         }
 
-        protected virtual void ActiveObject()
+        void ActiveObject()
         {
             isActive = true;
         }
-        protected virtual void DeactivateObject()
+        void DeactivateObject()
         {
             isActive = false;
         }
@@ -151,10 +153,14 @@ namespace RiverAttack
         }
 
         #region Calls
-        internal void OnEventObstacleMasterHit()
+        void OnEventObstacleMasterHit()
         {
             DestroyObstacle();
             EventObstacleMasterHit?.Invoke();
+        }
+        internal void OnEventObstacleUpdateSkin()
+        {
+            EventObstacleUpdateSkin?.Invoke();
         }
         void OnEventObstacleScore(PlayerSettings playerSettings)
         {

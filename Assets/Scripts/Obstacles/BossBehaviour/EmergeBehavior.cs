@@ -7,7 +7,7 @@ namespace RiverAttack
         bool m_Finished;
         readonly BossMaster m_BossMaster;
         float m_CountTime;
-        const float TIME_LIMIT = 10f;
+        const float TIME_LIMIT = 8f;
 
         internal EmergeBehavior(BossMaster bossMaster)
         {

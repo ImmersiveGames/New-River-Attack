@@ -39,6 +39,7 @@ namespace RiverAttack
             mySkin.transform.SetAsFirstSibling();
             playerSkinTrail.enabled = true;
             m_PlayerMaster.getPlayerSettings.playerSkin = skin;
+            m_PlayerMaster.OnEventPlayerMasterUpdateSkin();
             GamePlayManager.instance.OnEventUpdateLives(m_PlayerMaster.getPlayerSettings.lives);
         }
     }
