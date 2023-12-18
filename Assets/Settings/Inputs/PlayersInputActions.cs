@@ -482,6 +482,24 @@ namespace RiverAttack
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StartButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""063fcd15-eed4-48ac-a221-2e0f6b8965bb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BackButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""cd86680b-d81d-422d-aeee-7a50bb56ab89"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -616,6 +634,50 @@ namespace RiverAttack
                     ""action"": ""RightSelection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76fd8c11-eb15-487e-b35f-3976aa9b4cfd"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile;PC"",
+                    ""action"": ""StartButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20a8b1b3-004e-462d-abb3-073e62deccca"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StartButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""80f5be73-6bb7-4d56-b83d-50dd8c77f28c"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile;PC"",
+                    ""action"": ""BackButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6ef3fed8-b76f-4038-94e1-185b1c821269"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BackButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -667,6 +729,8 @@ namespace RiverAttack
             m_UI_Controlls_SelectButton = m_UI_Controlls.FindAction("SelectButton", throwIfNotFound: true);
             m_UI_Controlls_LeftSelection = m_UI_Controlls.FindAction("LeftSelection", throwIfNotFound: true);
             m_UI_Controlls_RightSelection = m_UI_Controlls.FindAction("RightSelection", throwIfNotFound: true);
+            m_UI_Controlls_StartButton = m_UI_Controlls.FindAction("StartButton", throwIfNotFound: true);
+            m_UI_Controlls_BackButton = m_UI_Controlls.FindAction("BackButton", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -802,6 +866,8 @@ namespace RiverAttack
         private readonly InputAction m_UI_Controlls_SelectButton;
         private readonly InputAction m_UI_Controlls_LeftSelection;
         private readonly InputAction m_UI_Controlls_RightSelection;
+        private readonly InputAction m_UI_Controlls_StartButton;
+        private readonly InputAction m_UI_Controlls_BackButton;
         public struct UI_ControllsActions
         {
             private @PlayersInputActions m_Wrapper;
@@ -810,6 +876,8 @@ namespace RiverAttack
             public InputAction @SelectButton => m_Wrapper.m_UI_Controlls_SelectButton;
             public InputAction @LeftSelection => m_Wrapper.m_UI_Controlls_LeftSelection;
             public InputAction @RightSelection => m_Wrapper.m_UI_Controlls_RightSelection;
+            public InputAction @StartButton => m_Wrapper.m_UI_Controlls_StartButton;
+            public InputAction @BackButton => m_Wrapper.m_UI_Controlls_BackButton;
             public InputActionMap Get() { return m_Wrapper.m_UI_Controlls; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -831,6 +899,12 @@ namespace RiverAttack
                 @RightSelection.started += instance.OnRightSelection;
                 @RightSelection.performed += instance.OnRightSelection;
                 @RightSelection.canceled += instance.OnRightSelection;
+                @StartButton.started += instance.OnStartButton;
+                @StartButton.performed += instance.OnStartButton;
+                @StartButton.canceled += instance.OnStartButton;
+                @BackButton.started += instance.OnBackButton;
+                @BackButton.performed += instance.OnBackButton;
+                @BackButton.canceled += instance.OnBackButton;
             }
 
             private void UnregisterCallbacks(IUI_ControllsActions instance)
@@ -847,6 +921,12 @@ namespace RiverAttack
                 @RightSelection.started -= instance.OnRightSelection;
                 @RightSelection.performed -= instance.OnRightSelection;
                 @RightSelection.canceled -= instance.OnRightSelection;
+                @StartButton.started -= instance.OnStartButton;
+                @StartButton.performed -= instance.OnStartButton;
+                @StartButton.canceled -= instance.OnStartButton;
+                @BackButton.started -= instance.OnBackButton;
+                @BackButton.performed -= instance.OnBackButton;
+                @BackButton.canceled -= instance.OnBackButton;
             }
 
             public void RemoveCallbacks(IUI_ControllsActions instance)
@@ -895,6 +975,8 @@ namespace RiverAttack
             void OnSelectButton(InputAction.CallbackContext context);
             void OnLeftSelection(InputAction.CallbackContext context);
             void OnRightSelection(InputAction.CallbackContext context);
+            void OnStartButton(InputAction.CallbackContext context);
+            void OnBackButton(InputAction.CallbackContext context);
         }
     }
 }

@@ -17,8 +17,7 @@ namespace RiverAttack
         #region UNITYMETHODS
         void OnEnable()
         {
-            m_InputSystem = new PlayersInputActions();
-            m_InputSystem.Enable();
+            SetControllersInput();
             m_GameHubManager = GameHubManager.instance;
         }
 
@@ -29,7 +28,18 @@ namespace RiverAttack
             missionName.text = m_GameHubManager.gamePlayingLog.activeMission.levelName;
             //Debug.Log($"Name {m_GameHubManager.gamePlayingLog.activeMission.levelName}");
         }
-  #endregion
+        #endregion
+
+        void SetControllersInput()
+        {
+            m_InputSystem = new PlayersInputActions();
+            m_InputSystem.UI_Controlls.Enable();
+
+            m_InputSystem.UI_Controlls.StartButton.performed += _ => ButtonStartMission();
+            m_InputSystem.UI_Controlls.BackButton.performed += _ => ButtonReturnInitialMenu();
+            m_InputSystem.UI_Controlls.LeftSelection.performed += _ => ButtonNextMission(-1);
+            m_InputSystem.UI_Controlls.RightSelection.performed += _ => ButtonNextMission(1);
+        }
 
         public void ButtonNextMission(int increment)
         {
