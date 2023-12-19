@@ -24,7 +24,6 @@ namespace RiverAttack
                 DestroyImmediate(transform.GetChild(0).gameObject);
             var go = Instantiate(skins[indexStartSkin], transform);
             go.transform.SetAsFirstSibling();
-            go.GetComponent<ObstacleMaster>().myColliders = go.GetComponentsInChildren<Collider>();
         }
     }
 }

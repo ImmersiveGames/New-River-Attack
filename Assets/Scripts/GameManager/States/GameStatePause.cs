@@ -7,7 +7,9 @@ namespace RiverAttack
         public override IEnumerator OnLoadState()
         {
             //Debug.Log($"On Load Estado: Pause");
+            GamePlayManager.instance.inputSystem.UI_Controlls.Enable();
             yield return null;
+            
         }
         public override void EnterState()
         {
@@ -21,6 +23,7 @@ namespace RiverAttack
         public override void ExitState()
         {
             //Debug.Log($"Sai do Estado: Pause");
+            GamePlayManager.instance.inputSystem.UI_Controlls.Disable();
             GamePlayManager.instance.panelMenuGame.PauseMenu(false);
         }
     }

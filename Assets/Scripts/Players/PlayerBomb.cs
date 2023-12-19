@@ -18,17 +18,14 @@ namespace RiverAttack
         GamePlayingLog m_GamePlayingLog;
 
         #region UNITYMETHODS
-        void Awake()
-        {
-            m_PlayersInputActions = new PlayersInputActions();
-        }
+        
         void OnEnable()
         {
             SetInitialReferences();
         }
         void Start()
         {
-            m_PlayersInputActions = m_PlayerMaster.playersInputActions;
+            m_PlayersInputActions = GamePlayManager.instance.inputSystem;
             m_PlayerSettings.bombs = GameSettings.instance.startBombs;
             m_PlayersInputActions.Player.Bomb.performed += Execute;
         }

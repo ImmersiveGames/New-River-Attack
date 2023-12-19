@@ -30,10 +30,6 @@ namespace RiverAttack
         static GamePlayingLog _gamePlayingLog;
 
         #region UNITYMETHODS
-        void Awake()
-        {
-            m_PlayersInputActions = new PlayersInputActions();
-        }
         void OnEnable()
         {
             SetInitialReferences();
@@ -44,8 +40,7 @@ namespace RiverAttack
             PoolObjectManager.CreatePool(this, prefabBullet, startBulletPool, transform);
             var pool = PoolObjectManager.GetPool(this);
             pool.SetAsLastSibling();
-            m_PlayersInputActions = m_PlayerMaster.playersInputActions;
-            m_PlayersInputActions.Enable();
+            m_PlayersInputActions = GamePlayManager.instance.inputSystem;
             m_CanExecuteAction = true;
             m_PlayersInputActions.Player.Shoot.performed += Execute;
         }

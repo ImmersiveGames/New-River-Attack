@@ -14,7 +14,6 @@ namespace RiverAttack
         {
             if (target == null) return;
             if (target.actualFuel >= GameSettings.instance.maxFuel) return;
-
             target.actualFuel += amount;
             GamePLayLogFuel(amount);
         }

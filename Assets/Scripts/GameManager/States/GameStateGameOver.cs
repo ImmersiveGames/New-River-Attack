@@ -31,7 +31,7 @@ namespace RiverAttack
         }
         public override void UpdateState()
         {
-            //Debug.Log($"GameOver");
+            Debug.Log($"GameOver");
         }
         public override void ExitState()
         {

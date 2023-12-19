@@ -17,7 +17,7 @@ namespace RiverAttack
         void OnTriggerEnter(Collider other)
         {
             if (!other.GetComponentInParent<PlayerMaster>()) return;
-            Debug.Log($"Stat Music: {GamePlayManager.instance.actualLevels.bgmStartLevel}");
+            //Debug.Log($"Stat Music: {GamePlayManager.instance.actualLevels.bgmStartLevel}");
             m_PlayMaster.OnEventBuildPathUpdate(transform.position.z);
         }
   #endregion

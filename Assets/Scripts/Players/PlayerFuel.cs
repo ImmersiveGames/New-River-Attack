@@ -25,14 +25,13 @@ namespace RiverAttack
         void Update()
         {
             if (!m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady) return;
-            if (m_GamePlayManager.getGodMode || m_PlayerMaster.inEffectArea) return;
+            if (m_GamePlayManager.getGodMode) return;
             m_TimeLoop += Time.deltaTime;
             if (m_TimeLoop < reduceFuelCadence) return;
 
             //Pode reduzir a Gasolina
             m_PlayerSettings.actualFuel -= reduceFuelRate;
             LogGamePlay(reduceFuelRate);
-            //FuelAlert(m_PlayerSettings.actualFuel);
 
             // Reinicia o contador
             m_TimeLoop = 0;

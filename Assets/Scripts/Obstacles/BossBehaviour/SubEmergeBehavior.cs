@@ -19,7 +19,7 @@ namespace RiverAttack
             // Lógica de entrada para o comportamento SubEmerge
             m_Finished = false;
             m_BossMaster.BossInvulnerability(true);
-            m_BossMaster.Submerge();
+            m_BossMaster.OnEventBossSubmerge();
         }
         public void Update()
         {
@@ -31,7 +31,6 @@ namespace RiverAttack
             m_CountTime = 0f;
             m_BossMaster.BossInvulnerability(false);
             FinishBehavior();
-            Debug.Log("O contador atingiu " + TIME_LIMIT + " segundos.");
         }
         public void Exit()
         {

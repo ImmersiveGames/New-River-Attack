@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 namespace RiverAttack
 {
@@ -31,8 +32,9 @@ namespace RiverAttack
         }
         void OnEnable()
         {
-            m_InputSystem = new PlayersInputActions();
-            m_InputSystem.Enable();
+            m_InputSystem = GamePlayManager.instance.inputSystem;
+            m_InputSystem.UI_Controlls.Enable();
+            m_InputSystem.Player.Disable();
             lastIndex = 0;
             // As ações quando chmar o menu, mas ele não precisa se auto configurar a unica coisa que precisa aqui é ativar a hud
         }
@@ -41,6 +43,11 @@ namespace RiverAttack
         {
             m_InputSystem.Player.Pause.performed += ExecutePauseGame;
             StartMenuOnOpenScene();
+        }
+        void OnDisable()
+        {
+            m_InputSystem.UI_Controlls.Disable();
+            m_InputSystem.Player.Enable();
         }
         #endregion
 
@@ -122,7 +129,7 @@ namespace RiverAttack
         void ExecutePauseGame(InputAction.CallbackContext callbackContext)
         {
             m_CurrentGameState = GameManager.instance.currentGameState;
-            Debug.Log($"Pause: {m_CurrentGameState}");
+            //Debug.Log($"Pause: {m_CurrentGameState}");
             switch (m_CurrentGameState)
             {
                 case GameStatePlayGame:

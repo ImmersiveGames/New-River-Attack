@@ -7,7 +7,7 @@ namespace RiverAttack
         bool m_Finished;
         readonly BossMaster m_BossMaster;
         float m_CountTime;
-        const float TIME_LIMIT = 8f;
+        const float TIME_LIMIT = 7.5f;
 
         internal EmergeBehavior(BossMaster bossMaster)
         {
@@ -31,7 +31,6 @@ namespace RiverAttack
             m_CountTime = 0f;
             m_BossMaster.BossInvulnerability(false);
             FinishBehavior();
-            Debug.Log("O contador atingiu " + TIME_LIMIT + " segundos.");
         }
         public void Exit()
         {

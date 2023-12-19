@@ -7,7 +7,7 @@ namespace RiverAttack
     public enum BattleBossSubState { Top, Base, Left, Right }
     public class GameStatePlayGameBoss : GameState
     {
-        internal BattleBossSubState currentSubState;
+        BattleBossSubState m_CurrentSubState;
         readonly Dictionary<BattleBossSubState, IBossBehavior[]> m_Behaviors;
 
         IBossBehavior[] m_CurrentBehaviors;
@@ -19,7 +19,7 @@ namespace RiverAttack
 
         public GameStatePlayGameBoss() {
             // Inicializa o estado do BattleBoss como "Topo"
-            currentSubState = BattleBossSubState.Top;
+            m_CurrentSubState = BattleBossSubState.Top;
             m_CurrentBehaviorIndex = 0;
 
             m_BossMaster = GamePlayManager.instance.bossMaster;
@@ -83,32 +83,38 @@ namespace RiverAttack
         }
 
         BattleBossSubState GetNextSubState() {
+            
+            BattleBossSubState nextState;
+
             // Verifica se todos os comportamentos do subestado atual foram concluídos
             if (m_CurrentBehaviors == null)
             {
-                m_CurrentBehaviors = m_Behaviors[currentSubState];
-                return currentSubState;
+                m_CurrentBehaviors = m_Behaviors[m_CurrentSubState];
+                return m_CurrentSubState;
             }
             if (m_CurrentBehaviorIndex < m_CurrentBehaviors.Length)
-                return currentSubState;
+                return m_CurrentSubState;
 
-            int randomIndex = Random.Range(0, 4); // Sorteia um número aleatório entre 0 e 3 (4 possíveis estados)
+            do
+            {
+                int randomIndex = Random.Range(0, 4);
+                nextState = (BattleBossSubState)randomIndex;
+            }
+            while (nextState == m_CurrentSubState); // Garante que o próximo estado seja diferente do atual
 
-            // Converte o número aleatório em um BattleBossSubState correspondente
-            var nextState = (BattleBossSubState)randomIndex;
             m_BossMaster.actualPosition = nextState;
-            Debug.Log($"RANDOM Position: {nextState}");
+           // Debug.Log($"RANDOM Position: {nextState}");
             return nextState;
         }
         void ChangeSubState(BattleBossSubState newSubState)
         {
-            if (currentSubState != newSubState)
+            if (m_CurrentSubState != newSubState)
             {
                 // Se for um substatus diferente deve trocar e reiniciar
-                currentSubState = newSubState;
+                m_CurrentSubState = newSubState;
                 m_BehaviorEnterExecuted = false;
                 m_CurrentBehaviorIndex = 0;
-                m_CurrentBehaviors = m_Behaviors[currentSubState];
+                m_CurrentBehaviors = m_Behaviors[m_CurrentSubState];
             }
             if (m_BehaviorEnterExecuted)
                 return;

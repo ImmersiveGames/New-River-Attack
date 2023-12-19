@@ -16,12 +16,12 @@ namespace RiverAttack
         public override void EnterState()
         {
             GameHubManager.instance.readyHub = true;
-            Debug.Log($"Entra no Estado: HUB");
+            //Debug.Log($"Entra no Estado: HUB");
         }
         public override void UpdateState()
         {
             if (GameManager.instance.onLoadScene) return;
-            Debug.Log($"Game HUB!");
+            //Debug.Log($"Game HUB!");
             /*if(!m_CheckCompleteLevel)
                 GameHubManager.instance.OnCheckCompleteLevel();
             m_CheckCompleteLevel = true;*/
@@ -29,7 +29,7 @@ namespace RiverAttack
         }
         public override void ExitState()
         {
-            Debug.Log($"Sai do Estado: HUB");
+            //Debug.Log($"Sai do Estado: HUB");
         }
     }
 }

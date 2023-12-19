@@ -31,6 +31,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2310220796174392091}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -38,7 +39,6 @@ Transform:
   m_Children:
   - {fileID: 491615061599308284}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!82 &1898658395667325484
 AudioSource:
@@ -177,10 +177,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 470845e1184cf1d4abf8d32f7e8cd85b, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1795330444146210, guid: 139f769fdedea1c42b49a2c24ffbde00,
     type: 3}
   timeoutDestroyExplosion: 1.7
   isDestroyed: 0
+  isActive: 0
 --- !u!114 &8565951570408733136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectTrigger: 
+  timeCollectAnimation: 1
 --- !u!114 &3689870222650831993
 MonoBehaviour:
   m_ObjectHideFlags: 0

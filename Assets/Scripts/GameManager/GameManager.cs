@@ -52,7 +52,7 @@ namespace RiverAttack
         }
         void Start()
         {
-            Debug.Log($"GameScene: {gameScenes}");
+            //Debug.Log($"GameScene: {gameScenes}");
             switch (gameScenes)
             {
 

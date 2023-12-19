@@ -16,16 +16,8 @@ namespace RiverAttack
             base.OnEnable();
             m_EffectAreaMaster.EventEnterAreaEffect += SoundAreaEffect;
             m_EffectAreaMaster.EventExitAreaEffect += StopSoundAreaEffect;
-            GamePlayManager.instance.EventOtherEnemiesKillPlayer += StopSoundArea;
-        }
-        void OnTriggerExit(Collider other)
-        {
-            if(m_PlayerMaster == null)
-                m_PlayerMaster = other.GetComponentInParent<PlayerMaster>();
-            if (!m_PlayerMaster) return;
-            m_PlayerMaster.inEffectArea = false;
-            if (!m_PlayerMaster.shouldPlayerBeReady) return;
-            StopSoundAreaEffect();
+            GamePlayManager.instance.EventOtherEnemiesKillPlayer += StopSoundAreaEffect;
+            GamePlayManager.instance.EventEnemiesMasterKillPlayer += StopSoundAreaEffect;
         }
 
         protected override void OnDisable()
@@ -39,8 +31,11 @@ namespace RiverAttack
         {
             m_EffectAreaMaster.EventEnterAreaEffect -= SoundAreaEffect;
             m_EffectAreaMaster.EventExitAreaEffect -= StopSoundAreaEffect;
-            if(GamePlayManager.instance)
-                GamePlayManager.instance.EventOtherEnemiesKillPlayer -= StopSoundArea;
+            if (!GamePlayManager.instance)
+                return;
+            GamePlayManager.instance.EventOtherEnemiesKillPlayer -= StopSoundAreaEffect;
+            GamePlayManager.instance.EventEnemiesMasterKillPlayer -= StopSoundAreaEffect;
+
         }
 
         protected override void SetInitialReferences()
@@ -51,20 +46,16 @@ namespace RiverAttack
 
         void SoundAreaEffect()
         {
-            if ((!audioSource && !effectAreaSound) || audioSource.isPlaying) return;
+            if (!audioSource || !effectAreaSound) return;
+            if(effectAreaSound.IsPlaying(audioSource)) return;
             effectAreaSound.Play(audioSource);
         }
 
         void StopSoundAreaEffect()
         {
-            if ((!audioSource && !effectAreaSound) && !audioSource.isPlaying) return;
+            if (!audioSource || !effectAreaSound) return;
+            if(!effectAreaSound.IsPlaying(audioSource)) return;
             effectAreaExitSound.Play(audioSource);
-        }
-
-        void StopSoundArea()
-        {
-            if ((!audioSource && !effectAreaSound) && !audioSource.isPlaying) return;
-            audioSource.Stop();
         }
     }
 }

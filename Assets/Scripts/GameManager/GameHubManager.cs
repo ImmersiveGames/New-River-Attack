@@ -36,7 +36,7 @@ namespace RiverAttack
         }
         internal void CheckNextLevel()
         {
-            Debug.Log($"Verifica se existe uma proxima missão ou termina o jogo");
+            //Debug.Log($"Verifica se existe uma proxima missão ou termina o jogo");
             if (gamePlayingLog.activeMission == missions[^1].levels)
             {
                 // Fim de jogo - chamar o fim do jogo

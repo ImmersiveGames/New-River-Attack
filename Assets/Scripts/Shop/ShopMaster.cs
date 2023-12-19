@@ -150,7 +150,7 @@ namespace Shopping
         #region INPUT BUTTONS
         void BuyInputButton(InputAction.CallbackContext context)
         {
-            Debug.Log("Comprar o item");
+            //Debug.Log("Comprar o item");
             var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
 
             BuyThisItem(playerSettings, item.productInStock);

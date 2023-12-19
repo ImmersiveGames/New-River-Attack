@@ -29,7 +29,7 @@ namespace RiverAttack
         internal List<LogPlayerCollectables> collectableList;
 
         internal PlayersInputActions playersInputActions;
-        internal bool inEffectArea;
+        //internal bool inEffectArea;
         [SerializeField]
         internal bool inPowerUp;
         internal int nextScoreForLive;
@@ -58,8 +58,9 @@ namespace RiverAttack
             m_GameSettings = GamePlayManager.getGameSettings;
             m_GameManager = GameManager.instance;
             m_GamePlayingLog = m_GamePlayManager.gamePlayingLog;
-            playersInputActions = new PlayersInputActions();
-            playersInputActions.Enable();
+            playersInputActions = m_GamePlayManager.inputSystem;
+            /*playersInputActions.Player.Enable();
+            playersInputActions.UI_Controlls.Disable();*/
         }
 
         void OnEnable()
@@ -102,7 +103,6 @@ namespace RiverAttack
 
         void PlayerStartSetup()
         {
-            inEffectArea = false;
             getPlayerSettings.spawnPosition = transform.position;
             getPlayerSettings.spawnPosition.z = 0;
             isPlayerDead = false;

@@ -35,6 +35,7 @@ namespace RiverAttack
 
         GameManager m_GameManager;
         PlayerManager m_PlayerManager;
+        internal PlayersInputActions inputSystem;
 
         #region Delegates
         public delegate void GeneralEventHandler();
@@ -78,7 +79,9 @@ namespace RiverAttack
             {
                 bossFight = actualLevels.bossFight;
             }
-            
+            inputSystem = new PlayersInputActions();
+            inputSystem.UI_Controlls.Disable();
+            inputSystem.Player.Enable();
         }
 
         protected override void OnDestroy()

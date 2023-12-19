@@ -68,11 +68,11 @@ namespace RiverAttack
                     throw new ArgumentOutOfRangeException(nameof(collisionType), collisionType, null);
             }
             if (bullet == null) return;
- 
+            
             DamageBoss(bullet.powerFire);
 
             //TODO: Organizar o esquema de ciclos e HP do Boss.
-            Debug.Log($" Coliders: {other}, {bullet}, {enemy.canDestruct}");
+            //Debug.Log($" Coliders: {other}, {bullet}, {enemy.canDestruct}");
             //OnEventObstacleMasterHit(); <= Efetivamente destroi o obstaculo
             //OnEventObstacleScore(playerMaster.getPlayerSettings); <= Envia para A HUD os resulfados
             //ShouldSavePoint(playerMaster.getPlayerSettings); ,= Verifica se salva a posição do player
@@ -101,17 +101,13 @@ namespace RiverAttack
             return GetComponent<BossShoot>();
         }
 
-        internal void Submerge()
-        {
-            OnEventBossSubmerge();
-        }
-
         void DamageBoss(int damage)
         {
             OnEventBossHit();
             bossHp -= damage;
-            if (bossHp > 0) return;
-            bossCycles--;
+            Debug.Log($"Cycles: {bossCycles} - HP:{bossHp} - State {GameManager.instance.currentGameState}");
+            
+            if (bossHp > 0) return; // Enquanto tiver HP
             if (bossCycles <= 0)
             {
                 Debug.Log($"FIM DE JOGO!!!!");
@@ -121,6 +117,7 @@ namespace RiverAttack
                 //TODO: Testa o fim do jogo
                 return;
             }
+            bossCycles--;
             //Recarrega o ciclo
             bossHp = m_BossScriptable!.maxHp;
             var gameSubState = GameManager.instance.currentGameState as GameStatePlayGameBoss;
@@ -128,7 +125,6 @@ namespace RiverAttack
 
             //Checar as mudanças de ciclo
         }
-        
 
         internal void BossInvulnerability(bool active)
         {
@@ -142,11 +138,11 @@ namespace RiverAttack
         {
             EventBossHit?.Invoke();
         }
-        public void OnEventBossEmerge()
+        internal void OnEventBossEmerge()
         {
             EventBossEmerge?.Invoke();
         }
-        void OnEventBossSubmerge()
+        internal void OnEventBossSubmerge()
         {
             EventBossSubmerge?.Invoke();
         }

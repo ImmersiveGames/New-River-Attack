@@ -6,13 +6,13 @@ namespace RiverAttack
     public class MissileAttackBehavior: IBossBehavior
     {
         // Shoot in Cone
-        static int numBullets = 5; // Número de projéteis no leque
-        float coneAngle = 90.0f;   // Ângulo do leque em graus (mínimo 15, máximo 360)
-        float shootSpeed = 80.0f;  // Velocidade dos projéteis
-        float shootCycles = 4;
-        float startCadence = 1f;
-        float bulletLifeTime = 5f;
-        
+        const int NUM_BULLETS = 5;      // Número de projéteis no leque
+        const float CONE_ANGLE = 90.0f; // Ângulo do leque em graus (mínimo 15, máximo 360)
+        const float SHOOT_SPEED = 80.0f; // Velocidade dos projéteis
+        const float SHOOT_CYCLES = 4;
+        const float START_CADENCE = 1f;
+        const float BULLET_LIFE_TIME = 10f;
+
         //Shoot Variaveis
         float m_Cadence;
         float m_ShootCycles;
@@ -24,7 +24,6 @@ namespace RiverAttack
 
         //IBossBehavior
         bool m_Finished;
-        bool m_OnBehavior;
         readonly BossMaster m_BossMaster;
         readonly BossShoot m_BossShoot;
         internal MissileAttackBehavior(BossMaster bossMaster)
@@ -34,23 +33,21 @@ namespace RiverAttack
         }
         public void Enter()
         {
-            //Debug.Log("Entrando no comportamento CleanShootBehavior");
-            m_Cadence = startCadence;
-            m_ShootCycles = shootCycles;
-            m_OnBehavior = false;
+            Debug.Log("Entrando no comportamento MissileAttack");
+            m_Cadence = START_CADENCE;
+            m_ShootCycles = SHOOT_CYCLES;
+            m_Finished = false;
             m_Target = m_BossMaster.targetPlayer;
             m_MyPool = PoolObjectManager.GetPool(m_IHasPool);
         }
         public void Update()
         {
-            //Debug.Log("Atualizando comportamento CleanShootBehavior");
-            /*if (m_OnBehavior) return;
-            m_OnBehavior = true;*/
+            Debug.Log("Atualizando comportamento MissileAttack");
             m_Cadence -= Time.deltaTime;
             if (!(m_Cadence <= 0.01f))
                 return;
-            m_Cadence = startCadence;
-            if (m_BossShoot.getBullets == null || m_Target == null || coneAngle is < 15.0f or > 360.0f)
+            m_Cadence = START_CADENCE;
+            if (m_BossShoot.getBullets == null || m_Target == null)
                 return;
             if (m_ShootCycles <= 0)
             {
@@ -63,7 +60,7 @@ namespace RiverAttack
         }
         public void Exit()
         {
-            //Debug.Log("Saindo do comportamento CleanShootBehavior");
+            Debug.Log("Saindo do comportamento MissileAttack");
         }
         public void FinishBehavior()
         {
@@ -81,7 +78,7 @@ namespace RiverAttack
             var bossPosition = m_BossMaster.transform.position;
             var targetTransform = m_Target.transform.position;
             var targetDirection = (targetTransform - bossPosition).normalized;
-            var directions = ConeDirections(targetDirection, numBullets, coneAngle);
+            var directions = ConeDirections(targetDirection, NUM_BULLETS, CONE_ANGLE);
             
             foreach (var t in directions)
             {
@@ -91,7 +88,7 @@ namespace RiverAttack
                 if (myBullet == null) continue;
                 myBullet.SetMyPool(m_MyPool);
                 myBullet.ownerShoot = m_BossMaster;
-                myBullet.Init(shootSpeed, bulletLifeTime);
+                myBullet.Init(SHOOT_SPEED, BULLET_LIFE_TIME);
                 myBullet.moveDirection = t;
             }
         }
