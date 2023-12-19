@@ -25,11 +25,11 @@ namespace RiverAttack
         //IBossBehavior
         bool m_Finished;
         readonly BossMaster m_BossMaster;
-        readonly BossShoot m_BossShoot;
+        readonly BossMissileShoot m_BossMissileShoot;
         internal MissileAttackBehavior(BossMaster bossMaster)
         {
             m_BossMaster = bossMaster;
-            m_IHasPool = m_BossShoot = m_BossMaster.GetBossShoot();
+            m_IHasPool = m_BossMissileShoot = m_BossMaster.GetBossMissileShoot();
         }
         public void Enter()
         {
@@ -47,7 +47,7 @@ namespace RiverAttack
             if (!(m_Cadence <= 0.01f))
                 return;
             m_Cadence = START_CADENCE;
-            if (m_BossShoot.getBullets == null || m_Target == null)
+            if (m_BossMissileShoot.getBulletsMissile == null || m_Target == null)
                 return;
             if (m_ShootCycles <= 0)
             {

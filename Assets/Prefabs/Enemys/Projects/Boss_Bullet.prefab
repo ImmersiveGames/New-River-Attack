@@ -151,7 +151,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerFire: 1
   audioShoot: {fileID: 11400000, guid: 441d356c0cd62c341834a7c023dbc4b0, type: 2}
-  moveDirection: {x: 0, y: 0, z: 0}
+  deadParticlePrefab: {fileID: 1795330444146210, guid: 87d121a8c2178ae4ea2294964b31a55a,
+    type: 3}
+  timeoutDestroyExplosion: 1.8
+  enemyExplodeAudio: {fileID: 11400000, guid: d8475ea90d3b44c4a80a294b73c00c71, type: 2}
 --- !u!82 &3037661334238096308
 AudioSource:
   m_ObjectHideFlags: 0
@@ -161,9 +164,9 @@ AudioSource:
   m_GameObject: {fileID: 5058071511349833923}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 5288483794940960326, guid: 58d7b5e9bc02ca541be53445706aa66a,
+  OutputAudioMixerGroup: {fileID: -8892438522889437315, guid: 58d7b5e9bc02ca541be53445706aa66a,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 663e59451aa214743a890d4b102c0ebb, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

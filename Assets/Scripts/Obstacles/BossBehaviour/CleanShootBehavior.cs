@@ -21,11 +21,11 @@ namespace RiverAttack
         //IBossBehavior
         bool m_Finished;
         readonly BossMaster m_BossMaster;
-        readonly BossShoot m_BossShoot;
+        readonly BossMissileShoot m_BossMissileShoot;
         internal CleanShootBehavior(BossMaster bossMaster)
         {
             m_BossMaster = bossMaster;
-            m_MyPool = m_BossShoot = m_BossMaster.GetBossShoot();
+            m_MyPool = m_BossMissileShoot = m_BossMaster.GetBossMissileShoot();
         }
         public void Enter()
         {
@@ -33,7 +33,7 @@ namespace RiverAttack
             m_Cadence = m_StartCadence;
             m_ShootCycles = shootCycles;
             
-            m_SpawnPoint = m_BossShoot.spawnPoint;
+            m_SpawnPoint = m_BossMissileShoot.spawnPoint;
             m_Target = m_BossMaster.targetPlayer;
         }
         public void Update()

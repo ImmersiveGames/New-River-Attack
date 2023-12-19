@@ -96,9 +96,13 @@ namespace RiverAttack
             Invoke(nameof(OnEventBossEmerge), 2f);
         }
 
-        internal BossShoot GetBossShoot()
+        internal BossMissileShoot GetBossMissileShoot()
         {
-            return GetComponent<BossShoot>();
+            return GetComponent<BossMissileShoot>();
+        }
+        internal BossMinesShoot GetBossMines()
+        {
+            return GetComponent<BossMinesShoot>();
         }
 
         void DamageBoss(int damage)

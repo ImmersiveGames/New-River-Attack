@@ -36,7 +36,7 @@ namespace RiverAttack
                 DestroyMe();
             }
         }
-        protected void DestroyMe()
+        protected virtual void DestroyMe()
         {
             gameObject.SetActive(false);
             if (!m_MyPool)

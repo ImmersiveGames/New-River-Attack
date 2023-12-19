@@ -29,6 +29,7 @@ namespace RiverAttack
             m_Behaviors = new Dictionary<BattleBossSubState, IBossBehavior[]> {
                 { BattleBossSubState.Top, new IBossBehavior[] {
                     new EmergeBehavior(m_BossMaster),
+                    new ExplosiveMinesBehavior(m_BossMaster),
                     new MissileAttackBehavior(m_BossMaster),
                     new SubEmergeBehavior(m_BossMaster)
                     // Adicionar os outros comportamentos para o subestado "Topo"

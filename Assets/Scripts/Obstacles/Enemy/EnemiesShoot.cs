@@ -42,7 +42,7 @@ namespace RiverAttack
         void Start()
         {
             // setup inicial do status
-            StartMyPool(startPool);
+            StartMyPool(bullet,startPool);
             ChangeState(m_StateShootHold);
             spawnPoint = GetComponentInChildren<EnemiesShootSpawn>().transform ? GetComponentInChildren<EnemiesShootSpawn>().transform : transform;
         }
@@ -101,9 +101,9 @@ namespace RiverAttack
                 return shootCadence > 0 && bulletSpeed > 0;
             }
         }
-        public void StartMyPool(int quantity, bool isPersistent = false)
+        public void StartMyPool(GameObject bullets, int quantity, bool isPersistent = false)
         {
-            PoolObjectManager.CreatePool(this, bullet, startPool, transform, isPersistent);
+            PoolObjectManager.CreatePool(this, bullets, quantity, transform, isPersistent);
         }
     }
 }
