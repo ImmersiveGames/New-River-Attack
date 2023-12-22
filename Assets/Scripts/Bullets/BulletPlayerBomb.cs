@@ -1,5 +1,4 @@
 using UnityEngine;
-using Utils;
 
 namespace RiverAttack
 {
@@ -26,15 +25,12 @@ namespace RiverAttack
         double m_TParam;
         Collider m_Collider;
 
-        GamePlayManager m_GamePlayManager;
-
         #region UNITY METHODS
         void OnEnable()
         {
             timeLife = pSystem.main.duration;
             m_Collider = GetComponent<Collider>();
             var audioSource = GetComponent<AudioSource>();
-            m_GamePlayManager = GamePlayManager.instance;
             audioShoot.Play(audioSource);
         }
 

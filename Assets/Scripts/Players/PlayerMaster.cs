@@ -76,7 +76,9 @@ namespace RiverAttack
         }
         void OnTriggerEnter(Collider other)
         {
-            if (!other.GetComponentInParent<WallsMaster>() && !other.GetComponentInParent<BossMaster>() && !other.GetComponentInParent<EnemiesMaster>() && !other.GetComponent<BulletEnemy>()&& !other.GetComponent<BulletBoss>()) return;
+            if (!other.GetComponentInParent<WallsMaster>() && !other.GetComponentInParent<BossMaster>() && 
+                !other.GetComponentInParent<EnemiesMaster>() && !other.GetComponent<BulletEnemy>()&& 
+                !other.GetComponent<BulletBoss>() && !other.GetComponent<MineMaster>()) return;
             if (other.GetComponentInParent<CollectiblesMaster>() != null) return;
             if (m_GamePlayManager.getGodMode || m_Invulnerability) return;
             LogGamePlay(other);

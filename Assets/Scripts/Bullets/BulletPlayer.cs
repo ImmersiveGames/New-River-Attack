@@ -25,7 +25,8 @@ namespace RiverAttack
         }
         void OnTriggerEnter(Collider collision)
         {
-            if (collision.GetComponentInParent<PlayerMaster>() || collision.GetComponentInParent<BulletPlayer>() || collision.GetComponentInParent<BulletPlayerBomb>() || collision.GetComponent<LevelChangeBGM>()) return;
+            if (collision.GetComponentInParent<PlayerMaster>() || collision.GetComponentInParent<BulletPlayer>() || 
+                collision.GetComponentInParent<BulletPlayerBomb>() || collision.GetComponent<LevelChangeBGM>()) return;
             var obstacleMaster = collision.GetComponent<ObstacleMaster>();
             if (obstacleMaster != null && !obstacleMaster.enemy.canDestruct) return;
             if (collision.GetComponentInParent<PowerUpMaster>()) return;

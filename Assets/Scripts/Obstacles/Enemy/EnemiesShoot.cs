@@ -44,7 +44,9 @@ namespace RiverAttack
             // setup inicial do status
             StartMyPool(bullet,startPool);
             ChangeState(m_StateShootHold);
-            spawnPoint = GetComponentInChildren<EnemiesShootSpawn>().transform ? GetComponentInChildren<EnemiesShootSpawn>().transform : transform;
+            var enemiesShootSpawn = GetComponentInChildren<EnemiesShootSpawn>();
+            if (enemiesShootSpawn == null) return;
+            spawnPoint = enemiesShootSpawn.transform ? enemiesShootSpawn.transform : transform;
         }
 
         void Update()

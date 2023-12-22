@@ -2,7 +2,7 @@
 
 namespace RiverAttack
 {
-    public sealed class EnemiesMaster : ObstacleMaster
+    public class EnemiesMaster : ObstacleMaster
     {
         EnemiesSetDifficultyListSo m_EnemiesSetDifficultList;
 

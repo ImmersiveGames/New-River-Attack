@@ -34,13 +34,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1504127474328815682}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &4183145737086533858
 Rigidbody:
@@ -179,10 +179,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
   timeoutDestroyExplosion: 2
   isDestroyed: 0
+  isActive: 0
   actualDifficultName: 0
 --- !u!114 &8040410916055668558
 MonoBehaviour:

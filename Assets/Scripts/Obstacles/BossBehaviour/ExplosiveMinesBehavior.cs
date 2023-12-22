@@ -1,13 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Unity.VisualScripting;
+using UnityEngine;
 using Utils;
+using Random = UnityEngine.Random;
 namespace RiverAttack
 {
     public class ExplosiveMinesBehavior : IBossBehavior
     {
-        public int quantidadeBombas = 10; // Número de bombas a serem espalhadas
-        public float alturaFixa = 1.0f;   // Posição fixa para o eixo Y
-        public float offsetZ = 10.0f;     // Offset para o eixo Z
-        
+
         //Shoot Variaveis
         float m_Cadence;
         float m_ShootCycles;
@@ -16,16 +19,17 @@ namespace RiverAttack
         Transform m_MyPool;
         
         Transform m_Target;
+        float m_DelayInstances = 1f;
 
         //IBossBehavior
         bool m_Finished;
         readonly BossMaster m_BossMaster;
-        readonly BossMinesShoot m_BossMissileShoot;
+        readonly BossMinesShoot m_BossMinesShoot;
         
         internal ExplosiveMinesBehavior(BossMaster bossMaster)
         {
             m_BossMaster = bossMaster;
-            m_IHasPool = m_BossMissileShoot = m_BossMaster.GetBossMines();
+            m_IHasPool = m_BossMinesShoot = m_BossMaster.GetBossMines();
         }
         public void Enter()
         {
@@ -63,25 +67,41 @@ namespace RiverAttack
         void Fire()
         {
             //Debug.Log("Shoot!");
-            EspalharBombasNaTela();
+            MinesInQuadrants(m_BossMinesShoot.minesQuantity, m_BossMinesShoot.numLines, m_BossMinesShoot.numColumns, m_BossMinesShoot.quadrantsBlocked);
         }
-        void EspalharBombasNaTela()
+        
+        void  MinesInQuadrants(int quantity, int lines, int columns, IReadOnlyCollection<Vector2Int> quadrantBlocked)
         {
-            //tranformar as posições em grids de 2x2
-            Camera camera = Camera.main;
+            var camera = Camera.main;
+            float height = camera!.orthographicSize * 2.0f;
+            float weight = height * camera.aspect;
 
-            float largura = camera.orthographicSize * 2.0f * camera.aspect;
+            float sizeQuadrantX = weight / columns;
+            float sizeQuadrantZ = height / lines;
 
-            for (int i = 0; i < quantidadeBombas; i++)
+            var usedQuadrants = new List<Vector2Int>();
+
+            for (int i = 0; i < quantity; i++)
             {
-                float posX = Random.Range(-largura / 2.0f, largura / 2.0f);
-                float posZ = Random.Range(camera.orthographicSize, offsetZ);
+                int indexQuadrantsX, indexQuadrantsZ;
 
-                Vector3 posicaoAleatoria = new Vector3(posX, alturaFixa, posZ);
+                do
+                {
+                    indexQuadrantsX = Random.Range(0, columns);
+                    indexQuadrantsZ = Random.Range(0, lines);
+                }
+                while (BossMinesShoot.QuadrantAlreadyOccupied(usedQuadrants, indexQuadrantsX, indexQuadrantsZ) || 
+                       BossMinesShoot.QuadrantsBlocked(indexQuadrantsX, indexQuadrantsZ, quadrantBlocked));
 
-                // Instanciar a bomba na posição aleatória
+                usedQuadrants.Add(new Vector2Int(indexQuadrantsX, indexQuadrantsZ));
+
+                float posX = ((indexQuadrantsX + 0.5f) * sizeQuadrantX) - (weight / 2.0f) + BossMinesShoot.OffsetX;
+                float posZ = ((indexQuadrantsZ + 0.5f) * sizeQuadrantZ) - (height / 2.0f) + BossMinesShoot.OffsetZ;
+
+                var randomPosition = new Vector3(posX, BossMinesShoot.OffsetY, posZ);
+                m_BossMinesShoot.PlayMineShoot();
                 var myShoot = PoolObjectManager.GetObject(m_IHasPool);
-                myShoot.transform.position = new Vector3(posicaoAleatoria.x, posicaoAleatoria.y, posicaoAleatoria.z);
+                myShoot.transform.position = new Vector3(randomPosition.x, randomPosition.y, randomPosition.z);
             }
             m_Finished = true;
         }
