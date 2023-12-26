@@ -4,7 +4,7 @@ namespace RiverAttack
 {
     public class StateShootHold : IShoot
     {
-        public void EnterState(EnemiesMaster enemyMaster)
+        public void EnterState(ObstacleMaster enemyMaster)
         {
            // Debug.Log("Estado: ShootHold - Entrando");
             // Coloque aqui as ações a serem executadas ao entrar no estado "Hold"

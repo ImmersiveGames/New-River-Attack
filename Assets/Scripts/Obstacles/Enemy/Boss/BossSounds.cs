@@ -25,7 +25,7 @@ namespace RiverAttack
         protected override void SetInitialReferences()
         {
             base.SetInitialReferences();
-            m_BossMaster = m_ObstacleMaster as BossMaster;
+            m_BossMaster = obstacleMaster as BossMaster;
         }
         void HitBossSound()
         {

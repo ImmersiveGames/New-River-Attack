@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 using Utils;
 using Random = UnityEngine.Random;
@@ -40,6 +38,7 @@ namespace RiverAttack
             m_MyPool = PoolObjectManager.GetPool(m_IHasPool);
             
             //Animação de colocar as bombas na agua
+            Fire();
         }
         public void Update()
         {
@@ -48,7 +47,7 @@ namespace RiverAttack
             //Animação de sombra das bombas.
             // tempo minimo para elas permanecerem na area
             
-            Fire();
+            
         }
         public void Exit()
         {
@@ -70,7 +69,7 @@ namespace RiverAttack
             MinesInQuadrants(m_BossMinesShoot.minesQuantity, m_BossMinesShoot.numLines, m_BossMinesShoot.numColumns, m_BossMinesShoot.quadrantsBlocked);
         }
         
-        void  MinesInQuadrants(int quantity, int lines, int columns, IReadOnlyCollection<Vector2Int> quadrantBlocked)
+        async void  MinesInQuadrants(int quantity, int lines, int columns, IReadOnlyCollection<Vector2Int> quadrantBlocked)
         {
             var camera = Camera.main;
             float height = camera!.orthographicSize * 2.0f;
@@ -100,8 +99,10 @@ namespace RiverAttack
 
                 var randomPosition = new Vector3(posX, BossMinesShoot.OffsetY, posZ);
                 m_BossMinesShoot.PlayMineShoot();
-                var myShoot = PoolObjectManager.GetObject(m_IHasPool);
+                var myShoot = await PoolObjectManager.GetObjectAsync(m_IHasPool);
                 myShoot.transform.position = new Vector3(randomPosition.x, randomPosition.y, randomPosition.z);
+                myShoot.GetComponent<MineMaster>().Initialization(m_MyPool);
+                await Task.Delay(Random.Range(500, 1000));
             }
             m_Finished = true;
         }
