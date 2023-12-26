@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 namespace RiverAttack
 {
     public class EnemiesAnimator : MonoBehaviour
@@ -15,13 +14,17 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
-            m_EnemiesMaster.EventObstacleMovement += AnimationMove; 
-            m_EnemiesMaster.EventObjectMasterFlipEnemies += AnimationFlip;
+            if (m_EnemiesMaster)
+            {
+                m_EnemiesMaster.EventObstacleMovement += AnimationMove; 
+                m_EnemiesMaster.EventObjectMasterFlipEnemies += AnimationFlip;
+            }
             m_GamePlayManager.EventReSpawnEnemiesMaster += ResetAnimation;
 
         }
         void OnDisable()
         {
+            if (!m_EnemiesMaster) return;
             m_EnemiesMaster.EventObstacleMovement -= AnimationMove;
             m_EnemiesMaster.EventObjectMasterFlipEnemies -= AnimationFlip;
         }

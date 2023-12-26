@@ -12,7 +12,7 @@ namespace RiverAttack
         GameObject deadParticlePrefab;
         [FormerlySerializedAs("timeoutDestroy")]
         [SerializeField]
-        float timeoutDestroyExplosion;
+        protected float timeoutDestroyExplosion;
         public bool isDestroyed;
         [SerializeField]
         internal bool isActive;
@@ -57,6 +57,7 @@ namespace RiverAttack
             if (other == null || !shouldObstacleBeReady || !enemy.canDestruct) return;
             ComponentToKill(other.GetComponent<BulletPlayer>(), CollisionType.Shoot);
             ComponentToKill(other.GetComponent<BulletPlayerBomb>(), CollisionType.Bomb);
+            //ComponentToKill(other.GetComponent<BulletBoss>(), CollisionType.None);
         }
         internal virtual void OnDestroy()
         {

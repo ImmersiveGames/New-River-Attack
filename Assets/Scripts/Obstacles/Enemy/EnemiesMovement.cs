@@ -135,21 +135,6 @@ namespace RiverAttack
         }
   #endregion
 
-        /*static Directions GetDirection(Vector3 vector3)
-        {
-            if (vector3 == new Vector3(0, 1, 0))
-                return Directions.Up;
-            if (vector3 == new Vector3(0, -1, 0))
-                return Directions.Down;
-            if (vector3 == new Vector3(1, 0, 0))
-                return Directions.Right;
-            if (vector3 == new Vector3(-1, 0, 0))
-                return Directions.Left;
-            if (vector3 == new Vector3(0, 0, 1))
-                return Directions.Forward;
-            if (vector3 == new Vector3(0, 0, -1))
-                return Directions.Back;
-            return vector3 != Vector3.zero ? Directions.Free : Directions.None;
-        }*/
+  
     }
 }

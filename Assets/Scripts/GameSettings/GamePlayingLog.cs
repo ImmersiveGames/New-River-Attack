@@ -33,7 +33,7 @@ namespace RiverAttack
     }
     public enum CollisionType
     {
-        Shoot, Bomb, Collider, Collected
+        Shoot, Bomb, Collider, Collected, None
     }
     [System.Serializable]
     public class LogResults

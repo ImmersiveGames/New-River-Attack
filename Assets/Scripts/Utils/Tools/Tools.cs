@@ -165,7 +165,7 @@ namespace Utils
                 aValue = default(TEnum);
                 return false;
             }
-        } 
+        }
         /*
          * ToggleChildren(Transform myTransform, bool setActive = true)
          * - Des/Ativa os filhos de um objeto

@@ -33,9 +33,7 @@ namespace RiverAttack
         }
         void OnTriggerEnter(Collider collision)
         {
-            if (collision.GetComponentInParent<EnemiesMaster>() || collision.GetComponentInParent<BossMaster>() ||
-                collision.GetComponentInParent<BulletBoss>() || collision.GetComponentInParent<BulletEnemy>() ||
-                collision.GetComponentInParent<WallsMaster>() ||collision.GetComponentInParent<EffectAreaMaster>()) 
+            if (!collision.GetComponentInParent<PlayerMaster>() && !collision.GetComponentInParent<EffectAreaMaster>())
                 return;
             DestroyMeExplosion();
         }

@@ -27,7 +27,8 @@ namespace RiverAttack
         {
             float score = m_ObstacleMaster.enemy.enemyScore;
             if (score == 0) return;
-            if (EnemiesMaster.myDifficulty.multiplyScore > 0)
+            var enemyMaster = m_ObstacleMaster as EnemiesMaster;
+            if (enemyMaster != null && EnemiesMaster.myDifficulty.multiplyScore > 0)
             {
                 var myDifficulty = EnemiesMaster.myDifficulty;
                 if (myDifficulty.multiplyScore > 0)
