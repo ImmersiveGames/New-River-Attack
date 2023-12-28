@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using GD.MinMaxSlider;
 using UnityEngine;
 using Random = UnityEngine.Random;
