@@ -1,50 +1,81 @@
-﻿using System;
+﻿using System.Collections;
 using UnityEngine;
 using Utils;
-using Random = UnityEngine.Random;
 namespace RiverAttack
 {
     public class MinesDetonator : ObstacleDetectApproach
     {
-        IShoot m_ActualState;
-        readonly StateDetonate m_StateDetonate;
-        readonly StateShootHold m_StateShootHold;
-        readonly StateShootPatrol m_StateShootPatrol;
-        MineMaster m_MineMaster;
-        GamePlayManager m_GamePlayManager;
+        [SerializeField] ParticleSystem pSystem;
+        [SerializeField] GameObject detonationParticles;
+        [SerializeField] float timeForDetonation = 3.0f;
+        [SerializeField] float colliderSizeFinal = 5.0f;
+        [SerializeField] float expansionSpeed = 1.0f;
+        [SerializeField] float timeLife;
+        [SerializeField] float shakeForce;
+        [SerializeField] float shakeTime;
+        [SerializeField] long millisecondsVibrate;
         
-        public MinesDetonator()
-        {
-            m_StateDetonate = new StateDetonate(this);
-            m_StateShootHold = new StateShootHold();
-            m_StateShootPatrol = new StateShootPatrol(this, null);
-        }
+        bool m_OnExplosion;
+        Collider m_Collider;
+        float m_EndLife;
+        float m_PlayerApproachRadius;
+        double m_TParam;
+        PlayerDetectApproach m_PlayerDetectApproach;
+        MineMaster m_MineMaster;
+        internal Coroutine detonation;
+        GamePlayManager m_GamePlayManager;
+
         void OnEnable()
         {
             SetInitialReferences();
+            target = null;
+            m_OnExplosion = false;
+            m_MineMaster.isDestroyed = false;
+            detonationParticles.SetActive(false);
+            m_PlayerApproachRadius = playerApproachRadius;
+            m_Collider = GetComponentInChildren<Collider>();
+            timeLife = pSystem.main.duration;
         }
-        void Update()
+        public void Update()
         {
-            if (!m_GamePlayManager.shouldBePlayingGame || !m_MineMaster.shouldObstacleBeReady || m_MineMaster.isDestroyed || !meshRenderer.isVisible)
+            var position = transform.position;
+            m_PlayerDetectApproach ??= new PlayerDetectApproach(position, m_PlayerApproachRadius);
+            target = m_PlayerDetectApproach.TargetApproach<PlayerMaster>(GameManager.instance.layerPlayer);
+            if (target == null || !shouldBeExplode)
                 return;
-            switch (shouldBeExplode)
-            {
-                case true when shouldBeApproach && !target:
-                    target = null;
-                    ChangeState(m_StateShootPatrol);
-                    target = m_StateShootPatrol.target;
-                    break;
-                case true:
-                    ChangeState(m_StateDetonate);
-                    break;
-                case false:
-                    target = null;
-                    ChangeState(m_StateShootHold);
-                    break;
-            }
-            m_ActualState.UpdateState();
+            m_OnExplosion = true;
+            detonation = StartCoroutine(MineDetonation());
+            m_MineMaster.SetMyCoroutine(detonation);
         }
-        
+
+        IEnumerator MineDetonation()
+        {
+            m_MineMaster.MineOffInvulnerability();
+            if (m_Collider.GetType() != typeof(SphereCollider)) yield break;
+            
+            m_MineMaster.OnEventMineAlert();
+            var sphere = (SphereCollider)m_Collider;
+            
+            yield return new WaitForSeconds(timeForDetonation);
+            if (m_MineMaster.isDestroyed) yield break;
+            m_EndLife = Time.time + timeLife;
+            detonationParticles.SetActive(true);
+            
+            CameraShake.ShakeCamera(shakeForce, shakeTime);
+            
+            //TODO: Arrumar nova forma de vibrar o celular
+#if UNITY_ANDROID && !UNITY_EDITOR
+            ToolsAndroid.Vibrate(millisecondsVibrate);
+            Handheld.Vibrate();
+#endif
+            do
+            {
+                m_TParam += Time.deltaTime * expansionSpeed;
+                sphere.radius = Mathf.Lerp(0.5f, colliderSizeFinal, (float)m_TParam);
+            }
+            while (sphere.radius < colliderSizeFinal - 0.1f);
+            AutoDestroy();
+        }
 
         protected override void SetInitialReferences()
         {
@@ -53,17 +84,14 @@ namespace RiverAttack
             m_MineMaster = GetComponent<MineMaster>();
         }
         
-        void ChangeState(IShoot newState)
+        bool shouldBeExplode { get { return m_MineMaster.isActive && m_OnExplosion == false; } }
+        void AutoDestroy()
         {
-            if (m_ActualState == newState) return;
-            m_ActualState?.ExitState();
-
-            m_ActualState = newState;
-            m_ActualState?.EnterState(m_MineMaster);
+            if (!(Time.time >= m_EndLife))
+                return;
+            detonationParticles.SetActive(false);
+            m_MineMaster.DestroyMe();
         }
-
-
-        bool shouldBeExplode { get { return m_MineMaster.isActive; } }
         
          #region Gizmos
         void OnDrawGizmosSelected()

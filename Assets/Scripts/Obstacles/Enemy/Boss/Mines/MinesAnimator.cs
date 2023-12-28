@@ -36,6 +36,6 @@ namespace RiverAttack
             if (m_Animator == null) return;
             m_Animator.SetTrigger(onAlert);
         }
-        
+
     }
 }

@@ -12,7 +12,7 @@ namespace RiverAttack
         bool m_HasBulletLifeTime;
         protected float bulletLifeTime;
         protected internal ObjectMaster ownerShoot;
-        Transform m_MyPool;
+        internal Transform m_MyPool;
 
         public void Init(float speed, float lifetime = 0)
         {

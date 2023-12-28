@@ -1,38 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using Utils;
 using Random = UnityEngine.Random;
 namespace RiverAttack
 {
     public class MineMaster: ObstacleMaster, IPoolable
     {
-        [SerializeField] GameObject detonationParticles;
-        [SerializeField] protected float bulletLifeTime;
-        bool m_HasBulletLifeTime;
         Transform m_MyPool;
+        Coroutine m_MyCoroutine;
         #region Delagetes
         public event GeneralEventHandler EventMineAlert;
         #endregion
-/*
+
         #region UNITYMETHODS
         internal override void OnEnable()
         {
             base.OnEnable();
             myColliders ??= GetComponentsInChildren<Collider>();
             MineInvulnerability(true);
+            Invoke(nameof(MineOffInvulnerability), 1f);
         }
         internal override void OnTriggerEnter(Collider other)
         {
             base.OnTriggerEnter(other);
             if (other.GetComponent<BulletPlayer>())
             {
+                isDestroyed = true;
                 Invoke(nameof(DestroyMe), timeoutDestroyExplosion);
                 return;
             }
             ComponentToKill(other.GetComponentInParent<PlayerMaster>(), CollisionType.Collider);
+            isDestroyed = true;
             GamePlayManager.instance.OnEventOtherEnemiesKillPlayer();
             Invoke(nameof(DestroyMe), timeoutDestroyExplosion);
         }
@@ -42,7 +39,6 @@ namespace RiverAttack
         public void Initialization(Transform pool)
         {
             m_MyPool = pool;
-            Invoke(nameof(MineOffInvulnerability),2f);
         }
 
         public Transform getPool
@@ -53,7 +49,7 @@ namespace RiverAttack
             }
         }
 
-        void MineOffInvulnerability()
+        internal void MineOffInvulnerability()
         {
             MineInvulnerability(false);
         }
@@ -64,15 +60,18 @@ namespace RiverAttack
                 collider1.enabled = !active;
             }
         }
-        protected void AutoDestroyMe(float timer)
+
+        internal void SetMyCoroutine(Coroutine coroutine)
         {
-            if (m_HasBulletLifeTime && Time.time >= timer)
-            {
-                DestroyMe();
-            }
+            m_MyCoroutine = coroutine;
         }
-        void DestroyMe()
+        internal void DestroyMe()
         {
+            
+            if (m_MyCoroutine != null)
+            {
+                StopCoroutine(m_MyCoroutine);
+            }
             Tools.ToggleChildren(transform);
             gameObject.SetActive(false);
             //StartObstacle();
@@ -81,9 +80,9 @@ namespace RiverAttack
             gameObject.transform.SetParent(m_MyPool);
             gameObject.transform.SetAsLastSibling();
         }
-        protected virtual void OnEventMineAlert()
+        public virtual void OnEventMineAlert()
         {
             EventMineAlert?.Invoke();
-        }*/
+        }
     }
 }
