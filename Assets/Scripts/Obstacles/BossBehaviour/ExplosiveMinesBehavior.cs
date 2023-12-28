@@ -31,7 +31,7 @@ namespace RiverAttack
         }
         public void Enter()
         {
-            Debug.Log("Entrando no comportamento ExplosiveMines");
+            //Debug.Log("Entrando no comportamento ExplosiveMines");
             
             m_Finished = false;
             m_Target = m_BossMaster.targetPlayer;
@@ -42,7 +42,7 @@ namespace RiverAttack
         }
         public void Update()
         {
-            Debug.Log("Atualizando comportamento ExplosiveMines");
+            //Debug.Log("Atualizando comportamento ExplosiveMines");
             // Demarcar as areas onde serão colocadas as bombas
             //Animação de sombra das bombas.
             // tempo minimo para elas permanecerem na area
@@ -51,7 +51,7 @@ namespace RiverAttack
         }
         public void Exit()
         {
-            Debug.Log("Saindo do comportamento ExplosiveMines");
+            //Debug.Log("Saindo do comportamento ExplosiveMines");
             //Remover todas as bombas.
         }
         public void FinishBehavior()
@@ -100,8 +100,8 @@ namespace RiverAttack
                 var randomPosition = new Vector3(posX, BossMinesShoot.OffsetY, posZ);
                 m_BossMinesShoot.PlayMineShoot();
                 var myShoot = await PoolObjectManager.GetObjectAsync(m_IHasPool);
-                myShoot.transform.position = new Vector3(randomPosition.x, randomPosition.y, randomPosition.z);
-               // myShoot.GetComponent<MineMaster>().Initialization(m_MyPool);
+                myShoot.transform.position = new Vector3(randomPosition.x, randomPosition.y, randomPosition.z); 
+                myShoot.GetComponent<MinesBoss>().Initialization(m_MyPool);
                 await Task.Delay(Random.Range(500, 1000));
             }
             m_Finished = true;

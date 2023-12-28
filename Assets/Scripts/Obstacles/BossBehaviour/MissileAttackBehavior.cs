@@ -33,7 +33,7 @@ namespace RiverAttack
         }
         public void Enter()
         {
-            Debug.Log("Entrando no comportamento MissileAttack");
+           // Debug.Log("Entrando no comportamento MissileAttack");
             m_Cadence = START_CADENCE;
             m_ShootCycles = SHOOT_CYCLES;
             m_Finished = false;
@@ -42,7 +42,7 @@ namespace RiverAttack
         }
         public void Update()
         {
-            Debug.Log("Atualizando comportamento MissileAttack");
+            //Debug.Log("Atualizando comportamento MissileAttack");
             m_Cadence -= Time.deltaTime;
             if (!(m_Cadence <= 0.01f))
                 return;
@@ -60,7 +60,7 @@ namespace RiverAttack
         }
         public void Exit()
         {
-            Debug.Log("Saindo do comportamento MissileAttack");
+            //Debug.Log("Saindo do comportamento MissileAttack");
         }
         public void FinishBehavior()
         {
@@ -104,7 +104,7 @@ namespace RiverAttack
             {
                 float angle = initialAngle + angleIncrease * i;
                 float deg2Rad = angle * Mathf.Deg2Rad;
-                var finalDirection = new Vector3(Mathf.Cos(deg2Rad), 0, Mathf.Sin(deg2Rad));
+                var finalDirection = new Vector3(Mathf.Cos(deg2Rad), 0f, Mathf.Sin(deg2Rad));
                 directions[i] = finalDirection;
             }
             return directions;

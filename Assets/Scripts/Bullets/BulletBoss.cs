@@ -15,7 +15,7 @@ namespace RiverAttack
         #region UNITYMETHODS
         void OnEnable()
         {
-            GamePlayManager.instance.EventEnemiesMasterKillPlayer += DestroyMe;
+            //GamePlayManager.instance.EventEnemiesMasterKillPlayer += DestroyMe;
             if (GamePlayManager.instance.playerDead) return;
             m_AudioSource = GetComponent<AudioSource>();
             audioShoot.Play(m_AudioSource);
