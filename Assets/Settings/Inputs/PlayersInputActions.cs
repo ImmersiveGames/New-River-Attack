@@ -680,6 +680,87 @@ namespace RiverAttack
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""BriefingRoom"",
+            ""id"": ""d164af3b-bc59-4f6d-9e2a-cd5dd1a854a0"",
+            ""actions"": [
+                {
+                    ""name"": ""Next"",
+                    ""type"": ""Button"",
+                    ""id"": ""0a9bda12-80f1-4ff6-958e-b6f7d9e8f140"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3a37691-c5b5-4927-9f8a-b3d09d19c060"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=3)"",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""979c0a81-87b5-48a4-b627-44723c685b1b"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4adae19c-5757-45de-8232-b9331905dbf6"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile;PC"",
+                    ""action"": ""Next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""006da81b-939b-4ea9-a053-bf303d2ed777"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC;Mobile"",
+                    ""action"": ""Next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c36de539-4b0f-4807-841b-c92b5071abbe"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bf997902-ec38-49b4-a7bf-c30d79d726d6"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile;PC"",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -731,6 +812,10 @@ namespace RiverAttack
             m_UI_Controlls_RightSelection = m_UI_Controlls.FindAction("RightSelection", throwIfNotFound: true);
             m_UI_Controlls_StartButton = m_UI_Controlls.FindAction("StartButton", throwIfNotFound: true);
             m_UI_Controlls_BackButton = m_UI_Controlls.FindAction("BackButton", throwIfNotFound: true);
+            // BriefingRoom
+            m_BriefingRoom = asset.FindActionMap("BriefingRoom", throwIfNotFound: true);
+            m_BriefingRoom_Next = m_BriefingRoom.FindAction("Next", throwIfNotFound: true);
+            m_BriefingRoom_Exit = m_BriefingRoom.FindAction("Exit", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -944,6 +1029,60 @@ namespace RiverAttack
             }
         }
         public UI_ControllsActions @UI_Controlls => new UI_ControllsActions(this);
+
+        // BriefingRoom
+        private readonly InputActionMap m_BriefingRoom;
+        private List<IBriefingRoomActions> m_BriefingRoomActionsCallbackInterfaces = new List<IBriefingRoomActions>();
+        private readonly InputAction m_BriefingRoom_Next;
+        private readonly InputAction m_BriefingRoom_Exit;
+        public struct BriefingRoomActions
+        {
+            private @PlayersInputActions m_Wrapper;
+            public BriefingRoomActions(@PlayersInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Next => m_Wrapper.m_BriefingRoom_Next;
+            public InputAction @Exit => m_Wrapper.m_BriefingRoom_Exit;
+            public InputActionMap Get() { return m_Wrapper.m_BriefingRoom; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(BriefingRoomActions set) { return set.Get(); }
+            public void AddCallbacks(IBriefingRoomActions instance)
+            {
+                if (instance == null || m_Wrapper.m_BriefingRoomActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_BriefingRoomActionsCallbackInterfaces.Add(instance);
+                @Next.started += instance.OnNext;
+                @Next.performed += instance.OnNext;
+                @Next.canceled += instance.OnNext;
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
+            }
+
+            private void UnregisterCallbacks(IBriefingRoomActions instance)
+            {
+                @Next.started -= instance.OnNext;
+                @Next.performed -= instance.OnNext;
+                @Next.canceled -= instance.OnNext;
+                @Exit.started -= instance.OnExit;
+                @Exit.performed -= instance.OnExit;
+                @Exit.canceled -= instance.OnExit;
+            }
+
+            public void RemoveCallbacks(IBriefingRoomActions instance)
+            {
+                if (m_Wrapper.m_BriefingRoomActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IBriefingRoomActions instance)
+            {
+                foreach (var item in m_Wrapper.m_BriefingRoomActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_BriefingRoomActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public BriefingRoomActions @BriefingRoom => new BriefingRoomActions(this);
         private int m_MobileSchemeIndex = -1;
         public InputControlScheme MobileScheme
         {
@@ -977,6 +1116,11 @@ namespace RiverAttack
             void OnRightSelection(InputAction.CallbackContext context);
             void OnStartButton(InputAction.CallbackContext context);
             void OnBackButton(InputAction.CallbackContext context);
+        }
+        public interface IBriefingRoomActions
+        {
+            void OnNext(InputAction.CallbackContext context);
+            void OnExit(InputAction.CallbackContext context);
         }
     }
 }

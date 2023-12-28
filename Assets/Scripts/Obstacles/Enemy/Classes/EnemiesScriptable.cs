@@ -9,7 +9,7 @@ namespace RiverAttack
     {
         [Header("Default Settings")]
         public new string name;
-        public new string namePT_BR;
+        public string namePT_BR;
         public int enemyScore;
         public Sprite spriteIcon;
         public AudioMixerGroup enemyAudioMixerGroup;
