@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 using Utils;
@@ -15,26 +14,20 @@ namespace RiverAttack
 
         readonly IHasPool m_IHasPool;
         Transform m_MyPool;
-        
-        Transform m_Target;
-        float m_DelayInstances = 1f;
-
+        readonly Camera m_Camera = Camera.main;
         //IBossBehavior
         bool m_Finished;
-        readonly BossMaster m_BossMaster;
         readonly BossMinesShoot m_BossMinesShoot;
         
         internal ExplosiveMinesBehavior(BossMaster bossMaster)
         {
-            m_BossMaster = bossMaster;
-            m_IHasPool = m_BossMinesShoot = m_BossMaster.GetBossMines();
+            m_IHasPool = m_BossMinesShoot = bossMaster.GetBossMines();
         }
         public void Enter()
         {
             //Debug.Log("Entrando no comportamento ExplosiveMines");
             
             m_Finished = false;
-            m_Target = m_BossMaster.targetPlayer;
             m_MyPool = PoolObjectManager.GetPool(m_IHasPool);
             
             //Animação de colocar as bombas na agua
@@ -69,33 +62,35 @@ namespace RiverAttack
             MinesInQuadrants(m_BossMinesShoot.minesQuantity, m_BossMinesShoot.numLines, m_BossMinesShoot.numColumns, m_BossMinesShoot.quadrantsBlocked);
         }
         
-        async void  MinesInQuadrants(int quantity, int lines, int columns, IReadOnlyCollection<Vector2Int> quadrantBlocked)
+        async void  MinesInQuadrants(int quantity, int lines, int columns, IEnumerable<Vector2Int> quadrantBlocked)
         {
-            var camera = Camera.main;
-            float height = camera!.orthographicSize * 2.0f;
-            float weight = height * camera.aspect;
-
-            float sizeQuadrantX = weight / columns;
-            float sizeQuadrantZ = height / lines;
-
+            
+            
+            var viewSize = new Vector2(m_Camera!.orthographicSize * 2.0f * m_Camera.aspect, m_Camera!.orthographicSize * 2.0f);
+            var sizeQuadrant = new Vector2(viewSize.x / columns, viewSize.y / lines);
             var usedQuadrants = new List<Vector2Int>();
+            usedQuadrants.AddRange(quadrantBlocked);
 
             for (int i = 0; i < quantity; i++)
             {
-                int indexQuadrantsX, indexQuadrantsZ;
-
+                var indexQuadrants = new Vector2Int(0,0);
+                if (usedQuadrants.Count >= columns * lines)
+                {
+                    m_Finished = true;
+                    break;
+                }
                 do
                 {
-                    indexQuadrantsX = Random.Range(0, columns);
-                    indexQuadrantsZ = Random.Range(0, lines);
+                    indexQuadrants.x = Random.Range(0, columns);
+                    indexQuadrants.y = Random.Range(0, lines);
                 }
-                while (BossMinesShoot.QuadrantAlreadyOccupied(usedQuadrants, indexQuadrantsX, indexQuadrantsZ) || 
-                       BossMinesShoot.QuadrantsBlocked(indexQuadrantsX, indexQuadrantsZ, quadrantBlocked));
+                while (BossMinesShoot.QuadrantAlreadyOccupied(indexQuadrants, sizeQuadrant, viewSize, ref usedQuadrants) ||
+                       BossMinesShoot.QuadrantAlreadySort(usedQuadrants, indexQuadrants.x, indexQuadrants.y)
+                       );
+                usedQuadrants.Add(new Vector2Int(indexQuadrants.x, indexQuadrants.y));
 
-                usedQuadrants.Add(new Vector2Int(indexQuadrantsX, indexQuadrantsZ));
-
-                float posX = ((indexQuadrantsX + 0.5f) * sizeQuadrantX) - (weight / 2.0f) + BossMinesShoot.OffsetX;
-                float posZ = ((indexQuadrantsZ + 0.5f) * sizeQuadrantZ) - (height / 2.0f) + BossMinesShoot.OffsetZ;
+                float posX = ((indexQuadrants.x + 0.5f) * sizeQuadrant.x) - (viewSize.x / 2.0f) + BossMinesShoot.OffsetX;
+                float posZ = ((indexQuadrants.y + 0.5f) * sizeQuadrant.y) - (viewSize.y / 2.0f) + BossMinesShoot.OffsetZ;
 
                 var randomPosition = new Vector3(posX, BossMinesShoot.OffsetY, posZ);
                 m_BossMinesShoot.PlayMineShoot();

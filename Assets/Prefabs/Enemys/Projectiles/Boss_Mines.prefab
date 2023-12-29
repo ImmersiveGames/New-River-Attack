@@ -10,10 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7875431335431470271}
   - component: {fileID: 8854809779424635891}
-  - component: {fileID: 7458467001889150401}
-  - component: {fileID: 3508173926402023825}
   - component: {fileID: 5987536645123621812}
-  m_Layer: 0
+  - component: {fileID: -3817854381144383739}
+  m_Layer: 7
   m_Name: Boss_Mines
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,28 +132,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!135 &7458467001889150401
-SphereCollider:
+--- !u!114 &5987536645123621812
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1644633236774006560}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.7
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &3508173926402023825
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a814b19c88dd46369acbf986c0475d84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerFire: 1
+  audioShoot: {fileID: 11400000, guid: 2c48f8ac33881c448a08fa1929decd3a, type: 2}
+  alertMineAudio: {fileID: 11400000, guid: 7973aa6d23c8b5b48aa9d428dac25c10, type: 2}
+  deadParticlePrefab: {fileID: 1795330444146210, guid: 87d121a8c2178ae4ea2294964b31a55a,
+    type: 3}
+  deadTimeOutExplosion: 1.8
+  enemyExplodeAudio: {fileID: 11400000, guid: a52115d0daadc7646a42d3fcd95c99bb, type: 2}
+  explosionParticlePrefab: {fileID: 1968301731207834, guid: 9fa9cf8daaa31a9489bd22d256ccb3e1,
+    type: 3}
+  mineTimeOutExplosion: 2
+  playerApproachRadius: 3
+  playerApproachRadiusRandom: {x: 0, y: 0}
+  onAlert: warning
+  gizmoColor: {r: 255, g: 0, b: 0, a: 150}
+  dropHeight: 1
+  timeToAutoDestroy: 6
+  dropChance: {x: 0, y: 0.3}
+  itemsVariables: {fileID: 11400000, guid: 9fb43d69f9e10ee4c8d41b2fa37218f2, type: 2}
+--- !u!54 &-3817854381144383739
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,33 +189,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5987536645123621812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1644633236774006560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a814b19c88dd46369acbf986c0475d84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  powerFire: 1
-  audioShoot: {fileID: 11400000, guid: 2c48f8ac33881c448a08fa1929decd3a, type: 2}
-  alertMineAudio: {fileID: 11400000, guid: 7973aa6d23c8b5b48aa9d428dac25c10, type: 2}
-  deadParticlePrefab: {fileID: 1795330444146210, guid: 87d121a8c2178ae4ea2294964b31a55a,
-    type: 3}
-  deadTimeOutExplosion: 1.8
-  enemyExplodeAudio: {fileID: 11400000, guid: a52115d0daadc7646a42d3fcd95c99bb, type: 2}
-  explosionParticlePrefab: {fileID: 1968301731207834, guid: 9fa9cf8daaa31a9489bd22d256ccb3e1,
-    type: 3}
-  mineTimeOutExplosion: 2
-  minesExplodeAudio: {fileID: 11400000, guid: 6c632ef7ec5a9ed49bfac3c1a2081bfe, type: 2}
-  playerApproachRadius: 3
-  playerApproachRadiusRandom: {x: 0, y: 0}
-  onAlert: warning
-  gizmoColor: {r: 255, g: 0, b: 0, a: 150}
 --- !u!1 &2826970326981890223
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1689616500202872714}
   - component: {fileID: 4118632635271916333}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Boss_Mine_Skin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2865899028860088591}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Water_Splash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +286,7 @@ GameObject:
   - component: {fileID: 266282001128554657}
   - component: {fileID: 8873873988236375891}
   - component: {fileID: 8212726791670476055}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pieces
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5202,7 +5183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6775110549053601380}
   - component: {fileID: 3701568776505765426}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5288,7 +5269,8 @@ GameObject:
   - component: {fileID: 1554200506601742204}
   - component: {fileID: 5172114053364733105}
   - component: {fileID: 8002398196355107}
-  m_Layer: 0
+  - component: {fileID: 1081025640434778484}
+  m_Layer: 7
   m_Name: Boss_Bombs_GPX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5362,3 +5344,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &1081025640434778484
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8290191143398156879}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

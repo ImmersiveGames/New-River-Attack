@@ -43,14 +43,28 @@ namespace RiverAttack
         {
             minesShoots.Play(m_AudioSource);
         }
-        internal static bool QuadrantAlreadyOccupied(IEnumerable<Vector2Int> quadrantsFull, int x, int z)
+        internal static bool QuadrantAlreadySort(IEnumerable<Vector2Int> quadrantsFull, int x, int z)
         {
             return quadrantsFull.Any(quadrants => quadrants.x == x && quadrants.y == z);
         }
 
-        internal static bool QuadrantsBlocked(int x, int z, IEnumerable<Vector2Int> quadrantBlocked)
+        static bool QuadrantsBlocked(int x, int z, IEnumerable<Vector2Int> quadrantBlocked)
         {
             return quadrantBlocked.Any(quadrants => quadrants.x == x && quadrants.y == z);
+        }
+        internal static bool QuadrantAlreadyOccupied(Vector2Int quadrants, Vector2 quadrantSize, Vector2 screenSize, ref List<Vector2Int> usedQuadrant)
+        {
+            float posX = ((quadrants.x + 0.5f) * quadrantSize.x) - (screenSize.x / 2.0f) + OffsetX;
+            float posZ = ((quadrants.y + 0.5f) * quadrantSize.y) - (screenSize.y / 2.0f) + OffsetZ;
+            var colliders = new Collider[1];
+            var newPosition = new Vector3(posX, 1, posZ);
+            int count = Physics.OverlapBoxNonAlloc(newPosition, quadrantSize / 2, colliders, Quaternion.identity, GameManager.instance.layerEnemies);
+            if (count <= 0)
+                return false;
+            var q = new Vector2Int(quadrants.x, quadrants.y);
+            if(!usedQuadrant.Contains(q))
+                usedQuadrant.Add(new Vector2Int(quadrants.x, quadrants.y));
+            return true;
         }
         void OnDrawGizmos()
         {

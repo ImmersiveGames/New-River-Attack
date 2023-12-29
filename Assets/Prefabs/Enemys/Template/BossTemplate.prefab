@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 1604458344605076990}
   - component: {fileID: 6334066241545962221}
   - component: {fileID: 6138703772560700845}
+  - component: {fileID: 5486426701050249489}
   m_Layer: 7
   m_Name: BossTemplate
   m_TagString: Untagged
@@ -300,7 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e1868218ea402194231835a26ac4e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletMissile: {fileID: 5058071511349833923, guid: 64a2a43a93bd5234b888f1a5a2760813,
+  bulletMissile: {fileID: 350553003683839363, guid: 64a2a43a93bd5234b888f1a5a2760813,
     type: 3}
   missileStartPool: 25
 --- !u!114 &6138703772560700845
@@ -315,9 +316,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcfeee0ee06e4b24bb0b1ab62f81f5d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletMines: {fileID: 862921064942662546, guid: b845dc40e42b7cc42b4d3437c87f8bfb,
+  debugGrade: 0
+  bulletMines: {fileID: 1644633236774006560, guid: 2121d31825cde90459cf35dbd1c85b21,
     type: 3}
   minesStartPool: 10
+  minesShoots: {fileID: 11400000, guid: 2c48f8ac33881c448a08fa1929decd3a, type: 2}
+  minesQuantity: 10
+  numColumns: 15
+  numLines: 10
+  quadrantsBlocked:
+  - {x: 6, y: 0}
+  - {x: 7, y: 0}
+  - {x: 7, y: 1}
+  - {x: 8, y: 0}
+--- !u!114 &5486426701050249489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1504127474328815682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93f261d835845aabc89747d270cd633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gasStation: {fileID: 2060862267933996537, guid: 1ba6c7c546fcb7946aacbfba76f5f74a,
+    type: 3}
+  startPool: 8
+  dropGasStationSound: {fileID: 11400000, guid: 2c48f8ac33881c448a08fa1929decd3a,
+    type: 2}
 --- !u!1001 &6329243061756705282
 PrefabInstance:
   m_ObjectHideFlags: 0

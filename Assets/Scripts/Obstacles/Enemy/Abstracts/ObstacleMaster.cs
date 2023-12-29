@@ -117,7 +117,7 @@ namespace RiverAttack
         }
         void TryRespawn()
         {
-            if (!enemy.canRespawn) return;
+            if (!enemy.canRespawn || gamePlayManager.bossFight) return;
             StartObstacle();
             Tools.ToggleChildren(transform);
         }

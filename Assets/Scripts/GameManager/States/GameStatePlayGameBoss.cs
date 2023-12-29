@@ -31,7 +31,8 @@ namespace RiverAttack
                     new EmergeBehavior(m_BossMaster),
                     new ExplosiveMinesBehavior(m_BossMaster),
                     new MissileAttackBehavior(m_BossMaster),
-                    new SubEmergeBehavior(m_BossMaster)
+                    new SubEmergeBehavior(m_BossMaster),
+                    new DropGasStationsBehavior(m_BossMaster)
                     // Adicionar os outros comportamentos para o subestado "Topo"
                 }},
                 { BattleBossSubState.Base, new IBossBehavior[] {
@@ -43,13 +44,15 @@ namespace RiverAttack
                 { BattleBossSubState.Left, new IBossBehavior[] {
                     new EmergeBehavior(m_BossMaster),
                     new MissileAttackBehavior(m_BossMaster),
-                    new SubEmergeBehavior(m_BossMaster)
+                    new SubEmergeBehavior(m_BossMaster),
+                    new DropGasStationsBehavior(m_BossMaster)
                     // Adicionar os outros comportamentos para o subestado "Left"
                 }},
                 { BattleBossSubState.Right, new IBossBehavior[] {
                     new EmergeBehavior(m_BossMaster),
                     new MissileAttackBehavior(m_BossMaster),
-                    new SubEmergeBehavior(m_BossMaster)
+                    new SubEmergeBehavior(m_BossMaster),
+                    new DropGasStationsBehavior(m_BossMaster)
                     // Adicionar os outros comportamentos para o subestado "Right"
                 }}
             };

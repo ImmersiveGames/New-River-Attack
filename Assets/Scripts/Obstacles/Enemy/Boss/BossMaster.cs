@@ -104,6 +104,10 @@ namespace RiverAttack
         {
             return GetComponent<BossMinesShoot>();
         }
+        internal BossGasStationDrop GetBossGasStationDrop()
+        {
+            return GetComponent<BossGasStationDrop>();
+        }
 
         void DamageBoss(int damage)
         {
