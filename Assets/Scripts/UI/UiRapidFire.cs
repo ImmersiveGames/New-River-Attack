@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 namespace RiverAttack
@@ -11,7 +10,7 @@ namespace RiverAttack
         [SerializeField] TMP_Text rapidFireCounter;
 
         [SerializeField] PowerUp listenPowerUp;
-        float spendTimer;
+        float m_SpendTimer;
         GamePlayManager m_GamePlayManager;
 
         #region UNITYMETHODS
@@ -34,14 +33,14 @@ namespace RiverAttack
         }
         void Update()
         {
-            if (!(spendTimer > 0))
+            if (!(m_SpendTimer > 0))
                 return;
-            spendTimer -= Time.deltaTime;
-            if (spendTimer <= 0)
+            m_SpendTimer -= Time.deltaTime;
+            if (m_SpendTimer <= 0)
             {
-                spendTimer = 0;
+                m_SpendTimer = 0;
             }
-            rapidFireCounter.text = spendTimer.ToString("F2");
+            rapidFireCounter.text = m_SpendTimer.ToString("F2");
         }
         void OnDisable()
         {
@@ -55,10 +54,13 @@ namespace RiverAttack
 
         void StartRapidFire()
         {
-            rapidFireEnable.gameObject.SetActive(true);
+            if(rapidFireEnable.gameObject.activeSelf == false)
+                rapidFireEnable.gameObject.SetActive(true);
         }
         void EndRapidFire()
         {
+            if (!rapidFireEnable.gameObject.activeSelf)
+                return;
             rapidFireEnable.gameObject.SetActive(false);
             rapidFireCounter.text = "00";
         }
@@ -66,7 +68,7 @@ namespace RiverAttack
         {
             if (powerUp != listenPowerUp)
                 return;
-            spendTimer = (timer > 0) ? timer : 0.0f;
+            m_SpendTimer = (timer > 0) ? timer : 0.0f;
         }
     }
 }

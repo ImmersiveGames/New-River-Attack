@@ -18,6 +18,7 @@ namespace RiverAttack
         [Header("Game Settings")]
         [SerializeField] internal GameSettings gameSettings;
         public LayerMask layerPlayer;
+        public LayerMask layerEnemies;
         public enum GameScenes {MainScene, MissionHub, GamePlay, GamePlayBoss, EndGameCredits }
         public GameScenes gameScenes;
         public enum GameModes {Classic,Mission}

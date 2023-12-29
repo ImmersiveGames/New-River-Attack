@@ -1,4 +1,3 @@
-using System.Collections;
 using GD.MinMaxSlider;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -7,33 +6,39 @@ namespace RiverAttack
 {
     public class MinesBoss: Bullets
     {
-        const float LERP = 5.0f;
         [SerializeField] AudioEventSample alertMineAudio;
         [SerializeField] GameObject deadParticlePrefab;
         [SerializeField] float deadTimeOutExplosion;
         [SerializeField] AudioEventSample enemyExplodeAudio;
         [SerializeField] GameObject explosionParticlePrefab;
         [SerializeField] float mineTimeOutExplosion;
-        [SerializeField] AudioEventSample minesExplodeAudio;
+        [Header("Approach")]
         [SerializeField] float playerApproachRadius;
         [SerializeField, MinMaxSlider(0f, 20f)] Vector2 playerApproachRadiusRandom;
         public string onAlert;
-        internal Vector3 moveDirection;
+        #region GizmoSettings
+        [Header("Gizmo Settings")]
+        public Color gizmoColor = new Color(255, 0, 0, 150);
+        #endregion
+
+        [Header("Drop Items")]
+        [SerializeField]
+        float dropHeight = 1;
+        [SerializeField]
+        float timeToAutoDestroy;
+        [SerializeField, Tooltip("Se o mínimo for diferente de 0 o valor é aleatório entre min e max."), MinMaxSlider(0, 1)]
+        Vector2 dropChance;
+        GameObject m_ItemDrop;
+        public ListDropItems itemsVariables;
         
         float m_StartTime;
         bool m_StartExplosion;
         bool m_IsDestroy;
         PlayerDetectApproach m_PlayerDetectApproach;
-        SphereCollider m_Collider;
         Transform m_Target;
         AudioSource m_AudioSource;
         Animator m_Animator;
-        
-        #region GizmoSettings
-        [Header("Gizmo Settings")]
-        public Color gizmoColor = new Color(255, 0, 0, 150);
-        #endregion
-        
+
         #region UNITYMETHODS
         void OnEnable()
         {
@@ -75,14 +80,13 @@ namespace RiverAttack
         {
             m_Animator = GetComponentInChildren<Animator>();
             m_AudioSource = GetComponent<AudioSource>();
-            m_Collider = GetComponent<SphereCollider>();
             playerApproachRadius = SetPlayerApproachRadius();
         }
         
 
         internal void Initialization(Transform pool)
         {
-            m_MyPool = pool;
+            myPool = pool;
             m_PlayerDetectApproach = new PlayerDetectApproach(transform.position, playerApproachRadius);
             
         }
@@ -98,17 +102,11 @@ namespace RiverAttack
         void DetonationMine()
         {
             if (m_IsDestroy) return;
-            if (m_AudioSource != null && minesExplodeAudio != null)
-            {
-                minesExplodeAudio.Play(m_AudioSource);
-            }
-            StartCoroutine(nameof(ExpandCollider));
+            
             Tools.ToggleChildren(transform, false);
             var transform1 = transform;
-            var explosion = Instantiate(explosionParticlePrefab,transform1.position, transform1.rotation);
-            Destroy(explosion, mineTimeOutExplosion);
+            Instantiate(explosionParticlePrefab,transform1.position, transform1.rotation);
             Invoke(nameof(DestroyMe), mineTimeOutExplosion);
-            
         }
         void AnimationAlert()
         {
@@ -121,36 +119,45 @@ namespace RiverAttack
                 alertMineAudio.Play(m_AudioSource);
             m_Animator.SetTrigger(onAlert);
         }
-
-        IEnumerator ExpandCollider()
-        {
-            float spendTime = 0.0f;
-            if (m_Collider == null) yield break;
-            float radioInitial = m_Collider.radius;
-
-            while (spendTime < mineTimeOutExplosion)
-            {
-                float actualRadio = Mathf.Lerp(radioInitial, playerApproachRadius, spendTime / mineTimeOutExplosion);
-                m_Collider.radius = actualRadio;
-                spendTime += Time.deltaTime;
-                yield return null;
-            }
-            m_Collider.radius = playerApproachRadius;
-        }
+        
         void DestroyMeExplosion()
         {
             m_IsDestroy = true;
             var transform1 = transform;
-            if (m_AudioSource != null && enemyExplodeAudio != null)
-                enemyExplodeAudio.Play(m_AudioSource);
-
+            enemyExplodeAudio.Play(m_AudioSource);
             if (deadParticlePrefab)
             {
                 var explosion = Instantiate(deadParticlePrefab,transform1.position, transform1.rotation);
-                Destroy(explosion, deadTimeOutExplosion);
+                Destroy(explosion, mineTimeOutExplosion);
             }
             Tools.ToggleChildren(transform, false);
+            DropItem();
             Invoke(nameof(DestroyMe), deadTimeOutExplosion);
+        }
+
+        void DropItem()
+        {
+            //Debug.Log($"Start Drop: {dropChance.y}, {itemsVariables}");
+            if (dropChance.y <= 0 || itemsVariables == null) return;
+            float checkChance = (dropChance.x != 0) ? Random.Range(dropChance.x, dropChance.y) : dropChance.y;
+            float sortRange = Random.value;
+            //.Log("Sorteio 1 - Chance: "+ checkChance + " Sorteio: " + sortRange);
+            if (!(sortRange <= checkChance)) return;
+            //Debug.Log("Vai Dropar um item");
+            sortRange = Random.value;
+            var dropItem = itemsVariables.TakeRandomItem(sortRange);
+            if (dropItem.item == null) return;
+            //Debug.Log("Dropou o item: " + dropItem.item.name);
+            var position = transform.position;
+            var dropPosition = new Vector3(position.x, dropHeight, position.z);
+            m_ItemDrop = Instantiate(dropItem.item, dropPosition, Quaternion.identity);
+            m_ItemDrop.SetActive(true);
+            if (timeToAutoDestroy > 0)
+                Invoke(nameof(DestroyDrop), timeToAutoDestroy);
+        }
+        void DestroyDrop()
+        {
+            Destroy(m_ItemDrop);
         }
         #region Gizmos
         void OnDrawGizmosSelected()

@@ -5,10 +5,7 @@ namespace RiverAttack
 {
     public class MissileAttackBehavior: IBossBehavior
     {
-        // Shoot in Cone
-        const int NUM_BULLETS = 5;      // Número de projéteis no leque
-        const float CONE_ANGLE = 90.0f; // Ângulo do leque em graus (mínimo 15, máximo 360)
-        const float SHOOT_SPEED = 80.0f; // Velocidade dos projéteis
+        const float SHOOT_SPEED = 80.0f;
         const float SHOOT_CYCLES = 4;
         const float START_CADENCE = 1f;
         const float BULLET_LIFE_TIME = 10f;
@@ -16,6 +13,8 @@ namespace RiverAttack
         //Shoot Variaveis
         float m_Cadence;
         float m_ShootCycles;
+        readonly int m_NumBullets;
+        readonly float m_ConeAngle;
 
         readonly IHasPool m_IHasPool;
         Transform m_MyPool;
@@ -26,9 +25,11 @@ namespace RiverAttack
         bool m_Finished;
         readonly BossMaster m_BossMaster;
         readonly BossMissileShoot m_BossMissileShoot;
-        internal MissileAttackBehavior(BossMaster bossMaster)
+        internal MissileAttackBehavior(BossMaster bossMaster, int numMissile, float angle)
         {
             m_BossMaster = bossMaster;
+            m_NumBullets = numMissile;
+            m_ConeAngle = angle;
             m_IHasPool = m_BossMissileShoot = m_BossMaster.GetBossMissileShoot();
         }
         public void Enter()
@@ -78,7 +79,7 @@ namespace RiverAttack
             var bossPosition = m_BossMaster.transform.position;
             var targetTransform = m_Target.transform.position;
             var targetDirection = (targetTransform - bossPosition).normalized;
-            var directions = ConeDirections(targetDirection, NUM_BULLETS, CONE_ANGLE);
+            var directions = ConeDirections(targetDirection, m_NumBullets, m_ConeAngle);
             
             foreach (var t in directions)
             {

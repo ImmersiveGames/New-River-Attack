@@ -30,26 +30,29 @@ namespace RiverAttack
                 { BattleBossSubState.Top, new IBossBehavior[] {
                     new EmergeBehavior(m_BossMaster),
                     new ExplosiveMinesBehavior(m_BossMaster),
-                    new MissileAttackBehavior(m_BossMaster),
-                    new SubEmergeBehavior(m_BossMaster)
+                    new MissileAttackBehavior(m_BossMaster, 5, 90),
+                    new SubEmergeBehavior(m_BossMaster),
+                    new DropGasStationsBehavior(m_BossMaster)
                     // Adicionar os outros comportamentos para o subestado "Topo"
                 }},
                 { BattleBossSubState.Base, new IBossBehavior[] {
                     new EmergeBehavior(m_BossMaster),
-                    new MissileAttackBehavior(m_BossMaster),
+                    new MissileAttackBehavior(m_BossMaster, 7, 70),
                     new SubEmergeBehavior(m_BossMaster)
                     // Adicionar os outros comportamentos para o subestado "Base"
                 }},
                 { BattleBossSubState.Left, new IBossBehavior[] {
                     new EmergeBehavior(m_BossMaster),
-                    new MissileAttackBehavior(m_BossMaster),
-                    new SubEmergeBehavior(m_BossMaster)
+                    new MissileAttackBehavior(m_BossMaster,5, 90),
+                    new SubEmergeBehavior(m_BossMaster),
+                    new DropGasStationsBehavior(m_BossMaster)
                     // Adicionar os outros comportamentos para o subestado "Left"
                 }},
                 { BattleBossSubState.Right, new IBossBehavior[] {
                     new EmergeBehavior(m_BossMaster),
-                    new MissileAttackBehavior(m_BossMaster),
-                    new SubEmergeBehavior(m_BossMaster)
+                    new MissileAttackBehavior(m_BossMaster,5, 90),
+                    new SubEmergeBehavior(m_BossMaster),
+                    new DropGasStationsBehavior(m_BossMaster)
                     // Adicionar os outros comportamentos para o subestado "Right"
                 }}
             };

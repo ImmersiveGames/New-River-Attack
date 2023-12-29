@@ -10,7 +10,6 @@ namespace RiverAttack
         float m_TimeToAccess;
         EffectAreaScriptable m_EffectArea;
 
-
         #region Events
         public event GeneralEventHandler EventEnterAreaEffect;
         public event GeneralEventHandler EventExitAreaEffect;
@@ -54,17 +53,20 @@ namespace RiverAttack
         protected override void DestroyObstacle()
         {
             OnEventExitAreaEffect();
+            playerMaster.inPowerUp = false;
             base.DestroyObstacle();
         }
 
         #region Calls
         void OnEventAreaEffect()
         {
+            playerMaster.inPowerUp = true;
             EventEnterAreaEffect?.Invoke();
         }
 
         void OnEventExitAreaEffect()
         {
+            playerMaster.inPowerUp = false;
             EventExitAreaEffect?.Invoke();
         }
   #endregion
