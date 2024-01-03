@@ -15,25 +15,20 @@ namespace RiverAttack
         [SerializeField] GameObject bulletMines;
         [SerializeField] int minesStartPool;
         [SerializeField] AudioEventSample minesShoots;
-        public int minesQuantity = 10;
-        public int numColumns = 15; 
-        public int numLines = 10;
+        [SerializeField] internal int[] numMines;
+        [SerializeField] internal int numColumns = 15; 
+        [SerializeField] internal int numLines = 10;
         public List<Vector2Int> quadrantsBlocked;
-
-        internal Transform spawnPoint;
+        
         AudioSource m_AudioSource;
         void Start()
         {
             m_AudioSource = GetComponent<AudioSource>();
+            numMines ??= new[] { 5 };
             // setup inicial do status
             StartMyPool(bulletMines,minesStartPool);
-            spawnPoint = GetComponentInChildren<EnemiesShootSpawn>().transform ? GetComponentInChildren<EnemiesShootSpawn>().transform : transform;
+            
         }
-        internal GameObject getBulletsMines
-        {
-            get { return bulletMines; }
-        }
-
         public void StartMyPool(GameObject bullets, int quantity, bool isPersistent = false)
         {
             PoolObjectManager.CreatePool(this, bullets, quantity, transform, isPersistent);

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 using Utils;
 namespace RiverAttack
 {
@@ -9,8 +8,7 @@ namespace RiverAttack
         [Header("Enemy Destroy Settings")]
         [SerializeField] internal bool isFinishLevel;
         [SerializeField]
-        GameObject deadParticlePrefab;
-        [FormerlySerializedAs("timeoutDestroy")]
+        GameObject deadParticlePrefab; 
         [SerializeField]
         protected float timeoutDestroyExplosion;
         public bool isDestroyed;
@@ -27,7 +25,6 @@ namespace RiverAttack
         #region Events
         public delegate void GeneralEventHandler();
         protected internal event GeneralEventHandler EventObstacleMasterHit;
-        protected internal event GeneralEventHandler EventObstacleUpdateSkin;
         public delegate void PlayerSettingsEventHandler(PlayerSettings playerSettings);
         protected internal event PlayerSettingsEventHandler EventObstacleScore;
         public delegate void MovementEventHandler(bool active);
@@ -158,10 +155,6 @@ namespace RiverAttack
         {
             DestroyObstacle();
             EventObstacleMasterHit?.Invoke();
-        }
-        internal void OnEventObstacleUpdateSkin()
-        {
-            EventObstacleUpdateSkin?.Invoke();
         }
         void OnEventObstacleScore(PlayerSettings playerSettings)
         {

@@ -33,6 +33,9 @@ namespace RiverAttack
         internal const float LimitZTop = 40.0f;
         internal const float LimitZBottom = 15.0f;
 
+        internal static readonly Vector2 ScreenLimitMin = new Vector2(-LimitX, LimitZBottom);
+        internal static readonly Vector2 ScreenLimitMax = new Vector2(LimitX, LimitZTop);
+
         GameManager m_GameManager;
         PlayerManager m_PlayerManager;
         internal PlayersInputActions inputSystem;

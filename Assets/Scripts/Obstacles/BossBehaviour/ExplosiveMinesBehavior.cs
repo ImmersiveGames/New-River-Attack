@@ -11,7 +11,7 @@ namespace RiverAttack
         //Shoot Variaveis
         float m_Cadence;
         float m_ShootCycles;
-
+        readonly int m_Mines;
         readonly IHasPool m_IHasPool;
         Transform m_MyPool;
         readonly Camera m_Camera = Camera.main;
@@ -19,9 +19,10 @@ namespace RiverAttack
         bool m_Finished;
         readonly BossMinesShoot m_BossMinesShoot;
         
-        internal ExplosiveMinesBehavior(BossMaster bossMaster)
+        internal ExplosiveMinesBehavior(BossMaster bossMaster, int minesQuantity)
         {
             m_IHasPool = m_BossMinesShoot = bossMaster.GetBossMines();
+            m_Mines = minesQuantity;
         }
         public void Enter()
         {
@@ -31,21 +32,15 @@ namespace RiverAttack
             m_MyPool = PoolObjectManager.GetPool(m_IHasPool);
             
             //Animação de colocar as bombas na agua
-            Fire();
+            MinesInQuadrants(m_Mines, m_BossMinesShoot.numLines, m_BossMinesShoot.numColumns, m_BossMinesShoot.quadrantsBlocked);
         }
         public void Update()
         {
             //Debug.Log("Atualizando comportamento ExplosiveMines");
-            // Demarcar as areas onde serão colocadas as bombas
-            //Animação de sombra das bombas.
-            // tempo minimo para elas permanecerem na area
-            
-            
         }
         public void Exit()
         {
             //Debug.Log("Saindo do comportamento ExplosiveMines");
-            //Remover todas as bombas.
         }
         public void FinishBehavior()
         {
@@ -55,17 +50,8 @@ namespace RiverAttack
         {
             return m_Finished;
         }
-
-        void Fire()
-        {
-            //Debug.Log("Shoot!");
-            MinesInQuadrants(m_BossMinesShoot.minesQuantity, m_BossMinesShoot.numLines, m_BossMinesShoot.numColumns, m_BossMinesShoot.quadrantsBlocked);
-        }
-        
         async void  MinesInQuadrants(int quantity, int lines, int columns, IEnumerable<Vector2Int> quadrantBlocked)
         {
-            
-            
             var viewSize = new Vector2(m_Camera!.orthographicSize * 2.0f * m_Camera.aspect, m_Camera!.orthographicSize * 2.0f);
             var sizeQuadrant = new Vector2(viewSize.x / columns, viewSize.y / lines);
             var usedQuadrants = new List<Vector2Int>();

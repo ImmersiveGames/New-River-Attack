@@ -5,9 +5,6 @@ namespace RiverAttack
     {
         [SerializeField]
         AudioEventSample bossHitAudio;
-        [SerializeField]
-        AudioEventSample bossAttack01Audio;
-
         BossMaster m_BossMaster;
 
         protected override void OnEnable()
@@ -31,11 +28,6 @@ namespace RiverAttack
         {
             if (audioSource != null && bossHitAudio != null)
                 bossHitAudio.Play(audioSource);
-        }
-        void BossAttack01Sound()
-        {
-            if (audioSource != null && bossAttack01Audio != null)
-                bossAttack01Audio.Play(audioSource);
         }
     }
 }

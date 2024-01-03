@@ -6,6 +6,8 @@ namespace RiverAttack
         public string onEmerge;
         public string onSubmerge;
         public string onGotHit;
+
+        public GameObject smokeVFX;
         
         BossMaster m_BossMaster;
         Animator m_Animator;
@@ -16,6 +18,7 @@ namespace RiverAttack
             m_BossMaster.EventBossEmerge += AnimateEmerge;
             m_BossMaster.EventBossSubmerge += AnimateSubmerge;
             m_BossMaster.EventBossHit += AnimateGotHit;
+            m_BossMaster.EventSmokeSpawn += SmokeBoss;
         }
 
         void OnDisable()
@@ -23,6 +26,7 @@ namespace RiverAttack
             m_BossMaster.EventBossEmerge -= AnimateEmerge;
             m_BossMaster.EventBossSubmerge -= AnimateSubmerge;
             m_BossMaster.EventBossHit -= AnimateGotHit;
+            m_BossMaster.EventSmokeSpawn -= SmokeBoss;
         }
 
         void SetInitialReferences()
@@ -54,6 +58,14 @@ namespace RiverAttack
             if (string.IsNullOrEmpty(onGotHit)) 
                 return;
             m_Animator.SetTrigger(onGotHit);
+        }
+
+        void SmokeBoss(Transform boss)
+        {
+            if (smokeVFX != null)
+            {
+                var smoke = Instantiate(smokeVFX, boss);
+            }
         }
     }
 }

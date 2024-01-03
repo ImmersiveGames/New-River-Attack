@@ -6,8 +6,8 @@ namespace RiverAttack
     {
         const float HEIGHT_Y = 0.3f;
         [Header("Boss Fight")]
-        [SerializeField] int bossHp;
-        [SerializeField] int bossCycles;
+        int m_BossHp;
+        int m_BossCycles;
 
         internal BattleBossSubState actualPosition;
 
@@ -18,6 +18,9 @@ namespace RiverAttack
         
         
         #region Events
+        public delegate void BossCyclesHandler(Transform spawnPosition);
+
+        protected internal event BossCyclesHandler EventSmokeSpawn;
         protected internal event GeneralEventHandler EventBossHit;
         protected internal event GeneralEventHandler EventBossEmerge;
         protected internal event GeneralEventHandler EventBossSubmerge;
@@ -26,8 +29,8 @@ namespace RiverAttack
         {
             base.Awake();
             m_BossScriptable = enemy as EnemiesBossScriptable;
-            bossHp = m_BossScriptable!.maxHp;
-            bossCycles = m_BossScriptable!.maxCycles;
+            m_BossHp = m_BossScriptable!.maxHp;
+            m_BossCycles = m_BossScriptable!.maxCycles;
             GamePlayManager.instance.bossMaster = this;
             actualPosition = BattleBossSubState.Top;
         }
@@ -64,6 +67,7 @@ namespace RiverAttack
                     break;
                 case CollisionType.Collected:
                     break;
+                case CollisionType.None:
                 default:
                     throw new ArgumentOutOfRangeException(nameof(collisionType), collisionType, null);
             }
@@ -77,7 +81,7 @@ namespace RiverAttack
             //OnEventObstacleScore(playerMaster.getPlayerSettings); <= Envia para A HUD os resulfados
             //ShouldSavePoint(playerMaster.getPlayerSettings); ,= Verifica se salva a posição do player
             //GamePlayManager.AddResultList(gamePlayingLog.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy, 1, collisionType);
-            ShouldFinishGame(); //<= Verifica se o jogo terminsou
+            //ShouldFinishGame(); //<= Verifica se o jogo terminsou
         }
 
         public void MoveBoss(BattleBossSubState positionBoss)
@@ -91,9 +95,11 @@ namespace RiverAttack
                 BattleBossSubState.Base => new Vector3(targetPosition.x, HEIGHT_Y, GamePlayManager.LimitZBottom + 5f),
                 BattleBossSubState.Left => new Vector3(targetPosition.x - distanceTarget, HEIGHT_Y, GamePlayManager.LimitZBottom + (targetPosition.z / 2)),
                 BattleBossSubState.Right => new Vector3(targetPosition.x + distanceTarget, HEIGHT_Y, GamePlayManager.LimitZBottom + (targetPosition.z / 2)),
+                BattleBossSubState.Dead => transform1.position,
                 _ => throw new ArgumentOutOfRangeException(nameof(positionBoss), positionBoss, null)
             };
             Invoke(nameof(OnEventBossEmerge), 2f);
+
         }
 
         internal BossMissileShoot GetBossMissileShoot()
@@ -112,12 +118,13 @@ namespace RiverAttack
         void DamageBoss(int damage)
         {
             OnEventBossHit();
-            bossHp -= damage;
-            Debug.Log($"Cycles: {bossCycles} - HP:{bossHp} - State {GameManager.instance.currentGameState}");
+            m_BossHp -= damage;
+            Debug.Log($"Cycles: {m_BossCycles} - HP:{m_BossHp} - State {GameManager.instance.currentGameState}");
             
-            if (bossHp > 0) return; // Enquanto tiver HP
-            if (bossCycles <= 0)
+            if (m_BossHp > 0) return; // Enquanto tiver HP
+            if (m_BossCycles <= 0)
             {
+                isDestroyed = true;
                 Debug.Log($"FIM DE JOGO!!!!");
                 //TODO: Testa o fim do jogo
                 //TODO: Chama a animaão de destruição do Submarino
@@ -125,9 +132,15 @@ namespace RiverAttack
                 //TODO: Testa o fim do jogo
                 return;
             }
-            bossCycles--;
+            m_BossCycles--;
+            var transformPoint = GetComponentInChildren<BossSmokePoints>().FindChildWithoutChild();
+            if (transformPoint != default)
+            {
+                OnEventSmokeSpawn(transformPoint);
+            }
+            
             //Recarrega o ciclo
-            bossHp = m_BossScriptable!.maxHp;
+            m_BossHp = m_BossScriptable!.maxHp;
             var gameSubState = GameManager.instance.currentGameState as GameStatePlayGameBoss;
             gameSubState?.FinishBehavior();
 
@@ -153,6 +166,10 @@ namespace RiverAttack
         internal void OnEventBossSubmerge()
         {
             EventBossSubmerge?.Invoke();
+        }
+        protected virtual void OnEventSmokeSpawn(Transform spawnPosition)
+        {
+            EventSmokeSpawn?.Invoke(spawnPosition);
         }
     }
 }

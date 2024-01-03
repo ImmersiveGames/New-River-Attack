@@ -7,11 +7,15 @@ namespace RiverAttack
         
         [Header("Missile Settings")]
         [SerializeField] GameObject bulletMissile;
+        [SerializeField] internal int[] numMissiles;
+        [SerializeField] internal float[] angleCones;
         [SerializeField] int missileStartPool;
 
         internal Transform spawnPoint;
         void Start()
         {
+            numMissiles ??= new[] { 5 };
+            angleCones ??= new[] { 90f};
             // setup inicial do status
             StartMyPool(bulletMissile, missileStartPool);
             spawnPoint = GetComponentInChildren<EnemiesShootSpawn>().transform ? GetComponentInChildren<EnemiesShootSpawn>().transform : transform;

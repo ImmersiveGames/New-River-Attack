@@ -3,12 +3,12 @@ using Utils;
 namespace RiverAttack
 {
     public class CleanShootBehavior : IBossBehavior
-    { 
-        float shootCycles = 4;
-        float shootSpeed = 40.0f;
-        float m_StartCadence = 1f;
-        float bulletLifeTime = 5f;
-        
+    {
+        const float SHOOT_CYCLES = 4;
+        const float SHOOT_SPEED = 40.0f;
+        const float START_CADENCE = 1f;
+        const float BULLET_LIFE_TIME = 5f;
+
         //Shoot Variaveis
         float m_Cadence;
         float m_ShootCycles;
@@ -30,8 +30,8 @@ namespace RiverAttack
         public void Enter()
         {
             //Debug.Log("Entrando no comportamento CleanShootBehavior");
-            m_Cadence = m_StartCadence;
-            m_ShootCycles = shootCycles;
+            m_Cadence = START_CADENCE;
+            m_ShootCycles = SHOOT_CYCLES;
             
             m_SpawnPoint = m_BossMissileShoot.spawnPoint;
             m_Target = m_BossMaster.targetPlayer;
@@ -42,7 +42,7 @@ namespace RiverAttack
             m_Cadence -= Time.deltaTime;
             if (!(m_Cadence <= 0.01f))
                 return;
-            m_Cadence = m_StartCadence;
+            m_Cadence = START_CADENCE;
             if (m_ShootCycles <= 0)
             {
                 m_Finished = true;
@@ -75,7 +75,7 @@ namespace RiverAttack
             var myBullet = myShoot.GetComponent<BulletBoss>();
             myBullet.SetMyPool(PoolObjectManager.GetPool(m_MyPool));
             myBullet.ownerShoot = m_BossMaster;
-            myBullet.Init(shootSpeed, bulletLifeTime);
+            myBullet.Init(SHOOT_SPEED, BULLET_LIFE_TIME);
             myBullet.moveDirection = targetTransform;
             //Deattached bullet
             var transformPosition = m_SpawnPoint.position;

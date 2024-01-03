@@ -4,7 +4,7 @@ using UnityEngine;
 using Utils;
 namespace RiverAttack
 {
-    public enum BattleBossSubState { Top, Base, Left, Right }
+    public enum BattleBossSubState { Top, Base, Left, Right, Dead }
     public class GameStatePlayGameBoss : GameState
     {
         BattleBossSubState m_CurrentSubState;
@@ -15,7 +15,6 @@ namespace RiverAttack
         bool m_BehaviorEnterExecuted;
 
         BossMaster m_BossMaster;
-        PlayerMaster m_PlayerMaster;
 
         public GameStatePlayGameBoss() {
             // Inicializa o estado do BattleBoss como "Topo"
@@ -23,36 +22,40 @@ namespace RiverAttack
             m_CurrentBehaviorIndex = 0;
 
             m_BossMaster = GamePlayManager.instance.bossMaster;
-            m_PlayerMaster = PlayerManager.instance.initializedPlayerMasters[0];
 
             // Inicializa os comportamentos para cada subestado
             m_Behaviors = new Dictionary<BattleBossSubState, IBossBehavior[]> {
                 { BattleBossSubState.Top, new IBossBehavior[] {
                     new EmergeBehavior(m_BossMaster),
-                    new ExplosiveMinesBehavior(m_BossMaster),
-                    new MissileAttackBehavior(m_BossMaster, 5, 90),
+                    new ExplosiveMinesBehavior(m_BossMaster,m_BossMaster.GetBossMines().numMines[0]),
+                    new MissileAttackBehavior(m_BossMaster, m_BossMaster.GetBossMissileShoot().numMissiles[0], m_BossMaster.GetBossMissileShoot().angleCones[0]),
                     new SubEmergeBehavior(m_BossMaster),
-                    new DropGasStationsBehavior(m_BossMaster)
+                    new DropGasStationsBehavior(m_BossMaster, m_BossMaster.GetBossGasStationDrop().dropGasStation[0])
                     // Adicionar os outros comportamentos para o subestado "Topo"
                 }},
                 { BattleBossSubState.Base, new IBossBehavior[] {
                     new EmergeBehavior(m_BossMaster),
-                    new MissileAttackBehavior(m_BossMaster, 7, 70),
+                    new MissileAttackBehavior(m_BossMaster, m_BossMaster.GetBossMissileShoot().numMissiles[1], m_BossMaster.GetBossMissileShoot().angleCones[1]),
                     new SubEmergeBehavior(m_BossMaster)
                     // Adicionar os outros comportamentos para o subestado "Base"
                 }},
                 { BattleBossSubState.Left, new IBossBehavior[] {
                     new EmergeBehavior(m_BossMaster),
-                    new MissileAttackBehavior(m_BossMaster,5, 90),
+                    new MissileAttackBehavior(m_BossMaster,m_BossMaster.GetBossMissileShoot().numMissiles[0], m_BossMaster.GetBossMissileShoot().angleCones[0]),
                     new SubEmergeBehavior(m_BossMaster),
-                    new DropGasStationsBehavior(m_BossMaster)
+                    new DropGasStationsBehavior(m_BossMaster, m_BossMaster.GetBossGasStationDrop().dropGasStation[0])
                     // Adicionar os outros comportamentos para o subestado "Left"
                 }},
                 { BattleBossSubState.Right, new IBossBehavior[] {
                     new EmergeBehavior(m_BossMaster),
-                    new MissileAttackBehavior(m_BossMaster,5, 90),
+                    new MissileAttackBehavior(m_BossMaster,m_BossMaster.GetBossMissileShoot().numMissiles[0], m_BossMaster.GetBossMissileShoot().angleCones[0]),
                     new SubEmergeBehavior(m_BossMaster),
-                    new DropGasStationsBehavior(m_BossMaster)
+                    new DropGasStationsBehavior(m_BossMaster, m_BossMaster.GetBossGasStationDrop().dropGasStation[0])
+                    // Adicionar os outros comportamentos para o subestado "Right"
+                }},
+                { BattleBossSubState.Dead, new IBossBehavior[] {
+                    new DeadBehavior(m_BossMaster)
+                    //new SubEmergeBehavior(m_BossMaster),
                     // Adicionar os outros comportamentos para o subestado "Right"
                 }}
             };
@@ -60,6 +63,7 @@ namespace RiverAttack
         }
         public override IEnumerator OnLoadState()
         {
+            //TODO: Play BGM COMBAT
             yield return null;
         }
         public override void EnterState()
@@ -67,12 +71,35 @@ namespace RiverAttack
             //Debug.Log($"Entra no Estado: Boss Fight");
             GamePlayManager.instance.panelMenuGame.StartMenuGame();
             GamePlayManager.instance.OnStartGame();
-            m_PlayerMaster = PlayerManager.instance.initializedPlayerMasters[0];
         }
         public override void UpdateState()
         {
             //Debug.Log("Boss Fight!");
-            ExecuteCurrentBehavior();
+            /*Debug.Log($"m_CurrentSubState: {m_CurrentSubState}");
+            Debug.Log($"m_CurrentBehaviorIndex: {m_CurrentBehaviorIndex}");*/
+            if (!m_BossMaster.shouldObstacleBeReady)
+            {
+                
+                return;
+            }
+                
+            //Se for o primeiro e tiver null atualiza os comportamentos, se não for o primeiro verifica se é o ultimo comportamento apra alterar
+            ChangeSubState(GetNextSubState());
+            
+            if (m_BehaviorEnterExecuted)
+            {
+                m_CurrentBehaviors[m_CurrentBehaviorIndex].Update();
+            }
+            if (!m_CurrentBehaviors[m_CurrentBehaviorIndex].IsFinished())
+                return;
+            // Se o comportamento se encerra executa o ultimo update e sua saida.
+            m_CurrentBehaviors[m_CurrentBehaviorIndex].Exit();
+            m_CurrentBehaviorIndex++;
+            m_BehaviorEnterExecuted = false;
+
+            /*Debug.Log($"N# Behavior: {m_CurrentBehaviors.Length}");
+            Debug.Log($"m_BehaviorCompleted: {m_BehaviorCompleted}");
+            Debug.Log($"m_BehaviorEnterExecuted: {m_BehaviorEnterExecuted}");*/
             //Verificar gameover
         }
         public override void ExitState()
@@ -82,7 +109,6 @@ namespace RiverAttack
            
             //Debug.Log($"Sai do Estado: Boss Fight");
             m_BossMaster = null;
-            m_PlayerMaster = null;
             System.GC.Collect();
         }
 
@@ -124,29 +150,6 @@ namespace RiverAttack
                 return;
             m_CurrentBehaviors[m_CurrentBehaviorIndex].Enter();
             m_BehaviorEnterExecuted = true;
-        }
-        
-        void ExecuteCurrentBehavior() {
-            /*Debug.Log($"m_CurrentSubState: {m_CurrentSubState}");
-            Debug.Log($"m_CurrentBehaviorIndex: {m_CurrentBehaviorIndex}");*/
-
-            //Se for o primeiro e tiver null atualiza os comportamentos, se não for o primeiro verifica se é o ultimo comportamento apra alterar
-            ChangeSubState(GetNextSubState());
-            
-            if (m_BehaviorEnterExecuted)
-            {
-                m_CurrentBehaviors[m_CurrentBehaviorIndex].Update();
-            }
-            if (!m_CurrentBehaviors[m_CurrentBehaviorIndex].IsFinished())
-                return;
-            // Se o comportamento se encerra executa o ultimo update e sua saida.
-            m_CurrentBehaviors[m_CurrentBehaviorIndex].Exit();
-            m_CurrentBehaviorIndex++;
-            m_BehaviorEnterExecuted = false;
-
-            /*Debug.Log($"N# Behavior: {m_CurrentBehaviors.Length}");
-            Debug.Log($"m_BehaviorCompleted: {m_BehaviorCompleted}");
-            Debug.Log($"m_BehaviorEnterExecuted: {m_BehaviorEnterExecuted}");*/
         }
 
         internal void FinishBehavior()

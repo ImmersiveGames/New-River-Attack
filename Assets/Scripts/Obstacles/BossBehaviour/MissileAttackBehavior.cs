@@ -28,8 +28,8 @@ namespace RiverAttack
         internal MissileAttackBehavior(BossMaster bossMaster, int numMissile, float angle)
         {
             m_BossMaster = bossMaster;
-            m_NumBullets = numMissile;
-            m_ConeAngle = angle;
+            m_NumBullets = (numMissile <= 0)? 3 : numMissile;
+            m_ConeAngle = (angle <= 15) ? 15 : angle;
             m_IHasPool = m_BossMissileShoot = m_BossMaster.GetBossMissileShoot();
         }
         public void Enter()
