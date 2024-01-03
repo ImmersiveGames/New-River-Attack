@@ -72,8 +72,14 @@ namespace RiverAttack
             m_GameManager.gameModes = GameManager.GameModes.Classic;
             m_GameManager.ChangeState(new GameStateOpenCutScene(), GameManager.GameScenes.GamePlay.ToString());
         }
+        public void ButtonBriefingRoom()
+        {
+            PlayClickSfx();            
+            m_GameManager.ChangeState(new GameStateHub(), GameManager.GameScenes.BriefingRoom.ToString());
+        }
 
- 
-  #endregion
+
+
+        #endregion
     }
 }

@@ -9,4 +9,5 @@ public class DialogObject : ScriptableObject
 {
     [SerializeField] public string[] dialogSentences_PT_BR;
     [SerializeField] public string[] dialogSentences_EN;
+    [SerializeField] public float[] dialogAnimationStartTime;
 }

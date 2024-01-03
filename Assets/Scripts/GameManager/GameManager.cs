@@ -19,7 +19,7 @@ namespace RiverAttack
         [SerializeField] internal GameSettings gameSettings;
         public LayerMask layerPlayer;
         public LayerMask layerEnemies;
-        public enum GameScenes {MainScene, MissionHub, GamePlay, GamePlayBoss, EndGameCredits }
+        public enum GameScenes { MainScene, MissionHub, GamePlay, GamePlayBoss, EndGameCredits, BriefingRoom }
         public GameScenes gameScenes;
         public enum GameModes {Classic,Mission}
         internal GameModes gameModes;
@@ -62,6 +62,8 @@ namespace RiverAttack
                 case GameScenes.MissionHub:
                     break;
                 case GameScenes.GamePlay:
+                    break;
+                case GameScenes.BriefingRoom:
                     break;
                 case GameScenes.GamePlayBoss:
                     gameModes = GameModes.Mission;
