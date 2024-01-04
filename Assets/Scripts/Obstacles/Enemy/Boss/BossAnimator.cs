@@ -6,6 +6,7 @@ namespace RiverAttack
         public string onEmerge;
         public string onSubmerge;
         public string onGotHit;
+        public string onDeath;
 
         public GameObject smokeVFX;
         
@@ -19,6 +20,7 @@ namespace RiverAttack
             m_BossMaster.EventBossSubmerge += AnimateSubmerge;
             m_BossMaster.EventBossHit += AnimateGotHit;
             m_BossMaster.EventSmokeSpawn += SmokeBoss;
+            m_BossMaster.EventBossDeath += AnimateDeath;
         }
 
         void OnDisable()
@@ -27,6 +29,7 @@ namespace RiverAttack
             m_BossMaster.EventBossSubmerge -= AnimateSubmerge;
             m_BossMaster.EventBossHit -= AnimateGotHit;
             m_BossMaster.EventSmokeSpawn -= SmokeBoss;
+            m_BossMaster.EventBossDeath -= AnimateDeath;
         }
 
         void SetInitialReferences()
@@ -58,6 +61,14 @@ namespace RiverAttack
             if (string.IsNullOrEmpty(onGotHit)) 
                 return;
             m_Animator.SetTrigger(onGotHit);
+        }
+        void AnimateDeath()
+        {
+            if (m_Animator == null)
+                m_Animator = GetComponentInChildren<Animator>();
+            if (string.IsNullOrEmpty(onDeath)) 
+                return;
+            m_Animator.SetBool(onDeath, true);
         }
 
         void SmokeBoss(Transform boss)

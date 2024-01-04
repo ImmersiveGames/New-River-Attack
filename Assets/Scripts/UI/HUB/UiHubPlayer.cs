@@ -6,7 +6,6 @@ namespace RiverAttack
     {
         [SerializeField] Vector3 positionOffset;
         public float moveTime = 1.0f;
-        //public float rotateTime = .5f;
         float m_Timer;
         Vector3 m_NextPosition;
         GameHubManager m_GameHubManager;
@@ -16,17 +15,15 @@ namespace RiverAttack
             m_GameHubManager = GameHubManager.instance;
             if (GamePlayingLog.instance.activeMission)
             {
-                var missions = GameHubManager.instance.missions.Find(x=>x.levels == GamePlayingLog.instance.activeMission);
-                //Debug.Log($"Position: {missions.position}");
+                var missions = m_GameHubManager.missions.Find(x=>x.levels == GamePlayingLog.instance.activeMission);
                 transform.position = new Vector3(0, 0, missions.position) + positionOffset;
-            };
-
-            GameHubManager.instance.ChangeMission += MovePlayer;
+            }
+            m_GameHubManager.ChangeMission += MovePlayer;
         }
 
         void OnDisable()
         {
-            GameHubManager.instance.ChangeMission -= MovePlayer;
+            m_GameHubManager.ChangeMission -= MovePlayer;
         }
 
         void OnDestroy()

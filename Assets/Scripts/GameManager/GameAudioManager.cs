@@ -49,6 +49,12 @@ namespace RiverAttack
                 yield return StartCoroutine(FadeAudio(source, time, source.volume, 0));
             track.Play(source);
         }
+        IEnumerator StopBGM(AudioSource source, AudioEvent track, float time)
+        {
+            if (source.isPlaying)
+                yield return StartCoroutine(FadeAudio(source, time, source.volume, 0));
+            track.Stop(source);
+        }
         public void ChangeBGM(LevelTypes typeLevel, float time)
         {
             bgmLevels.TryGetValue(typeLevel, out var audioSource);
@@ -71,10 +77,12 @@ namespace RiverAttack
         {
             audioEventSample.PlayOnShot(sfxAudioSource);
         }
-        public void StopBGM()
+        public void StopBGM(LevelTypes typeLevel)
         {
-            if (bgmAudioSource != null)
-                bgmAudioSource.Stop();
+            if (bgmAudioSource == null)
+                return;
+            bgmLevels.TryGetValue(typeLevel, out var audioSource);
+            StartCoroutine(StopBGM(bgmAudioSource, audioSource, 1f));
         }
 
         public void AccelPinch(float accel)

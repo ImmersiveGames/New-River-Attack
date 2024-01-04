@@ -19,14 +19,12 @@ namespace RiverAttack
             {
                 m_GameManager.panelBaseGame = this;
             }
-            
             menuInitial.gameObject.SetActive(true);
             screenWash.gameObject.SetActive(true);
             m_GameManager.panelFade.gameObject.SetActive(true);
         }
         void OnEnable()
         {
-
             SetMenuPrincipal();
             lastIndex = 0;
         }
@@ -34,8 +32,7 @@ namespace RiverAttack
         {
             Invoke(nameof(DeactivateScreenWash), SCREEN_WASH_TIMER);
         }
-  #endregion
-
+#endregion
         protected override void SetInternalMenu(int indexStart = 0)
         {
             base.SetInternalMenu(indexStart);
@@ -46,20 +43,17 @@ namespace RiverAttack
             screenWash.gameObject.SetActive(false);
             PlayAnimation(0f);
         }
-
         #region Buttons
         public void PlayAnimation(float animStartTime)
         {
             timelineManager.PlayAnimation(animStartTime);
         }
-
         public void ButtonExit()
         {
             PlayClickSfx();
             Application.Quit();
         }
 
-        
         public void ButtonModeMission()
         {
             PlayClickSfx();
@@ -77,9 +71,6 @@ namespace RiverAttack
             PlayClickSfx();            
             m_GameManager.ChangeState(new GameStateHub(), GameManager.GameScenes.BriefingRoom.ToString());
         }
-
-
-
         #endregion
     }
 }

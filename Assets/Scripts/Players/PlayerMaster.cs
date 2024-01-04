@@ -124,7 +124,13 @@ namespace RiverAttack
             m_GamePlayManager.OnEventUpdateBombs(getPlayerSettings.bombs);
             getPlayerSettings.actualFuel = m_GameSettings.startFuel;
             // não reiniciar as vidas no modo missão
-            //if (m_GameManager.gameModes == GameManager.GameModes.Mission)return;
+            if (m_GameManager.gameModes == GameManager.GameModes.Mission)
+            {
+                if (getPlayerSettings.lives == 0)
+                    getPlayerSettings.lives = 3;
+                m_GamePlayManager.OnEventUpdateLives(getPlayerSettings.lives);
+                return;
+            }
             getPlayerSettings.lives = m_GameSettings.startLives;
             m_GamePlayManager.OnEventUpdateLives(getPlayerSettings.lives);
         }

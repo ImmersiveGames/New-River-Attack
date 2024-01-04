@@ -52,6 +52,14 @@ namespace RiverAttack
         }
         void Update()
         {
+            switch (GamePlayManager.instance.readyToFinish)
+            {
+                case true when gameObject.activeSelf:
+                    DestroyMe();
+                    return;
+                case true:
+                    return;
+            }
             m_Target = m_PlayerDetectApproach.TargetApproach<PlayerMaster>(GameManager.instance.layerPlayer);
             if (m_Target == null || m_StartExplosion || m_IsDestroy)
                 return;

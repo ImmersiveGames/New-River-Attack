@@ -24,6 +24,7 @@ namespace RiverAttack
         protected internal event GeneralEventHandler EventBossHit;
         protected internal event GeneralEventHandler EventBossEmerge;
         protected internal event GeneralEventHandler EventBossSubmerge;
+        protected internal event GeneralEventHandler EventBossDeath;
   #endregion
         internal override void Awake()
         {
@@ -125,11 +126,10 @@ namespace RiverAttack
             if (m_BossCycles <= 0)
             {
                 isDestroyed = true;
-                Debug.Log($"FIM DE JOGO!!!!");
-                //TODO: Testa o fim do jogo
-                //TODO: Chama a animaão de destruição do Submarino
-                //TODO: Chama A conclusão da fase
-                //TODO: Testa o fim do jogo
+                GameAudioManager.instance.StopBGM(LevelTypes.Boss);
+                OnEventBossDeath();
+                gamePlayManager.readyToFinish = true;
+                Invoke(nameof(BeatGame),7f);
                 return;
             }
             m_BossCycles--;
@@ -145,6 +145,11 @@ namespace RiverAttack
             gameSubState?.FinishBehavior();
 
             //Checar as mudanças de ciclo
+        }
+
+        void BeatGame()
+        {
+            GameManager.instance.ChangeState(new GameStateEndGame(), "EndGameCredits");
         }
 
         internal void BossInvulnerability(bool active)
@@ -170,6 +175,10 @@ namespace RiverAttack
         protected virtual void OnEventSmokeSpawn(Transform spawnPosition)
         {
             EventSmokeSpawn?.Invoke(spawnPosition);
+        }
+        protected virtual void OnEventBossDeath()
+        {
+            EventBossDeath?.Invoke();
         }
     }
 }

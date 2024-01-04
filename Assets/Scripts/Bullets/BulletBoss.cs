@@ -27,6 +27,14 @@ namespace RiverAttack
         }
         void Update()
         {
+            switch (GamePlayManager.instance.readyToFinish)
+            {
+                case true when gameObject.activeSelf:
+                    DestroyMe();
+                    return;
+                case true:
+                    return;
+            }
             MoveShoot(moveDirection);
             if(m_StartTime > 0)
                 AutoDestroyMe(m_StartTime);

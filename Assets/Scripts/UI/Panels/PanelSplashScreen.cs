@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace RiverAttack
@@ -18,13 +16,7 @@ namespace RiverAttack
         {
             PerformFadeOut();
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
-        public void PerformFadeOut()
+        void PerformFadeOut()
         {
             fadeAnimator.SetTrigger(FadeOut);
         }

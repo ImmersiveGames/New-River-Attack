@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 namespace RiverAttack
 {
@@ -10,10 +9,6 @@ namespace RiverAttack
         [SerializeField] Transform background;
         [Header("HUD")]
         [SerializeField] Transform hud;
-
-        /*[Header("Buttons")]
-        [SerializeField] internal GameObject pauseButton;
-        [SerializeField] internal GameObject continueButton;*/
 
         GameState m_CurrentGameState;
         GameManager m_GameManager;

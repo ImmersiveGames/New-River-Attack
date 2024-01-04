@@ -34,7 +34,6 @@ namespace RiverAttack
         void UpdateDistance(int distance)
         {
             m_TMPTextDistance.text = distance.ToString();
-
         }
     }
 }

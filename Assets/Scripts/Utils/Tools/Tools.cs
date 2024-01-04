@@ -266,5 +266,16 @@ namespace Utils
         {
             return Mathf.Log10(normalizeNumber) * 20f;
         }
+        
+        public static string TimeFormat(float timeToFormat)
+        {
+            int hour = Mathf.FloorToInt(timeToFormat / 3600);
+            int minutes = Mathf.FloorToInt((timeToFormat % 3600) / 60);
+            int seconds = Mathf.FloorToInt(timeToFormat % 60);
+
+            string time = $"{hour:D2}:{minutes:D2}:{seconds:D2}";
+            
+            return time;
+        }
     }
 }

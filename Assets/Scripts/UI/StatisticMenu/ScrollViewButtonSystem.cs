@@ -8,23 +8,21 @@ public class ScrollViewButtonSystem : MonoBehaviour
 
     public void VerticalScrollUp()
     {
-        if (scrollRect != null)
+        if (scrollRect == null)
+            return;
+        if (scrollRect.verticalNormalizedPosition <= 1f) 
         {
-            if (scrollRect.verticalNormalizedPosition <= 1f) 
-            {
-                scrollRect.verticalNormalizedPosition += scrollSpeed;
-            }
+            scrollRect.verticalNormalizedPosition += scrollSpeed;
         }
     }
 
     public void VerticalScrollDown()
     {
-        if (scrollRect != null)
+        if (scrollRect == null)
+            return;
+        if (scrollRect.verticalNormalizedPosition >= 0f)
         {
-            if (scrollRect.verticalNormalizedPosition >= 0f)
-            {
-                scrollRect.verticalNormalizedPosition -= scrollSpeed;
-            }
+            scrollRect.verticalNormalizedPosition -= scrollSpeed;
         }
     }
 }
