@@ -68,7 +68,7 @@ namespace RiverAttack
         }
         public void ButtonBriefingRoom()
         {
-            PlayClickSfx();            
+            PlayClickSfx();
             m_GameManager.ChangeState(new GameStateHub(), GameManager.GameScenes.BriefingRoom.ToString());
         }
         #endregion
