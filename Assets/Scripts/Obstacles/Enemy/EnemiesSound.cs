@@ -36,7 +36,7 @@ namespace RiverAttack
             if (audioSource == null && !audioSource.isPlaying) return;
             audioSource.Stop();
         }
-        void ExplodeSound()
+        internal void ExplodeSound()
         {
             if (audioSource != null && enemyExplodeAudio != null)
                 enemyExplodeAudio.Play(audioSource);
