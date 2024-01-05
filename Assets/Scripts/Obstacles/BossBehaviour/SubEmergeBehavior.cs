@@ -18,7 +18,7 @@ namespace RiverAttack
             Debug.Log("Entrando no comportamento SubEmerge");
             // Lógica de entrada para o comportamento SubEmerge
             m_Finished = false;
-            m_BossMaster.BossInvulnerability(true);
+           // m_BossMaster.BossInvulnerability(true);
             m_BossMaster.OnEventBossSubmerge();
         }
         public void Update()
@@ -35,6 +35,7 @@ namespace RiverAttack
         public void Exit()
         {
             Debug.Log("Saindo do comportamento SubEmerge");
+            //m_BossMaster.BossInvulnerability(false);
             // Lógica de saída para o comportamento SubEmerge
         }
         public void FinishBehavior()

@@ -46,6 +46,7 @@ namespace RiverAttack
             //Debug.Log($" Coliders: {other}, {shouldObstacleBeReady}, {enemy.canDestruct}");
             if (other == null || !shouldObstacleBeReady || !enemy.canDestruct) return;
             if (!other.GetComponent<Bullets>() || other.GetComponent<BulletBoss>()) return;
+            
             ComponentToKill(other.GetComponent<BulletPlayer>(), CollisionType.Shoot);
             ComponentToKill(other.GetComponent<BulletPlayerBomb>(), CollisionType.Bomb);
             //GamePlayManager.instance.OnEventOtherEnemiesKillPlayer();

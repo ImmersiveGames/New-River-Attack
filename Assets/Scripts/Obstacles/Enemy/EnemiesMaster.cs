@@ -5,8 +5,7 @@ namespace RiverAttack
     public class EnemiesMaster : ObstacleMaster
     {
         EnemiesSetDifficultyListSo m_EnemiesSetDifficultList;
-
-        public EnemiesSetDifficulty.EnemyDifficult actualDifficultName;
+        
         public static EnemiesSetDifficulty myDifficulty { get; private set; }
 
         #region Delegates

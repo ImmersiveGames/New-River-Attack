@@ -25,6 +25,11 @@ namespace RiverAttack
             PoolObjectManager.CreatePool(this, gameObjectPool, quantity, transform, isPersistent);
         }
 
+        public Transform GetMyPool()
+        {
+            return transform;
+        }
+
         internal void PlayDropGas()
         {
             dropGasStationSound.Play(m_AudioSource);

@@ -6,27 +6,27 @@ namespace RiverAttack
     public class StateMove : IMove
     {
         readonly EnemiesMovement m_EnemiesMovement;
-        readonly EnemiesMaster m_EnemiesMaster;
+        readonly ObstacleMaster m_ObstacleMaster;
         float m_ElapsedTime;
         float m_MoveVelocity;
         float m_MultiplyEnemiesSpeedy;
         Vector3 m_VectorDirection;
         EnemiesSetDifficulty m_EnemiesSetDifficulty;
 
-        public StateMove(EnemiesMovement enemiesMovement, EnemiesMaster enemiesMaster)
+        public StateMove(EnemiesMovement enemiesMovement, ObstacleMaster obstacleMaster)
         {
             m_EnemiesMovement = enemiesMovement;
             m_MultiplyEnemiesSpeedy = 1;
-            m_EnemiesMaster = enemiesMaster;
-            m_EnemiesMaster.OnEventObstacleMovement(true);
+            m_ObstacleMaster = obstacleMaster;
+            m_ObstacleMaster.OnEventObstacleMovement(true);
         }
         public void EnterState()
         {
            //Debug.Log($"{m_EnemiesMaster.gameObject.name} Estado: MOVE - Entrando ");
            m_MoveVelocity = m_EnemiesMovement.moveVelocity * m_MultiplyEnemiesSpeedy;
-           if (!m_EnemiesMaster.enemy || !m_EnemiesMaster.enemy.enemiesSetDifficultyListSo)
+           if (!m_ObstacleMaster.enemy || !m_ObstacleMaster.enemy.enemiesSetDifficultyListSo)
                return;
-           m_EnemiesSetDifficulty = m_EnemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(m_EnemiesMaster.actualDifficultName);
+           m_EnemiesSetDifficulty = m_ObstacleMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(m_ObstacleMaster.actualDifficultName);
            m_MultiplyEnemiesSpeedy = m_EnemiesSetDifficulty.multiplyEnemiesSpeedy;
         }
         public void UpdateState(Transform transform, Vector3 direction)
@@ -37,7 +37,7 @@ namespace RiverAttack
         public void ExitState()
         {
            // Debug.Log("Estado: MOVE - Exit");
-           m_EnemiesMaster.OnEventObstacleMovement(false);
+           m_ObstacleMaster.OnEventObstacleMovement(false);
         }
 
         

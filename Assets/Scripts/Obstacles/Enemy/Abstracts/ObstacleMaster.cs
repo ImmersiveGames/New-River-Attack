@@ -21,6 +21,7 @@ namespace RiverAttack
         protected PlayerMaster playerMaster;
         protected GamePlayManager gamePlayManager;
         protected GamePlayingLog gamePlayingLog;
+        public EnemiesSetDifficulty.EnemyDifficult actualDifficultName;
 
         #region Events
         public delegate void GeneralEventHandler();

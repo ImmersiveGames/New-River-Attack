@@ -16,9 +16,10 @@ namespace RiverAttack
         public void Enter()
         {
             Debug.Log($"Entrando no comportamento Emergir {m_BossMaster.targetPlayer}");
+            m_BossMaster.BossInvulnerability(true);
             // Lógica de entrada para o comportamento Emergir
             m_Finished = false;
-            m_BossMaster.BossInvulnerability(true);
+            //m_BossMaster.BossInvulnerability(true);
             m_BossMaster.MoveBoss(m_BossMaster.actualPosition);
         }
         public void Update()
@@ -29,11 +30,11 @@ namespace RiverAttack
             if (!(m_CountTime >= TIME_LIMIT))
                 return;
             m_CountTime = 0f;
-            m_BossMaster.BossInvulnerability(false);
             FinishBehavior();
         }
         public void Exit()
         {
+            //m_BossMaster.BossInvulnerability(false);
             Debug.Log("Saindo do comportamento Emergir");
             //m_BossMaster.invulnerability = false;
             // Lógica de saída para o comportamento Emergir

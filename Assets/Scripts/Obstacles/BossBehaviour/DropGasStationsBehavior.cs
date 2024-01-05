@@ -5,7 +5,7 @@ namespace RiverAttack
     public class DropGasStationsBehavior : IBossBehavior
     {
         const float OFFSET_X = 2;
-        
+        const float AUTO_DESTROY_TIME = 10f;
         
         Transform m_SpawnPoint;
         readonly int m_NumGas;
@@ -35,8 +35,11 @@ namespace RiverAttack
                 float constrainedPositionX = Mathf.Clamp(transformPosition.x, screenLimitMin.x + OFFSET_X, screenLimitMax.x - OFFSET_X);
                 float constrainedPositionZ = Mathf.Clamp(transformPosition.z, screenLimitMin.y + OFFSET_X, screenLimitMax.y- OFFSET_X);
                 constrainedPositionX = (i == 0) ? constrainedPositionX - OFFSET_X : constrainedPositionX + OFFSET_X;
+                var effectMovement = myShoot.GetComponent<EffectAreaMovement>();
+                effectMovement.myPool = m_BossGasStationDrop.GetMyPool();
                 myShoot.transform.position = new Vector3(constrainedPositionX, 0, constrainedPositionZ);
                 myShoot.transform.rotation = new Quaternion(transformRotation.x, 0, transformRotation.z, transformRotation.w);
+                effectMovement.AutoDestroyMe(AUTO_DESTROY_TIME);
             }
 
             FinishBehavior();
