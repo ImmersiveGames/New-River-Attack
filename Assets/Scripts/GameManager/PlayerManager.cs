@@ -26,7 +26,7 @@ namespace RiverAttack
             var playerObject = Instantiate(playerPrefab, spawnPlayerPosition, Quaternion.identity);
             playerObject.name = playerSettings.name;
             var playerMaster = playerObject.GetComponent<PlayerMaster>();
-            GameTimelineManager.instance.InitializePLayerInTimeline(playerObject.transform, playerMaster.GetPlayerAnimator());
+            GameTimelineManager.instance.InitializePLayerInTimeline(playerObject.transform, playerMaster.GetComponent<Animator>());
             playerMaster.SetPlayerSettingsToPlayMaster(playerSettings);
             initializedPlayerMasters.Add(playerMaster);
             
@@ -36,7 +36,9 @@ namespace RiverAttack
             if (initializedPlayerMasters.Count <= 0) return;
             foreach (var playerMaster in initializedPlayerMasters)
             {
-                playerMaster.gameObject.SetActive(active);
+                GameObject o;
+                (o = playerMaster.gameObject).SetActive(active);
+                o.transform.rotation = Quaternion.identity;
             }
         }
         internal Transform GetTransformFirstPlayer()
@@ -62,6 +64,7 @@ namespace RiverAttack
             foreach (var playerMaster in initializedPlayerMasters)
             {
                 playerMaster.playerMovementStatus = PlayerMaster.MovementStatus.None;
+                playerMaster.gameObject.transform.rotation = Quaternion.identity;
             }
         }
         public void RemoveAllPlayers()

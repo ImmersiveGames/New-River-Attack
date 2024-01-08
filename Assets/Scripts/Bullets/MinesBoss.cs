@@ -52,6 +52,8 @@ namespace RiverAttack
         }
         void Update()
         {
+            if (!GamePlayManager.instance.shouldBePlayingGame)
+                return;
             switch (GamePlayManager.instance.readyToFinish)
             {
                 case true when gameObject.activeSelf:

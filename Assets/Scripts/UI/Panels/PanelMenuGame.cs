@@ -45,25 +45,7 @@ namespace RiverAttack
             m_InputSystem.Player.Enable();
         }
         #endregion
-
-#if !UNITY_EDITOR
-        #region Actions Application
-        protected override void OnApplicationFocus(bool hasFocus)
-        {
-            base.OnApplicationFocus(hasFocus);
-            if (!hasFocus && GameManager.instance.currentGameState is GameStatePlayGame or GameStatePlayGameBoss)
-                ButtonGamePause();
-        }
-
-        protected override void OnApplicationPause(bool pauseStatus)
-        {
-            base.OnApplicationPause(pauseStatus);
-            if (pauseStatus && GameManager.instance.currentGameState is GameStatePlayGame or GameStatePlayGameBoss)
-                ButtonGamePause();
-        }
-        #endregion
-#endif
-
+        
         void StartMenuOnOpenScene()
         {
             m_CurrentGameState = m_GameManager.currentGameState;
@@ -118,7 +100,12 @@ namespace RiverAttack
         }
         public void ButtonGameUnPause()
         {
-            m_GameManager.ChangeState(new GameStatePlayGame());
+            if(m_GameManager.lastGameState is GameStatePlayGame)
+                m_GameManager.ChangeState(new GameStatePlayGame());
+            if (GameManager.instance.currentGameState is GameStatePlayGameBoss)
+            {
+                GameStatePlayGameBoss.PauseState(false);
+            }
         }
 
         void ExecutePauseGame(InputAction.CallbackContext callbackContext)
@@ -131,7 +118,7 @@ namespace RiverAttack
                     ButtonGamePause();
                     break;
                 case GameStatePlayGameBoss:
-                    ButtonGamePause();
+                    GameStatePlayGameBoss.PauseState(!GamePlayManager.instance.bossFightPause);
                     break;
                 case GameStatePause:
                     ButtonGameUnPause();

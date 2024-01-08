@@ -72,7 +72,7 @@ namespace RiverAttack
                 }
                 while (BossMinesShoot.QuadrantAlreadyOccupied(indexQuadrants, sizeQuadrant, viewSize, ref usedQuadrants) ||
                        BossMinesShoot.QuadrantAlreadySort(usedQuadrants, indexQuadrants.x, indexQuadrants.y)
-                       );
+                      );
                 usedQuadrants.Add(new Vector2Int(indexQuadrants.x, indexQuadrants.y));
 
                 float posX = ((indexQuadrants.x + 0.5f) * sizeQuadrant.x) - (viewSize.x / 2.0f) + BossMinesShoot.OffsetX;

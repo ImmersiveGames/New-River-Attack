@@ -43,6 +43,7 @@ namespace RiverAttack
         
         internal bool onLoadScene;
         public GameState currentGameState { get; private set; }
+        internal GameState lastGameState;
 
         #region UNITYMETHODS
         void Awake()
@@ -56,7 +57,6 @@ namespace RiverAttack
             //Debug.Log($"GameScene: {gameScenes}");
             switch (gameScenes)
             {
-
                 case GameScenes.MainScene:
                     break;
                 case GameScenes.MissionHub:
@@ -77,6 +77,19 @@ namespace RiverAttack
             
             ChangeState(new GameStateMenu());
         }
+
+        #region Actions Application
+        protected void OnApplicationFocus(bool hasFocus)
+        {
+            PauseGame(!hasFocus);
+        }
+
+        protected void OnApplicationPause(bool pauseStatus)
+        {
+            PauseGame(pauseStatus);
+        }
+        #endregion
+
         void Update()
         {
             if(!onLoadScene)
@@ -97,7 +110,17 @@ namespace RiverAttack
             };
             return level;
         }
-        
+
+        public void PauseGame(bool pause)
+        {
+            Time.timeScale = pause ? 0 : 1;
+            if (currentGameState is not GameStatePlayGame)
+                return;
+            if (pause)
+            {
+                ChangeState(new GameStatePause());
+            }
+        }
         
         #region Machine State
         internal void ChangeState(GameState nextState)
@@ -107,6 +130,7 @@ namespace RiverAttack
             if(onLoadScene) return;
             onLoadScene = true;
             currentGameState?.ExitState();
+            lastGameState = currentGameState;
             currentGameState = nextState;
             StartCoroutine(currentGameState?.OnLoadState());
             currentGameState?.EnterState();
@@ -129,6 +153,7 @@ namespace RiverAttack
             currentGameState?.ExitState();
             // Chamar a cena de transição
             yield return SceneManager.LoadSceneAsync(nameSceneTransition, LoadSceneMode.Additive); // Carrega a cena de transição
+            lastGameState = currentGameState;
             currentGameState = nextState;
             yield return currentGameState?.OnLoadState();
             //Descarrega a scena aterior

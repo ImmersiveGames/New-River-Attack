@@ -39,6 +39,7 @@ namespace RiverAttack
         public void Update()
         {
             //Debug.Log("Atualizando comportamento CleanShootBehavior");
+            if(!m_BossMaster.shouldBeBossBattle) return;
             m_Cadence -= Time.deltaTime;
             if (!(m_Cadence <= 0.01f))
                 return;

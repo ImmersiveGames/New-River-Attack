@@ -43,6 +43,7 @@ namespace RiverAttack
         }
         public void Update()
         {
+            if(!m_BossMaster.shouldBeBossBattle) return;
             //Debug.Log("Atualizando comportamento MissileAttack");
             m_Cadence -= Time.deltaTime;
             if (!(m_Cadence <= 0.01f))

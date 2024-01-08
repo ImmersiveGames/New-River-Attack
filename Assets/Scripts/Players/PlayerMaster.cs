@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using Utils;
 namespace RiverAttack
@@ -34,7 +35,7 @@ namespace RiverAttack
         internal bool inPowerUp;
         internal int nextScoreForLive;
 
-        Animator m_Animator;
+        //Animator m_Animator;
         GamePlayingLog m_GamePlayingLog;
         GamePlayManager m_GamePlayManager;
         GameManager m_GameManager;
@@ -53,7 +54,7 @@ namespace RiverAttack
         #region UNITYMETHOD
         void Awake()
         {
-            m_Animator = GetComponent<Animator>();
+            //m_Animator = GetComponent<Animator>();
             m_GamePlayManager = GamePlayManager.instance;
             m_GameSettings = GamePlayManager.getGameSettings;
             m_GameManager = GameManager.instance;
@@ -67,6 +68,7 @@ namespace RiverAttack
         {
             m_GamePlayManager.EventStartRapidFire += () => inPowerUp = true;
             m_GamePlayManager.EventEndRapidFire += () => inPowerUp = false;
+            OnEventPlayerMasterUpdateSkin();
         }
 
         void Start()
@@ -103,10 +105,10 @@ namespace RiverAttack
             return getPlayerSettings.bombs < GameSettings.instance.maxBombs;
         }
 
-        public Animator GetPlayerAnimator()
+        /*public Animator GetPlayerAnimator()
         {
             return m_Animator;
-        }
+        }*/
 
         void PlayerStartSetup()
         {
@@ -185,7 +187,10 @@ namespace RiverAttack
         void ReSpawn()
         {
             m_GamePlayManager.OnEventActivateEnemiesMaster();
-            OnEventPlayerMasterBossHit(false);
+            if (m_GamePlayManager.bossFight)
+            {
+                OnEventPlayerMasterBossHit(false);
+            }
             isPlayerDead = false;
             playerMovementStatus = MovementStatus.None;
             m_Invulnerability = false;

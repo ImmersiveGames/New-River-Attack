@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using UnityEngine;
 namespace RiverAttack
 {
     public class GameStatePause : GameState
@@ -18,7 +19,7 @@ namespace RiverAttack
         }
         public override void UpdateState()
         {
-            //Debug.Log($"Game Pausado!");
+            Debug.Log($"Game Pausado!");
         }
         public override void ExitState()
         {

@@ -15,8 +15,8 @@ namespace RiverAttack
         [SerializeField] internal float distanceTarget = 20.0f;
 
         EnemiesBossScriptable m_BossScriptable;
-        
-        
+
+
         #region Events
         public delegate void BossCyclesHandler(Transform spawnPosition);
 
@@ -50,6 +50,14 @@ namespace RiverAttack
             ComponentToKill(other.GetComponent<BulletPlayer>(), CollisionType.Shoot);
             ComponentToKill(other.GetComponent<BulletPlayerBomb>(), CollisionType.Bomb);
             //GamePlayManager.instance.OnEventOtherEnemiesKillPlayer();
+        }
+
+        public bool shouldBeBossBattle
+        {
+            get
+            {
+                return shouldObstacleBeReady || !GamePlayManager.instance.bossFightPause;
+            }
         }
 
         protected override void ComponentToKill(Component other, CollisionType collisionType)
@@ -103,6 +111,7 @@ namespace RiverAttack
             Invoke(nameof(OnEventBossEmerge), 2f);
 
         }
+        
 
         internal BossMissileShoot GetBossMissileShoot()
         {

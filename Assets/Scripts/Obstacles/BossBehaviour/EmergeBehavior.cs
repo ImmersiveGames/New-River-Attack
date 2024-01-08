@@ -24,6 +24,7 @@ namespace RiverAttack
         }
         public void Update()
         {
+            if(!m_BossMaster.shouldBeBossBattle) return;
             //Debug.Log("Atualizando comportamento Emergir");
             m_CountTime += Time.deltaTime;
 

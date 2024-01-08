@@ -1,11 +1,8 @@
-using UnityEngine.SceneManagement;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using System.Collections;
 using UnityEngine;
 using Cinemachine;
-using UnityEngine.Serialization;
-
 
 namespace RiverAttack
 {
@@ -15,7 +12,6 @@ namespace RiverAttack
         [Header("Menus")]
         [SerializeField] protected Transform menuInitial;
         [SerializeField] protected Transform[] menuPrincipal;
-        [SerializeField] CinemachineBrain cineMachineBrain;
         [SerializeField] CinemachineVirtualCameraBase[] menuCamera;
         [SerializeField] internal GameSettings gameSettings;        
 
@@ -30,18 +26,6 @@ namespace RiverAttack
             //Debug.Log($"Tempos: {fadeInTime} , {fadeOutTime}");
         }
   #endregion
-
-        #region Actions Application
-        protected virtual void OnApplicationFocus(bool hasFocus)
-        {
-            Time.timeScale = hasFocus ? 1 : 0;
-        }
-
-        protected virtual void OnApplicationPause(bool pauseStatus)
-        {
-            Time.timeScale = pauseStatus ? 0 : 1;
-        }
-        #endregion
         
         protected virtual void SetInternalMenu(int indexStart = 0)
         {

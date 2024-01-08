@@ -43,6 +43,7 @@ namespace RiverAttack
                 return;
             var skinPart = GetComponentInChildren<PlayerSkinAttach>().gameObject;
             m_AnimatorSkin = skinPart.GetComponent<Animator>();
+            AnimationReset();
         }
         void AnimationMovement(Vector2 dir)
         {

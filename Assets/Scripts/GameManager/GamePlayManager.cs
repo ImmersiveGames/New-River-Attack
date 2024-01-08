@@ -27,8 +27,9 @@ namespace RiverAttack
         internal Levels actualLevels;
         internal bool playerDead;
         internal bool bossFight;
+        internal bool bossFightPause;
         internal BossMaster bossMaster;
-        
+
         internal const float LimitX = 28.0f;
         internal const float LimitZTop = 40.0f;
         internal const float LimitZBottom = 15.0f;
@@ -119,6 +120,24 @@ namespace RiverAttack
         public void GameOverMenu()
         {
             panelMenuGame.SetMenuGameOver();
+        }
+
+        internal void PauseBossBattle(bool pause)
+        {
+            if (pause)
+            {
+                inputSystem.UI_Controlls.Enable();
+                panelMenuGame.PauseMenu(true);
+                Time.timeScale = 0;
+                bossFightPause = true;
+            }
+            else
+            {
+                inputSystem.UI_Controlls.Disable();
+                panelMenuGame.PauseMenu(false);
+                Time.timeScale = 1;
+                bossFightPause = false;
+            }
         }
 
         public static void AddResultList(List<LogResults> list, PlayerSettings playerSettings, EnemiesScriptable enemy, int qnt, CollisionType collisionType)

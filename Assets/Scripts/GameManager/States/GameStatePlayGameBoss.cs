@@ -13,7 +13,6 @@ namespace RiverAttack
         IBossBehavior[] m_CurrentBehaviors;
         int m_CurrentBehaviorIndex;
         bool m_BehaviorEnterExecuted;
-
         BossMaster m_BossMaster;
 
         public GameStatePlayGameBoss() {
@@ -22,7 +21,7 @@ namespace RiverAttack
             m_CurrentBehaviorIndex = 0;
 
             m_BossMaster = GamePlayManager.instance.bossMaster;
-
+    
             // Inicializa os comportamentos para cada subestado
             m_Behaviors = new Dictionary<BattleBossSubState, IBossBehavior[]> {
                 { BattleBossSubState.Top, new IBossBehavior[] {
@@ -74,12 +73,11 @@ namespace RiverAttack
         }
         public override void UpdateState()
         {
-            //Debug.Log("Boss Fight!");
+            Debug.Log($"Boss Fight! {GamePlayManager.instance.bossFightPause}");
             /*Debug.Log($"m_CurrentSubState: {m_CurrentSubState}");
             Debug.Log($"m_CurrentBehaviorIndex: {m_CurrentBehaviorIndex}");*/
             if (!m_BossMaster.shouldObstacleBeReady)
             {
-                
                 return;
             }
                 
@@ -106,10 +104,13 @@ namespace RiverAttack
         {
             PlayerManager.instance.ActivePlayers(false);
             GamePlayManager.instance.OnEventDeactivateEnemiesMaster();
-           
             //Debug.Log($"Sai do Estado: Boss Fight");
             m_BossMaster = null;
             System.GC.Collect();
+        }
+        public static void PauseState(bool active)
+        {
+            GamePlayManager.instance.PauseBossBattle(active);
         }
 
         BattleBossSubState GetNextSubState() {

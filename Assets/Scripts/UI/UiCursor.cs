@@ -8,6 +8,11 @@ namespace RiverAttack
         GameObject m_ButtonActive;
         public AudioEventSample onOverCursorSfx;
 
+        void Start()
+        {
+            m_ButtonActive = EventSystem.current.currentSelectedGameObject;
+            SetCursor(m_ButtonActive.GetComponent<RectTransform>());
+        }
         void Update()
         {
             if (EventSystem.current.currentSelectedGameObject == null && m_ButtonActive != null)
