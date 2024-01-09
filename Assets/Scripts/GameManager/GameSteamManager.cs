@@ -7,10 +7,18 @@ namespace RiverAttack
     {
         protected Callback<GameOverlayActivated_t> gameOverlayActivated;
 
+        CGameID m_GameID;
+
         private void OnEnable() {
-            if (SteamManager.Initialized) {
+            if (!SteamManager.Initialized)
+                return;
+            
+            m_GameID = new CGameID(SteamUtils.GetAppID());
+            Debug.Log($"TESTE: {m_GameID}");
+            /*if (SteamManager.Initialized) {
                 gameOverlayActivated = Callback<GameOverlayActivated_t>.Create(OnGameOverlayActivated);
-            }
+            }*/
+            
         }
         
         void Start()
