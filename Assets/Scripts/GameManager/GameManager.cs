@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Steamworks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -54,6 +55,11 @@ namespace RiverAttack
         }
         void Start()
         {
+            if (SteamClient.IsValid && SteamClient.IsLoggedOn)
+            {
+                SteamFriends.OnGameOverlayActivated += PauseGame;
+            }
+            
             //Debug.Log($"GameScene: {gameScenes}");
             switch (gameScenes)
             {
@@ -111,7 +117,7 @@ namespace RiverAttack
             return level;
         }
 
-        public void PauseGame(bool pause)
+        void PauseGame(bool pause)
         {
             Time.timeScale = pause ? 0 : 1;
             if (currentGameState is not GameStatePlayGame)
