@@ -8,7 +8,7 @@ namespace RiverAttack
         {
             var startLevel = GameManager.instance.GetLevel();
             //Debug.Log($"Start: {startLevel}");
-            var startBgm = startLevel.bgmStartLevel;
+            var startBgm = startLevel.pathType;
             GameAudioManager.instance.ChangeBGM(startBgm, TIME_TO_FADE_BGM);
             yield return null;
         }

@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
-using UnityEngine.Serialization;
+
 namespace RiverAttack
 {
     [CreateAssetMenu(fileName = "GameSettings", menuName = "RiverAttack/GameSettings", order = 0)]
@@ -22,5 +21,6 @@ namespace RiverAttack
         public Locale startLocale;
         [Header("Game play Settings")]
         public int multiplyScoreForLives;
+      
     }
 }

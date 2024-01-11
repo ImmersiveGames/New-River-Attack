@@ -21,8 +21,9 @@ namespace RiverAttack
         [SerializeField] internal GameObject hudPath;
         public LevelsStates levelsStates = LevelsStates.Locked;
 
+        [FormerlySerializedAs("bgmStartLevel")]
         [Header("Build Settings")]
-        public LevelTypes bgmStartLevel;
+        public LevelTypes pathType;
         [SerializeField] internal GameObject pathStart;
         [SerializeField] internal GameObject pathEnd;
         [SerializeField] internal Vector3 levelOffset;

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using Utils;
 namespace RiverAttack
@@ -34,6 +35,7 @@ namespace RiverAttack
         [SerializeField]
         internal bool inPowerUp;
         internal int nextScoreForLive;
+        
 
         //Animator m_Animator;
         GamePlayingLog m_GamePlayingLog;
@@ -201,10 +203,12 @@ namespace RiverAttack
             var walls = component.GetComponentInParent<WallsMaster>();
             var enemies = component.GetComponentInParent<ObstacleMaster>();
             var bullet = component.GetComponent<BulletEnemy>();
-
+            
             if (walls != null)
             {
                 m_GamePlayingLog.playerDieWall += 1;
+                GameSteamManager.AddState("statCrashPlayer",1,false);
+                GameSteamManager.UnlockAchievement("ACH_CRASH_PLAYER_WALL");
             }
             if (bullet != null)
             {
@@ -216,8 +220,10 @@ namespace RiverAttack
             }
             else if (enemies != null)
             {
+                GameSteamManager.AddState("statCrashPlayer",1,false);
                 GamePlayManager.AddResultList(m_GamePlayingLog.hitEnemiesResultsList, getPlayerSettings, enemies.enemy, 1, CollisionType.Collider);
             }
+            GameSteamManager.StoreStats();
         }
 
         #region Calls

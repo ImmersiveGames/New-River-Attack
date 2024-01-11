@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-using System;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -28,13 +27,13 @@ namespace RiverAttack
 
         PlayersInputActions m_InputSystem;
 
-        private string[] sentences;
-        private int sentenceIndex = 0;
-        private bool isTyping = false;        
-        private bool isExitButtonPressed = false;
+        string[] m_Sentences;
+        int m_SentenceIndex = 0;
+        bool m_IsTyping = false;        
+        bool m_IsExitButtonPressed = false;
 
-        private Coroutine typingCoroutine;
-        private Coroutine exitButtonCoroutine;
+        Coroutine m_TypingCoroutine;
+        Coroutine m_ExitButtonCoroutine;
 
         const string PT_BR_LOCALIZATION = "Portuguese (Brazil) (pt-BR)";
         const string EN_LOCALIZATION = "English (en)";
@@ -57,51 +56,43 @@ namespace RiverAttack
 
         void Start()
         {
-            sentences = GetLocalization();
-            typingCoroutine = StartCoroutine(TypeSentence(sentences[sentenceIndex]));
+            m_Sentences = GetLocalization();
+            m_TypingCoroutine = StartCoroutine(TypeSentence(m_Sentences[m_SentenceIndex]));
         }
+        
 
-        void Update()
-        {
-            //NextButton();
-        }
-
-        private string[] GetLocalization()
+        string[] GetLocalization()
         {
             var language = gameSettings.startLocale;
 
-            if (language.LocaleName == PT_BR_LOCALIZATION)
+            return language.LocaleName switch
             {
-                return dialog.dialogSentences_PT_BR;
-            }                
+                PT_BR_LOCALIZATION => dialog.dialogSentences_PT_BR,
+                EN_LOCALIZATION => dialog.dialogSentences_EN,
+                _ => dialog.dialogSentences_EN
+            };
 
-            if (language.LocaleName == EN_LOCALIZATION)
-            {
-                return dialog.dialogSentences_EN;
-            }                
-
-            else return dialog.dialogSentences_EN;
         }
 
-        private void NextButton(InputAction.CallbackContext context)
+        void NextButton(InputAction.CallbackContext context)
         {
-            if (isTyping)
+            if (m_IsTyping)
             {
                 // Se ainda estiver digitando, exiba o texto inteiro imediatamente
-                StopCoroutine(typingCoroutine);
-                dialogText.text = sentences[sentenceIndex];
+                StopCoroutine(m_TypingCoroutine);
+                dialogText.text = m_Sentences[m_SentenceIndex];
                 IsTyping(false);
             }
             else
             {
-                // Se a frase terminou, avance para a próxima ou encerre o diálogo
+                // Se a frase terminou, avance para a prÃ³xima ou encerre o diï¿½logo
                 NextSentence();
             }
         }
 
-        private void IsTyping(bool isSpeaking)
+        void IsTyping(bool isSpeaking)
         {
-            isTyping = isSpeaking;
+            m_IsTyping = isSpeaking;
             nextCursor.SetActive(!isSpeaking);
             if (speakerAnimatorController != null)
                 speakerAnimatorController.SetBool("Speak", isSpeaking);
@@ -124,11 +115,11 @@ namespace RiverAttack
 
         void NextSentence()
         {
-            if (sentenceIndex < sentences.Length - 1)
+            if (m_SentenceIndex < m_Sentences.Length - 1)
             {
-                sentenceIndex++;
-                NextSlideAnim(sentenceIndex);
-                typingCoroutine = StartCoroutine(TypeSentence(sentences[sentenceIndex]));
+                m_SentenceIndex++;
+                NextSlideAnim(m_SentenceIndex);
+                m_TypingCoroutine = StartCoroutine(TypeSentence(m_Sentences[m_SentenceIndex]));
             }
             else
             {  
@@ -136,7 +127,7 @@ namespace RiverAttack
             }
         }
 
-        private void NextSlideAnim(int sentenceIndex)
+        void NextSlideAnim(int sentenceIndex)
         {
             if (dialog.dialogAnimationStartTime[sentenceIndex] >= 0)
             {
@@ -146,31 +137,32 @@ namespace RiverAttack
 
         void DialogEnd()
         {
-            // Fim do diálogo, você pode adicionar lógica adicional aqui
-            Debug.Log("Fim do diálogo");
+            // Fim do diÃ¡logo, vocÃª pode adicionar lÃ³gica adicional aqui
+            //Debug.Log("Fim do diÃ¡logo");
+            GameSteamManager.UnlockAchievement("ACH_FINISH_TUTORIAL");
             fadePanelAnimator.SetTrigger("FadeOut");
             StopAllCoroutines();
             SceneManager.LoadSceneAsync(sceneToLoad);
         }
 
-        private void StartHoldTime()
+        void StartHoldTime()
         {
-            isExitButtonPressed = true;
+            m_IsExitButtonPressed = true;
 
-            exitButtonCoroutine = StartCoroutine(FillImageOverTime());
+            m_ExitButtonCoroutine = StartCoroutine(FillImageOverTime());
         }
 
-        private void StopHoldTime()
+        void StopHoldTime()
         {
-            isExitButtonPressed = false;
+            m_IsExitButtonPressed = false;
             holdTimer = 0f;
-            StopCoroutine(exitButtonCoroutine); // Parar qualquer preenchimento ainda em andamento
-            fillExitButtonImage.fillAmount = 0f; // Reiniciar o preenchimento quando o botão é liberado        
+            StopCoroutine(m_ExitButtonCoroutine); // Parar qualquer preenchimento ainda em andamento
+            fillExitButtonImage.fillAmount = 0f; // Reiniciar o preenchimento quando o botï¿½o ï¿½ liberado        
         }
 
         IEnumerator FillImageOverTime()
         {
-            while (isExitButtonPressed && holdTimer < holdDuration)
+            while (m_IsExitButtonPressed && holdTimer < holdDuration)
             {
                 holdTimer += Time.deltaTime;
 
@@ -180,8 +172,8 @@ namespace RiverAttack
                 yield return null;
             }
 
-            // Ação a ser executada após manter o botão pressionado por 3 segundos
-            Debug.Log("Botão de saída mantido pressionado por 3 segundos!");
+            // AÃ§Ã£o a ser executada apÃ³s manter o botÃ£o pressionado por 3 segundos
+            Debug.Log("BotÃ£o de saÃ­da mantido pressionado por 3 segundos!");
             DialogEnd();
         }
     }

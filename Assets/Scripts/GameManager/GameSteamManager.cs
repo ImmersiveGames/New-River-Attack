@@ -10,7 +10,6 @@ namespace RiverAttack
     public class GameSteamManager: MonoBehaviour
     {
         const int STEAM_ID = 2777110;
-        
         string m_PlayerName;
         static IEnumerable<Achievement> _serverAchievements;
         
@@ -135,25 +134,41 @@ namespace RiverAttack
             }
         }
 
-        public static void SetState(string statName, float totals)
+        public static void SetState(string statName, float totals, bool instant)
         {
             if (!SteamClient.IsValid) return;
             SteamUserStats.SetStat( statName, totals );
+            if (instant)
+            {
+                StoreStats();
+            }
         }
-        public static void SetState(string statName, int totals)
+        public static void SetState(string statName, int totals, bool instant)
         {
             if (!SteamClient.IsValid) return;
             SteamUserStats.SetStat( statName, totals );
+            if (instant)
+            {
+                StoreStats();
+            }
         }
-        static void AddState(string statName, float totals)
+        public static void AddState(string statName, float totals, bool instant)
         {
             if (!SteamClient.IsValid) return;
             SteamUserStats.AddStat( statName, totals );
+            if (instant)
+            {
+                StoreStats();
+            }
         }
-        public static void AddState(string statName, int totals)
+        public static void AddState(string statName, int totals, bool instant)
         {
             if (!SteamClient.IsValid) return;
             SteamUserStats.AddStat( statName, totals );
+            if (instant)
+            {
+                StoreStats();
+            }
         }
         public static int GetStatInt(string statName)
         {
@@ -186,5 +201,6 @@ namespace RiverAttack
         }
 #endif
     }
+    
 }
 

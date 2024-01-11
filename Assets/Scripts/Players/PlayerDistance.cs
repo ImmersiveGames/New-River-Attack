@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace RiverAttack
 {
     public class PlayerDistance : MonoBehaviour
     {
         public float conversion;
-        public float offsetInicial;
+        [FormerlySerializedAs("offsetInicial")] public float offsetInitial;
 
         Vector3 m_LastPosition;
         float m_TravelledDistance;
@@ -28,10 +29,10 @@ namespace RiverAttack
         }
         void Start()
         {
-            offsetInicial += PlayerManager.instance.spawnPlayerPosition.z;
+            offsetInitial += PlayerManager.instance.spawnPlayerPosition.z;
             m_LastPosition = transform.position;
-            m_TravelledDistance = offsetInicial;
-            LoadMaxDistancia();
+            m_TravelledDistance = offsetInitial;
+            LoadMaxDistance();
         }
         void Update()
         {
@@ -43,7 +44,7 @@ namespace RiverAttack
             if (position.z < 0 && distanceTraveledByFrame <= 0 && !m_PlayerMaster.shouldPlayerBeReady) return;
 
             m_TravelledDistance += distanceTraveledByFrame;
-
+            GameSteamManager.AddState("stat_FlightDistance", m_TravelledDistance, false);
             // Atualiza o ponto mais distante alcançado
             m_MaxTravelledDistance = Mathf.Max(m_MaxTravelledDistance, m_TravelledDistance);
 
@@ -66,7 +67,7 @@ namespace RiverAttack
             m_PlayerSettings.distance = m_MaxTravelledDistance;
         }
   #endregion
-        void LoadMaxDistancia()
+        void LoadMaxDistance()
         {
             float settingDistance = m_PlayerMaster.getPlayerSettings.distance;
             m_MaxTravelledDistance = (settingDistance != 0) ? settingDistance : 0;
@@ -78,6 +79,7 @@ namespace RiverAttack
         {
             m_GamePlayingLog.maxPathDistance = maxDistance;
             m_GamePlayingLog.pathDistance += distance;
+            GameSteamManager.StoreStats();
         }
     }
 }

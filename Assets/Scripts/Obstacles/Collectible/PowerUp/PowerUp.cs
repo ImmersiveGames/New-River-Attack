@@ -7,6 +7,7 @@ namespace RiverAttack
     public class PowerUp : ScriptableObject
     {
         public new string name;
+        public PowerUpTypes powerUpType;
         public float duration;
         public bool canAccumulateDuration;
         public bool canAccumulateEffects;
@@ -26,5 +27,9 @@ namespace RiverAttack
             GamePlayPowerUps.target = player;
             endAction?.Invoke();
         }
+    }
+    public enum PowerUpTypes
+    {
+        RapidFire,Lives,Bomb
     }
 }

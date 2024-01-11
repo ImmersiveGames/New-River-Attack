@@ -22,6 +22,7 @@ namespace RiverAttack
         {
             var gamePlaySettings = GamePlayingLog.instance;
             gamePlaySettings.fuelStocked += fuel;
+            GameSteamManager.AddState("stat_Fill_Gas", fuel, false);
         }
         
         [Header("RapidFire PowerUp")]

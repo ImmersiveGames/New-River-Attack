@@ -45,8 +45,8 @@ namespace RiverAttack
         {
             //Debug.Log($" Coliders: {other}, {shouldObstacleBeReady}, {enemy.canDestruct}");
             if (other == null || !shouldObstacleBeReady || !enemy.canDestruct) return;
-            if (!other.GetComponent<Bullets>() || other.GetComponent<BulletBoss>()) return;
-            
+            if (!other.GetComponent<Bullets>() || other.GetComponent<BulletBoss>() || !other.GetComponentInParent<PlayerMaster>()) return;
+            ComponentToKill(other.GetComponent<PlayerMaster>(), CollisionType.Collider);
             ComponentToKill(other.GetComponent<BulletPlayer>(), CollisionType.Shoot);
             ComponentToKill(other.GetComponent<BulletPlayerBomb>(), CollisionType.Bomb);
             //GamePlayManager.instance.OnEventOtherEnemiesKillPlayer();
@@ -74,7 +74,7 @@ namespace RiverAttack
                     bullet = other.GetComponent<BulletPlayerBomb>();
                     break;
                 case CollisionType.Collider:
-                    break;
+                    return;
                 case CollisionType.Collected:
                     break;
                 case CollisionType.None:
@@ -82,16 +82,8 @@ namespace RiverAttack
                     throw new ArgumentOutOfRangeException(nameof(collisionType), collisionType, null);
             }
             if (bullet == null) return;
+            DamageBoss(bullet.powerFire, collisionType);
             
-            DamageBoss(bullet.powerFire);
-
-            //TODO: Organizar o esquema de ciclos e HP do Boss.
-            //Debug.Log($" Coliders: {other}, {bullet}, {enemy.canDestruct}");
-            //OnEventObstacleMasterHit(); <= Efetivamente destroi o obstaculo
-            //OnEventObstacleScore(playerMaster.getPlayerSettings); <= Envia para A HUD os resulfados
-            //ShouldSavePoint(playerMaster.getPlayerSettings); ,= Verifica se salva a posição do player
-            //GamePlayManager.AddResultList(gamePlayingLog.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy, 1, collisionType);
-            //ShouldFinishGame(); //<= Verifica se o jogo terminsou
         }
 
         public void MoveBoss(BattleBossSubState positionBoss)
@@ -125,11 +117,11 @@ namespace RiverAttack
         {
             return GetComponent<BossGasStationDrop>();
         }
-
-        void DamageBoss(int damage)
+        void DamageBoss(int damage, CollisionType collisionType)
         {
             OnEventBossHit();
-            m_BossHp -= damage;
+            int realDamage = (collisionType != CollisionType.Collider) ? damage : 2;
+            m_BossHp -= realDamage;
             Debug.Log($"Cycles: {m_BossCycles} - HP:{m_BossHp} - State {GameManager.instance.currentGameState}");
             
             if (m_BossHp > 0) return; // Enquanto tiver HP
@@ -137,6 +129,10 @@ namespace RiverAttack
             {
                 isDestroyed = true;
                 GameAudioManager.instance.StopBGM(LevelTypes.Boss);
+                if (collisionType == CollisionType.Collider)
+                {
+                    GameSteamManager.UnlockAchievement("ACH_CRASH_SUBMARINE");
+                }
                 OnEventBossDeath();
                 gamePlayManager.readyToFinish = true;
                 Invoke(nameof(BeatGame),7f);

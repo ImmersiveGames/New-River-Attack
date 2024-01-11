@@ -77,6 +77,7 @@ namespace RiverAttack
         void CollectWealth(PlayerSettings playerSettings, int collect)
         {
             playerSettings.wealth += collect;
+            GameSteamManager.AddState("stat_CollectRefugee", collect, true);
             gamePlayManager.OnEventUpdateRefugees(playerSettings.wealth);
         }
 

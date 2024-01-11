@@ -4,6 +4,7 @@ namespace RiverAttack
     public class EnemiesBridges : MonoBehaviour
     {
         EnemiesMaster m_EnemiesMaster;
+        
 
         public void IsFinish()
         {
@@ -11,6 +12,11 @@ namespace RiverAttack
             //Debug.Log($"Enemie Master: {m_EnemiesMaster}");
             if(m_EnemiesMaster)
                 m_EnemiesMaster.isFinishLevel = true;
+        }
+
+        public void SetBridgeType()
+        {
+            
         }
     }
 }

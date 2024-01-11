@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 namespace RiverAttack
 {
     public class GameStateEndGame : GameState
@@ -13,6 +14,17 @@ namespace RiverAttack
         public override void EnterState()
         {
             //Debug.Log($"Entra no Estado: EndGame");
+            switch (GameManager.instance.gameModes)
+            {
+                case GameManager.GameModes.Classic:
+                    GameSteamManager.UnlockAchievement("ACH_FINISH_CLASSIC");
+                    break;
+                case GameManager.GameModes.Mission:
+                    GameSteamManager.UnlockAchievement("ACH_FINISH_MISSION");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
         public override void UpdateState()
         {

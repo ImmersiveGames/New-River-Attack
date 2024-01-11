@@ -68,6 +68,7 @@ namespace RiverAttack
         {
             playerMaster.inPowerUp = false;
             EventExitAreaEffect?.Invoke();
+            GameSteamManager.StoreStats();
         }
   #endregion
 

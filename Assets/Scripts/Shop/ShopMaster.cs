@@ -25,6 +25,8 @@ namespace Shopping
         GameObject productForward, productBackward;
         [SerializeField]
         MenuPlayerSkinManager mainMenuPlayer;
+        [SerializeField]
+        ListShopProduct allSkins;
 
         [Header("Carousel"), SerializeField]
         bool infinityLooping;
@@ -121,9 +123,14 @@ namespace Shopping
 
             var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
             item.getSelectButton.interactable = true;
-            
+            GameSteamManager.UnlockAchievement("ACH_BUY_SKIN");
             m_AudioSource.PlayOneShot(clickSound);
 
+            if (Tools.CheckSameElements(allSkins.value, player.listProducts))
+            {
+                GameSteamManager.UnlockAchievement("ACH_BUY_SKIN_ALL");
+            }
+            
         }
         void SelectThisItem(PlayerSettings player, ShopProductStock shopProductStock)
         {

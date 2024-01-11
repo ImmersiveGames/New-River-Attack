@@ -277,5 +277,13 @@ namespace Utils
             
             return time;
         }
+        public static bool CheckSameElements<T>(IEnumerable<T> list1, IEnumerable<T> list2)
+        {
+            var hashSet = new HashSet<T>(list1);
+            var other = new HashSet<T>(list2);
+
+            // Verificar se ambos os conjuntos são iguais
+            return hashSet.SetEquals(other);
+        }
     }
 }

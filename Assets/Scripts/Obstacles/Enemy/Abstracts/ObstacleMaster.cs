@@ -1,3 +1,5 @@
+using System;
+using Steamworks.Data;
 using UnityEngine;
 using Utils;
 namespace RiverAttack
@@ -22,6 +24,8 @@ namespace RiverAttack
         protected GamePlayManager gamePlayManager;
         protected GamePlayingLog gamePlayingLog;
         public EnemiesSetDifficulty.EnemyDifficult actualDifficultName;
+        
+        
 
         #region Events
         public delegate void GeneralEventHandler();
@@ -93,6 +97,7 @@ namespace RiverAttack
             OnEventObstacleScore(playerMaster.getPlayerSettings);
             ShouldSavePoint(playerMaster.getPlayerSettings);
             GamePlayManager.AddResultList(gamePlayingLog.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy, 1, collisionType);
+            KillStatsHandle(collisionType);
             ShouldFinishGame();
         }
         internal static PlayerMaster WhoHit(Component other)
@@ -138,6 +143,9 @@ namespace RiverAttack
         {
             if (!enemy.isCheckInPoint)
                 return;
+            if(GameManager.instance.gameModes == GameManager.GameModes.Classic)
+                GameSteamManager.AddState("stat_FinishCPath", 1, false);
+            GameSteamManager.StoreStats();
             var transform1 = transform;
             var position = transform1.position;
             playerSettings.spawnPosition.z = position.z;
@@ -145,12 +153,64 @@ namespace RiverAttack
             gamePlayManager.OnEventBuildPathUpdate(position.z);
         }
 
-        protected void ShouldFinishGame()
+        void ShouldFinishGame()
         {
             if (!isFinishLevel) return;
+            GameSteamManager.StoreStats();
             gamePlayManager.readyToFinish = true;
         }
-
+        void KillStatsHandle(CollisionType collisionType)
+        {
+            switch (enemy.enemyType)
+            {
+                case EnemiesTypes.Others:
+                    break;
+                case EnemiesTypes.Ship:
+                    GameSteamManager.AddState("statBeatShip", 1, false);
+                    if(collisionType == CollisionType.Collider)
+                        GameSteamManager.UnlockAchievement("ACH_CRASH_PLAYER_SHIP");
+                    break;
+                case EnemiesTypes.Helicopter:
+                    GameSteamManager.AddState("statBeatHeli", 1, false);
+                    if(collisionType == CollisionType.Collider)
+                        GameSteamManager.UnlockAchievement("ACH_CRASH_PLAYER_HELI");
+                    break;
+                case EnemiesTypes.Hovercraft:
+                    GameSteamManager.AddState("statBeatHover", 1, false);
+                    break;
+                case EnemiesTypes.Drone:
+                    GameSteamManager.AddState("statBeatDrones", 1, false);
+                    if(collisionType == CollisionType.Collider)
+                        GameSteamManager.UnlockAchievement("ACH_CRASH_PLAYER_DRONE");
+                    break;
+                case EnemiesTypes.Tower:
+                    GameSteamManager.AddState("statBeatTower", 1, false);
+                    break;
+                case EnemiesTypes.Jet:
+                    GameSteamManager.AddState("statBeatJet", 1, false);
+                    break;
+                case EnemiesTypes.Tanks:
+                    break;
+                case EnemiesTypes.Bridges:
+                    GameSteamManager.AddState("statBeatBridge", 1, false);
+                    if(collisionType == CollisionType.Collider)
+                        GameSteamManager.UnlockAchievement("ACH_CRASH_PLAYER_BRIDGE");
+                    break;
+                case EnemiesTypes.Submarine:
+                    break;
+                case EnemiesTypes.GasStation:
+                    break;
+                case EnemiesTypes.Refugee:
+                    break;
+                case EnemiesTypes.Collectable:
+                    break;
+                case EnemiesTypes.Decoration:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            GameSteamManager.StoreStats();
+        }
         #region Calls
         void OnEventObstacleMasterHit()
         {
