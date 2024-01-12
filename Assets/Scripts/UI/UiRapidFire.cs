@@ -59,7 +59,7 @@ namespace RiverAttack
         }
         void EndRapidFire()
         {
-            if (!rapidFireEnable.gameObject.activeSelf)
+            if (rapidFireEnable.gameObject.activeSelf == false || m_SpendTimer > 0)
                 return;
             rapidFireEnable.gameObject.SetActive(false);
             rapidFireCounter.text = "00";

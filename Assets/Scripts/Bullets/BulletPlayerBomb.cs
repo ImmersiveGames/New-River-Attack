@@ -26,7 +26,7 @@ namespace RiverAttack
         float m_EndLife;
         double m_TParam;
         Collider m_Collider;
-        List<EnemiesMaster> m_CollisionEnemy;
+        List<EnemiesMaster> m_CollisionEnemy = new List<EnemiesMaster>();
 
         #region UNITY METHODS
         void OnEnable()
@@ -42,9 +42,10 @@ namespace RiverAttack
         {
             m_EndLife = Time.time + timeLife;
         }
-        void OnCollisionEnter(Collision other)
+        void OnTriggerEnter(Collider other)
         {
-            var enemy = other.collider.GetComponentInParent<EnemiesMaster>();
+            var enemy = other.GetComponentInParent<EnemiesMaster>();
+            Debug.Log(enemy);
             if (enemy && !m_CollisionEnemy.Contains(enemy))
             {
                 m_CollisionEnemy.Add(enemy);
@@ -81,6 +82,7 @@ namespace RiverAttack
         }
         new void DestroyMe()
         {
+            //Debug.Log(m_CollisionEnemy.Count);
             if (m_CollisionEnemy.Count >= 3)
             {
                 GameSteamManager.UnlockAchievement("ACH_HIT_BOMB_3");

@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using Cinemachine;
 namespace RiverAttack
 {
     [RequireComponent(typeof(AudioSource))]
     public class PanelPrincipal : PanelBase
     {
+        [SerializeField] CinemachineVirtualCameraBase[] menuCamera;
         [Header("Animation")]
         [SerializeField] protected TimeLineManager timelineManager;
         [Header("Menu Fades")]
@@ -33,6 +35,17 @@ namespace RiverAttack
             Invoke(nameof(DeactivateScreenWash), SCREEN_WASH_TIMER);
         }
 #endregion
+        void SwitchCamera(int cameraIndex) 
+        {
+            foreach (var virtualCam in menuCamera) 
+            {
+                virtualCam.Priority = 0;
+                virtualCam.gameObject.SetActive(false);
+            }
+
+            menuCamera[cameraIndex].Priority = 10;            
+            menuCamera[cameraIndex].gameObject.SetActive(true);            
+        }
         protected override void SetInternalMenu(int indexStart = 0)
         {
             base.SetInternalMenu(indexStart);

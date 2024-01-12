@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1280182848245238}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.37992823, y: 0.59636784, z: 0.37992823, w: 0.59636784}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4701862024937824}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -65, y: 90, z: 0}
 --- !u!198 &198282073106994414
 ParticleSystem:
@@ -4924,6 +4924,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1296608770970500}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -4931,7 +4932,6 @@ Transform:
   m_Children:
   - {fileID: 4501112717167946}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5754572953052246754
 MonoBehaviour:
@@ -4946,6 +4946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 6152bccc9615a3f4abab3d669b95bb57, type: 2}
+  isFinishLevel: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: fa95fafd8ce16b045bef9998c0084598,
     type: 3}
   timeoutDestroyExplosion: 2
@@ -5005,6 +5006,7 @@ GameObject:
   - component: {fileID: 33986937046935348}
   - component: {fileID: 23612235829201152}
   - component: {fileID: 95139635414240536}
+  - component: {fileID: 8713407255607539067}
   m_Layer: 9
   m_Name: BotoGPX
   m_TagString: Enemy
@@ -5019,6 +5021,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391620258977064}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.65, y: -0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -5027,7 +5030,6 @@ Transform:
   - {fileID: 4701862024937824}
   - {fileID: 4165180489935072}
   m_Father: {fileID: 4955376039709564}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33986937046935348
 MeshFilter:
@@ -5100,6 +5102,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8713407255607539067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391620258977064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a43fc02a07b4098931a5aa7b20cbd3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idAchievement: ACH_FIND_PINKRIVERDOLPHIN
 --- !u!1 &1554533685615920
 GameObject:
   m_ObjectHideFlags: 0
@@ -5123,6 +5138,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554533685615920}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -5130,7 +5146,6 @@ Transform:
   m_Children:
   - {fileID: 4990526722609696}
   m_Father: {fileID: 4501112717167946}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1593173825791334
 GameObject:
@@ -5157,13 +5172,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1593173825791334}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.37992823, y: 0.59636784, z: 0.37992823, w: 0.59636784}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4165180489935072}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -65, y: 90, z: 0}
 --- !u!198 &198984375481984138
 ParticleSystem:
@@ -10053,6 +10068,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1617689213656766}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -10060,5 +10076,4 @@ Transform:
   m_Children:
   - {fileID: 4730592606520150}
   m_Father: {fileID: 4501112717167946}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

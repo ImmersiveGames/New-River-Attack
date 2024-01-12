@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace RiverAttack
 {
@@ -30,7 +31,6 @@ namespace RiverAttack
             if (m_TimeLoop < reduceFuelCadence) return;
             //Pode reduzir a Gasolina
             m_PlayerSettings.actualFuel -= reduceFuelRate;
-            GameSteamManager.AddState("stat_SpendGas", reduceFuelRate, false);
             LogGamePlay(reduceFuelRate);
 
             // Reinicia o contador
@@ -41,6 +41,10 @@ namespace RiverAttack
             GameSteamManager.UnlockAchievement("ACH_DIE_PLAYER_GAS");
             m_PlayerMaster.OnEventPlayerMasterHit();
         }
+        void OnDisable()
+        {
+            GameSteamManager.StoreStats();
+        }
   #endregion
         void SetInitialReferences()
         {
@@ -49,19 +53,11 @@ namespace RiverAttack
             m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
             m_GamePlayingLog = m_GamePlayManager.gamePlayingLog;
         }
-        /*void IncreaseFuel(int fuel)
-        {
-            m_PlayerSettings.actualFuel = fuel;
-            if (m_PlayerSettings.actualFuel > GamePlayManager.getGameSettings.maxFuel)
-            {
-                m_PlayerSettings.actualFuel = GamePlayManager.getGameSettings.maxFuel;
-            }
-        }*/
 
         void LogGamePlay(int reduce)
         {
             m_GamePlayingLog.fuelSpent += reduce;
-            GameSteamManager.AddState("stat_SpendGas", reduce, false);
+            GameSteamManager.AddStat("stat_SpendGas", reduce, false);
         }
     }
 }

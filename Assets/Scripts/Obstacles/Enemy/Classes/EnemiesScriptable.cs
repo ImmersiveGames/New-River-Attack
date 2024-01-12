@@ -25,6 +25,6 @@ namespace RiverAttack
     }
     public enum EnemiesTypes
     {
-        Others, Ship, Helicopter, Hovercraft, Drone, Tower, Jet, Tanks, Bridges, Submarine, GasStation, Refugee, Collectable, Decoration
+        Others, Ship, Helicopter, Hovercraft, Drone, Tower, Jet, Tanks, Bridges, Submarine, GasStation, Refugee, Collectable, Decoration, Secret
     }
 }

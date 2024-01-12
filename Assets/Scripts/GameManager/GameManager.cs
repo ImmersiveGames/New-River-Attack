@@ -59,7 +59,6 @@ namespace RiverAttack
             {
                 SteamFriends.OnGameOverlayActivated += PauseGame;
             }
-            
             //Debug.Log($"GameScene: {gameScenes}");
             switch (gameScenes)
             {
@@ -215,5 +214,6 @@ namespace RiverAttack
             }
         }
         #endregion
+        
     }
 }

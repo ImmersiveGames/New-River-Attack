@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 namespace RiverAttack
@@ -15,6 +16,12 @@ namespace RiverAttack
         bool m_PushButtonStart;
 
         #region UNITYMETHODS
+        void Awake()
+        {
+            m_InputSystem = new PlayersInputActions();
+            m_InputSystem.UI_Controlls.Disable();
+            m_InputSystem.Player.Enable();
+        }
         void OnEnable()
         {
             SetControllersInput();
@@ -37,7 +44,6 @@ namespace RiverAttack
 
         void SetControllersInput()
         {
-            m_InputSystem = GamePlayManager.instance.inputSystem;
             m_InputSystem.UI_Controlls.Enable();
             m_InputSystem.UI_Controlls.StartButton.performed += _ => ButtonStartMission();
             m_InputSystem.UI_Controlls.BackButton.performed += _ => ButtonReturnInitialMenu();

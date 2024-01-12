@@ -11,7 +11,8 @@ namespace RiverAttack
         void Start()
         {
             m_ButtonActive = EventSystem.current.currentSelectedGameObject;
-            SetCursor(m_ButtonActive.GetComponent<RectTransform>());
+            if(m_ButtonActive != null)
+                SetCursor(m_ButtonActive.GetComponent<RectTransform>());
         }
         void Update()
         {

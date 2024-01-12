@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Steamworks;
 using Steamworks.Data;
-using Utils;
 namespace RiverAttack
 {
     public class GameSteamManager: MonoBehaviour
@@ -12,7 +11,7 @@ namespace RiverAttack
         const int STEAM_ID = 2777110;
         string m_PlayerName;
         static IEnumerable<Achievement> _serverAchievements;
-        
+        public bool resetAchievementsOnStart;
         bool m_ApplicationHasQuit;
 
         public static bool connectedToSteam
@@ -48,12 +47,16 @@ namespace RiverAttack
         void Start()
         {
             if (!SteamClient.IsValid) return;
+            if (resetAchievementsOnStart)
+            {
+                ClearAllStats(true);
+            }
             ReconcileMissedAchievements();
             SteamUserStats.OnAchievementProgress += AchievementChanged;
-            foreach ( var a in SteamUserStats.Achievements )
+            /*foreach ( var a in SteamUserStats.Achievements )
             {
                 Debug.Log( $"{a.Name} ({a.State}) {a.Identifier}" );
-            }
+            }*/
         }
         void Update()
         {
@@ -111,7 +114,6 @@ namespace RiverAttack
         }
         public static void UnlockAchievement(string archiveID)
         {
-            if (!SteamClient.IsValid) return;
             try
             {
                 if (!_serverAchievements.Any(achievement => achievement.Identifier == archiveID && !achievement.State))
@@ -134,42 +136,73 @@ namespace RiverAttack
             }
         }
 
-        public static void SetState(string statName, float totals, bool instant)
+        public static void SetStat(string statName, float totals, bool instant)
         {
-            if (!SteamClient.IsValid) return;
-            SteamUserStats.SetStat( statName, totals );
-            if (instant)
+            try
             {
-                StoreStats();
+                SteamUserStats.SetStat( statName, totals );
+                if (instant)
+                    SteamUserStats.StoreStats();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
         }
-        public static void SetState(string statName, int totals, bool instant)
+        public static void SetStat(string statName, int totals, bool instant)
         {
-            if (!SteamClient.IsValid) return;
-            SteamUserStats.SetStat( statName, totals );
-            if (instant)
+            try
             {
-                StoreStats();
+                SteamUserStats.SetStat( statName, totals);
+                if (instant)
+                    SteamUserStats.StoreStats();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
         }
-        public static void AddState(string statName, float totals, bool instant)
+        public static void AddStat(string statName, float totals, bool instant)
         {
-            if (!SteamClient.IsValid) return;
+            try
+            {
+                SteamUserStats.AddStat( statName, totals);
+                if (instant)
+                    SteamUserStats.StoreStats();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
+        }
+        public static void AddStat(string statName, int totals, bool instant)
+        {
+            try
+            {
+                SteamUserStats.AddStat( statName, totals);
+                if (instant)
+                    SteamUserStats.StoreStats();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        
+        /*public static void AddStatTest(string statName, int totals, bool instant)
+        {
+            int result = SteamUserStats.GetStatInt( statName );
+            Debug.Log($"{statName} result: {result}");
             SteamUserStats.AddStat( statName, totals );
-            if (instant)
-            {
-                StoreStats();
-            }
-        }
-        public static void AddState(string statName, int totals, bool instant)
-        {
-            if (!SteamClient.IsValid) return;
-            SteamUserStats.AddStat( statName, totals );
-            if (instant)
-            {
-                StoreStats();
-            }
-        }
+            result = SteamUserStats.GetStatInt( statName );
+            SteamUserStats.StoreStats();
+            Debug.Log($"Novo - {statName} result: {result}");
+        }*/
         public static int GetStatInt(string statName)
         {
             return !SteamClient.IsValid ? 0 : SteamUserStats.GetStatInt( statName );
@@ -181,7 +214,6 @@ namespace RiverAttack
 
         public static void StoreStats()
         {
-            if (!SteamClient.IsValid) return;
             SteamUserStats.StoreStats();
         }
         void GameCleanup()
@@ -192,14 +224,14 @@ namespace RiverAttack
             //leaveLobby();
             SteamClient.Shutdown();
         }
-#if UNITY_EDITOR
+
         static void ClearAllStats(bool includeAchievements)
         {
             SteamUserStats.ResetAll( includeAchievements ); // true = wipe achivements too
             SteamUserStats.StoreStats();
             SteamUserStats.RequestCurrentStats();
         }
-#endif
+
     }
     
 }

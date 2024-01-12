@@ -46,7 +46,7 @@ namespace Utils
                     var singleton = new GameObject();
                     _instance = singleton.AddComponent<T>();
                     singleton.name = "(singleton) " + typeof(T);
-
+                    
                    // DontDestroyOnLoad(singleton);
 
                     Debug.Log("[Singleton] An instance of " + typeof(T) +
@@ -88,5 +88,6 @@ namespace Utils
         {
             _applicationIsQuitting = false;
         }
+        
     }
 }

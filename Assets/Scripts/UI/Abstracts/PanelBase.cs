@@ -2,7 +2,6 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using System.Collections;
 using UnityEngine;
-using Cinemachine;
 
 namespace RiverAttack
 {
@@ -12,7 +11,6 @@ namespace RiverAttack
         [Header("Menus")]
         [SerializeField] protected Transform menuInitial;
         [SerializeField] protected Transform[] menuPrincipal;
-        [SerializeField] CinemachineVirtualCameraBase[] menuCamera;
         [SerializeField] internal GameSettings gameSettings;        
 
         [Header("Menu SFX")]
@@ -73,18 +71,6 @@ namespace RiverAttack
         public void PlayClickSfx()
         {
             GameAudioManager.instance.PlaySfx(clickSound);
-        }
-
-        protected void SwitchCamera(int cameraIndex) 
-        {
-            foreach (CinemachineVirtualCameraBase virtualCam in menuCamera) 
-            {
-                virtualCam.Priority = 0;
-                virtualCam.gameObject.SetActive(false);
-            }
-
-            menuCamera[cameraIndex].Priority = 10;            
-            menuCamera[cameraIndex].gameObject.SetActive(true);            
         }
 
         public void ButtonBack()

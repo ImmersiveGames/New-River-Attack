@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using Steamworks;
+using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace RiverAttack
 {
@@ -44,16 +46,17 @@ namespace RiverAttack
             if (position.z < 0 && distanceTraveledByFrame <= 0 && !m_PlayerMaster.shouldPlayerBeReady) return;
 
             m_TravelledDistance += distanceTraveledByFrame;
-            GameSteamManager.AddState("stat_FlightDistance", m_TravelledDistance, false);
             // Atualiza o ponto mais distante alcançado
             m_MaxTravelledDistance = Mathf.Max(m_MaxTravelledDistance, m_TravelledDistance);
-
+            // atualiza sempre que a distancia for maior que a ja coberta
             if (m_TravelledDistance > m_LastConvertDistance)
             {
                 m_LastConvertDistance = m_TravelledDistance;
                 int convertDistanceInt = Mathf.FloorToInt(m_LastConvertDistance / conversion);
                 m_GamePlayManager.OnEventUpdateDistance(convertDistanceInt);
+                AchievementHandle(m_GamePlayingLog.pathDistance + m_MaxTravelledDistance);
             }
+            
             //Debug.Log($"Update Distance: Distancia Convertida :{m_TravelledDistance}, Last: {m_LastConvertDistance}, Position: {position.z}");
             m_LastPosition = position;
             
@@ -61,6 +64,7 @@ namespace RiverAttack
         void OnDisable()
         {
             LogGamePlay(m_TravelledDistance, m_MaxTravelledDistance);
+            
         }
         void OnApplicationQuit()
         {
@@ -79,7 +83,17 @@ namespace RiverAttack
         {
             m_GamePlayingLog.maxPathDistance = maxDistance;
             m_GamePlayingLog.pathDistance += distance;
-            GameSteamManager.StoreStats();
+            int resultInt = Mathf.FloorToInt(m_GamePlayingLog.pathDistance);
+            GameSteamManager.SetStat("stat_FlightDistance", resultInt, true);
+        }
+        static void AchievementHandle(float result)
+        {
+            //Debug.Log($"Valor entrando: {result}");
+            int flight = GameSteamManager.GetStatInt("stat_FlightDistance");
+            int resultInt = Mathf.FloorToInt(result);
+            //Debug.Log($"Valor calculado: {resultInt}");
+            if (flight >= resultInt) return;
+            GameSteamManager.SetStat("stat_FlightDistance", resultInt, true);
         }
     }
 }

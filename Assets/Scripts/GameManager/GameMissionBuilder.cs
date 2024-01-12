@@ -157,17 +157,6 @@ namespace RiverAttack
             {
                 finalBridge.IsFinish();
             }
-            /*var lastPool = poolEnemyLevels[^1];
-            var bridges = lastPool.GetComponentInChildren<EnemiesBridges>();
-            if (bridges == null)
-            {
-                lastPool = poolEnemyLevels[^2];
-                bridges = lastPool.GetComponentInChildren<EnemiesBridges>();
-            }
-            if (bridges != null)
-            {
-                bridges.IsFinish();
-            }*/
         }
 
         void UpdatePoolLevel(IReadOnlyList<GameObject> pool, int actualHandle)
