@@ -41,14 +41,16 @@ namespace RiverAttack
                 poolPathLevels[j].SetActive(true);
             }
         }
-        /*void FixedPath(ref Vector3 nextBound, Levels level, GameObject nextPath, Transform myRoot)
+        /*
+        void FixedPath(ref Vector3 nextBound, Levels level, GameObject nextPath, Transform myRoot)
         {
             if (nextPath == null)
                 return;
             var path = BuildPath(ref nextBound, level, nextPath, myRoot);
             path.SetActive(true);
-        }*/
-        GameObject BuildPath(ref Vector3 nextBound, Levels level, Transform myRoot)
+        }
+        */
+        static GameObject BuildPath(ref Vector3 nextBound, Levels level, Transform myRoot)
         {
             var patch = Instantiate(level.hudPath, myRoot);
             patch.SetActive(false);
