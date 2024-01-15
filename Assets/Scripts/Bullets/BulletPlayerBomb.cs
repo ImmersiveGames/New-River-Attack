@@ -90,6 +90,7 @@ namespace RiverAttack
             GameObject o;
             (o = gameObject).SetActive(false);
             Destroy(o);
+            
         }
     }
 }

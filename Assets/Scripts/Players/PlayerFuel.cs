@@ -38,12 +38,14 @@ namespace RiverAttack
             // Verifica se ainda tem gasolina
             if (m_PlayerSettings.actualFuel > 0) return;
             m_PlayerSettings.actualFuel = 0;
-            GameSteamManager.UnlockAchievement("ACH_DIE_PLAYER_GAS");
+            if(GameSteamManager.connectedToSteam)
+                GameSteamManager.UnlockAchievement("ACH_DIE_PLAYER_GAS");
             m_PlayerMaster.OnEventPlayerMasterHit();
         }
         void OnDisable()
         {
-            GameSteamManager.StoreStats();
+            if(GameSteamManager.connectedToSteam)
+                GameSteamManager.StoreStats();
         }
   #endregion
         void SetInitialReferences()

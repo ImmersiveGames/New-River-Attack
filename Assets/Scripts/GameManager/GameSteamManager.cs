@@ -99,6 +99,7 @@ namespace RiverAttack
         }
         public static void UnlockAchievement(List<string> achievementsToUnlock)
         {
+            if (!connectedToSteam) return;
             if (!SteamClient.IsValid || !SteamClient.IsLoggedOn ) return;
             try
             {
@@ -114,6 +115,7 @@ namespace RiverAttack
         }
         public static void UnlockAchievement(string archiveID)
         {
+            if (!connectedToSteam) return;
             try
             {
                 if (!_serverAchievements.Any(achievement => achievement.Identifier == archiveID && !achievement.State))
@@ -138,6 +140,7 @@ namespace RiverAttack
 
         public static void SetStat(string statName, float totals, bool instant)
         {
+            if (!connectedToSteam) return;
             try
             {
                 SteamUserStats.SetStat( statName, totals );
@@ -152,6 +155,7 @@ namespace RiverAttack
         }
         public static void SetStat(string statName, int totals, bool instant)
         {
+            if (!connectedToSteam) return;
             try
             {
                 SteamUserStats.SetStat( statName, totals);
@@ -166,6 +170,7 @@ namespace RiverAttack
         }
         public static void AddStat(string statName, float totals, bool instant)
         {
+            if (!connectedToSteam) return;
             try
             {
                 SteamUserStats.AddStat( statName, totals);
@@ -181,6 +186,7 @@ namespace RiverAttack
         }
         public static void AddStat(string statName, int totals, bool instant)
         {
+            if (!connectedToSteam) return;
             try
             {
                 SteamUserStats.AddStat( statName, totals);
@@ -214,6 +220,7 @@ namespace RiverAttack
 
         public static void StoreStats()
         {
+            if (!connectedToSteam) return;
             SteamUserStats.StoreStats();
         }
         void GameCleanup()
