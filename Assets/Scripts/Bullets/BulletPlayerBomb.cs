@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,7 +25,7 @@ namespace RiverAttack
         float m_EndLife;
         double m_TParam;
         Collider m_Collider;
-        List<EnemiesMaster> m_CollisionEnemy = new List<EnemiesMaster>();
+        readonly List<EnemiesMaster> m_CollisionEnemy = new List<EnemiesMaster>();
 
         #region UNITY METHODS
         void OnEnable()
@@ -90,7 +89,6 @@ namespace RiverAttack
             GameObject o;
             (o = gameObject).SetActive(false);
             Destroy(o);
-            
         }
     }
 }

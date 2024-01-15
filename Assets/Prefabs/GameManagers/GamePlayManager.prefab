@@ -98,9 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelMenuGame: {fileID: 0}
-  classicLevels: {fileID: 11400000, guid: e830e2882b16dc9408cbf0c403b73ddf, type: 2}
-  missionLevels: {fileID: 11400000, guid: 89df264abcdabab40884e0012a2b8447, type: 2}
-  missionIndex: 0
   completePath: 0
   readyToFinish: 0
   godMode: 0
@@ -117,6 +114,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6692511939033817615}
   - component: {fileID: 6231058058294742876}
+  - component: {fileID: 4801163577247162390}
   m_Layer: 0
   m_Name: TimelineManager
   m_TagString: Untagged
@@ -154,6 +152,51 @@ MonoBehaviour:
   virtualCamera: {fileID: 0}
   openCutDirector: {fileID: 0}
   endCutDirector: {fileID: 0}
+--- !u!114 &4801163577247162390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7281137850188793276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 01da7c672d2c05a42b274b8be540037a, type: 2}
+    - {fileID: 11400000, guid: 9552c2288c667874381df6841a4de67a, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6231058058294742876}
+          m_TargetAssemblyTypeName: RiverAttack.GameTimelineManager, Assembly-CSharp
+          m_MethodName: EndOpenCutSceneBoss
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6231058058294742876}
+          m_TargetAssemblyTypeName: RiverAttack.GameTimelineManager, Assembly-CSharp
+          m_MethodName: EndOpenCutSceneBoss
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &8101130885918802135
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,8 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d611cdab8e147ce4ab73069ee2158da5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actualLevel: {fileID: 0}
-  actualPathIndex: 0
+  actualLevel: {fileID: 11400000, guid: c76a96867054d6849ba8d60c4345db75, type: 2}
   maxLevels: 5
   levelsFinishList: []
   pathMilestones: []
