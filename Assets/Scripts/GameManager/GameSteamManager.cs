@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Steamworks;
 using Steamworks.Data;
+using Utils;
 namespace RiverAttack
 {
     public class GameSteamManager: MonoBehaviour
     {
+        public static GameSteamManager instance;
         const int STEAM_ID = 2777110;
         string m_PlayerName;
         static IEnumerable<Achievement> _serverAchievements;
@@ -22,26 +24,33 @@ namespace RiverAttack
         #region UNITYMETHODS
         void Awake()
         {
-            try
+            if (instance == null)
             {
-                SteamClient.Init( STEAM_ID);
-                if (!SteamClient.IsValid)
+                instance = this;
+                try
                 {
-                    Debug.Log("Steam client not valid");
-                    throw new Exception();
+                    SteamClient.Init( STEAM_ID);
+                    if (!SteamClient.IsValid)
+                    {
+                        Debug.Log("Steam client not valid");
+                        throw new Exception();
+                    }
+                    m_PlayerName = SteamClient.Name;
+                    connectedToSteam = true;
+                    _serverAchievements = SteamUserStats.Achievements;
+                    Debug.Log("Steam initialized: " + m_PlayerName);
                 }
-                m_PlayerName = SteamClient.Name;
-                connectedToSteam = true;
-                _serverAchievements = SteamUserStats.Achievements;
-                Debug.Log("Steam initialized: " + m_PlayerName);
-                
-            }
-            catch ( Exception e )
-            {
-                connectedToSteam = false;
+                catch ( Exception e )
+                {
+                    connectedToSteam = false;
 
-                Debug.Log("Error connecting to Steam");
-                Debug.Log(e);
+                    Debug.Log("Error connecting to Steam");
+                    Debug.Log(e);
+                }
+            }
+            else if (instance != this)
+            {
+                Destroy(gameObject);
             }
         }
         void Start()
@@ -68,6 +77,7 @@ namespace RiverAttack
         }
         protected void OnDestroy()
         {
+            //base.OnDestroy();
             GameCleanup();
         }
         void OnApplicationQuit()
@@ -149,8 +159,7 @@ namespace RiverAttack
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                Debug.Log(e);
             }
         }
         public static void SetStat(string statName, int totals, bool instant)
@@ -164,8 +173,7 @@ namespace RiverAttack
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                Debug.Log(e);
             }
         }
         public static void AddStat(string statName, float totals, bool instant)
@@ -179,8 +187,7 @@ namespace RiverAttack
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                Debug.Log(e);
             }
             
         }
@@ -195,8 +202,7 @@ namespace RiverAttack
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                Debug.Log(e);
             }
         }
         
