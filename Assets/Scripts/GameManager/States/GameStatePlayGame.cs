@@ -25,6 +25,7 @@ namespace RiverAttack
             PlayerManager.instance.ActivePlayers(false);
             GamePlayManager.instance.OnEventDeactivateEnemiesMaster();
            
+            //TODO: Atualizar o Leaderboards
             //Debug.Log($"Sai do Estado: PlayGame");
             System.GC.Collect();
         }

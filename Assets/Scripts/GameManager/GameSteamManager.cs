@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Steamworks;
 using Steamworks.Data;
 using Utils;
@@ -11,10 +12,12 @@ namespace RiverAttack
     {
         static GameSteamManager _instance;
         const int STEAM_ID = 2777110;
-        string m_PlayerName;
+        const string LEADERBOARD_NAME = "River Attack HiScore";
         static IEnumerable<Achievement> _serverAchievements;
         public bool resetAchievementsOnStart;
         bool m_ApplicationHasQuit;
+
+        static Leaderboard? _leaderboard;
 
         public static bool connectedToSteam
         {
@@ -22,7 +25,7 @@ namespace RiverAttack
             private set;
         }
         #region UNITYMETHODS
-        void Awake()
+        async void Awake()
         {
             if (_instance == null)
             {
@@ -35,9 +38,11 @@ namespace RiverAttack
                         //Debug.Log("Steam client not valid");
                         throw new Exception();
                     }
-                    m_PlayerName = SteamClient.Name;
                     connectedToSteam = true;
                     _serverAchievements = SteamUserStats.Achievements;
+                    _leaderboard = await SteamUserStats.FindOrCreateLeaderboardAsync( LEADERBOARD_NAME, 
+                        LeaderboardSort.Ascending, 
+                        LeaderboardDisplay.Numeric );
                     //Debug.Log("Steam initialized: " + m_PlayerName);
                 }
                 catch ( Exception e )
@@ -235,6 +240,50 @@ namespace RiverAttack
             SteamUserStats.StoreStats();
             SteamUserStats.RequestCurrentStats();
         }
+
+        #region LeaderBoardas Methods
+
+
+        public static async void UpdateScore(int score, bool force)
+        {
+            if (!connectedToSteam || _leaderboard == null)
+                return;
+            try
+            {
+                if (force)
+                {
+                    await _leaderboard.Value.ReplaceScore(score);
+                }
+                else
+                {
+                    await _leaderboard.Value.SubmitScoreAsync(score);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e);
+            }
+        }
+
+        public static async Task<LeaderboardEntry[]> GetScores(int quantity)
+        {
+            if (!connectedToSteam || _leaderboard == null)
+                return null;
+            return await _leaderboard.Value.GetScoresAsync(quantity);
+        }
+        public static async Task<LeaderboardEntry[]> GetScoresFromFriends()
+        {
+            if (!connectedToSteam || _leaderboard == null)
+                return null;
+            return await _leaderboard.Value.GetScoresFromFriendsAsync();
+        }
+        public static async Task<LeaderboardEntry[]> GetScoresAround(int start, int end)
+        {
+            if (!connectedToSteam || _leaderboard == null)
+                return null;
+            return await _leaderboard.Value. GetScoresAroundUserAsync(start, end);
+        }
+  #endregion
 
     }
     
