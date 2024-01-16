@@ -1,13 +1,17 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace RiverAttack
 {
-    public class UiTextBomb : MonoBehaviour
+    public class UiHudBomb : MonoBehaviour
     {
         GamePlayManager m_GamePlayManager;
         PlayerSettings m_PlayerSettings;
-        TMP_Text m_TMPTextBomb;
+        public TMP_Text tmpTextBomb;
+        public Image bombOn;
+        public Image bombOff;
+
         #region UNITYMETHODS
         void OnEnable()
         {
@@ -16,8 +20,7 @@ namespace RiverAttack
         }
         void Start()
         {
-            int bombs = m_PlayerSettings.bombs;
-            UpdateBombs(bombs);
+            UpdateBombs(m_PlayerSettings.bombs);
         }
         void OnDisable()
         {
@@ -29,12 +32,14 @@ namespace RiverAttack
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_PlayerSettings = PlayerManager.instance.GetPlayerSettingsByIndex();
-            m_TMPTextBomb = GetComponent<TMP_Text>();
         }
 
         void UpdateBombs(int bombs)
         {
-            m_TMPTextBomb.text = $"X {bombs}";
+            bombOff.enabled = bombs <= 0;
+            bombOn.enabled = bombs > 0;
+         
+            tmpTextBomb.text = $"X {bombs}";
         }
     }
 }

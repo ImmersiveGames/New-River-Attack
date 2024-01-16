@@ -33,18 +33,6 @@ namespace RiverAttack
             m_InputSystem.BriefingRoom.Disable();
         }
 
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         void StartHoldTime()
         {
             m_IsExitButtonPressed = true;
@@ -73,11 +61,10 @@ namespace RiverAttack
             }
 
             // Ação a ser executada após manter o botão pressionado por 3 segundos
-            Debug.Log("Botão de saída mantido pressionado por 3 segundos!");
             BackToMainScene();
         }
 
-        public void BackToMainScene()
+        void BackToMainScene()
         {
             SceneManager.LoadScene(sceneToLoad);
         }

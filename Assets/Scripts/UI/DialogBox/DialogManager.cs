@@ -173,7 +173,7 @@ namespace RiverAttack
             }
 
             // Ação a ser executada após manter o botão pressionado por 3 segundos
-            Debug.Log("Botão de saída mantido pressionado por 3 segundos!");
+            //Debug.Log("Botão de saída mantido pressionado por 3 segundos!");
             DialogEnd();
         }
     }

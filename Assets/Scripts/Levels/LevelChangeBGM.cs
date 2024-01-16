@@ -18,10 +18,8 @@ namespace RiverAttack
         void OnTriggerEnter(Collider other)
         {
             if (!other.GetComponentInParent<PlayerMaster>()) return;
-            //Debug.Log($"Stat Music: {GamePlayManager.instance.actualLevels.bgmStartLevel}");
             var actualLevelSetup = GameMissionBuilder.instance.GetActualLevelSetup();
             m_GameAudioManager.ChangeBGM(actualLevelSetup.bgmLevel, TIME_TO_FADE_BGM);
-            Debug.Log($"Actual Level: {m_GamePlayManager.actualLevels}");
             m_GamePlayManager.OnEventBuildPathUpdate(transform.position.z);
         }
 

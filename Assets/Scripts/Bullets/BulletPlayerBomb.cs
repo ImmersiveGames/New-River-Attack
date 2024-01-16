@@ -44,7 +44,6 @@ namespace RiverAttack
         void OnTriggerEnter(Collider other)
         {
             var enemy = other.GetComponentInParent<EnemiesMaster>();
-            Debug.Log(enemy);
             if (enemy && !m_CollisionEnemy.Contains(enemy))
             {
                 m_CollisionEnemy.Add(enemy);

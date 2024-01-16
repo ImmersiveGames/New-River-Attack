@@ -27,7 +27,7 @@ namespace RiverAttack
             GameHubManager.instance.readyHub = false;
             yield return new WaitForSeconds(TIMER);
             Tools.ToggleChildren(transform, false);
-            Debug.Log($"Level: {level.name}");
+            //Debug.Log($"Level: {level.name}");
             GameAudioManager.instance.PlaySfx(enemyExplodeAudio);
             var explosionGameObject = Instantiate(explosion, transform);
             Destroy(explosionGameObject, TIMER_EXPLOSION);

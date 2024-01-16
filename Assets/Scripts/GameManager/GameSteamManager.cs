@@ -9,7 +9,7 @@ namespace RiverAttack
 {
     public class GameSteamManager: MonoBehaviour
     {
-        public static GameSteamManager instance;
+        static GameSteamManager _instance;
         const int STEAM_ID = 2777110;
         string m_PlayerName;
         static IEnumerable<Achievement> _serverAchievements;
@@ -19,26 +19,26 @@ namespace RiverAttack
         public static bool connectedToSteam
         {
             get;
-            set;
+            private set;
         }
         #region UNITYMETHODS
         void Awake()
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = this;
+                _instance = this;
                 try
                 {
                     SteamClient.Init( STEAM_ID);
                     if (!SteamClient.IsValid)
                     {
-                        Debug.Log("Steam client not valid");
+                        //Debug.Log("Steam client not valid");
                         throw new Exception();
                     }
                     m_PlayerName = SteamClient.Name;
                     connectedToSteam = true;
                     _serverAchievements = SteamUserStats.Achievements;
-                    Debug.Log("Steam initialized: " + m_PlayerName);
+                    //Debug.Log("Steam initialized: " + m_PlayerName);
                 }
                 catch ( Exception e )
                 {
@@ -48,7 +48,7 @@ namespace RiverAttack
                     Debug.Log(e);
                 }
             }
-            else if (instance != this)
+            else if (_instance != this)
             {
                 Destroy(gameObject);
             }
@@ -206,15 +206,6 @@ namespace RiverAttack
             }
         }
         
-        /*public static void AddStatTest(string statName, int totals, bool instant)
-        {
-            int result = SteamUserStats.GetStatInt( statName );
-            Debug.Log($"{statName} result: {result}");
-            SteamUserStats.AddStat( statName, totals );
-            result = SteamUserStats.GetStatInt( statName );
-            SteamUserStats.StoreStats();
-            Debug.Log($"Novo - {statName} result: {result}");
-        }*/
         public static int GetStatInt(string statName)
         {
             return !SteamClient.IsValid ? 0 : SteamUserStats.GetStatInt( statName );
@@ -240,7 +231,7 @@ namespace RiverAttack
 
         static void ClearAllStats(bool includeAchievements)
         {
-            SteamUserStats.ResetAll( includeAchievements ); // true = wipe achivements too
+            SteamUserStats.ResetAll( includeAchievements );
             SteamUserStats.StoreStats();
             SteamUserStats.RequestCurrentStats();
         }

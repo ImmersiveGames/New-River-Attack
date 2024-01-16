@@ -1666,6 +1666,7 @@ MonoBehaviour:
   productForward: {fileID: 5151305869799826664}
   productBackward: {fileID: 4135018641237324986}
   mainMenuPlayer: {fileID: 0}
+  allSkins: {fileID: 0}
   infinityLooping: 0
   spaceBetweenPanels: 0
   maxPosition: 0
@@ -1761,7 +1762,7 @@ GameObject:
   - component: {fileID: 3344532218572753307}
   - component: {fileID: 3957326928101127917}
   m_Layer: 5
-  m_Name: Bomb_Image
+  m_Name: Bomb_Image_off
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1807,7 +1808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.31132078, g: 0.3069153, b: 0.3069153, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3057,6 +3058,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff5a3dc264e02304691b3bbda6c66d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tmpTextBomb: {fileID: 0}
+  bombOn: {fileID: 0}
+  bombOff: {fileID: 0}
 --- !u!1 &2713512843956499338
 GameObject:
   m_ObjectHideFlags: 0
@@ -3436,6 +3440,81 @@ MonoBehaviour:
   m_Sprite: {fileID: 21300000, guid: 13817433aee80ba47a97274ccaf3db5d, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &2812858505385655215
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4836990907162222653}
+  - component: {fileID: 3344443569367887893}
+  - component: {fileID: 3165784655442484758}
+  m_Layer: 5
+  m_Name: Bomb_Image_on
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4836990907162222653
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2812858505385655215}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5625, y: 0.5625, z: 0.5625}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7500632160547071038}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 60, y: 160}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3344443569367887893
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2812858505385655215}
+  m_CullTransparentMesh: 1
+--- !u!114 &3165784655442484758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2812858505385655215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.31132078, g: 0.3069153, b: 0.3069153, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300008, guid: 3de49b0208cf67e4fbc9d0c1d0a9e1d1, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -3964,7 +4043,6 @@ GameObject:
   - component: {fileID: 7832599958399981068}
   - component: {fileID: 3364391562166958524}
   - component: {fileID: 1720519817513659566}
-  - component: {fileID: 3220732096282124148}
   m_Layer: 5
   m_Name: Bomb_Qtd_Text
   m_TagString: Untagged
@@ -4089,18 +4167,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &3220732096282124148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3335361973096820296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff5a3dc264e02304691b3bbda6c66d1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3538554742179479270
 GameObject:
   m_ObjectHideFlags: 0
@@ -7829,6 +7895,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7500632160547071038}
+  - component: {fileID: 8488389929624984536}
   m_Layer: 5
   m_Name: Bomb_Display
   m_TagString: Untagged
@@ -7850,6 +7917,7 @@ RectTransform:
   m_Children:
   - {fileID: 4738300987425171766}
   - {fileID: 6735148488447335778}
+  - {fileID: 4836990907162222653}
   - {fileID: 7832599958399981068}
   m_Father: {fileID: 5112500353193143499}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7858,6 +7926,21 @@ RectTransform:
   m_AnchoredPosition: {x: 97, y: -8}
   m_SizeDelta: {x: 120, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8488389929624984536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6874708492129825141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff5a3dc264e02304691b3bbda6c66d1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tmpTextBomb: {fileID: 1720519817513659566}
+  bombOn: {fileID: 3165784655442484758}
+  bombOff: {fileID: 3957326928101127917}
 --- !u!1 &6898745024015026776
 GameObject:
   m_ObjectHideFlags: 0
@@ -9764,8 +9847,6 @@ MonoBehaviour:
   - {fileID: 7876266413039176799}
   - {fileID: 4271509959616893667}
   - {fileID: 3862301358193808243}
-  cineMachineBrain: {fileID: 0}
-  menuCamera: []
   gameSettings: {fileID: 11400000, guid: db36c8f305b070e4286b509243b94647, type: 2}
   clickSound: {fileID: 11400000, guid: ea484399c14180340acf086f677c65ff, type: 2}
   background: {fileID: 947357488267359097}
@@ -9959,7 +10040,6 @@ GameObject:
   - component: {fileID: 101803848628623814}
   - component: {fileID: 6655181328350552426}
   - component: {fileID: 2085277365433538054}
-  - component: {fileID: 3723736374226884462}
   m_Layer: 5
   m_Name: Mission_HUB_Btn (1)
   m_TagString: Untagged
@@ -10123,11 +10203,23 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 101803848628623814}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1693582326333188230}
+        m_TargetAssemblyTypeName: RiverAttack.PanelMenuGame, Assembly-CSharp
+        m_MethodName: ButtonExitToHub
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2085277365433538054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10168,15 +10260,3 @@ MonoBehaviour:
           m_WaitForCompletion: 0
           m_LocalVariables: []
         m_PropertyPath: m_text
---- !u!114 &3723736374226884462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9190818937154482681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12446ef894c99d048a7f47aa72efc944, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

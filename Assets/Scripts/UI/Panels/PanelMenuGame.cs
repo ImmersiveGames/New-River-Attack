@@ -83,16 +83,7 @@ namespace RiverAttack
             background.gameObject.SetActive(false);
             menuInitial.gameObject.SetActive(true);
             SetInternalMenu(menuPrincipal.Length - 1);
-            /*menuControl.gameObject.SetActive(false);
-            menuHud.gameObject.SetActive(false);
-            menuParent.gameObject.SetActive(true);
-            backgroundImage.enabled = false;
-            logoImage.enabled = false;
-            foreach (var t in menuPrincipal)
-            {
-                t.gameObject.SetActive(false);
-            }
-            menuGameOver.gameObject.SetActive(true);*/
+            
         }
         void ButtonGamePause()
         {
@@ -125,16 +116,24 @@ namespace RiverAttack
                     break;
             }
         }
-
+        public void ButtonExitToHub()
+        {
+            ClearSceneForButtons();
+            m_GameManager.ChangeState(new GameStateHub(), GameManager.GameScenes.MissionHub.ToString());
+        }
         public void ButtonReturnInitialMenu()
+        {
+            ClearSceneForButtons();
+            m_GameManager.ChangeState(new GameStateMenu(), GameManager.GameScenes.MainScene.ToString());
+        }
+
+        void ClearSceneForButtons()
         {
             PlayClickSfx();
             StopAllCoroutines();
             PlayerManager.instance.DestroyPlayers();
             GameMissionBuilder.instance.ResetBuildMission();
             m_InputSystem.Disable();
-            //TODO: desligar tudo para depois mudar a scena.
-            m_GameManager.ChangeState(new GameStateMenu(), GameManager.GameScenes.MainScene.ToString());
         }
     }
 }
