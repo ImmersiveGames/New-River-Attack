@@ -39,6 +39,7 @@ namespace RiverAttack
             {
                 level.levelsStates = LevelsStates.Actual;
             }
+            SetUpMission(0);
         }
         void SetUpMission(int index)
         {

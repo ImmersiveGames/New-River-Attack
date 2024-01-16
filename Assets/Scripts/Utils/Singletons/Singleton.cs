@@ -60,7 +60,7 @@ namespace Utils
             }
         }
 
-        public void RemoveSingleton()
+        void RemoveSingleton()
         {
             if (_instance)
             {
@@ -78,9 +78,14 @@ namespace Utils
             So, this was made to be sure we're not creating that buggy ghost object.
          </summary>
          */
+        void OnApplicationQuit()
+        {
+            _applicationIsQuitting = true;
+            RemoveSingleton();
+        }
         protected virtual void OnDestroy()
         {
-            Debug.Log($"Destrui o singleton {typeof(T)}");
+            Debug.Log($"singleton destroyed {typeof(T)}");
             _applicationIsQuitting = true;
         }
 

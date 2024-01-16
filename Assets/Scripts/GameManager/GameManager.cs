@@ -199,7 +199,7 @@ namespace RiverAttack
         { 
             DestroyImmediate(PlayerManager.instance);
         }
-        private IEnumerator FadeCanvas(bool faceIn) {
+        IEnumerator FadeCanvas(bool faceIn) {
             var corInitial = fadeImage.color;
             float corAlpha = (faceIn) ? 0.0f : 1.0f; // in:out
             var corFinal = new Color(corInitial.r, corInitial.g, corInitial.b, corAlpha);

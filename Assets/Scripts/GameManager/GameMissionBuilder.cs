@@ -16,8 +16,6 @@ namespace RiverAttack
 
         [Header("Level HUB Settings")]
         public List<Levels> levelsFinishList = new List<Levels>();
-        /*[SerializeField]
-        List<Levels> previousLevelList = new List<Levels>(); // este só é usado para constatar a HUD*/
 
         [Header("INTERNAL SETTINGS")]
         [SerializeField]
@@ -28,8 +26,7 @@ namespace RiverAttack
         List<GameObject> poolEnemyLevels = new List<GameObject>();
         GameObject m_LevelRoot;
         GamePlayManager m_GamePlayManager;
-
-
+        
 
 #region UNITYMETHODS
         void OnEnable()
@@ -57,6 +54,10 @@ namespace RiverAttack
         }
   #endregion
 
+        public LevelsSetup GetActualLevelSetup()
+        {
+            return actualLevel.setLevelList[m_ActualPathIndex];
+        }
         internal void StartBuildMission(Levels level)
         {
             //Debug.Log($"Construiu a scena?");
@@ -131,7 +132,7 @@ namespace RiverAttack
             Tools.EqualizeLists(ref poolPathLevels, ref poolEnemyLevels);
 
             //Debug.Log($"Muda o BGM para: {actualLevel.setLevelList[actualPathIndex].bgmLevel}");
-            GameAudioManager.instance.ChangeBGM(actualLevel.setLevelList[m_ActualPathIndex].bgmLevel, TIME_TO_FADE_BGM);
+            //GameAudioManager.instance.ChangeBGM(actualLevel.setLevelList[m_ActualPathIndex].bgmLevel, TIME_TO_FADE_BGM);
             UpdatePoolLevel(poolPathLevels, m_ActualPathIndex);
             UpdatePoolLevel(poolEnemyLevels, m_ActualPathIndex);
             m_ActualPathIndex++;

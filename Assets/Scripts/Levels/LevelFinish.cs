@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace RiverAttack
 {
-    public class LevelFinish : MonoBehaviour
+    public class LevelFinish : LevelCheck
     {
         GamePlayManager m_GamePlayManager;
         #region UNITY METHODS

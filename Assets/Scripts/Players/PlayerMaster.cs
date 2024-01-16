@@ -80,11 +80,9 @@ namespace RiverAttack
         }
         void OnTriggerEnter(Collider other)
         {
-            Debug.Log($"coll: {other.GetComponent<LevelFinish>()}");
             if (other.GetComponentInParent<PlayerMaster>() || other.GetComponent<BulletPlayer>()
                 || other.GetComponent<BulletPlayerBomb>() || other.GetComponentInParent<CollectiblesMaster>() != null
-                || other.GetComponentInParent<EffectAreaAnimator>() || other.GetComponent<LevelFinish>()
-                || other.GetComponent<LevelChangeBGM>()) return;
+                || other.GetComponentInParent<EffectAreaAnimator>() || other.GetComponent<LevelCheck>()) return;
             
             if (m_GamePlayManager.getGodMode || m_Invulnerability) return;
             LogGamePlay(other);
