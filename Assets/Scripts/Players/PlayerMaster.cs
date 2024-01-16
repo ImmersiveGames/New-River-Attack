@@ -5,7 +5,7 @@ using UnityEngine;
 using Utils;
 namespace RiverAttack
 {
-    public sealed class PlayerMaster : ObjectMaster
+    public class PlayerMaster : ObjectMaster
     {
         [SerializeField] internal PlayerSettings getPlayerSettings;
         [Header("Player Destroy Settings")]
@@ -42,6 +42,7 @@ namespace RiverAttack
         GamePlayManager m_GamePlayManager;
         GameManager m_GameManager;
         GameSettings m_GameSettings;
+        
         #region Delagetes
         public delegate void GeneralEventHandler();
         public event GeneralEventHandler EventPlayerMasterHit;
@@ -76,7 +77,6 @@ namespace RiverAttack
         void Start()
         {
             PlayerStartSetup();
-            MyDebugStart();
         }
         void OnTriggerEnter(Collider other)
         {
@@ -179,6 +179,7 @@ namespace RiverAttack
             getPlayerSettings.actualFuel = m_GameSettings.startFuel;
             OnEventPlayerMasterRespawn();
             float timeToRespawn = m_GamePlayManager.bossFight ? timeoutReSpawn/2 : timeoutReSpawn;
+            
             Invoke(nameof(ReSpawn), timeToRespawn);
         }
         void ReSpawn()
@@ -247,12 +248,6 @@ namespace RiverAttack
             EventPlayerMasterUpdateSkin?.Invoke();
         }
   #endregion
-
-        void MyDebugStart()
-        {
-            if (!m_GameManager.debugMode) return;
-            transform.position = Vector3.zero;
-        }
         
     }
 }

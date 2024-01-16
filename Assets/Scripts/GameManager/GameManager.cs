@@ -86,11 +86,13 @@ namespace RiverAttack
         #region Actions Application
         protected void OnApplicationFocus(bool hasFocus)
         {
+            if(debugMode) return;
             PauseGame(!hasFocus);
         }
 
         protected void OnApplicationPause(bool pauseStatus)
         {
+            if(debugMode) return;
             PauseGame(pauseStatus);
         }
         #endregion
