@@ -5,14 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Steamworks;
 using Steamworks.Data;
-using Utils;
 namespace RiverAttack
 {
     public class GameSteamManager: MonoBehaviour
     {
         static GameSteamManager _instance;
         const int STEAM_ID = 2777110;
-        const string LEADERBOARD_NAME = "River Attack HiScore";
+        const string LEADERBOARD_NAME = "River_Attack_HiScore";
         static IEnumerable<Achievement> _serverAchievements;
         public bool resetAchievementsOnStart;
         bool m_ApplicationHasQuit;
@@ -40,15 +39,13 @@ namespace RiverAttack
                     }
                     connectedToSteam = true;
                     _serverAchievements = SteamUserStats.Achievements;
-                    _leaderboard = await SteamUserStats.FindOrCreateLeaderboardAsync( LEADERBOARD_NAME, 
-                        LeaderboardSort.Ascending, 
-                        LeaderboardDisplay.Numeric );
-                    //Debug.Log("Steam initialized: " + m_PlayerName);
+                    _leaderboard = await SteamUserStats.FindLeaderboardAsync(LEADERBOARD_NAME);
+
+                    Debug.Log("Leaderboard initialized: " + _leaderboard);
                 }
                 catch ( Exception e )
                 {
                     connectedToSteam = false;
-
                     Debug.Log("Error connecting to Steam");
                     Debug.Log(e);
                 }
@@ -231,6 +228,7 @@ namespace RiverAttack
                 return;
             m_ApplicationHasQuit = true;
             //leaveLobby();
+            _leaderboard = null;
             SteamClient.Shutdown();
         }
 
@@ -246,23 +244,20 @@ namespace RiverAttack
 
         public static async void UpdateScore(int score, bool force)
         {
-            if (!connectedToSteam || _leaderboard == null)
+            if (!connectedToSteam || _leaderboard == null || score <= 0)
                 return;
-            try
+            LeaderboardUpdate? result;
+            Debug.Log($"REGISTRAAAAAAAA {score} AQUI: {_leaderboard}");
+            if (force)
             {
-                if (force)
-                {
-                    await _leaderboard.Value.ReplaceScore(score);
-                }
-                else
-                {
-                    await _leaderboard.Value.SubmitScoreAsync(score);
-                }
+                result = await _leaderboard.Value.ReplaceScore(score);
             }
-            catch (Exception e)
+            else
             {
-                Debug.Log(e);
+                result = await _leaderboard.Value.SubmitScoreAsync(score);
             }
+            if (result != null)
+                Debug.Log($"Registrou: {result.Value.Score}");
         }
 
         public static async Task<LeaderboardEntry[]> GetScores(int quantity)

@@ -13,6 +13,8 @@ namespace RiverAttack
         {
             SetInitialReferences();
             m_GamePlayManager.EventUpdateScore += UpdateScore;
+            int score = m_PlayerSettings.score;
+            UpdateScore(score);
         }
         void Start()
         {

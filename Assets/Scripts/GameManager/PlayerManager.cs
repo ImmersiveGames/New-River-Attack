@@ -25,6 +25,7 @@ namespace RiverAttack
             var playerSettings = playerSettingsList[^1];
             var playerObject = Instantiate(playerPrefab, spawnPlayerPosition, Quaternion.identity);
             playerObject.name = playerSettings.name;
+            playerSettings.score = 0;
             var playerMaster = playerObject.GetComponent<PlayerMaster>();
             GameTimelineManager.instance.InitializePLayerInTimeline(playerObject.transform, playerMaster.GetComponent<Animator>());
             playerMaster.SetPlayerSettingsToPlayMaster(playerSettings);

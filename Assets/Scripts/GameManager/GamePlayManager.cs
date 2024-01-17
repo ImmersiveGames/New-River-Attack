@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using Utils;
 
@@ -40,6 +41,8 @@ namespace RiverAttack
         GameManager m_GameManager;
         PlayerManager m_PlayerManager;
         internal PlayersInputActions inputSystem;
+
+        int m_Score;
 
         #region Delegates
         public delegate void GeneralEventHandler();
@@ -121,6 +124,7 @@ namespace RiverAttack
         {
             panelMenuGame.SetMenuGameOver();
         }
+        
 
         internal void PauseBossBattle(bool pause)
         {
@@ -194,6 +198,7 @@ namespace RiverAttack
         }
         internal void OnEventUpdateScore(int value)
         {
+            GameSteamManager.UpdateScore(value, false);
             EventUpdateScore?.Invoke(value);
         }
         internal void OnEventUpdateDistance(int value)
