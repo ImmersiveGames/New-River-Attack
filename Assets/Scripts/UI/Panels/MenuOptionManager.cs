@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
@@ -5,11 +6,12 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
+using System.Collections.Generic;
 
 namespace RiverAttack
 {
     public class MenuOptionManager : MonoBehaviour
-    {
+    {        
         [Header("Audio Options References")]
         [SerializeField] AudioMixer mixerGroup;
         [SerializeField] Slider musicVolumeSlider;
@@ -25,6 +27,15 @@ namespace RiverAttack
         AudioSource m_AudioSource;
         GameSettings m_GameSettings;
 
+        [Header("Graphics Options References")]
+        [SerializeField] TMP_Dropdown gpx_QualityDropdown;
+        [SerializeField] DialogObject dialogQualityLocalization;
+        [SerializeField] TMP_Dropdown gpx_ResolutionDropdown;
+        [SerializeField] TMP_Text debugText;
+
+        int actualQuality;
+        Resolution actualResolution;
+
         #region UNITYMETHODS
         void OnEnable()
         {
@@ -35,11 +46,20 @@ namespace RiverAttack
                 m_GameSettings.startLocale = LocalizationSettings.SelectedLocale;
             m_ActualLocal = m_GameSettings.startLocale;
             SetLocaleButton(m_ActualLocal);
+
+            SetInitialGrapicsValues();
+            SetGraphicsQualityDropDwon();
+            SetResolutionDropDown();
         }
         void Start()
         {
             SetMusicVolume();
             SetSfxVolume();
+        }
+
+        void Update()
+        {
+            debugText.text = Screen.currentResolution.ToString();
         }
         void OnDisable()
         {
@@ -86,6 +106,7 @@ namespace RiverAttack
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeId];
             m_ActualLocal = m_GameSettings.startLocale = LocalizationSettings.SelectedLocale;
             m_ActiveLocaleButton = false;
+            SetGraphicsQualityDropDwon();
         }
 
         public void SetSfxVolume()
@@ -95,6 +116,141 @@ namespace RiverAttack
             mixerGroup.SetFloat("SFXVolume", volume);
 
             //Debug.Log("Volume de SFX: " + volume.ToString());
+        }
+
+        void SetInitialGrapicsValues() {
+            actualQuality = m_GameSettings.actualQuality;
+            actualResolution.width = m_GameSettings.actualResolutionWidth;
+            actualResolution.height = m_GameSettings.actualResolutionHeight;
+        }
+
+        void SetGraphicsQualityDropDwon()
+        {
+            string[] qualityLevels;
+
+            Debug.Log(m_ActualLocal.Identifier.Code);
+
+            if (dialogQualityLocalization != null)
+            {
+                if (m_ActualLocal.Identifier.Code == "en")
+                {
+                    qualityLevels = dialogQualityLocalization.dialogSentences_EN;
+                }
+                else if (m_ActualLocal.Identifier.Code == "pt-BR")
+                {
+                    qualityLevels = dialogQualityLocalization.dialogSentences_PT_BR;
+                }
+                else
+                {
+                    qualityLevels = QualitySettings.names;
+                }
+            }
+
+            else
+            {
+                qualityLevels = QualitySettings.names;
+            }
+            
+            
+            gpx_QualityDropdown.ClearOptions();
+
+            gpx_QualityDropdown.AddOptions(new List<string>(qualityLevels));
+
+            gpx_QualityDropdown.value = actualQuality;
+
+            gpx_QualityDropdown.onValueChanged.AddListener(delegate
+            {
+                OnQualityChanged(gpx_QualityDropdown);
+            });
+        }
+
+        void OnQualityChanged(TMP_Dropdown dropdown)
+        {
+            // Obter o valor selecionado e aplicar a qualidade gráfica.
+            QualitySettings.SetQualityLevel(dropdown.value);
+            actualQuality = dropdown.value;
+
+            m_GameSettings.actualQuality = actualQuality;
+
+            Debug.Log("Apliquei as qualidade grafica: " + QualitySettings.GetQualityLevel());
+        }
+
+        void SetResolutionDropDown()
+        {
+            Resolution[] allResolutions = Screen.resolutions;
+
+            // Remover duplicatas do array de resoluções.
+            Resolution[] resolutions = RemoveDuplicateResolutions(allResolutions);
+
+            gpx_ResolutionDropdown.ClearOptions();
+
+            List<TMP_Dropdown.OptionData> dropdownOptions = new List<TMP_Dropdown.OptionData>();
+
+            // Adicionar cada opção de resolução à lista em ordem inversa, evitando duplicatas.
+            foreach (Resolution resolution in resolutions)
+            {
+                string optionText = resolution.width + " x " + resolution.height;
+                dropdownOptions.Add(new TMP_Dropdown.OptionData(optionText));
+            }
+
+            gpx_ResolutionDropdown.AddOptions(dropdownOptions);
+
+            gpx_ResolutionDropdown.onValueChanged.AddListener(delegate
+            {
+                OnResolutionChanged(gpx_ResolutionDropdown, resolutions);
+            });
+
+            SetInitialResolutionValue(gpx_ResolutionDropdown, resolutions);
+        }
+
+        Resolution[] RemoveDuplicateResolutions(Resolution[] resolutions)
+        {
+            HashSet<string> uniqueResolutions = new HashSet<string>();
+            
+            List<Resolution> uniqueList = new List<Resolution>();
+
+            for (int i = resolutions.Length - 1; i >= 0; i--)
+            {
+                string resolutionString = resolutions[i].width + "x" + resolutions[i].height;
+
+                if (uniqueResolutions.Add(resolutionString))
+                {
+                    uniqueList.Add(resolutions[i]);
+                }
+            }
+            
+            return uniqueList.ToArray();
+        }
+
+            void SetInitialResolutionValue(TMP_Dropdown dropdown, Resolution[] resolutions)
+        {
+            Resolution currentResolution = currentResolution = Screen.currentResolution;
+
+            Debug.Log(actualResolution);
+
+            for (int i = 0; i < resolutions.Length; i++)
+            {
+                if (currentResolution.width == resolutions[i].width &&
+                    currentResolution.height == resolutions[i].height)
+                {
+                    dropdown.value = i;
+                    break;
+                }
+            }
+        }
+
+        void OnResolutionChanged(TMP_Dropdown dropdown, Resolution[] resolutions)
+        {
+            // Obter o valor selecionado e aplicar a resolução.
+            actualResolution.width = resolutions[dropdown.value].width;
+            actualResolution.height = resolutions[dropdown.value].height;
+
+            m_GameSettings.actualResolutionWidth = actualResolution.width;
+            m_GameSettings.actualResolutionHeight = actualResolution.height;
+            
+            Screen.SetResolution(actualResolution.width, actualResolution.height, Screen.fullScreen);
+
+            Debug.Log("Apliquei resolução: " + actualResolution);
         }
     }
 }

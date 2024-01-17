@@ -21,6 +21,10 @@ namespace RiverAttack
         public Locale startLocale;
         [Header("Game play Settings")]
         public int multiplyScoreForLives;
-      
+
+        [Header("Graphics Settings")]
+        public int actualQuality;
+        public int actualResolutionWidth;      
+        public int actualResolutionHeight;      
     }
 }
