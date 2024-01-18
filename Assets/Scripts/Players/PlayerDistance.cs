@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+using Steamworks;
+using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace RiverAttack
 {
     public class PlayerDistance : MonoBehaviour
     {
         public float conversion;
-        public float offsetInicial;
+        [FormerlySerializedAs("offsetInicial")] public float offsetInitial;
 
         Vector3 m_LastPosition;
         float m_TravelledDistance;
@@ -16,22 +19,22 @@ namespace RiverAttack
         GamePlayManager m_GamePlayManager;
         PlayerMaster m_PlayerMaster;
         PlayerSettings m_PlayerSettings;
-        GamePlaySettings m_GamePlaySettings;
+        GamePlayingLog m_GamePlayingLog;
 
         #region UNITYMETHODS
         void OnEnable()
         {
             m_GamePlayManager = GamePlayManager.instance;
-            m_GamePlaySettings = m_GamePlayManager.gamePlaySettings;
+            m_GamePlayingLog = m_GamePlayManager.gamePlayingLog;
             m_PlayerMaster = GetComponent<PlayerMaster>();
             m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
         }
         void Start()
         {
-            offsetInicial += GameManager.instance.spawnPlayerPosition.z;
+            offsetInitial += PlayerManager.instance.spawnPlayerPosition.z;
             m_LastPosition = transform.position;
-            m_TravelledDistance = offsetInicial;
-            LoadMaxDistancia();
+            m_TravelledDistance = offsetInitial;
+            LoadMaxDistance();
         }
         void Update()
         {
@@ -43,16 +46,17 @@ namespace RiverAttack
             if (position.z < 0 && distanceTraveledByFrame <= 0 && !m_PlayerMaster.shouldPlayerBeReady) return;
 
             m_TravelledDistance += distanceTraveledByFrame;
-
             // Atualiza o ponto mais distante alcançado
             m_MaxTravelledDistance = Mathf.Max(m_MaxTravelledDistance, m_TravelledDistance);
-
+            // atualiza sempre que a distancia for maior que a ja coberta
             if (m_TravelledDistance > m_LastConvertDistance)
             {
                 m_LastConvertDistance = m_TravelledDistance;
                 int convertDistanceInt = Mathf.FloorToInt(m_LastConvertDistance / conversion);
                 m_GamePlayManager.OnEventUpdateDistance(convertDistanceInt);
+                AchievementHandle(m_GamePlayingLog.pathDistance + m_MaxTravelledDistance);
             }
+            
             //Debug.Log($"Update Distance: Distancia Convertida :{m_TravelledDistance}, Last: {m_LastConvertDistance}, Position: {position.z}");
             m_LastPosition = position;
             
@@ -60,13 +64,14 @@ namespace RiverAttack
         void OnDisable()
         {
             LogGamePlay(m_TravelledDistance, m_MaxTravelledDistance);
+            
         }
         void OnApplicationQuit()
         {
             m_PlayerSettings.distance = m_MaxTravelledDistance;
         }
   #endregion
-        void LoadMaxDistancia()
+        void LoadMaxDistance()
         {
             float settingDistance = m_PlayerMaster.getPlayerSettings.distance;
             m_MaxTravelledDistance = (settingDistance != 0) ? settingDistance : 0;
@@ -76,8 +81,19 @@ namespace RiverAttack
 
         void LogGamePlay(float distance, float maxDistance)
         {
-            m_GamePlaySettings.maxPathDistance = maxDistance;
-            m_GamePlaySettings.pathDistance += distance;
+            m_GamePlayingLog.maxPathDistance = maxDistance;
+            m_GamePlayingLog.pathDistance += distance;
+            int resultInt = Mathf.FloorToInt(m_GamePlayingLog.pathDistance);
+            GameSteamManager.SetStat("stat_FlightDistance", resultInt, true);
+        }
+        static void AchievementHandle(float result)
+        {
+            //Debug.Log($"Valor entrando: {result}");
+            int flight = GameSteamManager.GetStatInt("stat_FlightDistance");
+            int resultInt = Mathf.FloorToInt(result);
+            //Debug.Log($"Valor calculado: {resultInt}");
+            if (flight >= resultInt) return;
+            GameSteamManager.SetStat("stat_FlightDistance", resultInt, true);
         }
     }
 }

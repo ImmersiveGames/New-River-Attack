@@ -1,25 +1,22 @@
-﻿using UnityEngine;
+using System.Collections;
+using UnityEngine;
 namespace RiverAttack
 {
     public class GameStateMenu : GameState
     {
-        const float TIME_TO_FADE_BGM = 0.2f;
-        readonly GameManager m_GameManager;
-        internal GameStateMenu()
+        const float TIME_TO_FADE_BGM = 0.01f;
+        public override IEnumerator OnLoadState()
         {
-            m_GameManager = GameManager.instance;
+            yield return null;
         }
-
         public override void EnterState()
         {
             //Debug.Log($"Entra no Estado: Menu");
-            GamePlayAudio.instance.ChangeBGM(LevelTypes.Menu, TIME_TO_FADE_BGM);
-            m_GameManager.startMenu.SetMenuPrincipal(0, true);
-            m_GameManager.startMenu.SetMenuHudControl(false);
+            GameAudioManager.instance.ChangeBGM(LevelTypes.Menu, TIME_TO_FADE_BGM);
         }
         public override void UpdateState()
         {
-           // Debug.Log($"Rodando no Estado: Menu");
+           //Debug.Log($"Rodando no Estado: Menu");
         }
         public override void ExitState()
         {

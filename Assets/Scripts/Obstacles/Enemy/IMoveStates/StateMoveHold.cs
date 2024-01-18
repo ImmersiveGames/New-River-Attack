@@ -6,13 +6,13 @@ namespace RiverAttack
     public class StateMoveHold : IMove
     {
         readonly EnemiesMovement m_EnemiesMovement;
-        readonly EnemiesMaster m_EnemiesMaster;
+        readonly ObstacleMaster m_ObstacleMaster;
         readonly GamePlayManager m_GamePlayManager;
         Vector3 m_VectorDirection;
-        public StateMoveHold(EnemiesMovement enemiesMovement, EnemiesMaster enemiesMaster)
+        public StateMoveHold(EnemiesMovement enemiesMovement, ObstacleMaster obstacleMaster)
         {
             m_EnemiesMovement = enemiesMovement;
-            m_EnemiesMaster = enemiesMaster;
+            m_ObstacleMaster = obstacleMaster;
             m_GamePlayManager = GamePlayManager.instance;
         }
         public void EnterState()
@@ -25,12 +25,12 @@ namespace RiverAttack
             if (m_EnemiesMovement.shouldBeMoving && !m_EnemiesMovement.shouldBeApproach)
             {
                 //Debug.Log($"{transform.name} MOVE!!!!");
-                m_EnemiesMovement.ChangeState(new StateMove(m_EnemiesMovement, m_EnemiesMaster));
+                m_EnemiesMovement.ChangeState(new StateMove(m_EnemiesMovement, m_ObstacleMaster));
             }
             if (m_EnemiesMovement.shouldBeMoving && m_EnemiesMovement.shouldBeApproach)
             {
                 //.Log($"{transform.name} Patrulha!!!!");
-                m_EnemiesMovement.ChangeState(new StateMovePatrol(m_EnemiesMovement, m_EnemiesMaster));
+                m_EnemiesMovement.ChangeState(new StateMovePatrol(m_EnemiesMovement, m_ObstacleMaster));
             }
             
         }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace RiverAttack
 {
@@ -7,7 +7,7 @@ namespace RiverAttack
         PlayerMaster m_PlayerMaster;
         GamePlayManager m_GamePlayManager;
         PlayerSettings m_PlayerSettings;
-        GamePlaySettings m_GamePlaySettings;
+        GamePlayingLog m_GamePlayingLog;
 
         #region UNITYMETHODS
         void OnEnable()
@@ -28,7 +28,7 @@ namespace RiverAttack
             m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
 
             m_GamePlayManager = GamePlayManager.instance;
-            m_GamePlaySettings = m_GamePlayManager.gamePlaySettings;
+            m_GamePlayingLog = m_GamePlayManager.gamePlayingLog;
         }
         void LoseLive()
         {
@@ -47,7 +47,7 @@ namespace RiverAttack
         }
         void LogGamePlay(int live)
         {
-            m_GamePlaySettings.livesSpent += live;
+            m_GamePlayingLog.livesSpent += live;
         }
     }
 }

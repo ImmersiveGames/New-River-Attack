@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Localization.Settings;
 namespace RiverAttack
 {
     public class BulletEnemy : Bullets
@@ -14,7 +13,6 @@ namespace RiverAttack
             var audioSource = GetComponent<AudioSource>();
             audioShoot.Play(audioSource);
             m_StartTime = Time.time + bulletLifeTime;
-
         }
         void FixedUpdate()
         {
@@ -24,7 +22,8 @@ namespace RiverAttack
         void OnTriggerEnter(Collider collision)
         {
             if ((collision.GetComponentInParent<EnemiesMaster>() && !collision.GetComponentInParent<CollectiblesMaster>()) ||
-                collision.GetComponentInParent<BulletEnemy>()) return;
+                collision.GetComponentInParent<BulletEnemy>()|| collision.GetComponentInParent<BulletBoss>()||
+                collision.GetComponentInParent<BossMaster>()) return;
             
             if (collision.GetComponentInParent<WallsMaster>() ||
                 collision.GetComponentInParent<EffectAreaMaster>()) return;

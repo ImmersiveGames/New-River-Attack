@@ -1,5 +1,6 @@
+using System;
+using Steamworks.Data;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Utils;
 namespace RiverAttack
 {
@@ -7,20 +8,24 @@ namespace RiverAttack
     {
         public EnemiesScriptable enemy;
         [Header("Enemy Destroy Settings")]
+        [SerializeField] internal bool isFinishLevel;
         [SerializeField]
-        GameObject deadParticlePrefab;
-        [FormerlySerializedAs("timeoutDestroy")]
+        GameObject deadParticlePrefab; 
         [SerializeField]
-        float timeoutDestroyExplosion;
+        protected float timeoutDestroyExplosion;
         public bool isDestroyed;
         [SerializeField]
         internal bool isActive;
+        internal Collider[] myColliders;
         Vector3 m_ObjectStartPosition;
         Quaternion m_ObjectStartRotate;
         Vector3 m_ObjectStartScale;
         protected PlayerMaster playerMaster;
         protected GamePlayManager gamePlayManager;
-        protected GamePlaySettings gamePlaySettings;
+        protected GamePlayingLog gamePlayingLog;
+        public EnemiesSetDifficulty.EnemyDifficult actualDifficultName;
+        
+        
 
         #region Events
         public delegate void GeneralEventHandler();
@@ -54,6 +59,7 @@ namespace RiverAttack
             if (other == null || !shouldObstacleBeReady || !enemy.canDestruct) return;
             ComponentToKill(other.GetComponent<BulletPlayer>(), CollisionType.Shoot);
             ComponentToKill(other.GetComponent<BulletPlayerBomb>(), CollisionType.Bomb);
+            //ComponentToKill(other.GetComponent<BulletBoss>(), CollisionType.None);
         }
         internal virtual void OnDestroy()
         {
@@ -67,13 +73,13 @@ namespace RiverAttack
         protected virtual void SetInitialReferences()
         {
             gamePlayManager = GamePlayManager.instance;
-            gamePlaySettings = gamePlayManager.gamePlaySettings;
+            gamePlayingLog = gamePlayManager.gamePlayingLog;
         }
-        public virtual bool shouldObstacleBeReady
+        public bool shouldObstacleBeReady
         {
             get { return isDestroyed == false && isActive; }
         }
-        protected virtual void StartObstacle()
+        void StartObstacle()
         {
             isDestroyed = false;
             isActive = true;
@@ -83,14 +89,15 @@ namespace RiverAttack
             objTransform.localScale = m_ObjectStartScale;
         }
 
-        protected void ComponentToKill(Component other, CollisionType collisionType)
+        protected virtual void ComponentToKill(Component other, CollisionType collisionType)
         {
             if (other == null) return;
             playerMaster = WhoHit(other);
             OnEventObstacleMasterHit();
             OnEventObstacleScore(playerMaster.getPlayerSettings);
             ShouldSavePoint(playerMaster.getPlayerSettings);
-            GamePlayManager.AddResultList(gamePlaySettings.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy, 1, collisionType);
+            GamePlayManager.AddResultList(gamePlayingLog.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy, 1, collisionType);
+            KillStatsHandle(collisionType);
             ShouldFinishGame();
         }
         internal static PlayerMaster WhoHit(Component other)
@@ -113,7 +120,7 @@ namespace RiverAttack
         }
         void TryRespawn()
         {
-            if (!enemy.canRespawn) return;
+            if (!enemy.canRespawn || gamePlayManager.bossFight) return;
             StartObstacle();
             Tools.ToggleChildren(transform);
         }
@@ -124,11 +131,11 @@ namespace RiverAttack
             StartObstacle();
         }
 
-        protected virtual void ActiveObject()
+        void ActiveObject()
         {
             isActive = true;
         }
-        protected virtual void DeactivateObject()
+        void DeactivateObject()
         {
             isActive = false;
         }
@@ -136,6 +143,9 @@ namespace RiverAttack
         {
             if (!enemy.isCheckInPoint)
                 return;
+            if(GameManager.instance.gameModes == GameManager.GameModes.Classic)
+                GameSteamManager.AddStat("stat_FinishCPath", 1, false);
+            GameSteamManager.StoreStats();
             var transform1 = transform;
             var position = transform1.position;
             playerSettings.spawnPosition.z = position.z;
@@ -145,10 +155,65 @@ namespace RiverAttack
 
         void ShouldFinishGame()
         {
-            if (!enemy.isFinishLevel) return;
+            if (!isFinishLevel) return;
+            GameSteamManager.StoreStats();
             gamePlayManager.readyToFinish = true;
         }
-
+        void KillStatsHandle(CollisionType collisionType)
+        {
+            switch (enemy.enemyType)
+            {
+                case EnemiesTypes.Others:
+                    break;
+                case EnemiesTypes.Ship:
+                    GameSteamManager.AddStat("stat_BeatShip", 1, false);
+                    if(collisionType == CollisionType.Collider)
+                        GameSteamManager.UnlockAchievement("ACH_CRASH_PLAYER_SHIP");
+                    break;
+                case EnemiesTypes.Helicopter:
+                    GameSteamManager.AddStat("stat_BeatHeli", 1, false);
+                    if(collisionType == CollisionType.Collider)
+                        GameSteamManager.UnlockAchievement("ACH_CRASH_PLAYER_HELI");
+                    break;
+                case EnemiesTypes.Hovercraft:
+                    GameSteamManager.AddStat("stat_BeatHover", 1, false);
+                    break;
+                case EnemiesTypes.Drone:
+                    GameSteamManager.AddStat("stat_BeatDrones", 1, false);
+                    if(collisionType == CollisionType.Collider)
+                        GameSteamManager.UnlockAchievement("ACH_CRASH_PLAYER_DRONE");
+                    break;
+                case EnemiesTypes.Tower:
+                    GameSteamManager.AddStat("stat_BeatTower", 1, false);
+                    break;
+                case EnemiesTypes.Jet:
+                    GameSteamManager.AddStat("stat_BeatJet", 1, false);
+                    break;
+                case EnemiesTypes.Tanks:
+                    break;
+                case EnemiesTypes.Bridges:
+                    GameSteamManager.AddStat("stat_BeatBridge", 1, false);
+                    if(collisionType == CollisionType.Collider)
+                        GameSteamManager.UnlockAchievement("ACH_CRASH_PLAYER_BRIDGE");
+                    break;
+                case EnemiesTypes.Submarine:
+                    break;
+                case EnemiesTypes.GasStation:
+                    break;
+                case EnemiesTypes.Refugee:
+                    break;
+                case EnemiesTypes.Collectable:
+                    break;
+                case EnemiesTypes.Decoration:
+                    break;
+                case EnemiesTypes.Secret:
+                    GameSteamManager.UnlockAchievement("ACH_FIND_SECRET");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            GameSteamManager.StoreStats();
+        }
         #region Calls
         void OnEventObstacleMasterHit()
         {

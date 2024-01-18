@@ -1,3 +1,4 @@
+using UnityEngine;
 namespace Utils
 {
     public interface IPoolable
@@ -5,6 +6,6 @@ namespace Utils
     }
     public interface IHasPool
     {
-        void StartMyPool(bool isPersistent = false);
+        void StartMyPool(GameObject bullets, int quantity, bool isPersistent = false);
     }
 }

@@ -1,44 +1,41 @@
-﻿using UnityEngine.Playables;
+using System.Collections;
 namespace RiverAttack
 {
     public class GameStateOpenCutScene : GameState
     {
         const float TIME_TO_FADE_BGM = 0.1f;
-        const float TOLERANCE = 1f;
-        readonly PlayableDirector m_PlayableDirector;
-        readonly GameManager m_GameManager;
-
-        internal GameStateOpenCutScene(PlayableDirector playableDirector)
+        public override IEnumerator OnLoadState()
         {
-            m_PlayableDirector = playableDirector;
-            m_GameManager = GameManager.instance;
+            var startLevel = GameManager.instance.GetLevel();
+            //Debug.Log($"Start: {startLevel}");
+            var startBgm = startLevel.pathType;
+            GameAudioManager.instance.ChangeBGM(startBgm, TIME_TO_FADE_BGM);
+            yield return null;
         }
         public override void EnterState()
         {
             //Debug.Log($"Entra no Estado: CutScene");
-            m_GameManager.openCutDirector.gameObject.SetActive(true);
-            if (!m_GameManager.haveAnyPlayerInitialized)
-                m_GameManager.InstantiatePlayers();
-            m_GameManager.PlayOpenCutScene();
-            //Iniciar a BGM
-            GamePlayAudio.instance.ChangeBGM(GamePlayManager.instance.actualLevels.bgmStartLevel, TIME_TO_FADE_BGM);
-            m_GameManager.startMenu.SetMenuPrincipal(1, false);
-            m_GameManager.startMenu.SetMenuHudControl(false);
+            GameMissionBuilder.instance.StartBuildMission(GamePlayManager.instance.actualLevels);
+            PlayerManager.instance.InstantiatePlayers();
+            if(!GamePlayManager.instance.actualLevels.bossFight)
+                GameTimelineManager.instance.openCutDirector.Play();
+            else
+            {
+                GameTimelineManager.instance.openCutDirector.Play(); // Trocar para a animação de BossFight
+                
+            }
+            
         }
 
         public override void UpdateState()
         {
-           // Debug.Log($"Rodando no Estado: CutScene");
-            if (m_PlayableDirector == null) return;
-
-            // Verificar se a animação já terminou
-            if (!(m_PlayableDirector.time >= m_PlayableDirector.duration - TOLERANCE))
-                return;
-            m_GameManager.ChangeState(new GameStatePlayGame());
+            if (GameManager.instance.onLoadScene) return;
+            //Debug.Log($"CutScene!");
         }
         public override void ExitState()
         {
-            //Debug.Log($"Saindo no Estado: CutScene");
+            //Debug.Log($"Sai do Estado: CutScene");
         }
+
     }
 }

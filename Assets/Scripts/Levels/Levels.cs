@@ -14,38 +14,30 @@ namespace RiverAttack
         public string developerDescription = "";
 #endif
         public bool beatGame;
+        public bool dontCountMilestone;
+        public bool bossFight;
 
         [Header("HUD Settings")]
-        public Sprite levelIcon;
-        public Vector3 levelIconPos;
-        
+        [SerializeField] internal GameObject hudPath;
+        public LevelsStates levelsStates = LevelsStates.Locked;
+
+        [FormerlySerializedAs("bgmStartLevel")]
         [Header("Build Settings")]
-        public LevelTypes bgmStartLevel;
+        public LevelTypes pathType;
         [SerializeField] internal GameObject pathStart;
         [SerializeField] internal GameObject pathEnd;
         [SerializeField] internal Vector3 levelOffset;
         [SerializeField] internal List<LevelsSetup> setLevelList;
-
-        /*        
-        public bool CheckIfComplete(List<Levels> finishList)
-        {
-            return finishList.Contains(this);
-        }
-
-        public bool CheckIfLastFinish(List<Levels> finishList)
-        {
-            return finishList[^1] == this;
-        }
-
-        public bool CheckIfUnlocked(Levels previous)
-        {
-            return previousLevel.Contains(previous);
-        }
-
-        public bool CheckIfLocked(List<Levels> finishList)
-        {
-            return previousLevel.Count > 0 && previousLevel.All(t => finishList.Count < 1 || !finishList.Contains(t));
-        }*/
+        
+    }
+    
+    public enum LevelsStates
+    {
+        Locked,   // Não é possivel acessar - Vermelho
+        Actual,   // Level selecionado - Amarelo
+        Complete, // nivel foi jogado e deve ser concluido assim que o jogador voltar pra HUB destruir pónte etc. - temp Verde
+        Open      // é possivel retornar a estes niveis já jogados - Branco
+            
     }
 
     [System.Serializable]

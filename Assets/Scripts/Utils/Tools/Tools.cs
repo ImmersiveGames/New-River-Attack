@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
@@ -10,6 +10,10 @@ namespace Utils
 {
     public static class Tools
     {
+        /*
+         * SerializableDictionary<TKey, TValue>]
+         * - Cria um dicionário serializado para ser exibido no inspector
+         * */
         [Serializable]
         public class SerializableDictionary<TKey, TValue>
         {
@@ -38,6 +42,10 @@ namespace Utils
                 return false;
             }
         }
+        /*
+         * ScriptableListToList<T>(List<int> listId, List<T> scriptableList)
+         * - Transforma uma Lista de Scriptable Objects em uma lista padrão
+         * */
         public static List<T> ScriptableListToList<T>(List<int> listId, List<T> scriptableList) where T : ScriptableObject
         {
             var defaultList = new List<T>();
@@ -50,13 +58,19 @@ namespace Utils
                 }
             }
             return defaultList;
-        }
-
+        } 
+        /*
+         *  ListToScriptableList<T>(IEnumerable<T> listProducts)
+         *  - Transforma ula lista de em uma Lista Escriptable Eumerada
+         * */
         public static List<int> ListToScriptableList<T>(IEnumerable<T> listProducts) where T : ScriptableObject
         {
             return listProducts.Select(item => item.GetInstanceID()).ToList();
-        }
-
+        } 
+        /*
+         * CopyComponent<T>(T original, GameObject destination)
+         * - Copia um tipo de componente T de um objeto em outro em tempo de execução
+         * */
         public static T CopyComponent<T>(T original, GameObject destination) where T : Component
         {
             var type = original.GetType();
@@ -75,13 +89,16 @@ namespace Utils
                 prop.SetValue(dst, prop.GetValue(original, null), null);
             }
             return dst;
-        }
-
+        } 
+        /*
+         * RateWightList(float weight, float totalWeight)
+         * - retorna a porcentagem de um valor em base 100 pelo seu total acumulado
+         * */
         public static float RateWightList(float weight, float totalWeight)
         {
             return (weight / totalWeight) * 100;
         }
-        public static string FirstLetterToUpper(this string s)
+        /*public static string FirstLetterToUpper(this string s)
         {
             if (string.IsNullOrEmpty(s))
                 return string.Empty;
@@ -90,43 +107,39 @@ namespace Utils
             char[] a = lower.ToCharArray();
             a[0] = char.ToUpper(a[0]);
             return new string(a);
-        }
+        }*/
+        /*
+         * GetPercentage(float val, float max)
+         * - retorna a porcentagem de um valor em porcentagem
+         * */
         public static float GetPercentage(float val, float max)
         {
             return (100 * val) / max;
         }
+        /*
+         * GetValorPercentage(float porcentage, float max)
+         * - Retorna o valor de uma porcentagem
+         * */
         public static float GetValorPercentage(float porcentage, float max)
         {
             return (max * porcentage) / 100;
-        }
-
+        } 
+        /*
+         * IsBetween<T>(this T value, T minimum, T maximum)
+         * - Verifica se o valor está entre dois numeros.
+         * */
         public static bool IsBetween<T>(this T value, T minimum, T maximum) where T : IComparable<T>
         {
             if (value.CompareTo(minimum) < 0)
                 return false;
             return value.CompareTo(maximum) <= 0;
         }
-        /* <summary>
-            fix collider whn flipped
-            </summary>
-            <param name="go">game object whit a collider</param>
-        */
-        public static void FixBoxCollider(GameObject go)
-        {
-            if (!go.GetComponent<Collider2D>())
-                return;
-            var col = go.GetComponent<Collider2D>();
-            var sprite = go.GetComponent<SpriteRenderer>();
 
-            float newX = (sprite.flipX) ? -col.offset.x : col.offset.x;
-            float newY = (sprite.flipY) ? -col.offset.y : col.offset.y;
-            col.offset = new Vector2(newX, newY);
-        }
         /* <summary>
             Retorna um vetor2 com o formato em unity points da camera atual
             </summary>
         */
-        public static Vector2 camSize
+        public static Vector2 unityCamSize
         {
             get
             {
@@ -136,8 +149,10 @@ namespace Utils
                 return new Vector2(width, height);
             }
         }
-
-
+        /*
+         * TryParseEnum<TEnum>(string aName, out TEnum aValue)
+         * - Tenta converter o valor de um enum em um tipo especico (String, int,..)
+         * */
         public static bool TryParseEnum<TEnum>(string aName, out TEnum aValue) where TEnum : struct
         {
             try
@@ -151,7 +166,10 @@ namespace Utils
                 return false;
             }
         }
-
+        /*
+         * ToggleChildren(Transform myTransform, bool setActive = true)
+         * - Des/Ativa os filhos de um objeto
+         * */
         public static void ToggleChildren(Transform myTransform, bool setActive = true)
         {
             if (myTransform.childCount <= 0)
@@ -161,6 +179,10 @@ namespace Utils
                 myTransform.GetChild(i).gameObject.SetActive(setActive);
             }
         }
+        /*
+         * TransformClear(Transform t)
+         * - Destroy os filhos de um objeto
+         * */
         public static void TransformClear(Transform t)
         {
             foreach (Transform child in t)
@@ -168,6 +190,10 @@ namespace Utils
                 Object.Destroy(child.gameObject);
             }
         }
+        /*
+         * SetLayersRecursively(LayerMask layerMask, Transform itemTransform)
+         * - Define layers para todos os objetos partentes de forma recursiva
+         * */
         public static void SetLayersRecursively(LayerMask layerMask, Transform itemTransform)
         {
             int novoLayer = Mathf.RoundToInt(Mathf.Log(layerMask.value, 2));
@@ -178,13 +204,19 @@ namespace Utils
                 var child = itemTransform.GetChild(i);
                 SetLayersRecursively(layerMask, child);
             }
-        }
-
+        } 
+        /*
+         * SetFollowVirtualCam(CinemachineVirtualCamera virtualCamera, Transform follow)
+         * - Define o objeto que a camera virtual irá seguir
+         * */
         public static void SetFollowVirtualCam(CinemachineVirtualCamera virtualCamera, Transform follow)
         {
             virtualCamera.Follow = follow;
         }
-
+        /*
+         * ChangeBindingReference(string track, Object animator, PlayableDirector playableDirector)
+         * - Substituir a referência nula pelo Animator desejado em um Timeline
+         * */
         public static void ChangeBindingReference(string track, Object animator, PlayableDirector playableDirector)
         {
             foreach (var playableBinding in playableDirector.playableAsset.outputs)
@@ -199,8 +231,11 @@ namespace Utils
                     playableDirector.SetGenericBinding(playableBinding.sourceObject, animator);
                 }
             }
-        }
-
+        } 
+        /*
+         * EqualizeLists<T>(ref List<T> listA, ref List<T> listB)
+         * - Torna as duas listas com quantidade iguais. (não valores)
+         * */
         public static void EqualizeLists<T>(ref List<T> listA, ref List<T> listB) where T : new()
         {
             int maxSize = Mathf.Max(listA.Count, listB.Count);
@@ -208,11 +243,47 @@ namespace Utils
             {
                 listA.Add(new T()); // Preencha com um elemento vazio (pode ser qualquer valor que você considere vazio)
             }
-
             while (listB.Count < maxSize)
             {
                 listB.Add(new T());
             }
+        }
+        /*
+         * GetAnimationTime(Animator animator, string animationName)
+         * - retorna o tempo da animação
+         * */
+        public static float GetAnimationTime(Animator animator, string animationName)
+        {
+            var controller = animator.runtimeAnimatorController;
+
+            return (from t in controller.animationClips where t.name == animationName select t.length).FirstOrDefault();
+        }
+/*
+ * SoundBase10(float normalizeNumber)
+ *  - transforma um numero base de 0.0 à 1.0 em um valor de metrica para sons (dB)
+ */
+        public static float SoundBase10(float normalizeNumber)
+        {
+            return Mathf.Log10(normalizeNumber) * 20f;
+        }
+        
+        public static string TimeFormat(float timeToFormat)
+        {
+            int hour = Mathf.FloorToInt(timeToFormat / 3600);
+            int minutes = Mathf.FloorToInt((timeToFormat % 3600) / 60);
+            int seconds = Mathf.FloorToInt(timeToFormat % 60);
+
+            string time = $"{hour:D2}:{minutes:D2}:{seconds:D2}";
+            
+            return time;
+        }
+        public static bool CheckSameElements<T>(IEnumerable<T> list1, IEnumerable<T> list2)
+        {
+            var hashSet = new HashSet<T>(list1);
+            var other = new HashSet<T>(list2);
+
+            // Verificar se ambos os conjuntos são iguais
+            return hashSet.SetEquals(other);
         }
     }
 }

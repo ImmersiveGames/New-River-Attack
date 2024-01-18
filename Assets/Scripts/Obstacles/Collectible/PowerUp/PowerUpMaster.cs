@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+using System;
+using UnityEngine;
 namespace RiverAttack
 {
     public class PowerUpMaster : CollectiblesMaster
@@ -39,7 +40,31 @@ namespace RiverAttack
         void ComponentToPowerUp(PlayerPowerUp playerPowerUp)
         {
             if (playerPowerUp == null || collectibleScriptable.powerUp == null) return;
-                playerPowerUp.ActivatePowerUp(collectibleScriptable.powerUp);
+            playerPowerUp.ActivatePowerUp(collectibleScriptable.powerUp);
+            AchievementHandler(collectibleScriptable.powerUp);
+        }
+        void AchievementHandler(PowerUp powerUp)
+        {
+            switch (powerUp.powerUpType)
+            {
+                case PowerUpTypes.RapidFire:
+                    GameSteamManager.UnlockAchievement("ACH_COLLECT_RAPID_FIRE");
+                    break;
+                case PowerUpTypes.Lives:
+                    GameSteamManager.UnlockAchievement("ACH_COLLECT_LIFE");
+                    break;
+                case PowerUpTypes.Bomb:
+                    GameSteamManager.UnlockAchievement("ACH_COLLECT_BOMB");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+        
+        protected override void OnEventCollectItem(PlayerSettings playerSettings)
+        {
+            base.OnEventCollectItem(playerSettings);
+            ToggleChildren(false);
         }
     }
 }

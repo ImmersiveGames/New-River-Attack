@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using Utils;
 namespace RiverAttack
@@ -47,14 +47,15 @@ namespace RiverAttack
                 }
                 // Ja tem algo na lista
             }
-            if(collectibleScriptable == gamePlayManager.refilBomb && whoHit.getPlayerSettings.bombs >= GameSettings.instance.maxBombs)
+            if(collectibleScriptable == gamePlayManager.refillBomb && whoHit.getPlayerSettings.bombs >= GameSettings.instance.maxBombs)
                 return;
             
             OnEventCollectItem(whoHit.getPlayerSettings);
             ShouldSavePoint(whoHit.getPlayerSettings);
             AddCollectList(collectableList, collectibleScriptable, collectibleScriptable.amountCollectables);
-            CollectWealth(whoHit.getPlayerSettings, collectibleScriptable.amountCollectables);
-            GamePlayManager.AddResultList(gamePlaySettings.hitEnemiesResultsList, whoHit.getPlayerSettings, enemy, collectibleScriptable.amountCollectables, CollisionType.Collected);
+            if(collectibleScriptable.powerUp == null)
+                CollectWealth(whoHit.getPlayerSettings, collectibleScriptable.amountCollectables);
+            GamePlayManager.AddResultList(gamePlayingLog.hitEnemiesResultsList, whoHit.getPlayerSettings, enemy, collectibleScriptable.amountCollectables, CollisionType.Collected);
         }
         static void AddCollectList(List<LogPlayerCollectables> list, CollectibleScriptable collectible, int qnt)
         {
@@ -76,6 +77,7 @@ namespace RiverAttack
         void CollectWealth(PlayerSettings playerSettings, int collect)
         {
             playerSettings.wealth += collect;
+            GameSteamManager.SetStat("stat_CollectRefugee", playerSettings.wealth, true);
             gamePlayManager.OnEventUpdateRefugees(playerSettings.wealth);
         }
 
@@ -83,7 +85,11 @@ namespace RiverAttack
         {
             isDestroyed = true;
             isActive = false;
-            Tools.ToggleChildren(transform, false);
+        }
+
+        protected void ToggleChildren(bool active)
+        {
+            Tools.ToggleChildren(transform, active);
         }
 
         #region Calls

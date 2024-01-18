@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using UnityEngine;
-using Utils;
 
 namespace RiverAttack
 {
@@ -25,8 +25,7 @@ namespace RiverAttack
         float m_EndLife;
         double m_TParam;
         Collider m_Collider;
-
-        GamePlayManager m_GamePlayManager;
+        readonly List<EnemiesMaster> m_CollisionEnemy = new List<EnemiesMaster>();
 
         #region UNITY METHODS
         void OnEnable()
@@ -34,7 +33,6 @@ namespace RiverAttack
             timeLife = pSystem.main.duration;
             m_Collider = GetComponent<Collider>();
             var audioSource = GetComponent<AudioSource>();
-            m_GamePlayManager = GamePlayManager.instance;
             audioShoot.Play(audioSource);
         }
 
@@ -42,6 +40,14 @@ namespace RiverAttack
         void Start()
         {
             m_EndLife = Time.time + timeLife;
+        }
+        void OnTriggerEnter(Collider other)
+        {
+            var enemy = other.GetComponentInParent<EnemiesMaster>();
+            if (enemy && !m_CollisionEnemy.Contains(enemy))
+            {
+                m_CollisionEnemy.Add(enemy);
+            }
         }
         void FixedUpdate()
         {
@@ -60,7 +66,7 @@ namespace RiverAttack
         void ExpandCollider()
         {
             m_TParam += Time.deltaTime * radiusSpeed;
-            CameraShake.instance.ShakeCamera(shakeForce, shakeTime);
+            CameraShake.ShakeCamera(shakeForce, shakeTime);
 
 //TODO: Arrumar nova forma de vibrar o celular
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -74,6 +80,11 @@ namespace RiverAttack
         }
         new void DestroyMe()
         {
+            //Debug.Log(m_CollisionEnemy.Count);
+            if (m_CollisionEnemy.Count >= 3)
+            {
+                GameSteamManager.UnlockAchievement("ACH_HIT_BOMB_3");
+            }
             GameObject o;
             (o = gameObject).SetActive(false);
             Destroy(o);

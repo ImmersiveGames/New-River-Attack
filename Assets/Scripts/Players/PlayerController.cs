@@ -45,9 +45,30 @@ namespace RiverAttack
                 < 0 => PlayerMaster.MovementStatus.Reduce,
                 _ => PlayerMaster.MovementStatus.None
             };
-
+            
             var moveDir = new Vector3(m_InputVector.x, 0, axisAutoMovement);
             if (m_GamePlayManager.getGodMode && m_GamePlayManager.godModeSpeed) moveDir *= 4;
+            if (m_GamePlayManager.bossFight)
+            {
+                float axisX = m_InputVector.x;
+                float axisZ = axisAutoMovement;
+                var nextPosition = transform.position + moveDir * (m_MovementSpeed * Time.deltaTime);
+                if (m_InputVector.x != 0)
+                {
+                    if (nextPosition.x is >= GamePlayManager.LimitX or <= GamePlayManager.LimitX * -1)
+                    {
+                        axisX = 0;
+                    }
+                }
+                if (m_InputVector.y != 0)
+                {
+                    if (nextPosition.z is >= GamePlayManager.LimitZTop or <= GamePlayManager.LimitZBottom)
+                    {
+                        axisZ = 0;
+                    }
+                }
+                moveDir = new Vector3(axisX, 0, axisZ);
+            }
             transform.position += moveDir * (m_MovementSpeed * Time.deltaTime);
 
             m_PlayerMaster.OnEventPlayerMasterControllerMovement(m_InputVector);
@@ -61,10 +82,10 @@ namespace RiverAttack
         }
         void SetValuesFromPlayerSettings(PlayerSettings settings)
         {
-            m_AutoMovement = settings.speedVertical;
+            m_AutoMovement = (!m_GamePlayManager.bossFight) ? settings.speedVertical : 0f;
             m_MovementSpeed = settings.mySpeedy;
-            m_MultiplyVelocityUp = settings.multiplyVelocityUp;
-            m_MultiplyVelocityDown = settings.multiplyVelocityDown;
+            m_MultiplyVelocityUp = (!m_GamePlayManager.bossFight)? settings.multiplyVelocityUp : 1f;
+            m_MultiplyVelocityDown = (!m_GamePlayManager.bossFight)? settings.multiplyVelocityDown : -1f;
         }
         void TouchMove(InputAction.CallbackContext context)
         {

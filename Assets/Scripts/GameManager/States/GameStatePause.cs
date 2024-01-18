@@ -1,26 +1,31 @@
-﻿using UnityEngine;
+using System.Collections;
+using UnityEngine;
 namespace RiverAttack
 {
     public class GameStatePause : GameState
     {
-        readonly GameManager m_GameManager;
-        public GameStatePause()
+        
+        public override IEnumerator OnLoadState()
         {
-            m_GameManager = GameManager.instance;
+            //Debug.Log($"On Load Estado: Pause");
+            GamePlayManager.instance.inputSystem.UI_Controlls.Enable();
+            yield return null;
+            
         }
         public override void EnterState()
         {
-            m_GameManager.startMenu.SetMenuPrincipal(1, true);
-            m_GameManager.startMenu.SetMenuHudControl(false);
+            GamePlayManager.instance.panelMenuGame.PauseMenu(true);
             //Debug.Log($"Entra no Estado: Pause");
         }
         public override void UpdateState()
         {
-            //Debug.Log($"Game Pausado!");
+            Debug.Log($"Game Pausado!");
         }
         public override void ExitState()
         {
             //Debug.Log($"Sai do Estado: Pause");
+            GamePlayManager.instance.inputSystem.UI_Controlls.Disable();
+            GamePlayManager.instance.panelMenuGame.PauseMenu(false);
         }
     }
 }

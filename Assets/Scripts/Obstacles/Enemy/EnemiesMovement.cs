@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+using System;
+using UnityEngine;
 using Utils;
+using Random = UnityEngine.Random;
 
 namespace RiverAttack
 {
@@ -9,18 +11,18 @@ namespace RiverAttack
         [SerializeField] bool ignoreWalls;
         [SerializeField] bool ignoreEnemies;
         [SerializeField] internal float moveVelocity;
-        public enum Directions { None, Forward, Back, Up, Right, Down, Left, Free }
+        enum Directions { None, Forward, Back, Up, Right, Down, Left, Free }
         [Header("Movement Directions")]
         [SerializeField] Directions startDirection;
-        Vector3 m_VectorDirection;
+        protected Vector3 m_VectorDirection;
         public Vector3 freeVectorDirection;
         [Header("Movement with Animation Curve")]
         [SerializeField] internal float animationDuration;
         [SerializeField] internal AnimationCurve animationCurve;
-   
-        IMove m_ActualState;
-        EnemiesMaster m_EnemiesMaster;
-        GamePlayManager m_GamePlayManager;
+
+        protected IMove m_ActualState;
+        protected ObstacleMaster m_ObstacleMaster;
+        protected GamePlayManager m_GamePlayManager;
         bool m_InCollision;
 
         #region UNITYMETHODS
@@ -35,12 +37,12 @@ namespace RiverAttack
         }
         void Start()
         {
-            ChangeState(new StateMoveHold(this, m_EnemiesMaster));
+            ChangeState(new StateMoveHold(this, m_ObstacleMaster));
         }
         void OnTriggerEnter(Collider other)
         {
             if (m_ActualState is not StateMove) return;
-            if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldObstacleBeReady || m_EnemiesMaster.isDestroyed || !meshRenderer.isVisible)
+            if (!m_GamePlayManager.shouldBePlayingGame || !m_ObstacleMaster.shouldObstacleBeReady || m_ObstacleMaster.isDestroyed || !meshRenderer.isVisible)
                 return;
             if(m_InCollision || (other.GetComponentInParent<WallsMaster>() && ignoreWalls) || (other.GetComponentInParent<EnemiesMaster>() && ignoreEnemies)) 
                 return;
@@ -48,12 +50,14 @@ namespace RiverAttack
             
             m_InCollision = true;
             m_VectorDirection *= -1;
-            m_EnemiesMaster.OnEventObjectMasterFlipEnemies(true);
+            var enemiesMaster = m_ObstacleMaster as EnemiesMaster;
+            if (enemiesMaster != null)
+                enemiesMaster.OnEventObjectMasterFlipEnemies(true);
         }
         void OnTriggerExit(Collider other)
         {
             if (m_ActualState is not StateMove) return;
-            if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldObstacleBeReady || m_EnemiesMaster.isDestroyed || !meshRenderer.isVisible)
+            if (!m_GamePlayManager.shouldBePlayingGame || !m_ObstacleMaster.shouldObstacleBeReady || m_ObstacleMaster.isDestroyed || !meshRenderer.isVisible)
                 return;
             if(!m_InCollision || (other.GetComponentInParent<WallsMaster>() && ignoreWalls) || (other.GetComponentInParent<EnemiesMaster>() && ignoreEnemies)) 
                 return;
@@ -62,7 +66,7 @@ namespace RiverAttack
         }
         void Update()
         {
-            if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldObstacleBeReady || m_EnemiesMaster.isDestroyed || !meshRenderer.isVisible)
+            if (!m_GamePlayManager.shouldBePlayingGame || !m_ObstacleMaster.shouldObstacleBeReady || m_ObstacleMaster.isDestroyed || !meshRenderer.isVisible)
                 return;
             m_ActualState.UpdateState(transform, m_VectorDirection);
         }
@@ -71,9 +75,9 @@ namespace RiverAttack
         {
             base.SetInitialReferences();
             m_GamePlayManager = GamePlayManager.instance;
-            m_EnemiesMaster = GetComponent<EnemiesMaster>();
+            m_ObstacleMaster = GetComponent<ObstacleMaster>();
         }
-        internal bool shouldBeMoving { get { return m_EnemiesMaster.isActive && moveVelocity > 0; } }
+        internal bool shouldBeMoving { get { return m_ObstacleMaster.isActive && moveVelocity > 0; } }
         internal void ChangeState(IMove newState)
         {
             if (m_ActualState == newState) return;
@@ -88,7 +92,7 @@ namespace RiverAttack
             m_VectorDirection = SetDirection(startDirection);
             m_InCollision = false;
             target = null;
-            ChangeState(new StateMoveHold(this, m_EnemiesMaster));
+            ChangeState(new StateMoveHold(this, m_ObstacleMaster));
         }
 
         Vector3 SetDirection(Directions dir)
@@ -135,21 +139,6 @@ namespace RiverAttack
         }
   #endregion
 
-        /*static Directions GetDirection(Vector3 vector3)
-        {
-            if (vector3 == new Vector3(0, 1, 0))
-                return Directions.Up;
-            if (vector3 == new Vector3(0, -1, 0))
-                return Directions.Down;
-            if (vector3 == new Vector3(1, 0, 0))
-                return Directions.Right;
-            if (vector3 == new Vector3(-1, 0, 0))
-                return Directions.Left;
-            if (vector3 == new Vector3(0, 0, 1))
-                return Directions.Forward;
-            if (vector3 == new Vector3(0, 0, -1))
-                return Directions.Back;
-            return vector3 != Vector3.zero ? Directions.Free : Directions.None;
-        }*/
+  
     }
 }

@@ -1,35 +1,34 @@
+using UnityEngine;
+using System.Collections;
 namespace RiverAttack
 {
     public class GameStatePlayGame : GameState
     {
-        readonly GameManager m_GameManager;
-        readonly GamePlayManager m_GamePlayManager;
-        public GameStatePlayGame()
+        public override IEnumerator OnLoadState()
         {
-            m_GameManager = GameManager.instance;
-            m_GamePlayManager = GamePlayManager.instance;
+            yield return null;
         }
         public override void EnterState()
         {
-           // Debug.Log($"Entra no Estado: PlayGame");
-            m_GameManager.startMenu.SetMenuPrincipal(1, false);
-            m_GameManager.startMenu.SetMenuHudControl(true);
-            if (!m_GameManager.haveAnyPlayerInitialized)
-                m_GameManager.InstantiatePlayers();
-
+            GamePlayManager.instance.panelMenuGame.StartMenuGame();
+            //Debug.Log($"Entra no Estado: PlayGame");
+            
             //TODO: dar mais tempo para o pause;
-            m_GamePlayManager.OnStartGame();
+            GamePlayManager.instance.OnStartGame();
         }
         public override void UpdateState()
         {
-            //Debug.Log($"PlayGame!");
+            Debug.Log("PlayGame!");
         }
         public override void ExitState()
         {
-            m_GameManager.ActivePlayers(false);
-            m_GamePlayManager.OnEventDeactivateEnemiesMaster();
-            
+            int score = PlayerManager.instance.playerSettingsList[0].score;
+            GameSteamManager.UpdateScore(score, false);
+            PlayerManager.instance.ActivePlayers(false);
+            GamePlayManager.instance.OnEventDeactivateEnemiesMaster();
             //Debug.Log($"Sai do Estado: PlayGame");
+            System.GC.Collect();
         }
+        
     }
 }

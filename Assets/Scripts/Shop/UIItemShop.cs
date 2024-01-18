@@ -1,4 +1,4 @@
-﻿using RiverAttack;
+using RiverAttack;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -73,7 +73,7 @@ namespace Shopping
         void SetupBuyButton(PlayerSettings player)
         {
             btnBuy.gameObject.SetActive(true);
-            Debug.Log($"Available to buy: {productInStock.shopProduct.name} , {productInStock.AvailableForBuy(player)}");
+            //Debug.Log($"Available to buy: {productInStock.shopProduct.name} , {productInStock.AvailableForBuy(player)}");
             btnBuy.interactable = productInStock.AvailableForBuy(player);
             if (btnBuy.interactable)
             {

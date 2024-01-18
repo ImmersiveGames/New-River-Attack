@@ -9,7 +9,7 @@ namespace RiverAttack
         PlayerSettings m_PlayerSettings;
         TMP_Text m_TMPTextRefugees;
         Animator m_Animator;
-        static readonly int RefugieBounce = Animator.StringToHash("Bounce");
+        static readonly int RefugeesBounce = Animator.StringToHash("Bounce");
         #region UNITYMETHODS
         void OnEnable()
         {
@@ -30,15 +30,15 @@ namespace RiverAttack
         void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
-            m_PlayerSettings = m_GamePlayManager.GetNoPlayerPlayerSettings();
+            m_PlayerSettings = PlayerManager.instance.GetPlayerSettingsByIndex();
             m_TMPTextRefugees = GetComponent<TMP_Text>();
             m_Animator = GetComponent<Animator>();
         }
 
-        void UpdateRefugees(int refugie)
+        void UpdateRefugees(int refugee)
         {
-            m_Animator.SetTrigger(RefugieBounce);
-            m_TMPTextRefugees.text = refugie.ToString();
+            m_Animator.SetTrigger(RefugeesBounce);
+            m_TMPTextRefugees.text = refugee.ToString();
         }
     }
 }

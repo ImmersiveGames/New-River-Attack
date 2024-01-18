@@ -9,19 +9,22 @@ namespace RiverAttack
     {
         [Header("Default Settings")]
         public new string name;
-        //public LocalizationString translateName;
-        //public float velocity;
-        //public float radiusToApproach;
-        //public float shootCadence;
+        public string namePT_BR;
+        public EnemiesTypes enemyType;
         public int enemyScore;
-        [Header("Drop Items")]
-        public ListDropItems listDropItems;
         public Sprite spriteIcon;
         public AudioMixerGroup enemyAudioMixerGroup;
+        [Header("Drop Items")]
+        public ListDropItems listDropItems;
+        [Header("Difficulty Set")]
         public EnemiesSetDifficultyListSo enemiesSetDifficultyListSo;
+        [Header("Game Behaviors")]
         public bool canRespawn;
         public bool canDestruct;
         public bool isCheckInPoint;
-        public bool isFinishLevel;
+    }
+    public enum EnemiesTypes
+    {
+        Others, Ship, Helicopter, Hovercraft, Drone, Tower, Jet, Tanks, Bridges, Submarine, GasStation, Refugee, Collectable, Decoration, Secret
     }
 }

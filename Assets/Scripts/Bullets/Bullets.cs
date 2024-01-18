@@ -5,41 +5,43 @@ namespace RiverAttack
     public class Bullets : MonoBehaviour, IPoolable
     {
         [SerializeField]
+        internal int powerFire = 1;
+        [SerializeField]
         protected AudioEventSample audioShoot;
         protected float bulletSpeed;
-        bool m_HasBulletLifeTime;
+        protected bool hasBulletLifeTime;
         protected float bulletLifeTime;
         protected internal ObjectMaster ownerShoot;
-        Transform m_MyPool;
+        internal Transform myPool;
 
         public void Init(float speed, float lifetime = 0)
         {
             bulletSpeed = speed;
-            m_HasBulletLifeTime = lifetime > 0;
-            bulletLifeTime = lifetime + Time.time;
+            hasBulletLifeTime = lifetime > 0;
+            bulletLifeTime = lifetime;
         }
 
         public bool haveAPool
         {
-            get { return m_MyPool; }
+            get { return myPool; }
         }
         public void SetMyPool(Transform pool)
         {
-            m_MyPool = pool;
+            myPool = pool;
         }
         protected void AutoDestroyMe(float timer)
         {
-            if (m_HasBulletLifeTime && Time.time >= timer)
+            if (hasBulletLifeTime && Time.time >= timer)
             {
                 DestroyMe();
             }
         }
-        protected void DestroyMe()
+        protected virtual void DestroyMe()
         {
             gameObject.SetActive(false);
-            if (!m_MyPool)
+            if (!myPool)
                 return;
-            gameObject.transform.SetParent(m_MyPool);
+            gameObject.transform.SetParent(myPool);
             gameObject.transform.SetAsLastSibling();
         }
     }

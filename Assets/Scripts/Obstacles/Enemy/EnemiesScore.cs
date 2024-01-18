@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace RiverAttack
 {
@@ -27,7 +27,8 @@ namespace RiverAttack
         {
             float score = m_ObstacleMaster.enemy.enemyScore;
             if (score == 0) return;
-            if (EnemiesMaster.myDifficulty.multiplyScore > 0)
+            var enemyMaster = m_ObstacleMaster as EnemiesMaster;
+            if (enemyMaster != null && EnemiesMaster.myDifficulty.multiplyScore > 0)
             {
                 var myDifficulty = EnemiesMaster.myDifficulty;
                 if (myDifficulty.multiplyScore > 0)
@@ -40,8 +41,8 @@ namespace RiverAttack
         }
         protected static void LogGamePlay(int score)
         {
-            if (score > GamePlaySettings.instance.totalScore)
-                GamePlaySettings.instance.totalScore = score;
+            if (score > GamePlayingLog.instance.totalScore)
+                GamePlayingLog.instance.totalScore = score;
         }
 
     }

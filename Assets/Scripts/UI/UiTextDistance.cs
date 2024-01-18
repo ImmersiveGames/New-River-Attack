@@ -1,4 +1,4 @@
-﻿using TMPro;
+using TMPro;
 using UnityEngine;
 namespace RiverAttack
 {
@@ -27,14 +27,13 @@ namespace RiverAttack
         void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
-            m_PlayerSettings = m_GamePlayManager.GetNoPlayerPlayerSettings();
+            m_PlayerSettings = PlayerManager.instance.GetPlayerSettingsByIndex();
             m_TMPTextDistance = GetComponent<TMP_Text>();
         }
 
         void UpdateDistance(int distance)
         {
             m_TMPTextDistance.text = distance.ToString();
-
         }
     }
 }

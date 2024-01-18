@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Shopping
 {
     [CreateAssetMenu(fileName = "ListShopProducts", menuName = "RiverAttack/Shopping/List/ListProduct", order = 101)]
     [System.Serializable]
-    public class ListShopProductxxx : ScriptableObject
+    public class ListShopProduct : ScriptableObject
     {
 #if UNITY_EDITOR
         [Multiline]

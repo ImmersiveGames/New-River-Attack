@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 using Utils;
 
@@ -8,24 +8,42 @@ namespace RiverAttack
 {
     public sealed class GamePlayManager : Singleton<GamePlayManager>
     {
+        [Header("Panels Settings")]
+        [SerializeField]
+        internal PanelMenuGame panelMenuGame;
+
+        [Header("Level Settings")]
         [SerializeField] internal bool completePath;
         [SerializeField] internal bool readyToFinish;
-        [SerializeField]
-        bool godMode;
+        [Header("Debug Settings")]
+        [SerializeField] bool godMode;
         [SerializeField] public bool godModeSpeed;
-        [SerializeField]
-        GameSettings gameSettings;
+        
+        [SerializeField] internal GamePlayingLog gamePlayingLog;
         internal bool getGodMode { get { return godMode; } }
-        [SerializeField]
-        internal GamePlaySettings gamePlaySettings;
+        
         [Header("Power Up References")]
-        public CollectibleScriptable refilBomb;
+        public CollectibleScriptable refillBomb;
 
         internal Levels actualLevels;
         internal bool playerDead;
+        internal bool bossFight;
+        internal bool bossFightPause;
+        internal BossMaster bossMaster;
+
+        internal const float LimitX = 28.0f;
+        internal const float LimitZTop = 40.0f;
+        internal const float LimitZBottom = 15.0f;
+
+        internal static readonly Vector2 ScreenLimitMin = new Vector2(-LimitX, LimitZBottom);
+        internal static readonly Vector2 ScreenLimitMax = new Vector2(LimitX, LimitZTop);
 
         GameManager m_GameManager;
-        PlayersInputActions m_InputSystem;
+        PlayerManager m_PlayerManager;
+        internal PlayersInputActions inputSystem;
+
+        int m_Score;
+
         #region Delegates
         public delegate void GeneralEventHandler();
         internal event GeneralEventHandler EventActivateEnemiesMaster;
@@ -48,37 +66,84 @@ namespace RiverAttack
         internal delegate void BuildPatchHandler(float position);
         internal event BuildPatchHandler EventBuildPathUpdate;
 
+        internal delegate void UpdatePowerUpHandler(PowerUp powerUp, float timer);
+        internal event UpdatePowerUpHandler EventUpdatePowerUpDuration;
+
         #endregion
 
         #region UNITYMETHODS
-        void OnEnable()
+        void Awake()
         {
+            if (FindObjectsOfType(typeof(GamePlayManager)).Length > 1)
+            {
+                gameObject.SetActive(false);
+                Destroy(this);
+            }
             m_GameManager = GameManager.instance;
+            m_PlayerManager = PlayerManager.instance;
+            actualLevels = m_GameManager.GetLevel();
+            if (actualLevels.bossFight)
+            {
+                bossFight = actualLevels.bossFight;
+            }
+            inputSystem = new PlayersInputActions();
+            inputSystem.UI_Controlls.Disable();
+            inputSystem.Player.Enable();
+        }
+
+        protected override void OnDestroy()
+        {
+            DestroyImmediate(m_PlayerManager);
+            StopAllCoroutines();
+            //base.OnDestroy();
         }
   #endregion
-        public GameSettings getGameSettings
+        public bool shouldBePlayingGame { get { return (m_GameManager.currentGameState is GameStatePlayGame or GameStatePlayGameBoss && !completePath); } }
+        public static GameSettings getGameSettings
         {
-            get { return gameSettings; }
+            get { return GameManager.instance.gameSettings; }
         }
 
         public void OnStartGame()
         {
+            StartCoroutine(StartGamePlay(0));
+        }
+        public void OnRestartGame()
+        {
             StartCoroutine(StartGamePlay());
         }
 
-        IEnumerator StartGamePlay()
+        IEnumerator StartGamePlay(float timeWait = 2f)
         {
-            yield return new WaitForSeconds(2f);
-            m_GameManager.ActivePlayers(true);
-            m_GameManager.UnPausedMovementPlayers();
+            yield return new WaitForSeconds(timeWait);
+            m_PlayerManager.ActivePlayers(true);
+            m_PlayerManager.UnPausedMovementPlayers();
             OnEventActivateEnemiesMaster();
         }
-        public bool shouldBePlayingGame { get { return (m_GameManager.currentGameState is GameStatePlayGame && !completePath); } }
-
-        public PlayerSettings GetNoPlayerPlayerSettings(int playerIndex = 0)
+        public void GameOverMenu()
         {
-            return m_GameManager.playerSettingsList.Count > 0 ? m_GameManager.playerSettingsList[playerIndex] : null;
+            panelMenuGame.SetMenuGameOver();
         }
+        
+
+        internal void PauseBossBattle(bool pause)
+        {
+            if (pause)
+            {
+                inputSystem.UI_Controlls.Enable();
+                panelMenuGame.PauseMenu(true);
+                Time.timeScale = 0;
+                bossFightPause = true;
+            }
+            else
+            {
+                inputSystem.UI_Controlls.Disable();
+                panelMenuGame.PauseMenu(false);
+                Time.timeScale = 1;
+                bossFightPause = false;
+            }
+        }
+
         public static void AddResultList(List<LogResults> list, PlayerSettings playerSettings, EnemiesScriptable enemy, int qnt, CollisionType collisionType)
         {
             var itemResults = list.Find(x => x.player == playerSettings && x.enemy == enemy && x.collisionType == collisionType);
@@ -100,31 +165,7 @@ namespace RiverAttack
                 list.Add(newItemResults);
             }
         }
-        public int HighScorePlayers()
-        {
-            if (m_GameManager.haveAnyPlayerInitialized == false) return 0;
-            int score = 0;
-            foreach (var pl in m_GameManager.initializedPlayerMasters.Where(pl => score < pl.GetComponent<PlayerMaster>().getPlayerSettings.score))
-            {
-                score += pl.GetComponent<PlayerMaster>().getPlayerSettings.score;
-            }
-
-            return score;
-        }
-
-        public void CompletePathEndCutScene()
-        {
-            GamePlayAudio.instance.ChangeBGM(LevelTypes.Complete, 0.1f);
-            m_GameManager.endCutDirector.gameObject.SetActive(true);
-            m_GameManager.startMenu.SetMenuPrincipal(1, false);
-            m_GameManager.startMenu.SetMenuHudControl(false);
-            Invoke(nameof(ChangeEndGame), 0.2f);
-        }
-
-        void ChangeEndGame()
-        {
-            m_GameManager.ChangeState(new GameStateEndGame());
-        }
+        
 
         #region Calls
         internal void OnEventActivateEnemiesMaster()
@@ -157,6 +198,7 @@ namespace RiverAttack
         }
         internal void OnEventUpdateScore(int value)
         {
+            //GameSteamManager.UpdateScore(6200, false);
             EventUpdateScore?.Invoke(value);
         }
         internal void OnEventUpdateDistance(int value)
@@ -191,6 +233,11 @@ namespace RiverAttack
         internal void OnEventEnemiesMasterForceRespawn()
         {
             EventEnemiesMasterForceRespawn?.Invoke();
+        }
+
+        internal void OnEventUpdatePowerUpDuration(PowerUp powerUp, float f)
+        {
+            EventUpdatePowerUpDuration?.Invoke(powerUp,f);
         }
   #endregion
         

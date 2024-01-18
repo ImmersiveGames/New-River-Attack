@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using Utils;
 namespace RiverAttack
@@ -15,20 +15,17 @@ namespace RiverAttack
         GamePlayManager m_GamePlayManager;
         PlayerSettings m_PlayerSettings;
         PlayersInputActions m_PlayersInputActions;
-        GamePlaySettings m_GamePlaySettings;
+        GamePlayingLog m_GamePlayingLog;
 
         #region UNITYMETHODS
-        void Awake()
-        {
-            m_PlayersInputActions = new PlayersInputActions();
-        }
+        
         void OnEnable()
         {
             SetInitialReferences();
         }
         void Start()
         {
-            m_PlayersInputActions = m_PlayerMaster.playersInputActions;
+            m_PlayersInputActions = GamePlayManager.instance.inputSystem;
             m_PlayerSettings.bombs = GameSettings.instance.startBombs;
             m_PlayersInputActions.Player.Bomb.performed += Execute;
         }
@@ -39,7 +36,7 @@ namespace RiverAttack
             m_GamePlayManager = GamePlayManager.instance;
             m_PlayerMaster = GetComponent<PlayerMaster>();
             m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
-            m_GamePlaySettings = m_GamePlayManager.gamePlaySettings;
+            m_GamePlayingLog = m_GamePlayManager.gamePlayingLog;
         }
         
         public void Execute(InputAction.CallbackContext callbackContext)
@@ -63,7 +60,7 @@ namespace RiverAttack
 
         void LogGamePlay(int bomb)
         {
-            m_GamePlaySettings.bombSpent += bomb;
+            m_GamePlayingLog.bombSpent += bomb;
         }
 
         /*

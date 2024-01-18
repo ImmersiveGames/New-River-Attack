@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 /*
  <summary>
 ** Be aware this will not prevent a non singleton constructor
@@ -46,8 +46,8 @@ namespace Utils
                     var singleton = new GameObject();
                     _instance = singleton.AddComponent<T>();
                     singleton.name = "(singleton) " + typeof(T);
-
-                    DontDestroyOnLoad(singleton);
+                    
+                   // DontDestroyOnLoad(singleton);
 
                     Debug.Log("[Singleton] An instance of " + typeof(T) +
                         " is needed in the scene, so '" + singleton +
@@ -60,7 +60,7 @@ namespace Utils
             }
         }
 
-        public void RemoveSingleton()
+        void RemoveSingleton()
         {
             if (_instance)
             {
@@ -78,8 +78,14 @@ namespace Utils
             So, this was made to be sure we're not creating that buggy ghost object.
          </summary>
          */
+        void OnApplicationQuit()
+        {
+            _applicationIsQuitting = true;
+            RemoveSingleton();
+        }
         protected virtual void OnDestroy()
         {
+            Debug.Log($"singleton destroyed {typeof(T)}");
             _applicationIsQuitting = true;
         }
 
@@ -87,5 +93,6 @@ namespace Utils
         {
             _applicationIsQuitting = false;
         }
+        
     }
 }

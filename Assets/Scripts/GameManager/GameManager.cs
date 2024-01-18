@@ -1,220 +1,221 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Cinemachine;
-using Unity.Mathematics;
+using System;
+using System.Collections;
+using Steamworks;
 using UnityEngine;
-using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Utils;
 namespace RiverAttack
 {
-    public abstract class GameState
-    {
-        public abstract void EnterState();
-        public abstract void UpdateState();
-        public abstract void ExitState();
-    }
-
-    public enum LevelTypes { Menu = 0, Hub = 1, Grass = 2, Forest = 3, Swamp = 4, Antique = 5, Desert = 6, Ice = 7, GameOver = 8, Complete = 9, HUD = 10 }
+    [RequireComponent(typeof(AudioSource))]
     public class GameManager : Singleton<GameManager>
     {
+        /*
+         * Este Script é dedicado apenas a guardar referencias e valores inerentes  
+         * ao escopo macro do jogo para ser possivel acessa-lo pelo projeto.
+         * Também é dedicado a criar o fluxo de estado (Finite Machine State)
+         */
         public bool debugMode;
-        bool m_OnTransition;
-        public PanelManager startMenu;
-
-        public float fadeDurationEnter = 0.5f;
-        public float fadeDurationExit = 0.5f;
-
-        [Header("Layer Settings")]
+        [Header("Game Settings")]
+        [SerializeField] internal GameSettings gameSettings;
         public LayerMask layerPlayer;
         public LayerMask layerEnemies;
-        public LayerMask layerCollection;
-        public LayerMask layerWall;
-
-        [Header("Player Settings")]
-        public GameObject playerPrefab;
-        public Vector3 spawnPlayerPosition;
-        public List<PlayerSettings> playerSettingsList = new List<PlayerSettings>();
-        [SerializeField] internal List<PlayerMaster> initializedPlayerMasters = new List<PlayerMaster>();
-
-        [Header("Camera Settings"), SerializeField] internal CinemachineVirtualCamera virtualCamera;
-
-        [Header("CutScenes Settings")]
+        public enum GameScenes { MainScene, MissionHub, GamePlay, GamePlayBoss, EndGameCredits, BriefingRoom }
+        public GameScenes gameScenes;
+        public enum GameModes {Classic,Mission}
+        internal GameModes gameModes;
+        [Header("Level Settings")]
+        public Levels classicLevels;
+        public ListLevels missionLevels;
+        [Header("Menus")]
         [SerializeField]
-        internal PlayableDirector openCutDirector;
-        [SerializeField]
-        internal PlayableDirector endCutDirector;
+        public PanelBase panelBaseGame;
+        [Header("Menu Fades")]
+        public string nameSceneTransition = "TransitionalScene";
+        public Transform panelFade;
+        public Image fadeImage;
+        //[SerializeField] Animator fadeAnimator;
+        [SerializeField] float fadeInTime = 1f;
+        [SerializeField] float fadeOutTime = 1f;
+        public T PanelBase<T>() where T : class
+        {
+            return panelBaseGame as T;
+        }
+        
+        internal bool onLoadScene;
+        public GameState currentGameState { get; private set; }
+        internal GameState lastGameState;
 
-        #region UnityMethods
+        #region UNITYMETHODS
+        void Awake()
+        {
+            if (FindObjectsOfType(typeof(GameManager)).Length <= 1)
+                return;
+            Destroy(gameObject);
+        }
         void Start()
         {
-            if (debugMode)
+            if (SteamClient.IsValid && SteamClient.IsLoggedOn)
             {
-                ChangeState(new GameStatePlayGame());
-                return;
+                SteamFriends.OnGameOverlayActivated += PauseGame;
             }
-            ChangeState(new GameStateMenu());
-        }
-        void Update()
-        {
-            currentGameState?.UpdateState();
-
-        }
-  #endregion
-        public GameState currentGameState
-        {
-            get;
-            private set;
-        }
-        internal void ChangeState(GameState newState)
-        {
-            //TODO: melhorar para fazer o state saltar as transições na entrada e na saida. talvez colocar na criação uma bolian para decidir
-            if (m_OnTransition) return;
-            if (currentGameState != null)
+            //Debug.Log($"GameScene: {gameScenes}");
+            switch (gameScenes)
             {
-                if (currentGameState is GameStateOpenCutScene)
-                {
-                    ChangeState(currentGameState, newState);
-                }
-                else
-                {
-                    if (newState is GameStateGameOver or GameStateEndCutScene)
-                    {
-                        ChangeState(currentGameState, newState);
-                    }
-                    else
-                    {
-                        m_OnTransition = true;
-                        StartCoroutine(PerformStateTransition(currentGameState, newState));
-                    }
-                }
-
+                case GameScenes.MainScene:
+                    break;
+                case GameScenes.MissionHub:
+                    break;
+                case GameScenes.GamePlay:
+                    break;
+                case GameScenes.BriefingRoom:
+                    break;
+                case GameScenes.GamePlayBoss:
+                    gameModes = GameModes.Mission;
+                    ChangeState(new GameStateOpenCutScene(), "GamePlayBoss");
+                    break;
+                case GameScenes.EndGameCredits:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-            else
-            {
-                currentGameState = newState;
-                currentGameState.EnterState();
-            }
-        }
-        public void PauseGame()
-        {
-            ChangeState(new GameStatePause());
-        }
-        public void UnPauseGame()
-        {
-            ChangeState(new GameStatePlayGame());
-        }
-
-        public void ActivePlayers(bool active)
-        {
-            if (initializedPlayerMasters.Count <= 0) return;
-            foreach (var playerMaster in initializedPlayerMasters)
-            {
-                playerMaster.gameObject.SetActive(active);
-            }
-        }
-        public bool haveAnyPlayerInitialized
-        {
-            get { return initializedPlayerMasters.Count > 0; }
-        }
-
-        public void UnPausedMovementPlayers()
-        {
-            if (initializedPlayerMasters.Count <= 0) return;
-            foreach (var playerMaster in initializedPlayerMasters)
-            {
-                playerMaster.playerMovementStatus = PlayerMaster.MovementStatus.None;
-            }
-        }
-
-        void ChangeState(GameState actualState, GameState nextState)
-        {
-            actualState.ExitState();
-
-            currentGameState = nextState;
-            currentGameState.EnterState();
-            if (currentGameState is GameStateGameOver)
-            {
-                Invoke(nameof(GameOverState), .2f);
-            }
-        }
-
-        IEnumerator PerformStateTransition(GameState actualState, GameState nextState)
-        {
-            //Debug.Log($"Start Coroutine");
-            // Implemente o efeito de fade out aqui
-            startMenu.PerformFadeOut();
-
-            yield return new WaitForSeconds(fadeDurationEnter);
-
-            actualState.ExitState();
-            yield return new WaitForSeconds(fadeDurationExit);
-            // Implemente o efeito de fade in aqui
-            startMenu.PerformFadeIn();
-
-            currentGameState = nextState;
-            currentGameState.EnterState();
             
-            m_OnTransition = false;
-        }
-
-        public void RemoveAllPlayers()
-        {
-            if (initializedPlayerMasters.Count <= 0) return;
-            foreach (var playerMaster in initializedPlayerMasters)
-            {
-                DestroyImmediate(playerMaster.gameObject);
-            }
-            initializedPlayerMasters = new List<PlayerMaster>();
-        }
-
-        void GameOverState()
-        {
-            var curr = currentGameState as GameStateGameOver;
-            curr?.GameOverState();
-        }
-
-        public void InstantiatePlayers()
-        {
-            if (initializedPlayerMasters.Count != 0)
-                return;
-            var playerSettings = playerSettingsList[^1];
-            var playerObject = Instantiate(playerPrefab, spawnPlayerPosition, quaternion.identity);
-            playerObject.name = playerSettings.name;
-            var playerMaster = playerObject.GetComponent<PlayerMaster>();
-            playerMaster.SetPlayerSettingsToPlayMaster(playerSettings);
-            initializedPlayerMasters.Add(playerMaster);
-            // Atualiza a cutscene com o animator do jogador;
-            Tools.ChangeBindingReference("Animation Track", playerMaster.GetPlayerAnimator(), openCutDirector);
-            Tools.ChangeBindingReference("Animation Track", playerMaster.GetPlayerAnimator(), endCutDirector);
-            // Coloca o player como Follow da camra
-            Tools.SetFollowVirtualCam(virtualCamera, playerObject.transform);
-        }
-
-        public void PlayOpenCutScene()
-        {
-            Invoke(nameof(InvokePlayOpenCutScene),0.2f);
-        }
-        void InvokePlayOpenCutScene()
-        {
-            openCutDirector.Play();
-        }
-
-        
-
-        #region Buttons Actions
-        public void BtnNewGame()
-        {
-            ChangeState(new GameStateOpenCutScene(openCutDirector));
-        }
-
-        public void BtnGameRestart()
-        {
-            GamePlayManager.instance.OnEventReSpawnEnemiesMaster();
-            GamePlayManager.instance.OnEventEnemiesMasterForceRespawn();
             ChangeState(new GameStateMenu());
-            GameMissionBuilder.instance.ResetBuildMission();
+        }
+
+        #region Actions Application
+        protected void OnApplicationFocus(bool hasFocus)
+        {
+            if(debugMode) return;
+            PauseGame(!hasFocus);
+        }
+
+        protected void OnApplicationPause(bool pauseStatus)
+        {
+            if(debugMode) return;
+            PauseGame(pauseStatus);
         }
         #endregion
 
+        void Update()
+        {
+            if(!onLoadScene)
+                currentGameState?.UpdateState();
+        }
+        protected override void OnDestroy()
+        {
+            //base.OnDestroy();
+        }
+        #endregion
+        public Levels GetLevel()
+        {
+            var level = gameModes switch
+            {
+                GameModes.Classic => classicLevels,
+                GameModes.Mission => GamePlayingLog.instance.activeMission,
+                _ => classicLevels
+            };
+            return level;
+        }
+
+        void PauseGame(bool pause)
+        {
+            Time.timeScale = pause ? 0 : 1;
+            if (currentGameState is not GameStatePlayGame)
+                return;
+            if (pause)
+            {
+                ChangeState(new GameStatePause());
+            }
+        }
+        
+        #region Machine State
+        internal void ChangeState(GameState nextState)
+        {
+            if (currentGameState == nextState)
+                return;
+            if(onLoadScene) return;
+            onLoadScene = true;
+            currentGameState?.ExitState();
+            lastGameState = currentGameState;
+            currentGameState = nextState;
+            StartCoroutine(currentGameState?.OnLoadState());
+            currentGameState?.EnterState();
+            onLoadScene = false;
+        }
+        
+        internal void ChangeState(GameState nextState, string nextSceneName)
+        {
+            if(onLoadScene) return;
+            onLoadScene = true;
+            StartCoroutine(LoadSceneAsync(nextState, nextSceneName));
+        }
+        IEnumerator LoadSceneAsync(GameState nextState,string nextSceneName)
+        {
+            if (currentGameState == nextState)
+                yield break;
+            string unloadScene = SceneManager.GetActiveScene().name;
+            yield return StartCoroutine(FadeCanvas(false));
+            // chama o status de saida
+            currentGameState?.ExitState();
+            // Chamar a cena de transição
+            yield return SceneManager.LoadSceneAsync(nameSceneTransition, LoadSceneMode.Additive); // Carrega a cena de transição
+            lastGameState = currentGameState;
+            currentGameState = nextState;
+            yield return currentGameState?.OnLoadState();
+            //Descarrega a scena aterior
+            SceneManager.UnloadSceneAsync(unloadScene);
+
+            while (SceneManager.GetSceneByName(unloadScene).isLoaded) {
+                yield return null; // Aguarda até que a cena anterior seja totalmente descarregada
+            }
+            //Carregando a nova scene
+            var loadScene = SceneManager.LoadSceneAsync(nextSceneName);
+            loadScene.allowSceneActivation = false;
+            
+            // wait for the scene to load
+            while (!loadScene.isDone)
+            {
+                if (loadScene.progress >= 0.9f)
+                {
+                    
+                    //Se precisar load bar
+                    break;
+                }
+                yield return null;
+            }
+            loadScene.allowSceneActivation = true;
+            while (!loadScene.isDone)
+            {
+                yield return null;
+            } 
+            currentGameState?.EnterState();
+            yield return StartCoroutine(FadeCanvas(true));
+            while (SceneManager.GetSceneByName(nameSceneTransition).isLoaded) {
+                yield return null; // Aguarda até que a cena anterior seja totalmente descarregada
+            }
+            onLoadScene = false;
+        }
+
+        internal static void DestroyGamePlay()
+        { 
+            DestroyImmediate(PlayerManager.instance);
+        }
+        IEnumerator FadeCanvas(bool faceIn) {
+            var corInitial = fadeImage.color;
+            float corAlpha = (faceIn) ? 0.0f : 1.0f; // in:out
+            var corFinal = new Color(corInitial.r, corInitial.g, corInitial.b, corAlpha);
+            float timeSpend = 0.0f;
+            float timeDuration = (faceIn) ? fadeInTime : fadeOutTime; // in:out 
+            
+            while (timeSpend < timeDuration) {
+                timeSpend += Time.deltaTime;
+                //Debug.Log($"FADE: {timeSpend}, {corInitial}, {corFinal}");
+                fadeImage.color = Color.Lerp(corInitial, corFinal, timeSpend / timeDuration);
+                yield return null;
+            }
+        }
+        #endregion
+        
     }
 }

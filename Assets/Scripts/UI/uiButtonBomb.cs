@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 namespace RiverAttack
 {
     public class UiButtonBomb : MonoBehaviour
@@ -16,7 +16,6 @@ namespace RiverAttack
 
         void ActionShoot()
         {
-            //Debug.Log($"Animator {m_Animator}");
             if (m_Animator != null)
             {
                 m_Animator.SetTrigger(IsPressed);

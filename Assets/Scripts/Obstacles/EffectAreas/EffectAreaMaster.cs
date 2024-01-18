@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+
 namespace RiverAttack
 {
     public class EffectAreaMaster : ObstacleMaster
@@ -13,22 +16,18 @@ namespace RiverAttack
   #endregion
 
         #region UNITYMETHODS
+
         void OnTriggerExit(Collider collision)
         {
-            if(playerMaster == null)
-                playerMaster = collision.GetComponentInParent<PlayerMaster>();
-            if (!playerMaster) return;
-            if (!playerMaster.shouldPlayerBeReady) return;
-            playerMaster.inEffectArea = false;
+            playerMaster = collision.GetComponentInParent<PlayerMaster>();
+            if(playerMaster == null || !playerMaster.shouldPlayerBeReady) return;
             OnEventExitAreaEffect();
         }
         void OnTriggerStay(Collider collision)
         {
-            if(playerMaster == null)
-                playerMaster = collision.GetComponentInParent<PlayerMaster>();
-            if (!playerMaster) return;
-            if (!playerMaster.shouldPlayerBeReady) return;
-            if (!playerMaster.inEffectArea) playerMaster.inEffectArea = true;
+            playerMaster = collision.GetComponentInParent<PlayerMaster>();
+            if (playerMaster == null || !playerMaster.shouldPlayerBeReady) 
+                return;
             CollectThis(playerMaster);
         }
   #endregion
@@ -42,7 +41,7 @@ namespace RiverAttack
         void CollectThis(PlayerMaster collision)
         {
             var player = collision.getPlayerSettings;
-            if (m_Timer <= 0 && playerMaster.inEffectArea)
+            if (m_Timer <= 0)
             {
                 m_EffectArea.EffectAreaStart(player);
                 OnEventAreaEffect();
@@ -53,23 +52,23 @@ namespace RiverAttack
 
         protected override void DestroyObstacle()
         {
-            if (playerMaster.inEffectArea)
-            {
-                playerMaster.inEffectArea = false;
-                OnEventExitAreaEffect();
-            }
+            OnEventExitAreaEffect();
+            playerMaster.inPowerUp = false;
             base.DestroyObstacle();
         }
 
         #region Calls
         void OnEventAreaEffect()
         {
+            playerMaster.inPowerUp = true;
             EventEnterAreaEffect?.Invoke();
         }
 
         void OnEventExitAreaEffect()
         {
+            playerMaster.inPowerUp = false;
             EventExitAreaEffect?.Invoke();
+            GameSteamManager.StoreStats();
         }
   #endregion
 

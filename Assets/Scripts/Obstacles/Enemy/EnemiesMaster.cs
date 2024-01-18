@@ -1,12 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace RiverAttack
 {
-    public sealed class EnemiesMaster : ObstacleMaster
+    public class EnemiesMaster : ObstacleMaster
     {
         EnemiesSetDifficultyListSo m_EnemiesSetDifficultList;
-
-        public EnemiesSetDifficulty.EnemyDifficult actualDifficultName;
+        
         public static EnemiesSetDifficulty myDifficulty { get; private set; }
 
         #region Delegates
@@ -44,7 +43,7 @@ namespace RiverAttack
         {
             if (m_EnemiesSetDifficultList != null)
             {
-                myDifficulty = enemy.enemiesSetDifficultyListSo.GetDifficultByScore(gamePlayManager.HighScorePlayers());
+                myDifficulty = enemy.enemiesSetDifficultyListSo.GetDifficultByScore(PlayerManager.instance.HighScorePlayers());
             }
         }
 

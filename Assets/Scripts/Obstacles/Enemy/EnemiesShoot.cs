@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Utils;
 namespace RiverAttack
 {
@@ -42,9 +42,11 @@ namespace RiverAttack
         void Start()
         {
             // setup inicial do status
-            StartMyPool();
+            StartMyPool(bullet,startPool);
             ChangeState(m_StateShootHold);
-            spawnPoint = GetComponentInChildren<EnemiesShootSpawn>().transform ? GetComponentInChildren<EnemiesShootSpawn>().transform : transform;
+            var enemiesShootSpawn = GetComponentInChildren<EnemiesShootSpawn>();
+            if (enemiesShootSpawn == null) return;
+            spawnPoint = enemiesShootSpawn.transform ? enemiesShootSpawn.transform : transform;
         }
 
         void Update()
@@ -101,9 +103,9 @@ namespace RiverAttack
                 return shootCadence > 0 && bulletSpeed > 0;
             }
         }
-        public void StartMyPool(bool isPersistent = false)
+        public void StartMyPool(GameObject bullets, int quantity, bool isPersistent = false)
         {
-            PoolObjectManager.CreatePool(this, bullet, startPool, transform, isPersistent);
+            PoolObjectManager.CreatePool(this, bullets, quantity, transform, isPersistent);
         }
     }
 }

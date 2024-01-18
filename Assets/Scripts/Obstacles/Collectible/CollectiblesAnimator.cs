@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
+using Utils;
 
 namespace RiverAttack
 {
     public class CollectiblesAnimator : MonoBehaviour
     {
         [SerializeField] string collectTrigger;
+        [SerializeField] float timeCollectAnimation;
 
         CollectiblesMaster m_CollectiblesMaster;
         Animator m_Animator;
@@ -23,19 +25,24 @@ namespace RiverAttack
 
         void CollectAnimation(PlayerSettings playerSettings)
         {
-            //TODO: {enchancement} implementar uma animação de coletar
             if (m_Animator == null)
             {
                 m_Animator = GetComponentInChildren<Animator>();
             }
-            if (m_Animator != null && !string.IsNullOrEmpty(collectTrigger))
-                m_Animator.SetTrigger(collectTrigger);
+            if (m_Animator == null || string.IsNullOrEmpty(collectTrigger)) return;
+            m_Animator.SetTrigger(collectTrigger);
+            Invoke(nameof(DisableChildren), timeCollectAnimation);
+
         }
         void SetInitialReferences()
         {
             m_CollectiblesMaster = GetComponent<CollectiblesMaster>();
             m_Animator = GetComponentInChildren<Animator>();
 
+        }
+        protected void DisableChildren()
+        {
+            Tools.ToggleChildren(transform, false);
         }
     }
 }

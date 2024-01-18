@@ -1,4 +1,3 @@
-﻿using System;
 using UnityEngine;
 namespace RiverAttack
 {
@@ -15,13 +14,17 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
-            m_EnemiesMaster.EventObstacleMovement += AnimationMove; 
-            m_EnemiesMaster.EventObjectMasterFlipEnemies += AnimationFlip;
+            if (m_EnemiesMaster)
+            {
+                m_EnemiesMaster.EventObstacleMovement += AnimationMove; 
+                m_EnemiesMaster.EventObjectMasterFlipEnemies += AnimationFlip;
+            }
             m_GamePlayManager.EventReSpawnEnemiesMaster += ResetAnimation;
 
         }
         void OnDisable()
         {
+            if (!m_EnemiesMaster) return;
             m_EnemiesMaster.EventObstacleMovement -= AnimationMove;
             m_EnemiesMaster.EventObjectMasterFlipEnemies -= AnimationFlip;
         }
@@ -64,29 +67,5 @@ namespace RiverAttack
             if (!string.IsNullOrEmpty(onFlip))
                 m_Animator.SetBool(onFlip, false);
         }
-        
-        /*
-        void ObjectMasterFlipEnemiesMasterFlipAnimation()
-        {
-            if (m_Animator == null)
-            {
-                m_Animator = GetComponentInChildren<Animator>();
-            }
-            //if (m_Animator != null && !string.IsNullOrEmpty(onFlip))
-               // m_Animator.SetBool(onFlip, !m_Animator.GetBool(onFlip));
-        }
-
-        void ResetAnimation()
-        {
-            //Debug.Log($"Reset Animator: {m_Animator}");
-            if (m_Animator == null) return;
-            if (!string.IsNullOrEmpty(onMove))
-                m_Animator.SetBool(onMove, false);
-            if (!string.IsNullOrEmpty(onFlip))
-                m_Animator.SetBool(onFlip, false);
-            //Forçando a Animação de movimento a reiniciar, normalmente é o eixo do movimento, mas como a variavel não entra neste escopo, força o movimento com true depois de revive-lo.
-            if (!string.IsNullOrEmpty(onMove)) 
-                m_Animator.SetBool(onMove, true);
-        }*/
     }
 }

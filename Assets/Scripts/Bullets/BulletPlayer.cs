@@ -5,6 +5,7 @@ namespace RiverAttack
     public class BulletPlayer : Bullets
     {
         GamePlayManager m_GamePlayManager;
+        float m_StartTime;
         #region UnityMethods
         void OnEnable()
         {
@@ -15,21 +16,27 @@ namespace RiverAttack
             var spawnPos = root.GetComponentInChildren<PlayerSkinAttach>() ?? root.GetComponent<PlayerSkinAttach>();
             if(spawnPos) 
                 TransformSpawnPosition(spawnPos.transform);
+            m_StartTime = Time.time + bulletLifeTime;
         }
         void FixedUpdate()
         {
             MoveShoot();
-            AutoDestroyMe(bulletLifeTime);
+            AutoDestroyMe(m_StartTime);
         }
         void OnTriggerEnter(Collider collision)
         {
-            if (collision.GetComponentInParent<PlayerMaster>() || collision.GetComponentInParent<BulletPlayer>() || collision.GetComponentInParent<BulletPlayerBomb>() || collision.GetComponent<LevelChangeBGM>()) return;
+            if (collision.GetComponentInParent<PlayerMaster>() || collision.GetComponentInParent<BulletPlayer>() || 
+                collision.GetComponentInParent<BulletPlayerBomb>() || collision.GetComponent<LevelChangeBGM>()) return;
             var obstacleMaster = collision.GetComponent<ObstacleMaster>();
             if (obstacleMaster != null && !obstacleMaster.enemy.canDestruct) return;
             if (collision.GetComponentInParent<PowerUpMaster>()) return;
             DestroyMe();
         }
         void OnBecameInvisible()
+        {
+            Invoke(nameof(DestroyMe), .01f);
+        }
+        void OnDisable()
         {
             Invoke(nameof(DestroyMe), .01f);
         }

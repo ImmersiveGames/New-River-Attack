@@ -15,8 +15,6 @@ namespace RiverAttack
         int startBulletPool;
 
         [Header("Bullets Settings")]
-        [SerializeField] float bulletSpeed;
-        [SerializeField] float bulletLifeTime;
         public Color bulletColor;
         public Color rapidFireColor;
         
@@ -27,13 +25,9 @@ namespace RiverAttack
         GamePlayManager m_GamePlayManager;
         PlayerMaster m_PlayerMaster;
         PlayerSettings m_PlayerSettings;
-        static GamePlaySettings _gamePlaySettings;
+        static GamePlayingLog _gamePlayingLog;
 
         #region UNITYMETHODS
-        void Awake()
-        {
-            m_PlayersInputActions = new PlayersInputActions();
-        }
         void OnEnable()
         {
             SetInitialReferences();
@@ -41,34 +35,29 @@ namespace RiverAttack
         }
         void Start()
         {
-            PoolObjectManager.CreatePool(this, prefabBullet, startBulletPool, transform);
-            var pool = PoolObjectManager.GetPool(this);
-            pool.SetAsLastSibling();
-            m_PlayersInputActions = m_PlayerMaster.playersInputActions;
-            m_PlayersInputActions.Enable();
+            StartMyPool(prefabBullet, startBulletPool);
+            m_PlayersInputActions = GamePlayManager.instance.inputSystem;
             m_CanExecuteAction = true;
             m_PlayersInputActions.Player.Shoot.performed += Execute;
+        }
+        void OnDestroy()
+        {
+            m_PlayersInputActions.Player.Shoot.performed -= Execute;
         }
   #endregion
         
         void SetInitialReferences()
         {
-            _gamePlaySettings = GamePlaySettings.instance;
+            _gamePlayingLog = GamePlayingLog.instance;
             m_GamePlayManager = GamePlayManager.instance;
             m_PlayerMaster = GetComponent<PlayerMaster>();
             m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
         }
-        public void StartMyPool(bool isPersistent = false)
+        public void StartMyPool(GameObject bullets, int quantity, bool isPersistent = false)
         {
-            PoolObjectManager.CreatePool(this, prefabBullet, startBulletPool, transform, isPersistent);
+            PoolObjectManager.CreatePool(this, bullets, startBulletPool, transform);
             var pool = PoolObjectManager.GetPool(this);
-            for (int i = 0; i < pool.childCount; i++)
-            {
-                var bulletPlayer = pool.GetChild(i).GetComponent<BulletPlayer>();
-                bulletPlayer.ownerShoot = m_PlayerMaster;
-                bulletPlayer.SetMyPool(pool);
-                bulletPlayer.Init(bulletSpeed, bulletLifeTime);
-            }
+            pool.SetAsLastSibling();
         }
         public void Execute(InputAction.CallbackContext callbackContext)
         {
@@ -97,8 +86,6 @@ namespace RiverAttack
             myShoot.transform.parent = null;
             LogGamePlay();
 
-            
-
         }
         IEnumerator Cooldown()
         {
@@ -113,7 +100,7 @@ namespace RiverAttack
         }
         static void LogGamePlay()
         {
-            _gamePlaySettings.shootSpent += 1;
+            _gamePlayingLog.shootSpent += 1;
         }
         
     }
