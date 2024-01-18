@@ -897,6 +897,36 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 36105405}
+--- !u!1 &1231194218 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5461112800930138272, guid: cb729b5deb9869145a9b94354c1adeed,
+    type: 3}
+  m_PrefabInstance: {fileID: 6834788240251475532}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1231194222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231194218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 10
+    m_Bottom: 10
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 500, y: 50}
+  m_Spacing: {x: 0, y: 10}
+  m_Constraint: 1
+  m_ConstraintCount: 1
 --- !u!1 &1331355163
 GameObject:
   m_ObjectHideFlags: 3
@@ -1346,6 +1376,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1696796867 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 651469779468116823, guid: cb729b5deb9869145a9b94354c1adeed,
+    type: 3}
+  m_PrefabInstance: {fileID: 6834788240251475532}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1740593866
@@ -23674,16 +23716,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 295211334377452213, guid: cb729b5deb9869145a9b94354c1adeed,
+    - target: {fileID: 264180099318502852, guid: cb729b5deb9869145a9b94354c1adeed,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: m_SizeDelta.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 264180099318502852, guid: cb729b5deb9869145a9b94354c1adeed,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 1517302919990312795, guid: cb729b5deb9869145a9b94354c1adeed,
         type: 3}
       propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3269389092187256033, guid: cb729b5deb9869145a9b94354c1adeed,
+        type: 3}
+      propertyPath: framerateDropdown
+      value: 
+      objectReference: {fileID: 1696796867}
     - target: {fileID: 3662284275151458383, guid: cb729b5deb9869145a9b94354c1adeed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -23734,6 +23786,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4764097114062089086, guid: cb729b5deb9869145a9b94354c1adeed,
+        type: 3}
+      propertyPath: m_VerticalFit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5164291813668537503, guid: cb729b5deb9869145a9b94354c1adeed,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5164291813668537503, guid: cb729b5deb9869145a9b94354c1adeed,
+        type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 8192
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469321371512738903, guid: cb729b5deb9869145a9b94354c1adeed,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 6251760092315763848, guid: cb729b5deb9869145a9b94354c1adeed,
         type: 3}
       propertyPath: m_Interactable
@@ -23744,6 +23816,11 @@ PrefabInstance:
       propertyPath: mainMenuPlayer
       value: 
       objectReference: {fileID: 1600305902}
+    - target: {fileID: 7880007411237934459, guid: cb729b5deb9869145a9b94354c1adeed,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 8241859186920285843, guid: cb729b5deb9869145a9b94354c1adeed,
         type: 3}
       propertyPath: m_Name
@@ -23789,10 +23866,15 @@ PrefabInstance:
       propertyPath: menuCamera.Array.data[6]
       value: 
       objectReference: {fileID: 224920640}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 238236420023714897, guid: cb729b5deb9869145a9b94354c1adeed, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5461112800930138272, guid: cb729b5deb9869145a9b94354c1adeed,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1231194222}
   m_SourcePrefab: {fileID: 100100000, guid: cb729b5deb9869145a9b94354c1adeed, type: 3}
 --- !u!114 &6834788240251475533 stripped
 MonoBehaviour:
