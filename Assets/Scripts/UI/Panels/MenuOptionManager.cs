@@ -32,9 +32,11 @@ namespace RiverAttack
         [SerializeField] DialogObject dialogQualityLocalization;
         [SerializeField] TMP_Dropdown gpx_ResolutionDropdown;
         [SerializeField] TMP_Text debugText;
+        [SerializeField] TMP_Dropdown framerateDropdown;
 
         int actualQuality;
         Resolution actualResolution;
+        RefreshRate actualRefreshRate;
 
         #region UNITYMETHODS
         void OnEnable()
@@ -47,6 +49,7 @@ namespace RiverAttack
             m_ActualLocal = m_GameSettings.startLocale;
             SetLocaleButton(m_ActualLocal);
 
+            SetFrameRateDropdown();
             SetInitialGrapicsValues();
             SetGraphicsQualityDropDwon();
             SetResolutionDropDown();
@@ -222,7 +225,7 @@ namespace RiverAttack
             return uniqueList.ToArray();
         }
 
-            void SetInitialResolutionValue(TMP_Dropdown dropdown, Resolution[] resolutions)
+        void SetInitialResolutionValue(TMP_Dropdown dropdown, Resolution[] resolutions)
         {
             Resolution currentResolution = currentResolution = Screen.currentResolution;
 
@@ -248,9 +251,81 @@ namespace RiverAttack
             m_GameSettings.actualResolutionWidth = actualResolution.width;
             m_GameSettings.actualResolutionHeight = actualResolution.height;
             
-            Screen.SetResolution(actualResolution.width, actualResolution.height, Screen.fullScreen);
+            Screen.SetResolution(actualResolution.width, actualResolution.height, FullScreenMode.FullScreenWindow, actualRefreshRate);
 
             Debug.Log("Apliquei resolução: " + actualResolution);
         }
-    }
+
+        void SetFrameRateDropdown()
+        {
+            // Limpar as opções existentes no Dropdown.
+            framerateDropdown.ClearOptions();
+
+            // Criar uma lista de opções para o Dropdown.
+            List<TMP_Dropdown.OptionData> dropdownOptions = new List<TMP_Dropdown.OptionData>();
+
+            // Adicionar as opções de taxa de quadros à lista.
+            dropdownOptions.Add(new TMP_Dropdown.OptionData("60 FPS"));
+            dropdownOptions.Add(new TMP_Dropdown.OptionData("30 FPS"));
+
+
+            // Adicionar as opções ao Dropdown.
+            framerateDropdown.AddOptions(dropdownOptions);
+
+            // Configurar o callback para a mudança na opção do Dropdown.
+            framerateDropdown.onValueChanged.AddListener(delegate
+            {
+                OnFramerateChanged(framerateDropdown);
+            });
+
+            // Definir o valor inicial do Dropdown com base na taxa de quadros atual.
+            SetInitialFramerateValue(framerateDropdown);
+        }
+
+        void SetInitialFramerateValue(TMP_Dropdown dropdown)
+        {
+            RefreshRate currentFramerate = GetRefreshRateForCurrentResolution();
+            actualRefreshRate = currentFramerate;
+
+            // Definir o valor inicial com base na taxa de quadros atual.
+            if (currentFramerate.value == 60)
+            {
+                dropdown.value = 0; // 60 FPS
+            }
+            else
+            {
+                dropdown.value = 1; // 30 FPS
+            }
+        }
+
+        void OnFramerateChanged(TMP_Dropdown dropdown)
+        {
+            // Obter o valor selecionado e aplicar a taxa de quadros.
+            int frameRate = dropdown.value == 0 ? 60 : 30;
+
+            RefreshRate selectedFramerate;
+
+            uint numerator = (uint)((uint)dropdown.value == 0 ? 60 : 30);
+            uint denominator = (uint)1;
+
+            selectedFramerate.numerator = numerator;
+            selectedFramerate.denominator = denominator;
+
+            Debug.Log(selectedFramerate.value);
+
+            actualRefreshRate = selectedFramerate;
+
+            Screen.SetResolution(Screen.width, Screen.height, FullScreenMode.FullScreenWindow, selectedFramerate);
+
+            Application.targetFrameRate = frameRate;
+        }
+
+        RefreshRate GetRefreshRateForCurrentResolution()
+        {
+            Resolution currentResolution = Screen.currentResolution;
+            return currentResolution.refreshRateRatio;
+        }
+
+    }   
+
 }
