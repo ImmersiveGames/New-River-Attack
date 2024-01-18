@@ -246,8 +246,8 @@ namespace RiverAttack
         {
             if (!connectedToSteam || _leaderboard == null || score <= 0)
                 return;
-            LeaderboardUpdate? result;
             Debug.Log($"REGISTRAAAAAAAA {score} AQUI: {_leaderboard}");
+            LeaderboardUpdate? result;
             if (force)
             {
                 result = await _leaderboard.Value.ReplaceScore(score);

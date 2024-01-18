@@ -22,6 +22,8 @@ namespace RiverAttack
         }
         public override void ExitState()
         {
+            int score = PlayerManager.instance.playerSettingsList[0].score;
+            GameSteamManager.UpdateScore(score, false);
             PlayerManager.instance.ActivePlayers(false);
             GamePlayManager.instance.OnEventDeactivateEnemiesMaster();
             //Debug.Log($"Sai do Estado: PlayGame");

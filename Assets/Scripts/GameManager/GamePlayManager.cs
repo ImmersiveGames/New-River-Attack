@@ -198,7 +198,7 @@ namespace RiverAttack
         }
         internal void OnEventUpdateScore(int value)
         {
-            GameSteamManager.UpdateScore(value, false);
+            //GameSteamManager.UpdateScore(6200, false);
             EventUpdateScore?.Invoke(value);
         }
         internal void OnEventUpdateDistance(int value)

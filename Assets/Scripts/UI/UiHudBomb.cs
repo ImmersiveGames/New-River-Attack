@@ -16,6 +16,7 @@ namespace RiverAttack
         void OnEnable()
         {
             SetInitialReferences();
+            UpdateBombs(m_PlayerSettings.bombs);
             m_GamePlayManager.EventUpdateBombs += UpdateBombs;
         }
         void Start()
