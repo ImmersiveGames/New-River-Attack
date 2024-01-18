@@ -14,6 +14,7 @@ namespace RiverAttack
         const string LEADERBOARD_NAME = "River_Attack_HiScore";
         static IEnumerable<Achievement> _serverAchievements;
         public bool resetAchievementsOnStart;
+        public bool demoMode;
         bool m_ApplicationHasQuit;
 
         static Leaderboard? _leaderboard;
@@ -31,17 +32,25 @@ namespace RiverAttack
                 _instance = this;
                 try
                 {
-                    SteamClient.Init( STEAM_ID);
-                    if (!SteamClient.IsValid)
+                    if (!demoMode)
                     {
-                        //Debug.Log("Steam client not valid");
-                        throw new Exception();
-                    }
-                    connectedToSteam = true;
-                    _serverAchievements = SteamUserStats.Achievements;
-                    _leaderboard = await SteamUserStats.FindLeaderboardAsync(LEADERBOARD_NAME);
+                        SteamClient.Init( STEAM_ID);
+                        if (!SteamClient.IsValid)
+                        {
+                            //Debug.Log("Steam client not valid");
+                            throw new Exception();
+                        }
+                        connectedToSteam = true;
+                        _serverAchievements = SteamUserStats.Achievements;
+                        _leaderboard = await SteamUserStats.FindLeaderboardAsync(LEADERBOARD_NAME);
 
-                    Debug.Log("Leaderboard initialized: " + _leaderboard);
+                        Debug.Log("Leaderboard initialized: " + _leaderboard);
+                    }
+                    else
+                    {
+                        connectedToSteam = false;
+                    }
+                    
                 }
                 catch ( Exception e )
                 {
