@@ -1042,6 +1042,11 @@ MonoBehaviour:
   defaultSfxVolume: 0.5
   engBtn: {fileID: 648653020201571221}
   ptBrBtn: {fileID: 6943173354999616218}
+  gpx_QualityDropdown: {fileID: 0}
+  dialogQualityLocalization: {fileID: 0}
+  gpx_ResolutionDropdown: {fileID: 0}
+  debugText: {fileID: 0}
+  framerateDropdown: {fileID: 0}
 --- !u!1 &789004014820987990
 GameObject:
   m_ObjectHideFlags: 0
@@ -3464,7 +3469,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4836990907162222653
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3505,7 +3510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.31132078, g: 0.3069153, b: 0.3069153, a: 1}
+  m_Color: {r: 0.9716981, g: 0.9579477, b: 0.9579477, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10040,8 +10045,9 @@ GameObject:
   - component: {fileID: 101803848628623814}
   - component: {fileID: 6655181328350552426}
   - component: {fileID: 2085277365433538054}
+  - component: {fileID: 320155544278513454}
   m_Layer: 5
-  m_Name: Mission_HUB_Btn (1)
+  m_Name: ssion_HUB_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10260,3 +10266,15 @@ MonoBehaviour:
           m_WaitForCompletion: 0
           m_LocalVariables: []
         m_PropertyPath: m_text
+--- !u!114 &320155544278513454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9190818937154482681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4847ebc8e57748c19a617bc2fd4b1301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
