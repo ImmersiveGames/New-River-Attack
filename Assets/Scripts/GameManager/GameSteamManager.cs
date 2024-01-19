@@ -153,7 +153,6 @@ namespace RiverAttack
         // se um archvment foi desbloqueado existe essa função para teste
         static void AchievementChanged( Achievement ach, int currentProgress, int progress )
         {
-            if (!connectedToSteam) return;
             if ( ach.State )
             {
                 Debug.Log( $"{ach.Name} WAS UNLOCKED!" );   
@@ -234,7 +233,6 @@ namespace RiverAttack
         }
         void GameCleanup()
         {
-            if (!connectedToSteam) return;
             if (m_ApplicationHasQuit)
                 return;
             m_ApplicationHasQuit = true;

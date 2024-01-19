@@ -39,6 +39,7 @@ namespace RiverAttack
         {
             bombOff.enabled = bombs <= 0;
             bombOn.enabled = bombs > 0;
+         
             tmpTextBomb.text = $"X {bombs}";
         }
     }
