@@ -108,6 +108,7 @@ namespace RiverAttack
             GamePlayManager.instance.OnEventDeactivateEnemiesMaster();
             //Debug.Log($"Sai do Estado: Boss Fight");
             m_BossMaster = null;
+            GameSaveManager.instance.SavePlayerSaves();
             System.GC.Collect();
         }
         public static void PauseState(bool active)

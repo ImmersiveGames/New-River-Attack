@@ -26,6 +26,7 @@ namespace RiverAttack
             GameSteamManager.UpdateScore(score, false);
             PlayerManager.instance.ActivePlayers(false);
             GamePlayManager.instance.OnEventDeactivateEnemiesMaster();
+            GameSaveManager.instance.SavePlayerSaves();
             //Debug.Log($"Sai do Estado: PlayGame");
             System.GC.Collect();
         }
