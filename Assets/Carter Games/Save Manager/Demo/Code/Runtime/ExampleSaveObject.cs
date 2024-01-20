@@ -21,25 +21,16 @@
  * THE SOFTWARE.
  */
 
-namespace CarterGames.Assets.SaveManager.Editor
+using UnityEngine;
+
+namespace CarterGames.Assets.SaveManager.Demo
 {
-    /// <summary>
-    /// Contains details for the asset.
-    /// </summary>
-    public static class AssetVersionData
+    [CreateAssetMenu(fileName = "Example Save Object", menuName = "Carter Games/Save Manager/Demo/Example Save Object Asset", order = 20)]
+    public class ExampleSaveObject : SaveObject
     {
-        /// <summary>
-        /// The version number of the asset.
-        /// </summary>
-        public static string VersionNumber => "2.1.2";
-        
-        
-        /// <summary>
-        /// The date this release of the asset was submitted for release.
-        /// </summary>
-        /// <remarks>
-        /// Asset owner is in the UK, so its D/M/Y format.
-        /// </remarks>
-        public static string ReleaseDate => "20/01/2024";
+        public SaveValue<string> playerName = new SaveValue<string>("examplePlayerName");
+        public SaveValue<int> playerHealth = new SaveValue<int>("examplePlayerHealth");
+        public SaveValue<Vector3> playerPosition = new SaveValue<Vector3>("examplePlayerPosition");
+        public SaveValue<int> playerShield = new SaveValue<int>("examplePlayerShield");
     }
 }

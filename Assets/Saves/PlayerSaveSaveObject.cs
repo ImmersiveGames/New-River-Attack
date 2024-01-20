@@ -41,7 +41,6 @@ namespace Save
         public SaveValue<List<Levels>> finishLevels;
         public SaveValue<List<LogResults>> hitEnemiesResultsList;
         #endregion
-        
-        
+
     }
 }
