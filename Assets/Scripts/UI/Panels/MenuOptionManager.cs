@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RiverAttack
 {
@@ -180,21 +181,16 @@ namespace RiverAttack
 
         void SetResolutionDropDown()
         {
-            Resolution[] allResolutions = Screen.resolutions;
+            var allResolutions = Screen.resolutions;
 
             // Remover duplicatas do array de resoluções.
-            Resolution[] resolutions = RemoveDuplicateResolutions(allResolutions);
+            var resolutions = RemoveDuplicateResolutions(allResolutions);
 
             gpx_ResolutionDropdown.ClearOptions();
 
-            List<TMP_Dropdown.OptionData> dropdownOptions = new List<TMP_Dropdown.OptionData>();
+            var dropdownOptions = resolutions.Select(resolution => resolution.width + " x " + resolution.height).Select(optionText => new TMP_Dropdown.OptionData(optionText)).ToList();
 
             // Adicionar cada opção de resolução à lista em ordem inversa, evitando duplicatas.
-            foreach (Resolution resolution in resolutions)
-            {
-                string optionText = resolution.width + " x " + resolution.height;
-                dropdownOptions.Add(new TMP_Dropdown.OptionData(optionText));
-            }
 
             gpx_ResolutionDropdown.AddOptions(dropdownOptions);
 
@@ -206,11 +202,11 @@ namespace RiverAttack
             SetInitialResolutionValue(gpx_ResolutionDropdown, resolutions);
         }
 
-        Resolution[] RemoveDuplicateResolutions(Resolution[] resolutions)
+        static Resolution[] RemoveDuplicateResolutions(Resolution[] resolutions)
         {
-            HashSet<string> uniqueResolutions = new HashSet<string>();
+            var uniqueResolutions = new HashSet<string>();
             
-            List<Resolution> uniqueList = new List<Resolution>();
+            var uniqueList = new List<Resolution>();
 
             for (int i = resolutions.Length - 1; i >= 0; i--)
             {
