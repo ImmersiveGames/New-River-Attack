@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 namespace RiverAttack 
 {
@@ -14,6 +16,7 @@ namespace RiverAttack
         [SerializeField] Animator speakerAnimatorController;
         [SerializeField] protected TimeLineManager timelineManager;
         [SerializeField] TMP_Text dialogText;
+        [SerializeField] string tableReference = "StringTableCollection";
         [SerializeField] DialogObject dialog;
         [SerializeField] float letterSpeed = 0.05f;
         [SerializeField] GameObject nextCursor;
@@ -63,14 +66,82 @@ namespace RiverAttack
 
         string[] GetLocalization()
         {
-            var language = gameSettings.startLocale;
+            return new[] {
+                new LocalizedString
+                {
+                    TableReference = tableReference,
+                    TableEntryReference = "Tutorial_Line01"
+                }.GetLocalizedString(),
 
-            return language.LocaleName switch
-            {
-                PT_BR_LOCALIZATION => dialog.dialogSentences_PT_BR,
-                EN_LOCALIZATION => dialog.dialogSentences_EN,
-                _ => dialog.dialogSentences_EN
+                new LocalizedString
+                {
+                    TableReference = tableReference,
+                    TableEntryReference = "Tutorial_Line02"
+                }.GetLocalizedString(),
+                
+                new LocalizedString
+                {
+                    TableReference = tableReference,
+                    TableEntryReference = "Tutorial_Line03"
+                }.GetLocalizedString(),
+
+                new LocalizedString
+                {
+                    TableReference = tableReference,
+                    TableEntryReference = "Tutorial_Line04"
+                }.GetLocalizedString(),
+
+                new LocalizedString
+                {
+                    TableReference = tableReference,
+                    TableEntryReference = "Tutorial_Line05"
+                }.GetLocalizedString(),
+
+                new LocalizedString
+                {
+                    TableReference = tableReference,
+                    TableEntryReference = "Tutorial_Line06"
+                }.GetLocalizedString(),
+
+                new LocalizedString
+                {
+                    TableReference = tableReference,
+                    TableEntryReference = "Tutorial_Line07"
+                }.GetLocalizedString(),
+
+                new LocalizedString
+                {
+                    TableReference = tableReference,
+                    TableEntryReference = "Tutorial_Line08"
+                }.GetLocalizedString(),
+
+                new LocalizedString
+                {
+                    TableReference = tableReference,
+                    TableEntryReference = "Tutorial_Line09"
+                }.GetLocalizedString(),
+
+                new LocalizedString
+                {
+                    TableReference = tableReference,
+                    TableEntryReference = "Tutorial_Line10"
+                }.GetLocalizedString(),
+
+                new LocalizedString
+                {
+                    TableReference = tableReference,
+                    TableEntryReference = "Tutorial_Line11"
+                }.GetLocalizedString(),
             };
+
+            //var language = gameSettings.startLocale;
+
+            //return language.LocaleName switch
+            //{
+            //    PT_BR_LOCALIZATION => dialog.dialogSentences_PT_BR,
+            //    EN_LOCALIZATION => dialog.dialogSentences_EN,
+            //    _ => dialog.dialogSentences_EN
+            //};
 
         }
 
