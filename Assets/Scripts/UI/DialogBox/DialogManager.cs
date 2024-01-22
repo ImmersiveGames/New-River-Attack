@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
+using System.Collections.Generic;
 
 namespace RiverAttack 
 {
@@ -14,9 +17,10 @@ namespace RiverAttack
         [SerializeField] Animator speakerAnimatorController;
         [SerializeField] protected TimeLineManager timelineManager;
         [SerializeField] TMP_Text dialogText;
-        [SerializeField] DialogObject dialog;
         [SerializeField] float letterSpeed = 0.05f;
         [SerializeField] GameObject nextCursor;
+        [SerializeField] List<LocalizedString> myDialogs;
+        [SerializeField] public float[] dialogAnimationStartTime;
 
         [Header("Exit Button Settings")]
         [SerializeField] Animator fadePanelAnimator;
@@ -34,9 +38,6 @@ namespace RiverAttack
 
         Coroutine m_TypingCoroutine;
         Coroutine m_ExitButtonCoroutine;
-
-        const string PT_BR_LOCALIZATION = "Portuguese (Brazil) (pt-BR)";
-        const string EN_LOCALIZATION = "English (en)";
 
         void OnEnable()
         {
@@ -63,15 +64,7 @@ namespace RiverAttack
 
         string[] GetLocalization()
         {
-            var language = gameSettings.startLocale;
-
-            return language.LocaleName switch
-            {
-                PT_BR_LOCALIZATION => dialog.dialogSentences_PT_BR,
-                EN_LOCALIZATION => dialog.dialogSentences_EN,
-                _ => dialog.dialogSentences_EN
-            };
-
+            return myDialogs.ConvertAll(ls => ls.GetLocalizedString()).ToArray();
         }
 
         void NextButton(InputAction.CallbackContext context)
@@ -129,9 +122,9 @@ namespace RiverAttack
 
         void NextSlideAnim(int sentenceIndex)
         {
-            if (dialog.dialogAnimationStartTime[sentenceIndex] >= 0)
+            if (dialogAnimationStartTime[sentenceIndex] >= 0)
             {
-                timelineManager.PlayAnimation(dialog.dialogAnimationStartTime[sentenceIndex]);
+                timelineManager.PlayAnimation(dialogAnimationStartTime[sentenceIndex]);
             }
         } 
 
