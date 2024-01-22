@@ -233,16 +233,15 @@ namespace RiverAttack
 
             for (int i = 0; i < resolutions.Length; i++)
             {
-                if (currentResolution.width == resolutions[i].width &&
-                    currentResolution.height == resolutions[i].height)
-                {
-                    dropdown.value = i;
-                    break;
-                }
+                if (currentResolution.width != resolutions[i].width ||
+                    currentResolution.height != resolutions[i].height)
+                    continue;
+                dropdown.value = i;
+                break;
             }
         }
 
-        void OnResolutionChanged(TMP_Dropdown dropdown, Resolution[] resolutions)
+        void OnResolutionChanged(TMP_Dropdown dropdown, IReadOnlyList<Resolution> resolutions)
         {
             // Obter o valor selecionado e aplicar a resolução.
             actualResolution.width = resolutions[dropdown.value].width;
@@ -262,11 +261,12 @@ namespace RiverAttack
             framerateDropdown.ClearOptions();
 
             // Criar uma lista de opções para o Dropdown.
-            List<TMP_Dropdown.OptionData> dropdownOptions = new List<TMP_Dropdown.OptionData>();
-
-            // Adicionar as opções de taxa de quadros à lista.
-            dropdownOptions.Add(new TMP_Dropdown.OptionData("60 FPS"));
-            dropdownOptions.Add(new TMP_Dropdown.OptionData("30 FPS"));
+            var dropdownOptions = new List<TMP_Dropdown.OptionData>
+            {
+                // Adicionar as opções de taxa de quadros à lista.
+                new TMP_Dropdown.OptionData("60 FPS"),
+                new TMP_Dropdown.OptionData("30 FPS")
+            };
 
 
             // Adicionar as opções ao Dropdown.
@@ -284,18 +284,15 @@ namespace RiverAttack
 
         void SetInitialFramerateValue(TMP_Dropdown dropdown)
         {
-            RefreshRate currentFramerate = GetRefreshRateForCurrentResolution();
+            var currentFramerate = GetRefreshRateForCurrentResolution();
             actualRefreshRate = currentFramerate;
 
-            // Definir o valor inicial com base na taxa de quadros atual.
-            if (currentFramerate.value == 60)
+            dropdown.value = currentFramerate.value switch
             {
-                dropdown.value = 0; // 60 FPS
-            }
-            else
-            {
-                dropdown.value = 1; // 30 FPS
-            }
+                // Definir o valor inicial com base na taxa de quadros atual.
+                60 => 0,
+                _ => 1
+            };
         }
 
         void OnFramerateChanged(TMP_Dropdown dropdown)
@@ -306,7 +303,7 @@ namespace RiverAttack
             RefreshRate selectedFramerate;
 
             uint numerator = (uint)((uint)dropdown.value == 0 ? 60 : 30);
-            uint denominator = (uint)1;
+            const uint denominator = 1;
 
             selectedFramerate.numerator = numerator;
             selectedFramerate.denominator = denominator;
@@ -320,9 +317,9 @@ namespace RiverAttack
             Application.targetFrameRate = frameRate;
         }
 
-        RefreshRate GetRefreshRateForCurrentResolution()
+        static RefreshRate GetRefreshRateForCurrentResolution()
         {
-            Resolution currentResolution = Screen.currentResolution;
+            var currentResolution = Screen.currentResolution;
             return currentResolution.refreshRateRatio;
         }
 
