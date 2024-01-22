@@ -8,6 +8,8 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Serialization;
+
 
 namespace RiverAttack
 {
@@ -27,17 +29,25 @@ namespace RiverAttack
         Locale m_ActualLocal;
         AudioSource m_AudioSource;
         GameSettings m_GameSettings;
-
+        
         [Header("Graphics Options References")]
-        [SerializeField] TMP_Dropdown gpx_QualityDropdown;
+        [SerializeField] TMP_Dropdown gpxQualityDropdown;
         [SerializeField] DialogObject dialogQualityLocalization;
-        [SerializeField] TMP_Dropdown gpx_ResolutionDropdown;
+        [SerializeField] TMP_Dropdown gpxResolutionDropdown;
         [SerializeField] TMP_Text debugText;
         [SerializeField] TMP_Dropdown framerateDropdown;
 
-        int actualQuality;
-        Resolution actualResolution;
-        RefreshRate actualRefreshRate;
+        int m_ActualQuality;
+        Resolution m_ActualResolution;
+        RefreshRate m_ActualRefreshRate;
+        
+        //Translate
+        [SerializeField] string tableReference = "StringTableCollection";
+        
+        
+        LocalizedString m_QualitySettingsPerformant;
+        LocalizedString m_QualitySettingsBalanced;
+        LocalizedString m_QualitySettingsFidelity;
 
         #region UNITYMETHODS
         void OnEnable()
@@ -51,8 +61,8 @@ namespace RiverAttack
             SetLocaleButton(m_ActualLocal);
 
             SetFrameRateDropdown();
-            SetInitialGrapicsValues();
-            SetGraphicsQualityDropDwon();
+            SetInitialGraphicsValues();
+            SetGraphicsQualityDropDown();
             SetResolutionDropDown();
         }
         void Start()
@@ -110,7 +120,7 @@ namespace RiverAttack
             LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeId];
             m_ActualLocal = m_GameSettings.startLocale = LocalizationSettings.SelectedLocale;
             m_ActiveLocaleButton = false;
-            SetGraphicsQualityDropDwon();
+            SetGraphicsQualityDropDown();
         }
 
         public void SetSfxVolume()
@@ -122,49 +132,42 @@ namespace RiverAttack
             //Debug.Log("Volume de SFX: " + volume.ToString());
         }
 
-        void SetInitialGrapicsValues() {
-            actualQuality = m_GameSettings.actualQuality;
-            actualResolution.width = m_GameSettings.actualResolutionWidth;
-            actualResolution.height = m_GameSettings.actualResolutionHeight;
+        void SetInitialGraphicsValues() {
+            m_ActualQuality = m_GameSettings.actualQuality;
+            m_ActualResolution.width = m_GameSettings.actualResolutionWidth;
+            m_ActualResolution.height = m_GameSettings.actualResolutionHeight;
         }
 
-        void SetGraphicsQualityDropDwon()
+        void SetGraphicsQualityDropDown()
         {
-            string[] qualityLevels;
-
-            Debug.Log(m_ActualLocal.Identifier.Code);
-
-            if (dialogQualityLocalization != null)
+            string[] qualityLevels =
             {
-                if (m_ActualLocal.Identifier.Code == "en")
+                new LocalizedString
                 {
-                    qualityLevels = dialogQualityLocalization.dialogSentences_EN;
-                }
-                else if (m_ActualLocal.Identifier.Code == "pt-BR")
+                    TableReference = tableReference,
+                    TableEntryReference = "QualitySettings_Performant"
+                }.ToString(),
+                new LocalizedString
                 {
-                    qualityLevels = dialogQualityLocalization.dialogSentences_PT_BR;
-                }
-                else
+                    TableReference = tableReference,
+                    TableEntryReference = "QualitySettings_Balanced"
+                }.ToString(),
+                new LocalizedString
                 {
-                    qualityLevels = QualitySettings.names;
-                }
-            }
+                    TableReference = tableReference,
+                    TableEntryReference = "QualitySettings_High Fidelity"
+                }.ToString()
+            };
 
-            else
+            gpxQualityDropdown.ClearOptions();
+
+            gpxQualityDropdown.AddOptions(new List<string>(qualityLevels));
+
+            gpxQualityDropdown.value = m_ActualQuality;
+
+            gpxQualityDropdown.onValueChanged.AddListener(delegate
             {
-                qualityLevels = QualitySettings.names;
-            }
-            
-            
-            gpx_QualityDropdown.ClearOptions();
-
-            gpx_QualityDropdown.AddOptions(new List<string>(qualityLevels));
-
-            gpx_QualityDropdown.value = actualQuality;
-
-            gpx_QualityDropdown.onValueChanged.AddListener(delegate
-            {
-                OnQualityChanged(gpx_QualityDropdown);
+                OnQualityChanged(gpxQualityDropdown);
             });
         }
 
@@ -172,9 +175,9 @@ namespace RiverAttack
         {
             // Obter o valor selecionado e aplicar a qualidade gráfica.
             QualitySettings.SetQualityLevel(dropdown.value);
-            actualQuality = dropdown.value;
+            m_ActualQuality = dropdown.value;
 
-            m_GameSettings.actualQuality = actualQuality;
+            m_GameSettings.actualQuality = m_ActualQuality;
 
             Debug.Log("Apliquei as qualidade grafica: " + QualitySettings.GetQualityLevel());
         }
@@ -186,20 +189,20 @@ namespace RiverAttack
             // Remover duplicatas do array de resoluções.
             var resolutions = RemoveDuplicateResolutions(allResolutions);
 
-            gpx_ResolutionDropdown.ClearOptions();
+            gpxResolutionDropdown.ClearOptions();
 
             var dropdownOptions = resolutions.Select(resolution => resolution.width + " x " + resolution.height).Select(optionText => new TMP_Dropdown.OptionData(optionText)).ToList();
 
             // Adicionar cada opção de resolução à lista em ordem inversa, evitando duplicatas.
 
-            gpx_ResolutionDropdown.AddOptions(dropdownOptions);
+            gpxResolutionDropdown.AddOptions(dropdownOptions);
 
-            gpx_ResolutionDropdown.onValueChanged.AddListener(delegate
+            gpxResolutionDropdown.onValueChanged.AddListener(delegate
             {
-                OnResolutionChanged(gpx_ResolutionDropdown, resolutions);
+                OnResolutionChanged(gpxResolutionDropdown, resolutions);
             });
 
-            SetInitialResolutionValue(gpx_ResolutionDropdown, resolutions);
+            SetInitialResolutionValue(gpxResolutionDropdown, resolutions);
         }
 
         static Resolution[] RemoveDuplicateResolutions(Resolution[] resolutions)
@@ -225,7 +228,7 @@ namespace RiverAttack
         {
             Resolution currentResolution = currentResolution = Screen.currentResolution;
 
-            Debug.Log(actualResolution);
+            Debug.Log(m_ActualResolution);
 
             for (int i = 0; i < resolutions.Length; i++)
             {
@@ -240,15 +243,15 @@ namespace RiverAttack
         void OnResolutionChanged(TMP_Dropdown dropdown, IReadOnlyList<Resolution> resolutions)
         {
             // Obter o valor selecionado e aplicar a resolução.
-            actualResolution.width = resolutions[dropdown.value].width;
-            actualResolution.height = resolutions[dropdown.value].height;
+            m_ActualResolution.width = resolutions[dropdown.value].width;
+            m_ActualResolution.height = resolutions[dropdown.value].height;
 
-            m_GameSettings.actualResolutionWidth = actualResolution.width;
-            m_GameSettings.actualResolutionHeight = actualResolution.height;
+            m_GameSettings.actualResolutionWidth = m_ActualResolution.width;
+            m_GameSettings.actualResolutionHeight = m_ActualResolution.height;
             
-            Screen.SetResolution(actualResolution.width, actualResolution.height, FullScreenMode.FullScreenWindow, actualRefreshRate);
+            Screen.SetResolution(m_ActualResolution.width, m_ActualResolution.height, FullScreenMode.FullScreenWindow, m_ActualRefreshRate);
 
-            Debug.Log("Apliquei resolução: " + actualResolution);
+            Debug.Log("Apliquei resolução: " + m_ActualResolution);
         }
 
         void SetFrameRateDropdown()
@@ -281,7 +284,7 @@ namespace RiverAttack
         void SetInitialFramerateValue(TMP_Dropdown dropdown)
         {
             var currentFramerate = GetRefreshRateForCurrentResolution();
-            actualRefreshRate = currentFramerate;
+            m_ActualRefreshRate = currentFramerate;
 
             dropdown.value = currentFramerate.value switch
             {
@@ -306,7 +309,7 @@ namespace RiverAttack
 
             Debug.Log(selectedFramerate.value);
 
-            actualRefreshRate = selectedFramerate;
+            m_ActualRefreshRate = selectedFramerate;
 
             Screen.SetResolution(Screen.width, Screen.height, FullScreenMode.FullScreenWindow, selectedFramerate);
 
