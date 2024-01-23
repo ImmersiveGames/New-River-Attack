@@ -1399,15 +1399,117 @@ MonoBehaviour:
   speakerAnimatorController: {fileID: 1522246012}
   timelineManager: {fileID: 895124993}
   dialogText: {fileID: 188673230}
-  tableReference: TutorialDialog
-  dialog: {fileID: 11400000, guid: 645ec186541cc424da3078106e151c45, type: 2}
   letterSpeed: 0.05
   nextCursor: {fileID: 779403267}
+  myDialogs:
+  - m_TableReference:
+      m_TableCollectionName: GUID:a4ad3cf4c304a0b40b5868f6958f223d
+    m_TableEntryReference:
+      m_KeyId: 17497718784
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:a4ad3cf4c304a0b40b5868f6958f223d
+    m_TableEntryReference:
+      m_KeyId: 247270080512
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:a4ad3cf4c304a0b40b5868f6958f223d
+    m_TableEntryReference:
+      m_KeyId: 312868995072
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:a4ad3cf4c304a0b40b5868f6958f223d
+    m_TableEntryReference:
+      m_KeyId: 367025848320
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:a4ad3cf4c304a0b40b5868f6958f223d
+    m_TableEntryReference:
+      m_KeyId: 541655695360
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:a4ad3cf4c304a0b40b5868f6958f223d
+    m_TableEntryReference:
+      m_KeyId: 601298698240
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:a4ad3cf4c304a0b40b5868f6958f223d
+    m_TableEntryReference:
+      m_KeyId: 647863861248
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:a4ad3cf4c304a0b40b5868f6958f223d
+    m_TableEntryReference:
+      m_KeyId: 691878887424
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:a4ad3cf4c304a0b40b5868f6958f223d
+    m_TableEntryReference:
+      m_KeyId: 748590071808
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:a4ad3cf4c304a0b40b5868f6958f223d
+    m_TableEntryReference:
+      m_KeyId: 785378312192
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:a4ad3cf4c304a0b40b5868f6958f223d
+    m_TableEntryReference:
+      m_KeyId: 885961916416
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  dialogAnimationStartTime:
+  - 0
+  - -1
+  - 1
+  - -1
+  - 2
+  - 3
+  - 4
+  - 5
+  - -1
+  - 0
+  - -1
   fadePanelAnimator: {fileID: 760114535}
   fillExitButtonImage: {fileID: 925864582}
   holdTimer: 0
   holdDuration: 3
   sceneToLoad: 0
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &422420375
 GameObject:
   m_ObjectHideFlags: 0
@@ -35258,11 +35360,78 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exit_Actions_Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 8136155028904478041, guid: 392e5965da380d14197bbbef91af9b23,
+        type: 3}
+      propertyPath: m_text
+      value: Segure ESC ou B para sair
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6075421885189725638, guid: 392e5965da380d14197bbbef91af9b23,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1891312130627814003}
   m_SourcePrefab: {fileID: 100100000, guid: 392e5965da380d14197bbbef91af9b23, type: 3}
+--- !u!1 &1891312130627814001 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6075421885189725638, guid: 392e5965da380d14197bbbef91af9b23,
+    type: 3}
+  m_PrefabInstance: {fileID: 1891312130627814000}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1891312130627814002 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8136155028904478041, guid: 392e5965da380d14197bbbef91af9b23,
+    type: 3}
+  m_PrefabInstance: {fileID: 1891312130627814000}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891312130627814001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1891312130627814003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891312130627814001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69beb381e244f92449b8c4cf954630e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackedObjects:
+  - rid: 3486400155172208642
+  references:
+    version: 2
+    RefIds:
+    - rid: 3486400155172208642
+      type: {class: TrackedUGuiGraphic, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects,
+        asm: Unity.Localization}
+      data:
+        m_Target: {fileID: 1891312130627814002}
+        m_TrackedProperties:
+          items:
+          - rid: 3486400155172208643
+        m_UpdateType: 0
+    - rid: 3486400155172208643
+      type: {class: LocalizedStringProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties,
+        asm: Unity.Localization}
+      data:
+        m_Localized:
+          m_TableReference:
+            m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
+          m_TableEntryReference:
+            m_KeyId: 43148420842651648
+            m_Key: 
+          m_FallbackState: 0
+          m_WaitForCompletion: 0
+          m_LocalVariables: []
+        m_PropertyPath: m_text
 --- !u!4 &1926739764552817887
 Transform:
   m_ObjectHideFlags: 0
