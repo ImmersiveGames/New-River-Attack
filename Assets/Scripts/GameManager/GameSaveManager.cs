@@ -33,6 +33,7 @@ namespace RiverAttack
             gameSettings.indexQuality = m_PlayerSave.indexQuality.Value;
             gameSettings.actualResolution = m_PlayerSave.actualResolution.Value;
             gameSettings.indexFrameRate = m_PlayerSave.indexFrameRate.Value;
+            gameSettings.indexResolution = m_PlayerSave.indexResolution.Value;
 
             gamePlayingLog.pathDistance = m_PlayerSave.pathDistance.Value;
             gamePlayingLog.maxPathDistance = m_PlayerSave.maxPathDistance.Value;
@@ -61,6 +62,7 @@ namespace RiverAttack
             m_PlayerSave.indexQuality.Value = gameSettings.indexQuality;
             m_PlayerSave.actualResolution.Value = gameSettings.actualResolution;
             m_PlayerSave.indexFrameRate.Value = gameSettings.indexFrameRate;
+            m_PlayerSave.indexResolution.Value = gameSettings.indexResolution;
 
             gamePlayingLog.pathDistance = m_PlayerSave.pathDistance.Value;
             gamePlayingLog.maxPathDistance = m_PlayerSave.maxPathDistance.Value;

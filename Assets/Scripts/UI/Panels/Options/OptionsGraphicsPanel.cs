@@ -1,37 +1,26 @@
 ﻿using TMPro;
 using UnityEngine;
-using UnityEngine.Localization;
 namespace RiverAttack
 {
     public class OptionsGraphicsPanel : OptionsDropDown
     {
         int m_ActualQuality;
-        /*void Start()
+        protected override void Awake()
         {
-            SetDropdown(actualLocal);
-            UpdateQuality(gameSettings.indexQuality);
+            base.Awake();
+            selectedOptionIndex = gameSettings.indexQuality;
+            Debug.Log($"Awake: {m_ActualQuality}");
         }
-        protected override void SetDropdown(Locale newLocale)
+        protected override void OnDropdownChanged(TMP_Dropdown tmpDropdown)
         {
-            base.SetDropdown(newLocale);
-            graphicsDropdown.value = m_ActualQuality;
-
-            graphicsDropdown.onValueChanged.AddListener(delegate
-            {
-                OnQualityChanged(graphicsDropdown);
-            });
+            base.OnDropdownChanged(tmpDropdown);
+            gameSettings.indexQuality = selectedOptionIndex;
+            UpdateQuality(selectedOptionIndex);
         }
-        void OnQualityChanged(TMP_Dropdown dropdown)
-        {
-            // Obter o valor selecionado e aplicar a qualidade gráfica.
-            gameSettings.indexQuality = m_ActualQuality = dropdown.value;
-            UpdateQuality(dropdown.value);
-
-        }
-        static void UpdateQuality(int indexQuality)
+        internal static void UpdateQuality(int indexQuality)
         {
             QualitySettings.SetQualityLevel(indexQuality);
             Debug.Log("Apliquei as qualidade grafica: " + QualitySettings.GetQualityLevel());
-        }*/
+        }
     }
 }

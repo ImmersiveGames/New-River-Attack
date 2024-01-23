@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
-using UnityEngine.UI;
 namespace RiverAttack
 {
     public abstract class OptionsDropDown: MonoBehaviour
     {
         [SerializeField] protected List<LocalizedString> options;
         public int selectedOptionIndex;
-        TMP_Dropdown dropdown
+        protected TMP_Dropdown dropdown
         {
             get
             {
@@ -21,12 +19,11 @@ namespace RiverAttack
         }
         Locale m_CurrentLocale;
         internal GameSettings gameSettings;
-        void Awake()
+        protected virtual void Awake()
         {
             gameSettings = GameSettings.instance;
-            selectedOptionIndex = gameSettings.indexFrameRate;
         }
-        void OnEnable()
+        protected virtual void OnEnable()
         {
             LocalizationSettings.SelectedLocaleChanged += UpdateDropdown;
         }
@@ -47,12 +44,9 @@ namespace RiverAttack
             LocalizationSettings.SelectedLocaleChanged -= UpdateDropdown;
         }
 
-        void UpdateDropdown(Locale locale)
+        protected virtual void UpdateDropdown(Locale locale)
         {
-            Debug.Log($"Valor: {dropdown.value}");
-            selectedOptionIndex = dropdown.value;
             dropdown.ClearOptions();
-            
             foreach (string localizedText in options.Select(t => t.GetLocalizedString()))
             {
                 dropdown.options.Add(new TMP_Dropdown.OptionData(localizedText, null));
@@ -64,11 +58,10 @@ namespace RiverAttack
                 OnDropdownChanged(dropdown);
             });
         }
-        void OnDropdownChanged(TMP_Dropdown tmpDropdown)
+        protected virtual void OnDropdownChanged(TMP_Dropdown tmpDropdown)
         {
-            Debug.Log($"Mudou o Valor: {tmpDropdown.value}");
+            //Debug.Log($"Mudou o Valor: {tmpDropdown.value}");
             selectedOptionIndex = tmpDropdown.value;
-            gameSettings.indexFrameRate = selectedOptionIndex;
         }
 
         void GetLocale()

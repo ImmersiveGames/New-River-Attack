@@ -56,6 +56,8 @@ namespace RiverAttack
             screenWash.gameObject.SetActive(false);
             PlayAnimation(0f);
         }
+        
+        
         #region Buttons
         public void PlayAnimation(float animStartTime)
         {

@@ -22,6 +22,7 @@ namespace Save
         public SaveValue<int> indexQuality;
         public SaveValue<Vector2Int> actualResolution;
         public SaveValue<int> indexFrameRate;
+        public SaveValue<int> indexResolution;
         #endregion
 
         #region GamePlayLog

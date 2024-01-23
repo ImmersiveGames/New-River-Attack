@@ -1,40 +1,36 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
 namespace RiverAttack
 {
     public class OptionsFrameRatePanel : OptionsDropDown
     {
         internal static uint actualFrameRate;
 
-        /*protected override void OnEnable()
+        protected override void Awake()
         {
-            base.OnEnable();
-            graphicsDropdown.value = gameSettings.indexFrameRate;
+            base.Awake();
+            selectedOptionIndex = gameSettings.indexFrameRate;
+            //Debug.Log($"Awake: {actualFrameRate}");
         }
 
-        protected override void SetDropdown(Locale newLocale)
+        protected override void OnDropdownChanged(TMP_Dropdown tmpDropdown)
         {
-            base.SetDropdown(newLocale);
-            graphicsDropdown.value = gameSettings.indexFrameRate;
-            graphicsDropdown.onValueChanged.AddListener(delegate
-            {
-                OnFramerateChanged(graphicsDropdown);
-            });
-        }
-        void OnFramerateChanged(TMP_Dropdown dropdown)
-        {
-            gameSettings.indexFrameRate = dropdown.value;
-            UpdateFrameRate(dropdown.value);
+            base.OnDropdownChanged(tmpDropdown);
+            gameSettings.indexFrameRate = selectedOptionIndex;
+            UpdateFrameRate(selectedOptionIndex);
         }
 
-        static void UpdateFrameRate(int valueIndex)
+        internal static int FrameRate(int indexFrame)
         {
-            int frameRate = valueIndex == 0 ? 60 : 30;
+            return indexFrame == 0 ? 60 : 30;
+        }
+
+        internal static void UpdateFrameRate(int indexFrame)
+        {
+            int frameRate = FrameRate(indexFrame);
             actualFrameRate = (uint)frameRate;
-            Debug.Log(frameRate);
             Application.targetFrameRate = frameRate;
-        }*/
+        }
     }
 }

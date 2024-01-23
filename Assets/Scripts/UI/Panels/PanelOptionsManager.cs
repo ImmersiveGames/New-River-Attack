@@ -1,11 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 namespace RiverAttack
 {
     public class PanelOptionsManager: MonoBehaviour
     {
-        
 
-        
     }
 }

@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using Steamworks;
 using UnityEngine;
-using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Utils;
@@ -62,6 +60,7 @@ namespace RiverAttack
             {
                 SteamFriends.OnGameOverlayActivated += PauseGame;
             }
+            SetOptionsOnStartUp();
             //Debug.Log($"GameScene: {gameScenes}");
             switch (gameScenes)
             {
@@ -219,6 +218,42 @@ namespace RiverAttack
             }
         }
         #endregion
-        
+        void SetOptionsOnStartUp()
+        {
+            if (Application.targetFrameRate != OptionsFrameRatePanel.FrameRate(gameSettings.indexFrameRate))
+            {
+                OptionsFrameRatePanel.UpdateFrameRate(gameSettings.indexFrameRate);
+            }
+
+            var actualResolution = Screen.currentResolution;
+            var vectorActualResolution = new Vector2Int(actualResolution.width, actualResolution.height);
+            //Debug.Log($"Setting : {gameSettings.actualResolution} - Actual {actualResolution}");
+            if (gameSettings.actualResolution == Vector2Int.zero)
+            {
+                gameSettings.actualResolution = vectorActualResolution;
+                //Debug.Log($"Setting : {gameSettings.actualResolution} - Actual {vectorActualResolution}");
+            }
+            
+            if (gameSettings.actualResolution != vectorActualResolution)
+            {
+                //Debug.Log($"Setting é diferente do atual");
+                uint fps = OptionsFrameRatePanel.actualFrameRate;
+                var selectedFramerate = OptionsResolutionPanel.GetRefreshRate(fps, 1);
+                Screen.SetResolution(
+                    gameSettings.actualResolution.x, gameSettings.actualResolution.y, 
+                    OptionsResolutionPanel.FullScreenMode, selectedFramerate );
+            }
+
+            int actualQualityLevel = QualitySettings.GetQualityLevel();
+            switch (gameSettings.indexQuality)
+            {
+                case < 0:
+                    gameSettings.indexQuality = actualQualityLevel;
+                    break;
+                case >= 0 when actualQualityLevel != gameSettings.indexQuality:
+                    QualitySettings.SetQualityLevel(gameSettings.indexQuality);
+                    break;
+            }
+        }
     }
 }

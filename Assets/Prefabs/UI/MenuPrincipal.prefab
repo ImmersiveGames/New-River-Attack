@@ -16701,6 +16701,7 @@ GameObject:
   - component: {fileID: 4231147742805964163}
   - component: {fileID: 2699553081773811799}
   - component: {fileID: 7007916455785903717}
+  - component: {fileID: 8635278876297856733}
   m_Layer: 5
   m_Name: GPX_Quality_Dropdown
   m_TagString: Untagged
@@ -16828,6 +16829,47 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_AlphaFadeSpeed: 0.15
+--- !u!114 &8635278876297856733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7262403111131990369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88092860b164688b6aaf42b7e6d9e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  options:
+  - m_TableReference:
+      m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
+    m_TableEntryReference:
+      m_KeyId: 43092505224572928
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
+    m_TableEntryReference:
+      m_KeyId: 43092817947684864
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
+    m_TableEntryReference:
+      m_KeyId: 43093089927327744
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  selectedOptionIndex: 0
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &7296899580547061137
 GameObject:
   m_ObjectHideFlags: 0
@@ -21858,6 +21900,7 @@ GameObject:
   - component: {fileID: 7468303227228769966}
   - component: {fileID: 3732128714255446595}
   - component: {fileID: 9199858799846714672}
+  - component: {fileID: 2579917147422439684}
   m_Layer: 5
   m_Name: GPX_Resolution_Dropdown
   m_TagString: Untagged
@@ -21977,20 +22020,27 @@ MonoBehaviour:
     m_Options:
     - m_Text: Option A
       m_Image: {fileID: 0}
-    - m_Text: Option B
-      m_Image: {fileID: 0}
-    - m_Text: Option C
-      m_Image: {fileID: 0}
-    - m_Text: Option D
-      m_Image: {fileID: 0}
-    - m_Text: Option E
-      m_Image: {fileID: 0}
-    - m_Text: Option F
-      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
   m_AlphaFadeSpeed: 0.15
+--- !u!114 &2579917147422439684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8783375216833615352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82ddfe81d9104e2da4d9acfa84b284e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  options: []
+  selectedOptionIndex: 0
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &8788210656140465026
 GameObject:
   m_ObjectHideFlags: 0
