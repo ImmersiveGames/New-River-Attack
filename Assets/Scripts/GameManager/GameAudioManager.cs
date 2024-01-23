@@ -36,7 +36,7 @@ namespace RiverAttack
             float volumeMusic = Tools.SoundBase10(m_GameSettings.musicVolume);
             float volumeSfx = Tools.SoundBase10(m_GameSettings.sfxVolume);
             mixerGroup.SetFloat("MusicVolume", volumeMusic);
-            mixerGroup.SetFloat("SFXVolume", volumeSfx);
+            mixerGroup.SetFloat("SfxVolume", volumeSfx);
         }
         public void PlayBGM(LevelTypes typeLevel)
         {

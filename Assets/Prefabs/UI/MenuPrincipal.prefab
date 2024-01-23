@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 2847180609835165868}
   - component: {fileID: 1095760528945395587}
   - component: {fileID: 49347886468236949}
+  - component: {fileID: 3942615459331089430}
   m_Layer: 5
   m_Name: zh-Hans_Btn
   m_TagString: Untagged
@@ -140,10 +141,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 877716966070201427}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -70}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2847180609835165868
 CanvasRenderer:
@@ -227,7 +228,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3269389092187256033}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RiverAttack.MenuOptionManager, Assembly-CSharp
         m_MethodName: ButtonChangeLocale
         m_Mode: 3
@@ -239,6 +240,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3942615459331089430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94297500307773928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa2ac18d295482ea6edeeec6a4683b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLocale: {fileID: 11400000, guid: f18a747eea99a3542803805c7243c8d2, type: 2}
+  flagActive: {r: 1, g: 1, b: 1, a: 1}
+  flagDeactivate: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
 --- !u!1 &112152068075959348
 GameObject:
   m_ObjectHideFlags: 0
@@ -1745,7 +1761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3772603757817794627
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6568,6 +6584,7 @@ GameObject:
   - component: {fileID: 4027107131862317721}
   - component: {fileID: 3433109803837155561}
   - component: {fileID: 8256967302340854906}
+  - component: {fileID: 3653718178988563282}
   m_Layer: 5
   m_Name: ES_Btn
   m_TagString: Untagged
@@ -6589,10 +6606,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 877716966070201427}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 460, y: -170}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4027107131862317721
 CanvasRenderer:
@@ -6676,7 +6693,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3269389092187256033}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RiverAttack.MenuOptionManager, Assembly-CSharp
         m_MethodName: ButtonChangeLocale
         m_Mode: 3
@@ -6688,6 +6705,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3653718178988563282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2401165715274244967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa2ac18d295482ea6edeeec6a4683b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLocale: {fileID: 11400000, guid: 99e9abab97c3ac74b9fac31eb60122d0, type: 2}
+  flagActive: {r: 1, g: 1, b: 1, a: 1}
+  flagDeactivate: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
 --- !u!1 &2421047936226100479
 GameObject:
   m_ObjectHideFlags: 0
@@ -6698,6 +6730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1845574796805287894}
   - component: {fileID: 3629511859479815046}
+  - component: {fileID: 6061569130782857923}
   m_Layer: 5
   m_Name: SFXVolume_Panel
   m_TagString: Untagged
@@ -6734,6 +6767,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2421047936226100479}
   m_CullTransparentMesh: 1
+--- !u!114 &6061569130782857923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2421047936226100479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d33f6c2789b4471e9c419220d8b97e14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeMusicVolume: 1
+  mixerGroup: {fileID: 24100000, guid: 58d7b5e9bc02ca541be53445706aa66a, type: 2}
+  defaultVolume: 0.5
 --- !u!1 &2442490489928568580
 GameObject:
   m_ObjectHideFlags: 0
@@ -7365,14 +7413,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4976211304088849608}
   - component: {fileID: 7400812423239948867}
-  - component: {fileID: 3269389092187256033}
+  - component: {fileID: 1854985878619652685}
   m_Layer: 5
   m_Name: Options_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4976211304088849608
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7392,7 +7440,6 @@ RectTransform:
   - {fileID: 554562774707804271}
   - {fileID: 3795469829738445965}
   - {fileID: 944657006984134922}
-  - {fileID: 8699525311340871543}
   m_Father: {fileID: 3246541963391349000}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7408,7 +7455,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2991966295714646085}
   m_CullTransparentMesh: 1
---- !u!114 &3269389092187256033
+--- !u!114 &1854985878619652685
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7417,22 +7464,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2991966295714646085}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75535f956fd07c44f91476fcd854af82, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ebca27c39c74753a67c29b9954fdde5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixerGroup: {fileID: 24100000, guid: 58d7b5e9bc02ca541be53445706aa66a, type: 2}
-  musicVolumeSlider: {fileID: 1617615093657450157}
-  defaultMusicVolume: 0.5
-  sfxVolumeSlider: {fileID: 422834262080675839}
-  defaultSfxVolume: 0.5
-  engBtn: {fileID: 5027138165924233793}
-  ptBrBtn: {fileID: 7133573891633247879}
-  gpx_QualityDropdown: {fileID: 7007916455785903717}
-  dialogQualityLocalization: {fileID: 11400000, guid: a34723be268191c4b9991d019f8aeb00,
-    type: 2}
-  gpx_ResolutionDropdown: {fileID: 9199858799846714672}
-  debugText: {fileID: 3590125119626012876}
-  framerateDropdown: {fileID: 651469779468116823}
 --- !u!1 &3064965676044450625
 GameObject:
   m_ObjectHideFlags: 0
@@ -7756,9 +7790,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8241859186920285843}
-        m_TargetAssemblyTypeName: RiverAttack.MenuOptionManager, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 6061569130782857923}
+        m_TargetAssemblyTypeName: RiverAttack.OptionsMusicPanel, Assembly-CSharp
+        m_MethodName: SetVolume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8169,6 +8203,7 @@ GameObject:
   - component: {fileID: 679844018221082280}
   - component: {fileID: 5793603938061277694}
   - component: {fileID: 773061483298117643}
+  - component: {fileID: 7190909584221088889}
   m_Layer: 5
   m_Name: JP_BR_Btn
   m_TagString: Untagged
@@ -8190,10 +8225,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 877716966070201427}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -170}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &679844018221082280
 CanvasRenderer:
@@ -8277,7 +8312,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3269389092187256033}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RiverAttack.MenuOptionManager, Assembly-CSharp
         m_MethodName: ButtonChangeLocale
         m_Mode: 3
@@ -8289,6 +8324,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7190909584221088889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3319512840950654643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa2ac18d295482ea6edeeec6a4683b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLocale: {fileID: 11400000, guid: 70e08b9236373c3418e21377807befff, type: 2}
+  flagActive: {r: 1, g: 1, b: 1, a: 1}
+  flagDeactivate: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
 --- !u!1 &3344166540356616800
 GameObject:
   m_ObjectHideFlags: 0
@@ -9022,9 +9072,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3269389092187256033}
-        m_TargetAssemblyTypeName: RiverAttack.MenuOptionManager, Assembly-CSharp
-        m_MethodName: SetMusicVolume
+      - m_Target: {fileID: 5884168528247495880}
+        m_TargetAssemblyTypeName: RiverAttack.OptionsMusicPanel, Assembly-CSharp
+        m_MethodName: SetVolume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9942,6 +9992,7 @@ GameObject:
   m_Component:
   - component: {fileID: 554562774707804271}
   - component: {fileID: 2286436087307899792}
+  - component: {fileID: 6368799776797061341}
   m_Layer: 5
   m_Name: GPX_Resolution_Panel
   m_TagString: Untagged
@@ -9978,6 +10029,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4079695636153487137}
   m_CullTransparentMesh: 1
+--- !u!114 &6368799776797061341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4079695636153487137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82ddfe81d9104e2da4d9acfa84b284e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropdownOptions: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &4155165830848243573
 GameObject:
   m_ObjectHideFlags: 0
@@ -12778,6 +12845,7 @@ GameObject:
   - component: {fileID: 3782370239938898802}
   - component: {fileID: 5768850533055237285}
   - component: {fileID: 1755736535163913169}
+  - component: {fileID: 4678833829033330316}
   m_Layer: 5
   m_Name: FR_Btn
   m_TagString: Untagged
@@ -12799,10 +12867,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 877716966070201427}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 340, y: -70}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3782370239938898802
 CanvasRenderer:
@@ -12886,7 +12954,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3269389092187256033}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RiverAttack.MenuOptionManager, Assembly-CSharp
         m_MethodName: ButtonChangeLocale
         m_Mode: 3
@@ -12898,6 +12966,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4678833829033330316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5044111516150294532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa2ac18d295482ea6edeeec6a4683b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLocale: {fileID: 11400000, guid: 01018649e45b51540ae8585bb362df62, type: 2}
+  flagActive: {r: 1, g: 1, b: 1, a: 1}
+  flagDeactivate: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
 --- !u!1 &5062667415121181498
 GameObject:
   m_ObjectHideFlags: 0
@@ -13136,16 +13219,6 @@ MonoBehaviour:
   m_Options:
     m_Options:
     - m_Text: Option A
-      m_Image: {fileID: 0}
-    - m_Text: Option B
-      m_Image: {fileID: 0}
-    - m_Text: Option C
-      m_Image: {fileID: 0}
-    - m_Text: Option D
-      m_Image: {fileID: 0}
-    - m_Text: Option E
-      m_Image: {fileID: 0}
-    - m_Text: Option F
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -13408,6 +13481,7 @@ GameObject:
   - component: {fileID: 4473206901766749897}
   - component: {fileID: 545368229311549141}
   - component: {fileID: 5027138165924233793}
+  - component: {fileID: 5112474945624468847}
   m_Layer: 5
   m_Name: Eng_Btn
   m_TagString: Untagged
@@ -13429,10 +13503,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 877716966070201427}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 220, y: -70}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4473206901766749897
 CanvasRenderer:
@@ -13516,7 +13590,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3269389092187256033}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RiverAttack.MenuOptionManager, Assembly-CSharp
         m_MethodName: ButtonChangeLocale
         m_Mode: 3
@@ -13528,6 +13602,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5112474945624468847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5232689106131117364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa2ac18d295482ea6edeeec6a4683b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLocale: {fileID: 11400000, guid: ca20d98518b426a4fb8a5a2d000ebf44, type: 2}
+  flagActive: {r: 1, g: 1, b: 1, a: 1}
+  flagDeactivate: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
 --- !u!1 &5260850048931407852
 GameObject:
   m_ObjectHideFlags: 0
@@ -15160,140 +15249,6 @@ MonoBehaviour:
           m_WaitForCompletion: 0
           m_LocalVariables: []
         m_PropertyPath: m_text
---- !u!1 &6478716569567938034
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8699525311340871543}
-  - component: {fileID: 2969583175424471979}
-  - component: {fileID: 3590125119626012876}
-  m_Layer: 5
-  m_Name: "Resolu\xE7\xE3oAtual_Text"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &8699525311340871543
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6478716569567938034}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4976211304088849608}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 562, y: -425}
-  m_SizeDelta: {x: 500, y: 60}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &2969583175424471979
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6478716569567938034}
-  m_CullTransparentMesh: 1
---- !u!114 &3590125119626012876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6478716569567938034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: New Text
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 53.7
-  m_fontSizeBase: 36
-  m_fontWeight: 400
-  m_enableAutoSizing: 1
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 1
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &6542442741105917112
 GameObject:
   m_ObjectHideFlags: 0
@@ -16274,6 +16229,7 @@ GameObject:
   - component: {fileID: 7725519959585191405}
   - component: {fileID: 2282578394320051762}
   - component: {fileID: 7133573891633247879}
+  - component: {fileID: 6931916670309897737}
   m_Layer: 5
   m_Name: PT_BR_Btn
   m_TagString: Untagged
@@ -16295,10 +16251,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 877716966070201427}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 220, y: -170}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7725519959585191405
 CanvasRenderer:
@@ -16382,7 +16338,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3269389092187256033}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RiverAttack.MenuOptionManager, Assembly-CSharp
         m_MethodName: ButtonChangeLocale
         m_Mode: 3
@@ -16394,6 +16350,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6931916670309897737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7165037083828189530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa2ac18d295482ea6edeeec6a4683b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLocale: {fileID: 11400000, guid: 71a44355d5d503d4dbca75c65994bde9, type: 2}
+  flagActive: {r: 1, g: 1, b: 1, a: 1}
+  flagDeactivate: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
 --- !u!1 &7193000858022426682
 GameObject:
   m_ObjectHideFlags: 0
@@ -16406,6 +16377,7 @@ GameObject:
   - component: {fileID: 8505940918385576609}
   - component: {fileID: 2027270414362744328}
   - component: {fileID: 4649348131384018893}
+  - component: {fileID: 2372905525325373824}
   m_Layer: 5
   m_Name: RU_Btn
   m_TagString: Untagged
@@ -16427,10 +16399,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 877716966070201427}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 340, y: -170}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8505940918385576609
 CanvasRenderer:
@@ -16514,7 +16486,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3269389092187256033}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RiverAttack.MenuOptionManager, Assembly-CSharp
         m_MethodName: ButtonChangeLocale
         m_Mode: 3
@@ -16526,6 +16498,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2372905525325373824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7193000858022426682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa2ac18d295482ea6edeeec6a4683b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLocale: {fileID: 11400000, guid: 18a4420091c52144da6ead7cb0fb304c, type: 2}
+  flagActive: {r: 1, g: 1, b: 1, a: 1}
+  flagDeactivate: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
 --- !u!1 &7229683042324424638
 GameObject:
   m_ObjectHideFlags: 0
@@ -17207,6 +17194,7 @@ GameObject:
   - component: {fileID: 7384889278150634809}
   - component: {fileID: 6664512552616916955}
   - component: {fileID: 5082474042389271931}
+  - component: {fileID: 3023961091608000595}
   m_Layer: 5
   m_Name: DE_Btn
   m_TagString: Untagged
@@ -17228,10 +17216,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 877716966070201427}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 460, y: -70}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7384889278150634809
 CanvasRenderer:
@@ -17315,7 +17303,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3269389092187256033}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RiverAttack.MenuOptionManager, Assembly-CSharp
         m_MethodName: ButtonChangeLocale
         m_Mode: 3
@@ -17327,6 +17315,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3023961091608000595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7475760148313980384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa2ac18d295482ea6edeeec6a4683b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLocale: {fileID: 11400000, guid: 1069a96ab137a9a478f35db9702143f8, type: 2}
+  flagActive: {r: 1, g: 1, b: 1, a: 1}
+  flagDeactivate: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
 --- !u!1 &7627339554523929027
 GameObject:
   m_ObjectHideFlags: 0
@@ -18828,6 +18831,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3127738041045004316}
   - component: {fileID: 2984618110402042457}
+  - component: {fileID: 5884168528247495880}
   m_Layer: 5
   m_Name: MusicVolume_Panel
   m_TagString: Untagged
@@ -18864,6 +18868,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8184127035838054814}
   m_CullTransparentMesh: 1
+--- !u!114 &5884168528247495880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8184127035838054814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d33f6c2789b4471e9c419220d8b97e14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  typeMusicVolume: 0
+  mixerGroup: {fileID: 24100000, guid: 58d7b5e9bc02ca541be53445706aa66a, type: 2}
+  defaultVolume: 0.5
 --- !u!1 &8240224490979685892
 GameObject:
   m_ObjectHideFlags: 0
@@ -20092,6 +20111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1704453797477210816}
   - component: {fileID: 2627900273833210210}
+  - component: {fileID: 3831439343202683837}
   m_Layer: 5
   m_Name: GPX_FPS_Panel
   m_TagString: Untagged
@@ -20128,6 +20148,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8542655341313548485}
   m_CullTransparentMesh: 1
+--- !u!114 &3831439343202683837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8542655341313548485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5db561175118458aaf984ad10dfe80d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropdownOptions:
+  - m_TableReference:
+      m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
+    m_TableEntryReference:
+      m_KeyId: 43135496056238080
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
+    m_TableEntryReference:
+      m_KeyId: 43135499009028096
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &8547918049388960856
 GameObject:
   m_ObjectHideFlags: 0
@@ -20880,6 +20932,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3795469829738445965}
   - component: {fileID: 4666272546152211856}
+  - component: {fileID: 735413935255297908}
   m_Layer: 5
   m_Name: GPX_Quality_Panel
   m_TagString: Untagged
@@ -20916,6 +20969,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8672435876679288799}
   m_CullTransparentMesh: 1
+--- !u!114 &735413935255297908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8672435876679288799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88092860b164688b6aaf42b7e6d9e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropdownOptions:
+  - m_TableReference:
+      m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
+    m_TableEntryReference:
+      m_KeyId: 43092505224572928
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
+    m_TableEntryReference:
+      m_KeyId: 43092817947684864
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
+    m_TableEntryReference:
+      m_KeyId: 43093089927327744
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &8694962683730761713
 GameObject:
   m_ObjectHideFlags: 0

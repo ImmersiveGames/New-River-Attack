@@ -287,5 +287,6 @@ namespace Utils
             // Verificar se ambos os conjuntos são iguais
             return hashSet.SetEquals(other);
         }
+        
     }
 }

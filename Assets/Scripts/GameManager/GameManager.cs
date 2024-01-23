@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using Steamworks;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Utils;
@@ -49,6 +51,7 @@ namespace RiverAttack
         #region UNITYMETHODS
         void Awake()
         {
+            //Application.targetFrameRate = -1;
             if (FindObjectsOfType(typeof(GameManager)).Length <= 1)
                 return;
             Destroy(gameObject);
@@ -79,7 +82,7 @@ namespace RiverAttack
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
+            StartChangeLocale(gameSettings.startLocale);
             ChangeState(new GameStateMenu());
         }
 
@@ -107,6 +110,19 @@ namespace RiverAttack
             //base.OnDestroy();
         }
         #endregion
+
+        void StartChangeLocale(Locale locale)
+        {
+            if(locale != null && locale != LocalizationSettings.SelectedLocale)
+            {
+                StartCoroutine(ChangeLocale(locale));
+            }
+        }
+        IEnumerator ChangeLocale(Locale locale)
+        {
+            yield return LocalizationSettings.InitializationOperation;
+            LocalizationSettings.SelectedLocale = gameSettings.startLocale = locale;
+        }
         public Levels GetLevel()
         {
             var level = gameModes switch

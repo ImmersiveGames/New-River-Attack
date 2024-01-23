@@ -30,9 +30,9 @@ namespace RiverAttack
             gameSettings.musicVolume = m_PlayerSave.musicVolume.Value;
             gameSettings.sfxVolume = m_PlayerSave.sfxVolume.Value;
             gameSettings.startLocale = m_PlayerSave.startLocale.Value;
-            gameSettings.actualQuality = m_PlayerSave.actualQuality.Value;
-            gameSettings.actualResolutionWidth = m_PlayerSave.actualResolutionWidth.Value;
-            gameSettings.actualResolutionHeight = m_PlayerSave.actualResolutionHeight.Value;
+            gameSettings.indexQuality = m_PlayerSave.indexQuality.Value;
+            gameSettings.actualResolution = m_PlayerSave.actualResolution.Value;
+            gameSettings.indexFrameRate = m_PlayerSave.indexFrameRate.Value;
 
             gamePlayingLog.pathDistance = m_PlayerSave.pathDistance.Value;
             gamePlayingLog.maxPathDistance = m_PlayerSave.maxPathDistance.Value;
@@ -58,9 +58,9 @@ namespace RiverAttack
             m_PlayerSave.musicVolume.Value = gameSettings.musicVolume;
             m_PlayerSave.sfxVolume.Value = gameSettings.sfxVolume;
             m_PlayerSave.startLocale.Value = gameSettings.startLocale;
-            m_PlayerSave.actualQuality.Value = gameSettings.actualQuality;
-            m_PlayerSave.actualResolutionWidth.Value = gameSettings.actualResolutionWidth;
-            m_PlayerSave.actualResolutionHeight.Value = gameSettings.actualResolutionHeight;
+            m_PlayerSave.indexQuality.Value = gameSettings.indexQuality;
+            m_PlayerSave.actualResolution.Value = gameSettings.actualResolution;
+            m_PlayerSave.indexFrameRate.Value = gameSettings.indexFrameRate;
 
             gamePlayingLog.pathDistance = m_PlayerSave.pathDistance.Value;
             gamePlayingLog.maxPathDistance = m_PlayerSave.maxPathDistance.Value;

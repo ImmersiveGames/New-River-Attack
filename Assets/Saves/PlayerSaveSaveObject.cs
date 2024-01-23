@@ -4,6 +4,7 @@ using UnityEngine;
 using RiverAttack;
 using Shopping;
 using UnityEngine.Localization;
+using UnityEngine.Serialization;
 
 namespace Save
 {
@@ -18,13 +19,12 @@ namespace Save
         public SaveValue<float> musicVolume;
         public SaveValue<float> sfxVolume;
         public SaveValue<Locale> startLocale;
-        public SaveValue<int> actualQuality;
-        public SaveValue<int> actualResolutionWidth;      
-        public SaveValue<int> actualResolutionHeight; 
+        public SaveValue<int> indexQuality;
+        public SaveValue<Vector2Int> actualResolution;
+        public SaveValue<int> indexFrameRate;
         #endregion
 
         #region GamePlayLog
-        public SaveValue<bool> myBoolSaveValue;
         public SaveValue<float> pathDistance;
         public SaveValue<float> maxPathDistance;
         public SaveValue<float> shootSpent;

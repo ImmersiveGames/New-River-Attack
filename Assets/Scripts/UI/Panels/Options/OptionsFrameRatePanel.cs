@@ -1,0 +1,39 @@
+﻿using TMPro;
+using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
+namespace RiverAttack
+{
+    public class OptionsFrameRatePanel : OptionsDropDown
+    {
+        internal static uint actualFrameRate;
+        void Start()
+        {
+            SetDropdown(actualLocal);
+            UpdateFrameRate(gameSettings.indexFrameRate);
+        }
+
+        protected override void SetDropdown(Locale newLocale)
+        {
+            base.SetDropdown(newLocale);
+            graphicsDropdown.value = gameSettings.indexFrameRate;
+            graphicsDropdown.onValueChanged.AddListener(delegate
+            {
+                OnFramerateChanged(graphicsDropdown);
+            });
+        }
+        void OnFramerateChanged(TMP_Dropdown dropdown)
+        {
+            gameSettings.indexFrameRate = dropdown.value;
+            UpdateFrameRate(dropdown.value);
+        }
+
+        static void UpdateFrameRate(int valueIndex)
+        {
+            int frameRate = valueIndex == 0 ? 30 : 60;
+            actualFrameRate = (uint)frameRate;
+            Debug.Log(frameRate);
+            Application.targetFrameRate = frameRate;
+        }
+    }
+}

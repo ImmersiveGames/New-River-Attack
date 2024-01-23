@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Localization;
+using UnityEngine.Serialization;
 
 namespace RiverAttack
 {
@@ -21,10 +22,11 @@ namespace RiverAttack
         public Locale startLocale;
         [Header("Game play Settings")]
         public int multiplyScoreForLives;
-
+        
         [Header("Graphics Settings")]
-        public int actualQuality;
-        public int actualResolutionWidth;      
-        public int actualResolutionHeight;      
+        public int indexQuality;
+        public Vector2Int actualResolution;
+        public FullScreenMode actualFullScreenMode;
+        public int indexFrameRate; 
     }
 }
