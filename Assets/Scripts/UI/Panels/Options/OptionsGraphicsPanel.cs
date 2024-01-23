@@ -6,7 +6,7 @@ namespace RiverAttack
     public class OptionsGraphicsPanel : OptionsDropDown
     {
         int m_ActualQuality;
-        void Start()
+        /*void Start()
         {
             SetDropdown(actualLocal);
             UpdateQuality(gameSettings.indexQuality);
@@ -32,6 +32,6 @@ namespace RiverAttack
         {
             QualitySettings.SetQualityLevel(indexQuality);
             Debug.Log("Apliquei as qualidade grafica: " + QualitySettings.GetQualityLevel());
-        }
+        }*/
     }
 }

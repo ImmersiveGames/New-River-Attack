@@ -10,6 +10,8 @@ namespace RiverAttack
         [SerializeField] Locale myLocale;
         
         Button m_FlagButton;
+        [SerializeField] Color normalColor;
+        [SerializeField] Color disableColor;
         static bool _activeLocaleButton;
         GameSettings m_GameSettings;
         void Awake()
@@ -20,32 +22,38 @@ namespace RiverAttack
         void OnEnable()
         {
             m_GameSettings = GameSettings.instance;
+            //Debug.Log($"Locale: {myLocale}, {LocalizationSettings.SelectedLocale}");
+            ChangeNormalColor(myLocale);
         }
 
         void Start()
         {
-            Initiate(myLocale);
-            LocalizationSettings.SelectedLocaleChanged += Initiate;
+            LocalizationSettings.SelectedLocaleChanged += ChangeNormalColor;
         }
 
-        void Initiate(Locale locale)
+        void OnDisable()
         {
-            if (locale == null || locale != LocalizationSettings.SelectedLocale)
-                return;
-            //Debug.Log($"EU: {locale.name}");
-            m_FlagButton.Select();
+            LocalizationSettings.SelectedLocaleChanged -= ChangeNormalColor;
+        }
+
+        void ChangeNormalColor(Locale locale)
+        {
+            var flagButtonColors = m_FlagButton.colors;
+            flagButtonColors.normalColor = LocalizationSettings.SelectedLocale != myLocale ? disableColor : normalColor;
+            GetComponent<Button>().colors = flagButtonColors;
         }
         public void ButtonChangeLocale()
         {
             if (_activeLocaleButton) return;
-            StartCoroutine(ChangeLocale());
+            StartCoroutine(ChangeLocale(myLocale));
         }
 
-        IEnumerator ChangeLocale()
+        IEnumerator ChangeLocale(Locale locale)
         {
+            //Debug.Log($"MEU Local: {locale}, {myLocale}");
             _activeLocaleButton = true;
             yield return LocalizationSettings.InitializationOperation;
-            LocalizationSettings.SelectedLocale = m_GameSettings.startLocale = myLocale;
+            LocalizationSettings.SelectedLocale = m_GameSettings.startLocale = locale;
             _activeLocaleButton = false;
         }
     }

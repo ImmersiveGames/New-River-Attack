@@ -7,10 +7,11 @@ namespace RiverAttack
     public class OptionsFrameRatePanel : OptionsDropDown
     {
         internal static uint actualFrameRate;
-        void Start()
+
+        /*protected override void OnEnable()
         {
-            SetDropdown(actualLocal);
-            UpdateFrameRate(gameSettings.indexFrameRate);
+            base.OnEnable();
+            graphicsDropdown.value = gameSettings.indexFrameRate;
         }
 
         protected override void SetDropdown(Locale newLocale)
@@ -30,10 +31,10 @@ namespace RiverAttack
 
         static void UpdateFrameRate(int valueIndex)
         {
-            int frameRate = valueIndex == 0 ? 30 : 60;
+            int frameRate = valueIndex == 0 ? 60 : 30;
             actualFrameRate = (uint)frameRate;
             Debug.Log(frameRate);
             Application.targetFrameRate = frameRate;
-        }
+        }*/
     }
 }

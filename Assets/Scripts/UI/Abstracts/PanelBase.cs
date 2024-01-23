@@ -1,3 +1,4 @@
+using System;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using System.Collections;
@@ -20,8 +21,8 @@ namespace RiverAttack
         #region UNITYMETHODS
         protected virtual void Awake()
         {
-            SetLocalization();
-            //Debug.Log($"Tempos: {fadeInTime} , {fadeOutTime}");
+            if(gameSettings.startLocale != null)
+                LocalizationSettings.SelectedLocale = gameSettings.startLocale;
         }
   #endregion
         
@@ -53,21 +54,7 @@ namespace RiverAttack
             menuInitial.gameObject.SetActive(true);
             SetInternalMenu();
         }
-        void SetLocalization()
-        {
-            if (gameSettings.startLocale == null)
-                gameSettings.startLocale = LocalizationSettings.SelectedLocale;
-            StartCoroutine(SetLocale(gameSettings.startLocale));
-            //Debug.Log($"LocalName: {gameSettings.startLocale.Identifier.Code}");
-        }
 
-        IEnumerator SetLocale(Locale localActual)
-        {
-            yield return LocalizationSettings.InitializationOperation;
-            LocalizationSettings.SelectedLocale = localActual;
-            gameSettings.startLocale = LocalizationSettings.SelectedLocale;
-        }
-        
         public void PlayClickSfx()
         {
             GameAudioManager.instance.PlaySfx(clickSound);

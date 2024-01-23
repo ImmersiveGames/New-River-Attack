@@ -8,7 +8,7 @@ namespace RiverAttack
     public class OptionsResolutionPanel : OptionsDropDown
     {
         static Resolution _actualResolution;
-        protected override void OnEnable()
+        /*protected override void OnEnable()
         {
             base.OnEnable();
             if (gameSettings.actualResolution == Vector2Int.zero)
@@ -28,7 +28,7 @@ namespace RiverAttack
             var tmpDropdownOptions = resolutions.Select(resolution => resolution.width + " x " + resolution.height).Select(optionText => new TMP_Dropdown.OptionData(optionText)).ToList();
             // Adicionar cada opção de resolução à lista em ordem inversa, evitando duplicatas.
 
-            ResetDropDown(tmpDropdownOptions);
+            graphicsDropdown.ClearOptions();
             
             graphicsDropdown.onValueChanged.AddListener(delegate
             {
@@ -89,6 +89,6 @@ namespace RiverAttack
             selectedFramerate.numerator = fps;
             selectedFramerate.denominator = denominator;
             Screen.SetResolution(dimension.x, dimension.y, fullScreenMode, selectedFramerate);
-        }
+        }*/
     }
 }
