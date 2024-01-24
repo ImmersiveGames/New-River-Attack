@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 namespace RiverAttack
 {
     public class ButtonActiveMissionOnly: MonoBehaviour
@@ -7,7 +8,7 @@ namespace RiverAttack
         {
             if (GameManager.instance.gameModes != GameManager.GameModes.Mission)
             {
-                gameObject.SetActive(false);
+                gameObject.GetComponent<Button>().interactable = false;
             }
         }
     }
