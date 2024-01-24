@@ -125,7 +125,7 @@ namespace RiverAttack
             // não reiniciar as vidas no modo missão
             if (m_GameManager.gameModes == GameManager.GameModes.Mission)
             {
-                if (getPlayerSettings.lives == 0)
+                if (getPlayerSettings.lives <= 1)
                     getPlayerSettings.lives = 3;
                 m_GamePlayManager.OnEventUpdateLives(getPlayerSettings.lives);
                 return;

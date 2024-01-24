@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Steamworks;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Utils;
@@ -56,7 +57,7 @@ namespace RiverAttack
         }
         void Start()
         {
-            if (SteamClient.IsValid && SteamClient.IsLoggedOn)
+            if (SteamClient.IsValid)
             {
                 SteamFriends.OnGameOverlayActivated += PauseGame;
             }
@@ -120,7 +121,7 @@ namespace RiverAttack
             return level;
         }
 
-        void PauseGame(bool pause)
+        internal void PauseGame(bool pause)
         {
             Time.timeScale = pause ? 0 : 1;
             if (currentGameState is not GameStatePlayGame)
