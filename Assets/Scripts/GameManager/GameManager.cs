@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using Steamworks;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Utils;

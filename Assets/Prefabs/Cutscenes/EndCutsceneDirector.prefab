@@ -4170,7 +4170,6 @@ GameObject:
   - component: {fileID: 4161649844428024740}
   - component: {fileID: 191092665510199380}
   - component: {fileID: 3153471400052687205}
-  - component: {fileID: 3958584181754696747}
   m_Layer: 0
   m_Name: Refuggies_Thanks_Text
   m_TagString: Untagged
@@ -4316,46 +4315,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3958584181754696747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2648747613940718025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69beb381e244f92449b8c4cf954630e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TrackedObjects:
-  - rid: 3486399765791375362
-  references:
-    version: 2
-    RefIds:
-    - rid: 3486399765791375362
-      type: {class: TrackedUGuiGraphic, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects,
-        asm: Unity.Localization}
-      data:
-        m_Target: {fileID: 191092665510199380}
-        m_TrackedProperties:
-          items:
-          - rid: 3486399765791375363
-        m_UpdateType: 0
-    - rid: 3486399765791375363
-      type: {class: LocalizedStringProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties,
-        asm: Unity.Localization}
-      data:
-        m_Localized:
-          m_TableReference:
-            m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
-          m_TableEntryReference:
-            m_KeyId: 36952782593458176
-            m_Key: 
-          m_FallbackState: 0
-          m_WaitForCompletion: 0
-          m_LocalVariables: []
-        m_PropertyPath: m_text
 --- !u!1 &2650464517877783256
 GameObject:
   m_ObjectHideFlags: 0
@@ -15380,7 +15339,6 @@ GameObject:
   - component: {fileID: 1762877115434074835}
   - component: {fileID: 8652175274197021199}
   - component: {fileID: 2442147550768032735}
-  - component: {fileID: 1691912304261065653}
   m_Layer: 0
   m_Name: Final_Thanks_Text
   m_TagString: Untagged
@@ -15526,46 +15484,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1691912304261065653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6197385295206205987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69beb381e244f92449b8c4cf954630e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TrackedObjects:
-  - rid: 3486399765791375364
-  references:
-    version: 2
-    RefIds:
-    - rid: 3486399765791375364
-      type: {class: TrackedUGuiGraphic, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects,
-        asm: Unity.Localization}
-      data:
-        m_Target: {fileID: 8652175274197021199}
-        m_TrackedProperties:
-          items:
-          - rid: 3486399765791375365
-        m_UpdateType: 0
-    - rid: 3486399765791375365
-      type: {class: LocalizedStringProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties,
-        asm: Unity.Localization}
-      data:
-        m_Localized:
-          m_TableReference:
-            m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
-          m_TableEntryReference:
-            m_KeyId: 36952928748175360
-            m_Key: 
-          m_FallbackState: 0
-          m_WaitForCompletion: 0
-          m_LocalVariables: []
-        m_PropertyPath: m_text
 --- !u!1 &6198313357232034859
 GameObject:
   m_ObjectHideFlags: 0
@@ -20260,6 +20178,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Exit_Actions_Panel
       objectReference: {fileID: 0}
+    - target: {fileID: 8136155028904478041, guid: 392e5965da380d14197bbbef91af9b23,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8136155028904478041, guid: 392e5965da380d14197bbbef91af9b23,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8979146096901057708, guid: 392e5965da380d14197bbbef91af9b23,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 900
+      objectReference: {fileID: 0}
+    - target: {fileID: 8979146096901057708, guid: 392e5965da380d14197bbbef91af9b23,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -520
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20360,7 +20298,7 @@ MonoBehaviour:
         m_TableReference:
           m_TableCollectionName: GUID:a34424302565f3c489d6188a6707d053
         m_TableEntryReference:
-          m_KeyId: 43990733558149120
+          m_KeyId: 44003678904152064
           m_Key: 
         m_FallbackState: 0
         m_WaitForCompletion: 0
@@ -20377,7 +20315,7 @@ MonoBehaviour:
         m_TableReference:
           m_TableCollectionName: GUID:a34424302565f3c489d6188a6707d053
         m_TableEntryReference:
-          m_KeyId: 43990779955539968
+          m_KeyId: 44003682028908544
           m_Key: 
         m_FallbackState: 0
         m_WaitForCompletion: 0

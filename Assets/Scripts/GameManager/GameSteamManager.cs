@@ -44,7 +44,7 @@ namespace RiverAttack
                         _serverAchievements = SteamUserStats.Achievements;
                         _leaderboard = await SteamUserStats.FindLeaderboardAsync(LEADERBOARD_NAME);
 
-                        Debug.Log("Leaderboard initialized: " + _leaderboard);
+                        //Debug.Log("Leaderboard initialized: " + _leaderboard);
                     }
                     else
                     {

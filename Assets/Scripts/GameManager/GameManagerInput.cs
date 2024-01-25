@@ -13,24 +13,24 @@ namespace RiverAttack
                     switch (change)
                     {
                         case InputDeviceChange.Added:
-                            Debug.Log($"Device {device} was added");
+                            //Debug.Log($"Device {device} was added");
                             break;
                         case InputDeviceChange.Removed:
-                            Debug.Log($"Device {device} was removed");
+                            //Debug.Log($"Device {device} was removed");
                             PauseGame(true);
                             break;
                         case InputDeviceChange.Disconnected:
-                            Debug.Log($"A existent Device {device} was disconnected");
+                            //Debug.Log($"A existent Device {device} was disconnected");
                             PauseGame(true);
                             break;
                         case InputDeviceChange.Reconnected:
-                            Debug.Log($"A existent Device {device} was reconnected");
+                            //Debug.Log($"A existent Device {device} was reconnected");
                             break;
                         case InputDeviceChange.Enabled:
-                            Debug.Log($"A existent Device {device} was enabled");
+                            //Debug.Log($"A existent Device {device} was enabled");
                             break;
                         case InputDeviceChange.Disabled:
-                            Debug.Log($"A existent Device {device} was disabled");
+                            //Debug.Log($"A existent Device {device} was disabled");
                             PauseGame(true);
                             break;
                         case InputDeviceChange.UsageChanged:
