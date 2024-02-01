@@ -83,14 +83,14 @@ namespace RiverAttack
                 gamePlayingLog.livesSpent.ToString()
                 ));
 
-            // Die by Wall
+            // Death by Wall
             statisticsDataList.Add(AddStatisticDataToList(
                 "Colisão",
                 "Air Crash",
                 gamePlayingLog.playerDieWall.ToString()
                 ));
 
-            // Die by Bullets
+            // Death by Bullets
             statisticsDataList.Add(AddStatisticDataToList(
                 "Abatido",
                 "Shot Down",
