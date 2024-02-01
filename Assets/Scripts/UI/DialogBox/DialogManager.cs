@@ -13,7 +13,6 @@ namespace RiverAttack
     public class DialogManager : MonoBehaviour
     {
         [Header("Dialog Settings")]
-        [SerializeField] GameSettings gameSettings;
         [SerializeField] Animator speakerAnimatorController;
         [SerializeField] protected TimeLineManager timelineManager;
         [SerializeField] TMP_Text dialogText;
@@ -23,21 +22,20 @@ namespace RiverAttack
         [SerializeField] public float[] dialogAnimationStartTime;
 
         [Header("Exit Button Settings")]
-        [SerializeField] Animator fadePanelAnimator;
         [SerializeField] Image fillExitButtonImage;
-        [SerializeField] private float holdTimer = 0f;
+        [SerializeField] private float holdTimer;
         [SerializeField] float holdDuration = 3f;
-        [SerializeField] int sceneToLoad;
 
         PlayersInputActions m_InputSystem;
 
         string[] m_Sentences;
-        int m_SentenceIndex = 0;
-        bool m_IsTyping = false;        
-        bool m_IsExitButtonPressed = false;
+        int m_SentenceIndex;
+        bool m_IsTyping;        
+        bool m_IsExitButtonPressed;
 
         Coroutine m_TypingCoroutine;
         Coroutine m_ExitButtonCoroutine;
+        static readonly int Speak = Animator.StringToHash("Speak");
 
         void OnEnable()
         {
@@ -88,7 +86,7 @@ namespace RiverAttack
             m_IsTyping = isSpeaking;
             nextCursor.SetActive(!isSpeaking);
             if (speakerAnimatorController != null)
-                speakerAnimatorController.SetBool("Speak", isSpeaking);
+                speakerAnimatorController.SetBool(Speak, isSpeaking);
         }
 
         IEnumerator TypeSentence(string sentence)
@@ -133,9 +131,8 @@ namespace RiverAttack
             // Fim do diálogo, você pode adicionar lógica adicional aqui
             //Debug.Log("Fim do diálogo");
             GameSteamManager.UnlockAchievement("ACH_FINISH_TUTORIAL");
-            fadePanelAnimator.SetTrigger("FadeOut");
             StopAllCoroutines();
-            SceneManager.LoadSceneAsync(sceneToLoad);
+            GameManager.instance.ChangeState(new GameStateMenu(), GameManager.GameScenes.MainScene.ToString());
         }
 
         void StartHoldTime()
