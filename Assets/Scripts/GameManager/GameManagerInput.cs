@@ -39,7 +39,8 @@ namespace RiverAttack
                         case InputDeviceChange.HardReset:
                             break;
                         default:
-                            throw new ArgumentOutOfRangeException(nameof(change), change, null);
+                            break;
+                            //throw new ArgumentOutOfRangeException(nameof(change), change, null);
                     }
                 };
 
