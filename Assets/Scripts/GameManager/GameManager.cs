@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
+using CarterGames.Assets.SaveManager;
+using Save;
 using Steamworks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Utils;
+using UnityEngine.Localization.Settings;
 namespace RiverAttack
 {
     [RequireComponent(typeof(AudioSource))]
@@ -45,6 +48,7 @@ namespace RiverAttack
         internal bool onLoadScene;
         public GameState currentGameState { get; private set; }
         internal GameState lastGameState;
+        PlayerSaveSaveObject m_PlayerSave;
 
         #region UNITYMETHODS
         void Awake()
@@ -220,6 +224,16 @@ namespace RiverAttack
         #endregion
         void SetOptionsOnStartUp()
         {
+            if (gameSettings.startLocale == null)
+            {
+                m_PlayerSave = SaveManager.GetSaveObject<PlayerSaveSaveObject>();
+                if (m_PlayerSave && m_PlayerSave.startLocale.Value)
+                {
+                    gameSettings.startLocale = m_PlayerSave.startLocale.Value;
+                }
+                gameSettings.startLocale = LocalizationSettings.SelectedLocale;
+            }
+            
             if (Application.targetFrameRate != OptionsFrameRatePanel.FrameRate(gameSettings.indexFrameRate))
             {
                 OptionsFrameRatePanel.UpdateFrameRate(gameSettings.indexFrameRate);
