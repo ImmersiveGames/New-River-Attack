@@ -11,11 +11,8 @@ namespace Save
     [CreateAssetMenu(fileName = "PlayerSaveSaveObject")]
     public class PlayerSaveSaveObject : SaveObject
     {
-        #region PlayerSettingsSave
         public SaveValue<List<ShopProduct>> listProducts;
-        #endregion
 
-        #region GameSettingsSave
         public SaveValue<float> musicVolume;
         public SaveValue<float> sfxVolume;
         public SaveValue<Locale> startLocale;
@@ -23,9 +20,7 @@ namespace Save
         public SaveValue<Vector2Int> actualResolution;
         public SaveValue<int> indexFrameRate;
         public SaveValue<int> indexResolution;
-        #endregion
-
-        #region GamePlayLog
+        
         public SaveValue<float> pathDistance;
         public SaveValue<float> maxPathDistance;
         public SaveValue<float> shootSpent;
@@ -41,7 +36,6 @@ namespace Save
         public SaveValue<Levels> activeMission;
         public SaveValue<List<Levels>> finishLevels;
         public SaveValue<List<LogResults>> hitEnemiesResultsList;
-        #endregion
 
     }
 }
