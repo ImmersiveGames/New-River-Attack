@@ -3,9 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
 using System.Collections.Generic;
 
 namespace RiverAttack 

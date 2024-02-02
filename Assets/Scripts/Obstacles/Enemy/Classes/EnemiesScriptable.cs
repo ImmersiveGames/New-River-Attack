@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Localization;
 using Utils;
 namespace RiverAttack
 {
@@ -9,7 +10,7 @@ namespace RiverAttack
     {
         [Header("Default Settings")]
         public new string name;
-        public string namePT_BR;
+        public LocalizedString localizeName;
         public EnemiesTypes enemyType;
         public int enemyScore;
         public Sprite spriteIcon;

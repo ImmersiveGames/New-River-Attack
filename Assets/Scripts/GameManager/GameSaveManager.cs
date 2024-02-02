@@ -24,6 +24,7 @@ namespace RiverAttack
 
         void LoadPlayerSaves()
         {
+            SaveManager.Load();
             m_PlayerSave.Load();
             playerSettings.listProducts = m_PlayerSave.listProducts.Value;
 

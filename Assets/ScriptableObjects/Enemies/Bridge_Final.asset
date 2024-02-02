@@ -13,7 +13,15 @@ MonoBehaviour:
   m_Name: Bridge_Final
   m_EditorClassIdentifier: 
   name: Bridges
-  namePT_BR: Pontes
+  localizeName:
+    m_TableReference:
+      m_TableCollectionName: GUID:4324ceb956596944f87fd26e389fce55
+    m_TableEntryReference:
+      m_KeyId: 73364959232
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   enemyType: 8
   enemyScore: 100
   spriteIcon: {fileID: 21300044, guid: 00fe56aef94d83649b921f117186f107, type: 3}
@@ -24,3 +32,6 @@ MonoBehaviour:
   canRespawn: 0
   canDestruct: 1
   isCheckInPoint: 1
+  references:
+    version: 2
+    RefIds: []

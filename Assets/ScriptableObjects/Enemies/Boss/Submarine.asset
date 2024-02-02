@@ -13,7 +13,15 @@ MonoBehaviour:
   m_Name: Submarine
   m_EditorClassIdentifier: 
   name: Submarine
-  namePT_BR: 
+  localizeName:
+    m_TableReference:
+      m_TableCollectionName: GUID:4324ceb956596944f87fd26e389fce55
+    m_TableEntryReference:
+      m_KeyId: 971524829184
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   enemyType: 9
   enemyScore: 1000
   spriteIcon: {fileID: 0}
@@ -22,7 +30,10 @@ MonoBehaviour:
   listDropItems: {fileID: 0}
   enemiesSetDifficultyListSo: {fileID: 0}
   canRespawn: 0
-  canDestruct: 1
+  canDestruct: 0
   isCheckInPoint: 0
   maxHp: 10
   maxCycles: 3
+  references:
+    version: 2
+    RefIds: []

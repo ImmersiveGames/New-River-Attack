@@ -1,7 +1,4 @@
-using System;
-using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
-using System.Collections;
 using UnityEngine;
 
 namespace RiverAttack

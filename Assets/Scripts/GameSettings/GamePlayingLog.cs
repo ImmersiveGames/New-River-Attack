@@ -50,5 +50,9 @@ namespace RiverAttack
             this.quantity = quantity;
             collisionType = collision;
         }
+        public LogResults()
+        {
+            //throw new System.NotImplementedException();
+        }
     }
 }

@@ -13,7 +13,15 @@ MonoBehaviour:
   m_Name: Tower
   m_EditorClassIdentifier: 
   name: Towers
-  namePT_BR: Torres
+  localizeName:
+    m_TableReference:
+      m_TableCollectionName: GUID:4324ceb956596944f87fd26e389fce55
+    m_TableEntryReference:
+      m_KeyId: 538634907648
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   enemyType: 5
   enemyScore: 50
   spriteIcon: {fileID: 21300002, guid: 00fe56aef94d83649b921f117186f107, type: 3}
@@ -25,3 +33,6 @@ MonoBehaviour:
   canRespawn: 1
   canDestruct: 1
   isCheckInPoint: 0
+  references:
+    version: 2
+    RefIds: []
