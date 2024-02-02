@@ -13,7 +13,15 @@ MonoBehaviour:
   m_Name: CollectableBombs
   m_EditorClassIdentifier: 
   name: Bombs
-  namePT_BR: Bombas
+  localizeName:
+    m_TableReference:
+      m_TableCollectionName: GUID:ba267218fcc8f9148be34b05b788955f
+    m_TableEntryReference:
+      m_KeyId: 321374138953728
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   enemyType: 0
   enemyScore: 0
   spriteIcon: {fileID: 21300008, guid: 3de49b0208cf67e4fbc9d0c1d0a9e1d1, type: 3}
@@ -28,3 +36,6 @@ MonoBehaviour:
   collectValuable: 0
   amountCollectables: 1
   powerUp: {fileID: 11400000, guid: 82e5bddd3be0b944e820f72efa5188ab, type: 2}
+  references:
+    version: 2
+    RefIds: []

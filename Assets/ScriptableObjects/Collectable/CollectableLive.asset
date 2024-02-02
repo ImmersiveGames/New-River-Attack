@@ -13,7 +13,15 @@ MonoBehaviour:
   m_Name: CollectableLive
   m_EditorClassIdentifier: 
   name: Extra Lifes
-  namePT_BR: Vidas Extras
+  localizeName:
+    m_TableReference:
+      m_TableCollectionName: GUID:ba267218fcc8f9148be34b05b788955f
+    m_TableEntryReference:
+      m_KeyId: 321583464083456
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   enemyType: 0
   enemyScore: 0
   spriteIcon: {fileID: 21300036, guid: 3de49b0208cf67e4fbc9d0c1d0a9e1d1, type: 3}
@@ -28,3 +36,6 @@ MonoBehaviour:
   collectValuable: 0
   amountCollectables: 1
   powerUp: {fileID: 11400000, guid: e54a1e3375bc9da41b0f3fde1945c38c, type: 2}
+  references:
+    version: 2
+    RefIds: []
