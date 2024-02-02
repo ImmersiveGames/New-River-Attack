@@ -25,7 +25,7 @@ namespace RiverAttack
         void LoadPlayerSaves()
         {
             SaveManager.Load();
-            m_PlayerSave.Load();
+            //m_PlayerSave.Load();
             playerSettings.listProducts = m_PlayerSave.listProducts.Value;
 
             gameSettings.musicVolume = m_PlayerSave.musicVolume.Value;
@@ -65,23 +65,23 @@ namespace RiverAttack
             m_PlayerSave.indexFrameRate.Value = gameSettings.indexFrameRate;
             m_PlayerSave.indexResolution.Value = gameSettings.indexResolution;
 
-            gamePlayingLog.pathDistance = m_PlayerSave.pathDistance.Value;
-            gamePlayingLog.maxPathDistance = m_PlayerSave.maxPathDistance.Value;
-            gamePlayingLog.shootSpent = m_PlayerSave.shootSpent.Value;
-            gamePlayingLog.livesSpent = m_PlayerSave.livesSpent.Value;
-            gamePlayingLog.fuelSpent = m_PlayerSave.fuelSpent.Value;
-            gamePlayingLog.fuelStocked = m_PlayerSave.fuelStocked.Value;
-            gamePlayingLog.bombSpent = m_PlayerSave.bombSpent.Value;
-            gamePlayingLog.totalScore = m_PlayerSave.totalScore.Value;
-            gamePlayingLog.timeSpent = m_PlayerSave.timeSpent.Value;
-            gamePlayingLog.playerDieWall = m_PlayerSave.playerDieWall.Value;
-            gamePlayingLog.playerDieBullet = m_PlayerSave.playerDieBullet.Value;
-            gamePlayingLog.playerDieFuelEmpty = m_PlayerSave.playerDieFuelEmpty.Value;
-            gamePlayingLog.activeMission = m_PlayerSave.activeMission.Value;
-            gamePlayingLog.finishLevels = m_PlayerSave.finishLevels.Value;
-            gamePlayingLog.hitEnemiesResultsList = m_PlayerSave.hitEnemiesResultsList.Value;
+            m_PlayerSave.pathDistance.Value = gamePlayingLog.pathDistance;
+            m_PlayerSave.maxPathDistance.Value = gamePlayingLog.maxPathDistance;
+            m_PlayerSave.shootSpent.Value = gamePlayingLog.shootSpent;
+            m_PlayerSave.livesSpent.Value = gamePlayingLog.livesSpent;
+            m_PlayerSave.fuelSpent.Value = gamePlayingLog.fuelSpent;
+            m_PlayerSave.fuelStocked.Value = gamePlayingLog.fuelStocked;
+            m_PlayerSave.bombSpent.Value = gamePlayingLog.bombSpent;
+            m_PlayerSave.totalScore.Value = gamePlayingLog.totalScore;
+            m_PlayerSave.timeSpent.Value = gamePlayingLog.timeSpent;
+            m_PlayerSave.playerDieWall.Value = gamePlayingLog.playerDieWall;
+            m_PlayerSave.playerDieBullet.Value = gamePlayingLog.playerDieBullet;
+            m_PlayerSave.playerDieFuelEmpty.Value = gamePlayingLog.playerDieFuelEmpty;
+            m_PlayerSave.activeMission.Value = gamePlayingLog.activeMission;
+            m_PlayerSave.finishLevels.Value = gamePlayingLog.finishLevels;
+            m_PlayerSave.hitEnemiesResultsList.Value = gamePlayingLog.hitEnemiesResultsList;
 
-            m_PlayerSave.Save();
+            //m_PlayerSave.Save();
             SaveManager.Save();
         }
 
