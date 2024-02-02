@@ -177,8 +177,8 @@ namespace RiverAttack
             if (deactivateIndex >= 0 && deactivateIndex < pool.Count - maxLevels && pool[deactivateIndex].activeInHierarchy)
                 pool[deactivateIndex].SetActive(false);
 
-            if (removeIndex >= 0 && removeIndex < pool.Count - maxLevels && !pool[removeIndex].activeInHierarchy)
-                Destroy(pool[removeIndex]);
+            /*if (removeIndex >= 0 && removeIndex < pool.Count - maxLevels && !pool[removeIndex].activeInHierarchy)
+                Destroy(pool[removeIndex]);*/
         }
 
         public void ResetBuildMission()
