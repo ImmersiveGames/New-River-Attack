@@ -3,11 +3,9 @@ namespace RiverAttack
 {
     public class CollectiblesSound : EnemiesSound
     {
-        [SerializeField]
-        AudioEventSample collectSound;
-        [SerializeField]
-        AudioEventSample showSound;
-        CollectiblesMaster m_CollectiblesMaster;
+        [SerializeField] private AudioEventSample collectSound;
+        [SerializeField] private AudioEventSample showSound;
+        private CollectiblesMaster m_CollectiblesMaster;
 
         #region UNITY METHODS
         protected override void OnEnable()
@@ -15,7 +13,8 @@ namespace RiverAttack
             base.OnEnable();
             m_CollectiblesMaster.EventCollectItem += CollectSound;
         }
-        void OnBecameVisible()
+
+        private void OnBecameVisible()
         {
             ShowSound();
         }
@@ -26,7 +25,7 @@ namespace RiverAttack
         }
   #endregion
 
-        void ShowSound()
+  private void ShowSound()
         {
             if (audioSource != null && showSound != null)
                 showSound.Play(audioSource);
@@ -38,7 +37,7 @@ namespace RiverAttack
             m_CollectiblesMaster = GetComponent<CollectiblesMaster>();
         }
 
-        void CollectSound(PlayerSettings playerSettings)
+        private void CollectSound(PlayerSettings playerSettings)
         {
             if (audioSource != null && collectSound != null)
                 collectSound.Play(audioSource);

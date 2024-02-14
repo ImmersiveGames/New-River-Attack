@@ -11,17 +11,15 @@ namespace RiverAttack
         [Header("Player Destroy Settings")]
         [SerializeField]
         internal bool isPlayerDead;
-        bool m_Invulnerability;
-        [SerializeField] float timeoutReSpawn;
-        [SerializeField]
-        GameObject deadParticlePrefab;
-        [SerializeField]
-        float timeoutDestroyExplosion;
+
+        private bool m_Invulnerability;
+        [SerializeField] private float timeoutReSpawn;
+        [SerializeField] private GameObject deadParticlePrefab;
+        [SerializeField] private float timeoutDestroyExplosion;
         [Header("Shake Camera")]
         [SerializeField]
-        float shakeIntensity;
-        [SerializeField]
-        float shakeTime;
+        private float shakeIntensity;
+        [SerializeField] private float shakeTime;
 
         public enum MovementStatus { None, Paused, Accelerate, Reduce }
         [Header("Movement")]
@@ -38,10 +36,10 @@ namespace RiverAttack
         
 
         //Animator m_Animator;
-        GamePlayingLog m_GamePlayingLog;
-        GamePlayManager m_GamePlayManager;
-        GameManager m_GameManager;
-        GameSettings m_GameSettings;
+        private GamePlayingLog m_GamePlayingLog;
+        private GamePlayManager m_GamePlayManager;
+        private GameManager m_GameManager;
+        private GameSettings m_GameSettings;
         
         #region Delagetes
         public delegate void GeneralEventHandler();
@@ -55,7 +53,8 @@ namespace RiverAttack
         #endregion
 
         #region UNITYMETHOD
-        void Awake()
+
+        private void Awake()
         {
             //m_Animator = GetComponent<Animator>();
             m_GamePlayManager = GamePlayManager.instance;
@@ -67,18 +66,19 @@ namespace RiverAttack
             playersInputActions.UI_Controlls.Disable();*/
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             m_GamePlayManager.EventStartRapidFire += () => inPowerUp = true;
             m_GamePlayManager.EventEndRapidFire += () => inPowerUp = false;
             OnEventPlayerMasterUpdateSkin();
         }
 
-        void Start()
+        private void Start()
         {
             PlayerStartSetup();
         }
-        void OnTriggerEnter(Collider other)
+
+        private void OnTriggerEnter(Collider other)
         {
             if (other.GetComponentInParent<PlayerMaster>() || other.GetComponent<BulletPlayer>()
                 || other.GetComponent<BulletPlayerBomb>() || other.GetComponentInParent<CollectiblesMaster>() != null
@@ -107,9 +107,10 @@ namespace RiverAttack
             return m_Animator;
         }*/
 
-        void PlayerStartSetup()
+        private void PlayerStartSetup()
         {
             getPlayerSettings.spawnPosition = transform.position;
+            getPlayerSettings.cadenceShootPowerUp = 0;
             getPlayerSettings.spawnPosition.z = 0;
             isPlayerDead = false;
             getPlayerSettings.score = 0;
@@ -134,7 +135,7 @@ namespace RiverAttack
             m_GamePlayManager.OnEventUpdateLives(getPlayerSettings.lives);
         }
 
-        void KillPlayer()
+        private void KillPlayer()
         {
             m_GamePlayManager.playerDead = !m_GamePlayManager.bossFight;
             isPlayerDead = !m_GamePlayManager.bossFight;
@@ -153,12 +154,12 @@ namespace RiverAttack
             Destroy(go, timeoutDestroyExplosion);
         }
 
-        void ChangeGameOver()
+        private void ChangeGameOver()
         {
             m_GameManager.ChangeState(new GameStateGameOver());
         }
 
-        void TryRespawn()
+        private void TryRespawn()
         {
             if (getPlayerSettings.lives <= 0)
             {
@@ -168,7 +169,7 @@ namespace RiverAttack
             Invoke(nameof(Reposition), timeoutReSpawn / 2);
         }
 
-        void Reposition()
+        private void Reposition()
         {
             //Debug.Log("Respawn Player");
             var transform1 = transform;
@@ -177,12 +178,14 @@ namespace RiverAttack
             m_GamePlayManager.OnEventReSpawnEnemiesMaster();
             Tools.ToggleChildren(transform1);
             getPlayerSettings.actualFuel = m_GameSettings.startFuel;
+            getPlayerSettings.cadenceShootPowerUp = 0;
             OnEventPlayerMasterRespawn();
-            float timeToRespawn = m_GamePlayManager.bossFight ? timeoutReSpawn/2 : timeoutReSpawn;
+            var timeToRespawn = m_GamePlayManager.bossFight ? timeoutReSpawn/2 : timeoutReSpawn;
             
             Invoke(nameof(ReSpawn), timeToRespawn);
         }
-        void ReSpawn()
+
+        private void ReSpawn()
         {
             m_GamePlayManager.OnEventActivateEnemiesMaster();
             if (m_GamePlayManager.bossFight)
@@ -194,7 +197,7 @@ namespace RiverAttack
             m_Invulnerability = false;
         }
 
-        void LogGamePlay(Component component)
+        private void LogGamePlay(Component component)
         {
             var walls = component.GetComponentInParent<WallsMaster>();
             var enemies = component.GetComponentInParent<ObstacleMaster>();
@@ -229,7 +232,8 @@ namespace RiverAttack
             EventPlayerMasterHit?.Invoke();
             TryRespawn();
         }
-        void OnEventPlayerMasterRespawn()
+
+        private void OnEventPlayerMasterRespawn()
         {
             m_GamePlayManager.playerDead = false;
             EventPlayerMasterRespawn?.Invoke();
@@ -239,7 +243,8 @@ namespace RiverAttack
         {
             EventPlayerMasterControllerMovement?.Invoke(dir);
         }
-        void OnEventPlayerMasterBossHit(bool active)
+
+        private void OnEventPlayerMasterBossHit(bool active)
         {
             EventPlayerMasterBossHit?.Invoke(active);
         }

@@ -18,7 +18,7 @@ namespace RiverAttack
             GamePLayLogFuel(amount);
         }
 
-        static void GamePLayLogFuel(int fuel)
+        private static void GamePLayLogFuel(int fuel)
         {
             var gamePlaySettings = GamePlayingLog.instance;
             gamePlaySettings.fuelStocked += fuel;
@@ -38,7 +38,7 @@ namespace RiverAttack
         {
         if (target == null) return;
         
-            float buff = (amount < cadenceRapidFireMin) ? cadenceRapidFireMin : amount;
+            var buff = (amount < cadenceRapidFireMin) ? cadenceRapidFireMin : amount;
             target.cadenceShootPowerUp = buff;
             var gamePlayManager = GamePlayManager.instance;
             var playerManager = PlayerManager.instance;

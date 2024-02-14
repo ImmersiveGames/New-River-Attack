@@ -4,16 +4,17 @@ namespace RiverAttack
 {
     public class DropGasStationsBehavior : IBossBehavior
     {
-        const float OFFSET_X = 2;
-        const float AUTO_DESTROY_TIME = 10f;
-        
-        Transform m_SpawnPoint;
-        readonly int m_NumGas;
+        private const float OFFSET_X = 2;
+        private const float AUTO_DESTROY_TIME = 10f;
 
-        readonly BossGasStationDrop m_BossGasStationDrop;
-        readonly IHasPool m_MyPool;
+        private Transform m_SpawnPoint;
+        private readonly int m_NumGas;
+
+        private readonly BossGasStationDrop m_BossGasStationDrop;
+
+        private readonly IHasPool m_MyPool;
         //IBossBehavior
-        bool m_Finished;
+        private bool m_Finished;
         internal DropGasStationsBehavior(BossMaster bossMaster, int quantity)
         {
             m_MyPool = m_BossGasStationDrop = bossMaster.GetBossGasStationDrop();

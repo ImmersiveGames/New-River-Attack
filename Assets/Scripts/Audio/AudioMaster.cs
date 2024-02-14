@@ -18,23 +18,24 @@ namespace RiverAttack
         [SerializeField]
         public bool playOnEnable = false;
 
-        AudioSource m_AudioSource;
+        private AudioSource m_AudioSource;
 
         #region UnityMethods
-        void OnEnable()
+
+        private void OnEnable()
         {
             m_AudioSource = GetComponent<AudioSource>();
             if (audioMixerGroup != null) m_AudioSource.outputAudioMixerGroup = audioMixerGroup;
         }
 
-        void Start()
+        private void Start()
         {
             if (playOnEnable)
                 PlayBGM();
         }
   #endregion
 
-        void PlayBGM()
+  private void PlayBGM()
         {
             if (m_AudioSource && loopingBGM != null)
             {
@@ -50,7 +51,7 @@ namespace RiverAttack
             }
         }
 
-        static IEnumerator StartPlay(AudioSource source, AudioEventClip startEventClip, AudioEventClip loopEventClip)
+        private static IEnumerator StartPlay(AudioSource source, AudioEventClip startEventClip, AudioEventClip loopEventClip)
         {
             var sourceClip = startEventClip.audioClip;
             if (sourceClip != null)
@@ -73,7 +74,7 @@ namespace RiverAttack
             yield return null;
         }
 
-        static IEnumerator StopPlay(AudioSource source, AudioEventClip endEventClip)
+        private static IEnumerator StopPlay(AudioSource source, AudioEventClip endEventClip)
         {
             source.clip = endEventClip.audioClip;
             source.volume = Random.Range(endEventClip.volume.x, endEventClip.volume.y);

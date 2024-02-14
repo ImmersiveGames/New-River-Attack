@@ -7,36 +7,37 @@ namespace RiverAttack
 {
     public class OptionsLanguagesPanel: MonoBehaviour
     {
-        [SerializeField] Locale myLocale;
-        
-        Button m_FlagButton;
-        [SerializeField] Color normalColor;
-        [SerializeField] Color disableColor;
-        static bool _activeLocaleButton;
-        GameSettings m_GameSettings;
-        void Awake()
+        [SerializeField] private Locale myLocale;
+
+        private Button m_FlagButton;
+        [SerializeField] private Color normalColor;
+        [SerializeField] private Color disableColor;
+        private static bool _activeLocaleButton;
+        private GameSettings m_GameSettings;
+
+        private void Awake()
         {
             m_FlagButton = GetComponent<Button>();
         }
 
-        void OnEnable()
+        private void OnEnable()
         {
             m_GameSettings = GameSettings.instance;
             //Debug.Log($"Locale: {myLocale}, {LocalizationSettings.SelectedLocale}");
             ChangeNormalColor(myLocale);
         }
 
-        void Start()
+        private void Start()
         {
             LocalizationSettings.SelectedLocaleChanged += ChangeNormalColor;
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             LocalizationSettings.SelectedLocaleChanged -= ChangeNormalColor;
         }
 
-        void ChangeNormalColor(Locale locale)
+        private void ChangeNormalColor(Locale locale)
         {
             var flagButtonColors = m_FlagButton.colors;
             flagButtonColors.normalColor = LocalizationSettings.SelectedLocale != myLocale ? disableColor : normalColor;
@@ -48,7 +49,7 @@ namespace RiverAttack
             StartCoroutine(ChangeLocale(myLocale));
         }
 
-        IEnumerator ChangeLocale(Locale locale)
+        private IEnumerator ChangeLocale(Locale locale)
         {
             //Debug.Log($"MEU Local: {locale}, {myLocale}");
             _activeLocaleButton = true;

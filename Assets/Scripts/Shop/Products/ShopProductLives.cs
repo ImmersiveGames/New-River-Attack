@@ -5,11 +5,11 @@ namespace RiverAttack
     [CreateAssetMenu(fileName = "ShopLife", menuName = "RiverAttack/Shopping/Lives", order = 2)]
     public class ShopProductLives : ShopProduct
     {
-        [SerializeField]
-        int quantity;
+        [SerializeField] private int quantity;
 
         #region UNITY METHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             isConsumable = true;
         }

@@ -7,13 +7,13 @@ namespace RiverAttack
     public enum BattleBossSubState { Top, Base, Left, Right, Dead }
     public class GameStatePlayGameBoss : GameState
     {
-        BattleBossSubState m_CurrentSubState;
-        readonly Dictionary<BattleBossSubState, IBossBehavior[]> m_Behaviors;
+        private BattleBossSubState m_CurrentSubState;
+        private readonly Dictionary<BattleBossSubState, IBossBehavior[]> m_Behaviors;
 
-        IBossBehavior[] m_CurrentBehaviors;
-        int m_CurrentBehaviorIndex;
-        bool m_BehaviorEnterExecuted;
-        BossMaster m_BossMaster;
+        private IBossBehavior[] m_CurrentBehaviors;
+        private int m_CurrentBehaviorIndex;
+        private bool m_BehaviorEnterExecuted;
+        private BossMaster m_BossMaster;
 
         public GameStatePlayGameBoss() {
             // Inicializa o estado do BattleBoss como "Topo"
@@ -68,6 +68,8 @@ namespace RiverAttack
         public override void EnterState()
         {
             //Debug.Log($"Entra no Estado: Boss Fight");
+            GamePlayManager.instance.inputSystem.Player.Enable();
+            GamePlayManager.instance.inputSystem.UI_Controlls.Disable();
             GamePlayManager.instance.panelMenuGame.StartMenuGame();
             GamePlayManager.instance.OnStartGame();
         }
@@ -102,12 +104,12 @@ namespace RiverAttack
         }
         public override void ExitState()
         {
-            int score = PlayerManager.instance.playerSettingsList[0].score;
+            var score = PlayerManager.instance.playerSettingsList[0].score;
             GameSteamManager.UpdateScore(score, false);
-            PlayerManager.instance.ActivePlayers(false);
-            GamePlayManager.instance.OnEventDeactivateEnemiesMaster();
+            //PlayerManager.instance.ActivePlayers(false);
+            //GamePlayManager.instance.OnEventDeactivateEnemiesMaster();
             //Debug.Log($"Sai do Estado: Boss Fight");
-            m_BossMaster = null;
+            //m_BossMaster = null;
             GameSaveManager.instance.SavePlayerSaves();
             System.GC.Collect();
         }
@@ -116,7 +118,7 @@ namespace RiverAttack
             GamePlayManager.instance.PauseBossBattle(active);
         }
 
-        BattleBossSubState GetNextSubState() {
+        private BattleBossSubState GetNextSubState() {
             
             BattleBossSubState nextState;
 
@@ -140,7 +142,8 @@ namespace RiverAttack
            // Debug.Log($"RANDOM Position: {nextState}");
             return nextState;
         }
-        void ChangeSubState(BattleBossSubState newSubState)
+
+        private void ChangeSubState(BattleBossSubState newSubState)
         {
             if (m_CurrentSubState != newSubState)
             {

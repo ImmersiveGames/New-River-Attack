@@ -12,9 +12,9 @@ namespace Utils
 {
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
-        static T _instance;
+        private static T _instance;
 
-        static readonly object _lock = new object();
+        private static readonly object _lock = new object();
 
         public static T instance
         {
@@ -60,7 +60,7 @@ namespace Utils
             }
         }
 
-        void RemoveSingleton()
+        private void RemoveSingleton()
         {
             if (_instance)
             {
@@ -68,7 +68,7 @@ namespace Utils
             }
         }
         // ReSharper disable once StaticMemberInGenericType
-        static bool _applicationIsQuitting;
+        private static bool _applicationIsQuitting;
         /* <summary>
             When Unity quits, it destroys objects in a random order.
             In principle, a Singleton is only destroyed when application quits.
@@ -78,7 +78,7 @@ namespace Utils
             So, this was made to be sure we're not creating that buggy ghost object.
          </summary>
          */
-        void OnApplicationQuit()
+        private void OnApplicationQuit()
         {
             _applicationIsQuitting = true;
             RemoveSingleton();

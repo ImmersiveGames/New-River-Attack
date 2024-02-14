@@ -5,31 +5,34 @@ namespace RiverAttack
 {
     public class LifeDisplay : MonoBehaviour
     {
-        [SerializeField]
-        GameObject iconLives;
+        [SerializeField] private GameObject iconLives;
 
-        int m_Lives;
-        GamePlayManager m_GamePlayManager;
-        PlayerSettings m_PlayerSettings;
+        private int m_Lives;
+        private GamePlayManager m_GamePlayManager;
+        private PlayerSettings m_PlayerSettings;
 
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
             SetLivesUI(m_PlayerSettings.lives);
             m_GamePlayManager.EventUpdateLives += SetLivesUI;
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             m_GamePlayManager.EventUpdateLives -= SetLivesUI;
         }
   #endregion
-        void SetInitialReferences()
+
+  private void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_PlayerSettings = PlayerManager.instance.GetPlayerSettingsByIndex();
         }
-        void SetLivesUI(int lives)
+
+        private void SetLivesUI(int lives)
         {
             //Debug.Log("Vou tentar Criar os icones");
             int children = transform.childCount;
@@ -45,7 +48,8 @@ namespace RiverAttack
                 child.GetComponent<Image>().sprite = m_PlayerSettings.playerSkin.hubSprite;
             }
         }
-        void CreateLiveIcon(Transform parent, int quantity)
+
+        private void CreateLiveIcon(Transform parent, int quantity)
         {
             for (int x = 0; x < quantity; x++)
             {

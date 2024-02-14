@@ -7,22 +7,22 @@ namespace RiverAttack
     public class GameHudBuilder : MonoBehaviour
     {
         
-        [SerializeField]
-        List<GameObject> poolPathLevels = new List<GameObject>();
+        [SerializeField] private List<GameObject> poolPathLevels = new List<GameObject>();
 
-        GameObject m_LevelRoot;
-        const float PLAYER_OFFSET = 5f;
+        private GameObject m_LevelRoot;
+        private const float PLAYER_OFFSET = 5f;
 
-        void OnEnable()
+        private void OnEnable()
         {
             StartBuildHUD(GameManager.instance.missionLevels);
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             DisableBuildMission();
         }
-        void StartBuildHUD(ListLevels level)
+
+        private void StartBuildHUD(ListLevels level)
         {
             m_LevelRoot = new GameObject
             {
@@ -30,7 +30,8 @@ namespace RiverAttack
             };
             CreateLevel(level, m_LevelRoot.transform);
         }
-        void CreateLevel(ListLevels listHudLevels, Transform myRoot = null)
+
+        private void CreateLevel(ListLevels listHudLevels, Transform myRoot = null)
         {
             var nextBound = new Vector3(listHudLevels.offset.x, listHudLevels.offset.y, listHudLevels.offset.z);
             for (int j = 0; j < listHudLevels.count; j++)
@@ -50,7 +51,7 @@ namespace RiverAttack
             path.SetActive(true);
         }
         */
-        static GameObject BuildPath(ref Vector3 nextBound, Levels level, Transform myRoot)
+        private static GameObject BuildPath(ref Vector3 nextBound, Levels level, Transform myRoot)
         {
             var patch = Instantiate(level.hudPath, myRoot);
             patch.SetActive(false);
@@ -73,7 +74,8 @@ namespace RiverAttack
             nextBound += new Vector3(0, 0, bound.size.z);
             return patch;
         }
-        void DisableBuildMission()
+
+        private void DisableBuildMission()
         {
             poolPathLevels = new List<GameObject>();
             Destroy(m_LevelRoot);

@@ -5,26 +5,26 @@ namespace RiverAttack
 {
     public class MissileAttackBehavior: IBossBehavior
     {
-        const float SHOOT_SPEED = 80.0f;
-        const float SHOOT_CYCLES = 4;
-        const float START_CADENCE = 1f;
-        const float BULLET_LIFE_TIME = 10f;
+        private const float SHOOT_SPEED = 80.0f;
+        private const float SHOOT_CYCLES = 4;
+        private const float START_CADENCE = 1f;
+        private const float BULLET_LIFE_TIME = 10f;
 
         //Shoot Variaveis
-        float m_Cadence;
-        float m_ShootCycles;
-        readonly int m_NumBullets;
-        readonly float m_ConeAngle;
+        private float m_Cadence;
+        private float m_ShootCycles;
+        private readonly int m_NumBullets;
+        private readonly float m_ConeAngle;
 
-        readonly IHasPool m_IHasPool;
-        Transform m_MyPool;
-        
-        Transform m_Target;
+        private readonly IHasPool m_IHasPool;
+        private Transform m_MyPool;
+
+        private Transform m_Target;
 
         //IBossBehavior
-        bool m_Finished;
-        readonly BossMaster m_BossMaster;
-        readonly BossMissileShoot m_BossMissileShoot;
+        private bool m_Finished;
+        private readonly BossMaster m_BossMaster;
+        private readonly BossMissileShoot m_BossMissileShoot;
         internal MissileAttackBehavior(BossMaster bossMaster, int numMissile, float angle)
         {
             m_BossMaster = bossMaster;
@@ -73,7 +73,7 @@ namespace RiverAttack
             return m_Finished;
         }
 
-        void Fire()
+        private void Fire()
         {
             if (GamePlayManager.instance.playerDead) return;
             //Debug.Log("Shoot!");
@@ -94,7 +94,8 @@ namespace RiverAttack
                 myBullet.moveDirection = t;
             }
         }
-        static IEnumerable<Vector3> ConeDirections(Vector3 targetDirection, int numMissile, float angleCone)
+
+        private static IEnumerable<Vector3> ConeDirections(Vector3 targetDirection, int numMissile, float angleCone)
         {
             var directions = new Vector3[numMissile];
 

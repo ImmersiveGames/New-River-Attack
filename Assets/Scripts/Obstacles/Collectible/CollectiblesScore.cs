@@ -2,7 +2,7 @@
 {
     public class CollectiblesScore : EnemiesScore
     {
-        CollectiblesMaster m_CollectiblesMaster;
+        private CollectiblesMaster m_CollectiblesMaster;
 
         #region UNITY METHODS
         protected override void OnEnable()
@@ -23,7 +23,7 @@
             m_CollectiblesMaster = GetComponent<CollectiblesMaster>();
         }
 
-        void SetCollScore(PlayerSettings playerSettings)
+        private void SetCollScore(PlayerSettings playerSettings)
         {
             float score = m_CollectiblesMaster.collectibleScriptable.collectValuable;
             if (score == 0) return;

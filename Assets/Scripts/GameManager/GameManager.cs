@@ -14,8 +14,8 @@ namespace RiverAttack
     public class GameManager : Singleton<GameManager>
     {
         /*
-         * Este Script é dedicado apenas a guardar referencias e valores inerentes  
-         * ao escopo macro do jogo para ser possivel acessa-lo pelo projeto.
+         * Este Script é dedicado apenas a guardar referências e valores inerentes  
+         * ao escopo macro do jogo para ser possível acessa-lo pelo projeto.
          * Também é dedicado a criar o fluxo de estado (Finite Machine State)
          */
         public bool debugMode;
@@ -38,8 +38,8 @@ namespace RiverAttack
         public Transform panelFade;
         public Image fadeImage;
         //[SerializeField] Animator fadeAnimator;
-        [SerializeField] float fadeInTime = 1f;
-        [SerializeField] float fadeOutTime = 1f;
+        [SerializeField] private float fadeInTime = 1f;
+        [SerializeField] private float fadeOutTime = 1f;
         public T PanelBase<T>() where T : class
         {
             return panelBaseGame as T;
@@ -48,43 +48,29 @@ namespace RiverAttack
         internal bool onLoadScene;
         public GameState currentGameState { get; private set; }
         internal GameState lastGameState;
-        PlayerSaveSaveObject m_PlayerSave;
+        private PlayerSaveSaveObject _playerSave;
 
-        private PlayerManager m_PlayerManager;
-        private PlayerMaster m_PlayerMaster;
+        private PlayerManager _playerManager;
 
-        public bool shouldPlayerBeReady 
-        { get
-            {
-                //Debug.Log("IsDead: " + PlayerManager.instance.initializedPlayerMasters[0].isPlayerDead);
-                //Debug.Log("Status: " + PlayerManager.instance.initializedPlayerMasters[0].playerMovementStatus);
-
-                return PlayerManager.instance.initializedPlayerMasters[0].isPlayerDead == false &&
-                    PlayerManager.instance.initializedPlayerMasters[0].playerMovementStatus !=  PlayerMaster.MovementStatus.Paused;
-            }
-        }
+        private static bool shouldPlayerBeReady =>
+            PlayerManager.instance.initializedPlayerMasters[0].isPlayerDead == false &&
+            PlayerManager.instance.initializedPlayerMasters[0].playerMovementStatus !=  PlayerMaster.MovementStatus.Paused;
 
         #region UNITYMETHODS
-        void Awake()
+
+        private void Awake()
         {
             //Application.targetFrameRate = -1;
             if (FindObjectsOfType(typeof(GameManager)).Length <= 1)
                 return;
             Destroy(gameObject);
         }
-        void Start()
-        {
-            m_PlayerManager = PlayerManager.instance;
-            
-            if (currentGameState is GameStatePlayGame ||
-                currentGameState is GameStatePlayGameBoss) 
-            {
-                m_PlayerMaster = m_PlayerManager.initializedPlayerMasters[0];
-            }            
 
+        private void Start()
+        {
             if (SteamClient.IsValid)
             {
-                SteamFriends.OnGameOverlayActivated += PauseGame;
+                SteamFriends.OnGameOverlayActivated += ChangeStateToPause;
             }
             SetOptionsOnStartUp();
             //Debug.Log($"GameScene: {gameScenes}");
@@ -114,17 +100,17 @@ namespace RiverAttack
         protected void OnApplicationFocus(bool hasFocus)
         {
             if(debugMode) return;
-            PauseGame(!hasFocus);
+            ChangeStateToPause(!hasFocus);
         }
 
         protected void OnApplicationPause(bool pauseStatus)
         {
             if(debugMode) return;
-            PauseGame(pauseStatus);
+            ChangeStateToPause(pauseStatus);
         }
         #endregion
 
-        void Update()
+        private void Update()
         {
             if(!onLoadScene)
                 currentGameState?.UpdateState();
@@ -146,19 +132,14 @@ namespace RiverAttack
             return level;
         }
 
-        internal void PauseGame(bool pause)
-        {         
-            Time.timeScale = pause ? 0 : 1;
-            if (currentGameState is GameStatePlayGame || 
-                currentGameState is GameStatePlayGameBoss) 
-            {
-                if (!shouldPlayerBeReady) { return; }
+        internal void ChangeStateToPause(bool pause)
+        {      
+            if (currentGameState is not GameStatePlayGame &&
+                currentGameState is not GameStatePlayGameBoss) return;
+            if (currentGameState == lastGameState) return;
+            if (!shouldPlayerBeReady) { return; }
 
-                if (pause)
-                {
-                    ChangeState(new GameStatePause());
-                }
-            }
+            ChangeState(pause ? new GameStatePause() : (lastGameState is GameStatePlayGame)?new GameStatePlayGame(): new GameStatePlayGameBoss());
         }
         
         #region Machine State
@@ -182,11 +163,12 @@ namespace RiverAttack
             onLoadScene = true;
             StartCoroutine(LoadSceneAsync(nextState, nextSceneName));
         }
-        IEnumerator LoadSceneAsync(GameState nextState,string nextSceneName)
+
+        private IEnumerator LoadSceneAsync(GameState nextState,string nextSceneName)
         {
             if (currentGameState == nextState)
                 yield break;
-            string unloadScene = SceneManager.GetActiveScene().name;
+            var unloadScene = SceneManager.GetActiveScene().name;
             yield return StartCoroutine(FadeCanvas(false));
             // chama o status de saida
             currentGameState?.ExitState();
@@ -233,12 +215,13 @@ namespace RiverAttack
         { 
             DestroyImmediate(PlayerManager.instance);
         }
-        IEnumerator FadeCanvas(bool faceIn) {
+
+        private IEnumerator FadeCanvas(bool faceIn) {
             var corInitial = fadeImage.color;
-            float corAlpha = (faceIn) ? 0.0f : 1.0f; // in:out
+            var corAlpha = (faceIn) ? 0.0f : 1.0f; // in:out
             var corFinal = new Color(corInitial.r, corInitial.g, corInitial.b, corAlpha);
-            float timeSpend = 0.0f;
-            float timeDuration = (faceIn) ? fadeInTime : fadeOutTime; // in:out 
+            var timeSpend = 0.0f;
+            var timeDuration = (faceIn) ? fadeInTime : fadeOutTime; // in:out 
             
             while (timeSpend < timeDuration) {
                 timeSpend += Time.deltaTime;
@@ -248,14 +231,15 @@ namespace RiverAttack
             }
         }
         #endregion
-        void SetOptionsOnStartUp()
+
+        private void SetOptionsOnStartUp()
         {
             if (gameSettings.startLocale == null)
             {
-                m_PlayerSave = SaveManager.GetSaveObject<PlayerSaveSaveObject>();
-                if (m_PlayerSave && m_PlayerSave.startLocale.Value)
+                _playerSave = SaveManager.GetSaveObject<PlayerSaveSaveObject>();
+                if (_playerSave && _playerSave.startLocale.Value)
                 {
-                    gameSettings.startLocale = m_PlayerSave.startLocale.Value;
+                    gameSettings.startLocale = _playerSave.startLocale.Value;
                 }
                 gameSettings.startLocale = LocalizationSettings.SelectedLocale;
             }
@@ -277,14 +261,14 @@ namespace RiverAttack
             if (gameSettings.actualResolution != vectorActualResolution)
             {
                 //Debug.Log($"Setting é diferente do atual");
-                uint fps = OptionsFrameRatePanel.actualFrameRate;
+                var fps = OptionsFrameRatePanel.actualFrameRate;
                 var selectedFramerate = OptionsResolutionPanel.GetRefreshRate(fps, 1);
                 Screen.SetResolution(
                     gameSettings.actualResolution.x, gameSettings.actualResolution.y, 
                     OptionsResolutionPanel.FullScreenMode, selectedFramerate );
             }
 
-            int actualQualityLevel = QualitySettings.GetQualityLevel();
+            var actualQualityLevel = QualitySettings.GetQualityLevel();
             switch (gameSettings.indexQuality)
             {
                 case < 0:

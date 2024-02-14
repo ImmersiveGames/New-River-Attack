@@ -8,9 +8,9 @@ namespace RiverAttack
 {
     public class OptionsResolutionPanel : OptionsDropDown
     {
-        static Resolution _actualResolution;
+        private static Resolution _actualResolution;
         public const FullScreenMode FullScreenMode = UnityEngine.FullScreenMode.FullScreenWindow;
-        static Resolution[] _resolutions;
+        private static Resolution[] _resolutions;
         
         protected override void Awake()
         {
@@ -20,7 +20,7 @@ namespace RiverAttack
             selectedOptionIndex = Array.IndexOf(_resolutions, _actualResolution);
         }
 
-        static Resolution[] GetResolutions()
+        private static Resolution[] GetResolutions()
         {
             var allResolution = Screen.resolutions;
             return RemoveDuplicateResolutions(allResolution);
@@ -47,7 +47,8 @@ namespace RiverAttack
             gameSettings.indexResolution = selectedOptionIndex;
             UpdateResolution(selectedOptionIndex);
         }
-        static void UpdateResolution(int indexFrame)
+
+        private static void UpdateResolution(int indexFrame)
         {
             var resolution = _resolutions[indexFrame];
             _actualResolution = resolution;
@@ -55,7 +56,8 @@ namespace RiverAttack
             SetResolution(dimension, FullScreenMode, OptionsFrameRatePanel.actualFrameRate);
             GameSettings.instance.actualResolution = dimension;
         }
-        static void SetResolution(Vector2Int dimension, FullScreenMode fullScreenMode, uint fps)
+
+        private static void SetResolution(Vector2Int dimension, FullScreenMode fullScreenMode, uint fps)
         {
             var selectedFramerate = GetRefreshRate(fps, 1);
             Screen.SetResolution(dimension.x, dimension.y, fullScreenMode, selectedFramerate);
@@ -69,7 +71,7 @@ namespace RiverAttack
             return selectedFramerate;
         }
 
-        static Resolution[] RemoveDuplicateResolutions(IReadOnlyList<Resolution> resolutionsList)
+        private static Resolution[] RemoveDuplicateResolutions(IReadOnlyList<Resolution> resolutionsList)
         {
             var uniqueResolutions = new HashSet<string>();
             var uniqueList = new List<Resolution>();

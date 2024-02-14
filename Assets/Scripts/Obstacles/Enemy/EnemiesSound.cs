@@ -6,10 +6,9 @@ namespace RiverAttack
 
         protected ObstacleMaster obstacleMaster;
         protected AudioSource audioSource;
-        [SerializeField]
-        AudioEventSample enemyExplodeAudio;
+        [SerializeField] private AudioEventSample enemyExplodeAudio;
 
-        GamePlayManager m_GamePlayManager;
+        private GamePlayManager m_GamePlayManager;
 
         #region UNITY METHODS
         protected virtual void OnEnable()
@@ -31,7 +30,8 @@ namespace RiverAttack
             audioSource = GetComponentInChildren<AudioSource>();
             m_GamePlayManager = GamePlayManager.instance;
         }
-        void StopSound()
+
+        private void StopSound()
         {
             if (audioSource == null && !audioSource.isPlaying) return;
             audioSource.Stop();

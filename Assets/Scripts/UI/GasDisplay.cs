@@ -5,36 +5,40 @@ namespace RiverAttack
 {
     public class GasDisplay : MonoBehaviour
     {
-        [SerializeField] AudioEventSample playerAlert;
-        [SerializeField] Image gasBarImage;
-        [SerializeField] Color highGasColor;
-        [SerializeField] Color mediumGasColor;
-        [SerializeField] Color lowGasColor;
+        [SerializeField] private AudioEventSample playerAlert;
+        [SerializeField] private Image gasBarImage;
+        [SerializeField] private Color highGasColor;
+        [SerializeField] private Color mediumGasColor;
+        [SerializeField] private Color lowGasColor;
 
-        const float MEDIUM_GAS_VALUE = 0.6f;
-        const float LOW_GAS_VALUE = 0.2f;
+        private const float MEDIUM_GAS_VALUE = 0.6f;
+        private const float LOW_GAS_VALUE = 0.2f;
 
-        AudioSource m_AudioSource;
-        GamePlayManager m_GamePlayManager;
-        PlayerSettings m_PlayerSettings;
+        private AudioSource m_AudioSource;
+        private GamePlayManager m_GamePlayManager;
+        private PlayerSettings m_PlayerSettings;
 
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
         }
-        void Update()
+
+        private void Update()
         {
             UpdateDisplay();
         }
         #endregion
-        void SetInitialReferences()
+
+        private void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_PlayerSettings = PlayerManager.instance.GetPlayerSettingsByIndex();
             m_AudioSource = GetComponent<AudioSource>();
         }
-        void UpdateDisplay()
+
+        private void UpdateDisplay()
         {
             float gasAmount = ((float)m_PlayerSettings.actualFuel) / 100;
             gasBarImage.fillAmount = gasAmount;

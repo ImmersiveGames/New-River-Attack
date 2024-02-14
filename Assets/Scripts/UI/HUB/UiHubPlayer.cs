@@ -4,13 +4,13 @@ namespace RiverAttack
 {
     public class UiHubPlayer: MonoBehaviour
     {
-        [SerializeField] Vector3 positionOffset;
+        [SerializeField] private Vector3 positionOffset;
         public float moveTime = 1.0f;
-        float m_Timer;
-        Vector3 m_NextPosition;
-        GameHubManager m_GameHubManager;
+        private float m_Timer;
+        private Vector3 m_NextPosition;
+        private GameHubManager m_GameHubManager;
 
-        void OnEnable()
+        private void OnEnable()
         {
             m_GameHubManager = GameHubManager.instance;
             if (GamePlayingLog.instance.activeMission)
@@ -21,18 +21,18 @@ namespace RiverAttack
             m_GameHubManager.ChangeMission += MovePlayer;
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             m_GameHubManager.ChangeMission -= MovePlayer;
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             StopAllCoroutines();
             Destroy(m_GameHubManager);
         }
 
-        void MovePlayer(int missionIndex)
+        private void MovePlayer(int missionIndex)
         {
             float newPosition = GameHubManager.instance.missions[missionIndex].position;
 

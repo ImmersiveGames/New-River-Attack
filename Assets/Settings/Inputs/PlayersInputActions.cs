@@ -500,6 +500,15 @@ namespace RiverAttack
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""9a942fcc-5a73-4771-aeff-0537cfc21446"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -678,6 +687,28 @@ namespace RiverAttack
                     ""action"": ""BackButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44e08bc2-ccfa-4084-9306-39ff8ababa7f"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC;Mobile"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""651db5fa-0c0a-4449-98c6-ec74caefb55c"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -834,6 +865,7 @@ namespace RiverAttack
             m_UI_Controlls_RightSelection = m_UI_Controlls.FindAction("RightSelection", throwIfNotFound: true);
             m_UI_Controlls_StartButton = m_UI_Controlls.FindAction("StartButton", throwIfNotFound: true);
             m_UI_Controlls_BackButton = m_UI_Controlls.FindAction("BackButton", throwIfNotFound: true);
+            m_UI_Controlls_Pause = m_UI_Controlls.FindAction("Pause", throwIfNotFound: true);
             // BriefingRoom
             m_BriefingRoom = asset.FindActionMap("BriefingRoom", throwIfNotFound: true);
             m_BriefingRoom_Next = m_BriefingRoom.FindAction("Next", throwIfNotFound: true);
@@ -975,6 +1007,7 @@ namespace RiverAttack
         private readonly InputAction m_UI_Controlls_RightSelection;
         private readonly InputAction m_UI_Controlls_StartButton;
         private readonly InputAction m_UI_Controlls_BackButton;
+        private readonly InputAction m_UI_Controlls_Pause;
         public struct UI_ControllsActions
         {
             private @PlayersInputActions m_Wrapper;
@@ -985,6 +1018,7 @@ namespace RiverAttack
             public InputAction @RightSelection => m_Wrapper.m_UI_Controlls_RightSelection;
             public InputAction @StartButton => m_Wrapper.m_UI_Controlls_StartButton;
             public InputAction @BackButton => m_Wrapper.m_UI_Controlls_BackButton;
+            public InputAction @Pause => m_Wrapper.m_UI_Controlls_Pause;
             public InputActionMap Get() { return m_Wrapper.m_UI_Controlls; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1012,6 +1046,9 @@ namespace RiverAttack
                 @BackButton.started += instance.OnBackButton;
                 @BackButton.performed += instance.OnBackButton;
                 @BackButton.canceled += instance.OnBackButton;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
 
             private void UnregisterCallbacks(IUI_ControllsActions instance)
@@ -1034,6 +1071,9 @@ namespace RiverAttack
                 @BackButton.started -= instance.OnBackButton;
                 @BackButton.performed -= instance.OnBackButton;
                 @BackButton.canceled -= instance.OnBackButton;
+                @Pause.started -= instance.OnPause;
+                @Pause.performed -= instance.OnPause;
+                @Pause.canceled -= instance.OnPause;
             }
 
             public void RemoveCallbacks(IUI_ControllsActions instance)
@@ -1138,6 +1178,7 @@ namespace RiverAttack
             void OnRightSelection(InputAction.CallbackContext context);
             void OnStartButton(InputAction.CallbackContext context);
             void OnBackButton(InputAction.CallbackContext context);
+            void OnPause(InputAction.CallbackContext context);
         }
         public interface IBriefingRoomActions
         {

@@ -4,14 +4,13 @@ namespace RiverAttack
 {
     public class MenuPlayerSkinManager : MonoBehaviour
     {
-        [SerializeField]
-        PlayerSettings playerSettings;
+        [SerializeField] private PlayerSettings playerSettings;
 
-        GameObject m_PlayerSkin;
-        TrailRenderer[] m_TrailRenderer;
+        private GameObject m_PlayerSkin;
+        private TrailRenderer[] m_TrailRenderer;
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             m_PlayerSkin = playerSettings.playerSkin.getSkin;
             ChangePlayerSkin();
@@ -33,7 +32,7 @@ namespace RiverAttack
             TurnOffTrails();
         }
 
-        void TurnOffTrails()
+        private void TurnOffTrails()
         {
             m_TrailRenderer = GetComponentsInChildren<TrailRenderer>();
 

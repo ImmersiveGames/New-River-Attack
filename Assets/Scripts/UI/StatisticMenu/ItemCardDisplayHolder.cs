@@ -14,8 +14,8 @@ namespace RiverAttack
             itemNameText.text = $"{rank} - {playerName}";
             itemValueText.text = score.ToString();
         }
-        
-        static string FormatRank(int rank, CultureInfo cultureInfo)
+
+        private static string FormatRank(int rank, CultureInfo cultureInfo)
         {
             // Adiciona a ordem correspondente ao número do rank
             if (rank % 100 >= 11 && rank % 100 <= 13)

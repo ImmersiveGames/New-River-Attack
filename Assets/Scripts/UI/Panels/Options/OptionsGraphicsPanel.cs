@@ -4,7 +4,7 @@ namespace RiverAttack
 {
     public class OptionsGraphicsPanel : OptionsDropDown
     {
-        int m_ActualQuality;
+        private int m_ActualQuality;
         protected override void Awake()
         {
             base.Awake();

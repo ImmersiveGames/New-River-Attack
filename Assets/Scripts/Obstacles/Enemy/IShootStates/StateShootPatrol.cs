@@ -4,14 +4,14 @@ namespace RiverAttack
 {
     public class StateShootPatrol : IShoot
     {
-        float m_StartApproachRadius;
-        float m_PlayerApproachRadius;
-        EnemiesMaster m_EnemiesMaster;
-        ObstacleMaster m_ObstacleMaster;
-        EnemiesSetDifficulty m_EnemiesSetDifficulty;
+        private float m_StartApproachRadius;
+        private float m_PlayerApproachRadius;
+        private EnemiesMaster m_EnemiesMaster;
+        private ObstacleMaster m_ObstacleMaster;
+        private EnemiesSetDifficulty m_EnemiesSetDifficulty;
         public Transform target;
-        PlayerDetectApproach m_PlayerDetectApproach;
-        readonly ObstacleDetectApproach m_ObstacleDetectApproach;
+        private PlayerDetectApproach m_PlayerDetectApproach;
+        private readonly ObstacleDetectApproach m_ObstacleDetectApproach;
 
         public StateShootPatrol(ObstacleDetectApproach enemiesShoot, Transform target)
         {

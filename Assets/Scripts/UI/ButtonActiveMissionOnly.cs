@@ -4,7 +4,7 @@ namespace RiverAttack
 {
     public class ButtonActiveMissionOnly: MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             if (GameManager.instance.gameModes != GameManager.GameModes.Mission)
             {

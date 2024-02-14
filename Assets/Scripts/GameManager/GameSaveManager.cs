@@ -6,18 +6,18 @@ namespace RiverAttack
 {
     public class GameSaveManager : Singleton<GameSaveManager>
     {
-        [SerializeField] PlayerSettings playerSettings;
-        [SerializeField] GameSettings gameSettings;
-        [SerializeField] GamePlayingLog gamePlayingLog;
-        PlayerSaveSaveObject m_PlayerSave;
+        [SerializeField] private PlayerSettings playerSettings;
+        [SerializeField] private GameSettings gameSettings;
+        [SerializeField] private GamePlayingLog gamePlayingLog;
+        private PlayerSaveSaveObject m_PlayerSave;
 
-        void Start()
+        private void Start()
         {
             m_PlayerSave = SaveManager.GetSaveObject<PlayerSaveSaveObject>();
             LoadPlayerSaves();
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             SavePlayerSaves();
         }
@@ -27,7 +27,7 @@ namespace RiverAttack
             //base.OnDestroy();
         }
 
-        void LoadPlayerSaves()
+        private void LoadPlayerSaves()
         {
             SaveManager.Load();
             //m_PlayerSave.Load();
@@ -90,7 +90,7 @@ namespace RiverAttack
             SaveManager.Save();
         }
 
-        void ClearPlayerSave()
+        private void ClearPlayerSave()
         {
             m_PlayerSave.ResetObjectSaveValues();
             SaveManager.Save();

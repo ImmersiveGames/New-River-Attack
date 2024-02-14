@@ -5,7 +5,7 @@ namespace RiverAttack
 {
     public class GameManagerInput : MonoBehaviour
     {
-        void Start()
+        private void Start()
         {
             InputSystem.onDeviceChange +=
                 (device, change) =>
@@ -46,9 +46,9 @@ namespace RiverAttack
 
         }
 
-        void PauseGame(bool pause)
+        private void PauseGame(bool pause)
         {
-            GameManager.instance.PauseGame(pause);
+            GameManager.instance.ChangeStateToPause(pause);
         }
     }
 }

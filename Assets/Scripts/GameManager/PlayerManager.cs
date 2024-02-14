@@ -54,7 +54,8 @@ namespace RiverAttack
             }
             initializedPlayerMasters = new List<PlayerMaster>();
         }
-        bool haveAnyPlayerInitialized
+
+        private bool haveAnyPlayerInitialized
         {
             get { return initializedPlayerMasters.Count > 0; }
         }

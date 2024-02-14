@@ -4,33 +4,37 @@ namespace RiverAttack
 {
     public class PlayerPowerUp : MonoBehaviour
     {
-        readonly Dictionary<PowerUp, float> m_ActivePowerUps = new Dictionary<PowerUp, float>();
+        private readonly Dictionary<PowerUp, float> m_ActivePowerUps = new Dictionary<PowerUp, float>();
 
-        List<PowerUp> m_Keys = new List<PowerUp>();
-        PlayerMaster m_PlayerMaster;
+        private List<PowerUp> m_Keys = new List<PowerUp>();
+        private PlayerMaster m_PlayerMaster;
 
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
             ClearActivePowerUps();
             m_PlayerMaster.EventPlayerMasterRespawn += ResetPowerUp;
         }
-        void Update()
+
+        private void Update()
         {
             HandleGlobalPowerUps();
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             m_PlayerMaster.EventPlayerMasterRespawn -= ResetPowerUp;
         }
   #endregion
-        void SetInitialReferences()
+
+  private void SetInitialReferences()
         {
             m_PlayerMaster = GetComponent<PlayerMaster>();
         }
 
-        void HandleGlobalPowerUps()
+        private void HandleGlobalPowerUps()
         {
             bool changed = false;
 
@@ -82,7 +86,7 @@ namespace RiverAttack
         }
 
         // Calls the end action of each powerup and clears them from the activePowerups
-        void ClearActivePowerUps(bool onlyEffect = false) //(Player target, bool onlyeffect = false)
+        private void ClearActivePowerUps(bool onlyEffect = false) //(Player target, bool onlyeffect = false)
         {
             //Debug.Log($"Can Accumulate Effect: {onlyEffect}");
             foreach (var powerUp in m_ActivePowerUps)
@@ -96,7 +100,8 @@ namespace RiverAttack
             if (!onlyEffect)
                 m_ActivePowerUps.Clear();
         }
-        void ResetPowerUp()
+
+        private void ResetPowerUp()
         {
             ClearActivePowerUps();
         }

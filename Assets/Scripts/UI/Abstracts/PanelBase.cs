@@ -12,7 +12,8 @@ namespace RiverAttack
         [SerializeField] internal GameSettings gameSettings;        
 
         [Header("Menu SFX")]
-        [SerializeField] AudioEventSample clickSound;
+        [SerializeField]
+        private AudioEventSample clickSound;
         protected int lastIndex; 
 
         #region UNITYMETHODS
@@ -37,7 +38,7 @@ namespace RiverAttack
             SetSelectGameObject(selectPanel);
         }
 
-        static void SetSelectGameObject(GameObject goButton)
+        private static void SetSelectGameObject(GameObject goButton)
         {
             var eventSystemFirstSelect = goButton.GetComponentInChildren<EventSystemFirstSelect>();
             if (eventSystemFirstSelect != null)

@@ -6,36 +6,39 @@ namespace RiverAttack
 {
     public class UiHudBomb : MonoBehaviour
     {
-        GamePlayManager m_GamePlayManager;
-        PlayerSettings m_PlayerSettings;
+        private GamePlayManager m_GamePlayManager;
+        private PlayerSettings m_PlayerSettings;
         public TMP_Text tmpTextBomb;
         public Image bombOn;
         public Image bombOff;
 
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
             UpdateBombs(m_PlayerSettings.bombs);
             m_GamePlayManager.EventUpdateBombs += UpdateBombs;
         }
-        void Start()
+
+        private void Start()
         {
             UpdateBombs(m_PlayerSettings.bombs);
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             m_GamePlayManager.EventUpdateBombs -= UpdateBombs;
         }
   #endregion
 
-        void SetInitialReferences()
+  private void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_PlayerSettings = PlayerManager.instance.GetPlayerSettingsByIndex();
         }
 
-        void UpdateBombs(int bombs)
+        private void UpdateBombs(int bombs)
         {
             bombOff.enabled = bombs <= 0;
             bombOn.enabled = bombs > 0;

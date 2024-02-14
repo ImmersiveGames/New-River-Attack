@@ -10,43 +10,44 @@ namespace RiverAttack
     {
         [Header("Shoot Settings")]
         [SerializeField]
-        GameObject prefabBullet;
-        [SerializeField]
-        int startBulletPool;
+        private GameObject prefabBullet;
+        [SerializeField] private int startBulletPool;
 
         [Header("Bullets Settings")]
         public Color bulletColor;
         public Color rapidFireColor;
-        
-        float m_ShootCadence;
-        bool m_CanExecuteAction;
-        
-        PlayersInputActions m_PlayersInputActions;
-        GamePlayManager m_GamePlayManager;
-        PlayerMaster m_PlayerMaster;
-        PlayerSettings m_PlayerSettings;
-        static GamePlayingLog _gamePlayingLog;
+
+        private float m_ShootCadence;
+        private float lastActionTime;
+
+        private PlayersInputActions m_PlayersInputActions;
+        private GamePlayManager m_GamePlayManager;
+        private PlayerMaster m_PlayerMaster;
+        private PlayerSettings m_PlayerSettings;
+        private static GamePlayingLog _gamePlayingLog;
 
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
-            m_ShootCadence = m_PlayerSettings.cadenceShoot;
+            //m_ShootCadence = m_PlayerSettings.cadenceShoot;
         }
-        void Start()
+
+        private void Start()
         {
             StartMyPool(prefabBullet, startBulletPool);
             m_PlayersInputActions = GamePlayManager.instance.inputSystem;
-            m_CanExecuteAction = true;
             m_PlayersInputActions.Player.Shoot.performed += Execute;
         }
-        void OnDestroy()
+
+        private void OnDestroy()
         {
             m_PlayersInputActions.Player.Shoot.performed -= Execute;
         }
   #endregion
-        
-        void SetInitialReferences()
+
+  private void SetInitialReferences()
         {
             _gamePlayingLog = GamePlayingLog.instance;
             m_GamePlayManager = GamePlayManager.instance;
@@ -61,17 +62,28 @@ namespace RiverAttack
         }
         public void Execute(InputAction.CallbackContext callbackContext)
         {
-            if (!m_CanExecuteAction || !m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady)
+            //Debug.Log($"ShotCadence: {m_ShootCadence}, Should Play {m_GamePlayManager.shouldBePlayingGame}, Should Player Ready {m_PlayerMaster.shouldPlayerBeReady}");
+            var cooldown = (m_PlayerSettings.cadenceShootPowerUp != 0)? m_PlayerSettings.cadenceShootPowerUp:m_PlayerSettings.cadenceShoot;
+            if (!m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady)
                 return;
-            m_GamePlayManager.OnEventPlayerPushButtonShoot();
-            m_ShootCadence = m_PlayerSettings.cadenceShoot;
-            if (m_PlayerSettings.cadenceShootPowerUp != 0)
-                m_ShootCadence = m_PlayerSettings.cadenceShootPowerUp;
-            Fire();
-            StartCoroutine(Cooldown());
+            if (!IsOnCooldown(cooldown))
+            {
+                // Faça a ação aqui
+                m_GamePlayManager.OnEventPlayerPushButtonShoot();
+                Fire();
+                //Debug.Log("Ação realizada!");
 
+                // Atualize o tempo da última ação
+                lastActionTime = Time.realtimeSinceStartup;
+            }
+            else
+            {
+                // Ação está em cooldown, você pode optar por lidar de alguma forma
+                //Debug.Log("Ação em cooldown!");
+            }
         }
-        void Fire()
+
+        private void Fire()
         {
             var myShoot = PoolObjectManager.GetObject(this);
             var bulletPlayer = myShoot.GetComponent<BulletPlayer>();
@@ -87,18 +99,17 @@ namespace RiverAttack
             LogGamePlay();
 
         }
-        IEnumerator Cooldown()
+        private bool IsOnCooldown(float cooldown)
         {
-            m_CanExecuteAction = false;
-
-            yield return new WaitForSeconds(m_ShootCadence);
-            m_CanExecuteAction = true;
+            
+            return Time.realtimeSinceStartup - lastActionTime < cooldown;
         }
         public void UnExecute(InputAction.CallbackContext callbackContext)
         {
             
         }
-        static void LogGamePlay()
+
+        private static void LogGamePlay()
         {
             _gamePlayingLog.shootSpent += 1;
         }

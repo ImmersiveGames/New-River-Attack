@@ -33,7 +33,8 @@ namespace RiverAttack
                 return Random.Range(audioSample.pitch.x, audioSample.pitch.y);
             }
         }
-        void SetupSource(AudioSource source)
+
+        private void SetupSource(AudioSource source)
         {
             source.outputAudioMixerGroup = audioMixerGroup;
             source.clip = audioSample.audioClip;

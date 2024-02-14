@@ -11,7 +11,7 @@ using UnityEngine;
 
 public abstract class SingletonScriptableObject<T> : ScriptableObject where T : ScriptableObject
 {
-    static T _instance = null;
+    private static T _instance = null;
     public static T instance
     {
         get

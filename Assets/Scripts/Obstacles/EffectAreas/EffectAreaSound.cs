@@ -3,13 +3,11 @@ namespace RiverAttack
 {
     public class EffectAreaSound : EnemiesSound
     {
-        EffectAreaMaster m_EffectAreaMaster;
-        [SerializeField]
-        AudioEventSample effectAreaSound;
-        [SerializeField]
-        AudioEventSample effectAreaExitSound;
-        
-        PlayerMaster m_PlayerMaster;
+        private EffectAreaMaster m_EffectAreaMaster;
+        [SerializeField] private AudioEventSample effectAreaSound;
+        [SerializeField] private AudioEventSample effectAreaExitSound;
+
+        private PlayerMaster m_PlayerMaster;
 
         protected override void OnEnable()
         {
@@ -27,7 +25,8 @@ namespace RiverAttack
             m_EffectAreaMaster.EventExitAreaEffect -= StopSoundAreaEffect;
             
         }
-        void OnDestroy()
+
+        private void OnDestroy()
         {
             m_EffectAreaMaster.EventEnterAreaEffect -= SoundAreaEffect;
             m_EffectAreaMaster.EventExitAreaEffect -= StopSoundAreaEffect;
@@ -44,14 +43,14 @@ namespace RiverAttack
             m_EffectAreaMaster = GetComponent<EffectAreaMaster>();
         }
 
-        void SoundAreaEffect()
+        private void SoundAreaEffect()
         {
             if (!audioSource || !effectAreaSound) return;
             if(effectAreaSound.IsPlaying(audioSource)) return;
             effectAreaSound.Play(audioSource);
         }
 
-        void StopSoundAreaEffect()
+        private void StopSoundAreaEffect()
         {
             if (!audioSource || !effectAreaSound) return;
             if(!effectAreaSound.IsPlaying(audioSource)) return;

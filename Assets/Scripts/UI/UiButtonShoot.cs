@@ -4,12 +4,13 @@ namespace RiverAttack
 {
     public class UiButtonShoot : MonoBehaviour
     {
-        const string BUTTON_TRIGGER = "IsPressed";
-        GamePlayManager m_GamePlayManager;
-        Animator m_Animator;
-        static readonly int IsPressed = Animator.StringToHash(BUTTON_TRIGGER);
-        [SerializeField] Image rapidFireImage;
-        void OnEnable()
+        private const string BUTTON_TRIGGER = "IsPressed";
+        private GamePlayManager m_GamePlayManager;
+        private Animator m_Animator;
+        private static readonly int IsPressed = Animator.StringToHash(BUTTON_TRIGGER);
+        [SerializeField] private Image rapidFireImage;
+
+        private void OnEnable()
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_Animator = GetComponent<Animator>();
@@ -17,14 +18,15 @@ namespace RiverAttack
             m_GamePlayManager.EventPlayerPushButtonShoot += ActionShoot;
             
         }
-        void Start()
+
+        private void Start()
         {
             rapidFireImage.enabled = false;
             m_GamePlayManager.EventStartRapidFire += StartRapidFire;
             m_GamePlayManager.EventEndRapidFire += EndRapidFire;
         }
 
-        void ActionShoot()
+        private void ActionShoot()
         {
             if (m_Animator != null)
             {
@@ -32,16 +34,17 @@ namespace RiverAttack
             }
         }
 
-        void StartRapidFire()
+        private void StartRapidFire()
         {
             rapidFireImage.enabled = true;
         }
-        void EndRapidFire()
+
+        private void EndRapidFire()
         {
             rapidFireImage.enabled = false;
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             m_GamePlayManager.EventPlayerPushButtonShoot -= ActionShoot;
             m_GamePlayManager.EventStartRapidFire -= StartRapidFire;

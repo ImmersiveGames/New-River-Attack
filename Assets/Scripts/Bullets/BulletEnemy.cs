@@ -3,10 +3,11 @@ namespace RiverAttack
 {
     public class BulletEnemy : Bullets
     {
-        float m_StartTime;
+        private float m_StartTime;
 
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             GamePlayManager.instance.EventEnemiesMasterKillPlayer += DestroyMe;
             if (GamePlayManager.instance.playerDead) return;
@@ -14,12 +15,14 @@ namespace RiverAttack
             audioShoot.Play(audioSource);
             m_StartTime = Time.time + bulletLifeTime;
         }
-        void FixedUpdate()
+
+        private void FixedUpdate()
         {
             MoveShoot();
             AutoDestroyMe(m_StartTime);
         }
-        void OnTriggerEnter(Collider collision)
+
+        private void OnTriggerEnter(Collider collision)
         {
             if ((collision.GetComponentInParent<EnemiesMaster>() && !collision.GetComponentInParent<CollectiblesMaster>()) ||
                 collision.GetComponentInParent<BulletEnemy>()|| collision.GetComponentInParent<BulletBoss>()||
@@ -30,13 +33,14 @@ namespace RiverAttack
             
             DestroyMe();
         }
-        void OnBecameInvisible()
+
+        private void OnBecameInvisible()
         {
             Invoke(nameof(DestroyMe), .01f);
         }
         #endregion
 
-        void MoveShoot()
+        private void MoveShoot()
         {
             if (GamePlayManager.instance.shouldBePlayingGame)
             {

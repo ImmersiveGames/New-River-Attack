@@ -5,7 +5,7 @@ namespace RiverAttack
     public class EnemiesScore : MonoBehaviour
     {
         protected GamePlayManager gamePlayManager;
-        ObstacleMaster m_ObstacleMaster;
+        private ObstacleMaster m_ObstacleMaster;
         #region UNITY METHODS
         protected virtual void OnEnable()
         {
@@ -23,7 +23,8 @@ namespace RiverAttack
             m_ObstacleMaster = GetComponent<ObstacleMaster>();
             gamePlayManager = GamePlayManager.instance;
         }
-        void SetScore(PlayerSettings playerSettings)
+
+        private void SetScore(PlayerSettings playerSettings)
         {
             float score = m_ObstacleMaster.enemy.enemyScore;
             if (score == 0) return;

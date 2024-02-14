@@ -6,12 +6,13 @@ namespace RiverAttack
         public string onMove;
         public string onFlip;
 
-        EnemiesMaster m_EnemiesMaster;
-        Animator m_Animator;
-        GamePlayManager m_GamePlayManager;
+        private EnemiesMaster m_EnemiesMaster;
+        private Animator m_Animator;
+        private GamePlayManager m_GamePlayManager;
 
         #region UNITY METHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
             if (m_EnemiesMaster)
@@ -22,26 +23,28 @@ namespace RiverAttack
             m_GamePlayManager.EventReSpawnEnemiesMaster += ResetAnimation;
 
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             if (!m_EnemiesMaster) return;
             m_EnemiesMaster.EventObstacleMovement -= AnimationMove;
             m_EnemiesMaster.EventObjectMasterFlipEnemies -= AnimationFlip;
         }
-        void OnDestroy()
+
+        private void OnDestroy()
         {
             m_GamePlayManager.EventReSpawnEnemiesMaster -= ResetAnimation;
         }
   #endregion
 
-        void SetInitialReferences()
+  private void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_EnemiesMaster = GetComponent<EnemiesMaster>();
             m_Animator = GetComponentInChildren<Animator>();
         }
 
-        void AnimationMove(bool active)
+        private void AnimationMove(bool active)
         {
             if (m_Animator == null)
                 m_Animator = GetComponentInChildren<Animator>();
@@ -50,7 +53,7 @@ namespace RiverAttack
             m_Animator.SetBool(onMove, active);
         }
 
-        void AnimationFlip(bool active)
+        private void AnimationFlip(bool active)
         {
             if (m_Animator == null)
                 m_Animator = GetComponentInChildren<Animator>();
@@ -59,7 +62,7 @@ namespace RiverAttack
             m_Animator.SetBool(onFlip, !m_Animator.GetBool(onFlip));
         }
 
-        void ResetAnimation()
+        private void ResetAnimation()
         {
             if (m_Animator == null) return;
             if (!string.IsNullOrEmpty(onMove))

@@ -3,9 +3,8 @@ namespace RiverAttack
 {
     public class BossSounds : EnemiesSound
     {
-        [SerializeField]
-        AudioEventSample bossHitAudio;
-        BossMaster m_BossMaster;
+        [SerializeField] private AudioEventSample bossHitAudio;
+        private BossMaster m_BossMaster;
 
         protected override void OnEnable()
         {
@@ -24,7 +23,8 @@ namespace RiverAttack
             base.SetInitialReferences();
             m_BossMaster = obstacleMaster as BossMaster;
         }
-        void HitBossSound()
+
+        private void HitBossSound()
         {
             if (audioSource != null && bossHitAudio != null)
                 bossHitAudio.Play(audioSource);

@@ -6,12 +6,13 @@ namespace RiverAttack
     public class UiHubBridges : MonoBehaviour
     {
         [SerializeField] internal Levels level;
-        [SerializeField] GameObject explosion;
-        [SerializeField]  AudioEventSample enemyExplodeAudio;
+        [SerializeField] private GameObject explosion;
+        [SerializeField] private AudioEventSample enemyExplodeAudio;
 
-        const float TIMER = 1f;
-        const float TIMER_EXPLOSION = 1.8f;
-        IEnumerator Start()
+        private const float TIMER = 1f;
+        private const float TIMER_EXPLOSION = 1.8f;
+
+        private IEnumerator Start()
         {
             if (!GameHubManager.instance.gamePlayingLog.finishLevels.Contains(level))
                 yield break;

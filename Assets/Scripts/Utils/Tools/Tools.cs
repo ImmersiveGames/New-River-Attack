@@ -19,11 +19,9 @@ namespace Utils
         [Serializable]
         public class SerializableDictionary<TKey, TValue>
         {
-            [SerializeField]
-            List<TKey> keys = new List<TKey>();
+            [SerializeField] private List<TKey> keys = new List<TKey>();
 
-            [SerializeField]
-            List<TValue> values = new List<TValue>();
+            [SerializeField] private List<TValue> values = new List<TValue>();
 
             public void Add(TKey key, TValue value)
             {

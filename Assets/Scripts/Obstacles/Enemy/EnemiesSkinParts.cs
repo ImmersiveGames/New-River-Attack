@@ -5,10 +5,10 @@ namespace RiverAttack
     public class EnemiesSkinParts : MonoBehaviour
     {
         // Identifica uma parte movel da skin
-        EnemiesSound m_EnemiesSound;
-        BossMaster m_BossMaster;
+        private EnemiesSound m_EnemiesSound;
+        private BossMaster m_BossMaster;
 
-        void Start()
+        private void Start()
         {
             m_EnemiesSound = GetComponentInParent<EnemiesSound>();
             m_BossMaster = GetComponentInParent<BossMaster>();

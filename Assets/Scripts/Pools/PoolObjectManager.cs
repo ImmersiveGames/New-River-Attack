@@ -6,7 +6,7 @@ namespace Utils
 {
     public class PoolObjectManager : MonoBehaviour
     {
-        static readonly Dictionary<IHasPool, PoolObject> ObjectPools = new Dictionary<IHasPool, PoolObject>();
+        private static readonly Dictionary<IHasPool, PoolObject> ObjectPools = new Dictionary<IHasPool, PoolObject>();
         public bool isPersistent;
 
         public static bool CreatePool(IHasPool typePool, GameObject prefab, int initialPoolSize, Transform poolRoot, bool persistent = false)

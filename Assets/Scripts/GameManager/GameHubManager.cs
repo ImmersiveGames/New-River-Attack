@@ -8,7 +8,7 @@ namespace RiverAttack
     {
         [SerializeField] internal List<HubMissions> missions;
         public GamePlayingLog gamePlayingLog;
-        [SerializeField] PanelHub panelHub;
+        [SerializeField] private PanelHub panelHub;
 
         internal bool readyHub;
         
@@ -16,7 +16,8 @@ namespace RiverAttack
         public delegate void HubEventHandler(int index);
         internal event HubEventHandler ChangeMission;
         #endregion
-        void Start()
+
+        private void Start()
         {
             if (gamePlayingLog.activeMission != null)
                 return;
@@ -28,7 +29,7 @@ namespace RiverAttack
             //base.OnDestroy();
         }
 
-        void SetActualLevel(int index)
+        private void SetActualLevel(int index)
         {
             gamePlayingLog.activeMission.levelsStates = gamePlayingLog.finishLevels.Contains(gamePlayingLog.activeMission) ? LevelsStates.Open : LevelsStates.Locked;
             missions[index].levels.levelsStates = LevelsStates.Actual;
@@ -52,7 +53,7 @@ namespace RiverAttack
         }
     }
     [Serializable]
-    class HubMissions
+    internal class HubMissions
     {
         public float position;
         public Levels levels;

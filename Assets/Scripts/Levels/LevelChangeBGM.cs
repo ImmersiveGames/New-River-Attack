@@ -5,17 +5,18 @@ namespace RiverAttack
 {
     public class LevelChangeBGM : LevelCheck
     {
-        const float TIME_TO_FADE_BGM = 0.1f;
-        GameAudioManager m_GameAudioManager;
-        GamePlayManager m_GamePlayManager;
+        private const float TIME_TO_FADE_BGM = 0.1f;
+        private GameAudioManager m_GameAudioManager;
+        private GamePlayManager m_GamePlayManager;
         #region UNITY METHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             m_GameAudioManager = GameAudioManager.instance;
             m_GamePlayManager = GamePlayManager.instance;
         }
 
-        void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             if (!other.GetComponentInParent<PlayerMaster>()) return;
             var actualLevelSetup = GameMissionBuilder.instance.GetActualLevelSetup();
@@ -23,7 +24,7 @@ namespace RiverAttack
             m_GamePlayManager.OnEventBuildPathUpdate(transform.position.z);
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             m_GameAudioManager = null;
             m_GamePlayManager = null;

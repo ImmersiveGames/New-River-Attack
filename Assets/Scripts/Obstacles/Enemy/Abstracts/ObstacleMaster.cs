@@ -9,17 +9,16 @@ namespace RiverAttack
         public EnemiesScriptable enemy;
         [Header("Enemy Destroy Settings")]
         [SerializeField] internal bool isFinishLevel;
-        [SerializeField]
-        GameObject deadParticlePrefab; 
+        [SerializeField] private GameObject deadParticlePrefab; 
         [SerializeField]
         protected float timeoutDestroyExplosion;
         public bool isDestroyed;
         [SerializeField]
         internal bool isActive;
         internal Collider[] myColliders;
-        Vector3 m_ObjectStartPosition;
-        Quaternion m_ObjectStartRotate;
-        Vector3 m_ObjectStartScale;
+        private Vector3 m_ObjectStartPosition;
+        private Quaternion m_ObjectStartRotate;
+        private Vector3 m_ObjectStartScale;
         protected PlayerMaster playerMaster;
         protected GamePlayManager gamePlayManager;
         protected GamePlayingLog gamePlayingLog;
@@ -79,7 +78,8 @@ namespace RiverAttack
         {
             get { return isDestroyed == false && isActive; }
         }
-        void StartObstacle()
+
+        private void StartObstacle()
         {
             isDestroyed = false;
             isActive = true;
@@ -118,24 +118,26 @@ namespace RiverAttack
             var explosion = Instantiate(deadParticlePrefab, transform);
             Destroy(explosion, timeoutDestroyExplosion);
         }
-        void TryRespawn()
+
+        private void TryRespawn()
         {
             if (!enemy.canRespawn || gamePlayManager.bossFight) return;
             StartObstacle();
             Tools.ToggleChildren(transform);
         }
 
-        void ForceRespawn()
+        private void ForceRespawn()
         {
             Tools.ToggleChildren(transform);
             StartObstacle();
         }
 
-        void ActiveObject()
+        private void ActiveObject()
         {
             isActive = true;
         }
-        void DeactivateObject()
+
+        private void DeactivateObject()
         {
             isActive = false;
         }
@@ -153,13 +155,14 @@ namespace RiverAttack
             gamePlayManager.OnEventBuildPathUpdate(position.z);
         }
 
-        void ShouldFinishGame()
+        private void ShouldFinishGame()
         {
             if (!isFinishLevel) return;
             GameSteamManager.StoreStats();
             gamePlayManager.readyToFinish = true;
         }
-        void KillStatsHandle(CollisionType collisionType)
+
+        private void KillStatsHandle(CollisionType collisionType)
         {
             switch (enemy.enemyType)
             {
@@ -215,12 +218,14 @@ namespace RiverAttack
             GameSteamManager.StoreStats();
         }
         #region Calls
-        void OnEventObstacleMasterHit()
+
+        private void OnEventObstacleMasterHit()
         {
             DestroyObstacle();
             EventObstacleMasterHit?.Invoke();
         }
-        void OnEventObstacleScore(PlayerSettings playerSettings)
+
+        private void OnEventObstacleScore(PlayerSettings playerSettings)
         {
             EventObstacleScore?.Invoke(playerSettings);
         }

@@ -9,11 +9,11 @@ namespace RiverAttack
         public string onDeath;
 
         public GameObject smokeVFX;
-        
-        BossMaster m_BossMaster;
-        Animator m_Animator;
 
-        void OnEnable()
+        private BossMaster m_BossMaster;
+        private Animator m_Animator;
+
+        private void OnEnable()
         {
             SetInitialReferences();
             m_BossMaster.EventBossEmerge += AnimateEmerge;
@@ -23,7 +23,7 @@ namespace RiverAttack
             m_BossMaster.EventBossDeath += AnimateDeath;
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             m_BossMaster.EventBossEmerge -= AnimateEmerge;
             m_BossMaster.EventBossSubmerge -= AnimateSubmerge;
@@ -32,13 +32,13 @@ namespace RiverAttack
             m_BossMaster.EventBossDeath -= AnimateDeath;
         }
 
-        void SetInitialReferences()
+        private void SetInitialReferences()
         {
             m_BossMaster = GetComponent<BossMaster>();
             m_Animator = GetComponentInChildren<Animator>();
         }
 
-        void AnimateEmerge()
+        private void AnimateEmerge()
         {
             if (m_Animator == null)
                 m_Animator = GetComponentInChildren<Animator>();
@@ -46,7 +46,8 @@ namespace RiverAttack
                 return;
             m_Animator.SetTrigger(onEmerge);
         }
-        void AnimateSubmerge()
+
+        private void AnimateSubmerge()
         {
             if (m_Animator == null)
                 m_Animator = GetComponentInChildren<Animator>();
@@ -54,7 +55,8 @@ namespace RiverAttack
                 return;
             m_Animator.SetTrigger(onSubmerge);
         }
-        void AnimateGotHit()
+
+        private void AnimateGotHit()
         {
             if (m_Animator == null)
                 m_Animator = GetComponentInChildren<Animator>();
@@ -62,7 +64,8 @@ namespace RiverAttack
                 return;
             m_Animator.SetTrigger(onGotHit);
         }
-        void AnimateDeath()
+
+        private void AnimateDeath()
         {
             if (m_Animator == null)
                 m_Animator = GetComponentInChildren<Animator>();
@@ -71,7 +74,7 @@ namespace RiverAttack
             m_Animator.SetBool(onDeath, true);
         }
 
-        void SmokeBoss(Transform boss)
+        private void SmokeBoss(Transform boss)
         {
             if (smokeVFX != null)
             {

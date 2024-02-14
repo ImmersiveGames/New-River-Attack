@@ -3,9 +3,9 @@ using UnityEngine.Playables;
 
 public class TimeLineManager : MonoBehaviour
 {
-    PlayableDirector m_PlayableDirector;
+    private PlayableDirector m_PlayableDirector;
 
-    void Start()
+    private void Start()
     {
         m_PlayableDirector = GetComponent<PlayableDirector>();
     }

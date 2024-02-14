@@ -12,16 +12,18 @@ namespace RiverAttack
         public const float OffsetX = 0.0f;
         public const float OffsetY = 1.0f;
         [Header("Mines Settings")]
-        [SerializeField] GameObject bulletMines;
-        [SerializeField] int minesStartPool;
-        [SerializeField] AudioEventSample minesShoots;
+        [SerializeField]
+        private GameObject bulletMines;
+        [SerializeField] private int minesStartPool;
+        [SerializeField] private AudioEventSample minesShoots;
         [SerializeField] internal int[] numMines;
         [SerializeField] internal int numColumns = 15; 
         [SerializeField] internal int numLines = 10;
         public List<Vector2Int> quadrantsBlocked;
-        
-        AudioSource m_AudioSource;
-        void Start()
+
+        private AudioSource m_AudioSource;
+
+        private void Start()
         {
             m_AudioSource = GetComponent<AudioSource>();
             numMines ??= new[] { 5 };
@@ -43,7 +45,7 @@ namespace RiverAttack
             return quadrantsFull.Any(quadrants => quadrants.x == x && quadrants.y == z);
         }
 
-        static bool QuadrantsBlocked(int x, int z, IEnumerable<Vector2Int> quadrantBlocked)
+        private static bool QuadrantsBlocked(int x, int z, IEnumerable<Vector2Int> quadrantBlocked)
         {
             return quadrantBlocked.Any(quadrants => quadrants.x == x && quadrants.y == z);
         }
@@ -61,7 +63,8 @@ namespace RiverAttack
                 usedQuadrant.Add(new Vector2Int(quadrants.x, quadrants.y));
             return true;
         }
-        void OnDrawGizmos()
+
+        private void OnDrawGizmos()
         {
             if(!debugGrade) return;
             var camera = Camera.main;

@@ -4,24 +4,24 @@ namespace RiverAttack
 {
     public class CleanShootBehavior : IBossBehavior
     {
-        const float SHOOT_CYCLES = 4;
-        const float SHOOT_SPEED = 40.0f;
-        const float START_CADENCE = 1f;
-        const float BULLET_LIFE_TIME = 5f;
+        private const float SHOOT_CYCLES = 4;
+        private const float SHOOT_SPEED = 40.0f;
+        private const float START_CADENCE = 1f;
+        private const float BULLET_LIFE_TIME = 5f;
 
         //Shoot Variaveis
-        float m_Cadence;
-        float m_ShootCycles;
-        
-        Transform m_SpawnPoint;
-        readonly IHasPool m_MyPool;
-        
-        Transform m_Target;
+        private float m_Cadence;
+        private float m_ShootCycles;
+
+        private Transform m_SpawnPoint;
+        private readonly IHasPool m_MyPool;
+
+        private Transform m_Target;
 
         //IBossBehavior
-        bool m_Finished;
-        readonly BossMaster m_BossMaster;
-        readonly BossMissileShoot m_BossMissileShoot;
+        private bool m_Finished;
+        private readonly BossMaster m_BossMaster;
+        private readonly BossMissileShoot m_BossMissileShoot;
         internal CleanShootBehavior(BossMaster bossMaster)
         {
             m_BossMaster = bossMaster;
@@ -65,7 +65,7 @@ namespace RiverAttack
             return m_Finished;
         }
 
-        void Fire()
+        private void Fire()
         {
             if (GamePlayManager.instance.playerDead) return;
             //Debug.Log("Shoot!");

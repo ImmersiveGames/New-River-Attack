@@ -5,10 +5,10 @@ namespace RiverAttack
 {
     public class StateMoveHold : IMove
     {
-        readonly EnemiesMovement m_EnemiesMovement;
-        readonly ObstacleMaster m_ObstacleMaster;
-        readonly GamePlayManager m_GamePlayManager;
-        Vector3 m_VectorDirection;
+        private readonly EnemiesMovement m_EnemiesMovement;
+        private readonly ObstacleMaster m_ObstacleMaster;
+        private readonly GamePlayManager m_GamePlayManager;
+        private Vector3 m_VectorDirection;
         public StateMoveHold(EnemiesMovement enemiesMovement, ObstacleMaster obstacleMaster)
         {
             m_EnemiesMovement = enemiesMovement;

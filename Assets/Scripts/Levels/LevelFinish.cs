@@ -5,14 +5,15 @@ namespace RiverAttack
 {
     public class LevelFinish : LevelCheck
     {
-        GamePlayManager m_GamePlayManager;
+        private GamePlayManager m_GamePlayManager;
         #region UNITY METHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             m_GamePlayManager = GamePlayManager.instance;
         }
 
-        void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             if (other.GetComponentInParent<PlayerMaster>() == null) return;
             if (m_GamePlayManager.readyToFinish != true) return;

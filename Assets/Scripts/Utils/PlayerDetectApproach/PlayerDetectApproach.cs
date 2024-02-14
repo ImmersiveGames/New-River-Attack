@@ -4,8 +4,8 @@ namespace Utils
 {
     public class PlayerDetectApproach
     {
-        readonly Vector3 m_PositionReference;
-        float m_Distance;
+        private readonly Vector3 m_PositionReference;
+        private float m_Distance;
 
         public PlayerDetectApproach(Vector3 refPosition, float patrolDistance)
         {

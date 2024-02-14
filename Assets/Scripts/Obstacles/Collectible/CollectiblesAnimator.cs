@@ -5,11 +5,11 @@ namespace RiverAttack
 {
     public class CollectiblesAnimator : MonoBehaviour
     {
-        [SerializeField] string collectTrigger;
-        [SerializeField] float timeCollectAnimation;
+        [SerializeField] private string collectTrigger;
+        [SerializeField] private float timeCollectAnimation;
 
-        CollectiblesMaster m_CollectiblesMaster;
-        Animator m_Animator;
+        private CollectiblesMaster m_CollectiblesMaster;
+        private Animator m_Animator;
 
         #region UNITY METHODS
         protected void OnEnable()
@@ -17,13 +17,14 @@ namespace RiverAttack
             SetInitialReferences();
             m_CollectiblesMaster.EventCollectItem += CollectAnimation;
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             m_CollectiblesMaster.EventCollectItem -= CollectAnimation;
         }
   #endregion
 
-        void CollectAnimation(PlayerSettings playerSettings)
+  private void CollectAnimation(PlayerSettings playerSettings)
         {
             if (m_Animator == null)
             {
@@ -34,7 +35,8 @@ namespace RiverAttack
             Invoke(nameof(DisableChildren), timeCollectAnimation);
 
         }
-        void SetInitialReferences()
+
+        private void SetInitialReferences()
         {
             m_CollectiblesMaster = GetComponent<CollectiblesMaster>();
             m_Animator = GetComponentInChildren<Animator>();

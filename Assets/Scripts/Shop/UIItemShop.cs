@@ -8,38 +8,37 @@ namespace Shopping
     public class UIItemShop : MonoBehaviour
     {
         [SerializeField, Header("Product Display")]
-        TMP_Text productName;
+        private TMP_Text productName;
         //[SerializeField]
         //TMP_Text productDescription;
-        [SerializeField]
-        TMP_Text productPrice;
-        [SerializeField]
-        Image productImage;
-        [SerializeField]
-        Button btnBuy;
-        [SerializeField]
-        Button btnSelect;
+        [SerializeField] private TMP_Text productPrice;
+        [SerializeField] private Image productImage;
+        [SerializeField] private Button btnBuy;
+        [SerializeField] private Button btnSelect;
 
         public ShopProductStock productInStock;
-        ShopMaster m_ShopManager;
+        private ShopMaster m_ShopManager;
 
         public Button getBuyButton { get { return btnBuy; } }
         public Button getSelectButton { get { return btnSelect; } }
 
         #region UNITY METHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
             m_ShopManager.eventButtonBuy += UpdateBuyButton;
             m_ShopManager.eventButtonSelect += SelectThisItem;
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             m_ShopManager.eventButtonBuy -= UpdateBuyButton;
             m_ShopManager.eventButtonSelect -= SelectThisItem;
         }
   #endregion
-        void SetInitialReferences()
+
+  private void SetInitialReferences()
         {
             m_ShopManager = ShopMaster.instance;
         }
@@ -60,17 +59,17 @@ namespace Shopping
             SetupSelectButton(player);
         }
 
-        void UpdateBuyButton(PlayerSettings player)
+        private void UpdateBuyButton(PlayerSettings player)
         {
             SetupButtons(player);
         }
 
-        void SelectThisItem(PlayerSettings player)
+        private void SelectThisItem(PlayerSettings player)
         {
             SetupButtons(player);
         }
 
-        void SetupBuyButton(PlayerSettings player)
+        private void SetupBuyButton(PlayerSettings player)
         {
             btnBuy.gameObject.SetActive(true);
             //Debug.Log($"Available to buy: {productInStock.shopProduct.name} , {productInStock.AvailableForBuy(player)}");
@@ -83,7 +82,7 @@ namespace Shopping
                 btnBuy.gameObject.SetActive(false);
         }
 
-        void SetupSelectButton(PlayerSettings player)
+        private void SetupSelectButton(PlayerSettings player)
         {
             btnSelect.gameObject.SetActive(true);
             if (!productInStock.PlayerAlreadyBuy(player) && !productInStock.shopProduct.isConsumable)

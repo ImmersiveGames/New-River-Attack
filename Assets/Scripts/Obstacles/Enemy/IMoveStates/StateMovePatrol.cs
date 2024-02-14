@@ -4,14 +4,14 @@ namespace RiverAttack
 {
     public class StateMovePatrol : IMove
     {
-        Transform m_Target;
-        float m_StartApproachRadius;
-        float m_PlayerApproachRadius;
+        private Transform m_Target;
+        private float m_StartApproachRadius;
+        private float m_PlayerApproachRadius;
 
-        readonly ObstacleMaster m_ObstacleMaster;
-        EnemiesSetDifficulty m_EnemiesSetDifficulty;
-        PlayerDetectApproach m_PlayerDetectApproach;
-        readonly EnemiesMovement m_EnemiesMovement;
+        private readonly ObstacleMaster m_ObstacleMaster;
+        private EnemiesSetDifficulty m_EnemiesSetDifficulty;
+        private PlayerDetectApproach m_PlayerDetectApproach;
+        private readonly EnemiesMovement m_EnemiesMovement;
 
         public StateMovePatrol(EnemiesMovement enemiesMovement, ObstacleMaster obstacleMaster)
         {

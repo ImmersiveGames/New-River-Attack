@@ -5,13 +5,15 @@ namespace RiverAttack
     [RequireComponent(typeof(AudioSource))]
     public class PanelPrincipal : PanelBase
     {
-        [SerializeField] CinemachineVirtualCameraBase[] menuCamera;
+        [SerializeField] private CinemachineVirtualCameraBase[] menuCamera;
         [Header("Animation")]
         [SerializeField] protected TimeLineManager timelineManager;
         [Header("Menu Fades")]
-        [SerializeField] Transform screenWash;
-        const float SCREEN_WASH_TIMER = 1f;
-        GameManager m_GameManager;
+        [SerializeField]
+        private Transform screenWash;
+
+        private const float SCREEN_WASH_TIMER = 1f;
+        private GameManager m_GameManager;
 #region UNITYMETHODS
         protected override void Awake()
         {
@@ -25,17 +27,20 @@ namespace RiverAttack
             screenWash.gameObject.SetActive(true);
             m_GameManager.panelFade.gameObject.SetActive(true);
         }
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetMenuPrincipal();
             lastIndex = 0;
         }
-        void Start()
+
+        private void Start()
         {
             Invoke(nameof(DeactivateScreenWash), SCREEN_WASH_TIMER);
         }
 #endregion
-        void SwitchCamera(int cameraIndex) 
+
+private void SwitchCamera(int cameraIndex) 
         {
             foreach (var virtualCam in menuCamera) 
             {
@@ -51,7 +56,8 @@ namespace RiverAttack
             base.SetInternalMenu(indexStart);
             SwitchCamera(indexStart);
         }
-        void DeactivateScreenWash()
+
+        private void DeactivateScreenWash()
         {
             screenWash.gameObject.SetActive(false);
             PlayAnimation(0f);

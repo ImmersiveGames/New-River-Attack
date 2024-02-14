@@ -5,30 +5,27 @@ namespace RiverAttack
 {
     public class BulletPlayerBomb : Bullets
     {
-        [SerializeField]
-        ParticleSystem pSystem;
-        [SerializeField]
-        float radiusSize;
-        [SerializeField]
-        float radiusSpeed;
-        [SerializeField]
-        float shakeForce;
-        [SerializeField]
-        float shakeTime;
-        [SerializeField]
-        long millisecondsVibrate;
-        float timeLife
+        [SerializeField] private ParticleSystem pSystem;
+        [SerializeField] private float radiusSize;
+        [SerializeField] private float radiusSpeed;
+        [SerializeField] private float shakeForce;
+        [SerializeField] private float shakeTime;
+        [SerializeField] private long millisecondsVibrate;
+
+        private float timeLife
         {
             get;
             set;
         }
-        float m_EndLife;
-        double m_TParam;
-        Collider m_Collider;
-        readonly List<EnemiesMaster> m_CollisionEnemy = new List<EnemiesMaster>();
+
+        private float m_EndLife;
+        private double m_TParam;
+        private Collider m_Collider;
+        private readonly List<EnemiesMaster> m_CollisionEnemy = new List<EnemiesMaster>();
 
         #region UNITY METHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             timeLife = pSystem.main.duration;
             m_Collider = GetComponent<Collider>();
@@ -37,11 +34,12 @@ namespace RiverAttack
         }
 
         // Use this for initialization
-        void Start()
+        private void Start()
         {
             m_EndLife = Time.time + timeLife;
         }
-        void OnTriggerEnter(Collider other)
+
+        private void OnTriggerEnter(Collider other)
         {
             var enemy = other.GetComponentInParent<EnemiesMaster>();
             if (enemy && !m_CollisionEnemy.Contains(enemy))
@@ -49,21 +47,23 @@ namespace RiverAttack
                 m_CollisionEnemy.Add(enemy);
             }
         }
-        void FixedUpdate()
+
+        private void FixedUpdate()
         {
             ExpandCollider();
             AutoDestroy();
         }
   #endregion
 
-        void AutoDestroy()
+  private void AutoDestroy()
         {
             if (Time.time >= m_EndLife)
             {
                 DestroyMe();
             }
         }
-        void ExpandCollider()
+
+        private void ExpandCollider()
         {
             m_TParam += Time.deltaTime * radiusSpeed;
             CameraShake.ShakeCamera(shakeForce, shakeTime);
@@ -78,7 +78,8 @@ namespace RiverAttack
             var sphere = (SphereCollider)m_Collider;
             sphere.radius = Mathf.Lerp(0.5f, radiusSize, (float)m_TParam);
         }
-        new void DestroyMe()
+
+        private new void DestroyMe()
         {
             //Debug.Log(m_CollisionEnemy.Count);
             if (m_CollisionEnemy.Count >= 3)

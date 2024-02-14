@@ -79,7 +79,7 @@ namespace Utils
         }
 
 
-        static Bounds GetRenderBounds(GameObject objets)
+        private static Bounds GetRenderBounds(GameObject objets)
         {
             var bounds = new Bounds(Vector3.zero, Vector3.zero);
             var render = objets.GetComponent<Renderer>();

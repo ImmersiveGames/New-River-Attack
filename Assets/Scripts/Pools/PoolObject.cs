@@ -4,10 +4,10 @@ namespace Utils
 {
     public class PoolObject
     {
-        readonly List<GameObject> m_PooledObjects;
-        readonly GameObject m_PooledObj;
-        readonly Transform m_MyRoot;
-        Transform m_Target;
+        private readonly List<GameObject> m_PooledObjects;
+        private readonly GameObject m_PooledObj;
+        private readonly Transform m_MyRoot;
+        private Transform m_Target;
 
         public PoolObject(GameObject prefab, int initialPoolSize, Transform myRoot, bool noTransform = false, bool persistent = false)
         {
@@ -28,7 +28,7 @@ namespace Utils
             m_PooledObj = prefab;
         }
 
-        GameObject CreateObject(GameObject prefab, Transform poolRoot)
+        private GameObject CreateObject(GameObject prefab, Transform poolRoot)
         {
             var transform = this.m_MyRoot.transform;
             var nObj = Object.Instantiate(prefab, transform.position, transform.rotation, poolRoot);
@@ -55,7 +55,7 @@ namespace Utils
             return CreateObject(m_PooledObj, m_MyRoot);
         }
 
-        void ResetPosition(GameObject gameObject)
+        private void ResetPosition(GameObject gameObject)
         {
             var transform = m_MyRoot.transform;
             var localPosition = transform.localPosition;

@@ -17,7 +17,8 @@ namespace RiverAttack
                 return GetComponent<TMP_Dropdown>();
             }
         }
-        Locale m_CurrentLocale;
+
+        private Locale m_CurrentLocale;
         internal GameSettings gameSettings;
         protected virtual void Awake()
         {
@@ -28,18 +29,18 @@ namespace RiverAttack
             LocalizationSettings.SelectedLocaleChanged += UpdateDropdown;
         }
 
-        void Start()
+        private void Start()
         {
             GetLocale();
             UpdateDropdown(m_CurrentLocale);
         }
-        
-        void OnDisable()
+
+        private void OnDisable()
         {
             LocalizationSettings.SelectedLocaleChanged -= UpdateDropdown;
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             LocalizationSettings.SelectedLocaleChanged -= UpdateDropdown;
         }
@@ -64,7 +65,7 @@ namespace RiverAttack
             selectedOptionIndex = tmpDropdown.value;
         }
 
-        void GetLocale()
+        private void GetLocale()
         {
             var locale = LocalizationSettings.SelectedLocale;
             m_CurrentLocale = locale;

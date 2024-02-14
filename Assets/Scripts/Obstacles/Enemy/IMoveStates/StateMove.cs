@@ -5,13 +5,13 @@ namespace RiverAttack
 {
     public class StateMove : IMove
     {
-        readonly EnemiesMovement m_EnemiesMovement;
-        readonly ObstacleMaster m_ObstacleMaster;
-        float m_ElapsedTime;
-        float m_MoveVelocity;
-        float m_MultiplyEnemiesSpeedy;
-        Vector3 m_VectorDirection;
-        EnemiesSetDifficulty m_EnemiesSetDifficulty;
+        private readonly EnemiesMovement m_EnemiesMovement;
+        private readonly ObstacleMaster m_ObstacleMaster;
+        private float m_ElapsedTime;
+        private float m_MoveVelocity;
+        private float m_MultiplyEnemiesSpeedy;
+        private Vector3 m_VectorDirection;
+        private EnemiesSetDifficulty m_EnemiesSetDifficulty;
 
         public StateMove(EnemiesMovement enemiesMovement, ObstacleMaster obstacleMaster)
         {
@@ -40,8 +40,8 @@ namespace RiverAttack
            m_ObstacleMaster.OnEventObstacleMovement(false);
         }
 
-        
-        void Move(Transform objMove, Vector3 direction, float velocity)
+
+        private void Move(Transform objMove, Vector3 direction, float velocity)
         {
             float curveValue = 1f;
             if (m_EnemiesMovement.animationCurve != null && m_EnemiesMovement.animationDuration != 0)
@@ -51,7 +51,8 @@ namespace RiverAttack
             //Debug.Log("MOVE:" + curveValue);
             objMove.Translate(direction * (curveValue * (velocity * Time.deltaTime)));
         }
-        float MoveCurveAnimation(float duration, AnimationCurve curve)
+
+        private float MoveCurveAnimation(float duration, AnimationCurve curve)
         {
             m_ElapsedTime += Time.deltaTime;
 

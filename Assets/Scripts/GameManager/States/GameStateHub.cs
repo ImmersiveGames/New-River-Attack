@@ -5,8 +5,8 @@ namespace RiverAttack
 {
     public class GameStateHub: GameState
     {
-        const float TIME_TO_FADE_BGM = 0.1f;
-        bool m_CheckCompleteLevel;
+        private const float TIME_TO_FADE_BGM = 0.1f;
+        private bool m_CheckCompleteLevel;
         public override IEnumerator OnLoadState()
         {
             GameManager.instance.gameModes = GameManager.GameModes.Mission;
@@ -15,6 +15,9 @@ namespace RiverAttack
         }
         public override void EnterState()
         {
+            GamePlayManager.instance.inputSystem.Player.Disable();
+            GamePlayManager.instance.inputSystem.UI_Controlls.Enable();
+            PlayerManager.instance.ActivePlayers(false);
             GameHubManager.instance.readyHub = true;
             //Debug.Log($"Entra no Estado: HUB");
         }

@@ -1,54 +1,46 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
 namespace RiverAttack
 {
     [RequireComponent(typeof(AudioSource))]
     public class PanelMenuGame : PanelBase
     {
         [Header("Background")]
-        [SerializeField] Transform background;
+        [SerializeField]
+        private Transform background;
         [Header("HUD")]
-        [SerializeField] Transform hud;
-
-        GameState m_CurrentGameState;
-        GameManager m_GameManager;
-        PlayersInputActions m_InputSystem;
+        [SerializeField]
+        private Transform hud;
+        private GameState _currentGameState;
+        private GameManager _gameManager;
+        private PlayersInputActions _inputSystem;
 
         #region UNITYMETHODS
         protected override void Awake()
         {
-            m_GameManager = GameManager.instance;
+            _gameManager = GameManager.instance;
             //Garantir que este objeto seja o menu principal quando voltar para a tela de inicio
-            if (!m_GameManager.panelBaseGame)
+            if (!_gameManager.panelBaseGame)
             {
-                m_GameManager.panelBaseGame = this;
+                _gameManager.panelBaseGame = this;
             }
             base.Awake();
         }
-        void OnEnable()
+
+        private void OnEnable()
         {
-            m_InputSystem = GamePlayManager.instance.inputSystem;
-            m_InputSystem.UI_Controlls.Enable();
-            m_InputSystem.Player.Disable();
             lastIndex = 0;
             // As ações quando chmar o menu, mas ele não precisa se auto configurar a unica coisa que precisa aqui é ativar a hud
         }
 
-        void Start()
+        private void Start()
         {
-            m_InputSystem.Player.Pause.performed += ExecutePauseGame;
             StartMenuOnOpenScene();
         }
-        void OnDisable()
-        {
-            m_InputSystem.UI_Controlls.Disable();
-            m_InputSystem.Player.Enable();
-        }
         #endregion
-        
-        void StartMenuOnOpenScene()
+
+        private void StartMenuOnOpenScene()
         {
-            m_CurrentGameState = m_GameManager.currentGameState;
+            _currentGameState = _gameManager.currentGameState;
             SetInternalMenu();
             menuInitial.gameObject.SetActive(false);
             hud.gameObject.SetActive(false);
@@ -56,7 +48,7 @@ namespace RiverAttack
         }
         public void StartMenuGame()
         {
-            m_CurrentGameState = GameManager.instance.currentGameState;
+            _currentGameState = GameManager.instance.currentGameState;
             menuInitial.gameObject.SetActive(false);
             background.gameObject.SetActive(false);
             hud.gameObject.SetActive(true);
@@ -64,7 +56,7 @@ namespace RiverAttack
 
         public void PauseMenu(bool active)
         {
-            m_CurrentGameState = GameManager.instance.currentGameState;
+            _currentGameState = GameManager.instance.currentGameState;
             menuInitial.gameObject.SetActive(active);
             background.gameObject.SetActive(active);
             hud.gameObject.SetActive(!active);
@@ -72,7 +64,7 @@ namespace RiverAttack
 
         public void SetMenuEndPath()
         {
-            m_CurrentGameState = GameManager.instance.currentGameState;
+            _currentGameState = GameManager.instance.currentGameState;
             menuInitial.gameObject.SetActive(false);
             background.gameObject.SetActive(false);
             hud.gameObject.SetActive(false);
@@ -83,69 +75,31 @@ namespace RiverAttack
             background.gameObject.SetActive(false);
             menuInitial.gameObject.SetActive(true);
             SetInternalMenu(menuPrincipal.Length - 1);
-            
         }
-        void ButtonGamePause()
+
+        public void ButtonUnPause()
         {
-            m_GameManager.PauseGame(true);
+            GamePlayManager.UnPauseGamePlay();
         }
-        public void ButtonGameUnPause()
-        {
-            Debug.Log("O que está aqui: " + m_GameManager.lastGameState);
-
-            if(m_GameManager.lastGameState is GameStatePlayGame) 
-            {
-                Debug.Log("Entrei na Despausa ");
-
-                //inputSystem.UI_Controlls.Disable();
-                PauseMenu(false);
-
-                m_GameManager.ChangeState(new GameStatePlayGame());
-
-                m_GameManager.PauseGame(false);
-            }                
-            
-            if (GameManager.instance.currentGameState is GameStatePlayGameBoss)
-            {
-                GameStatePlayGameBoss.PauseState(false);
-            }
-        }
-
-        void ExecutePauseGame(InputAction.CallbackContext callbackContext)
-        {
-            m_CurrentGameState = GameManager.instance.currentGameState;
-            //Debug.Log($"Pause: {m_CurrentGameState}");
-            switch (m_CurrentGameState)
-            {
-                case GameStatePlayGame:
-                    ButtonGamePause();
-                    break;
-                case GameStatePlayGameBoss:
-                    GameStatePlayGameBoss.PauseState(!GamePlayManager.instance.bossFightPause);
-                    break;
-                case GameStatePause:
-                    ButtonGameUnPause();
-                    break;
-            }
-        }
+        
         public void ButtonExitToHub()
         {
             ClearSceneForButtons();
-            m_GameManager.ChangeState(new GameStateHub(), GameManager.GameScenes.MissionHub.ToString());
+            _gameManager.ChangeState(new GameStateHub(), GameManager.GameScenes.MissionHub.ToString());
         }
         public void ButtonReturnInitialMenu()
         {
             ClearSceneForButtons();
-            m_GameManager.ChangeState(new GameStateMenu(), GameManager.GameScenes.MainScene.ToString());
+            _gameManager.ChangeState(new GameStateMenu(), GameManager.GameScenes.MainScene.ToString());
         }
 
-        void ClearSceneForButtons()
+        private void ClearSceneForButtons()
         {
+            Time.timeScale = 1;
             PlayClickSfx();
             StopAllCoroutines();
             PlayerManager.instance.DestroyPlayers();
             GameMissionBuilder.instance.ResetBuildMission();
-            m_InputSystem.Disable();
         }
     }
 }

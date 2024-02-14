@@ -5,13 +5,12 @@ namespace RiverAttack
     [CreateAssetMenu(fileName = "ShopBomb", menuName = "RiverAttack/Shopping/Bombs", order = 3)]
     public class ShopProductBomb : ShopProduct
     {
-        [SerializeField]
-        CollectibleScriptable bombPowerUpScriptable;
-        [SerializeField]
-        int quantity;
+        [SerializeField] private CollectibleScriptable bombPowerUpScriptable;
+        [SerializeField] private int quantity;
 
         #region UNITY METHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             isConsumable = true;
         }

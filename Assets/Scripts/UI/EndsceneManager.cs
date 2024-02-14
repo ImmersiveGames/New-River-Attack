@@ -9,17 +9,18 @@ namespace RiverAttack
 {    public class EndsceneManager : MonoBehaviour
     {
         [Header("Exit Button Settings")]
-        [SerializeField] Image fillExitButtonImage;
+        [SerializeField]
+        private Image fillExitButtonImage;
         [SerializeField] private float holdTimer = 0f;
-        [SerializeField] float holdDuration = 3f;
-        [SerializeField] int sceneToLoad;
+        [SerializeField] private float holdDuration = 3f;
+        [SerializeField] private int sceneToLoad;
 
-        PlayersInputActions m_InputSystem;
-        Coroutine m_ExitButtonCoroutine;
+        private PlayersInputActions m_InputSystem;
+        private Coroutine m_ExitButtonCoroutine;
 
-        bool m_IsExitButtonPressed = false;
+        private bool m_IsExitButtonPressed = false;
 
-        void OnEnable()
+        private void OnEnable()
         {
             m_InputSystem = new PlayersInputActions();
             m_InputSystem.BriefingRoom.Enable();
@@ -28,19 +29,19 @@ namespace RiverAttack
             m_InputSystem.BriefingRoom.Exit.canceled += ctx => StopHoldTime();
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             m_InputSystem.BriefingRoom.Disable();
         }
 
-        void StartHoldTime()
+        private void StartHoldTime()
         {
             m_IsExitButtonPressed = true;
 
             m_ExitButtonCoroutine = StartCoroutine(FillImageOverTime());
         }
 
-        void StopHoldTime()
+        private void StopHoldTime()
         {
             m_IsExitButtonPressed = false;
             holdTimer = 0f;
@@ -48,7 +49,7 @@ namespace RiverAttack
             fillExitButtonImage.fillAmount = 0f; // Reiniciar o preenchimento quando o bot�o � liberado        
         }
 
-        IEnumerator FillImageOverTime()
+        private IEnumerator FillImageOverTime()
         {
             while (m_IsExitButtonPressed && holdTimer < holdDuration)
             {
@@ -64,7 +65,7 @@ namespace RiverAttack
             BackToMainScene();
         }
 
-        void BackToMainScene()
+        private void BackToMainScene()
         {
             SceneManager.LoadScene(sceneToLoad);
         }

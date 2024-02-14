@@ -7,14 +7,14 @@ namespace RiverAttack
     [System.Serializable]
     public class ShopProductSkin : ShopProduct
     {
-        [SerializeField]
-        GameObject skinProduct;
+        [SerializeField] private GameObject skinProduct;
         public Sprite hubSprite;
 
         public GameObject getSkin { get { return skinProduct; } }
 
         #region UNITY METHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             isConsumable = false;
         }

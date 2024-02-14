@@ -10,33 +10,36 @@ namespace RiverAttack
         public float conversion;
         [FormerlySerializedAs("offsetInicial")] public float offsetInitial;
 
-        Vector3 m_LastPosition;
-        float m_TravelledDistance;
-        float m_ConvertDistance;
-        float m_LastConvertDistance;
-        float m_MaxTravelledDistance;
+        private Vector3 m_LastPosition;
+        private float m_TravelledDistance;
+        private float m_ConvertDistance;
+        private float m_LastConvertDistance;
+        private float m_MaxTravelledDistance;
 
-        GamePlayManager m_GamePlayManager;
-        PlayerMaster m_PlayerMaster;
-        PlayerSettings m_PlayerSettings;
-        GamePlayingLog m_GamePlayingLog;
+        private GamePlayManager m_GamePlayManager;
+        private PlayerMaster m_PlayerMaster;
+        private PlayerSettings m_PlayerSettings;
+        private GamePlayingLog m_GamePlayingLog;
 
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_GamePlayingLog = m_GamePlayManager.gamePlayingLog;
             m_PlayerMaster = GetComponent<PlayerMaster>();
             m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
         }
-        void Start()
+
+        private void Start()
         {
             offsetInitial += PlayerManager.instance.spawnPlayerPosition.z;
             m_LastPosition = transform.position;
             m_TravelledDistance = offsetInitial;
             LoadMaxDistance();
         }
-        void Update()
+
+        private void Update()
         {
             var position = transform.position;
             // Calcula a distância percorrida no eixo Z desde o último frame
@@ -61,17 +64,20 @@ namespace RiverAttack
             m_LastPosition = position;
             
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             LogGamePlay(m_TravelledDistance, m_MaxTravelledDistance);
             
         }
-        void OnApplicationQuit()
+
+        private void OnApplicationQuit()
         {
             m_PlayerSettings.distance = m_MaxTravelledDistance;
         }
   #endregion
-        void LoadMaxDistance()
+
+  private void LoadMaxDistance()
         {
             float settingDistance = m_PlayerMaster.getPlayerSettings.distance;
             m_MaxTravelledDistance = (settingDistance != 0) ? settingDistance : 0;
@@ -79,14 +85,15 @@ namespace RiverAttack
             m_GamePlayManager.OnEventUpdateDistance(Mathf.FloorToInt(m_ConvertDistance));
         }
 
-        void LogGamePlay(float distance, float maxDistance)
+        private void LogGamePlay(float distance, float maxDistance)
         {
             m_GamePlayingLog.maxPathDistance = maxDistance;
             m_GamePlayingLog.pathDistance += distance;
             int resultInt = Mathf.FloorToInt(m_GamePlayingLog.pathDistance);
             GameSteamManager.SetStat("stat_FlightDistance", resultInt, true);
         }
-        static void AchievementHandle(float result)
+
+        private static void AchievementHandle(float result)
         {
             //Debug.Log($"Valor entrando: {result}");
             int flight = GameSteamManager.GetStatInt("stat_FlightDistance");

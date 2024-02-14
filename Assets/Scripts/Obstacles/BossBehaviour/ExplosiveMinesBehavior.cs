@@ -9,15 +9,16 @@ namespace RiverAttack
     {
 
         //Shoot Variaveis
-        float m_Cadence;
-        float m_ShootCycles;
-        readonly int m_Mines;
-        readonly IHasPool m_IHasPool;
-        Transform m_MyPool;
-        readonly Camera m_Camera = Camera.main;
+        private float m_Cadence;
+        private float m_ShootCycles;
+        private readonly int m_Mines;
+        private readonly IHasPool m_IHasPool;
+        private Transform m_MyPool;
+
+        private readonly Camera m_Camera = Camera.main;
         //IBossBehavior
-        bool m_Finished;
-        readonly BossMinesShoot m_BossMinesShoot;
+        private bool m_Finished;
+        private readonly BossMinesShoot m_BossMinesShoot;
         
         internal ExplosiveMinesBehavior(BossMaster bossMaster, int minesQuantity)
         {
@@ -50,7 +51,8 @@ namespace RiverAttack
         {
             return m_Finished;
         }
-        async void  MinesInQuadrants(int quantity, int lines, int columns, IEnumerable<Vector2Int> quadrantBlocked)
+
+        private async void  MinesInQuadrants(int quantity, int lines, int columns, IEnumerable<Vector2Int> quadrantBlocked)
         {
             var viewSize = new Vector2(m_Camera!.orthographicSize * 2.0f * m_Camera.aspect, m_Camera!.orthographicSize * 2.0f);
             var sizeQuadrant = new Vector2(viewSize.x / columns, viewSize.y / lines);

@@ -4,17 +4,18 @@ namespace RiverAttack
 {
     public class UiCursor : MonoBehaviour
     {
-        [SerializeField] RectTransform arrowLeft, arrowRight;
-        GameObject m_ButtonActive;
+        [SerializeField] private RectTransform arrowLeft, arrowRight;
+        private GameObject m_ButtonActive;
         public AudioEventSample onOverCursorSfx;
 
-        void Start()
+        private void Start()
         {
             m_ButtonActive = EventSystem.current.currentSelectedGameObject;
             if(m_ButtonActive != null)
                 SetCursor(m_ButtonActive.GetComponent<RectTransform>());
         }
-        void Update()
+
+        private void Update()
         {
             if (EventSystem.current.currentSelectedGameObject == null && m_ButtonActive != null)
             {
@@ -27,7 +28,8 @@ namespace RiverAttack
             m_ButtonActive = EventSystem.current.currentSelectedGameObject;
             SetCursor(m_ButtonActive.GetComponent<RectTransform>());
         }
-        void SetCursor(RectTransform reference)
+
+        private void SetCursor(RectTransform reference)
         {
             var cursor = GetComponent<RectTransform>();
             cursor.position = reference.position;

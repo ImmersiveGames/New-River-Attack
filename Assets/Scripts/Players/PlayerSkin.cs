@@ -4,10 +4,11 @@ namespace RiverAttack
 {
     public class PlayerSkin : MonoBehaviour
     {
-        PlayerMaster m_PlayerMaster;
+        private PlayerMaster m_PlayerMaster;
 
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
             if (m_PlayerMaster != null ? m_PlayerMaster.getPlayerSettings : null)
@@ -15,17 +16,19 @@ namespace RiverAttack
                 ChangePlayerSkin(m_PlayerMaster.getPlayerSettings.playerSkin);
             }
         }
-        void Start()
+
+        private void Start()
         {
             ChangePlayerSkin(m_PlayerMaster.getPlayerSettings.playerSkin);
         }
   #endregion
-        void SetInitialReferences()
+
+  private void SetInitialReferences()
         {
             m_PlayerMaster = GetComponent<PlayerMaster>();
         }
 
-        void ChangePlayerSkin(ShopProductSkin skin)
+        private void ChangePlayerSkin(ShopProductSkin skin)
         {
             var playerSkinTrail = GetComponent<PlayerSkinTrail>();
             playerSkinTrail.enabled = false;

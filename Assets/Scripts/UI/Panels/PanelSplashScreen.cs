@@ -7,16 +7,18 @@ namespace RiverAttack
         [Header("Menu Fades")]
         public Transform panelFade;
         public Animator fadeAnimator;
-        float m_FadeInTime;
-        float m_FadeOutTime;
-        static readonly int FadeIn = Animator.StringToHash("FadeIn");
-        static readonly int FadeOut = Animator.StringToHash("FadeOut");
+        private float m_FadeInTime;
+        private float m_FadeOutTime;
+        private static readonly int FadeIn = Animator.StringToHash("FadeIn");
+
+        private static readonly int FadeOut = Animator.StringToHash("FadeOut");
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             PerformFadeOut();
         }
-        void PerformFadeOut()
+
+        private void PerformFadeOut()
         {
             fadeAnimator.SetTrigger(FadeOut);
         }

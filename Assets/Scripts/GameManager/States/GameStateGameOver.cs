@@ -5,10 +5,10 @@ namespace RiverAttack
 {
     public class GameStateGameOver : GameState
     {
-        const float TIME_TO_FADE_BGM = 0.1f;
-        readonly GameAudioManager m_GameAudioManager;
-        readonly GamePlayManager m_GamePlayManager;
-        readonly PlayerManager m_PlayerManager;
+        private const float TIME_TO_FADE_BGM = 0.1f;
+        private readonly GameAudioManager m_GameAudioManager;
+        private readonly GamePlayManager m_GamePlayManager;
+        private readonly PlayerManager m_PlayerManager;
 
         public GameStateGameOver()
         {

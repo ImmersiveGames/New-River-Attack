@@ -1,6 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using UnityEngine.InputSystem;
 using UnityEngine;
 using Utils;
 
@@ -16,12 +17,13 @@ namespace RiverAttack
         [SerializeField] internal bool completePath;
         [SerializeField] internal bool readyToFinish;
         [Header("Debug Settings")]
-        [SerializeField] bool godMode;
+        [SerializeField]
+        private bool godMode;
         [SerializeField] public bool godModeSpeed;
         
         [SerializeField] internal GamePlayingLog gamePlayingLog;
-        internal bool getGodMode { get { return godMode; } }
-        
+        internal bool getGodMode => godMode;
+
         [Header("Power Up References")]
         public CollectibleScriptable refillBomb;
 
@@ -38,11 +40,11 @@ namespace RiverAttack
         internal static readonly Vector2 ScreenLimitMin = new Vector2(-LimitX, LimitZBottom);
         internal static readonly Vector2 ScreenLimitMax = new Vector2(LimitX, LimitZTop);
 
-        GameManager m_GameManager;
-        PlayerManager m_PlayerManager;
+        private GameManager m_GameManager;
+        private PlayerManager m_PlayerManager;
         internal PlayersInputActions inputSystem;
 
-        int m_Score;
+        private int m_Score;
 
         #region Delegates
         public delegate void GeneralEventHandler();
@@ -72,7 +74,8 @@ namespace RiverAttack
         #endregion
 
         #region UNITYMETHODS
-        void Awake()
+
+        private void Awake()
         {
             if (FindObjectsOfType(typeof(GamePlayManager)).Length > 1)
             {
@@ -87,8 +90,12 @@ namespace RiverAttack
                 bossFight = actualLevels.bossFight;
             }
             inputSystem = new PlayersInputActions();
-            inputSystem.UI_Controlls.Disable();
-            inputSystem.Player.Enable();
+        }
+
+        private void Start()
+        {
+            inputSystem.Player.Pause.performed += PauseGamePlay;
+            inputSystem.UI_Controlls.Pause.performed += UnPauseGamePlay;
         }
 
         protected override void OnDestroy()
@@ -98,25 +105,23 @@ namespace RiverAttack
             //base.OnDestroy();
         }
   #endregion
-        public bool shouldBePlayingGame { get { return (m_GameManager.currentGameState is GameStatePlayGame or GameStatePlayGameBoss && !completePath); } }
-        public static GameSettings getGameSettings
-        {
-            get { return GameManager.instance.gameSettings; }
-        }
+        public bool shouldBePlayingGame => m_GameManager.currentGameState is GameStatePlayGame or GameStatePlayGameBoss && !completePath;
+
+        public static GameSettings getGameSettings => GameManager.instance.gameSettings;
 
         public void OnStartGame()
         {
-            StartCoroutine(StartGamePlay(0));
+            StartCoroutine(StartGamePlay(.5f));
         }
         public void OnRestartGame()
         {
             StartCoroutine(StartGamePlay());
         }
 
-        IEnumerator StartGamePlay(float timeWait = 2f)
+        private IEnumerator StartGamePlay(float timeWait = 2f)
         {
             yield return new WaitForSeconds(timeWait);
-            m_PlayerManager.ActivePlayers(true);
+            //m_PlayerManager.ActivePlayers(true);
             m_PlayerManager.UnPausedMovementPlayers();
             OnEventActivateEnemiesMaster();
         }
@@ -124,20 +129,45 @@ namespace RiverAttack
         {
             panelMenuGame.SetMenuGameOver();
         }
-        
 
+        private void PauseGamePlay(InputAction.CallbackContext callbackContext)
+        {
+            if (GameManager.instance.onLoadScene || 
+                m_PlayerManager.initializedPlayerMasters[0].isPlayerDead) return;
+            if (GameManager.instance.currentGameState is not (GameStatePlayGame or GameStatePlayGameBoss))
+                return;
+            GameManager.instance.ChangeState(new GameStatePause());
+        }
+        private static void UnPauseGamePlay(InputAction.CallbackContext callbackContext)
+        {
+            UnPauseGamePlay();
+        }
+        internal static void UnPauseGamePlay()
+        {
+            var gameManager = GameManager.instance;
+            if (gameManager.onLoadScene) return;
+            if (gameManager.currentGameState is not GameStatePause)
+                return;
+            if (gameManager.lastGameState is GameStatePlayGame)
+            {
+                gameManager.ChangeState(new GameStatePlayGame());
+            }
+            else if (gameManager.lastGameState is GameStatePlayGameBoss)
+            {
+                gameManager.ChangeState(new GameStatePlayGameBoss());
+            }
+            
+        }
         internal void PauseBossBattle(bool pause)
         {
             if (pause)
             {
-                inputSystem.UI_Controlls.Enable();
                 panelMenuGame.PauseMenu(true);
                 Time.timeScale = 0;
                 bossFightPause = true;
             }
             else
             {
-                inputSystem.UI_Controlls.Disable();
                 panelMenuGame.PauseMenu(false);
                 Time.timeScale = 1;
                 bossFightPause = false;

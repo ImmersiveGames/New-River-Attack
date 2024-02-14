@@ -33,17 +33,20 @@ namespace RiverAttack
                 name += "(" + collectibleScriptable.powerUp.name + ")";
             }
         }
-        void DestroyPowerUp()
+
+        private void DestroyPowerUp()
         {
             DestroyImmediate(gameObject);
         }
-        void ComponentToPowerUp(PlayerPowerUp playerPowerUp)
+
+        private void ComponentToPowerUp(PlayerPowerUp playerPowerUp)
         {
             if (playerPowerUp == null || collectibleScriptable.powerUp == null) return;
             playerPowerUp.ActivatePowerUp(collectibleScriptable.powerUp);
             AchievementHandler(collectibleScriptable.powerUp);
         }
-        void AchievementHandler(PowerUp powerUp)
+
+        private void AchievementHandler(PowerUp powerUp)
         {
             switch (powerUp.powerUpType)
             {

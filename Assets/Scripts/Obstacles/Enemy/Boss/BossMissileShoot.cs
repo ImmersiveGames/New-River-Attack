@@ -6,13 +6,15 @@ namespace RiverAttack
     {
         
         [Header("Missile Settings")]
-        [SerializeField] GameObject bulletMissile;
+        [SerializeField]
+        private GameObject bulletMissile;
         [SerializeField] internal int[] numMissiles;
         [SerializeField] internal float[] angleCones;
-        [SerializeField] int missileStartPool;
+        [SerializeField] private int missileStartPool;
 
         internal Transform spawnPoint;
-        void Start()
+
+        private void Start()
         {
             numMissiles ??= new[] { 5 };
             angleCones ??= new[] { 90f};

@@ -3,17 +3,18 @@ namespace RiverAttack
 {
     public class BulletBoss : Bullets
     {
-        const float LERP = 5.0f;
+        private const float LERP = 5.0f;
         
-        [SerializeField] GameObject deadParticlePrefab;
-        [SerializeField] float timeoutDestroyExplosion;
-        [SerializeField] AudioEventSample enemyExplodeAudio;
+        [SerializeField] private GameObject deadParticlePrefab;
+        [SerializeField] private float timeoutDestroyExplosion;
+        [SerializeField] private AudioEventSample enemyExplodeAudio;
         internal Vector3 moveDirection;
-        
-        float m_StartTime;
-        AudioSource m_AudioSource;
+
+        private float m_StartTime;
+        private AudioSource m_AudioSource;
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             //GamePlayManager.instance.EventEnemiesMasterKillPlayer += DestroyMe;
             if (GamePlayManager.instance.playerDead) return;
@@ -21,11 +22,13 @@ namespace RiverAttack
             audioShoot.Play(m_AudioSource);
             m_StartTime = Time.time + bulletLifeTime;
         }
-        void Start()
+
+        private void Start()
         {
             m_StartTime = Time.time + bulletLifeTime;
         }
-        void Update()
+
+        private void Update()
         {
             switch (GamePlayManager.instance.readyToFinish)
             {
@@ -39,18 +42,21 @@ namespace RiverAttack
             if(m_StartTime > 0)
                 AutoDestroyMe(m_StartTime);
         }
-        void OnTriggerEnter(Collider collision)
+
+        private void OnTriggerEnter(Collider collision)
         {
             if (!collision.GetComponentInParent<PlayerMaster>() && !collision.GetComponentInParent<EffectAreaMaster>())
                 return;
             DestroyMeExplosion();
         }
-        void OnBecameInvisible()
+
+        private void OnBecameInvisible()
         {
             Invoke(nameof(DestroyMe), .01f);
         }
         #endregion
-        void MoveShoot(Vector3 directionVector3)
+
+        private void MoveShoot(Vector3 directionVector3)
         {
             if (!GamePlayManager.instance.shouldBePlayingGame)
                 return;
@@ -60,7 +66,8 @@ namespace RiverAttack
             position = Vector3.Lerp(position, newDirection, LERP * Time.deltaTime);
             transform.position = position;
         }
-        void DestroyMeExplosion()
+
+        private void DestroyMeExplosion()
         {
             var transform1 = transform;
             if (m_AudioSource != null && enemyExplodeAudio != null)

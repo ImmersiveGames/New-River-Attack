@@ -5,25 +5,25 @@ namespace RiverAttack
 {
     public class PlayerFuel : MonoBehaviour
     {
-        [SerializeField]
-        int reduceFuelRate;
+        [SerializeField] private int reduceFuelRate;
 
-        [SerializeField, Range(0, 5)]
-        float reduceFuelCadence;
+        [SerializeField, Range(0, 5)] private float reduceFuelCadence;
 
-        float m_TimeLoop;
+        private float m_TimeLoop;
 
-        GamePlayManager m_GamePlayManager;
-        GamePlayingLog m_GamePlayingLog;
-        PlayerMaster m_PlayerMaster;
-        PlayerSettings m_PlayerSettings;
+        private GamePlayManager m_GamePlayManager;
+        private GamePlayingLog m_GamePlayingLog;
+        private PlayerMaster m_PlayerMaster;
+        private PlayerSettings m_PlayerSettings;
 
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
         }
-        void Update()
+
+        private void Update()
         {
             if (!m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady) return;
             if (m_GamePlayManager.getGodMode || m_PlayerMaster.inPowerUp) return;
@@ -42,13 +42,15 @@ namespace RiverAttack
                 GameSteamManager.UnlockAchievement("ACH_DIE_PLAYER_GAS");
             m_PlayerMaster.OnEventPlayerMasterHit();
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             if(GameSteamManager.connectedToSteam)
                 GameSteamManager.StoreStats();
         }
   #endregion
-        void SetInitialReferences()
+
+  private void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_PlayerMaster = GetComponent<PlayerMaster>();
@@ -56,7 +58,7 @@ namespace RiverAttack
             m_GamePlayingLog = m_GamePlayManager.gamePlayingLog;
         }
 
-        void LogGamePlay(int reduce)
+        private void LogGamePlay(int reduce)
         {
             m_GamePlayingLog.fuelSpent += reduce;
             GameSteamManager.AddStat("stat_SpendGas", reduce, false);

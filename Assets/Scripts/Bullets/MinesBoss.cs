@@ -6,15 +6,17 @@ namespace RiverAttack
 {
     public class MinesBoss: Bullets
     {
-        [SerializeField] AudioEventSample alertMineAudio;
-        [SerializeField] GameObject deadParticlePrefab;
-        [SerializeField] float deadTimeOutExplosion;
-        [SerializeField] AudioEventSample enemyExplodeAudio;
-        [SerializeField] GameObject explosionParticlePrefab;
-        [SerializeField] float mineTimeOutExplosion;
+        [SerializeField] private AudioEventSample alertMineAudio;
+        [SerializeField] private GameObject deadParticlePrefab;
+        [SerializeField] private float deadTimeOutExplosion;
+        [SerializeField] private AudioEventSample enemyExplodeAudio;
+        [SerializeField] private GameObject explosionParticlePrefab;
+        [SerializeField] private float mineTimeOutExplosion;
         [Header("Approach")]
-        [SerializeField] float playerApproachRadius;
-        [SerializeField, MinMaxSlider(0f, 20f)] Vector2 playerApproachRadiusRandom;
+        [SerializeField]
+        private float playerApproachRadius;
+        [SerializeField, MinMaxSlider(0f, 20f)]
+        private Vector2 playerApproachRadiusRandom;
         public string onAlert;
         #region GizmoSettings
         [Header("Gizmo Settings")]
@@ -23,34 +25,37 @@ namespace RiverAttack
 
         [Header("Drop Items")]
         [SerializeField]
-        float dropHeight = 1;
-        [SerializeField]
-        float timeToAutoDestroy;
+        private float dropHeight = 1;
+        [SerializeField] private float timeToAutoDestroy;
         [SerializeField, Tooltip("Se o mínimo for diferente de 0 o valor é aleatório entre min e max."), MinMaxSlider(0, 1)]
-        Vector2 dropChance;
-        GameObject m_ItemDrop;
+        private Vector2 dropChance;
+
+        private GameObject m_ItemDrop;
         public ListDropItems itemsVariables;
-        
-        float m_StartTime;
-        bool m_StartExplosion;
-        bool m_IsDestroy;
-        PlayerDetectApproach m_PlayerDetectApproach;
-        Transform m_Target;
-        AudioSource m_AudioSource;
-        Animator m_Animator;
+
+        private float m_StartTime;
+        private bool m_StartExplosion;
+        private bool m_IsDestroy;
+        private PlayerDetectApproach m_PlayerDetectApproach;
+        private Transform m_Target;
+        private AudioSource m_AudioSource;
+        private Animator m_Animator;
 
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
             Tools.ToggleChildren(transform);
             audioShoot.Play(m_AudioSource);
         }
-        void Start()
+
+        private void Start()
         {
             SetInitialReferences();
         }
-        void Update()
+
+        private void Update()
         {
             if (!GamePlayManager.instance.shouldBePlayingGame)
                 return;
@@ -69,14 +74,16 @@ namespace RiverAttack
             AnimationAlert();
             Invoke(nameof(DetonationMine),2f);
         }
-        void OnTriggerEnter(Collider collision)
+
+        private void OnTriggerEnter(Collider collision)
         {
             if (!collision.GetComponentInParent<PlayerMaster>() && !collision.GetComponentInParent<EffectAreaMaster>()
                 && (!collision.GetComponent<BulletPlayer>() || !collision.GetComponent<BulletPlayerBomb>()))
                 return;
             DestroyMeExplosion();
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             m_StartExplosion = false;
             m_IsDestroy = false;
@@ -85,8 +92,8 @@ namespace RiverAttack
             Tools.ToggleChildren(transform);
         }
         #endregion
-        
-        void SetInitialReferences()
+
+        private void SetInitialReferences()
         {
             m_Animator = GetComponentInChildren<Animator>();
             m_AudioSource = GetComponent<AudioSource>();
@@ -100,16 +107,18 @@ namespace RiverAttack
             m_PlayerDetectApproach = new PlayerDetectApproach(transform.position, playerApproachRadius);
             
         }
-        float randomRangeDetect
+
+        private float randomRangeDetect
         {
             get { return Random.Range(playerApproachRadiusRandom.x, playerApproachRadiusRandom.y); }
         }
-        float SetPlayerApproachRadius()
+
+        private float SetPlayerApproachRadius()
         {
             return playerApproachRadiusRandom != Vector2.zero ? randomRangeDetect : playerApproachRadius;
         }
 
-        void DetonationMine()
+        private void DetonationMine()
         {
             if (m_IsDestroy) return;
             
@@ -118,7 +127,8 @@ namespace RiverAttack
             Instantiate(explosionParticlePrefab,transform1.position, transform1.rotation);
             Invoke(nameof(DestroyMe), mineTimeOutExplosion);
         }
-        void AnimationAlert()
+
+        private void AnimationAlert()
         {
             if (m_Animator == null)
                 m_Animator = GetComponentInChildren<Animator>();
@@ -129,8 +139,8 @@ namespace RiverAttack
                 alertMineAudio.Play(m_AudioSource);
             m_Animator.SetTrigger(onAlert);
         }
-        
-        void DestroyMeExplosion()
+
+        private void DestroyMeExplosion()
         {
             m_IsDestroy = true;
             var transform1 = transform;
@@ -145,7 +155,7 @@ namespace RiverAttack
             Invoke(nameof(DestroyMe), deadTimeOutExplosion);
         }
 
-        void DropItem()
+        private void DropItem()
         {
             //Debug.Log($"Start Drop: {dropChance.y}, {itemsVariables}");
             if (dropChance.y <= 0 || itemsVariables == null) return;
@@ -165,12 +175,14 @@ namespace RiverAttack
             if (timeToAutoDestroy > 0)
                 Invoke(nameof(DestroyDrop), timeToAutoDestroy);
         }
-        void DestroyDrop()
+
+        private void DestroyDrop()
         {
             Destroy(m_ItemDrop);
         }
         #region Gizmos
-        void OnDrawGizmosSelected()
+
+        private void OnDrawGizmosSelected()
         {
         #if UNITY_EDITOR
             

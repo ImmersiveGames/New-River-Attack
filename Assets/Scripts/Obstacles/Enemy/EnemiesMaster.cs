@@ -4,7 +4,7 @@ namespace RiverAttack
 {
     public class EnemiesMaster : ObstacleMaster
     {
-        EnemiesSetDifficultyListSo m_EnemiesSetDifficultList;
+        private EnemiesSetDifficultyListSo m_EnemiesSetDifficultList;
         
         public static EnemiesSetDifficulty myDifficulty { get; private set; }
 
@@ -33,13 +33,14 @@ namespace RiverAttack
             ComponentToKill(other.GetComponentInParent<PlayerMaster>(), CollisionType.Collider);
             GamePlayManager.instance.OnEventOtherEnemiesKillPlayer();
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             EventObstacleMasterHit -= ChangeDifficulty;
         }
           #endregion
 
-        void ChangeDifficulty()
+          private void ChangeDifficulty()
         {
             if (m_EnemiesSetDifficultList != null)
             {

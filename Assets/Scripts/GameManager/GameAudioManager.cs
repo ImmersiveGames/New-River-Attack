@@ -9,17 +9,17 @@ namespace RiverAttack
     public class GameAudioManager : Singleton<GameAudioManager>
     {
         public AudioMixer mixerGroup;
-        [SerializeField] AudioSource bgmAudioSource;
+        [SerializeField] private AudioSource bgmAudioSource;
         [SerializeField] protected AudioSource sfxAudioSource;
         [SerializeField] internal Tools.SerializableDictionary<LevelTypes, AudioEventSample> bgmLevels = new Tools.SerializableDictionary<LevelTypes, AudioEventSample>();
         [Header("Menu SFX")]
         public AudioClip missionFailSound;
         public AudioClip missionSuccessSound;
-        GameSettings m_GameSettings;
+        private GameSettings m_GameSettings;
 
         #region UNITYMETHODS
-        
-        void Start()
+
+        private void Start()
         {
             m_GameSettings = GameSettings.instance;
             bgmAudioSource.pitch = 1;
@@ -31,7 +31,7 @@ namespace RiverAttack
         }
   #endregion
 
-        void RecoveryAudioSettings()
+  private void RecoveryAudioSettings()
         {
             float volumeMusic = Tools.SoundBase10(m_GameSettings.musicVolume);
             float volumeSfx = Tools.SoundBase10(m_GameSettings.sfxVolume);
@@ -43,13 +43,15 @@ namespace RiverAttack
             bgmLevels.TryGetValue(typeLevel, out var audioSource);
             audioSource.Play(bgmAudioSource);
         }
-        IEnumerator PlayBGM(AudioSource source, AudioEvent track, float time)
+
+        private IEnumerator PlayBGM(AudioSource source, AudioEvent track, float time)
         {
             if (source.isPlaying)
                 yield return StartCoroutine(FadeAudio(source, time, source.volume, 0));
             track.Play(source);
         }
-        IEnumerator StopBGM(AudioSource source, AudioEvent track, float time)
+
+        private IEnumerator StopBGM(AudioSource source, AudioEvent track, float time)
         {
             if (source.isPlaying)
                 yield return StartCoroutine(FadeAudio(source, time, source.volume, 0));
@@ -69,7 +71,8 @@ namespace RiverAttack
         {
             PlayOneShot(sfxAudioSource,audioClip);
         }
-        static void PlayOneShot(AudioSource audioSource, AudioClip audioClip)
+
+        private static void PlayOneShot(AudioSource audioSource, AudioClip audioClip)
         {
             audioSource.PlayOneShot(audioClip);
         }
@@ -91,7 +94,7 @@ namespace RiverAttack
                 StartCoroutine(FadePitch(bgmAudioSource, 0.1f, bgmAudioSource.pitch, accel));
         }
 
-        static IEnumerator FadePitch(AudioSource source, float timer, float starts, float ends)
+        private static IEnumerator FadePitch(AudioSource source, float timer, float starts, float ends)
         {
             float i = 0.0F;
             float step = 1.0F / timer;
@@ -104,7 +107,8 @@ namespace RiverAttack
             if (ends <= 0)
                 source.Stop();
         }
-        static IEnumerator FadeAudio(AudioSource source, float timer, float starts, float ends)
+
+        private static IEnumerator FadeAudio(AudioSource source, float timer, float starts, float ends)
         {
             float i = 0.0F;
             float step = 1.0F / timer;

@@ -6,8 +6,8 @@ namespace RiverAttack
     {
         /*const float TIME_TO_FADE_BGM = 0.1f;
         const float TOLERANCE = 1f;*/
-        readonly PlayableDirector m_PlayableDirector;
-        readonly GameManager m_GameManager;
+        private readonly PlayableDirector m_PlayableDirector;
+        private readonly GameManager m_GameManager;
         public override IEnumerator OnLoadState()
         {
             //throw new System.NotImplementedException();

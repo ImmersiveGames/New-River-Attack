@@ -8,12 +8,15 @@ namespace RiverAttack
     public class EnemiesMovement : ObstacleDetectApproach
     {
         [Header("Movement Settings")]
-        [SerializeField] bool ignoreWalls;
-        [SerializeField] bool ignoreEnemies;
+        [SerializeField]
+        private bool ignoreWalls;
+        [SerializeField] private bool ignoreEnemies;
         [SerializeField] internal float moveVelocity;
-        enum Directions { None, Forward, Back, Up, Right, Down, Left, Free }
+
+        private enum Directions { None, Forward, Back, Up, Right, Down, Left, Free }
         [Header("Movement Directions")]
-        [SerializeField] Directions startDirection;
+        [SerializeField]
+        private Directions startDirection;
         protected Vector3 m_VectorDirection;
         public Vector3 freeVectorDirection;
         [Header("Movement with Animation Curve")]
@@ -23,23 +26,27 @@ namespace RiverAttack
         protected IMove m_ActualState;
         protected ObstacleMaster m_ObstacleMaster;
         protected GamePlayManager m_GamePlayManager;
-        bool m_InCollision;
+        private bool m_InCollision;
 
         #region UNITYMETHODS
-        void Awake()
+
+        private void Awake()
         {
             m_VectorDirection = SetDirection(startDirection);
         }
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
             m_GamePlayManager.EventReSpawnEnemiesMaster += ResetEnemyMovement;
         }
-        void Start()
+
+        private void Start()
         {
             ChangeState(new StateMoveHold(this, m_ObstacleMaster));
         }
-        void OnTriggerEnter(Collider other)
+
+        private void OnTriggerEnter(Collider other)
         {
             if (m_ActualState is not StateMove) return;
             if (!m_GamePlayManager.shouldBePlayingGame || !m_ObstacleMaster.shouldObstacleBeReady || m_ObstacleMaster.isDestroyed || !meshRenderer.isVisible)
@@ -54,7 +61,8 @@ namespace RiverAttack
             if (enemiesMaster != null)
                 enemiesMaster.OnEventObjectMasterFlipEnemies(true);
         }
-        void OnTriggerExit(Collider other)
+
+        private void OnTriggerExit(Collider other)
         {
             if (m_ActualState is not StateMove) return;
             if (!m_GamePlayManager.shouldBePlayingGame || !m_ObstacleMaster.shouldObstacleBeReady || m_ObstacleMaster.isDestroyed || !meshRenderer.isVisible)
@@ -64,7 +72,8 @@ namespace RiverAttack
             if (!other.GetComponentInParent<EnemiesMaster>() && !other.GetComponentInParent<WallsMaster>()) return;
             m_InCollision = false;
         }
-        void Update()
+
+        private void Update()
         {
             if (!m_GamePlayManager.shouldBePlayingGame || !m_ObstacleMaster.shouldObstacleBeReady || m_ObstacleMaster.isDestroyed || !meshRenderer.isVisible)
                 return;
@@ -86,8 +95,8 @@ namespace RiverAttack
             m_ActualState = newState;
             m_ActualState?.EnterState();
         }
-        
-        void ResetEnemyMovement()
+
+        private void ResetEnemyMovement()
         {
             m_VectorDirection = SetDirection(startDirection);
             m_InCollision = false;
@@ -95,7 +104,7 @@ namespace RiverAttack
             ChangeState(new StateMoveHold(this, m_ObstacleMaster));
         }
 
-        Vector3 SetDirection(Directions dir)
+        private Vector3 SetDirection(Directions dir)
         {
             return dir switch
             {
@@ -112,7 +121,8 @@ namespace RiverAttack
         }
 
         #region Gizmos
-        void OnDrawGizmosSelected()
+
+        private void OnDrawGizmosSelected()
         {
 #if UNITY_EDITOR
             

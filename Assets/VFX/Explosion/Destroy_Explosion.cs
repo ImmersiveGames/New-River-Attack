@@ -6,13 +6,13 @@ public class Destroy_Explosion : MonoBehaviour
 {
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         Destroy(gameObject, 3f);
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
 
     }

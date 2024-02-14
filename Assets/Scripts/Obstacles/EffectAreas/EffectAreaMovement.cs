@@ -5,7 +5,8 @@ namespace RiverAttack
     public sealed class EffectAreaMovement: EnemiesMovement
     {
         internal Transform myPool;
-        void Update()
+
+        private void Update()
         {
             if (!m_GamePlayManager.shouldBePlayingGame || !m_ObstacleMaster.shouldObstacleBeReady || m_ObstacleMaster.isDestroyed)
                 return;
@@ -15,7 +16,8 @@ namespace RiverAttack
         {
             Invoke(nameof(DestroyMe), timer);
         }
-        void DestroyMe()
+
+        private void DestroyMe()
         {
             gameObject.SetActive(false);
             if (!myPool)

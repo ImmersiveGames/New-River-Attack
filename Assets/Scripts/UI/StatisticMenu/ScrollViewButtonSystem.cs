@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class ScrollViewButtonSystem : MonoBehaviour
 {
-    [SerializeField] ScrollRect scrollRect;
-    [SerializeField] float scrollSpeed = 0.1f;
+    [SerializeField] private ScrollRect scrollRect;
+    [SerializeField] private float scrollSpeed = 0.1f;
 
     public void VerticalScrollUp()
     {

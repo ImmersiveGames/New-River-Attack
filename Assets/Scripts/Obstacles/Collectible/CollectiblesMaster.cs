@@ -31,7 +31,7 @@ namespace RiverAttack
             collectibleScriptable = enemy as CollectibleScriptable;
         }
 
-        void ComponentToCollect(Component other)
+        private void ComponentToCollect(Component other)
         {
             if (other == null) return;
             var whoHit = WhoHit(other);
@@ -57,7 +57,8 @@ namespace RiverAttack
                 CollectWealth(whoHit.getPlayerSettings, collectibleScriptable.amountCollectables);
             GamePlayManager.AddResultList(gamePlayingLog.hitEnemiesResultsList, whoHit.getPlayerSettings, enemy, collectibleScriptable.amountCollectables, CollisionType.Collected);
         }
-        static void AddCollectList(List<LogPlayerCollectables> list, CollectibleScriptable collectible, int qnt)
+
+        private static void AddCollectList(List<LogPlayerCollectables> list, CollectibleScriptable collectible, int qnt)
         {
             var itemResults = list.Find(x => x.collectable == collectible);
             if (itemResults != null)
@@ -74,14 +75,14 @@ namespace RiverAttack
             }
         }
 
-        void CollectWealth(PlayerSettings playerSettings, int collect)
+        private void CollectWealth(PlayerSettings playerSettings, int collect)
         {
             playerSettings.wealth += collect;
             GameSteamManager.SetStat("stat_CollectRefugee", playerSettings.wealth, true);
             gamePlayManager.OnEventUpdateRefugees(playerSettings.wealth);
         }
 
-        void CollectObstacle()
+        private void CollectObstacle()
         {
             isDestroyed = true;
             isActive = false;

@@ -4,8 +4,8 @@ namespace RiverAttack
 {
     public class EnemiesShoot : ObstacleDetectApproach, IHasPool
     {
-        [SerializeField] GameObject bullet;
-        [SerializeField] int startPool;
+        [SerializeField] private GameObject bullet;
+        [SerializeField] private int startPool;
         [SerializeField] internal float shootCadence;
         [Header("Bullet Settings")]
         [SerializeField]
@@ -13,15 +13,16 @@ namespace RiverAttack
         [SerializeField] internal float bulletLifeTime;
 
         #region IShoots
-        readonly StateShoot m_StateShoot;
-        readonly StateShootHold m_StateShootHold;
-        readonly StateShootPatrol m_StateShootPatrol;
-        IShoot m_ActualState;
+
+        private readonly StateShoot m_StateShoot;
+        private readonly StateShootHold m_StateShootHold;
+        private readonly StateShootPatrol m_StateShootPatrol;
+        private IShoot m_ActualState;
     #endregion
 
-        GamePlayManager m_GamePlayManager;
-        EnemiesMaster m_EnemiesMaster;
-        EnemiesSetDifficulty m_EnemyDifficult;
+    private GamePlayManager m_GamePlayManager;
+    private EnemiesMaster m_EnemiesMaster;
+    private EnemiesSetDifficulty m_EnemyDifficult;
 
         internal Transform spawnPoint;
 
@@ -33,13 +34,15 @@ namespace RiverAttack
         }
 
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
             m_EnemiesMaster.EventObstacleMasterHit += StopFire;
             m_GamePlayManager.EventEnemiesMasterKillPlayer += StopFire;
         }
-        void Start()
+
+        private void Start()
         {
             // setup inicial do status
             StartMyPool(bullet,startPool);
@@ -49,7 +52,7 @@ namespace RiverAttack
             spawnPoint = enemiesShootSpawn.transform ? enemiesShootSpawn.transform : transform;
         }
 
-        void Update()
+        private void Update()
         {
             if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldObstacleBeReady || m_EnemiesMaster.isDestroyed || !meshRenderer.isVisible)
                 return;
@@ -70,7 +73,8 @@ namespace RiverAttack
             }
             m_ActualState.UpdateState();
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             m_EnemiesMaster.EventObstacleMasterHit -= StopFire;
             m_GamePlayManager.EventEnemiesMasterKillPlayer -= StopFire;
@@ -82,7 +86,8 @@ namespace RiverAttack
             m_GamePlayManager = GamePlayManager.instance;
             m_EnemiesMaster = GetComponent<EnemiesMaster>();
         }
-        void ChangeState(IShoot newState)
+
+        private void ChangeState(IShoot newState)
         {
             if (m_ActualState == newState) return;
             m_ActualState?.ExitState();
@@ -91,12 +96,13 @@ namespace RiverAttack
             m_ActualState?.EnterState(m_EnemiesMaster);
         }
 
-        void StopFire()
+        private void StopFire()
         {
             target = null;
             ChangeState(m_StateShootHold);
         }
-        bool shouldBeFire
+
+        private bool shouldBeFire
         {
             get
             {

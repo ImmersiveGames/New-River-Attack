@@ -6,20 +6,22 @@ namespace RiverAttack
 {
     public class LeaderBoardsManager : MonoBehaviour
     {
-        [SerializeField] int numRegister;
-        [SerializeField] GameObject prefabLine;
-        [SerializeField] Transform content;
-        void Awake()
+        [SerializeField] private int numRegister;
+        [SerializeField] private GameObject prefabLine;
+        [SerializeField] private Transform content;
+
+        private void Awake()
         {
             ClearLeaderboard();
         }
-        async void OnEnable()
+
+        private async void OnEnable()
         {
             if (GameSteamManager.connectedToSteam == false) return;
             await CreateListLeaderboard();
         }
 
-        async Task CreateListLeaderboard()
+        private async Task CreateListLeaderboard()
         {
             var globalScores = await GameSteamManager.GetScores( numRegister );
             ClearLeaderboard();
@@ -36,7 +38,7 @@ namespace RiverAttack
         }
 
 
-        void ClearLeaderboard()
+        private void ClearLeaderboard()
         {
             for (int i = 0; i < content.childCount; i++)
             {

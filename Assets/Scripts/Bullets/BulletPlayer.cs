@@ -4,10 +4,11 @@ namespace RiverAttack
 {
     public class BulletPlayer : Bullets
     {
-        GamePlayManager m_GamePlayManager;
-        float m_StartTime;
+        private GamePlayManager m_GamePlayManager;
+        private float m_StartTime;
         #region UnityMethods
-        void OnEnable()
+
+        private void OnEnable()
         {
             m_GamePlayManager = GamePlayManager.instance;
             var audioSource = GetComponent<AudioSource>();
@@ -18,12 +19,14 @@ namespace RiverAttack
                 TransformSpawnPosition(spawnPos.transform);
             m_StartTime = Time.time + bulletLifeTime;
         }
-        void FixedUpdate()
+
+        private void FixedUpdate()
         {
             MoveShoot();
             AutoDestroyMe(m_StartTime);
         }
-        void OnTriggerEnter(Collider collision)
+
+        private void OnTriggerEnter(Collider collision)
         {
             if (collision.GetComponentInParent<PlayerMaster>() || collision.GetComponentInParent<BulletPlayer>() || 
                 collision.GetComponentInParent<BulletPlayerBomb>() || collision.GetComponent<LevelChangeBGM>()) return;
@@ -32,17 +35,19 @@ namespace RiverAttack
             if (collision.GetComponentInParent<PowerUpMaster>()) return;
             DestroyMe();
         }
-        void OnBecameInvisible()
+
+        private void OnBecameInvisible()
         {
             Invoke(nameof(DestroyMe), .01f);
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             Invoke(nameof(DestroyMe), .01f);
         }
         #endregion
 
-        void MoveShoot()
+        private void MoveShoot()
         {
             if (m_GamePlayManager.shouldBePlayingGame)
             {
@@ -54,7 +59,8 @@ namespace RiverAttack
                 DestroyMe();
             }
         }
-        void TransformSpawnPosition(Transform spawnTransform)
+
+        private void TransformSpawnPosition(Transform spawnTransform)
         {
             var myTransform = transform;
             var position = spawnTransform.position;

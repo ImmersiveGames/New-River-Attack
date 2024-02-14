@@ -6,26 +6,28 @@ namespace Shopping
 {
     public class ShopCarousel
     {
-        readonly Transform m_ContentProduct;
-        readonly GameObject m_PanelProduct;
-        readonly RectTransform m_PanelCenter;
+        private readonly Transform m_ContentProduct;
+        private readonly GameObject m_PanelProduct;
+        private readonly RectTransform m_PanelCenter;
 
-        enum CarouselDirection { Horizontal, Vertical }
+        private enum CarouselDirection { Horizontal, Vertical }
         [Header("Carousel")]
         public float spaceBetweenPanels = 50;
         public bool infinityLooping = false;
         public float maxPosition = 1500;
-        CarouselDirection Direction = CarouselDirection.Horizontal;
+        private CarouselDirection Direction = CarouselDirection.Horizontal;
 
         public GameObject[] getProducts { get; private set; }
         public int getActualProduct { get; private set; }
 
     #region Internal varables
-        float[] m_Distance;
-        float[] m_DistanceReposition;
-        int m_ProductDistance;
-        bool m_Dragging = false;
-        bool m_TargetNearestButton = true;
+
+    private float[] m_Distance;
+    private float[] m_DistanceReposition;
+    private int m_ProductDistance;
+    private bool m_Dragging = false;
+
+    private bool m_TargetNearestButton = true;
         //private Vector2 productSize;
         #endregion
 
@@ -93,7 +95,8 @@ namespace Shopping
 
             //Canvas.ForceUpdateCanvases();
         }
-        void Drag(bool drag)
+
+        private void Drag(bool drag)
         {
             m_TargetNearestButton = true;
             m_Dragging = drag;
@@ -152,7 +155,7 @@ namespace Shopping
             //targetNearestButton = true;
         }
 
-        void LerpToProduct(float pos)
+        private void LerpToProduct(float pos)
         {
             float newX = 0, newY = 0;
             var anchoredPosition = m_ContentProduct.GetComponent<RectTransform>().anchoredPosition;
@@ -170,7 +173,7 @@ namespace Shopping
             m_ContentProduct.GetComponent<RectTransform>().anchoredPosition = new Vector2(newX, newY);
         }
 
-        Vector2 VectorCarouselDirection(Vector2 increment, float distance)
+        private Vector2 VectorCarouselDirection(Vector2 increment, float distance)
         {
             return Direction switch
             {
@@ -180,7 +183,7 @@ namespace Shopping
             };
         }
 
-        float VectorDistance(Vector3 anchor1, Vector3 anchor0)
+        private float VectorDistance(Vector3 anchor1, Vector3 anchor0)
         {
             return Direction switch
             {
@@ -190,7 +193,7 @@ namespace Shopping
             };
         }
 
-        void ClearShopping(int count)
+        private void ClearShopping(int count)
         {
             for (int i = 0; i < m_ContentProduct.childCount; i++)
             {

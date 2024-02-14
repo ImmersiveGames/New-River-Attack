@@ -4,7 +4,7 @@ namespace RiverAttack
 {
     public class GameStateMenu : GameState
     {
-        const float TIME_TO_FADE_BGM = 0.01f;
+        private const float TIME_TO_FADE_BGM = 0.01f;
         public override IEnumerator OnLoadState()
         {
             yield return null;
@@ -12,6 +12,9 @@ namespace RiverAttack
         public override void EnterState()
         {
             //Debug.Log($"Entra no Estado: Menu");
+            GamePlayManager.instance.inputSystem.Player.Disable();
+            GamePlayManager.instance.inputSystem.UI_Controlls.Enable();
+            PlayerManager.instance.ActivePlayers(false);
             GameAudioManager.instance.ChangeBGM(LevelTypes.Menu, TIME_TO_FADE_BGM);
         }
         public override void UpdateState()

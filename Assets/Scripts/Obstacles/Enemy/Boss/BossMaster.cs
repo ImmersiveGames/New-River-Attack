@@ -4,17 +4,16 @@ namespace RiverAttack
 {
     public class BossMaster: ObstacleMaster
     {
-        const float HEIGHT_Y = 0.3f;
-        [Header("Boss Fight")]
-        int m_BossHp;
-        int m_BossCycles;
+        private const float HEIGHT_Y = 0.3f;
+        [Header("Boss Fight")] private int m_BossHp;
+        private int m_BossCycles;
 
         internal BattleBossSubState actualPosition;
 
         internal Transform targetPlayer;
         [SerializeField] internal float distanceTarget = 20.0f;
 
-        EnemiesBossScriptable m_BossScriptable;
+        private EnemiesBossScriptable m_BossScriptable;
 
 
         #region Events
@@ -36,7 +35,7 @@ namespace RiverAttack
             actualPosition = BattleBossSubState.Top;
         }
 
-        void Start()
+        private void Start()
         {
             targetPlayer = PlayerManager.instance.GetTransformFirstPlayer();
         }
@@ -117,7 +116,8 @@ namespace RiverAttack
         {
             return GetComponent<BossGasStationDrop>();
         }
-        void DamageBoss(int damage, CollisionType collisionType)
+
+        private void DamageBoss(int damage, CollisionType collisionType)
         {
             OnEventBossHit();
             int realDamage = (collisionType != CollisionType.Collider) ? damage : 2;
@@ -153,7 +153,7 @@ namespace RiverAttack
             //Checar as mudanças de ciclo
         }
 
-        void BeatGame()
+        private void BeatGame()
         {
             GameManager.instance.ChangeState(new GameStateEndGame(), "EndGameCredits");
         }

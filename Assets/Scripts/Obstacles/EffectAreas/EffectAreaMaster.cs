@@ -6,9 +6,9 @@ namespace RiverAttack
 {
     public class EffectAreaMaster : ObstacleMaster
     {
-        float m_Timer;
-        float m_TimeToAccess;
-        EffectAreaScriptable m_EffectArea;
+        private float m_Timer;
+        private float m_TimeToAccess;
+        private EffectAreaScriptable m_EffectArea;
 
         #region Events
         public event GeneralEventHandler EventEnterAreaEffect;
@@ -17,13 +17,14 @@ namespace RiverAttack
 
         #region UNITYMETHODS
 
-        void OnTriggerExit(Collider collision)
+        private void OnTriggerExit(Collider collision)
         {
             playerMaster = collision.GetComponentInParent<PlayerMaster>();
             if(playerMaster == null || !playerMaster.shouldPlayerBeReady) return;
             OnEventExitAreaEffect();
         }
-        void OnTriggerStay(Collider collision)
+
+        private void OnTriggerStay(Collider collision)
         {
             playerMaster = collision.GetComponentInParent<PlayerMaster>();
             if (playerMaster == null || !playerMaster.shouldPlayerBeReady) 
@@ -38,7 +39,8 @@ namespace RiverAttack
             if (m_EffectArea != null)
                 m_TimeToAccess = m_EffectArea.timeToAccess;
         }
-        void CollectThis(PlayerMaster collision)
+
+        private void CollectThis(PlayerMaster collision)
         {
             var player = collision.getPlayerSettings;
             if (m_Timer <= 0)
@@ -58,13 +60,14 @@ namespace RiverAttack
         }
 
         #region Calls
-        void OnEventAreaEffect()
+
+        private void OnEventAreaEffect()
         {
             playerMaster.inPowerUp = true;
             EventEnterAreaEffect?.Invoke();
         }
 
-        void OnEventExitAreaEffect()
+        private void OnEventExitAreaEffect()
         {
             playerMaster.inPowerUp = false;
             EventExitAreaEffect?.Invoke();

@@ -5,20 +5,21 @@ namespace RiverAttack
 {
     public class BulletExplosion : Bullets
     {
-        [SerializeField] float radioSize;
-        [SerializeField] float radiusSpeed;
-        [SerializeField] float shakeForce;
-        [SerializeField] float shakeTime;
-        [SerializeField] long millisecondsVibrate;
-        
-        double m_TParam;
-        
-        float m_StartTime;
-        
-        ParticleSystem m_ParticleSystem;
-        AudioSource m_AudioSource;
-        SphereCollider m_Collider;
-        void Start()
+        [SerializeField] private float radioSize;
+        [SerializeField] private float radiusSpeed;
+        [SerializeField] private float shakeForce;
+        [SerializeField] private float shakeTime;
+        [SerializeField] private long millisecondsVibrate;
+
+        private double m_TParam;
+
+        private float m_StartTime;
+
+        private ParticleSystem m_ParticleSystem;
+        private AudioSource m_AudioSource;
+        private SphereCollider m_Collider;
+
+        private void Start()
         {
             m_AudioSource = GetComponent<AudioSource>();
             audioShoot.Play(m_AudioSource);
@@ -30,7 +31,8 @@ namespace RiverAttack
             m_StartTime = Time.time + bulletLifeTime;
             
         }
-        void FixedUpdate()
+
+        private void FixedUpdate()
         {
             m_TParam += Time.deltaTime * radiusSpeed;
             CameraShake.ShakeCamera(shakeForce, shakeTime);
@@ -43,11 +45,13 @@ namespace RiverAttack
             m_Collider.radius = Mathf.Lerp(0.3f, radioSize, (float)m_TParam);
             AutoDestroy();
         }
-        void OnBecameInvisible()
+
+        private void OnBecameInvisible()
         {
             Invoke(nameof(DestroyMe), .01f);
         }
-        void AutoDestroy()
+
+        private void AutoDestroy()
         {
             if (Time.time >= m_StartTime)
             {

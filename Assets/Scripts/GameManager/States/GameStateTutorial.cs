@@ -3,7 +3,7 @@ namespace RiverAttack
 {
     public class GameStateTutorial: GameState
     {
-        const float TIME_TO_FADE_BGM = 0.01f;
+        private const float TIME_TO_FADE_BGM = 0.01f;
         public override IEnumerator OnLoadState()
         {
             yield return null;

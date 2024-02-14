@@ -19,8 +19,9 @@ public class LocalizeDropdown : MonoBehaviour
  
     public List<LocalizedDropdownOption> options;
     public int selectedOptionIndex = 0;
-    Locale m_CurrentLocale = null;
-    Dropdown dropdown
+    private Locale m_CurrentLocale = null;
+
+    private Dropdown dropdown
     {
         get
         {
@@ -29,21 +30,20 @@ public class LocalizeDropdown : MonoBehaviour
     }
 
 
-    void Start()
+    private void Start()
     {
         GetLocale();
         UpdateDropdown(m_CurrentLocale);
         LocalizationSettings.SelectedLocaleChanged += UpdateDropdown;
     }
- 
- 
-    void OnEnable()=> LocalizationSettings.SelectedLocaleChanged += UpdateDropdown;
-    void OnDisable()=> LocalizationSettings.SelectedLocaleChanged -= UpdateDropdown;
-    void OnDestroy() => LocalizationSettings.SelectedLocaleChanged -= UpdateDropdown;
- 
- 
- 
-    void GetLocale()
+
+
+    private void OnEnable()=> LocalizationSettings.SelectedLocaleChanged += UpdateDropdown;
+    private void OnDisable()=> LocalizationSettings.SelectedLocaleChanged -= UpdateDropdown;
+    private void OnDestroy() => LocalizationSettings.SelectedLocaleChanged -= UpdateDropdown;
+
+
+    private void GetLocale()
     {
         var locale = LocalizationSettings.SelectedLocale;
         if (m_CurrentLocale != null && locale != m_CurrentLocale)
@@ -51,9 +51,9 @@ public class LocalizeDropdown : MonoBehaviour
             m_CurrentLocale = locale;
         }
     }
- 
- 
-    void UpdateDropdown(Locale locale)
+
+
+    private void UpdateDropdown(Locale locale)
     {
         selectedOptionIndex = dropdown.value;
         dropdown.ClearOptions();

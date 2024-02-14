@@ -7,8 +7,8 @@ namespace RiverAttack
 {
     public class GameTimelineManager : Singleton<GameTimelineManager>
     {
-        [Header("Camera Settings"), SerializeField] 
-        CinemachineVirtualCamera virtualCamera;
+        [Header("Camera Settings"), SerializeField]
+        private CinemachineVirtualCamera virtualCamera;
         
         [Header("CutScenes Settings")]
         [SerializeField]
@@ -16,10 +16,11 @@ namespace RiverAttack
         [SerializeField]
         internal PlayableDirector endCutDirector;
 
-        GameManager m_GameManager;
+        private GameManager m_GameManager;
 
         #region UNITYMETHODS
-        void Start()
+
+        private void Start()
         {
             m_GameManager = GameManager.instance;
             openCutDirector.gameObject.SetActive(true);
@@ -62,8 +63,8 @@ namespace RiverAttack
             }
             Invoke(nameof(ChangeEndGame), 3f);
         }
-        
-        void ChangeEndGame()
+
+        private void ChangeEndGame()
         {
             if(m_GameManager.gameModes == GameManager.GameModes.Classic)
                 m_GameManager.ChangeState(new GameStateEndGame(), GameManager.GameScenes.EndGameCredits.ToString());

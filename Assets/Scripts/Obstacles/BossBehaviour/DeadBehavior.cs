@@ -3,8 +3,8 @@ namespace RiverAttack
 {
     public class DeadBehavior: IBossBehavior
     {
-        readonly BossMaster m_BossMaster;
-        bool m_Finished;
+        private readonly BossMaster m_BossMaster;
+        private bool m_Finished;
         internal DeadBehavior(BossMaster bossMaster)
         {
             m_BossMaster = bossMaster;

@@ -5,16 +5,17 @@ namespace RiverAttack
 {
     public class PlayerAnimator : MonoBehaviour
     {
-        readonly int m_DirX = Animator.StringToHash("DirX");
-        readonly int m_DirY = Animator.StringToHash("DirY");
-        readonly int m_GotHit = Animator.StringToHash("GotHit");
+        private readonly int m_DirX = Animator.StringToHash("DirX");
+        private readonly int m_DirY = Animator.StringToHash("DirY");
+        private readonly int m_GotHit = Animator.StringToHash("GotHit");
 
-        Animator m_Animator;
-        Animator m_AnimatorSkin;
-        PlayerMaster m_PlayerMaster;
+        private Animator m_Animator;
+        private Animator m_AnimatorSkin;
+        private PlayerMaster m_PlayerMaster;
 
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
             m_PlayerMaster.EventPlayerMasterControllerMovement += AnimationMovement;
@@ -22,8 +23,8 @@ namespace RiverAttack
             m_PlayerMaster.EventPlayerMasterBossHit += AnimationHit;
             m_PlayerMaster.EventPlayerMasterUpdateSkin += UpdateAnimator;
         }
-        
-        void OnDisable()
+
+        private void OnDisable()
         {
             m_PlayerMaster.EventPlayerMasterControllerMovement -= AnimationMovement;
             m_PlayerMaster.EventPlayerMasterRespawn -= AnimationReset;
@@ -31,13 +32,14 @@ namespace RiverAttack
             m_PlayerMaster.EventPlayerMasterUpdateSkin -= UpdateAnimator;
         }
   #endregion
-        void SetInitialReferences()
+
+  private void SetInitialReferences()
         {
             m_PlayerMaster = GetComponent<PlayerMaster>();
             m_Animator = GetComponent<Animator>();
         }
 
-        void UpdateAnimator()
+        private void UpdateAnimator()
         {
             if (m_AnimatorSkin)
                 return;
@@ -45,18 +47,20 @@ namespace RiverAttack
             m_AnimatorSkin = skinPart.GetComponent<Animator>();
             AnimationReset();
         }
-        void AnimationMovement(Vector2 dir)
+
+        private void AnimationMovement(Vector2 dir)
         {
             m_Animator.SetFloat(m_DirX, dir.x);
             m_Animator.SetFloat(m_DirY, dir.y);
         }
 
-        void AnimationReset()
+        private void AnimationReset()
         {
             m_Animator.SetFloat(m_DirX, 0);
             m_Animator.SetFloat(m_DirY, 0);
         }
-        void AnimationHit(bool active)
+
+        private void AnimationHit(bool active)
         {
             m_AnimatorSkin.SetBool(m_GotHit,active);
         }

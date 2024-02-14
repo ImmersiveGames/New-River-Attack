@@ -3,7 +3,7 @@ namespace RiverAttack
 {
     public class EnemiesBridges : MonoBehaviour
     {
-        EnemiesMaster m_EnemiesMaster;
+        private EnemiesMaster m_EnemiesMaster;
         
 
         public void IsFinish()

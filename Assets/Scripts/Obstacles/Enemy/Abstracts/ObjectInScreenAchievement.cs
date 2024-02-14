@@ -3,9 +3,9 @@ namespace RiverAttack
 {
     public class ObjectInScreenAchievement: MonoBehaviour
     {
-        [SerializeField]
-        string idAchievement;
-        void OnBecameVisible()
+        [SerializeField] private string idAchievement;
+
+        private void OnBecameVisible()
         {
             GameSteamManager.UnlockAchievement(idAchievement);
         }

@@ -4,8 +4,9 @@ namespace RiverAttack
 {
     public class EventSystemFirstSelect : MonoBehaviour
     {
-        EventSystem m_EventSystem;
-        void Awake()
+        private EventSystem m_EventSystem;
+
+        private void Awake()
         {
             m_EventSystem = EventSystem.current;
         }

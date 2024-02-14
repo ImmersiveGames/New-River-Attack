@@ -4,28 +4,28 @@ using UnityEngine;
 
 public class ObstacleShakeCamera : MonoBehaviour
 {
-    [SerializeField]
-    float shakeIntensity;
-    [SerializeField]
-    float shakeTime;
-    ObstacleMaster m_ObstacleMaster;
+    [SerializeField] private float shakeIntensity;
+    [SerializeField] private float shakeTime;
+    private ObstacleMaster m_ObstacleMaster;
     #region UNITYMETHODS
-    void Awake()
+
+    private void Awake()
     {
         m_ObstacleMaster = GetComponent<ObstacleMaster>();
     }
-    void OnEnable()
+
+    private void OnEnable()
     {
         m_ObstacleMaster.EventObstacleMasterHit += ShakeCamOnExplode;
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         m_ObstacleMaster.EventObstacleMasterHit -= ShakeCamOnExplode;
     }
     #endregion
 
-    void ShakeCamOnExplode()
+    private void ShakeCamOnExplode()
     {
         CameraShake.ShakeCamera(shakeIntensity, shakeTime);
     }

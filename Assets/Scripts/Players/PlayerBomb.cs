@@ -7,23 +7,23 @@ namespace RiverAttack
     {
         [Header("Bomb Settings")]
         [SerializeField]
-        Vector3 bombOffset;
-        [SerializeField]
-        GameObject prefabBomb;
+        private Vector3 bombOffset;
+        [SerializeField] private GameObject prefabBomb;
 
-        PlayerMaster m_PlayerMaster;
-        GamePlayManager m_GamePlayManager;
-        PlayerSettings m_PlayerSettings;
-        PlayersInputActions m_PlayersInputActions;
-        GamePlayingLog m_GamePlayingLog;
+        private PlayerMaster m_PlayerMaster;
+        private GamePlayManager m_GamePlayManager;
+        private PlayerSettings m_PlayerSettings;
+        private PlayersInputActions m_PlayersInputActions;
+        private GamePlayingLog m_GamePlayingLog;
 
         #region UNITYMETHODS
-        
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
         }
-        void Start()
+
+        private void Start()
         {
             m_PlayersInputActions = GamePlayManager.instance.inputSystem;
             m_PlayerSettings.bombs = GameSettings.instance.startBombs;
@@ -31,7 +31,7 @@ namespace RiverAttack
         }
   #endregion
 
-        void SetInitialReferences()
+  private void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_PlayerMaster = GetComponent<PlayerMaster>();
@@ -58,7 +58,7 @@ namespace RiverAttack
             //throw new NotImplementedException();
         }
 
-        void LogGamePlay(int bomb)
+        private void LogGamePlay(int bomb)
         {
             m_GamePlayingLog.bombSpent += bomb;
         }

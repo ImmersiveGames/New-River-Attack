@@ -9,15 +9,15 @@ namespace RiverAttack
 {
     public class GameSteamManager: MonoBehaviour
     {
-        static GameSteamManager _instance;
-        const int STEAM_ID = 2777110;
-        const string LEADERBOARD_NAME = "River_Attack_HiScore";
-        static IEnumerable<Achievement> _serverAchievements;
+        private static GameSteamManager _instance;
+        private const int STEAM_ID = 2777110;
+        private const string LEADERBOARD_NAME = "River_Attack_HiScore";
+        private static IEnumerable<Achievement> _serverAchievements;
         public bool resetAchievementsOnStart;
         public bool demoMode;
-        bool m_ApplicationHasQuit;
+        private bool m_ApplicationHasQuit;
 
-        static Leaderboard? _leaderboard;
+        private static Leaderboard? _leaderboard;
 
         public static bool connectedToSteam
         {
@@ -25,7 +25,8 @@ namespace RiverAttack
             private set;
         }
         #region UNITYMETHODS
-        async void Awake()
+
+        private async void Awake()
         {
             if (_instance == null)
             {
@@ -64,7 +65,8 @@ namespace RiverAttack
                 Destroy(gameObject);
             }
         }
-        void Start()
+
+        private void Start()
         {
             if (!SteamClient.IsValid) return;
             if (resetAchievementsOnStart)
@@ -78,11 +80,13 @@ namespace RiverAttack
                 Debug.Log( $"{a.Name} ({a.State}) {a.Identifier}" );
             }*/
         }
-        void Update()
+
+        private void Update()
         {
             SteamClient.RunCallbacks();
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             GameCleanup();
         }
@@ -91,13 +95,14 @@ namespace RiverAttack
             //base.OnDestroy();
             GameCleanup();
         }
-        void OnApplicationQuit()
+
+        private void OnApplicationQuit()
         {
             GameCleanup();
         }
   #endregion
-        
-        void ReconcileMissedAchievements()
+
+  private void ReconcileMissedAchievements()
         {
             // Aqui ele coloca os achievementes offline para atualizar.
             
@@ -151,7 +156,7 @@ namespace RiverAttack
         }
 
         // se um archvment foi desbloqueado existe essa função para teste
-        static void AchievementChanged( Achievement ach, int currentProgress, int progress )
+        private static void AchievementChanged( Achievement ach, int currentProgress, int progress )
         {
             if ( ach.State )
             {
@@ -231,7 +236,8 @@ namespace RiverAttack
             if (!connectedToSteam) return;
             SteamUserStats.StoreStats();
         }
-        void GameCleanup()
+
+        private void GameCleanup()
         {
             if (m_ApplicationHasQuit)
                 return;
@@ -241,7 +247,7 @@ namespace RiverAttack
             SteamClient.Shutdown();
         }
 
-        static void ClearAllStats(bool includeAchievements)
+        private static void ClearAllStats(bool includeAchievements)
         {
             SteamUserStats.ResetAll( includeAchievements );
             SteamUserStats.StoreStats();

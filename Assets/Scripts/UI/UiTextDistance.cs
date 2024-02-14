@@ -4,34 +4,37 @@ namespace RiverAttack
 {
     public class UiTextDistance : MonoBehaviour
     {
-        GamePlayManager m_GamePlayManager;
-        PlayerSettings m_PlayerSettings;
-        TMP_Text m_TMPTextDistance;
+        private GamePlayManager m_GamePlayManager;
+        private PlayerSettings m_PlayerSettings;
+        private TMP_Text m_TMPTextDistance;
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
             m_GamePlayManager.EventUpdateDistance += UpdateDistance;
         }
-        void Start()
+
+        private void Start()
         {
             int distance = Mathf.FloorToInt(m_PlayerSettings.distance);
             UpdateDistance(distance);
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             m_GamePlayManager.EventUpdateDistance -= UpdateDistance;
         }
   #endregion
 
-        void SetInitialReferences()
+  private void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_PlayerSettings = PlayerManager.instance.GetPlayerSettingsByIndex();
             m_TMPTextDistance = GetComponent<TMP_Text>();
         }
 
-        void UpdateDistance(int distance)
+        private void UpdateDistance(int distance)
         {
             m_TMPTextDistance.text = distance.ToString();
         }

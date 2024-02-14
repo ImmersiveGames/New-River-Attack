@@ -5,17 +5,17 @@ namespace RiverAttack
 {
     public class StateShoot : IShoot
     {
-        IShoot m_ShootImplementation;
-        float m_Cadence;
-        float m_BulletSpeed;
-        float m_StartCadence;
-        float m_StartBulletSpeed;
-        float m_BulletLifeTime;
-        Transform m_SpawnPoint;
-        readonly EnemiesShoot m_EnemiesShoot;
-        EnemiesMaster m_EnemiesMaster;
-        EnemiesSetDifficulty m_EnemiesSetDifficulty;
-        readonly IHasPool m_MyPool;
+        private IShoot m_ShootImplementation;
+        private float m_Cadence;
+        private float m_BulletSpeed;
+        private float m_StartCadence;
+        private float m_StartBulletSpeed;
+        private float m_BulletLifeTime;
+        private Transform m_SpawnPoint;
+        private readonly EnemiesShoot m_EnemiesShoot;
+        private EnemiesMaster m_EnemiesMaster;
+        private EnemiesSetDifficulty m_EnemiesSetDifficulty;
+        private readonly IHasPool m_MyPool;
 
         public StateShoot(EnemiesShoot enemiesShoot)
         {
@@ -56,7 +56,8 @@ namespace RiverAttack
             //Debug.Log("Estado: Shoot - Saindo");
             // Coloque aqui as ações a serem executadas ao sair do estado atirar
         }
-        void Fire()
+
+        private void Fire()
         {
             if (GamePlayManager.instance.playerDead) return;
             //Debug.Log("Shoot!");

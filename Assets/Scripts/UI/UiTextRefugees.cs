@@ -5,29 +5,32 @@ namespace RiverAttack
 {
     public class UiTextRefugees : MonoBehaviour
     {
-        GamePlayManager m_GamePlayManager;
-        PlayerSettings m_PlayerSettings;
-        TMP_Text m_TMPTextRefugees;
-        Animator m_Animator;
-        static readonly int RefugeesBounce = Animator.StringToHash("Bounce");
+        private GamePlayManager m_GamePlayManager;
+        private PlayerSettings m_PlayerSettings;
+        private TMP_Text m_TMPTextRefugees;
+        private Animator m_Animator;
+        private static readonly int RefugeesBounce = Animator.StringToHash("Bounce");
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
             m_GamePlayManager.EventUpdateRefugees += UpdateRefugees;
         }
-        void Start()
+
+        private void Start()
         {
             int refugees = m_PlayerSettings.wealth;
             UpdateRefugees(refugees);
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             m_GamePlayManager.EventUpdateRefugees -= UpdateRefugees;
         }
   #endregion
 
-        void SetInitialReferences()
+  private void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_PlayerSettings = PlayerManager.instance.GetPlayerSettingsByIndex();
@@ -35,7 +38,7 @@ namespace RiverAttack
             m_Animator = GetComponent<Animator>();
         }
 
-        void UpdateRefugees(int refugee)
+        private void UpdateRefugees(int refugee)
         {
             m_Animator.SetTrigger(RefugeesBounce);
             m_TMPTextRefugees.text = refugee.ToString();

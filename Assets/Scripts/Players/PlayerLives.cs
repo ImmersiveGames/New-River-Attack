@@ -4,25 +4,28 @@ namespace RiverAttack
 {
     public class PlayerLives : MonoBehaviour
     {
-        PlayerMaster m_PlayerMaster;
-        GamePlayManager m_GamePlayManager;
-        PlayerSettings m_PlayerSettings;
-        GamePlayingLog m_GamePlayingLog;
+        private PlayerMaster m_PlayerMaster;
+        private GamePlayManager m_GamePlayManager;
+        private PlayerSettings m_PlayerSettings;
+        private GamePlayingLog m_GamePlayingLog;
 
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
             m_PlayerMaster.EventPlayerMasterHit += LoseLive;
             m_GamePlayManager.EventUpdateScore += CheckNewLives;
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             m_PlayerMaster.EventPlayerMasterHit -= LoseLive;
             m_GamePlayManager.EventUpdateScore -= CheckNewLives;
         }
   #endregion
-        void SetInitialReferences()
+
+  private void SetInitialReferences()
         {
             m_PlayerMaster = GetComponent<PlayerMaster>();
             m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
@@ -30,13 +33,15 @@ namespace RiverAttack
             m_GamePlayManager = GamePlayManager.instance;
             m_GamePlayingLog = m_GamePlayManager.gamePlayingLog;
         }
-        void LoseLive()
+
+        private void LoseLive()
         {
             m_PlayerSettings.lives -= 1;
             LogGamePlay(1);
             m_GamePlayManager.OnEventUpdateLives(m_PlayerSettings.lives);
         }
-        void CheckNewLives(int score)
+
+        private void CheckNewLives(int score)
         {
             int scoreToLive = GameSettings.instance.multiplyScoreForLives;
             if (score < m_PlayerMaster.nextScoreForLive) return;
@@ -45,7 +50,8 @@ namespace RiverAttack
             m_PlayerSettings.lives++;
             m_GamePlayManager.OnEventUpdateLives(m_PlayerSettings.lives);
         }
-        void LogGamePlay(int live)
+
+        private void LogGamePlay(int live)
         {
             m_GamePlayingLog.livesSpent += live;
         }

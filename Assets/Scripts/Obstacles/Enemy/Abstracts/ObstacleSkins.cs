@@ -4,18 +4,17 @@ namespace RiverAttack
 {
     public class ObstacleSkins : MonoBehaviour
     {
-        [SerializeField]
-        int indexStartSkin;
+        [SerializeField] private int indexStartSkin;
         public bool randomSkin;
         [SerializeField]
         protected GameObject[] skins;
 
-        void Start()
+        private void Start()
         {
             LoadDefaultSkin();
         }
 
-        void LoadDefaultSkin()
+        private void LoadDefaultSkin()
         {
             if (skins == null) return;
             if (randomSkin && skins.Length > 1)

@@ -3,7 +3,7 @@ namespace RiverAttack
 {
     public class GameStateOpenCutScene : GameState
     {
-        const float TIME_TO_FADE_BGM = 0.1f;
+        private const float TIME_TO_FADE_BGM = 0.1f;
         public override IEnumerator OnLoadState()
         {
             var startLevel = GameManager.instance.GetLevel();

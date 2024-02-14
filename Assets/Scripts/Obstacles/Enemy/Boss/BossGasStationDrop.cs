@@ -5,14 +5,16 @@ namespace RiverAttack
     public class BossGasStationDrop : MonoBehaviour, IHasPool
     {
         [Header("Gas Station Settings")]
-        [SerializeField] GameObject gasStation;
-        [SerializeField] int startPool;
+        [SerializeField]
+        private GameObject gasStation;
+        [SerializeField] private int startPool;
         [SerializeField] internal int[] dropGasStation;
-        [SerializeField] AudioEventSample dropGasStationSound;
+        [SerializeField] private AudioEventSample dropGasStationSound;
         
         internal Transform spawnPoint;
-        AudioSource m_AudioSource;
-        void Start()
+        private AudioSource m_AudioSource;
+
+        private void Start()
         {
             m_AudioSource = GetComponent<AudioSource>();
             dropGasStation ??= new[] { 2 };

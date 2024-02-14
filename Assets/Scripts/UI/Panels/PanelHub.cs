@@ -6,29 +6,31 @@ namespace RiverAttack
 {
     public class PanelHub: MonoBehaviour
     {
-        [SerializeField] TMP_Text missionName;
-        [SerializeField] AudioEvent clickSound;
-        int m_NextIndex;
+        [SerializeField] private TMP_Text missionName;
+        [SerializeField] private AudioEvent clickSound;
+        private int m_NextIndex;
 
-        PlayersInputActions m_InputSystem;
-        GameHubManager m_GameHubManager;
+        private PlayersInputActions m_InputSystem;
+        private GameHubManager m_GameHubManager;
 
-        bool m_PushButtonStart;
+        private bool m_PushButtonStart;
 
         #region UNITYMETHODS
-        void Awake()
+
+        private void Awake()
         {
             m_InputSystem = new PlayersInputActions();
-            m_InputSystem.UI_Controlls.Disable();
-            m_InputSystem.Player.Enable();
+            //m_InputSystem.UI_Controlls.Disable();
+            //m_InputSystem.Player.Enable();
         }
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetControllersInput();
             m_GameHubManager = GameHubManager.instance;
         }
 
-        void Start()
+        private void Start()
         {
             m_GameHubManager.readyHub = true;
             m_NextIndex = m_GameHubManager.missions.FindIndex(x => x.levels == m_GameHubManager.gamePlayingLog.activeMission);
@@ -36,15 +38,15 @@ namespace RiverAttack
             //Debug.Log($"Name {m_GameHubManager.gamePlayingLog.activeMission.levelName}");
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
-            m_InputSystem.UI_Controlls.Disable();
+            //m_InputSystem.UI_Controlls.Disable();
         }
         #endregion
 
-        void SetControllersInput()
+        private void SetControllersInput()
         {
-            m_InputSystem.UI_Controlls.Enable();
+            //m_InputSystem.UI_Controlls.Enable();
             m_InputSystem.UI_Controlls.StartButton.performed += _ => ButtonStartMission();
             m_InputSystem.UI_Controlls.BackButton.performed += _ => ButtonReturnInitialMenu();
             m_InputSystem.UI_Controlls.LeftSelection.performed += _ => ButtonNextMission(-1);
@@ -83,7 +85,7 @@ namespace RiverAttack
             m_PushButtonStart = false;
         }
 
-        static int GetHubIndex(int actual, int increment, IReadOnlyList<HubMissions> missions, ICollection<Levels> finish)
+        private static int GetHubIndex(int actual, int increment, IReadOnlyList<HubMissions> missions, ICollection<Levels> finish)
         {
             int realIndex = actual + increment;
             int max = missions.Count;

@@ -7,36 +7,36 @@ namespace RiverAttack
     public class EnemiesDropItem : MonoBehaviour
     {
         //ListDropItems itemsVariables;
-        [SerializeField]
-        float dropHeight = 1;
-        [SerializeField]
-        float timeToAutoDestroy;
+        [SerializeField] private float dropHeight = 1;
+        [SerializeField] private float timeToAutoDestroy;
         [SerializeField, Tooltip("Se o mínimo for diferente de 0 o valor é aleatório entre min e max."), MinMaxSlider(0, 1)]
-        Vector2 dropChance;
+        private Vector2 dropChance;
 
-        ListDropItems m_ItemsVariables;
-        EnemiesMaster m_EnemyMaster;
-        GameObject m_ItemDrop;
+        private ListDropItems m_ItemsVariables;
+        private EnemiesMaster m_EnemyMaster;
+        private GameObject m_ItemDrop;
 
         #region UNITY METHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
             m_EnemyMaster.EventObstacleMasterHit += DropItem;
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             m_EnemyMaster.EventObstacleMasterHit -= DropItem;
         }
   #endregion
 
-        void SetInitialReferences()
+  private void SetInitialReferences()
         {
             m_EnemyMaster = GetComponent<EnemiesMaster>();
             m_ItemsVariables = m_EnemyMaster.enemy.listDropItems;
         }
         //TODO: implementar Dropar mais de 1 item e pois precisa alterar a posição;
-        void DropItem()
+        private void DropItem()
         {
             if (dropChance.y <= 0 || m_ItemsVariables == null) return;
             float checkChance = (dropChance.x != 0) ? Random.Range(dropChance.x, dropChance.y) : dropChance.y;
@@ -55,7 +55,8 @@ namespace RiverAttack
             if (timeToAutoDestroy > 0)
                 Invoke(nameof(DestroyDrop), timeToAutoDestroy);
         }
-        void DestroyDrop()
+
+        private void DestroyDrop()
         {
             Destroy(m_ItemDrop);
         }

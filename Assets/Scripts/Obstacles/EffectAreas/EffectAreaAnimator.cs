@@ -4,44 +4,51 @@ namespace RiverAttack
     public sealed class EffectAreaAnimator : MonoBehaviour
     {
         public string onFueling;
-        Animator m_Animator;
+        private Animator m_Animator;
 
-        GamePlayManager m_GamePlayManager;
-        EffectAreaMaster m_EffectAreaMaster;
+        private GamePlayManager m_GamePlayManager;
+
+        private EffectAreaMaster m_EffectAreaMaster;
         // Start is called before the first frame update
 
         #region UNIYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
             m_GamePlayManager.EventReSpawnEnemiesMaster += ResetAnimation;
             m_GamePlayManager.EventEnemiesMasterForceRespawn += ResetAnimation;
             m_GamePlayManager.EventOtherEnemiesKillPlayer += ResetAnimation;
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             m_GamePlayManager.EventReSpawnEnemiesMaster -= ResetAnimation;
             m_GamePlayManager.EventEnemiesMasterForceRespawn -= ResetAnimation;
             m_GamePlayManager.EventOtherEnemiesKillPlayer -= ResetAnimation;
         }
-        void OnTriggerEnter(Collider other)
+
+        private void OnTriggerEnter(Collider other)
         {
             if (!other.GetComponentInParent<PlayerMaster>()) return;
             OnFuelingAnimation(true);
         }
-        void OnTriggerExit(Collider other)
+
+        private void OnTriggerExit(Collider other)
         {
             if (!other.GetComponentInParent<PlayerMaster>()) return;
             OnFuelingAnimation(false);
         }
         #endregion
-        void SetInitialReferences()
+
+        private void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_EffectAreaMaster = GetComponent<EffectAreaMaster>();
             m_Animator = GetComponentInChildren<Animator>();
         }
-        void OnFuelingAnimation(bool activeBool)
+
+        private void OnFuelingAnimation(bool activeBool)
         {
             if (!m_Animator)
             {
@@ -53,7 +60,7 @@ namespace RiverAttack
             m_Animator.SetBool(onFueling, activeBool);
         }
 
-        void ResetAnimation()
+        private void ResetAnimation()
         {
             if (!string.IsNullOrEmpty(onFueling))
                 m_Animator.SetBool(onFueling, false);

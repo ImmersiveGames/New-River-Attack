@@ -9,41 +9,30 @@ namespace Shopping
 {
     public class ShopMaster : Singleton<ShopMaster>
     {
-        [SerializeField]
-        Transform contentShop;
-        [SerializeField]
-        GameObject objProduct;
-        [SerializeField]
-        RectTransform refCenter;
-        [SerializeField]
-        ListShopStock productStock;
-        [SerializeField]
-        ScrollRect scrollBarShop;
-        [SerializeField]
-        TMP_Text wealthTMPText;
-        [SerializeField]
-        GameObject productForward, productBackward;
-        [SerializeField]
-        MenuPlayerSkinManager mainMenuPlayer;
-        [SerializeField]
-        ListShopProduct allSkins;
+        [SerializeField] private Transform contentShop;
+        [SerializeField] private GameObject objProduct;
+        [SerializeField] private RectTransform refCenter;
+        [SerializeField] private ListShopStock productStock;
+        [SerializeField] private ScrollRect scrollBarShop;
+        [SerializeField] private TMP_Text wealthTMPText;
+        [SerializeField] private GameObject productForward, productBackward;
+        [SerializeField] private MenuPlayerSkinManager mainMenuPlayer;
+        [SerializeField] private ListShopProduct allSkins;
 
-        [Header("Carousel"), SerializeField]
-        bool infinityLooping;
-        [SerializeField]
-        float spaceBetweenPanels, maxPosition;
+        [Header("Carousel"), SerializeField] private bool infinityLooping;
+        [SerializeField] private float spaceBetweenPanels, maxPosition;
         public Color selectedColor;
         public Color buyerColor;
         public Color normalColor;
 
         public AudioClip clickSound;
 
-        int m_LastSelectedSkin;
+        private int m_LastSelectedSkin;
 
-        ShopCarousel m_Shop;
-        AudioSource m_AudioSource;
-        PlayersInputActions m_InputSystem;
-        [SerializeField] PlayerSettings playerSettings;
+        private ShopCarousel m_Shop;
+        private AudioSource m_AudioSource;
+        private PlayersInputActions m_InputSystem;
+        [SerializeField] private PlayerSettings playerSettings;
 
         #region Delegates
         public delegate void GeneralUpdateButtons(PlayerSettings player);
@@ -53,7 +42,8 @@ namespace Shopping
         //TODO: Diferenciar que está atualmente Selecionado e as que são possiveis de compra.
   #endregion
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
             SetControllersInput();
@@ -61,7 +51,8 @@ namespace Shopping
             SetupShop(playerSettings);
             scrollBarShop.horizontalScrollbar.numberOfSteps = m_Shop.getProducts.Length;
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             m_InputSystem.UI_Controlls.Disable();
         }
@@ -70,13 +61,14 @@ namespace Shopping
             //base.OnDestroy();
         }
   #endregion
-        void SetInitialReferences()
+
+  private void SetInitialReferences()
         {
             m_AudioSource = GetComponentInParent<AudioSource>();
             if (m_AudioSource == null) Debug.LogWarning("Componente de Audio não encontrado.");
         }
 
-        void SetControllersInput()
+        private void SetControllersInput()
         {
             m_InputSystem = new PlayersInputActions();
             m_InputSystem.UI_Controlls.Enable();
@@ -86,7 +78,8 @@ namespace Shopping
             m_InputSystem.UI_Controlls.LeftSelection.performed += _ => ControllerNavigationArrows(-1);
             m_InputSystem.UI_Controlls.RightSelection.performed += _ => ControllerNavigationArrows(1);
         }
-        void SetupShop(PlayerSettings player)
+
+        private void SetupShop(PlayerSettings player)
         {
             m_Shop = new ShopCarousel(contentShop, objProduct, refCenter)
             {
@@ -110,7 +103,8 @@ namespace Shopping
                     item.getBuyButton.GetComponent<Image>().color = buyerColor;
             }
         }
-        void BuyThisItem(PlayerSettings player, ShopProductStock product)
+
+        private void BuyThisItem(PlayerSettings player, ShopProductStock product)
         {
             if (!product.AvailableInStock() || !product.HaveMoneyToBuy(player))
                 return;
@@ -132,7 +126,8 @@ namespace Shopping
             }
             
         }
-        void SelectThisItem(PlayerSettings player, ShopProductStock shopProductStock)
+
+        private void SelectThisItem(PlayerSettings player, ShopProductStock shopProductStock)
         {
             shopProductStock.shopProduct.ConsumeProduct(player);
             player.playerSkin = shopProductStock.shopProduct as ShopProductSkin;
@@ -149,20 +144,23 @@ namespace Shopping
 
             m_AudioSource.PlayOneShot(clickSound);
         }
-        void WealthDisplayUpdate(int wealth)
+
+        private void WealthDisplayUpdate(int wealth)
         {
             wealthTMPText.text = wealth.ToString();
         }
 
         #region INPUT BUTTONS
-        void BuyInputButton(InputAction.CallbackContext context)
+
+        private void BuyInputButton(InputAction.CallbackContext context)
         {
             //Debug.Log("Comprar o item");
             var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
 
             BuyThisItem(playerSettings, item.productInStock);
         }
-        void SelectButton(InputAction.CallbackContext context)
+
+        private void SelectButton(InputAction.CallbackContext context)
         {
 
             var item = m_Shop.getProducts[m_Shop.getActualProduct].GetComponent<UIItemShop>();
@@ -174,7 +172,8 @@ namespace Shopping
 
             SelectThisItem(playerSettings, item.productInStock);
         }
-        void ControllerNavigationArrows(int value)
+
+        private void ControllerNavigationArrows(int value)
         {
             switch (value)
             {
@@ -221,11 +220,13 @@ namespace Shopping
   #endregion
 
         #region Calls
-        void CallEventButtonSelect(PlayerSettings player)
+
+        private void CallEventButtonSelect(PlayerSettings player)
         {
             eventButtonSelect?.Invoke(player);
         }
-        void CallEventButtonBuy(PlayerSettings player)
+
+        private void CallEventButtonBuy(PlayerSettings player)
         {
             eventButtonBuy?.Invoke(player);
         }

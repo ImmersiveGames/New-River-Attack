@@ -8,14 +8,14 @@ namespace Utils
 
         private float m_TileSizeZ;
 
-        void Start()
+        private void Start()
         {
             // Obtém o tamanho da malha do primeiro filho no eixo Z
             var meshRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
             m_TileSizeZ = meshRenderer.bounds.size.z;
         }
 
-        void Update()
+        private void Update()
         {
             // Move cada tile para baixo no eixo Z
             for (int i = 0; i < transform.childCount; i++)
@@ -32,7 +32,7 @@ namespace Utils
             }
         }
 
-        void ResetTilePosition(Transform tile)
+        private void ResetTilePosition(Transform tile)
         {
             // Move o tile para o final da fila
             tile.Translate(Vector3.forward * (m_TileSizeZ * (transform.childCount - 1)));

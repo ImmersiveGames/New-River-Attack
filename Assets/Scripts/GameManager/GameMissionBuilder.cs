@@ -6,41 +6,42 @@ namespace RiverAttack
 {
     public class GameMissionBuilder : Singleton<GameMissionBuilder>
     {
-        const float TIME_TO_FADE_BGM = 0.1f;
+        private const float TIME_TO_FADE_BGM = 0.1f;
         
         [Header("Level Settings"), SerializeField]
-        Levels actualLevel;
-        int m_ActualPathIndex;
-        [SerializeField]
-        int maxLevels;
+        private Levels actualLevel;
+
+        private int m_ActualPathIndex;
+        [SerializeField] private int maxLevels;
 
         [Header("Level HUB Settings")]
         public List<Levels> levelsFinishList = new List<Levels>();
 
         [Header("INTERNAL SETTINGS")]
         [SerializeField]
-        List<float> pathMilestones = new List<float>();
-        [SerializeField]
-        List<GameObject> poolPathLevels = new List<GameObject>();
-        [SerializeField]
-        List<GameObject> poolEnemyLevels = new List<GameObject>();
-        GameObject m_LevelRoot;
-        GamePlayManager m_GamePlayManager;
+        private List<float> pathMilestones = new List<float>();
+        [SerializeField] private List<GameObject> poolPathLevels = new List<GameObject>();
+        [SerializeField] private List<GameObject> poolEnemyLevels = new List<GameObject>();
+        private GameObject m_LevelRoot;
+        private GamePlayManager m_GamePlayManager;
         
 
 #region UNITYMETHODS
-        void OnEnable()
+
+private void OnEnable()
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_GamePlayManager.EventBuildPathUpdate += BuildNextPathForPoolLevel;
         }
-        void Start()
+
+        private void Start()
         {
             poolPathLevels = new List<GameObject>();
             poolEnemyLevels = new List<GameObject>();
             pathMilestones = new List<float>();
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             m_GamePlayManager.EventBuildPathUpdate -= BuildNextPathForPoolLevel;
         }
@@ -68,7 +69,7 @@ namespace RiverAttack
             CreateLevel(level, m_LevelRoot.transform);
         }
 
-        void CreateLevel(Levels level, Transform myRoot = null)
+        private void CreateLevel(Levels level, Transform myRoot = null)
         {
             //Debug.Log($"Construiu a scena? {level}, {myRoot}");
             if (level.setLevelList.Count <= 0) return;
@@ -95,14 +96,16 @@ namespace RiverAttack
             GameTimelineManager.instance.endCutDirector.transform.position = nextBound;
             FixedPath(ref nextBound, level.pathEnd, myRoot);
         }
-        void FixedPath(ref Vector3 nextBound, GameObject nextPath, Transform myRoot)
+
+        private void FixedPath(ref Vector3 nextBound, GameObject nextPath, Transform myRoot)
         {
             if (nextPath == null)
                 return;
             var path = BuildPath(ref nextBound, nextPath, myRoot);
             path.SetActive(true);
         }
-        GameObject BuildPath(ref Vector3 nextBound, GameObject nextPath, Transform myRoot)
+
+        private GameObject BuildPath(ref Vector3 nextBound, GameObject nextPath, Transform myRoot)
         {
             var patch = Instantiate(nextPath, myRoot);
             patch.SetActive(false);
@@ -113,7 +116,8 @@ namespace RiverAttack
             pathMilestones.Add(nextBound.z);
             return patch;
         }
-        void BuildEnemies(Vector3 nextBound, LevelsSetup levelsSetup, int i, Transform myRoot)
+
+        private void BuildEnemies(Vector3 nextBound, LevelsSetup levelsSetup, int i, Transform myRoot)
         {
             if (levelsSetup.enemiesSets == null) return;
             levelsSetup.enemiesSets.SetActive(false);
@@ -124,7 +128,7 @@ namespace RiverAttack
             poolEnemyLevels.Add(enemies);
         }
 
-        void BuildNextPathForPoolLevel(float posZ)
+        private void BuildNextPathForPoolLevel(float posZ)
         {
             if (pathMilestones.Count <= 0) return;
             if (m_GamePlayManager.completePath || !(pathMilestones[m_ActualPathIndex] - posZ <= 0))
@@ -138,7 +142,7 @@ namespace RiverAttack
             m_ActualPathIndex++;
         }
 
-        EnemiesBridges FindEnemyBridges()
+        private EnemiesBridges FindEnemyBridges()
         {
             for (int i = poolEnemyLevels.Count - 1; i >= 0; i--)
             {
@@ -149,7 +153,7 @@ namespace RiverAttack
             return null;
         }
 
-        void SetFinishEnemy()
+        private void SetFinishEnemy()
         {
             var finalBridge = FindEnemyBridges();
             
@@ -160,7 +164,7 @@ namespace RiverAttack
             }
         }
 
-        void UpdatePoolLevel(IReadOnlyList<GameObject> pool, int actualHandle)
+        private void UpdatePoolLevel(IReadOnlyList<GameObject> pool, int actualHandle)
         {
             int axle = Mathf.CeilToInt(maxLevels / 2f);
             int activeIndex = (actualHandle + 1) % pool.Count + axle;

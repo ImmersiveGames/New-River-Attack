@@ -5,30 +5,33 @@ namespace RiverAttack
 {
     public class PlayerController : MonoBehaviour
     {
-        float m_AutoMovement;
-        float m_MovementSpeed;
-        float m_MultiplyVelocityUp;
-        float m_MultiplyVelocityDown;
+        private float m_AutoMovement;
+        private float m_MovementSpeed;
+        private float m_MultiplyVelocityUp;
+        private float m_MultiplyVelocityDown;
 
-        Vector2 m_InputVector;
-        PlayersInputActions m_PlayersInputActions;
-        PlayerMaster m_PlayerMaster;
-        GamePlayManager m_GamePlayManager;
+        private Vector2 m_InputVector;
+        private PlayersInputActions m_PlayersInputActions;
+        private PlayerMaster m_PlayerMaster;
+        private GamePlayManager m_GamePlayManager;
 
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             SetInitialReferences();
             SetValuesFromPlayerSettings(m_PlayerMaster.getPlayerSettings);
         }
-        void Start()
+
+        private void Start()
         {
             m_PlayersInputActions = m_PlayerMaster.playersInputActions;
             m_PlayersInputActions.Enable();
             m_PlayersInputActions.Player.Move.performed += TouchMove;
             m_PlayersInputActions.Player.Move.canceled += EndTouchMove;
         }
-        void FixedUpdate()
+
+        private void FixedUpdate()
         {
             if (!m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady) return;
 
@@ -75,24 +78,26 @@ namespace RiverAttack
         }
   #endregion
 
-        void SetInitialReferences()
+  private void SetInitialReferences()
         {
             m_PlayerMaster = GetComponent<PlayerMaster>();
             m_GamePlayManager = GamePlayManager.instance;
         }
-        void SetValuesFromPlayerSettings(PlayerSettings settings)
+
+        private void SetValuesFromPlayerSettings(PlayerSettings settings)
         {
             m_AutoMovement = (!m_GamePlayManager.bossFight) ? settings.speedVertical : 0f;
             m_MovementSpeed = settings.mySpeedy;
             m_MultiplyVelocityUp = (!m_GamePlayManager.bossFight)? settings.multiplyVelocityUp : 1f;
             m_MultiplyVelocityDown = (!m_GamePlayManager.bossFight)? settings.multiplyVelocityDown : -1f;
         }
-        void TouchMove(InputAction.CallbackContext context)
+
+        private void TouchMove(InputAction.CallbackContext context)
         {
             m_InputVector = context.ReadValue<Vector2>().normalized;
         }
 
-        void EndTouchMove(InputAction.CallbackContext context)
+        private void EndTouchMove(InputAction.CallbackContext context)
         {
             m_InputVector = Vector2.zero;
         }

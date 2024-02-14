@@ -6,23 +6,22 @@ namespace RiverAttack
 {
     public class CameraShake : MonoBehaviour
     {
+        private CinemachineVirtualCamera m_MyVirtualCamera;
+        private static CinemachineBasicMultiChannelPerlin _cineMachineBasicMultiChannelPerlin;
 
-        CinemachineVirtualCamera m_MyVirtualCamera;
-        static CinemachineBasicMultiChannelPerlin _cineMachineBasicMultiChannelPerlin;
-
-        static float _shakeTimer;
-        static float _shakeTimerTotal;
-        static float _startingIntensity;
+        private static float _shakeTimer;
+        private static float _shakeTimerTotal;
+        private static float _startingIntensity;
 
         // Start is called before the first frame update
-        void Awake()
+        private void Awake()
         {
             m_MyVirtualCamera = GetComponent<CinemachineVirtualCamera>();
             _cineMachineBasicMultiChannelPerlin = m_MyVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             ShakeTimer();         
         }
@@ -36,7 +35,7 @@ namespace RiverAttack
             _shakeTimer = time;
         }
 
-        void ShakeTimer()
+        private void ShakeTimer()
         {
             if (!(_shakeTimer > 0))
                 return;

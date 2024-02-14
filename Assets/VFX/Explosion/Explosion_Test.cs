@@ -8,13 +8,13 @@ public class Explosion_Test : MonoBehaviour
     public GameObject explosionEffect;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
 
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))
         {

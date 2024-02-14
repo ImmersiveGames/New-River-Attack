@@ -5,16 +5,17 @@ namespace RiverAttack
 {
     public class UiRapidFire: MonoBehaviour
     {
-        [SerializeField] Image rapidFireDisable;
-        [SerializeField] Image rapidFireEnable;
-        [SerializeField] TMP_Text rapidFireCounter;
+        [SerializeField] private Image rapidFireDisable;
+        [SerializeField] private Image rapidFireEnable;
+        [SerializeField] private TMP_Text rapidFireCounter;
 
-        [SerializeField] PowerUp listenPowerUp;
-        float m_SpendTimer;
-        GamePlayManager m_GamePlayManager;
+        [SerializeField] private PowerUp listenPowerUp;
+        private float m_SpendTimer;
+        private GamePlayManager m_GamePlayManager;
 
         #region UNITYMETHODS
-        void OnEnable()
+
+        private void OnEnable()
         {
             m_GamePlayManager = GamePlayManager.instance;
             m_GamePlayManager.EventStartRapidFire += StartRapidFire;
@@ -22,16 +23,18 @@ namespace RiverAttack
             m_GamePlayManager.EventUpdatePowerUpDuration += CountRapidFire;
             m_GamePlayManager.EventEnemiesMasterKillPlayer += EndRapidFire;
             m_GamePlayManager.EventOtherEnemiesKillPlayer += EndRapidFire;
+            m_GamePlayManager.EventReSpawnEnemiesMaster += ClearRapidFire;
         }
 
-        void Start()
+        private void Start()
         {
             rapidFireDisable.gameObject.SetActive(true);
             rapidFireEnable.gameObject.SetActive(false);
             rapidFireCounter.gameObject.SetActive(true);
             rapidFireCounter.text = "00";
         }
-        void Update()
+
+        private void Update()
         {
             if (!(m_SpendTimer > 0))
                 return;
@@ -42,29 +45,39 @@ namespace RiverAttack
             }
             rapidFireCounter.text = m_SpendTimer.ToString("F2");
         }
-        void OnDisable()
+
+        private void OnDisable()
         {
             m_GamePlayManager.EventStartRapidFire -= StartRapidFire;
             m_GamePlayManager.EventEndRapidFire -= EndRapidFire;
             m_GamePlayManager.EventUpdatePowerUpDuration -= CountRapidFire;
             m_GamePlayManager.EventEnemiesMasterKillPlayer -= EndRapidFire;
             m_GamePlayManager.EventOtherEnemiesKillPlayer -= EndRapidFire;
+            m_GamePlayManager.EventReSpawnEnemiesMaster -= ClearRapidFire;
         }
   #endregion
 
-        void StartRapidFire()
+  private void StartRapidFire()
         {
             if(rapidFireEnable.gameObject.activeSelf == false)
                 rapidFireEnable.gameObject.SetActive(true);
         }
-        void EndRapidFire()
+
+        private void EndRapidFire()
         {
             if (rapidFireEnable.gameObject.activeSelf == false || m_SpendTimer > 0)
                 return;
             rapidFireEnable.gameObject.SetActive(false);
             rapidFireCounter.text = "00";
         }
-        void CountRapidFire(PowerUp powerUp, float timer)
+
+        private void ClearRapidFire()
+        {
+            m_SpendTimer = 0;
+            rapidFireEnable.gameObject.SetActive(false);
+            rapidFireCounter.text = "00";
+        }
+        private void CountRapidFire(PowerUp powerUp, float timer)
         {
             if (powerUp != listenPowerUp)
                 return;

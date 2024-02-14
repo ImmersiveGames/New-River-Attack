@@ -4,16 +4,18 @@ namespace RiverAttack
 {
     public class GameStatePause : GameState
     {
-        
         public override IEnumerator OnLoadState()
         {
             //Debug.Log($"On Load Estado: Pause");
-            GamePlayManager.instance.inputSystem.UI_Controlls.Enable();
+            
             yield return null;
             
         }
         public override void EnterState()
         {
+            Time.timeScale = 0;
+            GamePlayManager.instance.inputSystem.Player.Disable();
+            GamePlayManager.instance.inputSystem.UI_Controlls.Enable();
             GamePlayManager.instance.panelMenuGame.PauseMenu(true);
             //Debug.Log($"Entra no Estado: Pause");
         }
@@ -24,7 +26,7 @@ namespace RiverAttack
         public override void ExitState()
         {
             //Debug.Log($"Sai do Estado: Pause");
-            GamePlayManager.instance.inputSystem.UI_Controlls.Disable();
+            Time.timeScale = 1;
             GamePlayManager.instance.panelMenuGame.PauseMenu(false);
         }
     }

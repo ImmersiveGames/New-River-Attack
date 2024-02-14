@@ -4,10 +4,10 @@ namespace RiverAttack
 {
     public class EmergeBehavior : IBossBehavior
     {
-        bool m_Finished;
-        readonly BossMaster m_BossMaster;
-        float m_CountTime;
-        const float TIME_LIMIT = 7.5f;
+        private bool m_Finished;
+        private readonly BossMaster m_BossMaster;
+        private float m_CountTime;
+        private const float TIME_LIMIT = 7.5f;
 
         internal EmergeBehavior(BossMaster bossMaster)
         {

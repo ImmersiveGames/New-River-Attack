@@ -6,34 +6,36 @@ namespace RiverAttack
 {
     public class OptionsMusicPanel : MonoBehaviour
     {
-        enum TypeMusicVolume{
+        private enum TypeMusicVolume{
             MusicVolume,
             SfxVolume
         }
-        [SerializeField] TypeMusicVolume typeMusicVolume;
-        [SerializeField] AudioMixer mixerGroup;
-        Slider m_SliderControl;
-        [SerializeField, Range(0.0001f, 1f)]  float defaultVolume = .5f;
-        
-        AudioSource m_AudioSource;
-        GameSettings m_GameSettings;
+        [SerializeField] private TypeMusicVolume typeMusicVolume;
+        [SerializeField] private AudioMixer mixerGroup;
+        private Slider m_SliderControl;
+        [SerializeField, Range(0.0001f, 1f)] private float defaultVolume = .5f;
+
+        private AudioSource m_AudioSource;
+        private GameSettings m_GameSettings;
         #region UNITYMETHODS
-        void Awake()
+
+        private void Awake()
         {
             m_SliderControl = GetComponentInChildren<Slider>();
         }
 
-        void Start()
+        private void Start()
         {
             SetVolume();
         }
-        void OnEnable()
+
+        private void OnEnable()
         {
             m_GameSettings = GameSettings.instance;
             m_SliderControl.value = (m_GameSettings.musicVolume == 0) ? defaultVolume : m_GameSettings.musicVolume;
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             switch (typeMusicVolume)
             {

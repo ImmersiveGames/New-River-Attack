@@ -15,86 +15,101 @@ namespace RiverAttack
     };
     public class StatisticDataManager : MonoBehaviour
     {
-        [SerializeField] Transform containerTransform;
-        [SerializeField] GameObject statisticItemCard;
-        [SerializeField] List<EnemiesScriptable> enemiesList;
-        [SerializeField] List<CollectibleScriptable> collectiblesList;
-        [SerializeField] List<StatisticItemData> statisticsListData;
-        static string getScore
+        [SerializeField] private Transform containerTransform;
+        [SerializeField] private GameObject statisticItemCard;
+        [SerializeField] private List<EnemiesScriptable> enemiesList;
+        [SerializeField] private List<CollectibleScriptable> collectiblesList;
+        [SerializeField] private List<StatisticItemData> statisticsListData;
+
+        private static string getScore
         {
             get { return GamePlayingLog.instance.totalScore.ToString(); }
         }
-        static string getSpendTime
+
+        private static string getSpendTime
         {
             get { return Tools.TimeFormat(GamePlayingLog.instance.timeSpent); }
         }
-        static string getMaxPathDistance
+
+        private static string getMaxPathDistance
         {
             get { return $"{GamePlayingLog.instance.maxPathDistance.ToString(CultureInfo.CurrentCulture)} KM"; }
         }
-        static string getShootSpent
+
+        private static string getShootSpent
         {
             get { return GamePlayingLog.instance.shootSpent.ToString(CultureInfo.CurrentCulture); }
         }
-        static string getBombSpent
+
+        private static string getBombSpent
         {
             get { return $"{GamePlayingLog.instance.bombSpent} KM"; }
         }
-        static string getFuelSpent
+
+        private static string getFuelSpent
         {
             get { return $"{GamePlayingLog.instance.fuelSpent} L"; }
         }
-        static string getLifeSpent
+
+        private static string getLifeSpent
         {
             get { return GamePlayingLog.instance.livesSpent.ToString(); }
         }
-        static string getDeathByWall
+
+        private static string getDeathByWall
         {
             get { return GamePlayingLog.instance.playerDieWall.ToString(); }
         }
-        static string getDeathByBullets
+
+        private static string getDeathByBullets
         {
             get { return GamePlayingLog.instance.playerDieBullet.ToString(); }
         }
-        static string getDeathByFuel
+
+        private static string getDeathByFuel
         {
             get { return GamePlayingLog.instance.playerDieFuelEmpty.ToString(); }
         }
-        static string getCompletedLevels
+
+        private static string getCompletedLevels
         {
             get { return GamePlayingLog.instance.finishLevels.Count.ToString(); }
         }
-        IEnumerable<LogResults> getEnemiesDestroyed
+
+        private IEnumerable<LogResults> getEnemiesDestroyed
         {
             get { return GamePlayingLog.instance.hitEnemiesResultsList.Where(item=>enemiesList.Contains(item.enemy))
                 .ToList(); }
         }
-        IEnumerable<LogResults> getCollectableItems
+
+        private IEnumerable<LogResults> getCollectableItems
         {
             get { return GamePlayingLog.instance.hitEnemiesResultsList.Where(item=>collectiblesList.Contains(item.enemy)).ToList(); }
         }
-        void OnEnable()
+
+        private void OnEnable()
         {
             ClearContainer();
             CreateFullStatisticList();
             LocalizationSettings.SelectedLocaleChanged += UpdateStatistics;
         }
-        void UpdateStatistics(Locale obj)
+
+        private void UpdateStatistics(Locale obj)
         {
             ClearContainer();
             CreateFullStatisticList();
         }
 
-        void ClearContainer()
+        private void ClearContainer()
         {
             foreach (Transform child in containerTransform)
             {
                 Destroy(child.gameObject);
             }
         }
-        
 
-        void CreateFullStatisticList()
+
+        private void CreateFullStatisticList()
         {
             statisticsListData = FilterByItemReference(statisticsListData);
             foreach (var itemData in statisticsListData)
@@ -150,7 +165,7 @@ namespace RiverAttack
             }
         }
 
-        void CreateItem(StatisticItemData itemData)
+        private void CreateItem(StatisticItemData itemData)
         {
             if (itemData.itemStatisticsList != null)
             {
@@ -164,20 +179,22 @@ namespace RiverAttack
                 CreateSubItem(newItemData); // Cria uma linha em Branco
             }
         }
-        void CreateSubItem(StatisticItemData itemData)
+
+        private void CreateSubItem(StatisticItemData itemData)
         {
             var itemCard = Instantiate(statisticItemCard, containerTransform);
             itemCard.GetComponent<ItemCardDisplayHolder>().itemNameText.text = itemData.itemString;
             itemCard.GetComponent<ItemCardDisplayHolder>().itemValueText.text = itemData.itemValue;
         }
-        static List<StatisticItemData> FilterByItemReference(IEnumerable<StatisticItemData> originalList)
+
+        private static List<StatisticItemData> FilterByItemReference(IEnumerable<StatisticItemData> originalList)
         {
             // Usa Distinct com um comparador personalizado
             var finalList = originalList.Distinct(new CompareItemReference()).ToList();
             return finalList;
         }
-        
-        static IEnumerable<StatisticItemData> SumStatistic(IEnumerable<EnemiesScriptable> enemiesList, IEnumerable<LogResults> logResultsList)
+
+        private static IEnumerable<StatisticItemData> SumStatistic(IEnumerable<EnemiesScriptable> enemiesList, IEnumerable<LogResults> logResultsList)
         {
             var list = enemiesList
                 .OrderBy(localName => localName.localizeName.GetLocalizedString())
@@ -194,7 +211,8 @@ namespace RiverAttack
         }
         
     }
-    class CompareItemReference : IEqualityComparer<StatisticItemData>
+
+    internal class CompareItemReference : IEqualityComparer<StatisticItemData>
     {
         public bool Equals(StatisticItemData x, StatisticItemData y)
         {
