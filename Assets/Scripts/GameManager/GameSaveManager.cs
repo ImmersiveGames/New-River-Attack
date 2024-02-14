@@ -22,6 +22,11 @@ namespace RiverAttack
             SavePlayerSaves();
         }
 
+        protected override void OnDestroy()
+        {
+            //base.OnDestroy();
+        }
+
         void LoadPlayerSaves()
         {
             SaveManager.Load();

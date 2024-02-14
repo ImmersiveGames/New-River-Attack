@@ -10,7 +10,7 @@ namespace RiverAttack
         [SerializeField] internal PlayerSettings getPlayerSettings;
         [Header("Player Destroy Settings")]
         [SerializeField]
-        bool isPlayerDead;
+        internal bool isPlayerDead;
         bool m_Invulnerability;
         [SerializeField] float timeoutReSpawn;
         [SerializeField]

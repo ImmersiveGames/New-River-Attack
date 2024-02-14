@@ -50,6 +50,20 @@ namespace RiverAttack
         internal GameState lastGameState;
         PlayerSaveSaveObject m_PlayerSave;
 
+        private PlayerManager m_PlayerManager;
+        private PlayerMaster m_PlayerMaster;
+
+        public bool shouldPlayerBeReady 
+        { get
+            {
+                //Debug.Log("IsDead: " + PlayerManager.instance.initializedPlayerMasters[0].isPlayerDead);
+                //Debug.Log("Status: " + PlayerManager.instance.initializedPlayerMasters[0].playerMovementStatus);
+
+                return PlayerManager.instance.initializedPlayerMasters[0].isPlayerDead == false &&
+                    PlayerManager.instance.initializedPlayerMasters[0].playerMovementStatus !=  PlayerMaster.MovementStatus.Paused;
+            }
+        }
+
         #region UNITYMETHODS
         void Awake()
         {
@@ -60,6 +74,14 @@ namespace RiverAttack
         }
         void Start()
         {
+            m_PlayerManager = PlayerManager.instance;
+            
+            if (currentGameState is GameStatePlayGame ||
+                currentGameState is GameStatePlayGameBoss) 
+            {
+                m_PlayerMaster = m_PlayerManager.initializedPlayerMasters[0];
+            }            
+
             if (SteamClient.IsValid)
             {
                 SteamFriends.OnGameOverlayActivated += PauseGame;
@@ -125,13 +147,17 @@ namespace RiverAttack
         }
 
         internal void PauseGame(bool pause)
-        {
+        {         
             Time.timeScale = pause ? 0 : 1;
-            if (currentGameState is not GameStatePlayGame)
-                return;
-            if (pause)
+            if (currentGameState is GameStatePlayGame || 
+                currentGameState is GameStatePlayGameBoss) 
             {
-                ChangeState(new GameStatePause());
+                if (!shouldPlayerBeReady) { return; }
+
+                if (pause)
+                {
+                    ChangeState(new GameStatePause());
+                }
             }
         }
         

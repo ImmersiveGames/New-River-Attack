@@ -87,12 +87,24 @@ namespace RiverAttack
         }
         void ButtonGamePause()
         {
-            m_GameManager.ChangeState(new GameStatePause());
+            m_GameManager.PauseGame(true);
         }
         public void ButtonGameUnPause()
         {
-            if(m_GameManager.lastGameState is GameStatePlayGame)
+            Debug.Log("O que está aqui: " + m_GameManager.lastGameState);
+
+            if(m_GameManager.lastGameState is GameStatePlayGame) 
+            {
+                Debug.Log("Entrei na Despausa ");
+
+                //inputSystem.UI_Controlls.Disable();
+                PauseMenu(false);
+
                 m_GameManager.ChangeState(new GameStatePlayGame());
+
+                m_GameManager.PauseGame(false);
+            }                
+            
             if (GameManager.instance.currentGameState is GameStatePlayGameBoss)
             {
                 GameStatePlayGameBoss.PauseState(false);
