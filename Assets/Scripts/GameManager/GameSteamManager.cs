@@ -244,7 +244,7 @@ namespace RiverAttack
         public static void StoreStats()
         {
             if (!connectedToSteam) return;
-            SteamUserStats.StoreStats();
+                SteamUserStats.StoreStats();
         }
 
         private void GameCleanup()

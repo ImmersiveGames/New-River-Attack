@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
@@ -95,6 +96,12 @@ namespace RiverAttack
         {
             _inputSystem.Player.Pause.performed += PauseGamePlay;
             _inputSystem.UI_Controlls.Pause.performed += UnPauseGamePlay;
+        }
+
+        private void OnDisable()
+        {
+            _inputSystem.Player.Pause.performed -= PauseGamePlay;
+            _inputSystem.UI_Controlls.Pause.performed -= UnPauseGamePlay;
         }
 
         protected override void OnDestroy()
