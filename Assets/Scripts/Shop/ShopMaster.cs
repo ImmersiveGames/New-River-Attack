@@ -56,7 +56,16 @@ namespace Shopping
         {
             SetControllersInput();
         }
-  #endregion
+
+        private void OnDisable()
+        {
+            m_InputSystem.UI_Controlls.BuyButton.performed -= BuyInputButton;
+            m_InputSystem.UI_Controlls.SelectButton.performed -= SelectButton;
+            m_InputSystem.UI_Controlls.LeftSelection.performed -= _ => ControllerNavigationArrows(-1);
+            m_InputSystem.UI_Controlls.RightSelection.performed -= _ => ControllerNavigationArrows(1);
+        }
+
+        #endregion
 
   private void SetInitialReferences()
         {

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 namespace RiverAttack
 {
     public class PanelHub: MonoBehaviour
@@ -40,17 +42,20 @@ namespace RiverAttack
 
         private void OnDisable()
         {
-            //m_InputSystem.UI_Controlls.Disable();
+            m_InputSystem.UI_Controlls.StartButton.performed -= ButtonStartMission;
+            m_InputSystem.UI_Controlls.BackButton.performed -= ButtonReturnInitialMenu;
+            m_InputSystem.UI_Controlls.LeftSelection.performed -= ctx => ButtonNextMission(-1);
+            m_InputSystem.UI_Controlls.RightSelection.performed -= ctx => ButtonNextMission(1);
         }
         #endregion
 
         private void SetControllersInput()
         {
             m_InputSystem = GameManager.instance.inputSystem;
-            m_InputSystem.UI_Controlls.StartButton.performed += _ => ButtonStartMission();
-            m_InputSystem.UI_Controlls.BackButton.performed += _ => ButtonReturnInitialMenu();
-            m_InputSystem.UI_Controlls.LeftSelection.performed += _ => ButtonNextMission(-1);
-            m_InputSystem.UI_Controlls.RightSelection.performed += _ => ButtonNextMission(1);
+            m_InputSystem.UI_Controlls.StartButton.performed += ButtonStartMission;
+            m_InputSystem.UI_Controlls.BackButton.performed += ButtonReturnInitialMenu;
+            m_InputSystem.UI_Controlls.LeftSelection.performed += ctx => ButtonNextMission(-1);
+            m_InputSystem.UI_Controlls.RightSelection.performed += ctx => ButtonNextMission(1);
         }
 
         public void ButtonNextMission(int increment)
@@ -66,6 +71,11 @@ namespace RiverAttack
             m_PushButtonStart = false;
             //Debug.Log($"Next Index: {m_NextIndex}");
         }
+
+        private void ButtonStartMission(InputAction.CallbackContext context)
+        {
+            ButtonStartMission();
+        }
         public void ButtonStartMission()
         {
             if (!m_GameHubManager.readyHub || m_PushButtonStart) return;
@@ -75,6 +85,11 @@ namespace RiverAttack
             GameManager.instance.ChangeState(new GameStateOpenCutScene(), m_GameHubManager.gamePlayingLog.activeMission.bossFight ? 
                 GameManager.GameScenes.GamePlayBoss.ToString() : GameManager.GameScenes.GamePlay.ToString());
             m_PushButtonStart = false;
+        }
+
+        private void ButtonReturnInitialMenu(InputAction.CallbackContext context)
+        {
+            ButtonReturnInitialMenu();
         }
         public void ButtonReturnInitialMenu()
         {
