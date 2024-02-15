@@ -132,7 +132,7 @@ namespace RiverAttack
         private void PauseGamePlay(InputAction.CallbackContext callbackContext)
         {
             if (GameManager.instance.onLoadScene || 
-                _playerManager.initializedPlayerMasters[0].isPlayerDead) return;
+                PlayerManager.instance.initializedPlayerMasters[0].isPlayerDead) return;
             if (GameManager.instance.currentGameState is not (GameStatePlayGame or GameStatePlayGameBoss))
                 return;
             GameManager.instance.ChangeState(new GameStatePause());
