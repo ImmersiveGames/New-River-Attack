@@ -75,7 +75,7 @@ namespace RiverAttack
         }
         public override void UpdateState()
         {
-            Debug.Log($"Boss Fight! {GamePlayManager.instance.bossFightPause}");
+            //Debug.Log($"Boss Fight! {GamePlayManager.instance.bossFightPause}");
             /*Debug.Log($"m_CurrentSubState: {m_CurrentSubState}");
             Debug.Log($"m_CurrentBehaviorIndex: {m_CurrentBehaviorIndex}");*/
             if (!m_BossMaster.shouldObstacleBeReady)
@@ -113,10 +113,10 @@ namespace RiverAttack
             GameSaveManager.instance.SavePlayerSaves();
             System.GC.Collect();
         }
-        public static void PauseState(bool active)
+        /*public static void PauseState(bool active)
         {
             GamePlayManager.instance.PauseBossBattle(active);
-        }
+        }*/
 
         private BattleBossSubState GetNextSubState() {
             
@@ -133,7 +133,7 @@ namespace RiverAttack
 
             do
             {
-                int randomIndex = Random.Range(0, 4);
+                var randomIndex = Random.Range(0, 4);
                 nextState = (BattleBossSubState)randomIndex;
             }
             while (nextState == m_CurrentSubState); // Garante que o próximo estado seja diferente do atual

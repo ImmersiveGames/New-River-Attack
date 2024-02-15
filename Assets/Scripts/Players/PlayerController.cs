@@ -58,14 +58,14 @@ namespace RiverAttack
                 var nextPosition = transform.position + moveDir * (m_MovementSpeed * Time.deltaTime);
                 if (m_InputVector.x != 0)
                 {
-                    if (nextPosition.x is >= GamePlayManager.LimitX or <= GamePlayManager.LimitX * -1)
+                    if (nextPosition.x is >= GamePlayManager.LIMIT_X or <= GamePlayManager.LIMIT_X * -1)
                     {
                         axisX = 0;
                     }
                 }
                 if (m_InputVector.y != 0)
                 {
-                    if (nextPosition.z is >= GamePlayManager.LimitZTop or <= GamePlayManager.LimitZBottom)
+                    if (nextPosition.z is >= GamePlayManager.LIMIT_Z_TOP or <= GamePlayManager.LIMIT_Z_BOTTOM)
                     {
                         axisZ = 0;
                     }

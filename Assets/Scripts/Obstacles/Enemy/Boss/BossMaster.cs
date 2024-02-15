@@ -42,8 +42,8 @@ namespace RiverAttack
 
         internal override void OnTriggerEnter(Collider other)
         {
-            //Debug.Log($" Coliders: {other}, {shouldObstacleBeReady}, {enemy.canDestruct}");
-            if (other == null || !shouldObstacleBeReady || !enemy.canDestruct) return;
+            Debug.Log($" Coliders: {other}, {shouldBeBossBattle}, {enemy.canDestruct}");
+            if (other == null || !shouldBeBossBattle || !enemy.canDestruct) return;
             if (!other.GetComponent<Bullets>() || other.GetComponent<BulletBoss>() || !other.GetComponentInParent<PlayerMaster>()) return;
             ComponentToKill(other.GetComponent<PlayerMaster>(), CollisionType.Collider);
             ComponentToKill(other.GetComponent<BulletPlayer>(), CollisionType.Shoot);
@@ -51,13 +51,7 @@ namespace RiverAttack
             //GamePlayManager.instance.OnEventOtherEnemiesKillPlayer();
         }
 
-        public bool shouldBeBossBattle
-        {
-            get
-            {
-                return shouldObstacleBeReady || !GamePlayManager.instance.bossFightPause;
-            }
-        }
+        public bool shouldBeBossBattle => shouldObstacleBeReady || GameManager.instance.currentGameState is not GameStatePause;
 
         protected override void ComponentToKill(Component other, CollisionType collisionType)
         {
@@ -93,9 +87,9 @@ namespace RiverAttack
             transform1.position = positionBoss switch
             {
                 BattleBossSubState.Top => new Vector3(targetPosition.x, HEIGHT_Y, targetPosition.z + distanceTarget),
-                BattleBossSubState.Base => new Vector3(targetPosition.x, HEIGHT_Y, GamePlayManager.LimitZBottom + 5f),
-                BattleBossSubState.Left => new Vector3(targetPosition.x - distanceTarget, HEIGHT_Y, GamePlayManager.LimitZBottom + (targetPosition.z / 2)),
-                BattleBossSubState.Right => new Vector3(targetPosition.x + distanceTarget, HEIGHT_Y, GamePlayManager.LimitZBottom + (targetPosition.z / 2)),
+                BattleBossSubState.Base => new Vector3(targetPosition.x, HEIGHT_Y, GamePlayManager.LIMIT_Z_BOTTOM + 5f),
+                BattleBossSubState.Left => new Vector3(targetPosition.x - distanceTarget, HEIGHT_Y, GamePlayManager.LIMIT_Z_BOTTOM + (targetPosition.z / 2)),
+                BattleBossSubState.Right => new Vector3(targetPosition.x + distanceTarget, HEIGHT_Y, GamePlayManager.LIMIT_Z_BOTTOM + (targetPosition.z / 2)),
                 BattleBossSubState.Dead => transform1.position,
                 _ => throw new ArgumentOutOfRangeException(nameof(positionBoss), positionBoss, null)
             };
