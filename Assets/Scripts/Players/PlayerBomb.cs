@@ -37,7 +37,7 @@ namespace RiverAttack
 
         #endregion
 
-  private void SetInitialReferences()
+        private void SetInitialReferences()
         {
             _gamePlayManager = GamePlayManager.instance;
             _playerMaster = GetComponent<PlayerMaster>();
