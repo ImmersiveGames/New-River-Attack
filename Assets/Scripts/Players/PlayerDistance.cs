@@ -1,41 +1,38 @@
-﻿using Steamworks;
-using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.SocialPlatforms.Impl;
+﻿using UnityEngine;
 
 namespace RiverAttack
 {
     public class PlayerDistance : MonoBehaviour
     {
         public float conversion;
-        [FormerlySerializedAs("offsetInicial")] public float offsetInitial;
+        public float offsetInitial;
 
-        private Vector3 m_LastPosition;
-        private float m_TravelledDistance;
-        private float m_ConvertDistance;
-        private float m_LastConvertDistance;
-        private float m_MaxTravelledDistance;
+        private Vector3 _lastPosition;
+        private float _travelledDistance;
+        private float _convertDistance;
+        private float _lastConvertDistance;
+        private float _maxTravelledDistance;
 
-        private GamePlayManager m_GamePlayManager;
-        private PlayerMaster m_PlayerMaster;
-        private PlayerSettings m_PlayerSettings;
-        private GamePlayingLog m_GamePlayingLog;
+        private GamePlayManager _gamePlayManager;
+        private PlayerMaster _playerMaster;
+        private PlayerSettings _playerSettings;
+        private GamePlayingLog _gamePlayingLog;
 
         #region UNITYMETHODS
 
         private void OnEnable()
         {
-            m_GamePlayManager = GamePlayManager.instance;
-            m_GamePlayingLog = m_GamePlayManager.gamePlayingLog;
-            m_PlayerMaster = GetComponent<PlayerMaster>();
-            m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
+            _gamePlayManager = GamePlayManager.instance;
+            _gamePlayingLog = _gamePlayManager.gamePlayingLog;
+            _playerMaster = GetComponent<PlayerMaster>();
+            _playerSettings = _playerMaster.getPlayerSettings;
         }
 
         private void Start()
         {
             offsetInitial += PlayerManager.instance.spawnPlayerPosition.z;
-            m_LastPosition = transform.position;
-            m_TravelledDistance = offsetInitial;
+            _lastPosition = transform.position;
+            _travelledDistance = offsetInitial;
             LoadMaxDistance();
         }
 
@@ -43,61 +40,62 @@ namespace RiverAttack
         {
             var position = transform.position;
             // Calcula a distância percorrida no eixo Z desde o último frame
-            float distanceTraveledByFrame = position.z - m_LastPosition.z;
+            var distanceTraveledByFrame = position.z - _lastPosition.z;
 
             // se a posição for maior que a inicial e não teveve nenhum movimento no ultimo frame e não ta permitindo joga então ignore; 
-            if (position.z < 0 && distanceTraveledByFrame <= 0 && !m_PlayerMaster.shouldPlayerBeReady) return;
+            if (position.z < 0 && distanceTraveledByFrame <= 0 && !_playerMaster.shouldPlayerBeReady) return;
 
-            m_TravelledDistance += distanceTraveledByFrame;
+            _travelledDistance += distanceTraveledByFrame;
             // Atualiza o ponto mais distante alcançado
-            m_MaxTravelledDistance = Mathf.Max(m_MaxTravelledDistance, m_TravelledDistance);
+            _maxTravelledDistance = Mathf.Max(_maxTravelledDistance, _travelledDistance);
             // atualiza sempre que a distancia for maior que a ja coberta
-            if (m_TravelledDistance > m_LastConvertDistance)
+            if (_travelledDistance > _lastConvertDistance)
             {
-                m_LastConvertDistance = m_TravelledDistance;
-                int convertDistanceInt = Mathf.FloorToInt(m_LastConvertDistance / conversion);
-                m_GamePlayManager.OnEventUpdateDistance(convertDistanceInt);
-                AchievementHandle(m_GamePlayingLog.pathDistance + m_MaxTravelledDistance);
+                _lastConvertDistance = _travelledDistance;
+                int convertDistanceInt = Mathf.FloorToInt(_lastConvertDistance / conversion);
+                _gamePlayManager.OnEventUpdateDistance(convertDistanceInt);
+                AchievementHandle(_gamePlayingLog.pathDistance + _maxTravelledDistance);
             }
             
-            //Debug.Log($"Update Distance: Distancia Convertida :{m_TravelledDistance}, Last: {m_LastConvertDistance}, Position: {position.z}");
-            m_LastPosition = position;
+            //Debug.Log($"Update Distance: Distancia Convertida :{_travelledDistance}, Last: {_lastConvertDistance}, Position: {position.z}");
+            _lastPosition = position;
             
         }
 
         private void OnDisable()
         {
-            LogGamePlay(m_TravelledDistance, m_MaxTravelledDistance);
+            LogGamePlay(_travelledDistance, _maxTravelledDistance);
             
         }
 
         private void OnApplicationQuit()
         {
-            m_PlayerSettings.distance = m_MaxTravelledDistance;
+            _playerSettings.distance = _maxTravelledDistance;
         }
   #endregion
 
   private void LoadMaxDistance()
         {
-            float settingDistance = m_PlayerMaster.getPlayerSettings.distance;
-            m_MaxTravelledDistance = (settingDistance != 0) ? settingDistance : 0;
-            m_ConvertDistance = m_MaxTravelledDistance / conversion;
-            m_GamePlayManager.OnEventUpdateDistance(Mathf.FloorToInt(m_ConvertDistance));
+            var settingDistance = _playerMaster.getPlayerSettings.distance;
+            _maxTravelledDistance = (settingDistance != 0) ? settingDistance : 0;
+            _convertDistance = _maxTravelledDistance / conversion;
+            _gamePlayManager.OnEventUpdateDistance(Mathf.FloorToInt(_convertDistance));
         }
 
         private void LogGamePlay(float distance, float maxDistance)
         {
-            m_GamePlayingLog.maxPathDistance = maxDistance;
-            m_GamePlayingLog.pathDistance += distance;
-            int resultInt = Mathf.FloorToInt(m_GamePlayingLog.pathDistance);
+            _gamePlayingLog.maxPathDistance = maxDistance;
+            _gamePlayingLog.pathDistance += distance;
+            var resultInt = Mathf.FloorToInt(_gamePlayingLog.pathDistance);
             GameSteamManager.SetStat("stat_FlightDistance", resultInt, true);
         }
 
         private static void AchievementHandle(float result)
         {
             //Debug.Log($"Valor entrando: {result}");
-            int flight = GameSteamManager.GetStatInt("stat_FlightDistance");
-            int resultInt = Mathf.FloorToInt(result);
+            if (!GameSteamManager.connectedToSteam) return;
+            var flight = GameSteamManager.GetStatInt("stat_FlightDistance");
+            var resultInt = Mathf.FloorToInt(result);
             //Debug.Log($"Valor calculado: {resultInt}");
             if (flight >= resultInt) return;
             GameSteamManager.SetStat("stat_FlightDistance", resultInt, true);

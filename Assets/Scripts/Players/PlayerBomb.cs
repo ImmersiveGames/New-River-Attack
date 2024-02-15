@@ -10,11 +10,11 @@ namespace RiverAttack
         private Vector3 bombOffset;
         [SerializeField] private GameObject prefabBomb;
 
-        private PlayerMaster m_PlayerMaster;
-        private GamePlayManager m_GamePlayManager;
-        private PlayerSettings m_PlayerSettings;
-        private PlayersInputActions m_PlayersInputActions;
-        private GamePlayingLog m_GamePlayingLog;
+        private PlayerMaster _playerMaster;
+        private GamePlayManager _gamePlayManager;
+        private PlayerSettings _playerSettings;
+        private PlayersInputActions _playersInputActions;
+        private GamePlayingLog _gamePlayingLog;
 
         #region UNITYMETHODS
 
@@ -25,32 +25,38 @@ namespace RiverAttack
 
         private void Start()
         {
-            m_PlayersInputActions = GameManager.instance.inputSystem;
-            m_PlayerSettings.bombs = GameSettings.instance.startBombs;
-            m_PlayersInputActions.Player.Bomb.performed += Execute;
+            _playersInputActions = GameManager.instance.inputSystem;
+            _playerSettings.bombs = GameSettings.instance.startBombs;
+            _playersInputActions.Player.Bomb.performed += Execute;
         }
-  #endregion
+
+        private void OnDisable()
+        {
+            _playersInputActions.Player.Bomb.performed -= Execute;
+        }
+
+        #endregion
 
   private void SetInitialReferences()
         {
-            m_GamePlayManager = GamePlayManager.instance;
-            m_PlayerMaster = GetComponent<PlayerMaster>();
-            m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
-            m_GamePlayingLog = m_GamePlayManager.gamePlayingLog;
+            _gamePlayManager = GamePlayManager.instance;
+            _playerMaster = GetComponent<PlayerMaster>();
+            _playerSettings = _playerMaster.getPlayerSettings;
+            _gamePlayingLog = _gamePlayManager.gamePlayingLog;
         }
         
         public void Execute(InputAction.CallbackContext callbackContext)
         {
-           //Debug.Log($"Collect{m_PlayerSettings.bombs}");
-           if (m_PlayerSettings.bombs <= 0 || !m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady)
+           //Debug.Log($"Collect{_playerSettings.bombs}");
+           if (_playerSettings.bombs <= 0 || !_gamePlayManager.shouldBePlayingGame || !_playerMaster.shouldPlayerBeReady)
                return;
-           m_GamePlayManager.OnEventPlayerPushButtonBomb();
-            m_PlayerSettings.bombs -= 1;
+           _gamePlayManager.OnEventPlayerPushButtonBomb();
+            _playerSettings.bombs -= 1;
             var bomb = Instantiate(prefabBomb);
             bomb.transform.localPosition = transform.localPosition + bombOffset;
-            bomb.GetComponent<Bullets>().ownerShoot = m_PlayerMaster;
+            bomb.GetComponent<Bullets>().ownerShoot = _playerMaster;
             bomb.SetActive(true);
-            m_GamePlayManager.OnEventUpdateBombs(m_PlayerSettings.bombs);
+            _gamePlayManager.OnEventUpdateBombs(_playerSettings.bombs);
             LogGamePlay(1);
         }
         public void UnExecute(InputAction.CallbackContext callbackContext)
@@ -60,7 +66,7 @@ namespace RiverAttack
 
         private void LogGamePlay(int bomb)
         {
-            m_GamePlayingLog.bombSpent += bomb;
+            _gamePlayingLog.bombSpent += bomb;
         }
 
         /*
@@ -68,7 +74,7 @@ namespace RiverAttack
         public void AddBomb(int ammoAmount)
         {
             bombQuantity += ammoAmount;
-            m_PlayerMaster.CallEventPlayerBomb();
+            _playerMaster.CallEventPlayerBomb();
         }
         */
     }

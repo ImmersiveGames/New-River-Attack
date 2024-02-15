@@ -10,12 +10,12 @@ namespace RiverAttack
     public class GameSteamManager: MonoBehaviour
     {
         private static GameSteamManager _instance;
-        private const int STEAM_ID = 2777110;
-        private const string LEADERBOARD_NAME = "River_Attack_HiScore";
+        private const int SteamID = 2777110;
+        private const string LeaderboardName = "River_Attack_HiScore";
         private static IEnumerable<Achievement> _serverAchievements;
         public bool resetAchievementsOnStart;
         public bool demoMode;
-        private bool m_ApplicationHasQuit;
+        private bool _applicationHasQuit;
 
         private static Leaderboard? _leaderboard;
 
@@ -35,7 +35,7 @@ namespace RiverAttack
                 {
                     if (!demoMode)
                     {
-                        SteamClient.Init( STEAM_ID);
+                        SteamClient.Init( SteamID);
                         if (!SteamClient.IsValid)
                         {
                             //Debug.Log("Steam client not valid");
@@ -43,7 +43,7 @@ namespace RiverAttack
                         }
                         connectedToSteam = true;
                         _serverAchievements = SteamUserStats.Achievements;
-                        _leaderboard = await SteamUserStats.FindLeaderboardAsync(LEADERBOARD_NAME);
+                        _leaderboard = await SteamUserStats.FindLeaderboardAsync(LeaderboardName);
 
                         //Debug.Log("Leaderboard initialized: " + _leaderboard);
                     }
@@ -224,11 +224,21 @@ namespace RiverAttack
         
         public static int GetStatInt(string statName)
         {
-            return !SteamClient.IsValid ? 0 : SteamUserStats.GetStatInt( statName );
+            var stat = 0;
+            if (SteamClient.IsValid)
+            {
+                stat = SteamUserStats.GetStatInt(statName);
+            }
+            return stat;
         }
         public static float GetStatFloat(string statName)
         {
-            return !SteamClient.IsValid ? 0 : SteamUserStats.GetStatFloat( statName );
+            var stat = 0f;
+            if (SteamClient.IsValid)
+            {
+                stat = SteamUserStats.GetStatFloat(statName);
+            }
+            return stat;
         }
 
         public static void StoreStats()
@@ -239,9 +249,9 @@ namespace RiverAttack
 
         private void GameCleanup()
         {
-            if (m_ApplicationHasQuit)
+            if (_applicationHasQuit)
                 return;
-            m_ApplicationHasQuit = true;
+            _applicationHasQuit = true;
             //leaveLobby();
             _leaderboard = null;
             SteamClient.Shutdown();
@@ -261,7 +271,6 @@ namespace RiverAttack
         {
             if (!connectedToSteam || _leaderboard == null || score <= 0)
                 return;
-            Debug.Log($"REGISTRAAAAAAAA {score} AQUI: {_leaderboard}");
             LeaderboardUpdate? result;
             if (force)
             {
@@ -272,7 +281,7 @@ namespace RiverAttack
                 result = await _leaderboard.Value.SubmitScoreAsync(score);
             }
             if (result != null)
-                Debug.Log($"Registrou: {result.Value.Score}");
+                Debug.Log($"Register: {result.Value.Score}");
         }
 
         public static async Task<LeaderboardEntry[]> GetScores(int quantity)
