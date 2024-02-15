@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -46,19 +47,14 @@ namespace Shopping
         private void OnEnable()
         {
             SetInitialReferences();
-            SetControllersInput();
             WealthDisplayUpdate(playerSettings.wealth);
             SetupShop(playerSettings);
             scrollBarShop.horizontalScrollbar.numberOfSteps = m_Shop.getProducts.Length;
         }
 
-        private void OnDisable()
+        private void Start()
         {
-            m_InputSystem.UI_Controlls.Disable();
-        }
-        protected override void OnDestroy()
-        {
-            //base.OnDestroy();
+            SetControllersInput();
         }
   #endregion
 
@@ -70,9 +66,7 @@ namespace Shopping
 
         private void SetControllersInput()
         {
-            m_InputSystem = new PlayersInputActions();
-            m_InputSystem.UI_Controlls.Enable();
-
+            m_InputSystem = GameManager.instance.inputSystem;
             m_InputSystem.UI_Controlls.BuyButton.performed += BuyInputButton;
             m_InputSystem.UI_Controlls.SelectButton.performed += SelectButton;
             m_InputSystem.UI_Controlls.LeftSelection.performed += _ => ControllerNavigationArrows(-1);
