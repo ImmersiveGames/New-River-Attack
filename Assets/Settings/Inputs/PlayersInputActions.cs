@@ -551,7 +551,7 @@ namespace RiverAttack
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC"",
                     ""action"": ""SelectButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -584,7 +584,7 @@ namespace RiverAttack
                     ""path"": ""<Gamepad>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mobile;PC"",
+                    ""groups"": ""PC"",
                     ""action"": ""LeftSelection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -673,17 +673,6 @@ namespace RiverAttack
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mobile;PC"",
-                    ""action"": ""BackButton"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6ef3fed8-b76f-4038-94e1-185b1c821269"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
                     ""action"": ""BackButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
