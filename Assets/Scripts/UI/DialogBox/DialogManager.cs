@@ -37,28 +37,22 @@ namespace RiverAttack
         private Coroutine m_ExitButtonCoroutine;
         private static readonly int Speak = Animator.StringToHash("Speak");
 
-        private void OnEnable()
+        private void OnDisable()
+        {
+            StopAllCoroutines();
+        }
+
+        private void Start()
         {
             m_InputSystem = GameManager.instance.inputSystem;
-            m_InputSystem.BriefingRoom.Enable();
 
             m_InputSystem.BriefingRoom.Next.performed += NextButton;
             m_InputSystem.BriefingRoom.Exit.started += ctx => StartHoldTime();
             m_InputSystem.BriefingRoom.Exit.canceled += ctx => StopHoldTime();
-        }
 
-        private void OnDisable()
-        {
-            m_InputSystem.BriefingRoom.Disable();
-        }
-
-
-        private void Start()
-        {
             m_Sentences = GetLocalization();
             m_TypingCoroutine = StartCoroutine(TypeSentence(m_Sentences[m_SentenceIndex]));
         }
-
 
         private string[] GetLocalization()
         {
