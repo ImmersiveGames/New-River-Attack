@@ -35,8 +35,8 @@ namespace RiverAttack
         {
             _inputActions.UI_Controlls.StartButton.performed -= ButtonStartMission;
             _inputActions.UI_Controlls.BackButton.performed -= ButtonReturnInitialMenu;
-            _inputActions.UI_Controlls.LeftSelection.performed -= NextMission;
-            _inputActions.UI_Controlls.RightSelection.performed -= LastMission;
+            _inputActions.UI_Controlls.LeftSelection.performed -= LastMission;
+            _inputActions.UI_Controlls.RightSelection.performed -= NextMission;
         }
         #endregion
 
@@ -45,8 +45,8 @@ namespace RiverAttack
             _inputActions = GameManager.instance.inputSystem;
             _inputActions.UI_Controlls.StartButton.performed += ButtonStartMission;
             _inputActions.UI_Controlls.BackButton.performed += ButtonReturnInitialMenu;
-            _inputActions.UI_Controlls.LeftSelection.performed += NextMission;
-            _inputActions.UI_Controlls.RightSelection.performed += LastMission;
+            _inputActions.UI_Controlls.LeftSelection.performed += LastMission;
+            _inputActions.UI_Controlls.RightSelection.performed += NextMission;
         }
 
         public void ButtonNextMission(int increment)
