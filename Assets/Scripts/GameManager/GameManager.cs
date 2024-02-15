@@ -49,8 +49,9 @@ namespace RiverAttack
         public GameState currentGameState { get; private set; }
         internal GameState lastGameState;
         private PlayerSaveSaveObject _playerSave;
-
         private PlayerManager _playerManager;
+        
+        internal PlayersInputActions inputSystem;
 
         private static bool shouldPlayerBeReady =>
             PlayerManager.instance.initializedPlayerMasters[0].isPlayerDead == false &&
@@ -68,6 +69,9 @@ namespace RiverAttack
 
         private void Start()
         {
+            inputSystem = new PlayersInputActions();
+            inputSystem.Player.Disable();
+            inputSystem.UI_Controlls.Enable();
             if (SteamClient.IsValid)
             {
                 SteamFriends.OnGameOverlayActivated += ChangeStateToPause;

@@ -41,7 +41,7 @@ namespace RiverAttack
 
         private GameManager _gameManager;
         private PlayerManager _playerManager;
-        internal PlayersInputActions inputSystem;
+        private PlayersInputActions _inputSystem;
 
         private int _score;
 
@@ -88,13 +88,13 @@ namespace RiverAttack
             {
                 bossFight = actualLevels.bossFight;
             }
-            inputSystem = new PlayersInputActions();
+            _inputSystem = _gameManager.inputSystem;
         }
 
         private void Start()
         {
-            inputSystem.Player.Pause.performed += PauseGamePlay;
-            inputSystem.UI_Controlls.Pause.performed += UnPauseGamePlay;
+            _inputSystem.Player.Pause.performed += PauseGamePlay;
+            _inputSystem.UI_Controlls.Pause.performed += UnPauseGamePlay;
         }
 
         protected override void OnDestroy()

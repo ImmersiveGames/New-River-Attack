@@ -61,7 +61,7 @@ namespace RiverAttack
             m_GameSettings = GamePlayManager.getGameSettings;
             m_GameManager = GameManager.instance;
             m_GamePlayingLog = m_GamePlayManager.gamePlayingLog;
-            playersInputActions = m_GamePlayManager.inputSystem;
+            playersInputActions = m_GameManager.inputSystem;
             /*playersInputActions.Player.Enable();
             playersInputActions.UI_Controlls.Disable();*/
         }

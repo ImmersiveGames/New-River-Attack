@@ -595,7 +595,7 @@ namespace RiverAttack
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC"",
                     ""action"": ""LeftSelection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -639,7 +639,7 @@ namespace RiverAttack
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC"",
                     ""action"": ""RightSelection"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -661,7 +661,7 @@ namespace RiverAttack
                     ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC"",
                     ""action"": ""StartButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

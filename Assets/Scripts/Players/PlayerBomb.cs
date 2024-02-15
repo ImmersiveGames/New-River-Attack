@@ -25,7 +25,7 @@ namespace RiverAttack
 
         private void Start()
         {
-            m_PlayersInputActions = GamePlayManager.instance.inputSystem;
+            m_PlayersInputActions = GameManager.instance.inputSystem;
             m_PlayerSettings.bombs = GameSettings.instance.startBombs;
             m_PlayersInputActions.Player.Bomb.performed += Execute;
         }

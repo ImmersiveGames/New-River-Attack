@@ -19,7 +19,7 @@ namespace RiverAttack
 
         private void Awake()
         {
-            m_InputSystem = new PlayersInputActions();
+            
             //m_InputSystem.UI_Controlls.Disable();
             //m_InputSystem.Player.Enable();
         }
@@ -46,7 +46,7 @@ namespace RiverAttack
 
         private void SetControllersInput()
         {
-            //m_InputSystem.UI_Controlls.Enable();
+            m_InputSystem = GameManager.instance.inputSystem;
             m_InputSystem.UI_Controlls.StartButton.performed += _ => ButtonStartMission();
             m_InputSystem.UI_Controlls.BackButton.performed += _ => ButtonReturnInitialMenu();
             m_InputSystem.UI_Controlls.LeftSelection.performed += _ => ButtonNextMission(-1);
@@ -55,6 +55,7 @@ namespace RiverAttack
 
         public void ButtonNextMission(int increment)
         {
+            Debug.Log($"Entrou no left right");
             if (!m_GameHubManager.readyHub || m_PushButtonStart) return;
             m_PushButtonStart = true;
             //m_GameHubManager.readyHub = false;

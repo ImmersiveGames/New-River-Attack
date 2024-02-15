@@ -14,8 +14,9 @@ namespace RiverAttack
         public override void EnterState()
         {
             Time.timeScale = 0;
-            GamePlayManager.instance.inputSystem.Player.Disable();
-            GamePlayManager.instance.inputSystem.UI_Controlls.Enable();
+            GameManager.instance.inputSystem.Player.Disable();
+            GameManager.instance.inputSystem.UI_Controlls.Enable();
+            GameManager.instance.inputSystem.BriefingRoom.Disable();
             GamePlayManager.instance.panelMenuGame.PauseMenu(true);
             //Debug.Log($"Entra no Estado: Pause");
         }

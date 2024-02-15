@@ -37,7 +37,7 @@ namespace RiverAttack
         private void Start()
         {
             StartMyPool(prefabBullet, startBulletPool);
-            m_PlayersInputActions = GamePlayManager.instance.inputSystem;
+            m_PlayersInputActions = GameManager.instance.inputSystem;
             m_PlayersInputActions.Player.Shoot.performed += Execute;
         }
 

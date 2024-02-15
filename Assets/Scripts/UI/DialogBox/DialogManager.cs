@@ -39,7 +39,7 @@ namespace RiverAttack
 
         private void OnEnable()
         {
-            m_InputSystem = new PlayersInputActions();
+            m_InputSystem = GameManager.instance.inputSystem;
             m_InputSystem.BriefingRoom.Enable();
 
             m_InputSystem.BriefingRoom.Next.performed += NextButton;
