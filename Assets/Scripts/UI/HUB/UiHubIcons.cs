@@ -18,7 +18,7 @@ namespace RiverAttack
         private void OnEnable()
         {
             m_MissionIcon = GetComponentInChildren<Image>();
-            GameHubManager.instance.ChangeMission += SetUpMission;
+            GameHubManager.instance.EventChangeMission += SetUpMission;
         }
 
         private void Start()

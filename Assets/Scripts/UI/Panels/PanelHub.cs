@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,66 +9,66 @@ namespace RiverAttack
     {
         [SerializeField] private TMP_Text missionName;
         [SerializeField] private AudioEvent clickSound;
-        private int m_NextIndex;
+        private int _nextIndex;
 
-        private PlayersInputActions m_InputSystem;
-        private GameHubManager m_GameHubManager;
+        private PlayersInputActions _inputActions;
+        private GameHubManager _gameHubManager;
 
-        private bool m_PushButtonStart;
+        private bool _pushButtonStart;
 
         #region UNITYMETHODS
-
-        private void Awake()
-        {
-            
-            //m_InputSystem.UI_Controlls.Disable();
-            //m_InputSystem.Player.Enable();
-        }
-
         private void OnEnable()
         {
             SetControllersInput();
-            m_GameHubManager = GameHubManager.instance;
+            _gameHubManager = GameHubManager.instance;
         }
 
         private void Start()
         {
-            m_GameHubManager.readyHub = true;
-            m_NextIndex = m_GameHubManager.missions.FindIndex(x => x.levels == m_GameHubManager.gamePlayingLog.activeMission);
-            missionName.text = m_GameHubManager.gamePlayingLog.activeMission.levelName;
-            //Debug.Log($"Name {m_GameHubManager.gamePlayingLog.activeMission.levelName}");
+            _gameHubManager.readyHub = true;
+            _nextIndex = _gameHubManager.missions.FindIndex(x => x.levels == _gameHubManager.gamePlayingLog.activeMission);
+            missionName.text = _gameHubManager.gamePlayingLog.activeMission.levelName;
+            //Debug.Log($"Name {_gameHubManager.gamePlayingLog.activeMission.levelName}");
         }
 
         private void OnDisable()
         {
-            m_InputSystem.UI_Controlls.StartButton.performed -= ButtonStartMission;
-            m_InputSystem.UI_Controlls.BackButton.performed -= ButtonReturnInitialMenu;
-            m_InputSystem.UI_Controlls.LeftSelection.performed -= ctx => ButtonNextMission(-1);
-            m_InputSystem.UI_Controlls.RightSelection.performed -= ctx => ButtonNextMission(1);
+            _inputActions.UI_Controlls.StartButton.performed -= ButtonStartMission;
+            _inputActions.UI_Controlls.BackButton.performed -= ButtonReturnInitialMenu;
+            _inputActions.UI_Controlls.LeftSelection.performed -= NextMission;
+            _inputActions.UI_Controlls.RightSelection.performed -= LastMission;
         }
         #endregion
 
         private void SetControllersInput()
         {
-            m_InputSystem = GameManager.instance.inputSystem;
-            m_InputSystem.UI_Controlls.StartButton.performed += ButtonStartMission;
-            m_InputSystem.UI_Controlls.BackButton.performed += ButtonReturnInitialMenu;
-            m_InputSystem.UI_Controlls.LeftSelection.performed += ctx => ButtonNextMission(-1);
-            m_InputSystem.UI_Controlls.RightSelection.performed += ctx => ButtonNextMission(1);
+            _inputActions = GameManager.instance.inputSystem;
+            _inputActions.UI_Controlls.StartButton.performed += ButtonStartMission;
+            _inputActions.UI_Controlls.BackButton.performed += ButtonReturnInitialMenu;
+            _inputActions.UI_Controlls.LeftSelection.performed += NextMission;
+            _inputActions.UI_Controlls.RightSelection.performed += LastMission;
         }
 
         public void ButtonNextMission(int increment)
         {
-            Debug.Log($"Entrou no left right");
-            if (!m_GameHubManager.readyHub || m_PushButtonStart) return;
-            m_PushButtonStart = true;
-            //m_GameHubManager.readyHub = false;
+            if (!_gameHubManager.readyHub || _pushButtonStart) return;
+            _pushButtonStart = true;
+            //_gameHubManager.readyHub = false;
             GameAudioManager.instance.PlaySfx(clickSound);
-            m_NextIndex = GetHubIndex(m_NextIndex, increment, m_GameHubManager.missions, m_GameHubManager.gamePlayingLog.finishLevels);
-            m_GameHubManager.OnChangeMission(m_NextIndex);
+            _nextIndex = GetHubIndex(_nextIndex, increment, _gameHubManager.missions, _gameHubManager.gamePlayingLog.finishLevels);
+            _gameHubManager.OnChangeMission(_nextIndex);
             missionName.text = GamePlayingLog.instance.activeMission.levelName;
-            m_PushButtonStart = false;
-            //Debug.Log($"Next Index: {m_NextIndex}");
+            _pushButtonStart = false;
+            //Debug.Log($"Next Index: {_nextIndex}");
+        }
+
+        private void NextMission(InputAction.CallbackContext context)
+        {
+            ButtonNextMission(1);
+        }
+        private void LastMission(InputAction.CallbackContext context)
+        {
+            ButtonNextMission(-1);
         }
 
         private void ButtonStartMission(InputAction.CallbackContext context)
@@ -78,13 +77,13 @@ namespace RiverAttack
         }
         public void ButtonStartMission()
         {
-            if (!m_GameHubManager.readyHub || m_PushButtonStart) return;
-            m_PushButtonStart = true;
+            if (!_gameHubManager.readyHub || _pushButtonStart) return;
+            _pushButtonStart = true;
             GameAudioManager.instance.PlaySfx(clickSound);
-            if(m_GameHubManager.gamePlayingLog.activeMission.bossFight){}
-            GameManager.instance.ChangeState(new GameStateOpenCutScene(), m_GameHubManager.gamePlayingLog.activeMission.bossFight ? 
+            if(_gameHubManager.gamePlayingLog.activeMission.bossFight){}
+            GameManager.instance.ChangeState(new GameStateOpenCutScene(), _gameHubManager.gamePlayingLog.activeMission.bossFight ? 
                 GameManager.GameScenes.GamePlayBoss.ToString() : GameManager.GameScenes.GamePlay.ToString());
-            m_PushButtonStart = false;
+            _pushButtonStart = false;
         }
 
         private void ButtonReturnInitialMenu(InputAction.CallbackContext context)
@@ -93,18 +92,18 @@ namespace RiverAttack
         }
         public void ButtonReturnInitialMenu()
         {
-            if (!m_GameHubManager.readyHub || m_PushButtonStart) return;
-            m_PushButtonStart = true;
+            if (!_gameHubManager.readyHub || _pushButtonStart) return;
+            _pushButtonStart = true;
             GameAudioManager.instance.PlaySfx(clickSound);
             StopAllCoroutines();
             GameManager.instance.ChangeState(new GameStateMenu(), GameManager.GameScenes.MainScene.ToString());
-            m_PushButtonStart = false;
+            _pushButtonStart = false;
         }
 
         private static int GetHubIndex(int actual, int increment, IReadOnlyList<HubMissions> missions, ICollection<Levels> finish)
         {
-            int realIndex = actual + increment;
-            int max = missions.Count;
+            var realIndex = actual + increment;
+            var max = missions.Count;
             if (realIndex >= max) return max - 1;
             if (realIndex <= 0) return 0;
             if(finish.Contains(missions[realIndex].levels)) return realIndex;

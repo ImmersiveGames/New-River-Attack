@@ -14,7 +14,7 @@ namespace RiverAttack
         
         #region Delagetes
         public delegate void HubEventHandler(int index);
-        internal event HubEventHandler ChangeMission;
+        internal event HubEventHandler EventChangeMission;
         #endregion
 
         private void Start()
@@ -49,7 +49,7 @@ namespace RiverAttack
         internal void OnChangeMission(int index)
         {
             SetActualLevel(index);
-            ChangeMission?.Invoke(index);
+            EventChangeMission?.Invoke(index);
         }
     }
     [Serializable]

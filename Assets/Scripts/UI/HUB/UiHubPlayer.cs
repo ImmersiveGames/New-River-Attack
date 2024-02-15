@@ -18,12 +18,12 @@ namespace RiverAttack
                 var missions = m_GameHubManager.missions.Find(x=>x.levels == GamePlayingLog.instance.activeMission);
                 transform.position = new Vector3(0, 0, missions.position) + positionOffset;
             }
-            m_GameHubManager.ChangeMission += MovePlayer;
+            m_GameHubManager.EventChangeMission += MovePlayer;
         }
 
         private void OnDisable()
         {
-            m_GameHubManager.ChangeMission -= MovePlayer;
+            m_GameHubManager.EventChangeMission -= MovePlayer;
         }
 
         private void OnDestroy()
