@@ -37,21 +37,25 @@ namespace RiverAttack
         private Coroutine m_ExitButtonCoroutine;
         private static readonly int Speak = Animator.StringToHash("Speak");
 
-        private void OnDisable()
-        {
-            StopAllCoroutines();
-        }
+        
 
         private void Start()
         {
             m_InputSystem = GameManager.instance.inputSystem;
 
             m_InputSystem.BriefingRoom.Next.performed += NextButton;
-            m_InputSystem.BriefingRoom.Exit.started += ctx => StartHoldTime();
-            m_InputSystem.BriefingRoom.Exit.canceled += ctx => StopHoldTime();
+            m_InputSystem.BriefingRoom.Exit.started += StartHoldTime;
+            m_InputSystem.BriefingRoom.Exit.canceled += StopHoldTime;
 
             m_Sentences = GetLocalization();
             m_TypingCoroutine = StartCoroutine(TypeSentence(m_Sentences[m_SentenceIndex]));
+        }
+        private void OnDisable()
+        {
+            StopAllCoroutines();
+            m_InputSystem.BriefingRoom.Next.performed -= NextButton;
+            m_InputSystem.BriefingRoom.Exit.started -= StartHoldTime;
+            m_InputSystem.BriefingRoom.Exit.canceled -= StopHoldTime;
         }
 
         private string[] GetLocalization()
@@ -129,14 +133,14 @@ namespace RiverAttack
             GameManager.instance.ChangeState(new GameStateMenu(), GameManager.GameScenes.MainScene.ToString());
         }
 
-        private void StartHoldTime()
+        private void StartHoldTime(InputAction.CallbackContext context)
         {
             m_IsExitButtonPressed = true;
 
             m_ExitButtonCoroutine = StartCoroutine(FillImageOverTime());
         }
 
-        private void StopHoldTime()
+        private void StopHoldTime(InputAction.CallbackContext context)
         {
             m_IsExitButtonPressed = false;
             holdTimer = 0f;
