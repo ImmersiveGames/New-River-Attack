@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using UnityEngine;
 
 namespace RiverAttack
@@ -40,7 +39,7 @@ namespace RiverAttack
 
         private void ClearLeaderboard()
         {
-            for (int i = 0; i < content.childCount; i++)
+            for (var i = 0; i < content.childCount; i++)
             {
                 Destroy(content.GetChild(i).gameObject);
             }

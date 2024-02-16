@@ -129,7 +129,7 @@ namespace RiverAttack
             if (!SteamClient.IsValid || !SteamClient.IsLoggedOn ) return;
             try
             {
-                foreach (string achievement in achievementsToUnlock)
+                foreach (var achievement in achievementsToUnlock)
                 {
                     UnlockAchievement(achievement);
                 }
