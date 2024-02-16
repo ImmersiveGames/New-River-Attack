@@ -215,12 +215,12 @@ namespace RiverAttack
             }
             if (enemies != null && enemies is CollectiblesMaster or EffectAreaMaster)
             {
-                GamePlayManager.AddResultList(m_GamePlayingLog.hitEnemiesResultsList, getPlayerSettings, enemies.enemy, 1, CollisionType.Collected);
+                GamePlayManager.AddResultList(m_GamePlayingLog.GetEnemiesResult(), getPlayerSettings, enemies.enemy, 1, CollisionType.Collected);
             }
             else if (enemies != null)
             {
                 GameSteamManager.AddStat("stat_CrashPlayer",1,false);
-                GamePlayManager.AddResultList(m_GamePlayingLog.hitEnemiesResultsList, getPlayerSettings, enemies.enemy, 1, CollisionType.Collider);
+                GamePlayManager.AddResultList(m_GamePlayingLog.GetEnemiesResult(), getPlayerSettings, enemies.enemy, 1, CollisionType.Collider);
             }
             GameSteamManager.StoreStats();
         }

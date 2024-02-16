@@ -96,7 +96,7 @@ namespace RiverAttack
             OnEventObstacleMasterHit();
             OnEventObstacleScore(playerMaster.getPlayerSettings);
             ShouldSavePoint(playerMaster.getPlayerSettings);
-            GamePlayManager.AddResultList(gamePlayingLog.hitEnemiesResultsList, playerMaster.getPlayerSettings, enemy, 1, collisionType);
+            GamePlayManager.AddResultList(gamePlayingLog.GetEnemiesResult(), playerMaster.getPlayerSettings, enemy, 1, collisionType);
             KillStatsHandle(collisionType);
             ShouldFinishGame();
         }

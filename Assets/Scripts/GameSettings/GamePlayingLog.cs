@@ -23,12 +23,28 @@ namespace RiverAttack
         /*
         public int lastMissionIndex;
         public int lastMissionFinishIndex;*/
-        public List<LogResults> hitEnemiesResultsList;
+        private List<LogResults> hitEnemiesResultsList;
 
         public int GetEnemiesHit(EnemiesScriptable enemy)
         {
             var item = hitEnemiesResultsList.Find(x => x.enemy == enemy);
             return item?.quantity ?? 0;
+        }
+
+        public void AddResultList(LogResults result)
+        {
+            hitEnemiesResultsList.Add(result);
+        }
+
+        public void ResultRecover(List<LogResults> resultsList)
+        {
+            hitEnemiesResultsList = new List<LogResults>();
+            hitEnemiesResultsList = resultsList;
+        }
+
+        public List<LogResults> GetEnemiesResult()
+        {
+            return hitEnemiesResultsList;
         }
     }
     public enum CollisionType

@@ -12,6 +12,7 @@ namespace Save
     public class PlayerSaveSaveObject : SaveObject
     {
         public SaveValue<List<ShopProduct>> listProducts;
+        public SaveValue<int> wealth;
 
         public SaveValue<float> musicVolume;
         public SaveValue<float> sfxVolume;

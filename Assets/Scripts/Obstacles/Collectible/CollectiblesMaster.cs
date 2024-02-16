@@ -55,7 +55,7 @@ namespace RiverAttack
             AddCollectList(collectableList, collectibleScriptable, collectibleScriptable.amountCollectables);
             if(collectibleScriptable.powerUp == null)
                 CollectWealth(whoHit.getPlayerSettings, collectibleScriptable.amountCollectables);
-            GamePlayManager.AddResultList(gamePlayingLog.hitEnemiesResultsList, whoHit.getPlayerSettings, enemy, collectibleScriptable.amountCollectables, CollisionType.Collected);
+            GamePlayManager.AddResultList(gamePlayingLog.GetEnemiesResult(), whoHit.getPlayerSettings, enemy, collectibleScriptable.amountCollectables, CollisionType.Collected);
         }
 
         private static void AddCollectList(List<LogPlayerCollectables> list, CollectibleScriptable collectible, int qnt)

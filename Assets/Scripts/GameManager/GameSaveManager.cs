@@ -32,6 +32,7 @@ namespace RiverAttack
             SaveManager.Load();
             //m_PlayerSave.Load();
             playerSettings.listProducts = m_PlayerSave.listProducts.Value;
+            playerSettings.wealth = m_PlayerSave.wealth.Value;
 
             gameSettings.musicVolume = m_PlayerSave.musicVolume.Value;
             gameSettings.sfxVolume = m_PlayerSave.sfxVolume.Value;
@@ -55,13 +56,13 @@ namespace RiverAttack
             gamePlayingLog.playerDieFuelEmpty = m_PlayerSave.playerDieFuelEmpty.Value;
             gamePlayingLog.activeMission = m_PlayerSave.activeMission.Value;
             gamePlayingLog.finishLevels = m_PlayerSave.finishLevels.Value;
-            gamePlayingLog.hitEnemiesResultsList = m_PlayerSave.hitEnemiesResultsList.Value;
+            gamePlayingLog.ResultRecover(m_PlayerSave.hitEnemiesResultsList.Value);
         }
 
         public void SavePlayerSaves()
         {
             m_PlayerSave.listProducts.Value = playerSettings.listProducts;
-
+            m_PlayerSave.wealth.Value = playerSettings.wealth;
             m_PlayerSave.musicVolume.Value = gameSettings.musicVolume;
             m_PlayerSave.sfxVolume.Value = gameSettings.sfxVolume;
             m_PlayerSave.startLocale.Value = gameSettings.startLocale;
@@ -84,7 +85,7 @@ namespace RiverAttack
             m_PlayerSave.playerDieFuelEmpty.Value = gamePlayingLog.playerDieFuelEmpty;
             m_PlayerSave.activeMission.Value = gamePlayingLog.activeMission;
             m_PlayerSave.finishLevels.Value = gamePlayingLog.finishLevels;
-            m_PlayerSave.hitEnemiesResultsList.Value = gamePlayingLog.hitEnemiesResultsList;
+            m_PlayerSave.hitEnemiesResultsList.Value = gamePlayingLog.GetEnemiesResult();
 
             //m_PlayerSave.Save();
             SaveManager.Save();

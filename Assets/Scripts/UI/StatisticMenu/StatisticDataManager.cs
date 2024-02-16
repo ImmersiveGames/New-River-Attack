@@ -78,13 +78,13 @@ namespace RiverAttack
 
         private IEnumerable<LogResults> getEnemiesDestroyed
         {
-            get { return GamePlayingLog.instance.hitEnemiesResultsList.Where(item=>enemiesList.Contains(item.enemy))
+            get { return GamePlayingLog.instance.GetEnemiesResult().Where(item=>enemiesList.Contains(item.enemy))
                 .ToList(); }
         }
 
         private IEnumerable<LogResults> getCollectableItems
         {
-            get { return GamePlayingLog.instance.hitEnemiesResultsList.Where(item=>collectiblesList.Contains(item.enemy)).ToList(); }
+            get { return GamePlayingLog.instance.GetEnemiesResult().Where(item=>collectiblesList.Contains(item.enemy)).ToList(); }
         }
 
         private void OnEnable()
