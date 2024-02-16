@@ -55,7 +55,7 @@ namespace RiverAttack
             _pushButtonStart = true;
             //_gameHubManager.readyHub = false;
             GameAudioManager.instance.PlaySfx(clickSound);
-            _nextIndex = GetHubIndex(_nextIndex, increment, _gameHubManager.missions, _gameHubManager.gamePlayingLog.finishLevels);
+            _nextIndex = GetHubIndex(_nextIndex, increment, _gameHubManager.missions, _gameHubManager.gamePlayingLog.GetLevelsResult());
             _gameHubManager.OnChangeMission(_nextIndex);
             missionName.text = GamePlayingLog.instance.activeMission.levelName;
             _pushButtonStart = false;

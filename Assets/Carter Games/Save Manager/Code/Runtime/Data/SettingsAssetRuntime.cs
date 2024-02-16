@@ -46,6 +46,7 @@ namespace CarterGames.Assets.SaveManager
         
         [SerializeField] private EncryptionOption encryptionOption;
         [SerializeField] private bool prettify;
+        [SerializeField] private bool autoLoadOnEntry = true;
         [SerializeField] private bool autoSaveOnExit = true;
 
         /* ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -109,10 +110,7 @@ namespace CarterGames.Assets.SaveManager
         /// </summary>
         public bool Prettify => prettify;
 
-
-        /// <summary>
-        /// Defines if the asset auto saves changes.
-        /// </summary>
+        public bool AutoLoad => autoLoadOnEntry;
         public bool AutoSave => autoSaveOnExit;
 
         /* ─────────────────────────────────────────────────────────────────────────────────────────────────────────────

@@ -22,7 +22,7 @@ namespace RiverAttack
             if (gamePlayingLog.activeMission != null)
                 return;
             gamePlayingLog.activeMission = missions[0].levels;
-            gamePlayingLog.finishLevels = new List<Levels>();
+            gamePlayingLog.LevelRecover(new List<Levels>());
         }
         protected override void OnDestroy()
         {
@@ -31,7 +31,7 @@ namespace RiverAttack
 
         private void SetActualLevel(int index)
         {
-            gamePlayingLog.activeMission.levelsStates = gamePlayingLog.finishLevels.Contains(gamePlayingLog.activeMission) ? LevelsStates.Open : LevelsStates.Locked;
+            gamePlayingLog.activeMission.levelsStates = gamePlayingLog.GetLevelsResult().Contains(gamePlayingLog.activeMission) ? LevelsStates.Open : LevelsStates.Locked;
             missions[index].levels.levelsStates = LevelsStates.Actual;
             gamePlayingLog.activeMission = missions[index].levels;
         }

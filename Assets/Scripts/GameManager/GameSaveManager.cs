@@ -55,7 +55,7 @@ namespace RiverAttack
             gamePlayingLog.playerDieBullet = m_PlayerSave.playerDieBullet.Value;
             gamePlayingLog.playerDieFuelEmpty = m_PlayerSave.playerDieFuelEmpty.Value;
             gamePlayingLog.activeMission = m_PlayerSave.activeMission.Value;
-            gamePlayingLog.finishLevels = m_PlayerSave.finishLevels.Value;
+            gamePlayingLog.LevelRecover(m_PlayerSave.finishLevels.Value);
             gamePlayingLog.ResultRecover(m_PlayerSave.hitEnemiesResultsList.Value);
         }
 
@@ -84,7 +84,7 @@ namespace RiverAttack
             m_PlayerSave.playerDieBullet.Value = gamePlayingLog.playerDieBullet;
             m_PlayerSave.playerDieFuelEmpty.Value = gamePlayingLog.playerDieFuelEmpty;
             m_PlayerSave.activeMission.Value = gamePlayingLog.activeMission;
-            m_PlayerSave.finishLevels.Value = gamePlayingLog.finishLevels;
+            m_PlayerSave.finishLevels.Value = gamePlayingLog.GetLevelsResult();
             m_PlayerSave.hitEnemiesResultsList.Value = gamePlayingLog.GetEnemiesResult();
 
             //m_PlayerSave.Save();

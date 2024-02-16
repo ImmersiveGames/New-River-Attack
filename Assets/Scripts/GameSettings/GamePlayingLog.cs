@@ -19,7 +19,7 @@ namespace RiverAttack
         public int playerDieBullet;
         public int playerDieFuelEmpty;
         public Levels activeMission;
-        public List<Levels> finishLevels;
+        private List<Levels> finishLevels;
         /*
         public int lastMissionIndex;
         public int lastMissionFinishIndex;*/
@@ -30,7 +30,10 @@ namespace RiverAttack
             var item = hitEnemiesResultsList.Find(x => x.enemy == enemy);
             return item?.quantity ?? 0;
         }
-
+        public void AddLevel(Levels level)
+        {
+            finishLevels.Add(level);
+        }
         public void AddResultList(LogResults result)
         {
             hitEnemiesResultsList.Add(result);
@@ -41,10 +44,19 @@ namespace RiverAttack
             hitEnemiesResultsList = new List<LogResults>();
             hitEnemiesResultsList = resultsList;
         }
+        public void LevelRecover(List<Levels> levelsList)
+        {
+            finishLevels = new List<Levels>();
+            finishLevels = levelsList;
+        }
 
         public List<LogResults> GetEnemiesResult()
         {
             return hitEnemiesResultsList;
+        }
+        public List<Levels> GetLevelsResult()
+        {
+            return finishLevels;
         }
     }
     public enum CollisionType

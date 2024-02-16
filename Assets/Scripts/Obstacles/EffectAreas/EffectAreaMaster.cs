@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace RiverAttack
@@ -55,7 +53,7 @@ namespace RiverAttack
         protected override void DestroyObstacle()
         {
             OnEventExitAreaEffect();
-            playerMaster.inPowerUp = false;
+            playerMaster.inEffectArea = false;
             base.DestroyObstacle();
         }
 
@@ -63,13 +61,13 @@ namespace RiverAttack
 
         private void OnEventAreaEffect()
         {
-            playerMaster.inPowerUp = true;
+            playerMaster.inEffectArea = true;
             EventEnterAreaEffect?.Invoke();
         }
 
         private void OnEventExitAreaEffect()
         {
-            playerMaster.inPowerUp = false;
+            playerMaster.inEffectArea = false;
             EventExitAreaEffect?.Invoke();
             GameSteamManager.StoreStats();
         }

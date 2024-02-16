@@ -30,9 +30,9 @@ namespace RiverAttack
         internal void Initialization(Levels levels)
         {
             level = levels;
-            if (levels.levelsStates == LevelsStates.Complete && GameHubManager.instance.gamePlayingLog.finishLevels.Contains(levels)) return;
+            if (levels.levelsStates == LevelsStates.Complete && GameHubManager.instance.gamePlayingLog.GetLevelsResult().Contains(levels)) return;
             level.levelsStates = LevelsStates.Locked;
-            if (GameHubManager.instance.gamePlayingLog.finishLevels.Contains(levels))
+            if (GameHubManager.instance.gamePlayingLog.GetLevelsResult().Contains(levels))
             {
                 level.levelsStates = LevelsStates.Open;
             }

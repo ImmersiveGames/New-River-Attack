@@ -17,10 +17,10 @@ namespace RiverAttack
         {
             if (other.GetComponentInParent<PlayerMaster>() == null) return;
             if (m_GamePlayManager.readyToFinish != true) return;
-            if (!GamePlayingLog.instance.finishLevels.Contains(m_GamePlayManager.actualLevels))
+            if (!GamePlayingLog.instance.GetLevelsResult().Contains(m_GamePlayManager.actualLevels))
             {
                 m_GamePlayManager.actualLevels.levelsStates = LevelsStates.Complete;
-                GamePlayingLog.instance.finishLevels.Add(m_GamePlayManager.actualLevels);
+                GamePlayingLog.instance.AddLevel(m_GamePlayManager.actualLevels);
                 if (GameManager.instance.gameModes == GameManager.GameModes.Mission)
                 {
                     switch (m_GamePlayManager.actualLevels.pathType)
@@ -43,6 +43,22 @@ namespace RiverAttack
                         case LevelTypes.Ice:
                             GameSteamManager.UnlockAchievement("ACH_FINISH_M_ICE");
                             break;
+                        case LevelTypes.Menu:
+                            break;
+                        case LevelTypes.Hub:
+                            break;
+                        case LevelTypes.GameOver:
+                            break;
+                        case LevelTypes.Complete:
+                            break;
+                        case LevelTypes.HUD:
+                            break;
+                        case LevelTypes.Boss:
+                            break;
+                        case LevelTypes.Tutorial:
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
                     }
                 }
             }

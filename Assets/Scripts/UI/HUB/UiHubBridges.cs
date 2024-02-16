@@ -14,7 +14,7 @@ namespace RiverAttack
 
         private IEnumerator Start()
         {
-            if (!GameHubManager.instance.gamePlayingLog.finishLevels.Contains(level))
+            if (!GameHubManager.instance.gamePlayingLog.GetLevelsResult().Contains(level))
                 yield break;
             if (level.levelsStates != LevelsStates.Complete)
             {

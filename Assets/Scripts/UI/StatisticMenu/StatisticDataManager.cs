@@ -21,60 +21,27 @@ namespace RiverAttack
         [SerializeField] private List<CollectibleScriptable> collectiblesList;
         [SerializeField] private List<StatisticItemData> statisticsListData;
 
-        private static string getScore
-        {
-            get { return GamePlayingLog.instance.totalScore.ToString(); }
-        }
+        private static string getScore => GamePlayingLog.instance.totalScore.ToString();
 
-        private static string getSpendTime
-        {
-            get { return Tools.TimeFormat(GamePlayingLog.instance.timeSpent); }
-        }
+        private static string getSpendTime => Tools.TimeFormat(GamePlayingLog.instance.timeSpent);
 
-        private static string getMaxPathDistance
-        {
-            get { return $"{GamePlayingLog.instance.maxPathDistance.ToString(CultureInfo.CurrentCulture)} KM"; }
-        }
+        private static string getMaxPathDistance => $"{GamePlayingLog.instance.maxPathDistance.ToString(CultureInfo.CurrentCulture)} KM";
 
-        private static string getShootSpent
-        {
-            get { return GamePlayingLog.instance.shootSpent.ToString(CultureInfo.CurrentCulture); }
-        }
+        private static string getShootSpent => GamePlayingLog.instance.shootSpent.ToString(CultureInfo.CurrentCulture);
 
-        private static string getBombSpent
-        {
-            get { return $"{GamePlayingLog.instance.bombSpent} KM"; }
-        }
+        private static string getBombSpent => $"{GamePlayingLog.instance.bombSpent} KM";
 
-        private static string getFuelSpent
-        {
-            get { return $"{GamePlayingLog.instance.fuelSpent} L"; }
-        }
+        private static string getFuelSpent => $"{GamePlayingLog.instance.fuelSpent} L";
 
-        private static string getLifeSpent
-        {
-            get { return GamePlayingLog.instance.livesSpent.ToString(); }
-        }
+        private static string getLifeSpent => GamePlayingLog.instance.livesSpent.ToString();
 
-        private static string getDeathByWall
-        {
-            get { return GamePlayingLog.instance.playerDieWall.ToString(); }
-        }
+        private static string getDeathByWall => GamePlayingLog.instance.playerDieWall.ToString();
 
-        private static string getDeathByBullets
-        {
-            get { return GamePlayingLog.instance.playerDieBullet.ToString(); }
-        }
+        private static string getDeathByBullets => GamePlayingLog.instance.playerDieBullet.ToString();
 
-        private static string getDeathByFuel
-        {
-            get { return GamePlayingLog.instance.playerDieFuelEmpty.ToString(); }
-        }
+        private static string getDeathByFuel => GamePlayingLog.instance.playerDieFuelEmpty.ToString();
 
-        private static string getCompletedLevels
-        {
-            get { return GamePlayingLog.instance.finishLevels.Count.ToString(); }
-        }
+        private static string getCompletedLevels => GamePlayingLog.instance.GetLevelsResult().Count.ToString();
 
         private IEnumerable<LogResults> getEnemiesDestroyed
         {
@@ -233,7 +200,6 @@ namespace RiverAttack
         public string itemString;
         [HideInInspector]
         public string itemValue;
-        [HideInInspector]
         public IEnumerable<StatisticItemData> itemStatisticsList;
     }
 }

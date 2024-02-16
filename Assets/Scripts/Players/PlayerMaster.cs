@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using Utils;
 namespace RiverAttack
@@ -12,7 +10,7 @@ namespace RiverAttack
         [SerializeField]
         internal bool isPlayerDead;
 
-        private bool m_Invulnerability;
+        private bool _invulnerability;
         [SerializeField] private float timeoutReSpawn;
         [SerializeField] private GameObject deadParticlePrefab;
         [SerializeField] private float timeoutDestroyExplosion;
@@ -29,17 +27,18 @@ namespace RiverAttack
         internal List<LogPlayerCollectables> collectableList;
 
         internal PlayersInputActions playersInputActions;
-        //internal bool inEffectArea;
+        [SerializeField]
+        internal bool inEffectArea;
         [SerializeField]
         internal bool inPowerUp;
         internal int nextScoreForLive;
         
 
         //Animator m_Animator;
-        private GamePlayingLog m_GamePlayingLog;
-        private GamePlayManager m_GamePlayManager;
-        private GameManager m_GameManager;
-        private GameSettings m_GameSettings;
+        private GamePlayingLog _gamePlayingLog;
+        private GamePlayManager _gamePlayManager;
+        private GameManager _gameManager;
+        private GameSettings _gameSettings;
         
         #region Delagetes
         public delegate void GeneralEventHandler();
@@ -57,19 +56,19 @@ namespace RiverAttack
         private void Awake()
         {
             //m_Animator = GetComponent<Animator>();
-            m_GamePlayManager = GamePlayManager.instance;
-            m_GameSettings = GamePlayManager.getGameSettings;
-            m_GameManager = GameManager.instance;
-            m_GamePlayingLog = m_GamePlayManager.gamePlayingLog;
-            playersInputActions = m_GameManager.inputSystem;
+            _gamePlayManager = GamePlayManager.instance;
+            _gameSettings = GamePlayManager.getGameSettings;
+            _gameManager = GameManager.instance;
+            _gamePlayingLog = _gamePlayManager.gamePlayingLog;
+            playersInputActions = _gameManager.inputSystem;
             /*playersInputActions.Player.Enable();
             playersInputActions.UI_Controlls.Disable();*/
         }
 
         private void OnEnable()
         {
-            m_GamePlayManager.EventStartRapidFire += () => inPowerUp = true;
-            m_GamePlayManager.EventEndRapidFire += () => inPowerUp = false;
+            _gamePlayManager.EventStartRapidFire += () => inPowerUp = true;
+            _gamePlayManager.EventEndRapidFire += () => inPowerUp = false;
             OnEventPlayerMasterUpdateSkin();
         }
 
@@ -84,7 +83,7 @@ namespace RiverAttack
                 || other.GetComponent<BulletPlayerBomb>() || other.GetComponentInParent<CollectiblesMaster>() != null
                 || other.GetComponentInParent<EffectAreaAnimator>() || other.GetComponent<LevelCheck>()) return;
             
-            if (m_GamePlayManager.getGodMode || m_Invulnerability) return;
+            if (_gamePlayManager.getGodMode || _invulnerability) return;
             LogGamePlay(other);
             //return;
             OnEventPlayerMasterHit();
@@ -114,37 +113,41 @@ namespace RiverAttack
             getPlayerSettings.spawnPosition.z = 0;
             isPlayerDead = false;
             getPlayerSettings.score = 0;
-            m_GamePlayManager.OnEventUpdateScore(getPlayerSettings.score);
+            _gamePlayManager.OnEventUpdateScore(getPlayerSettings.score);
             getPlayerSettings.distance = 0;
-            int distInt = Mathf.FloorToInt(getPlayerSettings.distance);
-            m_GamePlayManager.OnEventUpdateDistance(distInt);
+            var distInt = Mathf.FloorToInt(getPlayerSettings.distance);
+            _gamePlayManager.OnEventUpdateDistance(distInt);
             //getPlayerSettings.wealth = 0;
-            m_GamePlayManager.OnEventUpdateRefugees(getPlayerSettings.wealth);
-            getPlayerSettings.bombs = m_GameSettings.startBombs;
-            m_GamePlayManager.OnEventUpdateBombs(getPlayerSettings.bombs);
-            getPlayerSettings.actualFuel = m_GameSettings.startFuel;
+            _gamePlayManager.OnEventUpdateRefugees(getPlayerSettings.wealth);
+            getPlayerSettings.bombs = _gameSettings.startBombs;
+            _gamePlayManager.OnEventUpdateBombs(getPlayerSettings.bombs);
+            getPlayerSettings.actualFuel = _gameSettings.startFuel;
             // não reiniciar as vidas no modo missão
-            if (m_GameManager.gameModes == GameManager.GameModes.Mission)
+            if (_gameManager.gameModes == GameManager.GameModes.Mission)
             {
                 if (getPlayerSettings.lives <= 1)
                     getPlayerSettings.lives = 3;
-                m_GamePlayManager.OnEventUpdateLives(getPlayerSettings.lives);
+                _gamePlayManager.OnEventUpdateLives(getPlayerSettings.lives);
                 return;
             }
-            getPlayerSettings.lives = m_GameSettings.startLives;
-            m_GamePlayManager.OnEventUpdateLives(getPlayerSettings.lives);
+            getPlayerSettings.lives = _gameSettings.startLives;
+            _gamePlayManager.OnEventUpdateLives(getPlayerSettings.lives);
+            inEffectArea = false;
+            inPowerUp = false;
         }
 
         private void KillPlayer()
         {
-            m_GamePlayManager.playerDead = !m_GamePlayManager.bossFight;
-            isPlayerDead = !m_GamePlayManager.bossFight;
-            playerMovementStatus = m_GamePlayManager.bossFight ? MovementStatus.None : MovementStatus.Paused;
-            m_Invulnerability = true;
+            _gamePlayManager.playerDead = !_gamePlayManager.bossFight;
+            isPlayerDead = !_gamePlayManager.bossFight;
+            playerMovementStatus = _gamePlayManager.bossFight ? MovementStatus.None : MovementStatus.Paused;
+            _invulnerability = true;
             //TODO: Ativar animação de invencibilidade do jogador
             CameraShake.ShakeCamera(shakeIntensity,shakeTime);
-            m_GamePlayManager.OnEventEnemiesMasterKillPlayer();
-            if (m_GamePlayManager.bossFight)
+            _gamePlayManager.OnEventEnemiesMasterKillPlayer();
+            inEffectArea = false;
+            inPowerUp = false;
+            if (_gamePlayManager.bossFight)
             {
                 OnEventPlayerMasterBossHit(true);
                 return;
@@ -156,7 +159,7 @@ namespace RiverAttack
 
         private void ChangeGameOver()
         {
-            m_GameManager.ChangeState(new GameStateGameOver());
+            _gameManager.ChangeState(new GameStateGameOver());
         }
 
         private void TryRespawn()
@@ -173,28 +176,28 @@ namespace RiverAttack
         {
             //Debug.Log("Respawn Player");
             var transform1 = transform;
-            transform1.position = m_GamePlayManager.bossFight ? transform1.position : getPlayerSettings.spawnPosition;
-            transform1.rotation = m_GamePlayManager.bossFight ? transform1.rotation : getPlayerSettings.spawnRotation;
-            m_GamePlayManager.OnEventReSpawnEnemiesMaster();
+            transform1.position = _gamePlayManager.bossFight ? transform1.position : getPlayerSettings.spawnPosition;
+            transform1.rotation = _gamePlayManager.bossFight ? transform1.rotation : getPlayerSettings.spawnRotation;
+            _gamePlayManager.OnEventReSpawnEnemiesMaster();
             Tools.ToggleChildren(transform1);
-            getPlayerSettings.actualFuel = m_GameSettings.startFuel;
+            getPlayerSettings.actualFuel = _gameSettings.startFuel;
             getPlayerSettings.cadenceShootPowerUp = 0;
             OnEventPlayerMasterRespawn();
-            var timeToRespawn = m_GamePlayManager.bossFight ? timeoutReSpawn/2 : timeoutReSpawn;
+            var timeToRespawn = _gamePlayManager.bossFight ? timeoutReSpawn/2 : timeoutReSpawn;
             
             Invoke(nameof(ReSpawn), timeToRespawn);
         }
 
         private void ReSpawn()
         {
-            m_GamePlayManager.OnEventActivateEnemiesMaster();
-            if (m_GamePlayManager.bossFight)
+            _gamePlayManager.OnEventActivateEnemiesMaster();
+            if (_gamePlayManager.bossFight)
             {
                 OnEventPlayerMasterBossHit(false);
             }
             isPlayerDead = false;
             playerMovementStatus = MovementStatus.None;
-            m_Invulnerability = false;
+            _invulnerability = false;
         }
 
         private void LogGamePlay(Component component)
@@ -205,22 +208,22 @@ namespace RiverAttack
             
             if (walls != null)
             {
-                m_GamePlayingLog.playerDieWall += 1;
+                _gamePlayingLog.playerDieWall += 1;
                 GameSteamManager.AddStat("stat_CrashPlayer",1,false);
                 GameSteamManager.UnlockAchievement("ACH_CRASH_PLAYER_WALL");
             }
             if (bullet != null)
             {
-                m_GamePlayingLog.playerDieBullet += 1;
+                _gamePlayingLog.playerDieBullet += 1;
             }
             if (enemies != null && enemies is CollectiblesMaster or EffectAreaMaster)
             {
-                GamePlayManager.AddResultList(m_GamePlayingLog.GetEnemiesResult(), getPlayerSettings, enemies.enemy, 1, CollisionType.Collected);
+                GamePlayManager.AddResultList(_gamePlayingLog.GetEnemiesResult(), getPlayerSettings, enemies.enemy, 1, CollisionType.Collected);
             }
             else if (enemies != null)
             {
                 GameSteamManager.AddStat("stat_CrashPlayer",1,false);
-                GamePlayManager.AddResultList(m_GamePlayingLog.GetEnemiesResult(), getPlayerSettings, enemies.enemy, 1, CollisionType.Collider);
+                GamePlayManager.AddResultList(_gamePlayingLog.GetEnemiesResult(), getPlayerSettings, enemies.enemy, 1, CollisionType.Collider);
             }
             GameSteamManager.StoreStats();
         }
@@ -235,7 +238,7 @@ namespace RiverAttack
 
         private void OnEventPlayerMasterRespawn()
         {
-            m_GamePlayManager.playerDead = false;
+            _gamePlayManager.playerDead = false;
             EventPlayerMasterRespawn?.Invoke();
         }
 

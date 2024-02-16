@@ -26,7 +26,7 @@ namespace RiverAttack
         private void Update()
         {
             if (!m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady) return;
-            if (m_GamePlayManager.getGodMode || m_PlayerMaster.inPowerUp) return;
+            if (m_GamePlayManager.getGodMode || m_PlayerMaster.inEffectArea) return;
             m_TimeLoop += Time.deltaTime;
             if (m_TimeLoop < reduceFuelCadence) return;
             //Pode reduzir a Gasolina
