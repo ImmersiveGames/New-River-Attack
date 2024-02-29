@@ -22,7 +22,12 @@ namespace ImmersiveGames
             {
                 stateInitialized = true;
             }
-            outTransition?.OutTransitionAsync().ConfigureAwait(false);
+            var transitionOut = outTransition;
+            
+            if (transitionOut != null)
+            {
+                await transitionOut.OutTransitionAsync().ConfigureAwait(false);
+            }
             
             await OnEnter(previousState).ConfigureAwait(false);
         }
@@ -32,8 +37,12 @@ namespace ImmersiveGames
         public async Task ExitAsync()
         {
             await OnExit().ConfigureAwait(false);
-            inTransition?.InTransitionAsync().ConfigureAwait(false);
             
+            var transitionIn = inTransition;
+            if (transitionIn != null)
+            {
+                await transitionIn.InTransitionAsync().ConfigureAwait(false);
+            }
         }
 
         #endregion
@@ -51,7 +60,6 @@ namespace ImmersiveGames
 
         public virtual ITransition inTransition => null;
         public virtual ITransition outTransition => null;
-        
         
         protected virtual async Task OnEnter(IState previousState)
         {

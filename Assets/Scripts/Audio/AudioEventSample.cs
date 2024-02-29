@@ -3,7 +3,7 @@ using UnityEngine;
 namespace RiverAttack
 {
 
-    [CreateAssetMenu(fileName = "AudioEventSample", menuName = "Audio Events/Sample Audio", order = 1)]
+    [CreateAssetMenu(fileName = "AudioEvent", menuName = "Audio Events/Sample Audio", order = 1)]
     public class AudioEventSample : AudioEvent
     {
         [SerializeField]

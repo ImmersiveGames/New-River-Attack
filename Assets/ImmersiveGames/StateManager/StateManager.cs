@@ -28,6 +28,10 @@ namespace ImmersiveGames
                 Debug.Log($"Já está no estado: {stateName}");
                 return;
             }
+            MainThreadTaskExecutor.RunOnMainThread(() =>
+            {
+                AudioManager.instance.PlayBGM(nextState);
+            });
 
             if (_currentState != null)
             {
@@ -36,8 +40,9 @@ namespace ImmersiveGames
 
             _previousState = _currentState;
             _currentState = nextState;
-
-            await Task.Delay(2000).ConfigureAwait(true);
+            //TODO: Esta linha esta aqi para assegurar um intervalo antes de começar a carregar as scenas.
+            
+            //await Task.Delay(500).ConfigureAwait(true);
 
             // Adicionamos uma condição para verificar se há uma transição de cena necessária
             if (_currentState.requiresSceneLoad && !string.IsNullOrEmpty(_currentState.sceneName))
@@ -45,6 +50,8 @@ namespace ImmersiveGames
                 // Agora, esperamos que a transição de cena seja concluída antes de prosseguir
                 await SceneChangeManager.StartSceneTransitionAsync(_currentState, _previousState?.sceneName, _currentState.loadMode, _currentState.unLoadAdditiveScene).ConfigureAwait(false);
             }
+            //TODO: Esta linha esta aqi para assegurar um intervalo antes de começar o fadeout.
+            await Task.Delay(500).ConfigureAwait(true);
 
             await _currentState.EnterAsync(_previousState).ConfigureAwait(false);
 

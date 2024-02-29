@@ -9,8 +9,8 @@ namespace ImmersiveGames
         public GameStatePlay() : base("GameStatePlay") { }
         public override string sceneName => "GamePlayNovo";
         public override bool requiresSceneLoad => true;
-        public override LoadSceneMode loadMode => LoadSceneMode.Additive;
-        public override bool unLoadAdditiveScene => false;
+        public override LoadSceneMode loadMode => LoadSceneMode.Single;
+        public override bool unLoadAdditiveScene => true;
         public override ITransition inTransition => new FadeTransition();
         public override ITransition outTransition => new FadeTransition();
         

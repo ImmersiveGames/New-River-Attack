@@ -6,6 +6,9 @@ namespace ImmersiveGames
     public class FadeManager : MonoBehaviour
     {
         public static FadeManager instance { get; private set; }
+        
+        public float durationFadeIn = 2.0f;
+        public float durationFadeOut = 2.0f;
         private CanvasGroup _canvasGroup;
 
         private void Awake()
@@ -18,8 +21,7 @@ namespace ImmersiveGames
             {
                 Destroy(gameObject);
             }
-
-            DontDestroyOnLoad(this);
+            
             _canvasGroup = GetComponent<CanvasGroup>();
             if (_canvasGroup == null)
             {
@@ -27,11 +29,11 @@ namespace ImmersiveGames
             }
         }
 
-        public async Task FadeInAsync(float duration = 2.0f)
+        public async Task FadeInAsync()
         {
             if (_canvasGroup != null)
             {
-                await FadeAsync(true, duration).ConfigureAwait(false);
+                await FadeAsync(true, durationFadeIn).ConfigureAwait(false);
             }
             else
             {
@@ -39,11 +41,11 @@ namespace ImmersiveGames
             }
         }
 
-        public async Task FadeOutAsync(float duration = 2.0f)
+        public async Task FadeOutAsync()
         {
             if (_canvasGroup != null)
             {
-                await FadeAsync(false, duration).ConfigureAwait(false);
+                await FadeAsync(false, durationFadeOut).ConfigureAwait(false);
             }
             else
             {

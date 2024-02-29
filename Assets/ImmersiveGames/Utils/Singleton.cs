@@ -5,6 +5,7 @@ namespace ImmersiveGames
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static T _instance;
+        // ReSharper disable once InconsistentNaming
         private static readonly object _lock = new object();
 
         public static T instance
@@ -34,7 +35,7 @@ namespace ImmersiveGames
                     if (_instance == null)
                     {
                         _instance = this as T;
-                        DontDestroyOnLoad(gameObject);
+                        //DontDestroyOnLoad(gameObject);
                     }
                     else
                     {

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.UI;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +10,7 @@ namespace ImmersiveGames
     {
         private static readonly Stack<string> AdditiveScenes = new Stack<string>();
 
+        public Slider loadingProgressBar;
         public static async Task StartSceneTransitionAsync(IState nextState, string previousSceneName, LoadSceneMode loadSceneMode, 
             bool unloadPreviousAdditiveScene)
         {
@@ -15,7 +18,7 @@ namespace ImmersiveGames
             {
                 return;
             }
-
+            
             await MainThreadTaskExecutor.instance.RunOnMainThreadAsync(async () =>
             {
                 if (unloadPreviousAdditiveScene)
@@ -35,6 +38,7 @@ namespace ImmersiveGames
                     // Empilha a nova cena aditiva
                     AdditiveScenes.Push(nextState.sceneName);
                 }
+                // Desative o painel de loading no final da transição
             }).ConfigureAwait(false);
         }
 
@@ -58,6 +62,8 @@ namespace ImmersiveGames
             {
                 SceneManager.sceneUnloaded -= SceneUnloaded;
                 unloadCompletionSource.SetResult(true);
+                // Atualize a barra de progresso aqui (por exemplo, definindo-a como 100%)
+                UpdateProgressBar(1.0f);
             }
         }
 
@@ -67,12 +73,18 @@ namespace ImmersiveGames
                 return;
 
             var loadCompletionSource = new TaskCompletionSource<bool>();
+            
 
-            await MainThreadTaskExecutor.instance.RunOnMainThreadAsync(() =>
+            await MainThreadTaskExecutor.instance.RunOnMainThreadAsync(async () =>
             {
                 SceneManager.sceneLoaded += SceneLoaded;
-                SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
-                return Task.CompletedTask;
+                var asyncOperation = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
+                while (!asyncOperation.isDone)
+                {
+                    // Atualize a barra de progresso durante o carregamento
+                    UpdateProgressBar(asyncOperation.progress);
+                    await Task.Yield();
+                }
             }).ConfigureAwait(false);
 
             await loadCompletionSource.Task.ConfigureAwait(false);
@@ -81,7 +93,14 @@ namespace ImmersiveGames
             {
                 SceneManager.sceneLoaded -= SceneLoaded;
                 loadCompletionSource.SetResult(true);
+                // Atualize a barra de progresso aqui (por exemplo, definindo-a como 100%)
+                UpdateProgressBar(1.0f);
             }
+        }
+        // Adicione o método para atualizar a barra de progresso
+        private static void UpdateProgressBar(float progress)
+        {
+            instance.loadingProgressBar.value = progress;
         }
     }
 }

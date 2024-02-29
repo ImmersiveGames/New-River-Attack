@@ -1,12 +1,10 @@
-﻿using RiverAttack;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
-namespace Audio.Editor
+namespace ImmersiveGames.Editor
 {
-    [CustomEditor(typeof(AudioEvent), true)]
-    public class AudioEventEditor : UnityEditor.Editor
+    [CustomEditor(typeof(AudioEventScriptableObject), true)]
+    public class AudioEventScriptableObjectEditor : UnityEditor.Editor
     {
-
         [SerializeField] private AudioSource previewer;
         public void OnEnable()
         {
@@ -24,11 +22,11 @@ namespace Audio.Editor
             EditorGUI.BeginDisabledGroup(serializedObject.isEditingMultipleObjects);
             if (GUILayout.Button("Preview"))
             {
-                ((AudioEvent)target).Play(previewer);
+                ((AudioEvent)target).PreviewPlay(previewer);
             }
             if (GUILayout.Button("Stop"))
             {
-                ((AudioEvent)target).Stop(previewer);
+                ((AudioEvent)target).PreviewStop(previewer);
             }
             EditorGUI.EndDisabledGroup();
         }

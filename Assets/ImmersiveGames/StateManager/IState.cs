@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace ImmersiveGames
 {
