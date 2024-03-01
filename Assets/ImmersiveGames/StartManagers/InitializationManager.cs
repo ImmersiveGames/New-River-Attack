@@ -1,11 +1,14 @@
 ﻿using System;
+using ImmersiveGames.SaveManagers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ImmersiveGames
 {
     public class InitializationManager : MonoBehaviour
     {
         private readonly StateManager _stateManager = new StateManager();
+        [SerializeField] protected GameOptionsSave gameOptionsSave;
 
         private void Awake()
         {

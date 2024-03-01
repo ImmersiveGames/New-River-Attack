@@ -22,13 +22,13 @@ namespace RiverAttack
             if(gameSettings.startLocale != null)
                 LocalizationSettings.SelectedLocale = gameSettings.startLocale;
         }
-  #endregion
+        #endregion
         
         protected virtual void SetInternalMenu(int indexStart = 0)
         {
             if (menuPrincipal.Length < 1) return;
 
-            for (int i = 0; i < menuPrincipal.Length; i++)
+            for (var i = 0; i < menuPrincipal.Length; i++)
             {
                 lastIndex = (menuPrincipal[i].gameObject.activeSelf) ? i : 0;
                 menuPrincipal[i].gameObject.SetActive(false);

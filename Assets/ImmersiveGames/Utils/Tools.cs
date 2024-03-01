@@ -4,11 +4,10 @@ using System.Linq;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.Playables;
-using Object = UnityEngine.Object;
 
-namespace Utils
+namespace ImmersiveGames.Utils
 {
-    public static class Tools
+    public abstract class Tools
     {
         /*
          * SerializableDictionary<TKey, TValue>]
@@ -106,18 +105,18 @@ namespace Utils
             return (100 * val) / max;
         }
         /*
-         * GetValorPercentage(float porcentage, float max)
+         * GetValorPercentage(float percentage, float max)
          * - Retorna o valor de uma porcentagem
          * */
-        public static float GetValorPercentage(float porcentage, float max)
+        public static float GetValorPercentage(float percentage, float max)
         {
-            return (max * porcentage) / 100;
+            return (max * percentage) / 100;
         } 
         /*
          * IsBetween<T>(this T value, T minimum, T maximum)
          * - Verifica se o valor está entre dois numeros.
          * */
-        public static bool IsBetween<T>(this T value, T minimum, T maximum) where T : IComparable<T>
+        public static bool IsBetween<T>(T value, T minimum, T maximum) where T : IComparable<T>
         {
             if (value.CompareTo(minimum) < 0)
                 return false;
@@ -163,7 +162,7 @@ namespace Utils
         {
             if (myTransform.childCount <= 0)
                 return;
-            for (int i = 0; i < myTransform.childCount; i++)
+            for (var i = 0; i < myTransform.childCount; i++)
             {
                 myTransform.GetChild(i).gameObject.SetActive(setActive);
             }
@@ -176,7 +175,7 @@ namespace Utils
         {
             foreach (Transform child in t)
             {
-                Object.Destroy(child.gameObject);
+                UnityEngine.Object.Destroy(child.gameObject);
             }
         }
         /*
@@ -206,7 +205,7 @@ namespace Utils
          * ChangeBindingReference(string track, Object animator, PlayableDirector playableDirector)
          * - Substituir a referência nula pelo Animator desejado em um Timeline
          * */
-        public static void ChangeBindingReference(string track, Object animator, PlayableDirector playableDirector)
+        public static void ChangeBindingReference(string track, UnityEngine.Object animator, PlayableDirector playableDirector)
         {
             foreach (var playableBinding in playableDirector.playableAsset.outputs)
             {
@@ -247,14 +246,7 @@ namespace Utils
 
             return (from t in controller.animationClips where t.name == animationName select t.length).FirstOrDefault();
         }
-        /*
-         * SoundBase10(float normalizeNumber)
-         *  - transforma um numero base de 0.0 à 1.0 em um valor de metrica para sons (dB)
-         */
-        public static float SoundBase10(float normalizeNumber)
-        {
-            return Mathf.Log10(normalizeNumber) * 20f;
-        }
+        
         
         public static string TimeFormat(float timeToFormat)
         {
@@ -274,6 +266,5 @@ namespace Utils
             // Verificar se ambos os conjuntos são iguais
             return hashSet.SetEquals(other);
         }
-        
     }
 }

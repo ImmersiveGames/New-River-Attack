@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 namespace ImmersiveGames
 {
     [CreateAssetMenu(fileName = "AudioEventClip", menuName = "Audio Events/Audio Clip", order = 1)]
-    public class AudioEvent : AudioEventScriptableObject
+    public class AudioEvent : AudioEventSo
     {
         [SerializeField] private AudioEventClip audioSample;
         [SerializeField] private AudioMixerGroup audioMixerGroup;

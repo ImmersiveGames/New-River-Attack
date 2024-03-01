@@ -2,7 +2,7 @@
 using UnityEngine;
 namespace ImmersiveGames.Editor
 {
-    [CustomEditor(typeof(AudioEventScriptableObject), true)]
+    [CustomEditor(typeof(AudioEventSo), true)]
     public class AudioEventScriptableObjectEditor : UnityEditor.Editor
     {
         [SerializeField] private AudioSource previewer;

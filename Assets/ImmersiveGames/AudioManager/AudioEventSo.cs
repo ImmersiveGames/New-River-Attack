@@ -3,7 +3,7 @@ using GD.MinMaxSlider;
 
 namespace ImmersiveGames
 {
-    public abstract class AudioEventScriptableObject : ScriptableObject
+    public abstract class AudioEventSo : ScriptableObject
     {
         public abstract void Play(AudioSource source, MonoBehaviour monoBehaviour, float fadeTime = 1.0f);
         public abstract void PlayOnShot(AudioSource source);

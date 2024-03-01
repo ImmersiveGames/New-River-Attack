@@ -392,6 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072b9dcb87a548e981d5655e893260dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOptionsSave: {fileID: 11400000, guid: 27c6600f2ceb2724ea7bdedb94844935, type: 2}
 --- !u!1 &670759457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,7 +1136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b65856af68ee4664b01054de71c8c92e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  durationFadeIn: 2
+  durationFadeIn: 1
   durationFadeOut: 2
 --- !u!1 &1657190689
 GameObject:
@@ -1427,10 +1428,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ed9d0d74a224cd0b26ef2b33cd44781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 1980540679}
-  mapStateBgm:
-  - stateName: GameStateMenuInicial
-    backgroundMusic: {fileID: 11400000, guid: ba89aa7121db9df43bb55e67391bdecc, type: 2}
+  bgmAudioSource: {fileID: 0}
+  sfxAudioSource: {fileID: 0}
+  mixerGroup: {fileID: 24100000, guid: 58d7b5e9bc02ca541be53445706aa66a, type: 2}
+  mapStateBgm: {fileID: 11400000, guid: 08a911d72f4ea8141bb92e7423c1501d, type: 2}
+  mapMenuSfx: {fileID: 11400000, guid: 3ad477ec9b8879b438ee418e0833782a, type: 2}
+  fadeSound: 0.1
 --- !u!82 &1980540679
 AudioSource:
   m_ObjectHideFlags: 0
