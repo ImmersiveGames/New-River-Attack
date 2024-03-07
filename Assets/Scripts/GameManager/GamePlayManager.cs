@@ -94,13 +94,13 @@ namespace RiverAttack
         private void Start()
         {
             _inputSystem.Player.Pause.performed += PauseGamePlay;
-            _inputSystem.UI_Controlls.Pause.performed += UnPauseGamePlay;
+            _inputSystem.UiControls.Pause.performed += UnPauseGamePlay;
         }
 
         private void OnDisable()
         {
             _inputSystem.Player.Pause.performed -= PauseGamePlay;
-            _inputSystem.UI_Controlls.Pause.performed -= UnPauseGamePlay;
+            _inputSystem.UiControls.Pause.performed -= UnPauseGamePlay;
         }
 
         protected override void OnDestroy()

@@ -69,7 +69,7 @@ namespace RiverAttack
         {
             //Debug.Log($"Entra no Estado: Boss Fight");
             GameManager.instance.inputSystem.Player.Enable();
-            GameManager.instance.inputSystem.UI_Controlls.Disable();
+            GameManager.instance.inputSystem.UiControls.Disable();
             GameManager.instance.inputSystem.BriefingRoom.Disable();
             GamePlayManager.instance.panelMenuGame.StartMenuGame();
             GamePlayManager.instance.OnStartGame();

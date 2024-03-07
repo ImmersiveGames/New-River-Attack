@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace ImmersiveGames.Utils
+namespace ImmersiveGames.Panels
 {
     public class SystemEventFirstSelect : MonoBehaviour
     {

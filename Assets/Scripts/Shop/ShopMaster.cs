@@ -59,10 +59,10 @@ namespace Shopping
 
         private void OnDisable()
         {
-            m_InputSystem.UI_Controlls.BuyButton.performed -= BuyInputButton;
-            m_InputSystem.UI_Controlls.SelectButton.performed -= SelectButton;
-            m_InputSystem.UI_Controlls.LeftSelection.performed -= _ => ControllerNavigationArrows(-1);
-            m_InputSystem.UI_Controlls.RightSelection.performed -= _ => ControllerNavigationArrows(1);
+            m_InputSystem.UiControls.BuyButton.performed -= BuyInputButton;
+            m_InputSystem.UiControls.SelectButton.performed -= SelectButton;
+            m_InputSystem.UiControls.LeftSelection.performed -= _ => ControllerNavigationArrows(-1);
+            m_InputSystem.UiControls.RightSelection.performed -= _ => ControllerNavigationArrows(1);
         }
 
         #endregion
@@ -76,10 +76,10 @@ namespace Shopping
         private void SetControllersInput()
         {
             m_InputSystem = GameManager.instance.inputSystem;
-            m_InputSystem.UI_Controlls.BuyButton.performed += BuyInputButton;
-            m_InputSystem.UI_Controlls.SelectButton.performed += SelectButton;
-            m_InputSystem.UI_Controlls.LeftSelection.performed += _ => ControllerNavigationArrows(-1);
-            m_InputSystem.UI_Controlls.RightSelection.performed += _ => ControllerNavigationArrows(1);
+            m_InputSystem.UiControls.BuyButton.performed += BuyInputButton;
+            m_InputSystem.UiControls.SelectButton.performed += SelectButton;
+            m_InputSystem.UiControls.LeftSelection.performed += _ => ControllerNavigationArrows(-1);
+            m_InputSystem.UiControls.RightSelection.performed += _ => ControllerNavigationArrows(1);
         }
 
         private void SetupShop(PlayerSettings player)

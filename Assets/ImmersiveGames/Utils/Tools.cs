@@ -201,25 +201,7 @@ namespace ImmersiveGames.Utils
         {
             virtualCamera.Follow = follow;
         }
-        /*
-         * ChangeBindingReference(string track, Object animator, PlayableDirector playableDirector)
-         * - Substituir a referência nula pelo Animator desejado em um Timeline
-         * */
-        public static void ChangeBindingReference(string track, UnityEngine.Object animator, PlayableDirector playableDirector)
-        {
-            foreach (var playableBinding in playableDirector.playableAsset.outputs)
-            {
-                if (playableBinding.streamName != track)
-                    continue;
-                var bindingReference = playableDirector.GetGenericBinding(playableBinding.sourceObject);
-
-                if (bindingReference == null)
-                {
-                    // Substituir a referência nula pelo Animator desejado
-                    playableDirector.SetGenericBinding(playableBinding.sourceObject, animator);
-                }
-            }
-        } 
+        
         /*
          * EqualizeLists<T>(ref List<T> listA, ref List<T> listB)
          * - Torna as duas listas com quantidade iguais. (não valores)
@@ -240,13 +222,25 @@ namespace ImmersiveGames.Utils
          * GetAnimationTime(Animator animator, string animationName)
          * - retorna o tempo da animação
          * */
-        public static float GetAnimationTime(Animator animator, string animationName)
+        public static float GetAnimationDuration(Animator animator, string animationName)
         {
-            var controller = animator.runtimeAnimatorController;
+            if (animator == null || animator.runtimeAnimatorController == null)
+            {
+                Debug.LogWarning("Animator or Animator Controller not set. Unable to get animation duration.");
+                return 0f;
+            }
 
-            return (from t in controller.animationClips where t.name == animationName select t.length).FirstOrDefault();
+            var clip = animator.runtimeAnimatorController.animationClips.FirstOrDefault(c => c.name == animationName);
+
+            if (clip != null)
+            {
+                return clip.length;
+            }
+
+            Debug.LogWarning($"Animation clip '{animationName}' not found in the animator controller.");
+            return 0f;
+            
         }
-        
         
         public static string TimeFormat(float timeToFormat)
         {

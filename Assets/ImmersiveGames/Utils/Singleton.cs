@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ImmersiveGames
+namespace ImmersiveGames.Utils
 {
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {

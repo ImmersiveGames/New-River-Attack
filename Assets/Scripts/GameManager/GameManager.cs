@@ -71,7 +71,7 @@ namespace RiverAttack
         {
             inputSystem = new PlayersInputActions();
             inputSystem.Player.Disable();
-            inputSystem.UI_Controlls.Enable();
+            inputSystem.UiControls.Enable();
             if (SteamClient.IsValid)
             {
                 SteamFriends.OnGameOverlayActivated += ChangeStateToPause;

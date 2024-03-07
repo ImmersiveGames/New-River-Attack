@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
+using ImmersiveGames.InputManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace ImmersiveGames
+namespace ImmersiveGames.StateManager.States
 {
     public class GameStatePause : GameState
     {
@@ -28,7 +29,7 @@ namespace ImmersiveGames
 
         protected override async Task OnExit()
         {
-            // Lógica específica ao sair do estado de pausa em outras trheds
+            // Lógica específica ao sair do estado de pausa em outras threads
             await base.OnExit().ConfigureAwait(false);
             Debug.Log("Saiu do estado de pausa");
         }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using ImmersiveGames.StateManager;
+using ImmersiveGames.Utils;
 using UnityEngine.SceneManagement;
 
 namespace ImmersiveGames

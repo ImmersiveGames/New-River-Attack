@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
-namespace ImmersiveGames
+namespace ImmersiveGames.StateManager
 {
     public interface IState
     {

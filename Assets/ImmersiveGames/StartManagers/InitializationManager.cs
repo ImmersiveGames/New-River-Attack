@@ -1,50 +1,42 @@
-﻿using System;
+﻿using ImmersiveGames.InputManager;
 using ImmersiveGames.SaveManagers;
+using ImmersiveGames.StateManager.States;
+using RiverAttack;
 using UnityEngine;
-using UnityEngine.Serialization;
+using GameStatePause = ImmersiveGames.StateManager.States.GameStatePause;
 
 namespace ImmersiveGames
 {
     public class InitializationManager : MonoBehaviour
     {
-        private readonly StateManager _stateManager = new StateManager();
+        // Transforme _stateManager em uma propriedade estática
+
         [SerializeField] protected GameOptionsSave gameOptionsSave;
 
         private void Awake()
         {
             DontDestroyOnLoad(this);
-        }
 
-        private async void Start()
-        {
+            // Inicialize _stateManager apenas se ainda não foi inicializado
+            if (StateManager != null) return;
+            StateManager = new StateManager.StateManager();
+
             // Adicione os estados ao StateManager
-            DontDestroyOnLoad(this);
-            _stateManager.AddState(new GameStateMenuInicial());
-            _stateManager.AddState(new GameStatePlay());
-            _stateManager.AddState(new GameStatePause());
-            
-            // Inicia no estado de jogo e sua scena inicial
-            await _stateManager.ChangeStateAsync("GameStateMenuInicial").ConfigureAwait(false);
-
+            StateManager.AddState(new GameStateMenuInicial());
+            StateManager.AddState(new GameStatePlay());
+            StateManager.AddState(new GameStatePause());
+                
+            // Inicia no estado de jogo e sua cena inicial
+            StateManager.ChangeStateAsync("GameStateMenuInicial").ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
-        private async void Update()
+        private void Update()
         {
-            // Troca de estado ao pressionar tecla P para pausar e R para retomar
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                await _stateManager.ChangeStateAsync("GameStatePause").ConfigureAwait(false);
-            }
-            else if (Input.GetKeyDown(KeyCode.R))
-            {
-                await _stateManager.ChangeStateAsync("GameStatePlay").ConfigureAwait(false);
-            }
-            else if (Input.GetKeyDown(KeyCode.I))
-            {
-                await _stateManager.ChangeStateAsync("GameStateMenuInicial").ConfigureAwait(false);
-            }
-            if(StateManager.GetCurrentState().stateInitialized)
+            if (StateManager.GetCurrentState().stateInitialized)
                 StateManager.GetCurrentState().UpdateState();
         }
+
+        // Adicione uma propriedade estática para acessar _stateManager de qualquer lugar
+        public static StateManager.StateManager StateManager { get; private set; }
     }
 }

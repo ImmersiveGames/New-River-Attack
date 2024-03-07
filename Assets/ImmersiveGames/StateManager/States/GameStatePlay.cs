@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
+using ImmersiveGames.InputManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace ImmersiveGames
+namespace ImmersiveGames.StateManager.States
 {
     public class GameStatePlay : GameState
     {
@@ -13,6 +14,7 @@ namespace ImmersiveGames
         public override bool unLoadAdditiveScene => true;
         public override ITransition inTransition => new FadeTransition();
         public override ITransition outTransition => new FadeTransition();
+        protected override GameActionMaps stateInputActionMap => GameActionMaps.Player;
         
         protected override async Task OnEnter(IState previousState)
         {
@@ -29,7 +31,7 @@ namespace ImmersiveGames
 
         protected override async Task OnExit()
         {
-            // Lógica específica ao sair do estado de Game em outras trheds
+            // Lógica específica ao sair do estado de Game em outras threads
             await base.OnExit().ConfigureAwait(false);
             Debug.Log("Saiu do estado de Game");
         }

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace ImmersiveGames
+namespace ImmersiveGames.StateManager
 {
     public class StateManager
     {
@@ -40,7 +40,7 @@ namespace ImmersiveGames
 
             _previousState = _currentState;
             _currentState = nextState;
-            //TODO: Esta linha esta aqi para assegurar um intervalo antes de começar a carregar as scenas.
+            //TODO: Esta linha esta aqi para assegurar um intervalo antes de começar a carregar as cenas.
             
             //await Task.Delay(500).ConfigureAwait(true);
 
@@ -58,7 +58,7 @@ namespace ImmersiveGames
             Debug.Log($"Mudou para o estado: {stateName}");
         }
 
-        public static IState GetCurrentState()
+        public IState GetCurrentState()
         {
             return _currentState;
         }

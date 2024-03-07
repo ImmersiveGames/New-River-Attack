@@ -13,7 +13,7 @@ namespace RiverAttack
         {
             //Debug.Log($"Entra no Estado: Menu");
             GameManager.instance.inputSystem.Player.Disable();
-            GameManager.instance.inputSystem.UI_Controlls.Enable();
+            GameManager.instance.inputSystem.UiControls.Enable();
             GameManager.instance.inputSystem.BriefingRoom.Disable();
             PlayerManager.instance.ActivePlayers(false);
             GameAudioManager.instance.ChangeBGM(LevelTypes.Menu, TIME_TO_FADE_BGM);

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace ImmersiveGames
+namespace ImmersiveGames.Utils
 {
     /// <summary>
     /// Utility class for audio-related functions.
