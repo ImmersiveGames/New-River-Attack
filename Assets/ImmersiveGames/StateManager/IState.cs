@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using ImmersiveGames.ScenesManager.Transitions;
 using UnityEngine.SceneManagement;
 
 namespace ImmersiveGames.StateManager
@@ -6,7 +7,7 @@ namespace ImmersiveGames.StateManager
     public interface IState
     {
         string stateName { get; }
-        bool stateInitialized { get; }
+        bool stateInitialized { get; set; }
         ITransition inTransition => null;
         ITransition outTransition => null;
         Task EnterAsync(IState previousState);

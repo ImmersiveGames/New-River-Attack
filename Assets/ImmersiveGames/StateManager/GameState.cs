@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using ImmersiveGames.InputManager;
+using ImmersiveGames.ScenesManager.Transitions;
+using ImmersiveGames.Utils;
 using RiverAttack;
 using UnityEngine.SceneManagement;
 
@@ -9,11 +11,13 @@ namespace ImmersiveGames.StateManager
     {
         protected GameState(string currentStateName)
         {
+            // ReSharper disable once VirtualMemberCallInConstructor
             stateName = currentStateName;
         }
         #region IState Interface
+        
         public string stateName { get; }
-        public bool stateInitialized { get; private set; }
+        public bool stateInitialized { get; set; }
 
         public async Task EnterAsync(IState previousState)
         {
@@ -37,7 +41,7 @@ namespace ImmersiveGames.StateManager
         public async Task ExitAsync()
         {
             await OnExit().ConfigureAwait(false);
-
+            
             var transitionIn = inTransition;
             if (transitionIn != null)
             {
@@ -49,25 +53,25 @@ namespace ImmersiveGames.StateManager
 
         #region Scene Change
 
-        public virtual bool requiresSceneLoad => false;
-        public virtual string sceneName => null;
-        public virtual LoadSceneMode loadMode => LoadSceneMode.Single;
-        public virtual bool unLoadAdditiveScene => true;
+        public abstract bool requiresSceneLoad { get; }
+        public abstract string sceneName  { get; }
+        public abstract LoadSceneMode loadMode { get; }
+        public abstract bool unLoadAdditiveScene { get; }
 
         #endregion
 
         #region Transitions
 
-        public virtual ITransition inTransition => null;
-        public virtual ITransition outTransition => null;
-
+        public abstract ITransition inTransition { get; }
+        public abstract ITransition outTransition { get; }
         #endregion
 
         #region InputSystem
 
         private static PlayersInputActions _inputActions;
         private static ActionManager _actionManager;
-        protected virtual GameActionMaps stateInputActionMap => GameActionMaps.UiControls;
+        protected abstract GameActionMaps stateInputActionMap { get; }
+
         private static void ChangeInputMap(GameActionMaps actionMap)
         {
             // Inicializa o PlayersInputActions
@@ -86,7 +90,12 @@ namespace ImmersiveGames.StateManager
         protected virtual async Task OnEnter(IState previousState)
         {
             // Custom logic to be executed on entering the state
-            ChangeInputMap(stateInputActionMap);
+            await MainThreadTaskExecutor.instance.RunOnMainThreadAsync(() =>
+            {
+                ChangeInputMap(stateInputActionMap);
+                return Task.CompletedTask;
+            }).ConfigureAwait(false);
+            //
             await Task.Yield();
         }
 

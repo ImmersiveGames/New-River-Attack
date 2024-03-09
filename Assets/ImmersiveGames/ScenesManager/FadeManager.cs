@@ -1,10 +1,17 @@
 ﻿using System.Threading.Tasks;
+using ImmersiveGames.DebugManagers;
+using ImmersiveGames.Utils;
 using UnityEngine;
 
-namespace ImmersiveGames
+namespace ImmersiveGames.ScenesManager
 {
-    public class FadeManager : MonoBehaviour
+    public sealed class FadeManager : MonoBehaviour
     {
+        public delegate void FadeManagerEventHandler();
+
+        private event FadeManagerEventHandler EventFadeInStart;
+        public event FadeManagerEventHandler EventFadeOutComplete;
+        
         public static FadeManager instance { get; private set; }
         
         public float durationFadeIn = 2.0f;
@@ -25,7 +32,7 @@ namespace ImmersiveGames
             _canvasGroup = GetComponent<CanvasGroup>();
             if (_canvasGroup == null)
             {
-                Debug.LogError("FadeManager: CanvasGroup not found on the object.");
+                DebugManager.LogError("FadeManager: CanvasGroup not found on the object.");
             }
         }
 
@@ -33,11 +40,12 @@ namespace ImmersiveGames
         {
             if (_canvasGroup != null)
             {
+                MainThreadTaskExecutor.RunOnMainThread(OnEventFadeInStart);
                 await FadeAsync(true, durationFadeIn).ConfigureAwait(false);
             }
             else
             {
-                Debug.LogError("FadeManager: CanvasGroup not found on the object.");
+                DebugManager.LogError("FadeManager: CanvasGroup not found on the object.");
             }
         }
 
@@ -46,10 +54,11 @@ namespace ImmersiveGames
             if (_canvasGroup != null)
             {
                 await FadeAsync(false, durationFadeOut).ConfigureAwait(false);
+                MainThreadTaskExecutor.RunOnMainThread(OnEventOutComplete);
             }
             else
             {
-                Debug.LogError("FadeManager: CanvasGroup not found on the object.");
+                DebugManager.LogError("FadeManager: CanvasGroup not found on the object.");
             }
         }
 
@@ -81,6 +90,18 @@ namespace ImmersiveGames
                 _canvasGroup.alpha = targetAlpha;
                 fadeCompletionSource.SetResult(true);
             }
+        }
+
+        private void OnEventOutComplete()
+        {
+            EventFadeOutComplete?.Invoke();
+            DebugManager.Log("Complete Fade out");
+        }
+
+        private void OnEventFadeInStart()
+        {
+            EventFadeInStart?.Invoke();
+            DebugManager.Log("Start Fade in");
         }
     }
 }

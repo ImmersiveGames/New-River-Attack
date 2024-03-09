@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using UnityEngine.InputSystem;
+﻿using UnityEngine.InputSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ImmersiveGames.DebugManagers;
 using RiverAttack;
 
 namespace ImmersiveGames.InputManager
@@ -58,7 +58,7 @@ namespace ImmersiveGames.InputManager
             }
             else
             {
-                Debug.LogWarning($"Action Map '{actionMapName}' not found.");
+                DebugManager.LogWarning($"Action Map '{actionMapName}' not found.");
             }
         }
 
@@ -75,19 +75,19 @@ namespace ImmersiveGames.InputManager
             }
         }
 
-        private void HandleSpecialAction(InputAction action, InputAction.CallbackContext context)
+        private static void HandleSpecialAction(InputAction action, InputAction.CallbackContext context)
         {
-            // Lógica específica para ação especial
-            Debug.Log($"Special Action {action.name} Performed");
+            // Lógica específica para ação especial;
+            DebugManager.Log($"Special Action {action.name} Performed in context {context}");
         }
 
-        private bool IsSpecialAction(InputAction action)
+        private static bool IsSpecialAction(InputAction action)
         {
             // Adicione aqui a lógica para determinar se uma ação é especial ou não
             return action.name.StartsWith("Special");
         }
 
-        public void RegisterAction(string actionName, Action<InputAction.CallbackContext> callback)
+        public static void RegisterAction(string actionName, Action<InputAction.CallbackContext> callback)
         {
             if (!ActionListeners.TryGetValue(actionName, out var listener))
             {

@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using ImmersiveGames.DebugManagers;
+using UnityEngine;
 
 namespace ImmersiveGames.Utils
 {
-    public abstract class SingletonScriptable<T> : ScriptableObject where T : ScriptableObject
+    public class SingletonScriptable<T> : ScriptableObject where T : ScriptableObject
     {
         private static T _instance;
+        // ReSharper disable once StaticMemberInGenericType
         private static string _resourcePath = "SavesSO/GameOptionsSave";  // Defina o caminho padrão aqui
 
         public static T instance
@@ -15,7 +17,7 @@ namespace ImmersiveGames.Utils
                 _instance = Resources.Load<T>(_resourcePath);
                 if (_instance == null)
                 {
-                    Debug.LogError($"SingletonScriptable<{typeof(T)}> not found in Resources at path {_resourcePath}.");
+                    DebugManager.LogError($"SingletonScriptable<{typeof(T)}> not found in Resources at path {_resourcePath}.");
                 }
                 return _instance;
             }

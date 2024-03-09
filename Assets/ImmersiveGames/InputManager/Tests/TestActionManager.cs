@@ -1,4 +1,5 @@
-﻿using RiverAttack;
+﻿using ImmersiveGames.DebugManagers;
+using RiverAttack;
 using UnityEngine;
 
 namespace ImmersiveGames.InputManager.Tests
@@ -32,17 +33,17 @@ namespace ImmersiveGames.InputManager.Tests
 
         private void TestActivateActionMap(GameActionMaps actionMapName)
         {
-            Debug.Log($"Running Test: Activate Action Map '{actionMapName}'");
+            DebugManager.Log($"Running Test: Activate Action Map '{actionMapName}'");
 
             // Execute o método para ativar o Action Map específico
             _actionManager.ActivateActionMap(actionMapName);
 
             // Mensagens de depuração
-            Debug.Log($"Input Active: {_inputActions.asset.enabled}");
+            DebugManager.Log($"Input Active: {_inputActions.asset.enabled}");
 
             foreach (var actionMap in _inputActions.asset.actionMaps)
             {
-                Debug.Log($"Action Map '{actionMap.name}' Active: {actionMap.enabled}");
+                DebugManager.Log($"Action Map '{actionMap.name}' Active: {actionMap.enabled}");
             }
         }
     }

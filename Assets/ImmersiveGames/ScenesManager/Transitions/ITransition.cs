@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace ImmersiveGames
+namespace ImmersiveGames.ScenesManager.Transitions
 {
     public interface ITransition
     {

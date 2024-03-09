@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
+using ImmersiveGames.DebugManagers;
 using ImmersiveGames.InputManager;
-using UnityEngine;
+using ImmersiveGames.ScenesManager.Transitions;
 using UnityEngine.SceneManagement;
 
 namespace ImmersiveGames.StateManager.States
@@ -15,25 +16,26 @@ namespace ImmersiveGames.StateManager.States
         public override ITransition inTransition => new FadeTransition();
         public override ITransition outTransition => new FadeTransition();
 
+        protected override GameActionMaps stateInputActionMap => GameActionMaps.UiControls;
+
         protected override async Task OnEnter(IState previousState)
         {
             // Lógica específica ao entrar no estado de Menu Inicial
             await base.OnEnter(previousState).ConfigureAwait(false);
-            
-            Debug.Log("Entrou no estado de Menu Inicial");
+            DebugManager.Log("Entrou no estado de Menu Inicial");
         }
 
         public override void UpdateState()
         {
             // Lógica de atualização do estado de Menu Inicial
-            Debug.Log($"Update no estado de Menu Inicial, initialized: {stateInitialized}");
+            DebugManager.Log($"Update no estado de Menu Inicial, initialized: {stateInitialized}");
         }
 
         protected override async Task OnExit()
         {
             // Lógica específica ao sair do estado de Menu Inicial em outras threads
             await base.OnExit().ConfigureAwait(false);
-            Debug.Log("Saiu do estado de Menu Inicial");
+            DebugManager.Log("Saiu do estado de Menu Inicial");
         }
     }
 }

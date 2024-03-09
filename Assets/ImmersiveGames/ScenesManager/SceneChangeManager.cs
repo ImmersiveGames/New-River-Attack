@@ -1,12 +1,11 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-using UnityEngine.UI;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ImmersiveGames.StateManager;
 using ImmersiveGames.Utils;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-namespace ImmersiveGames
+namespace ImmersiveGames.ScenesManager
 {
     public class SceneChangeManager : Singleton<SceneChangeManager>
     {
@@ -80,6 +79,7 @@ namespace ImmersiveGames
             await MainThreadTaskExecutor.instance.RunOnMainThreadAsync(async () =>
             {
                 SceneManager.sceneLoaded += SceneLoaded;
+                instance.loadingProgressBar.gameObject.SetActive(true);
                 var asyncOperation = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
                 while (!asyncOperation.isDone)
                 {
@@ -87,8 +87,9 @@ namespace ImmersiveGames
                     UpdateProgressBar(asyncOperation.progress);
                     await Task.Yield();
                 }
+                instance.loadingProgressBar.gameObject.SetActive(false);
             }).ConfigureAwait(false);
-
+            await Task.Delay(500).ConfigureAwait(true);
             await loadCompletionSource.Task.ConfigureAwait(false);
 
             void SceneLoaded(Scene scene, LoadSceneMode mode)

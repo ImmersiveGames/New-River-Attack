@@ -2,6 +2,7 @@
 using UnityEditor;
 #endif
 
+using ImmersiveGames.DebugManagers;
 using ImmersiveGames.Utils;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -29,11 +30,11 @@ namespace ImmersiveGames.SaveManagers
 
             if (gameOptionsSave != null)
             {
-                Debug.Log("GameOptionsSave loaded in the Editor.");
+                DebugManager.Log("GameOptionsSave loaded in the Editor.");
             }
             else
             {
-                Debug.LogError("Failed to load GameOptionsSave in the Editor.");
+                DebugManager.LogError("Failed to load GameOptionsSave in the Editor.");
             }
         }
 #endif

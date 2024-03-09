@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
+using ImmersiveGames.DebugManagers;
 using ImmersiveGames.InputManager;
-using UnityEngine;
+using ImmersiveGames.ScenesManager.Transitions;
 using UnityEngine.SceneManagement;
 
 namespace ImmersiveGames.StateManager.States
@@ -20,20 +21,20 @@ namespace ImmersiveGames.StateManager.States
         {
             // Lógica específica ao entrar no estado de game
             await base.OnEnter(previousState).ConfigureAwait(false);
-            Debug.Log("Entrou no estado de Game");
+            DebugManager.Log("Entrou no estado de Game");
         }
 
         public override void UpdateState()
         {
             // Lógica de atualização do estado de game
-            Debug.Log($"Update no estado de Game, initialized: {stateInitialized}");
+            DebugManager.Log($"Update no estado de Game, initialized: {stateInitialized}");
         }
 
         protected override async Task OnExit()
         {
             // Lógica específica ao sair do estado de Game em outras threads
             await base.OnExit().ConfigureAwait(false);
-            Debug.Log("Saiu do estado de Game");
+            DebugManager.Log("Saiu do estado de Game");
         }
     }
 }

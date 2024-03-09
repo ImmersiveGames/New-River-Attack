@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
 using UnityEngine;
-using UnityEngine.Playables;
 
 namespace ImmersiveGames.Utils
 {
@@ -11,7 +10,7 @@ namespace ImmersiveGames.Utils
     {
         /*
          * SerializableDictionary<TKey, TValue>]
-         * - Cria um dicionário serializado para ser exibido no inspector
+         * - Cria um dicionário serializable para ser exibido no inspector
          * */
         [Serializable]
         public class SerializableDictionary<TKey, TValue>
@@ -114,7 +113,7 @@ namespace ImmersiveGames.Utils
         } 
         /*
          * IsBetween<T>(this T value, T minimum, T maximum)
-         * - Verifica se o valor está entre dois numeros.
+         * - Verifica se o valor está entre dois números.
          * */
         public static bool IsBetween<T>(T value, T minimum, T maximum) where T : IComparable<T>
         {
@@ -139,7 +138,7 @@ namespace ImmersiveGames.Utils
         }
         /*
          * TryParseEnum<TEnum>(string aName, out TEnum aValue)
-         * - Tenta converter o valor de um enum em um tipo especico (String, int,..)
+         * - Tenta converter o valor de um enum em um tipo especifico (String, int,..)
          * */
         public static bool TryParseEnum<TEnum>(string aName, out TEnum aValue) where TEnum : struct
         {
@@ -180,7 +179,7 @@ namespace ImmersiveGames.Utils
         }
         /*
          * SetLayersRecursively(LayerMask layerMask, Transform itemTransform)
-         * - Define layers para todos os objetos partentes de forma recursiva
+         * - Define layers para todos os objetos parentes de forma recursiva
          * */
         public static void SetLayersRecursively(LayerMask layerMask, Transform itemTransform)
         {
@@ -194,7 +193,7 @@ namespace ImmersiveGames.Utils
             }
         } 
         /*
-         * SetFollowVirtualCam(CinemachineVirtualCamera virtualCamera, Transform follow)
+         * SetFollowVirtualCam(Cinemachine Virtual Camera virtualCamera, Transform follow)
          * - Define o objeto que a camera virtual irá seguir
          * */
         public static void SetFollowVirtualCam(CinemachineVirtualCamera virtualCamera, Transform follow)

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using UnityEngine;
+using ImmersiveGames.DebugManagers;
+using ImmersiveGames.ScenesManager;
+using ImmersiveGames.Utils;
 
 namespace ImmersiveGames.StateManager
 {
@@ -19,13 +21,13 @@ namespace ImmersiveGames.StateManager
         {
             if (!_states.TryGetValue(stateName, out var nextState))
             {
-                Debug.LogError($"Estado não encontrado: {stateName}");
+                DebugManager.LogError($"Estado não encontrado: {stateName}");
                 return;
             }
 
             if (nextState == _currentState)
             {
-                Debug.Log($"Já está no estado: {stateName}");
+                DebugManager.Log($"Já está no estado: {stateName}");
                 return;
             }
             MainThreadTaskExecutor.RunOnMainThread(() =>
@@ -40,9 +42,6 @@ namespace ImmersiveGames.StateManager
 
             _previousState = _currentState;
             _currentState = nextState;
-            //TODO: Esta linha esta aqi para assegurar um intervalo antes de começar a carregar as cenas.
-            
-            //await Task.Delay(500).ConfigureAwait(true);
 
             // Adicionamos uma condição para verificar se há uma transição de cena necessária
             if (_currentState.requiresSceneLoad && !string.IsNullOrEmpty(_currentState.sceneName))
@@ -50,12 +49,10 @@ namespace ImmersiveGames.StateManager
                 // Agora, esperamos que a transição de cena seja concluída antes de prosseguir
                 await SceneChangeManager.StartSceneTransitionAsync(_currentState, _previousState?.sceneName, _currentState.loadMode, _currentState.unLoadAdditiveScene).ConfigureAwait(false);
             }
-            //TODO: Esta linha esta aqi para assegurar um intervalo antes de começar o fadeout.
-            await Task.Delay(500).ConfigureAwait(true);
-
+            
             await _currentState.EnterAsync(_previousState).ConfigureAwait(false);
 
-            Debug.Log($"Mudou para o estado: {stateName}");
+            DebugManager.Log($"Mudou para o estado: {stateName}");
         }
 
         public IState GetCurrentState()

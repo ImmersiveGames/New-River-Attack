@@ -1,4 +1,5 @@
 ﻿using System;
+using ImmersiveGames.DebugManagers;
 using RiverAttack;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -34,16 +35,16 @@ namespace ImmersiveGames.InputManager.Tests
 
         private void TestRegisterAction(string actionName, Action<InputAction.CallbackContext> callback)
         {
-            Debug.Log($"Running Test: Register Action '{actionName}'");
+            DebugManager.Log($"Running Test: Register Action '{actionName}'");
 
             // Ativa o Action Map relevante antes de registrar a ação (ajuste conforme necessário)
             _actionManager.ActivateActionMap(GameActionMaps.UiControls);
 
             // Registra a ação com a função de callback
-            _actionManager.RegisterAction(actionName, callback);
+            ActionManager.RegisterAction(actionName, callback);
 
             // Mensagem de depuração indicando que a ação foi registrada
-            Debug.Log($"Action '{actionName}' successfully registered");
+            DebugManager.Log($"Action '{actionName}' successfully registered");
 
             // Simula a execução da ação (pode ser ajustado conforme necessário)
             SimulateAction(actionName);
@@ -51,13 +52,13 @@ namespace ImmersiveGames.InputManager.Tests
 
         private void OnJumpAction(InputAction.CallbackContext context)
         {
-            Debug.Log("Jump action performed!");
+            DebugManager.Log("Jump action performed!");
         }
 
         private void SimulateAction(string actionName)
         {
             // Simula a execução da ação para testar o registro
-            Debug.Log($"Simulating action: {actionName}");
+            DebugManager.Log($"Simulating action: {actionName}");
 
             // Chama os observadores registrados para a ação (o ActionManager deve chamar a função de callback)
             _actionManager.NotifyObservers(actionName, new InputAction.CallbackContext());

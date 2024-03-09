@@ -1,9 +1,7 @@
-﻿using ImmersiveGames.InputManager;
-using ImmersiveGames.SaveManagers;
+﻿using ImmersiveGames.SaveManagers;
+using ImmersiveGames.DebugManagers;
 using ImmersiveGames.StateManager.States;
-using RiverAttack;
 using UnityEngine;
-using GameStatePause = ImmersiveGames.StateManager.States.GameStatePause;
 
 namespace ImmersiveGames
 {
@@ -12,10 +10,12 @@ namespace ImmersiveGames
         // Transforme _stateManager em uma propriedade estática
 
         [SerializeField] protected GameOptionsSave gameOptionsSave;
+        public DebugManager.DebugLevel debugLevel;
 
         private void Awake()
         {
             DontDestroyOnLoad(this);
+            DebugManager.debugLevel = debugLevel;
 
             // Inicialize _stateManager apenas se ainda não foi inicializado
             if (StateManager != null) return;
@@ -25,9 +25,12 @@ namespace ImmersiveGames
             StateManager.AddState(new GameStateMenuInicial());
             StateManager.AddState(new GameStatePlay());
             StateManager.AddState(new GameStatePause());
-                
-            // Inicia no estado de jogo e sua cena inicial
-            StateManager.ChangeStateAsync("GameStateMenuInicial").ConfigureAwait(false).GetAwaiter().GetResult();
+            StateManager.AddState(new GameStateBriefingRoom());
+            
+        }
+        private async void Start()
+        {
+            await StateManager.ChangeStateAsync("GameStateMenuInicial").ConfigureAwait(false);
         }
 
         private void Update()

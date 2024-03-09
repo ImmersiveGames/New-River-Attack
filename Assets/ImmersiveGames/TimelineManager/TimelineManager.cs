@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ImmersiveGames.DebugManagers;
+using UnityEngine;
 using UnityEngine.Playables;
 
 namespace ImmersiveGames.TimelineManager
@@ -14,7 +15,6 @@ namespace ImmersiveGames.TimelineManager
 
         public void PlayAnimation(float startTimer)
         {
-            Debug.Log("ENTRA");
             _playableDirector.Stop(); // Stop automatically pauses if it's playing
             if(startTimer >= 0)
                 _playableDirector.time = startTimer;
@@ -29,7 +29,7 @@ namespace ImmersiveGames.TimelineManager
         {
             if (animator == null)
             {
-                Debug.LogError("Animator is null. Cannot change binding reference.");
+                DebugManager.LogError("Animator is null. Cannot change binding reference.");
                 return;
             }
 

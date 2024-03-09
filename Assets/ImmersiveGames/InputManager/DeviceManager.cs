@@ -1,7 +1,7 @@
 ﻿using System;
-using ImmersiveGames.Panels.NotificationManager;
+using ImmersiveGames.DebugManagers;
+using ImmersiveGames.MenuManagers.NotificationManager;
 using ImmersiveGames.Utils;
-using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace ImmersiveGames.InputManager
@@ -32,18 +32,18 @@ namespace ImmersiveGames.InputManager
             {
                 case InputDeviceChange.Added:
                     _message = $"Device {device} was added";
-                    Debug.Log(_message);
+                    DebugManager.Log(_message);
                     EventOnDeviceAdded?.Invoke(device, change);
                     break;
                 case InputDeviceChange.Removed:
                     _message = $"Device {device} was removed";
-                    Debug.Log(_message);
+                    DebugManager.Log(_message);
                     EventOnDeviceRemoved?.Invoke(device, change);
                     break;
                 // Adicione outros casos conforme necessário
                 default:
                     _message = $"An unknown error occurred with the {device}";
-                    Debug.Log(_message);
+                    DebugManager.Log(_message);
                     throw new ArgumentOutOfRangeException(nameof(change), change, null);
             }
             _notificationManager.AddNotification(_message);
