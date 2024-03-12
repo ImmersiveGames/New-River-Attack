@@ -11,10 +11,10 @@ namespace ImmersiveGames.MenuManagers.UI
     public abstract class UIDropDown : MonoBehaviour
     {
         [SerializeField] protected List<LocalizedString> options;
-        private int SelectedOptionIndex { get; set; }
+        protected int SelectedOptionIndex { get; set; }
         private TMP_Dropdown Dropdown => GetComponent<TMP_Dropdown>();
 
-        private Locale _currentLocale;
+        protected Locale _currentLocale;
         private GameOptionsSave _gameOptionsSave;
 
         protected virtual void Awake()
@@ -33,12 +33,12 @@ namespace ImmersiveGames.MenuManagers.UI
             UpdateDropdown(_currentLocale);
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             LocalizationSettings.SelectedLocaleChanged -= UpdateDropdown;
         }
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             LocalizationSettings.SelectedLocaleChanged -= UpdateDropdown;
         }

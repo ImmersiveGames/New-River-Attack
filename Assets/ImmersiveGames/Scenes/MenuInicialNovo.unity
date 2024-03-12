@@ -43192,21 +43192,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &612206218563574585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3004787022275077512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aa2ac18d295482ea6edeeec6a4683b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myLocale: {fileID: 11400000, guid: 70e08b9236373c3418e21377807befff, type: 2}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  disableColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
 --- !u!1 &612471504784048854
 GameObject:
   m_ObjectHideFlags: 0
@@ -43566,7 +43551,7 @@ GameObject:
   - component: {fileID: 5108982066315483288}
   - component: {fileID: 6985470608380545229}
   - component: {fileID: 3673330855370174039}
-  - component: {fileID: 4095027266708491670}
+  - component: {fileID: 6985470608380545230}
   - component: {fileID: 1326152582018759113}
   m_Layer: 5
   m_Name: zh-Hans_Btn
@@ -44075,13 +44060,14 @@ GameObject:
   m_Component:
   - component: {fileID: 8875440168465329494}
   - component: {fileID: 7924095653806895954}
+  - component: {fileID: 8875440168465329495}
   m_Layer: 5
   m_Name: GPX_FPS_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &775510058946663810
 RectTransform:
   m_ObjectHideFlags: 0
@@ -45164,7 +45150,7 @@ GameObject:
   - component: {fileID: 3644190532959885172}
   - component: {fileID: 861144549965099236}
   - component: {fileID: 5179058378838746532}
-  - component: {fileID: 8537113048172785941}
+  - component: {fileID: 8249685171981217378}
   - component: {fileID: 8249685171981217377}
   m_Layer: 5
   m_Name: ES_Btn
@@ -45858,31 +45844,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1432288437442017225}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6884342494878273530}
-        m_TargetAssemblyTypeName: RiverAttack.OptionsLanguagesPanel, Assembly-CSharp
-        m_MethodName: ButtonChangeLocale
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RiverAttack.PanelBase, Assembly-CSharp
-        m_MethodName: PlayClickSfx
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!224 &1189031421546266574
 RectTransform:
   m_ObjectHideFlags: 0
@@ -47109,31 +47071,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9090777192011844046}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2641278388822146219}
-        m_TargetAssemblyTypeName: RiverAttack.OptionsLanguagesPanel, Assembly-CSharp
-        m_MethodName: ButtonChangeLocale
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 6
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RiverAttack.PanelBase, Assembly-CSharp
-        m_MethodName: PlayClickSfx
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1381613707225097846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47739,7 +47677,7 @@ GameObject:
   - component: {fileID: 6536750801365506676}
   - component: {fileID: 3874010021273995999}
   - component: {fileID: 2214148034032191493}
-  - component: {fileID: 9193305003071471381}
+  - component: {fileID: 6536750801365506677}
   m_Layer: 5
   m_Name: GPX_Quality_Dropdown
   m_TagString: Untagged
@@ -49198,19 +49136,7 @@ MonoBehaviour:
   m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RiverAttack.OptionsMusicPanel, Assembly-CSharp
-        m_MethodName: SetVolume
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!33 &1767223915824585619
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -50071,31 +49997,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2546797141638960230}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 612206218563574585}
-        m_TargetAssemblyTypeName: RiverAttack.OptionsLanguagesPanel, Assembly-CSharp
-        m_MethodName: ButtonChangeLocale
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RiverAttack.PanelBase, Assembly-CSharp
-        m_MethodName: PlayClickSfx
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!224 &1941902979282583569
 RectTransform:
   m_ObjectHideFlags: 0
@@ -51838,10 +51740,6 @@ MonoBehaviour:
   m_Options:
     m_Options:
     - m_Text: Option A
-      m_Image: {fileID: 0}
-    - m_Text: Option B
-      m_Image: {fileID: 0}
-    - m_Text: Option C
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -54099,21 +53997,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7138992250793295374}
   m_CullTransparentMesh: 1
---- !u!114 &2641278388822146219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3849427140784098525}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aa2ac18d295482ea6edeeec6a4683b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myLocale: {fileID: 11400000, guid: 18a4420091c52144da6ead7cb0fb304c, type: 2}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  disableColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
 --- !u!23 &2646351785467611863
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -54567,7 +54450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &2776624866983395140
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -55920,19 +55803,7 @@ MonoBehaviour:
   m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8818110086679947531}
-        m_TargetAssemblyTypeName: RiverAttack.OptionsMusicPanel, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!4 &2931607198431840372
 Transform:
   m_ObjectHideFlags: 0
@@ -56488,10 +56359,10 @@ GameObject:
   - component: {fileID: 2686202062600603381}
   - component: {fileID: 2546797141638960230}
   - component: {fileID: 1939412129031991795}
-  - component: {fileID: 612206218563574585}
+  - component: {fileID: 3279090390337272255}
   - component: {fileID: 1879498631686771695}
   m_Layer: 5
-  m_Name: JP_BR_Btn
+  m_Name: JP_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56854,21 +56725,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &3079949598036616040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7010670779683894743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aa2ac18d295482ea6edeeec6a4683b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myLocale: {fileID: 11400000, guid: ca20d98518b426a4fb8a5a2d000ebf44, type: 2}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  disableColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
 --- !u!222 &3089707633887621790
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -58521,6 +58377,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3279090390337272255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3004787022275077512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf13fec01f104787b429b3bb43a537f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLocale: {fileID: 11400000, guid: 70e08b9236373c3418e21377807befff, type: 2}
 --- !u!1 &3285127318207383360
 GameObject:
   m_ObjectHideFlags: 0
@@ -61063,31 +60932,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6985470608380545229}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4095027266708491670}
-        m_TargetAssemblyTypeName: RiverAttack.OptionsLanguagesPanel, Assembly-CSharp
-        m_MethodName: ButtonChangeLocale
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RiverAttack.PanelBase, Assembly-CSharp
-        m_MethodName: PlayClickSfx
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!33 &3677400071718977103
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -61296,31 +61141,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8189094163170733717}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3079949598036616040}
-        m_TargetAssemblyTypeName: RiverAttack.OptionsLanguagesPanel, Assembly-CSharp
-        m_MethodName: ButtonChangeLocale
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RiverAttack.PanelBase, Assembly-CSharp
-        m_MethodName: PlayClickSfx
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!4 &3761639349930711983
 Transform:
   m_ObjectHideFlags: 0
@@ -61761,7 +61582,7 @@ GameObject:
   - component: {fileID: 4679453423071779524}
   - component: {fileID: 9090777192011844046}
   - component: {fileID: 1380631636827390856}
-  - component: {fileID: 2641278388822146219}
+  - component: {fileID: 9090777192011844047}
   - component: {fileID: 4117769818177349505}
   m_Layer: 5
   m_Name: RU_Btn
@@ -61982,23 +61803,6 @@ RectTransform:
   m_AnchoredPosition: {x: -160, y: 20}
   m_SizeDelta: {x: 750, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3898458766959620226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4060528484602451564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82ddfe81d9104e2da4d9acfa84b284e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  options: []
-  selectedOptionIndex: 0
-  references:
-    version: 2
-    RefIds: []
 --- !u!224 &3903123794349501057
 RectTransform:
   m_ObjectHideFlags: 0
@@ -62802,7 +62606,6 @@ GameObject:
   - component: {fileID: 1764362758643296506}
   - component: {fileID: 7132555120156091390}
   - component: {fileID: 4928721450412278014}
-  - component: {fileID: 3898458766959620226}
   m_Layer: 5
   m_Name: GPX_Resolution_Dropdown
   m_TagString: Untagged
@@ -63014,21 +62817,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4095027266708491670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 672617891441660400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aa2ac18d295482ea6edeeec6a4683b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myLocale: {fileID: 11400000, guid: f18a747eea99a3542803805c7243c8d2, type: 2}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  disableColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
 --- !u!224 &4099748478600763068
 RectTransform:
   m_ObjectHideFlags: 0
@@ -69300,31 +69088,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 861144549965099236}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8537113048172785941}
-        m_TargetAssemblyTypeName: RiverAttack.OptionsLanguagesPanel, Assembly-CSharp
-        m_MethodName: ButtonChangeLocale
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 7
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RiverAttack.PanelBase, Assembly-CSharp
-        m_MethodName: PlayClickSfx
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &5185028533663066223
 GameObject:
   m_ObjectHideFlags: 0
@@ -71878,21 +71642,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7933177403405267797}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5666289977554422132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7921294257559976388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aa2ac18d295482ea6edeeec6a4683b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myLocale: {fileID: 11400000, guid: 71a44355d5d503d4dbca75c65994bde9, type: 2}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  disableColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
 --- !u!1 &5666820377139068182
 GameObject:
   m_ObjectHideFlags: 0
@@ -73921,31 +73670,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9180529103511816667}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6176557696723670983}
-        m_TargetAssemblyTypeName: RiverAttack.OptionsLanguagesPanel, Assembly-CSharp
-        m_MethodName: ButtonChangeLocale
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RiverAttack.PanelBase, Assembly-CSharp
-        m_MethodName: PlayClickSfx
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &6054275120078353852
 GameObject:
   m_ObjectHideFlags: 0
@@ -74720,21 +74445,6 @@ RectTransform:
   m_AnchoredPosition: {x: -30, y: 0}
   m_SizeDelta: {x: 1100, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6176557696723670983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8296682832946078400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aa2ac18d295482ea6edeeec6a4683b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myLocale: {fileID: 11400000, guid: 01018649e45b51540ae8585bb362df62, type: 2}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  disableColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
 --- !u!114 &6177238954362319721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77485,6 +77195,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1465354572143214825}
   m_CullTransparentMesh: 1
+--- !u!114 &6536750801365506677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465354572143214825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecdacd74a3254e9c9397b0aa56016656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  options:
+  - m_TableReference:
+      m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
+    m_TableEntryReference:
+      m_KeyId: 43092505224572928
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
+    m_TableEntryReference:
+      m_KeyId: 43092817947684864
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
+    m_TableEntryReference:
+      m_KeyId: 43093089927327744
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &6540007955503801593
 GameObject:
   m_ObjectHideFlags: 0
@@ -77778,7 +77528,6 @@ GameObject:
   - component: {fileID: 8408959931209706307}
   - component: {fileID: 5905449613435529766}
   - component: {fileID: 6126354307767508899}
-  - component: {fileID: 8271988425909920763}
   m_Layer: 5
   m_Name: GPX_FPS__Dropdown
   m_TagString: Untagged
@@ -79719,31 +79468,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9145825249787068043}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5666289977554422132}
-        m_TargetAssemblyTypeName: RiverAttack.OptionsLanguagesPanel, Assembly-CSharp
-        m_MethodName: ButtonChangeLocale
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RiverAttack.PanelBase, Assembly-CSharp
-        m_MethodName: PlayClickSfx
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!23 &6879089088986255167
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -79827,21 +79552,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8803191175739537758}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6884342494878273530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9208056042160524933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aa2ac18d295482ea6edeeec6a4683b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myLocale: {fileID: 11400000, guid: 1069a96ab137a9a478f35db9702143f8, type: 2}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  disableColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
 --- !u!1 &6890620558712203882
 GameObject:
   m_ObjectHideFlags: 0
@@ -80184,6 +79894,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6985470608380545230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 672617891441660400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf13fec01f104787b429b3bb43a537f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLocale: {fileID: 11400000, guid: f18a747eea99a3542803805c7243c8d2, type: 2}
 --- !u!114 &6990341949201867016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80244,7 +79967,7 @@ GameObject:
   - component: {fileID: 8066650714386241418}
   - component: {fileID: 8189094163170733717}
   - component: {fileID: 3752942244136535330}
-  - component: {fileID: 3079949598036616040}
+  - component: {fileID: 8326080885026726159}
   - component: {fileID: 8326080885026726158}
   m_Layer: 5
   m_Name: Eng_Btn
@@ -85475,7 +85198,7 @@ GameObject:
   - component: {fileID: 1106063059413289395}
   - component: {fileID: 9145825249787068043}
   - component: {fileID: 6875586328700372386}
-  - component: {fileID: 5666289977554422132}
+  - component: {fileID: 9145825249787068044}
   - component: {fileID: 2985002675876080575}
   m_Layer: 5
   m_Name: PT_BR_Btn
@@ -86431,13 +86154,27 @@ GameObject:
   m_Component:
   - component: {fileID: 3791816283259578336}
   - component: {fileID: 3477381129223169842}
+  - component: {fileID: 8054598500686171435}
   m_Layer: 5
   m_Name: GPX_Resolution_Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
+--- !u!114 &8054598500686171435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8054598500686171434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e212f216ee640bf8b9ffce52ffcd5a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolutionDropdown: {fileID: 4928721450412278014}
 --- !u!223 &8058313518191249948
 Canvas:
   m_ObjectHideFlags: 0
@@ -87458,6 +87195,19 @@ MonoBehaviour:
         - localeIdentifier:
             m_Code: ja
           value: 100
+--- !u!114 &8249685171981217378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993826334806999684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf13fec01f104787b429b3bb43a537f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLocale: {fileID: 11400000, guid: 99e9abab97c3ac74b9fac31eb60122d0, type: 2}
 --- !u!23 &8257441406675688863
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -87734,39 +87484,6 @@ RectTransform:
   m_AnchoredPosition: {x: 425, y: 0}
   m_SizeDelta: {x: 100, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8271988425909920763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6575669830076310053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5db561175118458aaf984ad10dfe80d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  options:
-  - m_TableReference:
-      m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
-    m_TableEntryReference:
-      m_KeyId: 43135499009028096
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  - m_TableReference:
-      m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
-    m_TableEntryReference:
-      m_KeyId: 43135496056238080
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  selectedOptionIndex: 0
-  references:
-    version: 2
-    RefIds: []
 --- !u!1 &8273800695721904705
 GameObject:
   m_ObjectHideFlags: 0
@@ -88088,7 +87805,7 @@ GameObject:
   - component: {fileID: 7726060771250154024}
   - component: {fileID: 9180529103511816667}
   - component: {fileID: 6028036656426978731}
-  - component: {fileID: 6176557696723670983}
+  - component: {fileID: 9180529103511816668}
   - component: {fileID: 4657832182912070048}
   m_Layer: 5
   m_Name: FR_Btn
@@ -88467,6 +88184,19 @@ MonoBehaviour:
         - localeIdentifier:
             m_Code: ja
           value: 100
+--- !u!114 &8326080885026726159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7010670779683894743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf13fec01f104787b429b3bb43a537f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLocale: {fileID: 11400000, guid: ca20d98518b426a4fb8a5a2d000ebf44, type: 2}
 --- !u!222 &8333817765495847505
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -89111,7 +88841,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &8480455117580575339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89198,21 +88928,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 625827524944217579}
   m_CullTransparentMesh: 1
---- !u!114 &8537113048172785941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 993826334806999684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aa2ac18d295482ea6edeeec6a4683b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myLocale: {fileID: 11400000, guid: 99e9abab97c3ac74b9fac31eb60122d0, type: 2}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  disableColor: {r: 0.23529412, g: 0.23529412, b: 0.23529412, a: 1}
 --- !u!4 &8538941449903375445
 Transform:
   m_ObjectHideFlags: 0
@@ -91407,6 +91122,20 @@ RectTransform:
   m_AnchoredPosition: {x: 400.00006, y: -200}
   m_SizeDelta: {x: 598.54004, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8875440168465329495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774573086694185982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3144634213415381e2d24b8d97275e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropdown: {fileID: 6126354307767508899}
+  frameRates: 1e0000003c0000005a00000078000000
 --- !u!4 &8877767547375629551
 Transform:
   m_ObjectHideFlags: 0
@@ -92963,6 +92692,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9090777192011844047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3849427140784098525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf13fec01f104787b429b3bb43a537f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLocale: {fileID: 11400000, guid: 18a4420091c52144da6ead7cb0fb304c, type: 2}
 --- !u!224 &9095040109452877965
 RectTransform:
   m_ObjectHideFlags: 0
@@ -93321,6 +93063,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9145825249787068044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7921294257559976388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf13fec01f104787b429b3bb43a537f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLocale: {fileID: 11400000, guid: 71a44355d5d503d4dbca75c65994bde9, type: 2}
 --- !u!1 &9166459775488196603
 GameObject:
   m_ObjectHideFlags: 0
@@ -93500,6 +93255,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9180529103511816668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296682832946078400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf13fec01f104787b429b3bb43a537f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLocale: {fileID: 11400000, guid: 01018649e45b51540ae8585bb362df62, type: 2}
 --- !u!1 &9190572266707639288
 GameObject:
   m_ObjectHideFlags: 0
@@ -93595,47 +93363,6 @@ MonoBehaviour:
           m_Key: 
         m_FallbackState: 0
         m_WaitForCompletion: 0
---- !u!114 &9193305003071471381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1465354572143214825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c88092860b164688b6aaf42b7e6d9e38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  options:
-  - m_TableReference:
-      m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
-    m_TableEntryReference:
-      m_KeyId: 43092505224572928
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  - m_TableReference:
-      m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
-    m_TableEntryReference:
-      m_KeyId: 43092817947684864
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  - m_TableReference:
-      m_TableCollectionName: GUID:a12c494cd2e63184f8e3557bcffd26f9
-    m_TableEntryReference:
-      m_KeyId: 43093089927327744
-      m_Key: 
-    m_FallbackState: 0
-    m_WaitForCompletion: 0
-    m_LocalVariables: []
-  selectedOptionIndex: 0
-  references:
-    version: 2
-    RefIds: []
 --- !u!33 &9196563835790919898
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -93731,7 +93458,7 @@ GameObject:
   - component: {fileID: 3046998682273851705}
   - component: {fileID: 1432288437442017225}
   - component: {fileID: 1187640467386293146}
-  - component: {fileID: 6884342494878273530}
+  - component: {fileID: 9208056042160524934}
   - component: {fileID: 5094719554528380493}
   m_Layer: 5
   m_Name: DE_Btn
@@ -93740,6 +93467,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &9208056042160524934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9208056042160524933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf13fec01f104787b429b3bb43a537f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLocale: {fileID: 11400000, guid: 1069a96ab137a9a478f35db9702143f8, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

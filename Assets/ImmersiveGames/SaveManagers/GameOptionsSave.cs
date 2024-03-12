@@ -14,6 +14,13 @@ namespace ImmersiveGames.SaveManagers
         [Header("Options Sound And Music")]
         public float bgmVolume;
         public float sfxVolume;
+        
+        [Header("Options Graphics")]
+        public int frameRate;
+
+        public Vector2Int actualResolution;
+        public int selectedQualityIndex;
+
         private new static string GetResourcePath() => "SavesSO/GameOptionsSave";
         public float GetVolumeLog10(AudioMixGroup type, float volumeDefault = 1f)
         {

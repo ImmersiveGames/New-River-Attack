@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.Tables;
 
 namespace ImmersiveGames.Utils
 {
@@ -260,4 +263,5 @@ namespace ImmersiveGames.Utils
             return hashSet.SetEquals(other);
         }
     }
+    
 }
