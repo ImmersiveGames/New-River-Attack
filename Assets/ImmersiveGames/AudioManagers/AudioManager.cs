@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using ImmersiveGames.AudioEvents;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.SaveManagers;
 using ImmersiveGames.StateManager;
@@ -12,14 +12,16 @@ namespace ImmersiveGames
 {
     [RequireComponent(typeof(AudioSource))]
     public class AudioManager : Singleton<AudioManager>
-    { 
+    {
+        private const float BGMVolumeDefault = 1f;
+        private const float SfxVolumeDefault = 1f;
         [SerializeField] private AudioSource bgmAudioSource;
         [SerializeField] private AudioSource sfxAudioSource;
         [SerializeField] private AudioMixer mixerGroup;
         [SerializeField] private AudioIndex mapStateBgm;
         [SerializeField] private AudioIndex mapMenuSfx;
         
-        [Header("Fade Sounds")] public float fadeSound = 0.1f;
+        [Header("Fade Sounds")] public float fadeSoundDuration = 1f;
 
         private static AudioSource _bgmAudioSource;
         private static AudioSource _sfxAudioSource;
@@ -49,16 +51,17 @@ namespace ImmersiveGames
         /// </summary>
         private void RecoveryAudioSettings()
         {
-            var volumeMusic = SoundBase10(GameOptionsSave.instance.musicVolume);
-            var volumeSfx = SoundBase10(GameOptionsSave.instance.sfxVolume);
-            mixerGroup.SetFloat("MusicVolume", volumeMusic);
-            mixerGroup.SetFloat("SfxVolume", volumeSfx);
+            var gameOptionsSave = GameOptionsSave.instance;
+            mixerGroup.SetFloat(AudioMixGroup.BgmVolume.ToString(), 
+                gameOptionsSave.GetVolumeLog10(AudioMixGroup.BgmVolume, BGMVolumeDefault));
+            mixerGroup.SetFloat(AudioMixGroup.SfxVolume.ToString(), 
+                gameOptionsSave.GetVolumeLog10(AudioMixGroup.SfxVolume, SfxVolumeDefault));
         }
 
         // Adicione esta função para obter o AudioEvent com base no IState fornecido
         private static AudioEvent GetAudioEventForState(IState state, IEnumerable<MapAudioEvent> mapAudioEvent)
         {
-            return (from stateBgm in mapAudioEvent where stateBgm.stateName == state.stateName select stateBgm.soundAudioEvent).FirstOrDefault();
+            return GetAudioEventForState(state.stateName, mapAudioEvent);
             // Retorna null se não encontrar correspondência
         }
         private static AudioEvent GetAudioEventForState(string stateName, IEnumerable<MapAudioEvent> mapAudioEvent)
@@ -94,50 +97,22 @@ namespace ImmersiveGames
         public void PlayBGM(IState state)
         {
             // Obtém o AudioEvent correspondente ao estado
-            var bgm = GetAudioEventForState(state, _mapStateBgm);
-            if (bgm == null)
+            var audioEventForState = GetAudioEventForState(state, _mapStateBgm);
+            if (audioEventForState == null)
             {
                 DebugManager.Log($"Não Encontrou um audio relativo ao nome: {state.stateName}");
             }
-
-            // Verifica se há algo tocando atualmente
-            if (bgmAudioSource.isPlaying)
-            {
-                // Se houver uma nova música para tocar, inicia uma transição suave (fade-out)
-                StartCoroutine(FadeOut(_bgmAudioSource, fadeSound));
-            }
             // Se houver uma nova música para tocar, inicia a reprodução com uma transição suave (fade-in)
-            if (bgm != null)
+            if (audioEventForState != null)
             {
-                bgm.Play(_bgmAudioSource, this, fadeSound);
+                audioEventForState.Play(_bgmAudioSource, this, fadeSoundDuration);
             }
         }
+        // Função para fade de volume usando a função FadeProperty.
+    }
 
-        private static IEnumerator FadeOut(AudioSource source, float fadeTime)
-        {
-            var startVolume = source.volume;
-
-            // Fade-out gradual
-            while (source.volume > 0)
-            {
-                source.volume -= startVolume * Time.deltaTime / fadeTime;
-                yield return null;
-            }
-
-            // Pára a música
-            source.Stop();
-
-            // Restaura o volume para evitar problemas futuros
-            source.volume = startVolume;
-        }
-        
-        /*
-         * SoundBase10(float normalizeNumber)
-         *  - transforma um numero base de 0.0 à 1.0 em um valor de metrica para sons (dB)
-         */
-        private static float SoundBase10(float normalizeNumber)
-        {
-            return Mathf.Log10(normalizeNumber) * 20f;
-        }
+    public enum AudioMixGroup
+    {
+        BgmVolume, SfxVolume
     }
 }

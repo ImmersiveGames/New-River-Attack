@@ -26,7 +26,7 @@ namespace RiverAttack
 
         private void Start()
         {
-            SetVolume();
+
         }
 
         private void OnEnable()
@@ -50,7 +50,7 @@ namespace RiverAttack
             }
         }
         #endregion
-        public void SetVolume()
+        public void SetVolume(float slideValue)
         {
             float volume = Mathf.Log10(m_SliderControl.value) * 20f;
             switch (typeMusicVolume)

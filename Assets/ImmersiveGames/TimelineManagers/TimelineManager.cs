@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Playables;
 
-namespace ImmersiveGames.TimelineManager
+namespace ImmersiveGames.TimelineManagers
 {
     public class TimelineManager
     {

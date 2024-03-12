@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using GD.MinMaxSlider;
 
-namespace ImmersiveGames
+namespace ImmersiveGames.AudioEvents
 {
     public abstract class AudioEventSo : ScriptableObject
     {

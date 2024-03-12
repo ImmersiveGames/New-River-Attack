@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using ImmersiveGames.DebugManagers;
 using UnityEngine;
 using UnityEngine.Audio;
+using Random = UnityEngine.Random;
 
-namespace ImmersiveGames
+namespace ImmersiveGames.AudioEvents
 {
     [CreateAssetMenu(fileName = "AudioEventClip", menuName = "Audio Events/Audio Clip", order = 1)]
     public class AudioEvent : AudioEventSo
@@ -12,6 +14,12 @@ namespace ImmersiveGames
         [SerializeField] private AudioMixerGroup audioMixerGroup;
 
         private MonoBehaviour _cachedMonoBehaviour;
+
+        private void OnDisable()
+        {
+            Cleanup();
+        }
+
         public void PreviewPlay(AudioSource source)
         {
             if (audioSample?.audioClip == null) return;

@@ -1,26 +1,24 @@
-﻿using ImmersiveGames.MenuManagers.Abstracts;
-using ImmersiveGames.MenuManagers.Interfaces;
+﻿using System;
+using Cinemachine;
+using ImmersiveGames.MenuManagers.Abstracts;
 using ImmersiveGames.ScenesManager;
 using ImmersiveGames.ScenesManager.Transitions;
+using ImmersiveGames.TimelineManagers;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.UI;
 
 namespace ImmersiveGames.MenuManagers
 {
-    public class MainMenu: AbstractMenuManager, IMenuTimelineAnimation
+    public class MainMenu: AbstractMenuManager
     {
+        public PanelsMenuReference[] panelsMenuReferences;
+        public Button[] disableButtons;
         public bool activeScreenWash;
         [SerializeField] private Transform screenWash;
         [SerializeField] private PlayableDirector playableDirector;
-        [SerializeField] private MenuTimelineReference[] timelineReferences;
 
-        public MenuTimelineReference[] TimelineReferences
-        {
-            get => timelineReferences;
-            set { }
-        }
-
-        private TimelineManager.TimelineManager _timelineManager;
+        private TimelineManager _timelineManager;
         private const float ScreenWashTimer = .5f;
         private float _animationTimeStart;
 
@@ -28,45 +26,50 @@ namespace ImmersiveGames.MenuManagers
 
         private void Start()
         {
+            SetMenu(panelsMenuReferences);
             screenWash.gameObject.SetActive(activeScreenWash);
             ActivateMenu(0);
-            FadeManager.instance.EventFadeOutComplete += DeactivateScreenWash;
+            if(FadeManager.instance)
+                FadeManager.instance.EventFadeOutComplete += DeactivateScreenWash;
         }
 
         private void OnDisable()
         {
-            FadeManager.instance.EventFadeOutComplete -= DeactivateScreenWash;
+            if(FadeManager.instance)
+                FadeManager.instance.EventFadeOutComplete -= DeactivateScreenWash;
         }
         #endregion
 
         #region AbstractMenuManager
 
-        protected override void OnEnterMenu(GameObject menuGameObject)
+        protected override void OnEnterMenu(PanelsMenuReference panelsMenuGameObject)
         {
-            _timelineManager = new TimelineManager.TimelineManager(playableDirector);
-            _animationTimeStart = GetTimeAnimationByGameObject(menuGameObject);
+            _timelineManager = new TimelineManager(playableDirector);
+            _animationTimeStart = panelsMenuGameObject.startTimelineAnimation;
+            SetInteractiveAllButtons(panelsMenuGameObject, true);
+            StartPlayAnimations(_animationTimeStart);
         }
 
-        protected override void OnExitMenu(GameObject menuGameObject)
+        protected override void OnExitMenu(PanelsMenuReference panelsMenuGameObject)
         {
+            SetInteractiveAllButtons(panelsMenuGameObject, false);
             _timelineManager = null;
         }
 
         #endregion
 
-        #region Interface IMenuTimelineAnimation
-        
-        public void TimelinePlayAnimation(float animationTimeStart)
-        {
-            _timelineManager?.PlayAnimation(animationTimeStart);
-        }
-        
-        public float GetTimeAnimationByGameObject(GameObject menuGameObject)
-        {
-            var menuRef = System.Array.Find(timelineReferences, timeline => timeline.menuGameObject == menuGameObject);
-            return menuRef?.timeAnimation ?? 0f; // or any default value you prefer
-        }
+        #region Buttons
 
+        private void SetInteractiveAllButtons(PanelsMenuReference panelButtons, bool interactive)
+        {
+            var allButtons = panelButtons.menuGameObject.GetComponentsInChildren<Button>();
+            foreach (var button in allButtons)
+            {
+                if (disableButtons != null && Array.Exists(disableButtons, obj => obj == button))
+                    interactive = false;
+                button.interactable = interactive;
+            }   
+        }
         public async void ButtonBriefingRoom()
         {
             await InitializationManager.StateManager.ChangeStateAsync("GameStateBriefingRoom").ConfigureAwait(false);
@@ -76,14 +79,15 @@ namespace ImmersiveGames.MenuManagers
         
         private void DeactivateScreenWash()
         {
-            if (activeScreenWash)
-            {
-                screenWash.gameObject.SetActive(false);
-                var canvasGroup = screenWash.gameObject.GetComponent<CanvasGroup>();
-                StartCoroutine(FadeTransition.Fade(canvasGroup, true, ScreenWashTimer));
-            }
-            if(playableDirector)
-                TimelinePlayAnimation(_animationTimeStart);
+            if (!activeScreenWash) return;
+            screenWash.gameObject.SetActive(false);
+            var canvasGroup = screenWash.gameObject.GetComponent<CanvasGroup>();
+            StartCoroutine(FadeTransition.Fade(canvasGroup, true, ScreenWashTimer));
+        }
+        private void StartPlayAnimations(float timeAnimationStart)
+        {
+            if(timeAnimationStart >= 0)
+                _timelineManager.PlayAnimation(timeAnimationStart);
         }
         
     }

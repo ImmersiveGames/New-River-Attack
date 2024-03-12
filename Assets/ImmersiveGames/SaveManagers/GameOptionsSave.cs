@@ -1,8 +1,4 @@
-﻿#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
-using ImmersiveGames.DebugManagers;
+﻿using System;
 using ImmersiveGames.Utils;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -16,27 +12,38 @@ namespace ImmersiveGames.SaveManagers
         public Locale startLocale;
         
         [Header("Options Sound And Music")]
-        public float musicVolume;
+        public float bgmVolume;
         public float sfxVolume;
-
         private new static string GetResourcePath() => "SavesSO/GameOptionsSave";
-
-#if UNITY_EDITOR
-        [MenuItem("ImmersiveGames/Load GameOptionsSave")]
-        private static void LoadGameOptionsSave()
+        public float GetVolumeLog10(AudioMixGroup type, float volumeDefault = 1f)
         {
-            // Editor-only method to load GameOptionsSave
-            var gameOptionsSave = Resources.Load<GameOptionsSave>(GetResourcePath());
+            var volume = GetVolume(type, volumeDefault);
+            return AudioUtils.SoundBase10(volume);
+        }
+        public float GetVolume(AudioMixGroup type, float volumeDefault = 1f)
+        {
+            return type switch
+            {
+                AudioMixGroup.BgmVolume => bgmVolume > 0.0f ? bgmVolume : volumeDefault,
+                AudioMixGroup.SfxVolume => sfxVolume > 0.0f ? sfxVolume : volumeDefault,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
 
-            if (gameOptionsSave != null)
+        // Define o volume com base no tipo de volume.
+        public void SetVolume(AudioMixGroup type, float volume)
+        {
+            switch (type)
             {
-                DebugManager.Log("GameOptionsSave loaded in the Editor.");
-            }
-            else
-            {
-                DebugManager.LogError("Failed to load GameOptionsSave in the Editor.");
+                case AudioMixGroup.BgmVolume:
+                    bgmVolume = volume;
+                    break;
+                case AudioMixGroup.SfxVolume:
+                    sfxVolume = volume;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
-#endif
     }
 }

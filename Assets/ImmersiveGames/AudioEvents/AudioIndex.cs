@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ImmersiveGames
+namespace ImmersiveGames.AudioEvents
 {
     [CreateAssetMenu(fileName = "AudioIndex", menuName = "ImmersiveGames/AudioIndex", order = 2)]
     public class AudioIndex : ScriptableObject

@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace ImmersiveGames.AudioManagers.Editor
+namespace ImmersiveGames.AudioEvents.Editor
 {
     [CustomEditor(typeof(AudioEventSo), true)]
     public class AudioEventScriptableObjectEditor : UnityEditor.Editor

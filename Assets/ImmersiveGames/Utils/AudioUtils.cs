@@ -40,7 +40,7 @@ namespace ImmersiveGames.Utils
         /// <param name="starts">The starting value of the property.</param>
         /// <param name="ends">The target value of the property.</param>
         /// <param name="propertySetter">The function to set the property during the fade.</param>
-        public static IEnumerator FadeProperty(AudioSource source, float timer, float starts, float ends, System.Action<AudioSource, float, float, float> propertySetter)
+        public static IEnumerator FadeProperty<T>(AudioSource source, float timer, float starts, float ends, System.Action<AudioSource, float, float, float> propertySetter)
         {
             var i = 0.0F;
             var step = 1.0F / timer;
@@ -54,6 +54,15 @@ namespace ImmersiveGames.Utils
 
             if (ends <= 0)
                 source.Stop();
+        }
+        
+        /*
+         * SoundBase10(float normalizeNumber)
+         *  - transforma um numero base de 0.0 à 1.0 em um valor de metrica para sons (dB)
+         */
+        public static float SoundBase10(float normalizeNumber)
+        {
+            return Mathf.Log10(normalizeNumber) * 20f;
         }
     }
 }

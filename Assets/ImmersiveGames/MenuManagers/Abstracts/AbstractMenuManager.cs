@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Cinemachine;
+using ImmersiveGames.DebugManagers;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace ImmersiveGames.MenuManagers.Abstracts
 {
     public abstract class AbstractMenuManager : MonoBehaviour
     {
-        public GameObject[] menus;
+        private PanelsMenuReference[] _menus;
 
         private readonly Stack<int> _menuHistory = new Stack<int>();
         private int _currentMenuIndex;
@@ -15,56 +19,63 @@ namespace ImmersiveGames.MenuManagers.Abstracts
 
         public static event MenuChangeEvent EventOnMenuChange;
 
+        protected void SetMenu(PanelsMenuReference[] menus)
+        {
+            _menus = menus;
+        }
+
         // Método abstrato para entrar no menu
-        protected abstract void OnEnterMenu(GameObject menuGameObject);
+        protected abstract void OnEnterMenu(PanelsMenuReference panelsMenuGameObject);
 
         // Método abstrato para sair do menu
-        protected abstract void OnExitMenu(GameObject menuGameObject);
+        protected abstract void OnExitMenu(PanelsMenuReference panelsMenuGameObject);
 
         // Método para ativar um menu específico pelo índice
         public void ActivateMenu(int index)
         {
-            if (index >= 0 && index < menus.Length)
+            if (index >= 0 && index < _menus.Length)
             {
                 // Desativar todos os menus
-                foreach (var menu in menus)
+                foreach (var menu in _menus)
                 {
-                    menu.SetActive(false);
+                    menu.menuGameObject.SetActive(false);
+                    menu.virtualCameraBase.Priority = 0;
+                    menu.virtualCameraBase.gameObject.SetActive(false);
                 }
 
                 // Adicionar o índice do menu ao histórico
                 _menuHistory.Push(_currentMenuIndex);
 
                 // Chamar o método para sair do menu atual
-                OnExitMenu(menus[_currentMenuIndex]);
+                OnExitMenu(_menus[_currentMenuIndex]);
 
                 // Atualizar o índice do menu atual
                 _currentMenuIndex = index;
 
                 // Ativar o menu desejado
-                menus[index].SetActive(true);
-
-                SetSelectGameObject(menus[index]);
+                _menus[index].menuGameObject.SetActive(true);
+                _menus[index].virtualCameraBase.Priority = 10;
+                _menus[index].virtualCameraBase.gameObject.SetActive(true);
+                
+                SetSelectGameObject(_menus[index].firstSelect);
                     
                 // Chamar o método para entrar no novo menu
-                OnEnterMenu(menus[index]);
+                OnEnterMenu(_menus[index]);
 
                 // Chamar o evento de troca de menu
-                EventOnMenuChange?.Invoke(menus[_menuHistory.Peek()].name, menus[index].name);
+                EventOnMenuChange?.Invoke(_menus[_menuHistory.Peek()].menuGameObject.name, _menus[index].menuGameObject.name);
             }
             else
             {
-                Debug.LogError("Índice de menu inválido.");
+                DebugManager.LogError("Índice de menu inválido.");
             }
         }
         // Método para indicar qual o botão será o primeiro do menu
-        private static void SetSelectGameObject(GameObject firstButton)
+        private static void SetSelectGameObject(GameObject firstSelectObject)
         {
-            var eventSystemFirstSelect = firstButton.GetComponentInChildren<SystemEventFirstSelect>();
-            if (eventSystemFirstSelect != null)
-            {
-                eventSystemFirstSelect.Init();
-            }
+            var eventSystem = EventSystem.current;
+            DebugManager.Log($"Iniciou o botão e o EventSystem {eventSystem}");
+            eventSystem.SetSelectedGameObject(firstSelectObject);
         }
 
         // Método para voltar ao menu anterior
@@ -85,4 +96,12 @@ namespace ImmersiveGames.MenuManagers.Abstracts
             Application.Quit();
         }
     }
+    [Serializable]
+    public class PanelsMenuReference
+    {
+        public GameObject menuGameObject;
+        public GameObject firstSelect;
+        public float startTimelineAnimation;
+        public CinemachineVirtualCameraBase virtualCameraBase;
+    } 
 }
