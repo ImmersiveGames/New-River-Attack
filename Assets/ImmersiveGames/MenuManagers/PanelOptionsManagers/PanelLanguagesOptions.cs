@@ -6,19 +6,19 @@ using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
-namespace ImmersiveGames.MenuManagers.GameOptionsPanels
+namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
 {
     public class PanelLanguagesOptions: MonoBehaviour
     {
         [SerializeField] private Locale myLocale;
         private Button _languageButton;
         private GameOptionsSave _gameOptionsSave;
-        private enum ButtonState { Active, Inactive }
-        private ButtonState _buttonState;
+        private PanelGameOptionManager _panelGameOptionManager;
 
         private void Awake()
         {
             _languageButton = GetComponent<Button>();
+            _panelGameOptionManager = GetComponentInParent<PanelGameOptionManager>();
         }
 
         private void OnEnable()
@@ -52,14 +52,16 @@ namespace ImmersiveGames.MenuManagers.GameOptionsPanels
         private void ChangeNormalColor(Locale locale)
         {
             var buttonColors = _languageButton.colors;
-            _buttonState = (LocalizationSettings.SelectedLocale != myLocale) ? ButtonState.Inactive : ButtonState.Active;
-            buttonColors.normalColor = (_buttonState == ButtonState.Active) ? GameOptionsManager.instance.normalButtonColor : GameOptionsManager.instance.disabledButtonColor;
+
+            buttonColors.normalColor = (LocalizationSettings.SelectedLocale != myLocale)
+                ? _panelGameOptionManager.disabledButtonColor
+                : _panelGameOptionManager.normalButtonColor; 
             _languageButton.colors = buttonColors;
         }
 
         private void ButtonChangeLocale()
         {
-            if (_buttonState == ButtonState.Active)
+            if (LocalizationSettings.SelectedLocale == myLocale)
                 return;
 
             AudioManager.PlayMouseClick();
@@ -68,12 +70,9 @@ namespace ImmersiveGames.MenuManagers.GameOptionsPanels
 
         private IEnumerator ChangeLocale(Locale locale)
         {
-            _buttonState = ButtonState.Active;
-
             yield return LocalizationSettings.InitializationOperation;
 
             LocalizationSettings.SelectedLocale = _gameOptionsSave.startLocale = locale;
-            _buttonState = ButtonState.Inactive;
 
             DebugManager.Log($"Locale changed to: {locale.name}");
         }

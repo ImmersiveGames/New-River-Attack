@@ -2,7 +2,7 @@
 using ImmersiveGames.SaveManagers;
 using UnityEngine;
 
-namespace ImmersiveGames.MenuManagers.GameOptionsPanels
+namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
 {
     public class PanelGraphicsOptions : UIDropDown
     {

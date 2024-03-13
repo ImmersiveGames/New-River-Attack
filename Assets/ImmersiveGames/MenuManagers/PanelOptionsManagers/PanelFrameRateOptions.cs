@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using ImmersiveGames.SaveManagers;
 using ImmersiveGames.DebugManagers;
+using ImmersiveGames.SaveManagers;
 using TMPro;
 using UnityEngine;
 
-namespace ImmersiveGames.MenuManagers.GameOptionsPanels
+namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
 {
     public class PanelFrameRateOptions : MonoBehaviour
     {

@@ -6,7 +6,7 @@ using ImmersiveGames.SaveManagers;
 using TMPro;
 using UnityEngine;
 
-namespace ImmersiveGames.MenuManagers.GameOptionsPanels
+namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
 {
     public class PanelResolutionOptions : MonoBehaviour
     {
