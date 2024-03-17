@@ -6,6 +6,8 @@ namespace ImmersiveGames.ShopManagers.Interfaces
     {
         ShopProduct shopProduct { get; set;}
         int quantityInStock { get; set; }
+
+        void UpdateStock(int quantity);
     }
     
 }

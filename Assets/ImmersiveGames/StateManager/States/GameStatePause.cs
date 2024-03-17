@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using ImmersiveGames.DebugManagers;
-using ImmersiveGames.InputManager;
 using ImmersiveGames.ScenesManager.Transitions;
 using UnityEngine.SceneManagement;
 
@@ -17,7 +16,6 @@ namespace ImmersiveGames.StateManager.States
         
         public override ITransition inTransition => new FadeTransition();
         public override ITransition outTransition => new FadeTransition();
-        protected override GameActionMaps stateInputActionMap => GameActionMaps.UiControls;
 
         protected override async Task OnEnter(IState previousState)
         {

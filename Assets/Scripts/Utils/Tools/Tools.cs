@@ -241,7 +241,7 @@ namespace Utils
          * GetAnimationTime(Animator animator, string animationName)
          * - retorna o tempo da animação
          * */
-        public static float GetAnimationTime(Animator animator, string animationName)
+        public static float GetAnimationDuration(Animator animator, string animationName)
         {
             var controller = animator.runtimeAnimatorController;
 

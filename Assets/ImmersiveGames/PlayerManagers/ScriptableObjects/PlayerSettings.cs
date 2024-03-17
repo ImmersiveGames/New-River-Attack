@@ -4,11 +4,9 @@ using UnityEngine;
 
 namespace ImmersiveGames.PlayerManagers.ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "PlayerSetting", menuName = "ImmersiveGames/RiverAttack/PlayerSettings", order = 101)]
+    [CreateAssetMenu(fileName = "PlayerSetting", menuName = "ImmersiveGames/RiverAttack/PlayerSettings", order = 102)]
     public class PlayerSettings: ScriptableObject
     {
-        [Header("Shopping")]
-        public int wallet;
-        public List<ProductStock> listPlayerProductStocks;
+        
     }
 }

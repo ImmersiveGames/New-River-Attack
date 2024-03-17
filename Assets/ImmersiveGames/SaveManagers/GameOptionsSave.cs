@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using ImmersiveGames.DebugManagers;
+using ImmersiveGames.ShopManagers.ShopProducts;
 using ImmersiveGames.Utils;
 using UnityEngine;
 using UnityEngine.Localization;
+using Object = UnityEngine.Object;
+using ShopProduct = ImmersiveGames.ShopManagers.Abstracts.ShopProduct;
 
 namespace ImmersiveGames.SaveManagers
 {
@@ -17,11 +22,56 @@ namespace ImmersiveGames.SaveManagers
         
         [Header("Options Graphics")]
         public int frameRate;
-
         public Vector2Int actualResolution;
         public int selectedQualityIndex;
 
-        private new static string GetResourcePath() => "SavesSO/GameOptionsSave";
+        [Header("Shopping")]
+        public int wallet;
+        public List<ProductStock> listPlayerProductStocks;
+
+        public void UpdateWallet(int price)
+        {
+            wallet += price;
+        }
+
+        private int FindIndex(Object product)
+        {
+            for (var i = 0; i < listPlayerProductStocks.Count; i++)
+            {
+                if (listPlayerProductStocks[i].shopProduct == product)
+                {
+                    return i; // Retorna o índice se o produto for encontrado
+                }
+            }
+            return -1; // Retorna -1 se o produto não for encontrado
+        }
+
+        public void AddInventory(ShopProduct product, int quantity)
+        {
+            var stockIndex = FindIndex(product);
+            if (stockIndex != -1)
+            {
+                // Encontrou o produto no estoque
+                var updatedStock = listPlayerProductStocks[stockIndex];
+                updatedStock.quantityInStock += quantity;
+                listPlayerProductStocks[stockIndex] = updatedStock;
+                DebugManager.LogWarning("Product is found in inventory, Update Quantity.");
+            }
+            else
+            {
+                var productStock = new ProductStock
+                {
+                    shopProduct = product,
+                    quantityInStock = quantity
+                };
+                listPlayerProductStocks.Add(productStock);
+                // Produto não encontrado no estoque
+                DebugManager.Log("Product not found in inventory, adicionando um novo.");
+            }
+        }
+
+        #region Options Settings
+        
         public float GetVolumeLog10(AudioMixGroup type, float volumeDefault = 1f)
         {
             var volume = GetVolume(type, volumeDefault);
@@ -52,5 +102,8 @@ namespace ImmersiveGames.SaveManagers
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        #endregion
+        
     }
 }

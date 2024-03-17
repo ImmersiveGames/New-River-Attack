@@ -1,10 +1,12 @@
 ﻿using System;
-using Cinemachine;
+using ImmersiveGames.DebugManagers;
+using ImmersiveGames.InputManager;
 using ImmersiveGames.MenuManagers.Abstracts;
 using ImmersiveGames.ScenesManager;
 using ImmersiveGames.ScenesManager.Transitions;
 using ImmersiveGames.TimelineManagers;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using UnityEngine.UI;
 
@@ -21,11 +23,18 @@ namespace ImmersiveGames.MenuManagers
         private TimelineManager _timelineManager;
         private const float ScreenWashTimer = .5f;
         private float _animationTimeStart;
+        
+        private PlayersInputActions _inputActions;
+        private ActionManager _actionManager;
 
         #region Unity Methods
 
         private void Start()
         {
+            //InputManagerInitializer.ActionManager.ActivateActionMap(GameActionMaps.UiControls);
+            InputManagerInitializer.RegisterAction("BackButton",InputBackButton );
+            
+            
             SetMenu(panelsMenuReferences);
             screenWash.gameObject.SetActive(activeScreenWash);
             ActivateMenu(0);
@@ -37,6 +46,11 @@ namespace ImmersiveGames.MenuManagers
         {
             if(FadeManager.instance)
                 FadeManager.instance.EventFadeOutComplete -= DeactivateScreenWash;
+        }
+        
+        private void OnDestroy()
+        {
+            InputManagerInitializer.UnregisterAction("BackButton",InputBackButton );
         }
         #endregion
 
@@ -57,6 +71,12 @@ namespace ImmersiveGames.MenuManagers
         }
 
         #endregion
+        
+        private void InputBackButton(InputAction.CallbackContext context)
+        {
+            DebugManager.Log("Apertou o Botão B");
+            GoBack();
+        }
 
         #region Buttons
 

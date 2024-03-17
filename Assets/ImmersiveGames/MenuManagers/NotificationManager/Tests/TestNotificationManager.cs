@@ -1,23 +1,84 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace ImmersiveGames.MenuManagers.NotificationManager.Tests
 {
-    public class TestNotificationManager: MonoBehaviour
+    public class TestNotificationManager : MonoBehaviour
     {
-        private NotificationManager _notificationManager;
+        public GameObject notificationPanelPrefab;
+        public GameObject choicePanelPrefab;
+
         private void Start()
         {
-            _notificationManager = GetComponent<NotificationManager>();
-            // Exemplo de chamada de notificação para teste
-            _notificationManager.AddNotification("Bem-vindo ao jogo!");
+            // Inscrever-se nos eventos do NotificationManager
+            NotificationManager.instance.EventNotificationAdded += HandleNotificationAdded;
+            NotificationManager.instance.EventNotificationAccepted += HandleNotificationAccepted;
+            NotificationManager.instance.EventNotificationClosed += HandleNotificationClosed;
         }
+
+        private void OnDestroy()
+        {
+            // Desinscrever-se dos eventos do NotificationManager para evitar vazamentos de memória
+            NotificationManager.instance.EventNotificationAdded -= HandleNotificationAdded;
+            NotificationManager.instance.EventNotificationAccepted -= HandleNotificationAccepted;
+            NotificationManager.instance.EventNotificationClosed -= HandleNotificationClosed;
+        }
+
+        private void HandleNotificationAdded(NotificationData notificationData)
+        {
+            Debug.Log("Notification added: " + notificationData.message);
+        }
+
+        private void HandleNotificationAccepted(NotificationData notificationData)
+        {
+            Debug.Log("Notification accepted: " + notificationData.message);
+        }
+
+        private void HandleNotificationClosed(NotificationData notificationData)
+        {
+            Debug.Log("Notification closed: " + notificationData.message);
+        }
+
         private void Update()
         {
-            // Exemplo: pressionar a tecla de espaço para adicionar notificações
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Keyboard.current.spaceKey.wasPressedThisFrame)
             {
-                _notificationManager.AddNotification("Nova mensagem!");
+                AddTextNotification($"This is a simple text notification.{Time.time}");
             }
+
+            if (Keyboard.current.altKey.wasPressedThisFrame)
+            {
+                AddConfirmationNotification($"Do you want to confirm this action? {Time.time}", ConfirmAction);
+            }
+        }
+
+        private void AddTextNotification(string message)
+        {
+            var notificationData = new NotificationData
+            {
+                panelPrefab = notificationPanelPrefab,
+                message = message,
+            };
+
+            NotificationManager.instance.AddNotification(notificationData);
+        }
+
+        private void AddConfirmationNotification(string message, System.Action confirmAction)
+        {
+            var notificationData = new NotificationData
+            {
+                panelPrefab = choicePanelPrefab,
+                message = message,
+                confirmAction = confirmAction,
+            };
+
+            NotificationManager.instance.AddNotification(notificationData);
+        }
+
+        private void ConfirmAction()
+        {
+            Debug.Log("Action confirmed!");
+            // Você pode adicionar outras ações a serem executadas após a confirmação aqui, se necessário.
         }
     }
 }

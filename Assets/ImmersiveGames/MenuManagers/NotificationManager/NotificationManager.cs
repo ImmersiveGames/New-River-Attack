@@ -1,57 +1,56 @@
-﻿using System.Collections.Generic;
-using ImmersiveGames.DebugManagers;
+﻿using System;
+using System.Collections.Generic;
+using ImmersiveGames.Utils;
 using UnityEngine;
 
 namespace ImmersiveGames.MenuManagers.NotificationManager
 {
-    public class NotificationManager : MonoBehaviour
+    public class NotificationManager : Singleton<NotificationManager>
     {
-        [SerializeField] private GameObject notificationPrefab;
-        private readonly Queue<string> _notificationQueue = new Queue<string>();
+        [Header("Configurações")]
+        public GameObject notificationPanelPrefab;
+        public GameObject choicePanelPrefab;
+
+        private readonly Queue<NotificationData> _notificationQueue = new Queue<NotificationData>();
         private NotificationPanel _currentPanel;
 
-        public void AddNotification(string message)
+        // Eventos para indicar outros scripts sobre notificações
+        public event Action<NotificationData> EventNotificationAdded;
+        public event Action<NotificationData> EventNotificationAccepted;
+        public event Action<NotificationData> EventNotificationClosed;
+        
+
+        public void AddNotification(NotificationData notificationData)
         {
-            _notificationQueue.Enqueue(message);
-            if (_notificationQueue.Count == 1 && !HasActivePanel())
-            {
-                ShowNextNotification();
-            }
+            _notificationQueue.Enqueue(notificationData);
+            EventNotificationAdded?.Invoke(notificationData);
+            TryShowNextNotification();
         }
 
-        private void ShowNextNotification()
+        private void TryShowNextNotification()
         {
-            if (_notificationQueue.Count <= 0) return;
-            var message = _notificationQueue.Peek();
-            var notificationObject = Instantiate(notificationPrefab, transform);
-            var notificationPanel = notificationObject.GetComponent<NotificationPanel>();
-
-            if (notificationPanel != null)
+            if (_currentPanel != null || _notificationQueue.Count <= 0) return;
+            var nextNotification = _notificationQueue.Dequeue();
+            _currentPanel = Instantiate(nextNotification.panelPrefab, transform).GetComponent<NotificationPanel>();
+            _currentPanel.Show(nextNotification.message, 
+                () =>
             {
-                _currentPanel = notificationPanel;
-                notificationPanel.ShowMessage(message, OnNotificationClosed);
-            }
-            else
+                EventNotificationClosed?.Invoke(nextNotification);
+                CloseNotification();
+                TryShowNextNotification();
+            }, 
+                ()=>
             {
-                DebugManager.LogError("NotificationPanel component not found on instantiated object.");
-                // Lide com o erro de forma apropriada
-            }
+                EventNotificationAccepted?.Invoke(nextNotification);
+                nextNotification.confirmAction.Invoke();
+            });
         }
 
-        private void OnNotificationClosed()
+        private void CloseNotification()
         {
-            _notificationQueue.Dequeue();
             _currentPanel = null;
-
-            if (_notificationQueue.Count > 0)
-            {
-                ShowNextNotification();
-            }
+            instance.TryShowNextNotification();
         }
         
-        private bool HasActivePanel()
-        {
-            return _currentPanel != null;
-        }
     }
 }

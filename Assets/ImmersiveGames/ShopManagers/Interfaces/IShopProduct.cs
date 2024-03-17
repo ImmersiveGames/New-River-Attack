@@ -5,14 +5,10 @@ namespace ImmersiveGames.ShopManagers.Interfaces
 {
     public interface IShopProduct
     {
-        public string GetName(bool locale);
-        public string GetDescription(bool locale);
+        public string GetName();
+        public string GetDescription();
         public int GetPrice();
         public Sprite GetImage();
-        public void Buy(PlayerSettings player);
-        
         
     }
-
-    
 }

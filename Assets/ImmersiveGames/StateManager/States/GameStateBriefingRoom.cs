@@ -1,5 +1,4 @@
-﻿using ImmersiveGames.InputManager;
-using ImmersiveGames.ScenesManager.Transitions;
+﻿using ImmersiveGames.ScenesManager.Transitions;
 using UnityEngine.SceneManagement;
 
 namespace ImmersiveGames.StateManager.States
@@ -20,6 +19,5 @@ namespace ImmersiveGames.StateManager.States
         public override bool unLoadAdditiveScene => true;
         public override ITransition inTransition => new FadeTransition();
         public override ITransition outTransition => new FadeTransition();
-        protected override GameActionMaps stateInputActionMap => GameActionMaps.BriefingRoom;
     }
 }

@@ -22,6 +22,7 @@ namespace ImmersiveGames.InputManager.Tests
 
             // Teste: Registrar uma ação
             TestRegisterAction("EscNotification", OnJumpAction);
+            TestRegisterAction("BackButton", OnTest);
         }
 
         private void OnDestroy()
@@ -41,7 +42,7 @@ namespace ImmersiveGames.InputManager.Tests
             _actionManager.ActivateActionMap(GameActionMaps.UiControls);
 
             // Registra a ação com a função de callback
-            ActionManager.RegisterAction(actionName, callback);
+            _actionManager.RegisterAction(actionName, callback);
 
             // Mensagem de depuração indicando que a ação foi registrada
             DebugManager.Log($"Action '{actionName}' successfully registered");
@@ -53,6 +54,10 @@ namespace ImmersiveGames.InputManager.Tests
         private void OnJumpAction(InputAction.CallbackContext context)
         {
             DebugManager.Log("Jump action performed!");
+        }
+        private void OnTest(InputAction.CallbackContext context)
+        {
+            DebugManager.Log("Botão B ativado!");
         }
 
         private void SimulateAction(string actionName)

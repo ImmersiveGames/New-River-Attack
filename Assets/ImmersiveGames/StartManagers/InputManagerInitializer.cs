@@ -1,6 +1,7 @@
-﻿using ImmersiveGames.InputManager;
-using RiverAttack;
+﻿using System;
+using ImmersiveGames.InputManager;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace ImmersiveGames
 {
@@ -21,7 +22,7 @@ namespace ImmersiveGames
             }
         }
 
-        public static ActionManager ActionManager
+        internal static ActionManager ActionManager
         {
             get
             {
@@ -31,10 +32,25 @@ namespace ImmersiveGames
             }
         }
 
-        private void OnDisable()
+        protected internal static void RegisterAction(string actionName, Action<InputAction.CallbackContext> callback)
+        {
+            ActionManager.RegisterAction(actionName, callback);
+        }
+        protected internal static void UnregisterAction(string actionName, Action<InputAction.CallbackContext> callback)
+        {
+            ActionManager.UnregisterAction(actionName, callback);
+        }
+
+        protected static void DisableInputs()
+        {
+            _inputActions?.Disable();
+        }
+
+        private void OnDestroy()
         {
             // Desativa os Inputs ao desabilitar o objeto
             _inputActions?.Disable();
+            _actionManager = null;
         }
     }
 }

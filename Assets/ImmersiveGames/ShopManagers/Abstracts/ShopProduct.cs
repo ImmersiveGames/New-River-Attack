@@ -15,18 +15,14 @@ namespace ImmersiveGames.ShopManagers.Abstracts
         public LocalizedString localizedDescription;
         public int priceItem;
         
-        public virtual string GetName(bool locale)
+        public virtual string GetName()
         {
-            if(localizedName != null)
-                return locale ? localizedName.GetLocalizedString() : name;
-            return name;
+            return localizedName.IsEmpty ? name : localizedName.GetLocalizedString();
         }
 
-        public virtual string GetDescription(bool locale)
+        public virtual string GetDescription()
         {
-            if(localizedName != null)
-                return locale ? localizedDescription.GetLocalizedString() : descriptionItem;
-            return descriptionItem;
+            return localizedDescription.IsEmpty ? descriptionItem : localizedDescription.GetLocalizedString();
         }
 
         public virtual int GetPrice()
@@ -37,11 +33,6 @@ namespace ImmersiveGames.ShopManagers.Abstracts
         public virtual Sprite GetImage()
         {
             return spriteItem;
-        }
-
-        public virtual void Buy(PlayerSettings player)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

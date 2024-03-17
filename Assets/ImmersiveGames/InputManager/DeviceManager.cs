@@ -41,12 +41,25 @@ namespace ImmersiveGames.InputManager
                     EventOnDeviceRemoved?.Invoke(device, change);
                     break;
                 // Adicione outros casos conforme necessário
+                case InputDeviceChange.Disconnected:
+                case InputDeviceChange.Reconnected:
+                case InputDeviceChange.Enabled:
+                case InputDeviceChange.Disabled:
+                case InputDeviceChange.UsageChanged:
+                case InputDeviceChange.ConfigurationChanged:
+                case InputDeviceChange.SoftReset:
+                case InputDeviceChange.HardReset:
                 default:
                     _message = $"An unknown error occurred with the {device}";
                     DebugManager.Log(_message);
                     throw new ArgumentOutOfRangeException(nameof(change), change, null);
             }
-            _notificationManager.AddNotification(_message);
+            var notificationData = new NotificationData
+            {
+                panelPrefab = _notificationManager.notificationPanelPrefab,
+                message = _message
+            };
+            _notificationManager.AddNotification(notificationData);
         }
     }
 }

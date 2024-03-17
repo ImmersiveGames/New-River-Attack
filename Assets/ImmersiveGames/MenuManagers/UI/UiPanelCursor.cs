@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ImmersiveGames.SaveManagers;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace ImmersiveGames.MenuManagers.UI
@@ -7,7 +8,7 @@ namespace ImmersiveGames.MenuManagers.UI
     {
         [SerializeField] private RectTransform arrowLeft;
         private GameObject _currentActiveButton;
-
+        
         private bool _isLoadMenu;
         
 
@@ -35,6 +36,9 @@ namespace ImmersiveGames.MenuManagers.UI
         {
             _isLoadMenu = false;
         }
+
+        public GameObject GetCurrentActiveButton => _currentActiveButton;
+        public GameObject SetCurrentActiveButton => _currentActiveButton = null;
 
         private void SetCursor(RectTransform reference)
         {

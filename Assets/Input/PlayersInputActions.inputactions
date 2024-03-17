@@ -424,24 +424,6 @@
             "id": "f85c31d3-07d1-4e65-a95f-8382e3a66cdd",
             "actions": [
                 {
-                    "name": "BuyButton",
-                    "type": "Button",
-                    "id": "d4723a7f-eb4f-4a39-ba76-8b6e436d51ed",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "SelectButton",
-                    "type": "Button",
-                    "id": "e66faeb4-5f21-42c8-b306-669f883bd032",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "LeftSelection",
                     "type": "Button",
                     "id": "9764b246-24bb-4fa4-87ea-079779ca18c2",
@@ -478,15 +460,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "EscNotification",
-                    "type": "Button",
-                    "id": "ce42f1e1-f09a-44bc-9f95-c8a78bddd6e3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "9a942fcc-5a73-4771-aeff-0537cfc21446",
@@ -494,62 +467,9 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "ComboAction",
-                    "type": "Button",
-                    "id": "a91eaebf-9eec-43f5-933f-434d130054e6",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "1f8f2e9a-3d57-4e72-abb4-dfdb85ebf842",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC;Mobile",
-                    "action": "BuyButton",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9a2f570c-a09a-4d84-a87a-37037c25e8f2",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "BuyButton",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ba1c1af3-560a-401c-b5d5-9f7b4a99e0b6",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mobile;PC",
-                    "action": "SelectButton",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "86ea53cc-c2bd-4fd0-a749-b56103369db9",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "SelectButton",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "c4c8f3c6-33a4-415a-b9d4-88d24f696f94",
@@ -663,7 +583,7 @@
                 {
                     "name": "",
                     "id": "80f5be73-6bb7-4d56-b83d-50dd8c77f28c",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "*/{Back}",
                     "interactions": "",
                     "processors": "",
                     "groups": "Mobile;PC",
@@ -692,37 +612,156 @@
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Shopping",
+            "id": "33625800-d1b4-4ed0-ba6e-631515d2f0e4",
+            "actions": [
+                {
+                    "name": "BuyButton",
+                    "type": "Button",
+                    "id": "77b0ef6d-8f93-499b-b49b-9c1bc775dc81",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
+                    "name": "SelectButton",
+                    "type": "Button",
+                    "id": "8289572e-8deb-4932-bcab-b0d3432c8baa",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LeftSelection",
+                    "type": "Button",
+                    "id": "13f6c1c6-3f74-4796-92d4-ee6d690c50a1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RightSelection",
+                    "type": "Button",
+                    "id": "d05d0f67-32ab-4716-9844-52b62c412e71",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "BackButton",
+                    "type": "Button",
+                    "id": "c953a5d1-4c97-4f66-be62-d434a426b6bd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
                     "name": "",
-                    "id": "c2f109e4-bd14-4e2a-8a4e-725430d00f3d",
-                    "path": "<Gamepad>/buttonEast",
+                    "id": "e4c64481-0ce0-4371-8d24-9f946f734a3b",
+                    "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "Mobile;PC",
-                    "action": "EscNotification",
+                    "action": "LeftSelection",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "08a267bb-0bc7-4994-873f-d5c622d6d8ed",
-                    "path": "<Keyboard>/escape",
+                    "id": "06a048b9-66d2-4eb8-ac01-09b2afc4de42",
+                    "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "EscNotification",
+                    "action": "LeftSelection",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "0ab5bb34-f2f8-4fd3-a699-d14672c9a175",
-                    "path": "",
+                    "id": "8e606323-b787-4049-ba29-549a6c39ff46",
+                    "path": "<Gamepad>/dpad/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "ComboAction",
+                    "groups": "PC",
+                    "action": "LeftSelection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "70d52c1d-a7dc-4e74-ae86-acb470aa50a9",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "LeftSelection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7fc2db53-4585-4077-ae93-b7970af4c09d",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "RightSelection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "feb31895-b411-4f50-ad5b-a2012be54ce0",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC;Mobile",
+                    "action": "RightSelection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7cf50d64-ce1d-41f3-af15-1e1363c318db",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mobile;PC",
+                    "action": "RightSelection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c9fb82b4-a5e8-47ba-b5a4-0c764a948855",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "RightSelection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "005b3273-0c53-47c6-9a0c-5416b43a0d90",
+                    "path": "*/{Back}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "BackButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -826,6 +865,82 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "Exit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Notifications",
+            "id": "b47fa6e6-9f30-4cb3-96a4-d5782beccf8d",
+            "actions": [
+                {
+                    "name": "CloseNotification",
+                    "type": "Button",
+                    "id": "50e3785d-e0dc-4dea-ba5f-32d5347a570b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ConfirmNotification",
+                    "type": "Button",
+                    "id": "3ec3736f-228c-4fc8-b8f2-4d16bbe4d779",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0e992488-8e08-4c30-ad42-8602b1a893d4",
+                    "path": "*/{Cancel}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "CloseNotification",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "78e8e3bd-fa49-42cd-be51-e5e06fe2b037",
+                    "path": "*/{Submit}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "ConfirmNotification",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "HUD",
+            "id": "da868c8f-e184-4f12-a83d-0409b6b6e25c",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "878896f4-b51c-4568-9464-2b5bc72dcd02",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c2aca002-8dd7-48c3-bf18-da5abef14324",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

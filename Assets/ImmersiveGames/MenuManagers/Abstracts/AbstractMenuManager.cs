@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Cinemachine;
 using ImmersiveGames.DebugManagers;
+using ImmersiveGames.MenuManagers.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,7 +11,6 @@ namespace ImmersiveGames.MenuManagers.Abstracts
     public abstract class AbstractMenuManager : MonoBehaviour
     {
         private PanelsMenuReference[] _menus;
-
         private readonly Stack<int> _menuHistory = new Stack<int>();
         private int _currentMenuIndex;
 
@@ -42,13 +42,12 @@ namespace ImmersiveGames.MenuManagers.Abstracts
                     menu.virtualCameraBase.Priority = 0;
                     menu.virtualCameraBase.gameObject.SetActive(false);
                 }
-
                 // Adicionar o índice do menu ao histórico
                 _menuHistory.Push(_currentMenuIndex);
 
                 // Chamar o método para sair do menu atual
                 OnExitMenu(_menus[_currentMenuIndex]);
-
+                
                 // Atualizar o índice do menu atual
                 _currentMenuIndex = index;
 
@@ -56,7 +55,7 @@ namespace ImmersiveGames.MenuManagers.Abstracts
                 _menus[index].menuGameObject.SetActive(true);
                 _menus[index].virtualCameraBase.Priority = 10;
                 _menus[index].virtualCameraBase.gameObject.SetActive(true);
-                
+
                 SetSelectGameObject(_menus[index].firstSelect);
                     
                 // Chamar o método para entrar no novo menu
@@ -71,23 +70,41 @@ namespace ImmersiveGames.MenuManagers.Abstracts
             }
         }
         // Método para indicar qual o botão será o primeiro do menu
-        private static void SetSelectGameObject(GameObject firstSelectObject)
+        private void SetSelectGameObject(GameObject firstSelectObject)
         {
             var eventSystem = EventSystem.current;
-            DebugManager.Log($"Iniciou o botão e o EventSystem {eventSystem}");
+            var cursor = GetComponentInChildren<UiPanelCursor>()?.GetCurrentActiveButton;
+            if (cursor != null)
+            {
+                firstSelectObject = cursor;
+            }
             eventSystem.SetSelectedGameObject(firstSelectObject);
         }
 
         // Método para voltar ao menu anterior
-        public void GoBack()
+        public void HistoryGoBack()
         {
-            if (_menuHistory.Count <= 0) return;
+            DebugManager.Log($"[Pilha] Size: {_menuHistory.Count}");
+            if (_menuHistory.Count <= 1) return;
             var previousMenuIndex = _menuHistory.Pop();
             AudioManager.PlayMouseClick();
+            var cursor = GetComponentInChildren<UiPanelCursor>()?.SetCurrentActiveButton;
             ActivateMenu(previousMenuIndex);
+        }
+        public void GoBack()
+        {
+            DebugManager.Log($"[Pilha] Size: {_menuHistory.Count}");
+            if (_menuHistory.Count <= 1) return;
 
-            // Se quiser realizar alguma ação específica quando o botão de voltar é pressionado, pode fazê-lo aqui
-            // Exemplo: Debug.Log("Botão de voltar pressionado para o menu anterior.");
+            // Remover o menu atual do histórico
+            _menuHistory.Pop();
+
+            // Obter o menu anterior sem removê-lo do histórico
+            var previousMenuIndex = _menuHistory.Peek();
+
+            AudioManager.PlayMouseClick();
+            var cursor = GetComponentInChildren<UiPanelCursor>()?.SetCurrentActiveButton;
+            ActivateMenu(previousMenuIndex);
         }
 
         public void ButtonExit()
