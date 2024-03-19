@@ -27,7 +27,7 @@ namespace ImmersiveGames.ShopManagers.ShopProducts
         public int quantityInStock
         {
             get => inQuantityInStock;
-            set => inQuantityInStock = inShopProductType == ShopProductType.Unique ? 1: value;
+            set => inQuantityInStock = value;// = inShopProductType == ShopProductType.Unique ? 1: value;
         }
         
         public void UpdateStock(int quantity)
@@ -43,10 +43,11 @@ namespace ImmersiveGames.ShopManagers.ShopProducts
             }
         }
         
-        public bool HaveInStock()
+        public bool HaveInStock(int quantity)
         {
             if (inShopProductType == ShopProductType.Infinite) return true;
-            return inQuantityInStock > 0;
+            if (inQuantityInStock <= 0) return false;
+            return inQuantityInStock >= quantity;
         }
 
         public bool PlayerAlreadyHave(GameOptionsSave gameOptionsSave, ShopProduct product)
@@ -55,9 +56,14 @@ namespace ImmersiveGames.ShopManagers.ShopProducts
                 Any(objeto => objeto.inShopProduct == product);
         }
 
-        public bool PlayerCanBuy(GameOptionsSave gameOptionsSave)
+        public bool PlayerHaveMoneyToBuy(GameOptionsSave gameOptionsSave, int quantity)
         {
-            if (gameOptionsSave.wallet < inShopProduct.priceItem) return false;
+            return gameOptionsSave.wallet >= inShopProduct.priceItem * quantity;
+        }
+
+        public bool PlayerCanBuy(GameOptionsSave gameOptionsSave, int quantity)
+        {
+            if (!HaveInStock(quantity) || gameOptionsSave.wallet < inShopProduct.priceItem * quantity) return false;
             var product = inShopProduct;
             var haveProduct = PlayerAlreadyHave(gameOptionsSave, product);
             return inShopProductType != ShopProductType.Unique || !haveProduct;

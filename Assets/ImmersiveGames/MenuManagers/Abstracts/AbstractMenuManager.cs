@@ -72,6 +72,7 @@ namespace ImmersiveGames.MenuManagers.Abstracts
         // Método para indicar qual o botão será o primeiro do menu
         private void SetSelectGameObject(GameObject firstSelectObject)
         {
+            if (!firstSelectObject) return;
             var eventSystem = EventSystem.current;
             var cursor = GetComponentInChildren<UiPanelCursor>()?.GetCurrentActiveButton;
             if (cursor != null)

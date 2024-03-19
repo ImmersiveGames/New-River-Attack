@@ -1,6 +1,4 @@
-﻿using ImmersiveGames.PlayerManagers.ScriptableObjects;
-
-namespace ImmersiveGames.ShopManagers.Interfaces
+﻿namespace ImmersiveGames.ShopManagers.Interfaces
 {
     public interface IShopProductUsable: IShopProduct
     {

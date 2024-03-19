@@ -68,7 +68,7 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
             var selectedIndex = CalculateSelectedItemIndex(content, forward);
 
             // Chama o método para atualizar o item selecionado
-            UpdateSelectedItem(selectedIndex);
+            UpdateSelectedItem(content, selectedIndex);
         }
 
         private float CalculateTargetX(float currentX, float moveAmount, bool forward)

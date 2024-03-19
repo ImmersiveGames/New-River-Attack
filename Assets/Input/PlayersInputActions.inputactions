@@ -663,6 +663,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "UseButton",
+                    "type": "Button",
+                    "id": "50cf4b1e-5748-4aac-990f-124ae9d786ad",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -762,6 +771,17 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "BackButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "54cce05e-f662-4265-bf41-90c80504e808",
+                    "path": "*/{Submit}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "UseButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

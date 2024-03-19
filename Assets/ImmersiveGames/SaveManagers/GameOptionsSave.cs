@@ -27,6 +27,8 @@ namespace ImmersiveGames.SaveManagers
 
         [Header("Shopping")]
         public int wallet;
+        public ShopProductSkin actualSkin;
+        //[HideInInspector]
         public List<ProductStock> listPlayerProductStocks;
 
         public void UpdateWallet(int price)

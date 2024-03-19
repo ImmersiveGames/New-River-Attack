@@ -1,10 +1,15 @@
-﻿using ImmersiveGames.ShopManagers.Interfaces;
+﻿using ImmersiveGames.DebugManagers;
+using ImmersiveGames.ShopManagers.Interfaces;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace ImmersiveGames.ShopManagers.NavigationModes
 {
     public class FiniteNavigationMode : INavigationMode
     {
+        public int SelectedItemIndex { get; private set; }
+        
         public virtual void MoveContent(RectTransform content, bool forward, MonoBehaviour monoBehaviour = null)
         {
             var rect = content.anchoredPosition;
@@ -30,8 +35,8 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
 
             content.anchoredPosition = rect;
 
-            var selectedIndex = CalculateSelectedItemIndex(content, forward);
-            UpdateSelectedItem(selectedIndex);
+            SelectedItemIndex = CalculateSelectedItemIndex(content, forward);
+            UpdateSelectedItem(content, SelectedItemIndex);
         }
 
         public int CalculateSelectedItemIndex(RectTransform content, bool forward)
@@ -43,9 +48,16 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
             return selectedIndex;
         }
 
-        public virtual void UpdateSelectedItem(int selectedIndex)
+        public virtual void UpdateSelectedItem(RectTransform content, int selectedIndex)
         {
-            Debug.Log($"Item selecionado: {selectedIndex}");
+            var childSelect = content.GetChild(selectedIndex);
+            var activeButton = childSelect.GetComponentInChildren<Button>();
+            if (activeButton != null)
+            {
+                var eventSystem = EventSystem.current;
+                eventSystem.SetSelectedGameObject(activeButton.gameObject);
+            }
+            DebugManager.Log($"Item selecionado: {selectedIndex}");
         }
     }
 }

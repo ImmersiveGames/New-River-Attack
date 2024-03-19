@@ -687,6 +687,15 @@ namespace ImmersiveGames
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""50cf4b1e-5748-4aac-990f-124ae9d786ad"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -786,6 +795,17 @@ namespace ImmersiveGames
                     ""processors"": """",
                     ""groups"": ""PC"",
                     ""action"": ""BackButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54cce05e-f662-4265-bf41-90c80504e808"",
+                    ""path"": ""*/{Submit}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""UseButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1026,6 +1046,7 @@ namespace ImmersiveGames
             m_Shopping_LeftSelection = m_Shopping.FindAction("LeftSelection", throwIfNotFound: true);
             m_Shopping_RightSelection = m_Shopping.FindAction("RightSelection", throwIfNotFound: true);
             m_Shopping_BackButton = m_Shopping.FindAction("BackButton", throwIfNotFound: true);
+            m_Shopping_UseButton = m_Shopping.FindAction("UseButton", throwIfNotFound: true);
             // BriefingRoom
             m_BriefingRoom = asset.FindActionMap("BriefingRoom", throwIfNotFound: true);
             m_BriefingRoom_Next = m_BriefingRoom.FindAction("Next", throwIfNotFound: true);
@@ -1251,6 +1272,7 @@ namespace ImmersiveGames
         private readonly InputAction m_Shopping_LeftSelection;
         private readonly InputAction m_Shopping_RightSelection;
         private readonly InputAction m_Shopping_BackButton;
+        private readonly InputAction m_Shopping_UseButton;
         public struct ShoppingActions
         {
             private @PlayersInputActions m_Wrapper;
@@ -1260,6 +1282,7 @@ namespace ImmersiveGames
             public InputAction @LeftSelection => m_Wrapper.m_Shopping_LeftSelection;
             public InputAction @RightSelection => m_Wrapper.m_Shopping_RightSelection;
             public InputAction @BackButton => m_Wrapper.m_Shopping_BackButton;
+            public InputAction @UseButton => m_Wrapper.m_Shopping_UseButton;
             public InputActionMap Get() { return m_Wrapper.m_Shopping; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1284,6 +1307,9 @@ namespace ImmersiveGames
                 @BackButton.started += instance.OnBackButton;
                 @BackButton.performed += instance.OnBackButton;
                 @BackButton.canceled += instance.OnBackButton;
+                @UseButton.started += instance.OnUseButton;
+                @UseButton.performed += instance.OnUseButton;
+                @UseButton.canceled += instance.OnUseButton;
             }
 
             private void UnregisterCallbacks(IShoppingActions instance)
@@ -1303,6 +1329,9 @@ namespace ImmersiveGames
                 @BackButton.started -= instance.OnBackButton;
                 @BackButton.performed -= instance.OnBackButton;
                 @BackButton.canceled -= instance.OnBackButton;
+                @UseButton.started -= instance.OnUseButton;
+                @UseButton.performed -= instance.OnUseButton;
+                @UseButton.canceled -= instance.OnUseButton;
             }
 
             public void RemoveCallbacks(IShoppingActions instance)
@@ -1514,6 +1543,7 @@ namespace ImmersiveGames
             void OnLeftSelection(InputAction.CallbackContext context);
             void OnRightSelection(InputAction.CallbackContext context);
             void OnBackButton(InputAction.CallbackContext context);
+            void OnUseButton(InputAction.CallbackContext context);
         }
         public interface IBriefingRoomActions
         {

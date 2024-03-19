@@ -7,8 +7,9 @@ namespace ImmersiveGames.ShopManagers.Interfaces
     {
         ShopProductType productType { get; set; }
 
-        bool HaveInStock();
-        bool PlayerCanBuy(GameOptionsSave gameOptionsSave);
+        bool HaveInStock(int quantity);
+        bool PlayerCanBuy(GameOptionsSave gameOptionsSave, int quantity);
+        bool PlayerHaveMoneyToBuy(GameOptionsSave gameOptionsSave, int quantity);
         bool PlayerAlreadyHave(GameOptionsSave gameOptionsSave, ShopProduct product);
     }
     public enum ShopProductType

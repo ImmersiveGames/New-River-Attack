@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using ImmersiveGames.DebugManagers;
-using ImmersiveGames.ShopManagers.Interfaces;
 
 namespace ImmersiveGames.ShopManagers.NavigationModes
 {
     public class SmoothFiniteNavigationMode : FiniteNavigationMode
     {
-        private const float SmoothTime = 0.2f;
+        private const float SmoothTime = 0.1f;
         private bool _isMoving;
         private int _selectedItemIndex;
+        private const float Approximation = 0.3f; // Aproximação para determinar a suavização
 
         public override void MoveContent(RectTransform content, bool forward, MonoBehaviour monoBehaviour = null)
         {
@@ -43,7 +43,7 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
             };
 
             var velocity = 0f;
-            while (Mathf.Abs(rect.x - targetX) > 0.01f)
+            while (Mathf.Abs(rect.x - targetX) > Approximation)
             {
                 rect.x = Mathf.SmoothDamp(rect.x, targetX, ref velocity, SmoothTime);
                 rect.x = Mathf.Clamp(rect.x, minPosition, maxPosition);
@@ -58,7 +58,7 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
             DebugManager.Log("Movimento concluído.");
 
             var selectedIndex = CalculateSelectedItemIndex(content, forward);
-            UpdateSelectedItem(selectedIndex);
+            UpdateSelectedItem(content, selectedIndex);
         }
     }
 }

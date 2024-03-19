@@ -1,11 +1,14 @@
-﻿using ImmersiveGames.ShopManagers.Interfaces;
+﻿using ImmersiveGames.DebugManagers;
+using ImmersiveGames.ShopManagers.Interfaces;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace ImmersiveGames.ShopManagers.NavigationModes
 {
     public class InfiniteNavigationMode : INavigationMode
     {
-        private int _selectedItemIndex;
+        public int SelectedItemIndex { get; private set; }
 
         public virtual void MoveContent(RectTransform content, bool forward, MonoBehaviour monoBehaviour = null)
         {
@@ -35,26 +38,31 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
             content.anchoredPosition = rect;
 
             // Calcula o índice do item centralizado após o movimento
-            _selectedItemIndex = CalculateSelectedItemIndex(content, forward);
+            SelectedItemIndex = CalculateSelectedItemIndex(content, forward);
 
             // Atualizar o item selecionado
-            UpdateSelectedItem(_selectedItemIndex);
+            UpdateSelectedItem(content, SelectedItemIndex);
         }
 
         public int CalculateSelectedItemIndex(RectTransform content, bool forward)
         {
             var childCount = content.childCount;
-            var selectedIndex = forward ? (_selectedItemIndex + 1) % childCount : (_selectedItemIndex - 1 + childCount) % childCount;
-            _selectedItemIndex = selectedIndex;  // Atualize o índice selecionado
+            var selectedIndex = forward ? (SelectedItemIndex + 1) % childCount : (SelectedItemIndex - 1 + childCount) % childCount;
+            SelectedItemIndex = selectedIndex;  // Atualize o índice selecionado
             return selectedIndex;
         }
 
-        public void UpdateSelectedItem(int selectedIndex)
+        public void UpdateSelectedItem(RectTransform content, int selectedIndex)
         {
-            // Implemente o código necessário para lidar com a seleção do item
-            // por exemplo, você pode notificar o gerenciador da loja sobre a seleção do item
-            // ou atualizar a visualização na interface do usuário, etc.
-            Debug.Log($"Item selecionado: {selectedIndex}");
+            var childSelect = content.GetChild(selectedIndex);
+            var activeButton = childSelect.GetComponentInChildren<Button>();
+            if (activeButton != null)
+            {
+                var eventSystem = EventSystem.current;
+                eventSystem.SetSelectedGameObject(activeButton.gameObject);
+            }
+            DebugManager.Log($"Item selecionado: {selectedIndex}");
         }
+        
     }
 }

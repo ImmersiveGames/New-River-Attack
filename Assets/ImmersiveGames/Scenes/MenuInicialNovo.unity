@@ -27614,7 +27614,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -6258226486721703383, guid: 58d7b5e9bc02ca541be53445706aa66a,
     type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -27708,10 +27708,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1600305898}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db9b70b682edabb47a41929ebcb3ea10, type: 3}
+  m_Script: {fileID: 11500000, guid: 7484eebd1ba34071a2979182e7fff7ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSettings: {fileID: 11400000, guid: c11a8f0b743164845ab2754709110c91, type: 2}
 --- !u!1 &1604892054
 GameObject:
   m_ObjectHideFlags: 0
@@ -43530,9 +43529,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8410145966750947350}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -170}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!1 &625827524944217579
@@ -47374,7 +47373,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 530}
+  m_SizeDelta: {x: 350, y: 530}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &1420211829788187184
 RectTransform:
@@ -53790,9 +53789,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8410145966750947350}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 90, y: -50}
   m_SizeDelta: {x: 120, y: 100}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &2631427487474298544
@@ -58285,13 +58284,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stockShopsList:
   - inShopProductType: 0
-    inShopProduct: {fileID: 11400000, guid: 01e59a13fcab94243bfb8e3df995a67b, type: 2}
+    inShopProduct: {fileID: 11400000, guid: 71a41fb6758c4414aa1791709a12698c, type: 2}
     inQuantityInStock: 0
-  - inShopProductType: 1
-    inShopProduct: {fileID: 11400000, guid: 011f6c0f5e655574982523f0e0b10174, type: 2}
+  - inShopProductType: 0
+    inShopProduct: {fileID: 11400000, guid: c89d0202086a2c446a5d0e96a15100fb, type: 2}
     inQuantityInStock: 100
-  - inShopProductType: 2
-    inShopProduct: {fileID: 11400000, guid: 8c1002376aec1554d92e1a1f8d6eddff, type: 2}
+  - inShopProductType: 0
+    inShopProduct: {fileID: 11400000, guid: 0429bd190dc5fe346b2299056fcb6851, type: 2}
     inQuantityInStock: 100
   prefabItemShop: {fileID: 6544333689387389186, guid: d8eec68c14f169f4bb4f30f4674eccec,
     type: 3}
@@ -88131,7 +88130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &8558861281929287787
 CanvasRenderer:
   m_ObjectHideFlags: 0
