@@ -7,13 +7,13 @@ namespace ImmersiveGames.LevelBuilder
     {
         public GameObject segmentObject;
         public GameObject enemySetObject; // GameObject do conjunto de inimigos
-        public float spawnDistance;
+        public float absolutePosition;
 
-        public ScenarioObjectData(GameObject track, GameObject enemySet, float distance)
+        public ScenarioObjectData(GameObject segmentObject, GameObject enemySetObject, float absolutePosition)
         {
-            segmentObject = track;
-            enemySetObject = enemySet;
-            spawnDistance = distance;
+            this.segmentObject = segmentObject;
+            this.enemySetObject = enemySetObject;
+            this.absolutePosition = absolutePosition;
         }
 
         public void RemoveObjectScene()

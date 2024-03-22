@@ -18,7 +18,7 @@ namespace ImmersiveGames.LevelBuilder.Test
                 Collider[] colliders = objetoInstanciado.GetComponentsInChildren<Collider>();
                 Debug.Log("Quantos coliders?: " + colliders.Length);
                 // Calcula o comprimento real do objeto montado com base nos colliders
-                Bounds comprimentoTotal = CalculateRealLength.getBounds(objetoInstanciado);
+                Bounds comprimentoTotal = CalculateRealLength.GetBounds(objetoInstanciado);
 
                 // Exibe o comprimento real calculado
                 Debug.Log("Comprimento real do objeto montado: " + comprimentoTotal.size.z);

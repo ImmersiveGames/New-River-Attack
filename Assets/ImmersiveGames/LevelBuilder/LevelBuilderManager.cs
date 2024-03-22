@@ -1,57 +1,51 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using ImmersiveGames.Utils;
-using RiverAttack;
 
 namespace ImmersiveGames.LevelBuilder
 {
     public class LevelBuilderManager : MonoBehaviour
     {
-        public ScenarioObjectData[] scenarioObjects; // Alteração 1: Renomear e mudar para array readonly
+        public ScenarioObjectData[] scenarioObjects;
         public GameObject initialSegmentPrefab;
         public GameObject finalSegmentPrefab;
         public Transform spawnPoint;
-        public int maxScenarioObjects = 5;
-        public Vector3 offset; // Adição: Offset para correção de posição
+        public int startNumOfSegments = 5;
+        public Vector3 offset;
 
         [SerializeField] private List<ScenarioObjectData> activeObjects = new List<ScenarioObjectData>();
-        private GameObject initialSegmentObject;
-        private bool initialSegmentInstantiated;
+        private GameObject _initialSegmentObject;
+        private bool _initialSegmentInstantiated;
+        
+        private GameObject _setsContainer;
 
         private void Start()
         {
-            var spawnPosition = spawnPoint.position;
-
-            // Instanciar o segmento inicial se ainda não foi instanciado
-            if (!initialSegmentInstantiated && initialSegmentPrefab != null)
+            InitialSegment();
+            
+            // Criar container para os sets
+            _setsContainer = new GameObject("Sets Container")
             {
-                initialSegmentObject = Instantiate(initialSegmentPrefab, spawnPosition, Quaternion.identity);
-                var initialSegmentLength =
-                    CalculateRealLength.CalculateCollidersLength(
-                        initialSegmentObject.GetComponentsInChildren<Collider>());
-                var initialSegmentPosition = spawnPosition - Vector3.forward * initialSegmentLength + offset;
-                initialSegmentObject.transform.position = initialSegmentPosition;
-                initialSegmentInstantiated = true;
-            }
+                transform =
+                {
+                    parent = transform
+                }
+            };
 
             // Instanciar os objetos do cenário
-            for (var i = 0; i < maxScenarioObjects; i++)
-            {
-                AddNextSegment();
-            }
+            AddNextSegment(startNumOfSegments);
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
-                AddNextSegment();
+                AddNextSegment(1);
             }
 
             if (Input.GetKeyDown(KeyCode.R) && activeObjects.Count > 0)
             {
-                RemoveSegments(0); // Remove o primeiro objeto do cenário
+                RemoveSegments(0, 1); // Remove o primeiro objeto do cenário
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -64,87 +58,144 @@ namespace ImmersiveGames.LevelBuilder
             }
         }
 
-        private void AddNextSegment()
+        private void InitialSegment()
         {
-            if (activeObjects.Count >= scenarioObjects.Length) // Alteração 2: Usar o array scenarioObjects
+            var spawnPosition = spawnPoint.position;
+
+            // Instanciar o segmento inicial se ainda não foi instanciado
+            if (_initialSegmentInstantiated || initialSegmentPrefab == null) return;
+            _initialSegmentObject = Instantiate(initialSegmentPrefab, spawnPosition, Quaternion.identity);
+            var initialSegmentBounds = CalculateRealLength.GetBounds(_initialSegmentObject);
+            var initialSegmentLength = initialSegmentBounds.size.z; // Acessar tamanho no eixo Z
+            var initialSegmentPosition = spawnPosition - Vector3.forward * initialSegmentLength + offset;
+            _initialSegmentObject.transform.position = initialSegmentPosition;
+            _initialSegmentInstantiated = true;
+        }
+
+        private void AddNextSegment(int count)
+        {
+            if (count <= 0 || scenarioObjects.Length - activeObjects.Count < count)
             {
-                Debug.LogWarning("Não é possível adicionar mais objetos ao cenário. Limite máximo atingido.");
+                Debug.LogWarning("Quantidade de segmentos a adicionar inválida.");
                 return;
             }
 
-            var index = activeObjects.Count; // Próximo índice é o tamanho atual da lista
-            var segmentPrefab =
-                scenarioObjects[index].segmentObject; // Alteração 3: Usar o objeto de segmento do ScenarioObjectData
-            var newSegment = Instantiate(segmentPrefab, Vector3.zero, Quaternion.identity, transform);
-
-            // Obter os WallsMaster dentro do novo objeto de segmento
-            var wallsMasters = newSegment.GetComponentsInChildren<WallsMaster>();
-
-            var previousSegmentLength = (from wallsMaster in wallsMasters
-                where wallsMaster != null
-                select wallsMaster.GetComponentsInChildren<Collider>()
-                into colliders
-                select CalculateRealLength.CalculateCollidersLength(colliders)).Sum();
-
-            // Posicionar o segmento ao longo do eixo Z com offset
-            Vector3 position;
-            if (activeObjects.Count > 0)
+            for (var i = 0; i < count; i++)
             {
-                var previousSegment = activeObjects[^1].segmentObject;
-                var newSegmentPositionZ =
-                    previousSegment.transform.position.z + previousSegmentLength +
-                    offset.z; // Adição: Adicionar offset na posição Z
-                position = newSegment.transform.position;
-                position = new Vector3(position.x + offset.x, position.y + offset.y, newSegmentPositionZ);
-                newSegment.transform.position = position;
-            }
-            else
-            {
-                // Posicionar o primeiro segmento com offset
-                position = newSegment.transform.position;
-                position = new Vector3(position.x + offset.x, position.y + offset.y,
-                    spawnPoint.position.z + offset.z); // Adição: Adicionar offset na posição Z
-                newSegment.transform.position = position;
-            }
 
-            // Adicionar à lista de objetos ativos
-            var newScenarioData = new ScenarioObjectData(newSegment, null, newSegment.transform.position.z);
-            activeObjects.Add(newScenarioData);
+                var index = activeObjects.Count; // Próximo índice é o tamanho atual da lista
+                var segmentPrefab =
+                    scenarioObjects[index]
+                        .segmentObject; // Alteração 3: Usar o objeto de segmento do ScenarioObjectData
+                var newSegment = Instantiate(segmentPrefab, Vector3.zero, Quaternion.identity, transform);
+
+                // Calcular o tamanho do segmento anterior (se houver)
+                var previousSegmentLength = activeObjects.Count > 0
+                    ? CalculateRealLength.GetBounds(activeObjects[^1].segmentObject).size.z
+                    : 0;
+
+                // Posicionar o segmento ao longo do eixo Z com offset
+                Vector3 position;
+                if (activeObjects.Count > 0)
+                {
+                    var previousSegment = activeObjects[^1].segmentObject;
+                    var newSegmentPositionZ =
+                        previousSegment.transform.position.z + previousSegmentLength + offset.z;
+
+                    position = newSegment.transform.position;
+                    position = new Vector3(position.x + offset.x, position.y + offset.y, newSegmentPositionZ);
+                    newSegment.transform.position = position;
+                }
+                else
+                {
+                    // Posicionar o primeiro segmento com offset
+                    position = newSegment.transform.position;
+                    position = new Vector3(position.x + offset.x, position.y + offset.y,
+                        spawnPoint.position.z + offset.z); // Adição: Posicionar no spawn point com offset
+                    newSegment.transform.position = position;
+                }
+
+                GameObject enemySetInstance = null;
+                // Verificar se o conjunto de inimigos existe
+                if (scenarioObjects[index].enemySetObject != null)
+                {
+                    // Instanciar o conjunto de inimigos na mesma posição e rotação do segmento
+                    enemySetInstance = Instantiate(scenarioObjects[index].enemySetObject,
+                        newSegment.transform.position, newSegment.transform.rotation, _setsContainer.transform);
+                    enemySetInstance.SetActive(true);
+                }
+                var newSegmentPosition = activeObjects.Count > 0
+                    ? activeObjects[^1].absolutePosition + previousSegmentLength + offset.z
+                    : spawnPoint.position.z + offset.z;
+                
+                // Adicionar à lista de objetos ativos
+                var newScenarioData =
+                    new ScenarioObjectData(newSegment, enemySetInstance, newSegmentPosition);
+                activeObjects.Add(newScenarioData);
+            }
 
             // Instanciar o segmento final no fim do último segmento
-            if (index == scenarioObjects.Length - 1 && finalSegmentPrefab != null && activeObjects.Count > 0)
+            if (activeObjects.Count >= scenarioObjects.Length && finalSegmentPrefab != null && activeObjects.Count > 0)
             {
-                var lastSegment = activeObjects[^1].segmentObject;
-                var lastSegmentLength =
-                    CalculateRealLength.CalculateCollidersLength(
-                        lastSegment.GetComponentsInChildren<Collider>());
-                Debug.Log($"Distancia: {lastSegment.transform.position.z}, {lastSegmentLength}" );
-                var finalSegmentInstance = Instantiate(finalSegmentPrefab,
-                    lastSegment.transform.position + Vector3.forward * lastSegmentLength + offset,
-                    Quaternion.identity);
+                FinalSegment();
             }
         }
 
-        private void RemoveSegments(int index)
+
+        private void FinalSegment()
+        {
+            var lastSegment = activeObjects[^1].segmentObject;
+            var lastSegmentBounds = CalculateRealLength.GetBounds(lastSegment);
+            var lastSegmentLength = lastSegmentBounds.size.z;
+            var finalSegmentInstance = Instantiate(finalSegmentPrefab,
+                lastSegment.transform.position + Vector3.forward * lastSegmentLength,
+                Quaternion.identity);
+        }
+
+        private void RemoveSegments(int startIndex, int count)
+        {
+            if (startIndex < 0 || startIndex >= activeObjects.Count)
+            {
+                Debug.LogWarning("Índice inicial inválido para remoção de segmento.");
+                return;
+            }
+
+            if (count <= 0 || startIndex + count > activeObjects.Count)
+            {
+                Debug.LogWarning("Quantidade de segmentos a remover inválida.");
+                return;
+            }
+
+            for (int i = startIndex; i < startIndex + count; i++)
+            {
+                RemoveSegment(i);
+            }
+        }
+
+        private void RemoveSegment(int index)
         {
             if (index < 0 || index >= activeObjects.Count)
             {
-                Debug.LogWarning("Índice inválido para remover objeto do cenário.");
+                Debug.LogWarning("Índice inválido para remoção de segmento.");
                 return;
             }
 
-            var scenarioData = activeObjects[index];
-            scenarioData.RemoveObjectScene();
-            activeObjects.RemoveAt(index);
+            var segmentToRemove = activeObjects[index];
+            var enemySetToRemove = segmentToRemove.enemySetObject;
 
-            // Verificar se o objeto inicial ainda está na cena e removê-lo se estiver
-            if (initialSegmentObject != null &&
-                !activeObjects.Exists(data => data.segmentObject == initialSegmentObject))
+            // Chamar CleanupEnemies antes de destruir o conjunto de inimigos
+            if (enemySetToRemove != null)
             {
-                Destroy(initialSegmentObject);
-                initialSegmentInstantiated = false;
+                CleanupEnemies(enemySetToRemove);
             }
+
+            // Remover o objeto do cenário
+            Destroy(segmentToRemove.segmentObject);
+
+            // Remover da lista de objetos ativos
+            activeObjects.RemoveAt(index);
         }
+
 
         private GameObject FindSegmentAtPosition(int zPosition)
         {
@@ -153,13 +204,37 @@ namespace ImmersiveGames.LevelBuilder
 
             foreach (var data in activeObjects)
             {
-                var distance = Mathf.Abs(data.spawnDistance - zPosition);
+                var distance = Mathf.Abs(data.absolutePosition - zPosition);
                 if (!(distance < closestDistance)) continue;
                 closestSegment = data.segmentObject;
                 closestDistance = distance;
             }
 
             return closestSegment;
+        }
+
+        // Função para remover os inimigos de forma segura
+        private void CleanupEnemies(GameObject enemySetToRemove)
+        {
+            // Obter todos os scripts de comportamento dos inimigos
+            // var enemyBehaviors = enemySetToRemove.GetComponentsInChildren<EnemyBehavior>();
+
+            // Parar todos os comportamentos dos inimigos
+            // foreach (var enemyBehavior in enemyBehaviors)
+            // {
+            //     enemyBehavior.StopBehavior();
+            // }
+            
+            enemySetToRemove.SetActive(false);
+
+            //Destruir os objetos dos inimigos
+            foreach (Transform child in enemySetToRemove.transform)
+            {
+                Destroy(child.gameObject);
+            }
+
+            // **Comentário:** Essa lógica está comentada pois os scripts de comportamento dos inimigos ainda não foram implementados.
+            // **Lembre-se:** Descomente o código quando os scripts de comportamento dos inimigos estiverem prontos.
         }
     }
 }
