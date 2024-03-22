@@ -2,7 +2,7 @@
 using ImmersiveGames.StateManager.States;
 using UnityEngine;
 
-namespace ImmersiveGames.AudioManagers.Test
+namespace ImmersiveGames.Test
 {
     public class AudioManagerTest : MonoBehaviour
     {

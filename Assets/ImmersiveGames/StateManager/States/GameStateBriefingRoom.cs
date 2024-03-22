@@ -1,4 +1,6 @@
-﻿using ImmersiveGames.ScenesManager.Transitions;
+﻿using System.Threading.Tasks;
+using ImmersiveGames.DebugManagers;
+using ImmersiveGames.ScenesManager.Transitions;
 using UnityEngine.SceneManagement;
 
 namespace ImmersiveGames.StateManager.States
@@ -7,10 +9,25 @@ namespace ImmersiveGames.StateManager.States
     {
         public GameStateBriefingRoom() : base("GameStateBriefingRoom") { }
 
+        protected override async Task OnEnter(IState previousState)
+        {
+            await base.OnEnter(previousState).ConfigureAwait(false);
+            DebugManager.Log("Entrou no estado de Briefing Room");
+            
+            //TODO: Iniciar o Tutorial
+        }
 
         public override void UpdateState()
         {
-            throw new System.NotImplementedException();
+            // Lógica de atualização do estado de pausa
+            DebugManager.Log($"Update no estado de Briefing Room, initialized: {stateInitialized}");
+        }
+
+        protected override async Task OnExit()
+        {
+            // Lógica específica ao sair do estado de pausa em outras threads
+            await base.OnExit().ConfigureAwait(false);
+            DebugManager.Log("Saiu do estado de Briefing Room");
         }
 
         public override bool requiresSceneLoad => true;

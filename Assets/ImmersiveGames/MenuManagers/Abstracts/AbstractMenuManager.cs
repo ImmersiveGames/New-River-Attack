@@ -33,6 +33,7 @@ namespace ImmersiveGames.MenuManagers.Abstracts
         // Método para ativar um menu específico pelo índice
         public void ActivateMenu(int index)
         {
+            AudioManager.PlayMouseClick();
             if (index >= 0 && index < _menus.Length)
             {
                 // Desativar todos os menus

@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &117652990
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 117652991}
+  - component: {fileID: 117652992}
+  m_Layer: 0
+  m_Name: Input Manager Start
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &117652991
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117652990}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1316554344292568965}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &117652992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117652990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d685d5e9f8f4f279a78534eb441d316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1460172350
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,7 +494,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072b9dcb87a548e981d5655e893260dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOptionsSave: {fileID: 11400000, guid: 27c6600f2ceb2724ea7bdedb94844935, type: 2}
   debugLevel: 3
 --- !u!224 &1069066123087954463
 RectTransform:
@@ -539,6 +582,7 @@ Transform:
   - {fileID: 831616569357812857}
   - {fileID: 7737500617625810739}
   - {fileID: 1914185859369156328}
+  - {fileID: 117652991}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1321551457737545158
@@ -775,7 +819,6 @@ GameObject:
   - component: {fileID: 4460600811422144645}
   - component: {fileID: 8162893643214991934}
   - component: {fileID: 1156373069157065431}
-  - component: {fileID: 6874649969790409639}
   - component: {fileID: 4427128884669895534}
   - component: {fileID: 3476845946499510325}
   - component: {fileID: 4005731098523280004}
@@ -1114,7 +1157,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0cdb7324828478eb3758a314aaefa77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notificationPrefab: {fileID: 7735401569761741533, guid: 5a17557bede4b7a48b8fc355b870534c,
+  notificationPanelPrefab: {fileID: 7351057169246047601, guid: 0109ad825923fb645b67a20ab302e82f,
+    type: 3}
+  choicePanelPrefab: {fileID: 5379342770691458941, guid: 07b2696a30169c4499c137a80b7ba274,
     type: 3}
 --- !u!223 &4460600811422144645
 Canvas:
@@ -1545,18 +1590,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &6874649969790409639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2189975765082684589}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba91b6fcb9164e35978a9b56a527701f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7180398504965540091
 MonoBehaviour:
   m_ObjectHideFlags: 0

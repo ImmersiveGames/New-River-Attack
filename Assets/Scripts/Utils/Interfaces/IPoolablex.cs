@@ -1,7 +1,7 @@
 using UnityEngine;
 namespace Utils
 {
-    public interface IPoolable
+    public interface IPoolablex
     {
     }
     public interface IHasPool

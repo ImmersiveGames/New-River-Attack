@@ -9,7 +9,7 @@ namespace ImmersiveGames
     {
         // Transforme _stateManager em uma propriedade estática
 
-        [SerializeField] protected GameOptionsSave gameOptionsSave;
+        //[SerializeField] protected GameOptionsSave gameOptionsSave;
         public DebugManager.DebugLevel debugLevel;
 
         private void Awake()
@@ -26,6 +26,7 @@ namespace ImmersiveGames
             StateManager.AddState(new GameStatePlay());
             StateManager.AddState(new GameStatePause());
             StateManager.AddState(new GameStateBriefingRoom());
+            StateManager.AddState(new GameStateOpenGame());
             
         }
         private async void Start()

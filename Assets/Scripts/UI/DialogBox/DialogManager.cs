@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Localization;
 using System.Collections.Generic;
 using ImmersiveGames;
+using UnityEditor.Localization.Editor;
 
 namespace RiverAttack 
 {

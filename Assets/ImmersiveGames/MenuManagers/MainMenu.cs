@@ -34,7 +34,6 @@ namespace ImmersiveGames.MenuManagers
             //InputManagerInitializer.ActionManager.ActivateActionMap(GameActionMaps.UiControls);
             InputManagerInitializer.RegisterAction("BackButton",InputBackButton );
             
-            
             SetMenu(panelsMenuReferences);
             screenWash.gameObject.SetActive(activeScreenWash);
             ActivateMenu(0);
@@ -74,7 +73,6 @@ namespace ImmersiveGames.MenuManagers
         
         private void InputBackButton(InputAction.CallbackContext context)
         {
-            DebugManager.Log("Apertou o Botão B");
             GoBack();
         }
 
@@ -90,9 +88,22 @@ namespace ImmersiveGames.MenuManagers
                 button.interactable = interactive;
             }   
         }
-        public async void ButtonBriefingRoom()
+        public async void GotoBriefingRoom()
         {
             await InitializationManager.StateManager.ChangeStateAsync("GameStateBriefingRoom").ConfigureAwait(false);
+        }
+        public async void GotoClassicMode()
+        {
+            await InitializationManager.StateManager.ChangeStateAsync("GameStateOpenGame").ConfigureAwait(false);
+        }
+        public async void GotoMissionMode()
+        {
+            await InitializationManager.StateManager.ChangeStateAsync("GameStateOpenGame").ConfigureAwait(false);
+        }
+        public void ButtonPlayAnimation(float startTime)
+        {
+            AudioManager.PlayMouseClick();
+            _timelineManager.PlayAnimation(startTime);
         }
 
         #endregion

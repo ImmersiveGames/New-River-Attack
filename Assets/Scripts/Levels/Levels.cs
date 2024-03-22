@@ -37,7 +37,6 @@ namespace RiverAttack
         Actual,   // Level selecionado - Amarelo
         Complete, // nivel foi jogado e deve ser concluido assim que o jogador voltar pra HUB destruir pónte etc. - temp Verde
         Open      // é possivel retornar a estes niveis já jogados - Branco
-            
     }
 
     [System.Serializable]
