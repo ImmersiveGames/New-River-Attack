@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ImmersiveGames.StateManager;
+using ImmersiveGames.StateManagers.Interfaces;
 using ImmersiveGames.Utils;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -15,7 +15,7 @@ namespace ImmersiveGames.ScenesManager
         public static async Task StartSceneTransitionAsync(IState nextState, string previousSceneName, LoadSceneMode loadSceneMode, 
             bool unloadPreviousAdditiveScene)
         {
-            if (nextState == null || nextState.sceneName == previousSceneName || !nextState.requiresSceneLoad)
+            if (nextState == null || nextState.SceneName == previousSceneName || !nextState.RequiresSceneLoad)
             {
                 return;
             }
@@ -32,12 +32,12 @@ namespace ImmersiveGames.ScenesManager
                     }
                 }
 
-                await LoadSceneAsync(nextState.sceneName, loadSceneMode).ConfigureAwait(false);
+                await LoadSceneAsync(nextState.SceneName, loadSceneMode).ConfigureAwait(false);
 
                 if (loadSceneMode == LoadSceneMode.Additive)
                 {
                     // Empilha a nova cena aditiva
-                    AdditiveScenes.Push(nextState.sceneName);
+                    AdditiveScenes.Push(nextState.SceneName);
                 }
                 // Desative o painel de loading no final da transição
             }).ConfigureAwait(false);

@@ -86,7 +86,7 @@ private void OnEnable()
                 nextBound.x = level.levelOffset.x;
                 BuildEnemies(nextBound, level.setLevelList[i], i, myRoot);
                 nextBound.x = level.levelOffset.x;
-                poolPathLevels.Add(BuildPath(ref nextBound, level.setLevelList[i].levelPaths, myRoot));
+                poolPathLevels.Add(BuildPath(ref nextBound, level.setLevelList[i].segmentObject, myRoot));
                 if (maxLevels > i)
                     poolPathLevels[i].SetActive(true);
             }
@@ -120,9 +120,9 @@ private void OnEnable()
 
         private void BuildEnemies(Vector3 nextBound, LevelsSetup levelsSetup, int i, Transform myRoot)
         {
-            if (levelsSetup.enemiesSets == null) return;
-            levelsSetup.enemiesSets.SetActive(false);
-            var enemies = Instantiate(levelsSetup.enemiesSets, myRoot);
+            if (levelsSetup.enemySetObject == null) return;
+            levelsSetup.enemySetObject.SetActive(false);
+            var enemies = Instantiate(levelsSetup.enemySetObject, myRoot);
             enemies.transform.position = nextBound;
             if (maxLevels > i)
                 enemies.SetActive(true);

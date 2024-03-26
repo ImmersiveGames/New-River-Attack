@@ -1,16 +1,15 @@
-﻿using ImmersiveGames.SaveManagers;
-using ImmersiveGames.DebugManagers;
-using ImmersiveGames.StateManager.States;
+﻿using ImmersiveGames.DebugManagers;
+using ImmersiveGames.StateManagers;
+using ImmersiveGames.StateManagers.States;
 using UnityEngine;
 
 namespace ImmersiveGames
 {
     public class InitializationManager : MonoBehaviour
     {
-        // Transforme _stateManager em uma propriedade estática
-
-        //[SerializeField] protected GameOptionsSave gameOptionsSave;
         public DebugManager.DebugLevel debugLevel;
+
+        public StatesNames startState = StatesNames.GameStateMenuInicial;
 
         private void Awake()
         {
@@ -19,7 +18,7 @@ namespace ImmersiveGames
 
             // Inicialize _stateManager apenas se ainda não foi inicializado
             if (StateManager != null) return;
-            StateManager = new StateManager.StateManager();
+            StateManager = new StateManager();
 
             // Adicione os estados ao StateManager
             StateManager.AddState(new GameStateMenuInicial());
@@ -31,16 +30,16 @@ namespace ImmersiveGames
         }
         private async void Start()
         {
-            await StateManager.ChangeStateAsync("GameStateMenuInicial").ConfigureAwait(false);
+            await StateManager.ChangeStateAsync(startState.ToString()).ConfigureAwait(false);
         }
 
         private void Update()
         {
-            if (StateManager.GetCurrentState().stateInitialized)
+            if (StateManager.GetCurrentState().StateInitialized)
                 StateManager.GetCurrentState().UpdateState();
         }
 
         // Adicione uma propriedade estática para acessar _stateManager de qualquer lugar
-        public static StateManager.StateManager StateManager { get; private set; }
+        public static StateManager StateManager { get; private set; }
     }
 }

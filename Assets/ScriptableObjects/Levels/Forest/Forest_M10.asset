@@ -13,33 +13,50 @@ MonoBehaviour:
   m_Name: Forest_M10
   m_EditorClassIdentifier: 
   levelName: Mission 10
+  levelNameLocale:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   developerDescription: 
   beatGame: 0
   dontCountMilestone: 0
+  bossFight: 0
   hudPath: {fileID: 5165634822946027408, guid: 020b5715ac1db1d4d86a05fee646f9d5, type: 3}
   levelsStates: 2
-  bgmStartLevel: 3
+  pathType: 128
   pathStart: {fileID: 1232418805373770, guid: 569b0bb5c7e414e9ab3348249377f412, type: 3}
   pathEnd: {fileID: 1488095893788870, guid: 3a911c95ebabc934b9c562d1b821c5fd, type: 3}
   levelOffset: {x: -5, y: 0, z: -60}
   setLevelList:
-  - levelPaths: {fileID: 1726549961331698, guid: 760c289de5b614e609cecba2ef4bb11c,
+  - segmentObject: {fileID: 1726549961331698, guid: 760c289de5b614e609cecba2ef4bb11c,
       type: 3}
-    enemiesSets: {fileID: 1641246378921162, guid: a1703f0bcb35d4eedb48eeff71bd2316,
+    enemySetObject: {fileID: 1641246378921162, guid: a1703f0bcb35d4eedb48eeff71bd2316,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 3
-  - levelPaths: {fileID: 1484556448414648, guid: e4a08c336ae27b74683d866d84790d6e,
+  - segmentObject: {fileID: 1484556448414648, guid: e4a08c336ae27b74683d866d84790d6e,
       type: 3}
-    enemiesSets: {fileID: 1012099591629360, guid: 2edba0b4bdcf97746a2e01a736b78ff0,
+    enemySetObject: {fileID: 1012099591629360, guid: 2edba0b4bdcf97746a2e01a736b78ff0,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 3
-  - levelPaths: {fileID: 1851707588251104, guid: c0ea6a269618c6048b0bcce982fe2933,
+  - segmentObject: {fileID: 1851707588251104, guid: c0ea6a269618c6048b0bcce982fe2933,
       type: 3}
-    enemiesSets: {fileID: 1630987721866198, guid: 44456a0dd8e3fb84a953ccf3d17fb6bd,
+    enemySetObject: {fileID: 1630987721866198, guid: 44456a0dd8e3fb84a953ccf3d17fb6bd,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 3
-  - levelPaths: {fileID: 1634887306617830, guid: 6302ed67d92fb422cb30de6fc641a7c6,
+  - segmentObject: {fileID: 1634887306617830, guid: 6302ed67d92fb422cb30de6fc641a7c6,
       type: 3}
-    enemiesSets: {fileID: 1279729267008362, guid: 2bc0454bb9589499bb19a74ef4dc56ca,
+    enemySetObject: {fileID: 1279729267008362, guid: 2bc0454bb9589499bb19a74ef4dc56ca,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 3
+  references:
+    version: 2
+    RefIds: []

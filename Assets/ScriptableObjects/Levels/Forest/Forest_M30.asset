@@ -13,29 +13,44 @@ MonoBehaviour:
   m_Name: Forest_M30
   m_EditorClassIdentifier: 
   levelName: Mission 30
+  levelNameLocale:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   developerDescription: 
   beatGame: 0
   dontCountMilestone: 0
   bossFight: 0
   hudPath: {fileID: 5165634822946027408, guid: 020b5715ac1db1d4d86a05fee646f9d5, type: 3}
   levelsStates: 0
-  bgmStartLevel: 3
+  pathType: 128
   pathStart: {fileID: 1232418805373770, guid: 569b0bb5c7e414e9ab3348249377f412, type: 3}
   pathEnd: {fileID: 1286329887760718, guid: 062c131aff35dd94fbeafec0874a5848, type: 3}
   levelOffset: {x: -5, y: 0, z: -60}
   setLevelList:
-  - levelPaths: {fileID: 5177994808662653360, guid: b1f577d56da48d44497490ebb7bbf6c0,
+  - segmentObject: {fileID: 5177994808662653360, guid: b1f577d56da48d44497490ebb7bbf6c0,
       type: 3}
-    enemiesSets: {fileID: 3236185142192283304, guid: 356c5ae6897648240befa5aba9c24d21,
+    enemySetObject: {fileID: 3236185142192283304, guid: 356c5ae6897648240befa5aba9c24d21,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 3
-  - levelPaths: {fileID: 6383192021815801039, guid: 7f4448408801ecb4ebc270dce0926dbf,
+  - segmentObject: {fileID: 6383192021815801039, guid: 7f4448408801ecb4ebc270dce0926dbf,
       type: 3}
-    enemiesSets: {fileID: 6887085524903370446, guid: a7ddb957e1580e2458394163fccb462d,
+    enemySetObject: {fileID: 6887085524903370446, guid: a7ddb957e1580e2458394163fccb462d,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 3
-  - levelPaths: {fileID: 5158254885413817992, guid: 2b84bf3e902e50e4e8b8b8e8dddf4490,
+  - segmentObject: {fileID: 5158254885413817992, guid: 2b84bf3e902e50e4e8b8b8e8dddf4490,
       type: 3}
-    enemiesSets: {fileID: 3753097210904775580, guid: a1976f7c099df6a43963bdf5061f21df,
+    enemySetObject: {fileID: 3753097210904775580, guid: a1976f7c099df6a43963bdf5061f21df,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 3
+  references:
+    version: 2
+    RefIds: []

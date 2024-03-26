@@ -1,29 +1,33 @@
 ﻿using System.Threading.Tasks;
 using ImmersiveGames.ScenesManager.Transitions;
+using ImmersiveGames.StateManagers.Interfaces;
 using UnityEngine.SceneManagement;
 
-namespace ImmersiveGames.StateManager
+namespace ImmersiveGames.StateManagers
 {
     public abstract class GameState : IState
     {
         protected GameState(string currentStateName)
         {
             // ReSharper disable once VirtualMemberCallInConstructor
-            stateName = currentStateName;
+            StateName = currentStateName;
         }
         #region IState Interface
         
-        public string stateName { get; }
-        public bool stateInitialized { get; set; }
+        public string StateName { get;}
+        public bool StateInitialized { get; set; }
+
+        private bool _stateFinalization;
+        public bool StateFinalization { get; set; }
 
         public async Task EnterAsync(IState previousState)
         {
-            if (!stateInitialized)
+            if (!StateInitialized)
             {
-                stateInitialized = true;
+                StateInitialized = true;
             }
 
-            var transitionOut = outTransition;
+            var transitionOut = OutTransition;
 
             if (transitionOut != null)
             {
@@ -31,15 +35,17 @@ namespace ImmersiveGames.StateManager
             }
             
             await OnEnter(previousState).ConfigureAwait(false);
+            StateFinalization = true;
         }
 
         public abstract void UpdateState();
 
         public async Task ExitAsync()
         {
+            StateFinalization = false;
             await OnExit().ConfigureAwait(false);
             
-            var transitionIn = inTransition;
+            var transitionIn = InTransition;
             if (transitionIn != null)
             {
                 await transitionIn.InTransitionAsync().ConfigureAwait(false);
@@ -50,17 +56,17 @@ namespace ImmersiveGames.StateManager
 
         #region Scene Change
 
-        public abstract bool requiresSceneLoad { get; }
-        public abstract string sceneName  { get; }
-        public abstract LoadSceneMode loadMode { get; }
-        public abstract bool unLoadAdditiveScene { get; }
+        public abstract bool RequiresSceneLoad { get; }
+        public abstract string SceneName  { get; }
+        public abstract LoadSceneMode LoadMode { get; }
+        public abstract bool UnLoadAdditiveScene { get; }
 
         #endregion
 
         #region Transitions
 
-        public abstract ITransition inTransition { get; }
-        public abstract ITransition outTransition { get; }
+        public abstract ITransition InTransition { get; }
+        public abstract ITransition OutTransition { get; }
         #endregion
         
         
@@ -80,5 +86,14 @@ namespace ImmersiveGames.StateManager
         }
 
         #endregion
+    }
+
+    public enum StatesNames
+    {
+        GameStateBriefingRoom,
+        GameStateMenuInicial,
+        GameStateOpenGame,
+        GameStatePause,
+        GameStatePlay
     }
 }

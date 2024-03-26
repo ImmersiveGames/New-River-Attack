@@ -16,7 +16,7 @@ namespace RiverAttack
             GameManager.instance.inputSystem.UiControls.Enable();
             GameManager.instance.inputSystem.BriefingRoom.Disable();
             PlayerManager.instance.ActivePlayers(false);
-            GameAudioManager.instance.ChangeBGM(LevelTypes.Menu, TIME_TO_FADE_BGM);
+            GameAudioManager.instance.ChangeBGM(BgmTypes.Menu, TIME_TO_FADE_BGM);
         }
         public override void UpdateState()
         {

@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using ImmersiveGames.StateManager.States;
+using ImmersiveGames.StateManagers.States;
 using UnityEngine;
 
 namespace ImmersiveGames.Test

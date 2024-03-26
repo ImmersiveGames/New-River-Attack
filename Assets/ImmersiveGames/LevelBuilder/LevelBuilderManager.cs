@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ImmersiveGames.StateManagers;
 using UnityEngine;
 using ImmersiveGames.Utils;
 
@@ -6,11 +7,10 @@ namespace ImmersiveGames.LevelBuilder
 {
     public class LevelBuilderManager : MonoBehaviour
     {
-        public ScenarioObjectData[] scenarioObjects;
-        public GameObject initialSegmentPrefab;
-        public GameObject finalSegmentPrefab;
         public Transform spawnPoint;
         public int startNumOfSegments = 5;
+        public int maxBehindActive = 2;
+        public int maxSegmentsInFront = 2;
         public Vector3 offset;
 
         [SerializeField] private List<ScenarioObjectData> activeObjects = new List<ScenarioObjectData>();
@@ -18,26 +18,18 @@ namespace ImmersiveGames.LevelBuilder
         private bool _initialSegmentInstantiated;
         
         private GameObject _setsContainer;
+        [SerializeField] private LevelData levelData;
 
         private void Start()
         {
-            InitialSegment();
-            
-            // Criar container para os sets
-            _setsContainer = new GameObject("Sets Container")
-            {
-                transform =
-                {
-                    parent = transform
-                }
-            };
-
-            // Instanciar os objetos do cenário
-            AddNextSegment(startNumOfSegments);
+            if(InitializationManager.StateManager == null)
+                StartToBuild(levelData);
         }
 
         private void Update()
         {
+            if(InitializationManager.StateManager != null) return;
+            
             if (Input.GetKeyDown(KeyCode.A))
             {
                 AddNextSegment(1);
@@ -50,21 +42,35 @@ namespace ImmersiveGames.LevelBuilder
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                var randomZPosition = Random.Range(0, 1000); // Altere os valores conforme necessário
-                var segmentAtPosition = FindSegmentAtPosition(randomZPosition);
-                Debug.Log(segmentAtPosition != null
-                    ? $"Posição Z procurada: {randomZPosition}, Objeto encontrado: {segmentAtPosition.name}"
-                    : $"Posição Z procurada: {randomZPosition}, Nenhum objeto encontrado.");
+                var randomZPosition = Random.Range(0, activeObjects[^1].absolutePosition+100); // Altere os valores conforme necessário
+                OptimizeSegments(randomZPosition);
             }
         }
 
-        private void InitialSegment()
+        public void StartToBuild(LevelData data)
+        {
+            InitialSegment(data.pathStart);
+            
+            // Criar container para os sets
+            _setsContainer = new GameObject(data.name)
+            {
+                transform =
+                {
+                    parent = transform
+                }
+            };
+
+            // Instanciar os objetos do cenário
+            AddNextSegment(startNumOfSegments);
+        }
+
+        private void InitialSegment(GameObject pathStart)
         {
             var spawnPosition = spawnPoint.position;
 
             // Instanciar o segmento inicial se ainda não foi instanciado
-            if (_initialSegmentInstantiated || initialSegmentPrefab == null) return;
-            _initialSegmentObject = Instantiate(initialSegmentPrefab, spawnPosition, Quaternion.identity);
+            if (_initialSegmentInstantiated || pathStart == null) return;
+            _initialSegmentObject = Instantiate(pathStart, spawnPosition, Quaternion.identity);
             var initialSegmentBounds = CalculateRealLength.GetBounds(_initialSegmentObject);
             var initialSegmentLength = initialSegmentBounds.size.z; // Acessar tamanho no eixo Z
             var initialSegmentPosition = spawnPosition - Vector3.forward * initialSegmentLength + offset;
@@ -74,7 +80,7 @@ namespace ImmersiveGames.LevelBuilder
 
         private void AddNextSegment(int count)
         {
-            if (count <= 0 || scenarioObjects.Length - activeObjects.Count < count)
+            if (count <= 0 || levelData.setLevelList.Count - activeObjects.Count < count)
             {
                 Debug.LogWarning("Quantidade de segmentos a adicionar inválida.");
                 return;
@@ -85,7 +91,7 @@ namespace ImmersiveGames.LevelBuilder
 
                 var index = activeObjects.Count; // Próximo índice é o tamanho atual da lista
                 var segmentPrefab =
-                    scenarioObjects[index]
+                    levelData.setLevelList[index]
                         .segmentObject; // Alteração 3: Usar o objeto de segmento do ScenarioObjectData
                 var newSegment = Instantiate(segmentPrefab, Vector3.zero, Quaternion.identity, transform);
 
@@ -117,10 +123,10 @@ namespace ImmersiveGames.LevelBuilder
 
                 GameObject enemySetInstance = null;
                 // Verificar se o conjunto de inimigos existe
-                if (scenarioObjects[index].enemySetObject != null)
+                if (levelData.setLevelList[index].enemySetObject != null)
                 {
                     // Instanciar o conjunto de inimigos na mesma posição e rotação do segmento
-                    enemySetInstance = Instantiate(scenarioObjects[index].enemySetObject,
+                    enemySetInstance = Instantiate(levelData.setLevelList[index].enemySetObject,
                         newSegment.transform.position, newSegment.transform.rotation, _setsContainer.transform);
                     enemySetInstance.SetActive(true);
                 }
@@ -135,19 +141,19 @@ namespace ImmersiveGames.LevelBuilder
             }
 
             // Instanciar o segmento final no fim do último segmento
-            if (activeObjects.Count >= scenarioObjects.Length && finalSegmentPrefab != null && activeObjects.Count > 0)
+            if (activeObjects.Count >= levelData.setLevelList.Count && levelData.pathEnd != null && activeObjects.Count > 0)
             {
-                FinalSegment();
+                FinalSegment(levelData.pathEnd);
             }
         }
 
 
-        private void FinalSegment()
+        private void FinalSegment(GameObject endPath)
         {
             var lastSegment = activeObjects[^1].segmentObject;
             var lastSegmentBounds = CalculateRealLength.GetBounds(lastSegment);
             var lastSegmentLength = lastSegmentBounds.size.z;
-            var finalSegmentInstance = Instantiate(finalSegmentPrefab,
+            var finalSegmentInstance = Instantiate(endPath,
                 lastSegment.transform.position + Vector3.forward * lastSegmentLength,
                 Quaternion.identity);
         }
@@ -166,7 +172,8 @@ namespace ImmersiveGames.LevelBuilder
                 return;
             }
 
-            for (int i = startIndex; i < startIndex + count; i++)
+            // Percorrer a lista de trás para frente ao remover os segmentos
+            for (var i = startIndex + count - 1; i >= startIndex; i--)
             {
                 RemoveSegment(i);
             }
@@ -194,24 +201,75 @@ namespace ImmersiveGames.LevelBuilder
 
             // Remover da lista de objetos ativos
             activeObjects.RemoveAt(index);
+
+            if (_initialSegmentInstantiated && _initialSegmentObject != null)
+            {
+                _initialSegmentInstantiated = false;
+                Destroy(_initialSegmentObject);
+                _initialSegmentObject = null;
+            }
         }
-
-
-        private GameObject FindSegmentAtPosition(int zPosition)
+        private ScenarioObjectData? FindSegmentAtPosition(float zPosition)
         {
-            GameObject closestSegment = null;
+            Debug.Log("Procurando segmento na posição Z: " + zPosition);
+
+            ScenarioObjectData? closestData = null;
             var closestDistance = float.MaxValue;
 
             foreach (var data in activeObjects)
             {
                 var distance = Mathf.Abs(data.absolutePosition - zPosition);
+                Debug.Log("Segmento analisado: " + data.segmentObject.name + ", distância: " + distance);
+
                 if (!(distance < closestDistance)) continue;
-                closestSegment = data.segmentObject;
+                closestData = data;
                 closestDistance = distance;
             }
 
-            return closestSegment;
+            Debug.Log("Segmento mais próximo encontrado: " + (closestData?.segmentObject.name ?? "nenhum"));
+
+            return closestData;
         }
+
+        
+        public void OptimizeSegments(float position)
+        {
+            Debug.Log("Otimizando segmentos com base na posição Z: " + position);
+
+            // Encontrar o segmento ativo
+            var activeSegment = FindSegmentAtPosition(position);
+            if (activeSegment == null)
+            {
+                Debug.Log("Segmento ativo encontrado: nenhum");
+                return;
+            }
+            var activeSegmentIndex = activeObjects.IndexOf((ScenarioObjectData)activeSegment);
+
+            
+            Debug.Log("Índice do segmento ativo: " + activeSegmentIndex);
+            
+            // Desativar segmentos atrás do ativo
+            var segmentsToRemoveCount = Mathf.Max(0, activeSegmentIndex - maxBehindActive);
+            if (segmentsToRemoveCount > 0)
+            {
+                RemoveSegments(0, segmentsToRemoveCount);
+            }
+            Debug.Log("Índice do segmento para remover: " + segmentsToRemoveCount);
+
+            // Calcular a quantidade de segmentos a serem instanciados à frente
+            var maxScenarioObjects = maxBehindActive + maxSegmentsInFront + 1;
+            var segmentsToInstantiateFront = Mathf.Clamp(
+                maxSegmentsInFront - (activeObjects.Count - activeSegmentIndex), // Ajusta para considerar segmentos já instanciados
+                0,
+                maxScenarioObjects - activeObjects.Count);
+            Debug.Log("Índice do segmento para Adicionar: " + segmentsToInstantiateFront);
+            // Instanciar os segmentos à frente
+            if (segmentsToInstantiateFront > 0)
+            {
+                AddNextSegment(segmentsToInstantiateFront);
+            }
+        }
+
 
         // Função para remover os inimigos de forma segura
         private void CleanupEnemies(GameObject enemySetToRemove)
@@ -234,7 +292,7 @@ namespace ImmersiveGames.LevelBuilder
             }
 
             // **Comentário:** Essa lógica está comentada pois os scripts de comportamento dos inimigos ainda não foram implementados.
-            // **Lembre-se:** Descomente o código quando os scripts de comportamento dos inimigos estiverem prontos.
+            // **Lembre-se:** Descomete o código quando os scripts de comportamento dos inimigos estiverem prontos.
         }
     }
 }

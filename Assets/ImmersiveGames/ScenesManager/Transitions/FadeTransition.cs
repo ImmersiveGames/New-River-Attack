@@ -11,13 +11,13 @@ namespace ImmersiveGames.ScenesManager.Transitions
         {
             // Implement your fade-in or fade-out logic here
             DebugManager.Log("Performing fade IN transition");
-            await FadeManager.instance.FadeInAsync().ConfigureAwait(false);
+            await FadeManager.Instance.FadeInAsync().ConfigureAwait(false);
         }
         public async Task OutTransitionAsync()
         {
             // Implement your fade-in or fade-out logic here
             DebugManager.Log("Performing fade Out transition");
-            await FadeManager.instance.FadeOutAsync().ConfigureAwait(false);
+            await FadeManager.Instance.FadeOutAsync().ConfigureAwait(false);
         }
 
         public static IEnumerator Fade(CanvasGroup canvasGroup, bool fadeIn, float fadeDuration)

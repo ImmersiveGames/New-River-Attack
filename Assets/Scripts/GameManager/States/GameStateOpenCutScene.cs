@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using Unity.VisualScripting;
+
 namespace RiverAttack
 {
     public class GameStateOpenCutScene : GameState
@@ -8,7 +10,12 @@ namespace RiverAttack
         {
             var startLevel = GameManager.instance.GetLevel();
             //Debug.Log($"Start: {startLevel}");
-            var startBgm = startLevel.pathType;
+            var pathType = startLevel.pathType;
+            var startBgm = (BgmTypes)pathType;
+            if (pathType == LevelTypes.Multi)
+            {
+                startBgm = startLevel.setLevelList[0].bgmLevel;
+            }
             GameAudioManager.instance.ChangeBGM(startBgm, TIME_TO_FADE_BGM);
             yield return null;
         }

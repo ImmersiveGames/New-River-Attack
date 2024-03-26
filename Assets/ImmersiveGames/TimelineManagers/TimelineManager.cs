@@ -1,4 +1,5 @@
-﻿using ImmersiveGames.DebugManagers;
+﻿using System.Collections.Generic;
+using ImmersiveGames.DebugManagers;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -19,6 +20,23 @@ namespace ImmersiveGames.TimelineManagers
             if(startTimer >= 0)
                 _playableDirector.time = startTimer;
             _playableDirector.Play();
+        }
+        public bool TryPlayAnimation(float startTime)
+        {
+            if (_playableDirector == null)
+            {
+                DebugManager.LogError("TimelineManager: PlayableDirector is null.");
+                return false;
+            }
+
+            _playableDirector.Stop(); // Stop automatically pauses if it's playing
+            if (startTime >= 0)
+            {
+                _playableDirector.time = startTime;
+            }
+
+            _playableDirector.Play();
+            return true;
         }
 
         /*

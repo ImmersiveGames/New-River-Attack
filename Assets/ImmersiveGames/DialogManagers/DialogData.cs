@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine.Localization;
 
 namespace ImmersiveGames.DialogManagers
 {
     [Serializable]
-    public class DialogData
+    public struct DialogData
     {
-        public LocalizedString textDialog;
-        public float animationStartDialog;
+        public List<LocalizedString> sentences;
+        public float startTimeSentences;
+        public LocalizedString nameSpeaker;
     }
 }

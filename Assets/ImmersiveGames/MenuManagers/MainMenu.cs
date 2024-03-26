@@ -37,14 +37,14 @@ namespace ImmersiveGames.MenuManagers
             SetMenu(panelsMenuReferences);
             screenWash.gameObject.SetActive(activeScreenWash);
             ActivateMenu(0);
-            if(FadeManager.instance)
-                FadeManager.instance.EventFadeOutComplete += DeactivateScreenWash;
+            if(FadeManager.Instance)
+                FadeManager.Instance.EventFadeOutComplete += DeactivateScreenWash;
         }
 
         private void OnDisable()
         {
-            if(FadeManager.instance)
-                FadeManager.instance.EventFadeOutComplete -= DeactivateScreenWash;
+            if(FadeManager.Instance)
+                FadeManager.Instance.EventFadeOutComplete -= DeactivateScreenWash;
         }
         
         private void OnDestroy()

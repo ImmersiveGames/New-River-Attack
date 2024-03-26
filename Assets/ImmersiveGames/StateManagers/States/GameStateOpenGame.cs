@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ScenesManager.Transitions;
+using ImmersiveGames.StateManagers.Interfaces;
 using UnityEngine.SceneManagement;
 
-namespace ImmersiveGames.StateManager.States
+namespace ImmersiveGames.StateManagers.States
 {
     public class GameStateOpenGame : GameState
     {
@@ -11,13 +12,13 @@ namespace ImmersiveGames.StateManager.States
         {
         }
 
-        public override string sceneName => "GamePlayNovo";
-        public override bool requiresSceneLoad => true;
-        public override LoadSceneMode loadMode => LoadSceneMode.Single;
-        public override bool unLoadAdditiveScene => true;
+        public override string SceneName => "GamePlayNovo";
+        public override bool RequiresSceneLoad => true;
+        public override LoadSceneMode LoadMode => LoadSceneMode.Single;
+        public override bool UnLoadAdditiveScene => true;
 
-        public override ITransition inTransition => new FadeTransition();
-        public override ITransition outTransition => new FadeTransition();
+        public override ITransition InTransition => new FadeTransition();
+        public override ITransition OutTransition => new FadeTransition();
 
         protected override async Task OnEnter(IState previousState)
         {
@@ -29,7 +30,7 @@ namespace ImmersiveGames.StateManager.States
         public override void UpdateState()
         {
             // Lógica de atualização do estado de pausa
-            DebugManager.Log($"Update no estado de Abertura, initialized: {stateInitialized}");
+            DebugManager.Log($"Update no estado de Abertura, initialized: {StateInitialized}");
         }
 
         protected override async Task OnExit()

@@ -2,8 +2,10 @@
 using System.Linq;
 using ImmersiveGames.AudioEvents;
 using ImmersiveGames.DebugManagers;
+using ImmersiveGames.LevelBuilder;
 using ImmersiveGames.SaveManagers;
-using ImmersiveGames.StateManager;
+using ImmersiveGames.StateManagers;
+using ImmersiveGames.StateManagers.Interfaces;
 using ImmersiveGames.Utils;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -61,7 +63,7 @@ namespace ImmersiveGames
         // Adicione esta função para obter o AudioEvent com base no IState fornecido
         private static AudioEvent GetAudioEventForState(IState state, IEnumerable<MapAudioEvent> mapAudioEvent)
         {
-            return GetAudioEventForState(state.stateName, mapAudioEvent);
+            return GetAudioEventForState(state.StateName, mapAudioEvent);
             // Retorna null se não encontrar correspondência
         }
         private static AudioEvent GetAudioEventForState(string stateName, IEnumerable<MapAudioEvent> mapAudioEvent)
@@ -100,7 +102,7 @@ namespace ImmersiveGames
             var audioEventForState = GetAudioEventForState(state, _mapStateBgm);
             if (audioEventForState == null)
             {
-                DebugManager.Log($"Não Encontrou um audio relativo ao nome: {state.stateName}");
+                DebugManager.Log($"Não Encontrou um audio relativo ao nome: {state.StateName}");
             }
             // Se houver uma nova música para tocar, inicia a reprodução com uma transição suave (fade-in)
             if (audioEventForState != null)
@@ -114,5 +116,16 @@ namespace ImmersiveGames
     public enum AudioMixGroup
     {
         BgmVolume, SfxVolume
+    }
+
+    public enum BgmTypes
+    {
+        Menu, HUD, GameOver, Complete, Tutorial,
+        Grass = LevelTypes.Grass, 
+        Forest= LevelTypes.Forest, 
+        Swamp= LevelTypes.Swamp, 
+        Antique= LevelTypes.Antique, 
+        Desert= LevelTypes.Desert, 
+        Ice= LevelTypes.Ice, Boss = LevelTypes.Boss
     }
 }

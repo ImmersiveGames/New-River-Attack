@@ -13,28 +13,44 @@ MonoBehaviour:
   m_Name: Grass_River_M03
   m_EditorClassIdentifier: 
   levelName: Mission 03
+  levelNameLocale:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   developerDescription: 
   beatGame: 0
+  dontCountMilestone: 0
+  bossFight: 0
   hudPath: {fileID: 1754994762184901881, guid: 3b6e6e8db9e0b334c95f28559399cec0, type: 3}
-  levelIcon: {fileID: 0}
-  levelIconPos: {x: 0, y: 0, z: 0}
-  bgmStartLevel: 2
+  levelsStates: 0
+  pathType: 64
   pathStart: {fileID: 1339132488644018, guid: 718139ffc2722bd4081603a626c43f19, type: 3}
   pathEnd: {fileID: 1339132488644018, guid: 718139ffc2722bd4081603a626c43f19, type: 3}
   levelOffset: {x: -5, y: 0, z: -60}
   setLevelList:
-  - levelPaths: {fileID: 1263647256776012, guid: 80f5da4b2538bbb4d82d7de0a584a711,
+  - segmentObject: {fileID: 1263647256776012, guid: 80f5da4b2538bbb4d82d7de0a584a711,
       type: 3}
-    enemiesSets: {fileID: 1956114688062278, guid: f514198761b0b7c46abdb9475a109289,
+    enemySetObject: {fileID: 1956114688062278, guid: f514198761b0b7c46abdb9475a109289,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 2
-  - levelPaths: {fileID: 1144612125479296, guid: 8bdd06c0021eb514e9fdeac6c06c221d,
+  - segmentObject: {fileID: 1144612125479296, guid: 8bdd06c0021eb514e9fdeac6c06c221d,
       type: 3}
-    enemiesSets: {fileID: 1916333645939694, guid: 4214d17c206ce334bb5c306cff83bf55,
+    enemySetObject: {fileID: 1916333645939694, guid: 4214d17c206ce334bb5c306cff83bf55,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 2
-  - levelPaths: {fileID: 1031392107387084, guid: a2c4ef78182060142ab68daf22260746,
+  - segmentObject: {fileID: 1031392107387084, guid: a2c4ef78182060142ab68daf22260746,
       type: 3}
-    enemiesSets: {fileID: 1444343655088312, guid: c4c51086ac5de1c41916c4264122a12e,
+    enemySetObject: {fileID: 1444343655088312, guid: c4c51086ac5de1c41916c4264122a12e,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 2
+  references:
+    version: 2
+    RefIds: []

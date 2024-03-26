@@ -13,29 +13,44 @@ MonoBehaviour:
   m_Name: Forest_M28
   m_EditorClassIdentifier: 
   levelName: Mission 28
+  levelNameLocale:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   developerDescription: 
   beatGame: 0
   dontCountMilestone: 0
   bossFight: 0
   hudPath: {fileID: 5165634822946027408, guid: 020b5715ac1db1d4d86a05fee646f9d5, type: 3}
   levelsStates: 0
-  bgmStartLevel: 3
+  pathType: 128
   pathStart: {fileID: 1232418805373770, guid: 569b0bb5c7e414e9ab3348249377f412, type: 3}
   pathEnd: {fileID: 1232418805373770, guid: 569b0bb5c7e414e9ab3348249377f412, type: 3}
   levelOffset: {x: -5, y: 0, z: -60}
   setLevelList:
-  - levelPaths: {fileID: 107576491226867134, guid: b576d70700b1abe46962a50c107a399b,
+  - segmentObject: {fileID: 107576491226867134, guid: b576d70700b1abe46962a50c107a399b,
       type: 3}
-    enemiesSets: {fileID: 8352998727416648294, guid: 222830bd4d03616418d1db65905dc431,
+    enemySetObject: {fileID: 8352998727416648294, guid: 222830bd4d03616418d1db65905dc431,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 3
-  - levelPaths: {fileID: 6541838646009791550, guid: ae3628f7d77d9bb41a93ca39743a0806,
+  - segmentObject: {fileID: 6541838646009791550, guid: ae3628f7d77d9bb41a93ca39743a0806,
       type: 3}
-    enemiesSets: {fileID: 7528409343315552341, guid: 0cffbacbf9a3a8249ae11647cc973cc4,
+    enemySetObject: {fileID: 7528409343315552341, guid: 0cffbacbf9a3a8249ae11647cc973cc4,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 3
-  - levelPaths: {fileID: 4959578765370090279, guid: 7a385d26645d9c54bbebf3299779c12f,
+  - segmentObject: {fileID: 4959578765370090279, guid: 7a385d26645d9c54bbebf3299779c12f,
       type: 3}
-    enemiesSets: {fileID: 858913711836364310, guid: e38b7e138d814b64ca5becc103f03213,
+    enemySetObject: {fileID: 858913711836364310, guid: e38b7e138d814b64ca5becc103f03213,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 3
+  references:
+    version: 2
+    RefIds: []

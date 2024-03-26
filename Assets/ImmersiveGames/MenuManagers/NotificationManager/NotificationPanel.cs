@@ -1,6 +1,7 @@
 ﻿using System;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.InputManager;
+using ImmersiveGames.Utils;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,7 +20,7 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
 
         private Animator _animator;
         private AudioSource _audioSource;
-        protected NotificationData notificationData;
+        protected NotificationData NotificationData;
 
         private static readonly int OpenTrigger = Animator.StringToHash("OpenTrigger");
         private static readonly int CloseTrigger = Animator.StringToHash("CloseTrigger");
@@ -82,12 +83,12 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
             }
             else
             {
-                StartCoroutine(TogglePanelCoroutine(true));
+                StartCoroutine(PanelsHelper.TogglePanel(gameObject, openTimeDuration, closeTimeDuration, true));
                 
             }
 
             // Etapa 6: Armazenar dados da notificação
-            notificationData = new NotificationData
+            NotificationData = new NotificationData
             {
                 message = message,
                 confirmAction = onConfirm,
@@ -124,7 +125,7 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
             }
             else
             {
-                StartCoroutine(TogglePanelCoroutine(false));
+                StartCoroutine(PanelsHelper.TogglePanel(gameObject, openTimeDuration, closeTimeDuration, false));
             }
         }
         private void ButtonClose(InputAction.CallbackContext context)
@@ -139,7 +140,7 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
             confirmButton.onClick?.Invoke();
         }
         
-        private System.Collections.IEnumerator TogglePanelCoroutine(bool open)
+        /*private System.Collections.IEnumerator TogglePanelCoroutine(bool open)
         {
             var duration = open ? openTimeDuration : closeTimeDuration; // Duração da animação de entrada
             var initialScale = transform.localScale;
@@ -155,7 +156,7 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
             transform.localScale = targetScale; // Garante que a escala esteja exatamente como desejado no final da animação
             if (open) yield break;
             Destroy(gameObject);
-        }
+        }*/
 
         private System.Collections.IEnumerator DelayedDestroyCoroutine(float delay)
         {

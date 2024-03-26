@@ -10,7 +10,7 @@ namespace RiverAttack
         public override IEnumerator OnLoadState()
         {
             GameManager.instance.gameModes = GameManager.GameModes.Mission;
-            GameAudioManager.instance.ChangeBGM(LevelTypes.Hub, TIME_TO_FADE_BGM);
+            GameAudioManager.instance.ChangeBGM(BgmTypes.HUD, TIME_TO_FADE_BGM);
             yield return null;
         }
         public override void EnterState()

@@ -244,7 +244,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &168163313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,60 +257,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c23d26e7906b4f008318ae5456cbc918, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenarioObjects:
-  - segmentObject: {fileID: 1098899354938464, guid: ea661a18f5f7b4ad8b21e008955cfe1a,
-      type: 3}
-    enemySetObject: {fileID: 1753646910070318, guid: dbd148f1b6bceeb4585a728f1ea260e2,
-      type: 3}
-    spawnDistance: 0
-  - segmentObject: {fileID: 1383632902568538, guid: 2ad6061eb73bf4dc4a7cb82f6602a230,
-      type: 3}
-    enemySetObject: {fileID: 1876523743882564, guid: d33a2f19d5f11d84eab56d93aa130332,
-      type: 3}
-    spawnDistance: 0
-  - segmentObject: {fileID: 1058777658038798, guid: 733a7db89988f4a468e8f9418f7fdb15,
-      type: 3}
-    enemySetObject: {fileID: 1281247228299778, guid: 5aadde66a9e7aaf459fe35e0565a1fbf,
-      type: 3}
-    spawnDistance: 0
-  - segmentObject: {fileID: 1567066370784176, guid: aedd9d3ab88b1b744a63c26ffbdd2afb,
-      type: 3}
-    enemySetObject: {fileID: 1410920618176920, guid: 6a1ae6408845e6446be5cefb43b8c1a5,
-      type: 3}
-    spawnDistance: 0
-  - segmentObject: {fileID: 1968442786654106, guid: 9e8bcd366fca6f74f96d72a96e7e4b99,
-      type: 3}
-    enemySetObject: {fileID: 1197306044004614, guid: af5abb85864545b4a9923cf79d4782c5,
-      type: 3}
-    spawnDistance: 0
-  - segmentObject: {fileID: 1234775519137096, guid: 99bf9788b2cfaa2428f87ce33382ead9,
-      type: 3}
-    enemySetObject: {fileID: 1767837324101830, guid: 42cedfda3f797944a85be3203ede0f15,
-      type: 3}
-    spawnDistance: 0
-  - segmentObject: {fileID: 1263647256776012, guid: 80f5da4b2538bbb4d82d7de0a584a711,
-      type: 3}
-    enemySetObject: {fileID: 1956114688062278, guid: f514198761b0b7c46abdb9475a109289,
-      type: 3}
-    spawnDistance: 0
-  - segmentObject: {fileID: 1144612125479296, guid: 8bdd06c0021eb514e9fdeac6c06c221d,
-      type: 3}
-    enemySetObject: {fileID: 1916333645939694, guid: 4214d17c206ce334bb5c306cff83bf55,
-      type: 3}
-    spawnDistance: 0
-  - segmentObject: {fileID: 1031392107387084, guid: a2c4ef78182060142ab68daf22260746,
-      type: 3}
-    enemySetObject: {fileID: 1444343655088312, guid: c4c51086ac5de1c41916c4264122a12e,
-      type: 3}
-    spawnDistance: 0
-  initialSegmentPrefab: {fileID: 1946683792779209864, guid: 576b41793d6f8c843b1a11dc03e09f1d,
-    type: 3}
-  finalSegmentPrefab: {fileID: 1946683792779209864, guid: 576b41793d6f8c843b1a11dc03e09f1d,
-    type: 3}
   spawnPoint: {fileID: 168163314}
-  maxScenarioObjects: 5
-  offset: {x: 0, y: 0, z: 0}
+  startNumOfSegments: 5
+  maxBehindActive: 2
+  maxSegmentsInFront: 2
+  offset: {x: -5, y: 0, z: 0}
   activeObjects: []
+  levelData: {fileID: 11400000, guid: a2a5bf96f300f1546ac4f7b9acc6a149, type: 2}
 --- !u!4 &168163314
 Transform:
   m_ObjectHideFlags: 0
@@ -698,7 +651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63345e81fa94d46aa225b2095185815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1410753801284338, guid: 5cd0afd57133e5242990ac25fd970867, type: 3}
+  prefab: {fileID: 1031392107387084, guid: a2c4ef78182060142ab68daf22260746, type: 3}
 --- !u!4 &1011241118
 Transform:
   m_ObjectHideFlags: 0
@@ -1265,7 +1218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &2576194847161804580
 AudioSource:
   m_ObjectHideFlags: 0

@@ -2,9 +2,10 @@
 using System.Threading.Tasks;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ScenesManager;
+using ImmersiveGames.StateManagers.Interfaces;
 using ImmersiveGames.Utils;
 
-namespace ImmersiveGames.StateManager
+namespace ImmersiveGames.StateManagers
 {
     public class StateManager
     {
@@ -14,20 +15,20 @@ namespace ImmersiveGames.StateManager
 
         public void AddState(IState state)
         {
-            _states[state.stateName] = state;
+            _states[state.StateName] = state;
         }
 
         public async Task ChangeStateAsync(string stateName)
         {
             if (!_states.TryGetValue(stateName, out var nextState))
             {
-                DebugManager.LogError($"Estado não encontrado: {stateName}");
+                DebugManager.LogError($"[StateManager] Estado não encontrado: {stateName}");
                 return;
             }
 
             if (nextState == _currentState)
             {
-                DebugManager.Log($"Já está no estado: {stateName}");
+                DebugManager.Log($"[StateManager] Já está no estado: {stateName}");
                 return;
             }
             MainThreadTaskExecutor.RunOnMainThread(() =>
@@ -44,15 +45,15 @@ namespace ImmersiveGames.StateManager
             _currentState = nextState;
 
             // Adicionamos uma condição para verificar se há uma transição de cena necessária
-            if (_currentState.requiresSceneLoad && !string.IsNullOrEmpty(_currentState.sceneName))
+            if (_currentState.RequiresSceneLoad && !string.IsNullOrEmpty(_currentState.SceneName))
             {
                 // Agora, esperamos que a transição de cena seja concluída antes de prosseguir
-                await SceneChangeManager.StartSceneTransitionAsync(_currentState, _previousState?.sceneName, _currentState.loadMode, _currentState.unLoadAdditiveScene).ConfigureAwait(false);
+                await SceneChangeManager.StartSceneTransitionAsync(_currentState, _previousState?.SceneName, _currentState.LoadMode, _currentState.UnLoadAdditiveScene).ConfigureAwait(false);
             }
             
             await _currentState.EnterAsync(_previousState).ConfigureAwait(false);
 
-            DebugManager.Log($"Mudou para o estado: {stateName}");
+            DebugManager.Log($"[StateManager] Mudou para o estado: {stateName}");
         }
 
         public IState GetCurrentState()
