@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using ImmersiveGames.DebugManagers;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -34,7 +33,7 @@ namespace ImmersiveGames.AudioEvents
         {
             if (audioSample?.audioClip == null || monoBehaviour == null)
             {
-                DebugManager.LogError("Audio clip not assigned or MonoBehaviour not set in AudioEvent.");
+                DebugManager.LogError<AudioEvent>("Audio clip not assigned or MonoBehaviour not set in AudioEvent.");
                 return;
             }
 
@@ -47,7 +46,7 @@ namespace ImmersiveGames.AudioEvents
             else
             {
                 SetupSource(source);
-                _cachedMonoBehaviour.StartCoroutine(FadeAudio(source, fadeTime, 0f, getVolume));
+                _cachedMonoBehaviour.StartCoroutine(FadeAudio(source, fadeTime, 0f, GetVolume));
                 source.Play();
             }
         }
@@ -64,14 +63,14 @@ namespace ImmersiveGames.AudioEvents
             source.Play();
 
             // Fade in da nova música
-            yield return _cachedMonoBehaviour.StartCoroutine(FadeAudio(source, fadeTime, 0f, getVolume));
+            yield return _cachedMonoBehaviour.StartCoroutine(FadeAudio(source, fadeTime, 0f, GetVolume));
         }
 
         public override void PlayOnShot(AudioSource source)
         {
             if (audioSample.audioClip == null) return;
             if (audioMixerGroup != null) source.outputAudioMixerGroup = audioMixerGroup;
-            source.PlayOneShot(audioSample.audioClip, getVolume);
+            source.PlayOneShot(audioSample.audioClip, GetVolume);
         }
 
         public override void Stop(AudioSource source, MonoBehaviour monoBehaviour, float fadeTime = 1.0f)
@@ -109,16 +108,16 @@ namespace ImmersiveGames.AudioEvents
         {
             source.outputAudioMixerGroup = audioMixerGroup;
             source.clip = audioSample.audioClip;
-            source.volume = getVolume;
-            source.pitch = getPitch;
+            source.volume = GetVolume;
+            source.pitch = GetPitch;
             source.loop = audioSample.loop;
         }
 
-        private float getVolume => Random.Range(audioSample.volume.x, audioSample.volume.y);
+        private float GetVolume => Random.Range(audioSample.volume.x, audioSample.volume.y);
 
-        private float getPitch => Random.Range(audioSample.pitch.x, audioSample.pitch.y);
+        private float GetPitch => Random.Range(audioSample.pitch.x, audioSample.pitch.y);
 
-        public void Cleanup()
+        private void Cleanup()
         {
             // Limpar o cache do MonoBehaviour
             if (_cachedMonoBehaviour == null) return;

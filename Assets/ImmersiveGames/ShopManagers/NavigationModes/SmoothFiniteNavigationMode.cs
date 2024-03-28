@@ -19,7 +19,7 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
                     monoBehaviour.StartCoroutine(MoveToPosition(content, forward, content.childCount));
                     break;
                 case true:
-                    DebugManager.LogWarning("Uma movimentação já está em andamento. Aguarde até que termine.");
+                    DebugManager.LogWarning<SmoothFiniteNavigationMode>("Uma movimentação já está em andamento. Aguarde até que termine.");
                     break;
             }
         }
@@ -27,7 +27,7 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
         private IEnumerator MoveToPosition(RectTransform content, bool forward, int totalItems)
         {
             _isMoving = true;
-            DebugManager.Log("Iniciando movimento.");
+            DebugManager.Log<SmoothFiniteNavigationMode>("Iniciando movimento.");
             var rect = content.anchoredPosition;
             var childCount = totalItems;
             var moveAmount = content.rect.width / childCount;
@@ -55,7 +55,7 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
             content.anchoredPosition = rect;
 
             _isMoving = false;
-            DebugManager.Log("Movimento concluído.");
+            DebugManager.Log<SmoothFiniteNavigationMode>("Movimento concluído.");
 
             var selectedIndex = CalculateSelectedItemIndex(content, forward);
             UpdateSelectedItem(content, selectedIndex);

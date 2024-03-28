@@ -24,13 +24,13 @@ namespace ImmersiveGames.DialogManagers.Test
         
         private void InputExitDialogCancel(InputAction.CallbackContext context)
         {
-            DebugManager.Log($"Cancelou o Botão B");
+            DebugManager.Log<TestBriefingRoom>($"Cancelou o Botão B");
      
         }
         private void InputExitDialog(InputAction.CallbackContext context)
         {
 
-            DebugManager.Log($"iniciou o Botão B");
+            DebugManager.Log<TestBriefingRoom>($"iniciou o Botão B");
 
         }
     }

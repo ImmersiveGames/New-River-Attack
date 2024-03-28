@@ -32,7 +32,7 @@ namespace ImmersiveGames.ScenesManager
             _canvasGroup = GetComponent<CanvasGroup>();
             if (_canvasGroup == null)
             {
-                DebugManager.LogError("[FadeManager]: CanvasGroup not found on the object.");
+                DebugManager.LogError<FadeManager>("CanvasGroup not found on the object.");
             }
         }
 
@@ -45,7 +45,7 @@ namespace ImmersiveGames.ScenesManager
             }
             else
             {
-                DebugManager.LogError("[FadeManager]: CanvasGroup not found on the object.");
+                DebugManager.LogError<FadeManager>("CanvasGroup not found on the object.");
             }
         }
 
@@ -58,7 +58,7 @@ namespace ImmersiveGames.ScenesManager
             }
             else
             {
-                DebugManager.LogError("[FadeManager]: CanvasGroup not found on the object.");
+                DebugManager.LogError<FadeManager>(" CanvasGroup not found on the object.");
             }
         }
 
@@ -95,13 +95,13 @@ namespace ImmersiveGames.ScenesManager
         private void OnEventOutComplete()
         {
             EventFadeOutComplete?.Invoke();
-            DebugManager.Log("[FadeManager] Complete Fade out");
+            DebugManager.Log<FadeManager>("Complete Fade out");
         }
 
         private void OnEventFadeInStart()
         {
             EventFadeInStart?.Invoke();
-            DebugManager.Log("[FadeManager] Start Fade in");
+            DebugManager.Log<FadeManager>("Start Fade in");
         }
     }
 }

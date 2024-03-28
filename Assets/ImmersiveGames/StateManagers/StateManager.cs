@@ -22,13 +22,13 @@ namespace ImmersiveGames.StateManagers
         {
             if (!_states.TryGetValue(stateName, out var nextState))
             {
-                DebugManager.LogError($"[StateManager] Estado não encontrado: {stateName}");
+                DebugManager.LogError<StateManager>($"Estado não encontrado: {stateName}");
                 return;
             }
 
             if (nextState == _currentState)
             {
-                DebugManager.Log($"[StateManager] Já está no estado: {stateName}");
+                DebugManager.Log<StateManager>($"Já está no estado: {stateName}");
                 return;
             }
             MainThreadTaskExecutor.RunOnMainThread(() =>
@@ -53,7 +53,7 @@ namespace ImmersiveGames.StateManagers
             
             await _currentState.EnterAsync(_previousState).ConfigureAwait(false);
 
-            DebugManager.Log($"[StateManager] Mudou para o estado: {stateName}");
+            DebugManager.Log<StateManager>($"Mudou para o estado: {stateName}");
         }
 
         public IState GetCurrentState()

@@ -16,7 +16,7 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
         {
             if (_isMoving)
             {
-                DebugManager.LogWarning("Uma movimentação já está em andamento. Aguarde até que termine.");
+                DebugManager.LogWarning<SmoothInfiniteNavigationMode>("Uma movimentação já está em andamento. Aguarde até que termine.");
                 return;
             }
 
@@ -34,7 +34,7 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
         private IEnumerator MoveSmoothly(RectTransform content, bool forward)
         {
             _isMoving = true;
-            DebugManager.Log("Iniciando movimento suave.");
+            DebugManager.Log<SmoothInfiniteNavigationMode>("Iniciando movimento suave.");
 
             var rect = content.anchoredPosition;
             var childCount = content.childCount;
@@ -62,7 +62,7 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
             content.anchoredPosition = rect;
 
             _isMoving = false;
-            DebugManager.Log("Movimento suave concluído.");
+            DebugManager.Log<SmoothInfiniteNavigationMode>("Movimento suave concluído.");
 
             // Calcula o índice do item centralizado após o movimento
             var selectedIndex = CalculateSelectedItemIndex(content, forward);

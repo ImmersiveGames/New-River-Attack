@@ -25,7 +25,7 @@ namespace ImmersiveGames.TimelineManagers
         {
             if (_playableDirector == null)
             {
-                DebugManager.LogError("TimelineManager: PlayableDirector is null.");
+                DebugManager.LogError<TimelineManager>("TimelineManager: PlayableDirector is null.");
                 return false;
             }
 
@@ -47,7 +47,7 @@ namespace ImmersiveGames.TimelineManagers
         {
             if (animator == null)
             {
-                DebugManager.LogError("Animator is null. Cannot change binding reference.");
+                DebugManager.LogError<TimelineManager>("Animator is null. Cannot change binding reference.");
                 return;
             }
 

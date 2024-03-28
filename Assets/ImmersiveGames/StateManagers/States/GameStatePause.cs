@@ -22,20 +22,20 @@ namespace ImmersiveGames.StateManagers.States
         {
             // Lógica específica ao entrar no estado de pausa
             await base.OnEnter(previousState).ConfigureAwait(false);
-            DebugManager.Log("Entrou no estado de pausa");
+            DebugManager.Log<GameStatePause>("Entrou no estado de pausa");
         }
 
         public override void UpdateState()
         {
             // Lógica de atualização do estado de pausa
-            DebugManager.Log($"Update no estado de pausa, initialized: {StateInitialized}");
+            DebugManager.Log<GameStatePause>($"Update no estado de pausa, initialized: {StateInitialized}");
         }
 
         protected override async Task OnExit()
         {
             // Lógica específica ao sair do estado de pausa em outras threads
             await base.OnExit().ConfigureAwait(false);
-            DebugManager.Log("Saiu do estado de pausa");
+            DebugManager.Log<GameStatePause>("Saiu do estado de pausa");
         }
         
     }

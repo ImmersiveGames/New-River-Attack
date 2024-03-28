@@ -4,7 +4,6 @@ using ImmersiveGames.AudioEvents;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.LevelBuilder;
 using ImmersiveGames.SaveManagers;
-using ImmersiveGames.StateManagers;
 using ImmersiveGames.StateManagers.Interfaces;
 using ImmersiveGames.Utils;
 using UnityEngine;
@@ -77,7 +76,7 @@ namespace ImmersiveGames
             var audioEventForState = GetAudioEventForState(stateName, _mapMenuSfx);
             if (audioEventForState == null)
             {
-                DebugManager.Log($"Não Encontrou um audio relativo ao nome: {stateName}");
+                DebugManager.Log<AudioManager>($"Não Encontrou um audio relativo ao nome: {stateName}");
                 return;
             }
             audioEventForState.PlayOnShot(_sfxAudioSource);
@@ -102,7 +101,7 @@ namespace ImmersiveGames
             var audioEventForState = GetAudioEventForState(state, _mapStateBgm);
             if (audioEventForState == null)
             {
-                DebugManager.Log($"Não Encontrou um audio relativo ao nome: {state.StateName}");
+                DebugManager.Log<AudioManager>($"Não Encontrou um audio relativo ao nome: {state.StateName}");
             }
             // Se houver uma nova música para tocar, inicia a reprodução com uma transição suave (fade-in)
             if (audioEventForState != null)

@@ -66,7 +66,7 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
             // Etapa 3: Verificar se o botão de fechar está presente
             if (closeButton == null)
             {
-                Debug.LogError("CloseButton is missing!");
+                DebugManager.LogError<NotificationPanel>("CloseButton is missing!");
                 return; // Abort the Show method if closeButton is missing
             }
 
@@ -130,33 +130,15 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
         }
         private void ButtonClose(InputAction.CallbackContext context)
         {
-            DebugManager.Log("Close Button action performed!");
+            DebugManager.Log<NotificationPanel>("Close Button action performed!");
             closeButton.onClick?.Invoke();
         }
         
         private void ButtonConfirm(InputAction.CallbackContext context)
         {
-            DebugManager.Log("Confirm Button action performed!");
+            DebugManager.Log<NotificationPanel>("Confirm Button action performed!");
             confirmButton.onClick?.Invoke();
         }
-        
-        /*private System.Collections.IEnumerator TogglePanelCoroutine(bool open)
-        {
-            var duration = open ? openTimeDuration : closeTimeDuration; // Duração da animação de entrada
-            var initialScale = transform.localScale;
-            var targetScale = open ? new Vector3(1f, 1f, 1f) : new Vector3(0f, 0f, 0f); // Escala desejada (normal)
-
-            var elapsedTime = 0f;
-            while (elapsedTime < duration)
-            {
-                transform.localScale = Vector3.Lerp(initialScale, targetScale, elapsedTime / duration);
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
-            transform.localScale = targetScale; // Garante que a escala esteja exatamente como desejado no final da animação
-            if (open) yield break;
-            Destroy(gameObject);
-        }*/
 
         private System.Collections.IEnumerator DelayedDestroyCoroutine(float delay)
         {

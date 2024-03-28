@@ -75,9 +75,9 @@ namespace ImmersiveGames.InputManager
             }
             else
             {
-                DebugManager.LogWarning($"Action Map '{actionMapName}' not found.");
+                DebugManager.LogWarning<ActionManager>($"Action Map '{actionMapName}' not found.");
             }
-            DebugManager.Log($"[Action Map] '{actionMapName}' Active.");
+            DebugManager.Log<ActionManager>($"[Action Map] '{actionMapName}' Active.");
         }
         
         #endregion
@@ -125,7 +125,7 @@ namespace ImmersiveGames.InputManager
         private void HandleSpecialAction(InputAction action, InputAction.CallbackContext context)
         {
             // Lógica específica para ação especial;
-            DebugManager.Log($"Special Action {action.name} Performed in context {context}");
+            DebugManager.Log<ActionManager>($"Special Action {action.name} Performed in context {context}");
         }
 
         private bool IsSpecialAction(InputAction action)
@@ -139,7 +139,7 @@ namespace ImmersiveGames.InputManager
             if (context.started)
             {
                 var completeName = action.name + "_Start";
-                DebugManager.Log($"Hold Action {completeName} Performed in Performed");
+                DebugManager.Log<ActionManager>($"Hold Action {completeName} Performed in Performed");
                 
                 ActionListeners.TryGetValue(completeName, out var listener);
                 if (listener != null)
@@ -153,7 +153,7 @@ namespace ImmersiveGames.InputManager
             if (context.canceled)
             {
                 var completeName = action.name + "_Cancel";
-                DebugManager.Log($"Hold Action {completeName} Performed in Cancel");
+                DebugManager.Log<ActionManager>($"Hold Action {completeName} Performed in Cancel");
                 
                 ActionListeners.TryGetValue(completeName, out var listener);
                 if (listener == null) return;

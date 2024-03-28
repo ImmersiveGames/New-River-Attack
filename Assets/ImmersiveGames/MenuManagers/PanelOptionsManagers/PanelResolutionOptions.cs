@@ -36,8 +36,8 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
                 : Array.IndexOf(_uniqueResolutions, _actualResolution));
 
             // Depuração para verificar resolução atual e resolução salva
-            DebugManager.Log("Resolução atual do sistema: " + Screen.currentResolution.width + " x " + Screen.currentResolution.height);
-            DebugManager.Log("Resolução salva: " + _actualResolution.width + " x " + _actualResolution.height);
+            DebugManager.Log<PanelResolutionOptions>("Resolução atual do sistema: " + Screen.currentResolution.width + " x " + Screen.currentResolution.height);
+            DebugManager.Log<PanelResolutionOptions>("Resolução salva: " + _actualResolution.width + " x " + _actualResolution.height);
         }
 
         private void InitializeDropdown(List<string> options)
@@ -66,7 +66,7 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
             SaveResolutionToOptions();
 
             // Depuração para verificar a resolução atual após a atualização
-            DebugManager.Log("Resolução atualizada: " + resolution.width + " x " + resolution.height);
+            DebugManager.Log<PanelResolutionOptions>("Resolução atualizada: " + resolution.width + " x " + resolution.height);
         }
 
         private static void SetResolution(Vector2Int dimension, FullScreenMode fullScreenMode)

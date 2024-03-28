@@ -74,7 +74,7 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
 
             LocalizationSettings.SelectedLocale = _gameOptionsSave.startLocale = locale;
 
-            DebugManager.Log($"Locale changed to: {locale.name}");
+            DebugManager.Log<PanelLanguagesOptions>($"Locale changed to: {locale.name}");
         }
     }
 }

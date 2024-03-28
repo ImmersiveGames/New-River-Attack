@@ -43,7 +43,7 @@ namespace ImmersiveGames.ShopManagers.SimpleShopping.Abstracts
 
         public void UpdateDisplays()
         {
-            DebugManager.Log("Updating Displays...");
+            DebugManager.Log<ShopProductSettings>("Updating Displays...");
             DisplayStock(_stockShop);
         }
 

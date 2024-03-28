@@ -26,7 +26,7 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
         private void OnDropdownChanged(int value)
         {
             UpdateFrameRate(frameRates[value]);
-            DebugManager.Log($"Taxa de quadros alterada para: {ActualFrameRate}");
+            DebugManager.Log<PanelFrameRateOptions>($"Taxa de quadros alterada para: {ActualFrameRate}");
         }
 
         // Método para preencher o dropdown com a lista de taxas de quadros.

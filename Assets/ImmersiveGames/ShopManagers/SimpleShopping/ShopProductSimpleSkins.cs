@@ -33,8 +33,8 @@ namespace ImmersiveGames.ShopManagers.SimpleShopping
         protected override void InteractableButtonBuy(IStockShop stockShop, int quantity)
         {
             var saveGameOptions = GameOptionsSave.instance;
-            DebugManager.Log($"[{stockShop.shopProduct.name}] Tem no stock: {stockShop.HaveInStock(quantity)}, " +
-                             $"Jogador Pode Comprar: {stockShop.PlayerCanBuy(saveGameOptions,quantity)}");
+            DebugManager.Log<ShopProductSimpleSkins>($"[{stockShop.shopProduct.name}] Tem no stock: {stockShop.HaveInStock(quantity)}, " +
+                                                     $"Jogador Pode Comprar: {stockShop.PlayerCanBuy(saveGameOptions,quantity)}");
             buttonBuy.GetComponentInChildren<TMP_Text>().color = textNormalColor;
             buttonBuy.GetComponentInChildren<LayoutElement>().GetComponent<Image>().color = textNormalColor;
             buttonBuy.onClick.RemoveAllListeners();
@@ -53,14 +53,14 @@ namespace ImmersiveGames.ShopManagers.SimpleShopping
             }
             buttonBuy.onClick.AddListener(() => BuyProduct(stockShop, quantity));
             
-            DebugManager.Log($"[{stockShop.shopProduct.name}] Tem no stock: {stockShop.HaveInStock(quantity)}, " +
-                             $"Jogador Pode Comprar: {stockShop.PlayerCanBuy(saveGameOptions,quantity)}");
+            DebugManager.Log<ShopProductSimpleSkins>($"[{stockShop.shopProduct.name}] Tem no stock: {stockShop.HaveInStock(quantity)}, " +
+                                                     $"Jogador Pode Comprar: {stockShop.PlayerCanBuy(saveGameOptions,quantity)}");
         }
         protected override void InteractableButtonUse(IStockShop stockShop, int quantity)
         {
             buttonUse.onClick.RemoveAllListeners();
             var interactable = stockShop?.shopProduct is IShopProductUsable;
-            DebugManager.Log("Use Button Interactable: " + interactable);
+            DebugManager.Log<ShopProductSimpleSkins>("Use Button Interactable: " + interactable);
             if (!interactable)
             {
                 buttonUse.interactable = false;
@@ -73,7 +73,7 @@ namespace ImmersiveGames.ShopManagers.SimpleShopping
             {
              //Aqui também é logica exclusiva para skins, para ampliar precisa modificar.
              buttonUse.GetComponentInChildren<TMP_Text>().text = textInUse.GetLocalizedString();
-             DebugManager.Log("Já possui e esta selecionado: " + stockShop.shopProduct.name);
+             DebugManager.Log<ShopProductSimpleSkins>("Já possui e esta selecionado: " + stockShop.shopProduct.name);
             }
             // No caso desta loja, não é possível comprar e usar ao mesmo tempo.
             buttonUse.onClick.AddListener(() => UseProduct(stockShop, quantity));
@@ -84,14 +84,14 @@ namespace ImmersiveGames.ShopManagers.SimpleShopping
             var saveGameOptions = GameOptionsSave.instance;
             if (saveGameOptions == null || stockShop?.shopProduct == null)
             {
-                DebugManager.LogWarning("Unable to buy product. Game options or stock shop is null.");
+                DebugManager.LogWarning<ShopProductSimpleSkins>("Unable to buy product. Game options or stock shop is null.");
                 return;
             }
 
             var price = stockShop.shopProduct.GetPrice() * quantity;
             if (saveGameOptions.wallet < price || !stockShop.HaveInStock(quantity) || !stockShop.PlayerCanBuy(saveGameOptions, quantity))
             {
-                DebugManager.LogWarning("Unable to buy product. Insufficient funds, out of stock, or cannot buy.");
+                DebugManager.LogWarning<ShopProductSimpleSkins>("Unable to buy product. Insufficient funds, out of stock, or cannot buy.");
                 return;
             }
 
@@ -107,14 +107,14 @@ namespace ImmersiveGames.ShopManagers.SimpleShopping
                 itemUse.Use(stockShop, quantity);
             }
             simpleShoppingManager.OnEventBuyProduct();
-            DebugManager.Log("Product purchased successfully.");
+            DebugManager.Log<ShopProductSimpleSkins>("Product purchased successfully.");
         }
         protected override void UseProduct(IStockShop stockShop, int quantity = 1)
         {
             if (stockShop?.shopProduct is not IShopProductUsable itemUse) return;
             itemUse.Use(stockShop, quantity);
             simpleShoppingManager.OnEventUseProduct(stockShop.shopProduct, quantity);
-            DebugManager.Log("Skin used successfully.");
+            DebugManager.Log<ShopProductSimpleSkins>("Skin used successfully.");
         }
     }
 }

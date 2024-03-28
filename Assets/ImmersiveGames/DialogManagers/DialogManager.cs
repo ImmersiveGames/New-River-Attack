@@ -88,14 +88,14 @@ namespace ImmersiveGames.DialogManagers
             // Verificação de índice do diálogo
             if (dialogIndex >= dialogDatas.Count)
             {
-                DebugManager.LogError("Índice de diálogo inválido: " + dialogIndex);
+                DebugManager.LogError<DialogManager>("Índice de diálogo inválido: " + dialogIndex);
                 return;
             }
 
             // Verificação de índice da frase
             if (sentenceIndex >= dialogDatas[dialogIndex].sentences.Count)
             {
-                DebugManager.LogError("Índice de frase inválido: " + sentenceIndex);
+                DebugManager.LogError<DialogManager>("Índice de frase inválido: " + sentenceIndex);
                 return;
             }
 
@@ -156,7 +156,7 @@ namespace ImmersiveGames.DialogManagers
             // Verificação de índice da frase
             if (_currentSentenceIndex >= dialogDatas[_currentDialogueIndex].sentences.Count)
             {
-                DebugManager.LogError("Índice de frase inválido: " + _currentSentenceIndex);
+                DebugManager.LogError<DialogManager>("Índice de frase inválido: " + _currentSentenceIndex);
                 return;
             }
             _typingCoroutine = StartCoroutine(TypeSentence(dialogDatas[_currentDialogueIndex].sentences[_currentSentenceIndex]));
@@ -170,7 +170,7 @@ namespace ImmersiveGames.DialogManagers
 
         private void EndDialogue()
         {
-            DebugManager.Log("Fim do diálogo!");
+            DebugManager.Log<DialogManager>("Fim do diálogo!");
             StopDialog();
         }
 

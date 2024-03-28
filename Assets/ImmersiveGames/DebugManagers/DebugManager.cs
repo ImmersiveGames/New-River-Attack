@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using System;
+using System.Collections.Generic;
 
 namespace ImmersiveGames.DebugManagers
 {
     public static class DebugManager
     {
-        public enum DebugLevel
+        public enum DebugLevels
         {
             None,
             Logs,
@@ -12,31 +14,45 @@ namespace ImmersiveGames.DebugManagers
             All
         }
 
-        public static DebugLevel debugLevel = DebugLevel.All;
+        private static DebugLevels _globalDebugLevel = DebugLevels.All;
+        private static readonly Dictionary<Type, DebugLevels> ScriptDebugLevels = new Dictionary<Type, DebugLevels>();
 
-        public static void Log(string message)
+        public static void SetGlobalDebugLevel(DebugLevels debugLevel)
         {
-            if (debugLevel is DebugLevel.Logs or DebugLevel.LogsAndWarnings or DebugLevel.All)
+            _globalDebugLevel = debugLevel;
+        }
+
+        public static void SetScriptDebugLevel<T>(DebugLevels debugLevel)
+        {
+            var scriptType = typeof(T);
+            ScriptDebugLevels[scriptType] = debugLevel;
+        }
+
+        public static void Log<T>(string message)
+        {
+            var scriptType = typeof(T);
+            if (ScriptDebugLevels.ContainsKey(scriptType) && ScriptDebugLevels[scriptType] >= _globalDebugLevel)
             {
-                Debug.Log(message);
+                Debug.Log($"[{scriptType.Name}] {message}");
             }
         }
 
-        public static void LogWarning(string message)
+        public static void LogWarning<T>(string message)
         {
-            if (debugLevel is DebugLevel.LogsAndWarnings or DebugLevel.All && debugLevel != DebugLevel.None)
+            var scriptType = typeof(T);
+            if (ScriptDebugLevels.ContainsKey(scriptType) && ScriptDebugLevels[scriptType] >= _globalDebugLevel)
             {
-                Debug.LogWarning(message);
+                Debug.LogWarning($"[{scriptType.Name}] {message}");
             }
         }
 
-        public static void LogError(string message)
+        public static void LogError<T>(string message)
         {
-            if (debugLevel == DebugLevel.All && debugLevel != DebugLevel.None)
+            var scriptType = typeof(T);
+            if (ScriptDebugLevels.ContainsKey(scriptType) && ScriptDebugLevels[scriptType] >= _globalDebugLevel)
             {
-                Debug.LogError(message);
+                Debug.LogError($"[{scriptType.Name}] {message}");
             }
         }
     }
-
 }

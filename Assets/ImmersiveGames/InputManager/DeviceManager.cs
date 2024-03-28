@@ -32,12 +32,12 @@ namespace ImmersiveGames.InputManager
             {
                 case InputDeviceChange.Added:
                     _message = $"Device {device} was added";
-                    DebugManager.Log(_message);
+                    DebugManager.Log<DeviceManager>(_message);
                     EventOnDeviceAdded?.Invoke(device, change);
                     break;
                 case InputDeviceChange.Removed:
                     _message = $"Device {device} was removed";
-                    DebugManager.Log(_message);
+                    DebugManager.Log<DeviceManager>(_message);
                     EventOnDeviceRemoved?.Invoke(device, change);
                     break;
                 // Adicione outros casos conforme necessário
@@ -51,7 +51,7 @@ namespace ImmersiveGames.InputManager
                 case InputDeviceChange.HardReset:
                 default:
                     _message = $"An unknown error occurred with the {device}";
-                    DebugManager.Log(_message);
+                    DebugManager.Log<DeviceManager>(_message);
                     throw new ArgumentOutOfRangeException(nameof(change), change, null);
             }
             var notificationData = new NotificationData

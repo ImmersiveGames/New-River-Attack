@@ -61,7 +61,7 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
                 var eventSystem = EventSystem.current;
                 eventSystem.SetSelectedGameObject(activeButton.gameObject);
             }
-            DebugManager.Log($"Item selecionado: {selectedIndex}");
+            DebugManager.Log<InfiniteNavigationMode>($"Item selecionado: {selectedIndex}");
         }
         
     }

@@ -57,7 +57,7 @@ namespace ImmersiveGames.SaveManagers
                 var updatedStock = listPlayerProductStocks[stockIndex];
                 updatedStock.quantityInStock += quantity;
                 listPlayerProductStocks[stockIndex] = updatedStock;
-                DebugManager.LogWarning("Product is found in inventory, Update Quantity.");
+                DebugManager.LogWarning<GameOptionsSave>("Product is found in inventory, Update Quantity.");
             }
             else
             {
@@ -68,7 +68,7 @@ namespace ImmersiveGames.SaveManagers
                 };
                 listPlayerProductStocks.Add(productStock);
                 // Produto não encontrado no estoque
-                DebugManager.Log("Product not found in inventory, adicionando um novo.");
+                DebugManager.Log<GameOptionsSave>("Product not found in inventory, adicionando um novo.");
             }
         }
 

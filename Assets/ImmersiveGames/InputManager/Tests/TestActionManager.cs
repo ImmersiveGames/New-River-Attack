@@ -33,17 +33,17 @@ namespace ImmersiveGames.InputManager.Tests
 
         private void TestActivateActionMap(ActionManager.GameActionMaps actionMapName)
         {
-            DebugManager.Log($"Running Test: Activate Action Map '{actionMapName}'");
+            DebugManager.Log<ActionManagerTest>($"Running Test: Activate Action Map '{actionMapName}'");
 
             // Execute o método para ativar o Action Map específico
             _actionManager.ActivateActionMap(actionMapName);
 
             // Mensagens de depuração
-            DebugManager.Log($"Input Active: {_inputActions.asset.enabled}");
+            DebugManager.Log<ActionManagerTest>($"Input Active: {_inputActions.asset.enabled}");
 
             foreach (var actionMap in _inputActions.asset.actionMaps)
             {
-                DebugManager.Log($"Action Map '{actionMap.name}' Active: {actionMap.enabled}");
+                DebugManager.Log<ActionManagerTest>($"Action Map '{actionMap.name}' Active: {actionMap.enabled}");
             }
         }
     }

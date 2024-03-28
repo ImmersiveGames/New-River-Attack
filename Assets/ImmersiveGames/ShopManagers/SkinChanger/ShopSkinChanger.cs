@@ -17,7 +17,7 @@ namespace ImmersiveGames.ShopManagers.SkinChanger
             _simpleShoppingManager = FindObjectOfType<SimpleShoppingManager>(true);
             if (!_simpleShoppingManager)
             {
-                DebugManager.LogError($"[MenuPlayerSkin] Não foi encontrado um 'SimpleShoppingManager' em cena");
+                DebugManager.LogError<ShopProductSimpleSkins>($"[MenuPlayerSkin] Não foi encontrado um 'SimpleShoppingManager' em cena");
             }
         }
 

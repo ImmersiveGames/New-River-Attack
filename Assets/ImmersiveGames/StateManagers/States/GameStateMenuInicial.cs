@@ -20,20 +20,20 @@ namespace ImmersiveGames.StateManagers.States
         {
             // Lógica específica ao entrar no estado de Menu Inicial
             await base.OnEnter(previousState).ConfigureAwait(false);
-            DebugManager.Log("Entrou no estado de Menu Inicial");
+            DebugManager.Log<GameStateMenuInicial>("Entrou no estado de Menu Inicial");
         }
 
         public override void UpdateState()
         {
             // Lógica de atualização do estado de Menu Inicial
-            DebugManager.Log($"Update no estado de Menu Inicial, initialized: {StateInitialized}");
+            DebugManager.Log<GameStateMenuInicial>($"Update no estado de Menu Inicial, initialized: {StateInitialized}");
         }
 
         protected override async Task OnExit()
         {
             // Lógica específica ao sair do estado de Menu Inicial em outras threads
             await base.OnExit().ConfigureAwait(false);
-            DebugManager.Log("Saiu do estado de Menu Inicial");
+            DebugManager.Log<GameStateMenuInicial>("Saiu do estado de Menu Inicial");
         }
     }
 }

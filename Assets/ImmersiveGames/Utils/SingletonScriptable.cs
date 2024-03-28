@@ -17,7 +17,7 @@ namespace ImmersiveGames.Utils
                 _instance = Resources.Load<T>(_resourcePath);
                 if (_instance == null)
                 {
-                    DebugManager.LogError($"SingletonScriptable<{typeof(T)}> not found in Resources at path {_resourcePath}.");
+                    DebugManager.LogError<T>($"SingletonScriptable<{typeof(T)}> not found in Resources at path {_resourcePath}.");
                 }
                 return _instance;
             }

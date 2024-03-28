@@ -26,7 +26,7 @@ namespace ImmersiveGames.MenuManagers.UI
 
         private void FillImage(InputAction.CallbackContext context)
         {
-                DebugManager.Log($"Enche a barra {context}");
+                DebugManager.Log<UIFillUp>($"Enche a barra {context}");
                 _exitButtonCoroutine = StartCoroutine(FillImageOverTime());
         }
         private void UnFillImage(InputAction.CallbackContext context)

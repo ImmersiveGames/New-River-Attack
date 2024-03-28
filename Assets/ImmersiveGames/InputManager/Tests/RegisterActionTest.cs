@@ -35,7 +35,7 @@ namespace ImmersiveGames.InputManager.Tests
 
         private void TestRegisterAction(string actionName, Action<InputAction.CallbackContext> callback)
         {
-            DebugManager.Log($"Running Test: Register Action '{actionName}'");
+            DebugManager.Log<RegisterActionTest>($"Running Test: Register Action '{actionName}'");
 
             // Ativa o Action Map relevante antes de registrar a ação (ajuste conforme necessário)
             _actionManager.ActivateActionMap(ActionManager.GameActionMaps.UiControls);
@@ -44,7 +44,7 @@ namespace ImmersiveGames.InputManager.Tests
             _actionManager.RegisterAction(actionName, callback);
 
             // Mensagem de depuração indicando que a ação foi registrada
-            DebugManager.Log($"Action '{actionName}' successfully registered");
+            DebugManager.Log<RegisterActionTest>($"Action '{actionName}' successfully registered");
 
             // Simula a execução da ação (pode ser ajustado conforme necessário)
             SimulateAction(actionName);
@@ -52,17 +52,17 @@ namespace ImmersiveGames.InputManager.Tests
 
         private void OnJumpAction(InputAction.CallbackContext context)
         {
-            DebugManager.Log("Jump action performed!");
+            DebugManager.Log<RegisterActionTest>("Jump action performed!");
         }
         private void OnTest(InputAction.CallbackContext context)
         {
-            DebugManager.Log("Botão B ativado!");
+            DebugManager.Log<RegisterActionTest>("Botão B ativado!");
         }
 
         private void SimulateAction(string actionName)
         {
             // Simula a execução da ação para testar o registro
-            DebugManager.Log($"Simulating action: {actionName}");
+            DebugManager.Log<RegisterActionTest>($"Simulating action: {actionName}");
 
             // Chama os observadores registrados para a ação (o ActionManager deve chamar a função de callback)
             _actionManager.NotifyObservers(actionName, new InputAction.CallbackContext());

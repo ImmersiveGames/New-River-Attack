@@ -13,7 +13,7 @@ namespace ImmersiveGames.StateManagers.States
         protected override async Task OnEnter(IState previousState)
         {
             await base.OnEnter(previousState).ConfigureAwait(false);
-            DebugManager.Log("[GameStateBriefingRoom] Entrou no estado de Briefing Room");
+            DebugManager.Log<GameStateBriefingRoom>("Entrou no estado de Briefing Room");
             
             //TODO: Iniciar o Tutorial
             
@@ -23,14 +23,14 @@ namespace ImmersiveGames.StateManagers.States
         {
             if (StateFinalization == false) return;
             // Lógica de atualização do estado de pausa
-            DebugManager.Log($"[GameStateBriefingRoom] Update no estado de Briefing Room, initialized: {StateInitialized}");
+            DebugManager.Log<GameStateBriefingRoom>($"Update no estado de Briefing Room, initialized: {StateInitialized}");
         }
 
         protected override async Task OnExit()
         {
             // Lógica específica ao sair do estado de pausa em outras threads
             await base.OnExit().ConfigureAwait(false);
-            DebugManager.Log("[GameStateBriefingRoom] Saiu do estado de Briefing Room");
+            DebugManager.Log<GameStateBriefingRoom>(" Saiu do estado de Briefing Room");
         }
 
         public override bool RequiresSceneLoad => true;

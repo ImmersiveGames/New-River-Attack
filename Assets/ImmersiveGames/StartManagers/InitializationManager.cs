@@ -2,19 +2,20 @@
 using ImmersiveGames.StateManagers;
 using ImmersiveGames.StateManagers.States;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ImmersiveGames
 {
     public class InitializationManager : MonoBehaviour
     {
-        public DebugManager.DebugLevel debugLevel;
+        [FormerlySerializedAs("debugLevel")] public DebugManager.DebugLevels debugLevels;
 
         public StatesNames startState = StatesNames.GameStateMenuInicial;
 
         private void Awake()
         {
             DontDestroyOnLoad(this);
-            DebugManager.debugLevel = debugLevel;
+            DebugManager.SetGlobalDebugLevel(debugLevels);
 
             // Inicialize _stateManager apenas se ainda não foi inicializado
             if (StateManager != null) return;

@@ -67,7 +67,7 @@ namespace ImmersiveGames.MenuManagers.Abstracts
             }
             else
             {
-                DebugManager.LogError("Índice de menu inválido.");
+                DebugManager.LogError<AbstractMenuManager>("Índice de menu inválido.");
             }
         }
         // Método para indicar qual o botão será o primeiro do menu
@@ -86,7 +86,7 @@ namespace ImmersiveGames.MenuManagers.Abstracts
         // Método para voltar ao menu anterior
         public void HistoryGoBack()
         {
-            DebugManager.Log($"[Pilha] Size: {_menuHistory.Count}");
+            DebugManager.Log<AbstractMenuManager>($"[Pilha] Size: {_menuHistory.Count}");
             if (_menuHistory.Count <= 1) return;
             var previousMenuIndex = _menuHistory.Pop();
             AudioManager.PlayMouseClick();
@@ -95,7 +95,7 @@ namespace ImmersiveGames.MenuManagers.Abstracts
         }
         public void GoBack()
         {
-            DebugManager.Log($"[Pilha] Size: {_menuHistory.Count}");
+            DebugManager.Log<AbstractMenuManager>($" Size: {_menuHistory.Count}");
             if (_menuHistory.Count <= 1) return;
 
             // Remover o menu atual do histórico
