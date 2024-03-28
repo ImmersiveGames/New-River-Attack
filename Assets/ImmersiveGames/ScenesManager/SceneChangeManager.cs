@@ -22,6 +22,7 @@ namespace ImmersiveGames.ScenesManager
             
             await MainThreadTaskExecutor.instance.RunOnMainThreadAsync(async () =>
             {
+                if (SceneManager.GetActiveScene().name == nextState.SceneName) return;
                 if (unloadPreviousAdditiveScene)
                 {
                     // Descarrega a última cena aditiva
@@ -52,6 +53,7 @@ namespace ImmersiveGames.ScenesManager
 
             await MainThreadTaskExecutor.instance.RunOnMainThreadAsync(() =>
             {
+                if (SceneManager.GetActiveScene().name == sceneName) return Task.CompletedTask;
                 SceneManager.sceneUnloaded += SceneUnloaded;
                 SceneManager.UnloadSceneAsync(sceneName);
                 return Task.CompletedTask;
@@ -70,7 +72,7 @@ namespace ImmersiveGames.ScenesManager
 
         private static async Task LoadSceneAsync(string sceneName, LoadSceneMode loadSceneMode)
         {
-            if (string.IsNullOrEmpty(sceneName))
+            if (string.IsNullOrEmpty(sceneName) || SceneManager.GetActiveScene().name == sceneName)
                 return;
 
             var loadCompletionSource = new TaskCompletionSource<bool>();

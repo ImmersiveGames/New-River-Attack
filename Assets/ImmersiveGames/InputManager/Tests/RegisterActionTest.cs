@@ -1,6 +1,5 @@
 ﻿using System;
 using ImmersiveGames.DebugManagers;
-using RiverAttack;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -39,7 +38,7 @@ namespace ImmersiveGames.InputManager.Tests
             DebugManager.Log($"Running Test: Register Action '{actionName}'");
 
             // Ativa o Action Map relevante antes de registrar a ação (ajuste conforme necessário)
-            _actionManager.ActivateActionMap(GameActionMaps.UiControls);
+            _actionManager.ActivateActionMap(ActionManager.GameActionMaps.UiControls);
 
             // Registra a ação com a função de callback
             _actionManager.RegisterAction(actionName, callback);

@@ -43,7 +43,7 @@ namespace ImmersiveGames.ShopManagers.SimpleShopping
 
         private void OnEnable()
         {
-            InputManagerInitializer.ActionManager.ActivateActionMap(GameActionMaps.Shopping);
+            InputManagerInitializer.ActionManager.ActivateActionMap(ActionManager.GameActionMaps.Shopping);
             UpdateStockProducts(panelContent);
         }
 

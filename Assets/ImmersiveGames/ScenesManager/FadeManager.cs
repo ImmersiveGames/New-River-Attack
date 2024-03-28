@@ -95,13 +95,13 @@ namespace ImmersiveGames.ScenesManager
         private void OnEventOutComplete()
         {
             EventFadeOutComplete?.Invoke();
-            DebugManager.Log("Complete Fade out");
+            DebugManager.Log("[FadeManager] Complete Fade out");
         }
 
         private void OnEventFadeInStart()
         {
             EventFadeInStart?.Invoke();
-            DebugManager.Log("Start Fade in");
+            DebugManager.Log("[FadeManager] Start Fade in");
         }
     }
 }

@@ -32,7 +32,7 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
         }
         private void Start()
         {
-            InputManagerInitializer.ActionManager.ActivateActionMap(GameActionMaps.Notifications);
+            InputManagerInitializer.ActionManager.ActivateActionMap(ActionManager.GameActionMaps.Notifications);
             InputManagerInitializer.RegisterAction("CloseNotification",ButtonClose );
             if(confirmButton != null)
                 InputManagerInitializer.RegisterAction("ConfirmNotification",ButtonConfirm );

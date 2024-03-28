@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Threading;
+using ImmersiveGames.DebugManagers;
 using ImmersiveGames.InputManager;
+using ImmersiveGames.Utils;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -31,7 +34,11 @@ namespace ImmersiveGames
                 return _actionManager;
             }
         }
-
+        protected internal static void RegisterAction(string actionName, Action<InputAction.CallbackContext> callbackComplete, Action<InputAction.CallbackContext> callbackCancel)
+        {
+            ActionManager.RegisterAction($"{actionName}_Start", callbackComplete);
+            ActionManager.RegisterAction($"{actionName}_Cancel", callbackCancel);
+        }
         protected internal static void RegisterAction(string actionName, Action<InputAction.CallbackContext> callback)
         {
             ActionManager.RegisterAction(actionName, callback);

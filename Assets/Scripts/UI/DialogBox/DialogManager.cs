@@ -46,8 +46,8 @@ namespace RiverAttack
             m_InputSystem = GameManager.instance.inputSystem;
 
             m_InputSystem.BriefingRoom.Next.performed += NextButton;
-            m_InputSystem.BriefingRoom.Exit.started += StartHoldTime;
-            m_InputSystem.BriefingRoom.Exit.canceled += StopHoldTime;
+            m_InputSystem.BriefingRoom.Hold_Exit.started += StartHoldTime;
+            m_InputSystem.BriefingRoom.Hold_Exit.canceled += StopHoldTime;
 
             m_Sentences = GetLocalization();
             m_TypingCoroutine = StartCoroutine(TypeSentence(m_Sentences[m_SentenceIndex]));
@@ -56,8 +56,8 @@ namespace RiverAttack
         {
             StopAllCoroutines();
             m_InputSystem.BriefingRoom.Next.performed -= NextButton;
-            m_InputSystem.BriefingRoom.Exit.started -= StartHoldTime;
-            m_InputSystem.BriefingRoom.Exit.canceled -= StopHoldTime;
+            m_InputSystem.BriefingRoom.Hold_Exit.started -= StartHoldTime;
+            m_InputSystem.BriefingRoom.Hold_Exit.canceled -= StopHoldTime;
         }
 
         private string[] GetLocalization()

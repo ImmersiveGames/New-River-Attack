@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using ImmersiveGames.DebugManagers;
+using ImmersiveGames.InputManager;
+using ImmersiveGames.StateManagers;
 using ImmersiveGames.Utils;
 using ImmersiveGames.TimelineManagers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Localization;
 using UnityEngine.Playables;
 
@@ -35,20 +38,14 @@ namespace ImmersiveGames.DialogManagers
 
         #endregion
 
-        #region Delegates
-        public delegate void DialogManagerEventHandler();
-        public static event DialogManagerEventHandler EventDialogEnd;
-
-        #endregion
-
         #region Variáveis Privadas
 
+        private bool _dialogOn;
         private const float WaitTime = 0.2f;
         private bool _isTyping;
         private int _currentDialogueIndex;
         private int _currentSentenceIndex;
         private Coroutine _typingCoroutine;
-        private Coroutine _panelCoroutine;
         private TimelineManager _timelineManager;
         private static readonly int Speak = Animator.StringToHash("Speak");
 
@@ -61,26 +58,25 @@ namespace ImmersiveGames.DialogManagers
             nextCursor.SetActive(false);
         }
 
+        private void OnEnable()
+        {
+            InputManagerInitializer.ActionManager.EventOnActionComplete += StopDialog;
+        }
+
         private void Start()
         {
             _timelineManager = new TimelineManager(playableDirector);
+            InputManagerInitializer.ActionManager.ActivateActionMap(ActionManager.GameActionMaps.BriefingRoom);
+            InputManagerInitializer.RegisterAction("Next", InputNextDialog );
             dialogText.text = "";
             nameText.text = "";
             StartCoroutine(WaitForInitialization());
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                NextDialog();
-            }
-        }
-
         private void OnDisable()
         {
             _typingCoroutine = null;
-            _panelCoroutine = null;
+            InputManagerInitializer.ActionManager.EventOnActionComplete -= StopDialog;
         }
 
         #endregion
@@ -105,9 +101,9 @@ namespace ImmersiveGames.DialogManagers
 
             _currentDialogueIndex = dialogIndex;
             _currentSentenceIndex = sentenceIndex;
-
+            _dialogOn = true;
             nameText.text = dialogDatas[_currentDialogueIndex].nameSpeaker.GetLocalizedString();
-            _panelCoroutine = StartCoroutine(CloseAndOpenPanel());
+            StartCoroutine(CloseAndOpenPanel());
         }
         private void NextDialogAnimation(int sentenceIndex)
         {
@@ -117,8 +113,10 @@ namespace ImmersiveGames.DialogManagers
             _timelineManager.PlayAnimation(dialogDatas[sentenceIndex].startTimeSentences);
             
         }
+        
         private void NextDialog()
         {
+            if (!_dialogOn) return;
             // Se o diálogo ainda estiver sendo digitado, interrompe a digitação e mostra o texto completo
             if (_isTyping)
             {
@@ -144,7 +142,7 @@ namespace ImmersiveGames.DialogManagers
                 if (_currentDialogueIndex < dialogDatas.Count)
                 {
                     NextDialogAnimation(_currentDialogueIndex);
-                    _panelCoroutine = StartCoroutine(CloseAndOpenPanel());
+                    StartCoroutine(CloseAndOpenPanel());
                 }
                 else
                 {
@@ -163,13 +161,26 @@ namespace ImmersiveGames.DialogManagers
             }
             _typingCoroutine = StartCoroutine(TypeSentence(dialogDatas[_currentDialogueIndex].sentences[_currentSentenceIndex]));
         }
+        private async void StopDialog()
+        {
+            _dialogOn = false;
+            StopAllCoroutines();
+            await InitializationManager.StateManager.ChangeStateAsync(StatesNames.GameStateMenuInicial.ToString()).ConfigureAwait(false);
+        }
 
         private void EndDialogue()
         {
-            EventDialogEnd?.Invoke();
-            //TODO: Ativar a conquista de assistiu o tutorial
             DebugManager.Log("Fim do diálogo!");
-            StopAllCoroutines();
+            StopDialog();
+        }
+
+        #endregion
+
+        #region InputManager
+
+        private void InputNextDialog(InputAction.CallbackContext context)
+        {
+            NextDialog();
         }
 
         #endregion

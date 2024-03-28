@@ -26,8 +26,8 @@ namespace RiverAttack
             m_InputSystem = new PlayersInputActions();
             m_InputSystem.BriefingRoom.Enable();
 
-            m_InputSystem.BriefingRoom.Exit.started += ctx => StartHoldTime();
-            m_InputSystem.BriefingRoom.Exit.canceled += ctx => StopHoldTime();
+            m_InputSystem.BriefingRoom.Hold_Exit.started += ctx => StartHoldTime();
+            m_InputSystem.BriefingRoom.Hold_Exit.canceled += ctx => StopHoldTime();
         }
 
         private void OnDisable()

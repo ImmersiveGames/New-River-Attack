@@ -4,6 +4,7 @@ using ImmersiveGames.InputManager;
 using ImmersiveGames.MenuManagers.Abstracts;
 using ImmersiveGames.ScenesManager;
 using ImmersiveGames.ScenesManager.Transitions;
+using ImmersiveGames.StateManagers;
 using ImmersiveGames.TimelineManagers;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -90,15 +91,15 @@ namespace ImmersiveGames.MenuManagers
         }
         public async void GotoBriefingRoom()
         {
-            await InitializationManager.StateManager.ChangeStateAsync("GameStateBriefingRoom").ConfigureAwait(false);
+            await InitializationManager.StateManager.ChangeStateAsync(StatesNames.GameStateBriefingRoom.ToString()).ConfigureAwait(false);
         }
         public async void GotoClassicMode()
         {
-            await InitializationManager.StateManager.ChangeStateAsync("GameStateOpenGame").ConfigureAwait(false);
+            await InitializationManager.StateManager.ChangeStateAsync(StatesNames.GameStateOpenGame.ToString()).ConfigureAwait(false);
         }
         public async void GotoMissionMode()
         {
-            await InitializationManager.StateManager.ChangeStateAsync("GameStateOpenGame").ConfigureAwait(false);
+            await InitializationManager.StateManager.ChangeStateAsync(StatesNames.GameStateOpenGame.ToString()).ConfigureAwait(false);
         }
         public void ButtonPlayAnimation(float startTime)
         {

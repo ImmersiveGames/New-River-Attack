@@ -19,7 +19,7 @@ namespace ImmersiveGames.InputManager.Tests
             _actionManager = new ActionManager(_inputActions);
 
             // Teste: Ativar Action Map específico
-            TestActivateActionMap(GameActionMaps.UiControls);
+            TestActivateActionMap(ActionManager.GameActionMaps.UiControls);
         }
 
         private void OnDestroy()
@@ -31,7 +31,7 @@ namespace ImmersiveGames.InputManager.Tests
             _actionManager = null;
         }
 
-        private void TestActivateActionMap(GameActionMaps actionMapName)
+        private void TestActivateActionMap(ActionManager.GameActionMaps actionMapName)
         {
             DebugManager.Log($"Running Test: Activate Action Map '{actionMapName}'");
 

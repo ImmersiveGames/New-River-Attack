@@ -825,7 +825,7 @@ namespace ImmersiveGames
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Exit"",
+                    ""name"": ""Hold_Exit"",
                     ""type"": ""Button"",
                     ""id"": ""c3a37691-c5b5-4927-9f8a-b3d09d19c060"",
                     ""expectedControlType"": ""Button"",
@@ -886,7 +886,7 @@ namespace ImmersiveGames
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC"",
-                    ""action"": ""Exit"",
+                    ""action"": ""Hold_Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -897,7 +897,7 @@ namespace ImmersiveGames
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Mobile;PC"",
-                    ""action"": ""Exit"",
+                    ""action"": ""Hold_Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -908,7 +908,7 @@ namespace ImmersiveGames
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC"",
-                    ""action"": ""Exit"",
+                    ""action"": ""Hold_Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1050,7 +1050,7 @@ namespace ImmersiveGames
             // BriefingRoom
             m_BriefingRoom = asset.FindActionMap("BriefingRoom", throwIfNotFound: true);
             m_BriefingRoom_Next = m_BriefingRoom.FindAction("Next", throwIfNotFound: true);
-            m_BriefingRoom_Exit = m_BriefingRoom.FindAction("Exit", throwIfNotFound: true);
+            m_BriefingRoom_Hold_Exit = m_BriefingRoom.FindAction("Hold_Exit", throwIfNotFound: true);
             // Notifications
             m_Notifications = asset.FindActionMap("Notifications", throwIfNotFound: true);
             m_Notifications_CloseNotification = m_Notifications.FindAction("CloseNotification", throwIfNotFound: true);
@@ -1354,13 +1354,13 @@ namespace ImmersiveGames
         private readonly InputActionMap m_BriefingRoom;
         private List<IBriefingRoomActions> m_BriefingRoomActionsCallbackInterfaces = new List<IBriefingRoomActions>();
         private readonly InputAction m_BriefingRoom_Next;
-        private readonly InputAction m_BriefingRoom_Exit;
+        private readonly InputAction m_BriefingRoom_Hold_Exit;
         public struct BriefingRoomActions
         {
             private @PlayersInputActions m_Wrapper;
             public BriefingRoomActions(@PlayersInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Next => m_Wrapper.m_BriefingRoom_Next;
-            public InputAction @Exit => m_Wrapper.m_BriefingRoom_Exit;
+            public InputAction @Hold_Exit => m_Wrapper.m_BriefingRoom_Hold_Exit;
             public InputActionMap Get() { return m_Wrapper.m_BriefingRoom; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1373,9 +1373,9 @@ namespace ImmersiveGames
                 @Next.started += instance.OnNext;
                 @Next.performed += instance.OnNext;
                 @Next.canceled += instance.OnNext;
-                @Exit.started += instance.OnExit;
-                @Exit.performed += instance.OnExit;
-                @Exit.canceled += instance.OnExit;
+                @Hold_Exit.started += instance.OnHold_Exit;
+                @Hold_Exit.performed += instance.OnHold_Exit;
+                @Hold_Exit.canceled += instance.OnHold_Exit;
             }
 
             private void UnregisterCallbacks(IBriefingRoomActions instance)
@@ -1383,9 +1383,9 @@ namespace ImmersiveGames
                 @Next.started -= instance.OnNext;
                 @Next.performed -= instance.OnNext;
                 @Next.canceled -= instance.OnNext;
-                @Exit.started -= instance.OnExit;
-                @Exit.performed -= instance.OnExit;
-                @Exit.canceled -= instance.OnExit;
+                @Hold_Exit.started -= instance.OnHold_Exit;
+                @Hold_Exit.performed -= instance.OnHold_Exit;
+                @Hold_Exit.canceled -= instance.OnHold_Exit;
             }
 
             public void RemoveCallbacks(IBriefingRoomActions instance)
@@ -1548,7 +1548,7 @@ namespace ImmersiveGames
         public interface IBriefingRoomActions
         {
             void OnNext(InputAction.CallbackContext context);
-            void OnExit(InputAction.CallbackContext context);
+            void OnHold_Exit(InputAction.CallbackContext context);
         }
         public interface INotificationsActions
         {
