@@ -1,3 +1,4 @@
+using ImmersiveGames;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,8 +28,8 @@ namespace RiverAttack
         {
             m_PlayersInputActions = m_PlayerMaster.playersInputActions;
             m_PlayersInputActions.Enable();
-            m_PlayersInputActions.Player.Move.performed += TouchMove;
-            m_PlayersInputActions.Player.Move.canceled += EndTouchMove;
+            m_PlayersInputActions.Player.Axis_Move.performed += TouchMove;
+            m_PlayersInputActions.Player.Axis_Move.canceled += EndTouchMove;
         }
 
         private void FixedUpdate()

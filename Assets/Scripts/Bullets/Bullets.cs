@@ -2,7 +2,7 @@ using UnityEngine;
 using Utils;
 namespace RiverAttack
 {
-    public class Bullets : MonoBehaviour, IPoolable
+    public class Bullets : MonoBehaviour, IPoolablex
     {
         [SerializeField]
         internal int powerFire = 1;

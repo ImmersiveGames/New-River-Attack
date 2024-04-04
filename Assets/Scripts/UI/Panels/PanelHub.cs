@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ImmersiveGames;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -33,20 +34,20 @@ namespace RiverAttack
 
         private void OnDisable()
         {
-            _inputActions.UI_Controlls.StartButton.performed -= ButtonStartMission;
-            _inputActions.UI_Controlls.BackButton.performed -= ButtonReturnInitialMenu;
-            _inputActions.UI_Controlls.LeftSelection.performed -= LastMission;
-            _inputActions.UI_Controlls.RightSelection.performed -= NextMission;
+            _inputActions.UiControls.StartButton.performed -= ButtonStartMission;
+            _inputActions.UiControls.BackButton.performed -= ButtonReturnInitialMenu;
+            _inputActions.UiControls.LeftSelection.performed -= LastMission;
+            _inputActions.UiControls.RightSelection.performed -= NextMission;
         }
         #endregion
 
         private void SetControllersInput()
         {
             _inputActions = GameManager.instance.inputSystem;
-            _inputActions.UI_Controlls.StartButton.performed += ButtonStartMission;
-            _inputActions.UI_Controlls.BackButton.performed += ButtonReturnInitialMenu;
-            _inputActions.UI_Controlls.LeftSelection.performed += LastMission;
-            _inputActions.UI_Controlls.RightSelection.performed += NextMission;
+            _inputActions.UiControls.StartButton.performed += ButtonStartMission;
+            _inputActions.UiControls.BackButton.performed += ButtonReturnInitialMenu;
+            _inputActions.UiControls.LeftSelection.performed += LastMission;
+            _inputActions.UiControls.RightSelection.performed += NextMission;
         }
 
         public void ButtonNextMission(int increment)

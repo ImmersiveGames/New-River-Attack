@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Cinemachine;
 using UnityEngine;
-using UnityEngine.Localization;
 using UnityEngine.Playables;
 using Object = UnityEngine.Object;
 
@@ -31,7 +29,7 @@ namespace Utils
 
             public bool TryGetValue(TKey key, out TValue value)
             {
-                int index = keys.IndexOf(key);
+                var index = keys.IndexOf(key);
                 if (index != -1)
                 {
                     value = values[index];
@@ -49,7 +47,7 @@ namespace Utils
         public static List<T> ScriptableListToList<T>(List<int> listId, List<T> scriptableList) where T : ScriptableObject
         {
             var defaultList = new List<T>();
-            foreach (int item in listId)
+            foreach (var item in listId)
             {
                 foreach (var sItem in scriptableList.Where(sItem => sItem.GetInstanceID() == item))
                 {
@@ -98,16 +96,7 @@ namespace Utils
         {
             return (weight / totalWeight) * 100;
         }
-        /*public static string FirstLetterToUpper(this string s)
-        {
-            if (string.IsNullOrEmpty(s))
-                return string.Empty;
-
-            string lower = s.ToLower();
-            char[] a = lower.ToCharArray();
-            a[0] = char.ToUpper(a[0]);
-            return new string(a);
-        }*/
+       
         /*
          * GetPercentage(float val, float max)
          * - retorna a porcentagem de um valor em porcentagem
@@ -144,8 +133,8 @@ namespace Utils
             get
             {
                 var cam = Camera.main;
-                float height = 2f * cam!.orthographicSize;
-                float width = height * cam.aspect;
+                var height = 2f * cam!.orthographicSize;
+                var width = height * cam.aspect;
                 return new Vector2(width, height);
             }
         }
@@ -196,10 +185,10 @@ namespace Utils
          * */
         public static void SetLayersRecursively(LayerMask layerMask, Transform itemTransform)
         {
-            int novoLayer = Mathf.RoundToInt(Mathf.Log(layerMask.value, 2));
+            var novoLayer = Mathf.RoundToInt(Mathf.Log(layerMask.value, 2));
             if (itemTransform.gameObject.layer != novoLayer)
                 itemTransform.gameObject.layer = novoLayer;
-            for (int i = 0; i < itemTransform.childCount; i++)
+            for (var i = 0; i < itemTransform.childCount; i++)
             {
                 var child = itemTransform.GetChild(i);
                 SetLayersRecursively(layerMask, child);
@@ -252,16 +241,16 @@ namespace Utils
          * GetAnimationTime(Animator animator, string animationName)
          * - retorna o tempo da animação
          * */
-        public static float GetAnimationTime(Animator animator, string animationName)
+        public static float GetAnimationDuration(Animator animator, string animationName)
         {
             var controller = animator.runtimeAnimatorController;
 
             return (from t in controller.animationClips where t.name == animationName select t.length).FirstOrDefault();
         }
-/*
- * SoundBase10(float normalizeNumber)
- *  - transforma um numero base de 0.0 à 1.0 em um valor de metrica para sons (dB)
- */
+        /*
+         * SoundBase10(float normalizeNumber)
+         *  - transforma um numero base de 0.0 à 1.0 em um valor de metrica para sons (dB)
+         */
         public static float SoundBase10(float normalizeNumber)
         {
             return Mathf.Log10(normalizeNumber) * 20f;
@@ -269,11 +258,11 @@ namespace Utils
         
         public static string TimeFormat(float timeToFormat)
         {
-            int hour = Mathf.FloorToInt(timeToFormat / 3600);
-            int minutes = Mathf.FloorToInt((timeToFormat % 3600) / 60);
-            int seconds = Mathf.FloorToInt(timeToFormat % 60);
+            var hour = Mathf.FloorToInt(timeToFormat / 3600);
+            var minutes = Mathf.FloorToInt((timeToFormat % 3600) / 60);
+            var seconds = Mathf.FloorToInt(timeToFormat % 60);
 
-            string time = $"{hour:D2}:{minutes:D2}:{seconds:D2}";
+            var time = $"{hour:D2}:{minutes:D2}:{seconds:D2}";
             
             return time;
         }

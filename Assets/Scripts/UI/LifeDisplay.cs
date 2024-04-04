@@ -45,7 +45,7 @@ namespace RiverAttack
             {
                 var child = transform.GetChild(x);
                 child.gameObject.SetActive(x < lives);
-                child.GetComponent<Image>().sprite = m_PlayerSettings.playerSkin.hubSprite;
+               // child.GetComponent<Image>().sprite = m_PlayerSettings.playerSkin.hubSprite;
             }
         }
 
@@ -54,7 +54,7 @@ namespace RiverAttack
             for (int x = 0; x < quantity; x++)
             {
                 var icon = Instantiate(iconLives, parent);
-                icon.GetComponent<Image>().sprite = m_PlayerSettings.playerSkin.hubSprite;
+               // icon.GetComponent<Image>().sprite = m_PlayerSettings.playerSkin.hubSprite;
                 //Debug.Log("icone criado");
             }
         }

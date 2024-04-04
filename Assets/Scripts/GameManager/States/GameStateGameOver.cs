@@ -20,7 +20,7 @@ namespace RiverAttack
         public override IEnumerator OnLoadState()
         {
             //throw new System.NotImplementedException();
-            m_GameAudioManager.ChangeBGM(LevelTypes.GameOver, TIME_TO_FADE_BGM);
+            m_GameAudioManager.ChangeBGM(BgmTypes.GameOver, TIME_TO_FADE_BGM);
             m_GameAudioManager.PlayVoice(m_GameAudioManager.missionFailSound);
             yield return null;
         }

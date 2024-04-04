@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ImmersiveGames.ShopManagers.ShopProducts;
+using UnityEngine;
 
 namespace RiverAttack
 {
@@ -38,8 +39,10 @@ namespace RiverAttack
                 int siblingIndex = children.transform.GetSiblingIndex();
                 DestroyImmediate(transform.GetChild(siblingIndex).gameObject);
             }
-            var mySkin = Instantiate(skin.getSkin, transform);
-            mySkin.transform.SetAsFirstSibling();
+            
+            /*var mySkin = Instantiate(skin.getSkin, transform);
+            mySkin.transform.SetAsFirstSibling();*/
+            
             playerSkinTrail.enabled = true;
             m_PlayerMaster.getPlayerSettings.playerSkin = skin;
             m_PlayerMaster.OnEventPlayerMasterUpdateSkin();

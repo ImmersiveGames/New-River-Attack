@@ -12,9 +12,9 @@ namespace RiverAttack
         {
             //Debug.Log($"Entrando no Estado: Tutorial");
             GameManager.instance.inputSystem.Player.Disable();
-            GameManager.instance.inputSystem.UI_Controlls.Disable();
+            GameManager.instance.inputSystem.UiControls.Disable();
             GameManager.instance.inputSystem.BriefingRoom.Enable();
-            GameAudioManager.instance.ChangeBGM(LevelTypes.Tutorial, TIME_TO_FADE_BGM);
+            GameAudioManager.instance.ChangeBGM(BgmTypes.Tutorial, TIME_TO_FADE_BGM);
         }
         public override void UpdateState()
         {

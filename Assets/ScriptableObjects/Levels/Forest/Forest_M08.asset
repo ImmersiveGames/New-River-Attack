@@ -13,28 +13,44 @@ MonoBehaviour:
   m_Name: Forest_M08
   m_EditorClassIdentifier: 
   levelName: Mission 08
+  levelNameLocale:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   developerDescription: 
   beatGame: 0
+  dontCountMilestone: 0
+  bossFight: 0
   hudPath: {fileID: 5165634822946027408, guid: 020b5715ac1db1d4d86a05fee646f9d5, type: 3}
-  levelIcon: {fileID: 0}
-  levelIconPos: {x: 0, y: 0, z: 0}
-  bgmStartLevel: 3
+  levelsStates: 0
+  pathType: 128
   pathStart: {fileID: 1232418805373770, guid: 569b0bb5c7e414e9ab3348249377f412, type: 3}
   pathEnd: {fileID: 1403363405104170, guid: 5062ea15c3e68774fb33b6d2bfdb02c5, type: 3}
   levelOffset: {x: -5, y: 0, z: -60}
   setLevelList:
-  - levelPaths: {fileID: 1937981643817942, guid: 00f5d23329503a542b6628d96c8121c9,
+  - segmentObject: {fileID: 1937981643817942, guid: 00f5d23329503a542b6628d96c8121c9,
       type: 3}
-    enemiesSets: {fileID: 1575522827100644, guid: c2a82fb2a6713c543aac4068f2a60ebb,
+    enemySetObject: {fileID: 1575522827100644, guid: c2a82fb2a6713c543aac4068f2a60ebb,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 3
-  - levelPaths: {fileID: 1822781675246948, guid: 4ab74b3fdd2c59c499fe2703717bf458,
+  - segmentObject: {fileID: 1822781675246948, guid: 4ab74b3fdd2c59c499fe2703717bf458,
       type: 3}
-    enemiesSets: {fileID: 1173117575287778, guid: 367ff4c24c93bee45857866780720106,
+    enemySetObject: {fileID: 1173117575287778, guid: 367ff4c24c93bee45857866780720106,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 3
-  - levelPaths: {fileID: 1095139062321636, guid: 3a4ad27d777768144bbc1c8f454c4fe6,
+  - segmentObject: {fileID: 1095139062321636, guid: 3a4ad27d777768144bbc1c8f454c4fe6,
       type: 3}
-    enemiesSets: {fileID: 1798345370038060, guid: 75212e9dec05eeb4e9bc003d8a219bb9,
+    enemySetObject: {fileID: 1798345370038060, guid: 75212e9dec05eeb4e9bc003d8a219bb9,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 3
+  references:
+    version: 2
+    RefIds: []

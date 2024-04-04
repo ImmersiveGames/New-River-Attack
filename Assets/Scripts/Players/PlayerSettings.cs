@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using ImmersiveGames.ShopManagers.Abstracts;
+using ImmersiveGames.ShopManagers.ShopProducts;
 using UnityEngine;
-using Shopping;
 using UnityEngine.Serialization;
 
 namespace RiverAttack

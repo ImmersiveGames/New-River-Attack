@@ -122,7 +122,7 @@ namespace RiverAttack
             if (m_BossCycles <= 0)
             {
                 isDestroyed = true;
-                GameAudioManager.instance.StopBGM(LevelTypes.Boss);
+                GameAudioManager.instance.StopBGM(BgmTypes.Boss);
                 if (collisionType == CollisionType.Collider)
                 {
                     GameSteamManager.UnlockAchievement("ACH_CRASH_SUBMARINE");

@@ -10,13 +10,13 @@ namespace RiverAttack
         public override IEnumerator OnLoadState()
         {
             GameManager.instance.gameModes = GameManager.GameModes.Mission;
-            GameAudioManager.instance.ChangeBGM(LevelTypes.Hub, TIME_TO_FADE_BGM);
+            GameAudioManager.instance.ChangeBGM(BgmTypes.HUD, TIME_TO_FADE_BGM);
             yield return null;
         }
         public override void EnterState()
         {
             GameManager.instance.inputSystem.Player.Disable();
-            GameManager.instance.inputSystem.UI_Controlls.Enable();
+            GameManager.instance.inputSystem.UiControls.Enable();
             GameManager.instance.inputSystem.BriefingRoom.Disable();
             PlayerManager.instance.ActivePlayers(false);
             GameHubManager.instance.readyHub = true;

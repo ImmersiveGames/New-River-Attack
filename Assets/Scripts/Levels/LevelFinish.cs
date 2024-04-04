@@ -43,20 +43,6 @@ namespace RiverAttack
                         case LevelTypes.Ice:
                             GameSteamManager.UnlockAchievement("ACH_FINISH_M_ICE");
                             break;
-                        case LevelTypes.Menu:
-                            break;
-                        case LevelTypes.Hub:
-                            break;
-                        case LevelTypes.GameOver:
-                            break;
-                        case LevelTypes.Complete:
-                            break;
-                        case LevelTypes.HUD:
-                            break;
-                        case LevelTypes.Boss:
-                            break;
-                        case LevelTypes.Tutorial:
-                            break;
                         default:
                             throw new ArgumentOutOfRangeException();
                     }

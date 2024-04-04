@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using CarterGames.Assets.SaveManager;
+using ImmersiveGames;
 using Save;
 using Steamworks;
 using UnityEngine;
@@ -71,7 +72,7 @@ namespace RiverAttack
         {
             inputSystem = new PlayersInputActions();
             inputSystem.Player.Disable();
-            inputSystem.UI_Controlls.Enable();
+            inputSystem.UiControls.Enable();
             if (SteamClient.IsValid)
             {
                 SteamFriends.OnGameOverlayActivated += ChangeStateToPause;

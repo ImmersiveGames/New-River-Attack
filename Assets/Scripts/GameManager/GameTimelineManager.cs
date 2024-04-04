@@ -53,7 +53,7 @@ namespace RiverAttack
         
         public void CompletePathEndCutScene()
         {
-            GameAudioManager.instance.ChangeBGM(LevelTypes.Complete, 0.1f);
+            GameAudioManager.instance.ChangeBGM(BgmTypes.Complete, 0.1f);
             endCutDirector.gameObject.SetActive(true);
             //endCutDirector.Play();
             var panelMenuGame = m_GameManager.PanelBase<PanelMenuGame>();

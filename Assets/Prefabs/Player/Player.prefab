@@ -214,6 +214,7 @@ MonoBehaviour:
   shakeTime: 0.2
   playerMovementStatus: 0
   collectableList: []
+  inEffectArea: 0
   inPowerUp: 0
 --- !u!114 &2938584616496795991
 MonoBehaviour:
@@ -242,8 +243,6 @@ MonoBehaviour:
   prefabBullet: {fileID: 1779806388395306, guid: db9dfd6a009dac4489263be4e1d00d8d,
     type: 3}
   startBulletPool: 10
-  bulletSpeed: 50
-  bulletLifeTime: 0
   bulletColor: {r: 1, g: 1, b: 0, a: 1}
   rapidFireColor: {r: 0.6431373, g: 0.122641504, b: 0.122641504, a: 1}
 --- !u!114 &-8360992911047462672
@@ -323,7 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conversion: 10
-  offsetInicial: 0
+  offsetInitial: 0
 --- !u!114 &8957561622807004078
 MonoBehaviour:
   m_ObjectHideFlags: 0

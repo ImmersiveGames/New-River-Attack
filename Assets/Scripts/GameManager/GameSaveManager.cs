@@ -31,7 +31,7 @@ namespace RiverAttack
         {
             SaveManager.Load();
             //m_PlayerSave.Load();
-            playerSettings.listProducts = m_PlayerSave.listProducts.Value;
+           // playerSettings.listProducts = m_PlayerSave.listProducts.Value;
             playerSettings.wealth = m_PlayerSave.wealth.Value;
 
             gameSettings.musicVolume = m_PlayerSave.musicVolume.Value;
@@ -61,7 +61,7 @@ namespace RiverAttack
 
         public void SavePlayerSaves()
         {
-            m_PlayerSave.listProducts.Value = playerSettings.listProducts;
+            //m_PlayerSave.listProducts.Value = playerSettings.listProducts;
             m_PlayerSave.wealth.Value = playerSettings.wealth;
             m_PlayerSave.musicVolume.Value = gameSettings.musicVolume;
             m_PlayerSave.sfxVolume.Value = gameSettings.sfxVolume;

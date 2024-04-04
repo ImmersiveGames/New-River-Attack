@@ -11,7 +11,7 @@ namespace RiverAttack
         public AudioMixer mixerGroup;
         [SerializeField] private AudioSource bgmAudioSource;
         [SerializeField] protected AudioSource sfxAudioSource;
-        [SerializeField] internal Tools.SerializableDictionary<LevelTypes, AudioEventSample> bgmLevels = new Tools.SerializableDictionary<LevelTypes, AudioEventSample>();
+        [SerializeField] internal Tools.SerializableDictionary<BgmTypes, AudioEventSample> bgmLevels = new Tools.SerializableDictionary<BgmTypes, AudioEventSample>();
         [Header("Menu SFX")]
         public AudioClip missionFailSound;
         public AudioClip missionSuccessSound;
@@ -38,7 +38,7 @@ namespace RiverAttack
             mixerGroup.SetFloat("MusicVolume", volumeMusic);
             mixerGroup.SetFloat("SfxVolume", volumeSfx);
         }
-        public void PlayBGM(LevelTypes typeLevel)
+        public void PlayBGM(BgmTypes typeLevel)
         {
             bgmLevels.TryGetValue(typeLevel, out var audioSource);
             audioSource.Play(bgmAudioSource);
@@ -57,7 +57,7 @@ namespace RiverAttack
                 yield return StartCoroutine(FadeAudio(source, time, source.volume, 0));
             track.Stop(source);
         }
-        public void ChangeBGM(LevelTypes typeLevel, float time)
+        public void ChangeBGM(BgmTypes typeLevel, float time)
         {
             bgmLevels.TryGetValue(typeLevel, out var audioSource);
             if (bgmAudioSource.isPlaying && bgmAudioSource.clip == audioSource.audioSample.audioClip)
@@ -80,7 +80,7 @@ namespace RiverAttack
         {
             audioEventSample.PlayOnShot(sfxAudioSource);
         }
-        public void StopBGM(LevelTypes typeLevel)
+        public void StopBGM(BgmTypes typeLevel)
         {
             if (bgmAudioSource == null)
                 return;

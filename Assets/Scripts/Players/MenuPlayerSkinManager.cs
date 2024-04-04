@@ -12,13 +12,13 @@ namespace RiverAttack
         // Start is called before the first frame update
         private void Start()
         {
-            m_PlayerSkin = playerSettings.playerSkin.getSkin;
+            //m_PlayerSkin = playerSettings.playerSkin.getSkin;
             ChangePlayerSkin();
         }
 
         public void ChangePlayerSkin()
         {
-            m_PlayerSkin = playerSettings.playerSkin.getSkin;
+            //m_PlayerSkin = playerSettings.playerSkin.getSkin;
 
             var children = GetComponentInChildren<PlayerSkinAttach>();
             if (children == true)

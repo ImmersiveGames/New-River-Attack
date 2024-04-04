@@ -13,29 +13,44 @@ MonoBehaviour:
   m_Name: Grass_River_M01
   m_EditorClassIdentifier: 
   levelName: Mission 01
+  levelNameLocale:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   developerDescription: 
   beatGame: 0
   dontCountMilestone: 0
   bossFight: 0
   hudPath: {fileID: 1754994762184901881, guid: 3b6e6e8db9e0b334c95f28559399cec0, type: 3}
   levelsStates: 1
-  pathType: 2
+  pathType: 64
   pathStart: {fileID: 1339132488644018, guid: 718139ffc2722bd4081603a626c43f19, type: 3}
   pathEnd: {fileID: 1339132488644018, guid: 718139ffc2722bd4081603a626c43f19, type: 3}
   levelOffset: {x: -5, y: 0, z: -60}
   setLevelList:
-  - levelPaths: {fileID: 1098899354938464, guid: ea661a18f5f7b4ad8b21e008955cfe1a,
+  - segmentObject: {fileID: 1098899354938464, guid: ea661a18f5f7b4ad8b21e008955cfe1a,
       type: 3}
-    enemiesSets: {fileID: 1753646910070318, guid: dbd148f1b6bceeb4585a728f1ea260e2,
+    enemySetObject: {fileID: 1753646910070318, guid: dbd148f1b6bceeb4585a728f1ea260e2,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 2
-  - levelPaths: {fileID: 1383632902568538, guid: 2ad6061eb73bf4dc4a7cb82f6602a230,
+  - segmentObject: {fileID: 1383632902568538, guid: 2ad6061eb73bf4dc4a7cb82f6602a230,
       type: 3}
-    enemiesSets: {fileID: 1876523743882564, guid: d33a2f19d5f11d84eab56d93aa130332,
+    enemySetObject: {fileID: 1876523743882564, guid: d33a2f19d5f11d84eab56d93aa130332,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 2
-  - levelPaths: {fileID: 1058777658038798, guid: 733a7db89988f4a468e8f9418f7fdb15,
+  - segmentObject: {fileID: 1058777658038798, guid: 733a7db89988f4a468e8f9418f7fdb15,
       type: 3}
-    enemiesSets: {fileID: 1281247228299778, guid: 5aadde66a9e7aaf459fe35e0565a1fbf,
+    enemySetObject: {fileID: 1281247228299778, guid: 5aadde66a9e7aaf459fe35e0565a1fbf,
       type: 3}
+    absolutePosition: 0
     bgmLevel: 2
+  references:
+    version: 2
+    RefIds: []

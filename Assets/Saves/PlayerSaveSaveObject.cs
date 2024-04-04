@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using CarterGames.Assets.SaveManager;
 using UnityEngine;
 using RiverAttack;
-using Shopping;
 using UnityEngine.Localization;
 using UnityEngine.Serialization;
 
@@ -11,7 +10,7 @@ namespace Save
     [CreateAssetMenu(fileName = "PlayerSaveSaveObject")]
     public class PlayerSaveSaveObject : SaveObject
     {
-        public SaveValue<List<ShopProduct>> listProducts;
+        //public SaveValue<List<ShopProduct>> listProducts;
         public SaveValue<int> wealth;
 
         public SaveValue<float> musicVolume;
