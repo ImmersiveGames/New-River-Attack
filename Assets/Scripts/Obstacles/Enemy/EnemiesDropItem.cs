@@ -13,7 +13,7 @@ namespace RiverAttack
         private Vector2 dropChance;
 
         private ListDropItems m_ItemsVariables;
-        private EnemiesMaster m_EnemyMaster;
+        private EnemiesMasterOld _mEnemyMasterOld;
         private GameObject m_ItemDrop;
 
         #region UNITY METHODS
@@ -21,19 +21,19 @@ namespace RiverAttack
         private void OnEnable()
         {
             SetInitialReferences();
-            m_EnemyMaster.EventObstacleMasterHit += DropItem;
+            _mEnemyMasterOld.EventObstacleMasterHit += DropItem;
         }
 
         private void OnDisable()
         {
-            m_EnemyMaster.EventObstacleMasterHit -= DropItem;
+            _mEnemyMasterOld.EventObstacleMasterHit -= DropItem;
         }
   #endregion
 
-  private void SetInitialReferences()
+        private void SetInitialReferences()
         {
-            m_EnemyMaster = GetComponent<EnemiesMaster>();
-            m_ItemsVariables = m_EnemyMaster.enemy.listDropItems;
+            _mEnemyMasterOld = GetComponent<EnemiesMasterOld>();
+            m_ItemsVariables = _mEnemyMasterOld.enemy.listDropItems;
         }
         //TODO: implementar Dropar mais de 1 item e pois precisa alterar a posição;
         private void DropItem()

@@ -1,14 +1,13 @@
-﻿using UnityEngine;
+﻿using ImmersiveGames.BulletsManagers;
+using UnityEngine;
 
 namespace ImmersiveGames.PoolManagers.Interface
 {
     public interface IPoolManager
     {
-        bool CreatePool(GameObject prefab, int initialPoolSize, Transform poolRoot, bool persistent = false);
+        bool CreatePool(string poolName, GameObject prefab, int initialPoolSize, Transform poolRoot, bool persistent = false);
 
-        GameObject GetObjectFromPool(string poolName);
-
-        GameObject GetObjectFromPool<T>(string poolName, ObjectMaster objMaster) where T : IPoolable;
+        GameObject GetObjectFromPool<T>(string poolName, Transform spawnPosition, BulletData bulletData) where T : IPoolable;
 
         Transform GetPool(string poolName);
 

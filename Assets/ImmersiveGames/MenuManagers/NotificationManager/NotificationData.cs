@@ -7,6 +7,6 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
     {
         public GameObject panelPrefab;
         public string message;
-        public System.Action confirmAction;
+        public System.Action ConfirmAction;
     }
 }

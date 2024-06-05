@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using NewRiverAttack.SteamGameManagers;
+
 namespace RiverAttack
 {
     public class GameStateEndGame : GameState
@@ -17,10 +19,10 @@ namespace RiverAttack
             switch (GameManager.instance.gameModes)
             {
                 case GameManager.GameModes.Classic:
-                    GameSteamManager.UnlockAchievement("ACH_FINISH_CLASSIC");
+                    SteamGameManager.UnlockAchievement("ACH_FINISH_CLASSIC");
                     break;
                 case GameManager.GameModes.Mission:
-                    GameSteamManager.UnlockAchievement("ACH_FINISH_MISSION");
+                    SteamGameManager.UnlockAchievement("ACH_FINISH_MISSION");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

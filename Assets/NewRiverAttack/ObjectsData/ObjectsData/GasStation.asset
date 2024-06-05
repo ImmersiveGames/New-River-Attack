@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c382620741fa430695158a3db9fa2aad, type: 3}
+  m_Name: GasStation
+  m_EditorClassIdentifier: 
+  canRespawn: 1
+  canKilled: 1
+  ignoreWalls: 1
+  ignoreEnemies: 1
+  ignoreBullets: 0
+  name: Gas Station
+  localizeName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  obstacleTypes: 11
+  hitPoints: 1
+  valueScore: 50
+  defaultPrefabSkin:
+  - {fileID: 3857086621416831841, guid: c9a17af5e65b68e4aa88fa6aa4058380, type: 3}
+  randomSkin: 0
+  deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
+    type: 3}
+  timeoutDestroy: 1.8
+  explodeSize: 0.7
+  shakeIntensity: 2
+  shakeTime: 0.1
+  moveVelocity: 0
+  animationDuration: 0
+  animationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  approachMovement: {x: 0, y: 0}
+  references:
+    version: 2
+    RefIds: []

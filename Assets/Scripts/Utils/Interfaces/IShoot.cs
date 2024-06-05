@@ -3,7 +3,7 @@ namespace Utils
 {
     public interface IShoot
     {
-        void EnterState(ObstacleMaster enemiesMaster);
+        void EnterState(ObstacleMasterOld enemiesMasterOld);
         void UpdateState();
         void ExitState();
     }

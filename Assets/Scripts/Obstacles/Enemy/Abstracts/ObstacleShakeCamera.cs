@@ -6,22 +6,22 @@ public class ObstacleShakeCamera : MonoBehaviour
 {
     [SerializeField] private float shakeIntensity;
     [SerializeField] private float shakeTime;
-    private ObstacleMaster m_ObstacleMaster;
+    private ObstacleMasterOld _mObstacleMasterOld;
     #region UNITYMETHODS
 
     private void Awake()
     {
-        m_ObstacleMaster = GetComponent<ObstacleMaster>();
+        _mObstacleMasterOld = GetComponent<ObstacleMasterOld>();
     }
 
     private void OnEnable()
     {
-        m_ObstacleMaster.EventObstacleMasterHit += ShakeCamOnExplode;
+        _mObstacleMasterOld.EventObstacleMasterHit += ShakeCamOnExplode;
     }
 
     private void OnDisable()
     {
-        m_ObstacleMaster.EventObstacleMasterHit -= ShakeCamOnExplode;
+        _mObstacleMasterOld.EventObstacleMasterHit -= ShakeCamOnExplode;
     }
     #endregion
 

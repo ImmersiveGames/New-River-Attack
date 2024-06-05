@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using ImmersiveGames.DebugManagers;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -10,7 +9,7 @@ namespace ImmersiveGames.AudioEvents
     [CreateAssetMenu(fileName = "AudioEventClip", menuName = "Audio Events/Audio Clip", order = 1)]
     public class AudioEvent : AudioEventSo
     {
-        [SerializeField] private AudioEventClip audioSample;
+        [SerializeField] public AudioEventClip audioSample;
         [SerializeField] private AudioMixerGroup audioMixerGroup;
 
         private MonoBehaviour _cachedMonoBehaviour;
@@ -24,7 +23,7 @@ namespace ImmersiveGames.AudioEvents
 
         #endregion
 
-        
+        #region Preview Inspector
 
         public void PreviewPlay(AudioSource source)
         {
@@ -36,6 +35,27 @@ namespace ImmersiveGames.AudioEvents
         {
             source.Stop();
         }
+
+        #endregion
+
+        public float GetLength => audioSample.audioClip.length;
+        public void SimplePlay(AudioSource source)
+        {
+            if (audioSample?.audioClip == null)
+            {
+                DebugManager.LogError<AudioEvent>("Audio clip not assigned in AudioEvent.");
+                return;
+            }
+            if(source == null)
+            {
+                DebugManager.LogError<AudioEvent>("Audio Source not assigned in AudioEvent.");
+                return;
+            };
+            if (source.isPlaying) source.Stop();
+            SetupSource(source);
+            source.Play();
+        }
+        
         public override void Play(AudioSource source, MonoBehaviour monoBehaviour, float fadeTime = 1.0f)
         {
             if (audioSample?.audioClip == null || monoBehaviour == null)
@@ -50,15 +70,21 @@ namespace ImmersiveGames.AudioEvents
             if (source.isPlaying)
             {
                 DebugManager.LogWarning<AudioEvent>($"Ja esta tocando: {audioSample.name}");
+                if (fadeTime == 0)
+                {
+                    source.Play();
+                    return;
+                }
                 _cachedMonoBehaviour.StartCoroutine(TransitionAudio(source, fadeTime));
+              return;  
             }
-            else
-            {
-                DebugManager.Log<AudioEvent>($"Não tocando: {audioSample.name}");
-                SetupSource(source);
+
+            DebugManager.Log<AudioEvent>($"Não tocando: {audioSample.name}");
+            SetupSource(source);
+            if(fadeTime > 0)
                 _cachedMonoBehaviour.StartCoroutine(FadeAudio(source, fadeTime, 0f, GetVolume));
-                source.Play();
-            }
+            source.Play();
+
         }
 
         private IEnumerator TransitionAudio(AudioSource source, float fadeTime)
@@ -90,6 +116,15 @@ namespace ImmersiveGames.AudioEvents
             if (IsPlaying(source) && monoBehaviour != null)
             {
                 monoBehaviour.StartCoroutine(FadeAudio(source, fadeTime, source.volume, 0f));
+            }
+        }
+        
+        public void Stop(AudioSource source)
+        {
+            if (audioSample.audioClip == null || source == null) return;
+            if (IsPlaying(source))
+            {
+                source.Stop();
             }
         }
 
@@ -125,9 +160,9 @@ namespace ImmersiveGames.AudioEvents
             source.loop = audioSample.loop;
         }
 
-        private float GetVolume => Random.Range(audioSample.volume.x, audioSample.volume.y);
+        public float GetVolume => Random.Range(audioSample.volume.x, audioSample.volume.y);
 
-        private float GetPitch => Random.Range(audioSample.pitch.x, audioSample.pitch.y);
+        public float GetPitch => Random.Range(audioSample.pitch.x, audioSample.pitch.y);
 
         private void Cleanup()
         {

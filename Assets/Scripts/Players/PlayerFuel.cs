@@ -1,4 +1,5 @@
 ﻿using System;
+using NewRiverAttack.SteamGameManagers;
 using UnityEngine;
 
 namespace RiverAttack
@@ -13,7 +14,7 @@ namespace RiverAttack
 
         private GamePlayManager m_GamePlayManager;
         private GamePlayingLog m_GamePlayingLog;
-        private PlayerMaster m_PlayerMaster;
+        private PlayerMasterOld _mPlayerMasterOld;
         private PlayerSettings m_PlayerSettings;
 
         #region UNITYMETHODS
@@ -25,8 +26,8 @@ namespace RiverAttack
 
         private void Update()
         {
-            if (!m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady) return;
-            if (m_GamePlayManager.getGodMode || m_PlayerMaster.inEffectArea) return;
+            if (!m_GamePlayManager.shouldBePlayingGame || !_mPlayerMasterOld.ShouldPlayerBeReady) return;
+            if (m_GamePlayManager.getGodMode || _mPlayerMasterOld.inEffectArea) return;
             m_TimeLoop += Time.deltaTime;
             if (m_TimeLoop < reduceFuelCadence) return;
             //Pode reduzir a Gasolina
@@ -38,30 +39,30 @@ namespace RiverAttack
             // Verifica se ainda tem gasolina
             if (m_PlayerSettings.actualFuel > 0) return;
             m_PlayerSettings.actualFuel = 0;
-            if(GameSteamManager.connectedToSteam)
-                GameSteamManager.UnlockAchievement("ACH_DIE_PLAYER_GAS");
-            m_PlayerMaster.OnEventPlayerMasterHit();
+            if(SteamGameManager.ConnectedToSteam)
+                SteamGameManager.UnlockAchievement("ACH_DIE_PLAYER_GAS");
+            _mPlayerMasterOld.OnEventPlayerMasterHit();
         }
 
         private void OnDisable()
         {
-            if(GameSteamManager.connectedToSteam)
-                GameSteamManager.StoreStats();
+            if(SteamGameManager.ConnectedToSteam)
+                SteamGameManager.StoreStats();
         }
   #endregion
 
   private void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
-            m_PlayerMaster = GetComponent<PlayerMaster>();
-            m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
+            _mPlayerMasterOld = GetComponent<PlayerMasterOld>();
+            m_PlayerSettings = _mPlayerMasterOld.getPlayerSettings;
             m_GamePlayingLog = m_GamePlayManager.gamePlayingLog;
         }
 
         private void LogGamePlay(int reduce)
         {
             m_GamePlayingLog.fuelSpent += reduce;
-            GameSteamManager.AddStat("stat_SpendGas", reduce, false);
+            SteamGameManager.AddStat("stat_SpendGas", reduce, false);
         }
     }
 }

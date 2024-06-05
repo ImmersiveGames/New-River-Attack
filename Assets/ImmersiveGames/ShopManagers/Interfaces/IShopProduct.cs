@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using ImmersiveGames.PlayerManagers.ScriptableObjects;
 
 namespace ImmersiveGames.ShopManagers.Interfaces
 {

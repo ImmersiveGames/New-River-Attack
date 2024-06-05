@@ -1,17 +1,17 @@
 ﻿/*
- * Copyright (c) 2018-Present Carter Games
- * 
+ * Copyright (c) 2024 Carter Games
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
  *
- *    
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
@@ -40,7 +40,7 @@ namespace CarterGames.Assets.SaveManager
         ───────────────────────────────────────────────────────────────────────────────────────────────────────────── */
 
         // The actual save data asset holding the data in the project.
-        private static SaveData SaveData => AssetAccessor.GetAsset<SettingsAssetRuntime>().SaveData;
+        private static SaveData SaveData => AssetAccessor.GetAsset<AssetGlobalRuntimeSettings>().SaveData;
         
         
         // The load handler cache for the save manager.
@@ -74,19 +74,19 @@ namespace CarterGames.Assets.SaveManager
         /// <summary>
         /// Gets the save path for the current save setup.
         /// </summary>
-        private static string SavePath => AssetAccessor.GetAsset<SettingsAssetRuntime>().SavePath;
+        private static string SavePath => AssetAccessor.GetAsset<AssetGlobalRuntimeSettings>().SavePath;
 
 
         /// <summary>
         /// Gets the save path for the current save setup.
         /// </summary>
-        private static bool Prettify => AssetAccessor.GetAsset<SettingsAssetRuntime>().Prettify;
+        private static bool Prettify => AssetAccessor.GetAsset<AssetGlobalRuntimeSettings>().Prettify;
 
 
         /// <summary>
         /// Gets the current encryption setting setup.
         /// </summary>
-        private static EncryptionOption EncryptionSetting => AssetAccessor.GetAsset<SettingsAssetRuntime>().Encryption;
+        private static EncryptionOption EncryptionSetting => AssetAccessor.GetAsset<AssetGlobalRuntimeSettings>().Encryption;
         
         
         /// <summary>
@@ -146,7 +146,7 @@ namespace CarterGames.Assets.SaveManager
             if (IsInitialized) return;
             
             // Makes the save file if it doesn't exist yet, as I somehow missed this check on load otherwise.
-            if (!File.Exists(AssetAccessor.GetAsset<SettingsAssetRuntime>().SavePath))
+            if (!File.Exists(AssetAccessor.GetAsset<AssetGlobalRuntimeSettings>().SavePath))
             {
                 Save();
             }
@@ -160,23 +160,7 @@ namespace CarterGames.Assets.SaveManager
             
             TryGenerateSaveLookup();
             
-
-            if (SaveData != null)
-            {
-                if (AssetAccessor.GetAsset<SettingsAssetRuntime>().AutoLoad)
-                {
-                    LoadedDataLookup = LoadFromFile();
-                }
-                else
-                {
-                    LoadedDataLookup = new SerializableDictionary<string, SerializableDictionary<string, string>>();
-                }
-            }
-            else
-            {
-                LoadedDataLookup = new SerializableDictionary<string, SerializableDictionary<string, string>>();
-            }
-
+            LoadedDataLookup = LoadFromFile();
 
             foreach (var saveValue in SaveDataLookup.ToList())
             {
@@ -298,7 +282,7 @@ namespace CarterGames.Assets.SaveManager
             loadHandler = new WebSaveHandler();
 #else
             loadHandler = new StandardSaveHandler();
-#endif  
+#endif
             
             return loadHandler.LoadFromFile(SavePath);
         }

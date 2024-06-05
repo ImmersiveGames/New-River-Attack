@@ -11,31 +11,31 @@ namespace RiverAttack
 
         private Animator m_Animator;
         private Animator m_AnimatorSkin;
-        private PlayerMaster m_PlayerMaster;
+        private PlayerMasterOld _mPlayerMasterOld;
 
         #region UNITYMETHODS
 
         private void OnEnable()
         {
             SetInitialReferences();
-            m_PlayerMaster.EventPlayerMasterControllerMovement += AnimationMovement;
-            m_PlayerMaster.EventPlayerMasterRespawn += AnimationReset;
-            m_PlayerMaster.EventPlayerMasterBossHit += AnimationHit;
-            m_PlayerMaster.EventPlayerMasterUpdateSkin += UpdateAnimator;
+            _mPlayerMasterOld.EventPlayerMasterControllerMovement += AnimationMovement;
+            _mPlayerMasterOld.EventPlayerMasterRespawn += AnimationReset;
+            _mPlayerMasterOld.EventPlayerMasterBossHit += AnimationHit;
+            _mPlayerMasterOld.EventPlayerMasterUpdateSkin += UpdateAnimator;
         }
 
         private void OnDisable()
         {
-            m_PlayerMaster.EventPlayerMasterControllerMovement -= AnimationMovement;
-            m_PlayerMaster.EventPlayerMasterRespawn -= AnimationReset;
-            m_PlayerMaster.EventPlayerMasterBossHit -= AnimationHit;
-            m_PlayerMaster.EventPlayerMasterUpdateSkin -= UpdateAnimator;
+            _mPlayerMasterOld.EventPlayerMasterControllerMovement -= AnimationMovement;
+            _mPlayerMasterOld.EventPlayerMasterRespawn -= AnimationReset;
+            _mPlayerMasterOld.EventPlayerMasterBossHit -= AnimationHit;
+            _mPlayerMasterOld.EventPlayerMasterUpdateSkin -= UpdateAnimator;
         }
   #endregion
 
   private void SetInitialReferences()
         {
-            m_PlayerMaster = GetComponent<PlayerMaster>();
+            _mPlayerMasterOld = GetComponent<PlayerMasterOld>();
             m_Animator = GetComponent<Animator>();
         }
 

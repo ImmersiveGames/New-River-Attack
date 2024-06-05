@@ -29,7 +29,7 @@ namespace RiverAttack
             _gameHubManager.readyHub = true;
             _nextIndex = _gameHubManager.missions.FindIndex(x => x.levels == _gameHubManager.gamePlayingLog.activeMission);
             missionName.text = _gameHubManager.gamePlayingLog.activeMission.levelName;
-            //Debug.Log($"Name {_gameHubManager.gamePlayingLog.activeMission.levelName}");
+            
         }
 
         private void OnDisable()
@@ -60,7 +60,7 @@ namespace RiverAttack
             _gameHubManager.OnChangeMission(_nextIndex);
             missionName.text = GamePlayingLog.instance.activeMission.levelName;
             _pushButtonStart = false;
-            //Debug.Log($"Next Index: {_nextIndex}");
+            
         }
 
         private void NextMission(InputAction.CallbackContext context)

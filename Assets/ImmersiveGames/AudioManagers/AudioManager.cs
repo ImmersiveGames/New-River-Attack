@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using ImmersiveGames.AudioEvents;
 using ImmersiveGames.DebugManagers;
-using ImmersiveGames.LevelBuilder;
-using ImmersiveGames.SaveManagers;
 using ImmersiveGames.StateManagers.Interfaces;
 using ImmersiveGames.Utils;
+using NewRiverAttack.LevelBuilder;
+using NewRiverAttack.SaveManagers;
 using UnityEngine;
 using UnityEngine.Audio;
 
 namespace ImmersiveGames
 {
-    public class AudioManager : Singleton<AudioManager>
+    public partial class AudioManager : Singleton<AudioManager>
     {
         private const float BGMVolumeDefault = 1f;
         private const float SfxVolumeDefault = 1f;
@@ -62,6 +61,7 @@ namespace ImmersiveGames
             return GetAudioEventForState(state.StateName, mapAudioEvent);
             // Retorna null se não encontrar correspondência
         }
+        
         private static AudioEvent GetAudioEventForState(string stateName, IEnumerable<MapAudioEvent> mapAudioEvent)
         {
             return (from stateBgm in mapAudioEvent where stateBgm.stateName == stateName select stateBgm.soundAudioEvent).FirstOrDefault();
@@ -78,49 +78,21 @@ namespace ImmersiveGames
             }
             audioEventForState.PlayOnShot(_sfxAudioSource);
         }
-
-        public static void PlayMouseClick()
-        {
-            PlayOneShot(EnumSfxSound.SfxMouseClick.ToString());
-        }
-        public static void PlayNotifications()
-        {
-            PlayOneShot(EnumSfxSound.SfxNotification.ToString());
-        }
-        public static void PlayMouseOver()
-        {
-            PlayOneShot(EnumSfxSound.SfxMouseOver.ToString());
-        }
-
-        public void PlayBGM(LevelData levelData, int levelIndexBgm)
-        {
-            DebugManager.Log<AudioManager>($"Procurando: {levelData.levelType}");
-            
-            var audioEventForLevel = levelData.levelType != LevelTypes.Multi ?
-                GetAudioEventForState(levelData.levelType.ToString(), _mapStateBgm):
-                GetAudioEventForState(levelData.setLevelList[levelIndexBgm].bgmLevel.ToString(), _mapStateBgm);
-            if (audioEventForLevel == null)
-            {
-                DebugManager.Log<AudioManager>($"Não Encontrou um audio relativo ao Tipo: {levelData.levelType.ToString()}");
-            }
-            DebugManager.Log<AudioManager>($"AudioEvent: {audioEventForLevel}");
-            audioEventForLevel.Play(_bgmAudioSource, this, fadeSoundDuration);
-        }
-
+        
         public static void PlayBGM(IState state)
+        {
+            PlayBGM(state.StateName);
+        }
+        public static void PlayBGM(string state)
         {
             // Obtém o AudioEvent correspondente ao estado
             var audioEventForState = GetAudioEventForState(state, _mapStateBgm);
             if (audioEventForState == null)
             {
-                DebugManager.Log<AudioManager>($"Não Encontrou um audio relativo ao nome: {state.StateName}");
+                DebugManager.LogWarning<AudioManager>($"Não Encontrou um audio relativo ao nome: {state}");
+                return;
             }
-            // Se houver uma nova música para tocar, inicia a reprodução com uma transição suave (fade-in)
-            if (audioEventForState != null)
-            {
-                audioEventForState.Play(_bgmAudioSource, instance, _fadeSoundDuration);
-            }
+            audioEventForState.Play(_bgmAudioSource, instance, _fadeSoundDuration);
         }
-        // Função para fade de volume usando a função FadeProperty.
     }
 }

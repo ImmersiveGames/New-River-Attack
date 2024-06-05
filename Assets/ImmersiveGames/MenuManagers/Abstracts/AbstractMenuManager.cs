@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Cinemachine;
+﻿using System.Collections.Generic;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.MenuManagers.UI;
 using UnityEngine;
@@ -35,8 +33,10 @@ namespace ImmersiveGames.MenuManagers.Abstracts
                 foreach (var menu in _menus)
                 {
                     menu.menuGameObject.SetActive(false);
+                    if (!menu.virtualCameraBase) continue;
                     menu.virtualCameraBase.Priority = 0;
                     menu.virtualCameraBase.gameObject.SetActive(false);
+
                 }
                 _menuHistory.Push(_currentMenuIndex);
 
@@ -45,9 +45,11 @@ namespace ImmersiveGames.MenuManagers.Abstracts
                 _currentMenuIndex = index;
 
                 _menus[index].menuGameObject.SetActive(true);
-                _menus[index].virtualCameraBase.Priority = 10;
-                _menus[index].virtualCameraBase.gameObject.SetActive(true);
-
+                if (_menus[index].virtualCameraBase)
+                {
+                    _menus[index].virtualCameraBase.Priority = 10;
+                    _menus[index].virtualCameraBase.gameObject.SetActive(true);
+                }
                 SetSelectGameObject(_menus[index].firstSelect);
 
                 OnEnterMenu(_menus[index]);
@@ -103,12 +105,5 @@ namespace ImmersiveGames.MenuManagers.Abstracts
             Application.Quit();
         }
     }
-    [Serializable]
-    public class PanelsMenuReference
-    {
-        public GameObject menuGameObject;
-        public GameObject firstSelect;
-        public float startTimelineAnimation;
-        public CinemachineVirtualCameraBase virtualCameraBase;
-    }
+   
 }

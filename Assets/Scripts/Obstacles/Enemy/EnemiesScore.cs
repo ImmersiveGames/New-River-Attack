@@ -5,33 +5,33 @@ namespace RiverAttack
     public class EnemiesScore : MonoBehaviour
     {
         protected GamePlayManager gamePlayManager;
-        private ObstacleMaster m_ObstacleMaster;
+        private ObstacleMasterOld _mObstacleMasterOld;
         #region UNITY METHODS
         protected virtual void OnEnable()
         {
             SetInitialReferences();
-            m_ObstacleMaster.EventObstacleScore += SetScore;
+            _mObstacleMasterOld.EventObstacleScore += SetScore;
         }
         protected virtual void OnDisable()
         {
-            m_ObstacleMaster.EventObstacleScore -= SetScore;
+            _mObstacleMasterOld.EventObstacleScore -= SetScore;
         }
   #endregion
 
         protected virtual void SetInitialReferences()
         {
-            m_ObstacleMaster = GetComponent<ObstacleMaster>();
+            _mObstacleMasterOld = GetComponent<ObstacleMasterOld>();
             gamePlayManager = GamePlayManager.instance;
         }
 
         private void SetScore(PlayerSettings playerSettings)
         {
-            float score = m_ObstacleMaster.enemy.enemyScore;
+            float score = _mObstacleMasterOld.enemy.enemyScore;
             if (score == 0) return;
-            var enemyMaster = m_ObstacleMaster as EnemiesMaster;
-            if (enemyMaster != null && EnemiesMaster.myDifficulty.multiplyScore > 0)
+            var enemyMaster = _mObstacleMasterOld as EnemiesMasterOld;
+            if (enemyMaster != null && EnemiesMasterOld.myDifficulty.multiplyScore > 0)
             {
-                var myDifficulty = EnemiesMaster.myDifficulty;
+                var myDifficulty = EnemiesMasterOld.myDifficulty;
                 if (myDifficulty.multiplyScore > 0)
                     score *= myDifficulty.multiplyScore;
             }

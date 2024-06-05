@@ -20,12 +20,12 @@ namespace RiverAttack
 
         //IBossBehavior
         private bool m_Finished;
-        private readonly BossMaster m_BossMaster;
+        private readonly BossMasterOld _mBossMasterOld;
         private readonly BossMissileShoot m_BossMissileShoot;
-        internal CleanShootBehavior(BossMaster bossMaster)
+        internal CleanShootBehavior(BossMasterOld bossMasterOld)
         {
-            m_BossMaster = bossMaster;
-            m_MyPool = m_BossMissileShoot = m_BossMaster.GetBossMissileShoot();
+            _mBossMasterOld = bossMasterOld;
+            m_MyPool = m_BossMissileShoot = _mBossMasterOld.GetBossMissileShoot();
         }
         public void Enter()
         {
@@ -34,12 +34,12 @@ namespace RiverAttack
             m_ShootCycles = SHOOT_CYCLES;
             
             m_SpawnPoint = m_BossMissileShoot.spawnPoint;
-            m_Target = m_BossMaster.targetPlayer;
+            m_Target = _mBossMasterOld.targetPlayer;
         }
         public void Update()
         {
             //Debug.Log("Atualizando comportamento CleanShootBehavior");
-            if(!m_BossMaster.shouldBeBossBattle) return;
+            if(!_mBossMasterOld.shouldBeBossBattle) return;
             m_Cadence -= Time.deltaTime;
             if (!(m_Cadence <= 0.01f))
                 return;
@@ -75,7 +75,7 @@ namespace RiverAttack
             //setting bullet entity
             var myBullet = myShoot.GetComponent<BulletBoss>();
             myBullet.SetMyPool(PoolObjectManager.GetPool(m_MyPool));
-            myBullet.ownerShoot = m_BossMaster;
+            myBullet.ownerShoot = _mBossMasterOld;
             myBullet.Init(SHOOT_SPEED, BULLET_LIFE_TIME);
             myBullet.moveDirection = targetTransform;
             //Deattached bullet

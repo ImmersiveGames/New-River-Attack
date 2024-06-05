@@ -13,7 +13,7 @@ namespace RiverAttack
 
         private Vector2 m_InputVector;
         private PlayersInputActions m_PlayersInputActions;
-        private PlayerMaster m_PlayerMaster;
+        private PlayerMasterOld _mPlayerMasterOld;
         private GamePlayManager m_GamePlayManager;
 
         #region UNITYMETHODS
@@ -21,12 +21,12 @@ namespace RiverAttack
         private void OnEnable()
         {
             SetInitialReferences();
-            SetValuesFromPlayerSettings(m_PlayerMaster.getPlayerSettings);
+            SetValuesFromPlayerSettings(_mPlayerMasterOld.getPlayerSettings);
         }
 
         private void Start()
         {
-            m_PlayersInputActions = m_PlayerMaster.playersInputActions;
+            m_PlayersInputActions = _mPlayerMasterOld.playersInputActions;
             m_PlayersInputActions.Enable();
             m_PlayersInputActions.Player.Axis_Move.performed += TouchMove;
             m_PlayersInputActions.Player.Axis_Move.canceled += EndTouchMove;
@@ -34,7 +34,7 @@ namespace RiverAttack
 
         private void FixedUpdate()
         {
-            if (!m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady) return;
+            if (!m_GamePlayManager.shouldBePlayingGame || !_mPlayerMasterOld.ShouldPlayerBeReady) return;
 
             float axisAutoMovement = m_InputVector.y switch
             {
@@ -43,11 +43,11 @@ namespace RiverAttack
                 _ => m_AutoMovement
             };
 
-            m_PlayerMaster.playerMovementStatus = m_InputVector.y switch
+            _mPlayerMasterOld.playerMovementStatus = m_InputVector.y switch
             {
-                > 0 => PlayerMaster.MovementStatus.Accelerate,
-                < 0 => PlayerMaster.MovementStatus.Reduce,
-                _ => PlayerMaster.MovementStatus.None
+                > 0 => PlayerMasterOld.MovementStatus.Accelerate,
+                < 0 => PlayerMasterOld.MovementStatus.Reduce,
+                _ => PlayerMasterOld.MovementStatus.None
             };
             
             var moveDir = new Vector3(m_InputVector.x, 0, axisAutoMovement);
@@ -75,13 +75,13 @@ namespace RiverAttack
             }
             transform.position += moveDir * (m_MovementSpeed * Time.deltaTime);
 
-            m_PlayerMaster.OnEventPlayerMasterControllerMovement(m_InputVector);
+            _mPlayerMasterOld.OnEventPlayerMasterControllerMovement(m_InputVector);
         }
   #endregion
 
   private void SetInitialReferences()
         {
-            m_PlayerMaster = GetComponent<PlayerMaster>();
+            _mPlayerMasterOld = GetComponent<PlayerMasterOld>();
             m_GamePlayManager = GamePlayManager.instance;
         }
 

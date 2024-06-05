@@ -3,15 +3,15 @@ namespace RiverAttack
 {
     public class EnemiesBridges : MonoBehaviour
     {
-        private EnemiesMaster m_EnemiesMaster;
+        private EnemiesMasterOld _mEnemiesMasterOld;
         
 
         public void IsFinish()
         {
-            m_EnemiesMaster = GetComponent<EnemiesMaster>();
+            _mEnemiesMasterOld = GetComponent<EnemiesMasterOld>();
             //Debug.Log($"Enemie Master: {m_EnemiesMaster}");
-            if(m_EnemiesMaster)
-                m_EnemiesMaster.isFinishLevel = true;
+            if(_mEnemiesMasterOld)
+                _mEnemiesMasterOld.isFinishLevel = true;
         }
 
         public void SetBridgeType()

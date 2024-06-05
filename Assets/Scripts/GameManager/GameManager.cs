@@ -56,7 +56,7 @@ namespace RiverAttack
 
         private static bool shouldPlayerBeReady =>
             PlayerManager.instance.initializedPlayerMasters[0].isPlayerDead == false &&
-            PlayerManager.instance.initializedPlayerMasters[0].playerMovementStatus !=  PlayerMaster.MovementStatus.Paused;
+            PlayerManager.instance.initializedPlayerMasters[0].playerMovementStatus !=  PlayerMasterOld.MovementStatus.Paused;
 
         #region UNITYMETHODS
 

@@ -10,31 +10,31 @@ namespace RiverAttack
 
         public GameObject smokeVFX;
 
-        private BossMaster m_BossMaster;
+        private BossMasterOld _mBossMasterOld;
         private Animator m_Animator;
 
         private void OnEnable()
         {
             SetInitialReferences();
-            m_BossMaster.EventBossEmerge += AnimateEmerge;
-            m_BossMaster.EventBossSubmerge += AnimateSubmerge;
-            m_BossMaster.EventBossHit += AnimateGotHit;
-            m_BossMaster.EventSmokeSpawn += SmokeBoss;
-            m_BossMaster.EventBossDeath += AnimateDeath;
+            _mBossMasterOld.EventBossEmerge += AnimateEmerge;
+            _mBossMasterOld.EventBossSubmerge += AnimateSubmerge;
+            _mBossMasterOld.EventBossHit += AnimateGotHit;
+            _mBossMasterOld.EventSmokeSpawn += SmokeBoss;
+            _mBossMasterOld.EventBossDeath += AnimateDeath;
         }
 
         private void OnDisable()
         {
-            m_BossMaster.EventBossEmerge -= AnimateEmerge;
-            m_BossMaster.EventBossSubmerge -= AnimateSubmerge;
-            m_BossMaster.EventBossHit -= AnimateGotHit;
-            m_BossMaster.EventSmokeSpawn -= SmokeBoss;
-            m_BossMaster.EventBossDeath -= AnimateDeath;
+            _mBossMasterOld.EventBossEmerge -= AnimateEmerge;
+            _mBossMasterOld.EventBossSubmerge -= AnimateSubmerge;
+            _mBossMasterOld.EventBossHit -= AnimateGotHit;
+            _mBossMasterOld.EventSmokeSpawn -= SmokeBoss;
+            _mBossMasterOld.EventBossDeath -= AnimateDeath;
         }
 
         private void SetInitialReferences()
         {
-            m_BossMaster = GetComponent<BossMaster>();
+            _mBossMasterOld = GetComponent<BossMasterOld>();
             m_Animator = GetComponentInChildren<Animator>();
         }
 

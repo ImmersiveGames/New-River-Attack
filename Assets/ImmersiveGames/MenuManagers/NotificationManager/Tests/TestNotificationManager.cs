@@ -69,7 +69,7 @@ namespace ImmersiveGames.MenuManagers.NotificationManager.Tests
             {
                 panelPrefab = choicePanelPrefab,
                 message = message,
-                confirmAction = confirmAction,
+                ConfirmAction = confirmAction,
             };
 
             NotificationManager.instance.AddNotification(notificationData);

@@ -64,5 +64,7 @@ namespace ImmersiveGames.Utils
         {
             return Mathf.Log10(normalizeNumber) * 20f;
         }
+        
+        
     }
 }

@@ -5,26 +5,26 @@ namespace RiverAttack
     public class EmergeBehavior : IBossBehavior
     {
         private bool m_Finished;
-        private readonly BossMaster m_BossMaster;
+        private readonly BossMasterOld _mBossMasterOld;
         private float m_CountTime;
         private const float TIME_LIMIT = 7.5f;
 
-        internal EmergeBehavior(BossMaster bossMaster)
+        internal EmergeBehavior(BossMasterOld bossMasterOld)
         {
-            m_BossMaster = bossMaster;
+            _mBossMasterOld = bossMasterOld;
         }
         public void Enter()
         {
-            Debug.Log($"Entrando no comportamento Emergir {m_BossMaster.targetPlayer}");
-            m_BossMaster.BossInvulnerability(true);
+            Debug.Log($"Entrando no comportamento Emergir {_mBossMasterOld.targetPlayer}");
+            _mBossMasterOld.BossInvulnerability(true);
             // Lógica de entrada para o comportamento Emergir
             m_Finished = false;
             //m_BossMaster.BossInvulnerability(true);
-            m_BossMaster.MoveBoss(m_BossMaster.actualPosition);
+            _mBossMasterOld.MoveBoss(_mBossMasterOld.actualPosition);
         }
         public void Update()
         {
-            if(!m_BossMaster.shouldBeBossBattle) return;
+            if(!_mBossMasterOld.shouldBeBossBattle) return;
             //Debug.Log("Atualizando comportamento Emergir");
             m_CountTime += Time.deltaTime;
 

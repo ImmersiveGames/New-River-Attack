@@ -1,5 +1,5 @@
-﻿using ImmersiveGames.SaveManagers;
-using ImmersiveGames.ShopManagers.Abstracts;
+﻿using ImmersiveGames.ShopManagers.Abstracts;
+using NewRiverAttack.SaveManagers;
 
 namespace ImmersiveGames.ShopManagers.Interfaces
 {

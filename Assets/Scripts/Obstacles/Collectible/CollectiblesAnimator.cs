@@ -8,19 +8,19 @@ namespace RiverAttack
         [SerializeField] private string collectTrigger;
         [SerializeField] private float timeCollectAnimation;
 
-        private CollectiblesMaster m_CollectiblesMaster;
+        private CollectiblesMasterOld _mCollectiblesMasterOld;
         private Animator m_Animator;
 
         #region UNITY METHODS
         protected void OnEnable()
         {
             SetInitialReferences();
-            m_CollectiblesMaster.EventCollectItem += CollectAnimation;
+            _mCollectiblesMasterOld.EventCollectItem += CollectAnimation;
         }
 
         private void OnDisable()
         {
-            m_CollectiblesMaster.EventCollectItem -= CollectAnimation;
+            _mCollectiblesMasterOld.EventCollectItem -= CollectAnimation;
         }
   #endregion
 
@@ -38,7 +38,7 @@ namespace RiverAttack
 
         private void SetInitialReferences()
         {
-            m_CollectiblesMaster = GetComponent<CollectiblesMaster>();
+            _mCollectiblesMasterOld = GetComponent<CollectiblesMasterOld>();
             m_Animator = GetComponentInChildren<Animator>();
 
         }

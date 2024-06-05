@@ -6,6 +6,9 @@ using ImmersiveGames.ScenesManager;
 using ImmersiveGames.ScenesManager.Transitions;
 using ImmersiveGames.StateManagers.Interfaces;
 using ImmersiveGames.TimelineManagers;
+using NewRiverAttack.GameManagers;
+using NewRiverAttack.GamePlayManagers;
+using NewRiverAttack.StateManagers;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
@@ -97,12 +100,14 @@ namespace ImmersiveGames.MenuManagers
         public async void GotoClassicMode()
         {
             AudioManager.PlayMouseClick();
-            await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateOpenGame.ToString()).ConfigureAwait(false);
+            GameManager.instance.gamePlayMode = GamePlayModes.ClassicMode;
+            await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStatePlay.ToString()).ConfigureAwait(false);
         }
         public async void GotoMissionMode()
         {
             AudioManager.PlayMouseClick();
-            await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateOpenGame.ToString()).ConfigureAwait(false);
+            GameManager.instance.gamePlayMode = GamePlayModes.MissionMode;
+            await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateHub.ToString()).ConfigureAwait(false);
         }
         public void ButtonPlayAnimation(float startTime)
         {

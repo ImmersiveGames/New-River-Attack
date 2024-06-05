@@ -2,34 +2,34 @@
 {
     public class CollectiblesScore : EnemiesScore
     {
-        private CollectiblesMaster m_CollectiblesMaster;
+        private CollectiblesMasterOld _mCollectiblesMasterOld;
 
         #region UNITY METHODS
         protected override void OnEnable()
         {
             base.OnEnable();
-            m_CollectiblesMaster.EventCollectItem += SetCollScore;
+            _mCollectiblesMasterOld.EventCollectItem += SetCollScore;
         }
         protected override void OnDisable()
         {
             base.OnDisable();
-            m_CollectiblesMaster.EventCollectItem -= SetCollScore;
+            _mCollectiblesMasterOld.EventCollectItem -= SetCollScore;
         }
   #endregion
 
         protected override void SetInitialReferences()
         {
             base.SetInitialReferences();
-            m_CollectiblesMaster = GetComponent<CollectiblesMaster>();
+            _mCollectiblesMasterOld = GetComponent<CollectiblesMasterOld>();
         }
 
         private void SetCollScore(PlayerSettings playerSettings)
         {
-            float score = m_CollectiblesMaster.collectibleScriptable.collectValuable;
+            float score = _mCollectiblesMasterOld.collectibleScriptable.collectValuable;
             if (score == 0) return;
-            if (EnemiesMaster.myDifficulty.multiplyScore > 0)
+            if (EnemiesMasterOld.myDifficulty.multiplyScore > 0)
             {
-                var myDifficulty = EnemiesMaster.myDifficulty;
+                var myDifficulty = EnemiesMasterOld.myDifficulty;
                 if (myDifficulty.multiplyScore > 0)
                     score *= myDifficulty.multiplyScore;
             }

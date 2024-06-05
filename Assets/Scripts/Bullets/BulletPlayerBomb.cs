@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NewRiverAttack.SteamGameManagers;
 using UnityEngine;
 
 namespace RiverAttack
@@ -21,7 +22,7 @@ namespace RiverAttack
         private float m_EndLife;
         private double m_TParam;
         private Collider m_Collider;
-        private readonly List<EnemiesMaster> m_CollisionEnemy = new List<EnemiesMaster>();
+        private readonly List<EnemiesMasterOld> m_CollisionEnemy = new List<EnemiesMasterOld>();
 
         #region UNITY METHODS
 
@@ -41,7 +42,7 @@ namespace RiverAttack
 
         private void OnTriggerEnter(Collider other)
         {
-            var enemy = other.GetComponentInParent<EnemiesMaster>();
+            var enemy = other.GetComponentInParent<EnemiesMasterOld>();
             if (enemy && !m_CollisionEnemy.Contains(enemy))
             {
                 m_CollisionEnemy.Add(enemy);
@@ -84,7 +85,7 @@ namespace RiverAttack
             //Debug.Log(m_CollisionEnemy.Count);
             if (m_CollisionEnemy.Count >= 3)
             {
-                GameSteamManager.UnlockAchievement("ACH_HIT_BOMB_3");
+                SteamGameManager.UnlockAchievement("ACH_HIT_BOMB_3");
             }
             GameObject o;
             (o = gameObject).SetActive(false);

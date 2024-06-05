@@ -1,57 +1,41 @@
-﻿using Cinemachine;
-using ImmersiveGames.GamePlayManagers;
-using ImmersiveGames.PlayerManagers.PlayerSystems;
+﻿using ImmersiveGames.TimelineManagers.Abstracts;
+using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
-using UnityEngine.Playables;
 
 namespace ImmersiveGames.TimelineManagers
 {
-    public class OpenAnimationMaster : MonoBehaviour
+    public class OpenAnimationMaster : AnimationsMaster
     {
-        private PlayableDirector _playableDirector;
-        private GamePlayManager _gamePlayManager;
-        private TimelineManager _timelineManager;
-        private CinemachineVirtualCamera _virtualCamera;
 
         private void Awake()
         {
             SetInitialReferences();
-            _gamePlayManager.EventPlayerInitialize += SetupTimeline;
-            _gamePlayManager.EventGameInitialize += PlayTimeline;
+            GamePlayManagerRef.EventPlayerInitialize += SetupTimeline;
+            GamePlayManagerRef.EventPostStateGameInitialize += PlayTimeline;
         }
 
         private void OnDestroy()
         {
-            _gamePlayManager.EventPlayerInitialize -= SetupTimeline;
-            _gamePlayManager.EventGameInitialize -= PlayTimeline;
+            GamePlayManagerRef.EventPlayerInitialize -= SetupTimeline;
+            GamePlayManagerRef.EventPostStateGameInitialize -= PlayTimeline;
         }
 
         private void SetupTimeline(PlayerMaster playerMaster)
         {
-            var playerAnimator = playerMaster.GetPlayerAnimator();
-            _timelineManager.ChangeBindingReference("Animation Track", playerAnimator);
-        }
-
-        private void PlayTimeline()
-        {
-            _timelineManager.PlayAnimation(0);
-        }
-
-        public void DownPriority()
-        {
-            _virtualCamera.Priority = 9;
+            gameObject.SetActive(true);
+            var playerAnimator = playerMaster.GetComponent<Animator>();
+            TimelineManagerRef.ChangeBindingReference("Animation Track", playerAnimator);
         }
         
-
-        private void SetInitialReferences()
+        protected override void SetInitialReferences()
         {
-            _gamePlayManager = GamePlayManager.instance;
-            _playableDirector = GetComponent<PlayableDirector>();
-            _playableDirector.gameObject.SetActive(true);
-            _timelineManager = new TimelineManager(_playableDirector);
-            _virtualCamera = GetComponentInChildren<CinemachineVirtualCamera>();
-            _virtualCamera.Priority = 10;
+            base.SetInitialReferences();
+            VirtualCamera.Priority = 10;
+        }
 
+        public void DisableAnimation()
+        {
+            gameObject.SetActive(false);
         }
     }
 }

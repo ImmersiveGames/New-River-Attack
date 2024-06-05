@@ -24,12 +24,12 @@ namespace RiverAttack
 
         private void OnTriggerEnter(Collider collision)
         {
-            if ((collision.GetComponentInParent<EnemiesMaster>() && !collision.GetComponentInParent<CollectiblesMaster>()) ||
+            if ((collision.GetComponentInParent<EnemiesMasterOld>() && !collision.GetComponentInParent<CollectiblesMasterOld>()) ||
                 collision.GetComponentInParent<BulletEnemy>()|| collision.GetComponentInParent<BulletBoss>()||
-                collision.GetComponentInParent<BossMaster>()) return;
+                collision.GetComponentInParent<BossMasterOld>()) return;
             
             if (collision.GetComponentInParent<WallsMaster>() ||
-                collision.GetComponentInParent<EffectAreaMaster>()) return;
+                collision.GetComponentInParent<EffectAreaMasterOld>()) return;
             
             DestroyMe();
         }

@@ -1,6 +1,6 @@
 ﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.MenuManagers.UI;
-using ImmersiveGames.SaveManagers;
+using NewRiverAttack.SaveManagers;
 using UnityEngine;
 
 namespace ImmersiveGames.MenuManagers.PanelOptionsManagers

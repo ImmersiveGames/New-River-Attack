@@ -7,7 +7,7 @@ namespace RiverAttack
         private readonly Dictionary<PowerUp, float> m_ActivePowerUps = new Dictionary<PowerUp, float>();
 
         private List<PowerUp> m_Keys = new List<PowerUp>();
-        private PlayerMaster m_PlayerMaster;
+        private PlayerMasterOld _mPlayerMasterOld;
 
         #region UNITYMETHODS
 
@@ -15,7 +15,7 @@ namespace RiverAttack
         {
             SetInitialReferences();
             ClearActivePowerUps();
-            m_PlayerMaster.EventPlayerMasterRespawn += ResetPowerUp;
+            _mPlayerMasterOld.EventPlayerMasterRespawn += ResetPowerUp;
         }
 
         private void Update()
@@ -25,13 +25,13 @@ namespace RiverAttack
 
         private void OnDisable()
         {
-            m_PlayerMaster.EventPlayerMasterRespawn -= ResetPowerUp;
+            _mPlayerMasterOld.EventPlayerMasterRespawn -= ResetPowerUp;
         }
   #endregion
 
   private void SetInitialReferences()
         {
-            m_PlayerMaster = GetComponent<PlayerMaster>();
+            _mPlayerMasterOld = GetComponent<PlayerMasterOld>();
         }
 
         private void HandleGlobalPowerUps()
@@ -40,7 +40,7 @@ namespace RiverAttack
 
             if (m_ActivePowerUps.Count > 0)
             {
-                var playerMaster = GetComponent<PlayerMaster>();
+                var playerMaster = GetComponent<PlayerMasterOld>();
                 foreach (var powerUp in m_Keys)
                 {
                     if (m_ActivePowerUps[powerUp] > 0)
@@ -69,7 +69,7 @@ namespace RiverAttack
             if (!m_ActivePowerUps.ContainsKey(powerUp))
             {
                // Debug.Log("Não tem esse power Up na lista");
-                powerUp.PowerUpStart(m_PlayerMaster.getPlayerSettings);
+                powerUp.PowerUpStart(_mPlayerMasterOld.getPlayerSettings);
                 m_ActivePowerUps.Add(powerUp, powerUp.duration);
             }
             else
@@ -95,7 +95,7 @@ namespace RiverAttack
                 if (onlyEffect && !powerUp.Key.canAccumulateEffects)
                     return;
                 //Debug.Log($"Termina o Power up {powerUp}");
-                powerUp.Key.PowerUpEnd(m_PlayerMaster.getPlayerSettings);
+                powerUp.Key.PowerUpEnd(_mPlayerMasterOld.getPlayerSettings);
             }
             if (!onlyEffect)
                 m_ActivePowerUps.Clear();

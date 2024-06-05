@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NewRiverAttack.HUBManagers.UI;
 using UnityEngine;
 using Utils;
 using Utils.TriangulatorHelper;
@@ -69,8 +70,8 @@ namespace RiverAttack
                     position = nextBound.z + PLAYER_OFFSET,
                     levels = level
                 });
-                patch.GetComponentInChildren<UiHubBridges>().level = level;
-                patch.GetComponentInChildren<UiHubIcons>().Initialization(level);
+                //patch.GetComponentInChildren<UiHubBridges>().level = level;
+                //patch.GetComponentInChildren<UiHubIcons>().Initialization(level);
             }
             nextBound += new Vector3(0, 0, bound.size.z);
             return patch;

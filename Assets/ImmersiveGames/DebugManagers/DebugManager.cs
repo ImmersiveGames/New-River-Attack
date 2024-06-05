@@ -59,5 +59,13 @@ namespace ImmersiveGames.DebugManagers
                 Debug.LogError($"[{scriptType.Name}] {message}");
             }
         }
+        public static void LogError<T>(Exception message)
+        {
+            var scriptType = typeof(T);
+            if (ScriptDebugLevels.TryGetValue(scriptType, out DebugLevels scriptDebugLevel) && ShouldLog(scriptDebugLevel))
+            {
+                Debug.LogError($"[{scriptType.Name}] {message}");
+            }
+        }
     }
 }

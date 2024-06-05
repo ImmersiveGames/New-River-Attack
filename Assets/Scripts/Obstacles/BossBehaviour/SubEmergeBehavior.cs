@@ -5,13 +5,13 @@ namespace RiverAttack
     public class SubEmergeBehavior: IBossBehavior
     {
         private bool m_Finished;
-        private readonly BossMaster m_BossMaster;
+        private readonly BossMasterOld _mBossMasterOld;
         private float m_CountTime;
         private const float TIME_LIMIT = 8f;
         
-        internal SubEmergeBehavior(BossMaster bossMaster)
+        internal SubEmergeBehavior(BossMasterOld bossMasterOld)
         {
-            m_BossMaster = bossMaster;
+            _mBossMasterOld = bossMasterOld;
         }
         public void Enter()
         {
@@ -19,18 +19,18 @@ namespace RiverAttack
             // Lógica de entrada para o comportamento SubEmerge
             m_Finished = false;
            // m_BossMaster.BossInvulnerability(true);
-            m_BossMaster.OnEventBossSubmerge();
+            _mBossMasterOld.OnEventBossSubmerge();
         }
         public void Update()
         {
-            if(!m_BossMaster.shouldBeBossBattle) return;
+            if(!_mBossMasterOld.shouldBeBossBattle) return;
             Debug.Log("Atualizando comportamento SubEmerge");
             m_CountTime += Time.deltaTime;
 
             if (!(m_CountTime >= TIME_LIMIT))
                 return;
             m_CountTime = 0f;
-            m_BossMaster.BossInvulnerability(false);
+            _mBossMasterOld.BossInvulnerability(false);
             FinishBehavior();
         }
         public void Exit()

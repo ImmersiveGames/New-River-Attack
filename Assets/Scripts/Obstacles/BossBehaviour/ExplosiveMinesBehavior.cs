@@ -20,9 +20,9 @@ namespace RiverAttack
         private bool m_Finished;
         private readonly BossMinesShoot m_BossMinesShoot;
         
-        internal ExplosiveMinesBehavior(BossMaster bossMaster, int minesQuantity)
+        internal ExplosiveMinesBehavior(BossMasterOld bossMasterOld, int minesQuantity)
         {
-            m_IHasPool = m_BossMinesShoot = bossMaster.GetBossMines();
+            m_IHasPool = m_BossMinesShoot = bossMasterOld.GetBossMines();
             m_Mines = minesQuantity;
         }
         public void Enter()

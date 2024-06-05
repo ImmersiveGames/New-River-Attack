@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using NewRiverAttack.SteamGameManagers;
+
 namespace RiverAttack
 {
     public class GameStatePlayGame : GameState
@@ -27,7 +29,7 @@ namespace RiverAttack
         {
             var score = PlayerManager.instance.playerSettingsList[0].score;
             GameSaveManager.instance.SavePlayerSaves();
-            GameSteamManager.UpdateScore(score, false);
+            SteamGameManager.UpdateScore(score, false);
             //PlayerManager.instance.ActivePlayers(false);
             GamePlayManager.instance.OnEventDeactivateEnemiesMaster();            
             //Debug.Log($"Sai do Estado: PlayGame");

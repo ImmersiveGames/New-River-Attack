@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using ImmersiveGames.ScenesManager.Transitions;
+using NewRiverAttack.LevelBuilder;
 using UnityEngine.SceneManagement;
 
 namespace ImmersiveGames.StateManagers.Interfaces

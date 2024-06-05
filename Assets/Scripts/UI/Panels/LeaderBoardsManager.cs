@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using NewRiverAttack.SteamGameManagers;
 using UnityEngine;
 
 namespace RiverAttack
@@ -16,13 +17,13 @@ namespace RiverAttack
 
         private async void OnEnable()
         {
-            if (GameSteamManager.connectedToSteam == false) return;
+            if (SteamGameManager.ConnectedToSteam == false) return;
             await CreateListLeaderboard();
         }
 
         private async Task CreateListLeaderboard()
         {
-            var globalScores = await GameSteamManager.GetScores( numRegister );
+            var globalScores = await SteamGameManager.GetScores( numRegister );
             ClearLeaderboard();
             foreach ( var e in globalScores)
             {

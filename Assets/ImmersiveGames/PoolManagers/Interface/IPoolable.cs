@@ -1,11 +1,13 @@
-﻿namespace ImmersiveGames.PoolManagers.Interface
+﻿using ImmersiveGames.BulletsManagers;
+using UnityEngine;
+
+namespace ImmersiveGames.PoolManagers.Interface
 {
     public interface IPoolable
     {
         bool IsPooled { get; }
         PoolObject Pool { get; set; }
-        void AssignPool(PoolObject pool);
-        void OnSpawned();
-        void OnDespawned();
+        void OnSpawned(Transform spawnPosition, IBulletsData bulletData);
+        void OnDespaired();
     }
 }

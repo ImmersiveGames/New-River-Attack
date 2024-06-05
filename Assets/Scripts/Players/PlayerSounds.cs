@@ -15,7 +15,7 @@ namespace RiverAttack
         private bool m_OnAccelerate;
         private bool m_OnDecelerate;
 
-        private PlayerMaster m_PlayerMaster;
+        private PlayerMasterOld _mPlayerMasterOld;
 
         private AudioSource m_AudioSource;
         //GamePlayManager m_GamePlayManager;
@@ -25,16 +25,16 @@ namespace RiverAttack
         private void OnEnable()
         {
             SetInitialReferences();
-            m_PlayerMaster.EventPlayerMasterControllerMovement += SoundEngine;
-            m_PlayerMaster.EventPlayerMasterHit += SoundExplosion;
+            _mPlayerMasterOld.EventPlayerMasterControllerMovement += SoundEngine;
+            _mPlayerMasterOld.EventPlayerMasterHit += SoundExplosion;
             /* m_GamePlayManager.EventPausePlayGame += SoundStop;
              m_GamePlayManager.EventCompletePath += SoundStop;*/
         }
 
         private void OnDisable()
         {
-            m_PlayerMaster.EventPlayerMasterControllerMovement -= SoundEngine;
-            m_PlayerMaster.EventPlayerMasterHit -= SoundExplosion;
+            _mPlayerMasterOld.EventPlayerMasterControllerMovement -= SoundEngine;
+            _mPlayerMasterOld.EventPlayerMasterHit -= SoundExplosion;
             /*
              * m_GamePlayManager.EventPausePlayGame -= SoundStop;
              */
@@ -43,14 +43,14 @@ namespace RiverAttack
 
   private void SetInitialReferences()
         {
-            m_PlayerMaster = GetComponent<PlayerMaster>();
+            _mPlayerMasterOld = GetComponent<PlayerMasterOld>();
             m_AudioSource = GetComponent<AudioSource>();
             //m_GamePlayManager = GamePlayManager.instance;
         }
 
         private void SoundEngine(Vector2 dir)
         {
-            if (!m_PlayerMaster.shouldPlayerBeReady) return;
+            if (!_mPlayerMasterOld.ShouldPlayerBeReady) return;
             switch (dir.y)
             {
                 case > 0 when m_OnAccelerate == false:

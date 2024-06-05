@@ -8,7 +8,7 @@ namespace RiverAttack
 
         private void Update()
         {
-            if (!m_GamePlayManager.shouldBePlayingGame || !m_ObstacleMaster.shouldObstacleBeReady || m_ObstacleMaster.isDestroyed)
+            if (!m_GamePlayManager.shouldBePlayingGame || !MObstacleMasterOld.shouldObstacleBeReady || MObstacleMasterOld.isDestroyed)
                 return;
             m_ActualState.UpdateState(transform, m_VectorDirection);
         }

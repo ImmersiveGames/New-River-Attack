@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NewRiverAttack.SteamGameManagers;
+using UnityEngine;
 
 namespace RiverAttack
 {
@@ -14,7 +15,7 @@ namespace RiverAttack
         private float _maxTravelledDistance;
 
         private GamePlayManager _gamePlayManager;
-        private PlayerMaster _playerMaster;
+        private PlayerMasterOld _playerMasterOld;
         private PlayerSettings _playerSettings;
         private GamePlayingLog _gamePlayingLog;
 
@@ -24,8 +25,8 @@ namespace RiverAttack
         {
             _gamePlayManager = GamePlayManager.instance;
             _gamePlayingLog = _gamePlayManager.gamePlayingLog;
-            _playerMaster = GetComponent<PlayerMaster>();
-            _playerSettings = _playerMaster.getPlayerSettings;
+            _playerMasterOld = GetComponent<PlayerMasterOld>();
+            _playerSettings = _playerMasterOld.getPlayerSettings;
         }
 
         private void Start()
@@ -42,8 +43,8 @@ namespace RiverAttack
             // Calcula a distância percorrida no eixo Z desde o último frame
             var distanceTraveledByFrame = position.z - _lastPosition.z;
 
-            // se a posição for maior que a inicial e não teveve nenhum movimento no ultimo frame e não ta permitindo joga então ignore; 
-            if (position.z < 0 && distanceTraveledByFrame <= 0 && !_playerMaster.shouldPlayerBeReady) return;
+            // se a posição for maior que a inicial e não teve nenhum movimento no ultimo frame e não ta permitindo joga então ignore; 
+            if (position.z < 0 && distanceTraveledByFrame <= 0 && !_playerMasterOld.ShouldPlayerBeReady) return;
 
             _travelledDistance += distanceTraveledByFrame;
             // Atualiza o ponto mais distante alcançado
@@ -76,7 +77,7 @@ namespace RiverAttack
 
   private void LoadMaxDistance()
         {
-            var settingDistance = _playerMaster.getPlayerSettings.distance;
+            var settingDistance = _playerMasterOld.getPlayerSettings.distance;
             _maxTravelledDistance = (settingDistance != 0) ? settingDistance : 0;
             _convertDistance = _maxTravelledDistance / conversion;
             _gamePlayManager.OnEventUpdateDistance(Mathf.FloorToInt(_convertDistance));
@@ -87,18 +88,18 @@ namespace RiverAttack
             _gamePlayingLog.maxPathDistance = maxDistance;
             _gamePlayingLog.pathDistance += distance;
             var resultInt = Mathf.FloorToInt(_gamePlayingLog.pathDistance);
-            GameSteamManager.SetStat("stat_FlightDistance", resultInt, true);
+            SteamGameManager.SetStat("stat_FlightDistance", resultInt, true);
         }
 
         private static void AchievementHandle(float result)
         {
             //Debug.Log($"Valor entrando: {result}");
-            if (!GameSteamManager.connectedToSteam) return;
-            var flight = GameSteamManager.GetStatInt("stat_FlightDistance");
+            if (!SteamGameManager.ConnectedToSteam) return;
+            var flight = SteamGameManager.GetStatInt("stat_FlightDistance");
             var resultInt = Mathf.FloorToInt(result);
             //Debug.Log($"Valor calculado: {resultInt}");
             if (flight >= resultInt) return;
-            GameSteamManager.SetStat("stat_FlightDistance", resultInt, true);
+            SteamGameManager.SetStat("stat_FlightDistance", resultInt, true);
         }
     }
 }

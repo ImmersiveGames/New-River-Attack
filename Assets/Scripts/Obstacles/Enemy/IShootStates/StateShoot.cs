@@ -13,7 +13,7 @@ namespace RiverAttack
         private float m_BulletLifeTime;
         private Transform m_SpawnPoint;
         private readonly EnemiesShoot m_EnemiesShoot;
-        private EnemiesMaster m_EnemiesMaster;
+        private EnemiesMasterOld _mEnemiesMasterOld;
         private EnemiesSetDifficulty m_EnemiesSetDifficulty;
         private readonly IHasPool m_MyPool;
 
@@ -23,7 +23,7 @@ namespace RiverAttack
             m_MyPool = enemiesShoot;
         }
 
-        public void EnterState(ObstacleMaster enemyMaster)
+        public void EnterState(ObstacleMasterOld enemyMasterOld)
         {
             m_StartCadence = m_Cadence = m_EnemiesShoot.shootCadence;
             m_StartBulletSpeed = m_EnemiesShoot.bulletSpeed;
@@ -31,10 +31,10 @@ namespace RiverAttack
             m_SpawnPoint = m_EnemiesShoot.spawnPoint;
 
             //Debug.Log("Estado: Shoot - Entrando" + m_EnemiesShoot.shootCadence);
-            m_EnemiesMaster = enemyMaster as EnemiesMaster;
-            if (m_EnemiesMaster != null && !m_EnemiesMaster.enemy && !m_EnemiesMaster.enemy.enemiesSetDifficultyListSo) return;
-            if (m_EnemiesMaster != null)
-                m_EnemiesSetDifficulty = m_EnemiesMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(m_EnemiesMaster.actualDifficultName);
+            _mEnemiesMasterOld = enemyMasterOld as EnemiesMasterOld;
+            if (_mEnemiesMasterOld != null && !_mEnemiesMasterOld.enemy && !_mEnemiesMasterOld.enemy.enemiesSetDifficultyListSo) return;
+            if (_mEnemiesMasterOld != null)
+                m_EnemiesSetDifficulty = _mEnemiesMasterOld.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(_mEnemiesMasterOld.actualDifficultName);
             m_Cadence = m_StartCadence * m_EnemiesSetDifficulty.multiplyEnemiesShootCadence;
             m_BulletSpeed = m_StartBulletSpeed * m_EnemiesSetDifficulty.multiplyEnemiesShootSpeedy;
         }
@@ -65,7 +65,7 @@ namespace RiverAttack
             //setting bullet entity
             var myBullet = myShoot.GetComponent<BulletEnemy>();
             myBullet.SetMyPool(PoolObjectManager.GetPool(m_MyPool));
-            myBullet.ownerShoot = m_EnemiesMaster;
+            myBullet.ownerShoot = _mEnemiesMasterOld;
             myBullet.Init(m_BulletSpeed, m_BulletLifeTime);
             //Deattached bullet
             var transformPosition = m_SpawnPoint.position;

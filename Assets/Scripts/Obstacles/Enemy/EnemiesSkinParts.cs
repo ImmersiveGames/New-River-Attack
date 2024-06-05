@@ -6,21 +6,21 @@ namespace RiverAttack
     {
         // Identifica uma parte movel da skin
         private EnemiesSound m_EnemiesSound;
-        private BossMaster m_BossMaster;
+        private BossMasterOld _mBossMasterOld;
 
         private void Start()
         {
             m_EnemiesSound = GetComponentInParent<EnemiesSound>();
-            m_BossMaster = GetComponentInParent<BossMaster>();
+            _mBossMasterOld = GetComponentInParent<BossMasterOld>();
         }
 
         public void BossInvulnerabilityOn()
         {
-            m_BossMaster.BossInvulnerability(true);
+            _mBossMasterOld.BossInvulnerability(true);
         }
         public void BossInvulnerabilityOff()
         {
-            m_BossMaster.BossInvulnerability(false);
+            _mBossMasterOld.BossInvulnerability(false);
         }
 
         public void PlayExplosionSound()

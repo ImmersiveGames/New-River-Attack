@@ -1,18 +1,19 @@
-﻿using Utils;
+﻿using NewRiverAttack.SteamGameManagers;
+using Utils;
 namespace RiverAttack
 {
     public class DeadBehavior: IBossBehavior
     {
-        private readonly BossMaster m_BossMaster;
+        private readonly BossMasterOld _mBossMasterOld;
         private bool m_Finished;
-        internal DeadBehavior(BossMaster bossMaster)
+        internal DeadBehavior(BossMasterOld bossMasterOld)
         {
-            m_BossMaster = bossMaster;
+            _mBossMasterOld = bossMasterOld;
         }
         public void Enter()
         {
             //Debug.Log("Enter in DeadBehavior");
-            GameSteamManager.UnlockAchievement("ACH_BEAT_SUBMARINE");
+            SteamGameManager.UnlockAchievement("ACH_BEAT_SUBMARINE");
         }
         public void Update()
         {

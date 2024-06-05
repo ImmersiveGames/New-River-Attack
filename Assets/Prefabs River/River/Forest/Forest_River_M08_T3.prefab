@@ -2859,7 +2859,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4623093423588200}
-  - component: {fileID: 2718539070549260558}
+  - component: {fileID: 1434294312359677505}
   m_Layer: 8
   m_Name: Forest_River_M08_T3
   m_TagString: Untagged
@@ -2904,7 +2904,7 @@ Transform:
   - {fileID: 8052601668820953175}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2718539070549260558
+--- !u!114 &1434294312359677505
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2913,7 +2913,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1095139062321636}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Script: {fileID: 11500000, guid: 0de2bb53686f429d90f5aaad6a13c13c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1096748805164582
@@ -6241,7 +6241,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1169986593367198}
-  m_Mesh: {fileID: 4300004, guid: 7772d0057ef7a49209a5242ef2045527, type: 3}
+  m_Mesh: {fileID: 1639652106940330822, guid: 7772d0057ef7a49209a5242ef2045527, type: 3}
 --- !u!23 &23965001496658528
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9440,13 +9440,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1265223535099582}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10, y: 0, z: 0}
+  m_LocalRotation: {x: 0.00000011920929, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -20, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4069718208530780}
-  m_Father: {fileID: 4514654728108658}
+  - {fileID: 8598962284057565283}
+  m_Father: {fileID: 4054828655599366}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33950195096783538
 MeshFilter:
@@ -9455,7 +9456,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1265223535099582}
-  m_Mesh: {fileID: 4300004, guid: 7772d0057ef7a49209a5242ef2045527, type: 3}
+  m_Mesh: {fileID: 1639652106940330822, guid: 7772d0057ef7a49209a5242ef2045527, type: 3}
 --- !u!23 &23677740207914902
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16334,8 +16335,8 @@ Transform:
   - {fileID: 4010674746265334}
   - {fileID: 4503753134489376}
   - {fileID: 4953325626079566}
-  - {fileID: 4037068342489280}
-  - {fileID: 4514654728108658}
+  - {fileID: 4758712362602806}
+  - {fileID: 4261563473697930}
   m_Father: {fileID: 4623093423588200}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1406377809300272
@@ -25174,90 +25175,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &1633571289095898
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4514654728108658}
-  - component: {fileID: 33773988855272890}
-  - component: {fileID: 23002835712569948}
-  m_Layer: 8
-  m_Name: Forest_Bridge_Metal (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4514654728108658
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1633571289095898}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4261563473697930}
-  m_Father: {fileID: 4054828655599366}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &33773988855272890
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1633571289095898}
-  m_Mesh: {fileID: 4300004, guid: 7772d0057ef7a49209a5242ef2045527, type: 3}
---- !u!23 &23002835712569948
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1633571289095898}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: d35f877c44fcb604abbbf2e882ccc2b0, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1637020499218120
 GameObject:
   m_ObjectHideFlags: 0
@@ -27098,7 +27015,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1668863864875424}
-  m_Mesh: {fileID: 4300004, guid: 7772d0057ef7a49209a5242ef2045527, type: 3}
+  m_Mesh: {fileID: 1639652106940330822, guid: 7772d0057ef7a49209a5242ef2045527, type: 3}
 --- !u!23 &23027447023836720
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -29213,13 +29130,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1723046975349372}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: 0, z: 0}
+  m_LocalRotation: {x: 0.00000011920929, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 40, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3391317659324785524}
-  m_Father: {fileID: 4037068342489280}
+  - {fileID: 5419614422456632769}
+  m_Father: {fileID: 4054828655599366}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33317477178486350
 MeshFilter:
@@ -29228,7 +29146,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1723046975349372}
-  m_Mesh: {fileID: 4300004, guid: 7772d0057ef7a49209a5242ef2045527, type: 3}
+  m_Mesh: {fileID: 1639652106940330822, guid: 7772d0057ef7a49209a5242ef2045527, type: 3}
 --- !u!23 &23214645925908624
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -30556,90 +30474,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a8b2f33b09196564a88e1f9432b54e25, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &1769891362342270
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4037068342489280}
-  - component: {fileID: 33353215747783738}
-  - component: {fileID: 23913768365420080}
-  m_Layer: 8
-  m_Name: Forest_Bridge_Metal
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4037068342489280
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1769891362342270}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4758712362602806}
-  m_Father: {fileID: 4054828655599366}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &33353215747783738
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1769891362342270}
-  m_Mesh: {fileID: 4300004, guid: 7772d0057ef7a49209a5242ef2045527, type: 3}
---- !u!23 &23913768365420080
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1769891362342270}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: d35f877c44fcb604abbbf2e882ccc2b0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -39213,7 +39047,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2392034496562174740}
-  m_Mesh: {fileID: 4300004, guid: 7772d0057ef7a49209a5242ef2045527, type: 3}
+  m_Mesh: {fileID: 1639652106940330822, guid: 7772d0057ef7a49209a5242ef2045527, type: 3}
 --- !u!23 &374375491549110726
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -39296,7 +39130,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3977428173006035474}
-  m_Mesh: {fileID: 4300004, guid: 7772d0057ef7a49209a5242ef2045527, type: 3}
+  m_Mesh: {fileID: 1639652106940330822, guid: 7772d0057ef7a49209a5242ef2045527, type: 3}
 --- !u!23 &4761465257586140156
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -39380,7 +39214,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4530543187929558887}
-  m_Mesh: {fileID: 4300004, guid: 7772d0057ef7a49209a5242ef2045527, type: 3}
+  m_Mesh: {fileID: 1639652106940330822, guid: 7772d0057ef7a49209a5242ef2045527, type: 3}
 --- !u!23 &5531682752379387208
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -39496,4 +39330,152 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8921407213025526751, guid: 1756300492bea5c458abcbf599fc63c9,
     type: 3}
   m_PrefabInstance: {fileID: 1445552238351412104}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5529558218602308138
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4758712362602806}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.000000037748947
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_Name
+      value: Forest_Bridge_Metal_03
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 80d7a6b862d1c4db8b0ffbd974106ec1, type: 3}
+--- !u!4 &5419614422456632769 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+    type: 3}
+  m_PrefabInstance: {fileID: 5529558218602308138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8133254491010432904
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4261563473697930}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.000000037748947
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+        type: 3}
+      propertyPath: m_Name
+      value: Forest_Bridge_Metal_02
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 80d7a6b862d1c4db8b0ffbd974106ec1, type: 3}
+--- !u!4 &8598962284057565283 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 80d7a6b862d1c4db8b0ffbd974106ec1,
+    type: 3}
+  m_PrefabInstance: {fileID: 8133254491010432904}
   m_PrefabAsset: {fileID: 0}

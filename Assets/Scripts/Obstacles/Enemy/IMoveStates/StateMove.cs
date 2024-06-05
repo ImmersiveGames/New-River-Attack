@@ -6,27 +6,27 @@ namespace RiverAttack
     public class StateMove : IMove
     {
         private readonly EnemiesMovement m_EnemiesMovement;
-        private readonly ObstacleMaster m_ObstacleMaster;
+        private readonly ObstacleMasterOld _mObstacleMasterOld;
         private float m_ElapsedTime;
         private float m_MoveVelocity;
         private float m_MultiplyEnemiesSpeedy;
         private Vector3 m_VectorDirection;
         private EnemiesSetDifficulty m_EnemiesSetDifficulty;
 
-        public StateMove(EnemiesMovement enemiesMovement, ObstacleMaster obstacleMaster)
+        public StateMove(EnemiesMovement enemiesMovement, ObstacleMasterOld obstacleMasterOld)
         {
             m_EnemiesMovement = enemiesMovement;
             m_MultiplyEnemiesSpeedy = 1;
-            m_ObstacleMaster = obstacleMaster;
-            m_ObstacleMaster.OnEventObstacleMovement(true);
+            _mObstacleMasterOld = obstacleMasterOld;
+            _mObstacleMasterOld.OnEventObstacleMovement(true);
         }
         public void EnterState()
         {
            //Debug.Log($"{m_EnemiesMaster.gameObject.name} Estado: MOVE - Entrando ");
            m_MoveVelocity = m_EnemiesMovement.moveVelocity * m_MultiplyEnemiesSpeedy;
-           if (!m_ObstacleMaster.enemy || !m_ObstacleMaster.enemy.enemiesSetDifficultyListSo)
+           if (!_mObstacleMasterOld.enemy || !_mObstacleMasterOld.enemy.enemiesSetDifficultyListSo)
                return;
-           m_EnemiesSetDifficulty = m_ObstacleMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(m_ObstacleMaster.actualDifficultName);
+           m_EnemiesSetDifficulty = _mObstacleMasterOld.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(_mObstacleMasterOld.actualDifficultName);
            m_MultiplyEnemiesSpeedy = m_EnemiesSetDifficulty.multiplyEnemiesSpeedy;
         }
         public void UpdateState(Transform transform, Vector3 direction)
@@ -37,7 +37,7 @@ namespace RiverAttack
         public void ExitState()
         {
            // Debug.Log("Estado: MOVE - Exit");
-           m_ObstacleMaster.OnEventObstacleMovement(false);
+           _mObstacleMasterOld.OnEventObstacleMovement(false);
         }
 
 

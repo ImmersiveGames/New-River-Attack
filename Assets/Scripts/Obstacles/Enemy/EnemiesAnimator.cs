@@ -6,7 +6,7 @@ namespace RiverAttack
         public string onMove;
         public string onFlip;
 
-        private EnemiesMaster m_EnemiesMaster;
+        private EnemiesMasterOld _mEnemiesMasterOld;
         private Animator m_Animator;
         private GamePlayManager m_GamePlayManager;
 
@@ -15,10 +15,10 @@ namespace RiverAttack
         private void OnEnable()
         {
             SetInitialReferences();
-            if (m_EnemiesMaster)
+            if (_mEnemiesMasterOld)
             {
-                m_EnemiesMaster.EventObstacleMovement += AnimationMove; 
-                m_EnemiesMaster.EventObjectMasterFlipEnemies += AnimationFlip;
+                _mEnemiesMasterOld.EventObstacleMovement += AnimationMove; 
+                _mEnemiesMasterOld.EventObjectMasterFlipEnemies += AnimationFlip;
             }
             m_GamePlayManager.EventReSpawnEnemiesMaster += ResetAnimation;
 
@@ -26,9 +26,9 @@ namespace RiverAttack
 
         private void OnDisable()
         {
-            if (!m_EnemiesMaster) return;
-            m_EnemiesMaster.EventObstacleMovement -= AnimationMove;
-            m_EnemiesMaster.EventObjectMasterFlipEnemies -= AnimationFlip;
+            if (!_mEnemiesMasterOld) return;
+            _mEnemiesMasterOld.EventObstacleMovement -= AnimationMove;
+            _mEnemiesMasterOld.EventObjectMasterFlipEnemies -= AnimationFlip;
         }
 
         private void OnDestroy()
@@ -40,7 +40,7 @@ namespace RiverAttack
   private void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
-            m_EnemiesMaster = GetComponent<EnemiesMaster>();
+            _mEnemiesMasterOld = GetComponent<EnemiesMasterOld>();
             m_Animator = GetComponentInChildren<Animator>();
         }
 

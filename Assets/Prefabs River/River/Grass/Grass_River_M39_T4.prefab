@@ -2689,8 +2689,6 @@ GameObject:
   - component: {fileID: 4552112894514472}
   - component: {fileID: 33559133663772062}
   - component: {fileID: 23407942633746628}
-  - component: {fileID: 65146347674224260}
-  - component: {fileID: 65904280289813180}
   m_Layer: 8
   m_Name: Grass_Tile_River_Bank_RL_01
   m_TagString: Wall
@@ -2763,48 +2761,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65146347674224260
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1098600685820862}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 0.1, z: 40}
-  m_Center: {x: 4, y: 0.1, z: 15}
---- !u!65 &65904280289813180
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1098600685820862}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: -2, y: 0.1, z: 40}
-  m_Center: {x: -4, y: 0.1, z: 15}
 --- !u!1 &1106174723488868
 GameObject:
   m_ObjectHideFlags: 0
@@ -4279,6 +4235,8 @@ Transform:
   - {fileID: 4882123755796102}
   - {fileID: 4623912647669364}
   - {fileID: 4795814710195074}
+  - {fileID: 8334835152526949289}
+  - {fileID: 48438984062308914}
   - {fileID: 4928785405591594}
   m_Father: {fileID: 4609526945846592}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4904,7 +4862,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182310185930088}
-  m_Mesh: {fileID: 4300000, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
+  m_Mesh: {fileID: 6177057896475675786, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
 --- !u!23 &23956383661677136
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5393,6 +5351,8 @@ Transform:
   m_Children:
   - {fileID: 4799009568101834}
   - {fileID: 4128445360309886}
+  - {fileID: 83559481736918685}
+  - {fileID: 6120169068591902875}
   - {fileID: 4984207607470620}
   - {fileID: 4254037034516982}
   m_Father: {fileID: 4609526945846592}
@@ -5408,8 +5368,6 @@ GameObject:
   - component: {fileID: 4128445360309886}
   - component: {fileID: 33432958294405130}
   - component: {fileID: 23526043482524680}
-  - component: {fileID: 65515862159359806}
-  - component: {fileID: 65366231092581588}
   m_Layer: 8
   m_Name: Grass_Tile_River_Bank_RL_01
   m_TagString: Wall
@@ -5482,48 +5440,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65515862159359806
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1211035610306494}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 0.1, z: 70}
-  m_Center: {x: 4, y: 0.1, z: 30}
---- !u!65 &65366231092581588
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1211035610306494}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: -2, y: 0.1, z: 70}
-  m_Center: {x: -4, y: 0.1, z: 30}
 --- !u!1 &1215935392003652
 GameObject:
   m_ObjectHideFlags: 0
@@ -7303,7 +7219,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1299705108833018}
-  m_Mesh: {fileID: 4300000, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
+  m_Mesh: {fileID: 6177057896475675786, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
 --- !u!23 &23906224289979712
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9082,6 +8998,8 @@ Transform:
   m_Children:
   - {fileID: 4129710975180598}
   - {fileID: 4029738576701236}
+  - {fileID: 4142257689427256510}
+  - {fileID: 3917142472723784678}
   - {fileID: 4363211010624842}
   - {fileID: 4352425067113360}
   m_Father: {fileID: 4472544235597962}
@@ -12290,7 +12208,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1505581381402504}
-  m_Mesh: {fileID: 4300000, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
+  m_Mesh: {fileID: 6177057896475675786, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
 --- !u!23 &23831610296243680
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -12457,7 +12375,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1507472395584766}
-  m_Mesh: {fileID: 4300000, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
+  m_Mesh: {fileID: 6177057896475675786, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
 --- !u!23 &23952166573150822
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16472,8 +16390,6 @@ GameObject:
   - component: {fileID: 4795814710195074}
   - component: {fileID: 33274867342478018}
   - component: {fileID: 23550222083723208}
-  - component: {fileID: 65119957832590478}
-  - component: {fileID: 65329364699507148}
   m_Layer: 8
   m_Name: Grass_Tile_River_Bank_RL_01
   m_TagString: Wall
@@ -16546,48 +16462,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65119957832590478
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1673112718576630}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 0.1, z: 70}
-  m_Center: {x: 4, y: 0.1, z: 30}
---- !u!65 &65329364699507148
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1673112718576630}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: -2, y: 0.1, z: 70}
-  m_Center: {x: -4, y: 0.1, z: 30}
 --- !u!1 &1675837115048050
 GameObject:
   m_ObjectHideFlags: 0
@@ -20649,7 +20523,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1843421684085596}
-  m_Mesh: {fileID: 4300000, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
+  m_Mesh: {fileID: 6177057896475675786, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
 --- !u!23 &23455396186671894
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21588,6 +21462,8 @@ Transform:
   m_Children:
   - {fileID: 4379809094410516}
   - {fileID: 4552112894514472}
+  - {fileID: 4850291563310585245}
+  - {fileID: 7279239003086106618}
   - {fileID: 4361848443089746}
   - {fileID: 4207921213961618}
   m_Father: {fileID: 4472544235597962}
@@ -22271,7 +22147,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1900662133367554}
-  m_Mesh: {fileID: 4300000, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
+  m_Mesh: {fileID: 6177057896475675786, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
 --- !u!23 &23520874344345020
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -22738,7 +22614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4398295912653076}
-  - component: {fileID: 2597113141353571029}
+  - component: {fileID: -3338977211078132705}
   m_Layer: 8
   m_Name: Grass_River_M39_T4
   m_TagString: Untagged
@@ -22783,7 +22659,7 @@ Transform:
   - {fileID: 7507430117680287030}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2597113141353571029
+--- !u!114 &-3338977211078132705
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -22792,7 +22668,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1919708347405836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
+  m_Script: {fileID: 11500000, guid: 0de2bb53686f429d90f5aaad6a13c13c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1920658305277582
@@ -24557,8 +24433,6 @@ GameObject:
   - component: {fileID: 4029738576701236}
   - component: {fileID: 33065681700343350}
   - component: {fileID: 23084017701277058}
-  - component: {fileID: 65132570965714314}
-  - component: {fileID: 65874294395636916}
   m_Layer: 8
   m_Name: Grass_Tile_River_Bank_RL_01
   m_TagString: Wall
@@ -24631,48 +24505,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &65132570965714314
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985698125892870}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 0.1, z: 40}
-  m_Center: {x: 4, y: 0.1, z: 15}
---- !u!65 &65874294395636916
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985698125892870}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: -2, y: 0.1, z: 40}
-  m_Center: {x: -4, y: 0.1, z: 15}
 --- !u!1 &1987582108587270
 GameObject:
   m_ObjectHideFlags: 0
@@ -25164,7 +24996,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 787717400719208247}
-  m_Mesh: {fileID: 4300000, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
+  m_Mesh: {fileID: 6177057896475675786, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
 --- !u!23 &2671051889712907083
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -25258,6 +25090,59 @@ Transform:
   - {fileID: 6498288305789811806}
   m_Father: {fileID: 7507430117680287030}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1701500103085593597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 48438984062308914}
+  - component: {fileID: 2789645707472607789}
+  m_Layer: 8
+  m_Name: Grass_Tile_River_Bank_RL_03
+  m_TagString: Wall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &48438984062308914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701500103085593597}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -13, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4771813658154220}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2789645707472607789
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701500103085593597}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 0.1, z: 70}
+  m_Center: {x: 4, y: 0.1, z: 30}
 --- !u!1 &1705851020696586096
 GameObject:
   m_ObjectHideFlags: 0
@@ -25360,6 +25245,59 @@ Transform:
   - {fileID: 1488755287251630844}
   m_Father: {fileID: 7507430117680287030}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2347321370985945121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3917142472723784678}
+  - component: {fileID: 1116893267053530243}
+  m_Layer: 8
+  m_Name: Grass_Tile_River_Bank_RL_03
+  m_TagString: Wall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &3917142472723784678
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2347321370985945121}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4443839328554174}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1116893267053530243
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2347321370985945121}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 0.1, z: 40}
+  m_Center: {x: 4, y: 0.1, z: 15}
 --- !u!1 &2738782934297723468
 GameObject:
   m_ObjectHideFlags: 0
@@ -25451,7 +25389,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2872265401876946739}
-  m_Mesh: {fileID: 4300000, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
+  m_Mesh: {fileID: 6177057896475675786, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
 --- !u!23 &8561145686213503548
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -25494,6 +25432,59 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2922855913604507141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7279239003086106618}
+  - component: {fileID: 5632337819291806057}
+  m_Layer: 8
+  m_Name: Grass_Tile_River_Bank_RL_03
+  m_TagString: Wall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &7279239003086106618
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922855913604507141}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -13, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4473496455584416}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5632337819291806057
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922855913604507141}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 0.1, z: 40}
+  m_Center: {x: 4, y: 0.1, z: 15}
 --- !u!1 &3185327832908172767
 GameObject:
   m_ObjectHideFlags: 0
@@ -25535,7 +25526,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3185327832908172767}
-  m_Mesh: {fileID: 4300000, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
+  m_Mesh: {fileID: 6177057896475675786, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
 --- !u!23 &1340773121547470244
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -25629,6 +25620,59 @@ Transform:
   - {fileID: 424663838184326375}
   m_Father: {fileID: 7507430117680287030}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4891748531010875411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 83559481736918685}
+  - component: {fileID: 4532680130024054519}
+  m_Layer: 8
+  m_Name: Grass_Tile_River_Bank_RL_02
+  m_TagString: Wall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &83559481736918685
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4891748531010875411}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4382407845108468}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4532680130024054519
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4891748531010875411}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 0.1, z: 70}
+  m_Center: {x: 4, y: 0.1, z: 30}
 --- !u!1 &5602355116599602863
 GameObject:
   m_ObjectHideFlags: 0
@@ -25670,7 +25714,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5602355116599602863}
-  m_Mesh: {fileID: 4300000, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
+  m_Mesh: {fileID: 6177057896475675786, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
 --- !u!23 &6691858421688932522
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -25754,7 +25798,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5648531001089642313}
-  m_Mesh: {fileID: 4300000, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
+  m_Mesh: {fileID: 6177057896475675786, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
 --- !u!23 &6843692933822352090
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -25797,6 +25841,112 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6450214369050412064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8334835152526949289}
+  - component: {fileID: 582288167132794598}
+  m_Layer: 8
+  m_Name: Grass_Tile_River_Bank_RL_02
+  m_TagString: Wall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &8334835152526949289
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6450214369050412064}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4771813658154220}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &582288167132794598
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6450214369050412064}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 0.1, z: 70}
+  m_Center: {x: 4, y: 0.1, z: 30}
+--- !u!1 &7027358304884526102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6120169068591902875}
+  - component: {fileID: 5917720011646150806}
+  m_Layer: 8
+  m_Name: Grass_Tile_River_Bank_RL_03
+  m_TagString: Wall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &6120169068591902875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7027358304884526102}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4382407845108468}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5917720011646150806
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7027358304884526102}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 0.1, z: 70}
+  m_Center: {x: 4, y: 0.1, z: 30}
 --- !u!1 &7250653650481465076
 GameObject:
   m_ObjectHideFlags: 0
@@ -25848,6 +25998,59 @@ Transform:
   - {fileID: 3197980662946725035}
   m_Father: {fileID: 7507430117680287030}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7749402484636522818
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4850291563310585245}
+  - component: {fileID: 2903732637937085745}
+  m_Layer: 8
+  m_Name: Grass_Tile_River_Bank_RL_02
+  m_TagString: Wall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &4850291563310585245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7749402484636522818}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4473496455584416}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2903732637937085745
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7749402484636522818}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 0.1, z: 40}
+  m_Center: {x: 4, y: 0.1, z: 15}
 --- !u!1 &8131343648133791072
 GameObject:
   m_ObjectHideFlags: 0
@@ -25888,7 +26091,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8131343648133791072}
-  m_Mesh: {fileID: 4300000, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
+  m_Mesh: {fileID: 6177057896475675786, guid: 1165659ba04aba24d904ff17e327d43c, type: 3}
 --- !u!23 &3281452461778726517
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -25931,6 +26134,59 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8310560736859115486
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4142257689427256510}
+  - component: {fileID: 6424530723314533731}
+  m_Layer: 8
+  m_Name: Grass_Tile_River_Bank_RL_02
+  m_TagString: Wall
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &4142257689427256510
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8310560736859115486}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000059604645, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4443839328554174}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6424530723314533731
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8310560736859115486}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 0.1, z: 40}
+  m_Center: {x: 4, y: 0.1, z: 15}
 --- !u!1 &9206753757197164727
 GameObject:
   m_ObjectHideFlags: 0

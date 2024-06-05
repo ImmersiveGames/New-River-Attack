@@ -1,17 +1,17 @@
 ﻿/*
- * Copyright (c) 2018-Present Carter Games
- * 
+ * Copyright (c) 2024 Carter Games
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
  *
- *    
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
@@ -29,7 +29,7 @@ namespace CarterGames.Assets.SaveManager.Editor
     /// <summary>
     /// A custom inspector for the settings asset scriptable object.
     /// </summary>
-    [CustomEditor(typeof(SettingsAssetRuntime))]
+    [CustomEditor(typeof(AssetGlobalRuntimeSettings))]
     public sealed class SettingsAssetRuntimeEditor : UnityEditor.Editor
     {
         /* ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -89,7 +89,7 @@ namespace CarterGames.Assets.SaveManager.Editor
         /// </summary>
         private void DrawDataSettings()
         {
-            UtilEditor.DrawSoScriptSection(target as SettingsAssetRuntime);
+            UtilEditor.DrawSoScriptSection(target as AssetGlobalRuntimeSettings);
 
             GUILayout.Space(12.5f);
 
@@ -111,9 +111,7 @@ namespace CarterGames.Assets.SaveManager.Editor
             EditorGUI.BeginDisabledGroup(true);
             EditorGUILayout.PropertyField(serializedObject.Fp("encryptionOption"), new GUIContent("Encryption Option"));
             EditorGUILayout.PropertyField(serializedObject.Fp("prettify"));
-            EditorGUILayout.PropertyField(serializedObject.Fp("autoLoadOnEntry"));
             EditorGUILayout.PropertyField(serializedObject.Fp("autoSaveOnExit"));
-            EditorGUILayout.PropertyField(serializedObject.Fp("showLogs"));
             EditorGUI.EndDisabledGroup();
         }
 

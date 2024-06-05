@@ -83,7 +83,7 @@ namespace ImmersiveGames.ScenesManager
                 SceneManager.sceneLoaded += SceneLoaded;
                 instance.loadingProgressBar.gameObject.SetActive(true);
                 var asyncOperation = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
-                while (!asyncOperation.isDone)
+                while (asyncOperation is { isDone: false })
                 {
                     // Atualize a barra de progresso durante o carregamento
                     UpdateProgressBar(asyncOperation.progress);

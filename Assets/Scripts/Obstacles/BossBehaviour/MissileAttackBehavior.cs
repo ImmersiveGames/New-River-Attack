@@ -23,14 +23,14 @@ namespace RiverAttack
 
         //IBossBehavior
         private bool m_Finished;
-        private readonly BossMaster m_BossMaster;
+        private readonly BossMasterOld _mBossMasterOld;
         private readonly BossMissileShoot m_BossMissileShoot;
-        internal MissileAttackBehavior(BossMaster bossMaster, int numMissile, float angle)
+        internal MissileAttackBehavior(BossMasterOld bossMasterOld, int numMissile, float angle)
         {
-            m_BossMaster = bossMaster;
+            _mBossMasterOld = bossMasterOld;
             m_NumBullets = (numMissile <= 0)? 3 : numMissile;
             m_ConeAngle = (angle <= 15) ? 15 : angle;
-            m_IHasPool = m_BossMissileShoot = m_BossMaster.GetBossMissileShoot();
+            m_IHasPool = m_BossMissileShoot = _mBossMasterOld.GetBossMissileShoot();
         }
         public void Enter()
         {
@@ -38,12 +38,12 @@ namespace RiverAttack
             m_Cadence = START_CADENCE;
             m_ShootCycles = SHOOT_CYCLES;
             m_Finished = false;
-            m_Target = m_BossMaster.targetPlayer;
+            m_Target = _mBossMasterOld.targetPlayer;
             m_MyPool = PoolObjectManager.GetPool(m_IHasPool);
         }
         public void Update()
         {
-            if(!m_BossMaster.shouldBeBossBattle) return;
+            if(!_mBossMasterOld.shouldBeBossBattle) return;
             //Debug.Log("Atualizando comportamento MissileAttack");
             m_Cadence -= Time.deltaTime;
             if (!(m_Cadence <= 0.01f))
@@ -77,7 +77,7 @@ namespace RiverAttack
         {
             if (GamePlayManager.instance.playerDead) return;
             //Debug.Log("Shoot!");
-            var bossPosition = m_BossMaster.transform.position;
+            var bossPosition = _mBossMasterOld.transform.position;
             var targetTransform = m_Target.transform.position;
             var targetDirection = (targetTransform - bossPosition).normalized;
             var directions = ConeDirections(targetDirection, m_NumBullets, m_ConeAngle);
@@ -89,7 +89,7 @@ namespace RiverAttack
                 
                 if (myBullet == null) continue;
                 myBullet.SetMyPool(m_MyPool);
-                myBullet.ownerShoot = m_BossMaster;
+                myBullet.ownerShoot = _mBossMasterOld;
                 myBullet.Init(SHOOT_SPEED, BULLET_LIFE_TIME);
                 myBullet.moveDirection = t;
             }

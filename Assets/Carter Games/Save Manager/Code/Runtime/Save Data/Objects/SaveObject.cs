@@ -1,17 +1,17 @@
 ﻿/*
- * Copyright (c) 2018-Present Carter Games
- * 
+ * Copyright (c) 2024 Carter Games
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
  *
- *    
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
@@ -130,6 +130,7 @@ namespace CarterGames.Assets.SaveManager
             
             foreach (var t in saveValues)
             {
+                if (t == null) continue;
                 if (!t.GetType().IsSubclassOf(typeof(SaveValueBase))) continue;
                 var sv = (SaveValueBase)t;
                 if (!data.ContainsKey(sv.key)) continue;
@@ -168,6 +169,7 @@ namespace CarterGames.Assets.SaveManager
             
             for (var i = 0; i < saveValues.Length; i++)
             {
+                if (saveValues[i] == null) continue;
                 if (!saveValues[i].GetType().IsSubclassOf(typeof(SaveValueBase))) continue;
                 var sv = (SaveValueBase) saveValues[i];
                 dic.Add(sv.key, sv);

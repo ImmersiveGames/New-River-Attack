@@ -11,7 +11,7 @@ namespace RiverAttack
         protected float bulletSpeed;
         protected bool hasBulletLifeTime;
         protected float bulletLifeTime;
-        protected internal ObjectMaster ownerShoot;
+        protected internal ObjectMasterOLD ownerShoot;
         internal Transform myPool;
 
         public void Init(float speed, float lifetime = 0)

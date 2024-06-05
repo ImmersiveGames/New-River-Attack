@@ -6,20 +6,20 @@ namespace RiverAttack
         private TrailRenderer[] m_TrailRenderer;
         [Range(0f, 1f)] private const float RANGE_AXIS_Y = 0.2f;
 
-        private PlayerMaster m_PlayerMaster;
+        private PlayerMasterOld _mPlayerMasterOld;
 
         #region UNITYMETHODS
 
         private void OnEnable()
         {
-            m_PlayerMaster = GetComponent<PlayerMaster>();
+            _mPlayerMasterOld = GetComponent<PlayerMasterOld>();
             m_TrailRenderer = GetComponentsInChildren<TrailRenderer>();
-            m_PlayerMaster.EventPlayerMasterControllerMovement += ActiveTrailsOnMovement;
+            _mPlayerMasterOld.EventPlayerMasterControllerMovement += ActiveTrailsOnMovement;
         }
 
         private void OnDisable()
         {
-            m_PlayerMaster.EventPlayerMasterControllerMovement -= ActiveTrailsOnMovement;
+            _mPlayerMasterOld.EventPlayerMasterControllerMovement -= ActiveTrailsOnMovement;
         }
   #endregion
 

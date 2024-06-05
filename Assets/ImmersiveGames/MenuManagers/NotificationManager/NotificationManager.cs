@@ -42,7 +42,7 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
                 ()=>
             {
                 EventNotificationAccepted?.Invoke(nextNotification);
-                nextNotification.confirmAction.Invoke();
+                nextNotification.ConfirmAction.Invoke();
             });
         }
 

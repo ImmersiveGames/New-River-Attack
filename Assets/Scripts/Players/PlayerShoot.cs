@@ -6,7 +6,7 @@ using Utils;
 using MeshRenderer = UnityEngine.MeshRenderer;
 namespace RiverAttack
 {
-    [RequireComponent(typeof(PlayerMaster))]
+    [RequireComponent(typeof(PlayerMasterOld))]
     public class PlayerShoot : MonoBehaviour, ICommand, IHasPool
     {
         [Header("Shoot Settings")]
@@ -23,7 +23,7 @@ namespace RiverAttack
 
         private PlayersInputActions m_PlayersInputActions;
         private GamePlayManager m_GamePlayManager;
-        private PlayerMaster m_PlayerMaster;
+        private PlayerMasterOld _mPlayerMasterOld;
         private PlayerSettings m_PlayerSettings;
         private static GamePlayingLog _gamePlayingLog;
 
@@ -52,8 +52,8 @@ namespace RiverAttack
         {
             _gamePlayingLog = GamePlayingLog.instance;
             m_GamePlayManager = GamePlayManager.instance;
-            m_PlayerMaster = GetComponent<PlayerMaster>();
-            m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
+            _mPlayerMasterOld = GetComponent<PlayerMasterOld>();
+            m_PlayerSettings = _mPlayerMasterOld.getPlayerSettings;
         }
         public void StartMyPool(GameObject bullets, int quantity, bool isPersistent = false)
         {
@@ -65,7 +65,7 @@ namespace RiverAttack
         {
             //Debug.Log($"ShotCadence: {m_ShootCadence}, Should Play {m_GamePlayManager.shouldBePlayingGame}, Should Player Ready {m_PlayerMaster.shouldPlayerBeReady}");
             var cooldown = (m_PlayerSettings.cadenceShootPowerUp != 0)? m_PlayerSettings.cadenceShootPowerUp:m_PlayerSettings.cadenceShoot;
-            if (!m_GamePlayManager.shouldBePlayingGame || !m_PlayerMaster.shouldPlayerBeReady)
+            if (!m_GamePlayManager.shouldBePlayingGame || !_mPlayerMasterOld.ShouldPlayerBeReady)
                 return;
             if (!IsOnCooldown(cooldown))
             {
@@ -89,12 +89,12 @@ namespace RiverAttack
             var myShoot = PoolObjectManager.GetObject(this);
             var bulletPlayer = myShoot.GetComponent<BulletPlayer>();
             bulletPlayer.SetMyPool(PoolObjectManager.GetPool(this));
-            bulletPlayer.ownerShoot = m_PlayerMaster;
+            bulletPlayer.ownerShoot = _mPlayerMasterOld;
             bulletPlayer.Init(m_PlayerSettings.shootVelocity, m_PlayerSettings.shootLifeTime);
             var meshRenderer = bulletPlayer.GetComponent<MeshRenderer>();
             //TODO: Animação no tiro e um feedback auditivo para o tiro;
             if (meshRenderer != null)
-                meshRenderer.material.color = (m_PlayerMaster.inPowerUp) ? rapidFireColor : bulletColor;
+                meshRenderer.material.color = (_mPlayerMasterOld.inPowerUp) ? rapidFireColor : bulletColor;
             
             myShoot.transform.parent = null;
             LogGamePlay();
@@ -102,7 +102,6 @@ namespace RiverAttack
         }
         private bool IsOnCooldown(float cooldown)
         {
-            
             return Time.realtimeSinceStartup - lastActionTime < cooldown;
         }
         public void UnExecute(InputAction.CallbackContext callbackContext)

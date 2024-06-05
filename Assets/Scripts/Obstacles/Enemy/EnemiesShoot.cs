@@ -21,7 +21,7 @@ namespace RiverAttack
     #endregion
 
     private GamePlayManager m_GamePlayManager;
-    private EnemiesMaster m_EnemiesMaster;
+    private EnemiesMasterOld _mEnemiesMasterOld;
     private EnemiesSetDifficulty m_EnemyDifficult;
 
         internal Transform spawnPoint;
@@ -38,7 +38,7 @@ namespace RiverAttack
         private void OnEnable()
         {
             SetInitialReferences();
-            m_EnemiesMaster.EventObstacleMasterHit += StopFire;
+            _mEnemiesMasterOld.EventObstacleMasterHit += StopFire;
             m_GamePlayManager.EventEnemiesMasterKillPlayer += StopFire;
         }
 
@@ -54,7 +54,7 @@ namespace RiverAttack
 
         private void Update()
         {
-            if (!m_GamePlayManager.shouldBePlayingGame || !m_EnemiesMaster.shouldObstacleBeReady || m_EnemiesMaster.isDestroyed || !meshRenderer.isVisible)
+            if (!m_GamePlayManager.shouldBePlayingGame || !_mEnemiesMasterOld.shouldObstacleBeReady || _mEnemiesMasterOld.isDestroyed || !meshRenderer.isVisible)
                 return;
             switch (shouldBeFire)
             {
@@ -76,7 +76,7 @@ namespace RiverAttack
 
         private void OnDisable()
         {
-            m_EnemiesMaster.EventObstacleMasterHit -= StopFire;
+            _mEnemiesMasterOld.EventObstacleMasterHit -= StopFire;
             m_GamePlayManager.EventEnemiesMasterKillPlayer -= StopFire;
         }
   #endregion
@@ -84,7 +84,7 @@ namespace RiverAttack
         {
             base.SetInitialReferences();
             m_GamePlayManager = GamePlayManager.instance;
-            m_EnemiesMaster = GetComponent<EnemiesMaster>();
+            _mEnemiesMasterOld = GetComponent<EnemiesMasterOld>();
         }
 
         private void ChangeState(IShoot newState)
@@ -93,7 +93,7 @@ namespace RiverAttack
             m_ActualState?.ExitState();
 
             m_ActualState = newState;
-            m_ActualState?.EnterState(m_EnemiesMaster);
+            m_ActualState?.EnterState(_mEnemiesMasterOld);
         }
 
         private void StopFire()

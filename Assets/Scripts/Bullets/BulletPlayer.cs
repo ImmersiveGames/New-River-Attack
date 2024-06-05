@@ -1,3 +1,4 @@
+using NewRiverAttack.LevelBuilder;
 using UnityEngine;
 
 namespace RiverAttack
@@ -28,11 +29,11 @@ namespace RiverAttack
 
         private void OnTriggerEnter(Collider collision)
         {
-            if (collision.GetComponentInParent<PlayerMaster>() || collision.GetComponentInParent<BulletPlayer>() || 
+            if (collision.GetComponentInParent<PlayerMasterOld>() || collision.GetComponentInParent<BulletPlayer>() || 
                 collision.GetComponentInParent<BulletPlayerBomb>() || collision.GetComponent<LevelChangeBGM>()) return;
-            var obstacleMaster = collision.GetComponent<ObstacleMaster>();
+            var obstacleMaster = collision.GetComponent<ObstacleMasterOld>();
             if (obstacleMaster != null && !obstacleMaster.enemy.canDestruct) return;
-            if (collision.GetComponentInParent<PowerUpMaster>()) return;
+            if (collision.GetComponentInParent<PowerUpMasterOld>()) return;
             DestroyMe();
         }
 

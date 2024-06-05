@@ -11,7 +11,7 @@ namespace RiverAttack
         public GameObject playerPrefab;
         public Vector3 spawnPlayerPosition;
         public List<PlayerSettings> playerSettingsList = new List<PlayerSettings>();
-        [SerializeField] internal List<PlayerMaster> initializedPlayerMasters = new List<PlayerMaster>();
+        [SerializeField] internal List<PlayerMasterOld> initializedPlayerMasters = new List<PlayerMasterOld>();
         
         protected override void OnDestroy()
         {
@@ -26,7 +26,7 @@ namespace RiverAttack
             var playerObject = Instantiate(playerPrefab, spawnPlayerPosition, Quaternion.identity);
             playerObject.name = playerSettings.name;
             playerSettings.score = 0;
-            var playerMaster = playerObject.GetComponent<PlayerMaster>();
+            var playerMaster = playerObject.GetComponent<PlayerMasterOld>();
             GameTimelineManager.instance.InitializePLayerInTimeline(playerObject.transform, playerMaster.GetComponent<Animator>());
             playerMaster.SetPlayerSettingsToPlayMaster(playerSettings);
             initializedPlayerMasters.Add(playerMaster);
@@ -52,7 +52,7 @@ namespace RiverAttack
             {
                 Destroy(playerMaster.gameObject);
             }
-            initializedPlayerMasters = new List<PlayerMaster>();
+            initializedPlayerMasters = new List<PlayerMasterOld>();
         }
 
         private bool haveAnyPlayerInitialized
@@ -65,7 +65,7 @@ namespace RiverAttack
             if (initializedPlayerMasters.Count <= 0) return;
             foreach (var playerMaster in initializedPlayerMasters)
             {
-                playerMaster.playerMovementStatus = PlayerMaster.MovementStatus.None;
+                playerMaster.playerMovementStatus = PlayerMasterOld.MovementStatus.None;
                 playerMaster.gameObject.transform.rotation = Quaternion.identity;
             }
         }
@@ -76,15 +76,15 @@ namespace RiverAttack
             {
                 DestroyImmediate(playerMaster.gameObject);
             }
-            initializedPlayerMasters = new List<PlayerMaster>();
+            initializedPlayerMasters = new List<PlayerMasterOld>();
         }
         public int HighScorePlayers()
         {
             if (haveAnyPlayerInitialized == false) return 0;
             int score = 0;
-            foreach (var pl in initializedPlayerMasters.Where(pl => score < pl.GetComponent<PlayerMaster>().getPlayerSettings.score))
+            foreach (var pl in initializedPlayerMasters.Where(pl => score < pl.GetComponent<PlayerMasterOld>().getPlayerSettings.score))
             {
-                score += pl.GetComponent<PlayerMaster>().getPlayerSettings.score;
+                score += pl.GetComponent<PlayerMasterOld>().getPlayerSettings.score;
             }
 
             return score;

@@ -45,7 +45,7 @@ namespace RiverAttack
 
         private void OnTriggerEnter(Collider collision)
         {
-            if (!collision.GetComponentInParent<PlayerMaster>() && !collision.GetComponentInParent<EffectAreaMaster>())
+            if (!collision.GetComponentInParent<PlayerMasterOld>() && !collision.GetComponentInParent<EffectAreaMasterOld>())
                 return;
             DestroyMeExplosion();
         }

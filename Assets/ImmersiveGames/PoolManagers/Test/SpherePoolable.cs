@@ -1,4 +1,5 @@
-﻿using ImmersiveGames.DebugManagers;
+﻿using ImmersiveGames.BulletsManagers;
+using ImmersiveGames.DebugManagers;
 using UnityEngine;
 using ImmersiveGames.PoolManagers.Interface;
 
@@ -14,13 +15,13 @@ namespace ImmersiveGames.PoolManagers.Test
         {
             Pool = pool;
         }
-        public void OnSpawned()
+        public void OnSpawned(Transform spawnPosition, IBulletsData bulletData)
         {
             DebugManager.Log<SpherePoolable>("SpherePoolable object spawned.");
             IsPooled = false;
         }
 
-        public void OnDespawned()
+        public void OnDespaired()
         {
             DebugManager.Log<SpherePoolable>("SpherePoolable object despawned.");
             IsPooled = true;

@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4eb4c962c2473ea20d99fc464e6b32, type: 3}
+  m_Name: Drone_Hard
+  m_EditorClassIdentifier: 
+  canRespawn: 1
+  canKilled: 1
+  ignoreWalls: 0
+  ignoreEnemies: 1
+  ignoreBullets: 0
+  name: Drone
+  localizeName:
+    m_TableReference:
+      m_TableCollectionName: GUID:4324ceb956596944f87fd26e389fce55
+    m_TableEntryReference:
+      m_KeyId: 252004560896
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  obstacleTypes: 5
+  hitPoints: 1
+  valueScore: 30
+  defaultPrefabSkin:
+  - {fileID: 1468515137389153396, guid: 5176fa8ad2a480d46beeb0b262bb3a23, type: 3}
+  - {fileID: -7330308236824226335, guid: f3af8524209a450479eb7a746d904d5d, type: 3}
+  randomSkin: 1
+  deadParticlePrefab: {fileID: 1795330444146210, guid: 139f769fdedea1c42b49a2c24ffbde00,
+    type: 3}
+  timeoutDestroy: 1.8
+  explodeSize: 0.7
+  shakeIntensity: 2
+  shakeTime: 0.5
+  moveVelocity: 15
+  animationDuration: 0
+  animationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  approachMovement: {x: 1, y: 10}
+  speedShoot: 0
+  cadenceShoot: 0
+  damageShoot: 0
+  approachShoot: {x: 0, y: 0}
+  dropItemChances: 0.2
+  dropItems:
+  - prefabPowerUp: {fileID: 656739116215919051, guid: 17b09b76d34468545a144793233f66c8,
+      type: 3}
+    dropChance: 8
+  - prefabPowerUp: {fileID: 8395036249102440061, guid: c5957cec90c930b4e8b1f5000354b6af,
+      type: 3}
+    dropChance: 4
+  references:
+    version: 2
+    RefIds: []

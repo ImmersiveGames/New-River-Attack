@@ -3,17 +3,17 @@ namespace RiverAttack
 {
     public class EffectAreaSound : EnemiesSound
     {
-        private EffectAreaMaster m_EffectAreaMaster;
+        private EffectAreaMasterOld _mEffectAreaMasterOld;
         [SerializeField] private AudioEventSample effectAreaSound;
         [SerializeField] private AudioEventSample effectAreaExitSound;
 
-        private PlayerMaster m_PlayerMaster;
+        private PlayerMasterOld _mPlayerMasterOld;
 
         protected override void OnEnable()
         {
             base.OnEnable();
-            m_EffectAreaMaster.EventEnterAreaEffect += SoundAreaEffect;
-            m_EffectAreaMaster.EventExitAreaEffect += StopSoundAreaEffect;
+            _mEffectAreaMasterOld.EventEnterAreaEffect += SoundAreaEffect;
+            _mEffectAreaMasterOld.EventExitAreaEffect += StopSoundAreaEffect;
             GamePlayManager.instance.EventOtherEnemiesKillPlayer += StopSoundAreaEffect;
             GamePlayManager.instance.EventEnemiesMasterKillPlayer += StopSoundAreaEffect;
         }
@@ -21,15 +21,15 @@ namespace RiverAttack
         protected override void OnDisable()
         {
             base.OnDisable();
-            m_EffectAreaMaster.EventEnterAreaEffect -= SoundAreaEffect;
-            m_EffectAreaMaster.EventExitAreaEffect -= StopSoundAreaEffect;
+            _mEffectAreaMasterOld.EventEnterAreaEffect -= SoundAreaEffect;
+            _mEffectAreaMasterOld.EventExitAreaEffect -= StopSoundAreaEffect;
             
         }
 
         private void OnDestroy()
         {
-            m_EffectAreaMaster.EventEnterAreaEffect -= SoundAreaEffect;
-            m_EffectAreaMaster.EventExitAreaEffect -= StopSoundAreaEffect;
+            _mEffectAreaMasterOld.EventEnterAreaEffect -= SoundAreaEffect;
+            _mEffectAreaMasterOld.EventExitAreaEffect -= StopSoundAreaEffect;
             if (!GamePlayManager.instance)
                 return;
             GamePlayManager.instance.EventOtherEnemiesKillPlayer -= StopSoundAreaEffect;
@@ -40,7 +40,7 @@ namespace RiverAttack
         protected override void SetInitialReferences()
         {
             base.SetInitialReferences();
-            m_EffectAreaMaster = GetComponent<EffectAreaMaster>();
+            _mEffectAreaMasterOld = GetComponent<EffectAreaMasterOld>();
         }
 
         private void SoundAreaEffect()

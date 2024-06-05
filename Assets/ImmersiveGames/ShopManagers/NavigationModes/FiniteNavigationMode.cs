@@ -14,6 +14,11 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
         {
             var rect = content.anchoredPosition;
             var childCount = content.childCount;
+            if (childCount <= 0)
+            {
+                DebugManager.LogError<FiniteNavigationMode>($"Não há filhos criados");
+                return;
+            }
             var moveAmount = content.rect.width / childCount;
             const int maxPosition = 0;
             var minPosition = -((childCount - 1) * moveAmount);
@@ -50,6 +55,11 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
 
         public virtual void UpdateSelectedItem(RectTransform content, int selectedIndex)
         {
+            if (content.childCount <= 0)
+            {
+                DebugManager.LogError<FiniteNavigationMode>($"Não há Itens no content");
+                return;
+            }
             var childSelect = content.GetChild(selectedIndex);
             var activeButton = childSelect.GetComponentInChildren<Button>();
             if (activeButton != null)

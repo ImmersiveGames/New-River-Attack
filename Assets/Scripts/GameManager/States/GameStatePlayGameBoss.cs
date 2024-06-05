@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using NewRiverAttack.SteamGameManagers;
 using UnityEngine;
 using Utils;
 namespace RiverAttack
@@ -13,47 +14,47 @@ namespace RiverAttack
         private IBossBehavior[] m_CurrentBehaviors;
         private int m_CurrentBehaviorIndex;
         private bool m_BehaviorEnterExecuted;
-        private BossMaster m_BossMaster;
+        private BossMasterOld _mBossMasterOld;
 
         public GameStatePlayGameBoss() {
             // Inicializa o estado do BattleBoss como "Topo"
             m_CurrentSubState = BattleBossSubState.Top;
             m_CurrentBehaviorIndex = 0;
 
-            m_BossMaster = GamePlayManager.instance.bossMaster;
+            _mBossMasterOld = GamePlayManager.instance.BossMasterOld;
     
             // Inicializa os comportamentos para cada subestado
             m_Behaviors = new Dictionary<BattleBossSubState, IBossBehavior[]> {
                 { BattleBossSubState.Top, new IBossBehavior[] {
-                    new EmergeBehavior(m_BossMaster),
-                    new ExplosiveMinesBehavior(m_BossMaster,m_BossMaster.GetBossMines().numMines[0]),
-                    new MissileAttackBehavior(m_BossMaster, m_BossMaster.GetBossMissileShoot().numMissiles[0], m_BossMaster.GetBossMissileShoot().angleCones[0]),
-                    new SubEmergeBehavior(m_BossMaster),
-                    new DropGasStationsBehavior(m_BossMaster, m_BossMaster.GetBossGasStationDrop().dropGasStation[0])
+                    new EmergeBehavior(_mBossMasterOld),
+                    new ExplosiveMinesBehavior(_mBossMasterOld,_mBossMasterOld.GetBossMines().numMines[0]),
+                    new MissileAttackBehavior(_mBossMasterOld, _mBossMasterOld.GetBossMissileShoot().numMissiles[0], _mBossMasterOld.GetBossMissileShoot().angleCones[0]),
+                    new SubEmergeBehavior(_mBossMasterOld),
+                    new DropGasStationsBehavior(_mBossMasterOld, _mBossMasterOld.GetBossGasStationDrop().dropGasStation[0])
                     // Adicionar os outros comportamentos para o subestado "Topo"
                 }},
                 { BattleBossSubState.Base, new IBossBehavior[] {
-                    new EmergeBehavior(m_BossMaster),
-                    new MissileAttackBehavior(m_BossMaster, m_BossMaster.GetBossMissileShoot().numMissiles[1], m_BossMaster.GetBossMissileShoot().angleCones[1]),
-                    new SubEmergeBehavior(m_BossMaster)
+                    new EmergeBehavior(_mBossMasterOld),
+                    new MissileAttackBehavior(_mBossMasterOld, _mBossMasterOld.GetBossMissileShoot().numMissiles[1], _mBossMasterOld.GetBossMissileShoot().angleCones[1]),
+                    new SubEmergeBehavior(_mBossMasterOld)
                     // Adicionar os outros comportamentos para o subestado "Base"
                 }},
                 { BattleBossSubState.Left, new IBossBehavior[] {
-                    new EmergeBehavior(m_BossMaster),
-                    new MissileAttackBehavior(m_BossMaster,m_BossMaster.GetBossMissileShoot().numMissiles[0], m_BossMaster.GetBossMissileShoot().angleCones[0]),
-                    new SubEmergeBehavior(m_BossMaster),
-                    new DropGasStationsBehavior(m_BossMaster, m_BossMaster.GetBossGasStationDrop().dropGasStation[0])
+                    new EmergeBehavior(_mBossMasterOld),
+                    new MissileAttackBehavior(_mBossMasterOld,_mBossMasterOld.GetBossMissileShoot().numMissiles[0], _mBossMasterOld.GetBossMissileShoot().angleCones[0]),
+                    new SubEmergeBehavior(_mBossMasterOld),
+                    new DropGasStationsBehavior(_mBossMasterOld, _mBossMasterOld.GetBossGasStationDrop().dropGasStation[0])
                     // Adicionar os outros comportamentos para o subestado "Left"
                 }},
                 { BattleBossSubState.Right, new IBossBehavior[] {
-                    new EmergeBehavior(m_BossMaster),
-                    new MissileAttackBehavior(m_BossMaster,m_BossMaster.GetBossMissileShoot().numMissiles[0], m_BossMaster.GetBossMissileShoot().angleCones[0]),
-                    new SubEmergeBehavior(m_BossMaster),
-                    new DropGasStationsBehavior(m_BossMaster, m_BossMaster.GetBossGasStationDrop().dropGasStation[0])
+                    new EmergeBehavior(_mBossMasterOld),
+                    new MissileAttackBehavior(_mBossMasterOld,_mBossMasterOld.GetBossMissileShoot().numMissiles[0], _mBossMasterOld.GetBossMissileShoot().angleCones[0]),
+                    new SubEmergeBehavior(_mBossMasterOld),
+                    new DropGasStationsBehavior(_mBossMasterOld, _mBossMasterOld.GetBossGasStationDrop().dropGasStation[0])
                     // Adicionar os outros comportamentos para o subestado "Right"
                 }},
                 { BattleBossSubState.Dead, new IBossBehavior[] {
-                    new DeadBehavior(m_BossMaster)
+                    new DeadBehavior(_mBossMasterOld)
                     //new SubEmergeBehavior(m_BossMaster),
                     // Adicionar os outros comportamentos para o subestado "Right"
                 }}
@@ -79,7 +80,7 @@ namespace RiverAttack
             //Debug.Log($"Boss Fight! {GamePlayManager.instance.bossFightPause}");
             /*Debug.Log($"m_CurrentSubState: {m_CurrentSubState}");
             Debug.Log($"m_CurrentBehaviorIndex: {m_CurrentBehaviorIndex}");*/
-            if (!m_BossMaster.shouldObstacleBeReady)
+            if (!_mBossMasterOld.shouldObstacleBeReady)
             {
                 return;
             }
@@ -106,7 +107,7 @@ namespace RiverAttack
         public override void ExitState()
         {
             var score = PlayerManager.instance.playerSettingsList[0].score;
-            GameSteamManager.UpdateScore(score, false);
+            SteamGameManager.UpdateScore(score, false);
             //PlayerManager.instance.ActivePlayers(false);
             //GamePlayManager.instance.OnEventDeactivateEnemiesMaster();
             //Debug.Log($"Sai do Estado: Boss Fight");
@@ -139,7 +140,7 @@ namespace RiverAttack
             }
             while (nextState == m_CurrentSubState); // Garante que o próximo estado seja diferente do atual
 
-            m_BossMaster.actualPosition = nextState;
+            _mBossMasterOld.actualPosition = nextState;
            // Debug.Log($"RANDOM Position: {nextState}");
             return nextState;
         }

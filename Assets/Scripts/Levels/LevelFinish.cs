@@ -1,4 +1,5 @@
 using System;
+using NewRiverAttack.SteamGameManagers;
 using UnityEngine;
 
 namespace RiverAttack
@@ -15,7 +16,7 @@ namespace RiverAttack
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponentInParent<PlayerMaster>() == null) return;
+            if (other.GetComponentInParent<PlayerMasterOld>() == null) return;
             if (m_GamePlayManager.readyToFinish != true) return;
             if (!GamePlayingLog.instance.GetLevelsResult().Contains(m_GamePlayManager.actualLevels))
             {
@@ -26,22 +27,22 @@ namespace RiverAttack
                     switch (m_GamePlayManager.actualLevels.pathType)
                     {
                         case LevelTypes.Grass:
-                            GameSteamManager.UnlockAchievement("ACH_FINISH_M_GRASS");
+                            SteamGameManager.UnlockAchievement("ACH_FINISH_M_GRASS");
                             break;
                         case LevelTypes.Forest:
-                            GameSteamManager.UnlockAchievement("ACH_FINISH_M_FOREST");
+                            SteamGameManager.UnlockAchievement("ACH_FINISH_M_FOREST");
                             break;
                         case LevelTypes.Swamp:
-                            GameSteamManager.UnlockAchievement("ACH_FINISH_M_SWAMP");
+                            SteamGameManager.UnlockAchievement("ACH_FINISH_M_SWAMP");
                             break;
                         case LevelTypes.Antique:
-                            GameSteamManager.UnlockAchievement("ACH_FINISH_M_ANCIENT");
+                            SteamGameManager.UnlockAchievement("ACH_FINISH_M_ANCIENT");
                             break;
                         case LevelTypes.Desert:
-                            GameSteamManager.UnlockAchievement("ACH_FINISH_M_DESERT");
+                            SteamGameManager.UnlockAchievement("ACH_FINISH_M_DESERT");
                             break;
                         case LevelTypes.Ice:
-                            GameSteamManager.UnlockAchievement("ACH_FINISH_M_ICE");
+                            SteamGameManager.UnlockAchievement("ACH_FINISH_M_ICE");
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NewRiverAttack.SteamGameManagers;
+using UnityEngine;
 using Utils;
 
 namespace RiverAttack
@@ -22,7 +23,7 @@ namespace RiverAttack
         {
             var gamePlaySettings = GamePlayingLog.instance;
             gamePlaySettings.fuelStocked += fuel;
-            GameSteamManager.AddStat("stat_FillGas", fuel, false);
+            SteamGameManager.AddStat("stat_FillGas", fuel, false);
         }
         
         [Header("RapidFire PowerUp")]

@@ -5,13 +5,13 @@ namespace RiverAttack
     {
         [SerializeField] private AudioEventSample collectSound;
         [SerializeField] private AudioEventSample showSound;
-        private CollectiblesMaster m_CollectiblesMaster;
+        private CollectiblesMasterOld _mCollectiblesMasterOld;
 
         #region UNITY METHODS
         protected override void OnEnable()
         {
             base.OnEnable();
-            m_CollectiblesMaster.EventCollectItem += CollectSound;
+            _mCollectiblesMasterOld.EventCollectItem += CollectSound;
         }
 
         private void OnBecameVisible()
@@ -21,7 +21,7 @@ namespace RiverAttack
         protected override void OnDisable()
         {
             base.OnDisable();
-            m_CollectiblesMaster.EventCollectItem -= CollectSound;
+            _mCollectiblesMasterOld.EventCollectItem -= CollectSound;
         }
   #endregion
 
@@ -34,7 +34,7 @@ namespace RiverAttack
         protected override void SetInitialReferences()
         {
             base.SetInitialReferences();
-            m_CollectiblesMaster = GetComponent<CollectiblesMaster>();
+            _mCollectiblesMasterOld = GetComponent<CollectiblesMasterOld>();
         }
 
         private void CollectSound(PlayerSettings playerSettings)

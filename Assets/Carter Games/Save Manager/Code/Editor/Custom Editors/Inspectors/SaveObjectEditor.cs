@@ -1,17 +1,17 @@
 ﻿/*
- * Copyright (c) 2018-Present Carter Games
- * 
+ * Copyright (c) 2024 Carter Games
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
  *
- *    
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
@@ -72,7 +72,6 @@ namespace CarterGames.Assets.SaveManager.Editor
             
             DrawInfoSection();
             EditorGUILayout.Space(3.5f);
-            
             DrawValuesSection();
             
             // Applies changes only if there are changes made.
@@ -96,10 +95,6 @@ namespace CarterGames.Assets.SaveManager.Editor
             EditorGUILayout.Space(3.5f);
             InspectorDrawValues();
             
-            // Applies changes only if there are changes made.
-            if (!EditorGUI.EndChangeCheck()) return;
-            
-            serializedObject.ApplyModifiedProperties();
             serializedObject.Update();
         }
 
@@ -121,16 +116,16 @@ namespace CarterGames.Assets.SaveManager.Editor
                 serializedObject.Update();
 
                 // Adds to save data if it doesn't exist.
-                if (UtilEditor.Settings.SaveData.Data.Contains((SaveObject)target)) return;
+                if (UtilEditor.AssetGlobalRuntimeSettings.SaveData.Data.Contains((SaveObject)target)) return;
                 
-                UtilEditor.Settings.SaveData.Data.Add((SaveObject)target);
+                UtilEditor.AssetGlobalRuntimeSettings.SaveData.Data.Add((SaveObject)target);
                         
                 propertiesLookup = new Dictionary<string, SerializedProperty>()
                 {
                     { "SaveKey", serializedObject.Fp("saveKey") },
                 };
                 
-                EditorUtility.SetDirty(UtilEditor.Settings.SaveData);
+                EditorUtility.SetDirty(UtilEditor.AssetGlobalRuntimeSettings.SaveData);
 
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
@@ -193,7 +188,7 @@ namespace CarterGames.Assets.SaveManager.Editor
             UtilEditor.DrawHorizontalGUILine();
             
             var prop = serializedObject.GetIterator();
-
+            
             if (prop.NextVisible(true))
             {
                 while (prop.NextVisible(false))
@@ -233,7 +228,6 @@ namespace CarterGames.Assets.SaveManager.Editor
                     if (propertiesLookup.ContainsKey(prop.name)) continue;
                     
                     EditorGUI.indentLevel++;
-                    
                     
                     EditorGUILayout.PropertyField(serializedObject.Fp(prop.name).Fpr("value"), new GUIContent(prop.displayName), true);
                     

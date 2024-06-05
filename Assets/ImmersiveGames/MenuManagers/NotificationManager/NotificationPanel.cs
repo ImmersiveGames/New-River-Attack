@@ -91,7 +91,7 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
             NotificationData = new NotificationData
             {
                 message = message,
-                confirmAction = onConfirm,
+                ConfirmAction = onConfirm,
             };
 
             // Etapa 7: Adicionar ouvintes aos botões

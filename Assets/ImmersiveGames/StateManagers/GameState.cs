@@ -2,6 +2,7 @@
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ScenesManager.Transitions;
 using ImmersiveGames.StateManagers.Interfaces;
+using NewRiverAttack.LevelBuilder;
 using UnityEngine.SceneManagement;
 
 namespace ImmersiveGames.StateManagers
@@ -27,18 +28,17 @@ namespace ImmersiveGames.StateManagers
             {
                 StateInitialized = true;
             }
-            DebugManager.Log<GameState>($"Entrada: PreviousState: {previousState}");
+            DebugManager.Log<GameState>($"O {previousState} requer transição? {RequiresSceneLoad}");
             if (previousState == null || RequiresSceneLoad)
             {
                 var transitionOut = OutTransition;
 
                 if (transitionOut != null)
                 {
-                    DebugManager.Log<GameState>($"Entrada: Out: {transitionOut}");
+                    DebugManager.Log<GameState>($"O {previousState} ira transitar usando: {transitionOut}");
                     await transitionOut.OutTransitionAsync().ConfigureAwait(false);
                 }
             }
-            
             
             await OnEnter(previousState).ConfigureAwait(false);
             StateFinalization = true;

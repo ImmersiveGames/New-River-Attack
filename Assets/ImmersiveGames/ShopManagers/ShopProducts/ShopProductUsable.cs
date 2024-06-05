@@ -9,6 +9,8 @@ namespace ImmersiveGames.ShopManagers.ShopProducts
     {
         [Range(1,10)]
         public int itemPackMultiply;
+
+        public GameObject prefabItem;
         public void Use(int indexPlayer, IStockShop stockShop, int quantity)
         {
             throw new System.NotImplementedException();

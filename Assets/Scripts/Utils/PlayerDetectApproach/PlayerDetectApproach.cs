@@ -27,7 +27,7 @@ namespace Utils
             for (int i = 0; i < size; i++)
             {
                 //Debug.Log("COLLIDES: "+ results[i] +" Referencia: "+m_PositionReference+" Distancia: "+m_Distance);
-                if (typeof(T) != typeof(PlayerMaster)) continue;
+                if (typeof(T) != typeof(PlayerMasterOld)) continue;
                 return results[i].transform.root;
             }
             return null;

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ImmersiveGames.BulletsManagers;
 using ImmersiveGames.DebugManagers;
 using UnityEngine;
 using ImmersiveGames.PoolManagers.Interface;
@@ -14,9 +15,9 @@ namespace ImmersiveGames.PoolManagers
         private readonly GameObject _pooledObj;
         private readonly Transform _myRoot;
 
-        public PoolObject(GameObject prefab, int initialPoolSize, Transform myRoot, bool persistent = false)
+        public PoolObject(string poolName, GameObject prefab, int initialPoolSize, Transform myRoot, bool persistent = false)
         {
-            _myRoot = new GameObject($"Pool({myRoot.root.name})").transform;
+            _myRoot = new GameObject(poolName).transform;
             _myRoot.SetParent(myRoot);
             _myRoot.SetAsLastSibling();
 
@@ -39,44 +40,40 @@ namespace ImmersiveGames.PoolManagers
 
             // Verifica se o objeto possui um componente IPoolable e atribui a referência do pool
             var poolable = newObj.GetComponent<IPoolable>();
-            if (poolable != null)
-            {
-                poolable.AssignPool(this);
-            }
+            if (poolable != null) poolable.Pool = this;
 
             return newObj;
         }
 
-        internal GameObject GetObject()
+        internal GameObject GetObject(Transform spawnPosition, BulletData bulletData)
         {
             foreach (var obj in _listInactiveObjects.Where(obj => obj != null))
             {
                 _listInactiveObjects.Remove(obj);
                 _listPooledObjects.Add(obj);
-                ResetTransform(obj);
-                obj.SetActive(true);
-                obj.transform.parent = null;
-                var poolable = obj.GetComponent<IPoolable>();
-                poolable?.OnSpawned();
-                return obj;
+                return SpawnObject(obj, spawnPosition, bulletData);
             }
 
             foreach (var obj in _listPooledObjects.Where(obj => !obj.activeSelf))
             {
-                ResetTransform(obj);
-                obj.SetActive(true);
-                obj.transform.parent = null;
-                var poolable = obj.GetComponent<IPoolable>();
-                poolable?.OnSpawned();
-                return obj;
+                return SpawnObject(obj, spawnPosition, bulletData);
             }
             return CreateObject(_pooledObj);
         }
 
-        private void ResetTransform(GameObject gameObject)
+        private GameObject SpawnObject(GameObject obj, Transform spawnPosition, BulletData bulletData)
         {
-            gameObject.transform.localPosition = Vector3.zero;
-            gameObject.transform.localRotation = Quaternion.identity;
+            obj.transform.localPosition = Vector3.zero;
+            obj.transform.localRotation = Quaternion.identity;
+            obj.SetActive(true);
+            var poolable = obj.GetComponent<IPoolable>();
+            if (poolable != null)
+            {
+                poolable.Pool = this;
+                poolable.OnSpawned(spawnPosition, bulletData);
+            }
+            obj.transform.parent = null;
+            return obj;
         }
 
         public Transform GetRoot()
@@ -86,7 +83,7 @@ namespace ImmersiveGames.PoolManagers
 
         public void ClearUnusedObjects()
         {
-            for (int i = _listInactiveObjects.Count - 1; i >= 0; i--)
+            for (var i = _listInactiveObjects.Count - 1; i >= 0; i--)
             {
                 if (_listInactiveObjects[i] == null)
                 {

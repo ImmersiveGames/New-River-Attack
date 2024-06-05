@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4eb4c962c2473ea20d99fc464e6b32, type: 3}
+  m_Name: AirCraft_Medio
+  m_EditorClassIdentifier: 
+  canRespawn: 1
+  canKilled: 1
+  isCheckInPoint: 0
+  ignoreWalls: 1
+  ignoreEnemies: 1
+  ignoreBullets: 0
+  name: Air Craft
+  localizeName:
+    m_TableReference:
+      m_TableCollectionName: GUID:4324ceb956596944f87fd26e389fce55
+    m_TableEntryReference:
+      m_KeyId: 29320572928
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  obstacleTypes: 1
+  hitPoints: 1
+  valueScore: 65
+  defaultPrefabSkin:
+  - {fileID: -4456779895122462279, guid: dca139ba25b42fe448cb0c356e8125fa, type: 3}
+  randomSkin: 0
+  deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
+    type: 3}
+  timeoutDestroy: 1.8
+  explodeSize: 0.7
+  shakeIntensity: 2
+  shakeTime: 0.5
+  moveVelocity: 25
+  animationDuration: 0
+  animationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  approachMovement: {x: 20, y: 30}
+  speedShoot: 0
+  cadenceShoot: 0
+  damageShoot: 0
+  approachShoot: {x: 0, y: 0}
+  dropItemChances: 0.25
+  dropItems:
+  - prefabPowerUp: {fileID: 656739116215919051, guid: 17b09b76d34468545a144793233f66c8,
+      type: 3}
+    dropChance: 2
+  - prefabPowerUp: {fileID: 8395036249102440061, guid: c5957cec90c930b4e8b1f5000354b6af,
+      type: 3}
+    dropChance: 3
+  - prefabPowerUp: {fileID: 8711698312663421325, guid: 629ff75bcc5c0f040830c3c685b3092c,
+      type: 3}
+    dropChance: 4
+  references:
+    version: 2
+    RefIds: []

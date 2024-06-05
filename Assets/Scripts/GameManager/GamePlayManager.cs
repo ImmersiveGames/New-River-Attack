@@ -31,7 +31,7 @@ namespace RiverAttack
         internal bool playerDead;
         internal bool bossFight;
         internal bool bossFightPause;
-        internal BossMaster bossMaster;
+        internal BossMasterOld BossMasterOld;
 
         internal const float LIMIT_X = 28.0f;
         internal const float LIMIT_Z_TOP = 40.0f;

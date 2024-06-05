@@ -4,7 +4,7 @@ namespace RiverAttack
 {
     public class PlayerLives : MonoBehaviour
     {
-        private PlayerMaster m_PlayerMaster;
+        private PlayerMasterOld _mPlayerMasterOld;
         private GamePlayManager m_GamePlayManager;
         private PlayerSettings m_PlayerSettings;
         private GamePlayingLog m_GamePlayingLog;
@@ -14,21 +14,21 @@ namespace RiverAttack
         private void OnEnable()
         {
             SetInitialReferences();
-            m_PlayerMaster.EventPlayerMasterHit += LoseLive;
+            _mPlayerMasterOld.EventPlayerMasterHit += LoseLive;
             m_GamePlayManager.EventUpdateScore += CheckNewLives;
         }
 
         private void OnDisable()
         {
-            m_PlayerMaster.EventPlayerMasterHit -= LoseLive;
+            _mPlayerMasterOld.EventPlayerMasterHit -= LoseLive;
             m_GamePlayManager.EventUpdateScore -= CheckNewLives;
         }
   #endregion
 
   private void SetInitialReferences()
         {
-            m_PlayerMaster = GetComponent<PlayerMaster>();
-            m_PlayerSettings = m_PlayerMaster.getPlayerSettings;
+            _mPlayerMasterOld = GetComponent<PlayerMasterOld>();
+            m_PlayerSettings = _mPlayerMasterOld.getPlayerSettings;
 
             m_GamePlayManager = GamePlayManager.instance;
             m_GamePlayingLog = m_GamePlayManager.gamePlayingLog;
@@ -44,9 +44,9 @@ namespace RiverAttack
         private void CheckNewLives(int score)
         {
             int scoreToLive = GameSettings.instance.multiplyScoreForLives;
-            if (score < m_PlayerMaster.nextScoreForLive) return;
+            if (score < _mPlayerMasterOld.nextScoreForLive) return;
             if (m_PlayerSettings.lives > GameSettings.instance.maxLives) return;
-            m_PlayerMaster.nextScoreForLive += scoreToLive;
+            _mPlayerMasterOld.nextScoreForLive += scoreToLive;
             m_PlayerSettings.lives++;
             m_GamePlayManager.OnEventUpdateLives(m_PlayerSettings.lives);
         }

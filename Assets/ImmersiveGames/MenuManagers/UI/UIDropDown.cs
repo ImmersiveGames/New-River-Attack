@@ -2,7 +2,7 @@
 using System.Linq;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.MenuManagers.PanelOptionsManagers;
-using ImmersiveGames.SaveManagers;
+using NewRiverAttack.SaveManagers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;

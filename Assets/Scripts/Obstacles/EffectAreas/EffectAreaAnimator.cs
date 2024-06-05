@@ -8,7 +8,7 @@ namespace RiverAttack
 
         private GamePlayManager m_GamePlayManager;
 
-        private EffectAreaMaster m_EffectAreaMaster;
+        private EffectAreaMasterOld _mEffectAreaMasterOld;
         // Start is called before the first frame update
 
         #region UNIYMETHODS
@@ -30,13 +30,13 @@ namespace RiverAttack
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.GetComponentInParent<PlayerMaster>()) return;
+            if (!other.GetComponentInParent<PlayerMasterOld>()) return;
             OnFuelingAnimation(true);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (!other.GetComponentInParent<PlayerMaster>()) return;
+            if (!other.GetComponentInParent<PlayerMasterOld>()) return;
             OnFuelingAnimation(false);
         }
         #endregion
@@ -44,7 +44,7 @@ namespace RiverAttack
         private void SetInitialReferences()
         {
             m_GamePlayManager = GamePlayManager.instance;
-            m_EffectAreaMaster = GetComponent<EffectAreaMaster>();
+            _mEffectAreaMasterOld = GetComponent<EffectAreaMasterOld>();
             m_Animator = GetComponentInChildren<Animator>();
         }
 

@@ -1,4 +1,5 @@
-﻿using ImmersiveGames.DebugManagers;
+﻿using ImmersiveGames.BulletsManagers;
+using ImmersiveGames.DebugManagers;
 using UnityEngine;
 using ImmersiveGames.PoolManagers.Interface;
 
@@ -19,7 +20,7 @@ namespace ImmersiveGames.PoolManagers.Test
         private void Start()
         {
             _poolManager = GetComponent<IPoolManager>();
-            _poolManager.CreatePool(prefab, initialPoolSize, poolRoot, persistent);
+            _poolManager.CreatePool("Teste Pool",prefab, initialPoolSize, poolRoot, persistent);
 
             _testingInactiveObjects = false;
         }
@@ -28,7 +29,7 @@ namespace ImmersiveGames.PoolManagers.Test
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                var newObj = _poolManager.GetObjectFromPool(poolName);
+                var newObj = _poolManager.GetObjectFromPool<IPoolable>(poolName, poolRoot, new BulletData());
                 if (newObj != null)
                 {
                     var xPos = Random.Range(-5f, 5f);

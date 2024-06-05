@@ -1,5 +1,4 @@
-﻿using ImmersiveGames.PlayerManagers.ScriptableObjects;
-using ImmersiveGames.ShopManagers.Interfaces;
+﻿using ImmersiveGames.ShopManagers.Interfaces;
 using UnityEngine;
 using UnityEngine.Localization;
 

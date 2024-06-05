@@ -15,9 +15,9 @@ namespace RiverAttack
         private readonly IHasPool m_MyPool;
         //IBossBehavior
         private bool m_Finished;
-        internal DropGasStationsBehavior(BossMaster bossMaster, int quantity)
+        internal DropGasStationsBehavior(BossMasterOld bossMasterOld, int quantity)
         {
-            m_MyPool = m_BossGasStationDrop = bossMaster.GetBossGasStationDrop();
+            m_MyPool = m_BossGasStationDrop = bossMasterOld.GetBossGasStationDrop();
             m_NumGas = (quantity <= 0)? 2 : quantity;
         }
 

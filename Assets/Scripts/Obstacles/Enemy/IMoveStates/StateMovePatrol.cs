@@ -8,15 +8,15 @@ namespace RiverAttack
         private float m_StartApproachRadius;
         private float m_PlayerApproachRadius;
 
-        private readonly ObstacleMaster m_ObstacleMaster;
+        private readonly ObstacleMasterOld _mObstacleMasterOld;
         private EnemiesSetDifficulty m_EnemiesSetDifficulty;
         private PlayerDetectApproach m_PlayerDetectApproach;
         private readonly EnemiesMovement m_EnemiesMovement;
 
-        public StateMovePatrol(EnemiesMovement enemiesMovement, ObstacleMaster obstacleMaster)
+        public StateMovePatrol(EnemiesMovement enemiesMovement, ObstacleMasterOld obstacleMasterOld)
         {
             m_EnemiesMovement = enemiesMovement;
-            m_ObstacleMaster = obstacleMaster;
+            _mObstacleMasterOld = obstacleMasterOld;
         }
         public void EnterState()
         {
@@ -24,8 +24,8 @@ namespace RiverAttack
             m_Target = null;
             m_PlayerApproachRadius = m_StartApproachRadius = m_EnemiesMovement.playerApproachRadius;
 
-            if (!m_ObstacleMaster.enemy && !m_ObstacleMaster.enemy.enemiesSetDifficultyListSo) return;
-            m_EnemiesSetDifficulty = m_ObstacleMaster.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(m_ObstacleMaster.actualDifficultName);
+            if (!_mObstacleMasterOld.enemy && !_mObstacleMasterOld.enemy.enemiesSetDifficultyListSo) return;
+            m_EnemiesSetDifficulty = _mObstacleMasterOld.enemy.enemiesSetDifficultyListSo.GetDifficultByEnemyDifficult(_mObstacleMasterOld.actualDifficultName);
             m_PlayerApproachRadius = m_StartApproachRadius * m_EnemiesSetDifficulty.multiplyPlayerDistanceRadiusToMove;
         }
         public void UpdateState(Transform transform, Vector3 direction)
@@ -33,9 +33,9 @@ namespace RiverAttack
             //Debug.Log($"{transform.gameObject.name} Estado: Patrol - Update: "+ m_PlayerApproachRadius);
             var position = transform.position;
             m_PlayerDetectApproach ??= new PlayerDetectApproach(position, m_PlayerApproachRadius);
-            m_Target = m_PlayerDetectApproach.TargetApproach<PlayerMaster>(GameManager.instance.layerPlayer);
+            m_Target = m_PlayerDetectApproach.TargetApproach<PlayerMasterOld>(GameManager.instance.layerPlayer);
             if(m_Target)
-                m_EnemiesMovement.ChangeState(new StateMove(m_EnemiesMovement, m_ObstacleMaster));
+                m_EnemiesMovement.ChangeState(new StateMove(m_EnemiesMovement, _mObstacleMasterOld));
         }
         public void ExitState()
         {

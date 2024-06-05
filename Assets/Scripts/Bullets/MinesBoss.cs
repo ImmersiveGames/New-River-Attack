@@ -67,7 +67,7 @@ namespace RiverAttack
                 case true:
                     return;
             }
-            m_Target = m_PlayerDetectApproach.TargetApproach<PlayerMaster>(GameManager.instance.layerPlayer);
+            m_Target = m_PlayerDetectApproach.TargetApproach<PlayerMasterOld>(GameManager.instance.layerPlayer);
             if (m_Target == null || m_StartExplosion || m_IsDestroy)
                 return;
             m_StartExplosion = true;
@@ -77,7 +77,7 @@ namespace RiverAttack
 
         private void OnTriggerEnter(Collider collision)
         {
-            if (!collision.GetComponentInParent<PlayerMaster>() && !collision.GetComponentInParent<EffectAreaMaster>()
+            if (!collision.GetComponentInParent<PlayerMasterOld>() && !collision.GetComponentInParent<EffectAreaMasterOld>()
                 && (!collision.GetComponent<BulletPlayer>() || !collision.GetComponent<BulletPlayerBomb>()))
                 return;
             DestroyMeExplosion();
