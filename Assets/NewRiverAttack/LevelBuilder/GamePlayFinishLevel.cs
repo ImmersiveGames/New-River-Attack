@@ -1,4 +1,5 @@
 ﻿using System;
+using ImmersiveGames;
 using ImmersiveGames.CameraManagers;
 using NewRiverAttack.GameManagers;
 using NewRiverAttack.GamePlayManagers;
@@ -25,11 +26,10 @@ namespace NewRiverAttack.LevelBuilder
         {
             base.OnTriggerEnter(other);
             var playerMaster = other.GetComponentInParent<PlayerMaster>();
-            if( playerMaster == null || playerMaster.IsDisable || !inFinisher) return;
+            if( playerMaster == null || playerMaster.IsDisable || !InFinisher) return;
+            AudioManager.PlayBGMOneShot("Finish");
             CameraManager.ActiveEndCamera(true);
-            //endVirtualCamera.gameObject.SetActive(true);
-            gamePlayManagerRef.OnEventGameFinisher();
-            Debug.Log($"FINISH GAME");
+            GamePlayManagerRef.OnEventGameFinisher();
             
             switch (GameManager.instance.gamePlayMode)
             {

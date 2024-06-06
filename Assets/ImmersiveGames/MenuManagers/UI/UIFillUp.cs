@@ -28,7 +28,8 @@ namespace ImmersiveGames.MenuManagers.UI
         private void OnDisable()
         {
             InputGameManager.UnregisterHoldAction("Hold_Exit",FillImage, UnFillImage );
-            StopCoroutine(_exitButtonCoroutine);
+            if(_exitButtonCoroutine != null)
+                StopCoroutine(_exitButtonCoroutine);
         }
 
         private void FillImage(InputAction.CallbackContext context)
@@ -39,7 +40,8 @@ namespace ImmersiveGames.MenuManagers.UI
         private void UnFillImage(InputAction.CallbackContext context)
         {
             _holdTimer = 0f;
-            StopCoroutine(_exitButtonCoroutine); // Parar qualquer preenchimento ainda em andamento
+            if(_exitButtonCoroutine != null)
+                StopCoroutine(_exitButtonCoroutine); // Parar qualquer preenchimento ainda em andamento
             _image.fillAmount = 0f; // Reiniciar o preenchimento quando o bot�o � liberado   
         }
         
@@ -58,7 +60,8 @@ namespace ImmersiveGames.MenuManagers.UI
             // Ação a ser executada após manter o botão pressionado por 3 segundos
             //Debug.Log("Botão de saída mantido pressionado por 3 segundos!");
             StopAllCoroutines();
-            StopCoroutine(_exitButtonCoroutine);
+            if(_exitButtonCoroutine != null)
+                StopCoroutine(_exitButtonCoroutine);
             InputGameManager.ActionManager.OnEventOnActionComplete();
         }
     }

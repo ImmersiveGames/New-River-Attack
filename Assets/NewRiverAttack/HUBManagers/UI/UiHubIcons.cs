@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using NewRiverAttack.LevelBuilder;
+using NewRiverAttack.SaveManagers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -45,7 +46,7 @@ namespace NewRiverAttack.HUBManagers.UI
             if (hubOrderData[startIndex].levelData.hudPath.levelsStates != LevelsStates.Complete)
             {
                 hubOrderData[_hubOrder].levelData.hudPath.levelsStates = LevelsStates.Locked;
-                if (_hubOrder < _hubGameManager.IndexMax)
+                if (_hubOrder < GameOptionsSave.instance.activeIndexMissionLevel)
                 {
                     hubOrderData[_hubOrder].levelData.hudPath.levelsStates = LevelsStates.Open;
                 }

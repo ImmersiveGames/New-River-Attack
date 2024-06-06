@@ -14,7 +14,7 @@ namespace NewRiverAttack.LevelBuilder
         {
             base.OnTriggerEnter(other);
             var playerMaster = other.GetComponentInParent<PlayerMaster>();
-            if( playerMaster == null || playerMaster.IsDisable || !inFinisher) return;
+            if( playerMaster == null || playerMaster.IsDisable || !InFinisher) return;
             AudioManager.PlayBGM(newBgmTypes.ToString());
         }
     }

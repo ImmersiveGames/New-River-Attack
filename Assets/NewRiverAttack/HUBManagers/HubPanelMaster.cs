@@ -4,6 +4,7 @@ using NewRiverAttack.AudioManagers;
 using NewRiverAttack.GameManagers;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.HUBManagers.UI;
+using NewRiverAttack.SaveManagers;
 using NewRiverAttack.StateManagers;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,7 @@ namespace NewRiverAttack.HUBManagers
         private int _indexMenu;
         
         private HubGameManager _hubGameManager;
+        private GameManager _gameManager;
         private void OnEnable()
         {
             SetInitialReferences();
@@ -42,13 +44,14 @@ namespace NewRiverAttack.HUBManagers
         private void SetInitialReferences()
         {
             _hubGameManager = HubGameManager.instance;
+            _gameManager = GameManager.instance;
 
         }
         public void ButtonNavigation(bool back)
         {
             if(!_hubGameManager.IsHubReady) return;
             var increment = (back) ? -1 : 1;
-            if(_indexMenu + increment > _hubGameManager.IndexMax) return;
+            if(_indexMenu + increment > GameOptionsSave.instance.activeIndexMissionLevel) return;
             _indexMenu += increment;
             if (_indexMenu < 0) _indexMenu = 0;
             _hubGameManager.OnEventCursorUpdateHub(_indexMenu);
@@ -59,8 +62,9 @@ namespace NewRiverAttack.HUBManagers
         {
             var audioGameOver = AudioManager.GetAudioSfxEvent(EnumSfxSound.SfxMouseClick);
             audioGameOver.PlayOnShot(GetComponent<AudioSource>());
-            GameManager.instance.gamePlayMode = GamePlayModes.MissionMode;
-            GameManager.instance.ActiveLevel = _hubGameManager.LevelOrder[_indexMenu].levelData;
+            _gameManager.gamePlayMode = GamePlayModes.MissionMode;
+            _gameManager.ActiveIndex = _indexMenu;
+            _gameManager.ActiveLevel = _hubGameManager.LevelOrder[_indexMenu].levelData;
             await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStatePlay.ToString()).ConfigureAwait(false);
         }
         
@@ -68,7 +72,7 @@ namespace NewRiverAttack.HUBManagers
         {
             var audioGameOver = AudioManager.GetAudioSfxEvent(EnumSfxSound.SfxMouseClick);
             audioGameOver.PlayOnShot(GetComponent<AudioSource>());
-            GameManager.instance.gamePlayMode = GamePlayModes.MissionMode;
+            _gameManager.gamePlayMode = GamePlayModes.MissionMode;
             await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateMenuInitial.ToString()).ConfigureAwait(false);
         }
     }

@@ -7,8 +7,8 @@ namespace NewRiverAttack.LevelBuilder.Abstracts
 {
     public abstract class LevelFinishers : MonoBehaviour
     {
-        protected bool inFinisher;
-        protected GamePlayManager gamePlayManagerRef;
+        protected bool InFinisher;
+        protected GamePlayManager GamePlayManagerRef;
         protected Vector3 GetTilePosition { get; private set; }
 
         protected virtual void OnEnable()
@@ -24,21 +24,21 @@ namespace NewRiverAttack.LevelBuilder.Abstracts
         protected virtual void OnTriggerEnter(Collider other)
         {
             var playerMaster = other.GetComponentInParent<PlayerMaster>();
-            if( playerMaster == null || playerMaster.IsDisable || inFinisher) return;
-            inFinisher = true;
+            if( playerMaster == null || playerMaster.IsDisable || InFinisher) return;
+            InFinisher = true;
         }
 
         protected virtual void OnTriggerExit(Collider other)
         {
             var playerMaster = other.GetComponentInParent<PlayerMaster>();
-            if( playerMaster == null || playerMaster.IsDisable || !inFinisher) return;
-            inFinisher = false;
+            if( playerMaster == null || playerMaster.IsDisable || !InFinisher) return;
+            InFinisher = false;
             
         }
         
         protected virtual void SetInitialReferences()
         {
-            gamePlayManagerRef = GamePlayManager.instance;
+            GamePlayManagerRef = GamePlayManager.instance;
         }
 
         

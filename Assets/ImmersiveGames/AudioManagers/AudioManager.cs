@@ -21,7 +21,7 @@ namespace ImmersiveGames
         [SerializeField] private AudioIndex mapStateBgm;
         [SerializeField] private AudioIndex mapMenuSfx;
         
-        [Header("Fade Sounds")] public float fadeSoundDuration = 1f;
+        [Header("Fade Sounds")] public float fadeSoundDuration = 0.5f;
 
         private static AudioSource _bgmAudioSource;
         private static AudioSource _sfxAudioSource;
@@ -68,15 +68,26 @@ namespace ImmersiveGames
             // Retorna null se não encontrar correspondência
         }
 
-        public static void PlayOneShot(string stateName)
+        public static void PlaySfx(string sfxName)
         {
-            var audioEventForState = GetAudioEventForState(stateName, _mapMenuSfx);
+            var audioEventForState = GetAudioEventForState(sfxName, _mapMenuSfx);
             if (audioEventForState == null)
             {
-                DebugManager.Log<AudioManager>($"Não Encontrou um audio relativo ao nome: {stateName}");
+                DebugManager.Log<AudioManager>($"Não Encontrou um audio relativo ao nome: {sfxName}");
                 return;
             }
             audioEventForState.PlayOnShot(_sfxAudioSource);
+        }
+        public static void PlayBGMOneShot(string state)
+        {
+            _bgmAudioSource.Stop();
+            var audioEventForState = GetAudioEventForState(state, _mapStateBgm);
+            if (audioEventForState == null)
+            {
+                DebugManager.Log<AudioManager>($"Não Encontrou um audio relativo ao nome: {state}");
+                return;
+            }
+            audioEventForState.PlayOnShot(_bgmAudioSource);
         }
         
         public static void PlayBGM(IState state)
@@ -93,6 +104,11 @@ namespace ImmersiveGames
                 return;
             }
             audioEventForState.Play(_bgmAudioSource, instance, _fadeSoundDuration);
+        }
+
+        public static void StopBGM()
+        {
+            _bgmAudioSource.Stop();
         }
     }
 }

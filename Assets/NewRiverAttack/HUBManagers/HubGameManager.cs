@@ -4,7 +4,9 @@ using ImmersiveGames.Utils;
 using NewRiverAttack.GameManagers;
 using NewRiverAttack.HUBManagers.UI;
 using NewRiverAttack.SaveManagers;
+using NewRiverAttack.StateManagers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace NewRiverAttack.HUBManagers
 {
@@ -17,7 +19,9 @@ namespace NewRiverAttack.HUBManagers
 
         internal bool IsHubReady { get; set; }
         internal List<HubOrderData> LevelOrder = new List<HubOrderData>();
-        public int IndexMax { get; private set; }
+        private int _lastSave;
+        public int actualIndex;
+        
         private const float WaitBridge = 1.5f;
         private const float WaitMove = 1f;
 
@@ -37,6 +41,7 @@ namespace NewRiverAttack.HUBManagers
         private void Start()
         {
             IsHubReady = false;
+            _lastSave = GameOptionsSave.instance.activeIndexMissionLevel;
             StartCoroutine(WaitForInitialization());
         }
 
@@ -56,27 +61,6 @@ namespace NewRiverAttack.HUBManagers
             IsHubReady = true;
         }
         
-
-        #region Calls
-
-        internal void OnEventInitializeHub()
-        {
-            IndexMax = GameOptionsSave.instance.activeIndexMissionLevel;
-            EventInitializeHub?.Invoke(LevelOrder, IndexMax);
-            if (LevelOrder[IndexMax].levelData.hudPath.levelsStates == LevelsStates.Complete)
-            {
-                OnEventCompleteLevel();
-            }
-        }
-
-        private void OnEventCompleteLevel()
-        {
-            IsHubReady = false;
-            LevelOrder[IndexMax].levelData.hudPath.levelsStates = LevelsStates.Open;
-            Invoke(nameof(PlayAnimationBridge), WaitBridge);
-            
-        }
-
         private void PlayAnimationBridge()
         {
             var indexOrder = GameOptionsSave.instance.activeIndexMissionLevel;
@@ -85,18 +69,51 @@ namespace NewRiverAttack.HUBManagers
             Invoke(nameof(UpdateComplete), WaitMove);
         }
 
-        private void UpdateComplete()
+        private async void UpdateComplete()
         {
-            IndexMax = GameOptionsSave.instance.activeIndexMissionLevel += 1;
-            OnEventCursorUpdateHub(IndexMax);
+            var lastIndex = LevelOrder.Count - 1;
+            if (actualIndex < lastIndex)
+            {
+                _lastSave = GameOptionsSave.instance.activeIndexMissionLevel += 1;
+                OnEventCursorUpdateHub(_lastSave);
+            }
             IsHubReady = true;
+            if (actualIndex != LevelOrder.Count - 1) return;
+            await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateEndGame.ToString()).ConfigureAwait(false);
         }
 
-        #endregion
+        #region Calls
 
+        internal void OnEventInitializeHub()
+        {
+            actualIndex = GameManager.instance.ActiveIndex;
+            if (GameManager.instance.ActiveLevel == null)
+            {
+                actualIndex = _lastSave;
+            }
+            //Debug.Log($"Index: {indexMax}");
+            EventInitializeHub?.Invoke(LevelOrder, actualIndex);
+            Debug.Log($"Index: {actualIndex}");
+            if (actualIndex != _lastSave) return;
+            if (LevelOrder[_lastSave].levelData.hudPath.levelsStates == LevelsStates.Complete)
+            {
+                OnEventCompleteLevel();
+            }
+        }
+
+        private void OnEventCompleteLevel()
+        {
+            IsHubReady = false;
+            LevelOrder[_lastSave].levelData.hudPath.levelsStates = LevelsStates.Open;
+            Invoke(nameof(PlayAnimationBridge), WaitBridge);
+            
+        }
         internal void OnEventCursorUpdateHub(int startIndex)
         {
             EventCursorUpdateHub?.Invoke(LevelOrder, startIndex);
         }
+        #endregion
+
+        
     }
 }

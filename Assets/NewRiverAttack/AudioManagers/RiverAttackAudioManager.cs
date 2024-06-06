@@ -18,15 +18,15 @@ namespace ImmersiveGames
         }*/
         public static void PlayMouseClick()
         {
-            PlayOneShot(EnumSfxSound.SfxMouseClick.ToString());
+            PlaySfx(EnumSfxSound.SfxMouseClick.ToString());
         }
         public static void PlayNotifications()
         {
-            PlayOneShot(EnumSfxSound.SfxNotification.ToString());
+            PlaySfx(EnumSfxSound.SfxNotification.ToString());
         }
         public static void PlayMouseOver()
         {
-            PlayOneShot(EnumSfxSound.SfxMouseOver.ToString());
+            PlaySfx(EnumSfxSound.SfxMouseOver.ToString());
         }
         /*public void PlayBGM(LevelData levelData, int levelIndexBgm)
         {

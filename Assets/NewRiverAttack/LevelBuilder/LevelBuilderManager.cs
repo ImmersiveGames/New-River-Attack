@@ -57,7 +57,7 @@ namespace NewRiverAttack.LevelBuilder
         {
             DebugManager.Log<LevelBuilderManager>($"AddNextSegment chamado com count = {count}");
 
-            if (count <= 0 || _levelData.setLevelList.Count - _nextSegmentIndex < count)
+            if (count <= 0 || (_levelData.setLevelList.Count > 0 && _levelData.setLevelList.Count - _nextSegmentIndex < count))
             {
                 DebugManager.LogWarning<LevelBuilderManager>("Quantidade de segmentos a adicionar inválida.");
                 return;

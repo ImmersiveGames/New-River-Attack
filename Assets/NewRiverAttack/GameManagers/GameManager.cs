@@ -21,6 +21,7 @@ namespace NewRiverAttack.GameManagers
         public LevelData classicModeLevels;
         public LevelListData missionModeLevels;
         internal LevelData ActiveLevel;
+        internal int ActiveIndex;
         protected override void Awake()
         {
             base.Awake();
