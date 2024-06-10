@@ -33,9 +33,11 @@ namespace NewRiverAttack.LevelBuilder
             _setsContainer = new GameObject(data.levelNameLocale.GetLocalizedString());
 
             InitialSegment(data.pathStart);
+            var numStart = (_levelData.setLevelList.Count > startNumOfSegments) ? startNumOfSegments
+                : _levelData.setLevelList.Count;
 
             // Instanciar os objetos do cenário
-            AddNextSegment(startNumOfSegments);
+            AddNextSegment(numStart);
         }
 
         private void InitialSegment(GameObject pathStart)

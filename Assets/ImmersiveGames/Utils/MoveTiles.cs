@@ -1,42 +1,57 @@
-﻿using UnityEngine;
+﻿using System;
+using NewRiverAttack.GameManagers;
+using NewRiverAttack.GamePlayManagers;
+using NewRiverAttack.PlayerManagers.PlayerSystems;
+using UnityEngine;
 
 namespace ImmersiveGames.Utils
 {
     public class MoveTiles : MonoBehaviour
     {
-        public float tileMoveSpeed = 5f; // Ajuste a velocidade conforme necessário
-        public float boundaryZ = -10f;   // Ajuste o ponto onde os tiles voltarão para o início
-
-        private float _tileSizeZ;
+        private GamePlayManager _gamePlayManager;
+        private bool _activeTile;
+        private Vector2 _textureOffset;
+        private Material _material;
+        private PlayerMaster _playerMaster;
+        
 
         private void Start()
         {
-            // Obtém o tamanho da malha do primeiro filho no eixo Z
-            var meshRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
-            _tileSizeZ = meshRenderer.bounds.size.z;
+            _material = GetComponent<Renderer>().material;
+            _textureOffset = _material.mainTextureOffset;
+        }
+        private void OnEnable()
+        {
+            SetInitialReferences();
         }
 
         private void Update()
         {
-            // Move cada tile para baixo no eixo Z
-            for (var i = 0; i < transform.childCount; i++)
-            {
-                var tile = transform.GetChild(i);
-                tile.Translate(Vector3.back * (tileMoveSpeed * Time.deltaTime));
-
-                // Verifica se o tile ultrapassou o limite definido
-                if (tile.position.z < boundaryZ)
-                {
-                    // Reposiciona apenas o tile que ultrapassou o limite
-                    ResetTilePosition(tile);
-                }
+            if (_activeTile){
+                var movement = new Vector2(0,-1 * _playerMaster.ActualSkin.playerSpeed/5);
+                // Aplicar o movimento ao offset da textura
+                _textureOffset += movement * Time.deltaTime;
+                //Debug.Log($"Speed Tile {movement}");
+                // Atualizar o offset da textura do material
+                _material.mainTextureOffset = _textureOffset;
+                
             }
         }
 
-        private void ResetTilePosition(Transform tile)
+        private void OnDisable()
         {
-            // Move o tile para o final da fila
-            tile.Translate(Vector3.forward * (_tileSizeZ * (transform.childCount - 1)));
+            _playerMaster = null;
+        }
+
+        private void SetInitialReferences()
+        {
+            _gamePlayManager = GamePlayManager.instance;
+        }
+        
+        public void ActiveTiles(PlayerMaster playerMaster)
+        {
+            _playerMaster = playerMaster;
+            _activeTile = true;
         }
     }
 }

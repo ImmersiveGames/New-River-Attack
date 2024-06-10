@@ -1143,7 +1143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamePlayLog: {fileID: 11400000, guid: fa79827a92bd32c45af291e7d04958c7, type: 2}
-  levelData: {fileID: 11400000, guid: a2a5bf96f300f1546ac4f7b9acc6a149, type: 2}
+  IsBossFight: 0
   allPlayersDefaultSettings: {fileID: 11400000, guid: 043e503aa1a78b24b90c0f26e399bc7e,
     type: 2}
 --- !u!4 &166128843
@@ -2685,6 +2685,20 @@ PlayableDirector:
     value: {fileID: 432770087}
   - key: {fileID: -5043094921907159267, guid: 3e894111a28026947b37cd57880f1134, type: 2}
     value: {fileID: 710266653}
+  - key: {fileID: 3909737770960200864, guid: efaf9d25f880fb64e88d6772a87e423d, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 1552155175877326772, guid: efaf9d25f880fb64e88d6772a87e423d, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 6649329206433522252, guid: efaf9d25f880fb64e88d6772a87e423d, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 3381734619422148682, guid: efaf9d25f880fb64e88d6772a87e423d, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 9033867411738324901, guid: efaf9d25f880fb64e88d6772a87e423d, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -3793796419168245199, guid: efaf9d25f880fb64e88d6772a87e423d, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -5043094921907159267, guid: efaf9d25f880fb64e88d6772a87e423d, type: 2}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References:
     - 98c20ffd93c0cd5449c0a38dc30016ab: {fileID: 1363596825}
@@ -4629,10 +4643,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 40
+  far clip plane: 80
   field of view: 30
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 15.01
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4656,8 +4670,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941151605}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 39, z: -25}
+  m_LocalRotation: {x: 0.46174863, y: 0, z: 0, w: 0.8870109}
+  m_LocalPosition: {x: 0, y: 44.492462, z: -23.630524}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5020,6 +5034,12 @@ PrefabInstance:
       propertyPath: startState
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 607106245801943029, guid: edd48384923765647a80334cb3dc5dc8,
+        type: 3}
+      propertyPath: classicModeLevels
+      value: 
+      objectReference: {fileID: 11400000, guid: 6a3fd24c905d97d4ba1a242d0e0e318b,
+        type: 2}
     - target: {fileID: 645895881759750797, guid: edd48384923765647a80334cb3dc5dc8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5073,7 +5093,7 @@ PrefabInstance:
     - target: {fileID: 1180812457030873934, guid: edd48384923765647a80334cb3dc5dc8,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1908975058179474991, guid: edd48384923765647a80334cb3dc5dc8,
         type: 3}
@@ -5083,12 +5103,17 @@ PrefabInstance:
     - target: {fileID: 1908975058179474991, guid: edd48384923765647a80334cb3dc5dc8,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4558102908901589133, guid: edd48384923765647a80334cb3dc5dc8,
+        type: 3}
+      propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8940221166966817703, guid: edd48384923765647a80334cb3dc5dc8,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

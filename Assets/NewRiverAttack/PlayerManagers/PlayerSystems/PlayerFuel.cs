@@ -40,7 +40,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
                 _fuel += lastFillFuel;
                 _fuel = Mathf.Clamp(_fuel, 0f, _fuelMax);
             }
-            if (_fuelPause || !_playerMaster.ObjectIsReady || _playerMaster.godMode || _playerMaster.inFinishPath) return;
+            if (_fuelPause || !_playerMaster.ObjectIsReady || _playerMaster.godMode || _playerMaster.InFinishPath) return;
             // Decrementa o combustível com base na taxa de decaimento por segundo
             var lastFuel = reduceFuelCadence * Time.deltaTime;
             _fuel -= lastFuel;

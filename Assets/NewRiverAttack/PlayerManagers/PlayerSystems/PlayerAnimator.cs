@@ -37,6 +37,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void AnimationMovement(Vector2 dir)
         {
             if (!_playerMaster.ObjectIsReady) return;
+            if (_playerMaster.InFinishPath) dir = Vector2.zero;
             _animator.SetFloat(_dirX, dir.x);
             _animator.SetFloat(_dirY, dir.y);
         }

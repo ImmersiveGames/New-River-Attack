@@ -51,7 +51,7 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<AudioEvent>(DebugManager.DebugLevels.None);
             
             //GamePlayManager
-            DebugManager.SetScriptDebugLevel<GamePlayManager>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<GamePlayManager>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<GameOptionsSave>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerAchievements>(DebugManager.DebugLevels.None);
             
@@ -116,8 +116,8 @@ namespace NewRiverAttack.DebugManagers
             
             //Build
             DebugManager.SetScriptDebugLevel<LevelBuilderManager>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<HubGameManager>(DebugManager.DebugLevels.All);
-            DebugManager.SetScriptDebugLevel<HubBuilder>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<HubGameManager>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<HubBuilder>(DebugManager.DebugLevels.None);
         }
     }
 }

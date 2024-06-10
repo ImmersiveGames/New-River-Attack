@@ -19,8 +19,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         public bool godMode;
         [SerializeField]
         private float timeoutReSpawn;
-
-        internal bool inFinishPath;
+        internal bool InFinishPath;
         private int _playerScore;
 
         #region Player Config Settings (privates)
@@ -66,7 +65,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             gameOptionSave.SetDefaultSkinPlayer(indexPlayer, defaultSettings.skinDefault);
             IsDisable = true;
             IsDead = false;
-            inFinishPath = false;
+            InFinishPath = false;
         }
 
         protected internal override void InitializeObject()

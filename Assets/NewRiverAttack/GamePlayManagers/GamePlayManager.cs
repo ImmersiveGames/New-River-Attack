@@ -25,7 +25,7 @@ namespace NewRiverAttack.GamePlayManagers
         [Header("GameLog"), SerializeField]
         private GamePlayLog gamePlayLog;
         
-        internal bool IsBossFight;
+        public bool IsBossFight;
         internal bool IsPause;
 
         [Header("Level Builder")]
@@ -49,6 +49,7 @@ namespace NewRiverAttack.GamePlayManagers
         public delegate void PlayerMasterEventHandler(PlayerMaster playerMaster);
         public event PlayerMasterEventHandler EventPlayerGetHit;
         public event PlayerMasterEventHandler EventPlayerInitialize;
+      
         public delegate void GamePlayGeneralEventHandler();
         public event GamePlayGeneralEventHandler EventPostStateGameInitialize;
         public event GamePlayGeneralEventHandler EventGameReady;
@@ -188,6 +189,7 @@ namespace NewRiverAttack.GamePlayManagers
         private void SetGameMode()
         {
             _actualLevel = GetLevel(_gameManager.gamePlayMode);
+            IsBossFight = _actualLevel.levelType == LevelTypes.Boss;
             AudioManager.PlayBGM(_actualLevel.setLevelList[0].levelType.ToString());
             _levelBuilderManager.StartToBuild(_actualLevel);
         }
@@ -230,6 +232,7 @@ namespace NewRiverAttack.GamePlayManagers
         }
         internal void OnEventGameReady()
         {
+            Debug.Log("Start na batalha");
             EventGameReady?.Invoke();
         }
         internal void OnEventGameRestart()
@@ -289,8 +292,5 @@ namespace NewRiverAttack.GamePlayManagers
             EventGameFinisher?.Invoke();
         }
         #endregion
-
-
-        
     }
 }

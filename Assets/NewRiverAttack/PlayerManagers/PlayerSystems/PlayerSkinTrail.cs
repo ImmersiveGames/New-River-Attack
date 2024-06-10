@@ -63,7 +63,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private void ActiveTrailsOnMovement(Vector2 dir)
         {
-            if (!_playerMaster.ObjectIsReady || _trailRenderers == null || _playerMaster.inFinishPath) return;
+            if (!_playerMaster.ObjectIsReady || _trailRenderers == null || _playerMaster.InFinishPath) return;
 
             _onAccelerate = dir.y > RangeAxisY;
 

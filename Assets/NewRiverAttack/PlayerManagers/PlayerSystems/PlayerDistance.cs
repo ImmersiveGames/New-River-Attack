@@ -37,7 +37,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             // Calcula a distância percorrida no eixo Z desde o último frame
             var distanceTraveledByFrame = position.z - _lastPosition.z;
             // se a posição for maior que a inicial e não teve nenhum movimento no ultimo frame e não ta permitindo joga então ignore;
-            if (position.z < 0 || distanceTraveledByFrame <= 0 || !_playerMaster.ObjectIsReady || _playerMaster.inFinishPath) return;
+            if (position.z < 0 || distanceTraveledByFrame <= 0 || !_playerMaster.ObjectIsReady || _playerMaster.InFinishPath) return;
             _travelledDistance += distanceTraveledByFrame;
             // Atualiza o ponto mais distante alcançado
             //_maxTravelledDistance = Mathf.Max(_maxTravelledDistance, _travelledDistance);
