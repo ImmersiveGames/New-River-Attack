@@ -1,5 +1,4 @@
 ﻿using NewRiverAttack.GamePlayManagers;
-using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
 using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems
@@ -11,7 +10,8 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         public string onGotHit = "GotHit";
         public string onDeath = "Death";
 
-        private GameObject smokeVFX;
+        private BossVfxTag _smokeVFX;
+        private BossVfxTag _splashVFX;
 
         private bool _onDeath;
         private Animator _animator;
@@ -41,13 +41,11 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         {
             _gamePlayManager = GamePlayManager.instance;
             _bossMaster = GetComponent<BossMaster>();
-            smokeVFX = GetComponentInChildren<BossVfxTag>()?.gameObject;
         }
 
         private void SetAnimations()
         {
             _animator = GetComponentInChildren<Animator>(true);
-            smokeVFX = GetComponentInChildren<BossVfxTag>(true)?.gameObject;
             if (_animator == null) return;
             if(!string.IsNullOrEmpty(onDeath))
                 _onDeath = _animator.GetBool(onDeath);
@@ -86,9 +84,37 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         private void SmokeBoss(Transform boss)
         {
-            if (smokeVFX != null)
+            if (_smokeVFX != null)
             {
-                var smoke = Instantiate(smokeVFX, boss);
+                var smoke = Instantiate(_smokeVFX, boss);
+            }
+        }
+
+        private void ActiveSplash()
+        {
+            SetVfxTypes(GetComponentsInChildren<BossVfxTag>(true));
+            _splashVFX.gameObject.SetActive(true);
+            var particleSystems = _splashVFX.GetComponentsInChildren<ParticleSystem>();
+            foreach (var particle in particleSystems)
+            {
+                particle.Play();
+            }
+        }
+
+        private void SetVfxTypes(BossVfxTag[] vfxTags)
+        {
+            foreach (var vfx in vfxTags)
+            {
+                //Debug.Log(vfx.idName);
+                switch (vfx.idName)
+                {
+                    case "Smoke":
+                        _smokeVFX = vfx;
+                        break;
+                    case "Splash":
+                        _splashVFX = vfx;
+                        break;
+                }
             }
         }
     }

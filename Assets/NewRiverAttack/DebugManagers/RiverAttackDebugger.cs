@@ -17,6 +17,7 @@ using NewRiverAttack.HUBManagers;
 using NewRiverAttack.HUDManagers.UI;
 using NewRiverAttack.LevelBuilder;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
+using NewRiverAttack.ObstaclesSystems.BossSystems;
 using NewRiverAttack.ObstaclesSystems.BridgeSystems;
 using NewRiverAttack.ObstaclesSystems.CollectibleSystems;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
@@ -54,6 +55,10 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<GamePlayManager>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<GameOptionsSave>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerAchievements>(DebugManager.DebugLevels.None);
+            
+            //Behaviors
+            DebugManager.SetScriptDebugLevel<BehaviorManager>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<Behavior>(DebugManager.DebugLevels.All);
             
             //Inputs
             DebugManager.SetScriptDebugLevel<ActionManager>(DebugManager.DebugLevels.None);
@@ -118,6 +123,11 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<LevelBuilderManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<HubGameManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<HubBuilder>(DebugManager.DebugLevels.None);
+            
+            //Boss
+            DebugManager.SetScriptDebugLevel<BossMaster>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<BossBehavior>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<GamePlayBossManager>(DebugManager.DebugLevels.All);
         }
     }
 }

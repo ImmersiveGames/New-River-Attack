@@ -44352,7 +44352,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1543916439911245698
 Transform:
   m_ObjectHideFlags: 0
@@ -49427,7 +49427,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5716248032603405097
 Transform:
   m_ObjectHideFlags: 0
@@ -49459,6 +49459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ae410c20b440a49b1a9bfa88f4cb4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idName: Smoke
 --- !u!1 &7091335443796374471
 GameObject:
   m_ObjectHideFlags: 0
@@ -54366,13 +54367,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3447448693704356611}
+  - component: {fileID: 1458132212298827660}
   m_Layer: 7
   m_Name: VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3447448693704356611
 Transform:
   m_ObjectHideFlags: 0
@@ -54389,6 +54391,19 @@ Transform:
   - {fileID: 6321393266989568489}
   m_Father: {fileID: 3067447889796664177}
   m_LocalEulerAnglesHint: {x: -20, y: 0, z: 0}
+--- !u!114 &1458132212298827660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7479083814283722136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ae410c20b440a49b1a9bfa88f4cb4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idName: Splash
 --- !u!1 &7636347862307922678
 GameObject:
   m_ObjectHideFlags: 0
@@ -59346,7 +59361,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5000944888067587179
 Transform:
   m_ObjectHideFlags: 0
@@ -59381,7 +59396,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4485208005218307255
 Transform:
   m_ObjectHideFlags: 0
@@ -59541,7 +59556,7 @@ PrefabInstance:
     - target: {fileID: 8831687987937450211, guid: 1e21ff8d85e0bd64891633107bc527f1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -59565,10 +59580,6 @@ PrefabInstance:
     - target: {fileID: 1471142367968716, guid: 6604855d6ea2f514aa583786155e7223, type: 3}
       propertyPath: m_Name
       value: Water_Splash_Submarine
-      objectReference: {fileID: 0}
-    - target: {fileID: 1471142367968716, guid: 6604855d6ea2f514aa583786155e7223, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4735828766231950, guid: 6604855d6ea2f514aa583786155e7223, type: 3}
       propertyPath: m_LocalPosition.x
@@ -59610,70 +59621,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 157919861747634557, guid: 6604855d6ea2f514aa583786155e7223,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 199232270932362646, guid: 6604855d6ea2f514aa583786155e7223,
-        type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1874032651705558336, guid: 6604855d6ea2f514aa583786155e7223,
         type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 12
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1972923295765451421, guid: 6604855d6ea2f514aa583786155e7223,
         type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 7131580731146345554, guid: 6604855d6ea2f514aa583786155e7223,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.97629607
-      objectReference: {fileID: 0}
-    - target: {fileID: 7131580731146345554, guid: 6604855d6ea2f514aa583786155e7223,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.2164396
-      objectReference: {fileID: 0}
-    - target: {fileID: 7131580731146345554, guid: 6604855d6ea2f514aa583786155e7223,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7269707125331106893, guid: 6604855d6ea2f514aa583786155e7223,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8074033778611211769, guid: 6604855d6ea2f514aa583786155e7223,
         type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8715704914172492988, guid: 6604855d6ea2f514aa583786155e7223,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.97629607
-      objectReference: {fileID: 0}
-    - target: {fileID: 8715704914172492988, guid: 6604855d6ea2f514aa583786155e7223,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.21643952
-      objectReference: {fileID: 0}
-    - target: {fileID: 8715704914172492988, guid: 6604855d6ea2f514aa583786155e7223,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8967154608062049074, guid: 6604855d6ea2f514aa583786155e7223,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
+      propertyPath: playOnAwake
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

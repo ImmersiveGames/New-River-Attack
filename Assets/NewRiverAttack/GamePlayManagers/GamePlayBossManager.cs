@@ -12,13 +12,12 @@ namespace NewRiverAttack.GamePlayManagers
         private void OnEnable()
         {
             SetInitialReferences();
-            _gamePlayManager.EventGameReady += PlayAbertura;
+            //_gamePlayManager.EventGameReady += PlayAbertura;
         }
-        
 
         private void OnDisable()
         {
-            _gamePlayManager.EventGameReady += PlayAbertura;
+            //_gamePlayManager.EventGameReady += PlayAbertura;
         }
 
         private void SetInitialReferences()
@@ -31,11 +30,11 @@ namespace NewRiverAttack.GamePlayManagers
             _bossMaster = bossMaster;
         }
         
-        private void PlayAbertura()
+        /*private void PlayAbertura()
         {
             Debug.Log("Play abertura");
             _bossMaster.InitializeBoss(_gamePlayManager.GetPlayerMaster(0));
 
-        }
+        }*/
     }
 }

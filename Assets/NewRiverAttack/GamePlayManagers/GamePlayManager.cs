@@ -52,7 +52,7 @@ namespace NewRiverAttack.GamePlayManagers
       
         public delegate void GamePlayGeneralEventHandler();
         public event GamePlayGeneralEventHandler EventPostStateGameInitialize;
-        public event GamePlayGeneralEventHandler EventGameReady;
+        public event GamePlayGeneralEventHandler EventGameReady; //inicia após a contagem
         public event GamePlayGeneralEventHandler EventGameRestart;
         public event GamePlayGeneralEventHandler EventGameOver;
         public event GamePlayGeneralEventHandler EventGameFinisher;
@@ -232,7 +232,6 @@ namespace NewRiverAttack.GamePlayManagers
         }
         internal void OnEventGameReady()
         {
-            Debug.Log("Start na batalha");
             EventGameReady?.Invoke();
         }
         internal void OnEventGameRestart()
