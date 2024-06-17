@@ -1,32 +1,71 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using ImmersiveGames.StateManagers;
-using ImmersiveGames.StateManagers.Interfaces;
-using UnityEngine;
+using ImmersiveGames.BehaviorsManagers;
+using ImmersiveGames.BehaviorsManagers.Interfaces;
+using ImmersiveGames.DebugManagers;
+using NewRiverAttack.ObstaclesSystems.BossSystems.Strategies;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 {
     public class MoveNorthBehavior : Behavior
     {
-        public MoveNorthBehavior() : base(nameof(MoveNorthBehavior), null)
+        private readonly BossBehavior _bossBehavior;
+        private int _nextSubBehaviorIndex = 0;
+
+        public MoveNorthBehavior(IBehavior[] subBehaviors, BossBehavior bossBehavior)
+            : base("MoveNorthBehavior", subBehaviors,
+                new DefaultChangeBehaviorStrategy(),
+                new DefaultUpdateStrategy()
+            )
         {
-        }
-        public override Task EnterAsync(IBehavior previousBehavior, MonoBehaviour monoBehaviour, CancellationToken token)
-        {
-            return Task.CompletedTask;
-            // Implemente a lógica de entrada do SubBehavior1
+            _bossBehavior = bossBehavior;
         }
 
-        public override Task UpdateAsync(CancellationToken token)
+        public override async Task EnterAsync(CancellationToken token)
         {
-            return Task.CompletedTask;
-            // Implemente a lógica de atualização do SubBehavior1
+            DebugManager.Log<MoveNorthBehavior>("Move North Behavior Entered");
         }
 
-        public override Task ExitAsync(IBehavior nextBehavior, CancellationToken token)
+        public override async Task UpdateAsync(CancellationToken token)
         {
-            return Task.CompletedTask;
-            // Implemente a lógica de saída do SubBehavior1
+            await base.UpdateAsync(token).ConfigureAwait(false);
+
+            // Verificar se há sub comportamentos para gerenciar
+            if (SubBehaviors is { Length: > 0 })
+            {
+                if (_nextSubBehaviorIndex >= SubBehaviors.Length)
+                {
+                    // Todos os sub comportamentos foram executados, finalizar o comportamento principal
+                    await FinalizeAsync().ConfigureAwait(false);
+                }
+                else
+                {
+                    // Obter o próximo sub comportamento
+                    var currentSubBehavior = SubBehaviors[_nextSubBehaviorIndex];
+
+                    // Verificar se o sub comportamento precisa ser finalizado
+                    if (!currentSubBehavior.Finalized)
+                    {
+                        await _bossBehavior.GetBehaviorManager.FinalizeSubBehaviorAsync(currentSubBehavior).ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        // Avançar para o próximo sub comportamento
+                        _nextSubBehaviorIndex++;
+                    }
+                }
+            }
+            else
+            {
+                // Não há sub comportamentos, finalizar o comportamento principal
+                await FinalizeAsync().ConfigureAwait(false);
+            }
+        }
+
+        public override async Task ExitAsync(CancellationToken token)
+        {
+            await base.ExitAsync(token).ConfigureAwait(false);
+            DebugManager.Log<MoveNorthBehavior>("Move North Behavior Exited");
         }
     }
 }

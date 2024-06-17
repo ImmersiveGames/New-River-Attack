@@ -76,7 +76,8 @@ namespace NewRiverAttack.DialogManagers
 
         private void OnDisable()
         {
-            StopCoroutine(_typingCoroutine); 
+            if(_typingCoroutine != null)
+                StopCoroutine(_typingCoroutine); 
             InputGameManager.ActionManager.EventOnActionComplete -= StopDialog;
         }
 

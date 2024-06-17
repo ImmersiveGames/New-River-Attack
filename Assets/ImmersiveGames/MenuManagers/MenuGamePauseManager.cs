@@ -57,7 +57,7 @@ namespace ImmersiveGames.MenuManagers
             splashScreen.gameObject.SetActive(!onPause);
             menuPause.gameObject.SetActive(!onPause);
             menuHud.gameObject.SetActive(onPause);
-            splashComplete.gameObject.SetActive(onPause);
+            splashComplete.gameObject.SetActive(false);
             _gameStartMenu.ActivateMenu(0);
         }
         private void SetHudMenu()

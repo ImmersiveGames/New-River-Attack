@@ -1,56 +1,88 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using DG.Tweening;
+using ImmersiveGames.BehaviorsManagers;
+using ImmersiveGames.BehaviorsManagers.Interfaces;
 using ImmersiveGames.DebugManagers;
-using ImmersiveGames.StateManagers;
-using ImmersiveGames.StateManagers.Interfaces;
-using UnityEngine;
+using ImmersiveGames.Utils;
+using NewRiverAttack.ObstaclesSystems.BossSystems.Strategies;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 {
     public class EnterSceneBehavior : Behavior
     {
-        private BossBehavior _bossBehavior;
-        public EnterSceneBehavior() : base(nameof(EnterSceneBehavior), null)
-        {
-        }
-        public override Task EnterAsync(IBehavior previousBehavior, MonoBehaviour monoBehaviour, CancellationToken token)
-        {
-            DebugManager.Log<Behavior>("Entering EnterSceneBehavior");
+        private const float InitialDelay = 2f;
+        private const float MoveDuration = 7f;
+        private const float DistanceOffset = 45f;
+        private readonly BossBehavior _bossBehavior;
 
-            if (monoBehaviour is not BossBehavior bossBehavior)
+        public EnterSceneBehavior(IBehavior[] subBehaviors, BossBehavior bossBehavior)
+            : base(EnumNameBehavior.EnterSceneBehavior.ToString(), subBehaviors,
+                new DefaultChangeBehaviorStrategy(),
+                new DefaultUpdateStrategy()
+            )
+        {
+            _bossBehavior = bossBehavior;
+        }
+
+        public override async Task EnterAsync(CancellationToken token)
+        {
+            DebugManager.Log<EnterSceneBehavior>("Enter EnterSceneBehavior");
+            var tcs = new TaskCompletionSource<bool>();
+
+            await UnityMainThreadDispatcher.EnqueueAsync(() =>
             {
-                DebugManager.LogError<Behavior>("MonoBehavior não autorizado");
+                // Ajustando a Posição inicial.
+                var vector3 = _bossBehavior.transform.position;
+                vector3.z = _bossBehavior.PlayerMaster.transform.position.z;
+                vector3.x = _bossBehavior.PlayerMaster.transform.position.x;
+                _bossBehavior.transform.position = vector3;
+                var distance = _bossBehavior.PlayerMaster.transform.position.z + DistanceOffset;
+
+                var mySequence = DOTween.Sequence();
+                mySequence.AppendInterval(InitialDelay);
+                mySequence.Append(_bossBehavior.transform.DOMoveZ(distance, MoveDuration).SetEase(Ease.OutQuad));
+
+                // Aguardar a conclusão da animação ou o cancelamento
+
+                mySequence.OnComplete(() => tcs.TrySetResult(true));
+                mySequence.OnKill(() => tcs.TrySetResult(false));
+                mySequence.Play();
+
+                _bossBehavior.BossMaster.OnEventBossShowUp();
                 return Task.CompletedTask;
+            }).ConfigureAwait(false);
+
+            // Aguardar a conclusão da animação ou o cancelamento
+            using (token.Register(() => tcs.TrySetCanceled()))
+            {
+                try
+                {
+                    await tcs.Task.ConfigureAwait(false);
+                }
+                catch (TaskCanceledException)
+                {
+                    DebugManager.Log<EnterSceneBehavior>("Animation was canceled.");
+                    return;
+                }
             }
-            //Ajustando a Posição inicial.
-            var vector3 = bossBehavior.transform.position;
-            vector3.z = bossBehavior.PlayerMaster.transform.position.z;
-            vector3.x = bossBehavior.PlayerMaster.transform.position.x;
-            bossBehavior.transform.position = vector3;
-            
-            var distance = bossBehavior.PlayerMaster.transform.position.z + 45;
-            var mySequence = DOTween.Sequence();
-            mySequence.Append(bossBehavior.transform.DOMoveZ(distance, 7f).SetEase(Ease.Linear));
-            mySequence.Play();
-            var boss = bossBehavior.BossMaster;
-            boss.OnEventBossShowUp();
-            return Task.CompletedTask;
-            // Implemente a lógica de entrada do BehaviorWithoutBehaviors
+
+            if (!token.IsCancellationRequested)
+            {
+                DebugManager.Log<EnterSceneBehavior>("Animation completed.");
+            }
+            Initialized = true;
+            Finalized = true;
         }
 
-        public override Task UpdateAsync(CancellationToken token)
+        public override async Task ExitAsync(CancellationToken token)
         {
-            DebugManager.Log<Behavior>("Updating EnterSceneBehavior");
-            return Task.CompletedTask;
-            // Implemente a lógica de atualização do BehaviorWithoutBehaviors
-        }
-
-        public override Task ExitAsync(IBehavior nextBehavior, CancellationToken token)
-        {
-            DebugManager.Log<Behavior>("Exiting EnterSceneBehavior");
-            return Task.CompletedTask;
-            // Implemente a lógica de saída do BehaviorWithoutBehaviors
+            if (token.IsCancellationRequested) return;
+            Initialized = false;
+            NextBehavior = _bossBehavior.GetBehaviorManager.GetBehavior("MoveNorthBehavior");
+            DebugManager.Log<EnterSceneBehavior>("Exit EnterSceneBehavior");
+            await base.ExitAsync(token).ConfigureAwait(false);
+            await _bossBehavior.GetBehaviorManager.ChangeBehaviorAsync(NextBehavior.Name).ConfigureAwait(false);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
-using ImmersiveGames.StateManagers;
-using ImmersiveGames.StateManagers.Interfaces;
+using System.Threading;
+using ImmersiveGames.BehaviorsManagers;
+using ImmersiveGames.BehaviorsManagers.Interfaces;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
@@ -27,17 +28,20 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         private void Start()
         {
             _behaviorManager = new BehaviorManager(this);
-            var comportamento01 = new EnterSceneBehavior();
-            var comportamento02 = new MoveNorthBehavior();
-            //var behavior2 = new BehaviorWithoutBehaviors();
 
-            _behaviorManager.AddBehavior(comportamento01);
-            _behaviorManager.AddBehavior(comportamento02);
+            var enterSceneBehavior = new EnterSceneBehavior(Array.Empty<IBehavior>(), this);
+
+            var specificSubBehavior = new SpecificBehavior(Array.Empty<IBehavior>(), this);
+
+            var moveNorthBehavior = new MoveNorthBehavior(new IBehavior[] { specificSubBehavior }, this);
+
+            _behaviorManager.AddBehavior(enterSceneBehavior);
+            _behaviorManager.AddBehavior(moveNorthBehavior);
         }
 
-        private void Update()
+        private async void Update()
         {
-            _ = _behaviorManager.UpdateAsync();
+            await _behaviorManager.UpdateAsync().ConfigureAwait(false);
         }
 
         private void OnDisable()
@@ -45,26 +49,27 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             _gamePlayManager.EventGameReady -= BossGameReady;
         }
 
-        void OnApplicationQuit()
+        private void OnApplicationQuit()
         {
             _behaviorManager.StopCurrentBehavior();
         }
-        
+
         private void SetInitialReferences()
         {
             _gamePlayManager = GamePlayManager.instance;
             BossMaster = GetComponent<BossMaster>();
         }
-        
+
         private void GetPlayerMaster(PlayerMaster playerMaster)
         {
             PlayerMaster = playerMaster;
         }
-        
-        private void BossGameReady()
+
+        internal BehaviorManager GetBehaviorManager => _behaviorManager;
+
+        private async void BossGameReady()
         {
-            Debug.Log($"Game Ready - {PlayerMaster}");
-            _ = _behaviorManager.ChangeBehaviorAsync(EnumNameBehavior.EnterSceneBehavior.ToString());
+            await _behaviorManager.ChangeBehaviorAsync("EnterSceneBehavior").ConfigureAwait(false);
         }
     }
 }
