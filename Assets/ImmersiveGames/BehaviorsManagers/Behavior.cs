@@ -9,21 +9,24 @@ namespace ImmersiveGames.BehaviorsManagers
 {
     public abstract class Behavior : IBehavior
     {
-        public string Name { get; protected set; }
+        public string Name { get; }
         public bool Initialized { get; set; }
         public bool Finalized { get; set; }
         private bool _isPaused;
         public IBehavior[] SubBehaviors { get; }
+        public BehaviorManager SubBehaviorManager { get; set; }
         protected IBehavior NextBehavior = null;
         public IChangeBehaviorStrategy ChangeBehaviorStrategy { get; }
         public IUpdateStrategy UpdateStrategy { get; }
-        public BehaviorManager SubBehaviorManager { get; set; } // Adicionado
+        private IFinalizeStrategy FinalizeStrategy { get; }
+        public int CurrentSubBehaviorIndex { get; set; }
 
-        protected Behavior(string name, IBehavior[] subBehaviors, IChangeBehaviorStrategy changeBehaviorStrategy, IUpdateStrategy updateStrategy)
+        protected Behavior(string name, IBehavior[] subBehaviors, IChangeBehaviorStrategy changeBehaviorStrategy = null, IUpdateStrategy updateStrategy = null, IFinalizeStrategy finalizeStrategy = null)
         {
             Name = name;
             ChangeBehaviorStrategy = changeBehaviorStrategy ?? new DefaultChangeBehaviorStrategy();
             UpdateStrategy = updateStrategy ?? new DefaultUpdateStrategy();
+            FinalizeStrategy = finalizeStrategy ?? new DefaultFinalizeStrategy();
             SubBehaviors = subBehaviors ?? Array.Empty<IBehavior>();
         }
 
@@ -39,10 +42,16 @@ namespace ImmersiveGames.BehaviorsManagers
             if (_isPaused || token.IsCancellationRequested) return;
             DebugManager.Log<Behavior>($"Updating... Behavior: {Name}");
             await Task.Delay(10, token).ConfigureAwait(false);
-
-            if (SubBehaviorManager != null)
+        
+            // Verificar e atualizar sub comportamentos
+            if (SubBehaviors is { Length: > 0 })
             {
-                await SubBehaviorManager.UpdateAsync().ConfigureAwait(false);
+                var currentSubBehavior = SubBehaviors[CurrentSubBehaviorIndex];
+
+                if (!currentSubBehavior.Finalized)
+                {
+                    await currentSubBehavior.UpdateAsync(token).ConfigureAwait(false);
+                }
             }
         }
 
@@ -51,26 +60,6 @@ namespace ImmersiveGames.BehaviorsManagers
             if (token.IsCancellationRequested) return;
             DebugManager.Log<Behavior>($"Exiting Behavior: {Name}");
             await Task.Delay(10, token).ConfigureAwait(false);
-            Initialized = false;
-            Finalized = false;
-
-            if (SubBehaviorManager != null)
-            {
-                await SubBehaviorManager.UpdateAsync().ConfigureAwait(false);
-            }
-        }
-        
-        public virtual async Task FinalizeAsync()
-        {
-            Finalized = true;
-
-            if (SubBehaviors is { Length: > 0 })
-            {
-                foreach (var subBehavior in SubBehaviors)
-                {
-                    await subBehavior.FinalizeAsync().ConfigureAwait(false);
-                }
-            }
         }
 
         public void Pause()
@@ -86,6 +75,18 @@ namespace ImmersiveGames.BehaviorsManagers
         public void Stop()
         {
             _isPaused = false;
+        }
+
+        // Método para finalizar explicitamente o sub comportamento
+        public void FinalizeSubBehavior()
+        {
+            FinalizeStrategy.FinalizeSubBehavior(this);
+        }
+
+        // Método para finalizar explicitamente o comportamento e todos os seus sub comportamentos
+        public async Task FinalizeAsync(CancellationToken cancellationToken)
+        {
+            await FinalizeStrategy.FinalizeAsync(this, cancellationToken).ConfigureAwait(false);
         }
     }
 }

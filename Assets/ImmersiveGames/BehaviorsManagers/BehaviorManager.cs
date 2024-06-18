@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using ImmersiveGames.BehaviorsManagers.Interfaces;
 using ImmersiveGames.DebugManagers;
 using NewRiverAttack.ObstaclesSystems.BossSystems;
-using UnityEngine;
 
 namespace ImmersiveGames.BehaviorsManagers
 {
@@ -23,7 +22,7 @@ namespace ImmersiveGames.BehaviorsManagers
             _cancellationTokenSource = new CancellationTokenSource();
         }
 
-        public IBehavior CurrentBehavior { get; private set; }
+        internal IBehavior CurrentBehavior { get; private set; }
 
         public void AddBehavior(IBehavior behavior)
         {
@@ -65,14 +64,6 @@ namespace ImmersiveGames.BehaviorsManagers
             if (_isPaused || CurrentBehavior == null) return;
             await CurrentBehavior.UpdateStrategy.UpdateAsync(CurrentBehavior, this, _cancellationTokenSource.Token).ConfigureAwait(false);
         }
-        
-        public async Task FinalizeSubBehaviorAsync(IBehavior subBehavior)
-        {
-            if (subBehavior.Initialized && !subBehavior.Finalized)
-            {
-                await subBehavior.ExitAsync(_cancellationTokenSource.Token).ConfigureAwait(false);
-            }
-        }
 
         public void Pause()
         {
@@ -91,6 +82,20 @@ namespace ImmersiveGames.BehaviorsManagers
             _cancellationTokenSource?.Cancel();
             CurrentBehavior?.Stop();
             CurrentBehavior = null;
+        }
+
+        // Método para finalizar explicitamente o sub comportamento atual
+        public void FinalizeCurrentSubBehavior()
+        {
+            CurrentBehavior?.FinalizeSubBehavior();
+        }
+
+        // Método para finalizar explicitamente o comportamento atual e todos os seus sub comportamentos
+        public async Task FinalizeCurrentBehaviorAsync()
+        {
+            if (CurrentBehavior == null) return;
+
+            await CurrentBehavior.FinalizeAsync(_cancellationTokenSource.Token).ConfigureAwait(false);
         }
     }
 }

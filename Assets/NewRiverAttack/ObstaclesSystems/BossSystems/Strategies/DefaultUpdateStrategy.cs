@@ -12,17 +12,27 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Strategies
             if (currentBehavior.Initialized && !currentBehavior.Finalized)
             {
                 await currentBehavior.UpdateAsync(cancellationToken).ConfigureAwait(false);
+            }
 
-                // Atualizar sub comportamentos, se houver
-                if (currentBehavior.SubBehaviorManager != null && currentBehavior.SubBehaviorManager.CurrentBehavior.Initialized && !currentBehavior.SubBehaviorManager.CurrentBehavior.Finalized)
+            // Atualizar subcomportamentos, se houver
+            if (currentBehavior.SubBehaviors.Length > 0)
+            {
+                var currentSubBehavior = currentBehavior.SubBehaviors[currentBehavior.CurrentSubBehaviorIndex];
+
+                if (currentSubBehavior.Initialized && !currentSubBehavior.Finalized)
                 {
-                    await currentBehavior.SubBehaviorManager.UpdateAsync().ConfigureAwait(false);
+                    await currentSubBehavior.UpdateAsync(cancellationToken).ConfigureAwait(false);
+                }
+                else if (currentSubBehavior.Finalized && currentBehavior.CurrentSubBehaviorIndex < currentBehavior.SubBehaviors.Length - 1)
+                {
+                    currentBehavior.CurrentSubBehaviorIndex++;
+                    currentBehavior.SubBehaviors[currentBehavior.CurrentSubBehaviorIndex].Initialized = true;
                 }
             }
 
             if (currentBehavior.Initialized && currentBehavior.Finalized)
             {
-                // Chamar ExitAsync para finalizar o comportamento atual e seus sub comportamentos
+                // Chamar ExitAsync para finalizar o comportamento atual e seus subcomportamentos
                 await currentBehavior.ExitAsync(cancellationToken).ConfigureAwait(false);
             }
         }

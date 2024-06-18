@@ -17,7 +17,9 @@ namespace ImmersiveGames.BehaviorsManagers.Interfaces
         Task ExitAsync(CancellationToken token);
         IChangeBehaviorStrategy ChangeBehaviorStrategy { get; }
         IUpdateStrategy UpdateStrategy { get; }
-        Task FinalizeAsync();
+        Task FinalizeAsync(CancellationToken cancellationToken);
+        int CurrentSubBehaviorIndex { get; set; }
+        void FinalizeSubBehavior();
         void Pause();
         void Resume();
         void Stop();
