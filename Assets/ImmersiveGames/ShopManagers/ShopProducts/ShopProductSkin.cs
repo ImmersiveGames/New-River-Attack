@@ -22,10 +22,10 @@ namespace ImmersiveGames.ShopManagers.ShopProducts
         [Header("Fuel Settings")]
         [Range(100f,300f)]
         public float maxFuel;
-        [Range(1f,10f)]
+        [Range(1f,5f)]
         public float cadenceFuel;
         [Header("Shooting Settings")]
-        [Range(0.1f,5f)] 
+        [Range(0.1f,2f)] 
         public float cadenceShoot;
         [Range(2f,10f)] 
         public float bulletSpeedMultiply;
@@ -33,6 +33,43 @@ namespace ImmersiveGames.ShopManagers.ShopProducts
         public int bulletDamage;
         [Range(0,10)] 
         public int colliderDamage;
+        
+        
+        public float GetRateSpeed()
+        {
+            return CalculateRelativeValue(8f, 20f,playerSpeed);
+        }
+        public float GetRateAgility()
+        {
+            return CalculateRelativeValue(8f, 20f,playerAgility);
+        }
+        public float GetRateMaxFuel()
+        {
+            return CalculateRelativeValue(80f, 300f,maxFuel);
+        }
+        public float GetRateCadenceFuel()
+        {
+            return 1 - CalculateRelativeValue(0.8f, 4f,cadenceFuel);
+        }
+        public float GetRateShoot()
+        {
+            return 1 - CalculateRelativeValue(0.1f, 1.5f,cadenceShoot);
+        }
+        private static float CalculateRelativeValue(float min, float max, float current)
+        {
+            // Garantir que o valor atual está dentro do intervalo [min, max]
+            if (current < min)
+            {
+                current = min;
+            }
+            else if (current > max)
+            {
+                current = max;
+            }
+
+            // Calcular o valor relativo
+            return (current - min) / (max - min);
+        }
         
         public Sprite GetSpriteLife()
         {

@@ -30,7 +30,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private void OnTriggerEnter(Collider other)
         {
-            if (MustCollider(other) || !_playerMaster.ObjectIsReady || _playerMaster.InFinishPath) return;
+            if (MustCollider(other) || !_playerMaster.ObjectIsReady || _playerMaster.AutoPilot) return;
             if (_playerMaster.godMode || _invulnerability) return;
             //Se não for nada disso significa que o player será destruído.
             _playerAchievements.LogCollision(other);

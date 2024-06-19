@@ -10,8 +10,17 @@ namespace NewRiverAttack.LevelBuilder
 {
     public class LevelBossFight : LevelFinishers
     {
-        private bool _changeControl;
         private PlayerMaster _playerMaster;
+        protected override void OnTriggerEnter(Collider other)
+        {
+            _playerMaster = other.GetComponentInParent<PlayerMaster>();
+            if (_playerMaster == null) return;
+            _playerMaster.AutoPilot = true;
+            
+            GetComponent<Collider>().enabled = false;
+        }
+        /*private bool _changeControl;
+        
         private MoveTiles _moveTiles;
 
         public float speed;
@@ -26,7 +35,7 @@ namespace NewRiverAttack.LevelBuilder
         {
             _playerMaster = other.GetComponentInParent<PlayerMaster>();
             if (_playerMaster == null) return;
-            _playerMaster.InFinishPath = true;
+            _playerMaster.AutoPilot = true;
             
             Invoke(nameof(StopAutoMove),1.5f);
             GetComponent<Collider>().enabled = false;
@@ -35,7 +44,7 @@ namespace NewRiverAttack.LevelBuilder
 
         private void StopAutoMove()
         {
-            _playerMaster.InFinishPath = false;
+            _playerMaster.AutoPilot = false;
             _moveTiles.ActiveTiles(_playerMaster);
         }
 
@@ -49,6 +58,6 @@ namespace NewRiverAttack.LevelBuilder
                     _playerMaster.ActualSkin.playerSpeed);
                 transform.position = newPosition;
             }
-        }
+        }*/
     }
 }

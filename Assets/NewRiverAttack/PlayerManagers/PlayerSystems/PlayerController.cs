@@ -11,9 +11,11 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
     [RequireComponent(typeof(PlayerMaster))]
     public class PlayerController : MonoBehaviour
     {
-        public bool autoMove;
         [Range(1.1f, 4f)] public float multiplyAccelerate = 2f;
         [Range(0.1f, 0.99f)] public float multiplyDecelerate = .5f;
+
+        private const float autoPilotSpeed = 1.5f;
+        private const int GodMultiSpeedy = 5;
 
         private float _speedVertical;
         private float _speedHorizontal;
@@ -33,15 +35,14 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void Start()
         {
             InitializeInput();
-            autoMove = !_gamePlayManager.IsBossFight;
         }
 
         private void FixedUpdate()
         {
             if (!_gamePlayManager.ShouldBePlayingGame || !_playerMaster.ObjectIsReady) return;
-            if (_playerMaster.InFinishPath)
+            if (_playerMaster.AutoPilot)
             {
-                transform.position += MovePlayerFinishPath();
+                transform.position += MovePlayerAutoPilot();
                 return;
             }
             if (_gamePlayManager.IsBossFight)
@@ -115,16 +116,16 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             return new Vector3(horizontalSpeed, 0, verticalSpeed);
         }
 
-        private Vector3 MovePlayerFinishPath()
+        private Vector3 MovePlayerAutoPilot()
         {
-            var actualSpeed = _speedVertical * 1.5f;
+            var actualSpeed = _speedVertical * autoPilotSpeed;
             var verticalSpeed = SpeedAutoVertical * actualSpeed * Time.deltaTime;
             return new Vector3(0, 0, verticalSpeed);
         }
 
         private Vector3 MovePlayer(bool multi)
         {
-            var actualSpeed = multi ? _speedVertical * 5f : _speedVertical;
+            var actualSpeed = multi ? _speedVertical * GodMultiSpeedy : _speedVertical;
             switch (_inputVector.y)
             {
                 case > 0:
@@ -143,7 +144,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private void SetAutoPilot()
         {
-            _playerMaster.InFinishPath = true;
+            _playerMaster.AutoPilot = true;
         }
 
         private void InputAxisPerformed(InputAction.CallbackContext context)

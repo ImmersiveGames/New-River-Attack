@@ -25,7 +25,7 @@ namespace NewRiverAttack.GamePlayManagers
         [Header("GameLog"), SerializeField]
         private GamePlayLog gamePlayLog;
         
-        public bool IsBossFight;
+        internal bool IsBossFight;
         internal bool IsPause;
 
         [Header("Level Builder")]

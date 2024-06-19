@@ -19,27 +19,27 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping.Abstracts
         [SerializeField] private TMP_Text textProductDescription;
         [SerializeField] private TMP_Text textProductPrice;
         [SerializeField] private Image imageProduct;
-
-        protected SimpleShoppingManager simpleShoppingManager;
+        
+        protected SimpleShoppingManager SimpleShoppingManager;
         private IStockShop _stockShop;
 
         #region Unity Methods
 
         private void Awake()
         {
-            simpleShoppingManager = GetComponentInParent<SimpleShoppingManager>();
+            SimpleShoppingManager = GetComponentInParent<SimpleShoppingManager>();
         }
 
         private void OnEnable()
         {
-            simpleShoppingManager.EventBuyProduct += UpdateDisplays;
-            simpleShoppingManager.EventUseProduct += UpdateUseDisplays;
+            SimpleShoppingManager.EventBuyProduct += UpdateDisplays;
+            SimpleShoppingManager.EventUseProduct += UpdateUseDisplays;
         }
         
 
         private void OnDisable()
         {
-            simpleShoppingManager.EventBuyProduct -= UpdateDisplays;
+            SimpleShoppingManager.EventBuyProduct -= UpdateDisplays;
         }
 
         #endregion

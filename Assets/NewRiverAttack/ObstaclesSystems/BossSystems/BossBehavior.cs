@@ -69,7 +69,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         private async void BossGameReady()
         {
-            await _behaviorManager.ChangeBehaviorAsync("EnterSceneBehavior").ConfigureAwait(false);
+            //await _behaviorManager.ChangeBehaviorAsync("EnterSceneBehavior").ConfigureAwait(false);
         }
     }
 }

@@ -13,6 +13,13 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
 {
     public class ShopProductSimpleSkins : ShopProductSettings
     {
+        [Header("Attributes Fields")]
+        [SerializeField] private Slider attSpeed;
+        [SerializeField] private Slider attAgility;
+        [SerializeField] private Slider attMaxFuel;
+        [SerializeField] private Slider attFuelCadence;
+        [SerializeField] private Slider attFireSpeed;
+        
         [Header("Skin Buttons Settings")]
         public Color textNormalColor;
         public Color textNoBuyColor = Color.red;
@@ -22,7 +29,24 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         protected internal override void DisplayStock(IStockShop stockShop)
         {
             base.DisplayStock(stockShop);
+            DisplaySlides(stockShop?.shopProduct);
             SelectSkinButton(stockShop, GameOptionsSave.instance);
+        }
+
+        private void DisplaySlides(IShopProduct shopProduct)
+        {
+            switch (shopProduct)
+            {
+                case null:
+                    return;
+                case ShopProductSkin productSkin:
+                    attSpeed.value = productSkin.GetRateSpeed();
+                    attAgility.value = productSkin.GetRateAgility();
+                    attMaxFuel.value = productSkin.GetRateMaxFuel();
+                    attFuelCadence.value = productSkin.GetRateCadenceFuel();
+                    attFireSpeed.value = productSkin.GetRateShoot();
+                    break;
+            }
         }
 
         private void SelectSkinButton(IStockShop stockShop, GameOptionsSave gameOptionsSave)
@@ -116,20 +140,20 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
                 if (stockShop.shopProduct is ShopProductSkin productSkin)
                 {
                     SteamGameManager.UnlockAchievement("ACH_BUY_SKIN");
-                    if (productSkin.HaveBuyAllProductInList(simpleShoppingManager.GetShopList))
+                    if (productSkin.HaveBuyAllProductInList(SimpleShoppingManager.GetShopList))
                     {
                         SteamGameManager.UnlockAchievement("ACH_BUY_SKIN_ALL");
                     }
                 }
             }
-            simpleShoppingManager.OnEventBuyProduct();
+            SimpleShoppingManager.OnEventBuyProduct();
             DebugManager.Log<ShopProductSimpleSkins>("Product purchased successfully.");
         }
         protected override void UseProduct(int indexPlayer,IStockShop stockShop, int quantity = 1)
         {
             if (stockShop?.shopProduct is not IShopProductUsable itemUse) return;
             itemUse.Use(indexPlayer,stockShop, quantity);
-            simpleShoppingManager.OnEventUseProduct(stockShop.shopProduct, quantity);
+            SimpleShoppingManager.OnEventUseProduct(stockShop.shopProduct, quantity);
             DebugManager.Log<ShopProductSimpleSkins>("Skin used successfully.");
         }
     }
