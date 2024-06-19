@@ -20,18 +20,22 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         [SerializeField] private RectTransform panelContent;
 
         private List<ShopProductStock> _productStocks;
-        
+
         private INavigationMode _navigationMode;
         private IShopLayout _shopLayout;
 
         #region Delegates
 
         public delegate void GeneralShoppingEventHandler();
+
         internal event GeneralShoppingEventHandler EventBuyProduct;
+
         public delegate void ProductShoppingEventHandler(ShopProduct shopProduct, int quantity);
+
         internal event ProductShoppingEventHandler EventUseProduct;
 
         #endregion
+
         #region Unity Methods
 
         private void Awake()
@@ -44,19 +48,15 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         private void OnEnable()
         {
             InputGameManager.ActionManager.ActivateActionMap(ActionManager.GameActionMaps.Shopping);
+            InputGameManager.RegisterAction("LeftSelection", InputOnMoveLeft);
+            InputGameManager.RegisterAction("RightSelection", InputOnMoveRight);
+            InputGameManager.RegisterAction("UseButton", InputOnUse);
             UpdateStockProducts(panelContent);
         }
 
         private void Start()
         {
-            
             _shopLayout.ConfigureLayout(panelContent, stockShopsList.Count, prefabItemShop);
-            
-            InputGameManager.RegisterAction("LeftSelection", InputOnMoveLeft );
-            InputGameManager.RegisterAction("RightSelection", InputOnMoveRight );
-            
-            InputGameManager.RegisterAction("UseButton", InputOnUse );
-            
             _productStocks = stockShopsList.OrderBy(prod => prod.shopProduct.name).ToList();
             CreateShopping(panelContent, _productStocks);
         }
@@ -64,30 +64,19 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         private void OnDisable()
         {
             InputGameManager.ActionManager.RestoreActionMap();
+            InputGameManager.UnregisterAction("LeftSelection", InputOnMoveLeft);
+            InputGameManager.UnregisterAction("RightSelection", InputOnMoveRight);
+            InputGameManager.UnregisterAction("UseButton", InputOnUse);
         }
 
         private void OnDestroy()
         {
-            _shopLayout =  null;
+            _shopLayout = null;
             _navigationMode = null;
             _productStocks.Clear();
         }
 
         #endregion
-        
-        private void InstantiateItemShop(ShopProductStock stock)
-        {
-            var item = Instantiate(prefabItemShop, panelContent);
-            var stockItemTemplate = item.GetComponent<ShopProductSettings>();
-            if (stockItemTemplate != null)
-            {
-                stockItemTemplate.DisplayStock(stock);
-            }
-            else
-            {
-                DebugManager.LogWarning<SimpleShoppingManager>($"Missing ShopProductSettings component on prefab: {prefabItemShop.name}");
-            }
-        }
 
         #region InputSystem
 
@@ -96,18 +85,19 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             DebugManager.Log<SimpleShoppingManager>($"[Move Left] contexto: {context}");
             ButtonShoppingNavigation(false);
         }
+
         private void InputOnMoveRight(InputAction.CallbackContext context)
         {
             DebugManager.Log<SimpleShoppingManager>($"[Move Right] contexto: {context}");
             ButtonShoppingNavigation(true);
         }
+
         private void InputOnUse(InputAction.CallbackContext context)
         {
             DebugManager.Log<SimpleShoppingManager>($"[Button A] Buy/Select contexto: {context}");
             UpdateStockProducts(panelContent);
         }
-        
-        //Click Direto no botão
+
         public void ButtonShoppingNavigation(bool forward)
         {
             _navigationMode.MoveContent(panelContent, forward, this);
@@ -119,7 +109,6 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         {
             var childCount = content.childCount;
 
-            // Loop através de todos os filhos e destrua-os
             for (var i = childCount - 1; i >= 0; i--)
             {
                 var child = content.GetChild(i);
@@ -137,38 +126,57 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
                                                         $"Product Type: {stock.productType}");
                 InstantiateItemShop(stock);
             }
+
             _navigationMode.UpdateSelectedItem(content, 0);
+            _shopLayout.ResetContentPosition(content);
+        }
+
+        private void InstantiateItemShop(ShopProductStock stock)
+        {
+            var item = Instantiate(prefabItemShop, panelContent);
+            var stockItemTemplate = item.GetComponent<ShopProductSettings>();
+            if (stockItemTemplate != null)
+            {
+                stockItemTemplate.DisplayStock(stock);
+            }
+            else
+            {
+                DebugManager.LogWarning<SimpleShoppingManager>($"Missing ShopProductSettings component on prefab: {prefabItemShop.name}");
+            }
+
+            var rectTransform = item.GetComponent<RectTransform>();
+            rectTransform.pivot = new Vector2(0, 0.5f);
+            rectTransform.anchorMin = new Vector2(0, 0.5f);
+            rectTransform.anchorMax = new Vector2(0, 0.5f);
         }
 
         private void UpdateStockProducts(Transform content)
         {
             var childCount = content.childCount;
             if (childCount < 1) return;
-            // Loop através de todos os filhos e destrua-os
-            for (var i = childCount - 1; i >= 0; i--)
+
+            ClearShopping(content);
+
+            foreach (var stock in stockShopsList)
             {
-                var child = content.GetChild(i);
-                var productSettings = child.GetComponent<ShopProductSettings>();
-                productSettings.UpdateDisplays();
+                InstantiateItemShop(stock);
             }
+
+            _navigationMode.UpdateSelectedItem((RectTransform)content, 0);
+            _shopLayout.ResetContentPosition((RectTransform)content);
         }
 
         public List<ShopProductStock> GetShopList => _productStocks;
 
-        #region Call Methods
-
-        internal void OnEventBuyProduct()
+        public void OnEventBuyProduct()
         {
             UpdateStockProducts(panelContent);
             EventBuyProduct?.Invoke();
         }
-        internal void OnEventUseProduct(ShopProduct shopProduct, int quantity)
+
+        public void OnEventUseProduct(ShopProduct shopProduct, int quantity)
         {
-            EventUseProduct?.Invoke(shopProduct,quantity);
+            EventUseProduct?.Invoke(shopProduct, quantity);
         }
-
-        #endregion
-
-        
     }
 }

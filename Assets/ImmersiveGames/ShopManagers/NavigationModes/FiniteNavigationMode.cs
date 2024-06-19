@@ -8,8 +8,8 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
 {
     public class FiniteNavigationMode : INavigationMode
     {
-        public int SelectedItemIndex { get; private set; }
-        
+        public int SelectedItemIndex { get; protected set; }
+
         public virtual void MoveContent(RectTransform content, bool forward, MonoBehaviour monoBehaviour = null)
         {
             var rect = content.anchoredPosition;
@@ -19,7 +19,11 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
                 DebugManager.LogError<FiniteNavigationMode>($"Não há filhos criados");
                 return;
             }
-            var moveAmount = content.rect.width / childCount;
+
+            var visibleChildIndex = GetVisibleChildIndex(content);
+            var visibleChild = content.GetChild(visibleChildIndex);
+            var moveAmount = visibleChild.GetComponent<RectTransform>().rect.width;
+
             const int maxPosition = 0;
             var minPosition = -((childCount - 1) * moveAmount);
 
@@ -28,6 +32,7 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
                 if (rect.x - moveAmount >= minPosition)
                 {
                     rect.x -= moveAmount;
+                    SelectedItemIndex = Mathf.Clamp(SelectedItemIndex + 1, 0, childCount - 1);
                 }
             }
             else
@@ -35,22 +40,27 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
                 if (rect.x + moveAmount <= maxPosition)
                 {
                     rect.x += moveAmount;
+                    SelectedItemIndex = Mathf.Clamp(SelectedItemIndex - 1, 0, childCount - 1);
                 }
             }
 
             content.anchoredPosition = rect;
 
-            SelectedItemIndex = CalculateSelectedItemIndex(content, forward);
             UpdateSelectedItem(content, SelectedItemIndex);
         }
 
-        public int CalculateSelectedItemIndex(RectTransform content, bool forward)
+        private static int GetVisibleChildIndex(RectTransform content)
         {
             var childCount = content.childCount;
-            var selectedIndex = forward
-                ? Mathf.Clamp(childCount - 1, 0, childCount - 1)
-                : Mathf.Clamp(0, 0, content.childCount - 1);
-            return selectedIndex;
+            for (var i = 0; i < childCount; i++)
+            {
+                var child = content.GetChild(i);
+                if (child.gameObject is { activeSelf: true, activeInHierarchy: true })
+                {
+                    return i;
+                }
+            }
+            return 0; // Retorna o primeiro índice se nenhum filho visível for encontrado
         }
 
         public virtual void UpdateSelectedItem(RectTransform content, int selectedIndex)
@@ -60,6 +70,7 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
                 DebugManager.LogError<FiniteNavigationMode>($"Não há Itens no content");
                 return;
             }
+
             var childSelect = content.GetChild(selectedIndex);
             var activeButton = childSelect.GetComponentInChildren<Button>();
             if (activeButton != null)
@@ -67,6 +78,7 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
                 var eventSystem = EventSystem.current;
                 eventSystem.SetSelectedGameObject(activeButton.gameObject);
             }
+
             DebugManager.Log<FiniteNavigationMode>($"Item selecionado: {selectedIndex}");
         }
     }

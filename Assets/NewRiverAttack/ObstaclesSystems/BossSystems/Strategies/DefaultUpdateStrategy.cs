@@ -14,7 +14,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Strategies
                 await currentBehavior.UpdateAsync(cancellationToken).ConfigureAwait(false);
             }
 
-            // Atualizar subcomportamentos, se houver
+            // Atualizar sub comportamentos, se houver
             if (currentBehavior.SubBehaviors.Length > 0)
             {
                 var currentSubBehavior = currentBehavior.SubBehaviors[currentBehavior.CurrentSubBehaviorIndex];
@@ -32,7 +32,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Strategies
 
             if (currentBehavior.Initialized && currentBehavior.Finalized)
             {
-                // Chamar ExitAsync para finalizar o comportamento atual e seus subcomportamentos
+                // Chamar ExitAsync para finalizar o comportamento atual e seus sub comportamentos
                 await currentBehavior.ExitAsync(cancellationToken).ConfigureAwait(false);
             }
         }

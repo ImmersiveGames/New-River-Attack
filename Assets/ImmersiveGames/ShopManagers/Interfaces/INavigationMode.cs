@@ -7,7 +7,7 @@ namespace ImmersiveGames.ShopManagers.Interfaces
         int SelectedItemIndex { get; }
         void MoveContent(RectTransform content, bool forward, MonoBehaviour monoBehaviour = null);
         void UpdateSelectedItem(RectTransform content, int selectedIndex);
-        int CalculateSelectedItemIndex(RectTransform content, bool forward);
+        //int CalculateSelectedItemIndex(RectTransform content, bool forward);
 
     }
 }

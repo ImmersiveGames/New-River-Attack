@@ -27,17 +27,24 @@ namespace ImmersiveGames.ShopManagers.Layouts
                 Debug.LogError("O prefab não possui um RectTransform.");
             }
 
-            horizontalLayoutGroup.padding.right = horizontalLayoutGroup.padding.left = (int)productWidth / 2;
+            horizontalLayoutGroup.padding.left = horizontalLayoutGroup.padding.right = 0;
             horizontalLayoutGroup.spacing = productWidth; // Espaço igual ao tamanho do produto
-            content.sizeDelta = new Vector2((itemCount - 1) * productWidth + productWidth, content.sizeDelta.y); // Largura do conteúdo ajustada para caber todos os produtos
+            content.sizeDelta = new Vector2(itemCount * productWidth, content.sizeDelta.y); // Largura do conteúdo ajustada para caber todos os produtos
 
             horizontalLayoutGroup.childControlHeight = true;
             horizontalLayoutGroup.childControlWidth = true;
-            horizontalLayoutGroup.childScaleHeight = true;
-            horizontalLayoutGroup.childScaleWidth = true;
+            horizontalLayoutGroup.childScaleHeight = false;
+            horizontalLayoutGroup.childScaleWidth = false;
             horizontalLayoutGroup.childForceExpandHeight = true;
             horizontalLayoutGroup.childForceExpandWidth = false;
-            
+        }
+
+        public void ResetContentPosition(RectTransform content)
+        {
+            if (content.childCount == 0) return;
+
+            // Define a posição inicial do conteúdo
+            content.anchoredPosition = new Vector2(0, content.anchoredPosition.y);
         }
     }
 }

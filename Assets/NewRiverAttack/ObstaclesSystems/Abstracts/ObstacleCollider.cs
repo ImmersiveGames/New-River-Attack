@@ -1,4 +1,5 @@
-﻿using ImmersiveGames.BulletsManagers;
+﻿using System;
+using ImmersiveGames.BulletsManagers;
 using ImmersiveGames.DebugManagers;
 using NewRiverAttack.BulletsManagers;
 using NewRiverAttack.GamePlayManagers;
@@ -10,11 +11,17 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
     public abstract class ObstacleCollider : MonoBehaviour
     {
         protected ObstacleMaster ObstacleMaster;
+        private int _obstacleHp;
         #region Unity Methods
 
         private void Awake()
         {
             ObstacleMaster = GetComponent<ObstacleMaster>();
+        }
+
+        private void Start()
+        {
+            _obstacleHp = ObstacleMaster.objectDefault.hitPoints;
         }
 
         internal virtual void OnTriggerEnter(Collider other)
@@ -28,17 +35,16 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         
         protected virtual void ComponentToKill(Component other, EnumCollisionType collisionType)
         {
+            if (other == null) return;
             if (other == null || !ObstacleMaster.ObjectIsReady || !ObstacleMaster.objectDefault.canKilled) return;
             var playerWhoHit = WhoHit<PlayerMaster>(other);
             if (playerWhoHit == null) return;
-            var damage = MakeDamage(other);
-            var hp = ObstacleMaster.objectDefault.hitPoints;
-            DebugManager.Log<ObstacleCollider>($"DAMAGE! {damage}, HP {hp} - {other}");
-            if (hp - damage <= 0)
-            {
-                playerWhoHit.SetPlayerScore(ObstacleMaster.objectDefault.GetScore());
-                ObstacleMaster.OnEventObstacleHit(playerWhoHit); 
-            }
+            var damage = SetDamage(other);
+            DebugManager.Log<ObstacleCollider>($"DAMAGE! {damage}, HP {_obstacleHp} - {other}");
+            _obstacleHp -= damage;
+            if (_obstacleHp > 0) return;
+            playerWhoHit.SetPlayerScore(ObstacleMaster.objectDefault.GetScore());
+            ObstacleMaster.OnEventObstacleHit(playerWhoHit);
 
             /*PlayerMasterOld = WhoHit(other);
             OnEventObstacleMasterHit();
@@ -59,7 +65,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             };
         }
 
-        private int MakeDamage(Component component)
+        private int SetDamage(Component component)
         {
             var teste= component switch
             {

@@ -49,8 +49,8 @@ namespace NewRiverAttack.BulletsManagers
             {
                 if (obstacleMaster.objectDefault.ignoreBullets ) return;
             }
-            
-            DestroyMe();
+            Invoke(nameof(DestroyMe), 0.1f);
+            //DestroyMe();
         }
         private void FixedUpdate()
         {

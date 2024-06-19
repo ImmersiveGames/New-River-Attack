@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using ImmersiveGames.DebugManagers;
+using UnityEngine.UI;
 
 namespace ImmersiveGames.ShopManagers.NavigationModes
 {
@@ -8,8 +9,8 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
     {
         private const float SmoothTime = 0.1f;
         private bool _isMoving;
-        private int _selectedItemIndex;
         private const float Approximation = 0.3f; // Aproximação para determinar a suavização
+        private int _moveCount;
 
         public override void MoveContent(RectTransform content, bool forward, MonoBehaviour monoBehaviour = null)
         {
@@ -28,25 +29,27 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
         {
             _isMoving = true;
             DebugManager.Log<SmoothFiniteNavigationMode>("Iniciando movimento.");
-            var rect = content.anchoredPosition;
-            var childCount = totalItems;
-            var moveAmount = content.rect.width / childCount;
-            const float maxPosition = 0f;
-            var minPosition = -((childCount - 1) * moveAmount);
 
+            // Atualiza o contador de movimentos
+            _moveCount += forward ? 1 : -1;
+            _moveCount = Mathf.Clamp(_moveCount, 0, totalItems - 1);
+
+            // Atualiza o índice selecionado de acordo com o contador de movimentos
+            SelectedItemIndex = _moveCount;
+            DebugManager.Log<SmoothFiniteNavigationMode>($"Índice selecionado: {SelectedItemIndex}");
+
+            // Obtém o espaço entre os elementos do layout group
+            var moveAmount = content.GetComponent<HorizontalLayoutGroup>().spacing;
+
+
+            var rect = content.anchoredPosition;
             var targetX = forward ? rect.x - moveAmount : rect.x + moveAmount;
-            targetX = forward switch
-            {
-                true when targetX < minPosition => minPosition,
-                false when targetX > maxPosition => maxPosition,
-                _ => targetX
-            };
+            targetX = Mathf.Clamp(targetX, -((totalItems - 1) * moveAmount), 0f);
 
             var velocity = 0f;
             while (Mathf.Abs(rect.x - targetX) > Approximation)
             {
                 rect.x = Mathf.SmoothDamp(rect.x, targetX, ref velocity, SmoothTime);
-                rect.x = Mathf.Clamp(rect.x, minPosition, maxPosition);
                 content.anchoredPosition = rect;
                 yield return null;
             }
@@ -57,8 +60,7 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
             _isMoving = false;
             DebugManager.Log<SmoothFiniteNavigationMode>("Movimento concluído.");
 
-            var selectedIndex = CalculateSelectedItemIndex(content, forward);
-            UpdateSelectedItem(content, selectedIndex);
+            UpdateSelectedItem(content, SelectedItemIndex);
         }
     }
 }
