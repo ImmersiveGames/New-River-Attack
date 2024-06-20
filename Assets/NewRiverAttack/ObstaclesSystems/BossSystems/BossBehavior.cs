@@ -13,6 +13,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
     {
         private BehaviorManager _behaviorManager;
         private GamePlayManager _gamePlayManager;
+        private GamePlayBossManager _gamePlayBossManager;
 
         public PlayerMaster PlayerMaster { get; private set; }
 
@@ -22,7 +23,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         {
             SetInitialReferences();
             _gamePlayManager.EventPlayerInitialize += GetPlayerMaster;
-            _gamePlayManager.EventGameReady += BossGameReady;
+            _gamePlayBossManager.EventEnterBoss += BossGameReady;
         }
 
         private void Start()
@@ -46,7 +47,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         private void OnDisable()
         {
-            _gamePlayManager.EventGameReady -= BossGameReady;
+            _gamePlayBossManager.EventEnterBoss -= BossGameReady;
         }
 
         private void OnApplicationQuit()
@@ -57,6 +58,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         private void SetInitialReferences()
         {
             _gamePlayManager = GamePlayManager.instance;
+            _gamePlayBossManager = GamePlayBossManager.instance;
             BossMaster = GetComponent<BossMaster>();
         }
 
@@ -69,7 +71,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         private async void BossGameReady()
         {
-            //await _behaviorManager.ChangeBehaviorAsync("EnterSceneBehavior").ConfigureAwait(false);
+            await _behaviorManager.ChangeBehaviorAsync("EnterSceneBehavior").ConfigureAwait(false);
         }
     }
 }

@@ -5,8 +5,6 @@ namespace ImmersiveGames.Utils
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static T _instance;
-        // ReSharper disable once InconsistentNaming
-        // ReSharper disable once StaticMemberInGenericType
         private static readonly object _lock = new object();
 
         public static T instance

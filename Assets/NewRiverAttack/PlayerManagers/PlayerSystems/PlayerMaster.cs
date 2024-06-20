@@ -20,6 +20,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         [SerializeField]
         private float timeoutReSpawn;
         internal bool AutoPilot;
+        internal bool BossController;
         private int _playerScore;
 
         #region Player Config Settings (privates)
@@ -66,6 +67,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             IsDisable = true;
             IsDead = false;
             AutoPilot = false;
+            BossController = false;
         }
 
         protected internal override void InitializeObject()

@@ -28,8 +28,6 @@ namespace NewRiverAttack.GamePlayManagers
         internal bool IsBossFight;
         internal bool IsPause;
 
-        [Header("Level Builder")]
-
         [Header("Player Initialize")]
         [SerializeField] private PlayersDefaultSettings allPlayersDefaultSettings;
 

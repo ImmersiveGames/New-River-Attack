@@ -12,8 +12,8 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
     public class EnterSceneBehavior : Behavior
     {
         private const float InitialDelay = 2f;
-        private const float MoveDuration = 7f;
-        private const float DistanceOffset = 45f;
+        private const float MoveDuration = 5f;
+        private const float DistanceOffset = 30f;
         private readonly BossBehavior _bossBehavior;
 
         public EnterSceneBehavior(IBehavior[] subBehaviors, BossBehavior bossBehavior)
@@ -41,15 +41,14 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
                 var mySequence = DOTween.Sequence();
                 mySequence.AppendInterval(InitialDelay);
-                mySequence.Append(_bossBehavior.transform.DOMoveZ(distance, MoveDuration).SetEase(Ease.OutQuad));
+                mySequence.Append(_bossBehavior.transform.DOMoveZ(distance, MoveDuration).SetEase(Ease.Linear));
 
                 // Aguardar a conclusão da animação ou o cancelamento
 
                 mySequence.OnComplete(() => tcs.TrySetResult(true));
                 mySequence.OnKill(() => tcs.TrySetResult(false));
                 mySequence.Play();
-
-                _bossBehavior.BossMaster.OnEventBossShowUp();
+                
                 return Task.CompletedTask;
             }).ConfigureAwait(false);
 

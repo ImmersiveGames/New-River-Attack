@@ -13,6 +13,11 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
     {
         [Range(1.1f, 4f)] public float multiplyAccelerate = 2f;
         [Range(0.1f, 0.99f)] public float multiplyDecelerate = .5f;
+        
+        public float bossAreaMinX;
+        public float bossAreaMaxX;
+        public float bossAreaMinZ;
+        public float bossAreaMaxZ;
 
         private const float autoPilotSpeed = 1.5f;
         private const int GodMultiSpeedy = 5;
@@ -40,12 +45,13 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void FixedUpdate()
         {
             if (!_gamePlayManager.ShouldBePlayingGame || !_playerMaster.ObjectIsReady) return;
+            Debug.Log($"AutoPilot: {_playerMaster.AutoPilot}");
             if (_playerMaster.AutoPilot)
             {
                 transform.position += MovePlayerAutoPilot();
                 return;
             }
-            if (_gamePlayManager.IsBossFight)
+            if (_gamePlayManager.IsBossFight && _playerMaster.BossController)
             {
                 transform.position += MovePlayerBoss();
                 return;
@@ -112,8 +118,15 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             
             var verticalSpeed = _inputVector.y * actualSpeed * Time.deltaTime;
             var horizontalSpeed = _inputVector.x * _speedHorizontal * Time.deltaTime;
+            
+            var newPosition = transform.position + new Vector3(horizontalSpeed, 0, verticalSpeed);
 
-            return new Vector3(horizontalSpeed, 0, verticalSpeed);
+            // Aplicar os limites para a posição da nave
+            newPosition.x = Mathf.Clamp(newPosition.x, bossAreaMinX, bossAreaMaxX);
+            newPosition.z = Mathf.Clamp(newPosition.z, bossAreaMinZ, bossAreaMaxZ);
+
+            return newPosition - transform.position;
+            //return new Vector3(horizontalSpeed, 0, verticalSpeed);
         }
 
         private Vector3 MovePlayerAutoPilot()

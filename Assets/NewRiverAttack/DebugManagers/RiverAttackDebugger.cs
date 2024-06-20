@@ -106,8 +106,8 @@ namespace NewRiverAttack.DebugManagers
             
             //Enemies
             DebugManager.SetScriptDebugLevel<ObjectMaster>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<ObstacleMaster>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<EnemiesMaster>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<ObstacleMaster>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<EnemiesMaster>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<ObstacleSkin>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<EnemiesExplosion>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<EnemiesMovement>(DebugManager.DebugLevels.None);

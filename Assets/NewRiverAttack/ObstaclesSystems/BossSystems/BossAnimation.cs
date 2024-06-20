@@ -17,6 +17,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         private Animator _animator;
         private BossMaster _bossMaster;
         private GamePlayManager _gamePlayManager;
+        private GamePlayBossManager _gamePlayBossManager;
 
         #region Unity Methods
 
@@ -24,14 +25,14 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         {
             SetInitialReferences();
             _bossMaster.EventObstacleChangeSkin += SetAnimations;
-            _bossMaster.EventBossShowUp += AnimateEmerge;
+            _gamePlayBossManager.EventEnterBoss += AnimateEmerge;
             _gamePlayManager.EventGameRestart += ResetAnimation;
         }
 
         private void OnDisable()
         {
             _bossMaster.EventObstacleChangeSkin -= SetAnimations;
-            _bossMaster.EventBossShowUp -= AnimateEmerge;
+            _gamePlayBossManager.EventEnterBoss -= AnimateEmerge;
             _gamePlayManager.EventGameRestart -= ResetAnimation;
         }
 
@@ -40,6 +41,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         private void SetInitialReferences()
         {
             _gamePlayManager = GamePlayManager.instance;
+            _gamePlayBossManager = GamePlayBossManager.instance;
             _bossMaster = GetComponent<BossMaster>();
         }
 
