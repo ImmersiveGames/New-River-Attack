@@ -87,7 +87,7 @@ namespace ImmersiveGames.MenuManagers
             menuPause.gameObject.SetActive(true);
             _gameStartMenu.ActivateMenu(1);
             menuHud.gameObject.SetActive(true);
-            splashComplete.gameObject.SetActive(true);
+            splashComplete.gameObject.SetActive(false);
             var audioGameOver = AudioManager.GetAudioSfxEvent(EnumSfxSound.SfxGameOver);
             audioGameOver.PlayOnShot(GetComponent<AudioSource>());
         }

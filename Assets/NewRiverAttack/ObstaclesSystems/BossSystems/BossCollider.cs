@@ -1,4 +1,5 @@
-﻿using NewRiverAttack.GamePlayManagers;
+﻿using System;
+using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
@@ -10,7 +11,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         internal override void OnTriggerEnter(Collider other)
         {
             if (other == null || !ObstacleMaster.ObjectIsReady) return;
-            
             ComponentToKill(other.GetComponentInParent<PlayerMaster>(), EnumCollisionType.Collider);
             base.OnTriggerEnter(other);
         }

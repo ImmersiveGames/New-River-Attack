@@ -37,6 +37,16 @@ namespace NewRiverAttack.LevelBuilder
         {
             _playerMaster.BossController = true;
             _playerMaster.AutoPilot = false;
+            
+            //Aqui precisa mudar para reiniciar no local da morte
+            var position = transform.position;
+            var savePosition = new Vector3(position.x, _playerMaster.transform.position.y,
+                position.z);
+            _playerMaster.SavePosition(savePosition);
+            
+            //
+            
+            
             _gamePlayBossManager.OnEventEnterBoss();
             _moveTiles.ActiveTiles(_playerMaster);
         }

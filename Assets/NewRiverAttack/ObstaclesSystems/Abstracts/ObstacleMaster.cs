@@ -45,8 +45,9 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         #endregion
         
         
-        internal void OnEventObstacleHit(PlayerMaster playerMaster)
+        internal void OnEventObstacleDeath(PlayerMaster playerMaster)
         {
+            Debug.Log("Triggou no evento");
             AttemptKillObstacle(playerMaster);
             EventObstacleHit?.Invoke(playerMaster);
         }

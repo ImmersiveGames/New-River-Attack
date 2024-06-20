@@ -19,7 +19,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         public float bossAreaMinZ;
         public float bossAreaMaxZ;
 
-        private const float autoPilotSpeed = 1.5f;
+        private const float AutoPilotSpeed = 1.5f;
         private const int GodMultiSpeedy = 5;
 
         private float _speedVertical;
@@ -45,7 +45,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void FixedUpdate()
         {
             if (!_gamePlayManager.ShouldBePlayingGame || !_playerMaster.ObjectIsReady) return;
-            Debug.Log($"AutoPilot: {_playerMaster.AutoPilot}");
             if (_playerMaster.AutoPilot)
             {
                 transform.position += MovePlayerAutoPilot();
@@ -126,12 +125,11 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             newPosition.z = Mathf.Clamp(newPosition.z, bossAreaMinZ, bossAreaMaxZ);
 
             return newPosition - transform.position;
-            //return new Vector3(horizontalSpeed, 0, verticalSpeed);
         }
 
         private Vector3 MovePlayerAutoPilot()
         {
-            var actualSpeed = _speedVertical * autoPilotSpeed;
+            var actualSpeed = _speedVertical * AutoPilotSpeed;
             var verticalSpeed = SpeedAutoVertical * actualSpeed * Time.deltaTime;
             return new Vector3(0, 0, verticalSpeed);
         }

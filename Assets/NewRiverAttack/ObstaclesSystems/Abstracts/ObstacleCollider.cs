@@ -44,7 +44,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             _obstacleHp -= damage;
             if (_obstacleHp > 0) return;
             playerWhoHit.SetPlayerScore(ObstacleMaster.objectDefault.GetScore());
-            ObstacleMaster.OnEventObstacleHit(playerWhoHit);
+            ObstacleMaster.OnEventObstacleDeath(playerWhoHit);
 
             /*PlayerMasterOld = WhoHit(other);
             OnEventObstacleMasterHit();
