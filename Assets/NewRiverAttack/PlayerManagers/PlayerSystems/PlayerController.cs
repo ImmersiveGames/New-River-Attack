@@ -13,11 +13,8 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
     {
         [Range(1.1f, 4f)] public float multiplyAccelerate = 2f;
         [Range(0.1f, 0.99f)] public float multiplyDecelerate = .5f;
-        
-        public float bossAreaMinX;
-        public float bossAreaMaxX;
-        public float bossAreaMinZ;
-        public float bossAreaMaxZ;
+        public Vector2 bossAreaX = new Vector2(-70, 65);
+        public Vector2 bossAreaZ = new Vector2(15, 100);
 
         private const float AutoPilotSpeed = 1.5f;
         private const int GodMultiSpeedy = 5;
@@ -121,8 +118,8 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             var newPosition = transform.position + new Vector3(horizontalSpeed, 0, verticalSpeed);
 
             // Aplicar os limites para a posição da nave
-            newPosition.x = Mathf.Clamp(newPosition.x, bossAreaMinX, bossAreaMaxX);
-            newPosition.z = Mathf.Clamp(newPosition.z, bossAreaMinZ, bossAreaMaxZ);
+            newPosition.x = Mathf.Clamp(newPosition.x, bossAreaX.x, bossAreaX.y);
+            newPosition.z = Mathf.Clamp(newPosition.z, bossAreaZ.x, bossAreaZ.y);
 
             return newPosition - transform.position;
         }

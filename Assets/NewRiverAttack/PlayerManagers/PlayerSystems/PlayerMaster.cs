@@ -6,7 +6,6 @@ using NewRiverAttack.GameManagers;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
-using NewRiverAttack.ObstaclesSystems.CollectibleSystems.PowerUpSystems;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
 using NewRiverAttack.SaveManagers;
 using UnityEngine;
@@ -17,14 +16,20 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
     {
         [Header("player Settings")] [SerializeField]
         public bool godMode;
-        [SerializeField]
-        private float timeoutReSpawn;
+
+        [SerializeField] private float timeoutReSpawn;
+        
+        [SerializeField] private float timeOutRespawnBoss = 1.5f;
+        [SerializeField] private float timeOutRepositionBoss = .5f;
+
+        private int _playerScore;
+        private PlayerLives _playerLives;
         internal bool AutoPilot;
         internal bool BossController;
-        private int _playerScore;
+
 
         #region Player Config Settings (privates)
-        
+
         public int PlayerIndex { get; private set; }
         public ShopProductSkin ActualSkin { get; private set; }
 
@@ -33,28 +38,44 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         #region Delagates
 
         public delegate void PlayerMasterGeneralHandler();
+
         public event PlayerMasterGeneralHandler EventPlayerMasterRespawn;
         public event PlayerMasterGeneralHandler EventPlayerMasterReady;
         public event PlayerMasterGeneralHandler EventPlayerMasterGetHit;
+        public event PlayerMasterGeneralHandler EventPlayerMasterForceExplode;
         public delegate void PlayerMasterObstacleHandler(ICollectable collectable);
+
         public event PlayerMasterObstacleHandler EventPlayerMasterCollect;
+
         public delegate void PlayerMasterSkinHandler(ShopProductSkin shopProductSkin);
+
         public event PlayerMasterSkinHandler EventPlayerMasterChangeSkin;
+
         public delegate void AxisEventHandler(Vector2 dir);
+
         public event AxisEventHandler EventPlayerMasterAxisMovement;
+
         public delegate void PlayerMasterEventHandler(int indexPlayer, PlayersDefaultSettings defaultSettings);
+
         public event PlayerMasterEventHandler EventPlayerMasterInitialize;
-        
+
         public delegate void PlayerMasterPowerUpHandler(ActivePowerUp activePowerUp);
+
         public event PlayerMasterPowerUpHandler EventPlayerMasterStartPowerUp;
         public event PlayerMasterPowerUpHandler EventPlayerMasterEndPowerUp;
+
         public delegate void PlayerMasterAreaEffectHandler(ObstacleTypes obstacleTypes);
+
         public event PlayerMasterAreaEffectHandler EventPlayerMasterAreaEffectStart;
         public event PlayerMasterAreaEffectHandler EventPlayerMasterAreaEffectEnd;
 
+        public delegate void PlayerMasterToggleHandler(bool active);
+
+        public event PlayerMasterToggleHandler EventPlayerMasterToggleSkin;
+
         #endregion
-        
-        
+
+
         #region Initializations
 
         private void SetPlayerSettings(int indexPlayer, PlayersDefaultSettings defaultSettings)
@@ -64,6 +85,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             var gameOptionSave = GameOptionsSave.instance;
             ActualSkin = gameOptionSave.playerSettings[indexPlayer].actualSkin;
             gameOptionSave.SetDefaultSkinPlayer(indexPlayer, defaultSettings.skinDefault);
+            _playerLives = GetComponent<PlayerLives>();
             IsDisable = true;
             IsDead = false;
             AutoPilot = false;
@@ -78,37 +100,41 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         }
 
         #endregion
+
         #region Object Master
+
         private void AttemptKillObstacle()
         {
-            if (GamePlayManagerRef.IsBossFight)
-            {
-                KillPlayerByBoss();
-                return;
-            }
-            
-            IsDead = true;
+            if (GamePlayManagerRef.IsBossFight) return;
             IsDisable = true;
-            //Tem uma forma diferente de morrer se for o boss, provavelmente vou precisar de uma tag
+            IsDead = true;
         }
 
         private void TryReSpawn()
         {
-            var playerLives = GetComponent<PlayerLives>();
-            var lives = (playerLives) ? playerLives.GetLives : GamePlayManagerRef.PlayersDefault.maxLives;
+            var lives = (_playerLives) ? _playerLives.GetLives : GamePlayManagerRef.PlayersDefault.maxLives;
 
             if (lives <= 0)
             {
+                if (BossController)
+                {
+                    IsDisable = true;
+                    IsDead = true;
+                    OnEventPlayerMasterForceExplode();
+                }
                 Invoke(nameof(ChangeGameOver), timeoutReSpawn);
+                return;
+            }
+
+            if (BossController)
+            {
+                Invoke(nameof(RepositionBoss), timeOutRespawnBoss);
                 return;
             }
 
             Invoke(nameof(Reposition), timeoutReSpawn);
         }
-        private void KillPlayerByBoss()
-        {
-            IsDisable = true;
-        }
+
         private void Reposition()
         {
             transform.position = new Vector3(GamePlayManagerRef.PlayersDefault.spawnPosition.x,
@@ -117,6 +143,12 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             transform.Rotate(GamePlayManagerRef.PlayersDefault.spawnPosition);
             OnEventPlayerMasterRespawn();
             Invoke(nameof(ReadyPlayer), timeoutReSpawn);
+        }
+
+        private void RepositionBoss()
+        {
+            OnEventPlayerMasterRespawn();
+            Invoke(nameof(ReadyPlayer), timeOutRepositionBoss);
         }
 
         private void ReadyPlayer()
@@ -132,6 +164,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             GamePlayManager.instance.OnEventGameOver();
             await GameManager.StateManager.ChangeStateAsync("GameStateGameOver").ConfigureAwait(false);
         }
+
         #endregion
 
         internal void SetPlayerScore(int score)
@@ -141,7 +174,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         }
 
         internal int GetPlayerScore => _playerScore;
-        
+
 
         #region Calls
 
@@ -164,7 +197,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         public void OnEventPlayerMasterGetHit()
         {
             AttemptKillObstacle();
-            //GamePlayManager.OnEventPlayerGetHit(this);
             GamePlayManagerRef.OnEventHudRapidFireEnd(0, PlayerIndex);
             EventPlayerMasterGetHit?.Invoke();
             TryReSpawn();
@@ -187,6 +219,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             DebugManager.Log<PlayerMaster>($"Event Collect");
             EventPlayerMasterCollect?.Invoke(collectable);
         }
+
         public void OnEventPlayerMasterStartPowerUp(ActivePowerUp activePowerUp)
         {
             EventPlayerMasterStartPowerUp?.Invoke(activePowerUp);
@@ -196,15 +229,28 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         {
             EventPlayerMasterEndPowerUp?.Invoke(activePowerUp);
         }
+
         internal void OnEventPlayerMasterAreaEffectStart(ObstacleTypes obstacleTypes)
         {
             EventPlayerMasterAreaEffectStart?.Invoke(obstacleTypes);
         }
+
         internal void OnEventPlayerMasterAreaEffectEnd(ObstacleTypes obstacleTypes)
         {
             EventPlayerMasterAreaEffectEnd?.Invoke(obstacleTypes);
         }
+
+        internal void OnEventPlayerMasterToggleSkin(bool active)
+        {
+            EventPlayerMasterToggleSkin?.Invoke(active);
+        }
+        private void OnEventPlayerMasterForceExplode()
+        {
+            EventPlayerMasterForceExplode?.Invoke();
+        }
+
         #endregion
+
         
     }
 }

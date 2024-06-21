@@ -33,23 +33,18 @@ namespace NewRiverAttack.HUDManagers.UI
         private void OnEnable()
         {
             SetInitialReferences();
-            
         }
-
         private void Start()
         {
             _playerMaster = _gamePlayManager.GetPlayerMaster(playerIndex);
             _playerFuel = _playerMaster.GetComponent<PlayerFuel>();
             _valorMeta = _playerFuel.GetFuel / _playerFuel.GetMaxFuel;
+            _playerMaster.EventPlayerMasterGetHit += StopSound;
         }
-
-
         private void Update()
         {
             UpdateDisplay();
         }
-
-        
 
         #endregion
 
@@ -61,8 +56,13 @@ namespace NewRiverAttack.HUDManagers.UI
         private void UpdateFuel(float valueUpdate, int iPlayerIndex)
         {
             if(playerIndex != iPlayerIndex) return;
+            _playerMaster = _gamePlayManager.GetPlayerMaster(playerIndex);
             
             //TODO: Aumentar a gasolina ou reduzir
+        }
+        private void StopSound()
+        {
+            playerAlert.Stop(_audioSource);
         }
 
         private void UpdateDisplay()

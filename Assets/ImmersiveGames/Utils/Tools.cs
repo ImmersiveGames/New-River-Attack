@@ -12,36 +12,6 @@ namespace ImmersiveGames.Utils
     public abstract class Tools
     {
         /*
-         * SerializableDictionary<TKey, TValue>]
-         * - Cria um dicionário serializable para ser exibido no inspector
-         * */
-        [Serializable]
-        public class SerializableDictionary<TKey, TValue>
-        {
-            [SerializeField] private List<TKey> keys = new List<TKey>();
-
-            [SerializeField] private List<TValue> values = new List<TValue>();
-
-            public void Add(TKey key, TValue value)
-            {
-                keys.Add(key);
-                values.Add(value);
-            }
-
-            public bool TryGetValue(TKey key, out TValue value)
-            {
-                var index = keys.IndexOf(key);
-                if (index != -1)
-                {
-                    value = values[index];
-                    return true;
-                }
-
-                value = default(TValue);
-                return false;
-            }
-        }
-        /*
          * ScriptableListToList<T>(List<int> listId, List<T> scriptableList)
          * - Transforma uma Lista de Scriptable Objects em uma lista padrão
          * */
@@ -60,7 +30,7 @@ namespace ImmersiveGames.Utils
         } 
         /*
          *  ListToScriptableList<T>(IEnumerable<T> listProducts)
-         *  - Transforma ula lista de em uma Lista Escriptable Eumerada
+         *  - Transforma ula lista de em uma Lista Scriptable Eumerada
          * */
         public static List<int> ListToScriptableList<T>(IEnumerable<T> listProducts) where T : ScriptableObject
         {
@@ -129,7 +99,7 @@ namespace ImmersiveGames.Utils
             Retorna um vetor2 com o formato em unity points da camera atual
             </summary>
         */
-        public static Vector2 unityCamSize
+        public static Vector2 UnityCamSize
         {
             get
             {
@@ -178,17 +148,6 @@ namespace ImmersiveGames.Utils
             }
         }
         /*
-         * TransformClear(Transform t)
-         * - Destroy os filhos de um objeto
-         * */
-        public static void TransformClear(Transform t)
-        {
-            foreach (Transform child in t)
-            {
-                UnityEngine.Object.Destroy(child.gameObject);
-            }
-        }
-        /*
          * SetLayersRecursively(LayerMask layerMask, Transform itemTransform)
          * - Define layers para todos os objetos parentes de forma recursiva
          * */
@@ -203,15 +162,6 @@ namespace ImmersiveGames.Utils
                 SetLayersRecursively(layerMask, child);
             }
         } 
-        /*
-         * SetFollowVirtualCam(Cinemachine Virtual Camera virtualCamera, Transform follow)
-         * - Define o objeto que a camera virtual irá seguir
-         * */
-        public static void SetFollowVirtualCam(CinemachineVirtualCamera virtualCamera, Transform follow)
-        {
-            virtualCamera.Follow = follow;
-        }
-        
         /*
          * EqualizeLists<T>(ref List<T> listA, ref List<T> listB)
          * - Torna as duas listas com quantidade iguais. (não valores)

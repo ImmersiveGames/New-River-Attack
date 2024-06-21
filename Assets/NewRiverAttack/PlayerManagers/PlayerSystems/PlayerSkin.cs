@@ -1,6 +1,6 @@
 ﻿using ImmersiveGames.ShopManagers.ShopProducts;
+using NewRiverAttack.PlayerManagers.Tags;
 using NewRiverAttack.SaveManagers;
-using RiverAttack;
 using UnityEngine;
 
 namespace NewRiverAttack.PlayerManagers.PlayerSystems
@@ -13,6 +13,12 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         {
             RemoveSkin();
             SetInitialReferences();
+            _playerMaster.EventPlayerMasterToggleSkin += ToggleSkin;
+        }
+
+        private void OnDisable()
+        {
+            _playerMaster.EventPlayerMasterToggleSkin -= ToggleSkin;
         }
 
         private void Start()
@@ -34,7 +40,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private void RemoveSkin()
         {
-            var children = GetComponentInChildren<PlayerSkinAttach>();
+            var children = GetComponentInChildren<SkinAttach>();
             if (children != true) return;
             var siblingIndex = children.transform.GetSiblingIndex();
             DestroyImmediate(transform.GetChild(siblingIndex).gameObject);
@@ -49,6 +55,12 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void SetInitialReferences()
         {
             _playerMaster = GetComponent<PlayerMaster>();
+        }
+
+        private void ToggleSkin(bool active)
+        {
+            var children = GetComponentInChildren<SkinAttach>();
+            children.gameObject.SetActive(active);
         }
     }
 }

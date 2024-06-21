@@ -26,12 +26,14 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         {
             _playerMaster.EventPlayerMasterGetHit += PlayerExplode;
             _playerMaster.EventPlayerMasterRespawn += PlayerRestore;
+            _playerMaster.EventPlayerMasterForceExplode += PlayerForceExplode;
         }
 
         private void OnDisable()
         {
             _playerMaster.EventPlayerMasterGetHit -= PlayerExplode;
             _playerMaster.EventPlayerMasterRespawn -= PlayerRestore;
+            _playerMaster.EventPlayerMasterForceExplode -= PlayerForceExplode;
         }
 
         #endregion
@@ -42,14 +44,24 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void PlayerExplode()
         {
             CameraShake.ShakeCamera(shakeIntensity,shakeTime);
-            Tools.ToggleChildren(transform, false);
+            if (_playerMaster.BossController) return;
+            
+            _playerMaster.OnEventPlayerMasterToggleSkin(false);
             var go = Instantiate(deadParticlePrefab, transform);
             Destroy(go, timeoutDestroyExplosion);
         }
+        private void PlayerForceExplode()
+        {
+            CameraShake.ShakeCamera(shakeIntensity,shakeTime);
+            _playerMaster.OnEventPlayerMasterToggleSkin(false);
+            var go = Instantiate(deadParticlePrefab, transform);
+            Destroy(go, timeoutDestroyExplosion);
+        }
+        
 
         private void PlayerRestore()
         {
-            Tools.ToggleChildren(transform, true);
+            _playerMaster.OnEventPlayerMasterToggleSkin(true);
         }
     }
 }

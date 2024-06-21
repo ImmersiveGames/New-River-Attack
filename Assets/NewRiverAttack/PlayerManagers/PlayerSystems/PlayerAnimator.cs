@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using ImmersiveGames.ShopManagers.ShopProducts;
+using NewRiverAttack.PlayerManagers.Tags;
+using UnityEngine;
 
 namespace NewRiverAttack.PlayerManagers.PlayerSystems
 {
@@ -17,13 +21,23 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         {
             SetInitialReferences();
             _playerMaster.EventPlayerMasterAxisMovement += AnimationMovement;
+            _playerMaster.EventPlayerMasterGetHit += AnimationBossHit;
             _playerMaster.EventPlayerMasterRespawn += AnimationReset;
+            
+        }
+
+        private void Start()
+        {
+            UpdateSkin(null);
+            _playerMaster.EventPlayerMasterChangeSkin += UpdateSkin;
         }
 
         private void OnDisable()
         {
             _playerMaster.EventPlayerMasterAxisMovement -= AnimationMovement;
+            _playerMaster.EventPlayerMasterGetHit -= AnimationBossHit;
             _playerMaster.EventPlayerMasterRespawn -= AnimationReset;
+            _playerMaster.EventPlayerMasterChangeSkin -= UpdateSkin;
         }
 
         #endregion
@@ -33,6 +47,12 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _playerMaster = GetComponent<PlayerMaster>();
             _animator = GetComponent<Animator>();
         }
+
+        private void UpdateSkin(ShopProductSkin shopProductSkin)
+        {
+            var children = GetComponentInChildren<SkinAttach>();
+            _animatorSkin = children.GetComponent<Animator>();
+        }
         
         private void AnimationMovement(Vector2 dir)
         {
@@ -41,14 +61,22 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _animator.SetFloat(_dirX, dir.x);
             _animator.SetFloat(_dirY, dir.y);
         }
-        private void AnimationBossHit(bool active)
+
+        private void AnimationBossHit()
         {
-            _animatorSkin.SetBool(_gotHit,active);
+            AnimationHit(true);
+        }
+        private void AnimationHit(bool active)
+        {
+            if(_animatorSkin)
+                _animatorSkin.SetBool(_gotHit,active);
         }
         private void AnimationReset()
         {
             _animator.SetFloat(_dirX, 0);
             _animator.SetFloat(_dirX, 0);
+            if(_animatorSkin)
+                _animatorSkin.SetBool(_gotHit,false);
         }
     }
 }

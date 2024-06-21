@@ -26,6 +26,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             InitializeTrails(null);
             _playerMaster.EventPlayerMasterAxisMovement += ActiveTrailsOnMovement;
             _playerMaster.EventPlayerMasterChangeSkin += InitializeTrails;
+            _playerMaster.EventPlayerMasterRespawn += ResetTrails;
             GamePlayManager.instance.EventGameFinisher += ActiveTrails;
         }
 
@@ -33,6 +34,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         {
             _playerMaster.EventPlayerMasterAxisMovement -= ActiveTrailsOnMovement;
             _playerMaster.EventPlayerMasterChangeSkin -= InitializeTrails;
+            _playerMaster.EventPlayerMasterRespawn -= ResetTrails;
             GamePlayManager.instance.EventGameFinisher -= ActiveTrails;
         }
 
@@ -53,12 +55,22 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private void ActiveTrails()
         {
-            Debug.Log("ASAS");
+            ToggleTrails(true);
+        }
+
+        private void ToggleTrails(bool active)
+        {
             foreach (var trail in _trailRenderers)
             {
                 trail.time = MaxTrailTime;
-                trail.gameObject.SetActive(true);
+                trail.gameObject.SetActive(active);
             }
+        }
+        private void ResetTrails()
+        {
+            ToggleTrails(false);
+            RemoveCoroutine(_coroutineInList);
+            RemoveCoroutine(_coroutineOutList);
         }
 
         private void ActiveTrailsOnMovement(Vector2 dir)
