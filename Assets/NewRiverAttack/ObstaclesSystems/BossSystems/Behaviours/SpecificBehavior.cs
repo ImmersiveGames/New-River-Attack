@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 {
-    public class SpecificBehavior : Behavior
+    /*public class SpecificBehavior : Behavior
     {
         private BossBehavior _bossBehavior;
 
@@ -40,5 +40,5 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             await base.ExitAsync(token).ConfigureAwait(false);
             DebugManager.Log<SpecificBehavior>("Specific Behavior Exited");
         }
-    }
+    }*/
 }

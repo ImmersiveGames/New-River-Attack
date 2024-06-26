@@ -5,7 +5,7 @@ using ImmersiveGames.BehaviorsManagers.Interfaces;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Strategies
 {
-    public class DefaultChangeBehaviorStrategy : IChangeBehaviorStrategy
+    /*public class DefaultChangeBehaviorStrategy : IChangeBehaviorStrategy
     {
         public async Task ChangeBehaviorAsync(IBehavior currentBehavior, BossBehavior bossBehavior,
             CancellationTokenSource cancellationTokenSource)
@@ -29,5 +29,5 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Strategies
                 currentBehavior.Initialized = true;
             }
         }
-    }
+    }*/
 }

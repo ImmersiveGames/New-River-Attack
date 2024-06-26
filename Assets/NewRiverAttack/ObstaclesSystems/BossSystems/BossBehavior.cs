@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using ImmersiveGames.BehaviorsManagers;
 using ImmersiveGames.BehaviorsManagers.Interfaces;
 using NewRiverAttack.GamePlayManagers;
@@ -16,7 +17,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         private GamePlayBossManager _gamePlayBossManager;
 
         public PlayerMaster PlayerMaster { get; private set; }
-
         public BossMaster BossMaster { get; private set; }
 
         private void OnEnable()
@@ -30,14 +30,13 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         {
             _behaviorManager = new BehaviorManager(this);
 
-            var enterSceneBehavior = new EnterSceneBehavior(Array.Empty<IBehavior>(), this);
-
-            var specificSubBehavior = new SpecificBehavior(Array.Empty<IBehavior>(), this);
-
-            var moveNorthBehavior = new MoveNorthBehavior(new IBehavior[] { specificSubBehavior }, this);
-            var moveSouthBehavior = new MoveSouthBehavior(new IBehavior[] { specificSubBehavior }, this);
-            var moveEastBehavior = new MoveEastBehavior(new IBehavior[] { specificSubBehavior }, this);
-            var moveWestBehavior = new MoveWestBehavior(new IBehavior[] { specificSubBehavior }, this);
+            var subs = new TesteSubs(Array.Empty<IBehavior>(), this);
+            var subs2 = new TesteSubs2(Array.Empty<IBehavior>(), this);
+            var enterSceneBehavior = new EnterSceneBehavior(_behaviorManager, Array.Empty<IBehavior>());
+            var moveNorthBehavior = new MoveNorthBehavior(_behaviorManager, new IBehavior[]{subs, subs2});
+            var moveSouthBehavior = new MoveSouthBehavior(_behaviorManager, new IBehavior[]{subs, subs2});
+            var moveEastBehavior = new MoveEastBehavior(_behaviorManager, new IBehavior[]{subs, subs2});
+            var moveWestBehavior = new MoveWestBehavior(_behaviorManager, new IBehavior[]{subs, subs2});
 
             _behaviorManager.AddBehavior(enterSceneBehavior);
             _behaviorManager.AddBehavior(moveNorthBehavior);
@@ -48,6 +47,19 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         private async void Update()
         {
+            if (Input.GetKey(KeyCode.K))
+            {
+                _behaviorManager.StopCurrentBehavior();
+            }
+            if (Input.GetKey(KeyCode.L))
+            {
+                _behaviorManager.StopCurrentSubBehavior();
+            }
+            if (Input.GetKey(KeyCode.J))
+            {
+                await _behaviorManager.ChangeBehaviorAsync(EnumNameBehavior.MoveNorthBehavior.ToString()).ConfigureAwait(false);
+            }
+            
             await _behaviorManager.UpdateAsync().ConfigureAwait(false);
         }
 
@@ -73,11 +85,9 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             PlayerMaster = playerMaster;
         }
 
-        internal BehaviorManager GetBehaviorManager => _behaviorManager;
-
         private async void BossGameReady()
         {
-            await _behaviorManager.ChangeBehaviorAsync("EnterSceneBehavior").ConfigureAwait(false);
+            await _behaviorManager.ChangeBehaviorAsync(EnumNameBehavior.EnterSceneBehavior.ToString()).ConfigureAwait(false);
         }
     }
 }

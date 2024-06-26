@@ -79,9 +79,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         private void AnimateGotHit(PlayerMaster playerMaster)
         {
-            Debug.Log("Acertou");
             if (_animator == null || string.IsNullOrEmpty(onGotHit)) return;
-            Debug.Log("Trigger");
             _animator.SetTrigger(onGotHit);
         }
 

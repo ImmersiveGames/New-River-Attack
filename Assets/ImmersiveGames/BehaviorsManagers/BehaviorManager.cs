@@ -4,32 +4,33 @@ using System.Threading.Tasks;
 using ImmersiveGames.BehaviorsManagers.Interfaces;
 using ImmersiveGames.DebugManagers;
 using NewRiverAttack.ObstaclesSystems.BossSystems;
+using UnityEngine;
 
 namespace ImmersiveGames.BehaviorsManagers
 {
     public class BehaviorManager
     {
         private readonly Dictionary<string, IBehavior> _behaviors = new Dictionary<string, IBehavior>();
-        private IBehavior _previousBehavior;
-        private BehaviorManager _subManagerBehavior;
         private readonly CancellationTokenSource _cancellationTokenSource;
-        private bool _isPaused;
-        private readonly BossBehavior _bossBehavior;
+        internal readonly BossBehavior BossBehavior;
+        private bool _isExitingCurrentBehavior;
+        internal int CurrentIndex;
+
+        private IBehavior CurrentBehavior { get; set; }
+        private BehaviorManager SubBehaviorManager { get; set; }
 
         public BehaviorManager(BossBehavior bossBehavior)
         {
-            _bossBehavior = bossBehavior;
+            BossBehavior = bossBehavior;
             _cancellationTokenSource = new CancellationTokenSource();
         }
-
-        internal IBehavior CurrentBehavior { get; private set; }
 
         public void AddBehavior(IBehavior behavior)
         {
             _behaviors[behavior.Name] = behavior;
         }
 
-        public void AddBehavior(IBehavior[] behaviors)
+        private void AddBehavior(IBehavior[] behaviors)
         {
             foreach (var behavior in behaviors)
             {
@@ -37,12 +38,7 @@ namespace ImmersiveGames.BehaviorsManagers
             }
         }
 
-        public IBehavior GetBehavior(string nameBehavior)
-        {
-            return _behaviors[nameBehavior];
-        }
-
-        public async Task ChangeBehaviorAsync(string behaviorName)
+        public async Task ChangeBehaviorAsync(string behaviorName, int subIndex = 0)
         {
             if (!_behaviors.TryGetValue(behaviorName, out var nextBehavior))
             {
@@ -56,40 +52,90 @@ namespace ImmersiveGames.BehaviorsManagers
                 return;
             }
             CurrentBehavior = nextBehavior;
-            await CurrentBehavior.ChangeBehaviorStrategy.ChangeBehaviorAsync(CurrentBehavior, _bossBehavior, _cancellationTokenSource).ConfigureAwait(false);
+            DebugManager.Log<BehaviorManager>($"Current behavior: {behaviorName}");
+            
+            await Task.Delay(100).ConfigureAwait(false);
+            CurrentBehavior.Initialized = true;
+            _isExitingCurrentBehavior = false;
+
+            await CurrentBehavior.EnterAsync(_cancellationTokenSource.Token).ConfigureAwait(false);
+            SubBehaviorManager = null;
+            if (CurrentBehavior.SubBehaviors.Length > 0 && CurrentBehavior.SubBehaviors[subIndex] != null)
+            {
+                SubBehaviorManager = new BehaviorManager(BossBehavior);
+                SubBehaviorManager.AddBehavior(CurrentBehavior.SubBehaviors);
+                await SubBehaviorManager.ChangeBehaviorAsync(CurrentBehavior.SubBehaviors[subIndex].Name).ConfigureAwait(true);
+            }
         }
 
         public async Task UpdateAsync()
         {
-            if (_isPaused || CurrentBehavior == null) return;
-            await CurrentBehavior.UpdateStrategy.UpdateAsync(CurrentBehavior, this, _cancellationTokenSource.Token).ConfigureAwait(false);
+            //Debug.Log($"Current: {CurrentBehavior?.Name}, Initialized: {CurrentBehavior?.Initialized}, Finalized: {CurrentBehavior?.Finalized}");
+            Debug.Log($"Current Sub: {SubBehaviorManager?.CurrentBehavior.Name}, Initialized: {SubBehaviorManager?.CurrentBehavior.Initialized}, Finalized: {SubBehaviorManager?.CurrentBehavior.Finalized}");
+            
+            if (CurrentBehavior is not { Initialized: true }) return;
+
+            if (!CurrentBehavior.Finalized)
+            {
+                DebugManager.Log<BehaviorManager>($"Updating via Manager");
+                await Task.Delay(100).ConfigureAwait(false);
+                await CurrentBehavior.UpdateAsync(_cancellationTokenSource.Token).ConfigureAwait(false);
+            }
+            
+            if (SubBehaviorManager?.CurrentBehavior is { Initialized: true, Finalized: false })
+            {
+                DebugManager.Log<BehaviorManager>($"Updating Subs via Manager");
+                await SubBehaviorManager.CurrentBehavior.UpdateAsync(_cancellationTokenSource.Token).ConfigureAwait(true);
+            }
+
+            if (SubBehaviorManager?.CurrentBehavior is { Initialized: true, Finalized: true })
+            {
+                DebugManager.Log<BehaviorManager>($"Finalizing Sub via Manager");
+                await FinalizeBehavior(SubBehaviorManager.CurrentBehavior).ConfigureAwait(false);
+                //Aqui precisa verificar se tem um index e adicionar
+                CurrentIndex++;
+                if (CurrentIndex < CurrentBehavior.SubBehaviors.Length)
+                {
+                    DebugManager.Log<BehaviorManager>($"Tem um novo sub para carregar {CurrentIndex}");
+                    await SubBehaviorManager.ChangeBehaviorAsync(CurrentBehavior.SubBehaviors[CurrentIndex].Name, CurrentIndex).ConfigureAwait(false);
+                }
+                else
+                {
+                    CurrentBehavior.Finalized = true;
+                }
+            }
+
+            if (CurrentBehavior.Finalized && !_isExitingCurrentBehavior)
+            {
+                _isExitingCurrentBehavior = true;
+                await FinalizeBehavior(CurrentBehavior).ConfigureAwait(false);
+
+                if (SubBehaviorManager?.CurrentBehavior.Initialized == true)
+                {
+                    await FinalizeBehavior(SubBehaviorManager.CurrentBehavior).ConfigureAwait(false);
+                }
+            }
         }
 
-        public void Pause()
+        private async Task FinalizeBehavior(IBehavior behavior)
         {
-            _isPaused = true;
-            CurrentBehavior?.Pause();
-        }
+            if (!behavior.Initialized) return;
 
-        public void Resume()
-        {
-            _isPaused = false;
-            CurrentBehavior?.Resume();
+            behavior.Initialized = false;
+            await Task.Delay(100).ConfigureAwait(false);
+            await behavior.ExitAsync(_cancellationTokenSource.Token).ConfigureAwait(false);
         }
 
         public void StopCurrentBehavior()
         {
-            _cancellationTokenSource?.Cancel();
-            CurrentBehavior?.Stop();
-            CurrentBehavior = null;
+            //_cancellationTokenSource.Cancel();
+            CurrentIndex = 0;
+            CurrentBehavior.Finalized = true;
         }
-
-        // Método para finalizar explicitamente o comportamento atual e todos os seus sub comportamentos
-        public async Task FinalizeCurrentBehaviorAsync()
+        public void StopCurrentSubBehavior()
         {
-            if (CurrentBehavior == null) return;
-
-            await CurrentBehavior.FinalizeAllSubBehavior(_cancellationTokenSource.Token).ConfigureAwait(false);
+            //_cancellationTokenSource.Cancel();
+            SubBehaviorManager.CurrentBehavior.Finalized = true;
         }
     }
 }

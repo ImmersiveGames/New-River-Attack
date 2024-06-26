@@ -47,12 +47,12 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         internal virtual void OnEventObstacleHit(PlayerMaster playerMaster)
         {
-            Debug.Log("Triggou no evento de Acerto");
+            
             EventObstacleHit?.Invoke(playerMaster);
         }
         internal virtual void OnEventObstacleDeath(PlayerMaster playerMaster)
         {
-            Debug.Log("Triggou no evento de Morte");
+        
             AttemptKillObstacle(playerMaster);
             EventObstacleDeath?.Invoke(playerMaster);
         }

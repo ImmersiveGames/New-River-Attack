@@ -9,7 +9,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Strategies
 {
     public class DefaultFinalizeStrategy : IFinalizeStrategy
     {
-        public async Task FinalizeAsync(IBehavior behavior, CancellationToken cancellationToken)
+        /*public async Task FinalizeAsync(IBehavior behavior, CancellationToken cancellationToken)
         {
             DebugManager.Log<DefaultFinalizeStrategy>("Call Finalize");
             if (behavior == null) return;
@@ -52,6 +52,15 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Strategies
                 // Avançar para o próximo sub comportamento
                 behavior.CurrentSubBehaviorIndex++;
             }
+        }*/
+        public Task FinalizeAsync(IBehavior behavior, CancellationToken cancellationToken)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void FinalizeSubBehavior(IBehavior behavior)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

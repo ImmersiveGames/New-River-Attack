@@ -7,7 +7,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Strategies
 {
     public class DefaultUpdateStrategy : IUpdateStrategy
     {
-        public async Task UpdateAsync(IBehavior currentBehavior, BehaviorManager manager, CancellationToken cancellationToken)
+        /*public async Task UpdateAsync(IBehavior currentBehavior, BehaviorManager manager, CancellationToken cancellationToken)
         {
             if (currentBehavior.Initialized && !currentBehavior.Finalized)
             {
@@ -35,6 +35,10 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Strategies
                 // Chamar ExitAsync para finalizar o comportamento atual e seus sub comportamentos
                 await currentBehavior.ExitAsync(cancellationToken).ConfigureAwait(false);
             }
+        }*/
+        public Task UpdateAsync(IBehavior currentBehavior, BehaviorManager manager, CancellationToken cancellationToken)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
