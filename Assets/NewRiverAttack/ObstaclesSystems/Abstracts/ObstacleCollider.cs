@@ -39,6 +39,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             if (other == null || !ObstacleMaster.ObjectIsReady || !ObstacleMaster.objectDefault.canKilled) return;
             var playerWhoHit = WhoHit<PlayerMaster>(other);
             if (playerWhoHit == null) return;
+            ObstacleMaster.OnEventObstacleHit(playerWhoHit);
             var damage = SetDamage(other);
             DebugManager.Log<ObstacleCollider>($"DAMAGE! {damage}, HP {_obstacleHp} - {other}");
             _obstacleHp -= damage;

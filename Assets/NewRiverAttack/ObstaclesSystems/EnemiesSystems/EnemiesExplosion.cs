@@ -18,12 +18,12 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         private void OnEnable()
         {
             SetInitialReferences();
-            _obstacleMaster.EventObstacleHit += ObstacleExplode;
+            _obstacleMaster.EventObstacleDeath += ObstacleExplode;
         }
 
         private void OnDisable()
         {
-            _obstacleMaster.EventObstacleHit -= ObstacleExplode;
+            _obstacleMaster.EventObstacleDeath -= ObstacleExplode;
         }
 
         #endregion

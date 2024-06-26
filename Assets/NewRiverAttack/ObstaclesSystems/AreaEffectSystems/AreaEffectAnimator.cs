@@ -20,7 +20,7 @@ namespace NewRiverAttack.ObstaclesSystems.AreaEffectSystems
             SetInitialReferences();
             _areaEffectMaster.EventMasterAreaEffectEnter += OnFilledUp;
             _areaEffectMaster.EventMasterAreaEffectExit += OffFilledUp;
-            _areaEffectMaster.EventObstacleHit += OffFilledUp;
+            _areaEffectMaster.EventObstacleDeath += OffFilledUp;
             _areaEffectMaster.EventObstacleChangeSkin += SetAnimations;
             _gamePlayManager.EventGameRestart -= OffFilledUp;
         }
@@ -29,7 +29,7 @@ namespace NewRiverAttack.ObstaclesSystems.AreaEffectSystems
         {
             _areaEffectMaster.EventMasterAreaEffectEnter -= OnFilledUp;
             _areaEffectMaster.EventMasterAreaEffectExit -= OffFilledUp;
-            _areaEffectMaster.EventObstacleHit -= OffFilledUp;
+            _areaEffectMaster.EventObstacleDeath -= OffFilledUp;
             _areaEffectMaster.EventObstacleChangeSkin -= SetAnimations;
             _gamePlayManager.EventGameRestart -= OffFilledUp;
         }

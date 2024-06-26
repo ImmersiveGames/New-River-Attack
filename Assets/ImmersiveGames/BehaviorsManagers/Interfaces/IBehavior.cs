@@ -10,6 +10,7 @@ namespace ImmersiveGames.BehaviorsManagers.Interfaces
         string Name { get; }
         bool Initialized { get; set; }
         bool Finalized { get; set; }
+        IBehavior NextBehavior { get; set; }
         IBehavior[] SubBehaviors { get; }
         BehaviorManager SubBehaviorManager { get; set; }
         Task EnterAsync(CancellationToken token);
@@ -17,9 +18,8 @@ namespace ImmersiveGames.BehaviorsManagers.Interfaces
         Task ExitAsync(CancellationToken token);
         IChangeBehaviorStrategy ChangeBehaviorStrategy { get; }
         IUpdateStrategy UpdateStrategy { get; }
-        Task FinalizeAsync(CancellationToken cancellationToken);
         int CurrentSubBehaviorIndex { get; set; }
-        void FinalizeSubBehavior();
+        Task FinalizeAllSubBehavior(CancellationToken cancellationToken);
         void Pause();
         void Resume();
         void Stop();

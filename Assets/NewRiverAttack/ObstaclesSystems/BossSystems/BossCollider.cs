@@ -11,8 +11,9 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         internal override void OnTriggerEnter(Collider other)
         {
             if (other == null || !ObstacleMaster.ObjectIsReady) return;
-            ComponentToKill(other.GetComponentInParent<PlayerMaster>(), EnumCollisionType.Collider);
             base.OnTriggerEnter(other);
+            ComponentToKill(other.GetComponentInParent<PlayerMaster>(), EnumCollisionType.Collider);
+            
         }
     }
 }

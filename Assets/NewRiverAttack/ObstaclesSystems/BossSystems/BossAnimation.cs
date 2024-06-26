@@ -26,15 +26,19 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         {
             SetInitialReferences();
             _bossMaster.EventObstacleChangeSkin += SetAnimations;
+            _bossMaster.EventObstacleHit += AnimateGotHit;
             _gamePlayBossManager.EventEnterBoss += AnimateEmerge;
             _gamePlayManager.EventGameRestart += ResetAnimation;
+            _bossMaster.EventObstacleDeath += AnimateDeath;
         }
 
         private void OnDisable()
         {
             _bossMaster.EventObstacleChangeSkin -= SetAnimations;
+            _bossMaster.EventObstacleHit -= AnimateGotHit;
             _gamePlayBossManager.EventEnterBoss -= AnimateEmerge;
             _gamePlayManager.EventGameRestart -= ResetAnimation;
+            _bossMaster.EventObstacleDeath -= AnimateDeath;
         }
 
         #endregion
@@ -81,10 +85,10 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             _animator.SetTrigger(onGotHit);
         }
 
-        private void AnimateDeath(bool active)
+        private void AnimateDeath(PlayerMaster playerMaster)
         {
             if (_animator == null || string.IsNullOrEmpty(onDeath)) return;
-            _animator.SetBool(onDeath, active);
+            _animator.SetBool(onDeath, true);
         }
 
         private void SmokeBoss(Transform boss)

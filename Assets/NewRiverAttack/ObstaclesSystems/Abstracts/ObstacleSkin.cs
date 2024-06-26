@@ -20,7 +20,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         {
             RemoveSkin();
             SetInitialReferences();
-            ObstacleMaster.EventObstacleHit += DesativeSkin;
+            ObstacleMaster.EventObstacleDeath += DesativeSkin;
             _gamePlayManager.EventGameRestart += RestoreSkin;
         }
 
@@ -31,7 +31,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         protected virtual void OnDisable()
         {
-            ObstacleMaster.EventObstacleHit -= DesativeSkin;
+            ObstacleMaster.EventObstacleDeath -= DesativeSkin;
             _gamePlayManager.EventGameRestart -= RestoreSkin;
         }
 
@@ -78,7 +78,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             _gamePlayManager = GamePlayManager.instance;
         }
 
-        private void DesativeSkin(PlayerMaster playerMaster)
+        protected virtual void DesativeSkin(PlayerMaster playerMaster)
         {
             if (!ObstacleMaster.objectDefault.canKilled) return;
             DesativeSkin();

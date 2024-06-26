@@ -17,12 +17,12 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         protected virtual void OnEnable()
         {
             SetInitialReferences();
-            ObstacleMaster.EventObstacleHit += ExplodeSound;
+            ObstacleMaster.EventObstacleDeath += ExplodeSound;
         }
 
         protected virtual void OnDisable()
         {
-            ObstacleMaster.EventObstacleHit -= ExplodeSound;
+            ObstacleMaster.EventObstacleDeath -= ExplodeSound;
         }
 
         #endregion
@@ -34,7 +34,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         
         private void ExplodeSound(PlayerMaster playerMaster)
         {
-            if (audioExplosion == null || audioExplosion == null) return;
+            if (AudioSource == null || audioExplosion == null) return;
             audioExplosion.PlayOnShot(AudioSource);
         }
     }

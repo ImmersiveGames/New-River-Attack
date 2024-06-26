@@ -84,18 +84,12 @@ namespace ImmersiveGames.BehaviorsManagers
             CurrentBehavior = null;
         }
 
-        // Método para finalizar explicitamente o sub comportamento atual
-        public void FinalizeCurrentSubBehavior()
-        {
-            CurrentBehavior?.FinalizeSubBehavior();
-        }
-
         // Método para finalizar explicitamente o comportamento atual e todos os seus sub comportamentos
         public async Task FinalizeCurrentBehaviorAsync()
         {
             if (CurrentBehavior == null) return;
 
-            await CurrentBehavior.FinalizeAsync(_cancellationTokenSource.Token).ConfigureAwait(false);
+            await CurrentBehavior.FinalizeAllSubBehavior(_cancellationTokenSource.Token).ConfigureAwait(false);
         }
     }
 }

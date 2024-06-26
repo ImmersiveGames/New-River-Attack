@@ -19,12 +19,12 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         private void OnEnable()
         {
             SetInitialReferences();
-            _enemiesMaster.EventObstacleHit += DropItem;
+            _enemiesMaster.EventObstacleDeath += DropItem;
         }
 
         private void OnDisable()
         {
-            _enemiesMaster.EventObstacleHit -= DropItem;
+            _enemiesMaster.EventObstacleDeath -= DropItem;
         }
 
         private void Update()

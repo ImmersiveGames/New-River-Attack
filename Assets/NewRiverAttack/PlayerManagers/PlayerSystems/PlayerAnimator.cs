@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using ImmersiveGames.ShopManagers.ShopProducts;
+﻿using ImmersiveGames.ShopManagers.ShopProducts;
 using NewRiverAttack.PlayerManagers.Tags;
 using UnityEngine;
 

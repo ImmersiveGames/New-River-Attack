@@ -15,14 +15,14 @@ namespace NewRiverAttack.ObstaclesSystems.AreaEffectSystems
         private AreaEffectMaster _areaEffectMaster;
         private GamePlayManager _gamePlayManager;
 
-        #region UNity Methods
+        #region Unity Methods
 
         protected override void OnEnable()
         {
             base.OnEnable();
             _areaEffectMaster.EventMasterAreaEffectEnter += EnterAreaSound;
             _areaEffectMaster.EventMasterAreaEffectExit += StopAreaSound;
-            _areaEffectMaster.EventObstacleHit += StopAreaSound;
+            _areaEffectMaster.EventObstacleDeath += StopAreaSound;
             _gamePlayManager.EventPlayerGetHit += StopAreaSound;
 
         }
@@ -32,7 +32,7 @@ namespace NewRiverAttack.ObstaclesSystems.AreaEffectSystems
             base.OnDisable();
             _areaEffectMaster.EventMasterAreaEffectEnter -= EnterAreaSound;
             _areaEffectMaster.EventMasterAreaEffectExit -= StopAreaSound;
-            _areaEffectMaster.EventObstacleHit -= StopAreaSound;
+            _areaEffectMaster.EventObstacleDeath -= StopAreaSound;
             _gamePlayManager.EventPlayerGetHit -= StopAreaSound;
         }
 

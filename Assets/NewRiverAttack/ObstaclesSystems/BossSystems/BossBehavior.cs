@@ -35,9 +35,15 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             var specificSubBehavior = new SpecificBehavior(Array.Empty<IBehavior>(), this);
 
             var moveNorthBehavior = new MoveNorthBehavior(new IBehavior[] { specificSubBehavior }, this);
+            var moveSouthBehavior = new MoveSouthBehavior(new IBehavior[] { specificSubBehavior }, this);
+            var moveEastBehavior = new MoveEastBehavior(new IBehavior[] { specificSubBehavior }, this);
+            var moveWestBehavior = new MoveWestBehavior(new IBehavior[] { specificSubBehavior }, this);
 
             _behaviorManager.AddBehavior(enterSceneBehavior);
             _behaviorManager.AddBehavior(moveNorthBehavior);
+            _behaviorManager.AddBehavior(moveSouthBehavior);
+            _behaviorManager.AddBehavior(moveEastBehavior);
+            _behaviorManager.AddBehavior(moveWestBehavior);
         }
 
         private async void Update()

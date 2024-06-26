@@ -20,6 +20,7 @@ using NewRiverAttack.LevelBuilder;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.BossSystems;
 using NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours;
+using NewRiverAttack.ObstaclesSystems.BossSystems.Strategies;
 using NewRiverAttack.ObstaclesSystems.BridgeSystems;
 using NewRiverAttack.ObstaclesSystems.CollectibleSystems;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
@@ -129,10 +130,15 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<BehaviorManager>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<Behavior>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<BossBehavior>(DebugManager.DebugLevels.All);
-            DebugManager.SetScriptDebugLevel<GamePlayBossManager>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<GamePlayBossManager>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<EnterSceneBehavior>(DebugManager.DebugLevels.All);
-            DebugManager.SetScriptDebugLevel<MoveNorthBehavior>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<MoveNorthBehavior>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<MoveSouthBehavior>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<MoveEastBehavior>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<MoveWestBehavior>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<SpecificBehavior>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<DefaultFinalizeStrategy>(DebugManager.DebugLevels.All);
+
             
         }
     }

@@ -14,6 +14,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         public delegate void ObstacleGenericHandler();
         public event ObstacleGenericHandler EventObstacleChangeSkin;
         public delegate void ObstacleMasterHandler(PlayerMaster playerMaster);
+        public event ObstacleMasterHandler EventObstacleDeath;
         public event ObstacleMasterHandler EventObstacleHit;
 
         #endregion
@@ -43,13 +44,17 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         protected abstract void TryReSpawn();
 
         #endregion
-        
-        
-        internal void OnEventObstacleDeath(PlayerMaster playerMaster)
+
+        internal virtual void OnEventObstacleHit(PlayerMaster playerMaster)
         {
-            Debug.Log("Triggou no evento");
-            AttemptKillObstacle(playerMaster);
+            Debug.Log("Triggou no evento de Acerto");
             EventObstacleHit?.Invoke(playerMaster);
+        }
+        internal virtual void OnEventObstacleDeath(PlayerMaster playerMaster)
+        {
+            Debug.Log("Triggou no evento de Morte");
+            AttemptKillObstacle(playerMaster);
+            EventObstacleDeath?.Invoke(playerMaster);
         }
 
         internal void OnObstacleChangeSkin()

@@ -9,15 +9,13 @@ using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 {
-    public class MoveNorthBehavior : Behavior
+    public class MoveWestBehavior : Behavior
     {
         private const float DistanceThreshold = 31f; // Exemplo de distância máxima permitida
         private readonly BossBehavior _bossBehavior;
 
-        public bool StopUpdate = false;
-
-        public MoveNorthBehavior(IBehavior[] subBehaviors, BossBehavior bossBehavior)
-            : base(EnumNameBehavior.MoveNorthBehavior.ToString(), subBehaviors,
+        public MoveWestBehavior(IBehavior[] subBehaviors, BossBehavior bossBehavior)
+            : base(EnumNameBehavior.MoveWestBehavior.ToString(), subBehaviors,
                 new DefaultChangeBehaviorStrategy(),
                 new DefaultUpdateStrategy())
         {
@@ -26,13 +24,13 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
         public override async Task EnterAsync(CancellationToken token)
         {
-            DebugManager.Log<MoveNorthBehavior>("Enter MoveNorthBehavior");
+            DebugManager.Log<MoveWestBehavior>("Enter MoveWestBehavior");
             await UnityMainThreadDispatcher.EnqueueAsync(() =>
             {
                 // Verificar se o Boss está ao norte do Player
                 if (_bossBehavior.transform.position.z <= _bossBehavior.PlayerMaster.transform.position.z)
                 {
-                    DebugManager.Log<MoveNorthBehavior>("Boss is not north of the player. Exiting...");
+                    DebugManager.Log<MoveEastBehavior>("Boss is not west of the player. Exiting...");
                     Finalized = true;
                     return Task.CompletedTask;
                 }
@@ -43,21 +41,22 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
         public override async Task UpdateAsync(CancellationToken token)
         {
-            if (IsPaused || token.IsCancellationRequested || Finalized || StopUpdate) return;
+            if (IsPaused || token.IsCancellationRequested || Finalized) return;
 
-            DebugManager.Log<MoveNorthBehavior>("Updating MoveNorthBehavior");
+            DebugManager.Log<MoveWestBehavior>("Updating MoveWestBehavior");
 
             // Verificar a distância do jogador
             var distance = Vector3.Distance(_bossBehavior.transform.position, _bossBehavior.PlayerMaster.transform.position);
-            //DebugManager.Log<MoveNorthBehavior>($"Distance: {distance}");
+            DebugManager.Log<MoveWestBehavior>($"Distance: {distance}");
             
             if (distance > DistanceThreshold)
             {
-                StopUpdate = true;
-                DebugManager.Log<MoveNorthBehavior>("Player is too far. Finalizing...");
-                await ExitAsync(token).ConfigureAwait(false);
+                DebugManager.Log<MoveWestBehavior>("Player is too far. Finalizing...");
+                Finalized = true;
+                //await FinalizeAsync(token).ConfigureAwait(false);
+                return;
             }
-            
+
             // Atualizar sub comportamentos, se houver
             if (SubBehaviors is { Length: > 0 })
             {
@@ -68,20 +67,21 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                     await currentSubBehavior.UpdateAsync(token).ConfigureAwait(false);
                 }
             }
-            
-            
         }
 
         public override async Task ExitAsync(CancellationToken token)
         {
             if (token.IsCancellationRequested || Finalized) return;
-            DebugManager.Log<MoveNorthBehavior>("Exit MoveNorthBehavior");
+
+            DebugManager.Log<MoveWestBehavior>("Exit MoveWestBehavior");
 
             // Chamar FinalizeAsync para garantir que todos os recursos sejam liberados
-            await FinalizeAllSubBehavior(token).ConfigureAwait(false);
+            //await FinalizeAsync(token).ConfigureAwait(false);
+
+            // Marcar como finalizado para evitar múltiplas chamadas
+            Finalized = true;
             
-            DebugManager.Log<MoveNorthBehavior>("Sorteia e Chama aqui");
-            await _bossBehavior.GetBehaviorManager.ChangeBehaviorAsync("MoveSouthBehavior").ConfigureAwait(false);
+            DebugManager.Log<MoveWestBehavior>("Sorteia e Chama aqui");
         }
     }
 }

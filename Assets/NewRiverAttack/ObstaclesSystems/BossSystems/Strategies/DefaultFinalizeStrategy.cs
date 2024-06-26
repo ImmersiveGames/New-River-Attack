@@ -2,6 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using ImmersiveGames.BehaviorsManagers.Interfaces;
+using ImmersiveGames.DebugManagers;
+using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Strategies
 {
@@ -9,6 +11,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Strategies
     {
         public async Task FinalizeAsync(IBehavior behavior, CancellationToken cancellationToken)
         {
+            DebugManager.Log<DefaultFinalizeStrategy>("Call Finalize");
             if (behavior == null) return;
 
             // Finalizar sub comportamentos
@@ -24,6 +27,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Strategies
                     }
                 }
             }
+            DebugManager.Log<DefaultFinalizeStrategy>("Finalize");
 
             // Finalizar o comportamento atual
             behavior.Finalized = true;
