@@ -32,8 +32,10 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _playerMaster.EventPlayerMasterAreaEffectStart += StartFillUp;
             _playerMaster.EventPlayerMasterAreaEffectEnd += EndFillEnd;
         }
-        void Update()
+
+        private void Update()
         {
+            if (_fuel <= 0) return;
             if (_inPowerUp)
             {
                 var lastFillFuel = fillUpFuelCadence * Time.deltaTime;
@@ -53,8 +55,9 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
             // Garante que o combustível não ultrapasse o máximo
             _fuel = Mathf.Clamp(_fuel, 0f, _fuelMax);
-            
-            if (!(_fuel <= 0)) return;
+
+            if (_fuel > 0) return;
+            DebugManager.Log<PlayerFuel>("ACABOUUU");
             _playerMaster.OnEventPlayerMasterGetHit();
             _playerAchievements.LogOutFuel();
         }
@@ -100,6 +103,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private void RestoreFuel()
         {
+            DebugManager.Log<PlayerFuel>("Restore Fuel");
             _fuel = _fuelMax;
             _playerAchievements.LogSpendFuel(_spendFuel);
             _spendFuel = 0;

@@ -42,7 +42,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         {
             await UnityMainThreadDispatcher.EnqueueAsync(() =>
             {
-                var newBehavior = GetRandomNextBehavior(new[] { "MoveNorthBehavior", "MoveWestBehavior", "MoveEastBehavior" });
+                var newBehavior = GetRandomNextBehavior(EnumDirectionBehavior.MoveSouthBehavior, PlayerMaster.transform.position);
                 DebugManager.Log<Behavior>($"Sort New Behavior {Name}");
                 _ = _behaviorManager.ChangeBehaviorAsync(newBehavior);
             }).ConfigureAwait(false);

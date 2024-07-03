@@ -70,9 +70,6 @@ namespace ImmersiveGames.BehaviorsManagers
 
         public async Task UpdateAsync()
         {
-            //Debug.Log($"Current: {CurrentBehavior?.Name}, Initialized: {CurrentBehavior?.Initialized}, Finalized: {CurrentBehavior?.Finalized}");
-            Debug.Log($"Current Sub: {SubBehaviorManager?.CurrentBehavior.Name}, Initialized: {SubBehaviorManager?.CurrentBehavior.Initialized}, Finalized: {SubBehaviorManager?.CurrentBehavior.Finalized}");
-            
             if (CurrentBehavior is not { Initialized: true }) return;
 
             if (!CurrentBehavior.Finalized)

@@ -85,21 +85,21 @@ namespace NewRiverAttack.DebugManagers
             
             
             //Players
-            DebugManager.SetScriptDebugLevel<PlayerMaster>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<PlayerMaster>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<PlayerController>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerSound>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<PlayerSkin>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<PlayerSkin>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<PlayerSkinTrail>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerDistance>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerCollisions>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<PlayerLives>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<PlayerLives>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<UILifeDisplay>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerShoot>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<ObjectShoot>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerBombs>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<Bullets>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<BulletBombPlayer>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<PlayerFuel>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<PlayerFuel>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<UIFuelDisplay>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerPowerUp>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerAreaEffect>(DebugManager.DebugLevels.None);
@@ -127,17 +127,12 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<BossMaster>(DebugManager.DebugLevels.None);
             
             //Behaviors
-            DebugManager.SetScriptDebugLevel<BehaviorManager>(DebugManager.DebugLevels.All);
+            /*DebugManager.SetScriptDebugLevel<BehaviorManager>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<Behavior>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<BossBehavior>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<GamePlayBossManager>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<EnterSceneBehavior>(DebugManager.DebugLevels.All);
-            /*DebugManager.SetScriptDebugLevel<MoveNorthBehavior>(DebugManager.DebugLevels.All);
-            DebugManager.SetScriptDebugLevel<MoveSouthBehavior>(DebugManager.DebugLevels.All);
-            DebugManager.SetScriptDebugLevel<MoveEastBehavior>(DebugManager.DebugLevels.All);
-            DebugManager.SetScriptDebugLevel<MoveWestBehavior>(DebugManager.DebugLevels.All);
-            DebugManager.SetScriptDebugLevel<SpecificBehavior>(DebugManager.DebugLevels.None);*/
-            DebugManager.SetScriptDebugLevel<MoveNorthBehavior>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<MoveNorthBehavior>(DebugManager.DebugLevels.All);*/
 
             
         }
