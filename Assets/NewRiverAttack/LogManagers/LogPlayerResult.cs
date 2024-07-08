@@ -1,5 +1,5 @@
 ﻿using NewRiverAttack.GamePlayManagers;
-using NewRiverAttack.ObstaclesSystems.ObjectsScriptables;
+using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
 
 namespace NewRiverAttack.LogManagers

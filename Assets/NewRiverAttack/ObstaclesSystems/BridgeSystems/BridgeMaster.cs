@@ -1,6 +1,6 @@
 ﻿using NewRiverAttack.LevelBuilder;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
-using NewRiverAttack.ObstaclesSystems.ObjectsScriptables;
+using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 

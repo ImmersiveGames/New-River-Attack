@@ -5,6 +5,7 @@ using ImmersiveGames.BehaviorsManagers;
 using ImmersiveGames.BehaviorsManagers.Interfaces;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.Utils;
+using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 
@@ -12,9 +13,9 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 {
     public class MoveEastBehavior : Behavior
     {
-        private const float MoveDuration = 5f;
-        private const float DistanceOffset = 30f;
-        private const float MinimumEastDistance = 10f; // Distância mínima para considerar ao leste
+        private const float MoveDistance = 20f;
+        
+        private readonly BossMovement _bossMovement;
         private readonly BehaviorManager _behaviorManager;
         private BossBehavior BossBehavior { get; }
         private PlayerMaster PlayerMaster { get; }
@@ -25,6 +26,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             _behaviorManager = behaviorManager;
             BossBehavior = behaviorManager.BossBehavior;
             PlayerMaster = BossBehavior.PlayerMaster;
+            _bossMovement = new BossMovement(BossMovement.Direction.MoveEastBehavior, PlayerMaster.transform);
         }
 
         public override async Task EnterAsync(CancellationToken token)
@@ -33,6 +35,20 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             await base.EnterAsync(token).ConfigureAwait(false);
             
             await Task.Delay(100, token).ConfigureAwait(false);
+            await UnityMainThreadDispatcher.EnqueueAsync(() =>
+            {
+                var myDirection = _bossMovement.GetRelativeDirection(BossBehavior.transform.position);
+                DebugManager.Log<Behavior>($"Estou na direção {myDirection} em relação ao player");
+                if (myDirection != _bossMovement.MyDirection)
+                {
+                    DebugManager.LogWarning<Behavior>($"Estou numa posição diferente preciso me mover");
+                    var newPosition = _bossMovement.GetNewPosition(_bossMovement.MyDirection, MoveDistance);
+                    BossBehavior.transform.position = newPosition;
+                    BossBehavior.BossMaster.OnEventBossEmerge();
+                }
+                
+                return Task.FromResult<Task>(null);
+            }).ConfigureAwait(false);
 
             Initialized = true;
 
@@ -40,13 +56,20 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
         public override async Task ExitAsync(CancellationToken token)
         {
+            var animationTime = 0f;
             await UnityMainThreadDispatcher.EnqueueAsync(() =>
             {
-                var newBehavior = GetRandomNextBehavior(EnumDirectionBehavior.MoveEastBehavior, PlayerMaster.transform.position);
-                DebugManager.Log<Behavior>($"Sort New Behavior {Name}");
-                _ = _behaviorManager.ChangeBehaviorAsync(newBehavior);
+                animationTime = BossBehavior.GetComponent<BossAnimation>().GetSubmergeTime();
+                BossBehavior.BossMaster.OnEventBossSubmerge();
             }).ConfigureAwait(false);
-            await Task.Delay(100, token).ConfigureAwait(false);
+            await Task.Delay((int)animationTime * 1000, token).ConfigureAwait(false);
+            await UnityMainThreadDispatcher.EnqueueAsync(() =>
+            {
+                var newBehavior = _bossMovement.GetRandomDirectionSelfExclude();
+                DebugManager.Log<Behavior>($"Sort New Behavior {Name}");
+                _ = _behaviorManager.ChangeBehaviorAsync(newBehavior.ToString());
+            }).ConfigureAwait(false);
+            
             await base.ExitAsync(token).ConfigureAwait(false);
             
         }

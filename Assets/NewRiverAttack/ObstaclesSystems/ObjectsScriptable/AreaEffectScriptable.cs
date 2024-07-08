@@ -1,7 +1,7 @@
 ﻿using GD.MinMaxSlider;
 using UnityEngine;
 
-namespace NewRiverAttack.ObstaclesSystems.ObjectsScriptables
+namespace NewRiverAttack.ObstaclesSystems.ObjectsScriptable
 {
     [CreateAssetMenu(fileName = "AreaEffect", menuName = "ImmersiveGames/RiverAttack/AreaEffect", order = 203)]
     public class AreaEffectScriptable : ObjectsScriptable

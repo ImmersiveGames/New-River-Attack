@@ -1,5 +1,4 @@
-﻿using NewRiverAttack.ObstaclesSystems.ObjectsScriptables;
-using NewRiverAttack.PlayerManagers.PlayerSystems;
+﻿using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.Abstracts
@@ -7,7 +6,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
     public abstract class ObstacleMaster: ObjectMaster
     {
         [SerializeField]
-        protected internal ObjectsScriptable objectDefault;
+        protected internal ObjectsScriptable.ObjectsScriptable objectDefault;
         public LayerMask layerPlayer;
         
         #region Delagates & Events

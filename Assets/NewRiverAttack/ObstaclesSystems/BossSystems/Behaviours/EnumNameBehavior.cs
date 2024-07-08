@@ -4,11 +4,4 @@
     {
         EnterSceneBehavior, MoveNorthBehavior, MoveSouthBehavior, MoveEastBehavior, MoveWestBehavior
     }
-    public enum EnumDirectionBehavior
-    {
-        MoveNorthBehavior,
-        MoveSouthBehavior,
-        MoveEastBehavior,
-        MoveWestBehavior
-    }
 }

@@ -7,7 +7,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 {
     public class TesteSubs : Behavior
     {
-        public TesteSubs(IBehavior[] subBehaviors, BossBehavior bossBehavior) : base(nameof(TesteSubs), subBehaviors)
+        public TesteSubs(BehaviorManager behaviorManager, IBehavior[] subBehaviors) : base(nameof(TesteSubs), subBehaviors)
         {
             
         }
@@ -23,12 +23,11 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
     }
     public class TesteSubs2 : Behavior
     {
-        public TesteSubs2(IBehavior[] subBehaviors, BossBehavior bossBehavior) : base(nameof(TesteSubs2), subBehaviors)
+        public TesteSubs2(BehaviorManager behaviorManager, IBehavior[] subBehaviors) : base(nameof(TesteSubs2), subBehaviors)
         {
         }
         public override async Task EnterAsync(CancellationToken token)
-        {
-            await base.EnterAsync(token).ConfigureAwait(false);
+        { await base.EnterAsync(token).ConfigureAwait(false);
             
             await Task.Delay(100).ConfigureAwait(false);
 

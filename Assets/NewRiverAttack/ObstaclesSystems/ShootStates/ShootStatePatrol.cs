@@ -2,7 +2,7 @@
 using ImmersiveGames.ObjectManagers.DetectManagers;
 using ImmersiveGames.ObjectManagers.Interfaces;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
-using NewRiverAttack.ObstaclesSystems.ObjectsScriptables;
+using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 

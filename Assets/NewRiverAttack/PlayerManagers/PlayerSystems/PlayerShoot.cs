@@ -64,7 +64,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
                 bulletSpeed = playerMaster.ActualSkin.playerSpeed * playerMaster.ActualSkin.bulletSpeedMultiply;
                 damage = playerMaster.ActualSkin.bulletDamage;
             }
-            MakeBullet(playerMaster, bulletSpeed, damage, bulletLifeTime);
+            MakeBullet(playerMaster, bulletSpeed, damage, bulletLifeTime, Vector3.forward);
         }
 
         private void AttemptShoot(InputAction.CallbackContext obj)

@@ -1,8 +1,9 @@
 ﻿using ImmersiveGames.ObjectManagers.Interfaces;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
-using NewRiverAttack.ObstaclesSystems.ObjectsScriptables;
+using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.ObstaclesSystems.ShootStates;
+using NewRiverAttack.PlayerManagers.Tags;
 using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
@@ -12,7 +13,6 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         private bool _isShoot;
         
         private IShoot _startState;
-        
         private EnemiesMaster _enemiesMaster;
         private EnemiesScriptables _enemies;
         private GamePlayManager _gamePlayManagers;
@@ -65,21 +65,13 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             _gamePlayManagers = GamePlayManager.instance;
             _enemiesMaster = GetComponent<EnemiesMaster>();
             _enemies = _enemiesMaster.objectDefault as EnemiesScriptables;
+            _shootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
         }
 
         internal void UpdateCadenceShoot()
         {
             CadenceShoot = _enemies.cadenceShoot;
-        }
-
-        private void StartShoot()
-        {
-            _isShoot = true;
-        }
-
-        private void StopShoot()
-        {
-            _isShoot = false;
+            _shootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
         }
 
         public override void SetDataBullet(ObjectMaster objectMaster)
@@ -97,7 +89,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
                     damage = enemy.damageShoot;
                 }
             }
-            MakeBullet(enemiesMaster, bulletSpeed, damage, bulletLifeTime);
+            MakeBullet(enemiesMaster, bulletSpeed, damage, bulletLifeTime, Vector3.forward);
         }
 
        
@@ -117,6 +109,16 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         }
         private IShoot GetActualState { get; set; }
         public bool ShouldBeShoot => _isShoot && _enemiesMaster.ObjectIsReady;
+
+        private void StartShoot()
+        {
+            _isShoot = true;
+        }
+
+        public void StopShoot()
+        {
+            _isShoot = false;
+        }
 
         #endregion
         

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NewRiverAttack.ObstaclesSystems.ObjectsScriptables
+namespace NewRiverAttack.ObstaclesSystems.ObjectsScriptable
 {
     [CreateAssetMenu(fileName = "Collectables", menuName = "ImmersiveGames/RiverAttack/Collectables", order = 202)]
     public class CollectibleScriptable : ObjectsScriptable

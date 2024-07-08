@@ -1,7 +1,7 @@
 ﻿using GD.MinMaxSlider;
 using UnityEngine;
 
-namespace NewRiverAttack.ObstaclesSystems.ObjectsScriptables
+namespace NewRiverAttack.ObstaclesSystems.ObjectsScriptable
 {
     [CreateAssetMenu(fileName = "Enemy", menuName = "ImmersiveGames/RiverAttack/Enemies", order = 201)]
     [System.Serializable]

@@ -1,7 +1,7 @@
 ﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ObjectManagers.Interfaces;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
-using NewRiverAttack.ObstaclesSystems.ObjectsScriptables;
+using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.ShootStates

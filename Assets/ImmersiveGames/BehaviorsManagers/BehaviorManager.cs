@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using ImmersiveGames.BehaviorsManagers.Interfaces;
 using ImmersiveGames.DebugManagers;
 using NewRiverAttack.ObstaclesSystems.BossSystems;
-using UnityEngine;
 
 namespace ImmersiveGames.BehaviorsManagers
 {
@@ -14,6 +13,7 @@ namespace ImmersiveGames.BehaviorsManagers
         private readonly CancellationTokenSource _cancellationTokenSource;
         internal readonly BossBehavior BossBehavior;
         private bool _isExitingCurrentBehavior;
+        private bool _isFinalizingSubBehavior;
         internal int CurrentIndex;
 
         private IBehavior CurrentBehavior { get; set; }
@@ -85,11 +85,11 @@ namespace ImmersiveGames.BehaviorsManagers
                 await SubBehaviorManager.CurrentBehavior.UpdateAsync(_cancellationTokenSource.Token).ConfigureAwait(true);
             }
 
-            if (SubBehaviorManager?.CurrentBehavior is { Initialized: true, Finalized: true })
+            if (SubBehaviorManager?.CurrentBehavior is { Initialized: true, Finalized: true } && !_isFinalizingSubBehavior)
             {
+                _isFinalizingSubBehavior = true;
                 DebugManager.Log<BehaviorManager>($"Finalizing Sub via Manager");
                 await FinalizeBehavior(SubBehaviorManager.CurrentBehavior).ConfigureAwait(false);
-                //Aqui precisa verificar se tem um index e adicionar
                 CurrentIndex++;
                 if (CurrentIndex < CurrentBehavior.SubBehaviors.Length)
                 {
@@ -100,6 +100,7 @@ namespace ImmersiveGames.BehaviorsManagers
                 {
                     CurrentBehavior.Finalized = true;
                 }
+                _isFinalizingSubBehavior = false;
             }
 
             if (CurrentBehavior.Finalized && !_isExitingCurrentBehavior)
@@ -125,13 +126,12 @@ namespace ImmersiveGames.BehaviorsManagers
 
         public void StopCurrentBehavior()
         {
-            //_cancellationTokenSource.Cancel();
             CurrentIndex = 0;
             CurrentBehavior.Finalized = true;
         }
+
         public void StopCurrentSubBehavior()
         {
-            //_cancellationTokenSource.Cancel();
             SubBehaviorManager.CurrentBehavior.Finalized = true;
         }
     }

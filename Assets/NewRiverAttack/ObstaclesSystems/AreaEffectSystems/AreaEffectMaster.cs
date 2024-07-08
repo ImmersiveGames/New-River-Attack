@@ -1,6 +1,6 @@
 ﻿using ImmersiveGames.ObjectManagers.Interfaces;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
-using NewRiverAttack.ObstaclesSystems.ObjectsScriptables;
+using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 
 namespace NewRiverAttack.ObstaclesSystems.AreaEffectSystems

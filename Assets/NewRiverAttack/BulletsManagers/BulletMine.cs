@@ -1,17 +1,16 @@
-﻿using ImmersiveGames;
+using ImmersiveGames;
 using ImmersiveGames.AudioEvents;
 using ImmersiveGames.BulletsManagers;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.PoolManagers;
 using ImmersiveGames.PoolManagers.Interface;
 using NewRiverAttack.AudioManagers;
-using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
 using UnityEngine;
 
 namespace NewRiverAttack.BulletsManagers
 {
-    public class BulletEnemies : Bullets, IPoolable
+    public class BulletMine : Bullets, IPoolable
     {
         private float _startTime;
         private const float LimitTime = 0.1f;
@@ -20,38 +19,20 @@ namespace NewRiverAttack.BulletsManagers
         private EnemiesMaster _enemiesMaster;
         private AudioSource _audioSource;
         
-
+        public bool IsPooled { get; private set; } = true;
+        
         #region Unity Methods
-
         private void OnEnable()
         {
             _audioSource = GetComponent<AudioSource>();
             _audioEvent = AudioManager.GetAudioSfxEvent(EnumSfxSound.SfxEnemyShoot);
         }
-
-        private void OnTriggerEnter(Collider collision)
-        {
-            if (collision == null) return;
-            if (collision.GetComponentInParent<ObstacleMaster>() || collision.GetComponent<BulletEnemies>()) return;
-            DestroyMe();
-        }
-        private void FixedUpdate()
-        {
-            MoveShoot();
-            AutoDestroy(_startTime);
-        }
-
         private void OnDisable()
         {
             Invoke(nameof(DestroyMe), LimitTime);
         }
-
         #endregion
-
-        #region Bullets Herance
-        public bool IsPooled { get; private set; } = true;
-        public PoolObject Pool { get; set; }
-
+        
         public override void OnSpawned(Transform spawnPosition, IBulletsData bulletData)
         {
             IsPooled = false;
@@ -61,6 +42,8 @@ namespace NewRiverAttack.BulletsManagers
             _enemiesMaster = bulletData.BulletOwner as EnemiesMaster;
             
         }
+        public PoolObject Pool { get; set; }
+        
         public void OnDespaired()
         {
             DebugManager.Log<Bullets>("Bullet object onDespaired.");
@@ -71,22 +54,6 @@ namespace NewRiverAttack.BulletsManagers
             gameObject.transform.SetAsLastSibling();
             IsPooled = true;
         }
-        #endregion
-
-        private void MoveShoot()
-        {
-            if (_enemiesMaster != null && _enemiesMaster.ObjectIsReady)
-            {
-                var speedy = BulletData.BulletSpeed * Time.deltaTime;
-                var direction = BulletData.BulletDirection;
-                transform.Translate(direction * speedy);
-            }
-            else
-            {
-                DestroyMe();
-            }
-        }
-
         protected override void DestroyMe()
         {
             base.DestroyMe();
