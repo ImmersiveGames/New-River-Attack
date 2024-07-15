@@ -1,5 +1,4 @@
 ﻿using NewRiverAttack.GamePlayManagers;
-using NewRiverAttack.ObstaclesSystems.ObjectsScriptables;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using NewRiverAttack.PlayerManagers.Tags;
 using UnityEngine;
@@ -37,7 +36,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         #endregion
 
-        private void ChangePlayerSkin(ObjectsScriptable enemy, bool random)
+        private void ChangePlayerSkin(ObjectsScriptable.ObjectsScriptable enemy, bool random)
         {
             if (enemy == null || enemy.defaultPrefabSkin.Length <= 0) return;
             var indexSkin = 0;

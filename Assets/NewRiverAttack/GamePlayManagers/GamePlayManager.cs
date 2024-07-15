@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Cinemachine;
 using ImmersiveGames;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.Utils;
@@ -14,14 +13,15 @@ using NewRiverAttack.PlayerManagers.ScriptableObjects;
 using NewRiverAttack.SaveManagers;
 using NewRiverAttack.StateManagers.States;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace NewRiverAttack.GamePlayManagers
 {
     public sealed class GamePlayManager : Singleton<GamePlayManager>
     {
         #region Variáveis
-        
+
+        [Header("Default Layers")]
+        public LayerMask layerEnemies;
         [Header("GameLog"), SerializeField]
         private GamePlayLog gamePlayLog;
         

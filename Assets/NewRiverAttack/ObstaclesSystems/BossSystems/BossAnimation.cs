@@ -27,6 +27,8 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             SetInitialReferences();
             _bossMaster.EventObstacleChangeSkin += SetAnimations;
             _bossMaster.EventObstacleHit += AnimateGotHit;
+            _bossMaster.EventBossEmerge += AnimateEmerge;
+            _bossMaster.EventBossSubmerge += AnimateSubmerge;
             _gamePlayBossManager.EventEnterBoss += AnimateEmerge;
             _gamePlayManager.EventGameRestart += ResetAnimation;
             _bossMaster.EventObstacleDeath += AnimateDeath;
@@ -36,6 +38,8 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         {
             _bossMaster.EventObstacleChangeSkin -= SetAnimations;
             _bossMaster.EventObstacleHit -= AnimateGotHit;
+            _bossMaster.EventBossEmerge -= AnimateEmerge;
+            _bossMaster.EventBossSubmerge -= AnimateSubmerge;
             _gamePlayBossManager.EventEnterBoss -= AnimateEmerge;
             _gamePlayManager.EventGameRestart -= ResetAnimation;
             _bossMaster.EventObstacleDeath -= AnimateDeath;
@@ -79,9 +83,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         private void AnimateGotHit(PlayerMaster playerMaster)
         {
-            Debug.Log("Acertou");
             if (_animator == null || string.IsNullOrEmpty(onGotHit)) return;
-            Debug.Log("Trigger");
             _animator.SetTrigger(onGotHit);
         }
 
@@ -108,6 +110,11 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             {
                 particle.Play();
             }
+        }
+
+        public float GetSubmergeTime()
+        {
+            return Utils.Tools.GetAnimationDuration(_animator, onSubmerge);
         }
 
         private void SetVfxTypes(BossVfxTag[] vfxTags)

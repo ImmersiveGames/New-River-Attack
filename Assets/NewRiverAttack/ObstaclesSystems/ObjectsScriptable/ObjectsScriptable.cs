@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Localization;
 
-namespace NewRiverAttack.ObstaclesSystems.ObjectsScriptables
+namespace NewRiverAttack.ObstaclesSystems.ObjectsScriptable
 {
     public abstract class ObjectsScriptable : ScriptableObject
     {

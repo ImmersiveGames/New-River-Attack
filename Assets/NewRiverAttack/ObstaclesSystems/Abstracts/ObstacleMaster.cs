@@ -1,5 +1,4 @@
-﻿using NewRiverAttack.ObstaclesSystems.ObjectsScriptables;
-using NewRiverAttack.PlayerManagers.PlayerSystems;
+﻿using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.Abstracts
@@ -7,7 +6,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
     public abstract class ObstacleMaster: ObjectMaster
     {
         [SerializeField]
-        protected internal ObjectsScriptable objectDefault;
+        protected internal ObjectsScriptable.ObjectsScriptable objectDefault;
         public LayerMask layerPlayer;
         
         #region Delagates & Events
@@ -47,12 +46,12 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         internal virtual void OnEventObstacleHit(PlayerMaster playerMaster)
         {
-            Debug.Log("Triggou no evento de Acerto");
+            
             EventObstacleHit?.Invoke(playerMaster);
         }
         internal virtual void OnEventObstacleDeath(PlayerMaster playerMaster)
         {
-            Debug.Log("Triggou no evento de Morte");
+        
             AttemptKillObstacle(playerMaster);
             EventObstacleDeath?.Invoke(playerMaster);
         }

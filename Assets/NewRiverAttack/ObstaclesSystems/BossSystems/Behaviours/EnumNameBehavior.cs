@@ -2,6 +2,6 @@
 {
     public enum EnumNameBehavior
     {
-        EnterSceneBehavior, MoveNorthBehavior, MoveSouthBehavior, MoveEastBehavior,MoveWestBehavior
+        EnterSceneBehavior, MoveNorthBehavior, MoveSouthBehavior, MoveEastBehavior, MoveWestBehavior
     }
 }

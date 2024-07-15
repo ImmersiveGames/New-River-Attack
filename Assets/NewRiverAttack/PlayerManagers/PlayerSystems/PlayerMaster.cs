@@ -106,8 +106,9 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void AttemptKillObstacle()
         {
             if (GamePlayManagerRef.IsBossFight) return;
-            IsDisable = true;
             IsDead = true;
+            IsDisable = true;
+            
         }
 
         private void TryReSpawn()
@@ -128,10 +129,10 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
             if (BossController)
             {
+                DebugManager.Log<PlayerMaster>("Try respawn Boss ");
                 Invoke(nameof(RepositionBoss), timeOutRespawnBoss);
                 return;
             }
-
             Invoke(nameof(Reposition), timeoutReSpawn);
         }
 
@@ -147,12 +148,16 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private void RepositionBoss()
         {
+            DebugManager.Log<PlayerMaster>("RepositionBoss Boss ");
             OnEventPlayerMasterRespawn();
+            DebugManager.Log<PlayerMaster>("RepositionBoss OnEventPlayerMasterRespawn");
             Invoke(nameof(ReadyPlayer), timeOutRepositionBoss);
+            
         }
 
         private void ReadyPlayer()
         {
+            DebugManager.Log<PlayerMaster>("ReadyPlayer ");
             OnEventPlayerMasterReady();
             IsDisable = false;
             IsDead = false;
@@ -248,8 +253,8 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         {
             EventPlayerMasterForceExplode?.Invoke();
         }
-
         #endregion
+
 
         
     }

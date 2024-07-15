@@ -59,7 +59,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private void ToggleSkin(bool active)
         {
-            var children = GetComponentInChildren<SkinAttach>();
+            var children = GetComponentInChildren<SkinAttach>(true);
             children.gameObject.SetActive(active);
         }
     }

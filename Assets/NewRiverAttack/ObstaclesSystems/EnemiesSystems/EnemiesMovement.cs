@@ -2,7 +2,7 @@
 using ImmersiveGames.ObjectManagers.Interfaces;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems.MovementStates;
-using NewRiverAttack.ObstaclesSystems.ObjectsScriptables;
+using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.WallsManagers;
 using UnityEngine;
 

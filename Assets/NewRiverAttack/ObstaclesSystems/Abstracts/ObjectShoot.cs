@@ -14,53 +14,64 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         [SerializeField] private int initialPoolSize = 10;
         public bool persistent;
-        private string _poolName;
+        public bool lockAtTarget;
+        
+        public string poolName;
 
         [Header("Bullet Settings")] [SerializeField, Range(0.5f, 4f)]
         protected float bulletLifeTime = 2f;
 
         protected float CadenceShoot;
-        private float _lastActionTime;
+        protected float LastActionTime;
 
         protected BulletData BulletData;
 
         private Transform _poolRoot;
-        private Transform _spawnPoint;
-        private IPoolManager _poolManager;
+        protected Transform SpawnPoint;
+        protected ShootSpawnPoint _shootSpawnPoint;
+        protected IPoolManager PoolManager;
+
+        protected GameObject Bullet;
+        private Transform _target;
+        
 
         #region Unity Methods
 
         private void Awake()
         {
-            _poolName = $"Pool ({gameObject.name})";
+            if(string.IsNullOrEmpty(poolName))
+                poolName = $"Pool ({gameObject.name})";
         }
 
         private void OnDisable()
         {
-            _poolManager = null;
+            PoolManager = null;
         }
 
         #endregion
-
-
+        
         protected virtual void SetInitialReferences()
         {
             DebugManager.Log<ObjectShoot>($"Cria o POOL");
-            _poolManager = null;
-            _poolManager = new PoolObjectManager();
+            PoolManager = null;
+            PoolManager = new PoolObjectManager();
             _poolRoot = transform;
-            _spawnPoint = _poolRoot;
-            _poolManager.CreatePool(_poolName, prefabBullet, initialPoolSize, _poolRoot, persistent);
+            PoolManager.CreatePool(poolName, prefabBullet, initialPoolSize, _poolRoot, persistent);
         }
 
-        protected internal void AttemptShoot(ObjectMaster objectMaster)
+        internal virtual void AttemptShoot(ObjectMaster objectMaster, Transform target = null)
         {
+            _target = target;
             if (!objectMaster.ObjectIsReady) return;
-            var spawn = GetComponentInChildren<ShootSpawnPoint>().transform;
-            _spawnPoint = transform;
-            if (spawn != null && _spawnPoint != spawn)
+            var spawn = _shootSpawnPoint.transform;
+            SpawnPoint = transform;
+            if (spawn != null && SpawnPoint != spawn)
             {
-                _spawnPoint = spawn;
+                SpawnPoint = spawn;
+                if (lockAtTarget && _target != null)
+                {
+                    PointTowardsTarget(SpawnPoint, _target.transform.position);
+                }
             }
 
             var cooldown = CadenceShoot;
@@ -68,7 +79,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             {
                 Fire();
                 DebugManager.Log<ObjectShoot>($"Atira");
-                _lastActionTime = Time.realtimeSinceStartup;
+                LastActionTime = Time.realtimeSinceStartup;
             }
             else
             {
@@ -78,13 +89,28 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         protected virtual void Fire()
         {
-            var bullet = _poolManager.GetObjectFromPool<IPoolable>(_poolName, _spawnPoint, BulletData);
+            Bullet = PoolManager.GetObjectFromPool<IPoolable>(poolName, SpawnPoint, BulletData);
+        }
+
+        private void PointTowardsTarget(Transform spawnPoint, Vector3 target)
+        {
+            // Log antes de mudar a rotação
+            Debug.Log($"SpawnPoint Position Before: {spawnPoint.position}, Rotation Before: {spawnPoint.rotation}");
+
+            // Calcula a direção do vetor entre o spawn point e o alvo
+            var directionToTarget = target - spawnPoint.position;
+
+            // Altera a rotação do spawn point para apontar para o alvo
+            spawnPoint.rotation = Quaternion.LookRotation(directionToTarget);
+
+            // Log depois de mudar a rotação
+            Debug.Log($"SpawnPoint Position After: {spawnPoint.position}, Rotation After: {spawnPoint.rotation}");
         }
 
         public abstract void SetDataBullet(ObjectMaster objectMaster);
 
 
-        protected void MakeBullet(ObjectMaster obstacleMaster, float bulletSpeed, int damage, float lifetime, bool powerUp = false)
+        protected void MakeBullet(ObjectMaster obstacleMaster, float bulletSpeed, int damage, float lifetime , Vector3 direction, bool powerUp = false)
         {
             // Cria os dados da bala
             BulletData = new BulletData
@@ -92,14 +118,15 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
                 BulletDamage = damage,
                 BulletSpeed = bulletSpeed,
                 BulletTimer = lifetime,
+                BulletDirection = direction,
                 BulletPowerUp = false,
                 BulletOwner = obstacleMaster
             };
         }
 
-        private bool IsOnCooldown(float cooldown)
+        protected bool IsOnCooldown(float cooldown)
         {
-            return Time.realtimeSinceStartup - _lastActionTime < cooldown;
+            return Time.realtimeSinceStartup - LastActionTime < cooldown;
         }
     }
 }

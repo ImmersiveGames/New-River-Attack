@@ -7,7 +7,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 {
     public abstract class ObjectMaster: MonoBehaviour
     {
-        protected bool IsDead;
+        protected internal bool IsDead;
         protected internal bool IsDisable;
         private Vector3 _startPosition;
         private Vector3 _startScale;

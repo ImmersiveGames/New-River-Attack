@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace NewRiverAttack.ObstaclesSystems.ObjectsScriptables
+namespace NewRiverAttack.ObstaclesSystems.ObjectsScriptable
 {
     [CreateAssetMenu(fileName = "Bridge", menuName = "ImmersiveGames/RiverAttack/Bridge", order = 204)]
     [System.Serializable]

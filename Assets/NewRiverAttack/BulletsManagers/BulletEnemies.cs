@@ -40,10 +40,6 @@ namespace NewRiverAttack.BulletsManagers
             MoveShoot();
             AutoDestroy(_startTime);
         }
-        private void OnBecameInvisible()
-        {
-            //Invoke(nameof(DestroyMe), LimitTime);
-        }
 
         private void OnDisable()
         {
@@ -82,7 +78,8 @@ namespace NewRiverAttack.BulletsManagers
             if (_enemiesMaster != null && _enemiesMaster.ObjectIsReady)
             {
                 var speedy = BulletData.BulletSpeed * Time.deltaTime;
-                transform.Translate(Vector3.forward * speedy);
+                var direction = BulletData.BulletDirection;
+                transform.Translate(direction * speedy);
             }
             else
             {

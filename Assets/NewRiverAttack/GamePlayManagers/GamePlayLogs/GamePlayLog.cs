@@ -2,7 +2,7 @@
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.Utils;
 using NewRiverAttack.LogManagers;
-using NewRiverAttack.ObstaclesSystems.ObjectsScriptables;
+using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using UnityEngine;
 
 namespace NewRiverAttack.GamePlayManagers.GamePlayLogs

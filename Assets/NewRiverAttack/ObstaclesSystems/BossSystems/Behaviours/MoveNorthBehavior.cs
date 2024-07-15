@@ -4,84 +4,73 @@ using ImmersiveGames.BehaviorsManagers;
 using ImmersiveGames.BehaviorsManagers.Interfaces;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.Utils;
-using NewRiverAttack.ObstaclesSystems.BossSystems.Strategies;
-using UnityEngine;
+using NewRiverAttack.PlayerManagers.PlayerSystems;
+
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 {
     public class MoveNorthBehavior : Behavior
-    {
-        private const float DistanceThreshold = 31f; // Exemplo de distância máxima permitida
-        private readonly BossBehavior _bossBehavior;
+    { 
+        private const float MoveDistance = 25f;
 
-        public bool StopUpdate = false;
+        private readonly BossMovement _bossMovement;
+        
+        private readonly BehaviorManager _behaviorManager;
+        private BossBehavior BossBehavior { get; }
+        private PlayerMaster PlayerMaster { get; }
 
-        public MoveNorthBehavior(IBehavior[] subBehaviors, BossBehavior bossBehavior)
-            : base(EnumNameBehavior.MoveNorthBehavior.ToString(), subBehaviors,
-                new DefaultChangeBehaviorStrategy(),
-                new DefaultUpdateStrategy())
+        public MoveNorthBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors) : base(
+            nameof(MoveNorthBehavior), subBehaviors)
         {
-            _bossBehavior = bossBehavior;
+            _behaviorManager = behaviorManager;
+            BossBehavior = behaviorManager.BossBehavior;
+            PlayerMaster = BossBehavior.PlayerMaster;
+            _bossMovement = new BossMovement(BossMovement.Direction.MoveNorthBehavior, PlayerMaster.transform);
         }
 
         public override async Task EnterAsync(CancellationToken token)
         {
-            DebugManager.Log<MoveNorthBehavior>("Enter MoveNorthBehavior");
+            _behaviorManager.CurrentIndex = 0;
+            await base.EnterAsync(token).ConfigureAwait(false);
+            
+            await Task.Delay(100, token).ConfigureAwait(false);
             await UnityMainThreadDispatcher.EnqueueAsync(() =>
             {
-                // Verificar se o Boss está ao norte do Player
-                if (_bossBehavior.transform.position.z <= _bossBehavior.PlayerMaster.transform.position.z)
+                var myDirection = _bossMovement.GetRelativeDirection(BossBehavior.transform.position);
+                DebugManager.Log<Behavior>($"Estou na direção {myDirection} em relação ao player");
+                if (myDirection != _bossMovement.MyDirection)
                 {
-                    DebugManager.Log<MoveNorthBehavior>("Boss is not north of the player. Exiting...");
-                    Finalized = true;
-                    return Task.CompletedTask;
+                    DebugManager.LogWarning<Behavior>($"Estou numa posição diferente preciso me mover");
+                    var newPosition = _bossMovement.GetNewPosition(_bossMovement.MyDirection, MoveDistance);
+                    BossBehavior.transform.position = newPosition;
+                    BossBehavior.BossMaster.OnEventBossEmerge();
                 }
-                Initialized = true;
-                return Task.CompletedTask;
+                return Task.FromResult<Task>(null);
             }).ConfigureAwait(false);
-        }
-
-        public override async Task UpdateAsync(CancellationToken token)
-        {
-            if (IsPaused || token.IsCancellationRequested || Finalized || StopUpdate) return;
-
-            DebugManager.Log<MoveNorthBehavior>("Updating MoveNorthBehavior");
-
-            // Verificar a distância do jogador
-            var distance = Vector3.Distance(_bossBehavior.transform.position, _bossBehavior.PlayerMaster.transform.position);
-            //DebugManager.Log<MoveNorthBehavior>($"Distance: {distance}");
             
-            if (distance > DistanceThreshold)
-            {
-                StopUpdate = true;
-                DebugManager.Log<MoveNorthBehavior>("Player is too far. Finalizing...");
-                await ExitAsync(token).ConfigureAwait(false);
-            }
-            
-            // Atualizar sub comportamentos, se houver
-            if (SubBehaviors is { Length: > 0 })
-            {
-                var currentSubBehavior = SubBehaviors[CurrentSubBehaviorIndex];
-
-                if (!currentSubBehavior.Finalized)
-                {
-                    await currentSubBehavior.UpdateAsync(token).ConfigureAwait(false);
-                }
-            }
-            
-            
+            Initialized = true;
         }
 
         public override async Task ExitAsync(CancellationToken token)
         {
-            if (token.IsCancellationRequested || Finalized) return;
-            DebugManager.Log<MoveNorthBehavior>("Exit MoveNorthBehavior");
-
-            // Chamar FinalizeAsync para garantir que todos os recursos sejam liberados
-            await FinalizeAllSubBehavior(token).ConfigureAwait(false);
+            var animationTime = 0f;
+     
+            await UnityMainThreadDispatcher.EnqueueAsync(() =>
+            {
+                animationTime = BossBehavior.GetComponent<BossAnimation>().GetSubmergeTime();
+                BossBehavior.BossMaster.OnEventBossSubmerge();
+            }).ConfigureAwait(false);
+            await Task.Delay((int)animationTime * 1000, token).ConfigureAwait(false);
+            await UnityMainThreadDispatcher.EnqueueAsync(() =>
+            {
+                var newBehavior = _bossMovement.GetRandomDirectionSelfExclude();
+                DebugManager.Log<Behavior>($"Sort New Behavior {Name}");
+                _ = _behaviorManager.ChangeBehaviorAsync(newBehavior.ToString());
+            }).ConfigureAwait(false);
             
-            DebugManager.Log<MoveNorthBehavior>("Sorteia e Chama aqui");
-            await _bossBehavior.GetBehaviorManager.ChangeBehaviorAsync("MoveSouthBehavior").ConfigureAwait(false);
+            await base.ExitAsync(token).ConfigureAwait(false);
         }
+
+        
     }
 }

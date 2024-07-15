@@ -1,7 +1,6 @@
 ﻿using ImmersiveGames.CameraManagers;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
-using NewRiverAttack.ObstaclesSystems.ObjectsScriptables;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
     public class EnemiesExplosion: MonoBehaviour
     {
         private ObstacleMaster _obstacleMaster;
-        private ObjectsScriptable _enemy;
+        private ObjectsScriptable.ObjectsScriptable _enemy;
         private GamePlayManager _gamePlayManager;
 
         #region Unity Methods
