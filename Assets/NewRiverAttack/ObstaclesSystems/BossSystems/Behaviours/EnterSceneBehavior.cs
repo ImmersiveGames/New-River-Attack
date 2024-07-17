@@ -18,7 +18,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         private BossBehavior BossBehavior { get; }
         private PlayerMaster PlayerMaster { get; }
 
-        public EnterSceneBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors) : base(nameof(EnterSceneBehavior), subBehaviors)
+        public EnterSceneBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors) : base(subBehaviors)
         {
             _behaviorManager = behaviorManager;
             BossBehavior = behaviorManager.BossBehavior;

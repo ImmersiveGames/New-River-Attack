@@ -83,7 +83,10 @@ namespace NewRiverAttack.BulletsManagers
         {
             if (_bombData.BombRadius == 0) return;
             _timerParam += Time.deltaTime * _bombData.BombRadiusSpeed;
-            CameraShake.ShakeCamera(_bombData.BombShakeForce, _bombData.BombShakeTime);
+            if (CameraShake.Instance != null)
+            {
+                CameraShake.Instance.ShakeCamera(_bombData.BombShakeForce, _bombData.BombShakeTime);
+            }
             HardWereVibration(_bombData.BombMillisecondsVibrate);
             if (!_collider && _collider.GetType() != typeof(SphereCollider))
                 return;

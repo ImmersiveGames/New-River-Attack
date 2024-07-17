@@ -14,7 +14,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         
         private IShoot _startState;
         private EnemiesMaster _enemiesMaster;
-        private EnemiesScriptables _enemies;
+        private EnemiesScriptable _enemies;
         private GamePlayManager _gamePlayManagers;
         #region Unity Methods
         private void OnEnable()
@@ -37,9 +37,9 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         private void Start()
         {
             if (_enemies.GetShootApproach != 0) 
-                _startState = new ShootStatePatrol(this, false);
+                _startState = new EnemyShootStatePatrol(this, false);
             if (_enemies.GetShootApproach == 0) 
-                _startState = new ShootStateShoot(this);
+                _startState = new EnemyShootSimpleState(this);
             
             ChangeState(_startState);
         }
@@ -64,7 +64,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             _isShoot = false;
             _gamePlayManagers = GamePlayManager.instance;
             _enemiesMaster = GetComponent<EnemiesMaster>();
-            _enemies = _enemiesMaster.objectDefault as EnemiesScriptables;
+            _enemies = _enemiesMaster.objectDefault as EnemiesScriptable;
             _shootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
         }
 
@@ -82,7 +82,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             var enemiesMaster = objectMaster as EnemiesMaster;
             if (enemiesMaster != null)
             {
-                var enemy = enemiesMaster.objectDefault as EnemiesScriptables;
+                var enemy = enemiesMaster.objectDefault as EnemiesScriptable;
                 if (enemy != null)
                 {
                     bulletSpeed = enemy.speedShoot;

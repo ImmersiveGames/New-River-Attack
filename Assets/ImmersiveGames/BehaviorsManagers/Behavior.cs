@@ -8,9 +8,13 @@ namespace ImmersiveGames.BehaviorsManagers
     public abstract class Behavior : IBehavior
     {
         private const double MinimumDistance = 10;
-        protected Behavior(string name, IBehavior[] subBehaviors)
+        protected Behavior(IBehavior[] subBehaviors, string identifier = "")
         {
-            Name = name;
+            Name = GetType().Name;
+            if (identifier != "")
+            {
+                Name += "_" + identifier;
+            }
             SubBehaviors = subBehaviors;
         }
 

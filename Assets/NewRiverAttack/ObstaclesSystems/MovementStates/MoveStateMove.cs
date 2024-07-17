@@ -9,7 +9,7 @@ namespace NewRiverAttack.ObstaclesSystems.MovementStates
     public class MoveStateMove : IMove
     {
         private readonly EnemiesMovement _enemiesMovement;
-        private readonly EnemiesScriptables _enemiesScriptables;
+        private readonly EnemiesScriptable _enemiesScriptable;
         private readonly EnemiesMaster _enemiesMaster;
         private EnemiesAnimation _enemiesAnimation;
         private float _speedMovement;
@@ -18,7 +18,7 @@ namespace NewRiverAttack.ObstaclesSystems.MovementStates
         public MoveStateMove(EnemiesMovement enemiesMovement)
         {
             _enemiesMovement = enemiesMovement;
-            _enemiesScriptables = _enemiesMovement.GetEnemySettings;
+            _enemiesScriptable = _enemiesMovement.GetEnemySettings;
             _enemiesMaster = _enemiesMovement.GetComponent<EnemiesMaster>();
         }
         public void EnterState()
@@ -56,9 +56,9 @@ namespace NewRiverAttack.ObstaclesSystems.MovementStates
         private void Move(Transform objMove, Vector3 direction, float velocity)
         {
             var curveValue = 1f;
-            if (_enemiesScriptables.animationCurve != null && _enemiesScriptables.animationDuration != 0)
+            if (_enemiesScriptable.animationCurve != null && _enemiesScriptable.animationDuration != 0)
             {
-                curveValue = MoveCurveAnimation(_enemiesScriptables.animationDuration, _enemiesScriptables.animationCurve);
+                curveValue = MoveCurveAnimation(_enemiesScriptable.animationDuration, _enemiesScriptable.animationCurve);
             }
             //Debug.Log("MOVE:" + curveValue);
             objMove.Translate(direction * (curveValue * (velocity * Time.deltaTime)));

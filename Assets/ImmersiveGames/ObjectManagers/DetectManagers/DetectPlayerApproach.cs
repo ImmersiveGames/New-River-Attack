@@ -4,12 +4,17 @@ namespace ImmersiveGames.ObjectManagers.DetectManagers
 {
     public class DetectPlayerApproach
     {
-        private readonly Vector3 _positionReference;
+        private Vector3 _positionReference;
         private readonly float _detectDistance;
         public DetectPlayerApproach(Vector3 refPosition, float patrolDistance)
         {
             _positionReference = refPosition;
             _detectDistance = patrolDistance;
+        }
+
+        public void UpdatePosition(Vector3 refPosition)
+        {
+            _positionReference = refPosition;
         }
         public Transform TargetApproach<T>(LayerMask targetLayer, int maxColliders = 3)
         {

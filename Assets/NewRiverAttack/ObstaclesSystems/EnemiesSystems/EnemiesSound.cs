@@ -7,7 +7,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 {
     public class EnemiesSound : MonoBehaviour
     {
-        [SerializeField] private AudioEvent audioExplosion;
+        [SerializeField] protected AudioEvent audioExplosion;
 
         protected ObstacleMaster ObstacleMaster;
         protected AudioSource AudioSource;

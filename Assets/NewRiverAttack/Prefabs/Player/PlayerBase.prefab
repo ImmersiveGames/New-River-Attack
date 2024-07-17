@@ -211,6 +211,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   godMode: 0
   timeoutReSpawn: 2
+  timeOutRespawnBoss: 1.5
+  timeOutRepositionBoss: 0.5
 --- !u!114 &6785691657528370336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,8 +227,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   multiplyAccelerate: 2
   multiplyDecelerate: 0.5
-  bossAreaX: {x: -70, y: 65}
-  bossAreaZ: {x: 15, y: 100}
 --- !u!114 &-8530567676733249129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +356,8 @@ MonoBehaviour:
     type: 3}
   initialPoolSize: 10
   persistent: 0
+  lockAtTarget: 0
+  poolName: 
   bulletLifeTime: 2
   cadenceDivider: 3
 --- !u!114 &-4252355936134993777
@@ -377,7 +379,7 @@ MonoBehaviour:
   radiusSize: 10
   radiusSpeed: 0.7
   shakeForce: 5
-  shakeTime: 0.15
+  shakeTime: 0.022
   millisecondsVibrate: 500
 --- !u!114 &3107391673226569144
 MonoBehaviour:

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using Cinemachine;
+using NewRiverAttack.ObstaclesSystems;
 using UnityEngine;
-using UnityEngine.Localization.Settings;
-using UnityEngine.Localization.Tables;
+using Random = UnityEngine.Random;
 
 namespace ImmersiveGames.Utils
 {
@@ -219,6 +217,26 @@ namespace ImmersiveGames.Utils
 
             // Verificar se ambos os conjuntos são iguais
             return hashSet.SetEquals(other);
+        }
+        public static GameObject GetRandomDrop(EnemyDropData[] items)
+        {
+            // Calcular a soma total das chances
+            var totalChance = items.Aggregate(0, (current, item) => (current + item.dropChance));
+
+            // Gerar um número aleatório entre 0 e a soma total das chances
+            var randomValue = Random.Range(0, totalChance);
+
+            // Percorrer os itens e retornar o item cujo intervalo contém o valor aleatório
+            var cumulativeChance = 0;
+            foreach (var item in items)
+            {
+                cumulativeChance += item.dropChance;
+                if (randomValue < cumulativeChance)
+                {
+                    return item.prefabPowerUp;
+                }
+            }
+            return null;
         }
     }
     

@@ -21,7 +21,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         private PlayerMaster PlayerMaster { get; }
 
         public MoveSouthBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors)
-            : base(nameof(MoveSouthBehavior), subBehaviors)
+            : base(subBehaviors)
         {
             _behaviorManager = behaviorManager;
             BossBehavior = behaviorManager.BossBehavior;

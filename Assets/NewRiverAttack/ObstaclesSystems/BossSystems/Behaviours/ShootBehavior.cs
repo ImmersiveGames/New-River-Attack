@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using ImmersiveGames.BehaviorsManagers;
 using ImmersiveGames.BehaviorsManagers.Interfaces;
@@ -10,12 +9,13 @@ using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 {
-    public class ShootBehavior : Behavior
+    public abstract class ShootBehavior : Behavior
     {
         private BossBehavior BossBehavior { get; }
         private readonly BossShoot _bossShoot;
         private PlayerMaster PlayerMaster { get; }
-        public ShootBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors) : base(nameof(ShootBehavior), subBehaviors)
+
+        protected ShootBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors) : base(subBehaviors, "1")
         {
             BossBehavior = behaviorManager.BossBehavior;
             PlayerMaster = behaviorManager.BossBehavior.PlayerMaster;

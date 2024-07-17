@@ -10,7 +10,7 @@ namespace NewRiverAttack.ObstaclesSystems.MovementStates
     {
         private readonly EnemiesMovement _enemiesMovement;
         private readonly EnemiesMaster _enemiesMaster;
-        private readonly EnemiesScriptables _enemiesScriptables;
+        private readonly EnemiesScriptable _enemiesScriptable;
         private EnemiesAnimation _enemiesAnimation;
         
         public float SpeedMovement;
@@ -21,15 +21,15 @@ namespace NewRiverAttack.ObstaclesSystems.MovementStates
         {
             _enemiesMovement = enemiesMovement;
             _enemiesMaster = _enemiesMovement.GetComponent<EnemiesMaster>();
-            _enemiesScriptables = _enemiesMovement.GetEnemySettings;
+            _enemiesScriptable = _enemiesMovement.GetEnemySettings;
             SpeedMovement = 0;
         }
 
         public void EnterState()
         {
             DebugManager.Log<EnemiesMovement>($" Entrando no Estado: HOLD");
-            _hasApproach = _enemiesScriptables.approachMovement.x != 0 &&
-                           _enemiesScriptables.approachMovement.y != 0;
+            _hasApproach = _enemiesScriptable.approachMovement.x != 0 &&
+                           _enemiesScriptable.approachMovement.y != 0;
             _enemiesAnimation = _enemiesMovement.GetComponent<EnemiesAnimation>();
             _enemiesAnimation.AnimationMove(false);
             _inTransition = false;

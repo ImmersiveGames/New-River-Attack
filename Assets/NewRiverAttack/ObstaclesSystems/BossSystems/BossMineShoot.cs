@@ -6,7 +6,6 @@ using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.BossSystems.Abstracts;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems
 {
@@ -32,7 +31,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         private int _actualMines;
         private void Awake()
         {
-            poolName = $"Pool ({nameof(BossMissileShoot)})";
+            poolName = $"Pool ({nameof(BossMineShoot)})";
             _camera = Camera.main;
             SpawnPoint = new GameObject().transform;
             SpawnPoint.name = "MinesSpawnPoint";
@@ -87,11 +86,8 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             SpawnPoint.position = transform.position;
             var randomPosition = new Vector3(posX, OffsetY, posZ);
             
-            DebugManager.Log<ObjectShoot>($"Position {randomPosition}");
             SpawnPoint.position += randomPosition;
             
-            //Todo: Toca o Som.
-            //Get projetil transforma as propriedades por BulletData
             Bullet = PoolManager.GetObjectFromPool<IPoolable>(poolName, SpawnPoint, BulletData);
         }
 

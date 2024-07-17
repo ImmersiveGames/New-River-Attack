@@ -13,12 +13,20 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
     {
         private BossBehavior BossBehavior { get; }
         private readonly BossShoot _bossShoot;
+        private readonly object[] _dataShoot;
+        private BossMissileShoot _bossMissileShoot;
+        private static string identifier;
         private PlayerMaster PlayerMaster { get; }
-        public MissileBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors) : base(nameof(MissileBehavior), subBehaviors)
+        
+        // Parametro 0 = Numero de misseis
+        // Parametro 1 = angulo de misseis
+        // Parametro 1 = cycles
+        public MissileBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors, params object[] data) : base(subBehaviors, string.Join("_", data))
         {
             BossBehavior = behaviorManager.BossBehavior;
             PlayerMaster = BossBehavior.PlayerMaster;
             _bossShoot = BossBehavior.GetComponent<BossMissileShoot>();
+            _dataShoot = data;
         }
         public override async Task EnterAsync(CancellationToken token)
         {
@@ -27,6 +35,12 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             await Task.Delay(100, token).ConfigureAwait(false);
             await UnityMainThreadDispatcher.EnqueueAsync(() =>
             {
+                _bossMissileShoot= _bossShoot as BossMissileShoot;
+                var numMissiles = (int)(_dataShoot[0] ?? 5);
+                var angleCones = (float)(_dataShoot[1] ?? 90f);
+                var numCycles = (int)(_dataShoot[2] ?? 3);
+                if (_bossMissileShoot != null) 
+                    _bossMissileShoot.SetMissiles(numMissiles, angleCones,numCycles);
                 _bossShoot.SetDataBullet(BossBehavior.BossMaster);
                 _bossShoot.UpdateCadenceShoot();
                 _bossShoot.StartShoot();
@@ -41,10 +55,10 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             await base.UpdateAsync(token).ConfigureAwait(false);
             await UnityMainThreadDispatcher.EnqueueAsync(() =>
             {
-                if (_bossShoot && _bossShoot.ShouldBeShoot)
-                {
-                    _bossShoot.AttemptShoot(BossBehavior.BossMaster, PlayerMaster.transform);
-                }
+                if (!_bossShoot || !_bossShoot.ShouldBeShoot) return;
+                _bossShoot.AttemptShoot(BossBehavior.BossMaster, PlayerMaster.transform);
+                if (!_bossMissileShoot.EndCycle) return;
+                Finalized = true;
             }).ConfigureAwait(false);
             
         }

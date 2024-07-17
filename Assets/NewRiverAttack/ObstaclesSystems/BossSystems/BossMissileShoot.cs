@@ -9,20 +9,25 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
     {
         [SerializeField] private int numMissiles = 5;
         [SerializeField] private float angleCones = 90;
+        [SerializeField] private int maxCycles = 3;
+
+        private int _actualCycles;
 
         private void Awake()
         {
             poolName = $"Pool ({nameof(BossMissileShoot)})";
             angleCones = angleCones <= 15 ? 15 : angleCones;
+            _actualCycles = maxCycles;
         }
 
-        public void SetMissiles(int numMissile, float angle)
+        public void SetMissiles(int numMissile, float angle, int cycles)
         {
             numMissiles = numMissile;
             angleCones = angle <= 15 ? 15 : angle;
+            _actualCycles = cycles <= 0 ? maxCycles : cycles;
         }
 
-
+        public bool EndCycle => _actualCycles <= 0;
         protected override void Fire()
         {
             var bossPosition = SpawnPoint.transform.position;
@@ -32,10 +37,10 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             {
                 base.Fire();
                 var bulletData = Bullet.GetComponent<Bullets>().GetBulletData;
-                bulletData.BulletDirection = t;
-                //Debug.Log($"Firing bullet with direction: {t.normalized}");
-                //Debug.Log($"SpawnPoint Position: {_spawnPoint.position}, Rotation: {_spawnPoint.rotation}");
+                if(bulletData != null)
+                    bulletData.BulletDirection = t;
             }
+            _actualCycles--;
         }
 
         private static IEnumerable<Vector3> ConeDirections(Vector3 targetDirection, int numMissile, float angleCone)

@@ -4,6 +4,7 @@ using ImmersiveGames.ShopManagers.ShopProducts;
 using NewRiverAttack.GamePlayManagers.GamePlayLogs;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.CollectibleSystems.PowerUpSystems;
+using NewRiverAttack.PlayerManagers.Tags;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -49,6 +50,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void UpdateCadenceShoot(ShopProductSkin shopProductSkin)
         {
             CadenceShoot = shopProductSkin.cadenceShoot;
+            _shootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
         }
 
         public override void SetDataBullet(ObjectMaster objectMaster)

@@ -8,9 +8,9 @@ using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 {
-    public class EnemiesMovement : MonoBehaviour
+    public sealed class EnemiesMovement : MonoBehaviour
     {
-        protected float _moveVelocity;
+        private float _moveVelocity;
         private enum Directions { None, Forward, Back, Up, Right, Down, Left, Free }
         [SerializeField] private Directions startDirection;
         [SerializeField] private Vector3 freeVectorDirection;
@@ -18,10 +18,10 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         private IMove _startState;
         
         private Vector3 _directionVector;
-        protected EnemiesMaster _enemiesMaster;
-        protected EnemiesScriptables _enemiesScriptables;
-        protected EnemiesAnimation _enemiesAnimation;
-        protected GamePlayManager _gamePlayManagers;
+        private EnemiesMaster _enemiesMaster;
+        private EnemiesScriptable _enemiesScriptable;
+        private EnemiesAnimation _enemiesAnimation;
+        private GamePlayManager _gamePlayManagers;
 
         #region Unity Methods
 
@@ -39,17 +39,17 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         private void Start()
         {
             _startState = new MoveStateHold(this);
-            if (_enemiesScriptables.GetMoveApproach != 0) _startState = new MoveStatePatrol(this);
-            if (_enemiesScriptables.GetMoveApproach == 0 && _enemiesScriptables.moveVelocity != 0) _startState = new MoveStateMove(this);
+            if (_enemiesScriptable.GetMoveApproach != 0) _startState = new MoveStatePatrol(this);
+            if (_enemiesScriptable.GetMoveApproach == 0 && _enemiesScriptable.moveVelocity != 0) _startState = new MoveStateMove(this);
 
             ChangeState(_startState);
         }
 
         void OnTriggerEnter(Collider other)
         {
-            if (other == null || !_enemiesMaster.ObjectIsReady || (_enemiesScriptables.ignoreWalls && _enemiesScriptables.ignoreEnemies) ) return;
-            var enemies = _enemiesScriptables.ignoreEnemies ? null : other.GetComponentInParent<EnemiesMaster>();
-            var wall = _enemiesScriptables.ignoreWalls ? null : other.GetComponentInParent<WallMaster>();
+            if (other == null || !_enemiesMaster.ObjectIsReady || (_enemiesScriptable.ignoreWalls && _enemiesScriptable.ignoreEnemies) ) return;
+            var enemies = _enemiesScriptable.ignoreEnemies ? null : other.GetComponentInParent<EnemiesMaster>();
+            var wall = _enemiesScriptable.ignoreWalls ? null : other.GetComponentInParent<WallMaster>();
             if (enemies == null && wall == null) return;
             _enemiesAnimation.AnimationFlip();
             _directionVector *= -1;
@@ -73,12 +73,12 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             _gamePlayManagers = GamePlayManager.instance;
             _enemiesMaster = GetComponent<EnemiesMaster>();
             _enemiesAnimation = GetComponent<EnemiesAnimation>();
-            _enemiesScriptables = _enemiesMaster.GetEnemySettings;
-            _moveVelocity = _enemiesScriptables.moveVelocity;
+            _enemiesScriptable = _enemiesMaster.GetEnemySettings;
+            _moveVelocity = _enemiesScriptable.moveVelocity;
         }
 
         public bool ShouldBeMove => _moveVelocity != 0 && _enemiesMaster.ObjectIsReady;
-        public EnemiesScriptables GetEnemySettings => _enemiesScriptables;
+        public EnemiesScriptable GetEnemySettings => _enemiesScriptable;
         
         private void SetVelocity(float defaultSpeed)
         {
@@ -89,7 +89,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         private void ResetMovement()
         {
             _directionVector = SetDirection(startDirection);
-            SetVelocity(_enemiesScriptables.moveVelocity);
+            SetVelocity(_enemiesScriptable.moveVelocity);
             ChangeState(_startState);
         }
         
@@ -131,10 +131,11 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 
         #region Gizmos
 #if UNITY_EDITOR
-        protected Vector2 _gizmoRadius;
+        private Vector2 _gizmoRadius;
         [Header("Gizmos Settings")]
         public Color gizmoColor = new Color(0, 0, 250, 150);
-        protected virtual void OnDrawGizmos()
+
+        private void OnDrawGizmos()
         {
             var em = GetComponent<EnemiesMaster>();
             _gizmoRadius = em.GetEnemySettings.approachMovement;

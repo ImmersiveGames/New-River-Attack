@@ -19,10 +19,8 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         [SerializeField, Range(1f,15f)] private float radiusSize;
         [SerializeField, Range(0.1f, 2f)] private float radiusSpeed;
         [SerializeField, Range(1f,10f)] private float shakeForce;
-        [SerializeField, Range(0.1f,1f)] private float shakeTime;
+        [SerializeField, Range(0.01f,0.1f)] private float shakeTime;
         [SerializeField, Range(100,1000)] private long millisecondsVibrate;
-
-        private int _bomb;
 
         private BombData _bombData;
         private PlayerMaster _playerMaster;
@@ -70,30 +68,31 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private void InitializeBombs(int indexPlayer, PlayersDefaultSettings defaultSettings)
         {
-            _bomb = defaultSettings.startBombs;
-            _gamePlayManager.OnEventHudBombUpdate(_bomb, _playerMaster.PlayerIndex);
+            GetBomb = defaultSettings.startBombs;
+            _gamePlayManager.OnEventHudBombUpdate(GetBomb, _playerMaster.PlayerIndex);
         }
 
         private void AttemptBomb(InputAction.CallbackContext obj)
         {
-            if (!_playerMaster.ObjectIsReady || _bomb <= 0) return;
+            if (!_playerMaster.ObjectIsReady || GetBomb <= 0) return;
             DebugManager.Log<PlayerBombs>($"Disparar bomba");
             UseBomb();
         }
 
         private void UseBomb()
         {
-            _bomb -= 1;
-            if (_bomb < 0) _bomb = 0;
+            GetBomb -= 1;
+            if (GetBomb < 0) GetBomb = 0;
             var bomb = Instantiate(prefabBomb);
             var bombPlayer = bomb.GetComponent<BulletBombPlayer>();
             bombPlayer.OnSpawned(transform, _bombData);
-            _gamePlayManager.OnEventHudBombUpdate(_bomb, _playerMaster.PlayerIndex);
+            _gamePlayManager.OnEventHudBombUpdate(GetBomb, _playerMaster.PlayerIndex);
             LogGamePlay(1);
         }
 
-        public int GetBomb => _bomb;
-        public int GetMaxBomb => _bomb;
+        public int GetBomb { get; private set; }
+
+        public int GetMaxBomb => GetBomb;
         private void LogGamePlay(int bomb)
         {
             GamePlayLog.instance.playersBombs += bomb;
@@ -104,8 +103,8 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void PowerUpAddBomb(ActivePowerUp activePowerUp)
         {
             if (activePowerUp.PowerUpData.powerUpType != PowerUpTypes.Bomb) return;
-            _bomb += 1;
-            _gamePlayManager.OnEventHudBombUpdate(_bomb, _playerMaster.PlayerIndex);
+            GetBomb += 1;
+            _gamePlayManager.OnEventHudBombUpdate(GetBomb, _playerMaster.PlayerIndex);
         }
 
         #endregion

@@ -101,10 +101,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1400035842080368023}
-    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: -3452443266293440661}
     - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
@@ -117,28 +113,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4780557932321413636}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1400035842080368023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3351906142001725201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3bf73c5f17c4f9f87f1183b31ef2c5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabBullet: {fileID: 3329594399931092120, guid: 31e9d801e8c0e254796f9e40eaab3840,
-    type: 3}
-  initialPoolSize: 10
-  persistent: 0
-  lockAtTarget: 1
-  poolName: 
-  bulletLifeTime: 3
-  speedShoot: 20
-  damageShoot: 1
-  cadenceShoot: 1
 --- !u!114 &-3452443266293440661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabBullet: {fileID: 1678599070653623651, guid: 3c74fc8416c495444b1c82ceef276d19,
     type: 3}
-  initialPoolSize: 25
+  initialPoolSize: 30
   persistent: 0
   lockAtTarget: 1
   poolName: 
@@ -163,6 +137,7 @@ MonoBehaviour:
   cadenceShoot: 1
   numMissiles: 5
   angleCones: 90
+  maxCycles: 3
 --- !u!114 &-6754764738268101092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a4fbdff2d0f4efba7b4e30d1b9e0b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabBullet: {fileID: 1539981423979474017, guid: d27c41bed8409114daad6a53221b3a45,
+  prefabBullet: {fileID: 3926336138218741227, guid: e2ee9b9e816edbe4ab423fff2b1d9ba4,
     type: 3}
   initialPoolSize: 12
   persistent: 0

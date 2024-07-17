@@ -82,7 +82,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             if (!ObstacleMaster.objectDefault.canKilled) return;
             DesativeSkin();
         }
-        protected void DesativeSkin()
+        internal void DesativeSkin()
         {
             _skin.SetActive(false);
         }

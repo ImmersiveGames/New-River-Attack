@@ -8,18 +8,18 @@ using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.ShootStates
 {
-    public class ShootStatePatrol : IShoot
+    public class EnemyShootStatePatrol : IShoot
     {
         private Transform _target;
         
         private readonly EnemiesShoot _enemiesShoot;
         private EnemiesMaster _enemiesMaster;
-        private EnemiesScriptables _enemies;
+        private EnemiesScriptable _enemies;
         private bool _inTransition;
         
         private float _approachRange;
         private DetectPlayerApproach _detectPlayerApproach;
-        public ShootStatePatrol(EnemiesShoot enemiesShoot, bool inTransition)
+        public EnemyShootStatePatrol(EnemiesShoot enemiesShoot, bool inTransition)
         {
             _enemiesShoot = enemiesShoot;
             _inTransition = inTransition;
@@ -41,7 +41,7 @@ namespace NewRiverAttack.ObstaclesSystems.ShootStates
             DebugManager.Log<EnemiesShoot>($" Atualizando o Estado: Patrol");
             _target = _detectPlayerApproach.TargetApproach<PlayerMaster>(_enemiesMaster.layerPlayer);
             if (_inTransition || !_target) return;
-            _enemiesShoot.ChangeState(new ShootStateShoot(_enemiesShoot));
+            _enemiesShoot.ChangeState(new EnemyShootSimpleState(_enemiesShoot));
             DebugManager.Log<EnemiesMovement>($" Target: {_target}");
         }
 

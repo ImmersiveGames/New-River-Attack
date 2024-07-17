@@ -94,17 +94,12 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         private void PointTowardsTarget(Transform spawnPoint, Vector3 target)
         {
-            // Log antes de mudar a rotação
-            Debug.Log($"SpawnPoint Position Before: {spawnPoint.position}, Rotation Before: {spawnPoint.rotation}");
-
             // Calcula a direção do vetor entre o spawn point e o alvo
             var directionToTarget = target - spawnPoint.position;
 
             // Altera a rotação do spawn point para apontar para o alvo
             spawnPoint.rotation = Quaternion.LookRotation(directionToTarget);
-
-            // Log depois de mudar a rotação
-            Debug.Log($"SpawnPoint Position After: {spawnPoint.position}, Rotation After: {spawnPoint.rotation}");
+            
         }
 
         public abstract void SetDataBullet(ObjectMaster objectMaster);

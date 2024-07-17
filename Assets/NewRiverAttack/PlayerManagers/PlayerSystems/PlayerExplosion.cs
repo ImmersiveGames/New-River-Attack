@@ -43,7 +43,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         }
         private void PlayerExplode()
         {
-            CameraShake.ShakeCamera(shakeIntensity,shakeTime);
+            //CameraShake.ShakeCamera(shakeIntensity,shakeTime);
             if (_playerMaster.BossController) return;
             
             _playerMaster.OnEventPlayerMasterToggleSkin(false);
@@ -52,7 +52,10 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         }
         private void PlayerForceExplode()
         {
-            CameraShake.ShakeCamera(shakeIntensity,shakeTime);
+            if (CameraShake.Instance != null)
+            {
+                CameraShake.Instance.ShakeCamera(shakeIntensity, shakeTime);
+            }
             _playerMaster.OnEventPlayerMasterToggleSkin(false);
             var go = Instantiate(deadParticlePrefab, transform);
             Destroy(go, timeoutDestroyExplosion);

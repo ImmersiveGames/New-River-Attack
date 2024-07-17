@@ -5,7 +5,7 @@ namespace NewRiverAttack.ObstaclesSystems.ObjectsScriptable
 {
     [CreateAssetMenu(fileName = "Enemy", menuName = "ImmersiveGames/RiverAttack/Enemies", order = 201)]
     [System.Serializable]
-    public class EnemiesScriptables : ObjectsScriptable
+    public class EnemiesScriptable : ObjectsScriptable
     {
         [Header("Movement Settings")] [Range(0, 50)]
         public float moveVelocity;
@@ -29,7 +29,6 @@ namespace NewRiverAttack.ObstaclesSystems.ObjectsScriptable
         public float dropItemChances = 0.25f;
 
         public EnemyDropData[] dropItems;
-
         
         public float GetMoveApproach
         {

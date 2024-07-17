@@ -13,7 +13,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         private BossBehavior BossBehavior { get; }
         private readonly BossShoot _bossShoot;
         private PlayerMaster PlayerMaster { get; }
-        public MineBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors) : base(nameof(MineBehavior), subBehaviors)
+        public MineBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors) : base(subBehaviors, "1")
         {
             BossBehavior = behaviorManager.BossBehavior;
             PlayerMaster = BossBehavior.PlayerMaster;

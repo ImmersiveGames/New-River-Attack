@@ -36,7 +36,10 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         private void ObstacleExplode(PlayerMaster playerMaster)
         {
             if(!_enemy.canKilled) return;
-            CameraShake.ShakeCamera(_enemy.shakeIntensity,_enemy.shakeTime);
+            if (CameraShake.Instance != null)
+            {
+                CameraShake.Instance.ShakeCamera(_enemy.shakeIntensity, _enemy.shakeTime);
+            }
             var go = Instantiate(_enemy.deadParticlePrefab, transform);
             go.transform.localScale = new Vector3(_enemy.explodeSize,_enemy.explodeSize,_enemy.explodeSize);
             Destroy(go, _enemy.timeoutDestroy);

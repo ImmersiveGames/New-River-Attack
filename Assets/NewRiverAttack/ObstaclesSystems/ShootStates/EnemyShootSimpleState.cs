@@ -6,13 +6,13 @@ using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.ShootStates
 {
-    public class ShootStateShoot : IShoot
+    public class EnemyShootSimpleState : IShoot
     {
         private readonly EnemiesShoot _enemiesShoot;
         private EnemiesMaster _enemiesMaster;
-        private EnemiesScriptables _enemies;
+        private EnemiesScriptable _enemies;
         private bool _inTransition;
-        public ShootStateShoot(EnemiesShoot enemiesShoot)
+        public EnemyShootSimpleState(EnemiesShoot enemiesShoot)
         {
             _enemiesShoot = enemiesShoot;
             
@@ -32,7 +32,7 @@ namespace NewRiverAttack.ObstaclesSystems.ShootStates
             DebugManager.Log<EnemiesShoot>($" Atualizando o Estado: Shoot");
             if (_inTransition) return;
             if(!_enemiesShoot.ShouldBeShoot)
-                _enemiesShoot.ChangeState(new ShootStatePatrol(_enemiesShoot, false));
+                _enemiesShoot.ChangeState(new EnemyShootStatePatrol(_enemiesShoot, false));
             else
                 _enemiesShoot.AttemptShoot(_enemiesMaster);
         }
