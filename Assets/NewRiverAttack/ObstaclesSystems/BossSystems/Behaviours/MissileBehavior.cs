@@ -46,26 +46,31 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 _bossShoot.StartShoot();
             }).ConfigureAwait(false);
             
-            Initialized = true;
+            //Initialized = true;
 
         }
         
-        public override async Task UpdateAsync(CancellationToken token)
+        public override async void UpdateAsync(CancellationToken token)
         {
-            await base.UpdateAsync(token).ConfigureAwait(false);
+            //base.UpdateAsync(token);
+            if (!_bossShoot || !_bossShoot.ShouldBeShoot) return;
+            await Task.Delay(100, token).ConfigureAwait(false);
             await UnityMainThreadDispatcher.EnqueueAsync(() =>
             {
-                if (!_bossShoot || !_bossShoot.ShouldBeShoot) return;
                 _bossShoot.AttemptShoot(BossBehavior.BossMaster, PlayerMaster.transform);
-                if (!_bossMissileShoot.EndCycle) return;
-                Finalized = true;
             }).ConfigureAwait(false);
+            //if (!_bossMissileShoot.EndCycle) return;
+            //Finalized = true;
             
         }
-        public override Task ExitAsync(CancellationToken token)
+        public override async Task ExitAsync(CancellationToken token)
         {
-            _bossShoot.StopShoot();
-            return base.ExitAsync(token);
+            await base.ExitAsync(token).ConfigureAwait(false);
+            await Task.Delay(100, token).ConfigureAwait(false);
+            await UnityMainThreadDispatcher.EnqueueAsync(() =>
+            {
+                _bossShoot.StopShoot();
+            }).ConfigureAwait(false);
         }
         
     }

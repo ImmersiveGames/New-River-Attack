@@ -8,6 +8,8 @@ namespace ImmersiveGames.BehaviorsManagers
     public abstract class Behavior : IBehavior
     {
         private const double MinimumDistance = 10;
+        private const int DebugDelay = 2000;
+
         protected Behavior(IBehavior[] subBehaviors, string identifier = "")
         {
             Name = GetType().Name;
@@ -24,26 +26,22 @@ namespace ImmersiveGames.BehaviorsManagers
         public bool Initialized { get; set; }
         public bool Finalized { get; set; }
 
-        public virtual Task EnterAsync(CancellationToken token)
+        public virtual async Task EnterAsync(CancellationToken token)
         {
-            DebugManager.Log<Behavior>($"Enter Behavior {Name}");
-            Finalized = false;
-            Initialized = false;
-            return Task.CompletedTask;
+            await Task.Delay(DebugDelay, token).ConfigureAwait(false);
+            DebugManager.Log<Behavior>($"Enter {GetType().Name}.");
         }
 
-        public virtual Task UpdateAsync(CancellationToken token)
+        public virtual async void UpdateAsync(CancellationToken token)
         {
-            DebugManager.Log<Behavior>($"Update Behavior {Name}");
-            return Task.CompletedTask;
+            await Task.Delay(DebugDelay, token).ConfigureAwait(false);
+            DebugManager.Log<Behavior>($"Update {GetType().Name}.");
         }
 
-        public virtual Task ExitAsync(CancellationToken token)
+        public virtual async Task ExitAsync(CancellationToken token)
         {
-            DebugManager.Log<Behavior>($"Exit Behavior {Name}");
-            Finalized = true;
-            Initialized = false;
-            return Task.CompletedTask;
+            await Task.Delay(DebugDelay, token).ConfigureAwait(false);
+            DebugManager.Log<Behavior>($"Exit {GetType().Name}.");
         }
         
     }

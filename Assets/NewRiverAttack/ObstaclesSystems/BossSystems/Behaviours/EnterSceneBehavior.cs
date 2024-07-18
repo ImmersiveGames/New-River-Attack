@@ -23,13 +23,13 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             _behaviorManager = behaviorManager;
             BossBehavior = behaviorManager.BossBehavior;
             PlayerMaster = BossBehavior.PlayerMaster;
-
         }
 
         public override async Task EnterAsync(CancellationToken token)
         {
             //await base.EnterAsync(token).ConfigureAwait(false);
-            
+            DebugManager.Log<EnterSceneBehavior>("Enter EnterSceneBehavior.");
+
             var tcs = new TaskCompletionSource<bool>();
             await UnityMainThreadDispatcher.EnqueueAsync(() =>
             {
@@ -37,9 +37,9 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 vector3.z = PlayerMaster.transform.position.z;
                 vector3.x = PlayerMaster.transform.position.x;
                 BossBehavior.transform.position = vector3;
-                
+
                 var distance = PlayerMaster.transform.position.z + DistanceOffset;
-                
+
                 var mySequence = DOTween.Sequence();
                 mySequence.AppendInterval(InitialDelay);
                 mySequence.Append(BossBehavior.transform.DOMoveZ(distance, MoveDuration).SetEase(Ease.Linear));
@@ -51,6 +51,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 mySequence.Play();
                 return Task.CompletedTask;
             }).ConfigureAwait(false);
+            BossBehavior.BossMaster.IsEmerge = true;
             // Aguardar a conclusão da animação ou o cancelamento
             await using (token.Register(() => tcs.TrySetCanceled()))
             {
@@ -72,10 +73,21 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             }
         }
 
-        public override Task ExitAsync(CancellationToken token)
+        public override async void UpdateAsync(CancellationToken token)
         {
-            _ = _behaviorManager.ChangeBehaviorAsync(EnumNameBehavior.MoveNorthBehavior.ToString());
-            return Task.CompletedTask;
+            DebugManager.Log<EnterSceneBehavior>("Update EnterSceneBehavior.");
+            if (Finalized)
+            {
+                await _behaviorManager.ChangeBehaviorAsync(EnumNameBehavior.MoveNorthBehavior.ToString())
+                    .ConfigureAwait(false);
+            }
+        }
+
+        public override async Task ExitAsync(CancellationToken token)
+        {
+            await base.ExitAsync(token).ConfigureAwait(false);
+            DebugManager.Log<EnterSceneBehavior>("Exit EnterSceneBehavior.");
+            //return Task.CompletedTask;
         }
     }
 }

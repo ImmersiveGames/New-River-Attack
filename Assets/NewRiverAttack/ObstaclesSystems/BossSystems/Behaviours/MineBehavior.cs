@@ -13,7 +13,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         private BossBehavior BossBehavior { get; }
         private readonly BossShoot _bossShoot;
         private PlayerMaster PlayerMaster { get; }
-        public MineBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors) : base(subBehaviors, "1")
+        public MineBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors) : base(subBehaviors)
         {
             BossBehavior = behaviorManager.BossBehavior;
             PlayerMaster = BossBehavior.PlayerMaster;
@@ -21,7 +21,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         }
         public override async Task EnterAsync(CancellationToken token)
         {
-            await base.EnterAsync(token).ConfigureAwait(false);
+            //await base.EnterAsync(token).ConfigureAwait(false);
             
             await Task.Delay(100, token).ConfigureAwait(false);
             await UnityMainThreadDispatcher.EnqueueAsync(() =>
@@ -31,25 +31,22 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 _bossShoot.StartShoot();
             }).ConfigureAwait(false);
             
-            Initialized = true;
+            //Initialized = true;
 
         }
-        public override async Task UpdateAsync(CancellationToken token)
+        public override async void UpdateAsync(CancellationToken token)
         {
-            await base.UpdateAsync(token).ConfigureAwait(false);
-            await UnityMainThreadDispatcher.EnqueueAsync(() =>
+            //base.UpdateAsync(token);
+            if (_bossShoot && _bossShoot.ShouldBeShoot)
             {
-                if (_bossShoot && _bossShoot.ShouldBeShoot)
-                {
-                    _bossShoot.AttemptShoot(BossBehavior.BossMaster, PlayerMaster.transform);
-                }
-            }).ConfigureAwait(false);
+                _bossShoot.AttemptShoot(BossBehavior.BossMaster, PlayerMaster.transform);
+            }
             
         }
-        public override Task ExitAsync(CancellationToken token)
+        public override async Task ExitAsync(CancellationToken token)
         {
             _bossShoot.StopShoot();
-            return base.ExitAsync(token);
+            //return base.ExitAsync(token);
         }
         
     }

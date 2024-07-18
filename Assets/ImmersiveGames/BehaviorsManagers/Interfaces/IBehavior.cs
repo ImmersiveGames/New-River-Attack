@@ -13,21 +13,7 @@ namespace ImmersiveGames.BehaviorsManagers.Interfaces
         bool Finalized { get; set; }
         
         Task EnterAsync(CancellationToken token);
-        Task UpdateAsync(CancellationToken token);
+        void UpdateAsync(CancellationToken token);
         Task ExitAsync(CancellationToken token);
-        /*
-        
-        
-        IBehavior NextBehavior { get; set; }
-        
-        BehaviorManager SubBehaviorManager { get; set; }
-        
-        IChangeBehaviorStrategy ChangeBehaviorStrategy { get; }
-        IUpdateStrategy UpdateStrategy { get; }
-        int CurrentSubBehaviorIndex { get; set; }
-        Task FinalizeAllSubBehavior(CancellationToken cancellationToken);
-        void Pause();
-        void Resume();
-        void Stop();*/
     }
 }

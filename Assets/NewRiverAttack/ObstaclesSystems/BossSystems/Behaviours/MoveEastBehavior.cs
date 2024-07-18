@@ -8,6 +8,7 @@ using ImmersiveGames.Utils;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
+using UnityEngine.Apple.ReplayKit;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 {
@@ -17,13 +18,18 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         
         private readonly BossMovement _bossMovement;
         private readonly BehaviorManager _behaviorManager;
+        private readonly BehaviorManager _subBehaviorManager;
         private BossBehavior BossBehavior { get; }
         private PlayerMaster PlayerMaster { get; }
+        
+        private readonly IBehavior[] _subBehaviors;
+        private int _subIndex;
 
         public MoveEastBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors)
             : base(subBehaviors)
         {
             _behaviorManager = behaviorManager;
+            _subBehaviors = subBehaviors;
             BossBehavior = behaviorManager.BossBehavior;
             PlayerMaster = BossBehavior.PlayerMaster;
             _bossMovement = new BossMovement(BossMovement.Direction.MoveEastBehavior, PlayerMaster.transform);
@@ -31,47 +37,46 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
         public override async Task EnterAsync(CancellationToken token)
         {
-            _behaviorManager.CurrentIndex = 0;
             await base.EnterAsync(token).ConfigureAwait(false);
             
+            var animationTime = 0;
             await Task.Delay(100, token).ConfigureAwait(false);
-            await UnityMainThreadDispatcher.EnqueueAsync(() =>
+            await UnityMainThreadDispatcher.EnqueueAsync( () =>
             {
                 var myDirection = _bossMovement.GetRelativeDirection(BossBehavior.transform.position);
-                DebugManager.Log<Behavior>($"Estou na direção {myDirection} em relação ao player");
+                DebugManager.Log<MoveEastBehavior>($"Direção: {myDirection}");
+
                 if (myDirection != _bossMovement.MyDirection)
                 {
-                    DebugManager.LogWarning<Behavior>($"Estou numa posição diferente preciso me mover");
+                    DebugManager.Log<MoveEastBehavior>($"Estou numa posição diferente preciso me mover");
                     var newPosition = _bossMovement.GetNewPosition(_bossMovement.MyDirection, MoveDistance);
                     BossBehavior.transform.position = newPosition;
-                    BossBehavior.BossMaster.OnEventBossEmerge();
                 }
-                
-                return Task.FromResult<Task>(null);
+                if (BossBehavior.BossMaster.IsEmerge) return;
+                BossBehavior.BossMaster.IsEmerge = true;
+                animationTime = (int)BossBehavior.GetComponent<BossAnimation>().GetSubmergeTime();
+                BossBehavior.BossMaster.OnEventBossEmerge();
             }).ConfigureAwait(false);
-
-            Initialized = true;
-
+            await Task.Delay(animationTime * 1000, token).ConfigureAwait(false);
+        }
+        public override void UpdateAsync(CancellationToken token)
+        {
+            base.UpdateAsync(token);
         }
 
         public override async Task ExitAsync(CancellationToken token)
         {
-            var animationTime = 0f;
-            await UnityMainThreadDispatcher.EnqueueAsync(() =>
+            await base.ExitAsync(token).ConfigureAwait(false);
+            var animationTime = 0;
+            await Task.Delay(100, token).ConfigureAwait(false);
+            await UnityMainThreadDispatcher.EnqueueAsync( () =>
             {
-                animationTime = BossBehavior.GetComponent<BossAnimation>().GetSubmergeTime();
+                if (!BossBehavior.BossMaster.IsEmerge) return;
+                BossBehavior.BossMaster.IsEmerge = false;
+                animationTime = (int)BossBehavior.GetComponent<BossAnimation>().GetSubmergeTime();
                 BossBehavior.BossMaster.OnEventBossSubmerge();
             }).ConfigureAwait(false);
-            await Task.Delay((int)animationTime * 1000, token).ConfigureAwait(false);
-            await UnityMainThreadDispatcher.EnqueueAsync(() =>
-            {
-                var newBehavior = _bossMovement.GetRandomDirectionSelfExclude();
-                DebugManager.Log<Behavior>($"Sort New Behavior {Name}");
-                _ = _behaviorManager.ChangeBehaviorAsync(newBehavior.ToString());
-            }).ConfigureAwait(false);
-            
-            await base.ExitAsync(token).ConfigureAwait(false);
-            
+            await Task.Delay(animationTime * 1000, token).ConfigureAwait(false);
         }
     }
 }

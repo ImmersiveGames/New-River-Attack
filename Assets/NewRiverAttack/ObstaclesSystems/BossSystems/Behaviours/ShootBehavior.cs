@@ -38,9 +38,9 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
         }
         
-        public override async Task UpdateAsync(CancellationToken token)
+        public override async void UpdateAsync(CancellationToken token)
         {
-            await base.UpdateAsync(token).ConfigureAwait(false);
+            base.UpdateAsync(token);
             await UnityMainThreadDispatcher.EnqueueAsync(() =>
             {
                 if (_bossShoot && _bossShoot.ShouldBeShoot)

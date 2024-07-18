@@ -11,7 +11,8 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
     {
         
         private PlayerMaster _playerMaster;
-        
+        public bool IsEmerge { get; set; }
+
         #region Delagates & Events
         public delegate void BossGenericHandler();
         public event BossGenericHandler EventBossEmerge;
