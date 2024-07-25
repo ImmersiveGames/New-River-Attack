@@ -1,16 +1,11 @@
-﻿using System;
-using ImmersiveGames.PoolManagers.Interface;
-using NewRiverAttack.GamePlayManagers;
+﻿using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
-using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems
 {
-    public sealed class BossMaster : EnemiesMaster, IHasPool
+    public sealed class BossMaster : EnemiesMaster
     {
-        
-        private PlayerMaster _playerMaster;
         public bool IsEmerge { get; set; }
 
         #region Delagates & Events
@@ -24,7 +19,13 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         {
             GamePlayBossManager.instance.SetBoss(this);
         }
-        
+
+        protected override void AttemptKillObstacle(PlayerMaster playerMaster)
+        {
+            base.AttemptKillObstacle(playerMaster);
+            playerMaster.OnEventPlayerMasterStopDecoyFuel(true);
+        }
+
         internal void OnEventBossSubmerge()
         {
             EventBossSubmerge?.Invoke();

@@ -8,6 +8,10 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         [SerializeField]
         protected internal ObjectsScriptable.ObjectsScriptable objectDefault;
         public LayerMask layerPlayer;
+        public T GetObjectScriptable<T>() where T : class
+        {
+            return objectDefault as T;
+        }
         
         #region Delagates & Events
         public delegate void ObstacleGenericHandler();
@@ -46,12 +50,10 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         internal virtual void OnEventObstacleHit(PlayerMaster playerMaster)
         {
-            
             EventObstacleHit?.Invoke(playerMaster);
         }
         internal virtual void OnEventObstacleDeath(PlayerMaster playerMaster)
         {
-        
             AttemptKillObstacle(playerMaster);
             EventObstacleDeath?.Invoke(playerMaster);
         }

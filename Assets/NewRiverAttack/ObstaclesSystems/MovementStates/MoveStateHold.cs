@@ -1,5 +1,6 @@
 ﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ObjectManagers.Interfaces;
+using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using UnityEngine;
@@ -8,8 +9,8 @@ namespace NewRiverAttack.ObstaclesSystems.MovementStates
 {
     public class MoveStateHold : IMove
     {
-        private readonly EnemiesMovement _enemiesMovement;
-        private readonly EnemiesMaster _enemiesMaster;
+        private readonly ObstacleMovement _obstacleMovement;
+        private readonly ObstacleMaster _obstacleMaster;
         private readonly EnemiesScriptable _enemiesScriptable;
         private EnemiesAnimation _enemiesAnimation;
         
@@ -17,43 +18,43 @@ namespace NewRiverAttack.ObstaclesSystems.MovementStates
         private bool _hasApproach;
         private bool _inTransition;
         
-        public MoveStateHold(EnemiesMovement enemiesMovement)
+        public MoveStateHold(ObstacleMovement obstacleMovement)
         {
-            _enemiesMovement = enemiesMovement;
-            _enemiesMaster = _enemiesMovement.GetComponent<EnemiesMaster>();
-            _enemiesScriptable = _enemiesMovement.GetEnemySettings;
+            _obstacleMovement = obstacleMovement;
+            _obstacleMaster = _obstacleMovement.GetComponent<ObstacleMaster>();
+            _enemiesScriptable = _obstacleMovement.GetObjectScriptable<EnemiesScriptable>();
             SpeedMovement = 0;
         }
 
         public void EnterState()
         {
-            DebugManager.Log<EnemiesMovement>($" Entrando no Estado: HOLD");
+            DebugManager.Log<ObstacleMovement>($" Entrando no Estado: HOLD");
             _hasApproach = _enemiesScriptable.approachMovement.x != 0 &&
                            _enemiesScriptable.approachMovement.y != 0;
-            _enemiesAnimation = _enemiesMovement.GetComponent<EnemiesAnimation>();
+            _enemiesAnimation = _obstacleMovement.GetComponent<EnemiesAnimation>();
             _enemiesAnimation.AnimationMove(false);
             _inTransition = false;
         }
 
         public void UpdateState(Transform transform, Vector3 direction)
         {
-            if (!_enemiesMaster.ObjectIsReady) return;
+            if (!_obstacleMaster.ObjectIsReady) return;
             if (!_inTransition && _hasApproach)
             {
-                _enemiesMovement.ChangeState(new MoveStatePatrol(_enemiesMovement));
+                _obstacleMovement.ChangeState(new MoveStatePatrol(_obstacleMovement));
             }
-            if (!_inTransition && _enemiesMovement.GetVelocity != 0 )
+            if (!_inTransition && _obstacleMovement.GetVelocity != 0 )
             {
-                _enemiesMovement.ChangeState(new MoveStateMove(_enemiesMovement));
+                _obstacleMovement.ChangeState(new MoveStateMove(_obstacleMovement));
             }
-            if (_enemiesMovement.ShouldBeMove || _inTransition) return;
-            DebugManager.Log<EnemiesMovement>($" Atualizando o Estado: HOLD");
+            if (_obstacleMovement.ShouldBeMove || _inTransition) return;
+            DebugManager.Log<ObstacleMovement>($" Atualizando o Estado: HOLD");
         }
 
         public void ExitState()
         {
             _inTransition = true;
-            DebugManager.Log<EnemiesMovement>($" Saindo do Estado: HOLD");
+            DebugManager.Log<ObstacleMovement>($" Saindo do Estado: HOLD");
         }
     }
 }

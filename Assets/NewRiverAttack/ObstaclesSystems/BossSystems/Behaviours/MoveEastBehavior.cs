@@ -1,14 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using DG.Tweening;
 using ImmersiveGames.BehaviorsManagers;
 using ImmersiveGames.BehaviorsManagers.Interfaces;
-using ImmersiveGames.DebugManagers;
-using ImmersiveGames.Utils;
-using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
-using UnityEngine;
-using UnityEngine.Apple.ReplayKit;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 {
@@ -38,26 +32,8 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         public override async Task EnterAsync(CancellationToken token)
         {
             await base.EnterAsync(token).ConfigureAwait(false);
-            
-            var animationTime = 0;
-            await Task.Delay(100, token).ConfigureAwait(false);
-            await UnityMainThreadDispatcher.EnqueueAsync( () =>
-            {
-                var myDirection = _bossMovement.GetRelativeDirection(BossBehavior.transform.position);
-                DebugManager.Log<MoveEastBehavior>($"Direção: {myDirection}");
-
-                if (myDirection != _bossMovement.MyDirection)
-                {
-                    DebugManager.Log<MoveEastBehavior>($"Estou numa posição diferente preciso me mover");
-                    var newPosition = _bossMovement.GetNewPosition(_bossMovement.MyDirection, MoveDistance);
-                    BossBehavior.transform.position = newPosition;
-                }
-                if (BossBehavior.BossMaster.IsEmerge) return;
-                BossBehavior.BossMaster.IsEmerge = true;
-                animationTime = (int)BossBehavior.GetComponent<BossAnimation>().GetSubmergeTime();
-                BossBehavior.BossMaster.OnEventBossEmerge();
-            }).ConfigureAwait(false);
-            await Task.Delay(animationTime * 1000, token).ConfigureAwait(false);
+            await ChangePosition(_bossMovement, BossBehavior, MoveDistance, token).ConfigureAwait(false);
+            await Emerge(BossBehavior.BossMaster,token, true).ConfigureAwait(false);
         }
         public override void UpdateAsync(CancellationToken token)
         {
@@ -67,16 +43,8 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         public override async Task ExitAsync(CancellationToken token)
         {
             await base.ExitAsync(token).ConfigureAwait(false);
-            var animationTime = 0;
-            await Task.Delay(100, token).ConfigureAwait(false);
-            await UnityMainThreadDispatcher.EnqueueAsync( () =>
-            {
-                if (!BossBehavior.BossMaster.IsEmerge) return;
-                BossBehavior.BossMaster.IsEmerge = false;
-                animationTime = (int)BossBehavior.GetComponent<BossAnimation>().GetSubmergeTime();
-                BossBehavior.BossMaster.OnEventBossSubmerge();
-            }).ConfigureAwait(false);
-            await Task.Delay(animationTime * 1000, token).ConfigureAwait(false);
+            await Emerge(BossBehavior.BossMaster,token, false).ConfigureAwait(false);
+            await DropGas(BossBehavior).ConfigureAwait(false);
         }
     }
 }

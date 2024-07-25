@@ -1,6 +1,4 @@
-﻿using System;
-using ImmersiveGames.ObjectManagers.Interfaces;
-using NewRiverAttack.GamePlayManagers;
+﻿using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.MovementStates;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.WallsManagers;
@@ -8,156 +6,54 @@ using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 {
-    public sealed class EnemiesMovement : MonoBehaviour
+    public class EnemiesMovement : ObstacleMovement
     {
-        private float _moveVelocity;
-        private enum Directions { None, Forward, Back, Up, Right, Down, Left, Free }
-        [SerializeField] private Directions startDirection;
-        [SerializeField] private Vector3 freeVectorDirection;
-
-        private IMove _startState;
         
-        private Vector3 _directionVector;
         private EnemiesMaster _enemiesMaster;
-        private EnemiesScriptable _enemiesScriptable;
         private EnemiesAnimation _enemiesAnimation;
-        private GamePlayManager _gamePlayManagers;
+        private EnemiesScriptable GetEnemySettings { get; set; }
 
         #region Unity Methods
-
-        private void Awake()
-        {
-            _directionVector = SetDirection(startDirection);
-        }
-
-        private void OnEnable()
-        {
-            SetInitialReferences();
-            _gamePlayManagers.EventGameRestart += ResetMovement;
-        }
-
         private void Start()
         {
-            _startState = new MoveStateHold(this);
-            if (_enemiesScriptable.GetMoveApproach != 0) _startState = new MoveStatePatrol(this);
-            if (_enemiesScriptable.GetMoveApproach == 0 && _enemiesScriptable.moveVelocity != 0) _startState = new MoveStateMove(this);
+            StartState = new MoveStateHold(this);
+            if (GetEnemySettings.GetMoveApproach != 0) StartState = new MoveStatePatrol(this);
+            if (GetEnemySettings.GetMoveApproach == 0 && GetEnemySettings.moveVelocity != 0) StartState = new MoveStateMove(this);
 
-            ChangeState(_startState);
+            ChangeState(StartState);
         }
 
-        void OnTriggerEnter(Collider other)
+        protected virtual void OnTriggerEnter(Collider other)
         {
-            if (other == null || !_enemiesMaster.ObjectIsReady || (_enemiesScriptable.ignoreWalls && _enemiesScriptable.ignoreEnemies) ) return;
-            var enemies = _enemiesScriptable.ignoreEnemies ? null : other.GetComponentInParent<EnemiesMaster>();
-            var wall = _enemiesScriptable.ignoreWalls ? null : other.GetComponentInParent<WallMaster>();
+            if (other == null || !ObstacleMaster.ObjectIsReady || (GetEnemySettings.ignoreWalls && GetEnemySettings.ignoreEnemies) ) return;
+            var enemies = GetEnemySettings.ignoreEnemies ? null : other.GetComponentInParent<EnemiesMaster>();
+            var wall = GetEnemySettings.ignoreWalls ? null : other.GetComponentInParent<WallMaster>();
             if (enemies == null && wall == null) return;
             _enemiesAnimation.AnimationFlip();
-            _directionVector *= -1;
-        }
-
-        private void Update()
-        {
-            if (!_enemiesMaster.ObjectIsReady) return;
-            GetActualState?.UpdateState(transform, _directionVector);
-        }
-
-        private void OnDisable()
-        {
-            _gamePlayManagers.EventGameRestart -= ResetMovement;
-        }
-
-        #endregion
-        
-        private void SetInitialReferences()
-        {
-            _gamePlayManagers = GamePlayManager.instance;
-            _enemiesMaster = GetComponent<EnemiesMaster>();
-            _enemiesAnimation = GetComponent<EnemiesAnimation>();
-            _enemiesScriptable = _enemiesMaster.GetEnemySettings;
-            _moveVelocity = _enemiesScriptable.moveVelocity;
-        }
-
-        public bool ShouldBeMove => _moveVelocity != 0 && _enemiesMaster.ObjectIsReady;
-        public EnemiesScriptable GetEnemySettings => _enemiesScriptable;
-        
-        private void SetVelocity(float defaultSpeed)
-        {
-            _moveVelocity = defaultSpeed;
-        }
-        public float GetVelocity => _moveVelocity;
-
-        private void ResetMovement()
-        {
-            _directionVector = SetDirection(startDirection);
-            SetVelocity(_enemiesScriptable.moveVelocity);
-            ChangeState(_startState);
+            DirectionVector *= -1;
         }
         
-
-        #region StateMachine
-        
-        internal void ChangeState(IMove newState)
-        {
-            if (GetActualState == newState) return;
-            GetActualState?.ExitState();
-
-            GetActualState = newState;
-            GetActualState?.EnterState();
-        }
-
-        private IMove GetActualState { get; set; }
-
-        #endregion
-
-        #region Functions Auxiliares
-
-        private Vector3 SetDirection(Directions dir)
-        {
-            return dir switch
-            {
-                Directions.Up => Vector3.up,
-                Directions.Right => Vector3.right,
-                Directions.Down => Vector3.down,
-                Directions.Left => Vector3.left,
-                Directions.Back => Vector3.back,
-                Directions.Forward => Vector3.forward,
-                Directions.None => Vector3.zero,
-                Directions.Free => freeVectorDirection,
-                _ => Vector3.zero
-            };
-        }
-
-        #endregion
-
-        #region Gizmos
-#if UNITY_EDITOR
-        private Vector2 _gizmoRadius;
-        [Header("Gizmos Settings")]
-        public Color gizmoColor = new Color(0, 0, 250, 150);
-
         private void OnDrawGizmos()
         {
             var em = GetComponent<EnemiesMaster>();
-            _gizmoRadius = em.GetEnemySettings.approachMovement;
+            GizmoRadius = em.GetEnemySettings.approachMovement;
+        }
+        #endregion
+
+        protected override void SetInitialReferences()
+        {
+            base.SetInitialReferences();
+            GetEnemySettings = GetObjectScriptable<EnemiesScriptable>();
+            _enemiesAnimation = GetComponent<EnemiesAnimation>();
+            MoveVelocity = GetEnemySettings.moveVelocity;
+            _enemiesMaster = ObstacleMaster as EnemiesMaster;
+            if (_enemiesMaster != null) GetEnemySettings = _enemiesMaster.GetEnemySettings;
         }
 
-        private void OnDrawGizmosSelected()
+        protected override void ResetMovement()
         {
-            if (_gizmoRadius == Vector2.zero) return;
-            var position = transform.position;
-            if (_gizmoRadius is { x: 0, y: > 0 })
-            {
-                Gizmos.color = gizmoColor;
-                Gizmos.DrawWireSphere(center: position, _gizmoRadius.y);
-            }
-            if (_gizmoRadius.x == 0) return;
-            Gizmos.color = gizmoColor + new Color(0.2f, 0.2f, 0.2f);
-            Gizmos.DrawWireSphere(center: position, _gizmoRadius.x);
-            Gizmos.color = gizmoColor - new Color(0.2f, 0.2f, 0.2f);
-            Gizmos.DrawWireSphere(center: position, _gizmoRadius.y);
+            SetVelocity(GetEnemySettings.moveVelocity);
+            base.ResetMovement();
         }
-#endif
-        #endregion
-        
     }
 }

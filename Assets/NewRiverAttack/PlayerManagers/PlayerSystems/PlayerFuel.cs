@@ -1,6 +1,7 @@
 ﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ShopManagers.ShopProducts;
 using NewRiverAttack.ObstaclesSystems;
+using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
 using UnityEngine;
 
@@ -8,17 +9,15 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 {
     public class PlayerFuel : MonoBehaviour
     {
-        private float _fuelMax;
-        private float _fuel;
         private float _spendFuel;
         [SerializeField] private float reduceFuelCadence = 1f; //Quanto maior mais rápido
-        [Header("Power Up Gas Station")]
-        [SerializeField] private float fillUpFuelCadence = 6f;
+        
         private bool _fuelPause;
         private bool _inPowerUp;
         
         private PlayerMaster _playerMaster;
         private PlayerAchievements _playerAchievements;
+        private float _areaEffectCadence;
 
         #region Unity Methods
 
@@ -31,33 +30,33 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _playerMaster.EventPlayerMasterRespawn += RestoreFuel;
             _playerMaster.EventPlayerMasterAreaEffectStart += StartFillUp;
             _playerMaster.EventPlayerMasterAreaEffectEnd += EndFillEnd;
+            _playerMaster.EventPlayerMasterStopDecoyFuel += PauseDecoy;
         }
 
         private void Update()
         {
-            if (_fuel <= 0) return;
+            if (GetFuel <= 0) return;
             if (_inPowerUp)
             {
-                var lastFillFuel = fillUpFuelCadence * Time.deltaTime;
-                _fuel += lastFillFuel;
-                _fuel = Mathf.Clamp(_fuel, 0f, _fuelMax);
+                var lastFillFuel = _areaEffectCadence * Time.deltaTime;
+                GetFuel += lastFillFuel;
+                GetFuel = Mathf.Clamp(GetFuel, 0f, GetMaxFuel);
             }
             if (_fuelPause || !_playerMaster.ObjectIsReady || _playerMaster.godMode || _playerMaster.AutoPilot) return;
             // Decrementa o combustível com base na taxa de decaimento por segundo
             var lastFuel = reduceFuelCadence * Time.deltaTime;
-            _fuel -= lastFuel;
+            GetFuel -= lastFuel;
             _spendFuel += lastFuel;
-            if (_spendFuel % _fuelMax == 0)
+            if (_spendFuel % GetMaxFuel == 0)
             {
                 _playerAchievements.LogSpendFuel(_spendFuel);
                 _spendFuel = 0;
             }
 
             // Garante que o combustível não ultrapasse o máximo
-            _fuel = Mathf.Clamp(_fuel, 0f, _fuelMax);
+            GetFuel = Mathf.Clamp(GetFuel, 0f, GetMaxFuel);
 
-            if (_fuel > 0) return;
-            DebugManager.Log<PlayerFuel>("ACABOUUU");
+            if (GetFuel > 0) return;
             _playerMaster.OnEventPlayerMasterGetHit();
             _playerAchievements.LogOutFuel();
         }
@@ -69,6 +68,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _playerMaster.EventPlayerMasterRespawn -= RestoreFuel;
             _playerMaster.EventPlayerMasterAreaEffectStart -= StartFillUp;
             _playerMaster.EventPlayerMasterAreaEffectEnd -= EndFillEnd;
+            _playerMaster.EventPlayerMasterStopDecoyFuel -= PauseDecoy;
         }
 
         #endregion
@@ -78,53 +78,40 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _playerMaster = GetComponent<PlayerMaster>();
             _playerAchievements = GetComponent<PlayerAchievements>();
         }
-        private void FuelUp(float quantidade)
-        {
-            // Adiciona a quantidade especificada ao combustível atual
-            _fuel += quantidade;
-
-            // Garante que o combustível não ultrapasse o máximo
-            _fuel = Mathf.Clamp(_fuel, 0f, _fuelMax);
-        }
+        
         private void PauseDecoy(bool pausar)
         {
             // Define o estado de pausa do decaimento
             _fuelPause = pausar;
         }
-        private void UpdateDecoyParam(float newFuelMax, float newCadenceFuel)
-        {
-            // Atualiza os valores máximos e decaimento com base nos parâmetros fornecidos
-            _fuelMax = newFuelMax;
-            reduceFuelCadence = newCadenceFuel;
-
-            // Garante que o combustível não ultrapasse o novo máximo
-            reduceFuelCadence = Mathf.Clamp(reduceFuelCadence, 0f, newFuelMax);
-        }
+        
 
         private void RestoreFuel()
         {
             DebugManager.Log<PlayerFuel>("Restore Fuel");
-            _fuel = _fuelMax;
+            GetFuel = GetMaxFuel;
             _playerAchievements.LogSpendFuel(_spendFuel);
             _spendFuel = 0;
         }
 
-        public float GetFuel => _fuel;
-        public float GetMaxFuel => _fuelMax;
+        public float GetFuel { get; private set; }
+
+        public float GetMaxFuel { get; private set; }
+
         private void InitializeFuel(int indexPlayer, PlayersDefaultSettings defaultSettings)
         {
             // 2- ORDEM DE INICIO
             if (_playerMaster.PlayerIndex != indexPlayer) return;
             var skin = _playerMaster.ActualSkin;
-            _fuelMax = skin.maxFuel != 0 ? skin.maxFuel : defaultSettings.maxFuel;
-            _fuel = _fuelMax;
+            GetMaxFuel = skin.maxFuel != 0 ? skin.maxFuel : defaultSettings.maxFuel;
+            GetFuel = GetMaxFuel;
             DebugManager.Log<PlayerFuel>($"No Initialize {_playerMaster.ActualSkin.name}");
         }
         private void InitializeSkinFuel(ShopProductSkin shopProductSkin)
         {
             // 3 - ORDEM DE INICIO
             if(shopProductSkin.maxFuel > 0)
-                _fuelMax = shopProductSkin.maxFuel;
+                GetMaxFuel = shopProductSkin.maxFuel;
             if(shopProductSkin.cadenceFuel > 0)
                 reduceFuelCadence = shopProductSkin.cadenceFuel;
             DebugManager.Log<PlayerFuel>($"Na Mudança de skin");
@@ -132,17 +119,19 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         #region PowerUp GasStatioin
 
-        private void EndFillEnd(ObstacleTypes areaEffect)
+        private void EndFillEnd(AreaEffectScriptable areaEffectScriptable)
         {
-            if (areaEffect != ObstacleTypes.GasStation) return;
+            if (areaEffectScriptable.obstacleTypes != ObstacleTypes.GasStation) return;
             _inPowerUp = false;
             PauseDecoy(_inPowerUp);
         }
 
-        private void StartFillUp(ObstacleTypes areaEffect)
+        private void StartFillUp(AreaEffectScriptable areaEffectScriptable)
         {
-            if (areaEffect != ObstacleTypes.GasStation) return;
+            if (areaEffectScriptable.obstacleTypes != ObstacleTypes.GasStation) return;
             _inPowerUp = true;
+            _areaEffectCadence = areaEffectScriptable.areaEffectCadence;
+
             PauseDecoy(_inPowerUp);
         }
 

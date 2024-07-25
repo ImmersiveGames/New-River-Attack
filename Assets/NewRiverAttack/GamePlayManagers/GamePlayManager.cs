@@ -3,14 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using ImmersiveGames;
+using ImmersiveGames.CameraManagers;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.Utils;
 using NewRiverAttack.GameManagers;
 using NewRiverAttack.GamePlayManagers.GamePlayLogs;
+using NewRiverAttack.HUBManagers;
 using NewRiverAttack.LevelBuilder;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
 using NewRiverAttack.SaveManagers;
+using NewRiverAttack.StateManagers;
 using NewRiverAttack.StateManagers.States;
 using UnityEngine;
 
@@ -165,7 +168,39 @@ namespace NewRiverAttack.GamePlayManagers
             //Aqui é Apos o Go da Animação
             _activePlayers = true;
             OnEventGameReady();
-            //OnEventGameStart();
+        }
+        public void FinisherGame()
+        {
+            AudioManager.PlayBGMOneShot("Finish");
+            var player = _initializedPlayers[0].transform.position;
+            CameraManager.RepositionEndCamera(new Vector3(player.x,40,player.z));
+            CameraManager.ActiveEndCamera(true);
+            OnEventGameFinisher();
+        }
+
+       internal void SendTo(GamePlayModes gamePlayModes)
+        {
+            switch (gamePlayModes)
+            {
+                case GamePlayModes.MissionMode:
+                    GameManager.instance.ActiveLevel.hudPath.levelsStates = LevelsStates.Complete;
+                    Invoke(nameof(SendToHub), 2f);
+                    break;
+                case GamePlayModes.ClassicMode:
+                    Invoke(nameof(SendToCompleteGame), 2f);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+        private async void SendToHub()
+        {
+            await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateHub.ToString()).ConfigureAwait(false);
+        }
+        
+        private async void SendToCompleteGame()
+        {
+            await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateEndGame.ToString()).ConfigureAwait(false);
         }
 
         #region Métodos Auxiliares

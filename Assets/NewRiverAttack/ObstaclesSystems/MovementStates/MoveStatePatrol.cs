@@ -1,7 +1,9 @@
 ﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ObjectManagers.DetectManagers;
 using ImmersiveGames.ObjectManagers.Interfaces;
+using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
+using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 
@@ -10,47 +12,48 @@ namespace NewRiverAttack.ObstaclesSystems.MovementStates
     public class MoveStatePatrol : IMove
     {
         private Transform _target;
-        private readonly EnemiesMovement _enemiesMovement;
-        private EnemiesAnimation _enemiesAnimation;
         private bool _inTransition;
         private readonly float _approachRange;
         private readonly DetectPlayerApproach _detectPlayerApproach;
-        private readonly EnemiesMaster _enemiesMaster;
+        private readonly ObstacleMaster _obstacleMaster;
+        private readonly ObstacleMovement _obstacleMovement;
+        
+        private EnemiesAnimation _enemiesAnimation;
 
-        public MoveStatePatrol(EnemiesMovement enemiesMovement)
+        public MoveStatePatrol(ObstacleMovement obstacleMovement)
         {
-            _enemiesMovement = enemiesMovement;
-            _enemiesMaster = _enemiesMovement.GetComponent<EnemiesMaster>();
-            var enemiesScriptable = _enemiesMovement.GetEnemySettings;
+            _obstacleMovement = obstacleMovement;
+            _obstacleMaster = _obstacleMovement.GetComponent<ObstacleMaster>();
+            var enemiesScriptable = _obstacleMovement.GetObjectScriptable<EnemiesScriptable>();
             _approachRange = enemiesScriptable.GetMoveApproach;
-            _detectPlayerApproach = new DetectPlayerApproach(_enemiesMovement.transform.position, _approachRange);
+            _detectPlayerApproach = new DetectPlayerApproach(_obstacleMovement.transform.position, _approachRange);
         }
         public void EnterState()
         {
-            DebugManager.Log<EnemiesMovement>($" Entrando no Estado: Patrol");
-            _enemiesAnimation = _enemiesMovement.GetComponent<EnemiesAnimation>();
+            DebugManager.Log<ObstacleMovement>($" Entrando no Estado: Patrol");
+            _enemiesAnimation = _obstacleMovement.GetComponent<EnemiesAnimation>();
             _enemiesAnimation.AnimationMove(false);
             _inTransition = false;
         }
 
         public void UpdateState(Transform transform, Vector3 direction)
         {
-            if (!_enemiesMaster.ObjectIsReady) return;
-            DebugManager.Log<EnemiesMovement>($" Atualizando o Estado: Patrol");
+            if (!_obstacleMaster.ObjectIsReady) return;
+            DebugManager.Log<ObstacleMovement>($" Atualizando o Estado: Patrol");
             if (!_inTransition && _approachRange == 0)
             {
-                _enemiesMovement.ChangeState(new MoveStateHold(_enemiesMovement));
+                _obstacleMovement.ChangeState(new MoveStateHold(_obstacleMovement));
                 return;
             }
-            _target = _detectPlayerApproach.TargetApproach<PlayerMaster>(_enemiesMaster.layerPlayer);
+            _target = _detectPlayerApproach.TargetApproach<PlayerMaster>(_obstacleMaster.layerPlayer);
             if (_inTransition || !_target) return;
-            _enemiesMovement.ChangeState(new MoveStateMove(_enemiesMovement));
-            DebugManager.Log<EnemiesMovement>($" Target: {_target}");
+            _obstacleMovement.ChangeState(new MoveStateMove(_obstacleMovement));
+            DebugManager.Log<ObstacleMovement>($" Target: {_target}");
         }
 
         public void ExitState()
         {
-            DebugManager.Log<EnemiesMovement>($" Saindo do Estado: Patrol");
+            DebugManager.Log<ObstacleMovement>($" Saindo do Estado: Patrol");
             _target = null;
             _inTransition = true;
         }

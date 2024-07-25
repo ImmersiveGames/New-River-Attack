@@ -65,13 +65,13 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             _gamePlayManagers = GamePlayManager.instance;
             _enemiesMaster = GetComponent<EnemiesMaster>();
             _enemies = _enemiesMaster.objectDefault as EnemiesScriptable;
-            _shootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
+            ShootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
         }
 
         internal void UpdateCadenceShoot()
         {
             CadenceShoot = _enemies.cadenceShoot;
-            _shootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
+            ShootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
         }
 
         public override void SetDataBullet(ObjectMaster objectMaster)

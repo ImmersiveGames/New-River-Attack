@@ -3,23 +3,26 @@ using System.Threading.Tasks;
 using ImmersiveGames.BehaviorsManagers;
 using ImmersiveGames.BehaviorsManagers.Interfaces;
 using ImmersiveGames.Utils;
-using NewRiverAttack.ObstaclesSystems.BossSystems.Abstracts;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 {
-    public abstract class ShootBehavior : Behavior
+    public class CleanShootBehavior : Behavior
     {
         private BossBehavior BossBehavior { get; }
-        private readonly BossShoot _bossShoot;
+        private readonly BehaviorManager _behaviorManager;
         private PlayerMaster PlayerMaster { get; }
-
-        protected ShootBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors) : base(subBehaviors, "1")
+        private readonly object[] _dataShoot;
+        
+        private readonly BossCleanShoot _bossCleanShoot;
+        public CleanShootBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors,params object[] data) : base(subBehaviors)
         {
+            _behaviorManager = behaviorManager;
             BossBehavior = behaviorManager.BossBehavior;
             PlayerMaster = behaviorManager.BossBehavior.PlayerMaster;
-            _bossShoot = BossBehavior.GetComponent<BossCleanShoot>();
+            _bossCleanShoot = BossBehavior.GetComponent<BossCleanShoot>();
+            _dataShoot = data;
         }
         public override async Task EnterAsync(CancellationToken token)
         {
@@ -28,32 +31,37 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             await Task.Delay(100, token).ConfigureAwait(false);
             await UnityMainThreadDispatcher.EnqueueAsync(() =>
             {
-                _bossShoot.SetDataBullet(BossBehavior.BossMaster);
-                _bossShoot.UpdateCadenceShoot();
-                Debug.Log(_bossShoot);
-                _bossShoot.StartShoot();
+                var maxShoot = (int)(_dataShoot[0] ?? 5);
+             
+                if (_bossCleanShoot != null) 
+                    _bossCleanShoot.SetShoots(maxShoot);
+                _bossCleanShoot.SetDataBullet(BossBehavior.BossMaster);
+                _bossCleanShoot.UpdateCadenceShoot();
+                _bossCleanShoot.StartShoot();
             }).ConfigureAwait(false);
-            
-            Initialized = true;
 
         }
         
         public override async void UpdateAsync(CancellationToken token)
         {
             base.UpdateAsync(token);
-            await UnityMainThreadDispatcher.EnqueueAsync(() =>
+            await UnityMainThreadDispatcher.EnqueueAsync(async () =>
             {
-                if (_bossShoot && _bossShoot.ShouldBeShoot)
+                if (_bossCleanShoot && _bossCleanShoot.ShouldBeShoot)
                 {
-                    _bossShoot.AttemptShoot(BossBehavior.BossMaster, PlayerMaster.transform);
+                    _bossCleanShoot.AttemptShoot(BossBehavior.BossMaster, PlayerMaster.transform);
                 }
             }).ConfigureAwait(false);
+            /*Debug.Log($"Update Shoot Finalize: {Finalized}");
+            if (!_bossCleanShoot.EndCycle) return;
             await Task.Delay(100, token).ConfigureAwait(false);
+            Finalized = true;
+            await NextBehavior(_behaviorManager.SubBehaviorManager).ConfigureAwait(false);*/
             
         }
         public override async Task ExitAsync(CancellationToken token)
         {
-            _bossShoot.StopShoot();
+            _bossCleanShoot.StopShoot();
             await base.ExitAsync(token).ConfigureAwait(false);
 
         }

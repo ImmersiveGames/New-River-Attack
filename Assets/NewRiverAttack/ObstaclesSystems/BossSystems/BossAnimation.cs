@@ -1,4 +1,5 @@
-﻿using NewRiverAttack.GamePlayManagers;
+﻿using System.Linq;
+using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 
@@ -10,8 +11,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         public string onSubmerge = "Submerge";
         public string onGotHit = "GotHit";
         public string onDeath = "Death";
-
-        private BossVfxTag _smokeVFX;
+        
         private BossVfxTag _splashVFX;
 
         private bool _onDeath;
@@ -93,15 +93,20 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             _animator.SetBool(onDeath, true);
         }
 
-        private void SmokeBoss(Transform boss)
+        public void SmokeBoss()
         {
-            if (_smokeVFX != null)
+            var tagVFX = GetComponentsInChildren<BossVfxTag>();
+            var smokeVFX = (from tagName in tagVFX where tagName.idName == "Smokes" select tagName.transform).FirstOrDefault();
+            if (smokeVFX == null) return;
+            foreach (Transform child in smokeVFX)
             {
-                var smoke = Instantiate(_smokeVFX, boss);
+                if (child.gameObject.activeSelf) continue;
+                child.gameObject.SetActive(true);
+                break; // Para a iteração após ativar o primeiro filho
             }
         }
 
-        private void ActiveSplash()
+        /*private void ActiveSplash()
         {
             SetVfxTypes(GetComponentsInChildren<BossVfxTag>(true));
             _splashVFX.gameObject.SetActive(true);
@@ -110,28 +115,11 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             {
                 particle.Play();
             }
-        }
+        }*/
 
         public float GetSubmergeTime()
         {
             return Utils.Tools.GetAnimationDuration(_animator, onSubmerge);
-        }
-
-        private void SetVfxTypes(BossVfxTag[] vfxTags)
-        {
-            foreach (var vfx in vfxTags)
-            {
-                //Debug.Log(vfx.idName);
-                switch (vfx.idName)
-                {
-                    case "Smoke":
-                        _smokeVFX = vfx;
-                        break;
-                    case "Splash":
-                        _splashVFX = vfx;
-                        break;
-                }
-            }
         }
     }
 }

@@ -6,6 +6,8 @@ using NewRiverAttack.GameManagers;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
+using NewRiverAttack.ObstaclesSystems.AreaEffectSystems;
+using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
 using NewRiverAttack.SaveManagers;
 using UnityEngine;
@@ -64,7 +66,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         public event PlayerMasterPowerUpHandler EventPlayerMasterStartPowerUp;
         public event PlayerMasterPowerUpHandler EventPlayerMasterEndPowerUp;
 
-        public delegate void PlayerMasterAreaEffectHandler(ObstacleTypes obstacleTypes);
+        public delegate void PlayerMasterAreaEffectHandler(AreaEffectScriptable areaEffectScriptable);
 
         public event PlayerMasterAreaEffectHandler EventPlayerMasterAreaEffectStart;
         public event PlayerMasterAreaEffectHandler EventPlayerMasterAreaEffectEnd;
@@ -72,6 +74,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         public delegate void PlayerMasterToggleHandler(bool active);
 
         public event PlayerMasterToggleHandler EventPlayerMasterToggleSkin;
+        public event PlayerMasterToggleHandler EventPlayerMasterStopDecoyFuel;
 
         #endregion
 
@@ -235,14 +238,14 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             EventPlayerMasterEndPowerUp?.Invoke(activePowerUp);
         }
 
-        internal void OnEventPlayerMasterAreaEffectStart(ObstacleTypes obstacleTypes)
+        internal void OnEventPlayerMasterAreaEffectStart(AreaEffectScriptable areaEffectScriptable)
         {
-            EventPlayerMasterAreaEffectStart?.Invoke(obstacleTypes);
+            EventPlayerMasterAreaEffectStart?.Invoke(areaEffectScriptable);
         }
 
-        internal void OnEventPlayerMasterAreaEffectEnd(ObstacleTypes obstacleTypes)
+        internal void OnEventPlayerMasterAreaEffectEnd(AreaEffectScriptable areaEffectScriptable)
         {
-            EventPlayerMasterAreaEffectEnd?.Invoke(obstacleTypes);
+            EventPlayerMasterAreaEffectEnd?.Invoke(areaEffectScriptable);
         }
 
         internal void OnEventPlayerMasterToggleSkin(bool active)
@@ -252,6 +255,10 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void OnEventPlayerMasterForceExplode()
         {
             EventPlayerMasterForceExplode?.Invoke();
+        }
+        internal void OnEventPlayerMasterStopDecoyFuel(bool pause)
+        {
+            EventPlayerMasterStopDecoyFuel?.Invoke(pause);
         }
         #endregion
 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c382620741fa430695158a3db9fa2aad, type: 3}
   m_Name: GasStationBoss
   m_EditorClassIdentifier: 
-  canRespawn: 1
+  canRespawn: 0
   canKilled: 1
   ignoreWalls: 1
   ignoreEnemies: 1
@@ -20,9 +20,9 @@ MonoBehaviour:
   name: Gas Station
   localizeName:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:4324ceb956596944f87fd26e389fce55
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 62897066051137536
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
   hitPoints: 1
   valueScore: 50
   defaultPrefabSkin:
-  - {fileID: 3857086621416831841, guid: c9a17af5e65b68e4aa88fa6aa4058380, type: 3}
+  - {fileID: 3857086621416831841, guid: 0bde2fdbf56f3064090b3a1f4e5f885c, type: 3}
   randomSkin: 0
   deadParticlePrefab: {fileID: 1471142367968716, guid: 481f99896f44194498a80282666de8c7,
     type: 3}
@@ -39,7 +39,8 @@ MonoBehaviour:
   explodeSize: 0.7
   shakeIntensity: 2
   shakeTime: 0.1
-  moveVelocity: 5
+  areaEffectCadence: 12
+  moveVelocity: 6
   animationDuration: 0
   animationCurve:
     serializedVersion: 2

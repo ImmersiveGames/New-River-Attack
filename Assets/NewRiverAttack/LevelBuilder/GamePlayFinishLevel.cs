@@ -1,12 +1,7 @@
-﻿using System;
-using ImmersiveGames;
-using ImmersiveGames.CameraManagers;
+﻿using ImmersiveGames.CameraManagers;
 using NewRiverAttack.GameManagers;
-using NewRiverAttack.GamePlayManagers;
-using NewRiverAttack.HUBManagers;
 using NewRiverAttack.LevelBuilder.Abstracts;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
-using NewRiverAttack.StateManagers;
 using UnityEngine;
 
 namespace NewRiverAttack.LevelBuilder
@@ -27,32 +22,9 @@ namespace NewRiverAttack.LevelBuilder
             base.OnTriggerEnter(other);
             var playerMaster = other.GetComponentInParent<PlayerMaster>();
             if( playerMaster == null || playerMaster.IsDisable || !InFinisher) return;
-            AudioManager.PlayBGMOneShot("Finish");
-            CameraManager.ActiveEndCamera(true);
-            GamePlayManagerRef.OnEventGameFinisher();
-            
-            switch (GameManager.instance.gamePlayMode)
-            {
-                case GamePlayModes.MissionMode:
-                    GameManager.instance.ActiveLevel.hudPath.levelsStates = LevelsStates.Complete;
-                    Invoke(nameof(SendToHub), 2f);
-                    break;
-                case GamePlayModes.ClassicMode:
-                    Invoke(nameof(SendToCompleteGame), 2f);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
+            GamePlayManagerRef.FinisherGame();
+            //GamePlayManagerRef.SendTo(GameManager.instance.gamePlayMode);
 
-        private async void SendToHub()
-        {
-            await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateHub.ToString()).ConfigureAwait(false);
-        }
-        
-        private async void SendToCompleteGame()
-        {
-            await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateEndGame.ToString()).ConfigureAwait(false);
         }
     }
 }

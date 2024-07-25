@@ -50,7 +50,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void UpdateCadenceShoot(ShopProductSkin shopProductSkin)
         {
             CadenceShoot = shopProductSkin.cadenceShoot;
-            _shootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
+            ShootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
         }
 
         public override void SetDataBullet(ObjectMaster objectMaster)

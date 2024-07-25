@@ -11,7 +11,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
     public abstract class ObstacleCollider : MonoBehaviour
     {
         protected ObstacleMaster ObstacleMaster;
-        private int _obstacleHp;
+        protected int ObstacleHp;
         #region Unity Methods
 
         private void Awake()
@@ -19,9 +19,9 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             ObstacleMaster = GetComponent<ObstacleMaster>();
         }
 
-        private void Start()
+        protected virtual void Start()
         {
-            _obstacleHp = ObstacleMaster.objectDefault.hitPoints;
+            ObstacleHp = ObstacleMaster.objectDefault.hitPoints;
         }
 
         internal virtual void OnTriggerEnter(Collider other)
@@ -39,11 +39,11 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             if (other == null || !ObstacleMaster.ObjectIsReady || !ObstacleMaster.objectDefault.canKilled) return;
             var playerWhoHit = WhoHit<PlayerMaster>(other);
             if (playerWhoHit == null) return;
-            ObstacleMaster.OnEventObstacleHit(playerWhoHit);
             var damage = SetDamage(other);
-            DebugManager.Log<ObstacleCollider>($"DAMAGE! {damage}, HP {_obstacleHp} - {other}");
-            _obstacleHp -= damage;
-            if (_obstacleHp > 0) return;
+            DebugManager.Log<ObstacleCollider>($"DAMAGE! {damage}, HP {ObstacleHp} - {other}");
+            ObstacleHp -= damage;
+            ObstacleMaster.OnEventObstacleHit(playerWhoHit);
+            if (ObstacleHp > 0) return;
             playerWhoHit.SetPlayerScore(ObstacleMaster.objectDefault.GetScore());
             ObstacleMaster.OnEventObstacleDeath(playerWhoHit);
 

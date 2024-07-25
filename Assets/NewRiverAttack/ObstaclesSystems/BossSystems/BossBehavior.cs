@@ -12,20 +12,27 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 {
     public class BossBehavior : MonoBehaviour
     {
+        public GameObject gasStation;
+        
         private BehaviorManager _behaviorManager;
         private GamePlayManager _gamePlayManager;
         private GamePlayBossManager _gamePlayBossManager;
 
         public PlayerMaster PlayerMaster { get; private set; }
         public BossMaster BossMaster { get; private set; }
-        
-        
 
         private void OnEnable()
         {
             SetInitialReferences();
             _gamePlayManager.EventPlayerInitialize += GetPlayerMaster;
+            BossMaster.EventObstacleDeath += DeathBoss;
             _gamePlayBossManager.EventEnterBoss += BossGameReady;
+        }
+
+        private async void DeathBoss(PlayerMaster playerMaster)
+        {
+            if( playerMaster == null || !BossMaster.IsDead) return;
+            await _behaviorManager.ChangeBehaviorAsync("DeathBehavior").ConfigureAwait(false);
         }
 
         private void Start()
@@ -37,26 +44,26 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             var testeC = new TestSubBehaviorsC(_behaviorManager, Array.Empty<IBehavior>());
             var testeD = new TestSubBehaviorsD(_behaviorManager, Array.Empty<IBehavior>());
             
-            //var cleanShootBehavior = new ShootBehavior(_behaviorManager,Array.Empty<IBehavior>());
+            var cleanShootBehavior = new CleanShootBehavior(_behaviorManager,Array.Empty<IBehavior>(), 3);
             var multiMissiles09 = new MissileBehavior(_behaviorManager,Array.Empty<IBehavior>(),9,90f,5);
             var multiMissiles05 = new MissileBehavior(_behaviorManager,Array.Empty<IBehavior>(),5,60f,3);
             
-            var emergeBehavior = new EmergeBehavior(_behaviorManager,Array.Empty<IBehavior>());
-            var submergeBehavior = new SubmergeBehavior(_behaviorManager,Array.Empty<IBehavior>());
             
             var mineBehavior = new MineBehavior(_behaviorManager,Array.Empty<IBehavior>());
             var enterSceneBehavior = new EnterSceneBehavior(_behaviorManager, Array.Empty<IBehavior>());
             
-            var moveNorthBehavior = new MoveNorthBehavior(_behaviorManager, new IBehavior[]{multiMissiles05,multiMissiles09,mineBehavior});
-            var moveSouthBehavior = new MoveSouthBehavior(_behaviorManager, new IBehavior[]{testeB,testeC,testeB});
+            var moveNorthBehavior = new MoveNorthBehavior(_behaviorManager, new IBehavior[]{multiMissiles05,multiMissiles09,mineBehavior,cleanShootBehavior});
+            var moveSouthBehavior = new MoveSouthBehavior(_behaviorManager, new IBehavior[]{multiMissiles05,testeC,testeB});
             var moveEastBehavior = new MoveEastBehavior(_behaviorManager, new IBehavior[]{multiMissiles05,multiMissiles09});
-            var moveWestBehavior = new MoveWestBehavior(_behaviorManager, new IBehavior[]{testeC,testeA,testeC});
+            var moveWestBehavior = new MoveWestBehavior(_behaviorManager, new IBehavior[]{multiMissiles05,testeA,testeC});
+            var deathBehavior = new DeathBehavior(_gamePlayManager, Array.Empty<IBehavior>());
 
             _behaviorManager.AddBehavior(enterSceneBehavior);
             _behaviorManager.AddBehavior(moveNorthBehavior);
             _behaviorManager.AddBehavior(moveSouthBehavior);
             _behaviorManager.AddBehavior(moveEastBehavior);
             _behaviorManager.AddBehavior(moveWestBehavior);
+            _behaviorManager.AddBehavior(deathBehavior);
         }
 
         private async void Update()
@@ -76,7 +83,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             }
             if (Input.GetKey(KeyCode.Alpha1))
             {
-                await _behaviorManager.SubBehaviorManager.ChangeBehaviorAsync("TestSubBehaviorsA").ConfigureAwait(false);
+                await _behaviorManager.SubBehaviorManager.ChangeBehaviorAsync("CleanShootBehavior").ConfigureAwait(false);
             }
             if (Input.GetKey(KeyCode.Alpha2))
             {
@@ -97,6 +104,8 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         private void OnDisable()
         {
+            _gamePlayManager.EventPlayerInitialize -= GetPlayerMaster;
+            BossMaster.EventObstacleDeath -= DeathBoss;
             _gamePlayBossManager.EventEnterBoss -= BossGameReady;
         }
 

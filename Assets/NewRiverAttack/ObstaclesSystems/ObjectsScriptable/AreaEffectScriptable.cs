@@ -6,6 +6,8 @@ namespace NewRiverAttack.ObstaclesSystems.ObjectsScriptable
     [CreateAssetMenu(fileName = "AreaEffect", menuName = "ImmersiveGames/RiverAttack/AreaEffect", order = 203)]
     public class AreaEffectScriptable : ObjectsScriptable
     {
+        [Header("Power Up Cadence")]
+        public float areaEffectCadence = 6f;
         [Header("Movement Settings")] [Range(0, 50)]
         public float moveVelocity;
 

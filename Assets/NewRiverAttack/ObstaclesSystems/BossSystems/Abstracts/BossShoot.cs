@@ -11,6 +11,8 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Abstracts
         [Range(5f, 40f)] public float speedShoot;
         [Range(0, 10)] public int damageShoot;
         [Range(0.1f, 5f)] public float cadenceShoot;
+
+        protected internal bool EndShoot;
         
         private BossMaster _bossMaster;
         private bool _isShoot;
@@ -29,7 +31,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Abstracts
         {
             base.SetInitialReferences();
             _bossMaster = GetComponent<BossMaster>();
-            _shootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
+            ShootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
         }
 
         public override void SetDataBullet(ObjectMaster objectMaster)
@@ -41,7 +43,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Abstracts
         internal virtual void UpdateCadenceShoot()
         {
             CadenceShoot = cadenceShoot;
-            _shootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
+            ShootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
         }
         
         public bool ShouldBeShoot => _isShoot && !_bossMaster.IsDead && !_bossMaster.IsDisable && !GamePlayManager.instance.IsPause;

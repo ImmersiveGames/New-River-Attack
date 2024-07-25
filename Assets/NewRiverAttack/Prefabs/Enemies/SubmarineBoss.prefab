@@ -11,37 +11,48 @@ PrefabInstance:
     - target: {fileID: 1317149263009183397, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.41479734
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1317149263009183397, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.00000001930763
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1317149263009183397, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.90991384
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1317149263009183397, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000648511
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1317149263009183397, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 360
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1317149263009183397, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 229.013
+      value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 6688330522074115381, guid: c4bed2524d6c2be458e7205159ddbb5b,
+        type: 3}
+      propertyPath: gasStation
+      value: 
+      objectReference: {fileID: 834139095582931611, guid: 6e08394c7f60711468021abfca52a7a6,
+        type: 3}
     - target: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
       propertyPath: m_Name
       value: SubmarineBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408341225404105196, guid: c4bed2524d6c2be458e7205159ddbb5b,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_Splash
       objectReference: {fileID: 0}
     - target: {fileID: 8533113740490216117, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
@@ -61,7 +72,7 @@ PrefabInstance:
     - target: {fileID: 8533113740490216117, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8533113740490216117, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
@@ -71,7 +82,7 @@ PrefabInstance:
     - target: {fileID: 8533113740490216117, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8533113740490216117, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
@@ -86,7 +97,7 @@ PrefabInstance:
     - target: {fileID: 8533113740490216117, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8533113740490216117, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
@@ -95,7 +106,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7183392156721996561, guid: c4bed2524d6c2be458e7205159ddbb5b, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6072724708906766231, guid: c4bed2524d6c2be458e7205159ddbb5b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
@@ -106,6 +118,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -6754764738268101092}
+    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3702190514856154776}
   m_SourcePrefab: {fileID: 100100000, guid: c4bed2524d6c2be458e7205159ddbb5b, type: 3}
 --- !u!1 &3351906142001725201 stripped
 GameObject:
@@ -160,9 +176,32 @@ MonoBehaviour:
   speedShoot: 10
   damageShoot: 1
   cadenceShoot: 1
-  debugGrade: 1
+  debugGrade: 0
   numColumns: 10
   numLines: 8
   numMines: 10
   quadrantsBlocked: []
   usedQuadrants: []
+--- !u!114 &-3702190514856154776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3351906142001725201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3bf73c5f17c4f9f87f1183b31ef2c5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabBullet: {fileID: 1678599070653623651, guid: 3c74fc8416c495444b1c82ceef276d19,
+    type: 3}
+  initialPoolSize: 10
+  persistent: 0
+  lockAtTarget: 1
+  poolName: 
+  bulletLifeTime: 2
+  speedShoot: 10
+  damageShoot: 1
+  cadenceShoot: 1
+  maxShoot: 0

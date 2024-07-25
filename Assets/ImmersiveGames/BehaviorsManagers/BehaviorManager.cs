@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ImmersiveGames.BehaviorsManagers.Interfaces;
 using ImmersiveGames.DebugManagers;
 using NewRiverAttack.ObstaclesSystems.BossSystems;
+using UnityEngine;
 
 namespace ImmersiveGames.BehaviorsManagers
 {
@@ -31,6 +33,23 @@ namespace ImmersiveGames.BehaviorsManagers
             _behaviors[behavior.Name] = behavior;
         }
 
+        public async Task NextBehavior()
+        {
+            if (_behaviors.Count <= 0) return;
+            var behaviorsNames = _behaviors.Keys.ToArray();
+            if (CurrentIndex +1 >= 0 && CurrentIndex +1 < behaviorsNames.Length)
+            {
+                CurrentIndex++;
+                var nextBehavior = behaviorsNames[CurrentIndex];
+                await ChangeBehaviorAsync(nextBehavior).ConfigureAwait(false);
+            }
+        }
+
+        public string[] GetBehaviorsNames()
+        {
+            return _behaviors.Keys.ToArray();
+        }
+
         private void AddBehavior(IBehavior[] behaviors)
         {
             foreach (var behavior in behaviors)
@@ -42,7 +61,7 @@ namespace ImmersiveGames.BehaviorsManagers
         {
             if (_inTransition) return;
 
-            //DebugManager.Log<BehaviorManager>($"Chamou o Change: {behaviorName}");
+            DebugManager.Log<BehaviorManager>($"Chamou o Change: {behaviorName}");
             _inTransition = true;
 
             var token = _cancellationTokenSource.Token;
@@ -59,13 +78,13 @@ namespace ImmersiveGames.BehaviorsManagers
                 if (SubBehaviorManager != null)
                 {
                     SubBehaviorManager.CurrentBehavior.Finalized = true;
-                    //DebugManager.Log<BehaviorManager>($"Sub Finalizar: {CurrentBehavior.Name}");
+                    DebugManager.Log<BehaviorManager>($"Sub Finalizar: {CurrentBehavior.Name}");
                     await SubBehaviorManager.CurrentBehavior.ExitAsync(token).ConfigureAwait(false);
                     SubBehaviorManager.CurrentBehavior.Initialized = false;
                 }
 
                 CurrentBehavior.Finalized = true;
-                //DebugManager.Log<BehaviorManager>($"Finalizar: {CurrentBehavior.Name}");
+                DebugManager.Log<BehaviorManager>($"Finalizar: {CurrentBehavior.Name}");
                 await CurrentBehavior.ExitAsync(token).ConfigureAwait(false);
                 CurrentBehavior.Initialized = false;
             }
@@ -76,7 +95,7 @@ namespace ImmersiveGames.BehaviorsManagers
 
             await Task.Delay(100, token).ConfigureAwait(false);
 
-            //DebugManager.Log<BehaviorManager>($"Entrar: {CurrentBehavior.Name}");
+            DebugManager.Log<BehaviorManager>($"Entrar: {CurrentBehavior.Name}");
             await CurrentBehavior.EnterAsync(token).ConfigureAwait(false);
 
             if (CurrentBehavior.SubBehaviors.Length > 0)
@@ -88,8 +107,6 @@ namespace ImmersiveGames.BehaviorsManagers
             }
             _inTransition = false;
         }
-
-
         public void UpdateAsync()
         {
             if (CurrentBehavior == null) return;

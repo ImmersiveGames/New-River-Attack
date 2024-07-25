@@ -10,7 +10,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
     public abstract class ObjectShoot : MonoBehaviour
     {
         [Header("Pool Settings")] [SerializeField]
-        private GameObject prefabBullet;
+        public GameObject prefabBullet;
 
         [SerializeField] private int initialPoolSize = 10;
         public bool persistent;
@@ -28,7 +28,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         private Transform _poolRoot;
         protected Transform SpawnPoint;
-        protected ShootSpawnPoint _shootSpawnPoint;
+        protected ShootSpawnPoint ShootSpawnPoint;
         protected IPoolManager PoolManager;
 
         protected GameObject Bullet;
@@ -63,7 +63,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         {
             _target = target;
             if (!objectMaster.ObjectIsReady) return;
-            var spawn = _shootSpawnPoint.transform;
+            var spawn = ShootSpawnPoint.transform;
             SpawnPoint = transform;
             if (spawn != null && SpawnPoint != spawn)
             {
@@ -92,16 +92,15 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             Bullet = PoolManager.GetObjectFromPool<IPoolable>(poolName, SpawnPoint, BulletData);
         }
 
-        private void PointTowardsTarget(Transform spawnPoint, Vector3 target)
+        private static void PointTowardsTarget(Transform spawnPoint, Vector3 target)
         {
             // Calcula a direção do vetor entre o spawn point e o alvo
             var directionToTarget = target - spawnPoint.position;
 
             // Altera a rotação do spawn point para apontar para o alvo
             spawnPoint.rotation = Quaternion.LookRotation(directionToTarget);
-            
         }
-
+        
         public abstract void SetDataBullet(ObjectMaster objectMaster);
 
 

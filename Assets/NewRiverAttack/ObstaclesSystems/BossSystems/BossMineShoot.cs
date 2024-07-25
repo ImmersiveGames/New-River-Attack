@@ -57,12 +57,12 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             {
                 _actualMines++;
                 Fire();
-                DebugManager.Log<ObjectShoot>($"Atira {_actualMines}, {numMines}");
+                DebugManager.Log<BossMineShoot>($"Atira {_actualMines}, {numMines}");
                 LastActionTime = Time.realtimeSinceStartup;
             }
-            else
+            if (_actualMines >= numMines)
             {
-                DebugManager.Log<ObjectShoot>($"Não pode Atirar");
+                EndShoot = true;
             }
         }
 

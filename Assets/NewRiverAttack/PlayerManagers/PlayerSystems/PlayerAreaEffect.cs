@@ -1,6 +1,7 @@
 ﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ObjectManagers.Interfaces;
 using NewRiverAttack.ObstaclesSystems.AreaEffectSystems;
+using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using UnityEngine;
 
 namespace NewRiverAttack.PlayerManagers.PlayerSystems
@@ -25,7 +26,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _areaEffect.EnterEffect();
             var areaEffectMaster = _areaEffect as AreaEffectMaster;
             if (areaEffectMaster == null) return;
-            _playerMaster.OnEventPlayerMasterAreaEffectStart(areaEffectMaster.GetScriptableSettings.obstacleTypes);
+            _playerMaster.OnEventPlayerMasterAreaEffectStart(areaEffectMaster.GetObjectScriptable<AreaEffectScriptable>());
         }
 
         private void OnTriggerExit(Collider other)
@@ -36,7 +37,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _areaEffect.ExitEffect();
             var areaEffectMaster = _areaEffect as AreaEffectMaster;
             if (areaEffectMaster == null) return;
-            _playerMaster.OnEventPlayerMasterAreaEffectEnd(areaEffectMaster.GetScriptableSettings.obstacleTypes);
+            _playerMaster.OnEventPlayerMasterAreaEffectEnd(areaEffectMaster.GetObjectScriptable<AreaEffectScriptable>());
         }
 
         #endregion

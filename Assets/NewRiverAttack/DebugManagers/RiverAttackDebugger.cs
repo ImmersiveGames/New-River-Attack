@@ -124,13 +124,15 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<BossMaster>(DebugManager.DebugLevels.None);
             
             //Behaviors
-            DebugManager.SetScriptDebugLevel<BehaviorManager>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<BehaviorManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<Behavior>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<BossBehavior>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<GamePlayBossManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<EnterSceneBehavior>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<MoveNorthBehavior>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<ShootBehavior>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<CleanShootBehavior>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<BossMineShoot>(DebugManager.DebugLevels.All);
+            
             
         }
     }

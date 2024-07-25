@@ -15,7 +15,6 @@ namespace RiverAttack
         }
         public void Enter()
         {
-            Debug.Log($"Entrando no comportamento Emergir {_mBossMasterOld.targetPlayer}");
             _mBossMasterOld.BossInvulnerability(true);
             // Lógica de entrada para o comportamento Emergir
             m_Finished = false;
@@ -36,7 +35,6 @@ namespace RiverAttack
         public void Exit()
         {
             //m_BossMaster.BossInvulnerability(false);
-            Debug.Log("Saindo do comportamento Emergir");
             //m_BossMaster.invulnerability = false;
             // Lógica de saída para o comportamento Emergir
         }
