@@ -75,6 +75,7 @@ namespace NewRiverAttack.BulletsManagers
 
         private void MoveShoot()
         {
+            Debug.Log($"Submarino: Dead: {_enemiesMaster.IsDead}, Disable {_enemiesMaster.IsDisable}");
             if (_enemiesMaster != null && _enemiesMaster.ObjectIsReady)
             {
                 var speedy = BulletData.BulletSpeed * Time.deltaTime;

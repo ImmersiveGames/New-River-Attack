@@ -20,9 +20,10 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         [Header("Bullet Settings")] [SerializeField, Range(0.5f, 4f)]
         protected float bulletLifeTime = 2f;
+        [Range(0, 10)] public int timesRepeat;
 
         protected float CadenceShoot;
-        protected float LastActionTime;
+        private float _lastActionTime;
 
         protected BulletData BulletData;
 
@@ -78,8 +79,8 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             if (!IsOnCooldown(cooldown))
             {
                 Fire();
-                DebugManager.Log<ObjectShoot>($"Atira");
-                LastActionTime = Time.realtimeSinceStartup;
+                _lastActionTime = Time.realtimeSinceStartup;
+                timesRepeat--;
             }
             else
             {
@@ -118,9 +119,9 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             };
         }
 
-        protected bool IsOnCooldown(float cooldown)
+        private bool IsOnCooldown(float cooldown)
         {
-            return Time.realtimeSinceStartup - LastActionTime < cooldown;
+            return Time.realtimeSinceStartup - _lastActionTime < cooldown;
         }
     }
 }

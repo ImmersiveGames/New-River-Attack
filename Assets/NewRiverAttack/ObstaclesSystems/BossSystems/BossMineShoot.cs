@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ImmersiveGames.DebugManagers;
 using ImmersiveGames.PoolManagers.Interface;
 using NewRiverAttack.GamePlayManagers;
-using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.BossSystems.Abstracts;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems
 {
@@ -33,37 +32,23 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         {
             poolName = $"Pool ({nameof(BossMineShoot)})";
             _camera = Camera.main;
-            SpawnPoint = new GameObject().transform;
-            SpawnPoint.name = "MinesSpawnPoint";
+            _spawnPoint = new GameObject().transform;
+            _spawnPoint.name = "MinesSpawnPoint";
         }
 
         internal override void UpdateCadenceShoot()
         {
             base.UpdateCadenceShoot();
-            _actualMines = 0;
             _viewSize = new Vector2(_camera!.orthographicSize * 2.0f * _camera.aspect, _camera!.orthographicSize * 2.0f);
             _sizeQuadrant = new Vector2(_viewSize.x / numColumns, _viewSize.y / numLines);
             usedQuadrants = new List<Vector2Int>();
             usedQuadrants.AddRange(quadrantsBlocked);
         }
-
-        internal override void AttemptShoot(ObjectMaster objectMaster, Transform target = null)
+        public void SetShoots(int mines, float cadence)
         {
-            if (!objectMaster.ObjectIsReady) return;
-            var cooldown = CadenceShoot;
-            
-            if (usedQuadrants.Count >= numColumns * numLines) return;
-            if (!IsOnCooldown(cooldown) && _actualMines < numMines)
-            {
-                _actualMines++;
-                Fire();
-                DebugManager.Log<BossMineShoot>($"Atira {_actualMines}, {numMines}");
-                LastActionTime = Time.realtimeSinceStartup;
-            }
-            if (_actualMines >= numMines)
-            {
-                EndShoot = true;
-            }
+            //numMines = mines <= 0 ? numMines : mines;
+            timesRepeat = mines <= 0 ? numMines : mines;
+            CadenceShoot = cadence <= 0 ? CadenceShoot : cadence;
         }
 
         protected override void Fire()
@@ -83,12 +68,12 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             // define a posição do quadrante sorteado
             var posX = ((indexQuadrants.x + 0.5f) * _sizeQuadrant.x) - (_viewSize.x / 2.0f) + OffsetX;
             var posZ = ((indexQuadrants.y + 0.5f) * _sizeQuadrant.y) - (_viewSize.y / 2.0f) + OffsetZ;
-            SpawnPoint.position = transform.position;
+            _spawnPoint.position = transform.position;
             var randomPosition = new Vector3(posX, OffsetY, posZ);
             
-            SpawnPoint.position += randomPosition;
+            _spawnPoint.position += randomPosition;
             
-            Bullet = PoolManager.GetObjectFromPool<IPoolable>(poolName, SpawnPoint, BulletData);
+            Bullet = PoolManager.GetObjectFromPool<IPoolable>(poolName, _spawnPoint, BulletData);
         }
 
         private static bool QuadrantAlreadySort(IEnumerable<Vector2Int> quadrantsFull, int x, int z)

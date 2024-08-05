@@ -11,9 +11,10 @@ namespace ImmersiveGames.BehaviorsManagers.Interfaces
         IBehavior[] SubBehaviors { get; }
         bool Initialized { get; set; }
         bool Finalized { get; set; }
-        
+
         Task EnterAsync(CancellationToken token);
         void UpdateAsync(CancellationToken token);
         Task ExitAsync(CancellationToken token);
+        
     }
 }

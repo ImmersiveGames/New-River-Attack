@@ -7,13 +7,19 @@ using NewRiverAttack.ObstaclesSystems.AreaEffectSystems;
 using NewRiverAttack.ObstaclesSystems.BossSystems;
 using NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours;
 using UnityEngine;
+using Random = System.Random;
 
 namespace ImmersiveGames.BehaviorsManagers
 {
     public abstract class Behavior : IBehavior
     {
-        private const double MinimumDistance = 10;
+        
         private const int DebugDelay = 100;
+
+        protected int Cycles;
+
+        protected bool ChangeBehavior;
+        protected bool ChangeSubBehavior;
 
         protected Behavior(IBehavior[] subBehaviors, string identifier = "")
         {
@@ -31,22 +37,38 @@ namespace ImmersiveGames.BehaviorsManagers
         public bool Initialized { get; set; }
         public bool Finalized { get; set; }
 
+        #region State Machine
+
         public virtual async Task EnterAsync(CancellationToken token)
         {
             await Task.Delay(DebugDelay, token).ConfigureAwait(false);
-            DebugManager.Log<Behavior>($"Enter {GetType().Name}.");
+            DebugManager.Log<Behavior>($"Enter {GetType().Name}. Finalize: {Finalized}");
         }
 
         public virtual async void UpdateAsync(CancellationToken token)
         {
             await Task.Delay(DebugDelay, token).ConfigureAwait(false);
-            DebugManager.Log<Behavior>($"Update {GetType().Name}.");
+            DebugManager.Log<Behavior>($"Update {GetType().Name}. Finalize: {Finalized}");
         }
 
         public virtual async Task ExitAsync(CancellationToken token)
         {
             await Task.Delay(DebugDelay, token).ConfigureAwait(false);
-            DebugManager.Log<Behavior>($"Exit {GetType().Name}.");
+            DebugManager.Log<Behavior>($"Exit {GetType().Name}. Finalize: {Finalized}");
+        }
+
+        #endregion
+       
+
+        #region Funções Auxiliatres
+
+        protected string GetRandomBehavior(string[] nameBehaviors)
+        {
+            if (nameBehaviors.Length <= 0) return nameBehaviors[0];
+            var random = new Random();
+            var indexRandom = random.Next(nameBehaviors.Length);
+            return nameBehaviors[indexRandom];
+
         }
         protected static async Task Emerge( BossMaster bossMaster, CancellationToken token, bool emerge)
         {
@@ -76,10 +98,10 @@ namespace ImmersiveGames.BehaviorsManagers
             await UnityMainThreadDispatcher.EnqueueAsync( () =>
             {
                 var myDirection = bossMovement.GetRelativeDirection(obstacleTransform.transform.position);
-                DebugManager.Log<MoveWestBehavior>($"Direção: {myDirection}");
+                DebugManager.Log<Behavior>($"Direção: {myDirection}");
 
                 if (myDirection == bossMovement.MyDirection) return;
-                DebugManager.Log<MoveWestBehavior>($"Estou numa posição diferente preciso me mover");
+                DebugManager.Log<Behavior>($"Estou numa posição diferente preciso me mover");
                 var newPosition = bossMovement.GetNewPosition(bossMovement.MyDirection, distance);
                 obstacleTransform.transform.position = newPosition;
             }).ConfigureAwait(false);
@@ -88,6 +110,7 @@ namespace ImmersiveGames.BehaviorsManagers
         {
             await UnityMainThreadDispatcher.EnqueueAsync( () =>
             {
+                if (bossBehavior.BossMaster.IsDead) return;
                 var gasPosition = bossBehavior.transform.position;
                 var newObj = Object.Instantiate(bossBehavior.gasStation);
                 newObj.SetActive(true);
@@ -96,13 +119,19 @@ namespace ImmersiveGames.BehaviorsManagers
                 newObj.transform.position = new Vector3(gasPosition.x, 0, gasPosition.z);
             }).ConfigureAwait(false);
         }
+        
 
-        protected async Task NextBehavior(BehaviorManager behaviorManager)
+        protected bool AreaDistance(BossBehavior bossBehavior, float minDistance)
         {
-            if (!Finalized) return;
-            Finalized = true;
-            await behaviorManager.NextBehavior().ConfigureAwait(false);
+            if (bossBehavior.BossMaster.IsDead) return false;
+            var targetPosition = bossBehavior.PlayerMaster.transform.position;
+            var bossPosition = bossBehavior.transform.position;
+            var distance = Vector3.Distance(bossPosition, targetPosition);
+            return !(minDistance >= distance);
         }
+
+        #endregion
+        
         
     }
 }

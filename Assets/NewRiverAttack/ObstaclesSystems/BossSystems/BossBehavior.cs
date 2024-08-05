@@ -1,12 +1,10 @@
 ﻿using System;
 using ImmersiveGames.BehaviorsManagers;
 using ImmersiveGames.BehaviorsManagers.Interfaces;
-using ImmersiveGames.Utils;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems
 {
@@ -38,24 +36,18 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         private void Start()
         {
             _behaviorManager = new BehaviorManager(this);
-
-            var testeA = new TestSubBehaviorsA(_behaviorManager, Array.Empty<IBehavior>());
-            var testeB = new TestSubBehaviorsB(_behaviorManager, Array.Empty<IBehavior>());
-            var testeC = new TestSubBehaviorsC(_behaviorManager, Array.Empty<IBehavior>());
-            var testeD = new TestSubBehaviorsD(_behaviorManager, Array.Empty<IBehavior>());
             
-            var cleanShootBehavior = new CleanShootBehavior(_behaviorManager,Array.Empty<IBehavior>(), 3);
-            var multiMissiles09 = new MissileBehavior(_behaviorManager,Array.Empty<IBehavior>(),9,90f,5);
-            var multiMissiles05 = new MissileBehavior(_behaviorManager,Array.Empty<IBehavior>(),5,60f,3);
+            //var cleanShootBehavior = new CleanShootBehavior(_behaviorManager,Array.Empty<IBehavior>(), 0.5f,8);
+            var multiMissiles09 = new MissileBehavior(_behaviorManager,Array.Empty<IBehavior>(),9,90f,1f,2);
+            var multiMissiles05 = new MissileBehavior(_behaviorManager,Array.Empty<IBehavior>(),5,60f,1f,3);
+            var mineBehavior = new MineBehavior(_behaviorManager,Array.Empty<IBehavior>(),10,1f);
             
-            
-            var mineBehavior = new MineBehavior(_behaviorManager,Array.Empty<IBehavior>());
             var enterSceneBehavior = new EnterSceneBehavior(_behaviorManager, Array.Empty<IBehavior>());
             
-            var moveNorthBehavior = new MoveNorthBehavior(_behaviorManager, new IBehavior[]{multiMissiles05,multiMissiles09,mineBehavior,cleanShootBehavior});
-            var moveSouthBehavior = new MoveSouthBehavior(_behaviorManager, new IBehavior[]{multiMissiles05,testeC,testeB});
+            var moveNorthBehavior = new MoveNorthBehavior(_behaviorManager, new IBehavior[]{multiMissiles05, multiMissiles09});
+            var moveSouthBehavior = new MoveSouthBehavior(_behaviorManager, new IBehavior[]{multiMissiles05,multiMissiles09});
             var moveEastBehavior = new MoveEastBehavior(_behaviorManager, new IBehavior[]{multiMissiles05,multiMissiles09});
-            var moveWestBehavior = new MoveWestBehavior(_behaviorManager, new IBehavior[]{multiMissiles05,testeA,testeC});
+            var moveWestBehavior = new MoveWestBehavior(_behaviorManager, new IBehavior[]{multiMissiles05,multiMissiles09});
             var deathBehavior = new DeathBehavior(_gamePlayManager, Array.Empty<IBehavior>());
 
             _behaviorManager.AddBehavior(enterSceneBehavior);
@@ -66,37 +58,8 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             _behaviorManager.AddBehavior(deathBehavior);
         }
 
-        private async void Update()
+        private void Update()
         {
-            if (Input.GetKey(KeyCode.I))
-            {
-                await _behaviorManager.ChangeBehaviorAsync("MoveNorthBehavior").ConfigureAwait(false);
-            }
-            if (Input.GetKey(KeyCode.J))
-            {
-                await _behaviorManager.ChangeBehaviorAsync("MoveWestBehavior").ConfigureAwait(false);
-            }
-            
-            if (Input.GetKey(KeyCode.K))
-            {
-                await _behaviorManager.ChangeBehaviorAsync("MoveSouthBehavior").ConfigureAwait(false);
-            }
-            if (Input.GetKey(KeyCode.Alpha1))
-            {
-                await _behaviorManager.SubBehaviorManager.ChangeBehaviorAsync("CleanShootBehavior").ConfigureAwait(false);
-            }
-            if (Input.GetKey(KeyCode.Alpha2))
-            {
-                await _behaviorManager.SubBehaviorManager.ChangeBehaviorAsync("MineBehavior").ConfigureAwait(false);
-            }
-            if (Input.GetKey(KeyCode.Alpha3))
-            {
-                await _behaviorManager.SubBehaviorManager.ChangeBehaviorAsync("MissileBehavior_9_90_5").ConfigureAwait(false);
-            }
-            if (Input.GetKey(KeyCode.Alpha4))
-            {
-                await _behaviorManager.SubBehaviorManager.ChangeBehaviorAsync("MissileBehavior_5_60_3").ConfigureAwait(false);
-            }
             if (!BossMaster.ObjectIsReady) return;
             
             _behaviorManager.UpdateAsync();

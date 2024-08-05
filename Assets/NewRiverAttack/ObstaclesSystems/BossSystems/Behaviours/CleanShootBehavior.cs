@@ -16,6 +16,8 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         private readonly object[] _dataShoot;
         
         private readonly BossCleanShoot _bossCleanShoot;
+        // Parametro 0 = cadência dos misseis
+        // Parametro 1 = cycles
         public CleanShootBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors,params object[] data) : base(subBehaviors)
         {
             _behaviorManager = behaviorManager;
@@ -24,17 +26,19 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             _bossCleanShoot = BossBehavior.GetComponent<BossCleanShoot>();
             _dataShoot = data;
         }
+        
         public override async Task EnterAsync(CancellationToken token)
         {
             await base.EnterAsync(token).ConfigureAwait(false);
-            
             await Task.Delay(100, token).ConfigureAwait(false);
             await UnityMainThreadDispatcher.EnqueueAsync(() =>
             {
-                var maxShoot = (int)(_dataShoot[0] ?? 5);
-             
-                if (_bossCleanShoot != null) 
-                    _bossCleanShoot.SetShoots(maxShoot);
+                //Debug.Log($"DATA: 0:{_dataShoot[0]}, 1:{_dataShoot[1]}");
+                var cadence = (float)(_dataShoot[0] ?? 1f);
+                var repeat = (int)(_dataShoot[1] ?? 10);
+                
+                if (_bossCleanShoot == null) return;
+                _bossCleanShoot.SetShoots(cadence,repeat);
                 _bossCleanShoot.SetDataBullet(BossBehavior.BossMaster);
                 _bossCleanShoot.UpdateCadenceShoot();
                 _bossCleanShoot.StartShoot();
@@ -47,16 +51,16 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             base.UpdateAsync(token);
             await UnityMainThreadDispatcher.EnqueueAsync(async () =>
             {
-                if (_bossCleanShoot && _bossCleanShoot.ShouldBeShoot)
+                if (_bossCleanShoot && _bossCleanShoot.ShouldBeShoot && !Finalized)
                 {
                     _bossCleanShoot.AttemptShoot(BossBehavior.BossMaster, PlayerMaster.transform);
                 }
+                
+                //EndCycle
+                if (_bossCleanShoot.timesRepeat > 0 && Finalized) return;
+                await Task.Delay(100, token).ConfigureAwait(false);
+                Finalized = true;
             }).ConfigureAwait(false);
-            /*Debug.Log($"Update Shoot Finalize: {Finalized}");
-            if (!_bossCleanShoot.EndCycle) return;
-            await Task.Delay(100, token).ConfigureAwait(false);
-            Finalized = true;
-            await NextBehavior(_behaviorManager.SubBehaviorManager).ConfigureAwait(false);*/
             
         }
         public override async Task ExitAsync(CancellationToken token)

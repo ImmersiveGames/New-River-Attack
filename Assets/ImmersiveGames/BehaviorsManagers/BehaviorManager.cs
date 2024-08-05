@@ -16,9 +16,9 @@ namespace ImmersiveGames.BehaviorsManagers
         internal readonly BossBehavior BossBehavior;
         
         private bool _inTransition;
-        internal int CurrentIndex;
+        private int _currentIndex;
 
-        private IBehavior CurrentBehavior { get; set; }
+        public IBehavior CurrentBehavior { get; private set; }
 
         public BehaviorManager SubBehaviorManager { get; private set; }
 
@@ -32,22 +32,12 @@ namespace ImmersiveGames.BehaviorsManagers
         {
             _behaviors[behavior.Name] = behavior;
         }
+        
 
-        public async Task NextBehavior()
+        public string[] GetBehaviorsNames(string remove)
         {
-            if (_behaviors.Count <= 0) return;
-            var behaviorsNames = _behaviors.Keys.ToArray();
-            if (CurrentIndex +1 >= 0 && CurrentIndex +1 < behaviorsNames.Length)
-            {
-                CurrentIndex++;
-                var nextBehavior = behaviorsNames[CurrentIndex];
-                await ChangeBehaviorAsync(nextBehavior).ConfigureAwait(false);
-            }
-        }
-
-        public string[] GetBehaviorsNames()
-        {
-            return _behaviors.Keys.ToArray();
+            var keys = _behaviors.Keys.ToArray();
+            return string.IsNullOrEmpty(remove) ? keys : keys.Where(valuePair => valuePair != remove).ToArray();
         }
 
         private void AddBehavior(IBehavior[] behaviors)
@@ -83,7 +73,7 @@ namespace ImmersiveGames.BehaviorsManagers
                     SubBehaviorManager.CurrentBehavior.Initialized = false;
                 }
 
-                CurrentBehavior.Finalized = true;
+               CurrentBehavior.Finalized = true;
                 DebugManager.Log<BehaviorManager>($"Finalizar: {CurrentBehavior.Name}");
                 await CurrentBehavior.ExitAsync(token).ConfigureAwait(false);
                 CurrentBehavior.Initialized = false;

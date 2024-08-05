@@ -1,29 +1,19 @@
 ﻿using NewRiverAttack.ObstaclesSystems.BossSystems.Abstracts;
-using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems
 {
     public class BossCleanShoot : BossShoot
     {
-        public int maxShoot;
-        private int _actualNumShoot;
         private void Awake()
         {
             poolName = $"Pool ({nameof(BossCleanShoot)})";
-            _actualNumShoot = 0;
         }
         
-        public void SetShoots(int numMissile)
+        public void SetShoots(float cadence, int repeat)
         {
-            maxShoot = numMissile;
-        }
-
-        protected override void Fire()
-        {
-            base.Fire();
-            _actualNumShoot++;
+            timesRepeat = repeat <= 0 ? 3 : repeat;
+            CadenceShoot = cadence <= 0 ? CadenceShoot : cadence;
         }
         
-        public bool EndCycle => _actualNumShoot > maxShoot;
     }
 }
