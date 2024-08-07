@@ -22,15 +22,15 @@ namespace NewRiverAttack.ObstaclesSystems.MovementStates
         {
             _obstacleMovement = obstacleMovement;
             _obstacleMaster = _obstacleMovement.GetComponent<ObstacleMaster>();
-            _enemiesScriptable = _obstacleMovement.GetObjectScriptable<EnemiesScriptable>();
+        
             SpeedMovement = 0;
         }
 
         public void EnterState()
         {
             DebugManager.Log<ObstacleMovement>($" Entrando no Estado: HOLD");
-            _hasApproach = _enemiesScriptable.approachMovement.x != 0 &&
-                           _enemiesScriptable.approachMovement.y != 0;
+            _hasApproach = _obstacleMovement.approachMovement.x != 0 &&
+                           _obstacleMovement.approachMovement.y != 0;
             _enemiesAnimation = _obstacleMovement.GetComponent<EnemiesAnimation>();
             _enemiesAnimation.AnimationMove(false);
             _inTransition = false;

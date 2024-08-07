@@ -24,8 +24,7 @@ namespace NewRiverAttack.ObstaclesSystems.MovementStates
         {
             _obstacleMovement = obstacleMovement;
             _obstacleMaster = _obstacleMovement.GetComponent<ObstacleMaster>();
-            var enemiesScriptable = _obstacleMovement.GetObjectScriptable<EnemiesScriptable>();
-            _approachRange = enemiesScriptable.GetMoveApproach;
+            _approachRange = _obstacleMovement.GetMoveApproach;
             _detectPlayerApproach = new DetectPlayerApproach(_obstacleMovement.transform.position, _approachRange);
         }
         public void EnterState()

@@ -1,4 +1,5 @@
-﻿using NewRiverAttack.ObstaclesSystems.Abstracts;
+﻿using GD.MinMaxSlider;
+using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.MovementStates;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.WallsManagers;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 {
-    public class EnemiesMovement : ObstacleMovement
+    public sealed class EnemiesMovement : ObstacleMovement
     {
         
         private EnemiesMaster _enemiesMaster;
@@ -17,13 +18,13 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         private void Start()
         {
             StartState = new MoveStateHold(this);
-            if (GetEnemySettings.GetMoveApproach != 0) StartState = new MoveStatePatrol(this);
-            if (GetEnemySettings.GetMoveApproach == 0 && GetEnemySettings.moveVelocity != 0) StartState = new MoveStateMove(this);
+            if (GetMoveApproach != 0) StartState = new MoveStatePatrol(this);
+            if (GetMoveApproach == 0 && moveVelocity != 0) StartState = new MoveStateMove(this);
 
             ChangeState(StartState);
         }
 
-        protected virtual void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             if (other == null || !ObstacleMaster.ObjectIsReady || (GetEnemySettings.ignoreWalls && GetEnemySettings.ignoreEnemies) ) return;
             var enemies = GetEnemySettings.ignoreEnemies ? null : other.GetComponentInParent<EnemiesMaster>();
@@ -35,8 +36,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         
         private void OnDrawGizmos()
         {
-            var em = GetComponent<EnemiesMaster>();
-            GizmoRadius = em.GetEnemySettings.approachMovement;
+            GizmoRadius = approachMovement;
         }
         #endregion
 
@@ -45,14 +45,14 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             base.SetInitialReferences();
             GetEnemySettings = GetObjectScriptable<EnemiesScriptable>();
             _enemiesAnimation = GetComponent<EnemiesAnimation>();
-            MoveVelocity = GetEnemySettings.moveVelocity;
+            MoveVelocity = moveVelocity;
             _enemiesMaster = ObstacleMaster as EnemiesMaster;
             if (_enemiesMaster != null) GetEnemySettings = _enemiesMaster.GetEnemySettings;
         }
 
         protected override void ResetMovement()
         {
-            SetVelocity(GetEnemySettings.moveVelocity);
+            SetVelocity(moveVelocity);
             base.ResetMovement();
         }
     }

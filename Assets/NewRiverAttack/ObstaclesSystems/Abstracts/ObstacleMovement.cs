@@ -1,4 +1,5 @@
-﻿using ImmersiveGames.ObjectManagers.Interfaces;
+﻿using GD.MinMaxSlider;
+using ImmersiveGames.ObjectManagers.Interfaces;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using UnityEngine;
@@ -7,6 +8,11 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 {
     public class ObstacleMovement : MonoBehaviour
     {
+        [Header("Movement Settings")] [Range(0, 50)]
+        public float moveVelocity;
+        [Header("Movement with Patrol")] [MinMaxSlider(0f, 100f)]
+        public Vector2 approachMovement;
+        
         protected float MoveVelocity;
 
         protected enum Directions { None, Forward, Back, Up, Right, Down, Left, Free }
@@ -96,6 +102,19 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
                 Directions.Free => freeVectorDirection,
                 _ => Vector3.zero
             };
+        }
+
+        public float GetMoveApproach
+        {
+            get
+            {
+                return approachMovement.x switch
+                {
+                    0 when approachMovement.y > 0 => approachMovement.y,
+                    > 0 => Random.Range(approachMovement.x, approachMovement.y),
+                    _ => 0
+                };
+            }
         }
 
         #endregion
