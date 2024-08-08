@@ -1,4 +1,5 @@
-﻿using Cinemachine;
+﻿using System;
+using Cinemachine;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace ImmersiveGames.CameraManagers
             SetInitialReferences();
             _gamePlayManager.EventPlayerInitialize += TargetPlayer;
         }
+        
 
         private void OnDisable()
         {
@@ -23,9 +25,11 @@ namespace ImmersiveGames.CameraManagers
 
         private void TargetPlayer(PlayerMaster playerMaster)
         {
+            Debug.Log($"playerMaster: {playerMaster}");
             if (playerMaster != null)
             {
                 _virtualCamera.Follow = playerMaster.transform;
+                Debug.Log($"Camera: {_virtualCamera.Follow}");
             }
             else
             {

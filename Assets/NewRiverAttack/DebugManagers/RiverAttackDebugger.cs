@@ -28,6 +28,7 @@ using NewRiverAttack.PlayerManagers.PlayerSystems;
 using NewRiverAttack.SaveManagers;
 using NewRiverAttack.ShoppingSystems.SimpleShopping;
 using NewRiverAttack.ShoppingSystems.SimpleShopping.Abstracts;
+using NewRiverAttack.ShoppingSystems.SkinChanger;
 using NewRiverAttack.StateManagers.States;
 using UnityEngine;
 
@@ -71,6 +72,8 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<FiniteNavigationMode>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<SmoothFiniteNavigationMode>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<ShopProductSettings>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<ShopSkinChanger>(DebugManager.DebugLevels.All);
+            
             
             
             //Scenes e States

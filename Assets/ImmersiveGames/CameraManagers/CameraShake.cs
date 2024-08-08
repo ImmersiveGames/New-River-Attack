@@ -20,7 +20,6 @@ namespace ImmersiveGames.CameraManagers
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject); // Opcional: se você quiser manter a instância entre cenas
             }
             else
             {

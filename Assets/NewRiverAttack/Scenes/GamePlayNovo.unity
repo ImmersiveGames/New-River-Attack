@@ -5103,12 +5103,17 @@ PrefabInstance:
     - target: {fileID: 1180812457030873934, guid: edd48384923765647a80334cb3dc5dc8,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1908975058179474991, guid: edd48384923765647a80334cb3dc5dc8,
         type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1908975058179474991, guid: edd48384923765647a80334cb3dc5dc8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4433071530622275263, guid: edd48384923765647a80334cb3dc5dc8,
         type: 3}
@@ -5123,7 +5128,7 @@ PrefabInstance:
     - target: {fileID: 8940221166966817703, guid: edd48384923765647a80334cb3dc5dc8,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5143,7 +5148,7 @@ GameObject:
   - component: {fileID: 1074486241}
   - component: {fileID: 1074486240}
   - component: {fileID: 1074486245}
-  - component: {fileID: 1074486244}
+  - component: {fileID: 1074486246}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -5235,18 +5240,6 @@ Transform:
   - {fileID: 1445953298}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 55, y: 0, z: 0}
---- !u!114 &1074486244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1074486238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1410e51c8ba434fbb2b3167ca78cf7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1074486245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5257,6 +5250,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 715e672a67b74d3e916564b07bbbea3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1074486246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074486238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1410e51c8ba434fbb2b3167ca78cf7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1157833002

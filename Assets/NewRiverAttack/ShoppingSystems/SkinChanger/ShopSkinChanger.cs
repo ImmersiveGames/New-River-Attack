@@ -1,9 +1,12 @@
 ﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ShopManagers.Abstracts;
 using ImmersiveGames.ShopManagers.ShopProducts;
+using NewRiverAttack.PlayerManagers.ScriptableObjects;
 using NewRiverAttack.PlayerManagers.Tags;
+using NewRiverAttack.SaveManagers;
 using NewRiverAttack.ShoppingSystems.SimpleShopping;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace NewRiverAttack.ShoppingSystems.SkinChanger
 {
@@ -11,18 +14,21 @@ namespace NewRiverAttack.ShoppingSystems.SkinChanger
     {
         private SimpleShoppingManager _simpleShoppingManager;
         private TrailRenderer[] _trailRenderers;
+        [SerializeField] private PlayerSettings playerSettings;
 
         private void Awake()
         {
             _simpleShoppingManager = FindObjectOfType<SimpleShoppingManager>(true);
             if (!_simpleShoppingManager)
             {
-                DebugManager.LogError<ShopProductSimpleSkins>($"[MenuPlayerSkin] Não foi encontrado um 'SimpleShoppingManager' em cena");
+                DebugManager.LogError<ShopSkinChanger>($"Não foi encontrado um 'SimpleShoppingManager' em cena");
             }
         }
 
         private void OnEnable()
         {
+            playerSettings = GameOptionsSave.instance.playerSettings[0];
+            ShoppingChangeSkin(playerSettings.actualSkin,1);
             _simpleShoppingManager.EventUseProduct += ShoppingChangeSkin;
         }
 

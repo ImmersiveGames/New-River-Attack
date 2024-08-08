@@ -23,7 +23,7 @@ namespace NewRiverAttack.LevelBuilder
             var playerMaster = other.GetComponentInParent<PlayerMaster>();
             if( playerMaster == null || playerMaster.IsDisable || !InFinisher) return;
             GamePlayManagerRef.FinisherGame();
-            //GamePlayManagerRef.SendTo(GameManager.instance.gamePlayMode);
+            GamePlayManagerRef.SendTo(GameManager.instance.gamePlayMode);
 
         }
     }
