@@ -42,8 +42,9 @@ namespace NewRiverAttack.DialogManagers
         #region Variáveis Privadas
 
         private bool _dialogOn;
-        private const float WaitTime = 0.2f;
         private bool _isTyping;
+        private bool _sentenceComplete;
+        private bool _isPanelTransitioning;
         private int _currentDialogueIndex;
         private int _currentSentenceIndex;
         private Coroutine _typingCoroutine;
@@ -68,16 +69,16 @@ namespace NewRiverAttack.DialogManagers
         {
             _timelineManager = new TimelineManager(playableDirector);
             InputGameManager.ActionManager.ActivateActionMap(ActionManager.GameActionMaps.BriefingRoom);
-            InputGameManager.RegisterAction("Next", InputNextDialog );
+            InputGameManager.RegisterAction("Next", InputNextDialog);
             dialogText.text = "";
             nameText.text = "";
-            StartCoroutine(WaitForInitialization());
+            StartCoroutine(StartDialogAfterDelay());
         }
 
         private void OnDisable()
         {
-            if(_typingCoroutine != null)
-                StopCoroutine(_typingCoroutine); 
+            if (_typingCoroutine != null)
+                StopCoroutine(_typingCoroutine);
             InputGameManager.ActionManager.EventOnActionComplete -= StopDialog;
         }
 
@@ -85,16 +86,20 @@ namespace NewRiverAttack.DialogManagers
 
         #region Métodos de Diálogo
 
+        private IEnumerator StartDialogAfterDelay()
+        {
+            yield return new WaitForSeconds(2f); // Atraso inicial antes de começar o diálogo
+            StartDialog(0, 0);
+        }
+
         private void StartDialog(int dialogIndex, int sentenceIndex)
         {
-            // Verificação de índice do diálogo
             if (dialogIndex >= dialogDatas.Count)
             {
                 DebugManager.LogError<DialogManager>("Índice de diálogo inválido: " + dialogIndex);
                 return;
             }
 
-            // Verificação de índice da frase
             if (sentenceIndex >= dialogDatas[dialogIndex].sentences.Count)
             {
                 DebugManager.LogError<DialogManager>("Índice de frase inválido: " + sentenceIndex);
@@ -107,62 +112,65 @@ namespace NewRiverAttack.DialogManagers
             nameText.text = dialogDatas[_currentDialogueIndex].nameSpeaker.GetLocalizedString();
             StartCoroutine(CloseAndOpenPanel());
         }
-        private void NextDialogAnimation(int sentenceIndex)
-        {
-            // Verificação de índice da animação
-            if (sentenceIndex >= dialogDatas.Count || dialogDatas[sentenceIndex].startTimeSentences < 0)
-                return;
-            _timelineManager.PlayAnimation(dialogDatas[sentenceIndex].startTimeSentences);
-            
-        }
-        
+
         private void NextDialog()
         {
-            if (!_dialogOn) return;
-            // Se o diálogo ainda estiver sendo digitado, interrompe a digitação e mostra o texto completo
+            if (!_dialogOn || _isPanelTransitioning) return;
+
+            // Se a sentença ainda está sendo digitada, exibe o texto completo imediatamente
             if (_isTyping)
             {
-                StopCoroutine(_typingCoroutine); // Para a coroutine de digitação
-                dialogText.text = dialogDatas[_currentDialogueIndex].sentences[_currentSentenceIndex].GetLocalizedString(); // Mostra o texto completo
-                IsTyping(false); // Define _isTyping como false para indicar que a digitação foi interrompida
-                return; // Sai do método sem avançar para a próxima sentença
+                StopCoroutine(_typingCoroutine);
+                dialogText.text = dialogDatas[_currentDialogueIndex].sentences[_currentSentenceIndex].GetLocalizedString();
+                IsTyping(false);
+                _sentenceComplete = true;
             }
+            // Se a sentença já foi completamente exibida, avança para a próxima
+            else if (_sentenceComplete)
+            {
+                StartCoroutine(WaitBeforeNextSentence());
+            }
+        }
 
-            // Avança para a próxima sentença se todas as frases do diálogo atual não foram completadas
+        private IEnumerator WaitBeforeNextSentence()
+        {
+            yield return new WaitForSeconds(0.5f); // Pequeno atraso antes de avançar
+
+            // Avança para a próxima sentença
             if (_currentSentenceIndex < dialogDatas[_currentDialogueIndex].sentences.Count - 1)
             {
                 _currentSentenceIndex++;
-                ShowSentence(); // Mostra a próxima sentença
+                ShowSentence();
             }
+            // Se for a última sentença do conjunto, transita para o próximo conjunto de diálogo
             else
             {
-                // Avança para o próximo diálogo se todas as frases do diálogo atual foram completadas
                 _currentDialogueIndex++;
                 _currentSentenceIndex = 0;
 
-                // Verifica se o próximo diálogo existe
                 if (_currentDialogueIndex < dialogDatas.Count)
                 {
-                    NextDialogAnimation(_currentDialogueIndex);
                     StartCoroutine(CloseAndOpenPanel());
                 }
                 else
                 {
-                    EndDialogue(); // Fim do diálogo se não houver mais diálogos para exibir
+                    EndDialogue(); // Fim do diálogo
                 }
             }
         }
 
         private void ShowSentence()
         {
-            // Verificação de índice da frase
             if (_currentSentenceIndex >= dialogDatas[_currentDialogueIndex].sentences.Count)
             {
                 DebugManager.LogError<DialogManager>("Índice de frase inválido: " + _currentSentenceIndex);
                 return;
             }
+
+            _sentenceComplete = false; // Reseta a flag para a nova sentença
             _typingCoroutine = StartCoroutine(TypeSentence(dialogDatas[_currentDialogueIndex].sentences[_currentSentenceIndex]));
         }
+
         private async void StopDialog()
         {
             _dialogOn = false;
@@ -174,6 +182,14 @@ namespace NewRiverAttack.DialogManagers
         {
             DebugManager.Log<DialogManager>("Fim do diálogo!");
             StopDialog();
+        }
+
+        private void NextDialogAnimation(int sentenceIndex)
+        {
+            if (sentenceIndex >= dialogDatas.Count || dialogDatas[sentenceIndex].startTimeSentences < 0)
+                return;
+
+            _timelineManager.PlayAnimation(dialogDatas[sentenceIndex].startTimeSentences);
         }
 
         #endregion
@@ -189,72 +205,54 @@ namespace NewRiverAttack.DialogManagers
 
         #region Métodos Auxiliares
 
-        private IEnumerator WaitForInitialization()
-        {
-            while (!GameManager.StateManager.GetCurrentState().StateFinalization)
-            {
-                yield return null;
-            }
-
-            // Inicia o primeiro diálogo quando o painel estiver totalmente aberto
-            StartDialog(0, 0);
-        }
         private IEnumerator TypeSentence(LocalizedString sentence)
         {
             dialogText.text = "";
             IsTyping(true);
-            var localizedSentence = sentence.GetLocalizedString(); // Cache do resultado
+            var localizedSentence = sentence.GetLocalizedString();
             var typedText = new StringBuilder();
 
-            // Controle de avanço por caractere
             foreach (var character in localizedSentence)
             {
                 typedText.Append(character);
                 dialogText.text = typedText.ToString();
                 yield return new WaitForSeconds(letterSpeed);
 
-                // Verificação de interrupção
                 if (!_isTyping)
                 {
                     break;
                 }
             }
-            // Mostrar a frase completa
-            dialogText.text = localizedSentence;
 
+            dialogText.text = localizedSentence;
             IsTyping(false);
+            _sentenceComplete = true;
         }
 
         private IEnumerator CloseAndOpenPanel()
         {
-            // Aguarda até que a escrita da última sentença seja concluída
-            while (_isTyping)
-            {
-                yield return null;
-            }
+            _isPanelTransitioning = true;
 
             // Fecha o painel
             yield return PanelsHelper.TogglePanel(dialogPanel, openTimeDuration, closeTimeDuration, false, false);
-            yield return new WaitForSeconds(closeTimeDuration + WaitTime); // Aguarda um pouco após fechar o painel
+            yield return new WaitForSeconds(closeTimeDuration + 0.2f); // Pequeno atraso após fechar o painel
 
-            // Limpa o texto e inicia a próxima sentença
             dialogText.text = "";
             nameText.text = dialogDatas[_currentDialogueIndex].nameSpeaker.GetLocalizedString();
 
-            // Adiciona um pequeno atraso antes de começar a próxima sentença
-            yield return new WaitForSeconds(openTimeDuration);
+            // Reproduz a animação do próximo conjunto de diálogos
+            NextDialogAnimation(_currentDialogueIndex);
 
-            // Abre o painel novamente
+            yield return new WaitForSeconds(openTimeDuration); // Espera antes de abrir o painel
+
+            // Abre o painel com o próximo conjunto de diálogo
             yield return PanelsHelper.TogglePanel(dialogPanel, openTimeDuration, closeTimeDuration, true, false);
 
-            // Inicia o próximo diálogo ou mostra a próxima frase
+            _isPanelTransitioning = false;
+
             if (_currentSentenceIndex < dialogDatas[_currentDialogueIndex].sentences.Count)
             {
                 ShowSentence();
-            }
-            else
-            {
-                NextDialog();
             }
         }
 
@@ -267,7 +265,7 @@ namespace NewRiverAttack.DialogManagers
                 speakerAnimatorController.SetBool(Speak, isSpeaking);
             }
         }
-        
+
         #endregion
     }
 }

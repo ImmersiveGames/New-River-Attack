@@ -14,13 +14,11 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         private readonly BossMineShoot _bossMineShoot;
         private readonly object[] _dataShoot;
         private PlayerMaster PlayerMaster { get; }
-        private readonly BehaviorManager _behaviorManager;
-
+        
         // Parametro 0 = Numero de Minas
         // Parametro 1 = cadencia
         public MineBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors, params object[] data) : base( subBehaviors)
         {
-            _behaviorManager = behaviorManager;
             BossBehavior = behaviorManager.BossBehavior;
             PlayerMaster = BossBehavior.PlayerMaster;
             _bossMineShoot = BossBehavior.GetComponent<BossMineShoot>();
@@ -47,7 +45,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             }).ConfigureAwait(false);
 
         }
-        public override async void UpdateAsync(CancellationToken token)
+        public override void UpdateAsync(CancellationToken token)
         {
             if (!_bossMineShoot || !_bossMineShoot.ShouldBeShoot || Finalized) return;
             _bossMineShoot.AttemptShoot(BossBehavior.BossMaster, PlayerMaster.transform);
