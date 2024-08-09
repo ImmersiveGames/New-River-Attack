@@ -4,14 +4,13 @@ using ImmersiveGames.BehaviorsManagers;
 using ImmersiveGames.BulletsManagers;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.InputManager;
-using ImmersiveGames.LevelBuilder;
 using ImmersiveGames.MenuManagers;
 using ImmersiveGames.MenuManagers.Abstracts;
 using ImmersiveGames.MenuManagers.PanelOptionsManagers;
 using ImmersiveGames.PoolManagers;
-using ImmersiveGames.PoolManagers.Test;
 using ImmersiveGames.ShopManagers.NavigationModes;
 using ImmersiveGames.StateManagers;
+using ImmersiveGames.SteamServicesManagers;
 using NewRiverAttack.BulletsManagers;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.HUBManagers;
@@ -30,6 +29,7 @@ using NewRiverAttack.ShoppingSystems.SimpleShopping;
 using NewRiverAttack.ShoppingSystems.SimpleShopping.Abstracts;
 using NewRiverAttack.ShoppingSystems.SkinChanger;
 using NewRiverAttack.StateManagers.States;
+using NewRiverAttack.SteamGameManagers;
 using UnityEngine;
 
 namespace NewRiverAttack.DebugManagers
@@ -140,6 +140,11 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<ObjectShoot>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<BossDirections>(DebugManager.DebugLevels.None);
             
+            //Steam Services
+            DebugManager.SetScriptDebugLevel<SteamConnectionManager>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<SteamAchievementService>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<SteamLeaderboardService>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<SteamStatsService>(DebugManager.DebugLevels.All);
             
         }
     }

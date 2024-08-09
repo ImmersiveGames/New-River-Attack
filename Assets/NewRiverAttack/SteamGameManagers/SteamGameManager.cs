@@ -105,7 +105,7 @@ namespace NewRiverAttack.SteamGameManagers
         }
   #endregion
 
-  private void ReconcileMissedAchievements()
+  private static void ReconcileMissedAchievements()
         {
             // Aqui ele coloca os achievements offline para atualizar.
             
