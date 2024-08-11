@@ -43,7 +43,7 @@ namespace NewRiverAttack.HUBManagers.UI
         internal void ExplodeBridge()
         {
             Tools.ToggleChildren(transform,false);
-            var audioGameOver = AudioManager.GetAudioSfxEvent(EnumSfxSound.SfxExplode);
+            var audioGameOver = AudioManager.instance.GetAudioSfxEvent(EnumSfxSound.SfxExplode);
             audioGameOver.PlayOnShot(_audioSource);
             vfxExplosion.gameObject.SetActive(true);
         }

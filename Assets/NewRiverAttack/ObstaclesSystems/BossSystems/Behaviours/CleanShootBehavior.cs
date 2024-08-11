@@ -31,7 +31,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         {
             await base.EnterAsync(token).ConfigureAwait(false);
             await Task.Delay(100, token).ConfigureAwait(false);
-            await UnityMainThreadDispatcher.EnqueueAsync(() =>
+            await MainThreadDispatcher.EnqueueAsync(() =>
             {
                 //Debug.Log($"DATA: 0:{_dataShoot[0]}, 1:{_dataShoot[1]}");
                 var cadence = (float)(_dataShoot[0] ?? 1f);
@@ -49,7 +49,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         public override async void UpdateAsync(CancellationToken token)
         {
             base.UpdateAsync(token);
-            await UnityMainThreadDispatcher.EnqueueAsync(async () =>
+            await MainThreadDispatcher.EnqueueAsync(async () =>
             {
                 if (_bossCleanShoot && _bossCleanShoot.ShouldBeShoot && !Finalized)
                 {

@@ -26,7 +26,7 @@ namespace NewRiverAttack.BulletsManagers
         private void OnEnable()
         {
             _audioSource = GetComponent<AudioSource>();
-            _audioEvent = AudioManager.GetAudioSfxEvent(EnumSfxSound.SfxEnemyShoot);
+            _audioEvent = AudioManager.instance.GetAudioSfxEvent(EnumSfxSound.SfxEnemyShoot);
         }
 
         private void OnTriggerEnter(Collider collision)

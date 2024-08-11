@@ -45,7 +45,7 @@ namespace ImmersiveGames.MenuManagers.UI
             if (reference == null) return;
             if (AudioManager.instance && _isLoadMenu)
             {
-                AudioManager.PlaySfx(EnumSfxSound.SfxMouseOver.ToString());
+                AudioManager.instance.PlaySfx(EnumSfxSound.SfxMouseOver.ToString());
             }
             var cursor = GetComponent<RectTransform>();
             cursor.position = reference.position;

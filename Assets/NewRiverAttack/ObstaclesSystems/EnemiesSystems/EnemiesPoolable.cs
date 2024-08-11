@@ -82,7 +82,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         private void SetInitialReferences()
         {
             _audioSource = GetComponent<AudioSource>();
-            _audioEvent = AudioManager.GetAudioSfxEvent(EnumSfxSound.SfxMineShoot);
+            _audioEvent = AudioManager.instance.GetAudioSfxEvent(EnumSfxSound.SfxMineShoot);
         }
         
     }

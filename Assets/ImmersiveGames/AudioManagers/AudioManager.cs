@@ -15,38 +15,34 @@ namespace ImmersiveGames
     {
         private const float BGMVolumeDefault = 1f;
         private const float SfxVolumeDefault = 1f;
+
         [SerializeField] private AudioSource bgmAudioSource;
         [SerializeField] private AudioSource sfxAudioSource;
         [SerializeField] private AudioMixer mixerGroup;
         [SerializeField] private AudioIndex mapStateBgm;
         [SerializeField] private AudioIndex mapMenuSfx;
-        
-        [Header("Fade Sounds")] public float fadeSoundDuration = 0.5f;
 
-        private static AudioSource _bgmAudioSource;
-        private static AudioSource _sfxAudioSource;
-        private static MapAudioEvent[] _mapStateBgm;
-        private static MapAudioEvent[] _mapMenuSfx;
-        private static float _fadeSoundDuration;
-        
+        [Header("Fade Sounds")] 
+        public float fadeSoundDuration = 0.5f;
+
+        private MapAudioEvent[] _mapStateBgm;
+        private MapAudioEvent[] _mapMenuSfx;
+
         private void OnEnable()
         {
             _mapStateBgm = mapStateBgm.mapAudioEvents;
             _mapMenuSfx = mapMenuSfx.mapAudioEvents;
-            _bgmAudioSource = bgmAudioSource;
-            _sfxAudioSource = sfxAudioSource;
-            _fadeSoundDuration = fadeSoundDuration;
         }
 
         private void Start()
         {
-            RecoveryAudioSettings();
+            RecoverAudioSettings();
         }
 
         /// <summary>
         /// Recovers audio settings based on the game settings.
         /// </summary>
-        private void RecoveryAudioSettings()
+        private void RecoverAudioSettings()
         {
             var gameOptionsSave = GameOptionsSave.instance;
             mixerGroup.SetFloat(EnumAudioMixGroup.BgmVolume.ToString(), 
@@ -55,60 +51,60 @@ namespace ImmersiveGames
                 gameOptionsSave.GetVolumeLog10(EnumAudioMixGroup.SfxVolume, SfxVolumeDefault));
         }
 
-        // Adicione esta função para obter o AudioEvent com base no IState fornecido
-        private static AudioEvent GetAudioEventForState(IState state, IEnumerable<MapAudioEvent> mapAudioEvent)
-        {
-            return GetAudioEventForState(state.StateName, mapAudioEvent);
-            // Retorna null se não encontrar correspondência
-        }
-        
-        private static AudioEvent GetAudioEventForState(string stateName, IEnumerable<MapAudioEvent> mapAudioEvent)
+        // Optimized method to get the AudioEvent based on IState
+        private AudioEvent GetAudioEventForState(string stateName, IEnumerable<MapAudioEvent> mapAudioEvent)
         {
             return (from stateBgm in mapAudioEvent where stateBgm.stateName == stateName select stateBgm.soundAudioEvent).FirstOrDefault();
-            // Retorna null se não encontrar correspondência
         }
 
-        public static void PlaySfx(string sfxName)
+        public void PlaySfx(string sfxName)
         {
             var audioEventForState = GetAudioEventForState(sfxName, _mapMenuSfx);
             if (audioEventForState == null)
             {
-                DebugManager.Log<AudioManager>($"Não Encontrou um audio relativo ao nome: {sfxName}");
+                #if UNITY_EDITOR
+                DebugManager.Log<AudioManager>($"Audio not found for name: {sfxName}");
+                #endif
                 return;
             }
-            audioEventForState.PlayOnShot(_sfxAudioSource);
+            audioEventForState.PlayOnShot(sfxAudioSource);
         }
-        public static void PlayBGMOneShot(string state)
+
+        public void PlayBGMOneShot(string state)
         {
-            _bgmAudioSource.Stop();
+            bgmAudioSource.Stop();
             var audioEventForState = GetAudioEventForState(state, _mapStateBgm);
             if (audioEventForState == null)
             {
-                DebugManager.Log<AudioManager>($"Não Encontrou um audio relativo ao nome: {state}");
+                #if UNITY_EDITOR
+                DebugManager.Log<AudioManager>($"Audio not found for state: {state}");
+                #endif
                 return;
             }
-            audioEventForState.PlayOnShot(_bgmAudioSource);
+            audioEventForState.PlayOnShot(bgmAudioSource);
         }
-        
-        public static void PlayBGM(IState state)
+
+        public void PlayBGM(IState state)
         {
             PlayBGM(state.StateName);
         }
-        public static void PlayBGM(string state)
+
+        public void PlayBGM(string state)
         {
-            // Obtém o AudioEvent correspondente ao estado
             var audioEventForState = GetAudioEventForState(state, _mapStateBgm);
             if (audioEventForState == null)
             {
-                DebugManager.LogWarning<AudioManager>($"Não Encontrou um audio relativo ao nome: {state}");
+                #if UNITY_EDITOR
+                DebugManager.LogWarning<AudioManager>($"Audio not found for state: {state}");
+                #endif
                 return;
             }
-            audioEventForState.Play(_bgmAudioSource, instance, _fadeSoundDuration);
+            audioEventForState.Play(bgmAudioSource, this, fadeSoundDuration);
         }
 
-        public static void StopBGM()
+        public void StopBGM()
         {
-            _bgmAudioSource.Stop();
+            bgmAudioSource.Stop();
         }
     }
 }

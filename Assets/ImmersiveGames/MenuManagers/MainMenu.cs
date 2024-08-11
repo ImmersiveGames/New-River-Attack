@@ -68,7 +68,7 @@ namespace ImmersiveGames.MenuManagers
 
         protected override void OnExitMenu(PanelsMenuReference panelsMenuGameObject)
         {
-            AudioManager.PlayMouseClick();
+            AudioManager.instance.PlayMouseClick();
             SetInteractiveAllButtons(panelsMenuGameObject, false);
             _timelineManager = null;
         }
@@ -94,24 +94,24 @@ namespace ImmersiveGames.MenuManagers
         }
         public async void GotoBriefingRoom()
         {
-            AudioManager.PlayMouseClick();
+            AudioManager.instance.PlayMouseClick();
             await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateBriefingRoom.ToString()).ConfigureAwait(false);
         }
         public async void GotoClassicMode()
         {
-            AudioManager.PlayMouseClick();
+            AudioManager.instance.PlayMouseClick();
             GameManager.instance.gamePlayMode = GamePlayModes.ClassicMode;
             await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStatePlay.ToString()).ConfigureAwait(false);
         }
         public async void GotoMissionMode()
         {
-            AudioManager.PlayMouseClick();
+            AudioManager.instance.PlayMouseClick();
             GameManager.instance.gamePlayMode = GamePlayModes.MissionMode;
             await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateHub.ToString()).ConfigureAwait(false);
         }
         public void ButtonPlayAnimation(float startTime)
         {
-            AudioManager.PlayMouseClick();
+            AudioManager.instance.PlayMouseClick();
             _timelineManager.PlayAnimation(startTime);
         }
 

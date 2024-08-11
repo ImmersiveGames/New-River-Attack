@@ -31,7 +31,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             DebugManager.Log<EnterSceneBehavior>("Enter EnterSceneBehavior.");
 
             var tcs = new TaskCompletionSource<bool>();
-            await UnityMainThreadDispatcher.EnqueueAsync(() =>
+            await MainThreadDispatcher.EnqueueAsync(() =>
             {
                 var vector3 = BossBehavior.transform.position;
                 vector3.z = PlayerMaster.transform.position.z;

@@ -68,7 +68,7 @@ namespace NewRiverAttack.BulletsManagers
             if (_audioSource == null)
                 _audioSource = GetComponent<AudioSource>();
             if (_audioEvent == null)
-                _audioEvent = AudioManager.GetAudioSfxEvent(EnumSfxSound.SfxPlayerBomb);
+                _audioEvent = AudioManager.instance.GetAudioSfxEvent(EnumSfxSound.SfxPlayerBomb);
             BulletData = _bombData = bombData is BombData bulletsData ? bulletsData : default;
             _playerAchievements = _bombData.BulletOwner.GetComponent<PlayerAchievements>();
             var transform1 = transform;

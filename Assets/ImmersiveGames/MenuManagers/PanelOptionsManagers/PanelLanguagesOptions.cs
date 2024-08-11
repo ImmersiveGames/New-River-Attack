@@ -65,7 +65,7 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
             if (LocalizationSettings.SelectedLocale == myLocale)
                 return;
 
-            AudioManager.PlayMouseClick();
+            AudioManager.instance.PlayMouseClick();
             StartCoroutine(ChangeLocale(myLocale));
         }
 

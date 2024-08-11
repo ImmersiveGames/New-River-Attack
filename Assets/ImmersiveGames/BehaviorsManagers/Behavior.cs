@@ -74,7 +74,7 @@ namespace ImmersiveGames.BehaviorsManagers
         {
             var animationTime = 0;
             await Task.Delay(100, token).ConfigureAwait(false);
-            await UnityMainThreadDispatcher.EnqueueAsync( () =>
+            await MainThreadDispatcher.EnqueueAsync( () =>
             {
                 if (bossMaster.IsEmerge == emerge) return;
                 bossMaster.IsEmerge = emerge;
@@ -95,7 +95,7 @@ namespace ImmersiveGames.BehaviorsManagers
         protected async Task ChangePosition(BossMovement bossMovement, Component obstacleTransform, float distance, CancellationToken token)
         {
             await Task.Delay(100, token).ConfigureAwait(false);
-            await UnityMainThreadDispatcher.EnqueueAsync( () =>
+            await MainThreadDispatcher.EnqueueAsync( () =>
             {
                 var myDirection = bossMovement.GetRelativeDirection(obstacleTransform.transform.position);
                 DebugManager.Log<Behavior>($"Direção: {myDirection}");
@@ -108,7 +108,7 @@ namespace ImmersiveGames.BehaviorsManagers
         }
         protected static async Task DropGas(BossBehavior bossBehavior)
         {
-            await UnityMainThreadDispatcher.EnqueueAsync( () =>
+            await MainThreadDispatcher.EnqueueAsync( () =>
             {
                 if (bossBehavior.BossMaster.IsDead) return;
                 var gasPosition = bossBehavior.transform.position;

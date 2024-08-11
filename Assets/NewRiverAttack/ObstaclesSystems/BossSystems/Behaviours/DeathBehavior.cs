@@ -24,12 +24,12 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             
             var tcs = new TaskCompletionSource<bool>();
             await Task.Delay(4000, token).ConfigureAwait(false);
-            await UnityMainThreadDispatcher.EnqueueAsync(() =>
+            await MainThreadDispatcher.EnqueueAsync(() =>
             {
                 _gameOverManager.FinisherGame();
             }).ConfigureAwait(false);
             await Task.Delay(4000, token).ConfigureAwait(false);
-            await UnityMainThreadDispatcher.EnqueueAsync(() =>
+            await MainThreadDispatcher.EnqueueAsync(() =>
             {
                 _gameOverManager.SendTo(GameManager.instance.gamePlayMode);
                 return Task.CompletedTask;

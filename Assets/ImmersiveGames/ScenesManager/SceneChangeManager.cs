@@ -12,6 +12,7 @@ namespace ImmersiveGames.ScenesManager
         private static readonly Stack<string> AdditiveScenes = new Stack<string>();
 
         public Slider loadingProgressBar;
+
         public static async Task StartSceneTransitionAsync(IState nextState, string previousSceneName, LoadSceneMode loadSceneMode, 
             bool unloadPreviousAdditiveScene)
         {
@@ -19,8 +20,8 @@ namespace ImmersiveGames.ScenesManager
             {
                 return;
             }
-            
-            await MainThreadTaskExecutor.instance.RunOnMainThreadAsync(async () =>
+
+            await MainThreadDispatcher.EnqueueAsync(async () =>
             {
                 if (SceneManager.GetActiveScene().name == nextState.SceneName) return;
                 if (unloadPreviousAdditiveScene)
@@ -51,7 +52,7 @@ namespace ImmersiveGames.ScenesManager
 
             var unloadCompletionSource = new TaskCompletionSource<bool>();
 
-            await MainThreadTaskExecutor.instance.RunOnMainThreadAsync(() =>
+            await MainThreadDispatcher.EnqueueAsync(() =>
             {
                 if (SceneManager.GetActiveScene().name == sceneName) return Task.CompletedTask;
                 SceneManager.sceneUnloaded += SceneUnloaded;
@@ -77,8 +78,7 @@ namespace ImmersiveGames.ScenesManager
 
             var loadCompletionSource = new TaskCompletionSource<bool>();
             
-
-            await MainThreadTaskExecutor.instance.RunOnMainThreadAsync(async () =>
+            await MainThreadDispatcher.EnqueueAsync(async () =>
             {
                 SceneManager.sceneLoaded += SceneLoaded;
                 instance.loadingProgressBar.gameObject.SetActive(true);
@@ -102,6 +102,7 @@ namespace ImmersiveGames.ScenesManager
                 UpdateProgressBar(1.0f);
             }
         }
+
         // Adicione o método para atualizar a barra de progresso
         private static void UpdateProgressBar(float progress)
         {

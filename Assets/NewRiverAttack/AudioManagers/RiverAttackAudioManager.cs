@@ -8,39 +8,39 @@ namespace ImmersiveGames
 {
     public partial class AudioManager
     {
-        public static AudioEvent GetAudioSfxEvent(EnumSfxSound sfxSound)
+        public AudioEvent GetAudioSfxEvent(EnumSfxSound sfxSound)
         {
             return GetAudioEventForState(sfxSound.ToString(), _mapMenuSfx);
         }
-        /*public static AudioEvent GetAudioBGMEvent(EnumBgmTypes bgmTypes)
-        {
-            return GetAudioEventForState(bgmTypes.ToString(), _mapStateBgm);
-        }*/
-        public static void PlayMouseClick()
+
+        public void PlayMouseClick()
         {
             PlaySfx(EnumSfxSound.SfxMouseClick.ToString());
         }
-        public static void PlayNotifications()
+
+        public void PlayNotifications()
         {
             PlaySfx(EnumSfxSound.SfxNotification.ToString());
         }
-        public static void PlayMouseOver()
+
+        public void PlayMouseOver()
         {
             PlaySfx(EnumSfxSound.SfxMouseOver.ToString());
         }
-        /*public void PlayBGM(LevelData levelData, int levelIndexBgm)
+
+        /* Uncomment and refactor when needed
+        public void PlayBGM(LevelData levelData, int levelIndexBgm)
         {
-            DebugManager.Log<AudioManager>($"Procurando: {levelData.levelType}");
-            
             var audioEventForLevel = levelData.levelType != LevelTypes.Multi ?
-                GetAudioEventForState(levelData.levelType.ToString(), _mapStateBgm):
+                GetAudioEventForState(levelData.levelType.ToString(), _mapStateBgm) :
                 GetAudioEventForState(levelData.startBgm.ToString(), _mapStateBgm);
+
             if (audioEventForLevel == null)
             {
-                DebugManager.Log<AudioManager>($"Não Encontrou um audio relativo ao Tipo: {levelData.levelType.ToString()}");
+                DebugManager.Log<AudioManager>($"Audio not found for type: {levelData.levelType}");
+                return;
             }
-            DebugManager.Log<AudioManager>($"AudioEvent: {audioEventForLevel}");
-            audioEventForLevel.Play(_bgmAudioSource, this, fadeSoundDuration);
+            audioEventForLevel.Play(bgmAudioSource, this, fadeSoundDuration);
         }*/
     }
 }

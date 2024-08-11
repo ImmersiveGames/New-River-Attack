@@ -32,7 +32,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             
             await Emerge(BossBehavior.BossMaster,token, false).ConfigureAwait(false);
             DebugManager.Log<MineBehavior>($"Enter {GetType().Name}. Finalize: {Finalized}");
-            await UnityMainThreadDispatcher.EnqueueAsync(() =>
+            await MainThreadDispatcher.EnqueueAsync(() =>
             { 
                 var numMines = (int)(_dataShoot[0] ?? 10);
                 var cadence = (float)(_dataShoot[1] ?? 0.8f);
@@ -60,7 +60,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             await Task.Delay(100, token).ConfigureAwait(false);
             await Emerge(BossBehavior.BossMaster,token, true).ConfigureAwait(false);
             await Task.Delay(100, token).ConfigureAwait(false);
-            await UnityMainThreadDispatcher.EnqueueAsync(() =>
+            await MainThreadDispatcher.EnqueueAsync(() =>
             {
                 _bossMineShoot.StopShoot();
             }).ConfigureAwait(false);

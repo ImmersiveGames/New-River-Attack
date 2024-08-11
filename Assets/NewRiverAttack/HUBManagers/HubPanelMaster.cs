@@ -60,7 +60,7 @@ namespace NewRiverAttack.HUBManagers
 
         public async void ButtonStartMission()
         {
-            var audioGameOver = AudioManager.GetAudioSfxEvent(EnumSfxSound.SfxMouseClick);
+            var audioGameOver = AudioManager.instance.GetAudioSfxEvent(EnumSfxSound.SfxMouseClick);
             audioGameOver.PlayOnShot(GetComponent<AudioSource>());
             _gameManager.gamePlayMode = GamePlayModes.MissionMode;
             _gameManager.ActiveIndex = _indexMenu;
@@ -70,7 +70,7 @@ namespace NewRiverAttack.HUBManagers
         
         public async void ButtonMenuInicial()
         {
-            var audioGameOver = AudioManager.GetAudioSfxEvent(EnumSfxSound.SfxMouseClick);
+            var audioGameOver = AudioManager.instance.GetAudioSfxEvent(EnumSfxSound.SfxMouseClick);
             audioGameOver.PlayOnShot(GetComponent<AudioSource>());
             _gameManager.gamePlayMode = GamePlayModes.MissionMode;
             await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateMenuInitial.ToString()).ConfigureAwait(false);

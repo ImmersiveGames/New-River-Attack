@@ -32,7 +32,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             await base.EnterAsync(token).ConfigureAwait(false);
             Finalized = false;
             await Task.Delay(100, token).ConfigureAwait(false);
-            await UnityMainThreadDispatcher.EnqueueAsync(() =>
+            await MainThreadDispatcher.EnqueueAsync(() =>
             {
                 var numMissiles = (int)(_dataShoot[0] ?? 5);
                 var angleCones = (float)(_dataShoot[1] ?? 90f);
@@ -60,7 +60,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         {
             await base.ExitAsync(token).ConfigureAwait(false);
             await Task.Delay(100, token).ConfigureAwait(false);
-            await UnityMainThreadDispatcher.EnqueueAsync(() =>
+            await MainThreadDispatcher.EnqueueAsync(() =>
             {
                 _bossMissileShoot.StopShoot();
             }).ConfigureAwait(false);

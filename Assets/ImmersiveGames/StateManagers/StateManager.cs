@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ScenesManager;
 using ImmersiveGames.StateManagers.Interfaces;
-using ImmersiveGames.Utils;
 
 namespace ImmersiveGames.StateManagers
 {
@@ -30,10 +29,11 @@ namespace ImmersiveGames.StateManagers
                 DebugManager.Log<StateManager>($"Já está no estado: {stateName}");
                 return;
             }
-            MainThreadTaskExecutor.RunOnMainThread(() =>
+            AudioManager.instance.PlayBGM(nextState);
+            /*MainThreadTaskExecutor.RunOnMainThread(() =>
             {
                 AudioManager.PlayBGM(nextState);
-            });
+            });*/
 
             if (_currentState != null)
             {

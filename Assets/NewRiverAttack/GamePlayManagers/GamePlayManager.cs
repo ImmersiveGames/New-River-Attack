@@ -171,7 +171,7 @@ namespace NewRiverAttack.GamePlayManagers
         }
         public void FinisherGame()
         {
-            AudioManager.PlayBGMOneShot("Finish");
+            AudioManager.instance.PlayBGMOneShot("Finish");
             var player = _initializedPlayers[0].transform.position;
             CameraManager.RepositionEndCamera(new Vector3(player.x,40,player.z));
             CameraManager.ActiveEndCamera(true);
@@ -223,7 +223,7 @@ namespace NewRiverAttack.GamePlayManagers
         {
             _actualLevel = GetLevel(_gameManager.gamePlayMode);
             IsBossFight = _actualLevel.levelType == LevelTypes.Boss;
-            AudioManager.PlayBGM(_actualLevel.setLevelList[0].levelType.ToString());
+            AudioManager.instance.PlayBGM(_actualLevel.setLevelList[0].levelType.ToString());
             _levelBuilderManager.StartToBuild(_actualLevel);
         }
 

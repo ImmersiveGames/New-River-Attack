@@ -51,7 +51,8 @@ namespace ImmersiveGames.ScenesManager
         {
             if (_canvasGroup != null)
             {
-                MainThreadTaskExecutor.RunOnMainThread(OnEventFadeInStart);
+                OnEventFadeInStart();
+                /*MainThreadTaskExecutor.RunOnMainThread(OnEventFadeInStart);*/
                 await FadeAsync(true, durationFadeIn).ConfigureAwait(false);
             }
             else
@@ -65,7 +66,8 @@ namespace ImmersiveGames.ScenesManager
             if (_canvasGroup != null)
             {
                 await FadeAsync(false, durationFadeOut).ConfigureAwait(false);
-                MainThreadTaskExecutor.RunOnMainThread(OnEventOutComplete);
+                OnEventOutComplete();
+                //MainThreadTaskExecutor.RunOnMainThread(OnEventOutComplete);
             }
             else
             {
@@ -83,7 +85,7 @@ namespace ImmersiveGames.ScenesManager
             var fadeCompletionSource = new TaskCompletionSource<bool>();
 
             // Run the fade on the main thread
-            MainThreadTaskExecutor.RunOnMainThread(FadeUpdate);
+            MainThreadDispatcher.Enqueue(FadeUpdate);
 
             // Wait for the fade to complete before returning
             await fadeCompletionSource.Task.ConfigureAwait(false);

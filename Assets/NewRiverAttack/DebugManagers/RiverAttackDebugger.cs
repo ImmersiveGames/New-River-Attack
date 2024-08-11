@@ -141,10 +141,10 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<BossDirections>(DebugManager.DebugLevels.None);
             
             //Steam Services
-            DebugManager.SetScriptDebugLevel<SteamConnectionManager>(DebugManager.DebugLevels.All);
-            DebugManager.SetScriptDebugLevel<SteamAchievementService>(DebugManager.DebugLevels.All);
-            DebugManager.SetScriptDebugLevel<SteamLeaderboardService>(DebugManager.DebugLevels.All);
-            DebugManager.SetScriptDebugLevel<SteamStatsService>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<SteamConnectionManager>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<SteamAchievementService>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<SteamLeaderboardService>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<SteamStatsService>(DebugManager.DebugLevels.None);
             
         }
     }

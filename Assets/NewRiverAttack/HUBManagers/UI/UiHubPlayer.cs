@@ -76,7 +76,7 @@ namespace NewRiverAttack.HUBManagers.UI
                 // 180-degree rotation around Y axis if target position is greater than current position
                 initialRotation = new Vector3(-180, 0, 0);
             }
-            var audioGameOver = AudioManager.GetAudioSfxEvent(EnumSfxSound.SfxEngineAccelerate);
+            var audioGameOver = AudioManager.instance.GetAudioSfxEvent(EnumSfxSound.SfxEngineAccelerate);
             // Create DoTween sequences for animation
             DOTween.Sequence()
                 .OnStart(() =>

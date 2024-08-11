@@ -79,7 +79,7 @@ namespace ImmersiveGames.MenuManagers.Abstracts
             DebugManager.Log<AbstractMenuManager>($"[Pilha] Size: {_menuHistory.Count}");
             if (_menuHistory.Count <= 1) return;
             var previousMenuIndex = _menuHistory.Pop();
-            AudioManager.PlayMouseClick();
+            AudioManager.instance.PlayMouseClick();
             var cursor = GetComponentInChildren<UiPanelCursor>()?.SetCurrentActiveButton;
             ActivateMenu(previousMenuIndex);
         }
@@ -91,7 +91,7 @@ namespace ImmersiveGames.MenuManagers.Abstracts
             // Obter o índice do menu anterior sem removê-lo da pilha
             var previousMenuIndex = _menuHistory.Peek();
 
-            AudioManager.PlayMouseClick();
+            AudioManager.instance.PlayMouseClick();
             var cursor = GetComponentInChildren<UiPanelCursor>()?.SetCurrentActiveButton;
             ActivateMenu(previousMenuIndex);
 
@@ -101,7 +101,7 @@ namespace ImmersiveGames.MenuManagers.Abstracts
 
         public void ButtonExit()
         {
-            AudioManager.PlayMouseClick();
+            AudioManager.instance.PlayMouseClick();
             Application.Quit();
         }
     }

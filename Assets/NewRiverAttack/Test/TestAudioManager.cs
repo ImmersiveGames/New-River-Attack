@@ -16,13 +16,13 @@ namespace NewRiverAttack.Test
         private IEnumerator TestMusicTransition()
         {
             // Play initial state
-            AudioManager.PlayBGM(new GameStateMenuInitial());
+            AudioManager.instance.PlayBGM(new GameStateMenuInitial());
 
             // Wait for a few seconds (simulating gameplay or time passing)
             yield return new WaitForSeconds(5f);
 
             // Play a different state (simulating a change in game state)
-            AudioManager.PlayBGM(new GameStatePlay());
+            AudioManager.instance.PlayBGM(new GameStatePlay());
         }
 
         // Replace YourInitialState and YourNextState with actual classes that implement IState

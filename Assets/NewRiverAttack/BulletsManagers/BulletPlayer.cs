@@ -31,7 +31,7 @@ namespace NewRiverAttack.BulletsManagers
         private void OnEnable()
         {
             _audioSource = GetComponent<AudioSource>();
-            _audioEvent = AudioManager.GetAudioSfxEvent(EnumSfxSound.SfxPlayerShoot);
+            _audioEvent = AudioManager.instance.GetAudioSfxEvent(EnumSfxSound.SfxPlayerShoot);
         }
 
         private void Awake()
