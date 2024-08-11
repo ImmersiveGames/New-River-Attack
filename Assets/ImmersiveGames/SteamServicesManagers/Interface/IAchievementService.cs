@@ -2,7 +2,7 @@
 {
     public interface IAchievementService
     {
-        void UnlockAchievement(string achievementId, bool notify = true);
+        void UnlockAchievement(string achievementId);
         bool IsAchievementUnlocked(string achievementId);
         void LoadAchievements();
         void SyncAchievements();

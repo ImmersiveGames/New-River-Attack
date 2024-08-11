@@ -13,13 +13,14 @@ namespace ImmersiveGames.SteamServicesManagers.Teste
             _steamAchievementService = SteamAchievementService.Instance;
             _steamStatsService = SteamStatsService.Instance;
             
-            Invoke(nameof(AddTesteAchievement), 5f);
+            Invoke(nameof(AddTesteAchievement), 2f);
         }
 
         private void AddTesteAchievement()
         {
-            //_steamAchievementService.UnlockAchievement("ACH_BUY_SKIN");
-            //_steamAchievementService.ResetAllAchievements();
+            _steamAchievementService.UnlockAchievement("ACH_BUY_SKIN");
+            _steamAchievementService.UnlockAchievement("ACH_XXXXXXXXX");
+            _steamAchievementService.ResetAllAchievements();
         }
     }
 }
