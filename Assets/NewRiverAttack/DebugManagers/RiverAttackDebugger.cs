@@ -72,7 +72,7 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<FiniteNavigationMode>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<SmoothFiniteNavigationMode>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<ShopProductSettings>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<ShopSkinChanger>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<ShopSkinChanger>(DebugManager.DebugLevels.None);
             
             
             
@@ -98,7 +98,7 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<PlayerShoot>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<ObjectShoot>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerBombs>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<Bullets>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<Bullets>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<BulletBombPlayer>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerFuel>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<UIFuelDisplay>(DebugManager.DebugLevels.None);

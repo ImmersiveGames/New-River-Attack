@@ -1,5 +1,4 @@
 ﻿using System;
-using ImmersiveGames.DebugManagers;
 using ImmersiveGames.InputManager;
 using ImmersiveGames.Utils;
 using TMPro;
@@ -19,8 +18,7 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
         private Animator _animator;
         private AudioSource _audioSource;
 
-        private static readonly int OpenTrigger = Animator.StringToHash("OpenTrigger");
-        private static readonly int CloseTrigger = Animator.StringToHash("CloseTrigger");
+        private static readonly int NotificationTrigger = Animator.StringToHash("Notification");
 
         public NotificationData NotificationData { get; private set; }
 
@@ -32,7 +30,6 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
 
         private void Start()
         {
-            // Se houver botões de confirmação, registre as ações, se necessário
             if (confirmButton != null)
             {
                 InputGameManager.RegisterAction("ConfirmNotification", ButtonConfirm);
@@ -45,7 +42,6 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
             {
                 InputGameManager.UnregisterAction("ConfirmNotification", ButtonConfirm);
             }
-
             InputGameManager.ActionManager.RestoreActionMap();
         }
 
@@ -59,10 +55,7 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
 
         private void PlayNotificationSound()
         {
-            if (_audioSource != null)
-            {
-                _audioSource.Play();
-            }
+            _audioSource?.Play();
         }
 
         private void SetMessageText(string message)
@@ -72,7 +65,6 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
 
         private void ConfigureButtons(Action onClose, Action onConfirm)
         {
-            // Se houver botões de confirmação, configure-os
             if (confirmButton != null)
             {
                 confirmButton.gameObject.SetActive(onConfirm != null);
@@ -81,8 +73,8 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
                     confirmButton.onClick.RemoveAllListeners();
                     confirmButton.onClick.AddListener(() =>
                     {
-                        onConfirm.Invoke();
-                        onClose.Invoke();
+                        onConfirm?.Invoke();
+                        onClose?.Invoke();
                         ClosePanel();
                     });
                 }
@@ -93,7 +85,7 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
         {
             if (_animator != null)
             {
-                _animator.SetTrigger(OpenTrigger);
+                _animator.SetTrigger(NotificationTrigger);
             }
             else
             {
@@ -105,8 +97,8 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
         {
             if (_animator != null)
             {
-                _animator.SetTrigger(CloseTrigger);
-                var animationDuration = global::Utils.Tools.GetAnimationDuration(_animator, CloseTrigger.ToString());
+                _animator.SetTrigger(NotificationTrigger);
+                float animationDuration = _animator.GetCurrentAnimatorStateInfo(0).length;
                 StartCoroutine(DelayedClose(animationDuration));
             }
             else
@@ -119,7 +111,7 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
         {
             yield return new WaitForSeconds(delay);
             gameObject.SetActive(false);
-            NotificationManager.instance.OnPanelClosed(this); // Notifica o manager que o painel foi fechado
+            NotificationManager.instance.OnPanelClosed(this);
         }
 
         private void ButtonConfirm(UnityEngine.InputSystem.InputAction.CallbackContext context)

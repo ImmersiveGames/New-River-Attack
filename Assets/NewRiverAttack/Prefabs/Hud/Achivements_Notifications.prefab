@@ -186,7 +186,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1440266148820207945}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2aed099c1a1b4d848ae4f4192b47bd70, type: 2}
   m_CullingMode: 0
@@ -346,6 +346,7 @@ GameObject:
   - component: {fileID: 6980913582554739192}
   - component: {fileID: 1781935665925109760}
   - component: {fileID: 7306905779150202226}
+  - component: {fileID: 2684743110296012122}
   m_Layer: 5
   m_Name: Achivements_Panel
   m_TagString: Untagged
@@ -414,6 +415,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2684743110296012122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6831433521102055595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3282d964c8f4ad2b5ecd01459b2958e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageText: {fileID: 1259460704449188443}
+  confirmButton: {fileID: 0}
+  openTimeDuration: 0.2
+  closeTimeDuration: 0.2
 --- !u!1 &6962836624392164264
 GameObject:
   m_ObjectHideFlags: 0

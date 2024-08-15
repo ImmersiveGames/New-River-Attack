@@ -1,5 +1,7 @@
 ﻿using ImmersiveGames.DebugManagers;
+using ImmersiveGames.ShopManagers.Abstracts;
 using ImmersiveGames.ShopManagers.Interfaces;
+using ImmersiveGames.ShopManagers.NavigationModes;
 using ImmersiveGames.ShopManagers.ShopProducts;
 using NewRiverAttack.SaveManagers;
 using NewRiverAttack.ShoppingSystems.SimpleShopping.Abstracts;
@@ -26,6 +28,25 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         public LocalizedString textUnavailable;
         public LocalizedString textInUse;
         public LocalizedString textNotInUse;
+        
+
+        private string cachedTextUnavailable;
+        private string cachedTextInUse;
+        private string cachedTextNotInUse;
+
+        protected void Awake()
+        {
+            SimpleShoppingManager = GetComponentInParent<SimpleShoppingManager>();
+            CacheLocalizedStrings();
+        }
+
+        private void CacheLocalizedStrings()
+        {
+            cachedTextUnavailable = textUnavailable.GetLocalizedString();
+            cachedTextInUse = textInUse.GetLocalizedString();
+            cachedTextNotInUse = textNotInUse.GetLocalizedString();
+        }
+
         protected internal override void DisplayStock(IStockShop stockShop)
         {
             base.DisplayStock(stockShop);
@@ -35,91 +56,116 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
 
         private void DisplaySlides(IShopProduct shopProduct)
         {
-            switch (shopProduct)
+            if (shopProduct is ShopProductSkin productSkin)
             {
-                case null:
-                    return;
-                case ShopProductSkin productSkin:
-                    attSpeed.value = productSkin.GetRateSpeed();
-                    attAgility.value = productSkin.GetRateAgility();
-                    attMaxFuel.value = productSkin.GetRateMaxFuel();
-                    attFuelCadence.value = productSkin.GetRateCadenceFuel();
-                    attFireSpeed.value = productSkin.GetRateShoot();
-                    break;
+                bool previousEnabled = attSpeed.interactable;
+                SetSliderInteractable(false);
+
+                attSpeed.value = productSkin.GetRateSpeed();
+                attAgility.value = productSkin.GetRateAgility();
+                attMaxFuel.value = productSkin.GetRateMaxFuel();
+                attFuelCadence.value = productSkin.GetRateCadenceFuel();
+                attFireSpeed.value = productSkin.GetRateShoot();
+
+                SetSliderInteractable(previousEnabled);
             }
+        }
+
+        private void SetSliderInteractable(bool isEnabled)
+        {
+            attSpeed.interactable = isEnabled;
+            attAgility.interactable = isEnabled;
+            attMaxFuel.interactable = isEnabled;
+            attFuelCadence.interactable = isEnabled;
+            attFireSpeed.interactable = isEnabled;
         }
 
         private void SelectSkinButton(IStockShop stockShop, GameOptionsSave gameOptionsSave)
         {
-            //Aqui só serve para skins mas se for ampliar precisa achar outra solução
             var hasSkin = stockShop.PlayerAlreadyHave(gameOptionsSave, stockShop.shopProduct);
             buttonUse.gameObject.SetActive(hasSkin);
             buttonBuy.gameObject.SetActive(!hasSkin);
         }
+
         protected override void InteractableButtonBuy(IStockShop stockShop, int quantity)
         {
             var saveGameOptions = GameOptionsSave.instance;
-            DebugManager.Log<ShopProductSimpleSkins>($"[{stockShop.shopProduct.name}] Tem no stock: {stockShop.HaveInStock(quantity)}, " +
-                                                     $"Jogador Pode Comprar: {stockShop.PlayerCanBuy(saveGameOptions,quantity)}");
-            buttonBuy.GetComponentInChildren<TMP_Text>().color = textNormalColor;
-            buttonBuy.GetComponentInChildren<LayoutElement>().GetComponent<Image>().color = textNormalColor;
+            bool canBuy = stockShop.HaveInStock(quantity) && stockShop.PlayerHaveMoneyToBuy(saveGameOptions, quantity);
+
+            buttonBuy.interactable = canBuy;
+            buttonBuy.GetComponentInChildren<TMP_Text>().color = canBuy ? textNormalColor : textNoBuyColor;
+            buttonBuy.GetComponentInChildren<LayoutElement>().GetComponent<Image>().color = canBuy ? textNormalColor : textNoBuyColor;
+
             buttonBuy.onClick.RemoveAllListeners();
-            if (!stockShop.HaveInStock(quantity))
+            if (canBuy)
             {
-                buttonBuy.interactable = false;
-                buttonBuy.GetComponentInChildren<TMP_Text>().text = textUnavailable.GetLocalizedString();
-                return;
+                buttonBuy.onClick.AddListener(() => BuyAndUseProduct(0, stockShop, quantity));
             }
-            if (!stockShop.PlayerHaveMoneyToBuy(saveGameOptions, quantity))
+            else
             {
-                buttonBuy.interactable = false;
-                buttonBuy.GetComponentInChildren<TMP_Text>().color = textNoBuyColor;
-                buttonBuy.GetComponentInChildren<LayoutElement>().GetComponent<Image>().color = textNoBuyColor;
-                return;
+                buttonBuy.GetComponentInChildren<TMP_Text>().text = cachedTextUnavailable;
             }
-            buttonBuy.onClick.AddListener(() => BuyProduct(0,stockShop, quantity));
-            
-            DebugManager.Log<ShopProductSimpleSkins>($"[{stockShop.shopProduct.name}] Tem no stock: {stockShop.HaveInStock(quantity)}, " +
-                                                     $"Jogador Pode Comprar: {stockShop.PlayerCanBuy(saveGameOptions,quantity)}");
+
+#if DEBUG
+            DebugManager.Log<ShopProductSimpleSkins>($"[{stockShop.shopProduct.name}] Can Buy: {canBuy}");
+#endif
         }
+
         protected override void InteractableButtonUse(IStockShop stockShop, int quantity)
         {
             buttonUse.onClick.RemoveAllListeners();
             var interactable = stockShop.shopProduct is IShopProductUsable;
+
+#if DEBUG
             DebugManager.Log<ShopProductSimpleSkins>("Use Button Interactable: " + interactable);
+#endif
+
             if (!interactable)
             {
                 buttonUse.interactable = false;
                 return;
             }
+
             var saveGameOptions = GameOptionsSave.instance;
-            
-            buttonUse.GetComponentInChildren<TMP_Text>().text = textNotInUse.GetLocalizedString();
-            DebugManager.Log<ShopProductSimpleSkins>("Já possui e esta selecionado: " + stockShop.shopProduct.name);
-            if (saveGameOptions.SkinIsActualInPlayer(0,stockShop.shopProduct) )
+            bool isCurrentSkin = saveGameOptions.SkinIsActualInPlayer(0, stockShop.shopProduct);
+
+            buttonUse.GetComponentInChildren<TMP_Text>().text = isCurrentSkin ? cachedTextInUse : cachedTextNotInUse;
+
+            if (interactable)
             {
-                
-             //Aqui também é logica exclusiva para skins, para ampliar precisa modificar.
-             buttonUse.GetComponentInChildren<TMP_Text>().text = textInUse.GetLocalizedString();
-             DebugManager.Log<ShopProductSimpleSkins>("Já possui e esta selecionado: " + stockShop.shopProduct.name);
+                buttonUse.onClick.AddListener(() => UseProduct(0, stockShop, quantity));
             }
-            // No caso desta loja, não é possível comprar e usar ao mesmo tempo.
-            buttonUse.onClick.AddListener(() => UseProduct(0,stockShop, quantity));
         }
-        
+
+        private void BuyAndUseProduct(int indexPlayer, IStockShop stockShop, int quantity)
+        {
+            BuyProduct(indexPlayer, stockShop, quantity);
+            UseProduct(indexPlayer, stockShop, quantity);
+
+            // Notifica outros sistemas para usar o produto
+            SimpleShoppingManager.OnEventBuyProduct();
+
+            // Move o painel para a posição do item comprado
+            MoveToProductPosition(stockShop);
+        }
+
         protected override void BuyProduct(int indexPlayer, IStockShop stockShop, int quantity = 1)
         {
             var saveGameOptions = GameOptionsSave.instance;
             if (saveGameOptions == null || stockShop?.shopProduct == null)
             {
+#if DEBUG
                 DebugManager.LogWarning<ShopProductSimpleSkins>("Unable to buy product. Game options or stock shop is null.");
+#endif
                 return;
             }
 
             var price = stockShop.shopProduct.GetPrice() * quantity;
             if (saveGameOptions.wallet < price || !stockShop.HaveInStock(quantity) || !stockShop.PlayerCanBuy(saveGameOptions, quantity))
             {
+#if DEBUG
                 DebugManager.LogWarning<ShopProductSimpleSkins>("Unable to buy product. Insufficient funds, out of stock, or cannot buy.");
+#endif
                 return;
             }
 
@@ -128,13 +174,15 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
 
             if (stockShop.shopProduct is IShopProductInventory product)
             {
-                product.AddPlayerProductList(indexPlayer,stockShop, quantity);
+                product.AddPlayerProductList(indexPlayer, stockShop, quantity);
             }
             if (stockShop.shopProduct is IShopProductUsable itemUse)
             {
-                itemUse.Use(indexPlayer,stockShop, quantity);
+                itemUse.Use(indexPlayer, stockShop, quantity);
             }
-            DebugManager.LogWarning<ShopProductSimpleSkins>("Achievement: UNLOCKED: Buy a Item.");
+#if DEBUG
+            DebugManager.LogWarning<ShopProductSimpleSkins>("Achievement: UNLOCKED: Buy an Item.");
+#endif
             if (SteamGameManager.ConnectedToSteam)
             {
                 if (stockShop.shopProduct is ShopProductSkin productSkin)
@@ -146,15 +194,56 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
                     }
                 }
             }
-            SimpleShoppingManager.OnEventBuyProduct();
-            DebugManager.Log<ShopProductSimpleSkins>("Product purchased successfully.");
         }
-        protected override void UseProduct(int indexPlayer,IStockShop stockShop, int quantity = 1)
+
+        protected override void UseProduct(int indexPlayer, IStockShop stockShop, int quantity = 1)
         {
-            if (stockShop?.shopProduct is not IShopProductUsable itemUse) return;
-            itemUse.Use(indexPlayer,stockShop, quantity);
-            SimpleShoppingManager.OnEventUseProduct(stockShop.shopProduct, quantity);
-            DebugManager.Log<ShopProductSimpleSkins>("Skin used successfully.");
+            if (stockShop?.shopProduct is IShopProductUsable itemUse)
+            {
+                itemUse.Use(indexPlayer, stockShop, quantity);
+                SimpleShoppingManager.OnEventUseProduct(stockShop.shopProduct, quantity);
+#if DEBUG
+                DebugManager.Log<ShopProductSimpleSkins>("Skin used successfully.");
+#endif
+            }
         }
+
+        private void MoveToProductPosition(IStockShop stockShop)
+        {
+            var layoutGroup = GetComponentInParent<HorizontalLayoutGroup>();
+            var content = layoutGroup?.transform as RectTransform;
+
+            if (content != null)
+            {
+                // Procurar o índice do produto comprado no layout
+                var productIndex = FindProductIndexInLayout(stockShop.shopProduct, content);
+                var navigation = GetComponentInParent<SmoothFiniteNavigationMode>();
+
+                if (navigation != null && productIndex >= 0)
+                {
+                    navigation.MoveContentToIndex(content, productIndex);
+                }
+            }
+        }
+        public override IShopProduct GetAssociatedProduct()
+        {
+            return _stockShop?.shopProduct; // Retorna o produto associado ao estoque
+        }
+        private int FindProductIndexInLayout(IShopProduct shopProduct, RectTransform content)
+        {
+            // Percorre todos os filhos do conteúdo para encontrar o índice do produto correspondente
+            for (int i = 0; i < content.childCount; i++)
+            {
+                var child = content.GetChild(i);
+                var productSettings = child.GetComponent<ShopProductSettings>();
+                if (productSettings != null && productSettings.GetAssociatedProduct().Equals(shopProduct))
+                {
+                    return i;
+                }
+            }
+            return -1; // Retorna -1 se o produto não for encontrado
+        }
+
+
     }
 }

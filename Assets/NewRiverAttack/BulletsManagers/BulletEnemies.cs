@@ -7,6 +7,7 @@ using ImmersiveGames.PoolManagers.Interface;
 using NewRiverAttack.AudioManagers;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
+using NewRiverAttack.WallsManagers;
 using UnityEngine;
 
 namespace NewRiverAttack.BulletsManagers
@@ -32,7 +33,7 @@ namespace NewRiverAttack.BulletsManagers
         private void OnTriggerEnter(Collider collision)
         {
             if (collision == null) return;
-            if (collision.GetComponentInParent<ObstacleMaster>() || collision.GetComponent<BulletEnemies>()) return;
+            if (collision.GetComponentInParent<WallMaster>() || collision.GetComponentInParent<ObstacleMaster>() || collision.GetComponent<BulletEnemies>()) return;
             DestroyMe();
         }
         private void FixedUpdate()

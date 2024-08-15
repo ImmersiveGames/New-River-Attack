@@ -9,20 +9,37 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
     {
         private const float SmoothTime = 0.1f;
         private bool _isMoving;
-        private const float Approximation = 0.3f; // Aproximação para determinar a suavização
+        private const float Approximation = 0.3f;
         private int _moveCount;
 
         public override void MoveContent(RectTransform content, bool forward, MonoBehaviour monoBehaviour = null)
         {
-            switch (_isMoving)
+            if (!_isMoving && monoBehaviour != null)
             {
-                case false when monoBehaviour != null:
-                    monoBehaviour.StartCoroutine(MoveToPosition(content, forward, content.childCount));
-                    break;
-                case true:
-                    DebugManager.LogWarning<SmoothFiniteNavigationMode>("Uma movimentação já está em andamento. Aguarde até que termine.");
-                    break;
+                monoBehaviour.StartCoroutine(MoveToPosition(content, forward, content.childCount));
             }
+            else
+            {
+                DebugManager.LogWarning<SmoothFiniteNavigationMode>("Uma movimentação já está em andamento. Aguarde até que termine.");
+            }
+        }
+        public void MoveContentToIndex(RectTransform content, int index)
+        {
+            if (!_isMoving)
+            {
+                _moveCount = index;
+                MoveToSpecificPosition(content, index);
+            }
+        }
+
+        private void MoveToSpecificPosition(RectTransform content, int targetIndex)
+        {
+            var moveAmount = content.GetComponent<HorizontalLayoutGroup>().spacing;
+            var targetX = -targetIndex * moveAmount;
+
+            // Suaviza a transição
+            content.anchoredPosition = new Vector2(targetX, content.anchoredPosition.y);
+            DebugManager.Log<SmoothFiniteNavigationMode>($"Movido para a posição do item de índice: {targetIndex}");
         }
 
         private IEnumerator MoveToPosition(RectTransform content, bool forward, int totalItems)
@@ -30,18 +47,13 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
             _isMoving = true;
             DebugManager.Log<SmoothFiniteNavigationMode>("Iniciando movimento.");
 
-            // Atualiza o contador de movimentos
             _moveCount += forward ? 1 : -1;
             _moveCount = Mathf.Clamp(_moveCount, 0, totalItems - 1);
 
-            // Atualiza o índice selecionado de acordo com o contador de movimentos
             SelectedItemIndex = _moveCount;
             DebugManager.Log<SmoothFiniteNavigationMode>($"Índice selecionado: {SelectedItemIndex}");
 
-            // Obtém o espaço entre os elementos do layout group
             var moveAmount = content.GetComponent<HorizontalLayoutGroup>().spacing;
-
-
             var rect = content.anchoredPosition;
             var targetX = forward ? rect.x - moveAmount : rect.x + moveAmount;
             targetX = Mathf.Clamp(targetX, -((totalItems - 1) * moveAmount), 0f);

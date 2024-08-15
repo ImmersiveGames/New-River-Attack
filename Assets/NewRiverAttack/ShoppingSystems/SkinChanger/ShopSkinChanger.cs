@@ -30,6 +30,7 @@ namespace NewRiverAttack.ShoppingSystems.SkinChanger
             playerSettings = GameOptionsSave.instance.playerSettings[0];
             ShoppingChangeSkin(playerSettings.actualSkin,1);
             _simpleShoppingManager.EventUseProduct += ShoppingChangeSkin;
+            _simpleShoppingManager.EventUseProduct += ShoppingChangeSkin;
         }
 
         private void OnDisable()

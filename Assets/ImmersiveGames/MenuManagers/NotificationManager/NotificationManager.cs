@@ -10,7 +10,6 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
     {
         [Header("Configurações")]
         public GameObject notificationPanelPrefab;
-        public GameObject choicePanelPrefab;
         public float notificationDisplayTime = 5f; // Tempo que cada notificação ficará visível
 
         private readonly Queue<NotificationData> _notificationQueue = new Queue<NotificationData>();
@@ -25,7 +24,7 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
 
         private void Start()
         {
-            _panelPool = new GenericObjectPool<NotificationPanel>(notificationPanelPrefab.GetComponent<NotificationPanel>(), transform, 5);
+            _panelPool = new GenericObjectPool<NotificationPanel>(notificationPanelPrefab.GetComponentInChildren<NotificationPanel>(), transform, 5);
         }
 
         public void AddNotification(NotificationData notificationData)
@@ -46,7 +45,7 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
 
                 var nextNotification = _notificationQueue.Dequeue();
                 InstantiateNotificationPanel(nextNotification);
-                _currentPanel.Show(nextNotification.message, () => CloseNotification(nextNotification), null);
+                _currentPanel.Show(nextNotification.message, () => CloseNotification(nextNotification));
 
                 // Fechar automaticamente após o tempo especificado
                 StartCoroutine(AutoCloseNotification(_currentPanel, notificationDisplayTime));
@@ -66,28 +65,26 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
             }
             _currentPanel = _panelPool.GetObject();
             _currentPanel.transform.SetParent(transform, false);
-            //_currentPanel.Initialize(nextNotification);
         }
 
         private void CloseNotification(NotificationData notification)
         {
             EventNotificationClosed?.Invoke(this, new NotificationEventArgs(notification));
-            _panelPool.ReleaseObject(_currentPanel);
+            _currentPanel.ClosePanel(); // Inicia o processo de fechamento com animação
             _currentPanel = null;
-
             if (_notificationQueue.Count == 0)
             {
                 RestoreInitialFocus();
             }
-
-            TryShowNextNotification();
         }
 
         public void OnPanelClosed(NotificationPanel panel)
         {
             if (panel == _currentPanel)
             {
-                CloseNotification(panel.NotificationData);
+                _panelPool.ReleaseObject(panel);
+                _currentPanel = null;
+                TryShowNextNotification();
             }
         }
 
@@ -111,6 +108,11 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
             {
                 EventSystem.current.SetSelectedGameObject(_initiallySelectedObject);
             }
+        }
+
+        protected virtual void OnEventNotificationAccepted(NotificationEventArgs e)
+        {
+            EventNotificationAccepted?.Invoke(this, e);
         }
     }
 
