@@ -11,7 +11,6 @@ namespace ImmersiveGames.MenuManagers.UI
         
         private bool _isLoadMenu;
         
-
         private void Start()
         {
             _currentActiveButton = EventSystem.current.currentSelectedGameObject;
@@ -38,7 +37,8 @@ namespace ImmersiveGames.MenuManagers.UI
         }
 
         public GameObject GetCurrentActiveButton => _currentActiveButton;
-        public GameObject SetCurrentActiveButton => _currentActiveButton = null;
+        
+        public void ClearCurrentActiveButton() => _currentActiveButton = null; // Método atualizado
 
         private void SetCursor(RectTransform reference)
         {

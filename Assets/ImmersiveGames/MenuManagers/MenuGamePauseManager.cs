@@ -69,6 +69,7 @@ namespace ImmersiveGames.MenuManagers
         }
         private void StartPauseMenu(InputAction.CallbackContext obj)
         {
+            if(!_gamePlayManager.ShouldBePlayingGame) return;
             DebugManager.Log<MenuGamePauseManager>($"Chamou a Pausa");
             SetPauseMenu(_gamePlayManager.IsPause);
             if (!_gamePlayManager.IsPause)

@@ -1,6 +1,7 @@
 ﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.InputManager;
 using ImmersiveGames.MenuManagers.Abstracts;
+using ImmersiveGames.MenuManagers.UI;
 using NewRiverAttack.GamePlayManagers;
 using UnityEngine.UI;
 
@@ -11,19 +12,19 @@ namespace ImmersiveGames.MenuManagers
         public PanelsMenuReference[] panelsMenuReferences;
         public Button[] disableButtons;
         public bool activeScreenWash;
-        
+        private UiPanelCursor _uiPanelCursor;
+
         #region Unity Methods
 
         private void Awake()
         {
+            _uiPanelCursor = GetComponentInChildren<UiPanelCursor>(); // Cache the cursor component
             SetMenu(panelsMenuReferences);
         }
 
         private void Start()
         {
             InputGameManager.ActionManager.ActivateActionMap(ActionManager.GameActionMaps.UiControls);
-            //InputGameManager.RegisterAction("BackButton",InputBackButton );
-            //ActivateMenu(0);
             DebugManager.Log<GameStartMenu>("Inicia o menu.");
         }
 
@@ -32,12 +33,14 @@ namespace ImmersiveGames.MenuManagers
             InputGameManager.ActionManager.RestoreActionMap();
             GamePlayManager.instance.EventGameOver -= OnGameOver;
         }
-        
+
         private void OnDestroy()
         {
-            //InputGameManager.UnregisterAction("BackButton",InputBackButton );
+            // Unregister actions if needed
         }
+
         #endregion
+
         protected override void OnEnterMenu(PanelsMenuReference panelsMenuGameObject)
         {
             DebugManager.Log<GameStartMenu>("Entrando no menu.");

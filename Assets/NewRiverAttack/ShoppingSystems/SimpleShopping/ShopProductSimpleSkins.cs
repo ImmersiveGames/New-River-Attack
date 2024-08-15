@@ -1,5 +1,4 @@
 ﻿using ImmersiveGames.DebugManagers;
-using ImmersiveGames.ShopManagers.Abstracts;
 using ImmersiveGames.ShopManagers.Interfaces;
 using ImmersiveGames.ShopManagers.NavigationModes;
 using ImmersiveGames.ShopManagers.ShopProducts;
@@ -30,9 +29,9 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         public LocalizedString textNotInUse;
         
 
-        private string cachedTextUnavailable;
-        private string cachedTextInUse;
-        private string cachedTextNotInUse;
+        private string _cachedTextUnavailable;
+        private string _cachedTextInUse;
+        private string _cachedTextNotInUse;
 
         protected void Awake()
         {
@@ -42,9 +41,9 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
 
         private void CacheLocalizedStrings()
         {
-            cachedTextUnavailable = textUnavailable.GetLocalizedString();
-            cachedTextInUse = textInUse.GetLocalizedString();
-            cachedTextNotInUse = textNotInUse.GetLocalizedString();
+            _cachedTextUnavailable = textUnavailable.GetLocalizedString();
+            _cachedTextInUse = textInUse.GetLocalizedString();
+            _cachedTextNotInUse = textNotInUse.GetLocalizedString();
         }
 
         protected internal override void DisplayStock(IStockShop stockShop)
@@ -103,7 +102,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             }
             else
             {
-                buttonBuy.GetComponentInChildren<TMP_Text>().text = cachedTextUnavailable;
+                buttonBuy.GetComponentInChildren<TMP_Text>().text = _cachedTextUnavailable;
             }
 
 #if DEBUG
@@ -129,7 +128,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             var saveGameOptions = GameOptionsSave.instance;
             bool isCurrentSkin = saveGameOptions.SkinIsActualInPlayer(0, stockShop.shopProduct);
 
-            buttonUse.GetComponentInChildren<TMP_Text>().text = isCurrentSkin ? cachedTextInUse : cachedTextNotInUse;
+            buttonUse.GetComponentInChildren<TMP_Text>().text = isCurrentSkin ? _cachedTextInUse : _cachedTextNotInUse;
 
             buttonUse.onClick.AddListener(() => UseProduct(0, stockShop, quantity));
         }
