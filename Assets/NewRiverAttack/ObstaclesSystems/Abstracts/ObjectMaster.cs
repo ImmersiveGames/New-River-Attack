@@ -69,6 +69,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         }
 
         protected float GetLastPositionZ => _savePosition.z;
+        protected float GetLastPositionX => _savePosition.x;
 
         protected internal void SavePosition(Vector3 myPosition)
         {

@@ -141,7 +141,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private void Reposition()
         {
-            transform.position = new Vector3(GamePlayManagerRef.PlayersDefault.spawnPosition.x,
+            transform.position = new Vector3(GetLastPositionX,
                 GamePlayManagerRef.PlayersDefault.spawnPosition.y,
                 GetLastPositionZ);
             transform.Rotate(GamePlayManagerRef.PlayersDefault.spawnPosition);
