@@ -131,23 +131,29 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
 
             buttonUse.GetComponentInChildren<TMP_Text>().text = isCurrentSkin ? cachedTextInUse : cachedTextNotInUse;
 
-            if (interactable)
-            {
-                buttonUse.onClick.AddListener(() => UseProduct(0, stockShop, quantity));
-            }
+            buttonUse.onClick.AddListener(() => UseProduct(0, stockShop, quantity));
         }
 
         private void BuyAndUseProduct(int indexPlayer, IStockShop stockShop, int quantity)
         {
+            if (this == null) return; // Verificação de nulidade
+
             BuyProduct(indexPlayer, stockShop, quantity);
+
+            if (this == null) return; // Verificação de nulidade após compra
+
             UseProduct(indexPlayer, stockShop, quantity);
 
             // Notifica outros sistemas para usar o produto
             SimpleShoppingManager.OnEventBuyProduct();
 
-            // Move o painel para a posição do item comprado
-            MoveToProductPosition(stockShop);
+            // Verificação de nulidade antes de mover o painel
+            if (this != null)
+            {
+                MoveToProductPosition(stockShop);
+            }
         }
+
 
         protected override void BuyProduct(int indexPlayer, IStockShop stockShop, int quantity = 1)
         {
@@ -215,16 +221,17 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
 
             if (content != null)
             {
-                // Procurar o índice do produto comprado no layout
                 var productIndex = FindProductIndexInLayout(stockShop.shopProduct, content);
                 var navigation = GetComponentInParent<SmoothFiniteNavigationMode>();
 
-                if (navigation != null && productIndex >= 0)
+                // Verificação de nulidade e se o índice é válido
+                if (navigation != null && productIndex >= 0 && this != null)
                 {
                     navigation.MoveContentToIndex(content, productIndex);
                 }
             }
         }
+
         public override IShopProduct GetAssociatedProduct()
         {
             return _stockShop?.shopProduct; // Retorna o produto associado ao estoque
