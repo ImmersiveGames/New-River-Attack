@@ -1,10 +1,8 @@
 ﻿using System;
-using ImmersiveGames.DebugManagers;
 using ImmersiveGames.InputManager;
 using ImmersiveGames.MenuManagers.Abstracts;
 using ImmersiveGames.ScenesManager;
 using ImmersiveGames.ScenesManager.Transitions;
-using ImmersiveGames.StateManagers.Interfaces;
 using ImmersiveGames.TimelineManagers;
 using NewRiverAttack.GameManagers;
 using NewRiverAttack.GamePlayManagers;
@@ -137,7 +135,7 @@ namespace ImmersiveGames.MenuManagers
                 _timelineManager.PlayAnimation(timeAnimationStart);
         }
 
-        public void GoBack()
+        public override void GoBack()
         {
             if (_canGoBack) // Verifica se o retorno está permitido
             {

@@ -9,6 +9,7 @@ using NewRiverAttack.AudioManagers;
 using NewRiverAttack.LevelBuilder.Abstracts;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
+using NewRiverAttack.WallsManagers;
 using UnityEngine;
 
 namespace NewRiverAttack.BulletsManagers
@@ -43,7 +44,8 @@ namespace NewRiverAttack.BulletsManagers
         private void OnTriggerEnter(Collider collision)
         {
             if (collision == null) return;
-            if (collision.GetComponentInParent<PlayerMaster>() || collision.GetComponent<BulletPlayer>() || collision.GetComponent<LevelFinishers>()) return;
+            if (collision.GetComponentInParent<PlayerMaster>() || collision.GetComponent<BulletPlayer>() || collision.GetComponent<LevelFinishers>()
+                || collision.GetComponent<WallMaster>()) return;
             var obstacleMaster = collision.GetComponentInParent<ObstacleMaster>();
             if (obstacleMaster != null)
             {
