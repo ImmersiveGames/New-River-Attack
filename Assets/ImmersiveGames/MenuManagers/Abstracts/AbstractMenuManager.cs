@@ -83,7 +83,7 @@ namespace ImmersiveGames.MenuManagers.Abstracts
             NavigateBack(true);
         }
 
-        public void GoBack()
+        public virtual void GoBack()
         {
             NavigateBack(false);
         }
