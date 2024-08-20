@@ -1,5 +1,9 @@
-﻿using ImmersiveGames.DebugManagers;
+﻿using System;
+using ImmersiveGames.DebugManagers;
+using ImmersiveGames.SteamServicesManagers;
+using ImmersiveGames.SteamServicesManagers.Interface;
 using NewRiverAttack.GamePlayManagers.GamePlayLogs;
+using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
 using NewRiverAttack.SteamGameManagers;
@@ -15,6 +19,10 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private const int BombToHitAchievement = 3;
         private bool _connectSteam;
         private PlayerMaster _playerMaster;
+
+        private IStatsService _statsService;
+        private GameStatisticManager _gameStatisticManager;
+        
         private void Start()
         {
             _playerMaster = GetComponent<PlayerMaster>();
@@ -23,11 +31,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             {
                 DebugManager.Log<PlayerAchievements>($"Steam not online");
             }
-        }
-
-        private void OnDisable()
-        {
-            LogPlayerScore(_playerMaster.GetPlayerScore, _playerMaster.PlayerIndex);
         }
 
         private void LogPlayerScore(int valueUpdate, int playerIndex)
@@ -49,7 +52,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         protected internal void LogDistanceReach(int distance)
         {
-            GamePlayLog.instance.amountDistance += distance;
+            GemeStatisticsDataLog.instance.amountDistance += distance;
             if (distance <= 0 || distance % DistanceToCheckAchievement != 0) return;
             DebugManager.Log<PlayerDistance>($"Distance Maxima para Registrar: {distance}");
             
@@ -70,8 +73,8 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         protected internal void LogSpendFuel(float fuel)
         {
             var spendFuel = (int)fuel;
-            GamePlayLog.instance.fuelSpent += spendFuel;
-            DebugManager.Log<PlayerAchievements>( $"Registrou gasto de gasolina: {spendFuel} No total: {GamePlayLog.instance.fuelSpent}" );
+            GemeStatisticsDataLog.instance.fuelSpent += spendFuel;
+            DebugManager.Log<PlayerAchievements>( $"Registrou gasto de gasolina: {spendFuel} No total: {GemeStatisticsDataLog.instance.fuelSpent}" );
             if (!_connectSteam) return;
             SteamGameManager.AddStat("stat_SpendGas", spendFuel, false);
             SteamGameManager.StoreStats();
@@ -90,8 +93,8 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             if (walls != null)
             {
                 // Colidiu com uma parede.
-                GamePlayLog.instance.playersDieWall += 1;
-                DebugManager.Log<PlayerAchievements>($"Registrado +1 colisão na Parede #{GamePlayLog.instance.playersDieWall}");
+                GemeStatisticsDataLog.instance.playersDieWall += 1;
+                DebugManager.Log<PlayerAchievements>($"Registrado +1 colisão na Parede #{GemeStatisticsDataLog.instance.playersDieWall}");
                 if (_connectSteam)
                 {
                     SteamGameManager.AddStat("stat_CrashPlayer",1,false);
@@ -101,8 +104,8 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             if (bullets != null)
             {
                 // Colidiu com uma bala inimiga.
-                GamePlayLog.instance.playersDieEnemyBullets += 1;
-                DebugManager.Log<PlayerAchievements>($"Registrado +1 colisão por Bullets #{GamePlayLog.instance.playersDieEnemyBullets}");
+                GemeStatisticsDataLog.instance.playersDieEnemyBullets += 1;
+                DebugManager.Log<PlayerAchievements>($"Registrado +1 colisão por Bullets #{GemeStatisticsDataLog.instance.playersDieEnemyBullets}");
             }
             if (enemies != null && enemies is not EnemiesMaster)
             { 

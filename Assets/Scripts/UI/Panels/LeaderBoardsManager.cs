@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.SteamGameManagers;
 using UnityEngine;
 

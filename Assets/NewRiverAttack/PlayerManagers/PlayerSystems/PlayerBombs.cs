@@ -95,7 +95,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         public int GetMaxBomb => GetBomb;
         private void LogGamePlay(int bomb)
         {
-            GamePlayLog.instance.playersBombs += bomb;
+            GemeStatisticsDataLog.instance.playersBombs += bomb;
         }
 
         #region PowerUP New Bomb

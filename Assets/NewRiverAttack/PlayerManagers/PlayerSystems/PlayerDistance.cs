@@ -12,7 +12,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private float _travelledDistance;
         
         private PlayerMaster _playerMaster;
-        private PlayerAchievements _playerAchievements;
+        //private PlayerAchievements _playerAchievements;
         private GamePlayManager _gamePlayManager;
 
         #region Unity Region
@@ -39,15 +39,13 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             // se a posição for maior que a inicial e não teve nenhum movimento no ultimo frame e não ta permitindo joga então ignore;
             if (position.z < 0 || distanceTraveledByFrame <= 0 || !_playerMaster.ObjectIsReady || _playerMaster.AutoPilot) return;
             _travelledDistance += distanceTraveledByFrame;
-            // Atualiza o ponto mais distante alcançado
-            //_maxTravelledDistance = Mathf.Max(_maxTravelledDistance, _travelledDistance);
             
             DebugManager.Log<PlayerDistance>($"Distance: {_travelledDistance}");
             
             var convertDistanceInt = Mathf.FloorToInt(_travelledDistance / BaseConversion);
             _gamePlayManager.OnEventHudDistanceUpdate(convertDistanceInt, _playerMaster.PlayerIndex);
             var resultInt = Mathf.FloorToInt(_travelledDistance);
-            _playerAchievements.LogDistanceReach(resultInt);
+            //_playerAchievements.LogDistanceReach(resultInt);
             
             _lastPosition = position;
         }
@@ -55,7 +53,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void SetInitialReferences()
         {
             _playerMaster = GetComponent<PlayerMaster>(); 
-            _playerAchievements = GetComponent<PlayerAchievements>();
+            //_playerAchievements = GetComponent<PlayerAchievements>();
             _gamePlayManager = GamePlayManager.instance;
         }
     }

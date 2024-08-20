@@ -22,6 +22,12 @@ namespace ImmersiveGames.SteamServicesManagers.Teste
             //_steamAchievementService.UnlockAchievement("ACH_BUY_SKIN");
             //_steamAchievementService.UnlockAchievement("ACH_XXXXXXXXX"); 
             //_steamAchievementService.ResetAllAchievements();
+
+            _steamStatsService.GetStat<int>("TESTE_01_INT");
+            _steamStatsService.GetStat<float>("TESTE_02_FLOAT");
+            
+            //_steamStatsService.SetStat("TESTE_02_FLOAT", 3.458f);
+            //_steamStatsService.SetStat("TESTE_01_INT", 89);
         }
     }
 }

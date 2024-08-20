@@ -1,8 +1,8 @@
 using System.Globalization;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
-namespace RiverAttack
+namespace NewRiverAttack.GameStatisticsSystem
 {
     public class ItemCardDisplayHolder : MonoBehaviour
     {

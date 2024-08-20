@@ -101,7 +101,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         
         private void LogGamePlay(int shoot)
         {
-            GamePlayLog.instance.playersShoots += shoot;
+            GemeStatisticsDataLog.instance.playersShoots += shoot;
         }
         
     }

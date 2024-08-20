@@ -3,10 +3,8 @@ using ImmersiveGames.ObjectManagers.Interfaces;
 using ImmersiveGames.PoolManagers.Interface;
 using ImmersiveGames.ShopManagers.ShopProducts;
 using NewRiverAttack.GameManagers;
-using NewRiverAttack.GamePlayManagers;
-using NewRiverAttack.ObstaclesSystems;
+using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
-using NewRiverAttack.ObstaclesSystems.AreaEffectSystems;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
 using NewRiverAttack.SaveManagers;
@@ -28,7 +26,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private PlayerLives _playerLives;
         internal bool AutoPilot;
         internal bool BossController;
-
 
         #region Player Config Settings (privates)
 
@@ -78,7 +75,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         #endregion
 
-
         #region Initializations
 
         private void SetPlayerSettings(int indexPlayer, PlayersDefaultSettings defaultSettings)
@@ -111,13 +107,12 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             if (GamePlayManagerRef.IsBossFight) return;
             IsDead = true;
             IsDisable = true;
-            
         }
 
         private void TryReSpawn()
         {
             var lives = (_playerLives) ? _playerLives.GetLives : GamePlayManagerRef.PlayersDefault.maxLives;
-
+            GameStatisticManager.instance.OnEventServiceScore(_playerScore);
             if (lives <= 0)
             {
                 if (BossController)
@@ -169,7 +164,8 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private async void ChangeGameOver()
         {
             DebugManager.Log<PlayerMaster>($"Enter in Game Over");
-            GamePlayManager.instance.OnEventGameOver();
+            GameStatisticManager.instance.OnEventServiceScore(_playerScore);
+            GamePlayManagerRef.OnEventGameOver();
             await GameManager.StateManager.ChangeStateAsync("GameStateGameOver").ConfigureAwait(false);
         }
 
@@ -178,11 +174,10 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         internal void SetPlayerScore(int score)
         {
             _playerScore += score;
-            GamePlayManager.instance.OnEventHudScoreUpdate(_playerScore, PlayerIndex);
+            GamePlayManagerRef.OnEventHudScoreUpdate(_playerScore, PlayerIndex);
         }
 
         internal int GetPlayerScore => _playerScore;
-
 
         #region Calls
 
@@ -261,8 +256,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             EventPlayerMasterStopDecoyFuel?.Invoke(pause);
         }
         #endregion
-
-
         
     }
 }

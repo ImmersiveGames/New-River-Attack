@@ -13,6 +13,8 @@ using ImmersiveGames.StateManagers;
 using ImmersiveGames.SteamServicesManagers;
 using NewRiverAttack.BulletsManagers;
 using NewRiverAttack.GamePlayManagers;
+using NewRiverAttack.GamePlayManagers.GamePlayLogs;
+using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.HUBManagers;
 using NewRiverAttack.HUDManagers.UI;
 using NewRiverAttack.LevelBuilder;
@@ -145,6 +147,10 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<SteamAchievementService>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<SteamLeaderboardService>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<SteamStatsService>(DebugManager.DebugLevels.None);
+            
+            DebugManager.SetScriptDebugLevel<SteamServerUpdater>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<GameStatisticManager>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<PanelStatisticsManager>(DebugManager.DebugLevels.None);
             
         }
     }

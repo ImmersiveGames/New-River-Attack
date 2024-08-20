@@ -8,6 +8,7 @@ using ImmersiveGames.DebugManagers;
 using ImmersiveGames.Utils;
 using NewRiverAttack.GameManagers;
 using NewRiverAttack.GamePlayManagers.GamePlayLogs;
+using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.HUBManagers;
 using NewRiverAttack.LevelBuilder;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
@@ -16,6 +17,7 @@ using NewRiverAttack.SaveManagers;
 using NewRiverAttack.StateManagers;
 using NewRiverAttack.StateManagers.States;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace NewRiverAttack.GamePlayManagers
 {
@@ -25,8 +27,8 @@ namespace NewRiverAttack.GamePlayManagers
 
         [Header("Default Layers")]
         public LayerMask layerEnemies;
-        [Header("GameLog"), SerializeField]
-        private GamePlayLog gamePlayLog;
+        [FormerlySerializedAs("gamePlayLog")] [Header("GameLog"), SerializeField]
+        private GemeStatisticsDataLog gemeStatisticsDataLog;
         
         internal bool IsBossFight;
         internal bool IsPause;
@@ -84,7 +86,7 @@ namespace NewRiverAttack.GamePlayManagers
             _gameManager = GameManager.instance;
             _gameOptionsSave = GameOptionsSave.instance;
             _levelBuilderManager = LevelBuilderManager.instance;
-            gamePlayLog = GamePlayLog.instance;
+            gemeStatisticsDataLog = GemeStatisticsDataLog.instance;
         }
 
         private void Start()
@@ -274,6 +276,7 @@ namespace NewRiverAttack.GamePlayManagers
         internal void OnEventHudScoreUpdate(int valueUpdate, int playerIndex )
         {
             EventHudScoreUpdate?.Invoke(valueUpdate, playerIndex);
+            GameStatisticManager.instance.OnEventLogScore(valueUpdate);
         }
         internal void OnEventHudDistanceUpdate(int valueUpdate, int playerIndex )
         {
