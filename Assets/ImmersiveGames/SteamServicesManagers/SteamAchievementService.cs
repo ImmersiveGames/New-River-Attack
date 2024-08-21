@@ -25,7 +25,7 @@ namespace ImmersiveGames.SteamServicesManagers
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
+                //DontDestroyOnLoad(gameObject);
                 DebugManager.Log<SteamAchievementService>("Instância criada e marcada para não destruir ao carregar uma nova cena.");
             }
             else

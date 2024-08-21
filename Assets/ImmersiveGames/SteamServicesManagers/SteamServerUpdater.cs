@@ -1,7 +1,5 @@
-﻿using System;
-using ImmersiveGames.DebugManagers;
+﻿using ImmersiveGames.DebugManagers;
 using NewRiverAttack.GameStatisticsSystem;
-using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 
 namespace ImmersiveGames.SteamServicesManagers
@@ -11,43 +9,40 @@ namespace ImmersiveGames.SteamServicesManagers
         private SteamConnectionManager _steamConnectionManager;
         private SteamAchievementService _steamAchievementService;
         private SteamStatsService _steamStatsService;
-
         private GameStatisticManager _gameStatisticManager;
-
-        #region Unity Methods
 
         private void Start()
         {
             SetInitialReferences();
-            _gameStatisticManager.EventLogScore += SetHighScore;
-        }
 
-        private void OnApplicationQuit()
-        {
-            
+            if (_gameStatisticManager != null)
+            {
+                _gameStatisticManager.EventServiceUpdateInt += UpdateInt;
+                _gameStatisticManager.EventServiceUpdateFloat += UpdateFloat;
+            }
         }
 
         private void OnDisable()
         {
-            _gameStatisticManager.EventLogScore -= SetHighScore;
+            if (_gameStatisticManager != null)
+            {
+                _gameStatisticManager.EventServiceUpdateInt -= UpdateInt;
+                _gameStatisticManager.EventServiceUpdateFloat -= UpdateFloat;
+            }
         }
 
-        #endregion
-
-        #region Update States
-        private void SetHighScore(int intValue)
+        private void UpdateInt(string stateName, int intValue)
         {
-            DebugManager.Log<SteamServerUpdater>($"Set Stat 'highScore': {intValue}");
-            _steamStatsService.SetStat("highScore",intValue);
+            DebugManager.Log<SteamServerUpdater>($"Log Stat Online: '{stateName}': {intValue}");
+            _steamStatsService?.SetStat(stateName, intValue);
         }
 
-        private void SetDistance()
+        private void UpdateFloat(string stateName, float floatValue)
         {
-            
+            DebugManager.Log<SteamServerUpdater>($"Log Stat Online: '{stateName}': {floatValue}");
+            _steamStatsService?.SetStat(stateName, floatValue);
         }
-        #endregion
-        
-        
+
         private void SetInitialReferences()
         {
             _steamConnectionManager = SteamConnectionManager.Instance;

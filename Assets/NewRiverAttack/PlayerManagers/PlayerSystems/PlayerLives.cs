@@ -1,7 +1,9 @@
 ﻿using NewRiverAttack.GamePlayManagers;
+using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.ObstaclesSystems.CollectibleSystems.PowerUpSystems;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace NewRiverAttack.PlayerManagers.PlayerSystems
 {
@@ -9,7 +11,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
     {
         private PlayerMaster _playerMaster;
         private GamePlayManager _gamePlayManager;
-        [SerializeField] private int _lives;
+        private int _lives;
         public int GetLives => _lives;
 
         #region Unity Methodos
@@ -51,6 +53,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         
         private void LoseLive()
         {
+            GameStatisticManager.instance.LogDeaths(1);
             ChangeLives(-1);
         }
 

@@ -2,6 +2,7 @@
 using ImmersiveGames.InputManager;
 using ImmersiveGames.ShopManagers.ShopProducts;
 using NewRiverAttack.GamePlayManagers.GamePlayLogs;
+using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.CollectibleSystems.PowerUpSystems;
 using NewRiverAttack.PlayerManagers.Tags;
@@ -77,7 +78,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         protected override void Fire()
         {
             base.Fire();
-            LogGamePlay(1);
+            GameStatisticManager.instance.LogShoots(1);
         }
 
         #region PowerUP - Rapid Fire
@@ -98,11 +99,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         }
 
         #endregion
-        
-        private void LogGamePlay(int shoot)
-        {
-            GemeStatisticsDataLog.instance.playersShoots += shoot;
-        }
         
     }
 }

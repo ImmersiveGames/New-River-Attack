@@ -5,6 +5,7 @@ using ImmersiveGames.Utils;
 using NewRiverAttack.LogManagers;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
 {
@@ -15,33 +16,29 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
         {
             SetResourcePath("SavesSO/GemeStatisticsDataLog");
         }
-        [Header("Players Logs")] 
-        public int playerMaxScore;
+
+        [Header("Players Logs")] public int playerMaxScore;
         public float playerTimeSpent;
-        public float playerMaxDistance;
-        public float playerTotalDistance;
+        public int playerMaxDistance;
+        public int playerDeaths;
+
         [Header("Players Archive Stats")] public int playersDieWall;
+        public int playersDieEnemyCollider;
         public int playersDieEnemyBullets;
-        public int playerDieFuelEmpty;
+        public int playersDieFuelOut;
         public int playersShoots;
         public int playersBombs;
-        public int fuelSpent;
-        public int amountDistance;
+        public float fuelSpent;
+        public float fuelCharge;
+        public float amountDistance;
 
-        #region LogFunctions
-        public void LogMaxScore(int score)
-        {
-            if (score > playerMaxScore)
-            {
-                playerMaxScore = score;
-            }
-        }
-        
-
-        #endregion
-
+        [Header("Distance Settings")]
+        [Tooltip("Define quantas unidades de medida no eixo Z equivalem a 1 unidade de medida personalizada.")]
+        public int baseConversion = 20;
 
         private List<LogPlayerResult> _listEnemyHit = new List<LogPlayerResult>();
+
+        public string GetAmountDistance => $"{amountDistance:F2}";
 
         public List<LogPlayerResult> GetEnemiesResult()
         {
@@ -57,40 +54,43 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
 
         public void RecoverLogPlayerResult(List<LogPlayerResult> resultsList)
         {
-            _listEnemyHit = new List<LogPlayerResult>();
-            _listEnemyHit = resultsList;
+            _listEnemyHit = new List<LogPlayerResult>(resultsList);
         }
 
         public void ResetLogs()
         {
             playerMaxScore = 0;
-            playerTimeSpent = 0f;
-            
+            playerTimeSpent = 0;
             playerMaxDistance = 0;
-            playerTotalDistance = 0;
 
             playersDieWall = 0;
+            playersDieEnemyCollider = 0;
             playersDieEnemyBullets = 0;
-            playerDieFuelEmpty = 0;
+            playersDieFuelOut = 0;
+
             playersShoots = 0;
             playersBombs = 0;
             fuelSpent = 0;
+            fuelCharge = 0;
             amountDistance = 0;
         }
 
-        
-
-        
-
-        public void LogMaxDistance(float distance)
+        public void IncrementStat(ref int stat, int value)
         {
-            playerMaxDistance = Mathf.Max(playerMaxDistance, distance);
-        }
-        public void LogTotalDistance(float distance)
-        {
-            playerTotalDistance += distance;
+            stat += value;
+            DebugManager.Log<GemeStatisticsDataLog>($"Incremented stat to {stat}");
         }
 
-        //public float playersMaxDistance;
+        public void IncrementStat(ref float stat, float value)
+        {
+            stat += value;
+            DebugManager.Log<GemeStatisticsDataLog>($"Incremented stat to {stat}");
+        }
+
+        public void SetAmountDistance(float amount)
+        {
+            amountDistance = amount / baseConversion;
+            DebugManager.Log<GemeStatisticsDataLog>($"Distance converted to custom unit: {amountDistance:F2}");
+        }
     }
 }

@@ -39,8 +39,16 @@ namespace NewRiverAttack.GameStatisticsSystem
 
         private string GetScore => _gemeStatistics.playerMaxScore.ToString();
         private string GetSpendTime => Tools.TimeFormat(_gemeStatistics.playerTimeSpent) ?? "0000000";
-        private string GetMaxPathDistance => $"{_gemeStatistics.playerMaxDistance.ToString(CultureInfo.CurrentCulture)} KM" ?? "0 KM";
-
+        private string GetMaxPathDistance => $"{_gemeStatistics.GetAmountDistance} KM" ?? "0 KM";
+        private string GetShootSpent => _gemeStatistics.playersShoots.ToString();
+        private string GetBombsSpent => _gemeStatistics.playersBombs.ToString();
+        private string GetFuelSpent => $"{_gemeStatistics.fuelSpent:F2} L" ?? "0 L";
+        private string GetFuelCharge => $"{_gemeStatistics.fuelCharge:F2} L" ?? "0 L";
+        private string GetDeaths => _gemeStatistics.playerDeaths.ToString();
+        private string GetWallDeaths => _gemeStatistics.playersDieWall.ToString();
+        private string GetEnemyDeaths => _gemeStatistics.playersDieEnemyCollider.ToString();
+        private string GetBulletsDeaths => _gemeStatistics.playersDieEnemyBullets.ToString();
+        private string GetFuelOut => _gemeStatistics.playersDieFuelOut.ToString();
         #endregion
 
         #region Panels Auxiliar
@@ -77,31 +85,37 @@ namespace NewRiverAttack.GameStatisticsSystem
                     case EnumGameStatistics.Time:
                         itemData.itemValue = GetSpendTime;
                         break;
-                    /*case GameStatistics.MaxPathDistance:
-                        itemData.itemValue = getMaxPathDistance;
+                    case EnumGameStatistics.MaxPathDistance:
+                        itemData.itemValue = GetMaxPathDistance;
                         break;
-                    case GameStatistics.ShootSpent:
-                        itemData.itemValue = getShootSpent;
+                    case EnumGameStatistics.ShootSpent:
+                        itemData.itemValue = GetShootSpent;
                         break;
-                    case GameStatistics.BombSpent:
-                        itemData.itemValue = getBombSpent;
+                    case EnumGameStatistics.BombSpent:
+                        itemData.itemValue = GetBombsSpent;
                         break;
-                    case GameStatistics.FuelSpent:
-                        itemData.itemValue = getFuelSpent;
+                    case EnumGameStatistics.FuelSpent:
+                        itemData.itemValue = GetFuelSpent;
                         break;
-                    case GameStatistics.LifeSpent:
-                        itemData.itemValue = getLifeSpent;
+                    case EnumGameStatistics.FuelCharge:
+                        itemData.itemValue = GetFuelCharge;
                         break;
-                    case GameStatistics.DeathByWall:
-                        itemData.itemValue = getDeathByWall;
+                    case EnumGameStatistics.LifeSpent:
+                        itemData.itemValue = GetDeaths;
                         break;
-                    case GameStatistics.DeathByBullets:
-                        itemData.itemValue = getDeathByBullets;
+                    case EnumGameStatistics.DeathByWall:
+                        itemData.itemValue = GetWallDeaths;
                         break;
-                    case GameStatistics.DieByFuel:
-                        itemData.itemValue = getDeathByFuel;
+                    case EnumGameStatistics.DeathByBullets:
+                        itemData.itemValue = GetBulletsDeaths;
                         break;
-                    case GameStatistics.CompletedLevels:
+                    case EnumGameStatistics.DeathByEnemy:
+                        itemData.itemValue = GetEnemyDeaths;
+                        break;
+                    case EnumGameStatistics.DieByFuel:
+                        itemData.itemValue = GetFuelOut;
+                        break;
+                    /*case GameStatistics.CompletedLevels:
                         itemData.itemValue = getCompletedLevels;
                         break;
                     case GameStatistics.EnemiesDestroyed:

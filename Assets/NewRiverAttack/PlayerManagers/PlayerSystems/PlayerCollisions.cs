@@ -2,13 +2,14 @@
 using ImmersiveGames.ObjectManagers.Interfaces;
 using ImmersiveGames.ShopManagers.ShopProducts;
 using NewRiverAttack.BulletsManagers;
+using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.LevelBuilder.Abstracts;
 using NewRiverAttack.PlayerManagers.Tags;
 using UnityEngine;
 
 namespace NewRiverAttack.PlayerManagers.PlayerSystems
 {
-    public class PlayerCollisions: MonoBehaviour
+    public class PlayerCollisions : MonoBehaviour
     {
         private PlayerMaster _playerMaster;
         private PlayerAchievements _playerAchievements;
@@ -16,6 +17,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private Collider[] _colliders;
 
         #region Unity Methods
+
         private void Awake()
         {
             SetInitialReferences();
@@ -33,7 +35,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             if (MustCollider(other) || !_playerMaster.ObjectIsReady || _playerMaster.AutoPilot) return;
             if (_playerMaster.godMode || _invulnerability) return;
             //Se não for nada disso significa que o player será destruído.
-            _playerAchievements.LogCollision(other);
+            GameStatisticManager.instance.LogCollision(other);
             _playerMaster.OnEventPlayerMasterGetHit();
             DebugManager.Log<PlayerCollisions>($"Collider: {other}");
         }
@@ -50,6 +52,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             SetPlayerColliders(true);
             _invulnerability = false;
         }
+
         private void PlayerDisableColliders()
         {
             SetPlayerColliders(false);
@@ -57,14 +60,14 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         }
 
         #endregion
-        
+
         private void SetInitialReferences()
         {
             _playerMaster = GetComponent<PlayerMaster>();
             _playerAchievements = GetComponent<PlayerAchievements>();
             GetSkinColliders(null);
         }
-        
+
 
         private void GetSkinColliders(ShopProductSkin shopProductSkin)
         {
@@ -83,11 +86,11 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private bool MustCollider(Component component)
         {
-            return component.GetComponent<BulletPlayer>() != null || component.GetComponent<BulletBombPlayer>() != null 
-                                                                  || component.GetComponent<LevelFinishers>() != null 
-                                                                  || component.GetComponentInParent<ICollectable>() != null 
-                                                                  ||  component.GetComponentInParent<IAreaEffect>() != null;
+            return component.GetComponent<BulletPlayer>() != null 
+                   || component.GetComponent<BulletBombPlayer>() != null
+                   || component.GetComponent<LevelFinishers>() != null
+                   || component.GetComponentInParent<ICollectable>() != null
+                   || component.GetComponentInParent<IAreaEffect>() != null;
         }
-        
     }
 }

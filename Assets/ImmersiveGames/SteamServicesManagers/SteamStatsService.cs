@@ -23,7 +23,7 @@ namespace ImmersiveGames.SteamServicesManagers
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
+                //DontDestroyOnLoad(gameObject);
                 DebugManager.Log<SteamStatsService>("SteamStatsService instanciado.");
             }
             else

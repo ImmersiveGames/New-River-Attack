@@ -4,6 +4,7 @@ using ImmersiveGames.InputManager;
 using NewRiverAttack.BulletsManagers;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.GamePlayManagers.GamePlayLogs;
+using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.ObstaclesSystems.CollectibleSystems.PowerUpSystems;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
 using UnityEngine;
@@ -69,6 +70,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void InitializeBombs(int indexPlayer, PlayersDefaultSettings defaultSettings)
         {
             GetBomb = defaultSettings.startBombs;
+            GetMaxBomb = defaultSettings.maxBombs;
             _gamePlayManager.OnEventHudBombUpdate(GetBomb, _playerMaster.PlayerIndex);
         }
 
@@ -87,16 +89,12 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             var bombPlayer = bomb.GetComponent<BulletBombPlayer>();
             bombPlayer.OnSpawned(transform, _bombData);
             _gamePlayManager.OnEventHudBombUpdate(GetBomb, _playerMaster.PlayerIndex);
-            LogGamePlay(1);
+            GameStatisticManager.instance.LogBombs(1);
         }
 
         public int GetBomb { get; private set; }
 
-        public int GetMaxBomb => GetBomb;
-        private void LogGamePlay(int bomb)
-        {
-            GemeStatisticsDataLog.instance.playersBombs += bomb;
-        }
+        public int GetMaxBomb { get; private set; }
 
         #region PowerUP New Bomb
 

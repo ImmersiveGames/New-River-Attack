@@ -1,5 +1,6 @@
 ﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ShopManagers.ShopProducts;
+using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.ObstaclesSystems;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
@@ -41,23 +42,19 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
                 var lastFillFuel = _areaEffectCadence * Time.deltaTime;
                 GetFuel += lastFillFuel;
                 GetFuel = Mathf.Clamp(GetFuel, 0f, GetMaxFuel);
+                GameStatisticManager.instance.LogFuelCharge(lastFillFuel);
             }
             if (_fuelPause || !_playerMaster.ObjectIsReady || _playerMaster.godMode || _playerMaster.AutoPilot) return;
             // Decrementa o combustível com base na taxa de decaimento por segundo
             var lastFuel = reduceFuelCadence * Time.deltaTime;
             GetFuel -= lastFuel;
-            _spendFuel += lastFuel;
-            if (_spendFuel % GetMaxFuel == 0)
-            {
-                _playerAchievements.LogSpendFuel(_spendFuel);
-                _spendFuel = 0;
-            }
 
             // Garante que o combustível não ultrapasse o máximo
             GetFuel = Mathf.Clamp(GetFuel, 0f, GetMaxFuel);
-
+            GameStatisticManager.instance.LogFuelSpend(lastFuel);
             if (GetFuel > 0) return;
             _playerMaster.OnEventPlayerMasterGetHit();
+            GameStatisticManager.instance.LogFuelOut(1);
             _playerAchievements.LogOutFuel();
         }
         private void OnDisable()
@@ -105,7 +102,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             var skin = _playerMaster.ActualSkin;
             GetMaxFuel = skin.maxFuel != 0 ? skin.maxFuel : defaultSettings.maxFuel;
             GetFuel = GetMaxFuel;
-            DebugManager.Log<PlayerFuel>($"No Initialize {_playerMaster.ActualSkin.name}");
+            DebugManager.Log<PlayerFuel>($"Initialize {_playerMaster.ActualSkin.name}");
         }
         private void InitializeSkinFuel(ShopProductSkin shopProductSkin)
         {

@@ -1145,7 +1145,8 @@ MonoBehaviour:
   layerEnemies:
     serializedVersion: 2
     m_Bits: 128
-  gamePlayLog: {fileID: 11400000, guid: fa79827a92bd32c45af291e7d04958c7, type: 2}
+  gemeStatisticsDataLog: {fileID: 11400000, guid: fa79827a92bd32c45af291e7d04958c7,
+    type: 2}
   allPlayersDefaultSettings: {fileID: 11400000, guid: 043e503aa1a78b24b90c0f26e399bc7e,
     type: 2}
 --- !u!4 &166128843
@@ -4645,10 +4646,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 40
+  far clip plane: 80
   field of view: 30
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 15.01
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4672,8 +4673,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941151605}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 39, z: -25}
+  m_LocalRotation: {x: 0.46174863, y: 0, z: 0, w: 0.8870109}
+  m_LocalPosition: {x: 0, y: 44.492462, z: -23.630524}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5031,6 +5032,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 607106245801943029, guid: edd48384923765647a80334cb3dc5dc8,
+        type: 3}
+      propertyPath: startState
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 607106245801943029, guid: edd48384923765647a80334cb3dc5dc8,
         type: 3}
       propertyPath: classicModeLevels

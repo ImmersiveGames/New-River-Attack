@@ -23,7 +23,7 @@ namespace ImmersiveGames.SteamServicesManagers
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject); // Mantém o objeto persistente entre as cenas
+                //DontDestroyOnLoad(gameObject); // Mantém o objeto persistente entre as cenas
                 InitializeSteam();
             }
             else

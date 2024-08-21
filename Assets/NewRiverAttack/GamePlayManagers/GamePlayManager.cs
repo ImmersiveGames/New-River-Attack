@@ -276,11 +276,13 @@ namespace NewRiverAttack.GamePlayManagers
         internal void OnEventHudScoreUpdate(int valueUpdate, int playerIndex )
         {
             EventHudScoreUpdate?.Invoke(valueUpdate, playerIndex);
-            GameStatisticManager.instance.OnEventLogScore(valueUpdate);
+            GameStatisticManager.instance.LogMaxScore(valueUpdate);
         }
         internal void OnEventHudDistanceUpdate(int valueUpdate, int playerIndex )
         {
+            // Converte a distância total acumulada em um valor inteiro com base na conversão
             EventHudDistanceUpdate?.Invoke(valueUpdate, playerIndex);
+            GameStatisticManager.instance.LogDistance(valueUpdate);
         }
         internal void OnEventHudLivesUpdate(int valueUpdate, int playerIndex)
         {
@@ -322,7 +324,8 @@ namespace NewRiverAttack.GamePlayManagers
         {
             EventHudRapidFireEnd?.Invoke(valueUpdate, playerIndex);
         }
-        internal void OnEventGameFinisher()
+
+        private void OnEventGameFinisher()
         {
             EventGameFinisher?.Invoke();
         }

@@ -18,7 +18,6 @@ namespace ImmersiveGames.Utils
                 return;
             }
             _instance = this;
-            DontDestroyOnLoad(gameObject);
         }
 
         private void Update()

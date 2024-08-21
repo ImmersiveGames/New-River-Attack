@@ -1,4 +1,7 @@
-﻿using ImmersiveGames.DebugManagers;
+﻿using System;
+using ImmersiveGames.DebugManagers;
+using NewRiverAttack.GamePlayManagers.GamePlayLogs;
+using NewRiverAttack.GameStatisticsSystem;
 using UnityEngine;
 using GamePlayManager = NewRiverAttack.GamePlayManagers.GamePlayManager;
 
@@ -6,22 +9,31 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 {
     public class PlayerDistance : MonoBehaviour
     {
-
-        private const int BaseConversion = 10;
-        private Vector3 _lastPosition;
+        // Configurações de conversão
+        
+        private float _lastPosition;
         private float _travelledDistance;
         
+        private float _totalAccumulatedDistance;
+        private float _distanceThisAttempt;
+        
         private PlayerMaster _playerMaster;
-        //private PlayerAchievements _playerAchievements;
         private GamePlayManager _gamePlayManager;
+        
 
         #region Unity Region
 
-        private void Start()
+        private void OnEnable()
         {
             SetInitialReferences();
-            _lastPosition = transform.position;
-            _travelledDistance = _gamePlayManager.PlayersDefault.spawnPosition.z;
+            _gamePlayManager.EventPlayerGetHit += ResetDistance;
+            _playerMaster.EventPlayerMasterGetHit += ResetDistance;
+        }
+
+        private void OnDisable()
+        {
+            _gamePlayManager.EventPlayerGetHit -= ResetDistance;
+            _playerMaster.EventPlayerMasterGetHit -= ResetDistance;
         }
 
         private void Update()
@@ -30,30 +42,38 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         }
 
         #endregion
+
+        private void ResetDistance()
+        {
+            _distanceThisAttempt = 0;
+        }
+        private void ResetDistance(PlayerMaster playerMaster)
+        {
+            ResetDistance();
+        }
         
         private void UpdatePlayerDistance()
         {
-            var position = transform.position;
-            // Calcula a distância percorrida no eixo Z desde o último frame
-            var distanceTraveledByFrame = position.z - _lastPosition.z;
-            // se a posição for maior que a inicial e não teve nenhum movimento no ultimo frame e não ta permitindo joga então ignore;
-            if (position.z < 0 || distanceTraveledByFrame <= 0 || !_playerMaster.ObjectIsReady || _playerMaster.AutoPilot) return;
-            _travelledDistance += distanceTraveledByFrame;
-            
-            DebugManager.Log<PlayerDistance>($"Distance: {_travelledDistance}");
-            
-            var convertDistanceInt = Mathf.FloorToInt(_travelledDistance / BaseConversion);
-            _gamePlayManager.OnEventHudDistanceUpdate(convertDistanceInt, _playerMaster.PlayerIndex);
-            var resultInt = Mathf.FloorToInt(_travelledDistance);
-            //_playerAchievements.LogDistanceReach(resultInt);
-            
-            _lastPosition = position;
+            var positionZ = transform.position.z;
+            if (!(positionZ > 0)) return;
+            var distanceTraveledByFrame = positionZ - _lastPosition;
+            if (distanceTraveledByFrame > 0 && _playerMaster.ObjectIsReady && !_playerMaster.AutoPilot)
+            {
+                _distanceThisAttempt += distanceTraveledByFrame;
+                _totalAccumulatedDistance += distanceTraveledByFrame;
+                GameStatisticManager.instance.LogAmountDistance(_totalAccumulatedDistance);
+
+                // Converte a distância total acumulada em um valor inteiro com base na conversão
+                var convertDistanceInt = Mathf.FloorToInt(_distanceThisAttempt / GemeStatisticsDataLog.instance.baseConversion);
+                _gamePlayManager.OnEventHudDistanceUpdate(convertDistanceInt, _playerMaster.PlayerIndex);
+            }
+            _lastPosition = transform.position.z;
         }
+        
         
         private void SetInitialReferences()
         {
             _playerMaster = GetComponent<PlayerMaster>(); 
-            //_playerAchievements = GetComponent<PlayerAchievements>();
             _gamePlayManager = GamePlayManager.instance;
         }
     }

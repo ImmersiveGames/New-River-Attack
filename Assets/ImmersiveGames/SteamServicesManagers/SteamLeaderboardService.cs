@@ -22,7 +22,7 @@ namespace ImmersiveGames.SteamServicesManagers
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
+                //DontDestroyOnLoad(gameObject);
                 LoadOfflineScores();
 
                 if (SteamConnectionManager.ConnectedToSteam)

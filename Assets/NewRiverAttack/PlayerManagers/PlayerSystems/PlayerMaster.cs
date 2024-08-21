@@ -112,7 +112,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void TryReSpawn()
         {
             var lives = (_playerLives) ? _playerLives.GetLives : GamePlayManagerRef.PlayersDefault.maxLives;
-            GameStatisticManager.instance.OnEventServiceScore(_playerScore);
+            GameStatisticManager.instance.OnEventServiceUpdate();
             if (lives <= 0)
             {
                 if (BossController)
@@ -164,7 +164,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private async void ChangeGameOver()
         {
             DebugManager.Log<PlayerMaster>($"Enter in Game Over");
-            GameStatisticManager.instance.OnEventServiceScore(_playerScore);
+            GameStatisticManager.instance.OnEventServiceUpdate();
             GamePlayManagerRef.OnEventGameOver();
             await GameManager.StateManager.ChangeStateAsync("GameStateGameOver").ConfigureAwait(false);
         }
