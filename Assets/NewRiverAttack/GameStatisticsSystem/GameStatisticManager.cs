@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using ImmersiveGames.BulletsManagers;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.Utils;
+using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.GamePlayManagers.GamePlayLogs;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
+using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
+using NewRiverAttack.PlayerManagers.ScriptableObjects;
 using NewRiverAttack.WallsManagers;
 using UnityEngine;
 
@@ -12,7 +15,7 @@ namespace NewRiverAttack.GameStatisticsSystem
     public sealed class GameStatisticManager : Singleton<GameStatisticManager>
     {
         private float _startTimer;
-        
+        private const float Epsilon = 0.1f;
         
         private GemeStatisticsDataLog _gemeStatisticsDataLog;
 
@@ -41,17 +44,17 @@ namespace NewRiverAttack.GameStatisticsSystem
         private void LogSessionTime(float sessionStartTime)
         {
             var sessionTime = Time.time - sessionStartTime;
-            _gemeStatisticsDataLog.playerTimeSpent += sessionTime;
+            if(_gemeStatisticsDataLog)
+                _gemeStatisticsDataLog.playerTimeSpent += sessionTime;
             DebugManager.Log<GameStatisticManager>($"Log Offline Timer {_gemeStatisticsDataLog.playerTimeSpent}");
         }
 
         internal void LogMaxScore(int score)
         {
-            if (score > _gemeStatisticsDataLog.playerMaxScore)
-            {
-                _gemeStatisticsDataLog.playerMaxScore = score;
-                DebugManager.Log<GameStatisticManager>($"Log Offline Max Score {_gemeStatisticsDataLog.playerMaxScore}");
-            }
+            if(_gemeStatisticsDataLog == null) return;
+            if (score <= _gemeStatisticsDataLog.playerMaxScore) return;
+            _gemeStatisticsDataLog.playerMaxScore = score;
+            DebugManager.Log<GameStatisticManager>($"Log Offline Max Score {_gemeStatisticsDataLog.playerMaxScore}");
         }
 
         public void LogAmountDistance(float amount)
@@ -94,7 +97,7 @@ namespace NewRiverAttack.GameStatisticsSystem
         public void LogFuelSpend(float floatValue)
         {
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.fuelSpent, floatValue);
-            if (_gemeStatisticsDataLog.fuelSpent % 1000 == 0)
+            if (Mathf.Abs(_gemeStatisticsDataLog.fuelSpent % 1000) < Epsilon || Mathf.Abs(1000 - (_gemeStatisticsDataLog.fuelSpent % 1000)) < Epsilon)
             {
                 OnEventServiceSet("stat_SpendGas", _gemeStatisticsDataLog.fuelSpent);
             }
@@ -102,7 +105,7 @@ namespace NewRiverAttack.GameStatisticsSystem
         public void LogFuelCharge(float floatValue)
         {
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.fuelCharge, floatValue);
-            if (_gemeStatisticsDataLog.fuelCharge % 100 == 0)
+            if (Mathf.Abs(_gemeStatisticsDataLog.fuelCharge % 100) < Epsilon || Mathf.Abs(100 - (_gemeStatisticsDataLog.fuelCharge % 100)) < Epsilon)
             {
                 OnEventServiceSet("stat_FillGas", _gemeStatisticsDataLog.fuelCharge);
             }
@@ -139,6 +142,41 @@ namespace NewRiverAttack.GameStatisticsSystem
         {
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersDieFuelOut, intValue);
             OnEventServiceSet("stat_FuelOut", _gemeStatisticsDataLog.playersDieFuelOut);
+        }
+        public void LogCompletePath(int intValue, GamePlayModes modes)
+        {
+            switch (modes)
+            {
+                case GamePlayModes.ClassicMode:
+                    _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersClassicPath, intValue);
+                    OnEventServiceSet("stat_FinishCPath", _gemeStatisticsDataLog.playersClassicPath);
+                    break;
+                case GamePlayModes.MissionMode:
+                    _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersMissionPath, intValue);
+                    OnEventServiceSet("stat_FinishMPath", _gemeStatisticsDataLog.playersMissionPath);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(modes), modes, null);
+            }
+        }
+        public void LogTimeRapidFire(float floatValue)
+        {
+            _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersTimeRapidFire, floatValue);
+            if (Mathf.Abs(_gemeStatisticsDataLog.playersTimeRapidFire % 100) < Epsilon || Mathf.Abs(100 - (_gemeStatisticsDataLog.playersTimeRapidFire % 100)) < Epsilon)
+            {
+                OnEventServiceSet("stat_TimeRapidFire", _gemeStatisticsDataLog.playersTimeRapidFire);
+            }
+        }
+        
+        public void LogBombsHit(int intValue)
+        {
+            _gemeStatisticsDataLog.playersBombHit = Mathf.Max(_gemeStatisticsDataLog.playersBombHit, intValue);
+            OnEventServiceSet("stat_BombHit", _gemeStatisticsDataLog.playersBombHit);
+        }
+
+        public void LogEnemiesHit(PlayerSettings player, ObjectsScriptable enemy, int quantity, EnumCollisionType collision)
+        {
+            _gemeStatisticsDataLog.AddOrUpdateStatisticHit(player,enemy, quantity,collision);
         }
 
         internal void OnEventServiceUpdate()

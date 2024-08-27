@@ -2,7 +2,12 @@
 using UnityEngine;
 using DG.Tweening;
 using ImmersiveGames;
+using ImmersiveGames.ShopManagers.Abstracts;
+using ImmersiveGames.ShopManagers.ShopProducts;
 using NewRiverAttack.AudioManagers;
+using NewRiverAttack.PlayerManagers.ScriptableObjects;
+using NewRiverAttack.PlayerManagers.Tags;
+using NewRiverAttack.SaveManagers;
 
 namespace NewRiverAttack.HUBManagers.UI
 {
@@ -17,10 +22,13 @@ namespace NewRiverAttack.HUBManagers.UI
         public Ease enterRotationAnimation;
         public Ease enterAnimation;
         
+        private PlayerSettings _playerSettings;
         private AudioSource _audioSource;
         private void OnEnable()
         {
             SetInitialReferences();
+            _playerSettings = GameOptionsSave.instance.playerSettings[0];
+            ShoppingChangeSkin(_playerSettings.actualSkin,1);
             _hubGameManager.EventInitializeHub += StartPosition;
             _hubGameManager.EventCursorUpdateHub += CursorUpdatePosition;
         }
@@ -93,6 +101,32 @@ namespace NewRiverAttack.HUBManagers.UI
                     _hubGameManager.IsHubReady = true;
                 })
                 .Play();
+        }
+        private void ShoppingChangeSkin(ShopProduct shopProduct, int quantity)
+        {
+            var shopProductSkin = shopProduct as ShopProductSkin;
+
+            var children = GetComponentInChildren<SkinAttach>();
+            if (shopProductSkin == null) return;
+            if (children == true)
+            {
+                var siblingIndex = children.transform.GetSiblingIndex();
+                DestroyImmediate(transform.GetChild(siblingIndex).gameObject);
+            }
+            var mySkin = Instantiate(shopProductSkin.prefabSkin, transform);
+            mySkin.transform.SetAsFirstSibling();
+            TurnOffTrails();
+        }
+
+
+        private void TurnOffTrails()
+        {
+            var trailRenderers = GetComponentsInChildren<TrailRenderer>();
+
+            foreach(var trail in trailRenderers)
+            {
+                trail.enabled = false;
+            }
         }
     }
 }

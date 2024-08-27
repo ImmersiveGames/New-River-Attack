@@ -22,22 +22,25 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void OnEnable()
         {
             SetInitialReferences();
+            InputGameManager.RegisterAction("Shoot", AttemptShoot);
             _playerMaster.EventPlayerMasterChangeSkin += UpdateCadenceShoot;
             _playerMaster.EventPlayerMasterStartPowerUp += StartPowerUp;
             _playerMaster.EventPlayerMasterEndPowerUp += EndPowerUp;
         }
         private void Start()
         {
-            InputGameManager.RegisterAction("Shoot", AttemptShoot);
+            //InputGameManager.RegisterAction("Shoot", AttemptShoot);
             SetDataBullet(_playerMaster);
             UpdateCadenceShoot(_playerMaster.ActualSkin);
         }
 
         private void OnDisable()
         {
+            ShootSpawnPoint = null;
             _playerMaster.EventPlayerMasterChangeSkin -= UpdateCadenceShoot;
             _playerMaster.EventPlayerMasterStartPowerUp -= StartPowerUp;
             _playerMaster.EventPlayerMasterEndPowerUp -= EndPowerUp;
+            InputGameManager.UnregisterAction("Shoot", AttemptShoot);
         }
 
         #endregion
@@ -52,6 +55,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         {
             CadenceShoot = shopProductSkin.cadenceShoot;
             ShootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
+            Debug.Log($"Update {ShootSpawnPoint}");
         }
 
         public override void SetDataBullet(ObjectMaster objectMaster)
@@ -96,6 +100,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _originalCadence = CadenceShoot;
             CadenceShoot /= cadenceDivider;
             BulletData.BulletPowerUp = true;
+            GameStatisticManager.instance.LogTimeRapidFire(activePowerUp.EndTime);
         }
 
         #endregion

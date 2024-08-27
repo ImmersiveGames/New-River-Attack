@@ -178,6 +178,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         }
 
         internal int GetPlayerScore => _playerScore;
+        internal PlayerSettings GetPlayerSettings => GameOptionsSave.instance.playerSettings[PlayerIndex];
 
         #region Calls
 

@@ -20,7 +20,6 @@ namespace NewRiverAttack.GameStatisticsSystem
         [SerializeField] private List<EnemiesScriptable> enemiesList;
         [SerializeField] private List<CollectibleScriptable> collectiblesList;
         [SerializeField] private List<StatisticItemData> statisticsListData;
-
         private GemeStatisticsDataLog _gemeStatistics;
 
         #region UnityMethods
@@ -49,6 +48,10 @@ namespace NewRiverAttack.GameStatisticsSystem
         private string GetEnemyDeaths => _gemeStatistics.playersDieEnemyCollider.ToString();
         private string GetBulletsDeaths => _gemeStatistics.playersDieEnemyBullets.ToString();
         private string GetFuelOut => _gemeStatistics.playersDieFuelOut.ToString();
+        private string GetCompleteMissionPath => _gemeStatistics.playersMissionPath.ToString();
+        private string GetCompleteClassicPath => _gemeStatistics.playersClassicPath.ToString();
+        private string GetTimeRapidFire => Tools.TimeFormat(_gemeStatistics.playersTimeRapidFire) ?? "0000000";
+        private string GetBombHits => _gemeStatistics.playersBombHit.ToString();
         #endregion
 
         #region Panels Auxiliar
@@ -115,10 +118,19 @@ namespace NewRiverAttack.GameStatisticsSystem
                     case EnumGameStatistics.DieByFuel:
                         itemData.itemValue = GetFuelOut;
                         break;
-                    /*case GameStatistics.CompletedLevels:
-                        itemData.itemValue = getCompletedLevels;
+                    case EnumGameStatistics.CompletedClassicLevels:
+                        itemData.itemValue = GetCompleteClassicPath;
                         break;
-                    case GameStatistics.EnemiesDestroyed:
+                    case EnumGameStatistics.CompletedMissionLevels:
+                        itemData.itemValue = GetCompleteMissionPath;
+                        break;
+                    case EnumGameStatistics.RapidFireTimer:
+                        itemData.itemValue = GetTimeRapidFire;
+                        break;
+                    case EnumGameStatistics.BombHits:
+                        itemData.itemValue = GetBombHits;
+                        break;
+                    /*case GameStatistics.EnemiesDestroyed:
                         itemData.ItemStatisticsList = SumStatistic(enemiesList,getEnemiesDestroyed);
                         break;
                     case GameStatistics.CollectableItems:
@@ -158,6 +170,22 @@ namespace NewRiverAttack.GameStatisticsSystem
             // Usa Distinct com um comparador personalizado
             var finalList = originalList.Distinct(new CompareItemReference()).ToList();
             return finalList;
+        }
+        
+        private static IEnumerable<StatisticItemData> SumStatistic(IEnumerable<EnemiesScriptable> enemiesList, IEnumerable<LogResults> logResultsList)
+        {
+            var list = enemiesList
+                .OrderBy(localName => localName.localizeName.GetLocalizedString())
+                .GroupBy(localName => localName.localizeName.GetLocalizedString())
+                .Select(
+                    grouping => new StatisticItemData()
+                    {
+                        itemString = grouping.Key,
+                        itemValue = logResultsList.Where(log => log.enemy.localizeName.GetLocalizedString() == grouping.Key)
+                            .Sum(log => log.quantity).ToString()
+                    }
+                );
+            return list;
         }
 
         private class CompareItemReference : IEqualityComparer<StatisticItemData>

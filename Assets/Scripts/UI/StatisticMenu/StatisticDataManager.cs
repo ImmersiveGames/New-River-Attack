@@ -113,7 +113,7 @@ namespace RiverAttack
                     case EnumGameStatistics.DieByFuel:
                         itemData.itemValue = getDeathByFuel;
                         break;
-                    case EnumGameStatistics.CompletedLevels:
+                    case EnumGameStatistics.CompletedClassicLevels:
                         itemData.itemValue = getCompletedLevels;
                         break;
                     case EnumGameStatistics.EnemiesDestroyed:
@@ -173,7 +173,6 @@ namespace RiverAttack
                 );
             return list;
         }
-        
     }
 
     internal class CompareItemReference : IEqualityComparer<StatisticItemData>

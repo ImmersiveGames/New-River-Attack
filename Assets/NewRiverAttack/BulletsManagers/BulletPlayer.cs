@@ -45,7 +45,7 @@ namespace NewRiverAttack.BulletsManagers
         {
             if (collision == null) return;
             if (collision.GetComponentInParent<PlayerMaster>() || collision.GetComponent<BulletPlayer>() || collision.GetComponent<LevelFinishers>()
-                || collision.GetComponent<WallMaster>()) return;
+                || collision.GetComponentInParent<WallMaster>()) return;
             var obstacleMaster = collision.GetComponentInParent<ObstacleMaster>();
             if (obstacleMaster != null)
             {

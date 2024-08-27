@@ -1,4 +1,6 @@
-﻿using NewRiverAttack.LevelBuilder;
+﻿using NewRiverAttack.GameManagers;
+using NewRiverAttack.GameStatisticsSystem;
+using NewRiverAttack.LevelBuilder;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
@@ -19,6 +21,7 @@ namespace NewRiverAttack.ObstaclesSystems.BridgeSystems
             LevelBuilderManager.instance.OptimizeSegments(transform.position.z);
             
             if (!GetBridgeSettings.isCheckPoint) return;
+            GameStatisticManager.instance.LogCompletePath(1, GameManager.instance.gamePlayMode);
             var position = transform.position;
             var savePosition = new Vector3(position.x, playerMaster.transform.position.y,
                 position.z);

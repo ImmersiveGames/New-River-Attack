@@ -5,6 +5,7 @@ using ImmersiveGames.BulletsManagers;
 using ImmersiveGames.CameraManagers;
 using ImmersiveGames.DebugManagers;
 using NewRiverAttack.AudioManagers;
+using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
@@ -118,7 +119,7 @@ namespace NewRiverAttack.BulletsManagers
 
         protected override void DestroyMe()
         {
-            _playerAchievements.LogHitsBomb(_enemiesMasters.Count);
+            GameStatisticManager.instance.LogBombsHit(_enemiesMasters.Count);
             GameObject o;
             (o = gameObject).SetActive(false);
             Destroy(o);

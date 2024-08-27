@@ -3,6 +3,7 @@ using ImmersiveGames.BulletsManagers;
 using ImmersiveGames.DebugManagers;
 using NewRiverAttack.BulletsManagers;
 using NewRiverAttack.GamePlayManagers;
+using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 
@@ -33,7 +34,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         #endregion
         
-        protected virtual void ComponentToKill(Component other, EnumCollisionType collisionType)
+        protected virtual void ComponentToKill(Component other, EnumCollisionType typeCollision)
         {
             if (other == null) return;
             if (other == null || !ObstacleMaster.ObjectIsReady || !ObstacleMaster.objectDefault.canKilled) return;
@@ -46,7 +47,9 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             if (ObstacleHp > 0) return;
             playerWhoHit.SetPlayerScore(ObstacleMaster.objectDefault.GetScore());
             ObstacleMaster.OnEventObstacleDeath(playerWhoHit);
-
+            GameStatisticManager.instance.LogEnemiesHit(playerWhoHit.GetPlayerSettings,ObstacleMaster.objectDefault,1,typeCollision);
+            
+            
             /*PlayerMasterOld = WhoHit(other);
             OnEventObstacleMasterHit();
             OnEventObstacleScore(PlayerMasterOld.getPlayerSettings);
