@@ -107,7 +107,7 @@ namespace RiverAttack
         public override void ExitState()
         {
             var score = PlayerManager.instance.playerSettingsList[0].score;
-            SteamGameManager.UpdateScore(score, false);
+            //SteamGameManager.UpdateScore(score, false);
             //PlayerManager.instance.ActivePlayers(false);
             //GamePlayManager.instance.OnEventDeactivateEnemiesMaster();
             //Debug.Log($"Sai do Estado: Boss Fight");

@@ -23,12 +23,6 @@ namespace ImmersiveGames.SteamServicesManagers
             {
                 Instance = this;
                 //DontDestroyOnLoad(gameObject);
-                LoadOfflineScores();
-
-                if (SteamConnectionManager.ConnectedToSteam)
-                {
-                    InitializeLeaderboard();
-                }
             }
             else
             {
@@ -36,10 +30,11 @@ namespace ImmersiveGames.SteamServicesManagers
             }
         }
 
-        private async void InitializeLeaderboard()
+        public static async Task InitializeLeaderboard()
         {
             try
             {
+                DebugManager.Log<SteamLeaderboardService>("inicializando..");
                 _leaderboard = await SteamUserStats.FindLeaderboardAsync(LeaderboardName).ConfigureAwait(false);
                 if (_leaderboard.HasValue)
                 {
@@ -56,7 +51,7 @@ namespace ImmersiveGames.SteamServicesManagers
             }
         }
 
-        public async void UpdateScore(int score, bool force)
+        public async Task UpdateScore(int score, bool force)
         {
             if (SteamConnectionManager.ConnectedToSteam && _leaderboard.HasValue)
             {
@@ -137,16 +132,15 @@ namespace ImmersiveGames.SteamServicesManagers
             PlayerPrefs.Save();
         }
 
-        public void SyncOfflineScores()
+        public async void SyncOfflineScores()
         {
             if (!SteamConnectionManager.ConnectedToSteam || !_leaderboard.HasValue || !_offlineScores.Any())
                 return;
 
             foreach (var score in _offlineScores.ToList())
             {
-                UpdateScore(score, false);
+                await UpdateScore(score, false).ConfigureAwait(false);
             }
-
             _offlineScores.Clear();
             SaveOfflineScores();
         }

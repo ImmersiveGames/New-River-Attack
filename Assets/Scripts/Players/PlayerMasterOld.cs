@@ -211,8 +211,8 @@ namespace RiverAttack
             if (walls != null)
             {
                 _gamePlayingLog.playerDieWall += 1;
-                SteamGameManager.AddStat("stat_CrashPlayer",1,false);
-                SteamGameManager.UnlockAchievement("ACH_CRASH_PLAYER_WALL");
+                //SteamGameManager.AddStat("stat_CrashPlayer",1,false);
+                //SteamGameManager.UnlockAchievement("ACH_CRASH_PLAYER_WALL");
             }
             if (bullet != null)
             {
@@ -224,10 +224,10 @@ namespace RiverAttack
             }
             else if (enemies != null)
             {
-                SteamGameManager.AddStat("stat_CrashPlayer",1,false);
+                //SteamGameManager.AddStat("stat_CrashPlayer",1,false);
                 GamePlayManager.AddResultList(_gamePlayingLog.GetEnemiesResult(), getPlayerSettings, enemies.enemy, 1, CollisionType.Collider);
             }
-            SteamGameManager.StoreStats();
+            //SteamGameManager.StoreStats();
         }
 
         #region Calls

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using ImmersiveGames.SteamServicesManagers;
 using NewRiverAttack.SteamGameManagers;
 
 namespace RiverAttack
@@ -19,10 +20,10 @@ namespace RiverAttack
             switch (GameManager.instance.gameModes)
             {
                 case GameManager.GameModes.Classic:
-                    SteamGameManager.UnlockAchievement("ACH_FINISH_CLASSIC");
+                    SteamAchievementService.Instance.UnlockAchievement("ACH_FINISH_CLASSIC");
                     break;
                 case GameManager.GameModes.Mission:
-                    SteamGameManager.UnlockAchievement("ACH_FINISH_MISSION");
+                    SteamAchievementService.Instance.UnlockAchievement("ACH_FINISH_MISSION");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

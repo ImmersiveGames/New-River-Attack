@@ -39,15 +39,15 @@ namespace RiverAttack
             // Verifica se ainda tem gasolina
             if (m_PlayerSettings.actualFuel > 0) return;
             m_PlayerSettings.actualFuel = 0;
-            if(SteamGameManager.ConnectedToSteam)
-                SteamGameManager.UnlockAchievement("ACH_DIE_PLAYER_GAS");
+            //if(SteamGameManager.ConnectedToSteam)
+                //SteamGameManager.UnlockAchievement("ACH_DIE_PLAYER_GAS");
             _mPlayerMasterOld.OnEventPlayerMasterHit();
         }
 
         private void OnDisable()
         {
-            if(SteamGameManager.ConnectedToSteam)
-                SteamGameManager.StoreStats();
+           // if(SteamGameManager.ConnectedToSteam)
+                //SteamGameManager.StoreStats();
         }
   #endregion
 
@@ -62,7 +62,7 @@ namespace RiverAttack
         private void LogGamePlay(int reduce)
         {
             m_GamePlayingLog.fuelSpent += reduce;
-            SteamGameManager.AddStat("stat_SpendGas", reduce, false);
+            //SteamGameManager.AddStat("stat_SpendGas", reduce, false);
         }
     }
 }

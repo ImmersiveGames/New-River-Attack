@@ -13,7 +13,7 @@ using Bullets = ImmersiveGames.BulletsManagers.Bullets;
 
 namespace NewRiverAttack.PlayerManagers.PlayerSystems
 {
-    public class PlayerAchievements: MonoBehaviour
+    /*public class PlayerAchievements: MonoBehaviour
     {
         private const int DistanceToCheckAchievement = 100;
         private const int BombToHitAchievement = 3;
@@ -124,5 +124,5 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             SteamGameManager.StoreStats();
             DebugManager.Log<PlayerAchievements>($"Registrados Feitos com sucesso");
         }
-    }
+    }*/
 }

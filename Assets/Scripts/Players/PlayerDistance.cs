@@ -88,18 +88,18 @@ namespace RiverAttack
             _gamePlayingLog.maxPathDistance = maxDistance;
             _gamePlayingLog.pathDistance += distance;
             var resultInt = Mathf.FloorToInt(_gamePlayingLog.pathDistance);
-            SteamGameManager.SetStat("stat_FlightDistance", resultInt, true);
+            //SteamGameManager.SetStat("stat_FlightDistance", resultInt, true);
         }
 
         private static void AchievementHandle(float result)
         {
             //Debug.Log($"Valor entrando: {result}");
-            if (!SteamGameManager.ConnectedToSteam) return;
-            var flight = SteamGameManager.GetStatInt("stat_FlightDistance");
+            //if (!SteamGameManager.ConnectedToSteam) return;
+            //var flight = SteamGameManager.GetStatInt("stat_FlightDistance");
             var resultInt = Mathf.FloorToInt(result);
             //Debug.Log($"Valor calculado: {resultInt}");
-            if (flight >= resultInt) return;
-            SteamGameManager.SetStat("stat_FlightDistance", resultInt, true);
+            //if (flight >= resultInt) return;
+            //SteamGameManager.SetStat("stat_FlightDistance", resultInt, true);
         }
     }
 }

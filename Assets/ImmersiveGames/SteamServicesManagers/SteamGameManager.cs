@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace NewRiverAttack.SteamGameManagers
 {
-    public class SteamGameManager: MonoBehaviour
+    /*public class SteamGameManager: MonoBehaviour
     {
         private static SteamGameManager _instance;
         private const int SteamID = 2777110;
@@ -76,12 +76,11 @@ namespace NewRiverAttack.SteamGameManagers
             {
                 ClearAllStats(true);
             }
-            ReconcileMissedAchievements();
             SteamUserStats.OnAchievementProgress += AchievementChanged;
             /*foreach ( var a in SteamUserStats.Achievements )
             {
                 DebugManager.Log<SteamGameManager>( $"{a.Name} ({a.State}) {a.Identifier}" );
-            }*/
+            }#1#
         }
 
         private void Update()
@@ -104,28 +103,7 @@ namespace NewRiverAttack.SteamGameManagers
             GameCleanup();
         }
   #endregion
-
-  private static void ReconcileMissedAchievements()
-        {
-            // Aqui ele coloca os achievements offline para atualizar.
-            
-            /*AchievementStatus localAchievementStatus = SaveSystem.LoadAchievementStatus();
-            var steamAchievementStatus = SteamUserStats.Achievements.ToList();
-            var achievementsThatWereMissed = new List<string>();
-
-            if (localAchievementStatus.achievementToCheck)
-            {
-                foreach (var achievement in steamAchievementStatus.Where(achievement => achievement.Name.Equals(achievementToCheck) && !achievement.State))
-                {
-                    achievementsThatWereMissed.Add(achievementToCheck);
-                }
-            }
-
-            if (achievementsThatWereMissed.Count > 0)
-            {
-                UnlockAchievements(achievementsThatWereMissed);
-            }*/
-        }
+  
         public static void UnlockAchievement(List<string> achievementsToUnlock)
         {
             if (!ConnectedToSteam) return;
@@ -308,7 +286,7 @@ namespace NewRiverAttack.SteamGameManagers
         }
   #endregion
 
-    }
+    }*/
     
 }
 

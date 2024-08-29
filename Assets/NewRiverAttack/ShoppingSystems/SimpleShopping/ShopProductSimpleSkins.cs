@@ -2,9 +2,9 @@
 using ImmersiveGames.ShopManagers.Interfaces;
 using ImmersiveGames.ShopManagers.NavigationModes;
 using ImmersiveGames.ShopManagers.ShopProducts;
+using ImmersiveGames.SteamServicesManagers;
 using NewRiverAttack.SaveManagers;
 using NewRiverAttack.ShoppingSystems.SimpleShopping.Abstracts;
-using NewRiverAttack.SteamGameManagers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -27,7 +27,6 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         public LocalizedString textUnavailable;
         public LocalizedString textInUse;
         public LocalizedString textNotInUse;
-        
 
         private string _cachedTextUnavailable;
         private string _cachedTextInUse;
@@ -55,19 +54,17 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
 
         private void DisplaySlides(IShopProduct shopProduct)
         {
-            if (shopProduct is ShopProductSkin productSkin)
-            {
-                bool previousEnabled = attSpeed.interactable;
-                SetSliderInteractable(false);
+            if (shopProduct is not ShopProductSkin productSkin) return;
+            var previousEnabled = attSpeed.interactable;
+            SetSliderInteractable(false);
 
-                attSpeed.value = productSkin.GetRateSpeed();
-                attAgility.value = productSkin.GetRateAgility();
-                attMaxFuel.value = productSkin.GetRateMaxFuel();
-                attFuelCadence.value = productSkin.GetRateCadenceFuel();
-                attFireSpeed.value = productSkin.GetRateShoot();
+            attSpeed.value = productSkin.GetRateSpeed();
+            attAgility.value = productSkin.GetRateAgility();
+            attMaxFuel.value = productSkin.GetRateMaxFuel();
+            attFuelCadence.value = productSkin.GetRateCadenceFuel();
+            attFireSpeed.value = productSkin.GetRateShoot();
 
-                SetSliderInteractable(previousEnabled);
-            }
+            SetSliderInteractable(previousEnabled);
         }
 
         private void SetSliderInteractable(bool isEnabled)
@@ -89,7 +86,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         protected override void InteractableButtonBuy(IStockShop stockShop, int quantity)
         {
             var saveGameOptions = GameOptionsSave.instance;
-            bool canBuy = stockShop.HaveInStock(quantity) && stockShop.PlayerHaveMoneyToBuy(saveGameOptions, quantity);
+            var canBuy = stockShop.HaveInStock(quantity) && stockShop.PlayerHaveMoneyToBuy(saveGameOptions, quantity);
 
             buttonBuy.interactable = canBuy;
             buttonBuy.GetComponentInChildren<TMP_Text>().color = canBuy ? textNormalColor : textNoBuyColor;
@@ -104,20 +101,16 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             {
                 buttonBuy.GetComponentInChildren<TMP_Text>().text = _cachedTextUnavailable;
             }
-
-#if DEBUG
+            
             DebugManager.Log<ShopProductSimpleSkins>($"[{stockShop.shopProduct.name}] Can Buy: {canBuy}");
-#endif
         }
 
         protected override void InteractableButtonUse(IStockShop stockShop, int quantity)
         {
             buttonUse.onClick.RemoveAllListeners();
             var interactable = stockShop.shopProduct is IShopProductUsable;
-
-#if DEBUG
+            
             DebugManager.Log<ShopProductSimpleSkins>("Use Button Interactable: " + interactable);
-#endif
 
             if (!interactable)
             {
@@ -126,7 +119,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             }
 
             var saveGameOptions = GameOptionsSave.instance;
-            bool isCurrentSkin = saveGameOptions.SkinIsActualInPlayer(0, stockShop.shopProduct);
+            var isCurrentSkin = saveGameOptions.SkinIsActualInPlayer(0, stockShop.shopProduct);
 
             buttonUse.GetComponentInChildren<TMP_Text>().text = isCurrentSkin ? _cachedTextInUse : _cachedTextNotInUse;
 
@@ -159,18 +152,14 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             var saveGameOptions = GameOptionsSave.instance;
             if (saveGameOptions == null || stockShop?.shopProduct == null)
             {
-#if DEBUG
                 DebugManager.LogWarning<ShopProductSimpleSkins>("Unable to buy product. Game options or stock shop is null.");
-#endif
                 return;
             }
 
             var price = stockShop.shopProduct.GetPrice() * quantity;
             if (saveGameOptions.wallet < price || !stockShop.HaveInStock(quantity) || !stockShop.PlayerCanBuy(saveGameOptions, quantity))
             {
-#if DEBUG
                 DebugManager.LogWarning<ShopProductSimpleSkins>("Unable to buy product. Insufficient funds, out of stock, or cannot buy.");
-#endif
                 return;
             }
 
@@ -185,32 +174,22 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             {
                 itemUse.Use(indexPlayer, stockShop, quantity);
             }
-#if DEBUG
             DebugManager.LogWarning<ShopProductSimpleSkins>("Achievement: UNLOCKED: Buy an Item.");
-#endif
-            if (SteamGameManager.ConnectedToSteam)
-            {
-                if (stockShop.shopProduct is ShopProductSkin productSkin)
+
+            if (stockShop.shopProduct is not ShopProductSkin productSkin) return;
+            SteamAchievementService.Instance.UnlockAchievement("ACH_BUY_SKIN");
+                if (productSkin.HaveBuyAllProductInList(SimpleShoppingManager.GetShopList))
                 {
-                    SteamGameManager.UnlockAchievement("ACH_BUY_SKIN");
-                    if (productSkin.HaveBuyAllProductInList(SimpleShoppingManager.GetShopList))
-                    {
-                        SteamGameManager.UnlockAchievement("ACH_BUY_SKIN_ALL");
-                    }
+                    SteamAchievementService.Instance.UnlockAchievement("ACH_BUY_SKIN_ALL");
                 }
-            }
         }
 
         protected override void UseProduct(int indexPlayer, IStockShop stockShop, int quantity = 1)
         {
-            if (stockShop?.shopProduct is IShopProductUsable itemUse)
-            {
-                itemUse.Use(indexPlayer, stockShop, quantity);
-                SimpleShoppingManager.OnEventUseProduct(stockShop.shopProduct, quantity);
-#if DEBUG
-                DebugManager.Log<ShopProductSimpleSkins>("Skin used successfully.");
-#endif
-            }
+            if (stockShop?.shopProduct is not IShopProductUsable itemUse) return;
+            itemUse.Use(indexPlayer, stockShop, quantity);
+            SimpleShoppingManager.OnEventUseProduct(stockShop.shopProduct, quantity);
+            DebugManager.Log<ShopProductSimpleSkins>("Skin used successfully.");
         }
 
         private void MoveToProductPosition(IStockShop stockShop)
@@ -218,16 +197,14 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             var layoutGroup = GetComponentInParent<HorizontalLayoutGroup>();
             var content = layoutGroup?.transform as RectTransform;
 
-            if (content != null)
-            {
-                var productIndex = FindProductIndexInLayout(stockShop.shopProduct, content);
-                var navigation = GetComponentInParent<SmoothFiniteNavigationMode>();
+            if (content == null) return;
+            var productIndex = FindProductIndexInLayout(stockShop.shopProduct, content);
+            var navigation = GetComponentInParent<SmoothFiniteNavigationMode>();
 
-                // Verificação de nulidade e se o índice é válido
-                if (navigation != null && productIndex >= 0 && this != null)
-                {
-                    navigation.MoveContentToIndex(content, productIndex);
-                }
+            // Verificação de nulidade e se o índice é válido
+            if (navigation != null && productIndex >= 0 && this != null)
+            {
+                navigation.MoveContentToIndex(content, productIndex);
             }
         }
 
@@ -238,7 +215,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         private int FindProductIndexInLayout(IShopProduct shopProduct, RectTransform content)
         {
             // Percorre todos os filhos do conteúdo para encontrar o índice do produto correspondente
-            for (int i = 0; i < content.childCount; i++)
+            for (var i = 0; i < content.childCount; i++)
             {
                 var child = content.GetChild(i);
                 var productSettings = child.GetComponent<ShopProductSettings>();
@@ -249,7 +226,5 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             }
             return -1; // Retorna -1 se o produto não for encontrado
         }
-
-
     }
 }

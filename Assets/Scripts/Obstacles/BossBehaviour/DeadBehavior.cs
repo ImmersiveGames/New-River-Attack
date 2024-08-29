@@ -13,7 +13,7 @@ namespace RiverAttack
         public void Enter()
         {
             //Debug.Log("Enter in DeadBehavior");
-            SteamGameManager.UnlockAchievement("ACH_BEAT_SUBMARINE");
+           // SteamGameManager.UnlockAchievement("ACH_BEAT_SUBMARINE");
         }
         public void Update()
         {

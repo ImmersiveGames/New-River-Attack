@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using ImmersiveGames.SteamServicesManagers;
+using UnityEngine;
 
 namespace NewRiverAttack.SteamGameManagers
 {
@@ -8,7 +9,8 @@ namespace NewRiverAttack.SteamGameManagers
 
         private void OnBecameVisible()
         {
-            SteamGameManager.UnlockAchievement(idAchievement);
+            SteamAchievementService.Instance.UnlockAchievement(idAchievement);
+            //SteamGameManager.UnlockAchievement(idAchievement);
         }
     }
 }

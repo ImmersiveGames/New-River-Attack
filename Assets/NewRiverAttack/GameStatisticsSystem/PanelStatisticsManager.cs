@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using ImmersiveGames.DebugManagers;
 using NewRiverAttack.GamePlayManagers.GamePlayLogs;
 using RiverAttack;
 using UnityEngine;
-using UnityEngine.Localization.Settings;
 using Utils;
 using CollectibleScriptable = NewRiverAttack.ObstaclesSystems.ObjectsScriptable.CollectibleScriptable;
 using EnemiesScriptable = NewRiverAttack.ObstaclesSystems.ObjectsScriptable.EnemiesScriptable;
@@ -38,11 +36,11 @@ namespace NewRiverAttack.GameStatisticsSystem
 
         private string GetScore => _gemeStatistics.playerMaxScore.ToString();
         private string GetSpendTime => Tools.TimeFormat(_gemeStatistics.playerTimeSpent) ?? "0000000";
-        private string GetMaxPathDistance => $"{_gemeStatistics.GetAmountDistance} KM" ?? "0 KM";
+        private string GetMaxPathDistance => $"{_gemeStatistics.GetAmountDistance} KM";
         private string GetShootSpent => _gemeStatistics.playersShoots.ToString();
         private string GetBombsSpent => _gemeStatistics.playersBombs.ToString();
-        private string GetFuelSpent => $"{_gemeStatistics.fuelSpent:F2} L" ?? "0 L";
-        private string GetFuelCharge => $"{_gemeStatistics.fuelCharge:F2} L" ?? "0 L";
+        private string GetFuelSpent => $"{_gemeStatistics.fuelSpent:F2} L";
+        private string GetFuelCharge => $"{_gemeStatistics.fuelCharge:F2} L";
         private string GetDeaths => _gemeStatistics.playerDeaths.ToString();
         private string GetWallDeaths => _gemeStatistics.playersDieWall.ToString();
         private string GetEnemyDeaths => _gemeStatistics.playersDieEnemyCollider.ToString();

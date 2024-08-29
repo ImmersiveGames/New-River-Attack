@@ -10,14 +10,13 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 {
     public class PlayerFuel : MonoBehaviour
     {
-        private float _spendFuel;
+
         [SerializeField] private float reduceFuelCadence = 1f; //Quanto maior mais rápido
         
         private bool _fuelPause;
         private bool _inPowerUp;
         
         private PlayerMaster _playerMaster;
-        private PlayerAchievements _playerAchievements;
         private float _areaEffectCadence;
 
         #region Unity Methods
@@ -55,11 +54,9 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             if (GetFuel > 0) return;
             _playerMaster.OnEventPlayerMasterGetHit();
             GameStatisticManager.instance.LogFuelOut(1);
-            _playerAchievements.LogOutFuel();
         }
         private void OnDisable()
         {
-            _playerAchievements.LogSpendFuel(_spendFuel);
             _playerMaster.EventPlayerMasterInitialize -= InitializeFuel;
             _playerMaster.EventPlayerMasterChangeSkin -= InitializeSkinFuel;
             _playerMaster.EventPlayerMasterRespawn -= RestoreFuel;
@@ -73,7 +70,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void SetInitialReferences()
         {
             _playerMaster = GetComponent<PlayerMaster>();
-            _playerAchievements = GetComponent<PlayerAchievements>();
         }
         
         private void PauseDecoy(bool pausar)
@@ -87,8 +83,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         {
             DebugManager.Log<PlayerFuel>("Restore Fuel");
             GetFuel = GetMaxFuel;
-            _playerAchievements.LogSpendFuel(_spendFuel);
-            _spendFuel = 0;
         }
 
         public float GetFuel { get; private set; }

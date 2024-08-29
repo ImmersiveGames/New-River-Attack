@@ -82,11 +82,7 @@ namespace RiverAttack
 
         private new void DestroyMe()
         {
-            //Debug.Log(m_CollisionEnemy.Count);
-            if (m_CollisionEnemy.Count >= 3)
-            {
-                SteamGameManager.UnlockAchievement("ACH_HIT_BOMB_3");
-            }
+            
             GameObject o;
             (o = gameObject).SetActive(false);
             Destroy(o);

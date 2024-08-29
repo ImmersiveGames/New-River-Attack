@@ -24,7 +24,7 @@ namespace RiverAttack
                 GamePlayingLog.instance.AddLevel(m_GamePlayManager.actualLevels);
                 if (GameManager.instance.gameModes == GameManager.GameModes.Mission)
                 {
-                    switch (m_GamePlayManager.actualLevels.pathType)
+                    /*switch (m_GamePlayManager.actualLevels.pathType)
                     {
                         case LevelTypes.Grass:
                             SteamGameManager.UnlockAchievement("ACH_FINISH_M_GRASS");
@@ -46,7 +46,7 @@ namespace RiverAttack
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
-                    }
+                    }*/
                 }
             }
                 

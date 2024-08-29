@@ -24,7 +24,6 @@ namespace NewRiverAttack.BulletsManagers
         private readonly List<EnemiesMaster> _enemiesMasters = new List<EnemiesMaster>();
 
         private AudioSource _audioSource;
-        private PlayerAchievements _playerAchievements;
         private BombData _bombData;
 
         #region Unity Methods
@@ -71,7 +70,7 @@ namespace NewRiverAttack.BulletsManagers
             if (_audioEvent == null)
                 _audioEvent = AudioManager.instance.GetAudioSfxEvent(EnumSfxSound.SfxPlayerBomb);
             BulletData = _bombData = bombData is BombData bulletsData ? bulletsData : default;
-            _playerAchievements = _bombData.BulletOwner.GetComponent<PlayerAchievements>();
+            
             var transform1 = transform;
             var position = spawnPosition.position;
             transform1.position = new Vector3(position.x, position.y, position.z + _bombData.BulletOffSet);

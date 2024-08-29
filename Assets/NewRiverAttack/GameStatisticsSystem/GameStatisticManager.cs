@@ -1,6 +1,7 @@
 ﻿using System;
 using ImmersiveGames.BulletsManagers;
 using ImmersiveGames.DebugManagers;
+using ImmersiveGames.SteamServicesManagers;
 using ImmersiveGames.Utils;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.GamePlayManagers.GamePlayLogs;
@@ -44,16 +45,17 @@ namespace NewRiverAttack.GameStatisticsSystem
         private void LogSessionTime(float sessionStartTime)
         {
             var sessionTime = Time.time - sessionStartTime;
-            if(_gemeStatisticsDataLog)
-                _gemeStatisticsDataLog.playerTimeSpent += sessionTime;
+            if (!_gemeStatisticsDataLog) return;
+            _gemeStatisticsDataLog.playerTimeSpent += sessionTime;
             DebugManager.Log<GameStatisticManager>($"Log Offline Timer {_gemeStatisticsDataLog.playerTimeSpent}");
         }
 
-        internal void LogMaxScore(int score)
+        internal async void LogMaxScore(int score)
         {
             if(_gemeStatisticsDataLog == null) return;
             if (score <= _gemeStatisticsDataLog.playerMaxScore) return;
             _gemeStatisticsDataLog.playerMaxScore = score;
+            await SteamLeaderboardService.Instance.UpdateScore(score, true).ConfigureAwait(false);
             DebugManager.Log<GameStatisticManager>($"Log Offline Max Score {_gemeStatisticsDataLog.playerMaxScore}");
         }
 

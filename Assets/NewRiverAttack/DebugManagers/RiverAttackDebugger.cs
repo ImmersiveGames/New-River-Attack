@@ -60,7 +60,6 @@ namespace NewRiverAttack.DebugManagers
             //GamePlayManager
             DebugManager.SetScriptDebugLevel<GamePlayManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<GameOptionsSave>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<PlayerAchievements>(DebugManager.DebugLevels.None);
             
             //Inputs
             DebugManager.SetScriptDebugLevel<ActionManager>(DebugManager.DebugLevels.None);
@@ -145,12 +144,13 @@ namespace NewRiverAttack.DebugManagers
             //Steam Services
             DebugManager.SetScriptDebugLevel<SteamConnectionManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<SteamAchievementService>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<SteamLeaderboardService>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<SteamLeaderboardService>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<SteamStatsService>(DebugManager.DebugLevels.None);
             
-            DebugManager.SetScriptDebugLevel<SteamServerUpdater>(DebugManager.DebugLevels.All);
-            DebugManager.SetScriptDebugLevel<GameStatisticManager>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<SteamServerUpdater>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<GameStatisticManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PanelStatisticsManager>(DebugManager.DebugLevels.None);
+            
             
         }
     }

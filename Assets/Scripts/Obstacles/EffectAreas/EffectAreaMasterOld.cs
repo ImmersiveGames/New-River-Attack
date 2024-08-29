@@ -70,7 +70,7 @@ namespace RiverAttack
         {
             PlayerMasterOld.inEffectArea = false;
             EventExitAreaEffect?.Invoke();
-            SteamGameManager.StoreStats();
+            //SteamGameManager.StoreStats();
         }
   #endregion
 

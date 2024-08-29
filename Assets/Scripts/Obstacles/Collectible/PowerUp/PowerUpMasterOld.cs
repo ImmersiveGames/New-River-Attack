@@ -52,13 +52,13 @@ namespace RiverAttack
             switch (powerUp.powerUpType)
             {
                 case PowerUpTypes.RapidFire:
-                    SteamGameManager.UnlockAchievement("ACH_COLLECT_RAPID_FIRE");
+                    //SteamGameManager.UnlockAchievement("ACH_COLLECT_RAPID_FIRE");
                     break;
                 case PowerUpTypes.Lives:
-                    SteamGameManager.UnlockAchievement("ACH_COLLECT_LIFE");
+                    //SteamGameManager.UnlockAchievement("ACH_COLLECT_LIFE");
                     break;
                 case PowerUpTypes.Bomb:
-                    SteamGameManager.UnlockAchievement("ACH_COLLECT_BOMB");
+                   // SteamGameManager.UnlockAchievement("ACH_COLLECT_BOMB");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

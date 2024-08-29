@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using ImmersiveGames.SteamServicesManagers;
 using NewRiverAttack.SteamGameManagers;
 
 namespace RiverAttack
@@ -29,7 +30,6 @@ namespace RiverAttack
         {
             var score = PlayerManager.instance.playerSettingsList[0].score;
             GameSaveManager.instance.SavePlayerSaves();
-            SteamGameManager.UpdateScore(score, false);
             //PlayerManager.instance.ActivePlayers(false);
             GamePlayManager.instance.OnEventDeactivateEnemiesMaster();            
             //Debug.Log($"Sai do Estado: PlayGame");

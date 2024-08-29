@@ -12,7 +12,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
     public class PlayerCollisions : MonoBehaviour
     {
         private PlayerMaster _playerMaster;
-        private PlayerAchievements _playerAchievements;
         private bool _invulnerability;
         private Collider[] _colliders;
 
@@ -64,7 +63,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void SetInitialReferences()
         {
             _playerMaster = GetComponent<PlayerMaster>();
-            _playerAchievements = GetComponent<PlayerAchievements>();
             GetSkinColliders(null);
         }
 

@@ -131,7 +131,7 @@ namespace RiverAttack
         {
             // Fim do diálogo, você pode adicionar lógica adicional aqui
             //Debug.Log("Fim do diálogo");
-            SteamGameManager.UnlockAchievement("ACH_FINISH_TUTORIAL");
+            //SteamGameManager.UnlockAchievement("ACH_FINISH_TUTORIAL");
             StopAllCoroutines();
             GameManager.instance.ChangeState(new GameStateMenu(), GameManager.GameScenes.MainScene.ToString());
         }

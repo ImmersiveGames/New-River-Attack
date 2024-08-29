@@ -128,7 +128,7 @@ namespace ImmersiveGames.SteamServicesManagers
 
             try
             {
-                string achievementName = achievementId; // Nome padrão se offline
+                var achievementName = achievementId; // Nome padrão se offline
 
                 if (ConnectedToSteam)
                 {
