@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using ImmersiveGames.Utils;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
@@ -105,21 +106,9 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
                 break; // Para a iteração após ativar o primeiro filho
             }
         }
-
-        /*private void ActiveSplash()
-        {
-            SetVfxTypes(GetComponentsInChildren<BossVfxTag>(true));
-            _splashVFX.gameObject.SetActive(true);
-            var particleSystems = _splashVFX.GetComponentsInChildren<ParticleSystem>();
-            foreach (var particle in particleSystems)
-            {
-                particle.Play();
-            }
-        }*/
-
         public float GetSubmergeTime()
         {
-            return Utils.Tools.GetAnimationDuration(_animator, onSubmerge);
+            return Tools.GetAnimationDuration(_animator, onSubmerge);
         }
     }
 }

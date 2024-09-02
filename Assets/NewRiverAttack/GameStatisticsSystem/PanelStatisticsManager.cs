@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using ImmersiveGames.DebugManagers;
+using ImmersiveGames.Utils;
 using NewRiverAttack.GamePlayManagers.GamePlayLogs;
-using RiverAttack;
 using UnityEngine;
-using Utils;
 using CollectibleScriptable = NewRiverAttack.ObstaclesSystems.ObjectsScriptable.CollectibleScriptable;
 using EnemiesScriptable = NewRiverAttack.ObstaclesSystems.ObjectsScriptable.EnemiesScriptable;
 
@@ -168,22 +167,6 @@ namespace NewRiverAttack.GameStatisticsSystem
             // Usa Distinct com um comparador personalizado
             var finalList = originalList.Distinct(new CompareItemReference()).ToList();
             return finalList;
-        }
-        
-        private static IEnumerable<StatisticItemData> SumStatistic(IEnumerable<EnemiesScriptable> enemiesList, IEnumerable<LogResults> logResultsList)
-        {
-            var list = enemiesList
-                .OrderBy(localName => localName.localizeName.GetLocalizedString())
-                .GroupBy(localName => localName.localizeName.GetLocalizedString())
-                .Select(
-                    grouping => new StatisticItemData()
-                    {
-                        itemString = grouping.Key,
-                        itemValue = logResultsList.Where(log => log.enemy.localizeName.GetLocalizedString() == grouping.Key)
-                            .Sum(log => log.quantity).ToString()
-                    }
-                );
-            return list;
         }
 
         private class CompareItemReference : IEqualityComparer<StatisticItemData>

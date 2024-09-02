@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using CarterGames.Assets.SaveManager;
+using NewRiverAttack.GamePlayManagers.GamePlayLogs;
+using NewRiverAttack.LevelBuilder;
 using UnityEngine;
-using RiverAttack;
 using UnityEngine.Localization;
-using UnityEngine.Serialization;
 
-namespace Save
+namespace Saves
 {
     [CreateAssetMenu(fileName = "PlayerSaveSaveObject")]
     public class PlayerSaveSaveObject : SaveObject
@@ -33,9 +33,9 @@ namespace Save
         public SaveValue<int> playerDieWall;
         public SaveValue<int> playerDieBullet;
         public SaveValue<int> playerDieFuelEmpty;
-        public SaveValue<Levels> activeMission;
-        public SaveValue<List<Levels>> finishLevels;
-        public SaveValue<List<LogResults>> hitEnemiesResultsList;
+        public SaveValue<LevelData> activeMission;
+        public SaveValue<List<LevelData>> finishLevels;
+        public SaveValue<List<GameStatisticHit>> hitEnemiesResultsList;
 
     }
 }
