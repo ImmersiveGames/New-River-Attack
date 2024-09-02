@@ -44,21 +44,21 @@ namespace NewRiverAttack.HUBManagers
         private void GoLeft(InputAction.CallbackContext obj)
         {
             if(_inInvoke) return;
-            if (EventSystem.current != null)
+            /*if (EventSystem.current != null)
             {
                 // Seleciona o botão especificado
                 EventSystem.current.SetSelectedGameObject(backwardButton.gameObject);
-            }
+            }*/
             backwardButton.onClick.Invoke();
         }
         private void GoRight(InputAction.CallbackContext obj)
         {
             if(_inInvoke) return;
-            if (EventSystem.current != null)
+            /*if (EventSystem.current != null)
             {
                 // Seleciona o botão especificado
                 EventSystem.current.SetSelectedGameObject(forwardButton.gameObject);
-            }
+            }*/
             forwardButton.onClick.Invoke();
         }
 
