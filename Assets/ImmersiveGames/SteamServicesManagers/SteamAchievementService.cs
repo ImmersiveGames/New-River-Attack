@@ -16,7 +16,7 @@ namespace ImmersiveGames.SteamServicesManagers
         private HashSet<string> _serverAchievements = new HashSet<string>();
         private HashSet<string> _offlineAchievements = new HashSet<string>();
         private bool ConnectedToSteam => SteamConnectionManager.ConnectedToSteam;
-        private bool NotifyOnAchievementUnlock { get; set; } = true;
+        private bool NotifyOnAchievementUnlock { get; set; } = false;
 
         #region Unity Methods
 
