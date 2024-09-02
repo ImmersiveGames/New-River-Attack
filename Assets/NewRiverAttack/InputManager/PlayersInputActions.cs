@@ -943,6 +943,182 @@ namespace ImmersiveGames
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""HUBControl"",
+            ""id"": ""617f71d7-564b-4a2d-b5da-ada37bafb141"",
+            ""actions"": [
+                {
+                    ""name"": ""BackButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""6b73fd6e-67b0-40ef-a0ad-8e8124d24c53"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StartButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""a125b71c-2120-439d-b3b0-df4bc4388f0f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightSelection"",
+                    ""type"": ""Button"",
+                    ""id"": ""8a84c39f-2336-4340-a792-84fbe8f3f9ff"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftSelection"",
+                    ""type"": ""Button"",
+                    ""id"": ""1a3a8ccb-af21-4f02-b820-238a20dbac4f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""137485b0-b85c-4c0b-9fc4-ded4f2b04cf8"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile;PC"",
+                    ""action"": ""LeftSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""05445d52-e010-4979-894a-1608197f0ccf"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""LeftSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bed67caf-dd0d-4096-93b5-2a10ee0a0863"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""LeftSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b4deca9-1a4c-44a8-a36e-6f1e401f15a0"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""LeftSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0dea1a0f-963f-4323-ba7c-7b2d7627e1e6"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""RightSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""21fb0b6d-9c0e-472c-9104-f4957d590304"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC;Mobile"",
+                    ""action"": ""RightSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ca57781e-b67b-4913-8f2e-77099bf77302"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile;PC"",
+                    ""action"": ""RightSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0a46f37b-0a88-499b-9eb0-3067f4f6a978"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""RightSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""10e090ec-9bd6-4d7f-901f-27723a297777"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile;PC"",
+                    ""action"": ""StartButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""373777e3-9b0f-4701-835d-860678131295"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""StartButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""639a0d65-af42-4ade-970f-0dbdaf435e58"",
+                    ""path"": ""*/{Submit}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StartButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""87d9fb1c-e31a-458c-b1a2-0fea93efc022"",
+                    ""path"": ""*/{Back}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile;PC"",
+                    ""action"": ""BackButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1007,6 +1183,12 @@ namespace ImmersiveGames
             m_Notifications = asset.FindActionMap("Notifications", throwIfNotFound: true);
             m_Notifications_CloseNotification = m_Notifications.FindAction("CloseNotification", throwIfNotFound: true);
             m_Notifications_ConfirmNotification = m_Notifications.FindAction("ConfirmNotification", throwIfNotFound: true);
+            // HUBControl
+            m_HUBControl = asset.FindActionMap("HUBControl", throwIfNotFound: true);
+            m_HUBControl_BackButton = m_HUBControl.FindAction("BackButton", throwIfNotFound: true);
+            m_HUBControl_StartButton = m_HUBControl.FindAction("StartButton", throwIfNotFound: true);
+            m_HUBControl_RightSelection = m_HUBControl.FindAction("RightSelection", throwIfNotFound: true);
+            m_HUBControl_LeftSelection = m_HUBControl.FindAction("LeftSelection", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -1390,6 +1572,76 @@ namespace ImmersiveGames
             }
         }
         public NotificationsActions @Notifications => new NotificationsActions(this);
+
+        // HUBControl
+        private readonly InputActionMap m_HUBControl;
+        private List<IHUBControlActions> m_HUBControlActionsCallbackInterfaces = new List<IHUBControlActions>();
+        private readonly InputAction m_HUBControl_BackButton;
+        private readonly InputAction m_HUBControl_StartButton;
+        private readonly InputAction m_HUBControl_RightSelection;
+        private readonly InputAction m_HUBControl_LeftSelection;
+        public struct HUBControlActions
+        {
+            private @PlayersInputActions m_Wrapper;
+            public HUBControlActions(@PlayersInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @BackButton => m_Wrapper.m_HUBControl_BackButton;
+            public InputAction @StartButton => m_Wrapper.m_HUBControl_StartButton;
+            public InputAction @RightSelection => m_Wrapper.m_HUBControl_RightSelection;
+            public InputAction @LeftSelection => m_Wrapper.m_HUBControl_LeftSelection;
+            public InputActionMap Get() { return m_Wrapper.m_HUBControl; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(HUBControlActions set) { return set.Get(); }
+            public void AddCallbacks(IHUBControlActions instance)
+            {
+                if (instance == null || m_Wrapper.m_HUBControlActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_HUBControlActionsCallbackInterfaces.Add(instance);
+                @BackButton.started += instance.OnBackButton;
+                @BackButton.performed += instance.OnBackButton;
+                @BackButton.canceled += instance.OnBackButton;
+                @StartButton.started += instance.OnStartButton;
+                @StartButton.performed += instance.OnStartButton;
+                @StartButton.canceled += instance.OnStartButton;
+                @RightSelection.started += instance.OnRightSelection;
+                @RightSelection.performed += instance.OnRightSelection;
+                @RightSelection.canceled += instance.OnRightSelection;
+                @LeftSelection.started += instance.OnLeftSelection;
+                @LeftSelection.performed += instance.OnLeftSelection;
+                @LeftSelection.canceled += instance.OnLeftSelection;
+            }
+
+            private void UnregisterCallbacks(IHUBControlActions instance)
+            {
+                @BackButton.started -= instance.OnBackButton;
+                @BackButton.performed -= instance.OnBackButton;
+                @BackButton.canceled -= instance.OnBackButton;
+                @StartButton.started -= instance.OnStartButton;
+                @StartButton.performed -= instance.OnStartButton;
+                @StartButton.canceled -= instance.OnStartButton;
+                @RightSelection.started -= instance.OnRightSelection;
+                @RightSelection.performed -= instance.OnRightSelection;
+                @RightSelection.canceled -= instance.OnRightSelection;
+                @LeftSelection.started -= instance.OnLeftSelection;
+                @LeftSelection.performed -= instance.OnLeftSelection;
+                @LeftSelection.canceled -= instance.OnLeftSelection;
+            }
+
+            public void RemoveCallbacks(IHUBControlActions instance)
+            {
+                if (m_Wrapper.m_HUBControlActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
+
+            public void SetCallbacks(IHUBControlActions instance)
+            {
+                foreach (var item in m_Wrapper.m_HUBControlActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_HUBControlActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
+        }
+        public HUBControlActions @HUBControl => new HUBControlActions(this);
         private int m_MobileSchemeIndex = -1;
         public InputControlScheme MobileScheme
         {
@@ -1439,6 +1691,13 @@ namespace ImmersiveGames
         {
             void OnCloseNotification(InputAction.CallbackContext context);
             void OnConfirmNotification(InputAction.CallbackContext context);
+        }
+        public interface IHUBControlActions
+        {
+            void OnBackButton(InputAction.CallbackContext context);
+            void OnStartButton(InputAction.CallbackContext context);
+            void OnRightSelection(InputAction.CallbackContext context);
+            void OnLeftSelection(InputAction.CallbackContext context);
         }
     }
 }
