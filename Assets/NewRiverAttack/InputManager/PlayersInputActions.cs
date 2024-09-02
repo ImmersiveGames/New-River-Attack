@@ -621,7 +621,7 @@ namespace ImmersiveGames
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""PC;Mobile"",
+                    ""groups"": ""PC"",
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

@@ -1,5 +1,6 @@
 ﻿using System;
 using Cinemachine;
+using ImmersiveGames.DebugManagers;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
@@ -25,15 +26,15 @@ namespace ImmersiveGames.CameraManagers
 
         private void TargetPlayer(PlayerMaster playerMaster)
         {
-            Debug.Log($"playerMaster: {playerMaster}");
+            //Debug.Log($"playerMaster: {playerMaster}");
             if (playerMaster != null)
             {
                 _virtualCamera.Follow = playerMaster.transform;
-                Debug.Log($"Camera: {_virtualCamera.Follow}");
+                DebugManager.Log<CameraManager>($"Camera: {_virtualCamera.Follow}");
             }
             else
             {
-                Debug.LogWarning("PlayerMaster não encontrado para o índice especificado.");
+                DebugManager.LogWarning<CameraManager>("PlayerMaster não encontrado para o índice especificado.");
             }
         }
 

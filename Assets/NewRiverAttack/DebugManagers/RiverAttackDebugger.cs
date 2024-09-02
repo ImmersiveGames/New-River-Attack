@@ -50,7 +50,7 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<AbstractMenuManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<MainMenu>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<GameStartMenu>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<MenuGamePauseManager>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<MenuGamePauseManager>(DebugManager.DebugLevels.All);
             
             
             //Audios
@@ -144,7 +144,7 @@ namespace NewRiverAttack.DebugManagers
             //Steam Services
             DebugManager.SetScriptDebugLevel<SteamConnectionManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<SteamAchievementService>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<SteamLeaderboardService>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<SteamLeaderboardService>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<SteamStatsService>(DebugManager.DebugLevels.None);
             
             DebugManager.SetScriptDebugLevel<SteamServerUpdater>(DebugManager.DebugLevels.None);

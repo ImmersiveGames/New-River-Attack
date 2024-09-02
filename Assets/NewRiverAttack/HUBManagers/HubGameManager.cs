@@ -91,9 +91,8 @@ namespace NewRiverAttack.HUBManagers
             {
                 actualIndex = _lastSave;
             }
-            //Debug.Log($"Index: {indexMax}");
             EventInitializeHub?.Invoke(LevelOrder, actualIndex);
-            Debug.Log($"Index: {actualIndex}");
+            //Debug.Log($"Index: {actualIndex}");
             if (actualIndex != _lastSave) return;
             if (LevelOrder[_lastSave].levelData.hudPath.levelsStates == LevelsStates.Complete)
             {

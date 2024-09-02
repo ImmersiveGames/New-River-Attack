@@ -65,7 +65,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             _target = target;
             if (!objectMaster.ObjectIsReady) return;
             
-            Debug.Log($"ShootSpawn: {ShootSpawnPoint}");
+            //Debug.Log($"ShootSpawn: {ShootSpawnPoint}");
             
             var spawn = ShootSpawnPoint.transform;
             SpawnPoint = transform;

@@ -9,7 +9,7 @@ namespace RiverAttack
         {
             base.Awake();
             selectedOptionIndex = gameSettings.indexQuality;
-            Debug.Log($"Awake: {m_ActualQuality}");
+            //Debug.Log($"Awake: {m_ActualQuality}");
         }
         protected override void OnDropdownChanged(TMP_Dropdown tmpDropdown)
         {
@@ -20,7 +20,7 @@ namespace RiverAttack
         internal static void UpdateQuality(int indexQuality)
         {
             QualitySettings.SetQualityLevel(indexQuality);
-            Debug.Log("Apliquei as qualidade grafica: " + QualitySettings.GetQualityLevel());
+            //Debug.Log("Apliquei as qualidade grafica: " + QualitySettings.GetQualityLevel());
         }
     }
 }

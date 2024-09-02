@@ -15,7 +15,7 @@ namespace RiverAttack
         }
         public void Enter()
         {
-            Debug.Log("Entrando no comportamento SubEmerge");
+            //Debug.Log("Entrando no comportamento SubEmerge");
             // Lógica de entrada para o comportamento SubEmerge
             m_Finished = false;
            // m_BossMaster.BossInvulnerability(true);
@@ -24,7 +24,7 @@ namespace RiverAttack
         public void Update()
         {
             if(!_mBossMasterOld.shouldBeBossBattle) return;
-            Debug.Log("Atualizando comportamento SubEmerge");
+            //Debug.Log("Atualizando comportamento SubEmerge");
             m_CountTime += Time.deltaTime;
 
             if (!(m_CountTime >= TIME_LIMIT))
@@ -35,7 +35,7 @@ namespace RiverAttack
         }
         public void Exit()
         {
-            Debug.Log("Saindo do comportamento SubEmerge");
+            //Debug.Log("Saindo do comportamento SubEmerge");
             //m_BossMaster.BossInvulnerability(false);
             // Lógica de saída para o comportamento SubEmerge
         }
