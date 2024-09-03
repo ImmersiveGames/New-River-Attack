@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using ImmersiveGames.Utils;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.PlayerManagers.PlayerSystems;

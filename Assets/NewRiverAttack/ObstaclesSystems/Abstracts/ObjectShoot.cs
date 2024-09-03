@@ -1,4 +1,4 @@
-﻿using ImmersiveGames.BulletsManagers;
+using ImmersiveGames.BulletsManagers;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.PoolManagers;
 using ImmersiveGames.PoolManagers.Interface;
