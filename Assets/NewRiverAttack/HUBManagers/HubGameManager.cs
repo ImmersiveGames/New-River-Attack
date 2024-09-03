@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ImmersiveGames.DebugManagers;
 using ImmersiveGames.Utils;
 using NewRiverAttack.GameManagers;
 using NewRiverAttack.HUBManagers.UI;
@@ -91,9 +92,8 @@ namespace NewRiverAttack.HUBManagers
             {
                 actualIndex = _lastSave;
             }
-            //Debug.Log($"Index: {indexMax}");
             EventInitializeHub?.Invoke(LevelOrder, actualIndex);
-            Debug.Log($"Index: {actualIndex}");
+            DebugManager.Log<HubGameManager>($"Index: {actualIndex}");
             if (actualIndex != _lastSave) return;
             if (LevelOrder[_lastSave].levelData.hudPath.levelsStates == LevelsStates.Complete)
             {

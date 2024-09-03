@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using ImmersiveGames.DebugManagers;
 using UnityEngine;
 
 namespace ImmersiveGames.StateManagers.Test
@@ -38,19 +39,19 @@ namespace ImmersiveGames.StateManagers.Test
                 behavior.Finalization = true;
             }
 
-            Debug.Log($"Comportamento '{behavior.Name}' finalizado: {behavior.Finalization}");
+            DebugManager.Log<TestBehavior>($"Comportamento '{behavior.Name}' finalizado: {behavior.Finalization}");
         }
 
         private void PrintAllBehaviors(IBehaviorTeste behavior)
         {
-            Debug.Log("Todos os comportamentos e seus status de finalização:");
+            DebugManager.Log<TestBehavior>("Todos os comportamentos e seus status de finalização:");
             PrintBehavior(behavior, 0);
         }
 
         private void PrintBehavior(IBehaviorTeste behavior, int level)
         {
             string indent = new string(' ', level * 2);
-            Debug.Log($"{indent}{behavior.Name} - Finalizado: {behavior.Finalization}");
+            DebugManager.Log<TestBehavior>($"{indent}{behavior.Name} - Finalizado: {behavior.Finalization}");
 
             if (behavior.SubBehaviors != null)
             {

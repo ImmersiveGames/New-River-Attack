@@ -55,7 +55,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         {
             CadenceShoot = shopProductSkin.cadenceShoot;
             ShootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
-            Debug.Log($"Update {ShootSpawnPoint}");
         }
 
         public override void SetDataBullet(ObjectMaster objectMaster)

@@ -107,17 +107,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             }
         }
 
-        /*private void ActiveSplash()
-        {
-            SetVfxTypes(GetComponentsInChildren<BossVfxTag>(true));
-            _splashVFX.gameObject.SetActive(true);
-            var particleSystems = _splashVFX.GetComponentsInChildren<ParticleSystem>();
-            foreach (var particle in particleSystems)
-            {
-                particle.Play();
-            }
-        }*/
-
         public float GetSubmergeTime()
         {
             return Tools.GetAnimationDuration(_animator, onSubmerge);

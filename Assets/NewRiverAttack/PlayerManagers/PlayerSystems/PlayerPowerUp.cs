@@ -62,7 +62,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             if (powerUpData.uniqueEffect)
             {
                 // Se accumulateEffects for falso, interrompa todos os power-ups ativos
-                Debug.Log("Não acumula Efeitos, removendo todos os outros.");
+                DebugManager.Log<PlayerPowerUp>("Não acumula Efeitos, removendo todos os outros.");
                 EndAllPowerUps();
             }
 

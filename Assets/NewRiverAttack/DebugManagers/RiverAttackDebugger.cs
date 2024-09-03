@@ -6,6 +6,7 @@ using ImmersiveGames.DebugManagers;
 using ImmersiveGames.InputManager;
 using ImmersiveGames.MenuManagers;
 using ImmersiveGames.MenuManagers.Abstracts;
+using ImmersiveGames.MenuManagers.PanelGameManagers;
 using ImmersiveGames.MenuManagers.PanelOptionsManagers;
 using ImmersiveGames.PoolManagers;
 using ImmersiveGames.ShopManagers.NavigationModes;
@@ -52,6 +53,9 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<GameStartMenu>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<MenuGamePauseManager>(DebugManager.DebugLevels.None);
             
+            DebugManager.SetScriptDebugLevel<PanelGamePause>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<PanelGameManager>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<PanelGameHud>(DebugManager.DebugLevels.All);
             
             //Audios
             DebugManager.SetScriptDebugLevel<AudioManager>(DebugManager.DebugLevels.None);
@@ -62,7 +66,7 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<GameOptionsSave>(DebugManager.DebugLevels.None);
             
             //Inputs
-            DebugManager.SetScriptDebugLevel<ActionManager>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<ActionManager>(DebugManager.DebugLevels.All);
             
             //PoolManager
             DebugManager.SetScriptDebugLevel<PoolObject>(DebugManager.DebugLevels.LogsAndWarnings);

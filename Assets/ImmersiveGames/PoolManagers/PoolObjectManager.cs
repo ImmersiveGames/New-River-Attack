@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ImmersiveGames.BulletsManagers;
+using ImmersiveGames.DebugManagers;
 using UnityEngine;
 using ImmersiveGames.PoolManagers.Interface;
 
@@ -22,7 +23,7 @@ namespace ImmersiveGames.PoolManagers
         public GameObject GetObjectFromPool<T>(string poolName, Transform spawnPosition, BulletData bulletData) where T : IPoolable
         {
             if (_objectPools.TryGetValue(poolName, out var pool)) return pool.GetObject(spawnPosition, bulletData);
-            Debug.LogError($"Pool {poolName} não encontrado!");
+            DebugManager.LogError<PoolObjectManager>($"Pool {poolName} não encontrado!");
             return null;
         }
 

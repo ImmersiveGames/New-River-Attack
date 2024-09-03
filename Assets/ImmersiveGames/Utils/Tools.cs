@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ImmersiveGames.DebugManagers;
 using NewRiverAttack.ObstaclesSystems;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -184,7 +185,7 @@ namespace ImmersiveGames.Utils
         {
             if (animator == null || animator.runtimeAnimatorController == null)
             {
-                Debug.LogWarning("Animator or Animator Controller not set. Unable to get animation duration.");
+                DebugManager.LogWarning<Tools>("Animator or Animator Controller not set. Unable to get animation duration.");
                 return 0f;
             }
 
@@ -195,7 +196,7 @@ namespace ImmersiveGames.Utils
                 return clip.length;
             }
 
-            Debug.LogWarning($"Animation clip '{animationName}' not found in the animator controller.");
+            DebugManager.LogWarning<Tools>($"Animation clip '{animationName}' not found in the animator controller.");
             return 0f;
             
         }

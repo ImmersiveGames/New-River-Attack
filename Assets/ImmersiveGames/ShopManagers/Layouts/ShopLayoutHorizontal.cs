@@ -1,4 +1,5 @@
-﻿using ImmersiveGames.ShopManagers.Interfaces;
+﻿using ImmersiveGames.DebugManagers;
+using ImmersiveGames.ShopManagers.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,7 +25,7 @@ namespace ImmersiveGames.ShopManagers.Layouts
             }
             else
             {
-                Debug.LogError("O prefab não possui um RectTransform.");
+                DebugManager.LogError<ShopLayoutHorizontal>("O prefab não possui um RectTransform.");
             }
 
             horizontalLayoutGroup.padding.left = horizontalLayoutGroup.padding.right = 0;
