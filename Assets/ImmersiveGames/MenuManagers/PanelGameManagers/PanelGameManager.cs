@@ -24,18 +24,11 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
         private void OnEnable()
         {
             SetInitialReferences();
-            _gamePlayManager.EventGameReady += SetHudMenu;
-            
-        }
-
-        private void SetHudMenu()
-        {
-            //InputGameManager.ActionManager.ActivateActionMap(ActionManager.GameActionMaps.Player);
         }
 
         private void OnDisable()
         {
-            _gamePlayManager.EventGameReady -= SetHudMenu;
+
         }
 
         #endregion

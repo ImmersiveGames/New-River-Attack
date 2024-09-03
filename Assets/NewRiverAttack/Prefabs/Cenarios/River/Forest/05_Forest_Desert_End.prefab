@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1286329887760718, guid: 062c131aff35dd94fbeafec0874a5848, type: 3}
       propertyPath: m_Name
-      value: 05_Forest_Desert Variant
+      value: 05_Forest_Desert_End
       objectReference: {fileID: 0}
     - target: {fileID: 4261858059484830, guid: 062c131aff35dd94fbeafec0874a5848, type: 3}
       propertyPath: m_LocalPosition.x
@@ -52,15 +52,43 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6738649188579969164, guid: 062c131aff35dd94fbeafec0874a5848, type: 3}
+    - {fileID: 4133737457947483981, guid: 062c131aff35dd94fbeafec0874a5848, type: 3}
+    - {fileID: 1614983642205563031, guid: 062c131aff35dd94fbeafec0874a5848, type: 3}
+    - {fileID: 7005333556030095375, guid: 062c131aff35dd94fbeafec0874a5848, type: 3}
+    - {fileID: 8869328406164833217, guid: 062c131aff35dd94fbeafec0874a5848, type: 3}
+    - {fileID: 4775741029366037250, guid: 062c131aff35dd94fbeafec0874a5848, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4261858059484830, guid: 062c131aff35dd94fbeafec0874a5848,
         type: 3}
       insertIndex: 0
       addedObject: {fileID: 2136512404814885442}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1286329887760718, guid: 062c131aff35dd94fbeafec0874a5848,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8177990332776701339}
   m_SourcePrefab: {fileID: 100100000, guid: 062c131aff35dd94fbeafec0874a5848, type: 3}
+--- !u!1 &540909384373216332 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1286329887760718, guid: 062c131aff35dd94fbeafec0874a5848,
+    type: 3}
+  m_PrefabInstance: {fileID: 541878711180035330}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8177990332776701339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540909384373216332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0de2bb53686f429d90f5aaad6a13c13c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &543255442030885788 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4261858059484830, guid: 062c131aff35dd94fbeafec0874a5848,

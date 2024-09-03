@@ -84,7 +84,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1569771552930710, guid: 31c2dea2ee11bec42b7d05e277084afd, type: 3}
       propertyPath: m_Name
-      value: 04_AC_Forest_River Variant
+      value: 04_AC_Forest_River_End
       objectReference: {fileID: 0}
     - target: {fileID: 4060476623273856, guid: 31c2dea2ee11bec42b7d05e277084afd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -126,15 +126,43 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9156281445241839521, guid: 31c2dea2ee11bec42b7d05e277084afd, type: 3}
+    - {fileID: 4664688904019606502, guid: 31c2dea2ee11bec42b7d05e277084afd, type: 3}
+    - {fileID: 397243091865326522, guid: 31c2dea2ee11bec42b7d05e277084afd, type: 3}
+    - {fileID: 7380392755976224635, guid: 31c2dea2ee11bec42b7d05e277084afd, type: 3}
+    - {fileID: 6168626332474037373, guid: 31c2dea2ee11bec42b7d05e277084afd, type: 3}
+    - {fileID: 8517963537752073455, guid: 31c2dea2ee11bec42b7d05e277084afd, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4060476623273856, guid: 31c2dea2ee11bec42b7d05e277084afd,
         type: 3}
       insertIndex: 0
       addedObject: {fileID: 6834116274539717241}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1569771552930710, guid: 31c2dea2ee11bec42b7d05e277084afd,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3875916591143329830}
   m_SourcePrefab: {fileID: 100100000, guid: 31c2dea2ee11bec42b7d05e277084afd, type: 3}
+--- !u!1 &7903887128627581206 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1569771552930710, guid: 31c2dea2ee11bec42b7d05e277084afd,
+    type: 3}
+  m_PrefabInstance: {fileID: 7905414684863064704}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3875916591143329830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7903887128627581206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0de2bb53686f429d90f5aaad6a13c13c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7907124943565149440 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4060476623273856, guid: 31c2dea2ee11bec42b7d05e277084afd,

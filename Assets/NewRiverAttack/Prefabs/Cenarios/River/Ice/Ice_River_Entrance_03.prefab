@@ -549,7 +549,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4259402657665478}
-  - component: {fileID: 3828575349092041561}
   m_Layer: 8
   m_Name: Linha_01
   m_TagString: Untagged
@@ -583,18 +582,6 @@ Transform:
   - {fileID: 4382022225403174}
   m_Father: {fileID: 4965787462029094}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3828575349092041561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1078859901033944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b0b6b3ac79ca68448fad170fdb4b71d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1105146738322132
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,6 +591,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4965787462029094}
+  - component: {fileID: 4411345241715879583}
   m_Layer: 8
   m_Name: Ice_River_Entrance_03
   m_TagString: Untagged
@@ -634,6 +622,18 @@ Transform:
   - {fileID: 4285769493344240948}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4411345241715879583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105146738322132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0de2bb53686f429d90f5aaad6a13c13c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1115778276058188
 GameObject:
   m_ObjectHideFlags: 0
@@ -5837,7 +5837,7 @@ GameObject:
   - component: {fileID: 7744564920637169873}
   - component: {fileID: 4070554209859099466}
   - component: {fileID: 9101954197774734143}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (3)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -5920,7 +5920,7 @@ GameObject:
   - component: {fileID: 6771083200852977190}
   - component: {fileID: 611741843078909925}
   - component: {fileID: 282224932466737035}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (4)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6001,7 +6001,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4285769493344240948}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Extra_Margins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6040,7 +6040,7 @@ GameObject:
   - component: {fileID: 3808685217335209885}
   - component: {fileID: 2756751360059456314}
   - component: {fileID: 1354669718587253823}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (4)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6123,7 +6123,7 @@ GameObject:
   - component: {fileID: 6961059897296148336}
   - component: {fileID: 2301331173170073325}
   - component: {fileID: 831882237987132984}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (5)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6206,7 +6206,7 @@ GameObject:
   - component: {fileID: 6668018032251412224}
   - component: {fileID: 1907778891450572824}
   - component: {fileID: 6867703340122222505}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6289,7 +6289,7 @@ GameObject:
   - component: {fileID: 4506828349547576549}
   - component: {fileID: 4474683884581549706}
   - component: {fileID: 7657989272862354752}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (5)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6372,7 +6372,7 @@ GameObject:
   - component: {fileID: 867066106051879910}
   - component: {fileID: 7551707017966748183}
   - component: {fileID: 1384054155712593322}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (4)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6455,7 +6455,7 @@ GameObject:
   - component: {fileID: 5757437674221530854}
   - component: {fileID: 7003711514721798601}
   - component: {fileID: 8800601245514057818}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (5)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6536,7 +6536,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2815527269205255389}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6575,7 +6575,7 @@ GameObject:
   - component: {fileID: 5272104575385883382}
   - component: {fileID: 1939549802519924723}
   - component: {fileID: 117195406407547307}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6658,7 +6658,7 @@ GameObject:
   - component: {fileID: 5015554602344961526}
   - component: {fileID: 7763893483270839209}
   - component: {fileID: 1888743917156085074}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6741,7 +6741,7 @@ GameObject:
   - component: {fileID: 5667699860599419906}
   - component: {fileID: 1751404178292583302}
   - component: {fileID: 2551723573965259339}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6822,7 +6822,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2945285069966226533}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6859,7 +6859,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2809757721210787886}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6898,7 +6898,7 @@ GameObject:
   - component: {fileID: 515475778240339311}
   - component: {fileID: 1249356583425080256}
   - component: {fileID: 3762946726194526147}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -6981,7 +6981,7 @@ GameObject:
   - component: {fileID: 2469006527104449730}
   - component: {fileID: 6577690103596772621}
   - component: {fileID: 6749717440435812681}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7064,7 +7064,7 @@ GameObject:
   - component: {fileID: 2003658961847811864}
   - component: {fileID: 7666092010548434594}
   - component: {fileID: 4158232377126400979}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7147,7 +7147,7 @@ GameObject:
   - component: {fileID: 9023583037410309828}
   - component: {fileID: 557177033201888648}
   - component: {fileID: 1799555695986425665}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7230,7 +7230,7 @@ GameObject:
   - component: {fileID: 5876096787012706602}
   - component: {fileID: 1168859186602404233}
   - component: {fileID: 117100646275357911}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (5)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7313,7 +7313,7 @@ GameObject:
   - component: {fileID: 147579601251630528}
   - component: {fileID: 3008252315737835571}
   - component: {fileID: 7142559497268446153}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7396,7 +7396,7 @@ GameObject:
   - component: {fileID: 8401236828397355123}
   - component: {fileID: 3999974069567580153}
   - component: {fileID: 813224452435015172}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (3)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7479,7 +7479,7 @@ GameObject:
   - component: {fileID: 4003692432076912077}
   - component: {fileID: 4339258921018554858}
   - component: {fileID: 3893305299283862216}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (3)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7562,7 +7562,7 @@ GameObject:
   - component: {fileID: 7578817011977427208}
   - component: {fileID: 1090466273045934986}
   - component: {fileID: 5655045514348713314}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (4)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7645,7 +7645,7 @@ GameObject:
   - component: {fileID: 6768323308480870133}
   - component: {fileID: 1479723558834759087}
   - component: {fileID: 7050620180009359728}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (4)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7728,7 +7728,7 @@ GameObject:
   - component: {fileID: 2547555365834992154}
   - component: {fileID: 4211839891021254169}
   - component: {fileID: 5521970622766608992}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (3)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7811,7 +7811,7 @@ GameObject:
   - component: {fileID: 6315548551059102050}
   - component: {fileID: 8318451922317563523}
   - component: {fileID: 5357563288661844510}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7894,7 +7894,7 @@ GameObject:
   - component: {fileID: 6928191928523255279}
   - component: {fileID: 3002991023357381439}
   - component: {fileID: 7226650727176541165}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -7977,7 +7977,7 @@ GameObject:
   - component: {fileID: 7301731311135063984}
   - component: {fileID: 2421360653901390135}
   - component: {fileID: 2564394999565451909}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8060,7 +8060,7 @@ GameObject:
   - component: {fileID: 3381297689705434576}
   - component: {fileID: 8800670501121480534}
   - component: {fileID: 7292841773102658781}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (3)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8143,7 +8143,7 @@ GameObject:
   - component: {fileID: 8905222280157950132}
   - component: {fileID: 5097802518957894299}
   - component: {fileID: 1313525218402398219}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8226,7 +8226,7 @@ GameObject:
   - component: {fileID: 7449018439906661072}
   - component: {fileID: 2097262437152228208}
   - component: {fileID: 3468634883102965208}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (5)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8309,7 +8309,7 @@ GameObject:
   - component: {fileID: 124502835799792258}
   - component: {fileID: 8326880434886384121}
   - component: {fileID: 7654086701961339536}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (3)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8392,7 +8392,7 @@ GameObject:
   - component: {fileID: 4937714584853429520}
   - component: {fileID: 1390388476794685169}
   - component: {fileID: 8995710012349814461}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (4)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8475,7 +8475,7 @@ GameObject:
   - component: {fileID: 6418280733769571707}
   - component: {fileID: 4092740165944158890}
   - component: {fileID: 2270109560436536898}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8556,7 +8556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 289100225769743659}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8593,7 +8593,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1449419769510964628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8632,7 +8632,7 @@ GameObject:
   - component: {fileID: 2047024181449576940}
   - component: {fileID: 9107759011235642226}
   - component: {fileID: 8828043817853344523}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8715,7 +8715,7 @@ GameObject:
   - component: {fileID: 2660104647297771343}
   - component: {fileID: 2406935337807448134}
   - component: {fileID: 7940420652195739847}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8798,7 +8798,7 @@ GameObject:
   - component: {fileID: 8324989330010118032}
   - component: {fileID: 976556212816238572}
   - component: {fileID: 6377552916358562579}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (5)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8881,7 +8881,7 @@ GameObject:
   - component: {fileID: 6838341249906562788}
   - component: {fileID: 414796088245158761}
   - component: {fileID: 3210630263854704039}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -8962,7 +8962,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8896391998071383408}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9001,7 +9001,7 @@ GameObject:
   - component: {fileID: 3932747427820807588}
   - component: {fileID: 6536723160279478920}
   - component: {fileID: 1374180018455362211}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ice_Base (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}

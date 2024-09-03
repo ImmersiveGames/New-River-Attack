@@ -15,15 +15,21 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
             GamePlayManager.instance.EventGameReady += SetHudMenu;
             GamePlayManager.instance.EventGameUnPause += SetHudMenu;
         }
-        
+
+        private void OnDisable()
+        {
+
+        }
+
         private void SetHudMenu()
         {
             gameObject.SetActive(true);
-            InputGameManager.RegisterAction("Pause", StartPauseMenu );
+            InputGameManager.RegisterAction("PauseGame", StartPauseMenu );
         }
         private void StartPauseMenu(InputAction.CallbackContext obj)
         {
             DebugManager.Log<PanelGameHud>("CALL PAUSE");
+            gameObject.SetActive(false);
             GamePlayManager.instance.OnEventGamePause();
         }
         /*#region UnityMethods

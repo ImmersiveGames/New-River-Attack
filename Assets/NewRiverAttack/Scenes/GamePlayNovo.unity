@@ -262,10 +262,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 981348268}
-        m_TargetAssemblyTypeName: ImmersiveGames.MenuManagers.MenuGamePauseManager,
+      - m_Target: {fileID: 1396477618}
+        m_TargetAssemblyTypeName: ImmersiveGames.MenuManagers.PanelGameManagers.PanelGamePause,
           Assembly-CSharp
-        m_MethodName: ButtonUnPause
+        m_MethodName: ButtonContinue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3945,10 +3945,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 981348268}
-        m_TargetAssemblyTypeName: ImmersiveGames.MenuManagers.MenuGamePauseManager,
+      - m_Target: {fileID: 1396477618}
+        m_TargetAssemblyTypeName: ImmersiveGames.MenuManagers.PanelGameManagers.PanelGamePause,
           Assembly-CSharp
-        m_MethodName: ButtonExitGame
+        m_MethodName: ButtonReturnMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5652,7 +5652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 1270420458}
+  m_FirstSelected: {fileID: 81306928}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!1 &1396477612
@@ -5796,6 +5796,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862ad1acb3754f67937853f4bd961a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cursor: {fileID: 596098403}
+  menus:
+  - {fileID: 81306934}
+  - {fileID: 888236015}
 --- !u!1 &1445953297
 GameObject:
   m_ObjectHideFlags: 3

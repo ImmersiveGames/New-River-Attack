@@ -57,7 +57,7 @@ namespace ImmersiveGames
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pause"",
+                    ""name"": ""PauseGame"",
                     ""type"": ""Button"",
                     ""id"": ""1f4253a5-5081-4ef8-a36f-cfc07c42ee46"",
                     ""expectedControlType"": ""Button"",
@@ -426,7 +426,7 @@ namespace ImmersiveGames
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC;Mobile"",
-                    ""action"": ""Pause"",
+                    ""action"": ""PauseGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -437,7 +437,7 @@ namespace ImmersiveGames
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC"",
-                    ""action"": ""Pause"",
+                    ""action"": ""PauseGame"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1161,7 +1161,7 @@ namespace ImmersiveGames
             m_Player_Axis_Move = m_Player.FindAction("Axis_Move", throwIfNotFound: true);
             m_Player_Bomb = m_Player.FindAction("Bomb", throwIfNotFound: true);
             m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
-            m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+            m_Player_PauseGame = m_Player.FindAction("PauseGame", throwIfNotFound: true);
             // UiControls
             m_UiControls = asset.FindActionMap("UiControls", throwIfNotFound: true);
             m_UiControls_LeftSelection = m_UiControls.FindAction("LeftSelection", throwIfNotFound: true);
@@ -1253,7 +1253,7 @@ namespace ImmersiveGames
         private readonly InputAction m_Player_Axis_Move;
         private readonly InputAction m_Player_Bomb;
         private readonly InputAction m_Player_Shoot;
-        private readonly InputAction m_Player_Pause;
+        private readonly InputAction m_Player_PauseGame;
         public struct PlayerActions
         {
             private @PlayersInputActions m_Wrapper;
@@ -1261,7 +1261,7 @@ namespace ImmersiveGames
             public InputAction @Axis_Move => m_Wrapper.m_Player_Axis_Move;
             public InputAction @Bomb => m_Wrapper.m_Player_Bomb;
             public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
-            public InputAction @Pause => m_Wrapper.m_Player_Pause;
+            public InputAction @PauseGame => m_Wrapper.m_Player_PauseGame;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1280,9 +1280,9 @@ namespace ImmersiveGames
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
-                @Pause.started += instance.OnPause;
-                @Pause.performed += instance.OnPause;
-                @Pause.canceled += instance.OnPause;
+                @PauseGame.started += instance.OnPauseGame;
+                @PauseGame.performed += instance.OnPauseGame;
+                @PauseGame.canceled += instance.OnPauseGame;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -1296,9 +1296,9 @@ namespace ImmersiveGames
                 @Shoot.started -= instance.OnShoot;
                 @Shoot.performed -= instance.OnShoot;
                 @Shoot.canceled -= instance.OnShoot;
-                @Pause.started -= instance.OnPause;
-                @Pause.performed -= instance.OnPause;
-                @Pause.canceled -= instance.OnPause;
+                @PauseGame.started -= instance.OnPauseGame;
+                @PauseGame.performed -= instance.OnPauseGame;
+                @PauseGame.canceled -= instance.OnPauseGame;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1665,7 +1665,7 @@ namespace ImmersiveGames
             void OnAxis_Move(InputAction.CallbackContext context);
             void OnBomb(InputAction.CallbackContext context);
             void OnShoot(InputAction.CallbackContext context);
-            void OnPause(InputAction.CallbackContext context);
+            void OnPauseGame(InputAction.CallbackContext context);
         }
         public interface IUiControlsActions
         {
