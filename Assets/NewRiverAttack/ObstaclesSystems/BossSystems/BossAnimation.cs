@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using ImmersiveGames.Utils;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
@@ -119,7 +120,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         public float GetSubmergeTime()
         {
-            return Utils.Tools.GetAnimationDuration(_animator, onSubmerge);
+            return Tools.GetAnimationDuration(_animator, onSubmerge);
         }
     }
 }
