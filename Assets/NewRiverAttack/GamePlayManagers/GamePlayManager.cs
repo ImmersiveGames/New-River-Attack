@@ -5,9 +5,7 @@ using System.Linq;
 using ImmersiveGames;
 using ImmersiveGames.CameraManagers;
 using ImmersiveGames.DebugManagers;
-using ImmersiveGames.Utils;
 using NewRiverAttack.GameManagers;
-using NewRiverAttack.GamePlayManagers.GamePlayLogs;
 using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.HUBManagers;
 using NewRiverAttack.LevelBuilder;
@@ -17,7 +15,6 @@ using NewRiverAttack.SaveManagers;
 using NewRiverAttack.StateManagers;
 using NewRiverAttack.StateManagers.States;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace NewRiverAttack.GamePlayManagers
 {
@@ -27,8 +24,7 @@ namespace NewRiverAttack.GamePlayManagers
 
         [Header("Default Layers")]
         public LayerMask layerEnemies;
-        [FormerlySerializedAs("gamePlayLog")] [Header("GameLog"), SerializeField]
-        private GemeStatisticsDataLog gemeStatisticsDataLog;
+
         
         internal bool IsBossFight;
         internal bool IsPause;
@@ -61,6 +57,7 @@ namespace NewRiverAttack.GamePlayManagers
         public event GamePlayGeneralEventHandler EventGameFinisher;
         public event GamePlayGeneralEventHandler EventGamePause;
         public event GamePlayGeneralEventHandler EventGameUnPause;
+        public event GamePlayGeneralEventHandler EventGameReload;
         public delegate void GamePlayHudFloatEventHandler(float valueUpdate, int playerIndex);
         public event GamePlayHudFloatEventHandler EventHudRapidFireUpdate;
         public event GamePlayHudFloatEventHandler EventHudRapidFireEnd;
@@ -102,7 +99,6 @@ namespace NewRiverAttack.GamePlayManagers
             _gameManager = GameManager.instance;
             _gameOptionsSave = GameOptionsSave.instance;
             _levelBuilderManager = LevelBuilderManager.Instance;
-            gemeStatisticsDataLog = GemeStatisticsDataLog.instance;
         }
 
         private void Start()
@@ -142,7 +138,7 @@ namespace NewRiverAttack.GamePlayManagers
             DebugManager.Log<GamePlayManager>($"Inicializando Jogadores");
 
             var rotationQuaternion = Quaternion.Euler(playersDefaultSettings.spawnRotation);
-
+            DestroyPlayers();
             for (var index = 0; index < _gameOptionsSave.playerSettings.Length; index++)
             {
                 var playerSetting = GameOptionsSave.instance.playerSettings[index];
@@ -272,7 +268,7 @@ namespace NewRiverAttack.GamePlayManagers
 
         #region Calls
 
-        private void OnEventPlayerInitialize(PlayerMaster playerMaster)
+        public void OnEventPlayerInitialize(PlayerMaster playerMaster)
         {
             EventPlayerInitialize?.Invoke(playerMaster);
         }
@@ -345,6 +341,21 @@ namespace NewRiverAttack.GamePlayManagers
         {
             EventGameFinisher?.Invoke();
         }
+        internal void OnEventGameReload()
+        {
+            IsPause = false;
+            
+            CameraManager.ActiveEndCamera(false);
+            _levelBuilderManager.CleanUpLevel();
+            SetGameMode();
+            InitializePlayers(allPlayersDefaultSettings);
+            GameManager.StateManager.ForceChangeState(StatesNames.GameStatePlay.ToString());
+            
+            EventGameReload?.Invoke();
+        }
         #endregion
+
+
+        
     }
 }

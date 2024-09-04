@@ -17,6 +17,20 @@ namespace ImmersiveGames.StateManagers
             _states[state.StateName] = state;
         }
 
+        public void ForceChangeState(string stateName)
+        {
+            if (!_states.TryGetValue(stateName, out var nextState))
+            {
+                DebugManager.LogError<StateManager>($"Estado não encontrado: {stateName}");
+                return;
+            }
+            AudioManager.instance.PlayBGM(nextState);
+            _currentState.ExitAsync(nextState);
+            _previousState = _currentState;
+            _currentState = nextState;
+            _currentState.EnterAsync(_previousState);
+        }
+
         public async Task ChangeStateAsync(string stateName)
         {
             if (!_states.TryGetValue(stateName, out var nextState))

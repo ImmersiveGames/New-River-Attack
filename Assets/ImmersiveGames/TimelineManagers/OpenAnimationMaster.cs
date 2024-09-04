@@ -12,12 +12,14 @@ namespace ImmersiveGames.TimelineManagers
             SetInitialReferences();
             GamePlayManagerRef.EventPlayerInitialize += SetupTimeline;
             GamePlayManagerRef.EventPostStateGameInitialize += PlayTimeline;
+            GamePlayManagerRef.EventGameReload += ResetTimeLine;
         }
 
         private void OnDestroy()
         {
             GamePlayManagerRef.EventPlayerInitialize -= SetupTimeline;
             GamePlayManagerRef.EventPostStateGameInitialize -= PlayTimeline;
+            GamePlayManagerRef.EventGameReload -= ResetTimeLine;
         }
 
         private void SetupTimeline(PlayerMaster playerMaster)
@@ -31,6 +33,11 @@ namespace ImmersiveGames.TimelineManagers
         {
             base.SetInitialReferences();
             VirtualCamera.Priority = 10;
+        }
+        private void ResetTimeLine()
+        {
+            VirtualCamera.Priority = 10;
+            PlayTimeline();
         }
 
         public void DisableAnimation()

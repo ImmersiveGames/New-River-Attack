@@ -24,6 +24,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         {
             SetInitialReferences();
             GamePlayManagerRef.EventPostStateGameInitialize += InitializeObject;
+            GamePlayManagerRef.EventGameReady += InitializeObject;
             DebugManager.Log<ObjectMaster>($"Enable - {gameObject.name}");
             IsDisable = true;
             IsDead = false;
@@ -38,6 +39,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         protected virtual void OnDisable()
         {
             GamePlayManagerRef.EventPostStateGameInitialize -= InitializeObject;
+            GamePlayManagerRef.EventGameReady -= InitializeObject;
         }
 
         #endregion

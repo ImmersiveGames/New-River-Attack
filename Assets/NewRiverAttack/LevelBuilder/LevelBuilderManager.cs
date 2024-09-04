@@ -276,6 +276,14 @@ namespace NewRiverAttack.LevelBuilder
             activeObjects = new List<ScenarioObjectData>();
         }
 
+        public void CleanUpLevel()
+        {
+            DestroyImmediate(_setsContainer);
+            DestroyImmediate(_initialSegmentObject);
+            _initialSegmentInstantiated = false;
+            activeObjects = new List<ScenarioObjectData>();
+        }
+
 
         // Função para remover os inimigos de forma segura
         private void CleanupEnemies(GameObject enemySetToRemove)
