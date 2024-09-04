@@ -11,7 +11,7 @@ using UnityEngine.Serialization;
 
 namespace NewRiverAttack.HUBManagers
 {
-    public sealed class HubGameManager : Singleton<HubGameManager>
+    public sealed class HubGameManager : MonoBehaviour
     {
         [Header("HUB Icon Color")] public readonly Color LockedColor = Color.red;
         public readonly Color ActualColor = new Color(255, 255, 0, 255);
@@ -27,6 +27,8 @@ namespace NewRiverAttack.HUBManagers
         private const float WaitMove = 1f;
 
         private UiHubPlayer _playerHub;
+        public static HubGameManager Instance { get; private set; }
+        
 
         #region Delegates & Events
         
@@ -38,7 +40,19 @@ namespace NewRiverAttack.HUBManagers
         
 
         #region Unity Methods
-
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+                DebugManager.Log<HubGameManager>("HubGameManager instanciado.");
+            }
+            else
+            {
+                Destroy(gameObject);
+                DebugManager.LogWarning<HubGameManager>("Tentativa de criar uma segunda instância de SteamStatsService foi evitada.");
+            }
+        }
         private void Start()
         {
             IsHubReady = false;

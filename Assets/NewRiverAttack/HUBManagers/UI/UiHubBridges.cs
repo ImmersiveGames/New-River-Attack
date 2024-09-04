@@ -36,7 +36,7 @@ namespace NewRiverAttack.HUBManagers.UI
 
         private void SetInitialReferences()
         {
-            _hubGameManager = HubGameManager.instance;
+            _hubGameManager = HubGameManager.Instance;
             _audioSource = GetComponent<AudioSource>();
         }
 

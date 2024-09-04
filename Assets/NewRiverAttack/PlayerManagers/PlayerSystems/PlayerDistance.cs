@@ -64,7 +64,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
                 GameStatisticManager.instance.LogAmountDistance(_totalAccumulatedDistance);
 
                 // Converte a distância total acumulada em um valor inteiro com base na conversão
-                var convertDistanceInt = Mathf.FloorToInt(_distanceThisAttempt / GemeStatisticsDataLog.instance.baseConversion);
+                var convertDistanceInt = Mathf.FloorToInt(_distanceThisAttempt / GemeStatisticsDataLog.BaseConversion);
                 _gamePlayManager.OnEventHudDistanceUpdate(convertDistanceInt, _playerMaster.PlayerIndex);
             }
             _lastPosition = transform.position.z;

@@ -50,12 +50,12 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<PanelResolutionOptions>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<AbstractMenuManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<MainMenu>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<GameStartMenu>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<MenuGamePauseManager>(DebugManager.DebugLevels.All);
+
             
             DebugManager.SetScriptDebugLevel<PanelGamePause>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<PanelGameManager>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<PanelGameHud>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<PanelGameOver>(DebugManager.DebugLevels.All);
             
             //Audios
             DebugManager.SetScriptDebugLevel<AudioManager>(DebugManager.DebugLevels.None);

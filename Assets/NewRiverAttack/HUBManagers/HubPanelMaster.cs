@@ -32,7 +32,7 @@ namespace NewRiverAttack.HUBManagers
         {
             SetInitialReferences();
             _inInvoke = false;
-            InputGameManager.ActionManager.ActivateActionMap(ActionManager.GameActionMaps.UiControls);
+            InputGameManager.ActionManager.ActivateActionMap(ActionManager.GameActionMaps.HubControl);
             InputGameManager.RegisterAction("StartButton", ButtonStartMission );
             InputGameManager.RegisterAction("BackButton", BackToMenu );
             InputGameManager.RegisterAction("RightSelection", GoRight );
@@ -103,7 +103,7 @@ namespace NewRiverAttack.HUBManagers
 
         private void SetInitialReferences()
         {
-            _hubGameManager = HubGameManager.instance;
+            _hubGameManager = HubGameManager.Instance;
             _gameManager = GameManager.instance;
 
         }

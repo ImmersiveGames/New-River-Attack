@@ -68,6 +68,7 @@ namespace NewRiverAttack.GameStatisticsSystem
         internal void LogDistance(int distance)
         {
             LogMaxDistance(distance);
+            if(_gemeStatisticsDataLog == null) return;
             if (_gemeStatisticsDataLog.amountDistance % 500 == 0)
             {
                 OnEventServiceSet("stat_FlightDistance", _gemeStatisticsDataLog.amountDistance);
@@ -76,12 +77,14 @@ namespace NewRiverAttack.GameStatisticsSystem
 
         private void LogMaxDistance(int intValue)
         {
+            if(_gemeStatisticsDataLog == null) return;
             _gemeStatisticsDataLog.playerMaxDistance = Mathf.Max(_gemeStatisticsDataLog.playerMaxDistance, intValue);
             DebugManager.Log<GameStatisticManager>($"Log Offline MAX Distance: {_gemeStatisticsDataLog.playerMaxDistance}");
         }
 
         public void LogShoots(int intValue)
         {
+            if(_gemeStatisticsDataLog == null) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersShoots, intValue);
             if (_gemeStatisticsDataLog.playersShoots % 100 == 0)
             {
@@ -91,6 +94,7 @@ namespace NewRiverAttack.GameStatisticsSystem
 
         public void LogBombs(int intValue)
         {
+            if(_gemeStatisticsDataLog == null) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersBombs, intValue);
             if (_gemeStatisticsDataLog.playersBombs % 100 == 0)
             {
@@ -99,6 +103,7 @@ namespace NewRiverAttack.GameStatisticsSystem
         }
         public void LogFuelSpend(float floatValue)
         {
+            if(_gemeStatisticsDataLog == null) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.fuelSpent, floatValue);
             if (Mathf.Abs(_gemeStatisticsDataLog.fuelSpent % 1000) < Epsilon || Mathf.Abs(1000 - (_gemeStatisticsDataLog.fuelSpent % 1000)) < Epsilon)
             {
@@ -107,6 +112,7 @@ namespace NewRiverAttack.GameStatisticsSystem
         }
         public void LogFuelCharge(float floatValue)
         {
+            if(_gemeStatisticsDataLog == null) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.fuelCharge, floatValue);
             if (Mathf.Abs(_gemeStatisticsDataLog.fuelCharge % 100) < Epsilon || Mathf.Abs(100 - (_gemeStatisticsDataLog.fuelCharge % 100)) < Epsilon)
             {
@@ -115,12 +121,14 @@ namespace NewRiverAttack.GameStatisticsSystem
         }
         public void LogDeaths(int intValue)
         {
+            if(_gemeStatisticsDataLog == null) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playerDeaths, intValue);
             OnEventServiceSet("stat_Deaths", _gemeStatisticsDataLog.playerDeaths);
         }
 
         public void LogCollision(Component other)
         {
+            if(_gemeStatisticsDataLog == null) return;
             // Testa se o componente é do tipo WallMaster
             if (other.GetComponentInParent<WallMaster>())
             {
@@ -143,6 +151,7 @@ namespace NewRiverAttack.GameStatisticsSystem
         
         public void LogFuelOut(int intValue)
         {
+            if(_gemeStatisticsDataLog == null) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersDieFuelOut, intValue);
             OnEventServiceSet("stat_FuelOut", _gemeStatisticsDataLog.playersDieFuelOut);
         }
@@ -164,6 +173,7 @@ namespace NewRiverAttack.GameStatisticsSystem
         }
         public void LogTimeRapidFire(float floatValue)
         {
+            if(_gemeStatisticsDataLog == null) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersTimeRapidFire, floatValue);
             if (Mathf.Abs(_gemeStatisticsDataLog.playersTimeRapidFire % 100) < Epsilon || Mathf.Abs(100 - (_gemeStatisticsDataLog.playersTimeRapidFire % 100)) < Epsilon)
             {
@@ -173,17 +183,20 @@ namespace NewRiverAttack.GameStatisticsSystem
         
         public void LogBombsHit(int intValue)
         {
+            if(_gemeStatisticsDataLog == null) return;
             _gemeStatisticsDataLog.playersBombHit = Mathf.Max(_gemeStatisticsDataLog.playersBombHit, intValue);
             OnEventServiceSet("stat_BombHit", _gemeStatisticsDataLog.playersBombHit);
         }
 
         public void LogEnemiesHit(PlayerSettings player, ObjectsScriptable enemy, int quantity, EnumCollisionType collision)
         {
+            if(_gemeStatisticsDataLog == null) return;
             _gemeStatisticsDataLog.AddOrUpdateStatisticHit(player,enemy, quantity,collision);
         }
 
         internal void OnEventServiceUpdate()
         {
+            if(_gemeStatisticsDataLog == null) return;
             DebugManager.Log<GameStatisticManager>($"Service Update");
             OnEventServiceSet("highScore", _gemeStatisticsDataLog.playerMaxScore);
             OnEventServiceSet("stat_FlightDistance", _gemeStatisticsDataLog.amountDistance);

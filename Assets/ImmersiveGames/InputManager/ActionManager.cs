@@ -57,16 +57,29 @@ namespace ImmersiveGames.InputManager
             ActivateActionMap(_lastGameActionMaps);
         }
 
+        public bool IsActiveActionMap(GameActionMaps actionMapName)
+        {
+            return _currentGameActionMaps == actionMapName;
+        }
+
         public void ActivateActionMap(GameActionMaps actionMapName)
         {
+            // Check if the requested action map is already active
+            if (_currentGameActionMaps == actionMapName)
+            {
+                DebugManager.Log<ActionManager>($"[Action Map] '{actionMapName}' is already active.");
+                return;
+            }
+
             _lastGameActionMaps = _currentGameActionMaps;
-            // Desativa todos os Action Maps
+
+            // Disable all action maps
             foreach (var actionMap in _inputActions.asset.actionMaps)
             {
                 actionMap.Disable();
             }
 
-            // Ativa o Action Map especificado
+            // Activate the requested action map
             var mapToActivate = _inputActions.asset.FindActionMap(actionMapName.ToString());
             if (mapToActivate != null)
             {
@@ -77,7 +90,8 @@ namespace ImmersiveGames.InputManager
             {
                 DebugManager.LogWarning<ActionManager>($"Action Map '{actionMapName}' not found.");
             }
-            DebugManager.Log<ActionManager>($"[Action Map] '{actionMapName}' Active.");
+
+            DebugManager.Log<ActionManager>($"[Action Map] '{actionMapName}' activated.");
         }
         
         #endregion
@@ -145,17 +159,17 @@ namespace ImmersiveGames.InputManager
             if (context.performed)
             {
                 completeName += "_Performed";
-                DebugManager.Log<ActionManager>($"Action {completeName} Performed in Performed");
+                //DebugManager.Log<ActionManager>($"Action {completeName} Performed in Performed");
             }
             else if (context.started)
             {
                 completeName += "_Start";
-                DebugManager.Log<ActionManager>($"Action {completeName} Performed in Started");
+                //DebugManager.Log<ActionManager>($"Action {completeName} Performed in Started");
             }
             else if (context.canceled)
             {
                 completeName += "_Cancel";
-                DebugManager.Log<ActionManager>($"Action {completeName} Performed in Cancel");
+                //DebugManager.Log<ActionManager>($"Action {completeName} Performed in Cancel");
             }
 
             if (!ActionListeners.TryGetValue(completeName, out var listener)) return;

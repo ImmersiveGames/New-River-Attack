@@ -80,7 +80,6 @@ namespace NewRiverAttack.GamePlayManagers
             if (Instance == null)
             {
                 Instance = this;
-                //DontDestroyOnLoad(gameObject);
                 DebugManager.Log<GamePlayManager>("GamePlayManager instanciado.");
             }
             else

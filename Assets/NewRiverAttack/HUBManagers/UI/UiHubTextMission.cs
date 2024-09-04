@@ -24,7 +24,7 @@ namespace NewRiverAttack.HUBManagers.UI
 
         private void SetInitialReferences()
         {
-            _hubGameManager = HubGameManager.instance;
+            _hubGameManager = HubGameManager.Instance;
             _text = GetComponent<TMP_Text>();
         }
         

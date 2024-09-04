@@ -52,7 +52,7 @@ namespace NewRiverAttack.HUBManagers
         private void SetInitialReferences()
         {
             _finishBuild = false;
-            _hubGameManager = HubGameManager.instance;
+            _hubGameManager = HubGameManager.Instance;
             _levelList = GameManager.instance.missionModeLevels;
             _listLevelDatas = _levelList.value;
         }

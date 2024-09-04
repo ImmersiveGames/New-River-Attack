@@ -32,7 +32,6 @@ namespace NewRiverAttack.LevelBuilder
             if (Instance == null)
             {
                 Instance = this;
-                //DontDestroyOnLoad(gameObject);
                 DebugManager.Log<LevelBuilderManager>("LevelBuilderManager instanciado.");
             }
             else
@@ -48,7 +47,6 @@ namespace NewRiverAttack.LevelBuilder
             _nextSegmentIndex = 0;
             // Criar container para os sets
             _setsContainer = new GameObject(data.levelNameLocale.GetLocalizedString());
-Debug.Log($"START:{data.pathStart}");
             InitialSegment(data.pathStart);
             var numStart = (_levelData.setLevelList.Count > startNumOfSegments) ? startNumOfSegments
                 : _levelData.setLevelList.Count;
@@ -154,12 +152,10 @@ Debug.Log($"START:{data.pathStart}");
                 _nextSegmentIndex++; // Incrementar o índice para o próximo segmento
             }
 
-            if (_nextSegmentIndex >= _levelData.setLevelList.Count && _levelData.pathEnd != null &&
-                activeObjects.Count > 0)
-            {
-                FinalSegment(_levelData.pathEnd);
-                DebugManager.Log<LevelBuilderManager>($"Segmento final instanciado: {_levelData.pathEnd.name}");
-            }
+            if (_nextSegmentIndex < _levelData.setLevelList.Count || _levelData.pathEnd == null ||
+                activeObjects.Count <= 0) return;
+            FinalSegment(_levelData.pathEnd);
+            DebugManager.Log<LevelBuilderManager>($"Segmento final instanciado: {_levelData.pathEnd.name}");
         }
 
         private void RemoveSegments(int startIndex, int count)

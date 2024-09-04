@@ -36,9 +36,7 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
         public float amountDistance;
         public int playersClassicPath;
         public int playersMissionPath;
-        [Header("Distance Settings")]
-        [Tooltip("Define quantas unidades de medida no eixo Z equivalem a 1 unidade de medida personalizada.")]
-        public int baseConversion = 20;
+        internal const int BaseConversion = 20;
 
         private List<GameStatisticHit> _listEnemyHit = new List<GameStatisticHit>();
         public string GetAmountDistance => $"{amountDistance:F2}";
@@ -167,7 +165,7 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
 
         public void SetAmountDistance(float amount)
         {
-            amountDistance = amount / baseConversion;
+            amountDistance = amount / BaseConversion;
             DebugManager.Log<GemeStatisticsDataLog>($"Distance converted to custom unit: {amountDistance:F2}");
         }
     }

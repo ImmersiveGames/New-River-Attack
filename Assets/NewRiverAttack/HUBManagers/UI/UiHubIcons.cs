@@ -26,7 +26,7 @@ namespace NewRiverAttack.HUBManagers.UI
         private void SetInitialReferences()
         {
             _missionIcon = GetComponentInChildren<Image>();
-            _hubGameManager = HubGameManager.instance;
+            _hubGameManager = HubGameManager.Instance;
         }
 
         private void OnDisable()

@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 
 namespace ImmersiveGames.MenuManagers
 {
-    public class MenuGamePauseManager: MonoBehaviour
+    /*public class MenuGamePauseManager: MonoBehaviour
     {
         [SerializeField] private Transform splashScreen;
         [SerializeField] private Transform menuPause;
@@ -18,7 +18,7 @@ namespace ImmersiveGames.MenuManagers
         [SerializeField] private Transform splashComplete;
 
         private GamePlayManager _gamePlayManager;
-        private GameStartMenu _gameStartMenu;
+        //private GameStartMenu _gameStartMenu;
 
         #region Unity Methods
 
@@ -48,7 +48,7 @@ namespace ImmersiveGames.MenuManagers
         private void SetInitialReferences()
         {
             _gamePlayManager = GamePlayManager.Instance;
-            _gameStartMenu = GetComponentInChildren<GameStartMenu>(true);
+            //_gameStartMenu = GetComponentInChildren<GameStartMenu>(true);
         }
 
         private void SetPauseMenu(bool onPause)
@@ -125,13 +125,13 @@ namespace ImmersiveGames.MenuManagers
             _gamePlayManager.OnEventGameUnPause();
             await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateMenuInitial.ToString()).ConfigureAwait(false);
         }
-        public async void ButtonRestart()
+        /*public async void ButtonRestart()
         {
             SetupInitial();
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
             await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStatePlay.ToString()).ConfigureAwait(false);
-        }
+        }#1#
 
         #endregion
-    }
+    }*/
 }

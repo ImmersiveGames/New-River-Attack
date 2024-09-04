@@ -15,36 +15,28 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
         private PanelGamePause _panelGamePause;
         private GamePlayManager _gamePlayManager;
 
-        #region Delegates
-
-        public delegate void PanelGameHandle();
-
-        public event PanelGameHandle EventPauseGame;
-        public event PanelGameHandle EventUnPauseGame;
-        public event PanelGameHandle EventHudGame;
-
-        #endregion
-
+        private bool _inLoad;
+        
         #region Unity Methods
 
         private void OnEnable()
         {
             SetInitialReferences();
+            InputGameManager.UnregisterAction("PauseGame", StartPauseMenu );
             InputGameManager.RegisterAction("PauseGame", StartPauseMenu );
             GamePlayManager.Instance.EventGameReady += SetHudMenu;
         }
 
-        private void OnDisable()
+        private void Start()
+        {
+            _inLoad = false;
+        }
+
+        private void OnDestroy()
         {
             GamePlayManager.Instance.EventGameReady -= SetHudMenu;
             InputGameManager.UnregisterAction("Pause", StartUnPauseMenu );
             InputGameManager.UnregisterAction("PauseGame", StartPauseMenu );
-        }
-
-        private void SetHudMenu()
-        {
-            _panelGameHud.gameObject.SetActive(true);
-            _panelGamePause.gameObject.SetActive(false);
         }
 
         #endregion
@@ -55,50 +47,58 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
             _panelGameHud = GetComponentInChildren<PanelGameHud>(true);
             _panelGamePause = GetComponentInChildren<PanelGamePause>(true);
         }
-        
-        private void StartPauseMenu(InputAction.CallbackContext context)
+        private void SetHudMenu()
         {
-            DebugManager.Log<PanelGameHud>("CALL PAUSE");
+            InputGameManager.ActionManager.ActivateActionMap(ActionManager.GameActionMaps.Player);
+            InputGameManager.UnregisterAction("PauseGame", StartPauseMenu );
+            InputGameManager.RegisterAction("PauseGame", StartPauseMenu );
+            _panelGameHud.gameObject.SetActive(true);
+            _panelGamePause.gameObject.SetActive(false);
+        }
+
+        private void SetPauseMenu()
+        {
             InputGameManager.ActionManager.ActivateActionMap(ActionManager.GameActionMaps.UiControls);
+            InputGameManager.UnregisterAction("Pause", StartUnPauseMenu );
             InputGameManager.RegisterAction("Pause", StartUnPauseMenu );
             _panelGameHud.gameObject.SetActive(false);
             _panelGamePause.gameObject.SetActive(true);
-            _gamePlayManager.OnEventGamePause();
+        }
+        
+        private void StartPauseMenu(InputAction.CallbackContext context)
+        {
+            ButtonPause();
         }
         private void StartUnPauseMenu(InputAction.CallbackContext context)
         {
-            InputGameManager.ActionManager.ActivateActionMap(ActionManager.GameActionMaps.Player);
-            InputGameManager.RegisterAction("PauseGame", StartPauseMenu );
-            DebugManager.Log<PanelGameHud>("CALL UNPAUSE");
-            _panelGameHud.gameObject.SetActive(true);
-            _panelGamePause.gameObject.SetActive(false);
-            _gamePlayManager.OnEventGameUnPause();
+            ButtonContinue();
         }
         public void ButtonReturnMenu()
         {
             Time.timeScale = 1;
-            //InputGameManager.ActionManager.ActivateActionMap(ActionManager.GameActionMaps.UiControls);
             _= GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateMenuInitial.ToString()).ConfigureAwait(true);
         }
-        
-        
-        #region Call Events
 
-        private void OnEventPauseGame()
+        public void ButtonPause()
         {
-            EventPauseGame?.Invoke();
+            if (!_gamePlayManager.ShouldBePlayingGame) return;
+            if (_inLoad) return;
+            _inLoad = true;
+            DebugManager.Log<PanelGameHud>("CALL PAUSE");
+            SetPauseMenu();
+            _gamePlayManager.OnEventGamePause();
+            _inLoad = false;
         }
-        private void OnEventUnPauseGame()
-        {
-            EventUnPauseGame?.Invoke();
-        }
-        private void OnEventHudGame()
-        {
-            EventHudGame?.Invoke();
-        }
-        #endregion
 
-
-        
+        public void ButtonContinue()
+        {
+            if (!_gamePlayManager.ShouldBePlayingGame) return;
+            if (_inLoad) return;
+            _inLoad = true;
+            DebugManager.Log<PanelGameHud>($"CALL UNPAUSE {_gamePlayManager.ShouldBePlayingGame}");
+            SetHudMenu();
+            _gamePlayManager.OnEventGameUnPause();
+            _inLoad = false;
+        }
     }
 }

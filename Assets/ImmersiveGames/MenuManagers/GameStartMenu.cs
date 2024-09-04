@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace ImmersiveGames.MenuManagers
 {
-    public class GameStartMenu : AbstractMenuManager
+    /*public class GameStartMenu : AbstractMenuManager
     {
         public PanelsMenuReference[] panelsMenuReferences;
         public Button[] disableButtons;
@@ -48,5 +48,5 @@ namespace ImmersiveGames.MenuManagers
         {
             ActivateMenu(1);
         }
-    }
+    }*/
 }
