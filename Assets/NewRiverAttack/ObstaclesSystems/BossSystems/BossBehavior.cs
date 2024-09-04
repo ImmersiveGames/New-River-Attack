@@ -44,10 +44,10 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             
             var enterSceneBehavior = new EnterSceneBehavior(_behaviorManager, Array.Empty<IBehavior>());
             
-            var moveNorthBehavior = new MoveNorthBehavior(_behaviorManager, new IBehavior[]{multiMissiles05, multiMissiles09});
+            var moveNorthBehavior = new MoveNorthBehavior(_behaviorManager, new IBehavior[]{multiMissiles05, mineBehavior,multiMissiles09});
             var moveSouthBehavior = new MoveSouthBehavior(_behaviorManager, new IBehavior[]{multiMissiles05,multiMissiles09});
-            var moveEastBehavior = new MoveEastBehavior(_behaviorManager, new IBehavior[]{multiMissiles05,multiMissiles09});
-            var moveWestBehavior = new MoveWestBehavior(_behaviorManager, new IBehavior[]{multiMissiles05,multiMissiles09});
+            var moveEastBehavior = new MoveEastBehavior(_behaviorManager, new IBehavior[]{multiMissiles09,multiMissiles05,multiMissiles09});
+            var moveWestBehavior = new MoveWestBehavior(_behaviorManager, new IBehavior[]{multiMissiles09,multiMissiles05,multiMissiles09});
             var deathBehavior = new DeathBehavior(_gamePlayManager, Array.Empty<IBehavior>());
 
             _behaviorManager.AddBehavior(enterSceneBehavior);
