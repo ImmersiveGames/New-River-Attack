@@ -60,7 +60,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private void SetInitialReferences()
         {
-            _gamePlayManager = GamePlayManager.instance;
+            _gamePlayManager = GamePlayManager.Instance;
             _playerMaster = GetComponent<PlayerMaster>();
         }
 

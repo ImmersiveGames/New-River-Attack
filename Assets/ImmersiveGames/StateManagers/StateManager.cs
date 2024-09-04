@@ -30,10 +30,6 @@ namespace ImmersiveGames.StateManagers
                 return;
             }
             AudioManager.instance.PlayBGM(nextState);
-            /*MainThreadTaskExecutor.RunOnMainThread(() =>
-            {
-                AudioManager.PlayBGM(nextState);
-            });*/
 
             if (_currentState != null)
             {
@@ -43,13 +39,12 @@ namespace ImmersiveGames.StateManagers
             _previousState = _currentState;
             _currentState = nextState;
 
-            // Adicionamos uma condição para verificar se há uma transição de cena necessária
             if (_currentState.RequiresSceneLoad && !string.IsNullOrEmpty(_currentState.SceneName))
             {
                 // Agora, esperamos que a transição de cena seja concluída antes de prosseguir
                 await SceneChangeManager.StartSceneTransitionAsync(_currentState, _previousState?.SceneName, _currentState.LoadMode, _currentState.UnLoadAdditiveScene).ConfigureAwait(false);
             }
-            
+
             await _currentState.EnterAsync(_previousState).ConfigureAwait(false);
 
             DebugManager.Log<StateManager>($"Mudou para o estado: {stateName}");

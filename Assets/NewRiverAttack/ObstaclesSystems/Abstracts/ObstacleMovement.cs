@@ -57,7 +57,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         #endregion
         protected virtual void SetInitialReferences()
         {
-            _gamePlayManagers = GamePlayManager.instance;
+            _gamePlayManagers = GamePlayManager.Instance;
             ObstacleMaster = GetComponent<ObstacleMaster>();
         }
         protected void SetVelocity(float defaultSpeed)

@@ -35,7 +35,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         private void SetInitialReferences()
         {
             _enemiesMaster = GetComponent<EnemiesMaster>();
-            _gamePlayManager = GamePlayManager.instance;
+            _gamePlayManager = GamePlayManager.Instance;
         }
 
         private void SetAnimations()

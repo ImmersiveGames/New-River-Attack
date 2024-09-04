@@ -6,25 +6,15 @@ using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.StateManagers;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 namespace ImmersiveGames.MenuManagers.PanelGameManagers
 {
     public class PanelGamePause : MonoBehaviour
     {
-        [SerializeField] private RectTransform cursor;
-        [SerializeField] private RectTransform[] menus;
-        
-        private void Awake()
+        /*private void Awake()
         {
             gameObject.SetActive(false);
             GamePlayManager.instance.EventGamePause += SetPauseGame;
-        }
-
-        private void OnEnable()
-        {
-            InputGameManager.ActionManager.ActivateActionMap(ActionManager.GameActionMaps.UiControls);
-            InputGameManager.RegisterAction("Pause", StartPauseMenu );
         }
 
         private void StartPauseMenu(InputAction.CallbackContext obj)
@@ -42,57 +32,14 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
         {
             DebugManager.Log<PanelGamePause>("Ação do MENU");
             gameObject.SetActive(false);
-            InputGameManager.ActionManager.ActivateActionMap(ActionManager.GameActionMaps.Player);
-            
-        }
-
-        public async void ButtonReturnMenu()
-        {
-            gameObject.SetActive(false);
             GamePlayManager.instance.OnEventGameUnPause();
-            await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateMenuInitial.ToString()).ConfigureAwait(false);
-        }
-        /*
-
-        #region UnityMethods
-
-        private void OnEnable()
-        {
-            
-            DebugManager.Log<PanelGamePause>("Teste Enable");
-            InputGameManager.ActionManager.ActivateActionMap(ActionManager.GameActionMaps.UiControls);
-            //InputGameManager.RegisterAction("Pause", StartUnPauseMenu );
-            
-            GamePlayManager.instance.EventGameUnPause += SetUnPauseGame;
         }
 
-        private void OnDisable()
+        public void ButtonReturnMenu()
         {
-            //InputGameManager.ActionManager.RestoreActionMap();
-            GamePlayManager.instance.EventGameUnPause -= SetUnPauseGame;
-        }
-
-        private void OnDestroy()
-        {
-            GamePlayManager.instance.EventGamePause -= SetPauseGame;
-        }
-
-        #endregion
-        private void StartUnPauseMenu(InputAction.CallbackContext obj)
-        {
-            DebugManager.Log<PanelGamePause>("CALL UNPAUSE");
-            GamePlayManager.instance.OnEventGameUnPause();
-            SetUnPauseGame();
-        }
-        private void SetPauseGame()
-        {
-            DebugManager.Log<PanelGamePause>("PAUSE");
-            gameObject.SetActive(true);
-        }
-        private void SetUnPauseGame()
-        {
-            DebugManager.Log<PanelGamePause>("UNPAUSE");
-            gameObject.SetActive(false);
+            Time.timeScale = 1;
+            //InputGameManager.ActionManager.ActivateActionMap(ActionManager.GameActionMaps.UiControls);
+            _= GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateMenuInitial.ToString()).ConfigureAwait(false);
         }*/
     }
 }

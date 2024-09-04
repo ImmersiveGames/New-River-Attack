@@ -50,7 +50,7 @@ namespace NewRiverAttack.HUDManagers.UI
 
         private void SetInitialReferences()
         {
-            _gamePlayManager = GamePlayManager.instance;
+            _gamePlayManager = GamePlayManager.Instance;
             _audioSource = GetComponent<AudioSource>();
         }
         private void UpdateFuel(float valueUpdate, int iPlayerIndex)

@@ -61,6 +61,7 @@ namespace NewRiverAttack.GameStatisticsSystem
 
         public void LogAmountDistance(float amount)
         {
+            if(_gemeStatisticsDataLog == null) return;
             _gemeStatisticsDataLog.SetAmountDistance(amount);
         }
 

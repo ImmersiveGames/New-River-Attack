@@ -45,7 +45,7 @@ namespace NewRiverAttack.HUDManagers.UI
         #endregion
         private void SetInitialReferences()
         {
-            _gamePlayManager = GamePlayManager.instance;
+            _gamePlayManager = GamePlayManager.Instance;
         }
         
         private void UpdateTimer(float timer, int indexPlayer)

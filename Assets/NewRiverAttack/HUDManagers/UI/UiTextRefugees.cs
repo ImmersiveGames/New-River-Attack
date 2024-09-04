@@ -35,7 +35,7 @@ namespace NewRiverAttack.HUDManagers.UI
 
         private void SetInitialReferences()
         {
-            _gamePlayManager = GamePlayManager.instance;
+            _gamePlayManager = GamePlayManager.Instance;
             _textRefugees = GetComponent<TMP_Text>();
             _animator = GetComponent<Animator>();
         }

@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace NewRiverAttack.LevelBuilder
 {
-    public class LevelBuilderManager : Singleton<LevelBuilderManager>
+    public class LevelBuilderManager : MonoBehaviour
     {
         //public Transform spawnPoint;
         public int startNumOfSegments = 5;
@@ -24,6 +24,23 @@ namespace NewRiverAttack.LevelBuilder
 
         private GameObject _setsContainer;
         private LevelData _levelData;
+
+        public static LevelBuilderManager Instance { get; private set; }
+        
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+                //DontDestroyOnLoad(gameObject);
+                DebugManager.Log<LevelBuilderManager>("LevelBuilderManager instanciado.");
+            }
+            else
+            {
+                Destroy(gameObject);
+                DebugManager.LogWarning<LevelBuilderManager>("Tentativa de criar uma segunda instância de SteamStatsService foi evitada.");
+            }
+        }
 
         public void StartToBuild(LevelData data)
         {
@@ -267,14 +284,6 @@ Debug.Log($"START:{data.pathStart}");
         // Função para remover os inimigos de forma segura
         private void CleanupEnemies(GameObject enemySetToRemove)
         {
-            // Obter todos os scripts de comportamento dos inimigos
-            // var enemyBehaviors = enemySetToRemove.GetComponentsInChildren<EnemyBehavior>();
-
-            // Parar todos os comportamentos dos inimigos
-            // foreach (var enemyBehavior in enemyBehaviors)
-            // {
-            //     enemyBehavior.StopBehavior();
-            // }
 
             enemySetToRemove.SetActive(false);
 
@@ -284,8 +293,6 @@ Debug.Log($"START:{data.pathStart}");
                 Destroy(child.gameObject);
             }
 
-            // **Comentário:** Essa lógica está comentada pois os scripts de comportamento dos inimigos ainda não foram implementados.
-            // **Lembre-se:** Descomete o código quando os scripts de comportamento dos inimigos estiverem prontos.
         }
     }
 }

@@ -945,7 +945,7 @@ namespace ImmersiveGames
             ]
         },
         {
-            ""name"": ""HUBControl"",
+            ""name"": ""HubControl"",
             ""id"": ""617f71d7-564b-4a2d-b5da-ada37bafb141"",
             ""actions"": [
                 {
@@ -1183,12 +1183,12 @@ namespace ImmersiveGames
             m_Notifications = asset.FindActionMap("Notifications", throwIfNotFound: true);
             m_Notifications_CloseNotification = m_Notifications.FindAction("CloseNotification", throwIfNotFound: true);
             m_Notifications_ConfirmNotification = m_Notifications.FindAction("ConfirmNotification", throwIfNotFound: true);
-            // HUBControl
-            m_HUBControl = asset.FindActionMap("HUBControl", throwIfNotFound: true);
-            m_HUBControl_BackButton = m_HUBControl.FindAction("BackButton", throwIfNotFound: true);
-            m_HUBControl_StartButton = m_HUBControl.FindAction("StartButton", throwIfNotFound: true);
-            m_HUBControl_RightSelection = m_HUBControl.FindAction("RightSelection", throwIfNotFound: true);
-            m_HUBControl_LeftSelection = m_HUBControl.FindAction("LeftSelection", throwIfNotFound: true);
+            // HubControl
+            m_HubControl = asset.FindActionMap("HubControl", throwIfNotFound: true);
+            m_HubControl_BackButton = m_HubControl.FindAction("BackButton", throwIfNotFound: true);
+            m_HubControl_StartButton = m_HubControl.FindAction("StartButton", throwIfNotFound: true);
+            m_HubControl_RightSelection = m_HubControl.FindAction("RightSelection", throwIfNotFound: true);
+            m_HubControl_LeftSelection = m_HubControl.FindAction("LeftSelection", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -1573,30 +1573,30 @@ namespace ImmersiveGames
         }
         public NotificationsActions @Notifications => new NotificationsActions(this);
 
-        // HUBControl
-        private readonly InputActionMap m_HUBControl;
-        private List<IHUBControlActions> m_HUBControlActionsCallbackInterfaces = new List<IHUBControlActions>();
-        private readonly InputAction m_HUBControl_BackButton;
-        private readonly InputAction m_HUBControl_StartButton;
-        private readonly InputAction m_HUBControl_RightSelection;
-        private readonly InputAction m_HUBControl_LeftSelection;
-        public struct HUBControlActions
+        // HubControl
+        private readonly InputActionMap m_HubControl;
+        private List<IHubControlActions> m_HubControlActionsCallbackInterfaces = new List<IHubControlActions>();
+        private readonly InputAction m_HubControl_BackButton;
+        private readonly InputAction m_HubControl_StartButton;
+        private readonly InputAction m_HubControl_RightSelection;
+        private readonly InputAction m_HubControl_LeftSelection;
+        public struct HubControlActions
         {
             private @PlayersInputActions m_Wrapper;
-            public HUBControlActions(@PlayersInputActions wrapper) { m_Wrapper = wrapper; }
-            public InputAction @BackButton => m_Wrapper.m_HUBControl_BackButton;
-            public InputAction @StartButton => m_Wrapper.m_HUBControl_StartButton;
-            public InputAction @RightSelection => m_Wrapper.m_HUBControl_RightSelection;
-            public InputAction @LeftSelection => m_Wrapper.m_HUBControl_LeftSelection;
-            public InputActionMap Get() { return m_Wrapper.m_HUBControl; }
+            public HubControlActions(@PlayersInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @BackButton => m_Wrapper.m_HubControl_BackButton;
+            public InputAction @StartButton => m_Wrapper.m_HubControl_StartButton;
+            public InputAction @RightSelection => m_Wrapper.m_HubControl_RightSelection;
+            public InputAction @LeftSelection => m_Wrapper.m_HubControl_LeftSelection;
+            public InputActionMap Get() { return m_Wrapper.m_HubControl; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(HUBControlActions set) { return set.Get(); }
-            public void AddCallbacks(IHUBControlActions instance)
+            public static implicit operator InputActionMap(HubControlActions set) { return set.Get(); }
+            public void AddCallbacks(IHubControlActions instance)
             {
-                if (instance == null || m_Wrapper.m_HUBControlActionsCallbackInterfaces.Contains(instance)) return;
-                m_Wrapper.m_HUBControlActionsCallbackInterfaces.Add(instance);
+                if (instance == null || m_Wrapper.m_HubControlActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_HubControlActionsCallbackInterfaces.Add(instance);
                 @BackButton.started += instance.OnBackButton;
                 @BackButton.performed += instance.OnBackButton;
                 @BackButton.canceled += instance.OnBackButton;
@@ -1611,7 +1611,7 @@ namespace ImmersiveGames
                 @LeftSelection.canceled += instance.OnLeftSelection;
             }
 
-            private void UnregisterCallbacks(IHUBControlActions instance)
+            private void UnregisterCallbacks(IHubControlActions instance)
             {
                 @BackButton.started -= instance.OnBackButton;
                 @BackButton.performed -= instance.OnBackButton;
@@ -1627,21 +1627,21 @@ namespace ImmersiveGames
                 @LeftSelection.canceled -= instance.OnLeftSelection;
             }
 
-            public void RemoveCallbacks(IHUBControlActions instance)
+            public void RemoveCallbacks(IHubControlActions instance)
             {
-                if (m_Wrapper.m_HUBControlActionsCallbackInterfaces.Remove(instance))
+                if (m_Wrapper.m_HubControlActionsCallbackInterfaces.Remove(instance))
                     UnregisterCallbacks(instance);
             }
 
-            public void SetCallbacks(IHUBControlActions instance)
+            public void SetCallbacks(IHubControlActions instance)
             {
-                foreach (var item in m_Wrapper.m_HUBControlActionsCallbackInterfaces)
+                foreach (var item in m_Wrapper.m_HubControlActionsCallbackInterfaces)
                     UnregisterCallbacks(item);
-                m_Wrapper.m_HUBControlActionsCallbackInterfaces.Clear();
+                m_Wrapper.m_HubControlActionsCallbackInterfaces.Clear();
                 AddCallbacks(instance);
             }
         }
-        public HUBControlActions @HUBControl => new HUBControlActions(this);
+        public HubControlActions @HubControl => new HubControlActions(this);
         private int m_MobileSchemeIndex = -1;
         public InputControlScheme MobileScheme
         {
@@ -1692,7 +1692,7 @@ namespace ImmersiveGames
             void OnCloseNotification(InputAction.CallbackContext context);
             void OnConfirmNotification(InputAction.CallbackContext context);
         }
-        public interface IHUBControlActions
+        public interface IHubControlActions
         {
             void OnBackButton(InputAction.CallbackContext context);
             void OnStartButton(InputAction.CallbackContext context);

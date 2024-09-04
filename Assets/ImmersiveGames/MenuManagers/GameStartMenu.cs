@@ -29,7 +29,7 @@ namespace ImmersiveGames.MenuManagers
         private void OnDisable()
         {
             InputGameManager.ActionManager.RestoreActionMap();
-            GamePlayManager.instance.EventGameOver -= OnGameOver;
+            GamePlayManager.Instance.EventGameOver -= OnGameOver;
         }
 
         #endregion

@@ -62,7 +62,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         {
             base.SetInitialReferences();
             _isShoot = false;
-            _gamePlayManagers = GamePlayManager.instance;
+            _gamePlayManagers = GamePlayManager.Instance;
             _enemiesMaster = GetComponent<EnemiesMaster>();
             _enemies = _enemiesMaster.objectDefault as EnemiesScriptable;
             ShootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();

@@ -14,7 +14,7 @@ namespace ImmersiveGames.TimelineManagers.Abstracts
         
         protected virtual void SetInitialReferences()
         {
-            GamePlayManagerRef = GamePlayManager.instance;
+            GamePlayManagerRef = GamePlayManager.Instance;
             _playableDirector = GetComponent<PlayableDirector>();
             _playableDirector.gameObject.SetActive(true);
             TimelineManagerRef = new TimelineManager(_playableDirector);

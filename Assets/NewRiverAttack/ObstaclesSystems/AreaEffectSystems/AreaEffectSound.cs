@@ -43,7 +43,7 @@ namespace NewRiverAttack.ObstaclesSystems.AreaEffectSystems
         {
             base.SetInitialReferences();
             _areaEffectMaster = ObstacleMaster as AreaEffectMaster;
-            _gamePlayManager = GamePlayManager.instance;
+            _gamePlayManager = GamePlayManager.Instance;
         }
 
         private void EnterAreaSound()

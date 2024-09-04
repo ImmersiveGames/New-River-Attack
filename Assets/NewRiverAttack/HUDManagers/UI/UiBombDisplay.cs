@@ -20,7 +20,7 @@ namespace NewRiverAttack.HUDManagers.UI
 
         private void OnEnable()
         {
-            _gamePlayManager = GamePlayManager.instance;
+            _gamePlayManager = GamePlayManager.Instance;
             _gamePlayManager.EventHudBombUpdate += UpdateBombs;
         }
 

@@ -41,7 +41,7 @@ namespace ImmersiveGames.CameraManagers
 
         private void SetInitialReferences()
         {
-            _gamePlayManager = GamePlayManager.instance;
+            _gamePlayManager = GamePlayManager.Instance;
             _virtualCamera = GetComponent<CinemachineVirtualCamera>();
         }
 

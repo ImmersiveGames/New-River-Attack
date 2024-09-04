@@ -27,7 +27,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _playerMaster.EventPlayerMasterAxisMovement += ActiveTrailsOnMovement;
             _playerMaster.EventPlayerMasterChangeSkin += InitializeTrails;
             _playerMaster.EventPlayerMasterRespawn += ResetTrails;
-            GamePlayManager.instance.EventGameFinisher += ActiveTrails;
+            GamePlayManager.Instance.EventGameFinisher += ActiveTrails;
         }
 
         private void OnDisable()
@@ -35,7 +35,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _playerMaster.EventPlayerMasterAxisMovement -= ActiveTrailsOnMovement;
             _playerMaster.EventPlayerMasterChangeSkin -= InitializeTrails;
             _playerMaster.EventPlayerMasterRespawn -= ResetTrails;
-            GamePlayManager.instance.EventGameFinisher -= ActiveTrails;
+            GamePlayManager.Instance.EventGameFinisher -= ActiveTrails;
         }
 
         private void InitializeTrails(ShopProductSkin productSkin)

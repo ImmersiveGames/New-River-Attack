@@ -18,7 +18,7 @@ namespace NewRiverAttack.ObstaclesSystems.BridgeSystems
             base.AttemptKillObstacle(playerMaster);
             
             //TODO: Aqui é um bom local para ajustar os saves e atualizar o cenário.
-            LevelBuilderManager.instance.OptimizeSegments(transform.position.z);
+            LevelBuilderManager.Instance.OptimizeSegments(transform.position.z);
             
             if (!GetBridgeSettings.isCheckPoint) return;
             GameStatisticManager.instance.LogCompletePath(1, GameManager.instance.gamePlayMode);

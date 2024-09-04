@@ -50,7 +50,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         
         private void SetInitialReferences()
         {
-            _gamePlayManager = GamePlayManager.instance;
+            _gamePlayManager = GamePlayManager.Instance;
             _gamePlayBossManager = GamePlayBossManager.instance;
             _bossMaster = GetComponent<BossMaster>();
         }

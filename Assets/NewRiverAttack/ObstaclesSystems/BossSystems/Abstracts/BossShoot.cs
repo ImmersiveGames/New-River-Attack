@@ -51,7 +51,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Abstracts
                 base.AttemptShoot(objectMaster, target);
         }
 
-        public bool ShouldBeShoot => _isShoot && !_bossMaster.IsDead && !_bossMaster.IsDisable && !GamePlayManager.instance.IsPause;
+        public bool ShouldBeShoot => _isShoot && !_bossMaster.IsDead && !_bossMaster.IsDisable && !GamePlayManager.Instance.IsPause;
         public void StartShoot()
         {
             _isShoot = true;

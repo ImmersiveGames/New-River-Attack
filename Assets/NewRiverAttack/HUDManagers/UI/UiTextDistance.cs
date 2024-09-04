@@ -34,7 +34,7 @@ namespace NewRiverAttack.HUDManagers.UI
 
         private void SetInitialReferences()
         {
-            _mGamePlayManager = GamePlayManager.instance;
+            _mGamePlayManager = GamePlayManager.Instance;
             _textDistance = GetComponent<TMP_Text>();
         }
 

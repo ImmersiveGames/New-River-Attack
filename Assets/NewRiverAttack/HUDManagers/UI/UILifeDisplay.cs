@@ -44,7 +44,7 @@ namespace NewRiverAttack.HUDManagers.UI
 
         private void SetInitialReferences()
         {
-            _gamePlayManager = GamePlayManager.instance;
+            _gamePlayManager = GamePlayManager.Instance;
             _playerMaster = _gamePlayManager.GetPlayerMaster(playerIndex);
             _playerLives = _playerMaster.GetComponent<PlayerLives>();
         }

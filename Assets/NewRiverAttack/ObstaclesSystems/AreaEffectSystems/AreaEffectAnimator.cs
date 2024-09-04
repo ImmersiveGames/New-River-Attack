@@ -39,7 +39,7 @@ namespace NewRiverAttack.ObstaclesSystems.AreaEffectSystems
         
         private void SetInitialReferences()
         {
-            _gamePlayManager = GamePlayManager.instance;
+            _gamePlayManager = GamePlayManager.Instance;
             _areaEffectMaster = GetComponent<AreaEffectMaster>();
             _animator = GetComponentInChildren<Animator>();
         }

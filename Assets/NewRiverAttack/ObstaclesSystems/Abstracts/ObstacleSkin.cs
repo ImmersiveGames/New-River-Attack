@@ -74,7 +74,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         protected virtual void SetInitialReferences()
         {
             ObstacleMaster = GetComponent<ObstacleMaster>();
-            _gamePlayManager = GamePlayManager.instance;
+            _gamePlayManager = GamePlayManager.Instance;
         }
 
         protected virtual void DesativeSkin(PlayerMaster playerMaster)

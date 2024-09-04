@@ -38,7 +38,7 @@ namespace NewRiverAttack.LevelBuilder.Abstracts
         
         protected virtual void SetInitialReferences()
         {
-            GamePlayManagerRef = GamePlayManager.instance;
+            GamePlayManagerRef = GamePlayManager.Instance;
         }
 
         

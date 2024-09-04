@@ -49,7 +49,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         protected virtual void SetInitialReferences()
         {
-            GamePlayManagerRef = GamePlayManager.instance;
+            GamePlayManagerRef = GamePlayManager.Instance;
         }
         
         private void SetInitialPosition()

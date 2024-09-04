@@ -21,7 +21,7 @@ using UnityEngine.Serialization;
 
 namespace NewRiverAttack.GamePlayManagers
 {
-    public sealed class GamePlayManager : Singleton<GamePlayManager>
+    public sealed class GamePlayManager : MonoBehaviour
     {
         #region Variáveis
 
@@ -72,6 +72,23 @@ namespace NewRiverAttack.GamePlayManagers
         public event GamePlayHudEventHandler EventHudRefugiesUpdate;
 
         #endregion
+        
+        public static GamePlayManager Instance { get; private set; }
+        
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+                //DontDestroyOnLoad(gameObject);
+                DebugManager.Log<GamePlayManager>("GamePlayManager instanciado.");
+            }
+            else
+            {
+                Destroy(gameObject);
+                DebugManager.LogWarning<GamePlayManager>("Tentativa de criar uma segunda instância de SteamStatsService foi evitada.");
+            }
+        }
 
         #region Unity Methods
         
@@ -85,7 +102,7 @@ namespace NewRiverAttack.GamePlayManagers
         {
             _gameManager = GameManager.instance;
             _gameOptionsSave = GameOptionsSave.instance;
-            _levelBuilderManager = LevelBuilderManager.instance;
+            _levelBuilderManager = LevelBuilderManager.Instance;
             gemeStatisticsDataLog = GemeStatisticsDataLog.instance;
         }
 

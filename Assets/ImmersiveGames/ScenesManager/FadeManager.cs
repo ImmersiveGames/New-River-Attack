@@ -85,7 +85,7 @@ namespace ImmersiveGames.ScenesManager
             var fadeCompletionSource = new TaskCompletionSource<bool>();
 
             // Run the fade on the main thread
-            MainThreadDispatcher.Enqueue(FadeUpdate);
+            await MainThreadDispatcher.EnqueueAsync(FadeUpdate).ConfigureAwait(false);
 
             // Wait for the fade to complete before returning
             await fadeCompletionSource.Task.ConfigureAwait(false);

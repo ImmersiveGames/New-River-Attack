@@ -92,7 +92,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             var posZ = ((quadrants.y + 0.5f) * quadrantSize.y) - (screenSize.y / 2.0f) + OffsetZ;
             var colliders = new Collider[1];
             var newPosition = new Vector3(posX, 1, posZ);
-            var count = Physics.OverlapBoxNonAlloc(newPosition, quadrantSize / 2, colliders, Quaternion.identity, GamePlayManager.instance.layerEnemies);
+            var count = Physics.OverlapBoxNonAlloc(newPosition, quadrantSize / 2, colliders, Quaternion.identity, GamePlayManager.Instance.layerEnemies);
             if (count <= 0)
                 return false;
             var q = new Vector2Int(quadrants.x, quadrants.y);

@@ -189,7 +189,7 @@ namespace ImmersiveGames.InputManager
         #endregion
         public enum GameActionMaps
         {
-            Player, UiControls, BriefingRoom, Notifications, Shopping, HUD
+            Player, UiControls, BriefingRoom, Notifications, Shopping, HubControl
         }
 
         public void OnEventOnActionComplete()

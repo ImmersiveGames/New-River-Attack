@@ -32,7 +32,7 @@ namespace NewRiverAttack.ObstaclesSystems.CollectibleSystems
         #endregion
         private void SetInitialReferences()
         {
-            _gamePlayManager = GamePlayManager.instance;
+            _gamePlayManager = GamePlayManager.Instance;
             _collectibleMaster = GetComponent<CollectibleMaster>();
             _animator = GetComponentInChildren<Animator>();
         }

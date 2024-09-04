@@ -88,6 +88,10 @@ namespace NewRiverAttack.HUBManagers
         {
             _hubGameManager.EventInitializeHub -= SetIndexMenu;
             _hubGameManager.EventCursorUpdateHub -= SetIndexMenu;
+            InputGameManager.UnregisterAction("StartButton", ButtonStartMission );
+            InputGameManager.UnregisterAction("BackButton", BackToMenu );
+            InputGameManager.UnregisterAction("RightSelection", GoRight );
+            InputGameManager.UnregisterAction("LeftSelection", GoLeft );
             InputGameManager.ActionManager.RestoreActionMap();
         }
 
