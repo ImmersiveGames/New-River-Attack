@@ -1,5 +1,7 @@
 ﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ShopManagers.Interfaces;
+using NewRiverAttack.ShoppingSystems.SimpleShopping;
+using NewRiverAttack.ShoppingSystems.SimpleShopping.Abstracts;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -86,7 +88,7 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
             return 0; // Retorna o primeiro índice se nenhum filho visível for encontrado
         }*/
 
-        public virtual void UpdateSelectedItem(RectTransform content, int selectedIndex)
+        /*public virtual void UpdateSelectedItem(RectTransform content, int selectedIndex)
         {
             if (content.childCount <= 0)
             {
@@ -103,6 +105,34 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
             }
 
             DebugManager.Log<FiniteNavigationMode>($"Item selecionado: {selectedIndex}");
+        }*/
+
+        public void UpdateSelectedItem(RectTransform content, int selectedIndex)
+        {
+            if (content.childCount <= 0) return;
+
+            // Obtém o item selecionado
+            var selectedItem = content.GetChild(selectedIndex).GetComponent<ShopProductSettings>();
+
+            if (selectedItem != null)
+            {
+                // Verifique se o item é usável ou comprável e destaque o botão correto
+                var shopProductSimpleSkins = selectedItem as ShopProductSimpleSkins;
+                if (shopProductSimpleSkins != null)
+                {
+                    if (shopProductSimpleSkins.buttonUse.gameObject.activeSelf)
+                    {
+                        // Foca no botão de usar se estiver ativo
+                        EventSystem.current.SetSelectedGameObject(shopProductSimpleSkins.buttonUse.gameObject);
+                    }
+                    else if (shopProductSimpleSkins.buttonBuy.gameObject.activeSelf)
+                    {
+                        // Foca no botão de comprar se estiver ativo
+                        EventSystem.current.SetSelectedGameObject(shopProductSimpleSkins.buttonBuy.gameObject);
+                    }
+                }
+            }
         }
+
     }
 }

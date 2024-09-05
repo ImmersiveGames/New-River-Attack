@@ -12,8 +12,8 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping.Abstracts
         [Header("Stock Fields")]
         [SerializeField] private TMP_Text textStockQuantity;
         [SerializeField] private TMP_Text textStockType;
-        [SerializeField] protected Button buttonBuy;
-        [SerializeField] protected Button buttonUse;
+        [SerializeField] protected internal Button buttonBuy;
+        [SerializeField] protected internal Button buttonUse;
         
         [Header("Products Fields")]
         [SerializeField] private TMP_Text textProductName;

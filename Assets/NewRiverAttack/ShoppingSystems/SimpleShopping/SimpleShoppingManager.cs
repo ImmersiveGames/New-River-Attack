@@ -9,6 +9,7 @@ using ImmersiveGames.ShopManagers.NavigationModes;
 using ImmersiveGames.ShopManagers.ShopProducts;
 using NewRiverAttack.ShoppingSystems.SimpleShopping.Abstracts;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -101,12 +102,31 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             DebugManager.Log<SimpleShoppingManager>($"[Move Right] contexto: {context}");
             ButtonShoppingNavigation(true);
         }
-
+        
         private void InputOnUse(InputAction.CallbackContext context)
         {
             DebugManager.Log<SimpleShoppingManager>($"[Button A] Buy/Select contexto: {context}");
-            UpdateStockProducts(panelContent);
+            // Verifica se há um GameObject focado pelo EventSystem
+            var selectedButton = EventSystem.current.currentSelectedGameObject;
+            if (selectedButton == null) return;
+
+            // Verifica se o botão selecionado é o de usar ou de comprar e executa a ação correspondente
+            var shopProductSimpleSkins = selectedButton.GetComponentInParent<ShopProductSimpleSkins>();
+            if (shopProductSimpleSkins != null)
+            {
+                if (selectedButton == shopProductSimpleSkins.buttonUse.gameObject)
+                {
+                    // Executa a ação de usar o item
+                    shopProductSimpleSkins.buttonUse.onClick.Invoke();
+                }
+                else if (selectedButton == shopProductSimpleSkins.buttonBuy.gameObject)
+                {
+                    // Executa a ação de comprar o item
+                    shopProductSimpleSkins.buttonBuy.onClick.Invoke();
+                }
+            }
         }
+
 
         public void ButtonShoppingNavigation(bool forward)
         {

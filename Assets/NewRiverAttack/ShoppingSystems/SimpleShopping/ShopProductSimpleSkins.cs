@@ -191,6 +191,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             SimpleShoppingManager.OnEventUseProduct(stockShop.shopProduct, quantity);
             DebugManager.Log<ShopProductSimpleSkins>("Skin used successfully.");
         }
+        
 
         private void MoveToProductPosition(IStockShop stockShop)
         {
