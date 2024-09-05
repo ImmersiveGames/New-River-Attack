@@ -198,15 +198,20 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             var content = layoutGroup?.transform as RectTransform;
 
             if (content == null) return;
-            var productIndex = FindProductIndexInLayout(stockShop.shopProduct, content);
-            var navigation = GetComponentInParent<SmoothFiniteNavigationMode>();
 
-            // Verificação de nulidade e se o índice é válido
-            if (navigation != null && productIndex >= 0 && this != null)
+            // Encontra o índice do produto no layout
+            var productIndex = FindProductIndexInLayout(stockShop.shopProduct, content);
+
+            // Usa o SimpleShoppingManager para acessar a navegação
+            var navigation = SimpleShoppingManager?.GetNavigationMode() as SmoothFiniteNavigationMode;
+
+            // Verifica se a navegação e o índice são válidos
+            if (navigation != null && productIndex >= 0)
             {
                 navigation.MoveContentToIndex(content, productIndex);
             }
         }
+
 
         public override IShopProduct GetAssociatedProduct()
         {

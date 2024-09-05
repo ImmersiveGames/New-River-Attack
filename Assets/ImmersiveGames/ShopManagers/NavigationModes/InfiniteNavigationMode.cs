@@ -43,8 +43,13 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
             // Atualizar o item selecionado
             UpdateSelectedItem(content, SelectedItemIndex);
         }
+        public virtual void MoveContentToIndex(RectTransform content, int index)
+        {
+            // Implementação padrão: atualiza o índice, mas não faz nada visualmente
+            SelectedItemIndex = index;
+        }
 
-        public int CalculateSelectedItemIndex(RectTransform content, bool forward)
+        protected int CalculateSelectedItemIndex(RectTransform content, bool forward)
         {
             var childCount = content.childCount;
             var selectedIndex = forward ? (SelectedItemIndex + 1) % childCount : (SelectedItemIndex - 1 + childCount) % childCount;

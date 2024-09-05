@@ -11,36 +11,44 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
         private bool _isMoving;
         private const float Approximation = 0.3f;
         private int _moveCount;
+        
+     
 
         public override void MoveContent(RectTransform content, bool forward, MonoBehaviour monoBehaviour = null)
         {
-            if (!_isMoving && monoBehaviour != null)
+            if (_isMoving)
             {
+                // Interrompe a coroutine anterior antes de iniciar uma nova
+                if (monoBehaviour != null) monoBehaviour.StopCoroutine(nameof(MoveToPosition));
+            }
+
+            if (monoBehaviour != null)
                 monoBehaviour.StartCoroutine(MoveToPosition(content, forward, content.childCount));
+        }
+        public override void MoveContentToIndex(RectTransform content, int index)
+        {
+            var layoutGroup = content.GetComponent<HorizontalLayoutGroup>();  // Obtendo o layout aqui (esse GetComponent é seguro para o HorizontalLayoutGroup)
+            if (layoutGroup != null)
+            {
+                _moveCount = index;
+                MoveToSpecificPosition(content, index, layoutGroup);
             }
             else
             {
-                DebugManager.LogWarning<SmoothFiniteNavigationMode>("Uma movimentação já está em andamento. Aguarde até que termine.");
-            }
-        }
-        public void MoveContentToIndex(RectTransform content, int index)
-        {
-            if (!_isMoving)
-            {
-                _moveCount = index;
-                MoveToSpecificPosition(content, index);
+                DebugManager.LogError<SmoothFiniteNavigationMode>("HorizontalLayoutGroup não encontrado no content.");
             }
         }
 
-        private void MoveToSpecificPosition(RectTransform content, int targetIndex)
+        private void MoveToSpecificPosition(RectTransform content, int targetIndex, HorizontalLayoutGroup layoutGroup)
         {
-            var moveAmount = content.GetComponent<HorizontalLayoutGroup>().spacing;
+            var moveAmount = layoutGroup.spacing;  // Usa o espaçamento do layout
             var targetX = -targetIndex * moveAmount;
 
-            // Suaviza a transição
+            // Ajusta a posição suavemente
             content.anchoredPosition = new Vector2(targetX, content.anchoredPosition.y);
             DebugManager.Log<SmoothFiniteNavigationMode>($"Movido para a posição do item de índice: {targetIndex}");
         }
+
 
         private IEnumerator MoveToPosition(RectTransform content, bool forward, int totalItems)
         {
