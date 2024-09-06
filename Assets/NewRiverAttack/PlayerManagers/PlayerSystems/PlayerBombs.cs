@@ -34,17 +34,13 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             SetInitialReferences();
             _playerMaster.EventPlayerMasterInitialize += InitializeBombs;
             _playerMaster.EventPlayerMasterStartPowerUp += PowerUpAddBomb;
-        }
-
-        private void Start()
-        {
             InputGameManager.RegisterAction("Bomb", AttemptBomb);
         }
-
         private void OnDisable()
         {
+            InputGameManager.UnregisterAction("Bomb", AttemptBomb);
             _playerMaster.EventPlayerMasterInitialize -= InitializeBombs;
-            _playerMaster.EventPlayerMasterStartPowerUp += PowerUpAddBomb;
+            _playerMaster.EventPlayerMasterStartPowerUp -= PowerUpAddBomb;
         }
 
         #endregion
