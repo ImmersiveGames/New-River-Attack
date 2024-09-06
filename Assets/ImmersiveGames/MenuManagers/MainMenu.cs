@@ -95,6 +95,8 @@ namespace ImmersiveGames.MenuManagers
 
         public async void GotoBriefingRoom()
         {
+            if(_onAction) return;
+            _onAction = true;
             DisableOnPress(GetCurrentMenu);
             _canGoBack = false; // Desabilita o retorno
             AudioManager.instance.PlayMouseClick();
@@ -111,8 +113,6 @@ namespace ImmersiveGames.MenuManagers
 
         public async void GotoMissionMode()
         {
-            if(_onAction) return;
-            _onAction = true;
             _canGoBack = false; // Desabilita o retorno
             AudioManager.instance.PlayMouseClick();
             GameManager.instance.gamePlayMode = GamePlayModes.MissionMode;
