@@ -27,7 +27,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         private IShopLayout _shopLayout;
 
         [SerializeField] private int poolSize = 10;
-        private Queue<GameObject> itemPool = new Queue<GameObject>();
+        private readonly Queue<GameObject> _itemPool = new Queue<GameObject>();
 
         #region Delegates
 
@@ -141,15 +141,15 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             {
                 var item = Instantiate(prefabItemShop, panelContent);
                 item.SetActive(false);
-                itemPool.Enqueue(item);
+                _itemPool.Enqueue(item);
             }
         }
 
         private GameObject GetPooledItem()
         {
-            if (itemPool.Count > 0)
+            if (_itemPool.Count > 0)
             {
-                var item = itemPool.Dequeue();
+                var item = _itemPool.Dequeue();
                 item.SetActive(true);
                 return item;
             }
@@ -163,7 +163,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         private void ReturnItemToPool(GameObject item)
         {
             item.SetActive(false);
-            itemPool.Enqueue(item);
+            _itemPool.Enqueue(item);
         }
 
         private void ClearShopping(Transform content)

@@ -52901,54 +52901,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2512452075057069264}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
-        m_MethodName: set_interactable
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 5715182055033585713}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
-        m_MethodName: set_interactable
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 583424094536798916}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
-        m_MethodName: set_interactable
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3981233822571651953}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
-        m_MethodName: set_interactable
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 7784761763959014916}
         m_TargetAssemblyTypeName: ImmersiveGames.MenuManagers.MainMenu, Assembly-CSharp
         m_MethodName: GotoBriefingRoom
@@ -58141,6 +58093,7 @@ MonoBehaviour:
   prefabItemShop: {fileID: 6544333689387389186, guid: d8eec68c14f169f4bb4f30f4674eccec,
     type: 3}
   panelContent: {fileID: 1415840740099508898}
+  poolSize: 10
 --- !u!114 &3374149904240921595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70453,9 +70406,21 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 607106245801943029, guid: edd48384923765647a80334cb3dc5dc8,
         type: 3}
+      propertyPath: dataLog
+      value: 
+      objectReference: {fileID: 11400000, guid: fa79827a92bd32c45af291e7d04958c7,
+        type: 2}
+    - target: {fileID: 607106245801943029, guid: edd48384923765647a80334cb3dc5dc8,
+        type: 3}
       propertyPath: enableDebugs
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 607106245801943029, guid: edd48384923765647a80334cb3dc5dc8,
+        type: 3}
+      propertyPath: gameOptionsSave
+      value: 
+      objectReference: {fileID: 11400000, guid: 27c6600f2ceb2724ea7bdedb94844935,
+        type: 2}
     - target: {fileID: 607106245801943029, guid: edd48384923765647a80334cb3dc5dc8,
         type: 3}
       propertyPath: classicModeLevels
@@ -70536,12 +70501,12 @@ PrefabInstance:
     - target: {fileID: 4558102908901589133, guid: edd48384923765647a80334cb3dc5dc8,
         type: 3}
       propertyPath: m_Alpha
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4558102908901589133, guid: edd48384923765647a80334cb3dc5dc8,
         type: 3}
       propertyPath: m_BlocksRaycasts
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8940221166966817703, guid: edd48384923765647a80334cb3dc5dc8,
         type: 3}

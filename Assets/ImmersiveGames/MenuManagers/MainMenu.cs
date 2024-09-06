@@ -8,6 +8,7 @@ using NewRiverAttack.GameManagers;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.StateManagers;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using UnityEngine.UI;
@@ -27,11 +28,13 @@ namespace ImmersiveGames.MenuManagers
         private float _animationTimeStart;
 
         private bool _canGoBack = true; // Flag para controle de retorno
+        private bool _onAction = false;
 
         #region Unity Methods
 
         private void Start()
         {
+            _onAction = false;
             InputGameManager.RegisterAction("BackButton", InputBackButton);
 
             SetMenu(panelsMenuReferences);
@@ -59,14 +62,14 @@ namespace ImmersiveGames.MenuManagers
         {
             _timelineManager = new TimelineManager(playableDirector);
             _animationTimeStart = panelsMenuGameObject.startTimelineAnimation;
-            SetInteractiveAllButtons(panelsMenuGameObject, true);
+            SetInitialInteractiveButtons(panelsMenuGameObject, true);
             StartPlayAnimations(_animationTimeStart);
         }
 
         protected override void OnExitMenu(PanelsMenuReference panelsMenuGameObject)
         {
             AudioManager.instance.PlayMouseClick();
-            SetInteractiveAllButtons(panelsMenuGameObject, false);
+            SetInitialInteractiveButtons(panelsMenuGameObject, false);
             _timelineManager = null;
         }
 
@@ -76,22 +79,25 @@ namespace ImmersiveGames.MenuManagers
         {
             GoBack(); // Agora apenas chama o GoBack()
         }
-
-        #region Buttons
-
-        private void SetInteractiveAllButtons(PanelsMenuReference panelButtons, bool interactive)
+        private void SetInitialInteractiveButtons(PanelsMenuReference panelButtons, bool interactive)
         {
             var allButtons = panelButtons.menuGameObject.GetComponentsInChildren<Button>();
             foreach (var button in allButtons)
             {
+                //Debug.Log($"Button: {button.name}");
                 if (disableButtons != null && Array.Exists(disableButtons, obj => obj == button))
                     interactive = false;
                 button.interactable = interactive;
             }
         }
 
+        #region Buttons
+
         public async void GotoBriefingRoom()
         {
+            if(_onAction) return;
+            _onAction = true;
+            DisableOnPress(GetCurrentMenu);
             _canGoBack = false; // Desabilita o retorno
             AudioManager.instance.PlayMouseClick();
             await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateBriefingRoom.ToString()).ConfigureAwait(false);
@@ -99,6 +105,8 @@ namespace ImmersiveGames.MenuManagers
 
         public async void GotoClassicMode()
         {
+            if(_onAction) return;
+            _onAction = true;
             _canGoBack = false; // Desabilita o retorno
             AudioManager.instance.PlayMouseClick();
             GameManager.instance.gamePlayMode = GamePlayModes.ClassicMode;
@@ -107,6 +115,8 @@ namespace ImmersiveGames.MenuManagers
 
         public async void GotoMissionMode()
         {
+            if(_onAction) return;
+            _onAction = true;
             _canGoBack = false; // Desabilita o retorno
             AudioManager.instance.PlayMouseClick();
             GameManager.instance.gamePlayMode = GamePlayModes.MissionMode;
@@ -115,6 +125,7 @@ namespace ImmersiveGames.MenuManagers
 
         public void ButtonPlayAnimation(float startTime)
         {
+            DisableOnPress(GetCurrentMenu);
             AudioManager.instance.PlayMouseClick();
             _timelineManager.PlayAnimation(startTime);
         }

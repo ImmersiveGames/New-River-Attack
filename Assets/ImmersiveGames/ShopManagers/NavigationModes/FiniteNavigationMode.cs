@@ -4,7 +4,6 @@ using NewRiverAttack.ShoppingSystems.SimpleShopping;
 using NewRiverAttack.ShoppingSystems.SimpleShopping.Abstracts;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace ImmersiveGames.ShopManagers.NavigationModes
 {
@@ -29,7 +28,7 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
             }
 
             // Calcula o próximo índice
-            int nextIndex = forward ? SelectedItemIndex + 1 : SelectedItemIndex - 1;
+            var nextIndex = forward ? SelectedItemIndex + 1 : SelectedItemIndex - 1;
             nextIndex = Mathf.Clamp(nextIndex, 0, childCount - 1);
 
             // Verifica se o próximo item é ativo e visível
@@ -37,12 +36,10 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
             {
                 nextIndex = forward ? nextIndex + 1 : nextIndex - 1;
 
-                if (nextIndex < 0 || nextIndex >= childCount)
-                {
-                    // Se sair dos limites, mantém o índice atual
-                    nextIndex = SelectedItemIndex;
-                    break;
-                }
+                if (nextIndex >= 0 && nextIndex < childCount) continue;
+                // Se sair dos limites, mantém o índice atual
+                nextIndex = SelectedItemIndex;
+                break;
             }
 
             var visibleChild = content.GetChild(nextIndex);
@@ -73,40 +70,6 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
             UpdateSelectedItem(content, SelectedItemIndex);
         }
 
-
-        /*private static int GetVisibleChildIndex(RectTransform content)
-        {
-            var childCount = content.childCount;
-            for (var i = 0; i < childCount; i++)
-            {
-                var child = content.GetChild(i);
-                if (child.gameObject is { activeSelf: true, activeInHierarchy: true })
-                {
-                    return i;
-                }
-            }
-            return 0; // Retorna o primeiro índice se nenhum filho visível for encontrado
-        }*/
-
-        /*public virtual void UpdateSelectedItem(RectTransform content, int selectedIndex)
-        {
-            if (content.childCount <= 0)
-            {
-                DebugManager.LogError<FiniteNavigationMode>($"Não há Itens no content");
-                return;
-            }
-
-            var childSelect = content.GetChild(selectedIndex);
-            var activeButton = childSelect.GetComponentInChildren<Button>();
-            if (activeButton != null)
-            {
-                var eventSystem = EventSystem.current;
-                eventSystem.SetSelectedGameObject(activeButton.gameObject);
-            }
-
-            DebugManager.Log<FiniteNavigationMode>($"Item selecionado: {selectedIndex}");
-        }*/
-
         public void UpdateSelectedItem(RectTransform content, int selectedIndex)
         {
             if (content.childCount <= 0) return;
@@ -114,23 +77,19 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
             // Obtém o item selecionado
             var selectedItem = content.GetChild(selectedIndex).GetComponent<ShopProductSettings>();
 
-            if (selectedItem != null)
+            if (selectedItem == null) return;
+            // Verifique se o item é usável ou comprável e destaque o botão correto
+            var shopProductSimpleSkins = selectedItem as ShopProductSimpleSkins;
+            if (shopProductSimpleSkins == null) return;
+            if (shopProductSimpleSkins.buttonUse.gameObject.activeSelf)
             {
-                // Verifique se o item é usável ou comprável e destaque o botão correto
-                var shopProductSimpleSkins = selectedItem as ShopProductSimpleSkins;
-                if (shopProductSimpleSkins != null)
-                {
-                    if (shopProductSimpleSkins.buttonUse.gameObject.activeSelf)
-                    {
-                        // Foca no botão de usar se estiver ativo
-                        EventSystem.current.SetSelectedGameObject(shopProductSimpleSkins.buttonUse.gameObject);
-                    }
-                    else if (shopProductSimpleSkins.buttonBuy.gameObject.activeSelf)
-                    {
-                        // Foca no botão de comprar se estiver ativo
-                        EventSystem.current.SetSelectedGameObject(shopProductSimpleSkins.buttonBuy.gameObject);
-                    }
-                }
+                // Foca no botão de usar se estiver ativo
+                EventSystem.current.SetSelectedGameObject(shopProductSimpleSkins.buttonUse.gameObject);
+            }
+            else if (shopProductSimpleSkins.buttonBuy.gameObject.activeSelf)
+            {
+                // Foca no botão de comprar se estiver ativo
+                EventSystem.current.SetSelectedGameObject(shopProductSimpleSkins.buttonBuy.gameObject);
             }
         }
 

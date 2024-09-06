@@ -3,6 +3,7 @@ using ImmersiveGames.DebugManagers;
 using ImmersiveGames.MenuManagers.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace ImmersiveGames.MenuManagers.Abstracts
 {
@@ -34,6 +35,7 @@ namespace ImmersiveGames.MenuManagers.Abstracts
 
         public void ActivateMenu(int index)
         {
+            
             if (index >= 0 && index < _menus.Length)
             {
                 foreach (var menu in _menus)
@@ -44,6 +46,7 @@ namespace ImmersiveGames.MenuManagers.Abstracts
                     menu.virtualCameraBase.gameObject.SetActive(false);
                 }
 
+                DisableOnPress(_menus[_currentMenuIndex]);
                 _menuHistory.Push(_currentMenuIndex);
                 OnExitMenu(_menus[_currentMenuIndex]);
 
@@ -103,6 +106,24 @@ namespace ImmersiveGames.MenuManagers.Abstracts
                 _menuHistory.Pop();
             }
         }
+
+        protected void DisableOnPress(PanelsMenuReference panelsMenuGameObject)
+        {
+            var clickedObject = EventSystem.current?.currentSelectedGameObject;
+            if (clickedObject == null) return;
+            var actualButton = clickedObject.GetComponent<Button>();
+            Debug.Log("Botão acionado por: " + actualButton.name);
+            var allButtons = panelsMenuGameObject.menuGameObject.GetComponentsInChildren<Button>();
+            Debug.Log("achou: " + allButtons.Length);
+            foreach (var button in allButtons)
+            {
+                if (button == actualButton) continue;
+                Debug.Log($"Button: {button}");
+                button.interactable = false;
+            }
+        }
+
+        public PanelsMenuReference GetCurrentMenu => _menus[_currentMenuIndex];
 
         public void ButtonExit()
         {
