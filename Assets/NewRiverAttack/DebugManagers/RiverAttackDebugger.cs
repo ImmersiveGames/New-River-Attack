@@ -72,10 +72,10 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<PoolObject>(DebugManager.DebugLevels.LogsAndWarnings);
             
             //shopping
-            DebugManager.SetScriptDebugLevel<SimpleShoppingManager>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<SimpleShoppingManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<ShopProductSimpleSkins>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<FiniteNavigationMode>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<SmoothFiniteNavigationMode>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<SmoothFiniteNavigationMode>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<ShopProductSettings>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<ShopSkinChanger>(DebugManager.DebugLevels.None);
             

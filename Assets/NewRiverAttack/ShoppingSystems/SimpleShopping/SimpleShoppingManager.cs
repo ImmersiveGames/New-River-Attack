@@ -22,12 +22,8 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         [SerializeField] private RectTransform panelContent;
 
         private List<ShopProductStock> _productStocks;
-
         private INavigationMode _navigationMode;
         private IShopLayout _shopLayout;
-
-        [SerializeField] private int poolSize = 10;
-        private readonly Queue<GameObject> _itemPool = new Queue<GameObject>();
 
         #region Delegates
 
@@ -43,12 +39,9 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
 
         private void Awake()
         {
-            _navigationMode = new SmoothFiniteNavigationMode();  // Instanciamos diretamente, sem GetComponent.
+            _navigationMode = new SmoothFiniteNavigationMode();
             _shopLayout = new ShopLayoutHorizontal();
             ClearShopping(panelContent);
-
-            // Inicializa o pool de objetos
-            InitializePool();
         }
 
         private void OnEnable()
@@ -65,19 +58,17 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             _shopLayout.ConfigureLayout(panelContent, stockShopsList.Count, prefabItemShop);
 
             _productStocks = new List<ShopProductStock>(stockShopsList);
-
-            // Substituindo LINQ por uma ordenação manual
             _productStocks.Sort((x, y) => string.Compare(x.shopProduct.name, y.shopProduct.name, StringComparison.Ordinal));
 
-            CreateShopping(panelContent, _productStocks);
+            CreateShopping(panelContent);
         }
 
         private void OnDisable()
         {
-            InputGameManager.ActionManager.RestoreActionMap();
             InputGameManager.UnregisterAction("LeftSelection", InputOnMoveLeft);
             InputGameManager.UnregisterAction("RightSelection", InputOnMoveRight);
             InputGameManager.UnregisterAction("UseButton", InputOnUse);
+            InputGameManager.ActionManager.RestoreActionMap();
         }
 
         private void OnDestroy()
@@ -102,111 +93,96 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             DebugManager.Log<SimpleShoppingManager>($"[Move Right] contexto: {context}");
             ButtonShoppingNavigation(true);
         }
-        
+
         private void InputOnUse(InputAction.CallbackContext context)
         {
-            DebugManager.Log<SimpleShoppingManager>($"[Button A] Buy/Select contexto: {context}");
-            // Verifica se há um GameObject focado pelo EventSystem
             var selectedButton = EventSystem.current.currentSelectedGameObject;
             if (selectedButton == null) return;
 
-            // Verifica se o botão selecionado é o de usar ou de comprar e executa a ação correspondente
             var shopProductSimpleSkins = selectedButton.GetComponentInParent<ShopProductSimpleSkins>();
             if (shopProductSimpleSkins != null)
             {
                 if (selectedButton == shopProductSimpleSkins.buttonUse.gameObject)
                 {
-                    // Executa a ação de usar o item
                     shopProductSimpleSkins.buttonUse.onClick.Invoke();
                 }
                 else if (selectedButton == shopProductSimpleSkins.buttonBuy.gameObject)
                 {
-                    // Executa a ação de comprar o item
                     shopProductSimpleSkins.buttonBuy.onClick.Invoke();
                 }
             }
         }
 
-
         public void ButtonShoppingNavigation(bool forward)
         {
-            _navigationMode.MoveContent(panelContent, forward, this);  // Passamos "this" apenas para coroutines
+            _navigationMode.MoveContent(panelContent, forward, this);
         }
 
         #endregion
-
-        private void InitializePool()
-        {
-            for (int i = 0; i < poolSize; i++)
-            {
-                var item = Instantiate(prefabItemShop, panelContent);
-                item.SetActive(false);
-                _itemPool.Enqueue(item);
-            }
-        }
-
-        private GameObject GetPooledItem()
-        {
-            if (_itemPool.Count > 0)
-            {
-                var item = _itemPool.Dequeue();
-                item.SetActive(true);
-                return item;
-            }
-            else
-            {
-                var newItem = Instantiate(prefabItemShop, panelContent);
-                return newItem;
-            }
-        }
-
-        private void ReturnItemToPool(GameObject item)
-        {
-            item.SetActive(false);
-            _itemPool.Enqueue(item);
-        }
+        
 
         private void ClearShopping(Transform content)
         {
             var childCount = content.childCount;
-
             for (var i = childCount - 1; i >= 0; i--)
             {
-                var child = content.GetChild(i);
-                ReturnItemToPool(child.gameObject);
+                content.GetChild(i);
             }
         }
 
-        private void CreateShopping(RectTransform content, List<ShopProductStock> productStocks)
+        private void CreateShopping(RectTransform content)
         {
             ClearShopping(content);
-            foreach (var stock in productStocks)
-            {
-                DebugManager.Log<SimpleShoppingManager>($"Stock Quantity: {stock.quantityInStock}, " +
-                                                        $"Product: {stock.shopProduct.name}, " +
-                                                        $"Product Type: {stock.productType}");
-
-                var item = GetPooledItem();
-                var stockItemTemplate = item.GetComponent<ShopProductSettings>();
-                if (stockItemTemplate != null)
-                {
-                    stockItemTemplate.DisplayStock(stock);
-                }
-                else
-                {
-                    DebugManager.LogWarning<SimpleShoppingManager>($"Missing ShopProductSettings component on prefab: {prefabItemShop.name}");
-                }
-
-                var rectTransform = item.GetComponent<RectTransform>();
-                rectTransform.pivot = new Vector2(0, 0.5f);
-                rectTransform.anchorMin = new Vector2(0, 0.5f);
-                rectTransform.anchorMax = new Vector2(0, 0.5f);
-            }
-
+            UpdateContentSize(content);  // Ajusta o tamanho do content
             _navigationMode.UpdateSelectedItem(content, 0);
             _shopLayout.ResetContentPosition(content);
         }
 
+        private void UpdateStockProducts(Transform content)
+        {
+            var selectedIndex = _navigationMode.SelectedItemIndex;
+            ClearShopping(content);
+
+            foreach (var stock in stockShopsList)
+            {
+                InstantiateItemShop(stock);
+            }
+
+            _navigationMode.UpdateSelectedItem((RectTransform)content, selectedIndex);
+            _shopLayout.ResetContentPosition((RectTransform)content);
+
+            var layoutGroup = content.GetComponent<HorizontalLayoutGroup>();
+            if (layoutGroup != null)
+            {
+                _navigationMode.MoveContentToIndex((RectTransform)content, selectedIndex);
+            }
+            else
+            {
+                DebugManager.LogError<SimpleShoppingManager>("HorizontalLayoutGroup não encontrado no content.");
+            }
+        }
+
+        public INavigationMode GetNavigationMode() => _navigationMode;
+
+        private void UpdateContentSize(RectTransform content)
+        {
+            var layoutGroup = content.GetComponent<HorizontalLayoutGroup>();
+            if (layoutGroup == null)
+            {
+                Debug.LogError("HorizontalLayoutGroup não encontrado.");
+                return;
+            }
+
+            if (content.childCount == 0) return;
+
+            // Obtém a largura do primeiro item após sua criação
+            var itemWidth = content.GetChild(0).GetComponent<RectTransform>().rect.width;
+
+            // Calcula o tamanho total do content com base no número de itens e espaçamento
+            var totalWidth = (itemWidth * content.childCount) + (layoutGroup.spacing * (content.childCount - 1));
+
+            content.sizeDelta = new Vector2(totalWidth, content.sizeDelta.y);  // Ajusta o tamanho do content
+        }
         private void InstantiateItemShop(ShopProductStock stock)
         {
             var item = Instantiate(prefabItemShop, panelContent);
@@ -225,43 +201,6 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             rectTransform.anchorMin = new Vector2(0, 0.5f);
             rectTransform.anchorMax = new Vector2(0, 0.5f);
         }
-
-        private void UpdateStockProducts(Transform content)
-        {
-            var childCount = content.childCount;
-            if (childCount < 1) return;
-
-            // Armazena o índice atual selecionado
-            int selectedIndex = _navigationMode.SelectedItemIndex;
-
-            ClearShopping(content);
-
-            foreach (var stock in stockShopsList)
-            {
-                InstantiateItemShop(stock);
-            }
-
-            // Restaura o índice selecionado anterior
-            _navigationMode.UpdateSelectedItem((RectTransform)content, selectedIndex);
-            _shopLayout.ResetContentPosition((RectTransform)content);
-
-            // Movimenta o carrossel para a posição correta
-            // Não precisa do GetComponent para SmoothFiniteNavigationMode
-            var layoutGroup = content.GetComponent<HorizontalLayoutGroup>();  // Aqui podemos pegar o layout de forma segura
-            if (layoutGroup != null)
-            {
-                _navigationMode.MoveContentToIndex((RectTransform)content, selectedIndex);
-            }
-            else
-            {
-                DebugManager.LogError<SimpleShoppingManager>("HorizontalLayoutGroup não encontrado no content.");
-            }
-        }
-        public INavigationMode GetNavigationMode()
-        {
-            return _navigationMode;
-        }
-
 
         public List<ShopProductStock> GetShopList => _productStocks;
 

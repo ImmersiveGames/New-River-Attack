@@ -112,13 +112,11 @@ namespace ImmersiveGames.MenuManagers.Abstracts
             var clickedObject = EventSystem.current?.currentSelectedGameObject;
             if (clickedObject == null) return;
             var actualButton = clickedObject.GetComponent<Button>();
-            Debug.Log("Botão acionado por: " + actualButton.name);
+            DebugManager.Log<AbstractMenuManager>("Botão acionado por: " + actualButton.name);
             var allButtons = panelsMenuGameObject.menuGameObject.GetComponentsInChildren<Button>();
-            Debug.Log("achou: " + allButtons.Length);
             foreach (var button in allButtons)
             {
                 if (button == actualButton) continue;
-                Debug.Log($"Button: {button}");
                 button.interactable = false;
             }
         }

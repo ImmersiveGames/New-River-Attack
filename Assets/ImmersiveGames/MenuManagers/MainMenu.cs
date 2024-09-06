@@ -95,8 +95,6 @@ namespace ImmersiveGames.MenuManagers
 
         public async void GotoBriefingRoom()
         {
-            if(_onAction) return;
-            _onAction = true;
             DisableOnPress(GetCurrentMenu);
             _canGoBack = false; // Desabilita o retorno
             AudioManager.instance.PlayMouseClick();
@@ -105,8 +103,6 @@ namespace ImmersiveGames.MenuManagers
 
         public async void GotoClassicMode()
         {
-            if(_onAction) return;
-            _onAction = true;
             _canGoBack = false; // Desabilita o retorno
             AudioManager.instance.PlayMouseClick();
             GameManager.instance.gamePlayMode = GamePlayModes.ClassicMode;
@@ -125,6 +121,8 @@ namespace ImmersiveGames.MenuManagers
 
         public void ButtonPlayAnimation(float startTime)
         {
+            if(_onAction) return;
+            _onAction = true;
             DisableOnPress(GetCurrentMenu);
             AudioManager.instance.PlayMouseClick();
             _timelineManager.PlayAnimation(startTime);

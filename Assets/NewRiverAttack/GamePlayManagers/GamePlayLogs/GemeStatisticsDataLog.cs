@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.Utils;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
 {
