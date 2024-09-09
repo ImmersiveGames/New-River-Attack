@@ -53,14 +53,13 @@ namespace NewRiverAttack.ObstaclesSystems.AreaEffectSystems
         }
         private void StopAreaSound(PlayerMaster playerMaster)
         {
-            if(!_areaEffectMaster.InAreaEffect)return;
+            if(!_areaEffectMaster.IsInAreaEffect)return;
             StopAreaSound();
         }
         private void StopAreaSound()
         {
             if (AudioSource != null && effectAreaExitSound != null)
-                if(!AudioSource.isPlaying && !_areaEffectMaster.InAreaEffect) return;
-            _areaEffectMaster.InAreaEffect = false;
+                if(!AudioSource.isPlaying && !_areaEffectMaster.IsInAreaEffect) return;
             AudioSource.Stop();
             effectAreaExitSound.PlayOnShot(AudioSource);
         }

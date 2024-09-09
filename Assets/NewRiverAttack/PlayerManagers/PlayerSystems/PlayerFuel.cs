@@ -36,25 +36,9 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void Update()
         {
             if (GetFuel <= 0) return;
-            if (_inPowerUp)
-            {
-                var lastFillFuel = _areaEffectCadence * Time.deltaTime;
-                GetFuel += lastFillFuel;
-                GetFuel = Mathf.Clamp(GetFuel, 0f, GetMaxFuel);
-                GameStatisticManager.instance.LogFuelCharge(lastFillFuel);
-            }
-            if (_fuelPause || !_playerMaster.ObjectIsReady || _playerMaster.godMode || _playerMaster.AutoPilot) return;
-            // Decrementa o combustível com base na taxa de decaimento por segundo
-            var lastFuel = reduceFuelCadence * Time.deltaTime;
-            GetFuel -= lastFuel;
-
-            // Garante que o combustível não ultrapasse o máximo
-            GetFuel = Mathf.Clamp(GetFuel, 0f, GetMaxFuel);
-            GameStatisticManager.instance.LogFuelSpend(lastFuel);
-            if (GetFuel > 0) return;
-            _playerMaster.OnEventPlayerMasterGetHit();
-            GameStatisticManager.instance.LogFuelOut(1);
+            UpdateFuelState();
         }
+
         private void OnDisable()
         {
             _playerMaster.EventPlayerMasterInitialize -= InitializeFuel;
@@ -71,13 +55,12 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         {
             _playerMaster = GetComponent<PlayerMaster>();
         }
-        
+
         private void PauseDecoy(bool pausar)
         {
             // Define o estado de pausa do decaimento
             _fuelPause = pausar;
         }
-        
 
         private void RestoreFuel()
         {
@@ -98,23 +81,25 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             GetFuel = GetMaxFuel;
             DebugManager.Log<PlayerFuel>($"Initialize {_playerMaster.ActualSkin.name}");
         }
+
         private void InitializeSkinFuel(ShopProductSkin shopProductSkin)
         {
             // 3 - ORDEM DE INICIO
-            if(shopProductSkin.maxFuel > 0)
+            if (shopProductSkin.maxFuel > 0)
                 GetMaxFuel = shopProductSkin.maxFuel;
-            if(shopProductSkin.cadenceFuel > 0)
+            if (shopProductSkin.cadenceFuel > 0)
                 reduceFuelCadence = shopProductSkin.cadenceFuel;
             DebugManager.Log<PlayerFuel>($"Na Mudança de skin");
         }
 
-        #region PowerUp GasStatioin
+        #region PowerUp GasStation
 
         private void EndFillEnd(AreaEffectScriptable areaEffectScriptable)
         {
             if (areaEffectScriptable.obstacleTypes != ObstacleTypes.GasStation) return;
             _inPowerUp = false;
-            PauseDecoy(_inPowerUp);
+
+            PauseDecoy(false); // Retoma o consumo de combustível
         }
 
         private void StartFillUp(AreaEffectScriptable areaEffectScriptable)
@@ -123,9 +108,34 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _inPowerUp = true;
             _areaEffectCadence = areaEffectScriptable.areaEffectCadence;
 
-            PauseDecoy(_inPowerUp);
+            PauseDecoy(true); // Pausa o consumo de combustível
         }
 
         #endregion
+
+        private void UpdateFuelState()
+        {
+            if (_inPowerUp)
+            {
+                // Recarregar combustível
+                var lastFillFuel = _areaEffectCadence * Time.deltaTime;
+                GetFuel += lastFillFuel;
+                GetFuel = Mathf.Clamp(GetFuel, 0f, GetMaxFuel);
+                GameStatisticManager.instance.LogFuelCharge(lastFillFuel);
+            }
+            else if (!_fuelPause && _playerMaster.ObjectIsReady && !_playerMaster.godMode && !_playerMaster.AutoPilot)
+            {
+                // Consumir combustível
+                var lastFuel = reduceFuelCadence * Time.deltaTime;
+                GetFuel -= lastFuel;
+                GetFuel = Mathf.Clamp(GetFuel, 0f, GetMaxFuel);
+                GameStatisticManager.instance.LogFuelSpend(lastFuel);
+                if (GetFuel <= 0)
+                {
+                    _playerMaster.OnEventPlayerMasterGetHit();
+                    GameStatisticManager.instance.LogFuelOut(1);
+                }
+            }
+        }
     }
 }

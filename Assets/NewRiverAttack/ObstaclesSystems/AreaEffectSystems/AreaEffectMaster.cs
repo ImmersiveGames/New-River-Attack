@@ -7,28 +7,42 @@ namespace NewRiverAttack.ObstaclesSystems.AreaEffectSystems
 {
     public sealed class AreaEffectMaster : ObstacleMaster, IAreaEffect
     {
-        internal bool InAreaEffect;
+        private bool _inAreaEffect;
+
+        public bool IsInAreaEffect => _inAreaEffect;
+
         internal event ObstacleGenericHandler EventMasterAreaEffectEnter;
         internal event ObstacleGenericHandler EventMasterAreaEffectExit;
-        
+
         internal AreaEffectScriptable GetScriptableSettings => objectDefault as AreaEffectScriptable;
+
         protected override void ReadyObject()
         {
             IsDisable = false;
+            _inAreaEffect = false;
         }
 
         protected override void AttemptKillObstacle(PlayerMaster playerMaster)
         {
             IsDisable = true;
-            if(!objectDefault.canKilled) return;
+
+            // Se o objeto pode ser destruído, aciona a lógica de saída da área de efeito
+            if (_inAreaEffect)
+            {
+                ExitEffect(); // Atualiza o estado para indicar que está fora do efeito
+            }
+
+            if (!objectDefault.canKilled) return;
+
             IsDead = true;
         }
 
         protected override void TryReSpawn()
         {
             IsDisable = true;
-            if(!objectDefault.canRespawn) return;
+            if (!objectDefault.canRespawn) return;
             IsDead = false;
+            _inAreaEffect = false;
             RepositionObject();
         }
 
@@ -44,12 +58,13 @@ namespace NewRiverAttack.ObstaclesSystems.AreaEffectSystems
 
         private void OnEventMasterAreaEffectEnter()
         {
-            InAreaEffect = true;
+            _inAreaEffect = true;
             EventMasterAreaEffectEnter?.Invoke();
         }
+
         private void OnEventMasterAreaEffectExit()
         {
-            InAreaEffect = false;
+            _inAreaEffect = false;
             EventMasterAreaEffectExit?.Invoke();
         }
     }
