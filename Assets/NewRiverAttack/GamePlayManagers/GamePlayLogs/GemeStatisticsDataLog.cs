@@ -5,6 +5,7 @@ using ImmersiveGames.Utils;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
 {
@@ -17,10 +18,10 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
         }
 
         [Header("Players Logs")] 
-        public int playerMaxScore;
-        public float playerTimeSpent;
-        public int playerMaxDistance;
-        public int playerDeaths;
+        public int playersMaxScore;
+        public float playersTimeSpent;
+        public int playersMaxDistance;
+        public int playersDeaths;
         public int playersDieWall;
         public int playersDieEnemyCollider;
         public int playersDieEnemyBullets;
@@ -29,15 +30,26 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
         public int playersBombs;
         public float playersTimeRapidFire;
         public int playersBombHit;
-        public float fuelSpent;
-        public float fuelCharge;
-        public float amountDistance;
+        public float playersFuelSpent; 
+        public float playersFuelCharge;
+        public float playersAmountDistance;
         public int playersClassicPath;
         public int playersMissionPath;
         internal const int BaseConversion = 20;
 
+        public List<GameStatisticHit> GetEnemyList
+        {
+            get => _listEnemyHit;
+            set
+            {
+                _listEnemyHit = new List<GameStatisticHit>();
+                _listEnemyHit = value;
+            }
+        }
+        
+
         private List<GameStatisticHit> _listEnemyHit = new List<GameStatisticHit>();
-        public string GetAmountDistance => $"{amountDistance:F2}";
+        public string GetAmountDistance => $"{playersAmountDistance:F2}";
 
         #region List Auxiliares
 
@@ -132,9 +144,9 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
 
         public void ResetLogs()
         {
-            playerMaxScore = 0;
-            playerTimeSpent = 0;
-            playerMaxDistance = 0;
+            playersMaxScore = 0;
+            playersTimeSpent = 0;
+            playersMaxDistance = 0;
 
             playersDieWall = 0;
             playersDieEnemyCollider = 0;
@@ -143,9 +155,9 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
 
             playersShoots = 0;
             playersBombs = 0;
-            fuelSpent = 0;
-            fuelCharge = 0;
-            amountDistance = 0;
+            playersFuelSpent = 0;
+            playersFuelCharge = 0;
+            playersAmountDistance = 0;
             _listEnemyHit = new List<GameStatisticHit>();
         }
 
@@ -163,8 +175,8 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
 
         public void SetAmountDistance(float amount)
         {
-            amountDistance = amount / BaseConversion;
-            DebugManager.Log<GemeStatisticsDataLog>($"Distance converted to custom unit: {amountDistance:F2}");
+            playersAmountDistance = amount / BaseConversion;
+            DebugManager.Log<GemeStatisticsDataLog>($"Distance converted to custom unit: {playersAmountDistance:F2}");
         }
     }
 }

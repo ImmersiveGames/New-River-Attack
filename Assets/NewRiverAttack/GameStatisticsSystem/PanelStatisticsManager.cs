@@ -33,14 +33,14 @@ namespace NewRiverAttack.GameStatisticsSystem
 
         #region GetValues
 
-        private string GetScore => _gemeStatistics.playerMaxScore.ToString();
-        private string GetSpendTime => Tools.TimeFormat(_gemeStatistics.playerTimeSpent) ?? "0000000";
+        private string GetScore => _gemeStatistics.playersMaxScore.ToString();
+        private string GetSpendTime => Tools.TimeFormat(_gemeStatistics.playersTimeSpent) ?? "0000000";
         private string GetMaxPathDistance => $"{_gemeStatistics.GetAmountDistance} KM";
         private string GetShootSpent => _gemeStatistics.playersShoots.ToString();
         private string GetBombsSpent => _gemeStatistics.playersBombs.ToString();
-        private string GetFuelSpent => $"{_gemeStatistics.fuelSpent:F2} L";
-        private string GetFuelCharge => $"{_gemeStatistics.fuelCharge:F2} L";
-        private string GetDeaths => _gemeStatistics.playerDeaths.ToString();
+        private string GetFuelSpent => $"{_gemeStatistics.playersFuelSpent:F2} L";
+        private string GetFuelCharge => $"{_gemeStatistics.playersFuelCharge:F2} L";
+        private string GetDeaths => _gemeStatistics.playersDeaths.ToString();
         private string GetWallDeaths => _gemeStatistics.playersDieWall.ToString();
         private string GetEnemyDeaths => _gemeStatistics.playersDieEnemyCollider.ToString();
         private string GetBulletsDeaths => _gemeStatistics.playersDieEnemyBullets.ToString();

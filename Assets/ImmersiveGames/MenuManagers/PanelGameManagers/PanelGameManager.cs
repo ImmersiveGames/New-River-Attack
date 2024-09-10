@@ -122,14 +122,12 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
             _inLoad = false;
         }
 
-        public async void ButtonReload()
+        public void ButtonReload()
         {
             
             _gamePlayManager.OnEventGameReload();
             SetupInitial();
             //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
-            
-            
         }
         private void SetupInitial()
         {

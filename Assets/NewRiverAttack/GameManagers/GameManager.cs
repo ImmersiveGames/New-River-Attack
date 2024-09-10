@@ -2,13 +2,10 @@
 using ImmersiveGames.StateManagers;
 using ImmersiveGames.Utils;
 using NewRiverAttack.GamePlayManagers;
-using NewRiverAttack.GamePlayManagers.GamePlayLogs;
 using NewRiverAttack.LevelBuilder;
-using NewRiverAttack.SaveManagers;
 using NewRiverAttack.StateManagers;
 using NewRiverAttack.StateManagers.States;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace NewRiverAttack.GameManagers
 {
@@ -26,8 +23,6 @@ namespace NewRiverAttack.GameManagers
         public LevelListData missionModeLevels;
         internal LevelData ActiveLevel;
         internal int ActiveIndex;
-        [SerializeField] private GemeStatisticsDataLog dataLog;
-        [SerializeField] private GameOptionsSave gameOptionsSave;
         
         protected override void Awake()
         {

@@ -6,6 +6,7 @@ namespace ImmersiveGames.ShopManagers.Abstracts
 {
     public abstract class ShopProduct: ScriptableObject, IShopProduct
     {
+        public ushort idProduct;
         public new string name;
         public LocalizedString localizedName;
         public Sprite spriteItem;

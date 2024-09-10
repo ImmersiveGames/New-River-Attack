@@ -46,17 +46,17 @@ namespace NewRiverAttack.GameStatisticsSystem
         {
             var sessionTime = Time.time - sessionStartTime;
             if (!_gemeStatisticsDataLog) return;
-            _gemeStatisticsDataLog.playerTimeSpent += sessionTime;
-            DebugManager.Log<GameStatisticManager>($"Log Offline Timer {_gemeStatisticsDataLog.playerTimeSpent}");
+            _gemeStatisticsDataLog.playersTimeSpent += sessionTime;
+            DebugManager.Log<GameStatisticManager>($"Log Offline Timer {_gemeStatisticsDataLog.playersTimeSpent}");
         }
 
         internal async void LogMaxScore(int score)
         {
             if(_gemeStatisticsDataLog == null) return;
-            if (score <= _gemeStatisticsDataLog.playerMaxScore) return;
-            _gemeStatisticsDataLog.playerMaxScore = score;
+            if (score <= _gemeStatisticsDataLog.playersMaxScore) return;
+            _gemeStatisticsDataLog.playersMaxScore = score;
             await SteamLeaderboardService.Instance.UpdateScore(score, true).ConfigureAwait(false);
-            DebugManager.Log<GameStatisticManager>($"Log Offline Max Score {_gemeStatisticsDataLog.playerMaxScore}");
+            DebugManager.Log<GameStatisticManager>($"Log Offline Max Score {_gemeStatisticsDataLog.playersMaxScore}");
         }
 
         public void LogAmountDistance(float amount)
@@ -69,17 +69,17 @@ namespace NewRiverAttack.GameStatisticsSystem
         {
             LogMaxDistance(distance);
             if(_gemeStatisticsDataLog == null) return;
-            if (_gemeStatisticsDataLog.amountDistance % 500 == 0)
+            if (_gemeStatisticsDataLog.playersAmountDistance % 500 == 0)
             {
-                OnEventServiceSet("stat_FlightDistance", _gemeStatisticsDataLog.amountDistance);
+                OnEventServiceSet("stat_FlightDistance", _gemeStatisticsDataLog.playersAmountDistance);
             }
         }
 
         private void LogMaxDistance(int intValue)
         {
             if(_gemeStatisticsDataLog == null) return;
-            _gemeStatisticsDataLog.playerMaxDistance = Mathf.Max(_gemeStatisticsDataLog.playerMaxDistance, intValue);
-            DebugManager.Log<GameStatisticManager>($"Log Offline MAX Distance: {_gemeStatisticsDataLog.playerMaxDistance}");
+            _gemeStatisticsDataLog.playersMaxDistance = Mathf.Max(_gemeStatisticsDataLog.playersMaxDistance, intValue);
+            DebugManager.Log<GameStatisticManager>($"Log Offline MAX Distance: {_gemeStatisticsDataLog.playersMaxDistance}");
         }
 
         public void LogShoots(int intValue)
@@ -104,26 +104,26 @@ namespace NewRiverAttack.GameStatisticsSystem
         public void LogFuelSpend(float floatValue)
         {
             if(_gemeStatisticsDataLog == null) return;
-            _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.fuelSpent, floatValue);
-            if (Mathf.Abs(_gemeStatisticsDataLog.fuelSpent % 1000) < Epsilon || Mathf.Abs(1000 - (_gemeStatisticsDataLog.fuelSpent % 1000)) < Epsilon)
+            _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersFuelSpent, floatValue);
+            if (Mathf.Abs(_gemeStatisticsDataLog.playersFuelSpent % 1000) < Epsilon || Mathf.Abs(1000 - (_gemeStatisticsDataLog.playersFuelSpent % 1000)) < Epsilon)
             {
-                OnEventServiceSet("stat_SpendGas", _gemeStatisticsDataLog.fuelSpent);
+                OnEventServiceSet("stat_SpendGas", _gemeStatisticsDataLog.playersFuelSpent);
             }
         }
         public void LogFuelCharge(float floatValue)
         {
             if(_gemeStatisticsDataLog == null) return;
-            _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.fuelCharge, floatValue);
-            if (Mathf.Abs(_gemeStatisticsDataLog.fuelCharge % 100) < Epsilon || Mathf.Abs(100 - (_gemeStatisticsDataLog.fuelCharge % 100)) < Epsilon)
+            _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersFuelCharge, floatValue);
+            if (Mathf.Abs(_gemeStatisticsDataLog.playersFuelCharge % 100) < Epsilon || Mathf.Abs(100 - (_gemeStatisticsDataLog.playersFuelCharge % 100)) < Epsilon)
             {
-                OnEventServiceSet("stat_FillGas", _gemeStatisticsDataLog.fuelCharge);
+                OnEventServiceSet("stat_FillGas", _gemeStatisticsDataLog.playersFuelCharge);
             }
         }
         public void LogDeaths(int intValue)
         {
             if(_gemeStatisticsDataLog == null) return;
-            _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playerDeaths, intValue);
-            OnEventServiceSet("stat_Deaths", _gemeStatisticsDataLog.playerDeaths);
+            _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersDeaths, intValue);
+            OnEventServiceSet("stat_Deaths", _gemeStatisticsDataLog.playersDeaths);
         }
 
         public void LogCollision(Component other)
@@ -198,12 +198,12 @@ namespace NewRiverAttack.GameStatisticsSystem
         {
             if(_gemeStatisticsDataLog == null) return;
             DebugManager.Log<GameStatisticManager>($"Service Update");
-            OnEventServiceSet("highScore", _gemeStatisticsDataLog.playerMaxScore);
-            OnEventServiceSet("stat_FlightDistance", _gemeStatisticsDataLog.amountDistance);
+            OnEventServiceSet("highScore", _gemeStatisticsDataLog.playersMaxScore);
+            OnEventServiceSet("stat_FlightDistance", _gemeStatisticsDataLog.playersAmountDistance);
             OnEventServiceSet("stat_Shoots", _gemeStatisticsDataLog.playersShoots);
             OnEventServiceSet("stat_Bombs", _gemeStatisticsDataLog.playersBombs);
-            OnEventServiceSet("stat_SpendGas", _gemeStatisticsDataLog.fuelSpent);
-            OnEventServiceSet("stat_FillGas", _gemeStatisticsDataLog.fuelCharge);
+            OnEventServiceSet("stat_SpendGas", _gemeStatisticsDataLog.playersFuelSpent);
+            OnEventServiceSet("stat_FillGas", _gemeStatisticsDataLog.playersFuelCharge);
         }
 
         private void OnEventServiceSet(string stateName, int intValue)

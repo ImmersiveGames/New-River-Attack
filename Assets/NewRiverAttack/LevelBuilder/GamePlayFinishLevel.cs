@@ -2,6 +2,7 @@
 using NewRiverAttack.GameManagers;
 using NewRiverAttack.LevelBuilder.Abstracts;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
+using NewRiverAttack.SaveManagers;
 using UnityEngine;
 
 namespace NewRiverAttack.LevelBuilder
@@ -25,7 +26,7 @@ namespace NewRiverAttack.LevelBuilder
             if( playerMaster == null || playerMaster.IsDisable || !InFinisher) return;
             GamePlayManagerRef.FinisherGame();
             GamePlayManagerRef.SendTo(GameManager.instance.gamePlayMode);
-
+            GameSaveHandler.Instance.SaveGameData();
         }
     }
 }

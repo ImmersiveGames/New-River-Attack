@@ -52,7 +52,6 @@ namespace NewRiverAttack.SaveManagers
         //Essa função é duplicada ela também existe em PlayersDefaultSave, mas aqui ela Não define o padrão.
         public void ChangeSkinToPlayer(int indexSettings, ShopProductSkin skin)
         {
-            //DebugManager.Log<GameOptionsSave>($"Skin {playerSettings[indexSettings].actualSkin.name}, {skin.name}");
             if (skin == null || playerSettings[indexSettings].actualSkin == null)
             {
                 playerSettings[indexSettings].actualSkin = skin;

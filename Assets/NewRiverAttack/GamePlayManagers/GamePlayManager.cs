@@ -330,6 +330,7 @@ namespace NewRiverAttack.GamePlayManagers
         }
         internal void OnEventGameOver()
         {
+            GameSaveHandler.Instance.SaveGameData();
             EventGameOver?.Invoke();
         }
         internal void OnEventHudRapidFireEnd(float valueUpdate, int playerIndex)
@@ -339,6 +340,7 @@ namespace NewRiverAttack.GamePlayManagers
 
         private void OnEventGameFinisher()
         {
+            GameSaveHandler.Instance.SaveGameData();
             EventGameFinisher?.Invoke();
         }
         internal void OnEventGameReload()
@@ -350,7 +352,7 @@ namespace NewRiverAttack.GamePlayManagers
             SetGameMode();
             InitializePlayers(allPlayersDefaultSettings);
             GameManager.StateManager.ForceChangeState(StatesNames.GameStatePlay.ToString());
-            
+            GameSaveHandler.Instance.SaveGameData();
             EventGameReload?.Invoke();
         }
         #endregion

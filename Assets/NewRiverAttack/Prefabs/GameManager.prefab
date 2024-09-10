@@ -321,7 +321,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871082313047152505}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 0.86
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -844,6 +844,7 @@ GameObject:
   - component: {fileID: 645895881759750797}
   - component: {fileID: 607106245801943029}
   - component: {fileID: 4921914926307398810}
+  - component: {fileID: 1523721577009070901}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -889,8 +890,8 @@ MonoBehaviour:
   enableDebugs: 1
   startState: 1
   gamePlayMode: 0
-  classicModeLevels: {fileID: 11400000, guid: e701df822de67cf4c8f76d315957443e, type: 2}
-  missionModeLevels: {fileID: 11400000, guid: 47a816f58e2577a4c9a7281610f34436, type: 2}
+  classicModeLevels: {fileID: 11400000, guid: 48a2902275ea02140b3f011bb75e26d2, type: 2}
+  missionModeLevels: {fileID: 11400000, guid: c2573330f4fa06f438df8b14f7a67b9b, type: 2}
 --- !u!114 &4921914926307398810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -904,6 +905,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingProgressBar: {fileID: 2642104626630621309}
+--- !u!114 &1523721577009070901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908975058179474991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e9ab7746d064af78ab6df98d3003aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataLog: {fileID: 11400000, guid: fa79827a92bd32c45af291e7d04958c7, type: 2}
+  gameOptionsSave: {fileID: 11400000, guid: 27c6600f2ceb2724ea7bdedb94844935, type: 2}
+  saveObject: {fileID: 11400000, guid: 46f644719e729f14fb6e7453eaae78ff, type: 2}
 --- !u!1 &2109225969570218996
 GameObject:
   m_ObjectHideFlags: 0
