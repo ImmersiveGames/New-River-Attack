@@ -15,7 +15,12 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         private EnemiesScriptable GetEnemySettings { get; set; }
 
         #region Unity Methods
+
         private void Start()
+        {
+            StartMovement();
+        }
+        private void StartMovement()
         {
             StartState = new MoveStateHold(this);
             if (GetMoveApproach != 0) StartState = new MoveStatePatrol(this);
@@ -54,6 +59,12 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         {
             SetVelocity(moveVelocity);
             base.ResetMovement();
+        }
+
+        protected override void ReloadMovement()
+        {
+            StartMovement();
+            ResetMovement();
         }
     }
 }

@@ -21,7 +21,8 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         {
             SetInitialReferences();
             _enemiesMaster.EventObstacleChangeSkin += UpdateCadenceShoot;
-            _gamePlayManagers.EventGameRestart -= ResetMovement;
+            _gamePlayManagers.EventGameRestart += ResetShoot;
+            _gamePlayManagers.EventGameReload -= RestartShoot;
         }
 
         private void OnBecameInvisible()
@@ -33,8 +34,12 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         {
             StartShoot();
         }
-        
+
         private void Start()
+        {
+            StartInitShoot();
+        }
+        private void StartInitShoot()
         {
             if (_enemies.GetShootApproach != 0) 
                 _startState = new EnemyShootStatePatrol(this, false);
@@ -53,7 +58,8 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         private void OnDisable()
         {
             _enemiesMaster.EventObstacleChangeSkin -= UpdateCadenceShoot;
-            _gamePlayManagers.EventGameRestart -= ResetMovement;
+            _gamePlayManagers.EventGameRestart -= ResetShoot;
+            _gamePlayManagers.EventGameReload -= RestartShoot;
         }
 
         #endregion
@@ -103,9 +109,15 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             GetActualState = newState;
             GetActualState?.EnterState(_enemiesMaster);
         }
-        private void ResetMovement()
+        private void ResetShoot()
         {
             ChangeState(_startState);
+        }
+
+        private void RestartShoot()
+        {
+            ResetShoot();
+            StartInitShoot();
         }
         private IShoot GetActualState { get; set; }
         public bool ShouldBeShoot => _isShoot && _enemiesMaster.ObjectIsReady;

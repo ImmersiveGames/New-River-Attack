@@ -23,6 +23,7 @@ namespace NewRiverAttack.ObstaclesSystems.CollectibleSystems
             if(!objectDefault.canRespawn) return;
             IsDisable = false;
         }
+        protected override void ReloadObject(){}
 
         protected override void AttemptKillObstacle(PlayerMaster playerMaster)
         {

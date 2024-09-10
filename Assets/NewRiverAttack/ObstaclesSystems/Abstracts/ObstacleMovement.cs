@@ -42,6 +42,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         {
             SetInitialReferences();
             _gamePlayManagers.EventGameRestart += ResetMovement;
+            _gamePlayManagers.EventGameReload += ReloadMovement;
         }
         private void Update()
         {
@@ -51,6 +52,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         private void OnDisable()
         {
             _gamePlayManagers.EventGameRestart -= ResetMovement;
+            _gamePlayManagers.EventGameReload -= ReloadMovement;
         }
         
 
@@ -60,6 +62,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             _gamePlayManagers = GamePlayManager.Instance;
             ObstacleMaster = GetComponent<ObstacleMaster>();
         }
+        protected virtual void ReloadMovement(){}
         protected void SetVelocity(float defaultSpeed)
         {
             MoveVelocity = defaultSpeed;

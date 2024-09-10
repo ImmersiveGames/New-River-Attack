@@ -19,6 +19,24 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         {
             GamePlayBossManager.instance.SetBoss(this);
         }
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            GamePlayManagerRef.EventGameReload += ReloadBoss;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            GamePlayManagerRef.EventGameReload -= ReloadBoss;
+        }
+        
+        private void ReloadBoss()
+        {
+            GamePlayBossManager.instance.SetBoss(this);
+            var behaviors = GetComponent<BossBehavior>();
+            behaviors.StartBehavior();
+        }
 
         protected override void AttemptKillObstacle(PlayerMaster playerMaster)
         {

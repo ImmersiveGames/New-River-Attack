@@ -20,9 +20,19 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             ObstacleMaster = GetComponent<ObstacleMaster>();
         }
 
+        private void OnEnable()
+        {
+            GamePlayManager.Instance.EventGameReload += ReloadHp;
+        }
+
         protected virtual void Start()
         {
-            ObstacleHp = ObstacleMaster.objectDefault.hitPoints;
+            ReloadHp();
+        }
+
+        private void OnDisable()
+        {
+            GamePlayManager.Instance.EventGameReload -= ReloadHp;
         }
 
         internal virtual void OnTriggerEnter(Collider other)
@@ -33,7 +43,10 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         }
 
         #endregion
-        
+        private void ReloadHp()
+        {
+            ObstacleHp = ObstacleMaster.objectDefault.hitPoints;
+        }
         protected virtual void ComponentToKill(Component other, EnumCollisionType typeCollision)
         {
             if (other == null) return;

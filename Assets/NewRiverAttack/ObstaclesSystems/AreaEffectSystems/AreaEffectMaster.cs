@@ -21,6 +21,7 @@ namespace NewRiverAttack.ObstaclesSystems.AreaEffectSystems
             IsDisable = false;
             _inAreaEffect = false;
         }
+        protected override void ReloadObject(){}
 
         protected override void AttemptKillObstacle(PlayerMaster playerMaster)
         {

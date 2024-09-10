@@ -35,6 +35,10 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         private void Start()
         {
+            StartBehavior();
+        }
+        internal void StartBehavior()
+        {
             _behaviorManager = new BehaviorManager(this);
             
             //var cleanShootBehavior = new CleanShootBehavior(_behaviorManager,Array.Empty<IBehavior>(), 0.5f,8);

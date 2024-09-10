@@ -29,6 +29,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             base.OnEnable();
             GamePlayManagerRef.EventGameRestart += TryReSpawn;
             GamePlayManagerRef.EventGameReady += ReadyObject;
+            GamePlayManagerRef.EventGameReload += ReloadObject;
         }
 
         protected override void OnDisable()
@@ -36,6 +37,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             base.OnDisable();
             GamePlayManagerRef.EventGameRestart -= TryReSpawn;
             GamePlayManagerRef.EventGameReady -= ReadyObject;
+            GamePlayManagerRef.EventGameReload -= ReloadObject;
         }
 
         #endregion
@@ -43,6 +45,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         #region Object Methods
         protected abstract void ReadyObject();
+        protected abstract void ReloadObject();
         protected abstract void AttemptKillObstacle(PlayerMaster playerMaster);
         protected abstract void TryReSpawn();
 

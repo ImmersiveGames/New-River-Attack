@@ -30,7 +30,11 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         {
             IsDisable = false;
         }
-        
+
+        protected override void ReloadObject()
+        {
+            RepositionObject();
+        }
         public EnemiesScriptable GetEnemySettings => objectDefault as EnemiesScriptable;
 
         public void OnEventSpawnObject(Vector2 position)

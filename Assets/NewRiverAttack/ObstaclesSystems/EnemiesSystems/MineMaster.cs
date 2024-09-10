@@ -10,6 +10,23 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         public event ObstacleGenericHandler EventDetonate;
         #endregion
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            GamePlayManagerRef.EventGameReload += DestroyMine;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            GamePlayManagerRef.EventGameReload -= DestroyMine;
+        }
+        
+        private void DestroyMine()
+        {
+            DestroyImmediate(gameObject);
+        }
+
         protected internal void OnEventAlertApproach()
         {
             EventAlertApproach?.Invoke();
