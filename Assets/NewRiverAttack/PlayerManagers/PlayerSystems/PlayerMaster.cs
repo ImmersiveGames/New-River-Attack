@@ -91,11 +91,12 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             BossController = false;
         }
 
-        protected internal override void SavePosition(Vector3 myPosition)
+        /*protected internal override void InitializeObject()
         {
-            DebugManager.Log<PlayerMaster>($"Save Position: {myPosition}");
-            base.SavePosition(myPosition);
-        }
+            //No caso aqui é pra inicializar da posição zero ao iniciar
+            base.InitializeObject();
+            SavePosition(Vector3.zero);
+        }*/
 
         #endregion
 
@@ -154,6 +155,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private void ReadyPlayer()
         {
+            DebugManager.Log<PlayerMaster>("ReadyPlayer ");
             OnEventPlayerMasterReady();
             IsDisable = false;
             IsDead = false;
@@ -218,6 +220,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         public void OnEventPlayerMasterCollect(ICollectable collectable)
         {
+            DebugManager.Log<PlayerMaster>($"Event Collect");
             EventPlayerMasterCollect?.Invoke(collectable);
         }
 

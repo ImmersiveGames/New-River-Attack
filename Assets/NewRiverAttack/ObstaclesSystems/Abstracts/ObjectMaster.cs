@@ -1,6 +1,7 @@
 ﻿using ImmersiveGames.DebugManagers;
 using NewRiverAttack.GamePlayManagers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace NewRiverAttack.ObstaclesSystems.Abstracts
 {
@@ -23,7 +24,8 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         {
             SetInitialReferences();
             GamePlayManagerRef.EventPostStateGameInitialize += InitializeObject;
-            GamePlayManagerRef.EventGameReady += ReadyObject;
+            GamePlayManagerRef.EventGameReady += InitializeObject;
+            DebugManager.Log<ObjectMaster>($"Enable - {gameObject.name}");
             IsDisable = true;
             IsDead = false;
         }
@@ -31,24 +33,20 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         private void Start()
         {
             SetInitialPosition();
+            DebugManager.Log<ObjectMaster>($"Start - {gameObject.name}");
         }
 
         protected virtual void OnDisable()
         {
             GamePlayManagerRef.EventPostStateGameInitialize -= InitializeObject;
-            GamePlayManagerRef.EventGameReady -= ReadyObject;
+            GamePlayManagerRef.EventGameReady -= InitializeObject;
         }
 
         #endregion
-        protected internal void InitializeObject()
+        protected internal virtual void InitializeObject()
         {
             IsDisable = false;
-            DebugManager.Log<ObjectMaster>($"Initialize: {transform.position.z}");
-        }
-
-        private void ReadyObject()
-        {
-            IsDisable = false;
+            DebugManager.Log<ObjectMaster>($"{transform.position.z}");
         }
 
         protected virtual void SetInitialReferences()
@@ -74,7 +72,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         protected float GetLastPositionZ => _savePosition.z;
         protected float GetLastPositionX => _savePosition.x;
-        protected internal virtual void SavePosition(Vector3 myPosition)
+        protected internal void SavePosition(Vector3 myPosition)
         {
             _savePosition = myPosition;
         }
