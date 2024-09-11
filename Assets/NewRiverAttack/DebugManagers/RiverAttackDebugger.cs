@@ -52,10 +52,10 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<MainMenu>(DebugManager.DebugLevels.None);
 
             
-            DebugManager.SetScriptDebugLevel<PanelGamePause>(DebugManager.DebugLevels.All);
-            DebugManager.SetScriptDebugLevel<PanelGameManager>(DebugManager.DebugLevels.All);
-            DebugManager.SetScriptDebugLevel<PanelGameHud>(DebugManager.DebugLevels.All);
-            DebugManager.SetScriptDebugLevel<PanelGameOver>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<PanelGamePause>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<PanelGameManager>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<PanelGameHud>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<PanelGameOver>(DebugManager.DebugLevels.None);
             
             //Audios
             DebugManager.SetScriptDebugLevel<AudioManager>(DebugManager.DebugLevels.None);
@@ -66,7 +66,7 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<GameOptionsSave>(DebugManager.DebugLevels.None);
             
             //Inputs
-            DebugManager.SetScriptDebugLevel<ActionManager>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<ActionManager>(DebugManager.DebugLevels.None);
             
             //PoolManager
             DebugManager.SetScriptDebugLevel<PoolObject>(DebugManager.DebugLevels.LogsAndWarnings);
@@ -75,7 +75,7 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<SimpleShoppingManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<ShopProductSimpleSkins>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<FiniteNavigationMode>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<SmoothFiniteNavigationMode>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<SmoothFiniteNavigationMode>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<ShopProductSettings>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<ShopSkinChanger>(DebugManager.DebugLevels.None);
             

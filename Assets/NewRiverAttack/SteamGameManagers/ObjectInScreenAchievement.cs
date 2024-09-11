@@ -10,7 +10,6 @@ namespace NewRiverAttack.SteamGameManagers
         private void OnBecameVisible()
         {
             SteamAchievementService.Instance.UnlockAchievement(idAchievement);
-            //SteamGameManager.UnlockAchievement(idAchievement);
         }
     }
 }

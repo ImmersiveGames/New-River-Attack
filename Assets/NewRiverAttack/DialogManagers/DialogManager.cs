@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.InputManager;
+using ImmersiveGames.SteamServicesManagers;
 using ImmersiveGames.TimelineManagers;
 using ImmersiveGames.Utils;
 using NewRiverAttack.GameManagers;
@@ -181,6 +182,7 @@ namespace NewRiverAttack.DialogManagers
         private void EndDialogue()
         {
             DebugManager.Log<DialogManager>("Fim do diálogo!");
+            SteamAchievementService.Instance.UnlockAchievement("ACH_FINISH_TUTORIAL");
             StopDialog();
         }
 

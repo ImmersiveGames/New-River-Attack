@@ -5,6 +5,7 @@ using System.Linq;
 using ImmersiveGames;
 using ImmersiveGames.CameraManagers;
 using ImmersiveGames.DebugManagers;
+using ImmersiveGames.SteamServicesManagers;
 using NewRiverAttack.GameManagers;
 using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.HUBManagers;
@@ -46,7 +47,6 @@ namespace NewRiverAttack.GamePlayManagers
 
         #region Delegates
         public delegate void PlayerMasterEventHandler(PlayerMaster playerMaster);
-        public event PlayerMasterEventHandler EventPlayerGetHit;
         public event PlayerMasterEventHandler EventPlayerInitialize;
       
         public delegate void GamePlayGeneralEventHandler();
@@ -182,6 +182,7 @@ namespace NewRiverAttack.GamePlayManagers
             //Aqui é Apos o Go da Animação
             _activePlayers = true;
             OnEventGameReady();
+            _initializedPlayers[0].SavePosition(Vector3.zero);
         }
         public void FinisherGame()
         {
@@ -214,6 +215,18 @@ namespace NewRiverAttack.GamePlayManagers
         
         private async void SendToCompleteGame()
         {
+            switch (_gameManager.gamePlayMode)
+            {
+                case GamePlayModes.ClassicMode:
+                    SteamAchievementService.Instance.UnlockAchievement("ACH_FINISH_CLASSIC");
+                    break;
+                case GamePlayModes.MissionMode:
+                    SteamAchievementService.Instance.UnlockAchievement("ACH_FINISH_MISSION");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
             await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateEndGame.ToString()).ConfigureAwait(false);
         }
 
@@ -252,13 +265,13 @@ namespace NewRiverAttack.GamePlayManagers
             //Aqui são as configurações assim que a cena for totalmente carregada.
         }
 
-        public void SetActiveLevel(LevelData dataLevel)
+        /*public void SetActiveLevel(LevelData dataLevel)
         {
             _actualLevel = dataLevel;
-        }
+        }*/
 
-        public LevelData GetLevelData => _actualLevel;
-        public int GetNumberOfPlayers => _initializedPlayers.Count;
+        /*public LevelData GetLevelData => _actualLevel;
+        public int GetNumberOfPlayers => _initializedPlayers.Count;*/
         public PlayersDefaultSettings PlayersDefault => allPlayersDefaultSettings;
         public PlayerMaster GetPlayerMaster(int playerIndex)
         {
@@ -268,7 +281,7 @@ namespace NewRiverAttack.GamePlayManagers
 
         #region Calls
 
-        public void OnEventPlayerInitialize(PlayerMaster playerMaster)
+        private void OnEventPlayerInitialize(PlayerMaster playerMaster)
         {
             EventPlayerInitialize?.Invoke(playerMaster);
         }
@@ -311,10 +324,6 @@ namespace NewRiverAttack.GamePlayManagers
         internal void OnEventHudRapidFireUpdate(float valueUpdate, int playerIndex)
         {
             EventHudRapidFireUpdate?.Invoke(valueUpdate, playerIndex);
-        }
-        internal void OnEventPlayerGetHit(PlayerMaster playerMaster)
-        {
-            EventPlayerGetHit?.Invoke(playerMaster);
         }
         internal void OnEventGamePause()
         {

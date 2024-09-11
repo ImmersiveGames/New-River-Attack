@@ -1,8 +1,5 @@
 ﻿using ImmersiveGames.AudioEvents;
-using ImmersiveGames.DebugManagers;
-using ImmersiveGames.LevelBuilder;
 using NewRiverAttack.AudioManagers;
-using NewRiverAttack.LevelBuilder;
 
 namespace ImmersiveGames
 {

@@ -1,6 +1,4 @@
-﻿using System;
-using ImmersiveGames.DebugManagers;
-using NewRiverAttack.GamePlayManagers.GamePlayLogs;
+﻿using NewRiverAttack.GamePlayManagers.GamePlayLogs;
 using NewRiverAttack.GameStatisticsSystem;
 using UnityEngine;
 using GamePlayManager = NewRiverAttack.GamePlayManagers.GamePlayManager;
@@ -26,13 +24,11 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void OnEnable()
         {
             SetInitialReferences();
-            _gamePlayManager.EventPlayerGetHit += ResetDistance;
             _playerMaster.EventPlayerMasterGetHit += ResetDistance;
         }
 
         private void OnDisable()
         {
-            _gamePlayManager.EventPlayerGetHit -= ResetDistance;
             _playerMaster.EventPlayerMasterGetHit -= ResetDistance;
         }
 
@@ -46,10 +42,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void ResetDistance()
         {
             _distanceThisAttempt = 0;
-        }
-        private void ResetDistance(PlayerMaster playerMaster)
-        {
-            ResetDistance();
         }
         
         private void UpdatePlayerDistance()

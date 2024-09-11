@@ -242,6 +242,7 @@ namespace NewRiverAttack.LevelBuilder
                 return;
             }
 
+            CheckSegmentActions(activeSegment);
             var activeSegmentIndex = activeObjects.IndexOf((ScenarioObjectData)activeSegment);
 
             DebugManager.Log<LevelBuilderManager>("Índice do segmento ativo: " + activeSegmentIndex);
@@ -268,6 +269,12 @@ namespace NewRiverAttack.LevelBuilder
             {
                 AddNextSegment(segmentsToInstantiateFront);
             }
+        }
+
+        private void CheckSegmentActions(ScenarioObjectData? activeSegment)
+        {
+            if(activeSegment == null) return;
+            
         }
 
         public void DestroyLevel()

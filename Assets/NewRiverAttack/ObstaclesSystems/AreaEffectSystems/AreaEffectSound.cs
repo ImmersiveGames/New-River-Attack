@@ -1,6 +1,4 @@
 ﻿using ImmersiveGames.AudioEvents;
-using NewRiverAttack.GamePlayManagers;
-using NewRiverAttack.ObstaclesSystems.CollectibleSystems;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
@@ -13,8 +11,7 @@ namespace NewRiverAttack.ObstaclesSystems.AreaEffectSystems
         [SerializeField] private AudioEvent effectAreaExitSound;
         
         private AreaEffectMaster _areaEffectMaster;
-        private GamePlayManager _gamePlayManager;
-
+     
         #region Unity Methods
 
         protected override void OnEnable()
@@ -23,8 +20,6 @@ namespace NewRiverAttack.ObstaclesSystems.AreaEffectSystems
             _areaEffectMaster.EventMasterAreaEffectEnter += EnterAreaSound;
             _areaEffectMaster.EventMasterAreaEffectExit += StopAreaSound;
             _areaEffectMaster.EventObstacleDeath += StopAreaSound;
-            _gamePlayManager.EventPlayerGetHit += StopAreaSound;
-
         }
 
         protected override void OnDisable()
@@ -33,7 +28,6 @@ namespace NewRiverAttack.ObstaclesSystems.AreaEffectSystems
             _areaEffectMaster.EventMasterAreaEffectEnter -= EnterAreaSound;
             _areaEffectMaster.EventMasterAreaEffectExit -= StopAreaSound;
             _areaEffectMaster.EventObstacleDeath -= StopAreaSound;
-            _gamePlayManager.EventPlayerGetHit -= StopAreaSound;
         }
 
         #endregion
@@ -43,7 +37,6 @@ namespace NewRiverAttack.ObstaclesSystems.AreaEffectSystems
         {
             base.SetInitialReferences();
             _areaEffectMaster = ObstacleMaster as AreaEffectMaster;
-            _gamePlayManager = GamePlayManager.Instance;
         }
 
         private void EnterAreaSound()
