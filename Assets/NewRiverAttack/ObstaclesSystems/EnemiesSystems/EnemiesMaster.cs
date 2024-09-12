@@ -19,7 +19,6 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 
         protected override void TryReSpawn()
         {
-            //GamePlayManagerRef.IsBossFight
             IsDisable = !GamePlayManagerRef.IsBossFight;
             if(!objectDefault.canRespawn) return;
             IsDead = false;

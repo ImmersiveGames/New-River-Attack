@@ -14,7 +14,6 @@ namespace NewRiverAttack.ObstaclesSystems.MovementStates
         private readonly EnemiesScriptable _enemiesScriptable;
         private EnemiesAnimation _enemiesAnimation;
         
-        public float SpeedMovement;
         private bool _hasApproach;
         private bool _inTransition;
         
@@ -22,8 +21,6 @@ namespace NewRiverAttack.ObstaclesSystems.MovementStates
         {
             _obstacleMovement = obstacleMovement;
             _obstacleMaster = _obstacleMovement.GetComponent<ObstacleMaster>();
-        
-            SpeedMovement = 0;
         }
 
         public void EnterState()

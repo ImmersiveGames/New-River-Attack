@@ -50,7 +50,7 @@ namespace ImmersiveGames.AudioEvents
             {
                 DebugManager.LogError<AudioEvent>("Audio Source not assigned in AudioEvent.");
                 return;
-            };
+            }
             if (source.isPlaying) source.Stop();
             SetupSource(source);
             source.Play();

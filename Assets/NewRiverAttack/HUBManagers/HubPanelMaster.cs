@@ -111,7 +111,7 @@ namespace NewRiverAttack.HUBManagers
         {
             if(!_hubGameManager.IsHubReady) return;
             var increment = (back) ? -1 : 1;
-            if(_indexMenu + increment > GameOptionsSave.instance.activeIndexMissionLevel) return;
+            if(_indexMenu + increment > GameOptionsSave.Instance.activeIndexMissionLevel) return;
             _inInvoke = true;
             _indexMenu += increment;
             if (_indexMenu < 0) _indexMenu = 0;

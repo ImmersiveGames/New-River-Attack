@@ -1,7 +1,6 @@
 ﻿using GD.MinMaxSlider;
 using ImmersiveGames.ObjectManagers.Interfaces;
 using NewRiverAttack.GamePlayManagers;
-using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.Abstracts

@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 namespace ImmersiveGames.MenuManagers.NotificationManager
 {
-    public class NotificationManager : Singleton<NotificationManager>
+    public sealed class NotificationManager : Singleton<NotificationManager>
     {
         [Header("Configurações")]
         public GameObject notificationPanelPrefab;
@@ -36,20 +36,18 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
 
         private void TryShowNextNotification()
         {
-            if (CanShowNotification())
+            if (!CanShowNotification()) return;
+            if (_notificationQueue.Count == 1)
             {
-                if (_notificationQueue.Count == 1)
-                {
-                    SaveInitialFocus();
-                }
-
-                var nextNotification = _notificationQueue.Dequeue();
-                InstantiateNotificationPanel(nextNotification);
-                _currentPanel.Show(nextNotification.message, () => CloseNotification(nextNotification));
-
-                // Fechar automaticamente após o tempo especificado
-                StartCoroutine(AutoCloseNotification(_currentPanel, notificationDisplayTime));
+                SaveInitialFocus();
             }
+
+            var nextNotification = _notificationQueue.Dequeue();
+            InstantiateNotificationPanel(nextNotification);
+            _currentPanel.Show(nextNotification.message, () => CloseNotification(nextNotification));
+
+            // Fechar automaticamente após o tempo especificado
+            StartCoroutine(AutoCloseNotification(_currentPanel, notificationDisplayTime));
         }
 
         private bool CanShowNotification()
@@ -110,7 +108,7 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
             }
         }
 
-        protected virtual void OnEventNotificationAccepted(NotificationEventArgs e)
+        private void OnEventNotificationAccepted(NotificationEventArgs e)
         {
             EventNotificationAccepted?.Invoke(this, e);
         }
@@ -118,7 +116,7 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
 
     public class NotificationEventArgs : EventArgs
     {
-        public NotificationData NotificationData { get; }
+        public NotificationData NotificationData;
 
         public NotificationEventArgs(NotificationData notificationData)
         {

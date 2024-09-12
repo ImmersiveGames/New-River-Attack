@@ -7,7 +7,7 @@ namespace ImmersiveGames.SteamServicesManagers
 {
     public class SteamConnectionManager : MonoBehaviour
     {
-        public static SteamConnectionManager Instance { get; private set; }
+        private static SteamConnectionManager Instance { get; set; }
         public static bool ConnectedToSteam { get; private set; }
         private static string UserName { get; set; }
 

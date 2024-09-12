@@ -81,7 +81,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         {
             PlayerIndex = indexPlayer;
             _playerScore = 0;
-            var gameOptionSave = GameOptionsSave.instance;
+            var gameOptionSave = GameOptionsSave.Instance;
             ActualSkin = gameOptionSave.playerSettings[indexPlayer].actualSkin;
             gameOptionSave.SetDefaultSkinPlayer(indexPlayer, defaultSettings.skinDefault);
             _playerLives = GetComponent<PlayerLives>();
@@ -178,7 +178,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         }
 
         internal int GetPlayerScore => _playerScore;
-        internal PlayerSettings GetPlayerSettings => GameOptionsSave.instance.playerSettings[PlayerIndex];
+        internal PlayerSettings GetPlayerSettings => GameOptionsSave.Instance.playerSettings[PlayerIndex];
 
         #region Calls
 

@@ -7,7 +7,7 @@ namespace NewRiverAttack.HUDManagers.UI
 {
     public class UiTextScore : MonoBehaviour
     {
-        [SerializeField] private int playerIndex = 0;
+        [SerializeField] private int playerIndex;
         private GamePlayManager _gamePlayManager;
         private PlayerMaster _playerMaster;
         private TMP_Text _tmpTextScore;

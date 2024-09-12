@@ -20,8 +20,6 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
 
         private static readonly int NotificationTrigger = Animator.StringToHash("Notification");
 
-        public NotificationData NotificationData { get; private set; }
-
         private void Awake()
         {
             _animator = GetComponent<Animator>();
@@ -65,20 +63,16 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
 
         private void ConfigureButtons(Action onClose, Action onConfirm)
         {
-            if (confirmButton != null)
+            if (confirmButton == null) return;
+            confirmButton.gameObject.SetActive(onConfirm != null);
+            if (onConfirm == null) return;
+            confirmButton.onClick.RemoveAllListeners();
+            confirmButton.onClick.AddListener(() =>
             {
-                confirmButton.gameObject.SetActive(onConfirm != null);
-                if (onConfirm != null)
-                {
-                    confirmButton.onClick.RemoveAllListeners();
-                    confirmButton.onClick.AddListener(() =>
-                    {
-                        onConfirm?.Invoke();
-                        onClose?.Invoke();
-                        ClosePanel();
-                    });
-                }
-            }
+                onConfirm.Invoke();
+                onClose?.Invoke();
+                ClosePanel();
+            });
         }
 
         private void OpenPanel()
@@ -98,7 +92,7 @@ namespace ImmersiveGames.MenuManagers.NotificationManager
             if (_animator != null)
             {
                 _animator.SetTrigger(NotificationTrigger);
-                float animationDuration = _animator.GetCurrentAnimatorStateInfo(0).length;
+                var animationDuration = _animator.GetCurrentAnimatorStateInfo(0).length;
                 StartCoroutine(DelayedClose(animationDuration));
             }
             else

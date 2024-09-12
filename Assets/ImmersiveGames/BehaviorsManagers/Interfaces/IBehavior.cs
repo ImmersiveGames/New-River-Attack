@@ -1,7 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using NewRiverAttack.ObstaclesSystems.BossSystems;
-using UnityEngine;
 
 namespace ImmersiveGames.BehaviorsManagers.Interfaces
 {

@@ -9,7 +9,7 @@ namespace NewRiverAttack.HUDManagers.UI
     public class UILifeDisplay : MonoBehaviour
     {
         [SerializeField] private GameObject iconLives;
-        [SerializeField] private int playerIndex = 0;
+        [SerializeField] private int playerIndex;
         private GamePlayManager _gamePlayManager;
         private PlayerMaster _playerMaster;
         private PlayerLives _playerLives;

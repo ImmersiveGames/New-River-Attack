@@ -29,7 +29,7 @@ namespace NewRiverAttack.ShoppingSystems.WalletDisplay
 
         void UpdateWalletDisplay()
         {
-            textWallet.text = GameOptionsSave.instance.wallet.ToString();
+            textWallet.text = GameOptionsSave.Instance.wallet.ToString();
         }
     }
 }

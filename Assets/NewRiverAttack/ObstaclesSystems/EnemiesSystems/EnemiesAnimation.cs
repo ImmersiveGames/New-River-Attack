@@ -8,8 +8,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         public string onMove = "OnMove";
         public string onFlip = "Turn";
 
-        private bool _startMove;
-        private bool _startFlip;
+        
 
         private Animator _animator;
         private EnemiesMaster _enemiesMaster;
@@ -41,11 +40,6 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         private void SetAnimations()
         {
             _animator = GetComponentInChildren<Animator>(true);
-            if (_animator == null) return;
-            if(!string.IsNullOrEmpty(onMove))
-                _startMove = _animator.GetBool(onMove);
-            if(!string.IsNullOrEmpty(onFlip))
-                _startFlip = _animator.GetBool(onFlip);
         }
         private void ResetAnimation()
         {

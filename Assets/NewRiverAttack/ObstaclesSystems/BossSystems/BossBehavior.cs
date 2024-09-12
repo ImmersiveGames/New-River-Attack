@@ -82,13 +82,10 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             _gamePlayBossManager = GamePlayBossManager.instance;
             BossMaster = GetComponent<BossMaster>();
         }
-
         private void GetPlayerMaster(PlayerMaster playerMaster)
         {
             PlayerMaster = playerMaster;
         }
-        
-
         private async void BossGameReady()
         {
             await _behaviorManager.ChangeBehaviorAsync(EnumNameBehavior.EnterSceneBehavior.ToString()).ConfigureAwait(false);

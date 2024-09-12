@@ -121,7 +121,7 @@ namespace ImmersiveGames.MenuManagers.Abstracts
             }
         }
 
-        public PanelsMenuReference GetCurrentMenu => _menus[_currentMenuIndex];
+        protected PanelsMenuReference GetCurrentMenu => _menus[_currentMenuIndex];
 
         public void ButtonExit()
         {

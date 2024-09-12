@@ -3,7 +3,6 @@ using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.ObstaclesSystems.CollectibleSystems.PowerUpSystems;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace NewRiverAttack.PlayerManagers.PlayerSystems
 {

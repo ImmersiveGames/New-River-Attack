@@ -9,7 +9,7 @@ namespace ImmersiveGames.Utils
         // ReSharper disable once StaticMemberInGenericType
         private static string _resourcePath = "SavesSO/GameOptionsSave";  // Defina o caminho padrão aqui
 
-        public static T instance
+        public static T Instance
         {
             get
             {
@@ -23,7 +23,7 @@ namespace ImmersiveGames.Utils
             }
         }
 
-        public static void SetResourcePath(string newPath)
+        protected static void SetResourcePath(string newPath)
         {
             _resourcePath = newPath;
         }

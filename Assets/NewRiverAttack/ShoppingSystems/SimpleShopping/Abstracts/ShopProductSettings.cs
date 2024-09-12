@@ -22,7 +22,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping.Abstracts
         [SerializeField] private Image imageProduct;
 
         protected SimpleShoppingManager SimpleShoppingManager;
-        protected IStockShop _stockShop;
+        protected IStockShop StockShop;
 
         #region Unity Methods
 
@@ -50,7 +50,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping.Abstracts
 #if DEBUG
             DebugManager.Log<ShopProductSettings>("Updating Displays...");
 #endif
-            DisplayStock(_stockShop);
+            DisplayStock(StockShop);
         }
 
         public void UpdateDisplays()
@@ -58,17 +58,17 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping.Abstracts
 #if DEBUG
             DebugManager.Log<ShopProductSettings>("Updating Displays...");
 #endif
-            DisplayStock(_stockShop);
+            DisplayStock(StockShop);
         }
 
         protected internal virtual void DisplayStock(IStockShop stockShop)
         {
-            _stockShop = stockShop;
+            StockShop = stockShop;
 
-            textStockQuantity.text = stockShop?.quantityInStock.ToString() ?? "N/A";
-            textStockType.text = stockShop?.productType.ToString() ?? "N/A";
+            textStockQuantity.text = stockShop?.QuantityInStock.ToString() ?? "N/A";
+            textStockType.text = stockShop?.ProductType.ToString() ?? "N/A";
 
-            DisplayProduct(stockShop?.shopProduct);
+            DisplayProduct(stockShop?.ShopProduct);
 
             SettingButtons(stockShop, 1);
         }

@@ -27,7 +27,7 @@ namespace NewRiverAttack.HUBManagers.UI
         private void OnEnable()
         {
             SetInitialReferences();
-            _playerSettings = GameOptionsSave.instance.playerSettings[0];
+            _playerSettings = GameOptionsSave.Instance.playerSettings[0];
             ShoppingChangeSkin(_playerSettings.actualSkin,1);
             _hubGameManager.EventInitializeHub += StartPosition;
             _hubGameManager.EventCursorUpdateHub += CursorUpdatePosition;
@@ -105,6 +105,7 @@ namespace NewRiverAttack.HUBManagers.UI
         private void ShoppingChangeSkin(ShopProduct shopProduct, int quantity)
         {
             var shopProductSkin = shopProduct as ShopProductSkin;
+            var shopQuantity = quantity;
 
             var children = GetComponentInChildren<SkinAttach>();
             if (shopProductSkin == null) return;
@@ -117,7 +118,6 @@ namespace NewRiverAttack.HUBManagers.UI
             mySkin.transform.SetAsFirstSibling();
             TurnOffTrails();
         }
-
 
         private void TurnOffTrails()
         {

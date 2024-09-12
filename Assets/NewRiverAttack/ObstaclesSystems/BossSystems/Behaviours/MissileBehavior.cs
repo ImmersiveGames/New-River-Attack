@@ -12,7 +12,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         private BossBehavior BossBehavior { get; }
         private readonly object[] _dataShoot;
         private readonly BossMissileShoot _bossMissileShoot;
-        private readonly BehaviorManager _behaviorManager;
         private PlayerMaster PlayerMaster { get; }
         
         // Parametro 0 = Numero de misseis
@@ -21,7 +20,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         // Parametro 3 = cycles
         public MissileBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors, params object[] data) : base( subBehaviors, string.Join("_", data))
         {
-            _behaviorManager = behaviorManager;
             BossBehavior = behaviorManager.BossBehavior;
             PlayerMaster = BossBehavior.PlayerMaster;
             _bossMissileShoot = BossBehavior.GetComponent<BossMissileShoot>();

@@ -10,7 +10,7 @@ namespace ImmersiveGames.InputManager
         private static ActionManager _actionManager;
 
         // Propriedades para acessar instâncias únicas de PlayersInputActions e ActionManager
-        public static PlayersInputActions InputActions
+        private static PlayersInputActions InputActions
         {
             get
             {

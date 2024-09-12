@@ -20,23 +20,20 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
                 if (monoBehaviour != null) monoBehaviour.StopCoroutine(nameof(MoveToPosition));
             }
 
-            if (monoBehaviour != null)
+            if (monoBehaviour == null) return;
+            switch (forward)
             {
                 // Verifica se já estamos no primeiro ou no último item antes de iniciar a movimentação
-                if (!forward && _moveCount <= 0)
-                {
+                case false when _moveCount <= 0:
                     DebugManager.Log<SmoothFiniteNavigationMode>("Já no primeiro item, não é possível mover para trás.");
                     return;
-                }
-
-                if (forward && _moveCount >= content.childCount - 1)
-                {
+                case true when _moveCount >= content.childCount - 1:
                     DebugManager.Log<SmoothFiniteNavigationMode>("Já no último item, não é possível mover para frente.");
                     return;
-                }
-
-                // Inicia a navegação
-                monoBehaviour.StartCoroutine(MoveToPosition(content, forward, content.childCount));
+                default:
+                    // Inicia a navegação
+                    monoBehaviour.StartCoroutine(MoveToPosition(content, forward, content.childCount));
+                    break;
             }
         }
 

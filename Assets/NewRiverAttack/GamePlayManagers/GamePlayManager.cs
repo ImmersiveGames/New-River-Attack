@@ -91,13 +91,12 @@ namespace NewRiverAttack.GamePlayManagers
         private void OnEnable()
         {
             SetInitialReferences();
-            //TODO: Vai precisar pegar o valor do index da missão
             SetGameMode();
         }
         private void SetInitialReferences()
         {
             _gameManager = GameManager.instance;
-            _gameOptionsSave = GameOptionsSave.instance;
+            _gameOptionsSave = GameOptionsSave.Instance;
             _levelBuilderManager = LevelBuilderManager.Instance;
         }
 
@@ -141,7 +140,7 @@ namespace NewRiverAttack.GamePlayManagers
             DestroyPlayers();
             for (var index = 0; index < _gameOptionsSave.playerSettings.Length; index++)
             {
-                var playerSetting = GameOptionsSave.instance.playerSettings[index];
+                var playerSetting = GameOptionsSave.Instance.playerSettings[index];
                 var playerName = string.IsNullOrEmpty(playerSetting.playerName) ? $"Player {index}" : playerSetting.playerName;
 
                 var newPlayer = Instantiate(playersDefaultSettings.playerPrefab, playersDefaultSettings.spawnPosition, rotationQuaternion);
@@ -269,7 +268,7 @@ namespace NewRiverAttack.GamePlayManagers
 
         #region Calls
 
-        public void OnEventPlayerInitialize(PlayerMaster playerMaster)
+        private void OnEventPlayerInitialize(PlayerMaster playerMaster)
         {
             EventPlayerInitialize?.Invoke(playerMaster);
         }

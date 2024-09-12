@@ -77,7 +77,7 @@ namespace NewRiverAttack.SaveManagers
         {
             for (var i = 0; i < listPlayerProductStocks.Count; i++)
             {
-                if (listPlayerProductStocks[i].shopProduct == product)
+                if (listPlayerProductStocks[i].ShopProduct == product)
                 {
                     return i; // Retorna o índice se o produto for encontrado
                 }
@@ -92,7 +92,7 @@ namespace NewRiverAttack.SaveManagers
             {
                 // Encontrou o produto no estoque
                 var updatedStock = listPlayerProductStocks[stockIndex];
-                updatedStock.quantityInStock += quantity;
+                updatedStock.QuantityInStock += quantity;
                 listPlayerProductStocks[stockIndex] = updatedStock;
                 DebugManager.LogWarning<GameOptionsSave>("Product is found in inventory, Update Quantity.");
             }
@@ -100,8 +100,8 @@ namespace NewRiverAttack.SaveManagers
             {
                 var productStock = new ProductStock
                 {
-                    shopProduct = product,
-                    quantityInStock = quantity
+                    ShopProduct = product,
+                    QuantityInStock = quantity
                 };
                 listPlayerProductStocks.Add(productStock);
                 // Produto não encontrado no estoque
@@ -115,16 +115,14 @@ namespace NewRiverAttack.SaveManagers
             return stockIndex != -1;
         }
 
-        public PlayerSettings GetPlayerOne => playerSettings[0];
-
         #region Options Settings
         
-        public float GetVolumeLog10(EnumAudioMixGroup type, float volumeDefault = 1f)
+        public float GetVolumeLog10(EnumAudioMixGroup type, float volumeDefault)
         {
             var volume = GetVolume(type, volumeDefault);
             return AudioUtils.SoundBase10(volume);
         }
-        public float GetVolume(EnumAudioMixGroup type, float volumeDefault = 1f)
+        public float GetVolume(EnumAudioMixGroup type, float volumeDefault)
         {
             return type switch
             {

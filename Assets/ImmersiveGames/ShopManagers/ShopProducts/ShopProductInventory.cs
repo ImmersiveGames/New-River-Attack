@@ -12,12 +12,12 @@ namespace ImmersiveGames.ShopManagers.ShopProducts
     {
         public void AddPlayerProductList(int indexPlayer, IStockShop stockShop, int quantity)
         {
-            GameOptionsSave.instance.AddInventory(stockShop.shopProduct, quantity);
+            GameOptionsSave.Instance.AddInventory(stockShop.ShopProduct, quantity);
         }
 
         public bool HaveBuyAllProductInList(IEnumerable<ShopProductStock> shopProductList)
         {
-            return shopProductList.Select(product => GameOptionsSave.instance.HaveProduct(product.shopProduct)).All(check => check);
+            return shopProductList.Select(product => GameOptionsSave.Instance.HaveProduct(product.ShopProduct)).All(check => check);
         }
     }
 }

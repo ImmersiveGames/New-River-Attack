@@ -8,7 +8,7 @@ namespace NewRiverAttack.HUDManagers.UI
 {
     public class UiBombDisplay : MonoBehaviour
     {
-        public int indexPlayer = 0;
+        public int indexPlayer;
         public TMP_Text tmpTextBomb;
         public Image bombOn;
         public Image bombOff;

@@ -64,7 +64,6 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
                 _enemiesFuse.ChangeState(new MineExplode());
             }
         }
-
         public void ExitState()
         {
             //Debug.Log($"Sai no Alert");

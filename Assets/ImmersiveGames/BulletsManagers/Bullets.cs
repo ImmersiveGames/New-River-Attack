@@ -5,7 +5,6 @@ namespace ImmersiveGames.BulletsManagers
 {
     public abstract class Bullets: MonoBehaviour
     {
-
         protected IBulletsData BulletData;
 
         public virtual void OnSpawned(Transform spawnPosition, IBulletsData bulletData)
@@ -17,7 +16,6 @@ namespace ImmersiveGames.BulletsManagers
             transform1.rotation = spawnPosition.rotation;
             BulletData = bulletData;
         }
-        
         internal virtual void AutoDestroy(float timer)
         {
             //Debug.Log($"Timer In Bullet: {BulletData.BulletTimer}, Timer:{Time.time} , Time: {timer}");
@@ -32,7 +30,5 @@ namespace ImmersiveGames.BulletsManagers
         }
 
         public IBulletsData GetBulletData => BulletData;
-
-
     }
 }

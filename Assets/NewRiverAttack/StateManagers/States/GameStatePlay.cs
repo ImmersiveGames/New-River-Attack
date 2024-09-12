@@ -3,8 +3,6 @@ using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ScenesManager.Transitions;
 using ImmersiveGames.StateManagers;
 using ImmersiveGames.StateManagers.Interfaces;
-using NewRiverAttack.GameManagers;
-using NewRiverAttack.LevelBuilder;
 using UnityEngine.SceneManagement;
 
 namespace NewRiverAttack.StateManagers.States

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using ImmersiveGames.BehaviorsManagers.Interfaces;
 using ImmersiveGames.DebugManagers;
 using NewRiverAttack.ObstaclesSystems.BossSystems;
-using UnityEngine;
 
 namespace ImmersiveGames.BehaviorsManagers
 {
@@ -72,8 +71,7 @@ namespace ImmersiveGames.BehaviorsManagers
                     await SubBehaviorManager.CurrentBehavior.ExitAsync(token).ConfigureAwait(false);
                     SubBehaviorManager.CurrentBehavior.Initialized = false;
                 }
-
-               CurrentBehavior.Finalized = true;
+                CurrentBehavior.Finalized = true;
                 DebugManager.Log<BehaviorManager>($"Finalizar: {CurrentBehavior.Name}");
                 await CurrentBehavior.ExitAsync(token).ConfigureAwait(false);
                 CurrentBehavior.Initialized = false;

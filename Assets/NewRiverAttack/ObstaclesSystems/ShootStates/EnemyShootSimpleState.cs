@@ -1,7 +1,6 @@
 ﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ObjectManagers.Interfaces;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
-using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.ShootStates
@@ -10,7 +9,6 @@ namespace NewRiverAttack.ObstaclesSystems.ShootStates
     {
         private readonly EnemiesShoot _enemiesShoot;
         private EnemiesMaster _enemiesMaster;
-        private EnemiesScriptable _enemies;
         private bool _inTransition;
         public EnemyShootSimpleState(EnemiesShoot enemiesShoot)
         {
@@ -22,7 +20,6 @@ namespace NewRiverAttack.ObstaclesSystems.ShootStates
             DebugManager.Log<EnemiesShoot>($" Entrando no Estado: Shoot");
             _inTransition = false;
             _enemiesMaster = enemiesMaster;
-            _enemies = enemiesMaster.GetEnemySettings;
             _enemiesShoot.SetDataBullet(enemiesMaster);
             _enemiesShoot.UpdateCadenceShoot();
         }

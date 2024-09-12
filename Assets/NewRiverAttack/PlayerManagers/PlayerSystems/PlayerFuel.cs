@@ -10,7 +10,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 {
     public class PlayerFuel : MonoBehaviour
     {
-
         [SerializeField] private float reduceFuelCadence = 1f; //Quanto maior mais rápido
         
         private bool _fuelPause;

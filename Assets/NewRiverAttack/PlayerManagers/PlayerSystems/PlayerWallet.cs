@@ -19,14 +19,14 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void OnEnable()
         {
             SetInitialReferences();
-            playerWallet = GameOptionsSave.instance.wallet;
+            playerWallet = GameOptionsSave.Instance.wallet;
             _playerMaster.EventPlayerMasterCollect += UpdateWallet;
         }
 
         private void OnDisable()
         {
             _playerMaster.EventPlayerMasterCollect -= UpdateWallet;
-            GameOptionsSave.instance.wallet = playerWallet;
+            GameOptionsSave.Instance.wallet = playerWallet;
         }
         #endregion
         

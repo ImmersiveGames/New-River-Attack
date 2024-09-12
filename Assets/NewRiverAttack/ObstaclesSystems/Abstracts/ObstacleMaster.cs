@@ -42,7 +42,6 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         #endregion
         
-
         #region Object Methods
         protected abstract void ReadyObject();
         protected abstract void ReloadObject();

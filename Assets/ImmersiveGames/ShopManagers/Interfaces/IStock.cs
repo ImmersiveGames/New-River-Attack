@@ -4,8 +4,8 @@ namespace ImmersiveGames.ShopManagers.Interfaces
 {
     public interface IStock
     {
-        ShopProduct shopProduct { get; set;}
-        int quantityInStock { get; set; }
+        ShopProduct ShopProduct { get; set;}
+        int QuantityInStock { get; set; }
 
         void UpdateStock(int quantity);
     }

@@ -10,13 +10,13 @@ namespace ImmersiveGames.ShopManagers.ShopProducts
         [SerializeField] private int inQuantityInStock;
         [SerializeField] internal ShopProduct inShopProduct;
         
-        public ShopProduct shopProduct
+        public ShopProduct ShopProduct
         {
             get => inShopProduct;
             set => inShopProduct = value;
         }
 
-        public int quantityInStock
+        public int QuantityInStock
         {
             get => inQuantityInStock;
             set => inQuantityInStock = value;

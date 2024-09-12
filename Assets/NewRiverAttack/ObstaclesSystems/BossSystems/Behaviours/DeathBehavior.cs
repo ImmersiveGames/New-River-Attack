@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using DG.Tweening;
 using ImmersiveGames.BehaviorsManagers;
 using ImmersiveGames.BehaviorsManagers.Interfaces;
 using ImmersiveGames.DebugManagers;
@@ -55,7 +54,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 Finalized = true;
             }
         }
-
         public override async Task ExitAsync(CancellationToken token)
         {
             await base.ExitAsync(token).ConfigureAwait(false);

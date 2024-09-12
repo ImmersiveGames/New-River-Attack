@@ -46,7 +46,7 @@ namespace NewRiverAttack.HUBManagers.UI
             if (hubOrderData[startIndex].levelData.hudPath.levelsStates != LevelsStates.Complete)
             {
                 hubOrderData[_hubOrder].levelData.hudPath.levelsStates = LevelsStates.Locked;
-                if (_hubOrder < GameOptionsSave.instance.activeIndexMissionLevel)
+                if (_hubOrder < GameOptionsSave.Instance.activeIndexMissionLevel)
                 {
                     hubOrderData[_hubOrder].levelData.hudPath.levelsStates = LevelsStates.Open;
                 }

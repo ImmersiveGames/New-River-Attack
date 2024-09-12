@@ -54,7 +54,7 @@ namespace NewRiverAttack.HUBManagers
         private void Start()
         {
             IsHubReady = false;
-            _lastSave = GameOptionsSave.instance.activeIndexMissionLevel;
+            _lastSave = GameOptionsSave.Instance.activeIndexMissionLevel;
             StartCoroutine(WaitForInitialization());
         }
 
@@ -76,7 +76,7 @@ namespace NewRiverAttack.HUBManagers
         
         private void PlayAnimationBridge()
         {
-            var indexOrder = GameOptionsSave.instance.activeIndexMissionLevel;
+            var indexOrder = GameOptionsSave.Instance.activeIndexMissionLevel;
             var bridge = LevelOrder[indexOrder].bridge;
             bridge.ExplodeBridge();
             Invoke(nameof(UpdateComplete), WaitMove);
@@ -87,7 +87,7 @@ namespace NewRiverAttack.HUBManagers
             var lastIndex = LevelOrder.Count - 1;
             if (actualIndex < lastIndex)
             {
-                _lastSave = GameOptionsSave.instance.activeIndexMissionLevel += 1;
+                _lastSave = GameOptionsSave.Instance.activeIndexMissionLevel += 1;
                 OnEventCursorUpdateHub(_lastSave);
             }
             IsHubReady = true;

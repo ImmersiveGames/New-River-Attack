@@ -1,5 +1,4 @@
-﻿using System;
-using NewRiverAttack.GamePlayManagers;
+﻿using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 
@@ -33,15 +32,11 @@ namespace NewRiverAttack.LevelBuilder.Abstracts
             var playerMaster = other.GetComponentInParent<PlayerMaster>();
             if( playerMaster == null || playerMaster.IsDisable || !InFinisher) return;
             InFinisher = false;
-            
         }
-        
         protected virtual void SetInitialReferences()
         {
             InFinisher = false;
             GamePlayManagerRef = GamePlayManager.Instance;
         }
-
-        
     }
 }

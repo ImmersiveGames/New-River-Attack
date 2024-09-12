@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using ImmersiveGames.DebugManagers;
+﻿using ImmersiveGames.DebugManagers;
 using UnityEngine;
 using UnityEngine.Playables;
 

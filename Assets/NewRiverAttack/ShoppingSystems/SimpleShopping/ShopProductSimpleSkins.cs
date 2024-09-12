@@ -48,8 +48,8 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         protected internal override void DisplayStock(IStockShop stockShop)
         {
             base.DisplayStock(stockShop);
-            DisplaySlides(stockShop?.shopProduct);
-            SelectSkinButton(stockShop, GameOptionsSave.instance);
+            DisplaySlides(stockShop?.ShopProduct);
+            SelectSkinButton(stockShop, GameOptionsSave.Instance);
         }
 
         private void DisplaySlides(IShopProduct shopProduct)
@@ -78,14 +78,14 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
 
         private void SelectSkinButton(IStockShop stockShop, GameOptionsSave gameOptionsSave)
         {
-            var hasSkin = stockShop.PlayerAlreadyHave(gameOptionsSave, stockShop.shopProduct);
+            var hasSkin = stockShop.PlayerAlreadyHave(gameOptionsSave, stockShop.ShopProduct);
             buttonUse.gameObject.SetActive(hasSkin);
             buttonBuy.gameObject.SetActive(!hasSkin);
         }
 
         protected override void InteractableButtonBuy(IStockShop stockShop, int quantity)
         {
-            var saveGameOptions = GameOptionsSave.instance;
+            var saveGameOptions = GameOptionsSave.Instance;
             var canBuy = stockShop.HaveInStock(quantity) && stockShop.PlayerHaveMoneyToBuy(saveGameOptions, quantity);
 
             buttonBuy.interactable = canBuy;
@@ -102,13 +102,13 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
                 buttonBuy.GetComponentInChildren<TMP_Text>().text = _cachedTextUnavailable;
             }
             
-            DebugManager.Log<ShopProductSimpleSkins>($"[{stockShop.shopProduct.name}] Can Buy: {canBuy}");
+            DebugManager.Log<ShopProductSimpleSkins>($"[{stockShop.ShopProduct.name}] Can Buy: {canBuy}");
         }
 
         protected override void InteractableButtonUse(IStockShop stockShop, int quantity)
         {
             buttonUse.onClick.RemoveAllListeners();
-            var interactable = stockShop.shopProduct is IShopProductUsable;
+            var interactable = stockShop.ShopProduct is IShopProductUsable;
             
             DebugManager.Log<ShopProductSimpleSkins>("Use Button Interactable: " + interactable);
 
@@ -118,8 +118,8 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
                 return;
             }
 
-            var saveGameOptions = GameOptionsSave.instance;
-            var isCurrentSkin = saveGameOptions.SkinIsActualInPlayer(0, stockShop.shopProduct);
+            var saveGameOptions = GameOptionsSave.Instance;
+            var isCurrentSkin = saveGameOptions.SkinIsActualInPlayer(0, stockShop.ShopProduct);
 
             buttonUse.GetComponentInChildren<TMP_Text>().text = isCurrentSkin ? _cachedTextInUse : _cachedTextNotInUse;
 
@@ -149,14 +149,14 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
 
         protected override void BuyProduct(int indexPlayer, IStockShop stockShop, int quantity = 1)
         {
-            var saveGameOptions = GameOptionsSave.instance;
-            if (saveGameOptions == null || stockShop?.shopProduct == null)
+            var saveGameOptions = GameOptionsSave.Instance;
+            if (saveGameOptions == null || stockShop?.ShopProduct == null)
             {
                 DebugManager.LogWarning<ShopProductSimpleSkins>("Unable to buy product. Game options or stock shop is null.");
                 return;
             }
 
-            var price = stockShop.shopProduct.GetPrice() * quantity;
+            var price = stockShop.ShopProduct.GetPrice() * quantity;
             if (saveGameOptions.wallet < price || !stockShop.HaveInStock(quantity) || !stockShop.PlayerCanBuy(saveGameOptions, quantity))
             {
                 DebugManager.LogWarning<ShopProductSimpleSkins>("Unable to buy product. Insufficient funds, out of stock, or cannot buy.");
@@ -166,17 +166,17 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             saveGameOptions.UpdateWallet(-price);
             stockShop.UpdateStock(-quantity);
 
-            if (stockShop.shopProduct is IShopProductInventory product)
+            if (stockShop.ShopProduct is IShopProductInventory product)
             {
                 product.AddPlayerProductList(indexPlayer, stockShop, quantity);
             }
-            if (stockShop.shopProduct is IShopProductUsable itemUse)
+            if (stockShop.ShopProduct is IShopProductUsable itemUse)
             {
                 itemUse.Use(indexPlayer, stockShop, quantity);
             }
             DebugManager.LogWarning<ShopProductSimpleSkins>("Achievement: UNLOCKED: Buy an Item.");
 
-            if (stockShop.shopProduct is not ShopProductSkin productSkin) return;
+            if (stockShop.ShopProduct is not ShopProductSkin productSkin) return;
             SteamAchievementService.Instance.UnlockAchievement("ACH_BUY_SKIN");
                 if (productSkin.HaveBuyAllProductInList(SimpleShoppingManager.GetShopList))
                 {
@@ -186,9 +186,9 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
 
         protected override void UseProduct(int indexPlayer, IStockShop stockShop, int quantity = 1)
         {
-            if (stockShop?.shopProduct is not IShopProductUsable itemUse) return;
+            if (stockShop?.ShopProduct is not IShopProductUsable itemUse) return;
             itemUse.Use(indexPlayer, stockShop, quantity);
-            SimpleShoppingManager.OnEventUseProduct(stockShop.shopProduct, quantity);
+            SimpleShoppingManager.OnEventUseProduct(stockShop.ShopProduct, quantity);
             DebugManager.Log<ShopProductSimpleSkins>("Skin used successfully.");
         }
         
@@ -201,13 +201,12 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             if (content == null) return;
 
             // Encontra o índice do produto no layout
-            var productIndex = FindProductIndexInLayout(stockShop.shopProduct, content);
+            var productIndex = FindProductIndexInLayout(stockShop.ShopProduct, content);
 
             // Usa o SimpleShoppingManager para acessar a navegação
-            var navigation = SimpleShoppingManager?.GetNavigationMode() as SmoothFiniteNavigationMode;
 
             // Verifica se a navegação e o índice são válidos
-            if (navigation != null && productIndex >= 0)
+            if (SimpleShoppingManager?.GetNavigationMode() is SmoothFiniteNavigationMode navigation && productIndex >= 0)
             {
                 navigation.MoveContentToIndex(content, productIndex);
             }
@@ -216,7 +215,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
 
         public override IShopProduct GetAssociatedProduct()
         {
-            return _stockShop?.shopProduct; // Retorna o produto associado ao estoque
+            return StockShop?.ShopProduct; // Retorna o produto associado ao estoque
         }
         private int FindProductIndexInLayout(IShopProduct shopProduct, RectTransform content)
         {

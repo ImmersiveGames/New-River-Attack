@@ -1,5 +1,4 @@
-﻿using GD.MinMaxSlider;
-using NewRiverAttack.ObstaclesSystems.Abstracts;
+﻿using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.MovementStates;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.WallsManagers;

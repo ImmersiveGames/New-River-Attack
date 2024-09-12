@@ -1,6 +1,4 @@
-﻿using System;
-using NewRiverAttack.ObstaclesSystems.Abstracts;
-using UnityEngine;
+﻿using NewRiverAttack.ObstaclesSystems.Abstracts;
 
 namespace NewRiverAttack.ObstaclesSystems.CollectibleSystems
 {
@@ -28,8 +26,6 @@ namespace NewRiverAttack.ObstaclesSystems.CollectibleSystems
             if(_collectibleAnimator != null) return;
             _collectibleMaster.EventMasterCollectCollect -= DesativeSkin;
         }
-        
-
         protected override void SetInitialReferences()
         {
             base.SetInitialReferences();

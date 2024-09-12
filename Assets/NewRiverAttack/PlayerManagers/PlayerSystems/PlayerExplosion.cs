@@ -1,5 +1,4 @@
 ﻿using ImmersiveGames.CameraManagers;
-using ImmersiveGames.Utils;
 using UnityEngine;
 
 namespace NewRiverAttack.PlayerManagers.PlayerSystems
@@ -60,7 +59,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             var go = Instantiate(deadParticlePrefab, transform);
             Destroy(go, timeoutDestroyExplosion);
         }
-        
 
         private void PlayerRestore()
         {

@@ -20,7 +20,7 @@ namespace ImmersiveGames.TimelineManagers.Abstracts
             TimelineManagerRef = new TimelineManager(_playableDirector);
             VirtualCamera = GetComponentInChildren<CinemachineVirtualCamera>();
         }
-        protected virtual void PlayTimeline()
+        protected void PlayTimeline()
         {
             TimelineManagerRef.PlayAnimation(0);
         }

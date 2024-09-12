@@ -9,12 +9,9 @@ namespace ImmersiveGames.CameraManagers
         public CinemachineVirtualCamera[] virtualCameras;
 
         private static CinemachineVirtualCamera _endVirtualCamera;
-        private static CinemachineVirtualCamera _principalVirtualCamera;
-
         protected override void Awake()
         {
             base.Awake();
-            _principalVirtualCamera = virtualCameras[0];
             _endVirtualCamera = virtualCameras[^1];
         }
 

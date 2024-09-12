@@ -4,23 +4,20 @@ using ImmersiveGames.BehaviorsManagers;
 using ImmersiveGames.BehaviorsManagers.Interfaces;
 using ImmersiveGames.Utils;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
-using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 {
-    public class CleanShootBehavior : Behavior
+    public abstract class CleanShootBehavior : Behavior
     {
         private BossBehavior BossBehavior { get; }
-        private readonly BehaviorManager _behaviorManager;
         private PlayerMaster PlayerMaster { get; }
         private readonly object[] _dataShoot;
         
         private readonly BossCleanShoot _bossCleanShoot;
         // Parametro 0 = cadência dos misseis
         // Parametro 1 = cycles
-        public CleanShootBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors,params object[] data) : base(subBehaviors)
+        protected CleanShootBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors,params object[] data) : base(subBehaviors)
         {
-            _behaviorManager = behaviorManager;
             BossBehavior = behaviorManager.BossBehavior;
             PlayerMaster = behaviorManager.BossBehavior.PlayerMaster;
             _bossCleanShoot = BossBehavior.GetComponent<BossCleanShoot>();

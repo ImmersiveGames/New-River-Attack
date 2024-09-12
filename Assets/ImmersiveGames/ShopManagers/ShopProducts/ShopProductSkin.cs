@@ -77,17 +77,17 @@ namespace ImmersiveGames.ShopManagers.ShopProducts
         }
         public void AddPlayerProductList(int indexPlayer, IStockShop stockShop, int quantity)
         {
-            GameOptionsSave.instance.AddInventory(stockShop.shopProduct, 1);
+            GameOptionsSave.Instance.AddInventory(stockShop.ShopProduct, 1);
         }
         public bool HaveBuyAllProductInList(IEnumerable<ShopProductStock> shopProductList)
         {
-            return shopProductList.Select(product => GameOptionsSave.instance.HaveProduct(product.shopProduct)).All(check => check);
+            return shopProductList.Select(product => GameOptionsSave.Instance.HaveProduct(product.ShopProduct)).All(check => check);
         }
 
         public void Use(int indexPlayer, IStockShop stockShop, int quantity)
         {
             //TODO: Aqui precisa avisar o objeto do player que trocou de skin??
-            GameOptionsSave.instance.ChangeSkinToPlayer(indexPlayer,this);
+            GameOptionsSave.Instance.ChangeSkinToPlayer(indexPlayer,this);
         }
     }
 }

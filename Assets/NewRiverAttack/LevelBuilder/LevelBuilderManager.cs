@@ -205,7 +205,7 @@ namespace NewRiverAttack.LevelBuilder
             var lastSegment = activeObjects[^1].segmentObject;
             var lastSegmentBounds = CalculateRealLength.GetBounds(lastSegment);
             var lastSegmentLength = lastSegmentBounds.size.z;
-            var finalSegmentInstance = Instantiate(endPath,
+            Instantiate(endPath,
                 lastSegment.transform.position + Vector3.forward * lastSegmentLength,
                 Quaternion.identity);
         }

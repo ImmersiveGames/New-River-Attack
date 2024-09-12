@@ -8,7 +8,6 @@ using NewRiverAttack.GameManagers;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.StateManagers;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using UnityEngine.UI;
@@ -28,7 +27,7 @@ namespace ImmersiveGames.MenuManagers
         private float _animationTimeStart;
 
         private bool _canGoBack = true; // Flag para controle de retorno
-        private bool _onAction = false;
+        private bool _onAction;
 
         #region Unity Methods
 

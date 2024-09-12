@@ -6,7 +6,6 @@ using NewRiverAttack.PlayerManagers.Tags;
 using NewRiverAttack.SaveManagers;
 using NewRiverAttack.ShoppingSystems.SimpleShopping;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace NewRiverAttack.ShoppingSystems.SkinChanger
 {
@@ -27,7 +26,7 @@ namespace NewRiverAttack.ShoppingSystems.SkinChanger
 
         private void OnEnable()
         {
-            playerSettings = GameOptionsSave.instance.playerSettings[0];
+            playerSettings = GameOptionsSave.Instance.playerSettings[0];
             ShoppingChangeSkin(playerSettings.actualSkin,1);
             _simpleShoppingManager.EventUseProduct += ShoppingChangeSkin;
             _simpleShoppingManager.EventUseProduct += ShoppingChangeSkin;

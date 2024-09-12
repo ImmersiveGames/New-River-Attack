@@ -1,12 +1,10 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using ImmersiveGames.BehaviorsManagers;
 using ImmersiveGames.BehaviorsManagers.Interfaces;
 using ImmersiveGames.DebugManagers;
 using NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
-using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Abstracts
 {
@@ -17,7 +15,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Abstracts
         private readonly BehaviorManager _behaviorManager;
 
         protected BossMovement BossMovement;
-        protected BossBehavior BossBehavior { get; set; }
+        private BossBehavior BossBehavior { get; set; }
         protected PlayerMaster PlayerMaster { get; set; }
 
         protected BossDirections(BehaviorManager behaviorManager, IBehavior[] subBehaviors) : base(subBehaviors)

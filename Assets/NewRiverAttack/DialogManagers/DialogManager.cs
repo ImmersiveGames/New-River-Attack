@@ -168,7 +168,7 @@ namespace NewRiverAttack.DialogManagers
                 return;
             }
 
-            _sentenceComplete = false; // Reseta a flag para a nova sentença
+            _sentenceComplete = false; // Reset a flag para a nova sentença
             _typingCoroutine = StartCoroutine(TypeSentence(dialogDatas[_currentDialogueIndex].sentences[_currentSentenceIndex]));
         }
 

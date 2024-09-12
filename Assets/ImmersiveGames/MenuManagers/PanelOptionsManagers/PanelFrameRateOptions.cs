@@ -19,7 +19,7 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
         private void Awake()
         {
             FillDropdown();
-            UpdateFrameRate(GameOptionsSave.instance.frameRate); // Inicializar com a taxa de quadros salva.
+            UpdateFrameRate(GameOptionsSave.Instance.frameRate); // Inicializar com a taxa de quadros salva.
         }
 
         // Método chamado quando o valor do dropdown é alterado.
@@ -41,7 +41,7 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
             }
 
             dropdown.onValueChanged.AddListener(OnDropdownChanged);
-            dropdown.value = frameRates.IndexOf(GameOptionsSave.instance.frameRate); // Definir o valor inicial.
+            dropdown.value = frameRates.IndexOf(GameOptionsSave.Instance.frameRate); // Definir o valor inicial.
         }
 
         // Método para atualizar a taxa de quadros com base no valor do dropdown.
@@ -49,7 +49,7 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
         {
             ActualFrameRate = frameRate;
             Application.targetFrameRate = frameRate;
-            GameOptionsSave.instance.frameRate = frameRate; // Salvar a taxa de quadros.
+            GameOptionsSave.Instance.frameRate = frameRate; // Salvar a taxa de quadros.
         }
 
         // Método chamado ao habilitar o objeto.
@@ -57,7 +57,7 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
         {
             if (dropdown != null)
             {
-                dropdown.value = frameRates.IndexOf(GameOptionsSave.instance.frameRate); // Atualizar o valor inicial.
+                dropdown.value = frameRates.IndexOf(GameOptionsSave.Instance.frameRate); // Atualizar o valor inicial.
             }
         }
 

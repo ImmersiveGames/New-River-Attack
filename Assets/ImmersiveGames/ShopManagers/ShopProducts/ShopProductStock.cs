@@ -13,18 +13,18 @@ namespace ImmersiveGames.ShopManagers.ShopProducts
         [SerializeField] private ShopProduct inShopProduct;
         [SerializeField] private int inQuantityInStock;
         
-        public ShopProductType productType
+        public ShopProductType ProductType
         {
             get => inShopProductType;
             set => inShopProductType = value;
         }
-        public ShopProduct shopProduct
+        public ShopProduct ShopProduct
         {
             get => inShopProduct;
             set => inShopProduct = value;
         }
 
-        public int quantityInStock
+        public int QuantityInStock
         {
             get => inQuantityInStock;
             set => inQuantityInStock = value;// = inShopProductType == ShopProductType.Unique ? 1: value;

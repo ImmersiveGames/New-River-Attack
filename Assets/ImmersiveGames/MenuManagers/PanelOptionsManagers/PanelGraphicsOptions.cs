@@ -28,12 +28,12 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
 
         private void LoadSavedQuality()
         {
-            SelectedOptionIndex = GameOptionsSave.instance.selectedQualityIndex;
+            SelectedOptionIndex = GameOptionsSave.Instance.selectedQualityIndex;
         }
 
         private static void SaveSelectedQuality(int selectedQualityIndex)
         {
-            GameOptionsSave.instance.selectedQualityIndex = selectedQualityIndex;
+            GameOptionsSave.Instance.selectedQualityIndex = selectedQualityIndex;
         }
 
         private static void UpdateQuality(int selectedQualityIndex)

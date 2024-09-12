@@ -14,7 +14,6 @@ using ImmersiveGames.StateManagers;
 using ImmersiveGames.SteamServicesManagers;
 using NewRiverAttack.BulletsManagers;
 using NewRiverAttack.GamePlayManagers;
-using NewRiverAttack.GamePlayManagers.GamePlayLogs;
 using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.HUBManagers;
 using NewRiverAttack.HUDManagers.UI;
@@ -32,7 +31,6 @@ using NewRiverAttack.ShoppingSystems.SimpleShopping;
 using NewRiverAttack.ShoppingSystems.SimpleShopping.Abstracts;
 using NewRiverAttack.ShoppingSystems.SkinChanger;
 using NewRiverAttack.StateManagers.States;
-using NewRiverAttack.SteamGameManagers;
 using UnityEngine;
 
 namespace NewRiverAttack.DebugManagers

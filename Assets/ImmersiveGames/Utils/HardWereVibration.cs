@@ -2,7 +2,7 @@
 
 namespace ImmersiveGames.Utils
 {
-    public class HardWereVibration
+    public abstract class HardWereVibration
     {
         private long _timeVibration;
         public static void Vibration(long timeVibration)

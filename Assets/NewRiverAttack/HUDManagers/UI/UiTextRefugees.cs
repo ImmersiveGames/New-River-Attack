@@ -22,7 +22,7 @@ namespace NewRiverAttack.HUDManagers.UI
 
         private void Start()
         {
-            var refugees = GameOptionsSave.instance.wallet;
+            var refugees = GameOptionsSave.Instance.wallet;
             UpdateRefugees(refugees, 0);
         }
 

@@ -35,7 +35,7 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
             _sliderControl.onValueChanged.RemoveAllListeners();
         }
 
-        public void SetVolume(float slideValue)
+        private void SetVolume(float slideValue)
         {
             // Calcula o volume em decibéis com base no valor do Slider.
             var volume = AudioUtils.SoundBase10(slideValue);
@@ -50,10 +50,10 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
         private void LoadGameOptions()
         {
             // Obtém a instância de GameOptionsSave.
-            _gameOptionsSave = GameOptionsSave.instance;
+            _gameOptionsSave = GameOptionsSave.Instance;
 
             // Define o valor do Slider com base nas opções salvas.
-            _sliderControl.value = _gameOptionsSave.GetVolume(audioTypeMixGroup);
+            _sliderControl.value = _gameOptionsSave.GetVolume(audioTypeMixGroup,1);
         }
 
         private void SaveGameOptions()

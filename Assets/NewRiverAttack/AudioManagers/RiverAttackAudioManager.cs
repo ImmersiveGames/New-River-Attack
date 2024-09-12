@@ -24,20 +24,5 @@ namespace ImmersiveGames
         {
             PlaySfx(EnumSfxSound.SfxMouseOver.ToString());
         }
-
-        /* Uncomment and refactor when needed
-        public void PlayBGM(LevelData levelData, int levelIndexBgm)
-        {
-            var audioEventForLevel = levelData.levelType != LevelTypes.Multi ?
-                GetAudioEventForState(levelData.levelType.ToString(), _mapStateBgm) :
-                GetAudioEventForState(levelData.startBgm.ToString(), _mapStateBgm);
-
-            if (audioEventForLevel == null)
-            {
-                DebugManager.Log<AudioManager>($"Audio not found for type: {levelData.levelType}");
-                return;
-            }
-            audioEventForLevel.Play(bgmAudioSource, this, fadeSoundDuration);
-        }*/
     }
 }

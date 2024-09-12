@@ -59,8 +59,8 @@ namespace ImmersiveGames.ScenesManager
                 var asyncUnload = SceneManager.UnloadSceneAsync(sceneName);
 
                 // Verifica se o processo de descarregamento foi concluído
-                asyncUnload.completed += _ => unloadCompletionSource.SetResult(true);
-                
+                if (asyncUnload != null) asyncUnload.completed += _ => unloadCompletionSource.SetResult(true);
+
                 return Task.CompletedTask;
             }).ConfigureAwait(false);
 
@@ -70,13 +70,11 @@ namespace ImmersiveGames.ScenesManager
             {
                 SceneManager.sceneUnloaded -= SceneUnloaded;
 
-                // Confirmação de que a cena foi completamente descarregada
-                if (!SceneManager.GetSceneByName(sceneName).isLoaded)
-                {
-                    unloadCompletionSource.SetResult(true);
-                    // Atualize a barra de progresso aqui (por exemplo, definindo-a como 100%)
-                    UpdateProgressBar(1.0f);
-                }
+                // Confirmação de que a cena foi completamente descarregado
+                if (SceneManager.GetSceneByName(sceneName).isLoaded) return;
+                unloadCompletionSource.SetResult(true);
+                // Atualize a barra de progresso aqui (por exemplo, definindo-a como 100%)
+                UpdateProgressBar(1.0f);
             }
         }
 

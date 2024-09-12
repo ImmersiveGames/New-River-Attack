@@ -4,7 +4,6 @@ using ImmersiveGames.AudioEvents;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.StateManagers.Interfaces;
 using ImmersiveGames.Utils;
-using NewRiverAttack.LevelBuilder;
 using NewRiverAttack.SaveManagers;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -44,7 +43,7 @@ namespace ImmersiveGames
         /// </summary>
         private void RecoverAudioSettings()
         {
-            var gameOptionsSave = GameOptionsSave.instance;
+            var gameOptionsSave = GameOptionsSave.Instance;
             mixerGroup.SetFloat(EnumAudioMixGroup.BgmVolume.ToString(), 
                 gameOptionsSave.GetVolumeLog10(EnumAudioMixGroup.BgmVolume, BGMVolumeDefault));
             mixerGroup.SetFloat(EnumAudioMixGroup.SfxVolume.ToString(), 
@@ -100,11 +99,6 @@ namespace ImmersiveGames
                 return;
             }
             audioEventForState.Play(bgmAudioSource, this, fadeSoundDuration);
-        }
-
-        public void StopBGM()
-        {
-            bgmAudioSource.Stop();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace NewRiverAttack.HUDManagers.UI
 {
     public class UIFuelDisplay : MonoBehaviour
     {
-        public int playerIndex = 0;
+        public int playerIndex;
         [SerializeField] private AudioEvent playerAlert;
         [SerializeField] private Image gasBarImage;
         [SerializeField] private Color highGasColor;
@@ -53,13 +53,7 @@ namespace NewRiverAttack.HUDManagers.UI
             _gamePlayManager = GamePlayManager.Instance;
             _audioSource = GetComponent<AudioSource>();
         }
-        private void UpdateFuel(float valueUpdate, int iPlayerIndex)
-        {
-            if(playerIndex != iPlayerIndex) return;
-            _playerMaster = _gamePlayManager.GetPlayerMaster(playerIndex);
-            
-            //TODO: Aumentar a gasolina ou reduzir
-        }
+        
         private void StopSound()
         {
             playerAlert.Stop(_audioSource);

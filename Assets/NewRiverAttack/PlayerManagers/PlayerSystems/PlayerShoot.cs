@@ -1,7 +1,5 @@
-﻿using ImmersiveGames.DebugManagers;
-using ImmersiveGames.InputManager;
+﻿using ImmersiveGames.InputManager;
 using ImmersiveGames.ShopManagers.ShopProducts;
-using NewRiverAttack.GamePlayManagers.GamePlayLogs;
 using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.CollectibleSystems.PowerUpSystems;

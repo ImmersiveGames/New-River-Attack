@@ -1,6 +1,4 @@
-﻿using ImmersiveGames.DebugManagers;
-using NewRiverAttack.GamePlayManagers;
-using NewRiverAttack.PlayerManagers.PlayerSystems;
+﻿using NewRiverAttack.GamePlayManagers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +7,7 @@ namespace NewRiverAttack.HUDManagers.UI
 {
     public class UiRapidFire : MonoBehaviour
     {
-        public int playerIndex = 0;
+        [SerializeField] private int playerIndex;
         private GamePlayManager _gamePlayManager;
         
         [SerializeField] private Image rapidFireDisable;

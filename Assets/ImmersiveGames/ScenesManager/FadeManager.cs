@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.Utils;
 using UnityEngine;
@@ -19,7 +17,6 @@ namespace ImmersiveGames.ScenesManager
         public float durationFadeIn = 2.0f;
         public float durationFadeOut = 2.0f;
         private CanvasGroup _canvasGroup;
-        private CancellationTokenSource _cancellationTokenSource;
 
         private void Awake()
         {
@@ -40,11 +37,6 @@ namespace ImmersiveGames.ScenesManager
 
             _canvasGroup.alpha = 1;
             _canvasGroup.blocksRaycasts = true;
-        }
-
-        private void Start()
-        {
-            _cancellationTokenSource = new CancellationTokenSource();
         }
 
         public async Task FadeInAsync()

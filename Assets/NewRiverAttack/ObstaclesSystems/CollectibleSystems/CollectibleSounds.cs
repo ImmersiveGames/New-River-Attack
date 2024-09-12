@@ -34,20 +34,16 @@ namespace NewRiverAttack.ObstaclesSystems.CollectibleSystems
         }
 
         #endregion
-
-
         protected override void SetInitialReferences()
         {
             base.SetInitialReferences();
             _collectibleMaster = ObstacleMaster as CollectibleMaster;
         }
-
         private void ShowSound()
         {
             if (AudioSource != null && helpSound != null)
                 helpSound.SimplePlay(AudioSource);
         }
-
         private void MasterCollectSound()
         {
             if (AudioSource != null && collectSound != null)

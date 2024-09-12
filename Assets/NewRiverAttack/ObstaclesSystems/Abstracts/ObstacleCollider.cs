@@ -1,5 +1,4 @@
-﻿using System;
-using ImmersiveGames.BulletsManagers;
+﻿using ImmersiveGames.BulletsManagers;
 using ImmersiveGames.DebugManagers;
 using NewRiverAttack.BulletsManagers;
 using NewRiverAttack.GamePlayManagers;
@@ -61,15 +60,6 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             playerWhoHit.SetPlayerScore(ObstacleMaster.objectDefault.GetScore());
             ObstacleMaster.OnEventObstacleDeath(playerWhoHit);
             GameStatisticManager.instance.LogEnemiesHit(playerWhoHit.GetPlayerSettings,ObstacleMaster.objectDefault,1,typeCollision);
-            
-            
-            /*PlayerMasterOld = WhoHit(other);
-            OnEventObstacleMasterHit();
-            OnEventObstacleScore(PlayerMasterOld.getPlayerSettings);
-            ShouldSavePoint(PlayerMasterOld.getPlayerSettings);
-            GamePlayManager.AddResultList(gamePlayingLog.GetEnemiesResult(), PlayerMasterOld.getPlayerSettings, enemy, 1, collisionType);
-            KillStatsHandle(collisionType);
-            ShouldFinishGame();*/
         }
 
         private static T WhoHit<T>(Component other) where T : class

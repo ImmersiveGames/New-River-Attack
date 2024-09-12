@@ -1,5 +1,4 @@
-﻿using System;
-using ImmersiveGames;
+﻿using ImmersiveGames;
 using ImmersiveGames.AudioEvents;
 using ImmersiveGames.BulletsManagers;
 using ImmersiveGames.DebugManagers;

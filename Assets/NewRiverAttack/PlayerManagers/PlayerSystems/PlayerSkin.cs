@@ -30,7 +30,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void ChangePlayerSkin(ShopProductSkin productSkin)
         {
             if (productSkin == null || _playerMaster == null) return;
-            var gameOptionsSave = GameOptionsSave.instance;
+            var gameOptionsSave = GameOptionsSave.Instance;
             gameOptionsSave.ChangeSkinToPlayer(_playerMaster.PlayerIndex, productSkin);
             //Remove A Skin Anterior
             RemoveSkin();

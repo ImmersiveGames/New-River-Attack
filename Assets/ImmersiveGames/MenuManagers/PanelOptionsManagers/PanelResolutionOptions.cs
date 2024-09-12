@@ -85,13 +85,13 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
         private Resolution GetResolutionFromOptionsSave()
         {
             // Se GameOptionsSave.instance for nulo, retorna a primeira resolução única
-            if (GameOptionsSave.instance == null)
+            if (GameOptionsSave.Instance == null)
             {
                 return _uniqueResolutions[0];
             }
 
             // Recupera a resolução salva
-            var savedResolution = GameOptionsSave.instance.actualResolution;
+            var savedResolution = GameOptionsSave.Instance.actualResolution;
 
             // Procura a resolução correspondente
             var matchingResolution = _uniqueResolutions.FirstOrDefault(resolution =>
@@ -102,9 +102,9 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
         }
         private static void SaveResolutionToOptions()
         {
-            if (GameOptionsSave.instance != null)
+            if (GameOptionsSave.Instance != null)
             {
-                GameOptionsSave.instance.actualResolution = new Vector2Int(_actualResolution.width, _actualResolution.height);
+                GameOptionsSave.Instance.actualResolution = new Vector2Int(_actualResolution.width, _actualResolution.height);
             }
         }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using NewRiverAttack.ObstaclesSystems.Abstracts;
+﻿using NewRiverAttack.ObstaclesSystems.Abstracts;
 
 namespace NewRiverAttack.ObstaclesSystems.CollectibleSystems
 {

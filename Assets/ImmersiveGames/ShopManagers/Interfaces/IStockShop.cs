@@ -5,7 +5,7 @@ namespace ImmersiveGames.ShopManagers.Interfaces
 {
     public interface IStockShop : IStock
     {
-        ShopProductType productType { get; set; }
+        ShopProductType ProductType { get; set; }
 
         bool HaveInStock(int quantity);
         bool PlayerCanBuy(GameOptionsSave gameOptionsSave, int quantity);

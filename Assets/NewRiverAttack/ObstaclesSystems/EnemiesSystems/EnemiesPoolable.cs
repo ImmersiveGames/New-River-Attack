@@ -11,7 +11,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 {
     public sealed class EnemiesPoolable : MonoBehaviour, IPoolable
     {
-        private float _startTime;
+        
         private const float LimitTime = 0.1f;
         private AudioEvent _audioEvent;
         private EnemiesMaster _enemiesMaster;
@@ -46,18 +46,10 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             transform1.position = spawnPosition.position;
             transform1.rotation = spawnPosition.rotation;
             _bulletData = bulletData;
-            _startTime = Time.time + bulletData.BulletTimer;
             _enemiesMaster = GetComponent<EnemiesMaster>();
             if (_enemiesMaster == null) return;
             _enemiesMaster.IsDisable = false;
             _enemiesMaster.OnEventSpawnObject(transform1.position);
-        }
-        private void AutoDestroy(float timer)
-        {
-            if (_bulletData.BulletTimer > 0 && Time.time >= timer)
-            {
-                DestroyMe();
-            }
         }
 
         public void OnDespaired()

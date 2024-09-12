@@ -17,14 +17,13 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
 
         private void Awake()
         {
-            
             _languageButton = GetComponent<Button>();
             _panelGameOptionManager = GetComponentInParent<PanelGameOptionManager>();
         }
 
         private void OnEnable()
         {
-            _gameOptionsSave = GameOptionsSave.instance;
+            _gameOptionsSave = GameOptionsSave.Instance;
             AddButtonOnClick();
             ChangeNormalColor(myLocale);
         }

@@ -1,7 +1,6 @@
 ﻿using ImmersiveGames.DebugManagers;
 using NewRiverAttack.GamePlayManagers;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace NewRiverAttack.ObstaclesSystems.Abstracts
 {

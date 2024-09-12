@@ -15,7 +15,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         
         private BossVfxTag _splashVFX;
 
-        private bool _onDeath;
+   
         private Animator _animator;
         private BossMaster _bossMaster;
         private GamePlayManager _gamePlayManager;
@@ -58,9 +58,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         private void SetAnimations()
         {
             _animator = GetComponentInChildren<Animator>(true);
-            if (_animator == null) return;
-            if(!string.IsNullOrEmpty(onDeath))
-                _onDeath = _animator.GetBool(onDeath);
         }
         private void ResetAnimation()
         {

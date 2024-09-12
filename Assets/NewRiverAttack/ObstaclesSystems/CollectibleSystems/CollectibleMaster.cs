@@ -1,5 +1,4 @@
-﻿using ImmersiveGames.DebugManagers;
-using ImmersiveGames.ObjectManagers.Interfaces;
+﻿using ImmersiveGames.ObjectManagers.Interfaces;
 using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;

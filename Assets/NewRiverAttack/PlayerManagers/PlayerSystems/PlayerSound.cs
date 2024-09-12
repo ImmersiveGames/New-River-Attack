@@ -7,7 +7,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 {
     public class PlayerSound : MonoBehaviour
     {
-        
         [SerializeField] private AudioEvent audioEngineLoop;
         [SerializeField] private AudioEvent audioStartAccelEngine;
         [SerializeField] private AudioEvent audioEngineAccelerator;

@@ -1,7 +1,6 @@
 ﻿using GD.MinMaxSlider;
 using ImmersiveGames.StateManagers;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems

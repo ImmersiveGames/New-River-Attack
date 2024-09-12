@@ -8,11 +8,9 @@ using NewRiverAttack.GamePlayManagers.GamePlayLogs;
 using NewRiverAttack.LevelBuilder;
 using NewRiverAttack.ObstaclesSystems;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
-using NewRiverAttack.ObstaclesSystems.CollectibleSystems;
 using NewRiverAttack.ObstaclesSystems.CollectibleSystems.PowerUpSystems;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
-using NewRiverAttack.SaveManagers;
 using NewRiverAttack.WallsManagers;
 using UnityEngine;
 
@@ -22,7 +20,6 @@ namespace NewRiverAttack.GameStatisticsSystem
     {
         private float _startTimer;
         private const float Epsilon = 0.1f;
-        private GameOptionsSave _gameOptionsSave;
         private GemeStatisticsDataLog _gemeStatisticsDataLog;
         private SteamAchievementService _steamAchievementService;
 
@@ -41,8 +38,7 @@ namespace NewRiverAttack.GameStatisticsSystem
         private void OnEnable()
         {
             _steamAchievementService = SteamAchievementService.Instance;
-            _gemeStatisticsDataLog = GemeStatisticsDataLog.instance;
-            _gameOptionsSave = GameOptionsSave.instance;
+            _gemeStatisticsDataLog = GemeStatisticsDataLog.Instance;
         }
 
         private void OnApplicationQuit()

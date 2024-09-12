@@ -58,7 +58,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             _shopLayout.ConfigureLayout(panelContent, stockShopsList.Count, prefabItemShop);
 
             _productStocks = new List<ShopProductStock>(stockShopsList);
-            _productStocks.Sort((x, y) => string.Compare(x.shopProduct.name, y.shopProduct.name, StringComparison.Ordinal));
+            _productStocks.Sort((x, y) => string.Compare(x.ShopProduct.name, y.ShopProduct.name, StringComparison.Ordinal));
 
             CreateShopping(panelContent);
         }

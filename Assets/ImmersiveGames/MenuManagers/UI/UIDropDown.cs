@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ImmersiveGames.DebugManagers;
-using ImmersiveGames.MenuManagers.PanelOptionsManagers;
 using NewRiverAttack.SaveManagers;
 using TMPro;
 using UnityEngine;
@@ -22,7 +20,7 @@ namespace ImmersiveGames.MenuManagers.UI
         protected virtual void Awake()
         {
             
-            _gameOptionsSave = GameOptionsSave.instance;
+            _gameOptionsSave = GameOptionsSave.Instance;
         }
 
         protected virtual void OnEnable()
@@ -46,7 +44,7 @@ namespace ImmersiveGames.MenuManagers.UI
             LocalizationSettings.SelectedLocaleChanged -= UpdateDropdown;
         }
 
-        protected virtual void UpdateDropdown(Locale locale)
+        private void UpdateDropdown(Locale locale)
         {
             Dropdown.onValueChanged.RemoveListener(OnDropdownChanged);
             Dropdown.ClearOptions();

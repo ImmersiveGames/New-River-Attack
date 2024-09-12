@@ -5,7 +5,6 @@ using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.StateManagers;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 namespace ImmersiveGames.MenuManagers.PanelGameManagers
 {
@@ -127,7 +126,6 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
             
             _gamePlayManager.OnEventGameReload();
             SetupInitial();
-            //SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
         }
         private void SetupInitial()
         {

@@ -27,7 +27,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
         public override async Task EnterAsync(CancellationToken token)
         {
-            //await base.EnterAsync(token).ConfigureAwait(false);
             DebugManager.Log<EnterSceneBehavior>("Enter EnterSceneBehavior.");
 
             var tcs = new TaskCompletionSource<bool>();
@@ -87,7 +86,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         {
             await base.ExitAsync(token).ConfigureAwait(false);
             DebugManager.Log<EnterSceneBehavior>("Exit EnterSceneBehavior.");
-            //return Task.CompletedTask;
         }
     }
 }

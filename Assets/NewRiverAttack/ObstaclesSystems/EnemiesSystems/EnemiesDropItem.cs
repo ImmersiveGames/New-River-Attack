@@ -1,9 +1,6 @@
-﻿using System.Linq;
-using GD.MinMaxSlider;
-using ImmersiveGames.DebugManagers;
+﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.Utils;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
-using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-
+﻿
 namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 {
     public class MineMaster : EnemiesMaster

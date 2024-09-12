@@ -24,7 +24,7 @@ namespace NewRiverAttack.GameStatisticsSystem
         private void OnEnable()
         {
             ClearContainer();
-            _gemeStatistics = GemeStatisticsDataLog.instance;
+            _gemeStatistics = GemeStatisticsDataLog.Instance;
             CreateFullStatisticList();
             //LocalizationSettings.SelectedLocaleChanged += UpdateStatistics;
         }
