@@ -5,9 +5,14 @@ using ImmersiveGames.SteamServicesManagers;
 using ImmersiveGames.Utils;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.GamePlayManagers.GamePlayLogs;
+using NewRiverAttack.LevelBuilder;
+using NewRiverAttack.ObstaclesSystems;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
+using NewRiverAttack.ObstaclesSystems.CollectibleSystems;
+using NewRiverAttack.ObstaclesSystems.CollectibleSystems.PowerUpSystems;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
+using NewRiverAttack.SaveManagers;
 using NewRiverAttack.WallsManagers;
 using UnityEngine;
 
@@ -17,8 +22,9 @@ namespace NewRiverAttack.GameStatisticsSystem
     {
         private float _startTimer;
         private const float Epsilon = 0.1f;
-        
+        private GameOptionsSave _gameOptionsSave;
         private GemeStatisticsDataLog _gemeStatisticsDataLog;
+        private SteamAchievementService _steamAchievementService;
 
         public delegate void GameLogIntHandler(string stateName, int intValue);
         public event GameLogIntHandler EventServiceUpdateInt;
@@ -34,7 +40,9 @@ namespace NewRiverAttack.GameStatisticsSystem
 
         private void OnEnable()
         {
+            _steamAchievementService = SteamAchievementService.Instance;
             _gemeStatisticsDataLog = GemeStatisticsDataLog.instance;
+            _gameOptionsSave = GameOptionsSave.instance;
         }
 
         private void OnApplicationQuit()
@@ -69,10 +77,7 @@ namespace NewRiverAttack.GameStatisticsSystem
         {
             LogMaxDistance(distance);
             if(_gemeStatisticsDataLog == null) return;
-            if (_gemeStatisticsDataLog.playersAmountDistance % 500 == 0)
-            {
-                OnEventServiceSet("stat_FlightDistance", _gemeStatisticsDataLog.playersAmountDistance);
-            }
+            CheckAmountUpdate("stat_FlightDistance", _gemeStatisticsDataLog.playersAmountDistance, 500);
         }
 
         private void LogMaxDistance(int intValue)
@@ -86,38 +91,26 @@ namespace NewRiverAttack.GameStatisticsSystem
         {
             if(_gemeStatisticsDataLog == null) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersShoots, intValue);
-            if (_gemeStatisticsDataLog.playersShoots % 100 == 0)
-            {
-                OnEventServiceSet("stat_Shoots", _gemeStatisticsDataLog.playersShoots);
-            }
+            CheckAmountUpdate("stat_Shoots", _gemeStatisticsDataLog.playersShoots);
         }
 
         public void LogBombs(int intValue)
         {
             if(_gemeStatisticsDataLog == null) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersBombs, intValue);
-            if (_gemeStatisticsDataLog.playersBombs % 100 == 0)
-            {
-                OnEventServiceSet("stat_Bombs", _gemeStatisticsDataLog.playersBombs);
-            }
+            CheckAmountUpdate("stat_Bombs", _gemeStatisticsDataLog.playersBombs);
         }
         public void LogFuelSpend(float floatValue)
         {
             if(_gemeStatisticsDataLog == null) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersFuelSpent, floatValue);
-            if (Mathf.Abs(_gemeStatisticsDataLog.playersFuelSpent % 1000) < Epsilon || Mathf.Abs(1000 - (_gemeStatisticsDataLog.playersFuelSpent % 1000)) < Epsilon)
-            {
-                OnEventServiceSet("stat_SpendGas", _gemeStatisticsDataLog.playersFuelSpent);
-            }
+            CheckAmountUpdate("stat_SpendGas", _gemeStatisticsDataLog.playersFuelSpent,1000);
         }
         public void LogFuelCharge(float floatValue)
         {
             if(_gemeStatisticsDataLog == null) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersFuelCharge, floatValue);
-            if (Mathf.Abs(_gemeStatisticsDataLog.playersFuelCharge % 100) < Epsilon || Mathf.Abs(100 - (_gemeStatisticsDataLog.playersFuelCharge % 100)) < Epsilon)
-            {
-                OnEventServiceSet("stat_FillGas", _gemeStatisticsDataLog.playersFuelCharge);
-            }
+            CheckAmountUpdate("stat_FillGas", _gemeStatisticsDataLog.playersFuelCharge);
         }
         public void LogDeaths(int intValue)
         {
@@ -134,6 +127,7 @@ namespace NewRiverAttack.GameStatisticsSystem
             {
                 _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersDieWall, 1);
                 OnEventServiceSet("stat_WallDeaths", _gemeStatisticsDataLog.playersDieWall);
+                _steamAchievementService.UnlockAchievement("ACH_CRASH_PLAYER_WALL");
             }
             // Testa se o componente é do tipo ObstacleMaster
             else if (other.GetComponentInParent<ObstacleMaster>())
@@ -147,6 +141,7 @@ namespace NewRiverAttack.GameStatisticsSystem
                 _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersDieEnemyBullets, 1);
                 OnEventServiceSet("stat_BulletsDeaths", _gemeStatisticsDataLog.playersDieEnemyBullets);
             }
+            CheckAmountUpdate("stat_CrashPlayer", _gemeStatisticsDataLog.GetCrashes, 50);
         }
         
         public void LogFuelOut(int intValue)
@@ -175,10 +170,7 @@ namespace NewRiverAttack.GameStatisticsSystem
         {
             if(_gemeStatisticsDataLog == null) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersTimeRapidFire, floatValue);
-            if (Mathf.Abs(_gemeStatisticsDataLog.playersTimeRapidFire % 100) < Epsilon || Mathf.Abs(100 - (_gemeStatisticsDataLog.playersTimeRapidFire % 100)) < Epsilon)
-            {
-                OnEventServiceSet("stat_TimeRapidFire", _gemeStatisticsDataLog.playersTimeRapidFire);
-            }
+            CheckAmountUpdate("stat_TimeRapidFire", _gemeStatisticsDataLog.playersTimeRapidFire);
         }
         
         public void LogBombsHit(int intValue)
@@ -187,11 +179,133 @@ namespace NewRiverAttack.GameStatisticsSystem
             _gemeStatisticsDataLog.playersBombHit = Mathf.Max(_gemeStatisticsDataLog.playersBombHit, intValue);
             OnEventServiceSet("stat_BombHit", _gemeStatisticsDataLog.playersBombHit);
         }
+        
+        internal void LogCollectables(ObjectsScriptable objects)
+        {
+            if(_gemeStatisticsDataLog == null) return;
+            
+            var powerUp = objects as PowerUpScriptable;
+            if (powerUp != null && powerUp.powerUpData.powerUpType == PowerUpTypes.Bomb)
+            {
+                _steamAchievementService.UnlockAchievement("ACH_COLLECT_RAPID_FIRE");
+            }
+            if (powerUp != null && powerUp.powerUpData.powerUpType == PowerUpTypes.RapidFire)
+            {
+                _steamAchievementService.UnlockAchievement("ACH_COLLECT_BOMB");
+            }
+            if (powerUp != null && powerUp.powerUpData.powerUpType == PowerUpTypes.Live)
+            {
+                _steamAchievementService.UnlockAchievement("ACH_COLLECT_LIFE");
+            }
+            if (powerUp == null && objects.obstacleTypes == ObstacleTypes.Refugee)
+            {
+                CheckAmountUpdateType("stat_CollectRefugee", ObstacleTypes.Refugee); 
+            }
+            
+        }
 
         public void LogEnemiesHit(PlayerSettings player, ObjectsScriptable enemy, int quantity, EnumCollisionType collision)
         {
             if(_gemeStatisticsDataLog == null) return;
             _gemeStatisticsDataLog.AddOrUpdateStatisticHit(player,enemy, quantity,collision);
+
+            switch (enemy.obstacleTypes)
+            {
+                case ObstacleTypes.AirCraft:
+                    CheckAmountUpdateType("stat_BeatJet", ObstacleTypes.AirCraft);
+                    break;
+                case ObstacleTypes.Ship:
+                    CheckAmountUpdateType("stat_BeatShip", ObstacleTypes.Ship);
+                    if(collision == EnumCollisionType.Collider)
+                        _steamAchievementService.UnlockAchievement("ACH_CRASH_PLAYER_SHIP");
+                    break;
+                case ObstacleTypes.Helicopter:
+                    CheckAmountUpdateType("stat_BeatHeli", ObstacleTypes.Helicopter);
+                    if(collision == EnumCollisionType.Collider)
+                        _steamAchievementService.UnlockAchievement("ACH_CRASH_PLAYER_HELI");
+                    break;
+                case ObstacleTypes.Hovercraft:
+                    CheckAmountUpdateType("stat_BeatHover", ObstacleTypes.Hovercraft);
+                    break;
+                case ObstacleTypes.Drone:
+                    CheckAmountUpdateType("stat_BeatDrones", ObstacleTypes.Drone);
+                    if(collision == EnumCollisionType.Collider)
+                        _steamAchievementService.UnlockAchievement("ACH_CRASH_PLAYER_DRONE");
+                    break;
+                case ObstacleTypes.Tower:
+                    CheckAmountUpdateType("stat_BeatTower", ObstacleTypes.Tower);
+                    break;
+                case ObstacleTypes.Rock:
+                    CheckAmountUpdateType("stat_BeatRock", ObstacleTypes.Rock);
+                    break;
+                case ObstacleTypes.Tanks:
+                    CheckAmountUpdateType("stat_BeatTanks", ObstacleTypes.Tanks);
+                    break;
+                case ObstacleTypes.Bridges:
+                    CheckAmountUpdateType("stat_BeatBridge", ObstacleTypes.Bridges);
+                    if(collision == EnumCollisionType.Collider)
+                        _steamAchievementService.UnlockAchievement("ACH_CRASH_PLAYER_BRIDGE");
+                    break;
+                case ObstacleTypes.Submarine:
+                    CheckAmountUpdateType("stat_BeatSubmarine", ObstacleTypes.Submarine);
+                    _steamAchievementService.UnlockAchievement("ACH_BEAT_SUBMARINE");
+                    break;
+                case ObstacleTypes.GasStation:
+                    CheckAmountUpdateType("stat_BeatGasStation", ObstacleTypes.GasStation);
+                    break;
+                case ObstacleTypes.Refugee:
+                    CheckAmountUpdateType("stat_BeatRefugee", ObstacleTypes.Refugee);
+                    break;
+                case ObstacleTypes.Mine:
+                    CheckAmountUpdateType("stat_BeatMine", ObstacleTypes.Mine);
+                    break;
+                case ObstacleTypes.Collectable:
+                    CheckAmountUpdateType("stat_BeatCollectable", ObstacleTypes.Collectable);
+                    break;
+                case ObstacleTypes.Decoration:
+                    CheckAmountUpdateType("stat_BeatDecoration", ObstacleTypes.Decoration);
+                    break;
+                case ObstacleTypes.Secret:
+                    CheckAmountUpdateType("stat_BeatSecret", ObstacleTypes.Secret);
+                    _steamAchievementService.UnlockAchievement("ACH_FIND_SECRET");
+                    break;
+                case ObstacleTypes.Others:
+                default:
+                    CheckAmountUpdateType("stat_BeatOthers", ObstacleTypes.Others);
+                    break;
+            }
+        }
+        public void LogSegmentActions(ScenarioObjectData? activeSegment)
+        {
+            if(activeSegment == null) return;
+            OnEventServiceSet("stat_FinishCPath", _gemeStatisticsDataLog.playersCountPath);
+            switch (activeSegment.Value.levelType)
+            {
+                case LevelTypes.Grass:
+                    _steamAchievementService.UnlockAchievement("ACH_FINISH_M_GRASS");
+                    break;
+                case LevelTypes.Forest:
+                    _steamAchievementService.UnlockAchievement("ACH_FINISH_M_FOREST");
+                    break;
+                case LevelTypes.Swamp:
+                    _steamAchievementService.UnlockAchievement("ACH_FINISH_M_SWAMP");
+                    break;
+                case LevelTypes.Antique:
+                    _steamAchievementService.UnlockAchievement("ACH_FINISH_M_ANTIQUE");
+                    break;
+                case LevelTypes.Desert:
+                    _steamAchievementService.UnlockAchievement("ACH_FINISH_M_DESERT");
+                    break;
+                case LevelTypes.Ice:
+                    _steamAchievementService.UnlockAchievement("ACH_FINISH_M_ICE");
+                    break;
+                case LevelTypes.Boss:
+                    _steamAchievementService.UnlockAchievement("ACH_BEAT_SUBMARINE");
+                    break;
+                case LevelTypes.Multi:
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         internal void OnEventServiceUpdate()
@@ -204,7 +318,33 @@ namespace NewRiverAttack.GameStatisticsSystem
             OnEventServiceSet("stat_Bombs", _gemeStatisticsDataLog.playersBombs);
             OnEventServiceSet("stat_SpendGas", _gemeStatisticsDataLog.playersFuelSpent);
             OnEventServiceSet("stat_FillGas", _gemeStatisticsDataLog.playersFuelCharge);
+            OnEventServiceSet("stat_FinishCPath", _gemeStatisticsDataLog.playersCountPath);
+            OnEventServiceSet("stat_CrashPlayer", _gemeStatisticsDataLog.GetCrashes);
+            OnEventServiceSet("stat_CollectRefugee", _gemeStatisticsDataLog.GetTotalQuantityByPlayerAndType(ObstacleTypes.Refugee));
         }
+        
+        #region Auxiliar
+        private void CheckAmountUpdateType(string statName,ObstacleTypes obstacleTypes, int amount = 100)
+        {
+            if(_gemeStatisticsDataLog == null) return;
+            var obstacles = _gemeStatisticsDataLog.GetTotalQuantityByPlayerAndType(obstacleTypes);
+            CheckAmountUpdate(statName, obstacles, amount);
+        }
+        private void CheckAmountUpdate(string statName,int quantity, int amount = 100)
+        {
+            if (quantity % amount == 0)
+            {
+                OnEventServiceSet(statName, quantity);
+            }
+        }
+        private void CheckAmountUpdate(string statName,float quantity, float amount = 100)
+        {
+            if (Mathf.Abs(quantity % amount) < Epsilon || Mathf.Abs(amount - (quantity % amount)) < Epsilon)
+            {
+                OnEventServiceSet(statName, quantity);
+            }
+        }
+        #endregion
 
         private void OnEventServiceSet(string stateName, int intValue)
         {

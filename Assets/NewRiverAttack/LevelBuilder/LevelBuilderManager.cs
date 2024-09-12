@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.Utils;
+using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using UnityEngine;
 
@@ -143,8 +143,9 @@ namespace NewRiverAttack.LevelBuilder
                 var newSegmentPosition = activeObjects.Count > 0
                     ? activeObjects[^1].absolutePosition + previousSegmentLength + offset.z
                     : spawnTransform.position.z + offset.z;
+                var levelType = _levelData.setLevelList[_nextSegmentIndex].levelType;
 
-                var newScenarioData = new ScenarioObjectData(newSegment, enemySetInstance, newSegmentPosition);
+                var newScenarioData = new ScenarioObjectData(newSegment, enemySetInstance, newSegmentPosition, levelType);
                 activeObjects.Add(newScenarioData);
                 DebugManager.Log<LevelBuilderManager>(
                     $"Novo segmento adicionado à lista de objetos ativos: {newSegment.name}");
@@ -241,8 +242,8 @@ namespace NewRiverAttack.LevelBuilder
                 DebugManager.Log<LevelBuilderManager>("Segmento ativo encontrado: nenhum");
                 return;
             }
-
-            CheckSegmentActions(activeSegment);
+            //Enviar dados do segmento para conquistas
+            GameStatisticManager.instance.LogSegmentActions(activeSegment);
             var activeSegmentIndex = activeObjects.IndexOf((ScenarioObjectData)activeSegment);
 
             DebugManager.Log<LevelBuilderManager>("Índice do segmento ativo: " + activeSegmentIndex);
@@ -270,13 +271,6 @@ namespace NewRiverAttack.LevelBuilder
                 AddNextSegment(segmentsToInstantiateFront);
             }
         }
-
-        private void CheckSegmentActions(ScenarioObjectData? activeSegment)
-        {
-            if(activeSegment == null) return;
-            
-        }
-
         public void DestroyLevel()
         {
             RemoveSegments(0, activeObjects.Count);

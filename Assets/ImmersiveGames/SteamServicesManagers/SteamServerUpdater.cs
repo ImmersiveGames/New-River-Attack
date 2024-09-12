@@ -6,8 +6,6 @@ namespace ImmersiveGames.SteamServicesManagers
 {
     public class SteamServerUpdater : MonoBehaviour
     {
-        private SteamConnectionManager _steamConnectionManager;
-        private SteamAchievementService _steamAchievementService;
         private SteamStatsService _steamStatsService;
         private GameStatisticManager _gameStatisticManager;
 
@@ -15,20 +13,16 @@ namespace ImmersiveGames.SteamServicesManagers
         {
             SetInitialReferences();
 
-            if (_gameStatisticManager != null)
-            {
-                _gameStatisticManager.EventServiceUpdateInt += UpdateInt;
-                _gameStatisticManager.EventServiceUpdateFloat += UpdateFloat;
-            }
+            if (_gameStatisticManager == null) return;
+            _gameStatisticManager.EventServiceUpdateInt += UpdateInt;
+            _gameStatisticManager.EventServiceUpdateFloat += UpdateFloat;
         }
 
         private void OnDisable()
         {
-            if (_gameStatisticManager != null)
-            {
-                _gameStatisticManager.EventServiceUpdateInt -= UpdateInt;
-                _gameStatisticManager.EventServiceUpdateFloat -= UpdateFloat;
-            }
+            if (_gameStatisticManager == null) return;
+            _gameStatisticManager.EventServiceUpdateInt -= UpdateInt;
+            _gameStatisticManager.EventServiceUpdateFloat -= UpdateFloat;
         }
 
         private void UpdateInt(string stateName, int intValue)
@@ -45,8 +39,6 @@ namespace ImmersiveGames.SteamServicesManagers
 
         private void SetInitialReferences()
         {
-            _steamConnectionManager = SteamConnectionManager.Instance;
-            _steamAchievementService = SteamAchievementService.Instance;
             _steamStatsService = SteamStatsService.Instance;
             _gameStatisticManager = GameStatisticManager.instance;
         }

@@ -115,6 +115,8 @@ namespace NewRiverAttack.SaveManagers
             return stockIndex != -1;
         }
 
+        public PlayerSettings GetPlayerOne => playerSettings[0];
+
         #region Options Settings
         
         public float GetVolumeLog10(EnumAudioMixGroup type, float volumeDefault = 1f)

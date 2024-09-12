@@ -4,7 +4,7 @@
     {
         Others, 
         
-        AirCraft, Ship, Helicopter, Hovercraft, Drone, Tower, Jet, Tanks, Bridges, Submarine, GasStation, Refugee, Mine,
+        AirCraft, Ship, Helicopter, Hovercraft, Drone, Tower, Rock, Tanks, Bridges, Submarine, GasStation, Refugee, Mine,
         
         Collectable, Decoration, Secret
     }

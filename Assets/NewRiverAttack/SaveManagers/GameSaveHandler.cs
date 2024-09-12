@@ -122,6 +122,9 @@ namespace NewRiverAttack.SaveManagers
             dataLog.playersClassicPath = saveObject.playersClassicPath.Value;
         if(saveObject.playersMissionPath.Value != 0)
             dataLog.playersMissionPath = saveObject.playersMissionPath.Value;
+        if(saveObject.playersCountPath.Value != 0)
+            dataLog.playersCountPath = saveObject.playersCountPath.Value;
+        
         if(saveObject.hitEnemiesResultsList.Value.Count > 0)
             dataLog.GetEnemyList = saveObject.hitEnemiesResultsList.Value;
         }
@@ -194,9 +197,13 @@ namespace NewRiverAttack.SaveManagers
             saveObject.playersClassicPath.Value = dataLog.playersClassicPath;
         if(saveObject.playersMissionPath.Value != dataLog.playersMissionPath)
             saveObject.playersMissionPath.Value = dataLog.playersMissionPath;
+        if(saveObject.playersCountPath.Value != dataLog.playersCountPath)
+            saveObject.playersCountPath.Value = dataLog.playersCountPath;
+     
         if(saveObject.hitEnemiesResultsList.Value != dataLog.GetEnemyList)
             saveObject.hitEnemiesResultsList.Value = dataLog.GetEnemyList;
             
+        
             //Update Files
             saveObject.Save();
             SaveManager.Save();

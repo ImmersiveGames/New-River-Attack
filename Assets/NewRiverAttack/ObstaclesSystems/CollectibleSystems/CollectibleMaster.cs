@@ -1,5 +1,6 @@
 ﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ObjectManagers.Interfaces;
+using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
@@ -13,6 +14,7 @@ namespace NewRiverAttack.ObstaclesSystems.CollectibleSystems
         public void Collect(PlayerMaster playerMaster)
         {
             OnEventMasterCollectCollect();
+            GameStatisticManager.instance.LogCollectables(objectDefault);
         }
 
         internal CollectibleScriptable GetCollectibleSettings => objectDefault as CollectibleScriptable;

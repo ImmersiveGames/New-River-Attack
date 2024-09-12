@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.Utils;
+using NewRiverAttack.LevelBuilder;
+using NewRiverAttack.ObstaclesSystems;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
 using UnityEngine;
@@ -35,6 +38,7 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
         public float playersAmountDistance;
         public int playersClassicPath;
         public int playersMissionPath;
+        public int playersCountPath;
         internal const int BaseConversion = 20;
 
         public List<GameStatisticHit> GetEnemyList
@@ -104,6 +108,12 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
                 .Where(hit => hit.player == player && hit.enemy.localizeName == enemy.localizeName)
                 .Sum(hit => hit.quantity);
         }
+        public int GetTotalQuantityByPlayerAndType(ObstacleTypes types)
+        {
+            return _listEnemyHit
+                .Where(hit => hit.enemy.obstacleTypes == types)
+                .Sum(hit => hit.quantity);
+        }
         public Dictionary<ObjectsScriptable, int> GetTotalQuantityByObstacleTypeSortedByName(PlayerSettings player)
         {
             return _listEnemyHit
@@ -140,7 +150,6 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
                 );
         }
         #endregion
-        
 
         public void ResetLogs()
         {
@@ -158,6 +167,7 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
             playersFuelSpent = 0;
             playersFuelCharge = 0;
             playersAmountDistance = 0;
+            playersCountPath = 0;
             _listEnemyHit = new List<GameStatisticHit>();
         }
 
@@ -178,5 +188,7 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
             playersAmountDistance = amount / BaseConversion;
             DebugManager.Log<GemeStatisticsDataLog>($"Distance converted to custom unit: {playersAmountDistance:F2}");
         }
+
+        public int GetCrashes => playersDieWall + playersDieEnemyCollider + playersDieFuelOut;
     }
 }
