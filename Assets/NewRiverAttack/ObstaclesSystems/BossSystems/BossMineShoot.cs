@@ -32,8 +32,33 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         {
             poolName = $"Pool ({nameof(BossMineShoot)})";
             _camera = Camera.main;
+            CreateSpawnPoint("MinesSpawnPoint");
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            GamePlayManager.Instance.EventGameReload += ReloadMine;
+            GamePlayManager.Instance.EventGameRestart += ReloadMine;
+        }
+
+        private void ReloadMine()
+        {
+            DestroyImmediate(_spawnPoint);
+            CreateSpawnPoint("MinesSpawnPoint");
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            GamePlayManager.Instance.EventGameReload -= ReloadMine;
+            GamePlayManager.Instance.EventGameRestart -= ReloadMine;
+        }
+
+        private void CreateSpawnPoint(string spawnName)
+        {
             _spawnPoint = new GameObject().transform;
-            _spawnPoint.name = "MinesSpawnPoint";
+            _spawnPoint.name = spawnName;
         }
 
         internal override void UpdateCadenceShoot()

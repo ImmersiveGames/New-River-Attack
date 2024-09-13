@@ -1,4 +1,5 @@
 ﻿using ImmersiveGames.AudioEvents;
+using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
@@ -7,13 +8,13 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
     {
         private MineMaster _mineMaster;
         [SerializeField] private AudioEvent alertAudio;
-
         protected override void OnEnable()
         {
             base.OnEnable();
             _mineMaster.EventAlertApproach += AlertAudio;
             _mineMaster.EventAlertStop += StopAlertAudio;
             _mineMaster.EventDetonate += DetonateAudio;
+            _mineMaster.EventObstacleDeath += StopAlertAudioOnDeath;
         }
 
         protected override void OnDisable()
@@ -22,6 +23,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             _mineMaster.EventAlertApproach -= AlertAudio;
             _mineMaster.EventAlertStop -= StopAlertAudio;
             _mineMaster.EventDetonate -= DetonateAudio;
+            _mineMaster.EventObstacleDeath -= StopAlertAudioOnDeath;
         }
 
         protected override void SetInitialReferences()
@@ -29,22 +31,39 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             ObstacleMaster = _mineMaster = GetComponent<MineMaster>();
             AudioSource = GetComponent<AudioSource>();
         }
-        
+
+        // Som de alerta toca apenas uma vez
         private void AlertAudio()
         {
-            if (AudioSource != null && alertAudio != null)
+            if (AudioSource != null && alertAudio != null && !AudioSource.isPlaying) 
+            {
                 alertAudio.SimplePlay(AudioSource);
+            }
         }
+
+        // Método para parar o áudio de alerta quando necessário
         private void StopAlertAudio()
         {
-            if (AudioSource != null && alertAudio != null && AudioSource.isPlaying)
-                alertAudio.Stop(AudioSource);
+            if (AudioSource != null && AudioSource.isPlaying) 
+            {
+                AudioSource.Stop();
+            }
         }
+
+        // Parar o áudio de alerta quando a mina é destruída
+        private void StopAlertAudioOnDeath(PlayerMaster playerMaster)
+        {
+            StopAlertAudio(); 
+        }
+
+        // Som de detonação, parando o som de alerta antes
         private void DetonateAudio()
         {
-            StopAlertAudio();
+            StopAlertAudio(); 
             if (AudioSource != null && audioExplosion != null)
+            {
                 audioExplosion.SimplePlay(AudioSource);
+            }
         }
     }
 }

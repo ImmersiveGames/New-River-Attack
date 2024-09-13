@@ -21,20 +21,27 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             SetInitialReferences();
             ObstacleMaster.EventObstacleDeath += DesativeSkin;
             _gamePlayManager.EventGameRestart += RestoreSkin;
+            _gamePlayManager.EventGameReload += ReloadSkin;
         }
 
         private void Start()
         {
-            ChangePlayerSkin(ObstacleMaster.objectDefault, ObstacleMaster.objectDefault.randomSkin);
+            ReloadSkin();
         }
 
         protected virtual void OnDisable()
         {
             ObstacleMaster.EventObstacleDeath -= DesativeSkin;
             _gamePlayManager.EventGameRestart -= RestoreSkin;
+            _gamePlayManager.EventGameReload -= ReloadSkin;
         }
 
         #endregion
+
+        protected void ReloadSkin()
+        {
+            ChangePlayerSkin(ObstacleMaster.objectDefault, ObstacleMaster.objectDefault.randomSkin);
+        }
 
         private void ChangePlayerSkin(ObjectsScriptable.ObjectsScriptable enemy, bool random)
         {

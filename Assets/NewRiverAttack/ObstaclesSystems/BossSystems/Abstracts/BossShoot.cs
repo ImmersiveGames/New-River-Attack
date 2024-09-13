@@ -14,14 +14,15 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Abstracts
         
         private BossMaster _bossMaster;
         private bool _isShoot;
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             SetInitialReferences();
             _bossMaster.EventObstacleChangeSkin += UpdateCadenceShoot;
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
+            PoolManager = null;
             _bossMaster.EventObstacleChangeSkin -= UpdateCadenceShoot;
         }
 

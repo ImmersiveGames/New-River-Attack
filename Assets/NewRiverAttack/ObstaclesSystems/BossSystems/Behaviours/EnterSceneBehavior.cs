@@ -34,6 +34,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             {
                 var vector3 = BossBehavior.transform.position;
                 vector3.z = PlayerMaster.transform.position.z;
+                vector3.y = PlayerMaster.transform.position.y;
                 vector3.x = PlayerMaster.transform.position.x;
                 BossBehavior.transform.position = vector3;
 

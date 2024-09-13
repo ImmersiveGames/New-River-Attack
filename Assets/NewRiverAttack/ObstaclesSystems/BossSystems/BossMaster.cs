@@ -1,6 +1,7 @@
 ﻿using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
+using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems
 {
@@ -36,6 +37,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             GamePlayBossManager.instance.SetBoss(this);
             var behaviors = GetComponent<BossBehavior>();
             behaviors.StartBehavior();
+            gameObject.transform.localScale = Vector3.one;
         }
 
         protected override void AttemptKillObstacle(PlayerMaster playerMaster)
