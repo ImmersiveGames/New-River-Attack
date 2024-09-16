@@ -147,7 +147,6 @@ namespace NewRiverAttack.SaveManagers
                     throw new ArgumentOutOfRangeException();
             }
         }
-
         #endregion
         
     }

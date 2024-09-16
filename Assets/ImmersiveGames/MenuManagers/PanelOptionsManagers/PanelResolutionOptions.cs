@@ -19,25 +19,32 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
 
         private void Awake()
         {
+            // Popula o array de resoluções únicas
             _uniqueResolutions = GetUniqueResolutions(Screen.resolutions, PanelFrameRateOptions.ActualFrameRate);
+            if (_uniqueResolutions == null || _uniqueResolutions.Length == 0)
+            {
+                DebugManager.LogError<PanelResolutionOptions>("Nenhuma resolução válida disponível!");
+                return;
+            }
+
+            // Verifica e define a resolução inicial com base no GameOptionsSave
             _actualResolution = GetResolutionFromOptionsSave();
 
-            // Obtém as opções do dropdown
-            var resolutionOptions = _uniqueResolutions.Select(resolution => resolution.width + " x " + resolution.height).ToList();
-    
-            // Inicializa o dropdown
+            // Preenche o dropdown com as resoluções
+            var resolutionOptions = _uniqueResolutions
+                .Select(resolution => resolution.width + " x " + resolution.height)
+                .ToList();
             InitializeDropdown(resolutionOptions);
 
-            // Define o valor selecionado do dropdown
-            // Se a resolução salva for zero ou nula, selecione a resolução atual
-            SetDropdownValue(_actualResolution is { width: 0, height: 0 }
-                ? Array.IndexOf(_uniqueResolutions, Screen.currentResolution)
-                // Caso contrário, selecione a resolução salva
-                : Array.IndexOf(_uniqueResolutions, _actualResolution));
+            // Define o valor selecionado no dropdown
+            var selectedResolutionIndex = Array.IndexOf(_uniqueResolutions, _actualResolution);
+            SetDropdownValue(selectedResolutionIndex >= 0 ? selectedResolutionIndex : 0);
 
-            // Depuração para verificar resolução atual e resolução salva
-            DebugManager.Log<PanelResolutionOptions>("Resolução atual do sistema: " + Screen.currentResolution.width + " x " + Screen.currentResolution.height);
-            DebugManager.Log<PanelResolutionOptions>("Resolução salva: " + _actualResolution.width + " x " + _actualResolution.height);
+            // Salva a resolução atual (mesmo que não tenha sido alterada)
+            SaveResolutionToOptions();
+
+            DebugManager.Log<PanelResolutionOptions>($"Resolução atual do sistema: {Screen.currentResolution.width} x {Screen.currentResolution.height}");
+            DebugManager.Log<PanelResolutionOptions>($"Resolução salva: {_actualResolution.width} x {_actualResolution.height}");
         }
 
         private void InitializeDropdown(List<string> options)
@@ -49,8 +56,15 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
 
         private void SetDropdownValue(int value)
         {
-            resolutionDropdown.value = value;
-            OnValueChanged?.Invoke(value);
+            if (value >= 0 && value < _uniqueResolutions.Length)
+            {
+                resolutionDropdown.value = value;
+                OnValueChanged?.Invoke(value);
+            }
+            else
+            {
+                DebugManager.LogError<PanelResolutionOptions>("Valor do dropdown fora dos limites.");
+            }
         }
 
         private void OnDropdownValueChanged(int value)
@@ -60,13 +74,21 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
 
         private void UpdateResolution(int indexFrame)
         {
-            var resolution = _uniqueResolutions[indexFrame];
-            _actualResolution = resolution;
-            SetResolution(new Vector2Int(resolution.width, resolution.height), FullScreenMode);
-            SaveResolutionToOptions();
+            if (indexFrame >= 0 && indexFrame < _uniqueResolutions.Length)
+            {
+                var resolution = _uniqueResolutions[indexFrame];
+                _actualResolution = resolution;
+                
+                // Aplica a resolução e salva em GameOptionsSave.Instance.actualResolution
+                SetResolution(new Vector2Int(resolution.width, resolution.height), FullScreenMode);
+                SaveResolutionToOptions();
 
-            // Depuração para verificar a resolução atual após a atualização
-            DebugManager.Log<PanelResolutionOptions>("Resolução atualizada: " + resolution.width + " x " + resolution.height);
+                DebugManager.Log<PanelResolutionOptions>($"Resolução atualizada: {resolution.width} x {resolution.height}");
+            }
+            else
+            {
+                DebugManager.LogError<PanelResolutionOptions>("Índice de resolução fora dos limites.");
+            }
         }
 
         private static void SetResolution(Vector2Int dimension, FullScreenMode fullScreenMode)
@@ -74,41 +96,58 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
             Screen.SetResolution(dimension.x, dimension.y, fullScreenMode);
         }
 
-        private static Resolution[] GetUniqueResolutions(IEnumerable<Resolution> resolutionsList, int targetFps)
+        private static Resolution[] GetUniqueResolutions(Resolution[] resolutionsList, int targetFps)
         {
-            return resolutionsList
+            var uniqueResolutions = resolutionsList
                 .Where(resolution => Mathf.Approximately(targetFps, (float)resolution.refreshRateRatio.value))
                 .Distinct()
                 .ToArray();
+
+            return uniqueResolutions.Length > 0 ? uniqueResolutions : resolutionsList.Distinct().ToArray();
         }
 
         private Resolution GetResolutionFromOptionsSave()
         {
-            // Se GameOptionsSave.instance for nulo, retorna a primeira resolução única
             if (GameOptionsSave.Instance == null)
             {
-                return _uniqueResolutions[0];
+                DebugManager.LogWarning<PanelResolutionOptions>("GameOptionsSave.Instance é nulo. Usando resolução atual da tela.");
+                return Screen.currentResolution;
             }
 
-            // Recupera a resolução salva
             var savedResolution = GameOptionsSave.Instance.actualResolution;
 
-            // Procura a resolução correspondente
+            // Se a resolução salva for (0, 0), define a resolução atual
+            if (savedResolution == Vector2Int.zero)
+            {
+                var currentResolution = new Vector2Int(Screen.currentResolution.width, Screen.currentResolution.height);
+                GameOptionsSave.Instance.actualResolution = currentResolution;
+                DebugManager.Log<PanelResolutionOptions>($"Resolução salva como {currentResolution.x} x {currentResolution.y}");
+                return Screen.currentResolution;
+            }
+
+            // Procura uma resolução que corresponda ao valor salvo
             var matchingResolution = _uniqueResolutions.FirstOrDefault(resolution =>
                 resolution.width == savedResolution.x && resolution.height == savedResolution.y);
 
-            // Retorna a resolução correspondente se existir, caso contrário, retorna a resolução padrão
-            return !matchingResolution.Equals(default(Resolution)) ? matchingResolution : _uniqueResolutions[0];
+            if (!matchingResolution.Equals(default(Resolution)))
+            {
+                return matchingResolution;
+            }
+
+            DebugManager.LogWarning<PanelResolutionOptions>("Resolução salva não encontrada. Usando a primeira resolução disponível.");
+            return _uniqueResolutions[0];
         }
+
         private static void SaveResolutionToOptions()
         {
             if (GameOptionsSave.Instance != null)
             {
+                // Sempre salva a resolução atual em GameOptionsSave.Instance.actualResolution
                 GameOptionsSave.Instance.actualResolution = new Vector2Int(_actualResolution.width, _actualResolution.height);
+                DebugManager.Log<PanelResolutionOptions>($"Resolução salva: {_actualResolution.width} x {_actualResolution.height}");
             }
         }
 
-        // Evento para notificar mudanças na resolução selecionada
         public Action<int> OnValueChanged { get; set; }
     }
 }

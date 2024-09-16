@@ -14,75 +14,111 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isExpanded: 1
   saveKey: RiverAttackSaveKey
-  listProducts:
-    key: 28f80117-2202-4771-a988-57cef2eeee13
-    value: []
-  wealth:
-    key: 186ec856-0f5d-489e-9e00-2fa912c53a42
-    value: 0
-  musicVolume:
-    key: fb9ea1a0-4e34-4343-bb7d-a10b9333f017
-    value: 0
+  wallet:
+    key: 713eb01e-904b-4240-844c-916d62a4adda
+    value: 5
+  bgmVolume:
+    key: 9be6caaf-ce81-4142-b6aa-9a61a2b379e5
+    value: 0.5012154
   sfxVolume:
     key: 86058884-16d0-4c67-8ae1-d80dd92b2dd3
-    value: 0
+    value: 0.49888462
   startLocale:
     key: 9d150d76-bba2-48e2-8a3f-acc7f2ee0dfe
-    value: {fileID: 0}
-  indexQuality:
-    key: 6c0c9285-8c6f-4cd9-9a49-444bfda4b1f5
+    value: {fileID: 11400000, guid: 71a44355d5d503d4dbca75c65994bde9, type: 2}
+  selectedQualityIndex:
+    key: fd81e501-09b1-4d6c-bf44-eca54c216b30
     value: 0
   actualResolution:
     key: 5ba9a5e2-a3b9-47b2-8685-3dd585a8fda0
-    value: {x: 0, y: 0}
-  indexFrameRate:
-    key: 4ff46980-0f87-4771-9b9e-e9cd16933c11
+    value: {x: 1920, y: 1080}
+  frameRate:
+    key: 3e672308-0747-4434-8137-2ba965de7b73
+    value: 30
+  listPlayerProductStocks:
+    key: 64d4c953-b122-48cd-b709-76971d379268
+    value:
+    - inQuantityInStock: 1
+      inShopProduct: {fileID: 11400000, guid: af1cc418d2f81394182cb972ddbba198, type: 2}
+  playerSettings:
+    key: f1a53577-f547-4c6f-8fc5-59ff82217fc6
+    value:
+    - {fileID: 11400000, guid: ceb963168ba4f8848b9c9f123aab4f9a, type: 2}
+  activeIndexMissionLevel:
+    key: 4ff5f0f3-9cdb-4951-b3dd-d47110276256
+    value: 5
+  missionLives:
+    key: edd7c4a8-c38a-4f9d-a7b3-723529178ad4
     value: 0
-  indexResolution:
-    key: 6fa37fd0-7f81-4e8c-aba6-d9eff74ab9a1
+  missionBombs:
+    key: e44a15ce-029f-46ec-bf38-3ae73431de1d
     value: 0
-  pathDistance:
-    key: a440e09b-3723-41f8-a0b1-4fffcb44b9a7
+  playersMaxScore:
+    key: 122ade93-cd8b-45cf-9e27-5c04a4e5ba2a
     value: 0
-  maxPathDistance:
-    key: f91fe0e9-cf6c-482a-a156-e8f5ad6e54c4
+  playersTimeSpent:
+    key: 59d331c7-f295-484d-9a63-7d41c63130e8
+    value: 133.3478
+  playersMaxDistance:
+    key: 34c10ee2-973c-4752-b400-220df416a8db
     value: 0
-  shootSpent:
-    key: a039a0cf-556b-4d90-bc6a-a7b076b2df08
+  playersDeaths:
+    key: ca2c934b-a4d2-44ae-a146-d4f8096ed3f5
     value: 0
-  livesSpent:
-    key: bf391b4e-9636-43ff-84b2-39a87ecca499
+  playersDieWall:
+    key: 9b01126d-6357-4fbd-988e-05da54fe774d
     value: 0
-  fuelSpent:
-    key: 0a056b6d-111b-4112-bbc2-a2a7317191f1
+  playersDieEnemyCollider:
+    key: 50966f9e-6cda-4fbe-9616-57c41701e912
     value: 0
-  fuelStocked:
-    key: f58cd8d9-d4f4-4eb0-8837-99afb7266ecc
+  playersDieEnemyBullets:
+    key: add80491-74ad-4e04-8c25-41d6e06e02b0
     value: 0
-  bombSpent:
-    key: 31505df3-2fde-455e-a3fa-1cc40e498097
+  playersDieFuelOut:
+    key: 9b7cccd5-f368-47ba-bbea-c6ef8a505ed7
     value: 0
-  totalScore:
-    key: 56e6ba5b-b7eb-49df-b1ba-6feec1012ce2
+  playersShoots:
+    key: 894ba710-adb1-46ca-92d5-e6be1ac9a324
+    value: 4
+  playersBombs:
+    key: bae59b14-5f1c-440e-82a6-599ace919aa4
     value: 0
-  timeSpent:
-    key: 9fdd00d5-6bc9-4848-b577-449aff2d5554
+  playersTimeRapidFire:
+    key: dbdb8830-dd02-43e3-8e4f-8862d638f21f
     value: 0
-  playerDieWall:
-    key: 1f9b6b86-8761-4708-852c-029d88746842
+  playersBombHit:
+    key: 63377e97-0deb-4692-bf84-c08de87f8c53
     value: 0
-  playerDieBullet:
-    key: b861f6b3-185f-47a7-986a-db390894f116
+  playersFuelSpent:
+    key: 256aa1b1-cff3-4187-9106-6257025d29e5
+    value: 0.31417423
+  playersFuelCharge:
+    key: c681026e-ea8f-4563-a28a-61a8c1104021
     value: 0
-  playerDieFuelEmpty:
-    key: 2c87635a-5dda-44b1-8561-c1c8f4dd6ca0
+  playersAmountDistance:
+    key: 75c2d5ca-45f3-45ff-be96-4924aeafec78
     value: 0
-  activeMission:
-    key: 3994e80a-c3a6-4a0b-b5dd-8d0a0ac2f60b
-    value: {fileID: 0}
-  finishLevels:
-    key: 83b4fe73-0744-430c-8487-d84fb72b443c
-    value: []
+  playersClassicPath:
+    key: 0936121f-575f-4098-a497-9098779e1217
+    value: 0
+  playersMissionPath:
+    key: 10451ab0-d747-4830-abe2-e369ce203d3b
+    value: 0
+  playersCountPath:
+    key: be279c48-7a70-4126-b93e-dcffdf5537d3
+    value: 0
   hitEnemiesResultsList:
     key: bec3e614-1cd8-4f67-9670-75154b05fe0a
-    value: []
+    value:
+    - player: {fileID: 11400000, guid: ceb963168ba4f8848b9c9f123aab4f9a, type: 2}
+      enemy: {fileID: 11400000, guid: 37d56e738206604448222457399e4314, type: 2}
+      quantity: 1
+      collisionType: 0
+    - player: {fileID: 11400000, guid: ceb963168ba4f8848b9c9f123aab4f9a, type: 2}
+      enemy: {fileID: 11400000, guid: 29ede106db981a849988775bf3e0837e, type: 2}
+      quantity: 1
+      collisionType: 0
+    - player: {fileID: 11400000, guid: ceb963168ba4f8848b9c9f123aab4f9a, type: 2}
+      enemy: {fileID: 11400000, guid: 9c6a9f868e7ddd944b0758922c40a89f, type: 2}
+      quantity: 1
+      collisionType: 0

@@ -47,17 +47,13 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping.Abstracts
 
         private void UpdateUseDisplays(ShopProduct shopProduct, int quantity)
         {
-#if DEBUG
             DebugManager.Log<ShopProductSettings>("Updating Displays...");
-#endif
             DisplayStock(StockShop);
         }
 
         public void UpdateDisplays()
         {
-#if DEBUG
             DebugManager.Log<ShopProductSettings>("Updating Displays...");
-#endif
             DisplayStock(StockShop);
         }
 
@@ -65,12 +61,12 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping.Abstracts
         {
             StockShop = stockShop;
 
+            // Exibindo os detalhes do produto e o estoque
             textStockQuantity.text = stockShop?.QuantityInStock.ToString() ?? "N/A";
             textStockType.text = stockShop?.ProductType.ToString() ?? "N/A";
 
             DisplayProduct(stockShop?.ShopProduct);
-
-            SettingButtons(stockShop, 1);
+            SettingButtons(stockShop, 1);  // Configura os botões (comprar/usar)
         }
 
         protected virtual void DisplayProduct(IShopProduct shopProduct)
@@ -82,7 +78,8 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping.Abstracts
             textProductPrice.text = shopProduct.GetPrice().ToString();
             imageProduct.sprite = shopProduct.GetImage();
         }
-        public abstract IShopProduct GetAssociatedProduct();
+
+        //public abstract IShopProduct GetAssociatedProduct();
 
         private void SettingButtons(IStockShop stockShop, int quantity)
         {

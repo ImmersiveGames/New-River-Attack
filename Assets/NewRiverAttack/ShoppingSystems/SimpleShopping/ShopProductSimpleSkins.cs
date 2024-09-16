@@ -1,6 +1,5 @@
 ﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ShopManagers.Interfaces;
-using ImmersiveGames.ShopManagers.NavigationModes;
 using ImmersiveGames.ShopManagers.ShopProducts;
 using ImmersiveGames.SteamServicesManagers;
 using NewRiverAttack.SaveManagers;
@@ -49,48 +48,51 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         {
             base.DisplayStock(stockShop);
             DisplaySlides(stockShop?.ShopProduct);
-            SelectSkinButton(stockShop, GameOptionsSave.Instance);
+            
+            // Verifica se o jogador já possui esse produto na lista de produtos
+            var gameOptions = GameOptionsSave.Instance;
+            var hasProductInPlayerInventory = gameOptions.listPlayerProductStocks.Exists(p => p.ShopProduct == stockShop.ShopProduct);
+
+            // Configura o botão de usar ou comprar com base na presença no inventário
+            if (hasProductInPlayerInventory)
+            {
+                buttonUse.gameObject.SetActive(true);
+                buttonBuy.gameObject.SetActive(false);
+            }
+            else if (stockShop is { QuantityInStock: > 0 })
+            {
+                buttonUse.gameObject.SetActive(false);
+                buttonBuy.gameObject.SetActive(true);
+            }
+            else
+            {
+                // Produto indisponível se não estiver no estoque e não estiver no inventário
+                buttonUse.gameObject.SetActive(false);
+                buttonBuy.gameObject.SetActive(false);
+                buttonBuy.GetComponentInChildren<TMP_Text>().text = _cachedTextUnavailable;
+            }
         }
+        
 
         private void DisplaySlides(IShopProduct shopProduct)
         {
             if (shopProduct is not ShopProductSkin productSkin) return;
-            var previousEnabled = attSpeed.interactable;
-            SetSliderInteractable(false);
 
             attSpeed.value = productSkin.GetRateSpeed();
             attAgility.value = productSkin.GetRateAgility();
             attMaxFuel.value = productSkin.GetRateMaxFuel();
             attFuelCadence.value = productSkin.GetRateCadenceFuel();
             attFireSpeed.value = productSkin.GetRateShoot();
-
-            SetSliderInteractable(previousEnabled);
-        }
-
-        private void SetSliderInteractable(bool isEnabled)
-        {
-            attSpeed.interactable = isEnabled;
-            attAgility.interactable = isEnabled;
-            attMaxFuel.interactable = isEnabled;
-            attFuelCadence.interactable = isEnabled;
-            attFireSpeed.interactable = isEnabled;
-        }
-
-        private void SelectSkinButton(IStockShop stockShop, GameOptionsSave gameOptionsSave)
-        {
-            var hasSkin = stockShop.PlayerAlreadyHave(gameOptionsSave, stockShop.ShopProduct);
-            buttonUse.gameObject.SetActive(hasSkin);
-            buttonBuy.gameObject.SetActive(!hasSkin);
         }
 
         protected override void InteractableButtonBuy(IStockShop stockShop, int quantity)
         {
-            var saveGameOptions = GameOptionsSave.Instance;
-            var canBuy = stockShop.HaveInStock(quantity) && stockShop.PlayerHaveMoneyToBuy(saveGameOptions, quantity);
+            var gameOptions = GameOptionsSave.Instance;
 
+            // Verifica se o jogador tem dinheiro suficiente e se o item está em estoque
+            var canBuy = stockShop.HaveInStock(quantity) && stockShop.PlayerHaveMoneyToBuy(gameOptions, quantity);
             buttonBuy.interactable = canBuy;
             buttonBuy.GetComponentInChildren<TMP_Text>().color = canBuy ? textNormalColor : textNoBuyColor;
-            buttonBuy.GetComponentInChildren<LayoutElement>().GetComponent<Image>().color = canBuy ? textNormalColor : textNoBuyColor;
 
             buttonBuy.onClick.RemoveAllListeners();
             if (canBuy)
@@ -101,135 +103,51 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             {
                 buttonBuy.GetComponentInChildren<TMP_Text>().text = _cachedTextUnavailable;
             }
-            
-            DebugManager.Log<ShopProductSimpleSkins>($"[{stockShop.ShopProduct.name}] Can Buy: {canBuy}");
         }
 
         protected override void InteractableButtonUse(IStockShop stockShop, int quantity)
         {
-            buttonUse.onClick.RemoveAllListeners();
-            var interactable = stockShop.ShopProduct is IShopProductUsable;
-            
-            DebugManager.Log<ShopProductSimpleSkins>("Use Button Interactable: " + interactable);
+            var gameOptions = GameOptionsSave.Instance;
 
-            if (!interactable)
-            {
-                buttonUse.interactable = false;
-                return;
-            }
-
-            var saveGameOptions = GameOptionsSave.Instance;
-            var isCurrentSkin = saveGameOptions.SkinIsActualInPlayer(0, stockShop.ShopProduct);
+            // Verifica se o produto já está em uso pelo jogador
+            var isCurrentSkin = gameOptions.SkinIsActualInPlayer(0, stockShop.ShopProduct);
 
             buttonUse.GetComponentInChildren<TMP_Text>().text = isCurrentSkin ? _cachedTextInUse : _cachedTextNotInUse;
-
+            buttonUse.interactable = true;
+            buttonUse.onClick.RemoveAllListeners();
             buttonUse.onClick.AddListener(() => UseProduct(0, stockShop, quantity));
         }
 
         private void BuyAndUseProduct(int indexPlayer, IStockShop stockShop, int quantity)
         {
-            if (this == null) return; // Verificação de nulidade
-
             BuyProduct(indexPlayer, stockShop, quantity);
-
-            if (this == null) return; // Verificação de nulidade após compra
-
             UseProduct(indexPlayer, stockShop, quantity);
-
-            // Notifica outros sistemas para usar o produto
             SimpleShoppingManager.OnEventBuyProduct();
-
-            // Verificação de nulidade antes de mover o painel
-            if (this != null)
-            {
-                MoveToProductPosition(stockShop);
-            }
         }
-
 
         protected override void BuyProduct(int indexPlayer, IStockShop stockShop, int quantity = 1)
         {
-            var saveGameOptions = GameOptionsSave.Instance;
-            if (saveGameOptions == null || stockShop?.ShopProduct == null)
-            {
-                DebugManager.LogWarning<ShopProductSimpleSkins>("Unable to buy product. Game options or stock shop is null.");
-                return;
-            }
+            var gameOptions = GameOptionsSave.Instance;
 
             var price = stockShop.ShopProduct.GetPrice() * quantity;
-            if (saveGameOptions.wallet < price || !stockShop.HaveInStock(quantity) || !stockShop.PlayerCanBuy(saveGameOptions, quantity))
-            {
-                DebugManager.LogWarning<ShopProductSimpleSkins>("Unable to buy product. Insufficient funds, out of stock, or cannot buy.");
-                return;
-            }
+            if (gameOptions.wallet < price || !stockShop.HaveInStock(quantity)) return;
 
-            saveGameOptions.UpdateWallet(-price);
+            gameOptions.UpdateWallet(-price);
             stockShop.UpdateStock(-quantity);
 
             if (stockShop.ShopProduct is IShopProductInventory product)
             {
                 product.AddPlayerProductList(indexPlayer, stockShop, quantity);
             }
-            if (stockShop.ShopProduct is IShopProductUsable itemUse)
-            {
-                itemUse.Use(indexPlayer, stockShop, quantity);
-            }
-            DebugManager.LogWarning<ShopProductSimpleSkins>("Achievement: UNLOCKED: Buy an Item.");
-
-            if (stockShop.ShopProduct is not ShopProductSkin productSkin) return;
-            SteamAchievementService.Instance.UnlockAchievement("ACH_BUY_SKIN");
-                if (productSkin.HaveBuyAllProductInList(SimpleShoppingManager.GetShopList))
-                {
-                    SteamAchievementService.Instance.UnlockAchievement("ACH_BUY_SKIN_ALL");
-                }
         }
 
         protected override void UseProduct(int indexPlayer, IStockShop stockShop, int quantity = 1)
         {
-            if (stockShop?.ShopProduct is not IShopProductUsable itemUse) return;
-            itemUse.Use(indexPlayer, stockShop, quantity);
-            SimpleShoppingManager.OnEventUseProduct(stockShop.ShopProduct, quantity);
-            DebugManager.Log<ShopProductSimpleSkins>("Skin used successfully.");
-        }
-        
-
-        private void MoveToProductPosition(IStockShop stockShop)
-        {
-            var layoutGroup = GetComponentInParent<HorizontalLayoutGroup>();
-            var content = layoutGroup?.transform as RectTransform;
-
-            if (content == null) return;
-
-            // Encontra o índice do produto no layout
-            var productIndex = FindProductIndexInLayout(stockShop.ShopProduct, content);
-
-            // Usa o SimpleShoppingManager para acessar a navegação
-
-            // Verifica se a navegação e o índice são válidos
-            if (SimpleShoppingManager?.GetNavigationMode() is SmoothFiniteNavigationMode navigation && productIndex >= 0)
+            if (stockShop?.ShopProduct is IShopProductUsable itemUse)
             {
-                navigation.MoveContentToIndex(content, productIndex);
+                itemUse.Use(indexPlayer, stockShop, quantity);
+                SimpleShoppingManager.OnEventUseProduct(stockShop.ShopProduct, quantity);
             }
-        }
-
-
-        public override IShopProduct GetAssociatedProduct()
-        {
-            return StockShop?.ShopProduct; // Retorna o produto associado ao estoque
-        }
-        private int FindProductIndexInLayout(IShopProduct shopProduct, RectTransform content)
-        {
-            // Percorre todos os filhos do conteúdo para encontrar o índice do produto correspondente
-            for (var i = 0; i < content.childCount; i++)
-            {
-                var child = content.GetChild(i);
-                var productSettings = child.GetComponent<ShopProductSettings>();
-                if (productSettings != null && productSettings.GetAssociatedProduct().Equals(shopProduct))
-                {
-                    return i;
-                }
-            }
-            return -1; // Retorna -1 se o produto não for encontrado
         }
     }
 }

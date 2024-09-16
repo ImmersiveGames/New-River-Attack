@@ -57,7 +57,10 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         {
             _shopLayout.ConfigureLayout(panelContent, stockShopsList.Count, prefabItemShop);
 
+            // Garantindo que a lista não está duplicada
             _productStocks = new List<ShopProductStock>(stockShopsList);
+
+            // Ordenando a lista por nome
             _productStocks.Sort((x, y) => string.Compare(x.ShopProduct.name, y.ShopProduct.name, StringComparison.Ordinal));
 
             CreateShopping(panelContent);
@@ -119,21 +122,26 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         }
 
         #endregion
-        
 
         private void ClearShopping(Transform content)
         {
             var childCount = content.childCount;
             for (var i = childCount - 1; i >= 0; i--)
             {
-                content.GetChild(i);
+                Destroy(content.GetChild(i).gameObject);  // Certifique-se de destruir os filhos
             }
         }
 
         private void CreateShopping(RectTransform content)
         {
             ClearShopping(content);
-            UpdateContentSize(content);  // Ajusta o tamanho do content
+
+            foreach (var stock in _productStocks)
+            {
+                InstantiateItemShop(stock);
+            }
+
+            UpdateContentSize(content);
             _navigationMode.UpdateSelectedItem(content, 0);
             _shopLayout.ResetContentPosition(content);
         }
@@ -143,7 +151,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             var selectedIndex = _navigationMode.SelectedItemIndex;
             ClearShopping(content);
 
-            foreach (var stock in stockShopsList)
+            foreach (var stock in _productStocks)
             {
                 InstantiateItemShop(stock);
             }
@@ -175,14 +183,12 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
 
             if (content.childCount == 0) return;
 
-            // Obtém a largura do primeiro item após sua criação
             var itemWidth = content.GetChild(0).GetComponent<RectTransform>().rect.width;
-
-            // Calcula o tamanho total do content com base no número de itens e espaçamento
             var totalWidth = (itemWidth * content.childCount) + (layoutGroup.spacing * (content.childCount - 1));
 
-            content.sizeDelta = new Vector2(totalWidth, content.sizeDelta.y);  // Ajusta o tamanho do content
+            content.sizeDelta = new Vector2(totalWidth, content.sizeDelta.y);
         }
+
         private void InstantiateItemShop(ShopProductStock stock)
         {
             var item = Instantiate(prefabItemShop, panelContent);

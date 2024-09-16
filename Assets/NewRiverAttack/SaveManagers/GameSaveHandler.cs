@@ -135,10 +135,10 @@ namespace NewRiverAttack.SaveManagers
             SaveGameLocation();
             
             // Game Options
-            if(!Mathf.Approximately(gameOptionsSave.bgmVolume, saveObject.bgmVolume.Value))
+            if(!Mathf.Approximately(saveObject.bgmVolume.Value, gameOptionsSave.bgmVolume))
                 saveObject.bgmVolume.Value = gameOptionsSave.bgmVolume;
-            if(!Mathf.Approximately(gameOptionsSave.sfxVolume, saveObject.sfxVolume.Value))
-                gameOptionsSave.sfxVolume = saveObject.sfxVolume.Value;
+            if(!Mathf.Approximately(saveObject.sfxVolume.Value, gameOptionsSave.sfxVolume))
+                saveObject.sfxVolume.Value = gameOptionsSave.sfxVolume;
             if(saveObject.frameRate.Value != gameOptionsSave.frameRate)
                 saveObject.frameRate.Value = gameOptionsSave.frameRate;
             if(saveObject.actualResolution.Value != gameOptionsSave.actualResolution)
@@ -147,7 +147,7 @@ namespace NewRiverAttack.SaveManagers
                  saveObject.selectedQualityIndex.Value = gameOptionsSave.selectedQualityIndex;
             
             //Player Game
-            if(gameOptionsSave.wallet != saveObject.wallet.Value)
+            if(saveObject.wallet.Value != gameOptionsSave.wallet)
                 saveObject.wallet.Value = gameOptionsSave.wallet;
             if(saveObject.listPlayerProductStocks.Value != gameOptionsSave.listPlayerProductStocks)
                 saveObject.listPlayerProductStocks.Value = gameOptionsSave.listPlayerProductStocks;

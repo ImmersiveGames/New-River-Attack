@@ -31,7 +31,7 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
         private void OnDisable()
         {
             // Salva as opções do jogo ao desativar o objeto.
-            SaveGameOptions();
+            //SaveGameOptions();
             _sliderControl.onValueChanged.RemoveAllListeners();
         }
 

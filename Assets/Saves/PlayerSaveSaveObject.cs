@@ -47,8 +47,6 @@ namespace Saves
         public SaveValue<int> playersClassicPath;
         public SaveValue<int> playersMissionPath;
         public SaveValue<int> playersCountPath;
-        public SaveValue<int> playersRefugies;
-        
         public SaveValue<List<GameStatisticHit>> hitEnemiesResultsList;
 
     }
