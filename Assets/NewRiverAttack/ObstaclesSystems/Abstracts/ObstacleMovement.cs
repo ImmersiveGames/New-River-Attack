@@ -122,11 +122,10 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         #endregion
         
         #region Gizmos
-#if UNITY_EDITOR
         protected Vector2 GizmoRadius;
         [Header("Gizmos Settings")]
         public Color gizmoColor = new Color(0, 0, 250, 150);
-        
+#if UNITY_EDITOR
         private void OnDrawGizmosSelected()
         {
             if (GizmoRadius == Vector2.zero) return;
