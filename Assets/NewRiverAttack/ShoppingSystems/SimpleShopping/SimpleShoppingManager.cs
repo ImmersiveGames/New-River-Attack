@@ -148,17 +148,39 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
 
         private void UpdateStockProducts(Transform content)
         {
-            var selectedIndex = _navigationMode.SelectedItemIndex;
-            ClearShopping(content);
-
-            foreach (var stock in _productStocks)
+            if (content == null)
             {
-                InstantiateItemShop(stock);
+                Debug.LogError("Panel content is null.");
+                return;
             }
 
+            if (stockShopsList == null || stockShopsList.Count == 0)
+            {
+                Debug.LogError("StockShopsList is null or empty.");
+                return;
+            }
+
+            // Armazena o índice atual selecionado
+            int selectedIndex = _navigationMode.SelectedItemIndex;
+
+            ClearShopping(content);  // Certifique-se de que ClearShopping está funcionando corretamente
+
+            foreach (var stock in stockShopsList)
+            {
+                if (stock.ShopProduct == null)
+                {
+                    Debug.LogError("Stock or ShopProduct is null.");
+                    continue;  // Pula itens nulos para evitar problemas
+                }
+
+                InstantiateItemShop(stock);  // Adiciona o item da loja
+            }
+
+            // Restaura o índice selecionado anterior
             _navigationMode.UpdateSelectedItem((RectTransform)content, selectedIndex);
             _shopLayout.ResetContentPosition((RectTransform)content);
 
+            // Verifica se o layout existe antes de tentar usá-lo
             var layoutGroup = content.GetComponent<HorizontalLayoutGroup>();
             if (layoutGroup != null)
             {
@@ -166,9 +188,10 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             }
             else
             {
-                DebugManager.LogError<SimpleShoppingManager>("HorizontalLayoutGroup não encontrado no content.");
+                Debug.LogError("HorizontalLayoutGroup não encontrado no content.");
             }
         }
+
 
         public INavigationMode GetNavigationMode() => _navigationMode;
 
@@ -191,7 +214,13 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
 
         private void InstantiateItemShop(ShopProductStock stock)
         {
-            var item = Instantiate(prefabItemShop, panelContent);
+            if (prefabItemShop == null)
+            {
+                Debug.LogError("Prefab item for shop is not assigned.");
+                return;
+            }
+
+            var item = Instantiate(prefabItemShop, panelContent);  // Instancia o item na loja
             var stockItemTemplate = item.GetComponent<ShopProductSettings>();
             if (stockItemTemplate != null)
             {
@@ -199,14 +228,23 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             }
             else
             {
-                DebugManager.LogWarning<SimpleShoppingManager>($"Missing ShopProductSettings component on prefab: {prefabItemShop.name}");
+                Debug.LogWarning($"Missing ShopProductSettings component on prefab: {prefabItemShop.name}");
             }
 
+            // Configura o RectTransform
             var rectTransform = item.GetComponent<RectTransform>();
-            rectTransform.pivot = new Vector2(0, 0.5f);
-            rectTransform.anchorMin = new Vector2(0, 0.5f);
-            rectTransform.anchorMax = new Vector2(0, 0.5f);
+            if (rectTransform != null)
+            {
+                rectTransform.pivot = new Vector2(0, 0.5f);
+                rectTransform.anchorMin = new Vector2(0, 0.5f);
+                rectTransform.anchorMax = new Vector2(0, 0.5f);
+            }
+            else
+            {
+                Debug.LogError("RectTransform not found on instantiated item.");
+            }
         }
+
 
         public List<ShopProductStock> GetShopList => _productStocks;
 

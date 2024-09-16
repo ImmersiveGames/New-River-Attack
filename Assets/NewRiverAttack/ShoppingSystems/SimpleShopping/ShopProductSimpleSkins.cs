@@ -21,11 +21,11 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         [SerializeField] private Slider attFireSpeed;
         
         [Header("Skin Buttons Settings")]
-        public Color textNormalColor;
-        public Color textNoBuyColor = Color.red;
-        public LocalizedString textUnavailable;
-        public LocalizedString textInUse;
-        public LocalizedString textNotInUse;
+        public Color textNormalColor;  // Cor padrão do texto do botão
+        public Color textNoBuyColor = Color.red;  // Cor vermelha para quando o jogador não tem dinheiro suficiente
+        public LocalizedString textUnavailable;  // Texto de "Indisponível"
+        public LocalizedString textInUse;  // Texto para "Em uso"
+        public LocalizedString textNotInUse;  // Texto para "Não está em uso"
 
         private string _cachedTextUnavailable;
         private string _cachedTextInUse;
@@ -49,30 +49,34 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             base.DisplayStock(stockShop);
             DisplaySlides(stockShop?.ShopProduct);
             
-            // Verifica se o jogador já possui esse produto na lista de produtos
+            // Verifica se o jogador já possui o produto no inventário
             var gameOptions = GameOptionsSave.Instance;
             var hasProductInPlayerInventory = gameOptions.listPlayerProductStocks.Exists(p => p.ShopProduct == stockShop.ShopProduct);
 
-            // Configura o botão de usar ou comprar com base na presença no inventário
+            // Lógica para configurar os botões com base no estoque e na lista do jogador
             if (hasProductInPlayerInventory)
             {
+                // Se o jogador já possui o produto, exibe o botão de usar
                 buttonUse.gameObject.SetActive(true);
-                buttonBuy.gameObject.SetActive(false);
+                buttonBuy.gameObject.SetActive(false);  // Não pode comprar se já tem
             }
-            else if (stockShop is { QuantityInStock: > 0 })
+            else if (stockShop.QuantityInStock > 0)
             {
-                buttonUse.gameObject.SetActive(false);
+                // Produto está no estoque, exibe o botão de comprar
+                buttonUse.gameObject.SetActive(false);  // Não pode usar se ainda não comprou
                 buttonBuy.gameObject.SetActive(true);
+
+                // Configura o botão de comprar para indicar se o jogador tem dinheiro suficiente
+                InteractableButtonBuy(stockShop, 1);
             }
             else
             {
-                // Produto indisponível se não estiver no estoque e não estiver no inventário
+                // Produto fora de estoque e jogador não possui o item
                 buttonUse.gameObject.SetActive(false);
-                buttonBuy.gameObject.SetActive(false);
+                buttonBuy.gameObject.SetActive(false);  // Produto indisponível
                 buttonBuy.GetComponentInChildren<TMP_Text>().text = _cachedTextUnavailable;
             }
         }
-        
 
         private void DisplaySlides(IShopProduct shopProduct)
         {
@@ -89,19 +93,17 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         {
             var gameOptions = GameOptionsSave.Instance;
 
-            // Verifica se o jogador tem dinheiro suficiente e se o item está em estoque
-            var canBuy = stockShop.HaveInStock(quantity) && stockShop.PlayerHaveMoneyToBuy(gameOptions, quantity);
-            buttonBuy.interactable = canBuy;
-            buttonBuy.GetComponentInChildren<TMP_Text>().color = canBuy ? textNormalColor : textNoBuyColor;
+            // Verifica se o jogador tem dinheiro suficiente
+            var hasEnoughMoney = stockShop.PlayerHaveMoneyToBuy(gameOptions, quantity);
+
+            // Sempre permite comprar se estiver em estoque, mas altera a cor dependendo do dinheiro
+            buttonBuy.interactable = hasEnoughMoney;  // Pode clicar se tiver dinheiro suficiente
+            buttonBuy.GetComponentInChildren<TMP_Text>().color = hasEnoughMoney ? textNormalColor : textNoBuyColor;
 
             buttonBuy.onClick.RemoveAllListeners();
-            if (canBuy)
+            if (hasEnoughMoney)
             {
                 buttonBuy.onClick.AddListener(() => BuyAndUseProduct(0, stockShop, quantity));
-            }
-            else
-            {
-                buttonBuy.GetComponentInChildren<TMP_Text>().text = _cachedTextUnavailable;
             }
         }
 
