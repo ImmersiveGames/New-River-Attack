@@ -1,7 +1,5 @@
-﻿using ImmersiveGames.DebugManagers;
-using ImmersiveGames.ShopManagers.Interfaces;
+﻿using ImmersiveGames.ShopManagers.Interfaces;
 using ImmersiveGames.ShopManagers.ShopProducts;
-using ImmersiveGames.SteamServicesManagers;
 using NewRiverAttack.SaveManagers;
 using NewRiverAttack.ShoppingSystems.SimpleShopping.Abstracts;
 using TMPro;
@@ -51,7 +49,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             
             // Verifica se o jogador já possui o produto no inventário
             var gameOptions = GameOptionsSave.Instance;
-            var hasProductInPlayerInventory = gameOptions.listPlayerProductStocks.Exists(p => p.ShopProduct == stockShop.ShopProduct);
+            var hasProductInPlayerInventory = gameOptions.listPlayerProductStocks.Exists(p => p.ShopProduct == stockShop?.ShopProduct);
 
             // Lógica para configurar os botões com base no estoque e na lista do jogador
             if (hasProductInPlayerInventory)
@@ -60,7 +58,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
                 buttonUse.gameObject.SetActive(true);
                 buttonBuy.gameObject.SetActive(false);  // Não pode comprar se já tem
             }
-            else if (stockShop.QuantityInStock > 0)
+            else if (stockShop is { QuantityInStock: > 0 })
             {
                 // Produto está no estoque, exibe o botão de comprar
                 buttonUse.gameObject.SetActive(false);  // Não pode usar se ainda não comprou
