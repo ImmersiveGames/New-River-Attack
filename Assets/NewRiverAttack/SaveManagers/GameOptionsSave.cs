@@ -40,7 +40,6 @@ namespace NewRiverAttack.SaveManagers
         public int missionLives;
         public int missionBombs;
 
-
         public bool SkinIsActualInPlayer(int indexSettings, ShopProduct skin)
         {
             if (playerSettings[indexSettings].actualSkin == null)

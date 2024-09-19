@@ -13,10 +13,11 @@ namespace ImmersiveGames.SteamServicesManagers
     public class SteamAchievementService : MonoBehaviour, IAchievementService
     {
         public static SteamAchievementService Instance { get; private set; }
+
         private HashSet<string> _serverAchievements = new HashSet<string>();
         private HashSet<string> _offlineAchievements = new HashSet<string>();
-        private bool ConnectedToSteam => SteamConnectionManager.ConnectedToSteam;
-        private bool NotifyOnAchievementUnlock { get; set; } = false;
+        private bool ConnectedToSteam => SteamConnectionManager.ConnectedToSteam; // Verifica conexão com Steam
+        private bool NotifyOnAchievementUnlock { get; set; } = false; // Definir se deve notificar conquistas
 
         #region Unity Methods
 
@@ -24,13 +25,23 @@ namespace ImmersiveGames.SteamServicesManagers
         {
             if (Instance == null)
             {
-                Instance = this;
-                //DontDestroyOnLoad(gameObject);
+                // Cria o objeto na raiz da cena se ele não for o objeto raiz
+                if (transform.parent != null)
+                {
+                    GameObject rootObject = new GameObject("SteamAchievementService");
+                    Instance = rootObject.AddComponent<SteamAchievementService>();
+                    DontDestroyOnLoad(rootObject);  // Marca o objeto como persistente
+                }
+                else
+                {
+                    Instance = this;
+                    DontDestroyOnLoad(gameObject);  // Marca o objeto como persistente
+                }
                 DebugManager.Log<SteamAchievementService>("Instância criada e marcada para não destruir ao carregar uma nova cena.");
             }
             else
             {
-                Destroy(gameObject);
+                Destroy(gameObject);  // Garante que não haverá múltiplas instâncias
                 DebugManager.LogWarning<SteamAchievementService>("Tentativa de criar outra instância evitada e o novo objeto foi destruído.");
             }
         }
@@ -38,8 +49,18 @@ namespace ImmersiveGames.SteamServicesManagers
         private void Start()
         {
             DebugManager.Log<SteamAchievementService>("Iniciando carregamento e sincronização de conquistas...");
-            LoadAchievements();
-            SyncAchievements(); // Tenta sincronizar conquistas ao iniciar
+
+            if (ConnectedToSteam)
+            {
+                DebugManager.Log<SteamAchievementService>("Conectado ao Steam. Carregando conquistas do servidor.");
+                LoadAchievements();
+                SyncAchievements(); // Sincroniza conquistas ao iniciar
+            }
+            else
+            {
+                DebugManager.LogWarning<SteamAchievementService>("Não está conectado ao Steam. Operando no modo offline.");
+                LoadOfflineAchievements();
+            }
         }
 
         private void OnApplicationQuit()
@@ -52,110 +73,110 @@ namespace ImmersiveGames.SteamServicesManagers
 
         #region IAchievementService Methods
 
+        // Carrega conquistas do servidor Steam
         public void LoadAchievements()
         {
             DebugManager.Log<SteamAchievementService>("Carregando conquistas offline...");
-            LoadOfflineAchievements();
+
+            LoadOfflineAchievements(); // Carrega conquistas offline primeiro
 
             if (ConnectedToSteam)
             {
-                DebugManager.Log<SteamAchievementService>("Conectado ao Steam. Carregando conquistas do servidor...");
+                DebugManager.Log<SteamAchievementService>("Carregando conquistas do servidor Steam...");
+
                 _serverAchievements = SteamUserStats.Achievements
                     .Where(a => a.State)
                     .Select(a => a.Identifier)
                     .ToHashSet();
+
                 DebugManager.Log<SteamAchievementService>($"Conquistas carregadas do servidor: {_serverAchievements.Count}");
             }
             else
             {
-                DebugManager.LogWarning<SteamAchievementService>("Não está conectado ao Steam. Conquistas do servidor não carregadas.");
+                DebugManager.LogWarning<SteamAchievementService>("Não foi possível carregar conquistas do servidor, sem conexão com o Steam.");
             }
         }
 
+        // Verifica se uma conquista foi desbloqueada
         public bool IsAchievementUnlocked(string achievementId)
         {
             bool unlocked = _serverAchievements.Contains(achievementId);
-            DebugManager.Log<SteamAchievementService>($"Verificação de conquista '{achievementId}' - Desbloqueada no servidor: {unlocked}");
+            DebugManager.Log<SteamAchievementService>($"Conquista '{achievementId}' - Desbloqueada no servidor: {unlocked}");
             return unlocked;
         }
 
+        // Sincroniza conquistas offline com o servidor Steam
         public void SyncAchievements()
         {
             if (!ConnectedToSteam)
             {
-                DebugManager.LogWarning<SteamAchievementService>("Não está conectado ao Steam. Salvando conquistas offline...");
+                DebugManager.LogWarning<SteamAchievementService>("Sem conexão ao Steam. Salvando conquistas offline...");
                 SaveOfflineAchievements();
                 return;
             }
 
             DebugManager.Log<SteamAchievementService>("Sincronizando conquistas offline com o servidor...");
+
             foreach (var achievementId in _offlineAchievements.ToList())
             {
                 try
                 {
-                    // Tentativa de sincronização no servidor
                     if (!IsAchievementUnlocked(achievementId))
                     {
                         var achievement = new Achievement(achievementId);
-                        achievement.Trigger();
+                        achievement.Trigger(); // Desbloqueia a conquista no Steam
                         DebugManager.Log<SteamAchievementService>($"Conquista '{achievementId}' sincronizada com sucesso.");
                         _serverAchievements.Add(achievementId);
                     }
-                    else
-                    {
-                        DebugManager.Log<SteamAchievementService>($"Conquista '{achievementId}' já está desbloqueada no servidor.");
-                    }
-                    _offlineAchievements.Remove(achievementId); // Remove da lista offline após sincronização bem-sucedida
+                    _offlineAchievements.Remove(achievementId); // Remove da lista de conquistas offline
                 }
                 catch (Exception e)
                 {
-                    DebugManager.LogError<SteamAchievementService>($"Falha ao sincronizar conquista {achievementId}: {e}");
+                    DebugManager.LogError<SteamAchievementService>($"Erro ao sincronizar conquista {achievementId}: {e}");
                 }
             }
 
-            SteamUserStats.StoreStats();
-            SaveOfflineAchievements(); // Salva novamente para garantir que só as não sincronizadas fiquem armazenadas
-            DebugManager.Log<SteamAchievementService>("Sincronização concluída.");
+            SteamUserStats.StoreStats(); // Salva no Steam
+            SaveOfflineAchievements(); // Salva localmente
         }
 
+        // Desbloqueia uma conquista
         public void UnlockAchievement(string achievementId, bool notify = true)
         {
             if (IsAchievementUnlocked(achievementId))
             {
-                DebugManager.Log<SteamAchievementService>($"Conquista '{achievementId}' já foi desbloqueada anteriormente no servidor.");
+                DebugManager.Log<SteamAchievementService>($"Conquista '{achievementId}' já foi desbloqueada.");
                 return;
             }
 
             try
             {
-                var achievementName = achievementId; // Nome padrão se offline
+                var achievementName = achievementId; // Nome padrão para modo offline
 
                 if (ConnectedToSteam)
                 {
                     var achievement = new Achievement(achievementId);
-                    achievement.Trigger();
-                    achievementName = achievement.Name; // Atualiza o nome se online
-
-                    DebugManager.Log<SteamAchievementService>($"Conquista desbloqueada online: {achievementName} ({achievementId})");
-
+                    achievement.Trigger(); // Desbloqueia no Steam
+                    achievementName = achievement.Name; // Nome atualizado do Steam
                     _serverAchievements.Add(achievementId);
                     SteamUserStats.StoreStats();
+                    DebugManager.Log<SteamAchievementService>($"Conquista '{achievementName}' ({achievementId}) desbloqueada.");
                 }
                 else
                 {
-                    DebugManager.LogWarning<SteamAchievementService>($"Não está conectado ao Steam. Desbloqueando conquista '{achievementId}' offline.");
+                    DebugManager.LogWarning<SteamAchievementService>($"Desbloqueando conquista '{achievementId}' offline.");
                     _offlineAchievements.Add(achievementId);
                     SaveOfflineAchievements();
                 }
 
                 if (notify && NotifyOnAchievementUnlock)
                 {
-                    NotifyAchievementUnlocked(achievementId, achievementName); // Notifica o usuário com o ID e Nome
+                    NotifyAchievementUnlocked(achievementId, achievementName); // Notifica o jogador
                 }
             }
             catch (Exception e)
             {
-                DebugManager.LogError<SteamAchievementService>($"Erro ao desbloquear a conquista {achievementId} : {e}");
+                DebugManager.LogError<SteamAchievementService>($"Erro ao desbloquear a conquista {achievementId}: {e}");
             }
         }
 
@@ -163,21 +184,22 @@ namespace ImmersiveGames.SteamServicesManagers
         {
             if (ConnectedToSteam)
             {
-                SteamUserStats.ResetAll(true);
+                SteamUserStats.ResetAll(true); // Reseta conquistas no Steam
                 SteamUserStats.StoreStats();
-                DebugManager.Log<SteamAchievementService>("Conquistas Online Resetadas!");
+                DebugManager.Log<SteamAchievementService>("Conquistas online resetadas.");
             }
 
             PlayerPrefs.DeleteAll();
             _offlineAchievements.Clear();
             SaveOfflineAchievements();
-            DebugManager.Log<SteamAchievementService>("Conquistas Offline Resetadas!");
+            DebugManager.Log<SteamAchievementService>("Conquistas offline resetadas.");
         }
 
         #endregion
 
-        #region Métodos Save Offline
+        #region Offline Achievement Methods
 
+        // Salva conquistas offline no PlayerPrefs
         private void SaveOfflineAchievements()
         {
             DebugManager.Log<SteamAchievementService>("Salvando conquistas offline...");
@@ -186,6 +208,7 @@ namespace ImmersiveGames.SteamServicesManagers
             DebugManager.Log<SteamAchievementService>("Conquistas offline salvas com sucesso.");
         }
 
+        // Carrega conquistas offline do PlayerPrefs
         private void LoadOfflineAchievements()
         {
             DebugManager.Log<SteamAchievementService>("Carregando conquistas offline de PlayerPrefs...");
@@ -197,17 +220,18 @@ namespace ImmersiveGames.SteamServicesManagers
             }
             else
             {
-                DebugManager.Log<SteamAchievementService>("Nenhuma conquista offline encontrada para carregar.");
+                DebugManager.Log<SteamAchievementService>("Nenhuma conquista offline encontrada.");
             }
         }
 
         #endregion
 
-        #region Auxiliares
+        #region Notification Methods
 
+        // Notifica que uma conquista foi desbloqueada
         private void NotifyAchievementUnlocked(string achievementId, string achievementName)
         {
-            DebugManager.Log<SteamAchievementService>($"Notificando o desbloqueio da conquista: {achievementName} ({achievementId})");
+            DebugManager.Log<SteamAchievementService>($"Notificando desbloqueio da conquista: {achievementName} ({achievementId})");
 
             var notificationData = new NotificationData
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using ImmersiveGames.BulletsManagers;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.SteamServicesManagers;
@@ -48,29 +49,31 @@ namespace NewRiverAttack.GameStatisticsSystem
 
         private void LogSessionTime(float sessionStartTime)
         {
+            if (sessionStartTime <= 0) return;
             var sessionTime = Time.time - sessionStartTime;
             if (!_gemeStatisticsDataLog) return;
             _gemeStatisticsDataLog.playersTimeSpent += sessionTime;
-            DebugManager.Log<GameStatisticManager>($"Log Offline Timer {_gemeStatisticsDataLog.playersTimeSpent}");
+            //DebugManager.Log<GameStatisticManager>($"Log Offline Timer {_gemeStatisticsDataLog.playersTimeSpent}");
         }
 
         internal async void LogMaxScore(int score)
         {
-            if(_gemeStatisticsDataLog == null) return;
+            if(_gemeStatisticsDataLog == null || score <= 0) return;
             if (score <= _gemeStatisticsDataLog.playersMaxScore) return;
             _gemeStatisticsDataLog.playersMaxScore = score;
             await SteamLeaderboardService.Instance.UpdateScore(score, true).ConfigureAwait(false);
-            DebugManager.Log<GameStatisticManager>($"Log Offline Max Score {_gemeStatisticsDataLog.playersMaxScore}");
+            //DebugManager.Log<GameStatisticManager>($"Log Offline Max Score {_gemeStatisticsDataLog.playersMaxScore}");
         }
 
         public void LogAmountDistance(float amount)
         {
-            if(_gemeStatisticsDataLog == null) return;
+            if(_gemeStatisticsDataLog == null || amount <= 0) return;
             _gemeStatisticsDataLog.SetAmountDistance(amount);
         }
 
         internal void LogDistance(int distance)
         {
+            if(distance <= 0) return;
             LogMaxDistance(distance);
             if(_gemeStatisticsDataLog == null) return;
             CheckAmountUpdate("stat_FlightDistance", _gemeStatisticsDataLog.playersAmountDistance, 500);
@@ -78,46 +81,46 @@ namespace NewRiverAttack.GameStatisticsSystem
 
         private void LogMaxDistance(int intValue)
         {
-            if(_gemeStatisticsDataLog == null) return;
+            if(_gemeStatisticsDataLog == null || intValue <= 0) return;
             _gemeStatisticsDataLog.playersMaxDistance = Mathf.Max(_gemeStatisticsDataLog.playersMaxDistance, intValue);
-            DebugManager.Log<GameStatisticManager>($"Log Offline MAX Distance: {_gemeStatisticsDataLog.playersMaxDistance}");
+            //DebugManager.Log<GameStatisticManager>($"Log Offline MAX Distance: {_gemeStatisticsDataLog.playersMaxDistance}");
         }
 
         public void LogShoots(int intValue)
         {
-            if(_gemeStatisticsDataLog == null) return;
+            if(_gemeStatisticsDataLog == null || intValue <= 0) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersShoots, intValue);
             CheckAmountUpdate("stat_Shoots", _gemeStatisticsDataLog.playersShoots);
         }
 
         public void LogBombs(int intValue)
         {
-            if(_gemeStatisticsDataLog == null) return;
+            if(_gemeStatisticsDataLog == null || intValue <= 0) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersBombs, intValue);
             CheckAmountUpdate("stat_Bombs", _gemeStatisticsDataLog.playersBombs);
         }
         public void LogFuelSpend(float floatValue)
         {
-            if(_gemeStatisticsDataLog == null) return;
+            if(_gemeStatisticsDataLog == null || floatValue <= 0) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersFuelSpent, floatValue);
             CheckAmountUpdate("stat_SpendGas", _gemeStatisticsDataLog.playersFuelSpent,1000);
         }
         public void LogFuelCharge(float floatValue)
         {
-            if(_gemeStatisticsDataLog == null) return;
+            if(_gemeStatisticsDataLog == null || floatValue <= 0) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersFuelCharge, floatValue);
             CheckAmountUpdate("stat_FillGas", _gemeStatisticsDataLog.playersFuelCharge);
         }
         public void LogDeaths(int intValue)
         {
-            if(_gemeStatisticsDataLog == null) return;
+            if(_gemeStatisticsDataLog == null || intValue <= 0) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersDeaths, intValue);
             OnEventServiceSet("stat_Deaths", _gemeStatisticsDataLog.playersDeaths);
         }
 
         public void LogCollision(Component other)
         {
-            if(_gemeStatisticsDataLog == null) return;
+            if(_gemeStatisticsDataLog == null || other ==null) return;
             // Testa se o componente é do tipo WallMaster
             if (other.GetComponentInParent<WallMaster>())
             {
@@ -142,12 +145,13 @@ namespace NewRiverAttack.GameStatisticsSystem
         
         public void LogFuelOut(int intValue)
         {
-            if(_gemeStatisticsDataLog == null) return;
+            if(_gemeStatisticsDataLog == null || intValue <= 0) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersDieFuelOut, intValue);
             OnEventServiceSet("stat_FuelOut", _gemeStatisticsDataLog.playersDieFuelOut);
         }
         public void LogCompletePath(int intValue, GamePlayModes modes)
         {
+            if(_gemeStatisticsDataLog == null || intValue <= 0) return;
             switch (modes)
             {
                 case GamePlayModes.ClassicMode:
@@ -164,30 +168,29 @@ namespace NewRiverAttack.GameStatisticsSystem
         }
         public void LogTimeRapidFire(float floatValue)
         {
-            if(_gemeStatisticsDataLog == null) return;
+            if(_gemeStatisticsDataLog == null || floatValue <= 0) return;
             _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersTimeRapidFire, floatValue);
             CheckAmountUpdate("stat_TimeRapidFire", _gemeStatisticsDataLog.playersTimeRapidFire);
         }
         
         public void LogBombsHit(int intValue)
         {
-            if(_gemeStatisticsDataLog == null) return;
+            if(_gemeStatisticsDataLog == null || intValue <= 0) return;
             _gemeStatisticsDataLog.playersBombHit = Mathf.Max(_gemeStatisticsDataLog.playersBombHit, intValue);
             OnEventServiceSet("stat_BombHit", _gemeStatisticsDataLog.playersBombHit);
         }
         
         internal void LogCollectables(ObjectsScriptable objects)
         {
-            if(_gemeStatisticsDataLog == null) return;
-            
+            if(_gemeStatisticsDataLog == null || objects == null) return;
             var powerUp = objects as PowerUpScriptable;
             if (powerUp != null && powerUp.powerUpData.powerUpType == PowerUpTypes.Bomb)
             {
-                _steamAchievementService.UnlockAchievement("ACH_COLLECT_RAPID_FIRE");
+                _steamAchievementService.UnlockAchievement("ACH_COLLECT_BOMB");
             }
             if (powerUp != null && powerUp.powerUpData.powerUpType == PowerUpTypes.RapidFire)
             {
-                _steamAchievementService.UnlockAchievement("ACH_COLLECT_BOMB");
+                _steamAchievementService.UnlockAchievement("ACH_COLLECT_RAPID_FIRE");
             }
             if (powerUp != null && powerUp.powerUpData.powerUpType == PowerUpTypes.Live)
             {
@@ -202,7 +205,7 @@ namespace NewRiverAttack.GameStatisticsSystem
 
         public void LogEnemiesHit(PlayerSettings player, ObjectsScriptable enemy, int quantity, EnumCollisionType collision)
         {
-            if(_gemeStatisticsDataLog == null) return;
+            if(_gemeStatisticsDataLog == null || enemy == null) return;
             _gemeStatisticsDataLog.AddOrUpdateStatisticHit(player,enemy, quantity,collision);
 
             switch (enemy.obstacleTypes)
@@ -320,12 +323,38 @@ namespace NewRiverAttack.GameStatisticsSystem
         }
         
         #region Auxiliar
-        private void CheckAmountUpdateType(string statName,ObstacleTypes obstacleTypes, int amount = 100)
+        private void CheckAmountUpdateType(string statName, ObstacleTypes obstacleTypes, int amount = 100)
         {
-            if(_gemeStatisticsDataLog == null) return;
+            // Verifica se _gemeStatisticsDataLog está inicializado
+            if (_gemeStatisticsDataLog == null)
+            {
+                DebugManager.LogError<GameStatisticManager>("_gemeStatisticsDataLog está null. Abandonando a execução.");
+                return;
+            }
+
+            // Verifica se listEnemyHit dentro de _gemeStatisticsDataLog está inicializado
+            if (_gemeStatisticsDataLog.GetEnemyList == null || !_gemeStatisticsDataLog.GetEnemyList.Any())
+            {
+                DebugManager.LogWarning<GameStatisticManager>("listEnemyHit está null ou vazia.");
+                return;
+            }
+
+            // Obtém a quantidade total de obstáculos do tipo fornecido
             var obstacles = _gemeStatisticsDataLog.GetTotalQuantityByPlayerAndType(obstacleTypes);
+
+            // Verifica se a quantidade de obstáculos retornada é válida
+            if (obstacles <= 0)
+            {
+                DebugManager.LogWarning<GameStatisticManager>("Nenhum obstáculo encontrado para o tipo especificado.");
+                return;
+            }
+
+            // Chama CheckAmountUpdate com a quantidade de obstáculos obtida
             CheckAmountUpdate(statName, obstacles, amount);
+            
         }
+
+
         private void CheckAmountUpdate(string statName,int quantity, int amount = 100)
         {
             if (quantity % amount == 0)

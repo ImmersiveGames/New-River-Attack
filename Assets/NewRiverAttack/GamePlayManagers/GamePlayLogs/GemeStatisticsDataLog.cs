@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.Utils;
 using NewRiverAttack.ObstaclesSystems;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
 {
@@ -19,6 +20,7 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
         }
 
         [Header("Players Logs")] 
+        public DateTime LastDate;
         public int playersMaxScore;
         public float playersTimeSpent;
         public int playersMaxDistance;
@@ -41,16 +43,16 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
 
         public List<GameStatisticHit> GetEnemyList
         {
-            get => listEnemyHit;
+            get => _listEnemyHit;
             set
             {
-                listEnemyHit = new List<GameStatisticHit>();
-                listEnemyHit = value;
+                _listEnemyHit = new List<GameStatisticHit>();
+                _listEnemyHit = value;
             }
         }
         
 
-        [SerializeField] private List<GameStatisticHit> listEnemyHit = new List<GameStatisticHit>();
+        private List<GameStatisticHit> _listEnemyHit = new List<GameStatisticHit>();
         public string GetAmountDistance => $"{playersAmountDistance:F2}";
 
         #region List Auxiliares
@@ -58,7 +60,7 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
         // 1. Retornar todos os registros com o mesmo jogador
         public IEnumerable<GameStatisticHit> GetHitsByPlayer(PlayerSettings player)
         {
-            return listEnemyHit
+            return _listEnemyHit
                 .Where(hit => hit.player == player)
                 .GroupBy(hit => hit.enemy.localizeName)
                 .Select(group => new GameStatisticHit(player, group.First().enemy, group.Sum(hit => hit.quantity), group.First().collisionType))
@@ -68,7 +70,7 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
         // 2. Retornar todos os registros com o mesmo jogador e inimigo
         public IEnumerable<GameStatisticHit> GetHitsByPlayerAndEnemy(PlayerSettings player, ObjectsScriptable enemy)
         {
-            return listEnemyHit
+            return _listEnemyHit
                 .Where(hit => hit.player == player && hit.enemy == enemy)
                 .GroupBy(hit => hit.enemy.localizeName)
                 .Select(group => new GameStatisticHit(player, group.First().enemy, group.Sum(hit => hit.quantity), group.First().collisionType))
@@ -78,7 +80,7 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
         // 3. Retornar todos os registros com o mesmo jogador e tipo de colisão
         public List<GameStatisticHit> GetHitsByPlayerAndCollision(PlayerSettings player, EnumCollisionType collision)
         {
-            return listEnemyHit
+            return _listEnemyHit
                 .Where(hit => hit.player == player && hit.collisionType == collision)
                 .GroupBy(hit => hit.enemy.localizeName)
                 .Select(group => new GameStatisticHit(player, group.First().enemy, group.Sum(hit => hit.quantity), collision))
@@ -88,7 +90,7 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
         // 4. Adicionar novo registro ou somar quantidade ao existente
         public void AddOrUpdateStatisticHit(PlayerSettings player, ObjectsScriptable enemy, int quantity, EnumCollisionType collision)
         {
-            var existingHit = listEnemyHit
+            var existingHit = _listEnemyHit
                 .FirstOrDefault(hit => hit.player == player && hit.enemy == enemy && hit.collisionType == collision);
 
             if (existingHit != null)
@@ -97,29 +99,38 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
             }
             else
             {
-                listEnemyHit.Add(new GameStatisticHit(player, enemy, quantity, collision));
+                _listEnemyHit.Add(new GameStatisticHit(player, enemy, quantity, collision));
             }
         }
         public int GetTotalQuantityByPlayerAndEnemy(PlayerSettings player, ObjectsScriptable enemy)
         {
-            return listEnemyHit
+            return _listEnemyHit
                 .Where(hit => hit.player == player && hit.enemy.localizeName == enemy.localizeName)
                 .Sum(hit => hit.quantity);
         }
         public int GetTotalQuantityByPlayerAndType(ObstacleTypes types)
         {
-            if (listEnemyHit != null)
+            // Verifica se a lista está inicializada antes de tentar acessar
+            if (_listEnemyHit == null || !_listEnemyHit.Any())
             {
-                return listEnemyHit
-                    .Where(hit => hit.enemy.obstacleTypes == types)
-                    .Sum(hit => hit.quantity);
+                DebugManager.LogWarning<GemeStatisticsDataLog>("listEnemyHit está null ou vazia. Retornando 0.");
+                return 0;
             }
 
-            return 0;
+            foreach (var hit in _listEnemyHit)
+            {
+                DebugManager.Log<GemeStatisticsDataLog>($"HIT {hit?.enemy}");
+            }
+            // Soma a quantidade de obstáculos do tipo fornecido
+            var tes = _listEnemyHit
+                .Where(hit => hit.enemy.obstacleTypes == types)
+                .Sum(hit => hit.quantity);
+            return tes;
         }
+
         public Dictionary<ObjectsScriptable, int> GetTotalQuantityByObstacleTypeSortedByName(PlayerSettings player)
         {
-            return listEnemyHit
+            return _listEnemyHit
                 .Where(hit => hit.player == player) // Filtra por jogador
                 .GroupBy(hit => hit.enemy) // Agrupa por inimigo (ObjectsScriptable)
                 .Select(group => new
@@ -138,7 +149,7 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
 
         public Dictionary<ObjectsScriptable, int> GetTotalQuantityByObstacleTypeSortedByQuantity(PlayerSettings player)
         {
-            return listEnemyHit
+            return _listEnemyHit
                 .Where(hit => hit.player == player) // Filtra por jogador
                 .GroupBy(hit => hit.enemy) // Agrupa por inimigo (ObjectsScriptable)
                 .Select(group => new
@@ -156,6 +167,7 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
 
         public void ResetLogs()
         {
+            LastDate = DateTime.Now;
             playersMaxScore = 0;
             playersTimeSpent = 0;
             playersMaxDistance = 0;
@@ -171,25 +183,25 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
             playersFuelCharge = 0;
             playersAmountDistance = 0;
             playersCountPath = 0;
-            listEnemyHit = new List<GameStatisticHit>();
+            _listEnemyHit = new List<GameStatisticHit>();
         }
 
         public void IncrementStat(ref int stat, int value)
         {
             stat += value;
-            DebugManager.Log<GemeStatisticsDataLog>($"Incremented stat to {stat}");
+            //DebugManager.Log<GemeStatisticsDataLog>($"Incremented stat to {stat}");
         }
 
         public void IncrementStat(ref float stat, float value)
         {
             stat += value;
-            DebugManager.Log<GemeStatisticsDataLog>($"Incremented stat to {stat}");
+            //DebugManager.Log<GemeStatisticsDataLog>($"Incremented stat to {stat}");
         }
 
         public void SetAmountDistance(float amount)
         {
             playersAmountDistance = amount / BaseConversion;
-            DebugManager.Log<GemeStatisticsDataLog>($"Distance converted to custom unit: {playersAmountDistance:F2}");
+            //DebugManager.Log<GemeStatisticsDataLog>($"Distance converted to custom unit: {playersAmountDistance:F2}");
         }
 
         public int GetCrashes => playersDieWall + playersDieEnemyCollider + playersDieFuelOut;

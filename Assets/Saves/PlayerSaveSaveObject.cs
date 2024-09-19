@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using CarterGames.Assets.SaveManager;
 using ImmersiveGames.ShopManagers.ShopProducts;
@@ -12,6 +13,7 @@ namespace Saves
     [CreateAssetMenu(fileName = "PlayerSaveSaveObject")]
     public class PlayerSaveSaveObject : SaveObject
     {
+        public SaveValue<DateTime> lastDate;
         public SaveValue<int> wallet;
 
         public SaveValue<float> bgmVolume;
