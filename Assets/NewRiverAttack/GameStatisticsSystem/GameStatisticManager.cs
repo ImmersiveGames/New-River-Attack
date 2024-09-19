@@ -36,7 +36,7 @@ namespace NewRiverAttack.GameStatisticsSystem
             base.Awake();
         }
 
-        private void OnEnable()
+        private void Start()
         {
             _steamAchievementService = SteamAchievementService.Instance;
             _gemeStatisticsDataLog = GemeStatisticsDataLog.Instance;
