@@ -32,7 +32,12 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 
         protected override void ReloadObject()
         {
-            RepositionObject();
+            if (GamePlayManagerRef.IsBossFight)
+            {
+                RepositionObject();
+                return;
+            }
+            IsDisable = true;
         }
         public EnemiesScriptable GetEnemySettings => objectDefault as EnemiesScriptable;
 
