@@ -59,6 +59,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             if (ObstacleHp > 0) return;
             playerWhoHit.SetPlayerScore(ObstacleMaster.objectDefault.GetScore());
             ObstacleMaster.OnEventObstacleDeath(playerWhoHit);
+            DebugManager.Log<ObstacleCollider>($"setting {playerWhoHit.GetPlayerSettings}, Default {ObstacleMaster.objectDefault}");
             GameStatisticManager.instance.LogEnemiesHit(playerWhoHit.GetPlayerSettings,ObstacleMaster.objectDefault,1,typeCollision);
         }
 

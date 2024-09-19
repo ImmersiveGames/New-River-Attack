@@ -1,4 +1,5 @@
-﻿using CarterGames.Assets.SaveManager;
+﻿using System;
+using CarterGames.Assets.SaveManager;
 using ImmersiveGames.DebugManagers;
 using NewRiverAttack.GamePlayManagers.GamePlayLogs;
 using Saves;
@@ -11,6 +12,8 @@ namespace NewRiverAttack.SaveManagers
         [SerializeField] private GemeStatisticsDataLog dataLog;
         [SerializeField] private GameOptionsSave gameOptionsSave;
         [SerializeField] private PlayerSaveSaveObject saveObject;
+        
+        private readonly DateTime _lastDate = new DateTime(2024, 9, 20); // Por exemplo, 1º de Janeiro de 2024
         
         public static GameSaveHandler Instance { get; private set; }
         private void Awake()
@@ -25,16 +28,45 @@ namespace NewRiverAttack.SaveManagers
                 Destroy(gameObject);
                 DebugManager.LogWarning<GameSaveHandler>("Tentativa de criar outra instância evitada e o novo objeto foi destruído.");
             }
+              // Certifique-se de que as mudanças sejam salvas imediatamente
+            Debug.Log("Todos os PlayerPrefs foram apagados.");
+            
+            
         }
         private void OnEnable()
         {
             saveObject = SaveManager.GetSaveObject<PlayerSaveSaveObject>();
+        
             LoadGameData();
         }
 
         private void Start()
         {
             LoadGameLocation();
+            // Verifica se o save possui a data do último save
+            if (saveObject.lastDate != null)
+            {
+                var lastSaveDate = saveObject.lastDate.Value;
+
+                // Se a data do último save for menor que a data indicada, reseta os valores
+                if (lastSaveDate >= _lastDate) return;
+                DebugManager.Log<GameSaveHandler>("Resetando os dados, pois o último save é anterior à data indicada.");
+                ResetFiles();
+            }
+            else
+            {
+                ResetFiles();
+                DebugManager.Log<GameSaveHandler>("Nenhuma data de último save encontrada, valores foram Reiniciados.");
+            }
+        }
+
+        private void ResetFiles()
+        {
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+            saveObject.ResetObjectSaveValues();
+            SaveManager.Save();
+            dataLog.ResetLogs();
         }
 
         private void OnApplicationQuit()
@@ -52,14 +84,15 @@ namespace NewRiverAttack.SaveManagers
         {
             if(gameOptionsSave.startLocale == null) return;
             saveObject.startLocale.Value = gameOptionsSave.startLocale;
-            Debug.Log(saveObject.startLocale.Value);
+            DebugManager.Log<GameSaveHandler>($"{saveObject.startLocale.Value}");
         }
 
         private void LoadGameData()
         {
-            saveObject.Load();
+            saveObject.Load(); 
             
         // Game Options
+        
         if(saveObject.bgmVolume.Value != 0)
             gameOptionsSave.bgmVolume = saveObject.bgmVolume.Value;
         if(saveObject.sfxVolume.Value != 0)
@@ -88,6 +121,8 @@ namespace NewRiverAttack.SaveManagers
             gameOptionsSave.missionBombs = saveObject.missionBombs.Value;
         
         //DataLog
+        dataLog.LastDate = saveObject.lastDate.Value;
+        
         if(saveObject.playersMaxScore.Value != 0)
             dataLog.playersMaxScore = saveObject.playersMaxScore.Value;
         if(saveObject.playersTimeSpent.Value != 0)
@@ -163,6 +198,8 @@ namespace NewRiverAttack.SaveManagers
                 saveObject.missionBombs.Value = gameOptionsSave.missionBombs;
             
             //DataLog
+            saveObject.lastDate.Value = DateTime.Now;
+            
         if(saveObject.playersMaxScore.Value != dataLog.playersMaxScore)
             saveObject.playersMaxScore.Value = dataLog.playersMaxScore;
         if(!Mathf.Approximately(saveObject.playersTimeSpent.Value, dataLog.playersTimeSpent))
