@@ -150,13 +150,13 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         {
             if (content == null)
             {
-                Debug.LogError("Panel content is null.");
+                DebugManager.LogError<SimpleShoppingManager>("Panel content is null.");
                 return;
             }
 
             if (stockShopsList == null || stockShopsList.Count == 0)
             {
-                Debug.LogError("StockShopsList is null or empty.");
+                DebugManager.LogError<SimpleShoppingManager>("StockShopsList is null or empty.");
                 return;
             }
 
@@ -169,7 +169,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             {
                 if (stock.ShopProduct == null)
                 {
-                    Debug.LogError("Stock or ShopProduct is null.");
+                    DebugManager.LogError<SimpleShoppingManager>("Stock or ShopProduct is null.");
                     continue;  // Pula itens nulos para evitar problemas
                 }
 
@@ -188,7 +188,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             }
             else
             {
-                Debug.LogError("HorizontalLayoutGroup não encontrado no content.");
+                DebugManager.LogError<SimpleShoppingManager>("HorizontalLayoutGroup não encontrado no content.");
             }
         }
 
@@ -200,7 +200,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             var layoutGroup = content.GetComponent<HorizontalLayoutGroup>();
             if (layoutGroup == null)
             {
-                Debug.LogError("HorizontalLayoutGroup não encontrado.");
+                DebugManager.LogError<SimpleShoppingManager>("HorizontalLayoutGroup não encontrado.");
                 return;
             }
 
@@ -216,7 +216,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
         {
             if (prefabItemShop == null)
             {
-                Debug.LogError("Prefab item for shop is not assigned.");
+                DebugManager.LogError<SimpleShoppingManager>("Prefab item for shop is not assigned.");
                 return;
             }
 
@@ -228,7 +228,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             }
             else
             {
-                Debug.LogWarning($"Missing ShopProductSettings component on prefab: {prefabItemShop.name}");
+                DebugManager.LogWarning<SimpleShoppingManager>($"Missing ShopProductSettings component on prefab: {prefabItemShop.name}");
             }
 
             // Configura o RectTransform
@@ -241,7 +241,7 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             }
             else
             {
-                Debug.LogError("RectTransform not found on instantiated item.");
+                DebugManager.LogError<SimpleShoppingManager>("RectTransform not found on instantiated item.");
             }
         }
 
