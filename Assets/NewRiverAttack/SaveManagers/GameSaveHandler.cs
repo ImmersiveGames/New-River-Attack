@@ -29,7 +29,7 @@ namespace NewRiverAttack.SaveManagers
                 DebugManager.LogWarning<GameSaveHandler>("Tentativa de criar outra instância evitada e o novo objeto foi destruído.");
             }
               // Certifique-se de que as mudanças sejam salvas imediatamente
-            Debug.Log("Todos os PlayerPrefs foram apagados.");
+              DebugManager.Log<GameSaveHandler>("Todos os PlayerPrefs foram apagados.");
             
             
         }
@@ -77,7 +77,7 @@ namespace NewRiverAttack.SaveManagers
         {
             if(saveObject.startLocale.Value == null) return;
             gameOptionsSave.startLocale = saveObject.startLocale.Value;
-            Debug.Log(gameOptionsSave.startLocale);
+            DebugManager.Log<GameSaveHandler>($"{gameOptionsSave.startLocale}");
         }
         
         private void SaveGameLocation()

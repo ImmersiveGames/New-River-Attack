@@ -1087,7 +1087,7 @@ MonoBehaviour:
   forwardButton: {fileID: 329872762}
   backwardButton: {fileID: 2130449931}
   startButton: {fileID: 1400851648}
-  backButton: {fileID: 0}
+  backButton: {fileID: 1840669832}
   cursor: {fileID: 1912406064}
 --- !u!1 &650435269
 GameObject:
@@ -2994,7 +2994,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 809232055}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 619394824}
+        m_TargetAssemblyTypeName: NewRiverAttack.HUBManagers.HubPanelMaster, Assembly-CSharp
+        m_MethodName: ButtonStartMission
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1400851649
 MonoBehaviour:
   m_ObjectHideFlags: 0
