@@ -31,6 +31,7 @@ namespace ImmersiveGames.SteamServicesManagers
                 Destroy(gameObject);
             }
         }
+
         private void Update()
         {
             if (!ConnectedToSteam) return;
@@ -40,11 +41,12 @@ namespace ImmersiveGames.SteamServicesManagers
             }
             catch (Exception e)
             {
-                DebugManager.LogError<SteamConnectionManager>($"Erro ao executar callbacks da Steam {e}");
+                DebugManager.LogError<SteamConnectionManager>($"Erro ao executar callbacks da Steam: {e.Message}");
                 ConnectedToSteam = false;
                 EventOnSteamDisconnected?.Invoke(); // Notifica sobre a desconexão
             }
         }
+
         private void OnApplicationQuit()
         {
             ShutdownSteam();
@@ -56,7 +58,7 @@ namespace ImmersiveGames.SteamServicesManagers
         }
 
         #endregion
-        
+
         private static void InitializeSteam()
         {
             try
@@ -78,7 +80,7 @@ namespace ImmersiveGames.SteamServicesManagers
             catch (Exception e)
             {
                 ConnectedToSteam = false;
-                DebugManager.LogError<SteamConnectionManager>($"Erro ao inicializar a Steam {e}");
+                DebugManager.LogError<SteamConnectionManager>($"Erro ao inicializar a Steam: {e.Message}");
             }
         }
 

@@ -109,7 +109,13 @@ namespace NewRiverAttack.GamePlayManagers
 
         private void OnDisable()
         {
+            GameSaveHandler.Instance.SaveGameData();
             CleanUpGame();
+        }
+
+        private void OnApplicationQuit()
+        {
+            GameSaveHandler.Instance.SaveGameData();
         }
 
         private void CleanUpGame()

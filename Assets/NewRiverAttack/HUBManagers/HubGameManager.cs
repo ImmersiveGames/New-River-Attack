@@ -87,11 +87,18 @@ namespace NewRiverAttack.HUBManagers
             var lastIndex = LevelOrder.Count - 1;
             if (actualIndex < lastIndex)
             {
-                _lastSave = GameOptionsSave.Instance.activeIndexMissionLevel += 1;
+                _lastSave += 1;
+
+                // Atualiza diretamente o GameOptionsSave.Instance.activeIndexMissionLevel
+                GameOptionsSave.Instance.activeIndexMissionLevel = Mathf.Max(GameOptionsSave.Instance.activeIndexMissionLevel, _lastSave);
+        
                 OnEventCursorUpdateHub(_lastSave);
             }
+    
             IsHubReady = true;
-            if (actualIndex != LevelOrder.Count - 1) return;
+    
+            if (actualIndex != lastIndex) return;
+
             await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateEndGame.ToString()).ConfigureAwait(false);
         }
 

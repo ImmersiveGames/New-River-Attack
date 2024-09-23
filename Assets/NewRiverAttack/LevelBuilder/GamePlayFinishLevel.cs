@@ -14,6 +14,7 @@ namespace NewRiverAttack.LevelBuilder
         protected override void Start()
         {
             base.Start();
+            InFinisher = false;
             if(GetTilePosition.z > 0)
                 CameraManager.RepositionEndCamera(endCameraPosition.position);
         }
@@ -21,7 +22,6 @@ namespace NewRiverAttack.LevelBuilder
         protected override void OnTriggerEnter(Collider other)
         {
             base.OnTriggerEnter(other);
-            
             var playerMaster = other.GetComponentInParent<PlayerMaster>();
             if( playerMaster == null || playerMaster.IsDisable || !InFinisher) return;
             GamePlayManagerRef.FinisherGame();

@@ -13,11 +13,13 @@ namespace NewRiverAttack.LevelBuilder.Abstracts
         protected virtual void OnEnable()
         {
             SetInitialReferences();
+            InFinisher = false;
         }
 
         protected virtual void Start()
         {
             GetTilePosition = gameObject.transform.parent.localPosition;
+            InFinisher = false;
         }
 
         protected virtual void OnTriggerEnter(Collider other)
@@ -30,7 +32,7 @@ namespace NewRiverAttack.LevelBuilder.Abstracts
         protected virtual void OnTriggerExit(Collider other)
         {
             var playerMaster = other.GetComponentInParent<PlayerMaster>();
-            if( playerMaster == null || playerMaster.IsDisable || !InFinisher) return;
+            if( playerMaster == null) return;
             InFinisher = false;
         }
         protected virtual void SetInitialReferences()

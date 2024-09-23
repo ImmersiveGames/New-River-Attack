@@ -44,20 +44,17 @@ namespace NewRiverAttack.SaveManagers
         {
             LoadGameLocation();
             // Verifica se o save possui a data do último save
-            if (saveObject.lastDate != null)
-            {
-                var lastSaveDate = saveObject.lastDate.Value;
+            if (saveObject.lastDate == null) return;
+            var lastSaveDate = saveObject.lastDate.Value;
+            // Se a data do último save for menor que a data indicada, reseta os valores
+            if (lastSaveDate >= _lastDate) return;
+            DebugManager.Log<GameSaveHandler>("Resetando os dados, pois o último save é anterior à data indicada.");
+            ResetFiles();
+        }
 
-                // Se a data do último save for menor que a data indicada, reseta os valores
-                if (lastSaveDate >= _lastDate) return;
-                DebugManager.Log<GameSaveHandler>("Resetando os dados, pois o último save é anterior à data indicada.");
-                ResetFiles();
-            }
-            else
-            {
-                ResetFiles();
-                DebugManager.Log<GameSaveHandler>("Nenhuma data de último save encontrada, valores foram Reiniciados.");
-            }
+        private void OnDisable()
+        {
+            SaveGameData();
         }
 
         private void ResetFiles()
@@ -239,16 +236,8 @@ namespace NewRiverAttack.SaveManagers
      
         if(saveObject.hitEnemiesResultsList.Value != dataLog.GetEnemyList)
             saveObject.hitEnemiesResultsList.Value = dataLog.GetEnemyList;
-            
-        
             //Update Files
             saveObject.Save();
-            SaveManager.Save();
-        }
-
-        public void ClearGameData()
-        {
-            saveObject.ResetObjectSaveValues();
             SaveManager.Save();
         }
     }

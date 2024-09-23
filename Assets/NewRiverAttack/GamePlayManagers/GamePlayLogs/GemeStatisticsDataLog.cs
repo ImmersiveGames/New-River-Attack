@@ -6,7 +6,6 @@ using ImmersiveGames.Utils;
 using NewRiverAttack.ObstaclesSystems;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
@@ -168,34 +167,35 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
         public void ResetLogs()
         {
             LastDate = DateTime.Now;
-            playersMaxScore = 0;
-            playersTimeSpent = 0;
-            playersMaxDistance = 0;
-
-            playersDieWall = 0;
-            playersDieEnemyCollider = 0;
-            playersDieEnemyBullets = 0;
-            playersDieFuelOut = 0;
-
-            playersShoots = 0;
-            playersBombs = 0;
-            playersFuelSpent = 0;
-            playersFuelCharge = 0;
-            playersAmountDistance = 0;
-            playersCountPath = 0;
-            _listEnemyHit = new List<GameStatisticHit>();
+        playersMaxScore = 0;
+        playersTimeSpent = 0;
+        playersMaxDistance = 0;
+        playersDeaths = 0;
+        playersDieWall = 0;
+        playersDieEnemyCollider = 0;
+        playersDieEnemyBullets = 0;
+        playersDieFuelOut = 0;
+        playersShoots = 0;
+        playersBombs = 0;
+        playersTimeRapidFire = 0;
+        playersBombHit = 0;
+        playersFuelSpent = 0; 
+        playersFuelCharge = 0;
+        playersAmountDistance = 0;
+        playersClassicPath = 0;
+        playersMissionPath = 0;
+        playersCountPath = 0;
+        _listEnemyHit = new List<GameStatisticHit>();
         }
 
         public void IncrementStat(ref int stat, int value)
         {
             stat += value;
-            //DebugManager.Log<GemeStatisticsDataLog>($"Incremented stat to {stat}");
         }
 
         public void IncrementStat(ref float stat, float value)
         {
             stat += value;
-            //DebugManager.Log<GemeStatisticsDataLog>($"Incremented stat to {stat}");
         }
 
         public void SetAmountDistance(float amount)

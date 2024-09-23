@@ -44,7 +44,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         private void ReloadMine()
         {
-            DestroyImmediate(_spawnPoint);
+            Destroy(_spawnPoint);
             CreateSpawnPoint("MinesSpawnPoint");
         }
 

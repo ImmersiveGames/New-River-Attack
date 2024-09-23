@@ -13,6 +13,7 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
         private PanelGameHud _panelGameHud;
         private PanelGamePause _panelGamePause;
         private PanelGameOver _panelGameOver;
+        private PanelGameComplete _panelGameComplete;
         private GamePlayManager _gamePlayManager;
 
         private bool _inLoad;
@@ -25,8 +26,9 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
             SetupInitial();
             InputGameManager.UnregisterAction("PauseGame", StartPauseMenu );
             InputGameManager.RegisterAction("PauseGame", StartPauseMenu );
-            GamePlayManager.Instance.EventGameReady += SetHudMenu;
-            GamePlayManager.Instance.EventGameOver += SetGameOverMenu;
+            _gamePlayManager.EventGameReady += SetHudMenu;
+            _gamePlayManager.EventGameOver += SetGameOverMenu;
+            _gamePlayManager.EventGameFinisher += SetGameComplete;
         }
 
         private void Start()
@@ -36,7 +38,8 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
 
         private void OnDestroy()
         {
-            GamePlayManager.Instance.EventGameReady -= SetHudMenu;
+            _gamePlayManager.EventGameReady -= SetHudMenu;
+            _gamePlayManager.EventGameFinisher -= SetGameComplete;
             InputGameManager.UnregisterAction("Pause", StartUnPauseMenu );
             InputGameManager.UnregisterAction("PauseGame", StartPauseMenu );
         }
@@ -49,6 +52,7 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
             _panelGameHud = GetComponentInChildren<PanelGameHud>(true);
             _panelGamePause = GetComponentInChildren<PanelGamePause>(true);
             _panelGameOver = GetComponentInChildren<PanelGameOver>(true);
+            _panelGameComplete = GetComponentInChildren<PanelGameComplete>(true);
             
         }
         private void SetHudMenu()
@@ -59,6 +63,7 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
             _panelGameHud.gameObject.SetActive(true);
             _panelGamePause.gameObject.SetActive(false);
             _panelGameOver.gameObject.SetActive(false);
+            _panelGameComplete.gameObject.SetActive(false);
         }
 
         private void SetPauseMenu()
@@ -69,6 +74,7 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
             _panelGameHud.gameObject.SetActive(false);
             _panelGamePause.gameObject.SetActive(true);
             _panelGameOver.gameObject.SetActive(false);
+            _panelGameComplete.gameObject.SetActive(false);
         }
         
         private void SetGameOverMenu()
@@ -78,6 +84,14 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
             _panelGameHud.gameObject.SetActive(false);
             _panelGamePause.gameObject.SetActive(false);
             _panelGameOver.gameObject.SetActive(true);
+            _panelGameComplete.gameObject.SetActive(false);
+        }
+        private void SetGameComplete()
+        {
+            _panelGameHud.gameObject.SetActive(false);
+            _panelGamePause.gameObject.SetActive(false);
+            _panelGameOver.gameObject.SetActive(false);
+            _panelGameComplete.gameObject.SetActive(true);
         }
         
         private void StartPauseMenu(InputAction.CallbackContext context)
@@ -132,6 +146,7 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
             _panelGameHud.gameObject.SetActive(false);
             _panelGamePause.gameObject.SetActive(false);
             _panelGameOver.gameObject.SetActive(false);
+            _panelGameComplete.gameObject.SetActive(false);
         }
     }
 }
