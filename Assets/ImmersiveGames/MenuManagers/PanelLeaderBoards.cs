@@ -17,10 +17,16 @@ namespace ImmersiveGames.MenuManagers
         #region Unity Methods
         private void Start()
         {
-            ClearLeaderboard();
+            // Carrega as pontuações offline ao iniciar
             SteamLeaderboardService.Instance.LoadOfflineScores();
+        }
+
+        private void OnEnable()
+        {
+            // Sempre que o painel for habilitado, atualiza a leaderboard
             StartCoroutine(UpdateLeaderboard());
         }
+
         #endregion
 
         private IEnumerator UpdateLeaderboard()
@@ -28,23 +34,39 @@ namespace ImmersiveGames.MenuManagers
             // Ativa o objeto de loading
             loadingObject.SetActive(true);
 
+            // Inicializa o leaderboard (executa o método async como uma tarefa)
+            var initializeTask = SteamLeaderboardService.InitializeLeaderboard();
+
+            // Espera pela conclusão da inicialização do leaderboard
+            while (!initializeTask.IsCompleted)
+            {
+                yield return null; // Espera até o final do frame até que a tarefa seja completada
+            }
+
+            // Verifica se ocorreu algum erro durante a inicialização
+            if (initializeTask.IsFaulted)
+            {
+                Debug.LogError("Erro ao inicializar o leaderboard.");
+                yield break; // Interrompe se houver falha
+            }
+
             // Pequeno atraso para garantir que a UI está carregada
             yield return new WaitForSeconds(0.1f);
 
-            // Executa a tarefa assíncrona em paralelo
-            var task = CreateListLeaderboard();
+            // Executa a tarefa de criar a lista de pontuações
+            var createListTask = CreateListLeaderboard();
 
             // Espera pela conclusão da tarefa
-            while (!task.IsCompleted)
+            while (!createListTask.IsCompleted)
             {
-                yield return null; // Retorna ao final de cada frame até a tarefa completar
+                yield return null; // Espera até o final de cada frame
             }
 
-            // Desativa o objeto de loading após o carregamento terminar
+            // Desativa o objeto de loading após a conclusão
             loadingObject.SetActive(false);
 
-            // Verifica por exceções
-            if (task.IsFaulted)
+            // Verifica por exceções na criação da lista de pontuações
+            if (createListTask.IsFaulted)
             {
                 Debug.LogError("Erro ao carregar a leaderboard.");
             }
@@ -56,7 +78,6 @@ namespace ImmersiveGames.MenuManagers
 
             if (SteamConnectionManager.ConnectedToSteam)
             {
-                await SteamLeaderboardService.InitializeLeaderboard();
                 var scores = await SteamLeaderboardService.Instance.GetScores(numRegister);
 
                 if (scores == null)

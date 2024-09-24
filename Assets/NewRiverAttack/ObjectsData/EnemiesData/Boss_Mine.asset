@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc4eb4c962c2473ea20d99fc464e6b32, type: 3}
   m_Name: Boss_Mine
   m_EditorClassIdentifier: 
-  canRespawn: 1
+  canRespawn: 0
   canKilled: 1
   ignoreWalls: 1
   ignoreEnemies: 1
@@ -39,7 +39,6 @@ MonoBehaviour:
   explodeSize: 0.7
   shakeIntensity: 2
   shakeTime: 0.5
-  moveVelocity: 0
   animationDuration: 0
   animationCurve:
     serializedVersion: 2
@@ -47,7 +46,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  approachMovement: {x: 0, y: 0}
   speedShoot: 0
   cadenceShoot: 0
   damageShoot: 0

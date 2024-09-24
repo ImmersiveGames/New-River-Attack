@@ -64,6 +64,8 @@ namespace ImmersiveGames.SteamServicesManagers
                     if (result.HasValue)
                     {
                         DebugManager.Log<SteamLeaderboardService>($"Score registrado: {result.Value.Score}");
+                        // Após o score ser registrado, recarrega o leaderboard para atualizar as posições
+                        await SteamLeaderboardService.Instance.GetScores(10); // Atualiza a lista de scores, quantidade de registros ajustável
                     }
                 }
                 catch (Exception e)
