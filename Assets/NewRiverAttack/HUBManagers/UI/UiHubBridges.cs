@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using ImmersiveGames;
 using ImmersiveGames.Utils;
 using NewRiverAttack.AudioManagers;
+using NewRiverAttack.SaveManagers;
 using UnityEngine;
 
 namespace NewRiverAttack.HUBManagers.UI
@@ -28,11 +29,14 @@ namespace NewRiverAttack.HUBManagers.UI
 
         private void InitializeBridge(List<HubOrderData> listHubOrderData, int startIndex)
         {
-            if (startIndex > _hubOrder)
-            {
-                gameObject.SetActive(false);
-            }
+            // Sempre use o index salvo mais alto ao retornar para o HUB
+            var highestIndex = GameOptionsSave.Instance.activeIndexMissionLevel;
+
+            // Desativa a ponte se o índice da ponte for menor que o índice salvo
+            gameObject.SetActive(_hubOrder >= highestIndex);
+            // Mantém ativa se for maior ou igual
         }
+
 
         private void SetInitialReferences()
         {

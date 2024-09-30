@@ -75,6 +75,5 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         {
             _savePosition = myPosition;
         }
-        
     }
 }

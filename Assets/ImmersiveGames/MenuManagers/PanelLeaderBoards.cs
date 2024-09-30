@@ -34,42 +34,34 @@ namespace ImmersiveGames.MenuManagers
             // Ativa o objeto de loading
             loadingObject.SetActive(true);
 
-            // Inicializa o leaderboard (executa o método async como uma tarefa)
+            // Garante que o leaderboard será sempre inicializado
             var initializeTask = SteamLeaderboardService.InitializeLeaderboard();
 
-            // Espera pela conclusão da inicialização do leaderboard
+            // Espera pela inicialização
             while (!initializeTask.IsCompleted)
             {
-                yield return null; // Espera até o final do frame até que a tarefa seja completada
+                yield return null;
             }
 
-            // Verifica se ocorreu algum erro durante a inicialização
+            // Verifica se a inicialização falhou
             if (initializeTask.IsFaulted)
             {
                 Debug.LogError("Erro ao inicializar o leaderboard.");
-                yield break; // Interrompe se houver falha
+                yield break;
             }
 
-            // Pequeno atraso para garantir que a UI está carregada
+            // Pequeno atraso para garantir que a UI está pronta
             yield return new WaitForSeconds(0.1f);
 
-            // Executa a tarefa de criar a lista de pontuações
+            // Carrega a lista de pontuações
             var createListTask = CreateListLeaderboard();
-
-            // Espera pela conclusão da tarefa
             while (!createListTask.IsCompleted)
             {
-                yield return null; // Espera até o final de cada frame
+                yield return null;
             }
 
-            // Desativa o objeto de loading após a conclusão
+            // Desativa o loading
             loadingObject.SetActive(false);
-
-            // Verifica por exceções na criação da lista de pontuações
-            if (createListTask.IsFaulted)
-            {
-                Debug.LogError("Erro ao carregar a leaderboard.");
-            }
         }
 
         private async Task CreateListLeaderboard()
@@ -78,7 +70,7 @@ namespace ImmersiveGames.MenuManagers
 
             if (SteamConnectionManager.ConnectedToSteam)
             {
-                var scores = await SteamLeaderboardService.Instance.GetScores(numRegister);
+                var scores = await SteamLeaderboardService.Instance.GetScores(numRegister).ConfigureAwait(true);
 
                 if (scores == null)
                 {
