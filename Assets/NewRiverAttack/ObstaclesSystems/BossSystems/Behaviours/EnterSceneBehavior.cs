@@ -22,7 +22,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         {
             _behaviorManager = behaviorManager;
             BossBehavior = behaviorManager.BossBehavior;
-            PlayerMaster = BossBehavior.PlayerMaster;
+            //PlayerMaster = BossBehavior.PlayerMaster;
         }
 
         public override async Task EnterAsync(CancellationToken token)
@@ -51,7 +51,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 mySequence.Play();
                 return Task.CompletedTask;
             }).ConfigureAwait(false);
-            BossBehavior.BossMaster.IsEmerge = true;
+            //BossBehavior.BossMaster.IsEmerge = true;
             // Aguardar a conclusão da animação ou o cancelamento
             await using (token.Register(() => tcs.TrySetCanceled()))
             {

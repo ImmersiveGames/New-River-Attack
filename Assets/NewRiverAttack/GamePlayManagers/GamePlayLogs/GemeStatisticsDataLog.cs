@@ -112,6 +112,7 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
             // Verifica se a lista está inicializada antes de tentar acessar
             if (_listEnemyHit == null || !_listEnemyHit.Any())
             {
+                _listEnemyHit = new List<GameStatisticHit>();
                 DebugManager.LogWarning<GemeStatisticsDataLog>("listEnemyHit está null ou vazia. Retornando 0.");
                 return 0;
             }

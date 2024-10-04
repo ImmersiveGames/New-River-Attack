@@ -1,6 +1,7 @@
 ﻿using System;
 using ImmersiveGames.BehaviorsManagers;
 using ImmersiveGames.BehaviorsManagers.Interfaces;
+using ImmersiveGames.BehaviorTreeSystem;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
@@ -10,7 +11,37 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 {
     public class BossBehavior : MonoBehaviour
     {
-        public GameObject gasStation;
+        private BossBehaviorHandle _behavior;
+
+        #region Unity Methods
+
+        private void Awake()
+        {
+            _behavior = new BossBehaviorHandle();
+        }
+
+        private void OnEnable()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Start()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnDisable()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+        
+        private void SetInitialReferences()
+        {
+            
+        }
+        /*public GameObject gasStation;
         
         private BehaviorManager _behaviorManager;
         private GamePlayManager _gamePlayManager;
@@ -89,6 +120,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         private async void BossGameReady()
         {
             await _behaviorManager.ChangeBehaviorAsync(EnumNameBehavior.EnterSceneBehavior.ToString()).ConfigureAwait(false);
-        }
+        }*/
     }
 }

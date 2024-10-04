@@ -110,24 +110,25 @@ namespace ImmersiveGames.BehaviorsManagers
         {
             await MainThreadDispatcher.EnqueueAsync( () =>
             {
-                if (bossBehavior.BossMaster.IsDead) return;
+                /*if (bossBehavior.BossMaster.IsDead) return;
                 var gasPosition = bossBehavior.transform.position;
                 var newObj = Object.Instantiate(bossBehavior.gasStation);
                 newObj.SetActive(true);
                 var effectMaster = newObj.GetComponent<AreaEffectMaster>();
                 effectMaster.IsDisable = false;
-                newObj.transform.position = new Vector3(gasPosition.x, 0, gasPosition.z);
+                newObj.transform.position = new Vector3(gasPosition.x, 0, gasPosition.z);*/
             }).ConfigureAwait(false);
         }
         
 
         protected bool AreaDistance(BossBehavior bossBehavior, float minDistance)
         {
-            if (bossBehavior.BossMaster.IsDead) return false;
+            /*if (bossBehavior.BossMaster.IsDead) return false;
             var targetPosition = bossBehavior.PlayerMaster.transform.position;
             var bossPosition = bossBehavior.transform.position;
             var distance = Vector3.Distance(bossPosition, targetPosition);
-            return !(minDistance >= distance);
+            return !(minDistance >= distance);*/
+            return true;
         }
 
         #endregion

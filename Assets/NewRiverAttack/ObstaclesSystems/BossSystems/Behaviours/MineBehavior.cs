@@ -20,7 +20,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         public MineBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors, params object[] data) : base( subBehaviors)
         {
             BossBehavior = behaviorManager.BossBehavior;
-            PlayerMaster = BossBehavior.PlayerMaster;
+            //PlayerMaster = BossBehavior.PlayerMaster;
             _bossMineShoot = BossBehavior.GetComponent<BossMineShoot>();
             _dataShoot = data;
         }
@@ -30,7 +30,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             Finalized = false;
             await Task.Delay(100, token).ConfigureAwait(false);
             
-            await Emerge(BossBehavior.BossMaster,token, false).ConfigureAwait(false);
+            //await Emerge(BossBehavior.BossMaster,token, false).ConfigureAwait(false);
             DebugManager.Log<MineBehavior>($"Enter {GetType().Name}. Finalize: {Finalized}");
             await MainThreadDispatcher.EnqueueAsync(() =>
             { 
@@ -39,7 +39,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 
                 if (_bossMineShoot == null) return;
                 _bossMineShoot.SetShoots(numMines, cadence);
-                _bossMineShoot.SetDataBullet(BossBehavior.BossMaster);
+                //_bossMineShoot.SetDataBullet(BossBehavior.BossMaster);
                 _bossMineShoot.UpdateCadenceShoot();
                 _bossMineShoot.StartShoot();
             }).ConfigureAwait(false);
@@ -48,7 +48,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         public override void UpdateAsync(CancellationToken token)
         {
             if (!_bossMineShoot || !_bossMineShoot.ShouldBeShoot || Finalized) return;
-            _bossMineShoot.AttemptShoot(BossBehavior.BossMaster, PlayerMaster.transform);
+            //_bossMineShoot.AttemptShoot(BossBehavior.BossMaster, PlayerMaster.transform);
             base.UpdateAsync(token);
             if(_bossMineShoot.timesRepeat <= 0)
                 Finalized = true;
@@ -58,7 +58,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         {
             await base.ExitAsync(token).ConfigureAwait(false);
             await Task.Delay(100, token).ConfigureAwait(false);
-            await Emerge(BossBehavior.BossMaster,token, true).ConfigureAwait(false);
+            //await Emerge(BossBehavior.BossMaster,token, true).ConfigureAwait(false);
             await Task.Delay(100, token).ConfigureAwait(false);
             await MainThreadDispatcher.EnqueueAsync(() =>
             {

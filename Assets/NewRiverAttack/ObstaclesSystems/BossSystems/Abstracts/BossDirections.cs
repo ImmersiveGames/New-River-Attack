@@ -22,7 +22,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Abstracts
         {
             _behaviorManager = behaviorManager;
             BossBehavior = behaviorManager.BossBehavior;
-            PlayerMaster = BossBehavior.PlayerMaster;
+            //PlayerMaster = BossBehavior.PlayerMaster;
         }
         public override async Task EnterAsync(CancellationToken token)
         {
@@ -30,7 +30,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Abstracts
             ChangeSubBehavior = false;
             await base.EnterAsync(token).ConfigureAwait(false);
             await ChangePosition(BossMovement, BossBehavior, MoveDistance, token).ConfigureAwait(false);
-            await Emerge(BossBehavior.BossMaster,token, true).ConfigureAwait(false);
+            //await Emerge(BossBehavior.BossMaster,token, true).ConfigureAwait(false);
         }
         public override async void UpdateAsync(CancellationToken token)
         {
@@ -45,7 +45,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Abstracts
             ChangeBehavior = false;
             ChangeSubBehavior = false;
             await base.ExitAsync(token).ConfigureAwait(false);
-            await Emerge(BossBehavior.BossMaster,token, false).ConfigureAwait(false);
+            //await Emerge(BossBehavior.BossMaster,token, false).ConfigureAwait(false);
             await DropGas(BossBehavior).ConfigureAwait(false);
         }
 

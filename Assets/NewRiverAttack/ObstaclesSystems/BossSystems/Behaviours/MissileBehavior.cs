@@ -21,7 +21,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         public MissileBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors, params object[] data) : base( subBehaviors, string.Join("_", data))
         {
             BossBehavior = behaviorManager.BossBehavior;
-            PlayerMaster = BossBehavior.PlayerMaster;
+            //PlayerMaster = BossBehavior.PlayerMaster;
             _bossMissileShoot = BossBehavior.GetComponent<BossMissileShoot>();
             _dataShoot = data;
         }
@@ -39,7 +39,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
                 if (_bossMissileShoot == null) return;
                 _bossMissileShoot.SetShoots(numMissiles, angleCones, cadence, numCycles);
-                _bossMissileShoot.SetDataBullet(BossBehavior.BossMaster);
+                //_bossMissileShoot.SetDataBullet(BossBehavior.BossMaster);
                 _bossMissileShoot.UpdateCadenceShoot();
                 _bossMissileShoot.StartShoot();
             }).ConfigureAwait(false);
@@ -48,7 +48,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         public override void UpdateAsync(CancellationToken token)
         {
             if (!_bossMissileShoot || !_bossMissileShoot.ShouldBeShoot || Finalized) return;
-            _bossMissileShoot.AttemptShoot(BossBehavior.BossMaster, PlayerMaster.transform);
+            //_bossMissileShoot.AttemptShoot(BossBehavior.BossMaster, PlayerMaster.transform);
             base.UpdateAsync(token);
             if(_bossMissileShoot.timesRepeat <= 0)
                 Finalized = true;

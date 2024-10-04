@@ -19,7 +19,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         protected CleanShootBehavior(BehaviorManager behaviorManager, IBehavior[] subBehaviors,params object[] data) : base(subBehaviors)
         {
             BossBehavior = behaviorManager.BossBehavior;
-            PlayerMaster = behaviorManager.BossBehavior.PlayerMaster;
+            //PlayerMaster = behaviorManager.BossBehavior.PlayerMaster;
             _bossCleanShoot = BossBehavior.GetComponent<BossCleanShoot>();
             _dataShoot = data;
         }
@@ -36,7 +36,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 
                 if (_bossCleanShoot == null) return;
                 _bossCleanShoot.SetShoots(cadence,repeat);
-                _bossCleanShoot.SetDataBullet(BossBehavior.BossMaster);
+                //_bossCleanShoot.SetDataBullet(BossBehavior.BossMaster);
                 _bossCleanShoot.UpdateCadenceShoot();
                 _bossCleanShoot.StartShoot();
             }).ConfigureAwait(false);
@@ -50,7 +50,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             {
                 if (_bossCleanShoot && _bossCleanShoot.ShouldBeShoot && !Finalized)
                 {
-                    _bossCleanShoot.AttemptShoot(BossBehavior.BossMaster, PlayerMaster.transform);
+                    //_bossCleanShoot.AttemptShoot(BossBehavior.BossMaster, PlayerMaster.transform);
                 }
                 
                 //EndCycle

@@ -36,7 +36,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         {
             GamePlayBossManager.instance.SetBoss(this);
             var behaviors = GetComponent<BossBehavior>();
-            behaviors.StartBehavior();
+            //behaviors.StartBehavior();
             gameObject.transform.localScale = Vector3.one;
         }
 
