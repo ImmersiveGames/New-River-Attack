@@ -12,7 +12,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         public string onSubmerge = "Submerge";
         public string onGotHit = "GotHit";
         public string onDeath = "Death";
-        
+        public string onReset = "ResetIdle";
         private BossVfxTag _splashVFX;
 
    
@@ -33,6 +33,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             _gamePlayBossManager.EventEnterBoss += AnimateEmerge;
             _gamePlayManager.EventGameRestart += ResetAnimation;
             _bossMaster.EventObstacleDeath += AnimateDeath;
+            _bossMaster.EventBossResetForEnter += BossResetForEnter;
         }
 
         private void OnDisable()
@@ -44,6 +45,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             _gamePlayBossManager.EventEnterBoss -= AnimateEmerge;
             _gamePlayManager.EventGameRestart -= ResetAnimation;
             _bossMaster.EventObstacleDeath -= AnimateDeath;
+            _bossMaster.EventBossResetForEnter -= BossResetForEnter;
         }
 
         #endregion
@@ -53,6 +55,11 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             _gamePlayManager = GamePlayManager.Instance;
             _gamePlayBossManager = GamePlayBossManager.instance;
             _bossMaster = GetComponent<BossMaster>();
+        }
+        private void BossResetForEnter()
+        {
+            SetAnimations();
+            _animator.SetTrigger(onReset);
         }
 
         private void SetAnimations()

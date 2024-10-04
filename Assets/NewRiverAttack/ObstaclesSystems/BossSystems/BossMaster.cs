@@ -8,11 +8,13 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
     public sealed class BossMaster : EnemiesMaster
     {
         public bool IsEmerge { get; set; }
+        public PlayerMaster PlayerMaster { get; private set; }
 
         #region Delagates & Events
         public delegate void BossGenericHandler();
         public event BossGenericHandler EventBossEmerge;
         public event BossGenericHandler EventBossSubmerge;
+        public event BossGenericHandler EventBossResetForEnter;
 
         #endregion
         
@@ -24,20 +26,28 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         {
             base.OnEnable();
             GamePlayManagerRef.EventGameReload += ReloadBoss;
+            GamePlayManagerRef.EventPlayerInitialize += GetPlayerMaster;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
             GamePlayManagerRef.EventGameReload -= ReloadBoss;
+            GamePlayManagerRef.EventPlayerInitialize -= GetPlayerMaster;
+        }
+        private void GetPlayerMaster(PlayerMaster playerMaster)
+        {
+            PlayerMaster = playerMaster;
         }
         
         private void ReloadBoss()
         {
-            GamePlayBossManager.instance.SetBoss(this);
+            /*GamePlayBossManager.instance.SetBoss(this);
+            /*##################################1#
             var behaviors = GetComponent<BossBehavior>();
             //behaviors.StartBehavior();
-            gameObject.transform.localScale = Vector3.one;
+            /*##################################1#
+            gameObject.transform.localScale = Vector3.one;*/
         }
 
         protected override void AttemptKillObstacle(PlayerMaster playerMaster)
@@ -54,6 +64,11 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         internal void OnEventBossEmerge()
         {
             EventBossEmerge?.Invoke();
+        }
+
+        internal void OnEventBossResetForEnter()
+        {
+            EventBossResetForEnter?.Invoke();
         }
     }
 }

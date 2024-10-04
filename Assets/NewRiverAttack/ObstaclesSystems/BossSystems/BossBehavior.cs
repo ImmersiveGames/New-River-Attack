@@ -17,7 +17,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         private void Awake()
         {
-            _behavior = new BossBehaviorHandle();
+            //_behavior = new BossBehaviorHandle();
         }
 
         private void OnEnable()
