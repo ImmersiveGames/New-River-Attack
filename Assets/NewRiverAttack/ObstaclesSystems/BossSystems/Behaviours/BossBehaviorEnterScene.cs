@@ -1,9 +1,7 @@
 ﻿using System;
 using DG.Tweening;
 using ImmersiveGames.BehaviorTreeSystem.Interface;
-using NewRiverAttack.PlayerManagers.Tags;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 {
@@ -12,82 +10,111 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         public float initialDelay = 3f;
         public float moveDuration = 5f;
         public float distanceOffset = 50f;
-        
-        //TODO: Precisa de uma forma re reiniciar a animação sempre que o Enter scene for iniciado.
 
-        private NodeState _currentState = NodeState.Running; // Inicialmente o estado é Idle (em vez de Running)
+        private NodeState _currentState = NodeState.Running; // O estado começa como Running
         private BossMaster _bossMaster;
-        private Tween _moveTween; // Armazenar o Tween para reutilizar
+        private Tween _moveTween;  // Armazena o Tween para reutilizar e reiniciar
+        private bool _hasCompleted; // Controle para evitar que OnKill e OnComplete se conflitem
 
         private void Start()
         {
             _bossMaster = GetComponent<BossMaster>();
         }
-        
-        
 
+        // Método para reinicializar o estado do nó, usado no reset
+        public void OnEnter()
+        {
+            Debug.Log("EnterScene OnEnter chamado");
+
+            _currentState = NodeState.Running;  // Reinicia o estado para Running ao entrar
+            _moveTween?.Kill();  // Cancela qualquer Tween anterior, se estiver ativo
+            _moveTween = null;   // Reseta o Tween
+            _hasCompleted = false; // Reseta o controle de conclusão
+        }
+
+        // Método para resetar o comportamento (será chamado no ResetAll)
+        public void ResetEnterScene()
+        {
+            Debug.Log("Resetando o estado do EnterScene");
+
+            OnEnter();  // Reutiliza o método OnEnter para resetar o estado e a animação
+            StartSetup();  // Reposiciona o boss no início
+        }
+
+        // Método que controla a entrada do Boss na cena
         private NodeState EnterScene()
         {
-            switch (_currentState)
+            // Se a animação já tiver concluído ou falhado, retorna o estado final
+            if (_currentState is NodeState.Success or NodeState.Failure)
             {
-                // Checa se o estado já foi concluído com sucesso ou falha
-                case NodeState.Success or NodeState.Failure:
-                    return _currentState;  // Retorna o estado final atual sem reiniciar
-                // Iniciar animação apenas se estiver em Running e não houver Tween ativo
-                case NodeState.Running when _moveTween == null:
+                Debug.Log("EnterScene retornando estado final: " + _currentState);
+                return _currentState;  // Sai com o estado final
+            }
+
+            // Se o estado for Running e não houver Tween ativo, inicia a animação
+            if (_currentState == NodeState.Running && _moveTween == null)
+            {
+                Debug.Log("Iniciando animação em EnterScene");
+
+                _bossMaster.IsEmerge = false;
+
+                // Configurar e iniciar a sequência de animação
+                var playerPosition = _bossMaster.PlayerMaster.transform.position;
+                var distance = playerPosition.z + distanceOffset;
+
+                var mySequence = DOTween.Sequence();
+                mySequence.AppendInterval(initialDelay);
+
+                // Callback para atualizar a posição antes de mover
+                mySequence.AppendCallback(() =>
                 {
-                    _bossMaster.IsEmerge = false;
-                    // Configurar e iniciar a sequência de animação
-                    var playerPosition = _bossMaster.PlayerMaster.transform.position;
-                    var distance = playerPosition.z + distanceOffset;
+                    Debug.Log("Atualizando posição do Boss para iniciar movimento");
+                    transform.position = new Vector3(playerPosition.x, transform.position.y, transform.position.z);
+                });
 
-                    var mySequence = DOTween.Sequence();
-                    mySequence.AppendInterval(initialDelay);
+                // Movimento principal com DOTween e armazenar o Tween
+                _moveTween = transform.DOMoveZ(distance, moveDuration).SetEase(Ease.Linear);
 
-                    // Callback para atualizar a posição antes de mover
-                    mySequence.AppendCallback(() =>
-                    {
-                        transform.position = new Vector3(playerPosition.x, transform.position.y, transform.position.z);
-                    });
+                // Adicionar o Tween ao Sequence
+                mySequence.Append(_moveTween);
 
-                    // Movimento principal com DOTween e armazenar o Tween
-                    _moveTween = transform.DOMoveZ(distance, moveDuration).SetEase(Ease.Linear);
+                // Ao concluir a animação, definir o estado como Success
+                mySequence.OnComplete(() =>
+                {
+                    if (_hasCompleted) return; // Garante que só seja chamado uma vez
+                    Debug.Log("Animação completa em EnterScene");
+                    _currentState = NodeState.Success;
+                    _bossMaster.IsEmerge = true;
+                    _moveTween = null;  // Resetar o Tween
+                    _hasCompleted = true;  // Marca que a animação foi completada
+                });
 
-                    // Adicionar o Tween ao Sequence
-                    mySequence.Append(_moveTween);
+                // Caso a animação seja interrompida (seu mySequence for "Killed"), definir o estado como Failure
+                mySequence.OnKill(() =>
+                {
+                    if (_hasCompleted) return;  // Garante que só seja chamado se OnComplete não foi chamado
+                    Debug.Log("Animação interrompida em EnterScene");
+                    _currentState = NodeState.Failure;
+                    _moveTween = null;  // Resetar o Tween
+                });
 
-                    // Ao concluir a animação, definir o estado como Success
-                    mySequence.OnComplete(() =>
-                    {
-                        _currentState = NodeState.Success;
-                        _bossMaster.IsEmerge = true;
-                        _moveTween = null; // Resetar o Tween
-                    });
-
-                    // Caso a animação seja interrompida (seu mySequence for "Killed"), definir o estado como Failure
-                    mySequence.OnKill(() =>
-                    {
-                        _currentState = NodeState.Failure;
-                        _moveTween = null; // Resetar o Tween
-                    });
-
-                    // Inicia a sequência
-                    mySequence.Play();
-                    break;
-                }
+                // Inicia a sequência
+                mySequence.Play();
             }
 
             // Enquanto a animação está em andamento, retorna Running
+            Debug.Log("EnterScene retornando Running");
             return NodeState.Running;
         }
 
+        // Método para configurar o início do comportamento
         public void StartSetup()
         {
             _bossMaster.IsEmerge = false;
-            transform.position = Vector3.zero;
+            transform.position = Vector3.zero;  // Reposiciona o Boss no início
             _bossMaster.OnEventBossResetForEnter();
-
         }
+
         // Retorna a função que será chamada pelo nó de comportamento
         public Func<NodeState> GetNodeFunction()
         {
@@ -96,5 +123,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
         // Nome do nó, conforme a interface INodeFunctionProvider
         public string NodeName => "EnterScene";
+        public int NodeID => 0;
     }
 }

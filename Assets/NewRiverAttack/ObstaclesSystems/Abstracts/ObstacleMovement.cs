@@ -36,6 +36,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         private void Awake()
         {
             DirectionVector = SetDirection(startDirection);
+            SetInitialReferences();
         }
         private void OnEnable()
         {

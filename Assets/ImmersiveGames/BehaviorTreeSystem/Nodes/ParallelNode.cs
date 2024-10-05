@@ -18,34 +18,52 @@ namespace ImmersiveGames.BehaviorTreeSystem.Nodes
 
         public NodeState Tick()
         {
-            bool anyRunning = false;
+            bool isAnyRunning = false;
             int successCount = 0;
 
             foreach (var node in _nodes)
             {
                 var result = node.Tick();
 
-                if (result == NodeState.Running) anyRunning = true;
-                else if (result == NodeState.Success) successCount++;
-
-                if (result == NodeState.Success && _interruptOnSuccess) return NodeState.Success;
-                if (result == NodeState.Failure && _requireAllSuccess) return NodeState.Failure;
+                switch (result)
+                {
+                    case NodeState.Running:
+                        isAnyRunning = true;
+                        break;
+                    case NodeState.Success:
+                        successCount++;
+                        if (_interruptOnSuccess) 
+                            return NodeState.Success; // Interrompe com sucesso imediato
+                        break;
+                    case NodeState.Failure:
+                        if (_requireAllSuccess) 
+                            return NodeState.Failure; // Falha imediata se todos precisarem ter sucesso
+                        break;
+                }
             }
 
-            if (_requireAllSuccess && successCount == _nodes.Count) return NodeState.Success;
-            if (!_requireAllSuccess && successCount > 0) return NodeState.Success;
+            if (_requireAllSuccess && successCount == _nodes.Count) 
+                return NodeState.Success;
+            if (!_requireAllSuccess && successCount > 0) 
+                return NodeState.Success;
 
-            return anyRunning ? NodeState.Running : NodeState.Failure;
+            return isAnyRunning ? NodeState.Running : NodeState.Failure;
         }
 
         public void OnEnter()
         {
-            foreach (var node in _nodes) node.OnEnter();
+            foreach (var node in _nodes)
+            {
+                node.OnEnter(); // Inicializa todos os nós
+            }
         }
 
         public void OnExit()
         {
-            foreach (var node in _nodes) node.OnExit();
+            foreach (var node in _nodes)
+            {
+                node.OnExit(); // Finaliza todos os nós
+            }
         }
     }
 }

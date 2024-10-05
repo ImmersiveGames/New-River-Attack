@@ -5,14 +5,15 @@ using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems
 {
-    public class BossMissileShoot : BossShoot
+    public class BossMissileShootOld : BossShootOld
     {
+        [Header("Cone Shoot Settings")]
         [SerializeField] private int numMissiles = 5;
         [SerializeField] private float angleCones = 90;
         
         private void Awake()
         {
-            poolName = $"Pool ({nameof(BossMissileShoot)})";
+            poolName = $"Pool ({nameof(BossMissileShootOld)})";
             angleCones = angleCones <= 15 ? 15 : angleCones;
         }
 

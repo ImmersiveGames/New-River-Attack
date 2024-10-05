@@ -14,6 +14,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         private Vector3 _savePosition;
         protected GamePlayManager GamePlayManagerRef;
+
         
         public bool ObjectIsReady => !IsDead && !IsDisable && GamePlayManagerRef.ShouldBePlayingGame;   
         

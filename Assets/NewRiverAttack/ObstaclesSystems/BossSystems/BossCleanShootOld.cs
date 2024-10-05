@@ -2,11 +2,11 @@
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems
 {
-    public class BossCleanShoot : BossShoot
+    public class BossCleanShootOld : BossShootOld
     {
         private void Awake()
         {
-            poolName = $"Pool ({nameof(BossCleanShoot)})";
+            poolName = $"Pool ({nameof(BossCleanShootOld)})";
         }
         
         public void SetShoots(float cadence, int repeat)

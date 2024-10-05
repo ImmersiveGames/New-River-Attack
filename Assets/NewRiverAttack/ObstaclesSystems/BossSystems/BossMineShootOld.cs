@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems
 {
-    public class BossMineShoot : BossShoot
+    public class BossMineShootOld : BossShootOld
     {
         private const float OffsetZ = -18.0f;
         private const float OffsetX = 0.0f;
@@ -30,7 +30,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         private int _actualMines;
         private void Awake()
         {
-            poolName = $"Pool ({nameof(BossMineShoot)})";
+            poolName = $"Pool ({nameof(BossMineShootOld)})";
             _camera = Camera.main;
             CreateSpawnPoint("MinesSpawnPoint");
         }

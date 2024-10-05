@@ -9,5 +9,6 @@ namespace ImmersiveGames.BehaviorTreeSystem.Interface
 
         // Nome identificador para o nó, caso seja necessário para referências futuras
         string NodeName { get; }
+        int NodeID { get; }
     }
 }

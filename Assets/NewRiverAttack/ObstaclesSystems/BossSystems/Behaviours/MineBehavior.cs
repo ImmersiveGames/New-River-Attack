@@ -11,7 +11,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
     public class MineBehavior : Behavior
     {
         private BossBehavior BossBehavior { get; }
-        private readonly BossMineShoot _bossMineShoot;
+        private readonly BossMineShootOld _bossMineShootOld;
         private readonly object[] _dataShoot;
         private PlayerMaster PlayerMaster { get; }
         
@@ -21,7 +21,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         {
             BossBehavior = behaviorManager.BossBehavior;
             //PlayerMaster = BossBehavior.PlayerMaster;
-            _bossMineShoot = BossBehavior.GetComponent<BossMineShoot>();
+            _bossMineShootOld = BossBehavior.GetComponent<BossMineShootOld>();
             _dataShoot = data;
         }
         public override async Task EnterAsync(CancellationToken token)
@@ -37,20 +37,20 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 var numMines = (int)(_dataShoot[0] ?? 10);
                 var cadence = (float)(_dataShoot[1] ?? 0.8f);
                 
-                if (_bossMineShoot == null) return;
-                _bossMineShoot.SetShoots(numMines, cadence);
+                if (_bossMineShootOld == null) return;
+                _bossMineShootOld.SetShoots(numMines, cadence);
                 //_bossMineShoot.SetDataBullet(BossBehavior.BossMaster);
-                _bossMineShoot.UpdateCadenceShoot();
-                _bossMineShoot.StartShoot();
+                _bossMineShootOld.UpdateCadenceShoot();
+                _bossMineShootOld.StartShoot();
             }).ConfigureAwait(false);
 
         }
         public override void UpdateAsync(CancellationToken token)
         {
-            if (!_bossMineShoot || !_bossMineShoot.ShouldBeShoot || Finalized) return;
+            if (!_bossMineShootOld || !_bossMineShootOld.ShouldBeShoot || Finalized) return;
             //_bossMineShoot.AttemptShoot(BossBehavior.BossMaster, PlayerMaster.transform);
             base.UpdateAsync(token);
-            if(_bossMineShoot.timesRepeat <= 0)
+            if(_bossMineShootOld.timesRepeat <= 0)
                 Finalized = true;
             
         }
@@ -62,7 +62,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             await Task.Delay(100, token).ConfigureAwait(false);
             await MainThreadDispatcher.EnqueueAsync(() =>
             {
-                _bossMineShoot.StopShoot();
+                _bossMineShootOld.StopShoot();
             }).ConfigureAwait(false);
         }
         

@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using ImmersiveGames.DebugManagers;
 using ImmersiveGames.PoolSystems.Interfaces;
 using UnityEngine;
 
@@ -32,16 +30,14 @@ namespace ImmersiveGames.PoolSystems
             }
         }
 
-        // Método separado para criar um novo objeto
         private GameObject CreateObject()
         {
             var newObj = Object.Instantiate(_prefab, _root);
             newObj.SetActive(false);
-            AssignPoolable(newObj); // Configura o poolable
+            AssignPoolable(newObj);
             return newObj;
         }
 
-        // Método para configurar um IPoolable
         private void AssignPoolable(GameObject obj)
         {
             var poolable = obj.GetComponent<IPoolable>();
@@ -51,28 +47,33 @@ namespace ImmersiveGames.PoolSystems
             }
         }
 
-        // Método separado para encontrar um objeto inativo
         private GameObject FindInactiveObject()
         {
-            return _pooledObjects.FirstOrDefault(obj => !obj.activeSelf);
+            foreach (var obj in _pooledObjects)
+            {
+                if (!obj.activeSelf)
+                {
+                    return obj;
+                }
+            }
+            return null;
         }
 
-        // Obtenção do objeto reutilizado ou criação de novo
+        // O método usa o tipo genérico T para passar o tipo correto de ISpawnData
         internal GameObject GetObject<T>(Transform spawnPosition, T data) where T : ISpawnData
         {
-            var obj = FindInactiveObject() ?? CreateObject(); // Busca ou cria objeto
-            return SpawnObject(obj, spawnPosition, data); // Spawn objeto
+            var obj = FindInactiveObject() ?? CreateObject();
+            return SpawnObject(obj, spawnPosition, data);
         }
 
-        // Método modular para spawnar o objeto
         private GameObject SpawnObject<T>(GameObject obj, Transform spawnPosition, T data) where T : ISpawnData
         {
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localRotation = Quaternion.identity;
             obj.SetActive(true);
-            
+
             var poolable = obj.GetComponent<IPoolable>();
-            poolable?.OnSpawned(spawnPosition, data); // Chama evento customizado
+            poolable?.OnSpawned(spawnPosition, data);
 
             obj.transform.parent = null;
             return obj;
@@ -80,28 +81,20 @@ namespace ImmersiveGames.PoolSystems
 
         public Transform GetRoot() => _root;
 
-        // Limpeza de objetos inativos
         public void ClearUnusedObjects()
         {
             _pooledObjects.RemoveAll(obj => obj == null);
         }
 
-        // Redimensiona o pool
         public void ResizePool(int newSize)
         {
             if (newSize < _pooledObjects.Count)
             {
                 for (var i = _pooledObjects.Count - 1; i >= newSize; i--)
                 {
-                    if (!_pooledObjects[i].activeSelf)
-                    {
-                        Object.Destroy(_pooledObjects[i]);
-                        _pooledObjects.RemoveAt(i);
-                    }
-                    else
-                    {
-                        DebugManager.LogWarning<PoolObject>("Cannot resize while objects are active.");
-                    }
+                    if (_pooledObjects[i].activeSelf) continue;
+                    Object.Destroy(_pooledObjects[i]);
+                    _pooledObjects.RemoveAt(i);
                 }
             }
             else
@@ -113,7 +106,6 @@ namespace ImmersiveGames.PoolSystems
             }
         }
 
-        // Retorna o objeto ao pool
         public void ReturnObject(GameObject obj)
         {
             if (obj == null) return;

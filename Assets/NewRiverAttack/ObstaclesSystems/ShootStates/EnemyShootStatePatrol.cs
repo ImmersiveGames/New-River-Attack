@@ -12,42 +12,42 @@ namespace NewRiverAttack.ObstaclesSystems.ShootStates
     {
         private Transform _target;
         
-        private readonly EnemiesShoot _enemiesShoot;
+        private readonly EnemiesShootOld _enemiesShootOld;
         private EnemiesMaster _enemiesMaster;
         private EnemiesScriptable _enemies;
         private bool _inTransition;
         
         private float _approachRange;
         private DetectPlayerApproach _detectPlayerApproach;
-        public EnemyShootStatePatrol(EnemiesShoot enemiesShoot, bool inTransition)
+        public EnemyShootStatePatrol(EnemiesShootOld enemiesShootOld, bool inTransition)
         {
-            _enemiesShoot = enemiesShoot;
+            _enemiesShootOld = enemiesShootOld;
             _inTransition = inTransition;
         }
         public void EnterState(EnemiesMaster enemiesMaster)
         {
-            DebugManager.Log<EnemiesShoot>($" Entrando no Estado: Patrol");
+            DebugManager.Log<EnemiesShootOld>($" Entrando no Estado: Patrol");
             _inTransition = false;
             _enemiesMaster = enemiesMaster;
             _enemies = enemiesMaster.GetEnemySettings;
             _approachRange = _enemies.GetShootApproach;
-            _detectPlayerApproach = new DetectPlayerApproach(_enemiesShoot.transform.position, _approachRange);
+            _detectPlayerApproach = new DetectPlayerApproach(_enemiesShootOld.transform.position, _approachRange);
         }
 
         public void UpdateState(Transform referencePosition)
         {
             
             if (!_enemiesMaster.ObjectIsReady) return;
-            DebugManager.Log<EnemiesShoot>($" Atualizando o Estado: Patrol");
+            DebugManager.Log<EnemiesShootOld>($" Atualizando o Estado: Patrol");
             _target = _detectPlayerApproach.TargetApproach<PlayerMaster>(_enemiesMaster.layerPlayer);
             if (_inTransition || !_target) return;
-            _enemiesShoot.ChangeState(new EnemyShootSimpleState(_enemiesShoot));
+            _enemiesShootOld.ChangeState(new EnemyShootSimpleState(_enemiesShootOld));
             DebugManager.Log<EnemiesMovement>($" Target: {_target}");
         }
 
         public void ExitState()
         {
-            DebugManager.Log<EnemiesShoot>($" Saindo do Estado: Patrol");
+            DebugManager.Log<EnemiesShootOld>($" Saindo do Estado: Patrol");
             _inTransition = true;
             _target = null;
         }

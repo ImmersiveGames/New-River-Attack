@@ -1,127 +1,99 @@
-using ImmersiveGames.BulletsManagers;
-using ImmersiveGames.DebugManagers;
-using ImmersiveGames.PoolManagers;
-using ImmersiveGames.PoolManagers.Interface;
-using NewRiverAttack.PlayerManagers.Tags;
+﻿using ImmersiveGames.DebugManagers;
+using ImmersiveGames.PoolSystems;
+using ImmersiveGames.PoolSystems.Interfaces;
+using NewRiverAttack.BulletsManagers.Interface;
+using NewRiverAttack.GamePlayManagers;
 using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.Abstracts
 {
     public abstract class ObjectShoot : MonoBehaviour
     {
-        [Header("Pool Settings")] [SerializeField]
-        public GameObject prefabBullet;
-
+        [Header("Pool Settings")]
+        [SerializeField] private GameObject prefabBullet;
         [SerializeField] private int initialPoolSize = 10;
-        public bool persistent;
-        public bool lockAtTarget;
-        
-        public string poolName;
+        [SerializeField] private bool persistent;
+        [SerializeField] private string poolName;
 
-        [Header("Bullet Settings")] [SerializeField, Range(0.5f, 4f)]
-        protected float bulletLifeTime = 2f;
-        [Range(0, 10)] public int timesRepeat;
-
-        protected float CadenceShoot;
         private float _lastActionTime;
-
-        protected BulletData BulletData;
-
-        private Transform _poolRoot;
-        protected Transform SpawnPoint;
-        protected ShootSpawnPoint ShootSpawnPoint;
-        protected IPoolManager PoolManager;
-
-        protected GameObject Bullet;
-        private Transform _target;
-        
+        public Transform SpawnPoint { get; set; }
+        private IPoolManager _poolManager;
+        private GamePlayManager _gamePlayManagerRef;
 
         #region Unity Methods
 
-        private void Awake()
+        protected virtual void Awake()
         {
-            if(string.IsNullOrEmpty(poolName))
+            if (string.IsNullOrEmpty(poolName))
                 poolName = $"Pool ({gameObject.name})";
+            SetInitialReferences();
         }
 
-        private void OnDisable()
+        protected virtual  void OnEnable()
         {
-            PoolManager = null;
+            _gamePlayManagerRef.EventGameReload += ResetShoot;
+            _gamePlayManagerRef.EventGameRestart += ResetShoot;
+        }
+
+        protected virtual void OnDisable()
+        {
+            _poolManager = null;  // Limpa referência quando desativado
+            _gamePlayManagerRef.EventGameReload -= ResetShoot;
+            _gamePlayManagerRef.EventGameRestart -= ResetShoot;
         }
 
         #endregion
-        
+
+        // Método para configurar as referências e criar o pool de objetos
         protected virtual void SetInitialReferences()
         {
-            DebugManager.Log<ObjectShoot>($"Cria o POOL");
-            PoolManager = null;
-            PoolManager = new PoolObjectManager();
-            _poolRoot = transform;
-            PoolManager.CreatePool(poolName, prefabBullet, initialPoolSize, _poolRoot, persistent);
+            DebugManager.Log<ObjectShoot>($"Criando Pool: {poolName}");
+            _gamePlayManagerRef = GamePlayManager.Instance;
+            _poolManager = new PoolObjectManager();
+            _poolManager.CreatePool(poolName, prefabBullet, initialPoolSize, transform, persistent);
         }
 
-        internal virtual void AttemptShoot(ObjectMaster objectMaster, Transform target = null)
+        // Método para tentar disparar, respeitando o cooldown
+        internal virtual void AttemptShoot(ObjectMaster objectMaster)
         {
-            _target = target;
             if (!objectMaster.ObjectIsReady) return;
-            var spawn = ShootSpawnPoint.transform;
-            SpawnPoint = transform;
-            if (spawn != null && SpawnPoint != spawn)
+            
+            if (!IsOnCooldown(GetCadenceShoot()))
             {
-                SpawnPoint = spawn;
-                if (lockAtTarget && _target != null)
-                {
-                    PointTowardsTarget(SpawnPoint, _target.transform.position);
-                }
-            }
-
-            var cooldown = CadenceShoot;
-            if (!IsOnCooldown(cooldown))
-            {
-                Fire();
+                var bulletData = CreateBulletData(SpawnPoint.forward);
+                Fire(bulletData);
                 _lastActionTime = Time.realtimeSinceStartup;
-                timesRepeat--;
             }
             else
             {
-                DebugManager.Log<ObjectShoot>($"Não pode Atirar");
+                DebugManager.Log<ObjectShoot>($"Cooldown ativo. Não pode atirar.");
             }
         }
 
-        protected virtual void Fire()
+        // Método que dispara a bala (configuração de dados fica na classe concreta)
+        protected virtual void Fire(BulletSpawnData bulletData)
         {
-            Bullet = PoolManager.GetObjectFromPool<IPoolable>(poolName, SpawnPoint, BulletData);
+            _poolManager.GetObjectFromPool(poolName, SpawnPoint, bulletData);
         }
 
-        private static void PointTowardsTarget(Transform spawnPoint, Vector3 target)
-        {
-            // Calcula a direção do vetor entre o spawn point e o alvo
-            var directionToTarget = target - spawnPoint.position;
-
-            // Altera a rotação do spawn point para apontar para o alvo
-            spawnPoint.rotation = Quaternion.LookRotation(directionToTarget);
-        }
-        
-        public abstract void SetDataBullet(ObjectMaster objectMaster);
-
-
-        protected void MakeBullet(ObjectMaster obstacleMaster, float bulletSpeed, int damage, float lifetime , Vector3 direction, bool powerUp = false)
-        {
-            // Cria os dados da bala
-            BulletData = new BulletData
-            {
-                BulletDamage = damage,
-                BulletSpeed = bulletSpeed,
-                BulletTimer = lifetime,
-                BulletDirection = direction,
-                BulletPowerUp = false,
-                BulletOwner = obstacleMaster
-            };
-        }
-
+        // Verifica se o disparo está em cooldown
         private bool IsOnCooldown(float cooldown)
         {
             return Time.realtimeSinceStartup - _lastActionTime < cooldown;
+        }
+
+        // Método abstrato para a cadência de tiro (definido na classe concreta)
+        protected abstract float GetCadenceShoot();
+
+        // Método abstrato para criar os dados da bala (definido na classe concreta)
+        protected abstract BulletSpawnData CreateBulletData(Vector3 direction);
+
+        public abstract void ResetShoot();
+
+        protected Transform AlwaysTarget()
+        {
+            var master = _gamePlayManagerRef.GetPlayerMaster(0);
+            return master ? master.transform : null;
         }
     }
 }

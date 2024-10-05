@@ -11,7 +11,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
     {
         private BossBehavior BossBehavior { get; }
         private readonly object[] _dataShoot;
-        private readonly BossMissileShoot _bossMissileShoot;
+        private readonly BossMissileShootOld _bossMissileShootOld;
         private PlayerMaster PlayerMaster { get; }
         
         // Parametro 0 = Numero de misseis
@@ -22,7 +22,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         {
             BossBehavior = behaviorManager.BossBehavior;
             //PlayerMaster = BossBehavior.PlayerMaster;
-            _bossMissileShoot = BossBehavior.GetComponent<BossMissileShoot>();
+            _bossMissileShootOld = BossBehavior.GetComponent<BossMissileShootOld>();
             _dataShoot = data;
         }
         public override async Task EnterAsync(CancellationToken token)
@@ -37,20 +37,20 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 var cadence = (float)(_dataShoot[2] ?? 1f);
                 var numCycles = (int)(_dataShoot[3] ?? 3);
 
-                if (_bossMissileShoot == null) return;
-                _bossMissileShoot.SetShoots(numMissiles, angleCones, cadence, numCycles);
+                if (_bossMissileShootOld == null) return;
+                _bossMissileShootOld.SetShoots(numMissiles, angleCones, cadence, numCycles);
                 //_bossMissileShoot.SetDataBullet(BossBehavior.BossMaster);
-                _bossMissileShoot.UpdateCadenceShoot();
-                _bossMissileShoot.StartShoot();
+                _bossMissileShootOld.UpdateCadenceShoot();
+                _bossMissileShootOld.StartShoot();
             }).ConfigureAwait(false);
         }
         
         public override void UpdateAsync(CancellationToken token)
         {
-            if (!_bossMissileShoot || !_bossMissileShoot.ShouldBeShoot || Finalized) return;
+            if (!_bossMissileShootOld || !_bossMissileShootOld.ShouldBeShoot || Finalized) return;
             //_bossMissileShoot.AttemptShoot(BossBehavior.BossMaster, PlayerMaster.transform);
             base.UpdateAsync(token);
-            if(_bossMissileShoot.timesRepeat <= 0)
+            if(_bossMissileShootOld.timesRepeat <= 0)
                 Finalized = true;
 
         }
@@ -60,7 +60,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             await Task.Delay(100, token).ConfigureAwait(false);
             await MainThreadDispatcher.EnqueueAsync(() =>
             {
-                _bossMissileShoot.StopShoot();
+                _bossMissileShootOld.StopShoot();
             }).ConfigureAwait(false);
         }
     }

@@ -9,7 +9,6 @@ namespace ImmersiveGames.PoolSystems
     {
         private readonly Dictionary<string, PoolObject> _objectPools = new Dictionary<string, PoolObject>();
 
-        // Cria um pool de objetos
         public bool CreatePool(string poolName, GameObject prefab, int initialPoolSize, Transform poolRoot, bool persistent = false)
         {
             if (_objectPools.ContainsKey(poolName)) return false;
@@ -19,24 +18,23 @@ namespace ImmersiveGames.PoolSystems
             return true;
         }
 
-        // Obtém objeto de um pool genérico
+        // O tipo genérico T garante que o tipo de ISpawnData correto seja passado
         public GameObject GetObjectFromPool<T>(string poolName, Transform spawnPosition, T data) where T : ISpawnData
         {
             if (_objectPools.TryGetValue(poolName, out var pool))
             {
                 return pool.GetObject(spawnPosition, data);
             }
+
             DebugManager.LogError<PoolObjectManager>($"Pool {poolName} not found!");
             return null;
         }
 
-        // Obtém a raiz de um pool
         public Transform GetPool(string poolName)
         {
             return _objectPools.TryGetValue(poolName, out var pool) ? pool.GetRoot() : null;
         }
 
-        // Limpa objetos inativos em um pool
         public void ClearUnusedObjects(string poolName)
         {
             if (_objectPools.TryGetValue(poolName, out var pool))
@@ -45,7 +43,6 @@ namespace ImmersiveGames.PoolSystems
             }
         }
 
-        // Redimensiona um pool
         public void ResizePool(string poolName, int newSize)
         {
             if (_objectPools.TryGetValue(poolName, out var pool))
@@ -54,7 +51,6 @@ namespace ImmersiveGames.PoolSystems
             }
         }
 
-        // Retorna um objeto ao pool
         public void ReturnObjectToPool(GameObject obj, string poolName)
         {
             if (!_objectPools.TryGetValue(poolName, out var pool)) return;
@@ -64,7 +60,7 @@ namespace ImmersiveGames.PoolSystems
             }
             else
             {
-                Object.Destroy(obj); // Destrói se não estiver em cena
+                Object.Destroy(obj);
             }
         }
     }

@@ -10,7 +10,6 @@ namespace ImmersiveGames.BehaviorTreeSystem
     {
         // Armazena referências de nós criados
         private static readonly Dictionary<string, INode> _nodeReferences = new Dictionary<string, INode>();
-
         // Método para criar ActionNodes a partir de funções fornecidas por MonoBehaviour (INodeFunctionProvider)
         public static INode CreateNodeFromFunctionProvider(INodeFunctionProvider functionProvider)
         {

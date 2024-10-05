@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Abstracts
 {
-    public abstract class BossShoot : ObjectShoot
+    public abstract class BossShootOld : ObjectShootOld
     {
         [Header("Shoot Settings")] 
         [Range(5f, 40f)] public float speedShoot;

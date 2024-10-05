@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace NewRiverAttack.PlayerManagers.PlayerSystems
 {
-    public class PlayerShoot : ObjectShoot
+    public class PlayerShootOld : ObjectShootOld
     {
         [Header("PowerUp Settings"), SerializeField, Range(0,5)] private int cadenceDivider;
         private PlayerMaster _playerMaster;

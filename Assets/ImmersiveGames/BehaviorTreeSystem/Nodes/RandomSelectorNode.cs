@@ -6,10 +6,10 @@ namespace ImmersiveGames.BehaviorTreeSystem.Nodes
 {
     public class RandomSelectorNode : INode
     {
-        private readonly List<INode> _nodes;   // Lista de nós a serem selecionados aleatoriamente
-        private readonly int _maxTimes;        // Quantas vezes selecionar um nó
-        private int _currentTimes;             // Contador de execuções
-        private INode _currentNode;            // Nó atualmente sendo executado
+        private readonly List<INode> _nodes;
+        private readonly int _maxTimes;
+        private int _currentTimes;
+        private INode _currentNode;
 
         public RandomSelectorNode(List<INode> nodes, int maxTimes = 1)
         {
@@ -20,40 +20,39 @@ namespace ImmersiveGames.BehaviorTreeSystem.Nodes
 
         public void OnEnter()
         {
-            _currentTimes = 0;  // Reseta o contador ao entrar
-            SelectRandomNode(); // Seleciona um nó aleatório para começar
+            _currentTimes = 0;
+            SelectRandomNode();
         }
 
         public NodeState Tick()
         {
-            // Se já atingiu o número máximo de execuções, retorna Success
-            if (_currentTimes >= _maxTimes) return NodeState.Success;
+            if (_currentTimes >= _maxTimes) 
+                return NodeState.Success;  // Sucesso se o limite de execuções for alcançado
 
-            // Executa o nó atual
             var result = _currentNode.Tick();
 
-            // Se o nó terminou com sucesso ou falha, sai do nó atual
             if (result is NodeState.Success or NodeState.Failure)
             {
                 _currentNode.OnExit();
-                _currentTimes++;  // Incrementa o contador
+                _currentTimes++;
 
-                // Se ainda não atingiu o máximo, escolhe outro nó aleatório
                 if (_currentTimes < _maxTimes)
                 {
-                    SelectRandomNode();
+                    SelectRandomNode(); // Seleciona um novo nó aleatório se ainda há execuções restantes
+                    return NodeState.Running;
                 }
+
+                return NodeState.Success; // Sucesso após atingir o limite de execuções
             }
 
-            return _currentTimes < _maxTimes ? NodeState.Running : NodeState.Success;
+            return NodeState.Running; // Continua enquanto o nó atual está em execução
         }
 
         public void OnExit()
         {
-            _currentNode?.OnExit();  // Sai do nó atual se estiver em execução
+            _currentNode?.OnExit();
         }
 
-        // Método auxiliar para selecionar um nó aleatório
         private void SelectRandomNode()
         {
             if (_nodes.Count == 0) return;

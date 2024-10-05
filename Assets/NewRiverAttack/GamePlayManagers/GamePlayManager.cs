@@ -131,7 +131,7 @@ namespace NewRiverAttack.GamePlayManagers
         #region Controle de Jogo
 
         public bool ShouldBePlayingGame =>
-            GameManager.StateManager.GetCurrentState() is GameStatePlay && _activePlayers;
+            GameManager.StateManager.GetCurrentState() is GameStatePlay && _activePlayers && !IsPause;
         
 
         #endregion

@@ -16,37 +16,45 @@ namespace ImmersiveGames.BehaviorTreeSystem.Nodes
 
         public void OnEnter()
         {
-            _currentNodeIndex = 0;  // Reinicializa o índice quando o nó começa
+            _currentNodeIndex = 0;  
             if (_nodes.Count > 0)
             {
-                _nodes[_currentNodeIndex].OnEnter();  // Chama OnEnter do primeiro nó
+                _nodes[0].OnEnter(); // Garante que o primeiro nó sempre inicializa ao entrar na sequência
             }
         }
 
         public NodeState Tick()
         {
-            if (_currentNodeIndex >= _nodes.Count) return NodeState.Success;
+            if (_currentNodeIndex >= _nodes.Count) 
+                return NodeState.Success; // Retorna sucesso se todos os nós já foram executados
 
-            var result = _nodes[_currentNodeIndex].Tick();
+            var currentNode = _nodes[_currentNodeIndex];
+            var result = currentNode.Tick();
 
-            if (result != NodeState.Success)
-                return _currentNodeIndex >= _nodes.Count ? NodeState.Success : NodeState.Running;
-            _nodes[_currentNodeIndex].OnExit();  // Limpeza do nó concluído
+            if (result == NodeState.Running)
+                return NodeState.Running;
+
+            currentNode.OnExit();
+
+            if (result == NodeState.Failure)
+                return NodeState.Failure; // Falha na sequência interrompe a execução
+
+            // Se o nó atual teve sucesso, avança para o próximo
             _currentNodeIndex++;
-
             if (_currentNodeIndex < _nodes.Count)
             {
-                _nodes[_currentNodeIndex].OnEnter();  // Chama OnEnter do próximo nó
+                _nodes[_currentNodeIndex].OnEnter(); // Inicializa o próximo nó
+                return NodeState.Running; // Continua a execução
             }
 
-            return _currentNodeIndex >= _nodes.Count ? NodeState.Success : NodeState.Running;
+            return NodeState.Success; // Todos os nós foram executados com sucesso
         }
 
         public void OnExit()
         {
             if (_currentNodeIndex < _nodes.Count)
             {
-                _nodes[_currentNodeIndex].OnExit();
+                _nodes[_currentNodeIndex].OnExit(); // Executa o OnExit do nó atual ao sair da sequência
             }
         }
     }

@@ -1,5 +1,5 @@
-﻿using ImmersiveGames.ObjectManagers.Interfaces;
-using NewRiverAttack.GamePlayManagers;
+﻿using NewRiverAttack.BulletsManagers.Interface;
+using ImmersiveGames.FiniteStateMachine;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.ObstaclesSystems.ShootStates;
@@ -8,158 +8,159 @@ using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 {
-    public sealed class EnemiesShoot : ObjectShoot
+    public class EnemiesShoot : ObjectShoot
     {
-        private bool _isShoot;
-        
-        private IShoot _startState;
+        private StateMachine _stateMachine;
         private EnemiesMaster _enemiesMaster;
-        private EnemiesScriptable _enemies;
-        private GamePlayManager _gamePlayManagers;
-        #region Unity Methods
-        private void OnEnable()
+        private EnemiesScriptable _enemiesScriptable;
+        private Transform _target;
+
+        // Variável para controlar se o inimigo está visível na tela
+        private bool _isVisible;
+        public bool ShouldBeShoot => _isVisible && _enemiesMaster.ObjectIsReady;
+
+        #region UnityMethods
+
+        protected override void OnEnable()
         {
-            SetInitialReferences();
+            base.OnEnable();
             _enemiesMaster.EventObstacleChangeSkin += UpdateCadenceShoot;
-            _gamePlayManagers.EventGameRestart += ResetShoot;
-            _gamePlayManagers.EventGameReload -= RestartShoot;
-        }
-
-        private void OnBecameInvisible()
-        {
-            Invoke(nameof(StopShoot), 1f);
-        }
-
-        private void OnBecameVisible()
-        {
-            StartShoot();
-        }
-
-        private void Start()
-        {
-            StartInitShoot();
-        }
-        private void StartInitShoot()
-        {
-            if (_enemies.GetShootApproach != 0) 
-                _startState = new EnemyShootStatePatrol(this, false);
-            if (_enemies.GetShootApproach == 0) 
-                _startState = new EnemyShootSimpleState(this);
-            
-            ChangeState(_startState);
         }
 
         private void Update()
         {
-            if (!_enemiesMaster.ObjectIsReady) return;
-            GetActualState?.UpdateState(transform);
+            _stateMachine.Tick(); // Atualiza o estado da FSM
         }
 
-        private void OnDisable()
+        private void OnBecameVisible()
         {
+            _isVisible = true; // Inimigo está visível, deve atirar
+        }
+
+        private void OnBecameInvisible()
+        {
+            _isVisible = false; // Inimigo saiu da tela, para de atirar
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
             _enemiesMaster.EventObstacleChangeSkin -= UpdateCadenceShoot;
-            _gamePlayManagers.EventGameRestart -= ResetShoot;
-            _gamePlayManagers.EventGameReload -= RestartShoot;
         }
 
         #endregion
 
+        #region Configuração e Inicialização
+
+        // Inicializa a FSM e define os estados e transições
+        private void InitializeStateMachine()
+        {
+            _stateMachine = new StateMachine();
+
+            var patrolState = new PatrolState(this, _enemiesScriptable);
+            var shootState = new ShootState(this);
+
+            // Transição de Patrulha para Atirar
+            _stateMachine.AddTransition(patrolState, shootState, patrolState.IsTargetInRange);
+
+            // Transição garantida para o estado de atirar
+            _stateMachine.AddAnyTransition(shootState, () => _target != null);
+
+            // Define o estado inicial com base no GetShootApproach
+            _stateMachine.SetState(_enemiesScriptable.GetShootApproach == 0 ? shootState : patrolState);
+        }
+
+        // Configura as referências iniciais e chama a inicialização da FSM
         protected override void SetInitialReferences()
         {
             base.SetInitialReferences();
-            _isShoot = false;
-            _gamePlayManagers = GamePlayManager.Instance;
             _enemiesMaster = GetComponent<EnemiesMaster>();
-            _enemies = _enemiesMaster.objectDefault as EnemiesScriptable;
-            ShootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
+            _enemiesScriptable = _enemiesMaster.GetEnemySettings;
+
+            UpdateCadenceShoot();
+            InitializeStateMachine();
         }
 
-        internal void UpdateCadenceShoot()
+        // Reseta o estado de tiro e reinicializa a FSM
+        public override void ResetShoot()
         {
-            CadenceShoot = _enemies.cadenceShoot;
-            ShootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
-        }
+            // Reseta variáveis internas e visibilidade
+            _isVisible = false;
+            _target = null;
 
-        public override void SetDataBullet(ObjectMaster objectMaster)
-        {
-            var bulletSpeed = 0f;
-            var damage = 0;
-
-            var enemiesMaster = objectMaster as EnemiesMaster;
-            if (enemiesMaster != null)
-            {
-                var enemy = enemiesMaster.objectDefault as EnemiesScriptable;
-                if (enemy != null)
-                {
-                    bulletSpeed = enemy.speedShoot;
-                    damage = enemy.damageShoot;
-                }
-            }
-            MakeBullet(enemiesMaster, bulletSpeed, damage, bulletLifeTime, Vector3.forward);
-        }
-
-       
-        #region StateMachine
-        
-        internal void ChangeState(IShoot newState)
-        {
-            if (GetActualState == newState) return;
-            GetActualState?.ExitState();
-
-            GetActualState = newState;
-            GetActualState?.EnterState(_enemiesMaster);
-        }
-        private void ResetShoot()
-        {
-            ChangeState(_startState);
-        }
-
-        private void RestartShoot()
-        {
-            ResetShoot();
-            StartInitShoot();
-        }
-        private IShoot GetActualState { get; set; }
-        public bool ShouldBeShoot => _isShoot && _enemiesMaster.ObjectIsReady;
-
-        private void StartShoot()
-        {
-            _isShoot = true;
-        }
-
-        public void StopShoot()
-        {
-            _isShoot = false;
+            InitializeStateMachine(); // Reconfigura a FSM
+            UpdateCadenceShoot(); // Atualiza o ponto de disparo
         }
 
         #endregion
-        
+
+        #region Controle de Tiro e Pool
+
+        // Atualiza o ponto de spawn e outras referências
+        private void UpdateCadenceShoot()
+        {
+            var shootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
+            SpawnPoint = shootSpawnPoint != null ? shootSpawnPoint.transform : transform;
+        }
+
+        // Define a cadência de tiro específica para o inimigo
+        protected override float GetCadenceShoot()
+        {
+            return _enemiesScriptable.cadenceShoot;
+        }
+
+        // Criação dos dados da bala para o inimigo
+        protected override BulletSpawnData CreateBulletData(Vector3 direction)
+        {
+            return new BulletSpawnData
+            (
+                _enemiesMaster,
+                direction, // SpawnPoint.forward Direção sempre no SpawnPoint
+                _enemiesScriptable.damageShoot,
+                _enemiesScriptable.speedShoot,
+                _enemiesScriptable.timeoutDestroy,
+                false
+            );
+        }
+
+        #endregion
+
         #region Gizmos
+
 #if UNITY_EDITOR
+
+        [Header("Gizmos Settings")] public Color gizmoColor = new Color(255, 0, 0, 150); // Cor padrão do gizmo
         private Vector2 _gizmoRadius;
-        [Header("Gizmos Settings")]
-        public Color gizmoColor = new Color(255, 0, 0, 150);
+
         private void OnDrawGizmos()
         {
+            if (Application.isPlaying) return;
             var em = GetComponent<EnemiesMaster>();
+            if (em == null || em.GetEnemySettings == null) return;
+
             _gizmoRadius = em.GetEnemySettings.approachShoot;
         }
 
         private void OnDrawGizmosSelected()
         {
+            if (_gizmoRadius == Vector2.zero) return; // Sem área definida
+
             var position = transform.position;
-            if (_gizmoRadius is { x: 0, y: > 0 })
-            {
-                Gizmos.color = gizmoColor;
-                Gizmos.DrawWireSphere(center: position, _gizmoRadius.y);
-            }
-            if (_gizmoRadius.x == 0) return;
-            Gizmos.color = gizmoColor + new Color(0.2f, 0.2f, 0.2f);
-            Gizmos.DrawWireSphere(center: position, _gizmoRadius.x);
-            Gizmos.color = gizmoColor - new Color(0.2f, 0.2f, 0.2f);
+
+            Gizmos.color = gizmoColor - new Color(0.2f, 0.2f, 0.2f); // Cor para o máximo
             Gizmos.DrawWireSphere(center: position, _gizmoRadius.y);
+
+            if (!(_gizmoRadius.x > 0)) return;
+            Gizmos.color = gizmoColor + new Color(0.2f, 0.2f, 0.2f); // Cor para o mínimo
+            Gizmos.DrawWireSphere(center: position, _gizmoRadius.x);
         }
 #endif
+
         #endregion
+
+        public void SetTarget(Transform target)
+        {
+            _target = target;
+        }
     }
 }
