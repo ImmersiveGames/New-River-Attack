@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace NewRiverAttack.BulletsManagers
 {
-    public class BulletEnemies : Bullets, IPoolable
+    public class BulletEnemiesOld : Bullets, IPoolable
     {
         private float _startTime;
         private const float LimitTime = 0.1f;
@@ -33,7 +33,7 @@ namespace NewRiverAttack.BulletsManagers
         private void OnTriggerEnter(Collider collision)
         {
             if (collision == null) return;
-            if (collision.GetComponentInParent<WallMaster>() || collision.GetComponentInParent<ObstacleMaster>() || collision.GetComponent<BulletEnemies>()) return;
+            if (collision.GetComponentInParent<WallMaster>() || collision.GetComponentInParent<ObstacleMaster>() || collision.GetComponent<BulletEnemiesOld>()) return;
             DestroyMe();
         }
         private void FixedUpdate()

@@ -7,5 +7,6 @@ namespace ImmersiveGames.PoolSystems.Interfaces
     {
         public Vector3 Direction { get; set; }
         public ObjectMaster Owner { get; set; }
+        public Vector3 Position { get; set; }
     }
 }

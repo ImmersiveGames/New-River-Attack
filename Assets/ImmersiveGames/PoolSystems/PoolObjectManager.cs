@@ -9,6 +9,7 @@ namespace ImmersiveGames.PoolSystems
     {
         private readonly Dictionary<string, PoolObject> _objectPools = new Dictionary<string, PoolObject>();
 
+        // Cria um novo pool de objetos
         public bool CreatePool(string poolName, GameObject prefab, int initialPoolSize, Transform poolRoot, bool persistent = false)
         {
             if (_objectPools.ContainsKey(poolName)) return false;
@@ -18,7 +19,7 @@ namespace ImmersiveGames.PoolSystems
             return true;
         }
 
-        // O tipo genérico T garante que o tipo de ISpawnData correto seja passado
+        // Obtém um objeto do pool
         public GameObject GetObjectFromPool<T>(string poolName, Transform spawnPosition, T data) where T : ISpawnData
         {
             if (_objectPools.TryGetValue(poolName, out var pool))
@@ -30,11 +31,13 @@ namespace ImmersiveGames.PoolSystems
             return null;
         }
 
-        public Transform GetPool(string poolName)
+        // **Modificado**: Agora retorna o PoolObject em vez de apenas o Transform
+        public PoolObject GetPool(string poolName)
         {
-            return _objectPools.TryGetValue(poolName, out var pool) ? pool.GetRoot() : null;
+            return _objectPools.GetValueOrDefault(poolName);
         }
 
+        // Limpa objetos não utilizados
         public void ClearUnusedObjects(string poolName)
         {
             if (_objectPools.TryGetValue(poolName, out var pool))
@@ -43,6 +46,7 @@ namespace ImmersiveGames.PoolSystems
             }
         }
 
+        // Redimensiona o pool
         public void ResizePool(string poolName, int newSize)
         {
             if (_objectPools.TryGetValue(poolName, out var pool))
@@ -51,6 +55,7 @@ namespace ImmersiveGames.PoolSystems
             }
         }
 
+        // Retorna o objeto ao pool
         public void ReturnObjectToPool(GameObject obj, string poolName)
         {
             if (!_objectPools.TryGetValue(poolName, out var pool)) return;

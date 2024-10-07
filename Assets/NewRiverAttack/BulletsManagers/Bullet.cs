@@ -1,17 +1,26 @@
-﻿using ImmersiveGames.PoolSystems;
+﻿using System;
+using ImmersiveGames.PoolSystems;
 using UnityEngine;
 using ImmersiveGames.PoolSystems.Interfaces;
 using NewRiverAttack.BulletsManagers.Interface;
+using NewRiverAttack.ObstaclesSystems.Abstracts;
 
 namespace NewRiverAttack.BulletsManagers
 {
-    public class Bullet : MonoBehaviour, IPoolable
+    public abstract class Bullet : MonoBehaviour, IPoolable
     {
-        private Vector3 _direction;
-        private float _speed;
+        protected Vector3 Direction;
+        protected ObjectMaster Owned;
+        protected Vector3 Position;
+        protected int Damage;
+        protected float Speed;
+        protected float LifeTimer;
+        protected bool PowerUp;
+        protected bool IsInitialized;
+        
+        
         private float _lifetime;
-        private float _lifeTimer;
-        private bool _isInitialized;
+        
 
         public PoolObject Pool { get; set; } // Referência ao pool
 
@@ -21,46 +30,35 @@ namespace NewRiverAttack.BulletsManagers
             // Inicializa os dados da bala a partir do BulletSpawnData
             if (data is BulletSpawnData bulletData)
             {
-                _direction = bulletData.Direction;
-                _speed = bulletData.Speed;
+                Direction = bulletData.Direction;
+                Owned = bulletData.Owner;
+                Position = bulletData.Position;
+                Damage = bulletData.Damage;
+                Speed = bulletData.Speed;
+                PowerUp = bulletData.PowerUp;
+                
                 _lifetime = bulletData.Timer; // Usamos "Timer" como tempo de vida
             }
 
-            _lifeTimer = _lifetime;
+            LifeTimer = _lifetime;
 
             transform.position = spawnPosition.position;
             transform.rotation = spawnPosition.rotation;
 
-            _isInitialized = true;
+            IsInitialized = true;
         }
-
-        private void Update()
-        {
-            if (!_isInitialized) return;
-
-            // Movimenta o projétil na direção e velocidade fornecidas
-            transform.position += _direction * _speed * Time.deltaTime;
-
-            // Reduz o tempo de vida do projétil
-            _lifeTimer -= Time.deltaTime;
-
-            // Se o tempo de vida acabar, retorna ao pool
-            if (_lifeTimer <= 0)
-            {
-                ReturnToPool();
-            }
-        }
-
+        
         // Método para retornar o projétil ao pool
-        private void ReturnToPool()
+        protected void ReturnToPool()
         {
-            _isInitialized = false; // Desativar lógica de movimento
+            IsInitialized = false; // Desativar lógica de movimento
             Pool?.ReturnObject(gameObject); // Retorna ao pool
         }
 
-        private void OnCollisionEnter(Collision collision)
+        protected virtual void OnTriggerEnter(Collider other)
         {
-            // Quando a bala colide com algo, retorna ao pool
+            if (other.GetComponentInParent<ObjectMaster>() == Owned) return;
+            if (other.GetComponentInParent<Bullet>() == this) return;
             ReturnToPool();
         }
     }

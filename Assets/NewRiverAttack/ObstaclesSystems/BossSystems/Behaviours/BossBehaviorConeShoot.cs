@@ -101,8 +101,8 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 float currentAngle = startAngle + (i * angleStep);
                 Vector3 shootDirection = Quaternion.Euler(0, currentAngle, 0) * SpawnPoint.forward;
 
-                var bulletData = CreateBulletData(shootDirection);
-                base.Fire(bulletData);
+                var bulletData = CreateBulletData(shootDirection,SpawnPoint.position);
+                base.Fire(bulletData, SpawnPoint);
             }
         }
 
@@ -116,9 +116,9 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         }
 
         // Criação dos dados da bala
-        protected override BulletSpawnData CreateBulletData(Vector3 direction)
+        protected override BulletSpawnData CreateBulletData(Vector3 direction, Vector3 position)
         {
-            return new BulletSpawnData(_bossMaster, direction, bulletDamage, bulletSpeed, bulletLifetime, false);
+            return new BulletSpawnData(_bossMaster, direction, position, bulletDamage, bulletSpeed, bulletLifetime, false);
         }
 
         public override void ResetShoot()

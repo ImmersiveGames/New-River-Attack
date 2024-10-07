@@ -15,7 +15,6 @@ namespace ImmersiveGames.BehaviorTreeSystem.Nodes
 
         public void OnEnter()
         {
-            Debug.Log("Action Enter");
             // O comportamento de entrada será controlado pelo decorator, se necessário.
         }
 
@@ -26,7 +25,6 @@ namespace ImmersiveGames.BehaviorTreeSystem.Nodes
 
         public void OnExit()
         {
-            Debug.Log("Action Exit");
             // O comportamento de saída será controlado pelo decorator, se necessário.
         }
     }

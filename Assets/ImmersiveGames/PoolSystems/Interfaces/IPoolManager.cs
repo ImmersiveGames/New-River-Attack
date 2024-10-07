@@ -14,7 +14,7 @@ namespace ImmersiveGames.PoolSystems.Interfaces
         void ReturnObjectToPool(GameObject obj, string poolName);
 
         // Retorna a raiz do pool
-        Transform GetPool(string poolName);
+        PoolObject GetPool(string poolName);
 
         // Limpa os objetos inativos do pool
         void ClearUnusedObjects(string poolName);

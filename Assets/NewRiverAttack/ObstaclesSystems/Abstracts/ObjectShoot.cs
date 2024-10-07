@@ -16,8 +16,9 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         [SerializeField] private string poolName;
 
         private float _lastActionTime;
-        public Transform SpawnPoint { get; set; }
+        protected Transform SpawnPoint { get; set; }
         private IPoolManager _poolManager;
+        private PoolObject _bulletPool; // Agora armazena o PoolObject
         private GamePlayManager _gamePlayManagerRef;
 
         #region Unity Methods
@@ -29,7 +30,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             SetInitialReferences();
         }
 
-        protected virtual  void OnEnable()
+        protected virtual void OnEnable()
         {
             _gamePlayManagerRef.EventGameReload += ResetShoot;
             _gamePlayManagerRef.EventGameRestart += ResetShoot;
@@ -37,31 +38,32 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         protected virtual void OnDisable()
         {
-            _poolManager = null;  // Limpa referência quando desativado
             _gamePlayManagerRef.EventGameReload -= ResetShoot;
             _gamePlayManagerRef.EventGameRestart -= ResetShoot;
         }
 
         #endregion
 
-        // Método para configurar as referências e criar o pool de objetos
+        // Configura referências iniciais e cria o pool de objetos
         protected virtual void SetInitialReferences()
         {
-            DebugManager.Log<ObjectShoot>($"Criando Pool: {poolName}");
             _gamePlayManagerRef = GamePlayManager.Instance;
             _poolManager = new PoolObjectManager();
+
+            // Obtém o PoolObject diretamente
             _poolManager.CreatePool(poolName, prefabBullet, initialPoolSize, transform, persistent);
+            _bulletPool = _poolManager.GetPool(poolName);
         }
 
-        // Método para tentar disparar, respeitando o cooldown
+        // Método que tenta disparar respeitando o cooldown
         internal virtual void AttemptShoot(ObjectMaster objectMaster)
         {
             if (!objectMaster.ObjectIsReady) return;
-            
+
             if (!IsOnCooldown(GetCadenceShoot()))
             {
-                var bulletData = CreateBulletData(SpawnPoint.forward);
-                Fire(bulletData);
+                var bulletData = CreateBulletData(SpawnPoint.forward, SpawnPoint.position);
+                Fire(bulletData, SpawnPoint);
                 _lastActionTime = Time.realtimeSinceStartup;
             }
             else
@@ -70,26 +72,45 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             }
         }
 
-        // Método que dispara a bala (configuração de dados fica na classe concreta)
-        protected virtual void Fire(BulletSpawnData bulletData)
+        // Método para disparar a bala
+        protected virtual void Fire(BulletSpawnData bulletData, Transform spawnPoint)
         {
-            _poolManager.GetObjectFromPool(poolName, SpawnPoint, bulletData);
+            _bulletPool.GetObject(spawnPoint, bulletData); // Usa o PoolObject para obter o objeto
         }
 
-        // Verifica se o disparo está em cooldown
+        // Método que verifica se o disparo está em cooldown
         private bool IsOnCooldown(float cooldown)
         {
             return Time.realtimeSinceStartup - _lastActionTime < cooldown;
         }
 
-        // Método abstrato para a cadência de tiro (definido na classe concreta)
+        protected void ReturnMarkedObjects()
+        {
+            _bulletPool.ReturnMarkedObjects();
+        }
+
+        // Método que reseta todos os objetos ativos e retorna ao pool
+        protected void ResetSpawnedObjects()
+        {
+            _bulletPool.ReturnAllActiveObjects(); // Retorna todos os objetos ativos
+        }
+
+        // Método que marca um objeto para retorno ao pool posteriormente
+        public void MarkForReturn(GameObject obj)
+        {
+            _bulletPool.MarkForReturn(obj); // Marca o objeto
+        }
+
+        // Função abstrata para cadência de tiro
         protected abstract float GetCadenceShoot();
 
-        // Método abstrato para criar os dados da bala (definido na classe concreta)
-        protected abstract BulletSpawnData CreateBulletData(Vector3 direction);
+        // Método abstrato para criar dados da bala (definido nas classes derivadas)
+        protected abstract BulletSpawnData CreateBulletData(Vector3 direction, Vector3 position);
 
+        // Função para resetar o tiro
         public abstract void ResetShoot();
 
+        // Função para obter um alvo fixo, sempre mira no jogador
         protected Transform AlwaysTarget()
         {
             var master = _gamePlayManagerRef.GetPlayerMaster(0);

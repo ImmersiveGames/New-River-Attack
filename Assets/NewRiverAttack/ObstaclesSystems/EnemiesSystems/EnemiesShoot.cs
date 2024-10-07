@@ -110,12 +110,13 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         }
 
         // Criação dos dados da bala para o inimigo
-        protected override BulletSpawnData CreateBulletData(Vector3 direction)
+        protected override BulletSpawnData CreateBulletData(Vector3 direction, Vector3 position)
         {
             return new BulletSpawnData
             (
                 _enemiesMaster,
                 direction, // SpawnPoint.forward Direção sempre no SpawnPoint
+                position,
                 _enemiesScriptable.damageShoot,
                 _enemiesScriptable.speedShoot,
                 _enemiesScriptable.timeoutDestroy,

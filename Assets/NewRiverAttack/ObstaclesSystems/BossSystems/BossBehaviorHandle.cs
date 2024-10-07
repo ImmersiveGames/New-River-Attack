@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ImmersiveGames.BehaviorTreeSystem;
 using ImmersiveGames.BehaviorTreeSystem.Interface;
 using ImmersiveGames.BehaviorTreeSystem.Nodes;
+using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours;
 using UnityEngine;
 
@@ -20,6 +21,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         private void Start()
         {
+            GamePlayManager.Instance.EventGameReload += ResetAll;
             CreateBossBehaviors();
         }
 
@@ -27,6 +29,11 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         {
             if (!_bossMaster.ObjectIsReady) return;
             _tree?.Tick();  // Atualiza a árvore de comportamento a cada frame
+        }
+
+        private void OnDisable()
+        {
+            GamePlayManager.Instance.EventGameReload -= ResetAll;
         }
 
         private void SetInitialReferences()
@@ -55,17 +62,25 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             var enterScene = GetComponent<BossBehaviorEnterScene>();
             var singleShoot = GetComponentByID<BossBehaviorSingleShoot>(1);
             var coneShoot = GetComponentByID<BossBehaviorConeShoot>(1);
+            var spawnShoot = GetComponent<BossBehaviorRandomSpawn>();
 
             // Cria Nodes
             var nodeEnterScene = NodeFactory.CreateNodeFromFunctionProvider(enterScene);
             var nodeSingleShoot = NodeFactory.CreateNodeFromFunctionProvider(singleShoot);
             var nodeConeShoot = NodeFactory.CreateNodeFromFunctionProvider(coneShoot);
+            var nodeMineShoot = NodeFactory.CreateNodeFromFunctionProvider(spawnShoot);
             var nodeWaitSec = NodeFactory.CreateNode(NodeTypes.WaitNode, new Dictionary<NodeParam, object>
             {
                 { NodeParam.WaitTime, 1f }
             });
 
             // Aplica Decorators
+            var onEnterMineShoot = NodeFactory.ApplyDecorator(nodeMineShoot, NodeDecorations.OnEnterDecorator,
+                new Dictionary<NodeDecorationsParam, object>
+                {
+                    { NodeDecorationsParam.OnEnter, (Action)spawnShoot.OnEnter }
+                }
+            );
             var onEnterEnterScene = NodeFactory.ApplyDecorator(nodeEnterScene, NodeDecorations.OnEnterDecorator,
                 new Dictionary<NodeDecorationsParam, object>
                 {
@@ -90,10 +105,14 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             {
                 nodeWaitSec,
                 onEnterEnterScene,
+                /*nodeWaitSec,
+                repeatSingleShot,
+                nodeWaitSec,
+                repeatConeShot,*/
                 nodeWaitSec,
                 repeatSingleShot,
                 nodeWaitSec,
-                repeatConeShot
+                onEnterMineShoot,
             };
 
             _tree = new BehaviorTree(new SequenceNode(listNodesSequencial));
@@ -102,16 +121,14 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         // Método para resetar a árvore
         public void ResetTree()
         {
-            if (_tree != null)
-            {
-                Debug.Log("Resetando a árvore de comportamento");
-                _tree = null;  // Limpa a árvore atual
-                CreateBossBehaviors();  // Recria a árvore de comportamento do zero
-            }
+            if (_tree == null) return;
+            Debug.Log("Resetando a árvore de comportamento");
+            _tree = null;  // Limpa a árvore atual
+            CreateBossBehaviors();  // Recria a árvore de comportamento do zero
         }
 
         // Método para resetar todo o comportamento, incluindo os nós e a árvore
-        public void ResetAll()
+        private void ResetAll()
         {
             // Resetar comportamentos individuais
             var singleShoot = GetComponentByID<BossBehaviorSingleShoot>(1) as BossBehaviorSingleShoot;

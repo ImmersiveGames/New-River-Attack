@@ -38,9 +38,10 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         #endregion
 
-        protected void ReloadSkin()
+        private void ReloadSkin()
         {
             ChangePlayerSkin(ObstacleMaster.objectDefault, ObstacleMaster.objectDefault.randomSkin);
+            _skin.SetActive(true);
         }
 
         private void ChangePlayerSkin(ObjectsScriptable.ObjectsScriptable enemy, bool random)
@@ -61,6 +62,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
             RemoveSkin();
             CreateSkin(skin);
+            _skin.SetActive(true);
             ObstacleMaster.OnObstacleChangeSkin();
         }
 

@@ -67,8 +67,8 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             if (!Aim()) return NodeState.Failure;
 
             // Executa o disparo
-            var bulletData = CreateBulletData(SpawnPoint.forward);
-            base.Fire(bulletData);
+            var bulletData = CreateBulletData(SpawnPoint.forward, SpawnPoint.position);
+            base.Fire(bulletData, SpawnPoint);
             
             // Atualiza o tempo do último disparo para gerenciar o cooldown
             _lastShootTime = Time.time;
@@ -107,10 +107,10 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         }
 
         // Criação dos dados do projétil (herdado de ObjectShoot)
-        protected override BulletSpawnData CreateBulletData(Vector3 direction)
+        protected override BulletSpawnData CreateBulletData(Vector3 direction, Vector3 position)
         {
             // Cria os dados da bala, substituindo os números mágicos por variáveis configuráveis
-            return new BulletSpawnData(_bossMaster, direction, bulletDamage, bulletSpeed, bulletLifetime, false);
+            return new BulletSpawnData(_bossMaster, direction, position, bulletDamage, bulletSpeed, bulletLifetime, false);
         }
 
         // Método para resetar o tiro (herdado de ObjectShoot)

@@ -16,21 +16,18 @@ namespace ImmersiveGames.BehaviorTreeSystem.Nodes
 
         public void OnEnter()
         {
-            _elapsedTime = 0f;  // Reinicializa o tempo quando o nó começa
-            Debug.Log("Wait enter");
+            _elapsedTime = 0f;  // Reinicializa o tempo quando o nó começa);
         }
 
         public NodeState Tick()
         {
             _elapsedTime += Time.deltaTime;
-            //Debug.Log("Wait");
             return _elapsedTime >= _waitTime ? NodeState.Success : NodeState.Running;
         }
 
         public void OnExit()
         {
             // Limpeza ou lógica ao sair, caso necessário, pode ser decorada
-            Debug.Log("Wait exit");
         }
     }
 }

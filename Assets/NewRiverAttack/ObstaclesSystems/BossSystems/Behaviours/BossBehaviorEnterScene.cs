@@ -23,9 +23,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
         // Método para reinicializar o estado do nó, usado no reset
         public void OnEnter()
-        {
-            Debug.Log("EnterScene OnEnter chamado");
-
+        { 
             _currentState = NodeState.Running;  // Reinicia o estado para Running ao entrar
             _moveTween?.Kill();  // Cancela qualquer Tween anterior, se estiver ativo
             _moveTween = null;   // Reseta o Tween
@@ -35,8 +33,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         // Método para resetar o comportamento (será chamado no ResetAll)
         public void ResetEnterScene()
         {
-            Debug.Log("Resetando o estado do EnterScene");
-
             OnEnter();  // Reutiliza o método OnEnter para resetar o estado e a animação
             StartSetup();  // Reposiciona o boss no início
         }
@@ -47,15 +43,12 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             // Se a animação já tiver concluído ou falhado, retorna o estado final
             if (_currentState is NodeState.Success or NodeState.Failure)
             {
-                Debug.Log("EnterScene retornando estado final: " + _currentState);
                 return _currentState;  // Sai com o estado final
             }
 
             // Se o estado for Running e não houver Tween ativo, inicia a animação
             if (_currentState == NodeState.Running && _moveTween == null)
             {
-                Debug.Log("Iniciando animação em EnterScene");
-
                 _bossMaster.IsEmerge = false;
 
                 // Configurar e iniciar a sequência de animação
@@ -68,7 +61,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 // Callback para atualizar a posição antes de mover
                 mySequence.AppendCallback(() =>
                 {
-                    Debug.Log("Atualizando posição do Boss para iniciar movimento");
                     transform.position = new Vector3(playerPosition.x, transform.position.y, transform.position.z);
                 });
 
@@ -82,7 +74,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 mySequence.OnComplete(() =>
                 {
                     if (_hasCompleted) return; // Garante que só seja chamado uma vez
-                    Debug.Log("Animação completa em EnterScene");
                     _currentState = NodeState.Success;
                     _bossMaster.IsEmerge = true;
                     _moveTween = null;  // Resetar o Tween
@@ -93,7 +84,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 mySequence.OnKill(() =>
                 {
                     if (_hasCompleted) return;  // Garante que só seja chamado se OnComplete não foi chamado
-                    Debug.Log("Animação interrompida em EnterScene");
                     _currentState = NodeState.Failure;
                     _moveTween = null;  // Resetar o Tween
                 });
@@ -103,12 +93,11 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             }
 
             // Enquanto a animação está em andamento, retorna Running
-            Debug.Log("EnterScene retornando Running");
             return NodeState.Running;
         }
 
         // Método para configurar o início do comportamento
-        public void StartSetup()
+        private void StartSetup()
         {
             _bossMaster.IsEmerge = false;
             transform.position = Vector3.zero;  // Reposiciona o Boss no início

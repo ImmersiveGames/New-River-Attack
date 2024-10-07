@@ -7,6 +7,22 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
     public class MineSound : EnemiesSound
     {
         private MineMaster _mineMaster;
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+        }
+
+        protected override void SetInitialReferences()
+        {
+            base.SetInitialReferences();
+            _mineMaster = ObstacleMaster as MineMaster;
+        }
+        /*private MineMaster _mineMaster;
         [SerializeField] private AudioEvent alertAudio;
         protected override void OnEnable()
         {
@@ -64,6 +80,6 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             {
                 audioExplosion.SimplePlay(AudioSource);
             }
-        }
+        }*/
     }
 }

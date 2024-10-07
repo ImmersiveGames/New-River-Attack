@@ -50,8 +50,8 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             _enemiesFuse = fuse as EnemiesFuse;
             if (_enemiesFuse == null) return;
             _mineMaster = _enemiesFuse.GetEnemiesMaster as MineMaster;
-            if (_mineMaster != null) _mineMaster.OnEventAlertApproach();
-            _timeExpire = _enemiesFuse.timeInAlert;
+            //if (_mineMaster != null) _mineMaster.OnEventAlertApproach();
+            //_timeExpire = _enemiesFuse.timeInAlert;
             //Debug.Log($"Entra no Alert");
         }
 
@@ -67,8 +67,8 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         public void ExitState()
         {
             //Debug.Log($"Sai no Alert");
-            if (_mineMaster != null) _mineMaster.OnEventAlertStop();
-            _enemiesFuse.GetComponent<ObstacleSkin>().DesativeSkin();
+            //if (_mineMaster != null) _mineMaster.OnEventAlertStop();
+            //_enemiesFuse.GetComponent<ObstacleSkin>().DesativeSkin();
         }
     }
 
@@ -95,8 +95,8 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             _timerParam = 0f;
             _isExploding = true;
 
-            if (_mineMaster != null)
-                _mineMaster.OnEventDetonate();
+            //if (_mineMaster != null)
+                //_mineMaster.OnEventDetonate();
         }
 
         public void UpdateState()
