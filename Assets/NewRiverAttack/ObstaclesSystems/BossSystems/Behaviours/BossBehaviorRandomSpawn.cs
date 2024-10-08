@@ -66,7 +66,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             }
 
             Destroy(tempSpawnPoint.gameObject);
-
+            PoolHelper.ReturnMarkedObjects();
             _hasCompleted = true;
             _spawnRoutine = null;
         }
@@ -88,6 +88,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 _spawnRoutine = null;
             }
             _hasCompleted = false;
+            PoolHelper.ReturnAllActiveObjects();
         }
 
         public override BulletSpawnData CreateBulletData(Vector3 direction, Vector3 position)

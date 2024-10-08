@@ -114,6 +114,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6260783935389217745}
+    - targetCorrespondingSourceObject: {fileID: 3351906142001725201, guid: 5836a6983a6ae7e43adc627c6be58bd5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2116340582709893856}
   m_SourcePrefab: {fileID: 100100000, guid: 5836a6983a6ae7e43adc627c6be58bd5, type: 3}
 --- !u!1 &2719651978305858814 stripped
 GameObject:
@@ -157,7 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabBullet: {fileID: 1678599070653623651, guid: 39f17979f49e9aa4a8581a235928267c,
     type: 3}
-  initialPoolSize: 50
+  initialPoolSize: 20
   persistent: 0
   poolName: PoolCone01
   idNode: 1
@@ -166,6 +170,30 @@ MonoBehaviour:
   bulletLifetime: 5
   projectileCount: 5
   coneAngle: 45
+  shootCooldown: 1.5
+--- !u!114 &2116340582709893856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2719651978305858814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b4c22ebc407af44e8a381827d7e43d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabBullet: {fileID: 1678599070653623651, guid: 39f17979f49e9aa4a8581a235928267c,
+    type: 3}
+  initialPoolSize: 30
+  persistent: 0
+  poolName: PoolCone02
+  idNode: 2
+  bulletDamage: 1
+  bulletSpeed: 30
+  bulletLifetime: 3
+  projectileCount: 9
+  coneAngle: 75
   shootCooldown: 1.5
 --- !u!4 &4541379194326653790 stripped
 Transform:

@@ -62,12 +62,14 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             var enterScene = GetComponent<BossBehaviorEnterScene>();
             var singleShoot = GetComponentByID<BossBehaviorSingleShoot>(1);
             var coneShoot = GetComponentByID<BossBehaviorConeShoot>(1);
+            var coneShoot02 = GetComponentByID<BossBehaviorConeShoot>(2);
             var spawnShoot = GetComponent<BossBehaviorRandomSpawn>();
 
             // Cria Nodes
             var nodeEnterScene = NodeFactory.CreateNodeFromFunctionProvider(enterScene);
             var nodeSingleShoot = NodeFactory.CreateNodeFromFunctionProvider(singleShoot);
             var nodeConeShoot = NodeFactory.CreateNodeFromFunctionProvider(coneShoot);
+            var nodeConeShoot02 = NodeFactory.CreateNodeFromFunctionProvider(coneShoot02);
             var nodeMineShoot = NodeFactory.CreateNodeFromFunctionProvider(spawnShoot);
             var nodeWaitSec = NodeFactory.CreateNode(NodeTypes.WaitNode, new Dictionary<NodeParam, object>
             {
@@ -93,7 +95,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
                     { NodeDecorationsParam.Times, 3 }
                 }
             );
-            var repeatConeShot = NodeFactory.ApplyDecorator(nodeConeShoot, NodeDecorations.RepeatDecorator,
+            var repeatConeShot = NodeFactory.ApplyDecorator(nodeConeShoot02, NodeDecorations.RepeatDecorator,
                 new Dictionary<NodeDecorationsParam, object>
                 {
                     { NodeDecorationsParam.Times, 3 }
@@ -106,7 +108,9 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
                 nodeWaitSec,
                 onEnterEnterScene,
                 nodeWaitSec,
-                nodeConeShoot,
+                repeatConeShot,
+                nodeWaitSec,
+                onEnterMineShoot,
                 
                 /*nodeWaitSec,
                 repeatSingleShot,

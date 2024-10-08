@@ -57,10 +57,6 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         {
             Debug.Log("Disparando projétil com direção: " + bulletData.Direction);
             PoolHelper.GetObject(spawnPoint, bulletData);
-            /*if (obj == null)
-            {
-                Debug.LogError("Nenhum objeto foi recuperado do pool!");
-            }*/
         }
 
         public virtual void ResetShoot()

@@ -7,7 +7,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Helpers
 {
     public class PoolingHelper
     {
-        private PoolObject _poolObject;
+        private readonly PoolObject _poolObject;
 
         public PoolingHelper(GameObject prefab, Transform parent, string poolName, int initialSize, bool persistent)
         {
@@ -16,20 +16,20 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Helpers
             _poolObject = poolManager.GetPool(poolName);
         }
 
-        /*public void ReturnMarkedObjects()
+        public void ReturnMarkedObjects()
         {
-            _poolObject.ReturnMarkedObjects();
+            //_poolObject.ReturnMarkedObjects();
         }
 
         public void ReturnAllActiveObjects()
         {
-            _poolObject.ReturnAllActiveObjects();
+            //_poolObject.ReturnAllActiveObjects();
         }
 
         public void MarkForReturn(GameObject obj)
         {
-            _poolObject.MarkForReturn(obj);
-        }*/
+            //_poolObject.MarkForReturn(obj);
+        }
 
         public void GetObject(Transform spawnPoint, BulletSpawnData data)
         {

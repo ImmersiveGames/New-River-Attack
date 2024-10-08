@@ -1,5 +1,4 @@
-﻿using System;
-using ImmersiveGames.PoolSystems;
+﻿using ImmersiveGames.PoolSystems;
 using UnityEngine;
 using ImmersiveGames.PoolSystems.Interfaces;
 using NewRiverAttack.BulletsManagers.Interface;
@@ -7,20 +6,17 @@ using NewRiverAttack.ObstaclesSystems.Abstracts;
 
 namespace NewRiverAttack.BulletsManagers
 {
-    public abstract class Bullet : MonoBehaviour, IPoolable
+    public class Bullet : MonoBehaviour, IPoolable
     {
         protected Vector3 Direction;
-        protected ObjectMaster Owned;
-        protected Vector3 Position;
-        protected int Damage;
+        private Vector3 _position;
         protected float Speed;
-        protected float LifeTimer;
-        protected bool PowerUp;
-        protected bool IsInitialized;
-        
-        
         private float _lifetime;
-        
+        protected float LifeTimer;
+        protected bool IsInitialized;
+        private ObjectMaster _owner;
+        private int _damage;
+        private bool _powerUp;
 
         public PoolObject Pool { get; set; } // Referência ao pool
 
@@ -31,13 +27,12 @@ namespace NewRiverAttack.BulletsManagers
             if (data is BulletSpawnData bulletData)
             {
                 Direction = bulletData.Direction;
-                Owned = bulletData.Owner;
-                Position = bulletData.Position;
-                Damage = bulletData.Damage;
                 Speed = bulletData.Speed;
-                PowerUp = bulletData.PowerUp;
-                
                 _lifetime = bulletData.Timer; // Usamos "Timer" como tempo de vida
+                _owner = bulletData.Owner;
+                _position = bulletData.Position;
+                _damage = bulletData.Damage;
+                _powerUp = bulletData.PowerUp;
             }
 
             LifeTimer = _lifetime;
@@ -47,7 +42,7 @@ namespace NewRiverAttack.BulletsManagers
 
             IsInitialized = true;
         }
-        
+
         // Método para retornar o projétil ao pool
         protected void ReturnToPool()
         {
@@ -55,11 +50,6 @@ namespace NewRiverAttack.BulletsManagers
             Pool?.ReturnObject(gameObject); // Retorna ao pool
         }
 
-        protected virtual void OnTriggerEnter(Collider other)
-        {
-            if (other.GetComponentInParent<ObjectMaster>() == Owned) return;
-            if (other.GetComponentInParent<Bullet>() == this) return;
-            ReturnToPool();
-        }
+        
     }
 }

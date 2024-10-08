@@ -6,9 +6,9 @@ namespace ImmersiveGames.PoolSystems
 {
     public class PoolObject
     {
-        private readonly List<GameObject> _pooledObjects = new List<GameObject>(); // Objetos no pool
-        //private readonly List<GameObject> _activeObjects = new List<GameObject>(); // Objetos ativos
-        //private readonly List<GameObject> _markedForReturn = new List<GameObject>(); // Objetos marcados para retorno
+        private readonly List<GameObject> _pooledObjects; // Objetos no pool
+        private readonly List<GameObject> _activeObjects; // Objetos ativos
+        private readonly List<GameObject> _markedForReturn; // Objetos marcados para retorno
 
         private readonly GameObject _prefab;
         private readonly Transform _root;
@@ -20,6 +20,10 @@ namespace ImmersiveGames.PoolSystems
             _root.SetParent(parent);
             _root.SetAsLastSibling();
 
+            _pooledObjects = new List<GameObject>();
+            _activeObjects = new List<GameObject>();
+            _markedForReturn = new List<GameObject>();
+            
             _prefab = prefab;
 
             for (var i = 0; i < initialPoolSize; i++)
@@ -70,7 +74,7 @@ namespace ImmersiveGames.PoolSystems
         internal GameObject GetObject<T>(Transform spawnPosition, T data) where T : ISpawnData
         {
             var obj = FindInactiveObject() ?? CreateObject();
-            //_activeObjects.Add(obj); // Adiciona à lista de objetos ativos
+            _activeObjects.Add(obj); // Adiciona à lista de objetos ativos
             return SpawnObject(obj, spawnPosition, data);
         }
 
@@ -89,33 +93,33 @@ namespace ImmersiveGames.PoolSystems
         }
 
         // Marca um objeto para retornar ao pool após a conclusão do ciclo de spawn
-        /*public void MarkForReturn(GameObject obj)
+        public void MarkForReturn(GameObject obj)
         {
             if (_activeObjects.Contains(obj))
             {
                 _markedForReturn.Add(obj); // Marca o objeto para retorno
             }
-        }*/
+        }
 
         // Retorna todos os objetos que foram marcados para retorno ao pool
-        /*public void ReturnMarkedObjects()
+        public void ReturnMarkedObjects()
         {
             foreach (var obj in _markedForReturn)
             {
                 ReturnObject(obj); // Retorna o objeto ao pool
             }
             _markedForReturn.Clear(); // Limpa a lista de marcados
-        }*/
+        }
 
         // Retorna todos os objetos ativos ao pool
-        /*public void ReturnAllActiveObjects()
+        public void ReturnAllActiveObjects()
         {
             foreach (var obj in _activeObjects)
             {
                 ReturnObject(obj); // Retorna ao pool
             }
             _activeObjects.Clear(); // Limpa a lista de objetos ativos
-        }*/
+        }
 
         // Retorna um objeto ao pool
         public void ReturnObject(GameObject obj)
@@ -123,7 +127,7 @@ namespace ImmersiveGames.PoolSystems
             if (obj == null) return;
             obj.SetActive(false);
             obj.transform.SetParent(_root);
-            //_activeObjects.Remove(obj); // Remove da lista de ativos
+            _activeObjects.Remove(obj); // Remove da lista de ativos
         }
 
         // Método que limpa objetos nulos da lista de objetos poolados

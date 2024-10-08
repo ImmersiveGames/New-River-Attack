@@ -1,21 +1,9 @@
-﻿using ImmersiveGames.AudioEvents;
-using NewRiverAttack.PlayerManagers.PlayerSystems;
-using UnityEngine;
-
+﻿
 namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 {
     public class MineSound : EnemiesSound
     {
         private MineMaster _mineMaster;
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-        }
-
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-        }
 
         protected override void SetInitialReferences()
         {

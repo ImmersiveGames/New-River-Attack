@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NewRiverAttack.ObstaclesSystems.Abstracts;
+using UnityEngine;
 
 namespace NewRiverAttack.BulletsManagers
 {
@@ -9,7 +10,7 @@ namespace NewRiverAttack.BulletsManagers
             if (!IsInitialized) return;
 
             // Movimenta o projétil na direção e velocidade fornecidas
-            transform.position += Direction * Speed * Time.deltaTime;
+            transform.position += Direction * (Speed * Time.deltaTime);
 
             // Reduz o tempo de vida do projétil
             LifeTimer -= Time.deltaTime;
@@ -19,6 +20,12 @@ namespace NewRiverAttack.BulletsManagers
             {
                 ReturnToPool();
             }
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.GetComponentInParent<Bullet>()) return;
+            if (other.GetComponentInParent<ObstacleMaster>()) return;
+            ReturnToPool();
         }
     }
 }

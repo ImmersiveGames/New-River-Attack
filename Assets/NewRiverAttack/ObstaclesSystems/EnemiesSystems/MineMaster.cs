@@ -1,6 +1,4 @@
 ﻿
-using Unity.VisualScripting;
-
 namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 {
     public class MineMaster : EnemiesMaster
@@ -13,19 +11,9 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         
         #region Unity Methods
 
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-        }
-
         private void Start()
         {
             IsDisable = false;
-        }
-
-        protected override void OnDisable()
-        {
-            base.OnDisable();
         }
 
         #endregion
