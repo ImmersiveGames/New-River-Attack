@@ -40,6 +40,12 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             GamePlayManagerRef.EventGameReload -= ReloadObject;
         }
 
+        public bool ShouldBeReady
+        {
+            get => GamePlayManagerRef.ShouldBePlayingGame && !IsDead && !IsDisable;
+            set => throw new System.NotImplementedException();
+        }
+
         #endregion
         
         #region Object Methods
@@ -50,11 +56,11 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         #endregion
 
-        internal virtual void OnEventObstacleHit(PlayerMaster playerMaster)
+        internal void OnEventObstacleHit(PlayerMaster playerMaster)
         {
             EventObstacleHit?.Invoke(playerMaster);
         }
-        internal virtual void OnEventObstacleDeath(PlayerMaster playerMaster)
+        internal void OnEventObstacleDeath(PlayerMaster playerMaster)
         {
             AttemptKillObstacle(playerMaster);
             EventObstacleDeath?.Invoke(playerMaster);

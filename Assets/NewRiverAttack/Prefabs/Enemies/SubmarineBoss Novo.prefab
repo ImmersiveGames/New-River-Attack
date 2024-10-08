@@ -188,14 +188,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 406902398953566534}
-    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5243508630135604663}
-    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8232004363638800602}
   m_SourcePrefab: {fileID: 100100000, guid: c4bed2524d6c2be458e7205159ddbb5b, type: 3}
 --- !u!1 &3351906142001725201 stripped
@@ -308,52 +300,6 @@ MonoBehaviour:
   initialDelay: 3
   moveDuration: 5
   distanceOffset: 40
---- !u!114 &406902398953566534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3351906142001725201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a42975e8f44367b065d3aaf4bfd676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabBullet: {fileID: 1678599070653623651, guid: 3c74fc8416c495444b1c82ceef276d19,
-    type: 3}
-  initialPoolSize: 10
-  persistent: 0
-  poolName: 
-  idNode: 1
-  bulletDamage: 1
-  bulletSpeed: 20
-  bulletLifetime: 5
-  shootCooldown: 1.5
---- !u!114 &5243508630135604663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3351906142001725201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b4c22ebc407af44e8a381827d7e43d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabBullet: {fileID: 1678599070653623651, guid: 3c74fc8416c495444b1c82ceef276d19,
-    type: 3}
-  initialPoolSize: 10
-  persistent: 0
-  poolName: 
-  idNode: 1
-  bulletDamage: 1
-  bulletSpeed: 20
-  bulletLifetime: 5
-  projectileCount: 5
-  coneAngle: 45
-  shootCooldown: 1.5
 --- !u!114 &8232004363638800602
 MonoBehaviour:
   m_ObjectHideFlags: 0

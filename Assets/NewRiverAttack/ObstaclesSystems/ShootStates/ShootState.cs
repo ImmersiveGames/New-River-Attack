@@ -1,5 +1,6 @@
 ﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.FiniteStateMachine;
+using NewRiverAttack.ObstaclesSystems.BossSystems.Helpers;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
 
 namespace NewRiverAttack.ObstaclesSystems.ShootStates
@@ -7,20 +8,20 @@ namespace NewRiverAttack.ObstaclesSystems.ShootStates
     public class ShootState : IState
     {
         private readonly EnemiesShoot _enemiesShoot;
-        private readonly EnemiesMaster _enemiesMaster;
+        private readonly ForwardShotPattern _forwardShotPattern;
 
         public ShootState(EnemiesShoot enemiesShoot)
         {
             _enemiesShoot = enemiesShoot;
-            _enemiesMaster = enemiesShoot.GetComponent<EnemiesMaster>();
+            _forwardShotPattern = new ForwardShotPattern(_enemiesShoot.GetCadenceShoot);
         }
 
         public void Tick()
         {
-            // Enquanto o inimigo puder atirar (verificado por ShouldBeShoot), ele tentará atirar
-            if (!_enemiesShoot.ShouldBeShoot) return;
-            
-            _enemiesShoot.AttemptShoot(_enemiesMaster);
+            if (!_enemiesShoot.ShouldBeReady) return;
+
+            // Executa o padrão de tiro
+            _forwardShotPattern.Execute(_enemiesShoot.SpawnPoint, _enemiesShoot);
         }
 
         public void OnEnter()
@@ -31,6 +32,7 @@ namespace NewRiverAttack.ObstaclesSystems.ShootStates
         public void OnExit()
         {
             DebugManager.Log<ShootState>("Inimigo parou de atirar.");
+            _enemiesShoot.SetTarget(null); // Limpa o alvo quando sai do estado de tiro
         }
     }
 }

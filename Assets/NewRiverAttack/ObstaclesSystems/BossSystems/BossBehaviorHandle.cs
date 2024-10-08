@@ -78,7 +78,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             var onEnterMineShoot = NodeFactory.ApplyDecorator(nodeMineShoot, NodeDecorations.OnEnterDecorator,
                 new Dictionary<NodeDecorationsParam, object>
                 {
-                    { NodeDecorationsParam.OnEnter, (Action)spawnShoot.OnEnter }
+                    { NodeDecorationsParam.OnEnter, (Action)spawnShoot.ResetShoot }
                 }
             );
             var onEnterEnterScene = NodeFactory.ApplyDecorator(nodeEnterScene, NodeDecorations.OnEnterDecorator,
@@ -105,14 +105,13 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             {
                 nodeWaitSec,
                 onEnterEnterScene,
+                nodeWaitSec,
+                nodeConeShoot,
+                
                 /*nodeWaitSec,
                 repeatSingleShot,
                 nodeWaitSec,
-                repeatConeShot,*/
-                nodeWaitSec,
-                repeatSingleShot,
-                nodeWaitSec,
-                onEnterMineShoot,
+                onEnterMineShoot,*/
             };
 
             _tree = new BehaviorTree(new SequenceNode(listNodesSequencial));

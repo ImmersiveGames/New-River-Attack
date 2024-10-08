@@ -1,12 +1,11 @@
-﻿using ImmersiveGames.PoolManagers.Interface;
-using NewRiverAttack.ObstaclesSystems.Abstracts;
+﻿using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 {
-    public class EnemiesMaster : ObstacleMaster, IHasPool
+    public class EnemiesMaster : ObstacleMaster
     {
         public delegate void ObstaclePositionHandler(Vector2 position);
         public event ObstaclePositionHandler EventSpawnObject;
