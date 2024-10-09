@@ -13,13 +13,11 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         [SerializeField] private int initialPoolSize = 10;
         [SerializeField] private bool persistent;
         [SerializeField] private string poolName;
-
         protected PoolingHelper PoolHelper { get; private set; }
         private IShootPattern ShootPattern { get; set; }
-        public Transform SpawnPoint { get; set; }
+        public Transform SpawnPoint { get; private set; }
 
         private ObstacleMaster _obstacleMaster;
-
         protected virtual void Awake()
         {
             PoolHelper = new PoolingHelper(prefabBullet, transform, poolName, initialPoolSize, persistent);
@@ -48,14 +46,13 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             ShootPattern = pattern;
         }
 
-        public void ExecuteShootPattern()
+        protected void ExecuteShootPattern()
         {
             ShootPattern?.Execute(SpawnPoint, this);
         }
 
         public void Fire(BulletSpawnData bulletData, Transform spawnPoint)
         {
-            Debug.Log("Disparando projétil com direção: " + bulletData.Direction);
             PoolHelper.GetObject(spawnPoint, bulletData);
         }
 

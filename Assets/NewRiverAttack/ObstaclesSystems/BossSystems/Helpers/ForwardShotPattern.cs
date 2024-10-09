@@ -6,11 +6,12 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Helpers
 {
     public class ForwardShotPattern : IShootPattern
     {
-        private readonly CooldownSystem _cooldownSystem = new CooldownSystem();
+        private readonly CooldownSystem _cooldownSystem;
         private readonly float _cooldown;
 
         public ForwardShotPattern(float cooldown)
         {
+            _cooldownSystem = new CooldownSystem();
             _cooldown = cooldown;
         }
         public bool CanShoot() => _cooldownSystem.IsCooldownComplete(_cooldown);

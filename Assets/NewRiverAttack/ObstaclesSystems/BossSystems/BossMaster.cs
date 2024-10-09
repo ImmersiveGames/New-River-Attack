@@ -17,24 +17,30 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         public event BossGenericHandler EventBossResetForEnter;
 
         #endregion
-        
-        private void Start()
-        {
-            GamePlayBossManager.instance.SetBoss(this);
-        }
+
+        #region Unity Methods
         protected override void OnEnable()
         {
             base.OnEnable();
             GamePlayManagerRef.EventGameReload += ReloadBoss;
             GamePlayManagerRef.EventPlayerInitialize += GetPlayerMaster;
         }
-
+        private void Start()
+        {
+            GamePlayBossManager.instance.SetBoss(this);
+        }
         protected override void OnDisable()
         {
             base.OnDisable();
             GamePlayManagerRef.EventGameReload -= ReloadBoss;
             GamePlayManagerRef.EventPlayerInitialize -= GetPlayerMaster;
         }
+
+        #endregion
+        
+        
+
+        
         private void GetPlayerMaster(PlayerMaster playerMaster)
         {
             PlayerMaster = playerMaster;

@@ -31,7 +31,7 @@ namespace NewRiverAttack.ObstaclesSystems.ShootStates
             _enemiesMaster = enemiesMaster;
             _enemies = enemiesMaster.GetEnemySettings;
             _approachRange = _enemies.GetShootApproach;
-            _detectPlayerApproach = new DetectPlayerApproach(_enemiesShootOld.transform.position, _approachRange);
+            _detectPlayerApproach = new DetectPlayerApproach(_approachRange);
         }
 
         public void UpdateState(Transform referencePosition)
@@ -39,7 +39,7 @@ namespace NewRiverAttack.ObstaclesSystems.ShootStates
             
             if (!_enemiesMaster.ObjectIsReady) return;
             DebugManager.Log<EnemiesShootOld>($" Atualizando o Estado: Patrol");
-            _target = _detectPlayerApproach.TargetApproach<PlayerMaster>(_enemiesMaster.layerPlayer);
+            _target = _detectPlayerApproach.TargetApproach<PlayerMaster>(_enemiesShootOld.transform.position,_enemiesMaster.layerPlayer);
             if (_inTransition || !_target) return;
             _enemiesShootOld.ChangeState(new EnemyShootSimpleState(_enemiesShootOld));
             DebugManager.Log<EnemiesMovement>($" Target: {_target}");

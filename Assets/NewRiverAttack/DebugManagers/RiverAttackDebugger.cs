@@ -63,7 +63,7 @@ namespace NewRiverAttack.DebugManagers
             //GamePlayManager
             DebugManager.SetScriptDebugLevel<GamePlayManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<GameOptionsSave>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<GemeStatisticsDataLog>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<GemeStatisticsDataLog>(DebugManager.DebugLevels.None);
             
             
             //Inputs
@@ -73,9 +73,9 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<PoolObject>(DebugManager.DebugLevels.LogsAndWarnings);
             
             //shopping
-            DebugManager.SetScriptDebugLevel<SimpleShoppingManager>(DebugManager.DebugLevels.All);
-            DebugManager.SetScriptDebugLevel<ShopProductSimpleSkins>(DebugManager.DebugLevels.All);
-            DebugManager.SetScriptDebugLevel<FiniteNavigationMode>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<SimpleShoppingManager>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<ShopProductSimpleSkins>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<FiniteNavigationMode>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<SmoothFiniteNavigationMode>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<ShopProductSettings>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<ShopSkinChanger>(DebugManager.DebugLevels.None);
@@ -148,12 +148,12 @@ namespace NewRiverAttack.DebugManagers
             
             //Steam Services
             DebugManager.SetScriptDebugLevel<SteamConnectionManager>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<SteamAchievementService>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<SteamAchievementService>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<SteamLeaderboardService>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<SteamStatsService>(DebugManager.DebugLevels.None);
             
             DebugManager.SetScriptDebugLevel<SteamServerUpdater>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<GameStatisticManager>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<GameStatisticManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PanelStatisticsManager>(DebugManager.DebugLevels.None);
             
             

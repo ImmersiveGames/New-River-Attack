@@ -53,6 +53,7 @@ namespace ImmersiveGames.AudioEvents
             }
             if (source.isPlaying) source.Stop();
             SetupSource(source);
+            DebugManager.Log<AudioEvent>("PLAY AudioEvent.");
             source.Play();
         }
         

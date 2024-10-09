@@ -1,5 +1,5 @@
 ﻿
-namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
+namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
 {
     public class MineMaster : EnemiesMaster
     {
@@ -7,37 +7,27 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         public event ObstacleGenericHandler EventAlertApproach;
         public event ObstacleGenericHandler EventAlertStop;
         public event ObstacleGenericHandler EventDetonate;
+        public event ObstacleGenericHandler EventShoot;
+        
         #endregion
         
         #region Unity Methods
 
-        private void Start()
-        {
-            IsDisable = false;
-        }
-
-        #endregion
-        
-        /*
-
         protected override void OnEnable()
         {
             base.OnEnable();
-            GamePlayManagerRef.EventGameReload += DestroyMine;
+            IsDisable = false;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-            GamePlayManagerRef.EventGameReload -= DestroyMine;
-        }
-        
-        private void DestroyMine()
-        {
-            DestroyImmediate(gameObject);
+            IsDisable = true;
         }
 
-        */
+        #endregion
+        
+
         protected internal void OnEventAlertApproach()
         {
             EventAlertApproach?.Invoke();
@@ -51,6 +41,11 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         protected internal void OnEventAlertStop()
         {
             EventAlertStop?.Invoke();
+        }
+
+        protected internal void OnEventShoot()
+        {
+            EventShoot?.Invoke();
         }
     }
 }

@@ -75,6 +75,10 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             {
                 { NodeParam.WaitTime, 1f }
             });
+            var nodeWait5Sec = NodeFactory.CreateNode(NodeTypes.WaitNode, new Dictionary<NodeParam, object>
+            {
+                { NodeParam.WaitTime, 8f }
+            });
 
             // Aplica Decorators
             var onEnterMineShoot = NodeFactory.ApplyDecorator(nodeMineShoot, NodeDecorations.OnEnterDecorator,
@@ -107,12 +111,21 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             {
                 nodeWaitSec,
                 onEnterEnterScene,
-                nodeWaitSec,
-                repeatConeShot,
+                
+                onEnterMineShoot,
                 nodeWaitSec,
                 onEnterMineShoot,
+                nodeWaitSec,
+                onEnterMineShoot,
+                nodeWaitSec,
+                onEnterMineShoot,
+                nodeWaitSec,
+                //repeatConeShot,
                 
-                /*nodeWaitSec,
+                /*
+                 nodeWaitSec,
+                repeatConeShot,
+                 nodeWaitSec,
                 repeatSingleShot,
                 nodeWaitSec,
                 onEnterMineShoot,*/

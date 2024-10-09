@@ -8,70 +8,7 @@ using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 {
-    public class MineIdle : ISimpleState
-    {
-        private Transform _target;
-        private DetectPlayerApproach _detectPlayerApproach;
-        private float _approachRange;
-
-        private EnemiesFuse _enemiesFuse;
-
-        public void EnterState(Component fuse)
-        {
-            _enemiesFuse = fuse as EnemiesFuse;
-            if (_enemiesFuse == null) return;
-            //Debug.Log($"Entra no Idle {fuse.transform.position}");
-            _detectPlayerApproach =
-                new DetectPlayerApproach(_enemiesFuse.transform.position, _enemiesFuse.GetMoveApproach);
-        }
-
-        public void UpdateState()
-        {
-            //Debug.Log($"Atualiza no Idle");
-            _target = _detectPlayerApproach.TargetApproach<PlayerMaster>(_enemiesFuse.GetEnemiesMaster.layerPlayer);
-            if (_target == null) return;
-            _enemiesFuse.ChangeState(new MineAlert());
-        }
-
-        public void ExitState()
-        {
-            //Debug.Log($"Sai no Idle");
-        }
-    }
-
-    public class MineAlert : ISimpleState
-    {
-        private EnemiesFuse _enemiesFuse;
-        private MineMaster _mineMaster;
-        private float _timeExpire;
-
-        public void EnterState(Component fuse)
-        {
-            _enemiesFuse = fuse as EnemiesFuse;
-            if (_enemiesFuse == null) return;
-            _mineMaster = _enemiesFuse.GetEnemiesMaster as MineMaster;
-            //if (_mineMaster != null) _mineMaster.OnEventAlertApproach();
-            //_timeExpire = _enemiesFuse.timeInAlert;
-            //Debug.Log($"Entra no Alert");
-        }
-
-        public void UpdateState()
-        {
-            //Debug.Log($"Atualiza no Alert");
-            _timeExpire -= Time.deltaTime;
-            if (_timeExpire <= 0)
-            {
-                _enemiesFuse.ChangeState(new MineExplode());
-            }
-        }
-        public void ExitState()
-        {
-            //Debug.Log($"Sai no Alert");
-            //if (_mineMaster != null) _mineMaster.OnEventAlertStop();
-            //_enemiesFuse.GetComponent<ObstacleSkin>().DesativeSkin();
-        }
-    }
-
+    /*
     public class MineExplode : ISimpleState
     {
         private EnemiesFuse _enemiesFuse;
@@ -130,6 +67,6 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             _enemiesFuse.gameObject.SetActive(false);
             _isExploding = false;
         }
-    }
+    }*/
 
 }

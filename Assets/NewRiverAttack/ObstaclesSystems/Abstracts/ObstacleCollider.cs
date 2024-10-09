@@ -12,6 +12,8 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
     {
         protected ObstacleMaster ObstacleMaster;
         protected int ObstacleHp;
+
+        private GamePlayManager _gamePlayManager;
         #region Unity Methods
 
         private void Awake()
@@ -21,7 +23,9 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         private void OnEnable()
         {
-            GamePlayManager.Instance.EventGameReload += ReloadHp;
+            _gamePlayManager = GamePlayManager.Instance;
+            _gamePlayManager.EventGameReload += ReloadHp;
+            _gamePlayManager.EventGameRestart += ReloadHp;
         }
 
         protected virtual void Start()
@@ -31,7 +35,8 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         private void OnDisable()
         {
-            GamePlayManager.Instance.EventGameReload -= ReloadHp;
+            _gamePlayManager.EventGameReload -= ReloadHp;
+            _gamePlayManager.EventGameRestart -= ReloadHp;
         }
 
         internal virtual void OnTriggerEnter(Collider other)
@@ -46,7 +51,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         {
             ObstacleHp = ObstacleMaster.objectDefault.hitPoints;
         }
-        protected virtual void ComponentToKill(Component other, EnumCollisionType typeCollision)
+        protected void ComponentToKill(Component other, EnumCollisionType typeCollision)
         {
             if (other == null) return;
             if (other == null || !ObstacleMaster.ObjectIsReady || !ObstacleMaster.objectDefault.canKilled) return;

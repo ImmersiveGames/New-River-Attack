@@ -14,14 +14,13 @@ GameObject:
   - component: {fileID: 9035360423552217474}
   - component: {fileID: 4798230867052689205}
   - component: {fileID: 6257388729385124894}
+  - component: {fileID: 2051538355772123072}
+  - component: {fileID: 491024110380200694}
   - component: {fileID: 8153487511730520566}
   - component: {fileID: 1640896341314251701}
   - component: {fileID: 1775969276365334518}
   - component: {fileID: 191750238222066608}
-  - component: {fileID: 3140778001253171691}
-  - component: {fileID: 491024110380200694}
   - component: {fileID: -8499037559368664279}
-  - component: {fileID: 2051538355772123072}
   m_Layer: 7
   m_Name: BossMine
   m_TagString: Untagged
@@ -80,7 +79,7 @@ AudioSource:
   m_GameObject: {fileID: 3926336138218741227}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -8892438522889437315, guid: 58d7b5e9bc02ca541be53445706aa66a,
+  OutputAudioMixerGroup: {fileID: -8226051224746977772, guid: 58d7b5e9bc02ca541be53445706aa66a,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
@@ -238,6 +237,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onAlert: warning
+  onAlertStop: warning_stop
+--- !u!114 &2051538355772123072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3926336138218741227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 940b2a52e3734ba8b23a088f209f3749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioExplosion: {fileID: 11400000, guid: 91d9aa8253aa12e4788bf26f51c62105, type: 2}
+  alertAudio: {fileID: 11400000, guid: bd20e29e125d0a245897cf7e9b08672a, type: 2}
+  shootAudio: {fileID: 11400000, guid: 32c7cdb10f78e9c459e69b46a28733a8, type: 2}
+--- !u!114 &491024110380200694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3926336138218741227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e01bddacedc74b50b294f39d13a9d311, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeAnimation: 2
+  timeInAlert: 2
+  detonationVfx: {fileID: 118030374270689778, guid: 70e4075578659e345910bc8e41e564ba,
+    type: 3}
+  radiusExpendSize: 9
+  expansionDuration: 1.1
+  shakeForce: 5
+  shakeTime: 0.02
 --- !u!114 &8153487511730520566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,44 +317,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3926336138218741227}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaa53f11e391483cbeb5fdd8d834f286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3140778001253171691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3926336138218741227}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e5bb973e05a4d2ab5a689e03e4a024e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &491024110380200694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3926336138218741227}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e01bddacedc74b50b294f39d13a9d311, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  approachMovement: {x: 4, y: 4}
-  timeInAlert: 2
-  detonationVfx: {fileID: 118030374270689778, guid: 70e4075578659e345910bc8e41e564ba,
-    type: 3}
-  radiusExpendSize: 10
-  expansionDuration: 1.1
-  shakeForce: 5
-  shakeTime: 0.02
-  millisecondsVibrate: 300
 --- !u!114 &-8499037559368664279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,16 +334,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 647bcad54ff64151a3c402468ebd4811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2051538355772123072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3926336138218741227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 940b2a52e3734ba8b23a088f209f3749, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioExplosion: {fileID: 11400000, guid: 91d9aa8253aa12e4788bf26f51c62105, type: 2}

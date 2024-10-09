@@ -1,47 +1,57 @@
 ﻿
-namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
+using System;
+using ImmersiveGames.AudioEvents;
+using NewRiverAttack.PlayerManagers.PlayerSystems;
+using UnityEngine;
+
+namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
 {
     public class MineSound : EnemiesSound
     {
         private MineMaster _mineMaster;
-
-        protected override void SetInitialReferences()
-        {
-            base.SetInitialReferences();
-            _mineMaster = ObstacleMaster as MineMaster;
-        }
-        /*private MineMaster _mineMaster;
         [SerializeField] private AudioEvent alertAudio;
+        [SerializeField] private AudioEvent shootAudio;
+        #region Unity Methods
+
         protected override void OnEnable()
         {
             base.OnEnable();
             _mineMaster.EventAlertApproach += AlertAudio;
+            _mineMaster.EventShoot += ShootAudio;
             _mineMaster.EventAlertStop += StopAlertAudio;
             _mineMaster.EventDetonate += DetonateAudio;
             _mineMaster.EventObstacleDeath += StopAlertAudioOnDeath;
         }
+        
 
         protected override void OnDisable()
         {
             base.OnDisable();
             _mineMaster.EventAlertApproach -= AlertAudio;
+            _mineMaster.EventShoot -= ShootAudio;
             _mineMaster.EventAlertStop -= StopAlertAudio;
             _mineMaster.EventDetonate -= DetonateAudio;
             _mineMaster.EventObstacleDeath -= StopAlertAudioOnDeath;
         }
 
+        #endregion
         protected override void SetInitialReferences()
         {
-            ObstacleMaster = _mineMaster = GetComponent<MineMaster>();
-            AudioSource = GetComponent<AudioSource>();
+            base.SetInitialReferences();
+            _mineMaster = ObstacleMaster as MineMaster;
         }
-
-        // Som de alerta toca apenas uma vez
         private void AlertAudio()
         {
             if (AudioSource != null && alertAudio != null && !AudioSource.isPlaying) 
             {
                 alertAudio.SimplePlay(AudioSource);
+            }
+        }
+        private void ShootAudio()
+        {
+            if (AudioSource != null && shootAudio != null && !AudioSource.isPlaying) 
+            {
+                shootAudio.SimplePlay(AudioSource);
             }
         }
 
@@ -68,6 +78,6 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             {
                 audioExplosion.SimplePlay(AudioSource);
             }
-        }*/
+        }
     }
 }

@@ -106,12 +106,12 @@ PrefabInstance:
     - target: {fileID: 7841797180397970709, guid: 21cc778a34330f34086e09e15801236c,
         type: 3}
       propertyPath: m_Name
-      value: Tower
+      value: Tower Teste
       objectReference: {fileID: 0}
     - target: {fileID: 8533113740490216117, guid: 21cc778a34330f34086e09e15801236c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8533113740490216117, guid: 21cc778a34330f34086e09e15801236c,
         type: 3}
@@ -121,7 +121,7 @@ PrefabInstance:
     - target: {fileID: 8533113740490216117, guid: 21cc778a34330f34086e09e15801236c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8533113740490216117, guid: 21cc778a34330f34086e09e15801236c,
         type: 3}
@@ -158,14 +158,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8836107727840729734, guid: 21cc778a34330f34086e09e15801236c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8533113740490216117, guid: 21cc778a34330f34086e09e15801236c,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8585359855414681507}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: 21cc778a34330f34086e09e15801236c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2861840862322107073}
   m_SourcePrefab: {fileID: 100100000, guid: 21cc778a34330f34086e09e15801236c, type: 3}
 --- !u!4 &283724172222506858 stripped
 Transform:
@@ -173,3 +178,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8467972489600775647}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1826175434520842442 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7841797180397970709, guid: 21cc778a34330f34086e09e15801236c,
+    type: 3}
+  m_PrefabInstance: {fileID: 8467972489600775647}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2861840862322107073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826175434520842442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ab3ad3abaf14f18b03fb448b9308e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabBullet: {fileID: 3329594399931092120, guid: 56d83b53ea709394681178a6a0501962,
+    type: 3}
+  initialPoolSize: 10
+  persistent: 0
+  poolName: PoolBullets

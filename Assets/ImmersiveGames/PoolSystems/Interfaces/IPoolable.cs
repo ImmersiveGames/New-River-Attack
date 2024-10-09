@@ -9,5 +9,8 @@ namespace ImmersiveGames.PoolSystems.Interfaces
 
         // Método chamado quando o objeto é ativado pelo pool
         void OnSpawned(Transform spawnPosition, ISpawnData data);
+        
+        void OnReturnedToPool();
+        
     }
 }

@@ -1,10 +1,9 @@
-﻿using System;
-using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
+﻿using NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 
 namespace NewRiverAttack.BulletsManagers
 {
-    public class BulletBossMine :Bullet
+    public class BulletBossMine : Bullet
     {
         private MineMaster _mineMaster;
 
@@ -23,6 +22,7 @@ namespace NewRiverAttack.BulletsManagers
             _mineMaster.EventObstacleDeath += MarkToReturn;
         }
 
+        //Marcado para retornar ao pool quando destruido;
         private void MarkToReturn(PlayerMaster playerMaster)
         {
             Pool?.MarkForReturn(gameObject);

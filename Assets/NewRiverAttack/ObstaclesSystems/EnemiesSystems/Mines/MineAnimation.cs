@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 
-namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
+namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
 {
     public class MineAnimation : MonoBehaviour
     {
         public string onAlert = "warning";
+        public string onAlertStop = "warning_stop";
         
         private Animator _animator;
         private MineMaster _mineMaster;
@@ -16,12 +17,14 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             SetInitialReferences();
             _mineMaster.EventObstacleChangeSkin += SetAnimations;
             _mineMaster.EventAlertApproach += AnimationAlert;
+            _mineMaster.EventAlertStop += AnimationAlertStop;
         }
 
         private void OnDisable()
         {
             _mineMaster.EventObstacleChangeSkin -= SetAnimations;
             _mineMaster.EventAlertApproach -= AnimationAlert;
+            _mineMaster.EventAlertStop -= AnimationAlertStop;
         }
 
         #endregion
@@ -40,6 +43,11 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         {
             if (_animator == null || string.IsNullOrEmpty(onAlert)) return;
             _animator.SetTrigger(onAlert);
+        }
+        private void AnimationAlertStop()
+        {
+            if (_animator == null || string.IsNullOrEmpty(onAlertStop)) return;
+            _animator.SetTrigger(onAlertStop);
         }
     }
 }

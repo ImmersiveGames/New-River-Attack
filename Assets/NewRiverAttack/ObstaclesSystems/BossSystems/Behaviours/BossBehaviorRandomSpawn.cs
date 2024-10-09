@@ -31,6 +31,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
         private Coroutine _spawnRoutine;
         private bool _hasCompleted;
+        
 
         protected override void Awake()
         {
@@ -88,7 +89,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 _spawnRoutine = null;
             }
             _hasCompleted = false;
-            PoolHelper.ReturnAllActiveObjects();
+            PoolHelper.ReturnMarkedObjects();
         }
 
         public override BulletSpawnData CreateBulletData(Vector3 direction, Vector3 position)

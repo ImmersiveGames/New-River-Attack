@@ -1,55 +1,57 @@
-﻿using ImmersiveGames.PoolSystems;
+﻿using System;
+using ImmersiveGames.PoolSystems;
 using UnityEngine;
 using ImmersiveGames.PoolSystems.Interfaces;
 using NewRiverAttack.BulletsManagers.Interface;
-using NewRiverAttack.ObstaclesSystems.Abstracts;
 
 namespace NewRiverAttack.BulletsManagers
 {
-    public class Bullet : MonoBehaviour, IPoolable
+    public abstract class Bullet : MonoBehaviour, IPoolable
     {
-        protected Vector3 Direction;
-        private Vector3 _position;
-        protected float Speed;
-        private float _lifetime;
-        protected float LifeTimer;
-        protected bool IsInitialized;
-        private ObjectMaster _owner;
-        private int _damage;
-        private bool _powerUp;
+        protected BulletSpawnData BulletData;
+        protected float Lifetime;
+
+        public bool IsInitialize { get; private set; }
+
+        private void OnDisable()
+        {
+            IsInitialize = false;
+        }
+
+        #region IPoolable
 
         public PoolObject Pool { get; set; } // Referência ao pool
 
         // Método chamado quando o projétil é instanciado do pool
-        public void OnSpawned(Transform spawnPosition, ISpawnData data)
+        public virtual void OnSpawned(Transform spawnPosition, ISpawnData data)
         {
-            // Inicializa os dados da bala a partir do BulletSpawnData
-            if (data is BulletSpawnData bulletData)
+            BulletData = data as BulletSpawnData;
+            if (BulletData != null)
             {
-                Direction = bulletData.Direction;
-                Speed = bulletData.Speed;
-                _lifetime = bulletData.Timer; // Usamos "Timer" como tempo de vida
-                _owner = bulletData.Owner;
-                _position = bulletData.Position;
-                _damage = bulletData.Damage;
-                _powerUp = bulletData.PowerUp;
+                Lifetime = BulletData.Timer;
             }
-
-            LifeTimer = _lifetime;
 
             transform.position = spawnPosition.position;
             transform.rotation = spawnPosition.rotation;
 
-            IsInitialized = true;
+            IsInitialize = true;
         }
+
+        // Método chamado quando o projétil é retornado ao pool
+        public virtual void OnReturnedToPool()
+        {
+            IsInitialize = false; // Certifica-se de que a lógica de movimento e qualquer estado seja resetado
+            Lifetime = 0;         // Reseta o tempo de vida da bala
+            BulletData = null;    // Limpa os dados do projétil
+        }
+
+        #endregion
 
         // Método para retornar o projétil ao pool
         protected void ReturnToPool()
         {
-            IsInitialized = false; // Desativar lógica de movimento
+            IsInitialize = false; // Desativa a lógica de movimento
             Pool?.ReturnObject(gameObject); // Retorna ao pool
         }
-
-        
     }
 }

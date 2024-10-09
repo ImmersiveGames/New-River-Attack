@@ -19,6 +19,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         public bool ObjectIsReady => !IsDead && !IsDisable && GamePlayManagerRef.ShouldBePlayingGame;   
         
         #region Unity Methods
+        
 
         protected virtual void OnEnable()
         {
@@ -43,13 +44,13 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         }
 
         #endregion
-        protected internal virtual void InitializeObject()
+        protected internal void InitializeObject()
         {
             IsDisable = false;
             DebugManager.Log<ObjectMaster>($"{transform.position.z}");
         }
 
-        protected virtual void SetInitialReferences()
+        private void SetInitialReferences()
         {
             GamePlayManagerRef = GamePlayManager.Instance;
         }

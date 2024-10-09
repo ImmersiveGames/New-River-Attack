@@ -7,16 +7,16 @@ namespace NewRiverAttack.BulletsManagers
     {
         private void Update()
         {
-            if (!IsInitialized) return;
+            if (!IsInitialize) return;
 
             // Movimenta o projétil na direção e velocidade fornecidas
-            transform.position += Direction * (Speed * Time.deltaTime);
+            transform.position += BulletData.Direction * (BulletData.Speed * Time.deltaTime);
 
             // Reduz o tempo de vida do projétil
-            LifeTimer -= Time.deltaTime;
+            Lifetime -= Time.deltaTime;
 
             // Se o tempo de vida acabar, retorna ao pool
-            if (LifeTimer <= 0)
+            if (Lifetime <= 0)
             {
                 ReturnToPool();
             }

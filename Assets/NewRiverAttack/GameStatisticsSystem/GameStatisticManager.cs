@@ -182,7 +182,7 @@ namespace NewRiverAttack.GameStatisticsSystem
         
         internal void LogCollectables(ObjectsScriptable objects)
         {
-            if(_gemeStatisticsDataLog == null || objects == null) return;
+            if(_gemeStatisticsDataLog == null || objects == null ) return;
             var powerUp = objects as PowerUpScriptable;
             if (powerUp != null && powerUp.powerUpData.powerUpType == PowerUpTypes.Bomb)
             {

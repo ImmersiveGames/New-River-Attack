@@ -24,7 +24,7 @@ namespace NewRiverAttack.ObstaclesSystems.MovementStates
             _obstacleMovement = obstacleMovement;
             _obstacleMaster = _obstacleMovement.GetComponent<ObstacleMaster>();
             _approachRange = _obstacleMovement.GetMoveApproach;
-            _detectPlayerApproach = new DetectPlayerApproach(_obstacleMovement.transform.position, _approachRange);
+            _detectPlayerApproach = new DetectPlayerApproach(_approachRange);
         }
         public void EnterState()
         {
@@ -43,7 +43,7 @@ namespace NewRiverAttack.ObstaclesSystems.MovementStates
                 _obstacleMovement.ChangeState(new MoveStateHold(_obstacleMovement));
                 return;
             }
-            _target = _detectPlayerApproach.TargetApproach<PlayerMaster>(_obstacleMaster.layerPlayer);
+            _target = _detectPlayerApproach.TargetApproach<PlayerMaster>(_obstacleMovement.transform.position,_obstacleMaster.layerPlayer);
             if (_inTransition || !_target) return;
             _obstacleMovement.ChangeState(new MoveStateMove(_obstacleMovement));
             DebugManager.Log<ObstacleMovement>($" Target: {_target}");

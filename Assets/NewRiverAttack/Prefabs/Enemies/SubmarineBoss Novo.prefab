@@ -168,18 +168,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: -3452443266293440661}
-    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -6754764738268101092}
-    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -3702190514856154776}
-    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4763579153246437609}
     - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
@@ -189,6 +177,18 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8232004363638800602}
+    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4051715128356781852}
+    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4834472796722127644}
+    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1158815908821011756}
   m_SourcePrefab: {fileID: 100100000, guid: c4bed2524d6c2be458e7205159ddbb5b, type: 3}
 --- !u!1 &3351906142001725201 stripped
 GameObject:
@@ -196,83 +196,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4780557932321413636}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-3452443266293440661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3351906142001725201}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c4c4cc7ef484b0f956d066d9590d707, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabBullet: {fileID: 1678599070653623651, guid: 3c74fc8416c495444b1c82ceef276d19,
-    type: 3}
-  initialPoolSize: 35
-  persistent: 0
-  lockAtTarget: 1
-  poolName: 
-  bulletLifeTime: 2.5
-  timesRepeat: 3
-  speedShoot: 20
-  damageShoot: 1
-  cadenceShoot: 2
-  numMissiles: 5
-  angleCones: 120
---- !u!114 &-6754764738268101092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3351906142001725201}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a4fbdff2d0f4efba7b4e30d1b9e0b32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabBullet: {fileID: 3926336138218741227, guid: e2ee9b9e816edbe4ab423fff2b1d9ba4,
-    type: 3}
-  initialPoolSize: 12
-  persistent: 0
-  lockAtTarget: 0
-  poolName: 
-  bulletLifeTime: 2
-  timesRepeat: 0
-  speedShoot: 10
-  damageShoot: 1
-  cadenceShoot: 1
-  debugGrade: 0
-  numColumns: 10
-  numLines: 8
-  numMines: 10
-  quadrantsBlocked: []
-  usedQuadrants: []
---- !u!114 &-3702190514856154776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3351906142001725201}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3bf73c5f17c4f9f87f1183b31ef2c5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabBullet: {fileID: 1678599070653623651, guid: 3c74fc8416c495444b1c82ceef276d19,
-    type: 3}
-  initialPoolSize: 10
-  persistent: 0
-  lockAtTarget: 1
-  poolName: 
-  bulletLifeTime: 2
-  timesRepeat: 0
-  speedShoot: 10
-  damageShoot: 1
-  cadenceShoot: 1
 --- !u!114 &4763579153246437609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,7 +239,8 @@ MonoBehaviour:
     type: 3}
   initialPoolSize: 10
   persistent: 0
-  poolName: 
+  poolName: PoolMines
+  shootAudio: {fileID: 11400000, guid: 7051e6f622b4c004b8243bebe05e80da, type: 2}
   idNode: 0
   itemCount: 5
   safeDistance: 2
@@ -325,3 +249,76 @@ MonoBehaviour:
   itemLifetime: 5
   baseCadence: 1.5
   cadenceVariance: 0.5
+--- !u!114 &4051715128356781852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3351906142001725201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9a42975e8f44367b065d3aaf4bfd676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabBullet: {fileID: 1678599070653623651, guid: 3c74fc8416c495444b1c82ceef276d19,
+    type: 3}
+  initialPoolSize: 10
+  persistent: 0
+  poolName: PoolMissle
+  shootAudio: {fileID: 11400000, guid: 32c7cdb10f78e9c459e69b46a28733a8, type: 2}
+  idNode: 1
+  bulletDamage: 1
+  bulletSpeed: 20
+  bulletLifetime: 5
+  baseCadence: 1.5
+--- !u!114 &4834472796722127644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3351906142001725201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b4c22ebc407af44e8a381827d7e43d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabBullet: {fileID: 1678599070653623651, guid: 39f17979f49e9aa4a8581a235928267c,
+    type: 3}
+  initialPoolSize: 20
+  persistent: 0
+  poolName: PoolCone01
+  shootAudio: {fileID: 11400000, guid: 32c7cdb10f78e9c459e69b46a28733a8, type: 2}
+  idNode: 1
+  bulletDamage: 1
+  bulletSpeed: 20
+  bulletLifetime: 5
+  projectileCount: 5
+  coneAngle: 45
+  shootCooldown: 1.5
+--- !u!114 &1158815908821011756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3351906142001725201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b4c22ebc407af44e8a381827d7e43d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabBullet: {fileID: 1678599070653623651, guid: 39f17979f49e9aa4a8581a235928267c,
+    type: 3}
+  initialPoolSize: 30
+  persistent: 0
+  poolName: PoolCone02
+  shootAudio: {fileID: 11400000, guid: 32c7cdb10f78e9c459e69b46a28733a8, type: 2}
+  idNode: 2
+  bulletDamage: 1
+  bulletSpeed: 30
+  bulletLifetime: 3
+  projectileCount: 9
+  coneAngle: 75
+  shootCooldown: 1.5
