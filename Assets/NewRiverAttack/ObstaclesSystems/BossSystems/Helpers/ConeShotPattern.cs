@@ -49,7 +49,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Helpers
 
                 // Criar e disparar o projétil
                 var bulletData = shooter.CreateBulletData(shootDirection, spawnPoint.position);
-                shooter.Fire(bulletData, spawnPoint);
+                shooter.PoolingOut(spawnPoint, bulletData);
             }
 
             // Atualiza o cooldown **após** todos os projéteis terem sido disparados

@@ -1,4 +1,5 @@
 ﻿using ImmersiveGames.FiniteStateMachine;
+using NewRiverAttack.VfxSystems;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -39,15 +40,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
         {
             _remainingTime = 0;
             _mineFuse.OnEventAlertStop(); // Notifica que o alerta foi interrompido
-            InstanceVisualEffect();
-            _mineFuse.ReturnBullet();
         }
-
-        private void InstanceVisualEffect()
-        {
-            var effectPosition = new Vector3(_mineFuse.transform.position.x, 1f, _mineFuse.transform.position.z);
-            var effect = Object.Instantiate(_mineFuse.detonationVfx, effectPosition, _mineFuse.transform.rotation);
-            effect.GetComponent<BombVfx>().InitializeBomb(_mineFuse.radiusExpendSize,_mineFuse.expansionDuration,_mineFuse.shakeForce, _mineFuse.shakeTime);
-        }
+        
     }
 }

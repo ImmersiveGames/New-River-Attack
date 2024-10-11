@@ -73,9 +73,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 
         public override void ResetShoot()
         {
-            base.ResetShoot();
             _target = null;
-            
         }
 
         private void InitializeStateMachine()

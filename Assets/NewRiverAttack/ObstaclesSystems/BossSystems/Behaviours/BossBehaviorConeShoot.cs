@@ -27,6 +27,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         [SerializeField] private float shootCooldown = 1.5f;
         
         private ConeShotPattern _shootPattern;
+        public override void ResetShoot() { }
         public override float GetCadenceShoot => shootCooldown;
 
         protected override void Awake()

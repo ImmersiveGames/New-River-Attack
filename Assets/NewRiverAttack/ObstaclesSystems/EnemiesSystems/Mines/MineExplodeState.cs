@@ -1,6 +1,7 @@
 ﻿using ImmersiveGames.CameraManagers;
 using ImmersiveGames.FiniteStateMachine;
 using NewRiverAttack.PlayerManagers.Tags;
+using NewRiverAttack.VfxSystems;
 using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
@@ -25,14 +26,15 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
         // Configura o estado inicial ao entrar no estado de explosão
         public void OnEnter()
         {
-            Debug.Log("Enter EXPLODE");
-            _mineFuse.ReturnBullet();
+            var effectPosition = new Vector3(_mineFuse.transform.position.x, 1f, _mineFuse.transform.position.z);
+            var effect = Object.Instantiate(_mineFuse.detonationVfx, effectPosition, _mineFuse.transform.rotation);
+            effect.GetComponent<BombVfx>().InitializeBomb(_mineFuse.radiusExpendSize,_mineFuse.expansionDuration,_mineFuse.shakeForce, _mineFuse.shakeTime);
         }
 
         // Realiza o reset ao sair do estado de explosão
         public void OnExit()
         {
-            Debug.Log("EXIT EXPLODE");
+            _mineFuse.ReturnBullet();
         }
     }
 }

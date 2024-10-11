@@ -15,10 +15,11 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Helpers
             poolManager.CreatePool(poolName, prefab, initialSize, parent, persistent);
             _poolObject = poolManager.GetPool(poolName);
         }
-        public void GetObject(Transform spawnPoint, BulletSpawnData data)
+        public void GetObject<T>(Transform spawnPosition, T data) where T : ISpawnData
         {
-            _poolObject.GetObject(spawnPoint, data);
+            _poolObject.GetObject(spawnPosition, data);
         }
+        
         public void MarkForReturn(GameObject obj)
         {
             _poolObject.MarkForReturn(obj);
@@ -27,16 +28,16 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Helpers
         {
             _poolObject.ReturnMarkedObjects();
         }
-/*
-        
+
+        public void ReturnObject(GameObject obj)
+        {
+            _poolObject.ReturnObject(obj);
+        }
 
         public void ReturnAllActiveObjects()
         {
             _poolObject.ReturnAllActiveObjects();
         }
-
-        
-*/
         
     }
 }

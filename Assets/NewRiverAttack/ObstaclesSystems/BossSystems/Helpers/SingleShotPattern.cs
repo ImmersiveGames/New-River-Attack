@@ -27,7 +27,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Helpers
             if (!targetingSystem.AimAtTarget(spawnPoint, target)) return;
 
             var bulletData = shooter.CreateBulletData(spawnPoint.forward, spawnPoint.position);
-            shooter.Fire(bulletData, spawnPoint);
+            shooter.PoolingOut(spawnPoint, bulletData);
             _cooldownSystem.UpdateLastActionTime();
         }
     }

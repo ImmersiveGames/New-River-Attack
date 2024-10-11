@@ -23,6 +23,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
         private Transform _target;
         private EnemiesScriptable _enemiesScriptable;
         private BulletBossMine _bulletBossMine;
+        private MinePatrolState _startState;
 
         #region Unity Methods
 
@@ -43,7 +44,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
         private void OnEnable()
         {
             if (_stateMachine == null) return;
-            InitializeStateMachine();
+            ResetFuse();
         }
 
         private void Update()
@@ -70,13 +71,20 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
             var alertState = new MineAlertState(this, timeInAlert);
             var explodeState = new MineExplodeState(this);
 
+            _startState = patrolState;
             _stateMachine.AddTransition(patrolState, alertState, () => _target != null && ShouldBeReady);
-            _stateMachine.AddTransition(alertState, patrolState, () => alertState.RemainingTime <= 0 && ShouldBeReady);
+            _stateMachine.AddTransition(alertState, explodeState, () => alertState.RemainingTime <= 0 && ShouldBeReady);
+            _stateMachine.AddTransition(explodeState, patrolState, () => ShouldBeReady);
             
+            ResetFuse();
+        }
+
+        private void ResetFuse()
+        {
             _fuseInitialize = false;
             _target = null;
             _mineMaster.OnEventShoot();
-            _stateMachine.SetState(patrolState);
+            _stateMachine.SetState(_startState);
             Invoke(nameof(SetFuseReady), timeAnimation);
         }
 

@@ -1,7 +1,7 @@
 ﻿using ImmersiveGames.CameraManagers;
 using UnityEngine;
 
-namespace NewRiverAttack.ObstaclesSystems
+namespace NewRiverAttack.VfxSystems
 {
     public class BombVfx : MonoBehaviour
     {

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using ImmersiveGames.PoolSystems;
+using ImmersiveGames.PoolSystems.Interfaces;
+using UnityEngine;
 using NewRiverAttack.BulletsManagers.Interface;
 using NewRiverAttack.ObstaclesSystems.BossSystems.Helpers;
 using NewRiverAttack.ObstaclesSystems.BossSystems.Helpers.Interfaces;
@@ -9,19 +11,21 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
     public abstract class ObjectShoot : MonoBehaviour
     {
         [Header("Pool Settings")]
-        [SerializeField] private GameObject prefabBullet;
-        [SerializeField] private int initialPoolSize = 10;
-        [SerializeField] private bool persistent;
-        [SerializeField] private string poolName;
+        [SerializeField]
+        protected GameObject prefabBullet;
+        [SerializeField] protected int initialPoolSize = 10;
+        [SerializeField] protected bool persistent;
+        [SerializeField] protected string poolName;
+        
+        public Transform SpawnPoint { get; private set; }
         protected PoolingHelper PoolHelper { get; private set; }
         private IShootPattern ShootPattern { get; set; }
-        public Transform SpawnPoint { get; private set; }
 
         private ObstacleMaster _obstacleMaster;
         protected virtual void Awake()
         {
-            PoolHelper = new PoolingHelper(prefabBullet, transform, poolName, initialPoolSize, persistent);
             _obstacleMaster = GetComponent<ObstacleMaster>();
+            PoolHelper = new PoolingHelper(prefabBullet, transform, poolName, initialPoolSize, persistent);
             UpdateSpawnPoint();
         }
 
@@ -34,7 +38,10 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         {
             _obstacleMaster.EventObstacleChangeSkin -= UpdateSpawnPoint;
         }
-
+        public void PoolingOut(Transform spawnPoint,ISpawnData bulletData)
+        {
+            PoolHelper.GetObject(spawnPoint, bulletData);
+        }
         protected void UpdateSpawnPoint()
         {
             var shootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
@@ -51,16 +58,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             ShootPattern?.Execute(SpawnPoint, this);
         }
 
-        public void Fire(BulletSpawnData bulletData, Transform spawnPoint)
-        {
-            PoolHelper.GetObject(spawnPoint, bulletData);
-        }
-
-        public virtual void ResetShoot()
-        {
-            
-        }
-
+        public abstract void ResetShoot();
         public abstract float GetCadenceShoot { get; }
         public abstract BulletSpawnData CreateBulletData(Vector3 direction, Vector3 position);
     }

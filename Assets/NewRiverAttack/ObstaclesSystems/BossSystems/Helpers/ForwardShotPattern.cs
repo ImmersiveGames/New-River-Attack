@@ -22,7 +22,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Helpers
 
             // Cria os dados do projétil para disparar na direção do SpawnPoint
             var bulletData = shooter.CreateBulletData(spawnPoint.forward, spawnPoint.position);
-            shooter.Fire(bulletData, spawnPoint);
+            shooter.PoolingOut(spawnPoint, bulletData);
 
             // Atualiza o tempo do último disparo
             _cooldownSystem.UpdateLastActionTime();

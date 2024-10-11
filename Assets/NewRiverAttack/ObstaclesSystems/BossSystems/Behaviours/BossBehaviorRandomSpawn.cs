@@ -48,7 +48,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         private NodeState ExecuteSpawnBehavior()
         {
             if (_hasCompleted) return NodeState.Success; 
-            if (_spawnRoutine == null) _spawnRoutine = StartCoroutine(SpawnItemsCoroutine());
+            _spawnRoutine ??= StartCoroutine(SpawnItemsCoroutine());
             return NodeState.Running; 
         }
 
@@ -76,7 +76,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         {
             tempSpawnPoint.position = position;
             var itemData = CreateBulletData(Vector3.zero, position);
-            Fire(itemData, tempSpawnPoint); 
+            PoolingOut(tempSpawnPoint, itemData);
         }
 
         public override float GetCadenceShoot => baseCadence;
