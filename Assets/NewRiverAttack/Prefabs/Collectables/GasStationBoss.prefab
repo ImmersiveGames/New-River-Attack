@@ -138,6 +138,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 927ae7ac05bb6c94e9c47fae12bcfd22,
         type: 2}
+    - target: {fileID: 6586866091402461465, guid: 606d6e5498e6e5242ae92cc138ff5149,
+        type: 3}
+      propertyPath: myLayerMask.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 8076285316687941154, guid: 606d6e5498e6e5242ae92cc138ff5149,
         type: 3}
       propertyPath: m_Name
@@ -174,6 +179,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b09e77f7e75f4788b3e3bc99d5f21e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveVelocity: 0
+  approachMovement: {x: 0, y: 0}
   startDirection: 2
   freeVectorDirection: {x: 0, y: 0, z: 0}
   gizmoColor: {r: 0, g: 0, b: 250, a: 150}

@@ -1,5 +1,6 @@
 ﻿using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace NewRiverAttack.ObstaclesSystems.Abstracts
 {
@@ -8,6 +9,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         [SerializeField]
         protected internal ObjectsScriptable.ObjectsScriptable objectDefault;
         public LayerMask layerPlayer;
+        public LayerMask myLayerMask;
         public T GetObjectScriptable<T>() where T : class
         {
             return objectDefault as T;

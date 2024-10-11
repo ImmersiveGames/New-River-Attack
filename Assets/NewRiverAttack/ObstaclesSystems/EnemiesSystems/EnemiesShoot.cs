@@ -14,6 +14,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         private EnemiesScriptable _enemiesScriptable;
         private Transform _target;
         private bool _isVisible;
+        private IState _startState;
 
         protected override void Awake()
         {
@@ -27,6 +28,10 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         private void OnEnable()
         {
             _enemiesMaster.EventObstacleChangeSkin += UpdateSpawnPoint;
+            if (_stateMachine != null)
+            {
+                ResetShoot();
+            }
         }
 
         private void OnDisable()
@@ -74,6 +79,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         public override void ResetShoot()
         {
             _target = null;
+            _stateMachine.SetState(_startState);
         }
 
         private void InitializeStateMachine()
@@ -84,9 +90,11 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             var shootState = new ShootState(this);
 
             _stateMachine.AddTransition(patrolState, shootState, () => _target != null && ShouldBeReady);
-            _stateMachine.AddTransition(shootState, patrolState, () => _target == null || !ShouldBeReady);
+            //_stateMachine.AddTransition(shootState, patrolState, () => _target == null || !ShouldBeReady);
 
-            _stateMachine.SetState(patrolState);
+            _startState = _enemiesScriptable.GetShootApproach != 0 ? patrolState : shootState;
+
+            ResetShoot();
         }
     }
 }

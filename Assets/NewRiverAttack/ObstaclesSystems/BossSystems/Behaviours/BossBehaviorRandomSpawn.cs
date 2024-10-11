@@ -5,6 +5,7 @@ using ImmersiveGames.BehaviorTreeSystem.Interface;
 using NewRiverAttack.BulletsManagers.Interface;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.BossSystems.Helpers;
+using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 {
@@ -19,6 +20,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         [Header("Spawn Settings")]
         [SerializeField] private int itemCount = 5;
         [SerializeField] private float safeDistance = 2f;
+        [SerializeField] private float safeEnemyDistance = 3f;
 
         [Header("Item Data Settings")]
         [SerializeField] private int itemDamage = 1;
@@ -37,7 +39,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         {
             base.Awake();
             _bossMaster = GetComponent<BossMaster>();
-            _spawnHelper = new RandomSpawnHelper(safeDistance, _bossMaster.transform, Camera.main);
+            _spawnHelper = new RandomSpawnHelper(safeDistance, _bossMaster.transform, Camera.main,safeEnemyDistance, _bossMaster.myLayerMask);
         }
 
         public string NodeName => $"BossRandomSpawn_{idNode}";
@@ -58,7 +60,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
             for (var i = 0; i < itemCount; i++)
             {
-                var randomPosition = _spawnHelper.GetValidSpawnPosition();
+                var randomPosition = _spawnHelper.GetValidSpawnPosition<EnemiesMaster>();
                 if (randomPosition.HasValue)
                 {
                     SpawnItem(randomPosition.Value, tempSpawnPoint);
