@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 5319958293030942210}
   - component: {fileID: 7233150431635892822}
   - component: {fileID: 6319901254584662391}
-  - component: {fileID: 8836107727840729734}
   - component: {fileID: 4956855821762473754}
   - component: {fileID: 5852553174298682640}
   m_Layer: 7
@@ -304,27 +303,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onMove: OnMove
   onFlip: Turn
---- !u!114 &8836107727840729734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7841797180397970709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13f8000529b14cf2b57cc6aee3c3076c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabBullet: {fileID: 3329594399931092120, guid: 31e9d801e8c0e254796f9e40eaab3840,
-    type: 3}
-  initialPoolSize: 10
-  persistent: 0
-  lockAtTarget: 0
-  poolName: 
-  bulletLifeTime: 2
-  timesRepeat: 0
-  gizmoColor: {r: 255, g: 0, b: 0, a: 150}
 --- !u!114 &4956855821762473754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,6 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabBullet: {fileID: 3329594399931092120, guid: 31e9d801e8c0e254796f9e40eaab3840,
     type: 3}
+  audioShoot: {fileID: 11400000, guid: 32c7cdb10f78e9c459e69b46a28733a8, type: 2}
   initialPoolSize: 10
   persistent: 0
-  poolName: PoolBuett
+  poolName: PoolBullet

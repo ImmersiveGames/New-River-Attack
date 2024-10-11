@@ -80,8 +80,6 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<ShopProductSettings>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<ShopSkinChanger>(DebugManager.DebugLevels.None);
             
-            
-            
             //Scenes e States
             DebugManager.SetScriptDebugLevel<GameState>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<StateManager>(DebugManager.DebugLevels.None);
@@ -102,7 +100,6 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<PlayerLives>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<UILifeDisplay>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerShootOld>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<ObjectShootOld>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerBombs>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<Bullets>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<BulletBombPlayer>(DebugManager.DebugLevels.None);
@@ -120,7 +117,7 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<EnemiesMovement>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<ObstacleCollider>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<EnemiesDropItem>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<EnemiesShootOld>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<EnemiesShoot>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<CollectibleMaster>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<BridgeMaster>(DebugManager.DebugLevels.None);
             
@@ -139,11 +136,6 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<GamePlayBossManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<EnterSceneBehavior>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<MoveNorthBehavior>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<MissileBehavior>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<CleanShootBehavior>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<BossMineShootOld>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<BossMissileShootOld>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<ObjectShootOld>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<BossDirections>(DebugManager.DebugLevels.None);
             
             //Steam Services
