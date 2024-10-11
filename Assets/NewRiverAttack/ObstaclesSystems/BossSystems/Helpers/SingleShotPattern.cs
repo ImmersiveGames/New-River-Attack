@@ -21,7 +21,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Helpers
         public void Execute(Transform spawnPoint, ObjectShoot shooter)
         {
             if (!CanShoot()) return;
-
+            shooter.ShootSound();
             var target = GamePlayManager.Instance.GetPlayerMaster(0).transform;
             var targetingSystem = new TargetingSystem();
             if (!targetingSystem.AimAtTarget(spawnPoint, target)) return;

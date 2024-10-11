@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 6319901254584662391}
   - component: {fileID: 8836107727840729734}
   - component: {fileID: 4956855821762473754}
+  - component: {fileID: 5852553174298682640}
   m_Layer: 7
   m_Name: EnemieBase
   m_TagString: Untagged
@@ -247,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea38cf2fe7664bcb90b5b323734d7660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomSkin: 0
+  forceSkinIndex: -1
 --- !u!114 &2784870932561799755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,8 +273,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15cfcd52aa074aea8b04ddbbf3b14458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveVelocity: 0
+  approachMovement: {x: 0, y: 0}
   startDirection: 1
   freeVectorDirection: {x: 0, y: 0, z: 0}
+  gizmoColor: {r: 0, g: 0, b: 250, a: 150}
 --- !u!114 &7233150431635892822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,7 +290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaa53f11e391483cbeb5fdd8d834f286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropChances: {x: 0, y: 0}
 --- !u!114 &6319901254584662391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,7 +320,11 @@ MonoBehaviour:
     type: 3}
   initialPoolSize: 10
   persistent: 0
+  lockAtTarget: 0
+  poolName: 
   bulletLifeTime: 2
+  timesRepeat: 0
+  gizmoColor: {r: 255, g: 0, b: 0, a: 150}
 --- !u!114 &4956855821762473754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,3 +338,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioExplosion: {fileID: 11400000, guid: 91d9aa8253aa12e4788bf26f51c62105, type: 2}
+--- !u!114 &5852553174298682640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7841797180397970709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ab3ad3abaf14f18b03fb448b9308e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabBullet: {fileID: 3329594399931092120, guid: 31e9d801e8c0e254796f9e40eaab3840,
+    type: 3}
+  initialPoolSize: 10
+  persistent: 0
+  poolName: PoolBuett

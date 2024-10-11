@@ -1,5 +1,4 @@
 ﻿using ImmersiveGames.FiniteStateMachine;
-using ImmersiveGames.PoolSystems;
 using NewRiverAttack.BulletsManagers;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using UnityEngine;

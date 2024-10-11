@@ -26,7 +26,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Helpers
         {
             // Verifica o cooldown apenas no início do disparo do cone completo
             if (!CanShoot()) return;
-
+            shooter.ShootSound();
             // Verificar se há um alvo
             var target = GamePlayManager.Instance.GetPlayerMaster(0)?.transform;
             if (target == null) return;

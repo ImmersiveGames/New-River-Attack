@@ -87,7 +87,7 @@ namespace NewRiverAttack.BulletsManagers
             {
                 CameraShake.Instance.ShakeCamera(_bombData.BombShakeForce, _bombData.BombShakeTime);
             }
-            HardWereVibration(_bombData.BombMillisecondsVibrate);
+            //HardWereVibration(_bombData.BombMillisecondsVibrate);
             if (!_collider && _collider.GetType() != typeof(SphereCollider))
                 return;
             _collider.radius = Mathf.Lerp(_startRadius, _bombData.BombRadius, (float)_timerParam);
@@ -126,7 +126,7 @@ namespace NewRiverAttack.BulletsManagers
 
         public PlayerMaster GetBombOwner => _bombData.BulletOwner as PlayerMaster;
 
-        private void HardWereVibration(long timeVibration)
+        /*private void HardWereVibration(long timeVibration)
         {
             if (Application.platform == RuntimePlatform.Android && SystemInfo.supportsVibration)
             {
@@ -135,6 +135,6 @@ namespace NewRiverAttack.BulletsManagers
                 Handheld.Vibrate();
                 #endif
             }
-        }
+        }*/
     }
 }

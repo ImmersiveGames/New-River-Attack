@@ -22,7 +22,7 @@ namespace NewRiverAttack.BulletsManagers
             _mineMaster.EventObstacleDeath += MarkToReturn;
         }
 
-        //Marcado para retornar ao pool quando destruido;
+        //Marcado para retornar ao pool quando destruído;
         private void MarkToReturn(PlayerMaster playerMaster)
         {
             Pool?.MarkForReturn(gameObject);

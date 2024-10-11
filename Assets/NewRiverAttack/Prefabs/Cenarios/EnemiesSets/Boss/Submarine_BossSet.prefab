@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4541379194326653790}
-  - {fileID: 4768570348479441927}
+  - {fileID: 4053696579296950726}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &809093155267646447
@@ -96,21 +96,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8232004363638800602, guid: 5836a6983a6ae7e43adc627c6be58bd5,
-        type: 3}
-      propertyPath: itemCount
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8232004363638800602, guid: 5836a6983a6ae7e43adc627c6be58bd5,
-        type: 3}
-      propertyPath: baseCadence
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8232004363638800602, guid: 5836a6983a6ae7e43adc627c6be58bd5,
-        type: 3}
-      propertyPath: initialPoolSize
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -122,7 +107,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 809093155267646447}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &4738526599602785133
+--- !u!1001 &4300482644425465516
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -185,19 +170,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tower Teste
       objectReference: {fileID: 0}
-    - target: {fileID: 1826175434520842442, guid: 0145f75375bfcbd4597685c2afc3894a,
+    - target: {fileID: 2647054485499105487, guid: 0145f75375bfcbd4597685c2afc3894a,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: poolName
+      value: PoolBullet
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 2647054485499105487, guid: 0145f75375bfcbd4597685c2afc3894a,
+        type: 3}
+      propertyPath: audioShoot
+      value: 
+      objectReference: {fileID: 11400000, guid: 32c7cdb10f78e9c459e69b46a28733a8,
+        type: 2}
+    - target: {fileID: 3844337305251552212, guid: 0145f75375bfcbd4597685c2afc3894a,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844337305251552212, guid: 0145f75375bfcbd4597685c2afc3894a,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -8226051224746977772, guid: 58d7b5e9bc02ca541be53445706aa66a,
+        type: 2}
+    m_RemovedComponents:
+    - {fileID: 2861840862322107073, guid: 0145f75375bfcbd4597685c2afc3894a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0145f75375bfcbd4597685c2afc3894a, type: 3}
---- !u!4 &4768570348479441927 stripped
+--- !u!4 &4053696579296950726 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 283724172222506858, guid: 0145f75375bfcbd4597685c2afc3894a,
     type: 3}
-  m_PrefabInstance: {fileID: 4738526599602785133}
+  m_PrefabInstance: {fileID: 4300482644425465516}
   m_PrefabAsset: {fileID: 0}

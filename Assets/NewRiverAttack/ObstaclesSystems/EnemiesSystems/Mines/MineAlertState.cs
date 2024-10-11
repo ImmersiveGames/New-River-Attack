@@ -1,7 +1,5 @@
 ﻿using ImmersiveGames.FiniteStateMachine;
-using NewRiverAttack.VfxSystems;
 using UnityEngine;
-using UnityEngine.VFX;
 
 namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
 {

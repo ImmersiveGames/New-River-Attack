@@ -1,6 +1,5 @@
 ﻿using ImmersiveGames.PoolSystems;
 using ImmersiveGames.PoolSystems.Interfaces;
-using NewRiverAttack.BulletsManagers.Interface;
 using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Helpers

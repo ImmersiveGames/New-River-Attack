@@ -1,6 +1,4 @@
-﻿using ImmersiveGames.CameraManagers;
-using ImmersiveGames.FiniteStateMachine;
-using NewRiverAttack.PlayerManagers.Tags;
+﻿using ImmersiveGames.FiniteStateMachine;
 using NewRiverAttack.VfxSystems;
 using UnityEngine;
 

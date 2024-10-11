@@ -19,11 +19,11 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Helpers
         {
             // Verifica o cooldown
             if (!_cooldownSystem.IsCooldownComplete(_cooldown)) return;
-
+            shooter.ShootSound();
             // Cria os dados do projétil para disparar na direção do SpawnPoint
             var bulletData = shooter.CreateBulletData(spawnPoint.forward, spawnPoint.position);
             shooter.PoolingOut(spawnPoint, bulletData);
-
+            
             // Atualiza o tempo do último disparo
             _cooldownSystem.UpdateLastActionTime();
         }
