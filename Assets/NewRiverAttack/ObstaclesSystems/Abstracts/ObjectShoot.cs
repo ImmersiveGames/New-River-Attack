@@ -64,8 +64,6 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             if (_audioSource == null || audioShoot == null) return;
             audioShoot.SimplePlay(_audioSource);
         }
-
-        public abstract void ResetShoot();
         public abstract float GetCadenceShoot { get; }
         public abstract BulletSpawnData CreateBulletData(Vector3 direction, Vector3 position);
     }

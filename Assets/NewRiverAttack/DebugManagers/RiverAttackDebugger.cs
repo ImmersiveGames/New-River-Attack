@@ -1,6 +1,5 @@
 ﻿using ImmersiveGames;
 using ImmersiveGames.AudioEvents;
-using ImmersiveGames.BehaviorsManagers;
 using ImmersiveGames.BulletsManagers;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.InputManager;
@@ -21,7 +20,6 @@ using NewRiverAttack.HUDManagers.UI;
 using NewRiverAttack.LevelBuilder;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.BossSystems;
-using NewRiverAttack.ObstaclesSystems.BossSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours;
 using NewRiverAttack.ObstaclesSystems.BridgeSystems;
 using NewRiverAttack.ObstaclesSystems.CollectibleSystems;
@@ -129,14 +127,6 @@ namespace NewRiverAttack.DebugManagers
             //Boss
             DebugManager.SetScriptDebugLevel<BossMaster>(DebugManager.DebugLevels.None);
             
-            //Behaviors
-            DebugManager.SetScriptDebugLevel<BehaviorManager>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<Behavior>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<BossBehavior>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<GamePlayBossManager>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<EnterSceneBehavior>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<MoveNorthBehavior>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<BossDirections>(DebugManager.DebugLevels.None);
             
             //Steam Services
             DebugManager.SetScriptDebugLevel<SteamConnectionManager>(DebugManager.DebugLevels.None);

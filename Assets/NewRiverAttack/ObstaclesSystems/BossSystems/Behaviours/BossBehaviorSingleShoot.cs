@@ -21,7 +21,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         
         [Header("Cooldown Settings")]
         [SerializeField] private float baseCadence = 1.5f;
-        private SingleShotPattern _shootPattern; // Guarda a referência ao padrão de tiro
+        private ForwardShotPattern _shootPattern; // Guarda a referência ao padrão de tiro
 
         public override float GetCadenceShoot => baseCadence;
 
@@ -29,7 +29,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         {
             base.Awake();
             _bossMaster = GetComponent<BossMaster>();
-            _shootPattern = new SingleShotPattern(baseCadence); // Inicializa o padrão de tiro com o cooldown
+            _shootPattern = new ForwardShotPattern(baseCadence); // Inicializa o padrão de tiro com o cooldown
             SetShootPattern(_shootPattern);
         }
 
@@ -50,7 +50,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             return NodeState.Success; // Retorna Success após o tiro
         }
 
-        public override void ResetShoot()
+        public void ResetBehavior()
         {
         }
 

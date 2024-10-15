@@ -1,5 +1,4 @@
-﻿using System;
-using ImmersiveGames.PoolSystems;
+﻿using ImmersiveGames.PoolSystems;
 using UnityEngine;
 using ImmersiveGames.PoolSystems.Interfaces;
 using NewRiverAttack.BulletsManagers.Interface;
@@ -11,7 +10,7 @@ namespace NewRiverAttack.BulletsManagers
         protected BulletSpawnData BulletData;
         protected float Lifetime;
 
-        public bool IsInitialize { get; private set; }
+        protected bool IsInitialize { get; private set; }
 
         private void OnDisable()
         {

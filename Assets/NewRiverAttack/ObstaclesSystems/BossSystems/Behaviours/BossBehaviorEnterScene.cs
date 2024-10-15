@@ -28,10 +28,11 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             _moveTween?.Kill();  // Cancela qualquer Tween anterior, se estiver ativo
             _moveTween = null;   // Reseta o Tween
             _hasCompleted = false; // Reseta o controle de conclusão
+            Invulnerability(true);
         }
 
         // Método para resetar o comportamento (será chamado no ResetAll)
-        public void ResetEnterScene()
+        public void ResetBehavior()
         {
             OnEnter();  // Reutiliza o método OnEnter para resetar o estado e a animação
             StartSetup();  // Reposiciona o boss no início
@@ -78,6 +79,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                     _bossMaster.IsEmerge = true;
                     _moveTween = null;  // Resetar o Tween
                     _hasCompleted = true;  // Marca que a animação foi completada
+                    Invulnerability(false);
                 });
 
                 // Caso a animação seja interrompida (seu mySequence for "Killed"), definir o estado como Failure
@@ -108,6 +110,14 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         public Func<NodeState> GetNodeFunction()
         {
             return EnterScene;
+        }
+        private void Invulnerability(bool active)
+        {
+            var colliders = _bossMaster.GetComponentsInChildren<Collider>();
+            for (var i = colliders.Length - 1; i >= 0; i--)
+            {
+                colliders[i].enabled = !active;
+            }
         }
 
         // Nome do nó, conforme a interface INodeFunctionProvider

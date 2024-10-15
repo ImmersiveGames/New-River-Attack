@@ -27,7 +27,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         [SerializeField] private float shootCooldown = 1.5f;
         
         private ConeShotPattern _shootPattern;
-        public override void ResetShoot() { }
         public override float GetCadenceShoot => shootCooldown;
 
         protected override void Awake()
@@ -51,6 +50,10 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
             ExecuteShootPattern(); // Executa o padrão de tiro
             return NodeState.Success; // Retorna Success após o tiro
+        }
+
+        public void ResetBehavior()
+        {
         }
 
         public override BulletSpawnData CreateBulletData(Vector3 direction, Vector3 position)

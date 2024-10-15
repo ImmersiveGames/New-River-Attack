@@ -102,7 +102,7 @@ PrefabInstance:
     - target: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
       propertyPath: m_Name
-      value: SubmarineBoss Novo
+      value: SubmarineBoss
       objectReference: {fileID: 0}
     - target: {fileID: 8408341225404105196, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
@@ -190,6 +190,26 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1158815908821011756}
+    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4930180847178675582}
+    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5012417016686135038}
+    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6479082060858815368}
+    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 766218042095677876}
+    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1074189007053486126}
   m_SourcePrefab: {fileID: 100100000, guid: c4bed2524d6c2be458e7205159ddbb5b, type: 3}
 --- !u!1 &3351906142001725201 stripped
 GameObject:
@@ -238,14 +258,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabBullet: {fileID: 3926336138218741227, guid: e2ee9b9e816edbe4ab423fff2b1d9ba4,
     type: 3}
-  initialPoolSize: 2
+  audioShoot: {fileID: 11400000, guid: 7051e6f622b4c004b8243bebe05e80da, type: 2}
+  initialPoolSize: 20
   persistent: 0
   poolName: PoolMines
-  idNode: 0
-  itemCount: 2
+  idNode: 1
+  itemCount: 8
   safeDistance: 2
+  safeEnemyDistance: 3
   itemDamage: 1
-  itemSpeed: 10
+  itemSpeed: 0
   itemLifetime: 5
   baseCadence: 3
   cadenceVariance: 0.5
@@ -261,16 +283,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9a42975e8f44367b065d3aaf4bfd676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabBullet: {fileID: 1678599070653623651, guid: 3c74fc8416c495444b1c82ceef276d19,
+  prefabBullet: {fileID: 834139095582931611, guid: 6e08394c7f60711468021abfca52a7a6,
     type: 3}
-  initialPoolSize: 10
+  audioShoot: {fileID: 11400000, guid: 32c7cdb10f78e9c459e69b46a28733a8, type: 2}
+  initialPoolSize: 2
   persistent: 0
-  poolName: PoolMissle
+  poolName: PoolGas
   idNode: 1
-  bulletDamage: 1
-  bulletSpeed: 20
-  bulletLifetime: 5
-  baseCadence: 1.5
+  bulletDamage: 0
+  bulletSpeed: 10
+  bulletLifetime: 6
+  baseCadence: 1
 --- !u!114 &4834472796722127644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,6 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabBullet: {fileID: 1678599070653623651, guid: 39f17979f49e9aa4a8581a235928267c,
     type: 3}
+  audioShoot: {fileID: 11400000, guid: 32c7cdb10f78e9c459e69b46a28733a8, type: 2}
   initialPoolSize: 20
   persistent: 0
   poolName: PoolCone01
@@ -309,13 +333,79 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabBullet: {fileID: 1678599070653623651, guid: 39f17979f49e9aa4a8581a235928267c,
     type: 3}
+  audioShoot: {fileID: 11400000, guid: 32c7cdb10f78e9c459e69b46a28733a8, type: 2}
   initialPoolSize: 30
   persistent: 0
   poolName: PoolCone02
   idNode: 2
   bulletDamage: 1
-  bulletSpeed: 30
+  bulletSpeed: 25
   bulletLifetime: 3
   projectileCount: 9
-  coneAngle: 75
+  coneAngle: 90
   shootCooldown: 1.5
+--- !u!114 &4930180847178675582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3351906142001725201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68cacd9296b2411780feb45773ff015c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEmerge: Emerge
+--- !u!114 &5012417016686135038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3351906142001725201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b19da31b9d7e402f9be971a37326f3b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSubmerge: Submerge
+--- !u!114 &6479082060858815368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3351906142001725201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d98f2ab6a648f398dd180a68a97e30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &766218042095677876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3351906142001725201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 837c963a11774f369a52e2188fa79e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  extendTime: 3
+--- !u!114 &1074189007053486126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3351906142001725201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 855f03ca90224825a5e589072e7a58a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onBossDeath: Death
+  extendTime: 2

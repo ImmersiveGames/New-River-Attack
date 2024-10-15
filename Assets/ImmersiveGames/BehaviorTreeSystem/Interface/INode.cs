@@ -38,7 +38,8 @@
         DelayDecorator,
         RepeatDecorator,
         ParallelConditionDecorator,
-        GlobalConditionDecorator
+        GlobalConditionDecorator,
+        OnEnterExitDecorator
     }
 
     public enum NodeDecorationsParam

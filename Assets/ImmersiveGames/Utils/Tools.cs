@@ -40,25 +40,7 @@ namespace ImmersiveGames.Utils
             
             return time;
         }
-        public static float GetAnimationDuration(Animator animator, string animationName)
-        {
-            if (animator == null || animator.runtimeAnimatorController == null)
-            {
-                DebugManager.LogWarning<Tools>("Animator or Animator Controller not set. Unable to get animation duration.");
-                return 0f;
-            }
-
-            var clip = animator.runtimeAnimatorController.animationClips.FirstOrDefault(c => c.name == animationName);
-
-            if (clip != null)
-            {
-                return clip.length;
-            }
-
-            DebugManager.LogWarning<Tools>($"Animation clip '{animationName}' not found in the animator controller.");
-            return 0f;
-            
-        }
+        
 
         public static GameObject GetRandomDrop(EnemyDropData[] items)
         {

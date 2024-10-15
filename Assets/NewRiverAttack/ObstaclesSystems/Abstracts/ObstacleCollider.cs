@@ -47,6 +47,8 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         }
 
         #endregion
+
+        public int GetHp() => ObstacleHp;
         private void ReloadHp()
         {
             ObstacleHp = ObstacleMaster.objectDefault.hitPoints;

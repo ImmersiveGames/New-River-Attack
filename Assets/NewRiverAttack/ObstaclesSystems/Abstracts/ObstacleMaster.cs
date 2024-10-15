@@ -42,11 +42,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             GamePlayManagerRef.EventGameReload -= ReloadObject;
         }
 
-        public bool ShouldBeReady
-        {
-            get => GamePlayManagerRef.ShouldBePlayingGame && !IsDead && !IsDisable;
-            set => throw new System.NotImplementedException();
-        }
+        public bool ShouldBeReady => GamePlayManagerRef.ShouldBePlayingGame && !IsDead && !IsDisable;
 
         #endregion
         

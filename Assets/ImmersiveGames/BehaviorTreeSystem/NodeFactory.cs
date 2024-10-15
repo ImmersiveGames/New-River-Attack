@@ -117,6 +117,7 @@ namespace ImmersiveGames.BehaviorTreeSystem
             {
                 NodeDecorations.OnEnterDecorator => CreateOnEnterDecoratorNode(node, parameters),
                 NodeDecorations.OnExitDecorator => CreateOnExitDecoratorNode(node, parameters),
+                NodeDecorations.OnEnterExitDecorator => CreateOnEnterExitDecoratorNode(node, parameters),
                 NodeDecorations.DelayDecorator => CreateDelayDecoratorNode(node, parameters),
                 NodeDecorations.RepeatDecorator => CreateRepeatDecoratorNode(node, parameters),
                 NodeDecorations.ParallelConditionDecorator => CreateParallelConditionDecorator(node, parameters),
@@ -143,6 +144,15 @@ namespace ImmersiveGames.BehaviorTreeSystem
                 throw new ArgumentException("Missing 'onExit' parameter for OnExitDecoratorNode.");
 
             return new OnExitDecoratorNode(node, onExit);
+        }
+        private static INode CreateOnEnterExitDecoratorNode(INode node, Dictionary<NodeDecorationsParam, object> parameters)
+        {
+            if (!parameters.TryGetValue(NodeDecorationsParam.OnEnter, out var onEnterObj) || onEnterObj is not Action onEnter)
+                throw new ArgumentException("Missing 'OnEnter' parameter for OnEnterExitDecoratorNode.");
+            if (!parameters.TryGetValue(NodeDecorationsParam.OnExit, out var onExitObj) || onExitObj is not Action onExit)
+                throw new ArgumentException("Missing 'OnExit' parameter for OnEnterExitDecoratorNode.");
+
+            return new OnEnterExitDecoratorNode(node, onEnter, onExit);
         }
 
         // Criação de DelayDecoratorNode

@@ -30,7 +30,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             _enemiesMaster.EventObstacleChangeSkin += UpdateSpawnPoint;
             if (_stateMachine != null)
             {
-                ResetShoot();
+                ResetBehavior();
             }
         }
 
@@ -76,7 +76,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             _target = newTarget;
         }
 
-        public override void ResetShoot()
+        public void ResetBehavior()
         {
             _target = null;
             _stateMachine.SetState(_startState);
@@ -94,7 +94,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 
             _startState = _enemiesScriptable.GetShootApproach != 0 ? patrolState : shootState;
 
-            ResetShoot();
+            ResetBehavior();
         }
     }
 }

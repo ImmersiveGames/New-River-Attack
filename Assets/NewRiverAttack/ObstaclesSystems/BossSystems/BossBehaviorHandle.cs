@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ImmersiveGames.BehaviorTreeSystem;
+using ImmersiveGames.BehaviorTreeSystem.Decorations;
 using ImmersiveGames.BehaviorTreeSystem.Interface;
 using ImmersiveGames.BehaviorTreeSystem.Nodes;
 using NewRiverAttack.GamePlayManagers;
@@ -11,6 +12,8 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 {
     public class BossBehaviorHandle : MonoBehaviour
     {
+        private BossCollider _bossCollider;
+        
         private BehaviorTree _tree;
         private BossMaster _bossMaster;
 
@@ -22,6 +25,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         private void Start()
         {
             GamePlayManager.Instance.EventGameReload += ResetAll;
+            _bossCollider = GetComponent<BossCollider>();
             CreateBossBehaviors();
         }
 
@@ -59,51 +63,166 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         private void CreateBossBehaviors()
         {
+            #region Providers Creators
+
             var enterScene = GetComponent<BossBehaviorEnterScene>();
             var singleShoot = GetComponentByID<BossBehaviorSingleShoot>(1);
             var coneShoot = GetComponentByID<BossBehaviorConeShoot>(1);
             var coneShoot02 = GetComponentByID<BossBehaviorConeShoot>(2);
-            var spawnShoot = GetComponent<BossBehaviorRandomSpawn>();
+            var mineSpawn = GetComponentByID<BossBehaviorRandomSpawn>(1);
+            var movement = GetComponent<BossBehaviorMovement>();
+            var emerge = GetComponent<BossBehaviorEmerge>();
+            var submerge = GetComponent<BossBehaviorSubmerge>();
+            var death = GetComponent<BossBehaviorDeath>();
+            var finish = GetComponent<BossBehaviorFinishGame>();
+            
+            #endregion
+
+            #region Node Factory
 
             // Cria Nodes
             var nodeEnterScene = NodeFactory.CreateNodeFromFunctionProvider(enterScene);
             var nodeSingleShoot = NodeFactory.CreateNodeFromFunctionProvider(singleShoot);
-            var nodeConeShoot = NodeFactory.CreateNodeFromFunctionProvider(coneShoot);
+            var nodeConeShoot01 = NodeFactory.CreateNodeFromFunctionProvider(coneShoot);
             var nodeConeShoot02 = NodeFactory.CreateNodeFromFunctionProvider(coneShoot02);
-            var nodeMineShoot = NodeFactory.CreateNodeFromFunctionProvider(spawnShoot);
+            var nodeMineShoot = NodeFactory.CreateNodeFromFunctionProvider(mineSpawn);
+            var nodeMovement = NodeFactory.CreateNodeFromFunctionProvider(movement);
+            var nodeEmerge = NodeFactory.CreateNodeFromFunctionProvider(emerge);
+            var nodeSubmerge = NodeFactory.CreateNodeFromFunctionProvider(submerge);
+            var nodeDeath = NodeFactory.CreateNodeFromFunctionProvider(death);
+            var nodeFinish = NodeFactory.CreateNodeFromFunctionProvider(finish);
+            
             var nodeWaitSec = NodeFactory.CreateNode(NodeTypes.WaitNode, new Dictionary<NodeParam, object>
             {
                 { NodeParam.WaitTime, 1f }
             });
             var nodeWait5Sec = NodeFactory.CreateNode(NodeTypes.WaitNode, new Dictionary<NodeParam, object>
             {
-                { NodeParam.WaitTime, 8f }
+                { NodeParam.WaitTime, 5f }
             });
 
+            #endregion
+
+            #region Decoration Apply
+
             // Aplica Decorators
-            var onEnterMineShoot = NodeFactory.ApplyDecorator(nodeMineShoot, NodeDecorations.OnEnterDecorator,
-                new Dictionary<NodeDecorationsParam, object>
-                {
-                    { NodeDecorationsParam.OnEnter, (Action)spawnShoot.ResetShoot }
-                }
-            );
             var onEnterEnterScene = NodeFactory.ApplyDecorator(nodeEnterScene, NodeDecorations.OnEnterDecorator,
                 new Dictionary<NodeDecorationsParam, object>
                 {
                     { NodeDecorationsParam.OnEnter, (Action)enterScene.OnEnter }
                 }
             );
-            var repeatSingleShot = NodeFactory.ApplyDecorator(nodeSingleShoot, NodeDecorations.RepeatDecorator,
+            
+            var onEnterExitEmerge = NodeFactory.ApplyDecorator(nodeEmerge, NodeDecorations.OnEnterExitDecorator,
+                new Dictionary<NodeDecorationsParam, object>
+                {
+                    { NodeDecorationsParam.OnEnter, (Action)emerge.OnEnter },
+                    { NodeDecorationsParam.OnExit, (Action)emerge.OnExit }
+                }
+            );
+            var onEnterSubmerge = NodeFactory.ApplyDecorator(nodeSubmerge, NodeDecorations.OnEnterDecorator,
+                new Dictionary<NodeDecorationsParam, object>
+                {
+                    { NodeDecorationsParam.OnEnter, (Action)submerge.OnEnter }
+                }
+            );
+            
+            var onEnterMineShoot = NodeFactory.ApplyDecorator(nodeMineShoot, NodeDecorations.OnEnterDecorator,
+                new Dictionary<NodeDecorationsParam, object>
+                {
+                    { NodeDecorationsParam.OnEnter, (Action)mineSpawn.ResetBehavior }
+                }
+            );
+            var repeatConeShot01X5 = NodeFactory.ApplyDecorator(nodeConeShoot01, NodeDecorations.RepeatDecorator,
+                new Dictionary<NodeDecorationsParam, object>
+                {
+                    { NodeDecorationsParam.Times, 5 }
+                }
+            );
+            var repeatConeShot01X3 = NodeFactory.ApplyDecorator(nodeConeShoot01, NodeDecorations.RepeatDecorator,
                 new Dictionary<NodeDecorationsParam, object>
                 {
                     { NodeDecorationsParam.Times, 3 }
                 }
             );
-            var repeatConeShot = NodeFactory.ApplyDecorator(nodeConeShoot02, NodeDecorations.RepeatDecorator,
+            var repeatConeShot02X4 = NodeFactory.ApplyDecorator(nodeConeShoot02, NodeDecorations.RepeatDecorator,
                 new Dictionary<NodeDecorationsParam, object>
                 {
-                    { NodeDecorationsParam.Times, 3 }
+                    { NodeDecorationsParam.Times, 4 }
                 }
+            );
+            var repeatConeShot02X6 = NodeFactory.ApplyDecorator(nodeConeShoot02, NodeDecorations.RepeatDecorator,
+                new Dictionary<NodeDecorationsParam, object>
+                {
+                    { NodeDecorationsParam.Times, 6 }
+                }
+            );
+            var onEnterDeath = NodeFactory.ApplyDecorator(nodeDeath, NodeDecorations.OnEnterDecorator,
+                new Dictionary<NodeDecorationsParam, object>
+                {
+                    { NodeDecorationsParam.OnEnter, (Action)death.OnEnter }
+                }
+            );
+            var onEnterExitFinish = NodeFactory.ApplyDecorator(nodeFinish, NodeDecorations.OnEnterExitDecorator,
+                new Dictionary<NodeDecorationsParam, object>
+                {
+                    { NodeDecorationsParam.OnEnter, (Action)finish.OnEnter },
+                    { NodeDecorationsParam.OnExit, (Action)finish.OnExit }
+                }
+            );
+
+            #endregion
+
+            #region Sequences of Shoots
+            
+            var sequenceNorth = new SequenceNode(new List<INode>
+            {
+                repeatConeShot01X3,
+                nodeWaitSec,
+                onEnterMineShoot,
+                nodeWaitSec,
+                repeatConeShot01X5,
+                nodeWaitSec,
+                onEnterSubmerge,
+                nodeSingleShoot,
+                nodeMovement,
+                onEnterExitEmerge,
+                nodeWaitSec
+            });
+            var sequenceSouth = new SequenceNode(new List<INode>
+            {
+                repeatConeShot02X6,
+                nodeWaitSec,
+                onEnterSubmerge,
+                nodeSingleShoot,
+                nodeMovement,
+                onEnterExitEmerge,
+                nodeWaitSec,
+            });
+            var sequenceSide = new SequenceNode(new List<INode>
+            {
+                repeatConeShot02X4,
+                nodeWaitSec,
+                repeatConeShot02X6,
+                nodeWaitSec,
+                onEnterSubmerge,
+                nodeSingleShoot,
+                nodeMovement,
+                onEnterExitEmerge,
+                nodeWaitSec,
+            });
+
+            #endregion
+
+            var randomPositionShoot = new RandomSelectorNode(new List<INode>
+            {
+                sequenceNorth,sequenceSouth, sequenceSide
+            },int.MaxValue);
+
+            var globalCondition = new GlobalConditionDecorator(
+                randomPositionShoot,
+                GlobalStopCondition, 
+                new ActionNode(StopTree)
             );
 
             // Sequência de Nodes
@@ -111,31 +230,34 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             {
                 nodeWaitSec,
                 onEnterEnterScene,
-                
-                onEnterMineShoot,
                 nodeWaitSec,
-                onEnterMineShoot,
+                globalCondition,
                 nodeWaitSec,
-                onEnterMineShoot,
-                nodeWaitSec,
-                onEnterMineShoot,
-                nodeWaitSec,
-                //repeatConeShot,
-                
-                /*
-                 nodeWaitSec,
-                repeatConeShot,
-                 nodeWaitSec,
-                repeatSingleShot,
-                nodeWaitSec,
-                onEnterMineShoot,*/
+                onEnterDeath,
+                nodeWait5Sec,
+                onEnterExitFinish
             };
 
             _tree = new BehaviorTree(new SequenceNode(listNodesSequencial));
+            return;
+
+            bool GlobalStopCondition() 
+            {
+                // Verifica uma condição de interrupção global (por exemplo, uma variável de jogo)
+                if (_bossCollider == null) return false;
+                var hp = _bossCollider.GetHp();
+                return hp <= 0;
+            }
+
+            NodeState StopTree()
+            {
+                //Placeholder: Aqui vai a ação de finalização no caso morte.
+                return NodeState.Success;
+            }
         }
 
         // Método para resetar a árvore
-        public void ResetTree()
+        private void ResetTree()
         {
             if (_tree == null) return;
             Debug.Log("Resetando a árvore de comportamento");
@@ -144,16 +266,30 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         }
 
         // Método para resetar todo o comportamento, incluindo os nós e a árvore
-        private void ResetAll()
+        public void ResetAll()
         {
             // Resetar comportamentos individuais
+            var enterScene = GetComponent<BossBehaviorEnterScene>();
             var singleShoot = GetComponentByID<BossBehaviorSingleShoot>(1) as BossBehaviorSingleShoot;
             var coneShoot = GetComponentByID<BossBehaviorConeShoot>(1) as BossBehaviorConeShoot;
-            var enterScene = GetComponent<BossBehaviorEnterScene>();  // Adiciona o EnterScene ao reset
+            var coneShoot02 = GetComponentByID<BossBehaviorConeShoot>(2) as BossBehaviorConeShoot;
+            var mineSpawn = GetComponentByID<BossBehaviorRandomSpawn>(1)as BossBehaviorRandomSpawn;
+            var movement = GetComponent<BossBehaviorMovement>();
+            var emerge = GetComponent<BossBehaviorEmerge>();
+            var submerge = GetComponent<BossBehaviorSubmerge>();
+            var death = GetComponent<BossBehaviorDeath>();
+            var finish = GetComponent<BossBehaviorFinishGame>();
 
-            singleShoot?.ResetShoot();
-            coneShoot?.ResetShoot();
-            enterScene?.ResetEnterScene();  // Resetar o EnterScene
+            enterScene?.ResetBehavior();  // Resetar o EnterScene
+            singleShoot?.ResetBehavior();
+            coneShoot?.ResetBehavior();
+            coneShoot02?.ResetBehavior();
+            mineSpawn?.ResetBehavior();
+            movement?.ResetBehavior();
+            emerge?.ResetBehavior();
+            submerge?.ResetBehavior();
+            death?.ResetBehavior();
+            finish?.ResetBehavior();
 
             // Resetar a árvore de comportamento
             ResetTree();
