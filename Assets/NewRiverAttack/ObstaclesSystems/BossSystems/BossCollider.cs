@@ -12,7 +12,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         #region Unity Methods
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
             ObstacleMaster.EventObstacleHit += DamageProgression;
         }
@@ -31,7 +31,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             ComponentToKill(other.GetComponentInParent<PlayerMaster>(), EnumCollisionType.Collider);
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
             ObstacleMaster.EventObstacleHit -= DamageProgression;
         }
