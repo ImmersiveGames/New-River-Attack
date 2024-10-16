@@ -22,7 +22,7 @@ namespace ImmersiveGames.SteamServicesManagers
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject); // Descomentei caso você queira manter o objeto vivo entre cenas
+                //DontDestroyOnLoad(gameObject); // Descomentei caso você queira manter o objeto vivo entre cenas
             }
             else
             {
