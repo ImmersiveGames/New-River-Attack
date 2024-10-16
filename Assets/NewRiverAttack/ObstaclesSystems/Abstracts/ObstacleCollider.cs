@@ -13,7 +13,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         protected ObstacleMaster ObstacleMaster;
         protected int ObstacleHp;
 
-        private GamePlayManager _gamePlayManager;
+        protected GamePlayManager GamePlayManager;
         #region Unity Methods
 
         private void Awake()
@@ -21,11 +21,11 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             ObstacleMaster = GetComponent<ObstacleMaster>();
         }
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
-            _gamePlayManager = GamePlayManager.Instance;
-            _gamePlayManager.EventGameReload += ReloadHp;
-            _gamePlayManager.EventGameRestart += ReloadHp;
+            GamePlayManager = GamePlayManager.Instance;
+            GamePlayManager.EventGameReload += ReloadHp;
+            GamePlayManager.EventGameRestart += ReloadHp;
         }
 
         protected virtual void Start()
@@ -33,10 +33,10 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             ReloadHp();
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
-            _gamePlayManager.EventGameReload -= ReloadHp;
-            _gamePlayManager.EventGameRestart -= ReloadHp;
+            GamePlayManager.EventGameReload -= ReloadHp;
+            GamePlayManager.EventGameRestart -= ReloadHp;
         }
 
         internal virtual void OnTriggerEnter(Collider other)

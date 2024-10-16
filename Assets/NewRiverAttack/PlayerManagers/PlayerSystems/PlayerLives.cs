@@ -21,6 +21,8 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _playerMaster.EventPlayerMasterGetHit += LoseLive;
             _playerMaster.EventPlayerMasterInitialize += InitializeLives;
             _playerMaster.EventPlayerMasterStartPowerUp += PowerUpAddLive;
+            _gamePlayManager.EventGameRestart += InitializeLives;
+            _gamePlayManager.EventGameReload += InitializeLives;
         }
 
         private void OnDisable()
@@ -28,6 +30,8 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _playerMaster.EventPlayerMasterGetHit -= LoseLive;
             _playerMaster.EventPlayerMasterInitialize -= InitializeLives;
             _playerMaster.EventPlayerMasterStartPowerUp -= PowerUpAddLive;
+            _gamePlayManager.EventGameRestart -= InitializeLives;
+            _gamePlayManager.EventGameReload -= InitializeLives;
         }
 
         #endregion
@@ -42,11 +46,14 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _lives = defaultSettings.startLives;
             _gamePlayManager.OnEventHudLivesUpdate(_lives, _playerMaster.PlayerIndex);
         }
+        private void InitializeLives()
+        {
+            _gamePlayManager.OnEventHudLivesUpdate(_gamePlayManager.PlayersDefault.startLives, _playerMaster.PlayerIndex);
+        }
 
         private void ChangeLives(int quantity)
         {
             _lives += quantity;
-            //LogGamePlay(1);
             _gamePlayManager.OnEventHudLivesUpdate(_lives, _playerMaster.PlayerIndex);
         }
         

@@ -97,7 +97,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _originalCadence = CadenceShoot;
             CadenceShoot /= cadenceDivider;
             BulletData.BulletPowerUp = true;
-            GameStatisticManager.instance.LogTimeRapidFire(activePowerUp.EndTime);
+            GameStatisticManager.instance.LogTimeRapidFire(activePowerUp.RemainingDuration);
         }
 
         #endregion

@@ -15,7 +15,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private PlayerMaster _playerMaster;
         private List<ActivePowerUp> _activePowerUps;
         private GamePlayManager _gamePlayManager;
-        
+
         #region Unity Methods
 
         private void OnEnable()
@@ -42,8 +42,9 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _playerMaster.EventPlayerMasterGetHit -= EndAllPowerUps;
             _gamePlayManager.EventGameFinisher -= EndAllPowerUps;
         }
+
         #endregion
-        
+
         private void SetInitialReferences()
         {
             _playerMaster = GetComponent<PlayerMaster>();
@@ -58,7 +59,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             var collectedSettings = collected.GetPowerUpSettings;
             if (collectedSettings == null) return;
             var powerUpData = collectedSettings.powerUpData;
-            
+
             if (powerUpData.uniqueEffect)
             {
                 // Se accumulateEffects for falso, interrompa todos os power-ups ativos
@@ -73,12 +74,12 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
                 // Se acumular duração estiver permitido, acumule a duração do power-up do mesmo tipo
                 if (powerUpData.accumulateDuration)
                 {
-                    activePowerUp.EndTime += powerUpData.duration;
+                    activePowerUp.RemainingDuration += powerUpData.duration;
                     DebugManager.Log<PlayerPowerUp>("Duração do power-up acumulada.");
                 }
                 else
                 {
-                    activePowerUp.EndTime = Time.time + powerUpData.duration;
+                    activePowerUp.RemainingDuration = powerUpData.duration;
                     DebugManager.Log<PlayerPowerUp>("Power-up não acumula duração. Ele reinicia o contador");
                 }
             }
@@ -88,7 +89,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
                 var newPowerUp = new ActivePowerUp
                 {
                     PowerUpData = powerUpData,
-                    EndTime = Time.time + powerUpData.duration
+                    RemainingDuration = powerUpData.duration
                 };
                 _activePowerUps.Add(newPowerUp);
                 _playerMaster.OnEventPlayerMasterStartPowerUp(newPowerUp);
@@ -99,14 +100,17 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         {
             if (_activePowerUps.Count == 0) return;
 
-            var currentTime = Time.time;
+            float deltaTime = Time.deltaTime;
 
             for (var i = _activePowerUps.Count - 1; i >= 0; i--)
             {
-                if (!(_activePowerUps[i].EndTime <= currentTime)) continue;
-                var expiredPowerUp = _activePowerUps[i];
-                _activePowerUps.RemoveAt(i);
-                _playerMaster.OnEventPlayerMasterEndPowerUp(expiredPowerUp);
+                _activePowerUps[i].RemainingDuration -= deltaTime; // Usando deltaTime para decrementar o tempo
+                if (_activePowerUps[i].RemainingDuration <= 0)
+                {
+                    var expiredPowerUp = _activePowerUps[i];
+                    _activePowerUps.RemoveAt(i);
+                    _playerMaster.OnEventPlayerMasterEndPowerUp(expiredPowerUp);
+                }
             }
         }
 
@@ -138,7 +142,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             var activePowerUp = FindActivePowerUp(powerUpType);
             if (activePowerUp != null)
             {
-                return activePowerUp.EndTime - Time.time;
+                return Mathf.Max(0, activePowerUp.RemainingDuration); // Garantir que nunca retorna um valor negativo
             }
             return 0f; // Retorna 0 se o power-up não estiver ativo
         }
@@ -152,12 +156,11 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         }
 
         #endregion
-        
     }
-    
+
     public class ActivePowerUp
     {
         public PowerUpData PowerUpData;
-        public float EndTime;
+        public float RemainingDuration; // Duração restante do power-up
     }
 }
