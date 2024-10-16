@@ -22,7 +22,7 @@ namespace ImmersiveGames.SteamServicesManagers
             if (Instance == null)
             {
                 Instance = this;
-                //DontDestroyOnLoad(gameObject);
+                DontDestroyOnLoad(gameObject); // Descomentei caso você queira manter o objeto vivo entre cenas
             }
             else
             {
@@ -32,26 +32,31 @@ namespace ImmersiveGames.SteamServicesManagers
 
         public static async Task InitializeLeaderboard()
         {
-            try
+            int retryCount = 3;
+            for (int i = 0; i < retryCount; i++)
             {
-                DebugManager.Log<SteamLeaderboardService>("inicializando leaderboard...");
-                _leaderboard = await SteamUserStats.FindLeaderboardAsync(LeaderboardName).ConfigureAwait(false);
-                if (_leaderboard.HasValue)
+                try
                 {
-                    DebugManager.Log<SteamLeaderboardService>("Leaderboard inicializado com sucesso.");
+                    DebugManager.Log<SteamLeaderboardService>("Tentando inicializar o leaderboard...");
+                    _leaderboard = await SteamUserStats.FindLeaderboardAsync(LeaderboardName).ConfigureAwait(false);
+                    if (_leaderboard.HasValue)
+                    {
+                        DebugManager.Log<SteamLeaderboardService>("Leaderboard inicializado com sucesso.");
+                        break;
+                    }
+                    else
+                    {
+                        DebugManager.LogError<SteamLeaderboardService>($"Falha ao inicializar o leaderboard. Tentativa: {i + 1}");
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    DebugManager.LogError<SteamLeaderboardService>("Falha ao inicializar o leaderboard.");
+                    DebugManager.LogError<SteamLeaderboardService>($"Erro ao inicializar o leaderboard: {e.Message}. Tentativa: {i + 1}");
                 }
-            }
-            catch (Exception e)
-            {
-                DebugManager.LogError<SteamLeaderboardService>($"Erro ao inicializar o leaderboard {e.Message}");
             }
         }
 
-        public async Task UpdateScore(int score, bool force)
+        public async Task UpdateScore(int score, bool force = false) // O valor padrão de `force` é falso
         {
             if (SteamConnectionManager.ConnectedToSteam && _leaderboard.HasValue)
             {
@@ -59,11 +64,11 @@ namespace ImmersiveGames.SteamServicesManagers
                 {
                     // Obtém a pontuação atual do usuário no leaderboard
                     var currentScoreEntry = await _leaderboard.Value.GetScoresAroundUserAsync(1, 1).ConfigureAwait(false);
-                    var currentScore = currentScoreEntry?.FirstOrDefault().Score;
+                    var currentScore = currentScoreEntry?.FirstOrDefault().Score ?? 0; // Valor padrão de 0 se não houver pontuação
 
                     if (currentScore >= score && !force)
                     {
-                        DebugManager.Log<SteamLeaderboardService>($"A nova pontuação ({score}) não é superior à pontuação atual ({currentScore.Value}).");
+                        DebugManager.Log<SteamLeaderboardService>($"A nova pontuação ({score}) não é superior à pontuação atual ({currentScore}).");
                         return; // Se a nova pontuação não for maior, não a envia
                     }
 
@@ -90,7 +95,6 @@ namespace ImmersiveGames.SteamServicesManagers
             }
         }
 
-
         public async Task<LeaderboardEntry[]> GetScores(int quantity)
         {
             if (!SteamConnectionManager.ConnectedToSteam || !_leaderboard.HasValue)
@@ -102,7 +106,7 @@ namespace ImmersiveGames.SteamServicesManagers
             }
             catch (Exception e)
             {
-                DebugManager.LogError<SteamLeaderboardService>($"Erro ao buscar pontuações {e.Message}");
+                DebugManager.LogError<SteamLeaderboardService>($"Erro ao buscar pontuações: {e.Message}");
                 return null;
             }
         }
@@ -154,7 +158,7 @@ namespace ImmersiveGames.SteamServicesManagers
 
             foreach (var score in _offlineScores.ToList())
             {
-                await UpdateScore(score, false).ConfigureAwait(true);
+                await UpdateScore(score).ConfigureAwait(true);
             }
             _offlineScores.Clear();
             SaveOfflineScores();
