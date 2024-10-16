@@ -19,15 +19,24 @@ namespace ImmersiveGames.SteamServicesManagers
 
         private void Awake()
         {
+            // Remover DontDestroyOnLoad para garantir que o objeto seja recriado ao voltar para a cena
             if (Instance == null)
             {
                 Instance = this;
-                //DontDestroyOnLoad(gameObject); // Descomentei caso você queira manter o objeto vivo entre cenas
+                //DontDestroyOnLoad(gameObject); // Removido para permitir a reinicialização na troca de cena
             }
             else
             {
                 Destroy(gameObject);
             }
+        }
+
+        // Adicionar método para forçar a inicialização toda vez que o objeto for ativado (OnEnable)
+        private async void OnEnable()
+        {
+            LoadOfflineScores();
+            await InitializeLeaderboard(); // Tentar carregar o leaderboard novamente
+            SyncOfflineScores(); // Sincroniza qualquer pontuação offline
         }
 
         public static async Task InitializeLeaderboard()
@@ -56,7 +65,7 @@ namespace ImmersiveGames.SteamServicesManagers
             }
         }
 
-        public async Task UpdateScore(int score, bool force = false) // O valor padrão de `force` é falso
+        public async Task UpdateScore(int score, bool force = false)
         {
             if (SteamConnectionManager.ConnectedToSteam && _leaderboard.HasValue)
             {
@@ -167,12 +176,6 @@ namespace ImmersiveGames.SteamServicesManagers
         private void OnApplicationQuit()
         {
             SaveOfflineScores();
-        }
-
-        private void OnEnable()
-        {
-            LoadOfflineScores();
-            SyncOfflineScores();
         }
     }
 }
