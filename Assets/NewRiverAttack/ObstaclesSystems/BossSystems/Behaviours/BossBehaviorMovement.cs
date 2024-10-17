@@ -8,6 +8,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 {
     public class BossBehaviorMovement : MonoBehaviour, INodeFunctionProvider
     {
+        [SerializeField] private float bossDistance = 12f;
         private BossMaster _bossMaster;
         private BossDirections _myDirections;
         private Vector2 _limitX;
@@ -39,7 +40,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         {
             var playerPosition = GetReferencePosition();
             var newDirection = GetRandomDirection(_myDirections);
-            var newPosition = GetNewPosition(newDirection, playerPosition);
+            var newPosition = GetNewPosition(newDirection, playerPosition, bossDistance);
             transform.position = newPosition;
             return NodeState.Success;
         }
@@ -62,13 +63,13 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                         newPosition.z = _limitZ.y;
                     }
                     break;
-                case BossDirections.South:
+                /*case BossDirections.South:
                     newPosition.z -= distance;
                     if (newPosition.z < _limitZ.x)
                     {
                         newPosition.z = _limitZ.x;
                     }
-                    break;
+                    break;*/
                 case BossDirections.East:
                     newPosition.x += distance;
                     if (newPosition.x > _limitX.y)
@@ -112,7 +113,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         private enum BossDirections
         {
             North,
-            South,
             West,
             East
         }

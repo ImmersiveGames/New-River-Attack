@@ -26,11 +26,13 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         #endregion
         public void OnEnter()
         {
+            Debug.Log("Entrou Finish");
             _gamePlayManager.FinisherGame();
         }
 
         public void OnExit()
         {
+            Debug.Log("Saiu Finish");
             _gamePlayManager.SendTo(GameManager.instance.gamePlayMode);
         }
         public Func<NodeState> GetNodeFunction()

@@ -14,7 +14,7 @@ using UnityEngine.UI;
 
 namespace ImmersiveGames.MenuManagers
 {
-    public class MainMenu: AbstractMenuManager
+    public class MainMenu : AbstractMenuManager
     {
         public PanelsMenuReference[] panelsMenuReferences;
         public Button[] disableButtons;
@@ -73,17 +73,17 @@ namespace ImmersiveGames.MenuManagers
         }
 
         #endregion
-        
+
         private void InputBackButton(InputAction.CallbackContext context)
         {
             GoBack(); // Agora apenas chama o GoBack()
         }
+
         private void SetInitialInteractiveButtons(PanelsMenuReference panelButtons, bool interactive)
         {
             var allButtons = panelButtons.menuGameObject.GetComponentsInChildren<Button>();
             foreach (var button in allButtons)
             {
-                //Debug.Log($"Button: {button.name}");
                 if (disableButtons != null && Array.Exists(disableButtons, obj => obj == button))
                     interactive = false;
                 button.interactable = interactive;
@@ -94,7 +94,7 @@ namespace ImmersiveGames.MenuManagers
 
         public async void GotoBriefingRoom()
         {
-            if(_onAction) return;
+            if (_onAction) return;
             _onAction = true;
             DisableOnPress(GetCurrentMenu);
             _canGoBack = false; // Desabilita o retorno
@@ -120,7 +120,7 @@ namespace ImmersiveGames.MenuManagers
 
         public void ButtonPlayAnimation(float startTime)
         {
-            if(_onAction) return;
+            if (_onAction) return;
             _onAction = true;
             DisableOnPress(GetCurrentMenu);
             AudioManager.instance.PlayMouseClick();
@@ -128,7 +128,7 @@ namespace ImmersiveGames.MenuManagers
         }
 
         #endregion
-        
+
         private void DeactivateScreenWash()
         {
             if (!activeScreenWash) return;
@@ -139,16 +139,15 @@ namespace ImmersiveGames.MenuManagers
 
         private void StartPlayAnimations(float timeAnimationStart)
         {
-            if(timeAnimationStart >= 0)
+            if (timeAnimationStart >= 0)
                 _timelineManager.PlayAnimation(timeAnimationStart);
         }
 
         public override void GoBack()
         {
-            if (_canGoBack) // Verifica se o retorno está permitido
+            if (_canGoBack)
             {
-                // Lógica de retorno original aqui
-                base.GoBack(); // Se for necessário
+                base.GoBack(); // Retorna ao menu anterior
             }
         }
     }

@@ -27,7 +27,7 @@ namespace NewRiverAttack.GamePlayManagers
 
         
         internal bool IsBossFight;
-        internal bool IsPause;
+        private bool _isPause;
 
         [Header("Player Initialize")]
         [SerializeField] private PlayersDefaultSettings allPlayersDefaultSettings;
@@ -102,7 +102,7 @@ namespace NewRiverAttack.GamePlayManagers
 
         private void Start()
         {
-            IsPause = false;
+            _isPause = false;
             InitializePlayers(allPlayersDefaultSettings);
             StartCoroutine(WaitForInitialization());
         }
@@ -131,7 +131,7 @@ namespace NewRiverAttack.GamePlayManagers
         #region Controle de Jogo
 
         public bool ShouldBePlayingGame =>
-            GameManager.StateManager.GetCurrentState() is GameStatePlay && _activePlayers && !IsPause;
+            GameManager.StateManager.GetCurrentState() is GameStatePlay && _activePlayers && !_isPause;
         
 
         #endregion
@@ -324,13 +324,13 @@ namespace NewRiverAttack.GamePlayManagers
         }
         internal void OnEventGamePause()
         {
-            IsPause = true;
+            _isPause = true;
             EventGamePause?.Invoke();
             Time.timeScale = 0;
         }
         internal void OnEventGameUnPause()
         {
-            IsPause = false;
+            _isPause = false;
             EventGameUnPause?.Invoke();
             Time.timeScale = 1;
         }
@@ -351,7 +351,7 @@ namespace NewRiverAttack.GamePlayManagers
         }
         internal void OnEventGameReload()
         {
-            IsPause = false;
+            _isPause = false;
             
             CameraManager.ActiveEndCamera(false);
             _levelBuilderManager.CleanUpLevel();

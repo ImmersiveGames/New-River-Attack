@@ -17,7 +17,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         {
             //Aqui precisa ser o nome do Submerge porque o emerge é só a animação tocando ao contrario
             _timerEmerge = AnimationDuration.GetAnimationDuration(Animator, "Submerge");
-            Debug.Log($"TIME ANIME: {_timerEmerge}");
         }
 
         #endregion

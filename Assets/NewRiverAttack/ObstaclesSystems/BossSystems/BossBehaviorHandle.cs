@@ -31,7 +31,8 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         private void Update()
         {
-            if (!_bossMaster.ObjectIsReady) return;
+            if (!GamePlayManager.Instance.ShouldBePlayingGame) return;
+            if (_bossMaster.IsDisable && _bossCollider.GetHp() > 0) return;
             _tree?.Tick();  // Atualiza a árvore de comportamento a cada frame
         }
 
@@ -183,6 +184,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
                 nodeWaitSec,
                 repeatConeShot01X5,
                 nodeWaitSec,
+                
                 onEnterSubmerge,
                 nodeSingleShoot,
                 nodeMovement,
@@ -191,8 +193,11 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             });
             var sequenceSouth = new SequenceNode(new List<INode>
             {
+                onEnterMineShoot,
+                nodeWaitSec,
                 repeatConeShot02X6,
                 nodeWaitSec,
+                
                 onEnterSubmerge,
                 nodeSingleShoot,
                 nodeMovement,
@@ -203,8 +208,9 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             {
                 repeatConeShot02X4,
                 nodeWaitSec,
-                repeatConeShot02X6,
+                repeatConeShot02X4,
                 nodeWaitSec,
+                
                 onEnterSubmerge,
                 nodeSingleShoot,
                 nodeMovement,
@@ -216,13 +222,13 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
             var randomPositionShoot = new RandomSelectorNode(new List<INode>
             {
-                sequenceNorth,sequenceSouth, sequenceSide
+                sequenceNorth, sequenceSouth, sequenceSide
             },int.MaxValue);
-
-            var globalCondition = new GlobalConditionDecorator(
+            
+            var conditionalRandomShoot = new ConditionalNodeDecorator(
                 randomPositionShoot,
                 GlobalStopCondition, 
-                new ActionNode(StopTree)
+                () => Debug.Log("Interrompendo o randomPositionShoot por causa da condição global.")
             );
 
             // Sequência de Nodes
@@ -231,7 +237,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
                 nodeWaitSec,
                 onEnterEnterScene,
                 nodeWaitSec,
-                globalCondition,
+                conditionalRandomShoot,
                 nodeWaitSec,
                 onEnterDeath,
                 nodeWait5Sec,
@@ -244,6 +250,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             bool GlobalStopCondition() 
             {
                 // Verifica uma condição de interrupção global (por exemplo, uma variável de jogo)
+                Debug.Log($"Condition {_bossCollider.GetHp()}");
                 if (_bossCollider == null) return false;
                 var hp = _bossCollider.GetHp();
                 return hp <= 0;
@@ -252,6 +259,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             NodeState StopTree()
             {
                 //Placeholder: Aqui vai a ação de finalização no caso morte.
+                Debug.Log("STOP TREE");
                 return NodeState.Success;
             }
         }

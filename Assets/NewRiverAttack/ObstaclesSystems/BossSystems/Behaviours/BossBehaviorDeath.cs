@@ -27,12 +27,14 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         #endregion
         public void OnEnter()
         {
+            Debug.Log("Entrou Dead");
             Invulnerability(true);
             AnimationBossDeath();
         }
         
         private NodeState BossDeath()
         {
+            Debug.Log("Boss Dead");
             _elapsedTime += Time.deltaTime;
             return _elapsedTime >= _timerDeath ? NodeState.Success : NodeState.Running;
         }
