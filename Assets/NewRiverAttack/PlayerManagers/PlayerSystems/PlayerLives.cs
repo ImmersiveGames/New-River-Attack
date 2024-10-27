@@ -10,6 +10,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
     {
         private PlayerMaster _playerMaster;
         private GamePlayManager _gamePlayManager;
+        private GameHudManager _gameHudManager;
         private PlayersManager _playersManager;
         private int _lives;
         public int GetLives => _lives;
@@ -41,22 +42,23 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _playerMaster = GetComponent<PlayerMaster>();
             _gamePlayManager = GamePlayManager.Instance;
             _playersManager = PlayersManager.Instance;
+            _gameHudManager = GameHudManager.Instance;
         }
         
         private void InitializeLives(int indexPlayer, PlayersDefaultSettings defaultSettings)
         {
             _lives = defaultSettings.startLives;
-            _gamePlayManager.OnEventHudLivesUpdate(_lives, _playerMaster.PlayerIndex);
+            _gameHudManager.OnEventHudLivesUpdate(_lives, _playerMaster.PlayerIndex);
         }
         private void InitializeLives()
         {
-            _gamePlayManager.OnEventHudLivesUpdate(_playersManager.PlayersDefault.startLives, _playerMaster.PlayerIndex);
+            _gameHudManager.OnEventHudLivesUpdate(_playersManager.PlayersDefault.startLives, _playerMaster.PlayerIndex);
         }
 
         private void ChangeLives(int quantity)
         {
             _lives += quantity;
-            _gamePlayManager.OnEventHudLivesUpdate(_lives, _playerMaster.PlayerIndex);
+            _gameHudManager.OnEventHudLivesUpdate(_lives, _playerMaster.PlayerIndex);
         }
         
         private void LoseLive()

@@ -46,7 +46,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
                 transform.position += MovePlayerAutoPilot();
                 return;
             }
-            if (_gamePlayManager.IsBossFight && _playerMaster.BossController)
+            if (GameLevelManager.Instance.IsBossFight && _playerMaster.BossController)
             {
                 transform.position += MovePlayerBoss();
                 return;

@@ -1,4 +1,5 @@
-﻿using NewRiverAttack.ObstaclesSystems.Abstracts;
+﻿using NewRiverAttack.GamePlayManagers;
+using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 
@@ -6,6 +7,13 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 {
     public class EnemiesMaster : ObstacleMaster
     {
+        private GameLevelManager _gameLevelManager;
+        protected override void SetInitialReferences()
+        {
+            base.SetInitialReferences();
+            _gameLevelManager = GameLevelManager.Instance;
+        }
+
         protected override void AttemptKillObstacle(PlayerMaster playerMaster)
         {
             IsDisable = true;
@@ -15,7 +23,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 
         protected override void TryReSpawn()
         {
-            IsDisable = !GamePlayManagerRef.IsBossFight;
+            IsDisable = !_gameLevelManager.IsBossFight;
             if(!objectDefault.canRespawn) return;
             IsDead = false;
             RepositionObject();
@@ -28,7 +36,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
 
         protected override void ReloadObject()
         {
-            if (GamePlayManagerRef.IsBossFight)
+            if (_gameLevelManager.IsBossFight)
             {
                 RepositionObject();
                 return;

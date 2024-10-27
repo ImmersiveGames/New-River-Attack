@@ -22,6 +22,12 @@ namespace ImmersiveGames.Utils
 
         private void Update()
         {
+            if (_instance == null)
+            {
+                var go = new GameObject("MainThreadDispatcher");
+                _instance = go.AddComponent<MainThreadDispatcher>();
+                DontDestroyOnLoad(go);
+            }
             while (ActionsQueue.TryDequeue(out var action))
             {
                 action?.Invoke();
@@ -41,6 +47,7 @@ namespace ImmersiveGames.Utils
 
         public static void Enqueue(Action action)
         {
+            if (action == null) throw new ArgumentNullException(nameof(action));
             ActionsQueue.Enqueue(action);
         }
 
@@ -65,29 +72,27 @@ namespace ImmersiveGames.Utils
             return tcs.Task;
         }
 
-        public static async Task EnqueueAsync(Func<Task> action)
+        public static Task EnqueueAsync(Func<Task> action)
         {
             if (action == null) throw new ArgumentNullException(nameof(action));
-            
+
             var tcs = new TaskCompletionSource<bool>();
 
-            Enqueue(Action);
-
-            await tcs.Task.ConfigureAwait(false);
-            return;
-
-            async void Action()
+            Enqueue(async () =>
             {
                 try
                 {
-                    await action.Invoke().ConfigureAwait(false);
+                    await action();
                     tcs.SetResult(true);
                 }
                 catch (Exception ex)
                 {
                     tcs.SetException(ex);
                 }
-            }
+            });
+
+            return tcs.Task;
         }
+
     }
 }

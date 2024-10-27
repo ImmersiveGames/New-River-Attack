@@ -29,6 +29,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         internal bool BossController;
 
         private PlayersManager _playersManager;
+        private GameHudManager _gameHudManager;
 
         #region Player Config Settings (privates)
 
@@ -98,6 +99,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         {
             base.SetInitialReferences();
             _playersManager = PlayersManager.Instance;
+            _gameHudManager = GameHudManager.Instance;
         }
 
         #endregion
@@ -106,7 +108,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private void AttemptKillObstacle()
         {
-            if (GamePlayManagerRef.IsBossFight) return;
+            if (GameLevelManager.Instance.IsBossFight) return;
             IsDead = true;
             IsDisable = true;
         }
@@ -176,7 +178,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         internal void SetPlayerScore(int score)
         {
             _playerScore += score;
-            GamePlayManagerRef.OnEventHudScoreUpdate(_playerScore, PlayerIndex);
+            _gameHudManager.OnEventHudScoreUpdate(_playerScore, PlayerIndex);
         }
 
         internal int GetPlayerScore => _playerScore;
@@ -203,7 +205,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         public void OnEventPlayerMasterGetHit()
         {
             AttemptKillObstacle();
-            GamePlayManagerRef.OnEventHudRapidFireEnd(0, PlayerIndex);
+            _gameHudManager.OnEventHudRapidFireEnd(0, PlayerIndex);
             EventPlayerMasterGetHit?.Invoke();
             TryReSpawn();
         }

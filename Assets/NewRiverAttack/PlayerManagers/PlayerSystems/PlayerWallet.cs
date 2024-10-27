@@ -12,7 +12,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         [SerializeField] private int playerWallet;
 
         private PlayerMaster _playerMaster;
-        private GamePlayManager _gamePlayManager;
+        private GameHudManager _gameHudManager;
 
         #region Unity Methods
 
@@ -33,7 +33,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void SetInitialReferences()
         {
             _playerMaster = GetComponent<PlayerMaster>();
-            _gamePlayManager = GamePlayManager.Instance;
+            _gameHudManager = GameHudManager.Instance;
         }
         
         private void UpdateWallet(ICollectable collectable)
@@ -46,7 +46,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             var walletValue = collectedData.collectValuable * collectedData.amountCollectables; 
             if( collectedData.maxCollectible != 0 && playerWallet >= collectedData.maxCollectible ) return;
             playerWallet += walletValue;
-            _gamePlayManager.OnEventHudRefugiesUpdate(playerWallet, _playerMaster.PlayerIndex); 
+            _gameHudManager.OnEventHudRefugiesUpdate(playerWallet, _playerMaster.PlayerIndex); 
         }
     }
 }

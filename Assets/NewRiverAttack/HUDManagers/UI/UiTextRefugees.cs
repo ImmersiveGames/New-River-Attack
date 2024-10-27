@@ -7,7 +7,7 @@ namespace NewRiverAttack.HUDManagers.UI
 {
     public class UiTextRefugees : MonoBehaviour
     {
-        private GamePlayManager _gamePlayManager;
+        private GameHudManager _gameHudManager;
         private TMP_Text _textRefugees;
         private Animator _animator;
         private static readonly int RefugeesBounce = Animator.StringToHash("Bounce");
@@ -17,7 +17,7 @@ namespace NewRiverAttack.HUDManagers.UI
         private void OnEnable()
         {
             SetInitialReferences();
-            _gamePlayManager.EventHudRefugiesUpdate += UpdateRefugees;
+            _gameHudManager.EventHudRefugiesUpdate += UpdateRefugees;
         }
 
         private void Start()
@@ -28,14 +28,14 @@ namespace NewRiverAttack.HUDManagers.UI
 
         private void OnDisable()
         {
-            _gamePlayManager.EventHudRefugiesUpdate -= UpdateRefugees;
+            _gameHudManager.EventHudRefugiesUpdate -= UpdateRefugees;
         }
 
         #endregion
 
         private void SetInitialReferences()
         {
-            _gamePlayManager = GamePlayManager.Instance;
+            _gameHudManager = GameHudManager.Instance;
             _textRefugees = GetComponent<TMP_Text>();
             _animator = GetComponent<Animator>();
         }

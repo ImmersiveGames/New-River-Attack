@@ -7,8 +7,8 @@ namespace NewRiverAttack.HUDManagers.UI
 {
     public class UiTextDistance : MonoBehaviour
     {
-        [SerializeField] private int playerIndex = 0;
-        private GamePlayManager _mGamePlayManager;
+        [SerializeField] private int playerIndex;
+        private GameHudManager _gameHudManager;
         private PlayerSettings _playerSettings;
         private TMP_Text _textDistance;
 
@@ -17,7 +17,7 @@ namespace NewRiverAttack.HUDManagers.UI
         private void OnEnable()
         {
             SetInitialReferences();
-            _mGamePlayManager.EventHudDistanceUpdate += UpdateDistance;
+            _gameHudManager.EventHudDistanceUpdate += UpdateDistance;
         }
 
         private void Start()
@@ -27,14 +27,14 @@ namespace NewRiverAttack.HUDManagers.UI
 
         private void OnDisable()
         {
-            _mGamePlayManager.EventHudDistanceUpdate -= UpdateDistance;
+            _gameHudManager.EventHudDistanceUpdate -= UpdateDistance;
         }
 
         #endregion
 
         private void SetInitialReferences()
         {
-            _mGamePlayManager = GamePlayManager.Instance;
+            _gameHudManager = GameHudManager.Instance;
             _textDistance = GetComponent<TMP_Text>();
         }
 

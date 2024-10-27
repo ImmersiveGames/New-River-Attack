@@ -1,4 +1,5 @@
-﻿using NewRiverAttack.GamePlayManagers.GamePlayLogs;
+﻿using NewRiverAttack.GamePlayManagers;
+using NewRiverAttack.GamePlayManagers.GamePlayLogs;
 using NewRiverAttack.GameStatisticsSystem;
 using UnityEngine;
 using GamePlayManager = NewRiverAttack.GamePlayManagers.GamePlayManager;
@@ -16,7 +17,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private float _distanceThisAttempt;
         
         private PlayerMaster _playerMaster;
-        private GamePlayManager _gamePlayManager;
+        private GameHudManager _gameHudManager;
         
 
         #region Unity Region
@@ -57,7 +58,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
                 // Converte a distância total acumulada em um valor inteiro com base na conversão
                 var convertDistanceInt = Mathf.FloorToInt(_distanceThisAttempt / GemeStatisticsDataLog.BaseConversion);
-                _gamePlayManager.OnEventHudDistanceUpdate(convertDistanceInt, _playerMaster.PlayerIndex);
+                _gameHudManager.OnEventHudDistanceUpdate(convertDistanceInt, _playerMaster.PlayerIndex);
             }
             _lastPosition = transform.position.z;
         }
@@ -66,7 +67,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void SetInitialReferences()
         {
             _playerMaster = GetComponent<PlayerMaster>(); 
-            _gamePlayManager = GamePlayManager.Instance;
+            _gameHudManager = GameHudManager.Instance;
         }
     }
 }

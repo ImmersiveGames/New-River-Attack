@@ -8,7 +8,7 @@ namespace NewRiverAttack.HUDManagers.UI
     public class UiRapidFire : MonoBehaviour
     {
         [SerializeField] private int playerIndex;
-        private GamePlayManager _gamePlayManager;
+        private GameHudManager _gameHudManager;
         
         [SerializeField] private Image rapidFireDisable;
         [SerializeField] private Image rapidFireEnable;
@@ -22,8 +22,8 @@ namespace NewRiverAttack.HUDManagers.UI
         private void OnEnable()
         {
             SetInitialReferences();
-            _gamePlayManager.EventHudRapidFireUpdate += UpdateTimer;
-            _gamePlayManager.EventHudRapidFireEnd += StopTimer;
+            _gameHudManager.EventHudRapidFireUpdate += UpdateTimer;
+            _gameHudManager.EventHudRapidFireEnd += StopTimer;
         }
 
         private void Start()
@@ -36,14 +36,14 @@ namespace NewRiverAttack.HUDManagers.UI
 
         private void OnDisable()
         {
-            _gamePlayManager.EventHudRapidFireUpdate -= UpdateTimer;
-            _gamePlayManager.EventHudRapidFireEnd -= StopTimer;
+            _gameHudManager.EventHudRapidFireUpdate -= UpdateTimer;
+            _gameHudManager.EventHudRapidFireEnd -= StopTimer;
         }
 
         #endregion
         private void SetInitialReferences()
         {
-            _gamePlayManager = GamePlayManager.Instance;
+            _gameHudManager = GameHudManager.Instance;
         }
         
         private void UpdateTimer(float timer, int indexPlayer)

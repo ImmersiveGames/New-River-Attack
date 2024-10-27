@@ -15,6 +15,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private PlayerMaster _playerMaster;
         private List<ActivePowerUp> _activePowerUps;
         private GamePlayManager _gamePlayManager;
+        private GameHudManager _gameHudManager;
 
         #region Unity Methods
 
@@ -32,7 +33,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             if (IsPowerUpActive(PowerUpTypes.RapidFire))
             {
                 var timeRapid = GetPowerUpRemainingTime(PowerUpTypes.RapidFire);
-                _gamePlayManager.OnEventHudRapidFireUpdate(timeRapid, _playerMaster.PlayerIndex);
+                _gameHudManager.OnEventHudRapidFireUpdate(timeRapid, _playerMaster.PlayerIndex);
             }
         }
 
@@ -49,6 +50,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         {
             _playerMaster = GetComponent<PlayerMaster>();
             _gamePlayManager = GamePlayManager.Instance;
+            _gameHudManager = GameHudManager.Instance;
             _activePowerUps = new List<ActivePowerUp>();
         }
 

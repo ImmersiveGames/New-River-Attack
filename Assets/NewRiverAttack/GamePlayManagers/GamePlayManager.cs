@@ -6,7 +6,6 @@ using ImmersiveGames.DebugManagers;
 using NewRiverAttack.GameManagers;
 using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.HUBManagers;
-using NewRiverAttack.LevelBuilder;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using NewRiverAttack.SaveManagers;
 using NewRiverAttack.StateManagers;
@@ -18,17 +17,8 @@ namespace NewRiverAttack.GamePlayManagers
     public sealed class GamePlayManager : MonoBehaviour
     {
         #region Variáveis
-
-        [Header("Default Layers")]
-        public LayerMask layerEnemies;
         
-        internal bool IsBossFight;
         private bool _isPause;
-        
-        private LevelBuilderManager _levelBuilderManager;
-        private LevelData _actualLevel;
-
-        private GameManager _gameManager;
 
         #endregion
 
@@ -36,7 +26,6 @@ namespace NewRiverAttack.GamePlayManagers
         public event Action EventGameReadyGo;
         public event Action EventGameFinisher;
         public event Action EventGameReset; //Hard Reset
-        
         public event Action EventObstacleReload; //SoftReload (Respawn)
         
         public delegate void PlayerMasterEventHandler(PlayerMaster playerMaster);
@@ -44,19 +33,8 @@ namespace NewRiverAttack.GamePlayManagers
         public event GamePlayGeneralEventHandler EventPostStateGameInitialize;
         //public event GamePlayGeneralEventHandler EventGameRestart;
         public event GamePlayGeneralEventHandler EventGameOver;
-        
         public event GamePlayGeneralEventHandler EventGamePause;
         public event GamePlayGeneralEventHandler EventGameUnPause;
-        
-        public delegate void GamePlayHudFloatEventHandler(float valueUpdate, int playerIndex);
-        public event GamePlayHudFloatEventHandler EventHudRapidFireUpdate;
-        public event GamePlayHudFloatEventHandler EventHudRapidFireEnd;
-        public delegate void GamePlayHudEventHandler(int valueUpdate, int playerIndex);
-        public event GamePlayHudEventHandler EventHudScoreUpdate;
-        public event GamePlayHudEventHandler EventHudDistanceUpdate;
-        public event GamePlayHudEventHandler EventHudLivesUpdate;
-        public event GamePlayHudEventHandler EventHudBombUpdate;
-        public event GamePlayHudEventHandler EventHudRefugiesUpdate;
 
         #endregion
         
@@ -65,7 +43,6 @@ namespace NewRiverAttack.GamePlayManagers
         #region Unity Methods
         private void Awake()
         {
-            SetInitialReferences();
             if (Instance == null)
             {
                 Instance = this;
@@ -78,15 +55,7 @@ namespace NewRiverAttack.GamePlayManagers
                 DebugManager.LogWarning<GamePlayManager>("Tentativa de criar uma segunda instância de GamePlayManager foi evitada.");
             }
         }
-        private void OnEnable()
-        {
-            BuildLevel();
-        }
-        private void SetInitialReferences()
-        {
-            _gameManager = GameManager.instance;
-            _levelBuilderManager = LevelBuilderManager.Instance;
-        }
+        
 
         private void Start()
         {
@@ -97,19 +66,11 @@ namespace NewRiverAttack.GamePlayManagers
         private void OnDisable()
         {
             GameSaveHandler.Instance.SaveGameData();
-            CleanUpGame();
         }
 
         private void OnApplicationQuit()
         {
             GameSaveHandler.Instance.SaveGameData();
-        }
-
-        private void CleanUpGame()
-        {
-            _gameManager = null;
-            _levelBuilderManager.DestroyLevel();
-            _levelBuilderManager = null;
         }
 
         #endregion
@@ -159,28 +120,7 @@ namespace NewRiverAttack.GamePlayManagers
         }
 
         #region Métodos Auxiliares
-
-        private LevelData GetLevel(GamePlayModes modes)
-        {
-            switch (modes)
-            {
-                case GamePlayModes.ClassicMode:
-                    return _gameManager.classicModeLevels;
-                case GamePlayModes.MissionMode:
-                    return _gameManager.ActiveLevel;
-                default:
-                    DebugManager.LogError<GamePlayManager>("Não existe um arquivo de data para construir uma cena");
-                    return null;
-            }
-        }
-
-        private void BuildLevel()
-        {
-            _actualLevel = GetLevel(_gameManager.gamePlayMode);
-            IsBossFight = _actualLevel.levelType == LevelTypes.Boss;
-            AudioManager.instance.PlayBGM(_actualLevel.setLevelList[0].levelType.ToString());
-            _levelBuilderManager.StartToBuild(_actualLevel);
-        }
+        
 
         private IEnumerator WaitForInitialization()
         {
@@ -205,33 +145,7 @@ namespace NewRiverAttack.GamePlayManagers
         {
             EventGameReadyGo?.Invoke();
         }
-        internal void OnEventHudScoreUpdate(int valueUpdate, int playerIndex )
-        {
-            EventHudScoreUpdate?.Invoke(valueUpdate, playerIndex);
-            GameStatisticManager.instance.LogMaxScore(valueUpdate);
-        }
-        internal void OnEventHudDistanceUpdate(int valueUpdate, int playerIndex )
-        {
-            // Converte a distância total acumulada em um valor inteiro com base na conversão
-            EventHudDistanceUpdate?.Invoke(valueUpdate, playerIndex);
-            GameStatisticManager.instance.LogDistance(valueUpdate);
-        }
-        internal void OnEventHudLivesUpdate(int valueUpdate, int playerIndex)
-        {
-            EventHudLivesUpdate?.Invoke(valueUpdate, playerIndex);
-        }
-        internal void OnEventHudRefugiesUpdate(int valueUpdate, int playerIndex)
-        {
-            EventHudRefugiesUpdate?.Invoke(valueUpdate, playerIndex);
-        }
-        internal void OnEventHudBombUpdate(int valueUpdate, int playerIndex)
-        {
-            EventHudBombUpdate?.Invoke(valueUpdate, playerIndex);
-        }
-        internal void OnEventHudRapidFireUpdate(float valueUpdate, int playerIndex)
-        {
-            EventHudRapidFireUpdate?.Invoke(valueUpdate, playerIndex);
-        }
+        
         internal void OnEventGamePause()
         {
             _isPause = true;
@@ -249,10 +163,7 @@ namespace NewRiverAttack.GamePlayManagers
             GameSaveHandler.Instance.SaveGameData();
             EventGameOver?.Invoke();
         }
-        internal void OnEventHudRapidFireEnd(float valueUpdate, int playerIndex)
-        {
-            EventHudRapidFireEnd?.Invoke(valueUpdate, playerIndex);
-        }
+        
 
         private void OnEventGameFinisher()
         {
@@ -263,9 +174,7 @@ namespace NewRiverAttack.GamePlayManagers
         internal void OnEventGameReset()
         {
             _isPause = false;
-            _levelBuilderManager.CleanUpLevel();
             CameraManager.ActiveEndCamera(false);
-            BuildLevel();
             CameraManager.ActiveStartCamera();
             GameManager.StateManager.ForceChangeState(StatesNames.GameStatePlay.ToString());
             GameSaveHandler.Instance.SaveGameData();

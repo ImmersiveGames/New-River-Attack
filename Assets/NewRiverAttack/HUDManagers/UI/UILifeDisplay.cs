@@ -11,8 +11,8 @@ namespace NewRiverAttack.HUDManagers.UI
     {
         [SerializeField] private GameObject iconLives;
         [SerializeField] private int playerIndex;
-        private GamePlayManager _gamePlayManager;
         private PlayersManager _playersManager;
+        private GameHudManager _gameHudManager;
         private PlayerMaster _playerMaster;
         private PlayerLives _playerLives;
 
@@ -22,7 +22,7 @@ namespace NewRiverAttack.HUDManagers.UI
         {
             SetInitialReferences();
 
-            _gamePlayManager.EventHudLivesUpdate += SetLivesUI;
+            _gameHudManager.EventHudLivesUpdate += SetLivesUI;
         }
 
         private void Start()
@@ -32,7 +32,7 @@ namespace NewRiverAttack.HUDManagers.UI
 
         private void OnDisable()
         {
-            _gamePlayManager.EventHudLivesUpdate -= SetLivesUI;
+            _gameHudManager.EventHudLivesUpdate -= SetLivesUI;
         }
 
         private void SetLivesUI(int valueUpdate, int iPlayerIndex)
@@ -46,8 +46,8 @@ namespace NewRiverAttack.HUDManagers.UI
 
         private void SetInitialReferences()
         {
-            _gamePlayManager = GamePlayManager.Instance;
             _playersManager = PlayersManager.Instance;
+            _gameHudManager = GameHudManager.Instance;
             _playerMaster = _playersManager.GetPlayerMaster(playerIndex);
             _playerLives = _playerMaster.GetComponent<PlayerLives>();
         }

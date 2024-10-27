@@ -24,7 +24,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private BombData _bombData;
         private PlayerMaster _playerMaster;
-        private GamePlayManager _gamePlayManager;
+        private GameHudManager _gameHudManager;
 
         #region Unity Methods
 
@@ -46,7 +46,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private void SetInitialReferences()
         {
-            _gamePlayManager = GamePlayManager.Instance;
+            _gameHudManager = GameHudManager.Instance;
             _playerMaster = GetComponent<PlayerMaster>();
             _bombData = new BombData
             {
@@ -65,7 +65,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void InitializeBombs(int indexPlayer, PlayersDefaultSettings defaultSettings)
         {
             GetBomb = defaultSettings.startBombs;
-            _gamePlayManager.OnEventHudBombUpdate(GetBomb, _playerMaster.PlayerIndex);
+            _gameHudManager.OnEventHudBombUpdate(GetBomb, _playerMaster.PlayerIndex);
         }
 
         private void AttemptBomb(InputAction.CallbackContext obj)
@@ -82,7 +82,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             var bomb = Instantiate(prefabBomb);
             var bombPlayer = bomb.GetComponent<BulletBombPlayer>();
             bombPlayer.OnSpawned(transform, _bombData);
-            _gamePlayManager.OnEventHudBombUpdate(GetBomb, _playerMaster.PlayerIndex);
+            _gameHudManager.OnEventHudBombUpdate(GetBomb, _playerMaster.PlayerIndex);
             GameStatisticManager.instance.LogBombs(1);
         }
 
@@ -94,7 +94,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         {
             if (activePowerUp.PowerUpData.powerUpType != PowerUpTypes.Bomb) return;
             GetBomb += 1;
-            _gamePlayManager.OnEventHudBombUpdate(GetBomb, _playerMaster.PlayerIndex);
+            _gameHudManager.OnEventHudBombUpdate(GetBomb, _playerMaster.PlayerIndex);
         }
 
         #endregion

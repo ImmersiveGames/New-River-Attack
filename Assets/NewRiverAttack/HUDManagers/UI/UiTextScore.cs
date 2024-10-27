@@ -8,7 +8,7 @@ namespace NewRiverAttack.HUDManagers.UI
     public class UiTextScore : MonoBehaviour
     {
         [SerializeField] private int playerIndex;
-        private GamePlayManager _gamePlayManager;
+        private GameHudManager _gameHudManager;
         private PlayerMaster _playerMaster;
         private TMP_Text _tmpTextScore;
 
@@ -17,7 +17,7 @@ namespace NewRiverAttack.HUDManagers.UI
         private void OnEnable()
         {
             SetInitialReferences();
-            _gamePlayManager.EventHudScoreUpdate += UpdateScore;
+            _gameHudManager.EventHudScoreUpdate += UpdateScore;
         }
 
         private void Start()
@@ -27,14 +27,14 @@ namespace NewRiverAttack.HUDManagers.UI
 
         private void OnDisable()
         {
-            _gamePlayManager.EventHudScoreUpdate -= UpdateScore;
+            _gameHudManager.EventHudScoreUpdate -= UpdateScore;
         }
 
         #endregion
 
         private void SetInitialReferences()
         {
-            _gamePlayManager = GamePlayManager.Instance;
+            _gameHudManager = GameHudManager.Instance;
             _tmpTextScore = GetComponent<TMP_Text>();
         }
 
