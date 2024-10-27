@@ -64,10 +64,7 @@ namespace ImmersiveGames.StateManagers
             DebugManager.Log<StateManager>($"Mudou para o estado: {stateName}");
         }
 
-        public IState GetCurrentState()
-        {
-            return _currentState;
-        }
+        public IState GetCurrentState => _currentState;
 
         public IState GetPreviousState()
         {

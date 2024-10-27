@@ -1,6 +1,5 @@
 ﻿using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace NewRiverAttack.ObstaclesSystems.Abstracts
 {
@@ -29,17 +28,17 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         protected override void OnEnable()
         {
             base.OnEnable();
-            GamePlayManagerRef.EventGameRestart += TryReSpawn;
-            GamePlayManagerRef.EventGameReady += ReadyObject;
-            GamePlayManagerRef.EventGameReload += ReloadObject;
+            GamePlayManagerRef.EventObstacleReload += TryReSpawn;
+            GamePlayManagerRef.EventGameReadyGo += ReadyObject;
+            GamePlayManagerRef.EventGameReset += ReloadObject;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-            GamePlayManagerRef.EventGameRestart -= TryReSpawn;
-            GamePlayManagerRef.EventGameReady -= ReadyObject;
-            GamePlayManagerRef.EventGameReload -= ReloadObject;
+            GamePlayManagerRef.EventObstacleReload -= TryReSpawn;
+            GamePlayManagerRef.EventGameReadyGo -= ReadyObject;
+            GamePlayManagerRef.EventGameReset -= ReloadObject;
         }
 
         public bool ShouldBeReady => GamePlayManagerRef.ShouldBePlayingGame && !IsDead && !IsDisable;

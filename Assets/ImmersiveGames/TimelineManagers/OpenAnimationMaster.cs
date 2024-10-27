@@ -10,16 +10,16 @@ namespace ImmersiveGames.TimelineManagers
         private void Awake()
         {
             SetInitialReferences();
-            GamePlayManagerRef.EventPlayerInitialize += SetupTimeline;
+            PlayersManagerRef.EventPlayerInitialize += SetupTimeline;
             GamePlayManagerRef.EventPostStateGameInitialize += PlayTimeline;
-            GamePlayManagerRef.EventGameReload += ResetTimeLine;
+            GamePlayManagerRef.EventGameReset += ResetTimeLine;
         }
 
         private void OnDestroy()
         {
-            GamePlayManagerRef.EventPlayerInitialize -= SetupTimeline;
+            PlayersManagerRef.EventPlayerInitialize -= SetupTimeline;
             GamePlayManagerRef.EventPostStateGameInitialize -= PlayTimeline;
-            GamePlayManagerRef.EventGameReload -= ResetTimeLine;
+            GamePlayManagerRef.EventGameReset -= ResetTimeLine;
         }
 
         private void SetupTimeline(PlayerMaster playerMaster)

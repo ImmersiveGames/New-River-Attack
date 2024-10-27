@@ -14,6 +14,7 @@ namespace NewRiverAttack.HUDManagers.UI
         public Image bombOff;
 
         private GamePlayManager _gamePlayManager;
+        private PlayersManager _playersManager;
         private PlayerBombs _playerBombs;
 
         #region UNITYMETHODS
@@ -39,8 +40,8 @@ namespace NewRiverAttack.HUDManagers.UI
 
         private void SetInitialReferences()
         {
-            
-            var playerMaster = _gamePlayManager.GetPlayerMaster(indexPlayer);
+            _playersManager = PlayersManager.Instance;
+            var playerMaster = _playersManager.GetPlayerMaster(indexPlayer);
             _playerBombs = playerMaster.GetComponent<PlayerBombs>();
         }
 

@@ -23,7 +23,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
         public void OnEnter()
         {
-            BossMaster.IsEmerge = false;
             Invulnerability(true);
             AnimationSubmerge();
         }

@@ -20,13 +20,15 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         {
             SetInitialReferences();
             _enemiesMaster.EventObstacleChangeSkin += SetAnimations;
-            _gamePlayManager.EventGameRestart += ResetAnimation;
+            _gamePlayManager.EventGameReset += ResetAnimation;
+            _gamePlayManager.EventObstacleReload += ResetAnimation;
         }
 
         private void OnDisable()
         {
             _enemiesMaster.EventObstacleChangeSkin -= SetAnimations;
-            _gamePlayManager.EventGameRestart -= ResetAnimation;
+            _gamePlayManager.EventGameReset -= ResetAnimation;
+            _gamePlayManager.EventObstacleReload -= ResetAnimation;
         }
 
         #endregion

@@ -102,7 +102,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
         private Vector3 GetReferencePosition()
         {
-            var target = GamePlayManager.Instance.GetPlayerMaster(0);
+            var target = PlayersManager.Instance.GetPlayerMaster(0);
             return target.transform.position;
         }
         public Func<NodeState> GetNodeFunction()

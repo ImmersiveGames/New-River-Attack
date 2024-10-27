@@ -22,7 +22,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Helpers
         {
             if (!CanShoot()) return;
             shooter.ShootSound();
-            var target = GamePlayManager.Instance.GetPlayerMaster(0).transform;
+            var target = PlayersManager.Instance.GetPlayerMaster(0).transform;
             var targetingSystem = new TargetingSystem();
             if (!targetingSystem.AimAtTarget(spawnPoint, target)) return;
 

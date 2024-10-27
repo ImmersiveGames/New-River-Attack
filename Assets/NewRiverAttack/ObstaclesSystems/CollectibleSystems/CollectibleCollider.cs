@@ -10,16 +10,16 @@ namespace NewRiverAttack.ObstaclesSystems.CollectibleSystems
         {
             base.OnEnable();
             ObstacleMaster.EventObstacleHit += ColliderHit;
-            GamePlayManager.EventGameReload += ColliderReload;
-            GamePlayManager.EventGameRestart += ColliderReload;
+            GamePlayManager.EventGameReset += ColliderReload;
+            GamePlayManager.EventObstacleReload += ColliderReload;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
             ObstacleMaster.EventObstacleHit -= ColliderHit;
-            GamePlayManager.EventGameReload -= ColliderReload;
-            GamePlayManager.EventGameRestart -= ColliderReload;
+            GamePlayManager.EventGameReset -= ColliderReload;
+            GamePlayManager.EventObstacleReload -= ColliderReload;
         }
 
         private void OnBecameInvisible()

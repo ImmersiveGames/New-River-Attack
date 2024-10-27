@@ -1,6 +1,8 @@
 ﻿using System;
 using DG.Tweening;
 using ImmersiveGames.BehaviorTreeSystem.Interface;
+using NewRiverAttack.GamePlayManagers;
+using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
@@ -16,14 +18,13 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         private Tween _moveTween;  // Armazena o Tween para reutilizar e reiniciar
         private bool _hasCompleted; // Controle para evitar que OnKill e OnComplete se conflitem
 
-        private void Start()
-        {
-            _bossMaster = GetComponent<BossMaster>();
-        }
+        private PlayerMaster _playerMaster;
 
         // Método para reinicializar o estado do nó, usado no reset
         public void OnEnter()
         { 
+            _bossMaster = GetComponent<BossMaster>();
+            _playerMaster = PlayersManager.Instance.GetPlayerMaster(0);
             _currentState = NodeState.Running;  // Reinicia o estado para Running ao entrar
             _moveTween?.Kill();  // Cancela qualquer Tween anterior, se estiver ativo
             _moveTween = null;   // Reseta o Tween
@@ -48,51 +49,46 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             }
 
             // Se o estado for Running e não houver Tween ativo, inicia a animação
-            if (_currentState == NodeState.Running && _moveTween == null)
+            if (_currentState != NodeState.Running || _moveTween != null) return NodeState.Running;
+
+            var playerPosition = _playerMaster.transform.position;
+            var distance = playerPosition.z + distanceOffset;
+
+            var mySequence = DOTween.Sequence();
+            mySequence.AppendInterval(initialDelay);
+
+            // Callback para atualizar a posição antes de mover
+            mySequence.AppendCallback(() =>
             {
-                _bossMaster.IsEmerge = false;
+                transform.position = new Vector3(playerPosition.x, transform.position.y, transform.position.z);
+            });
 
-                // Configurar e iniciar a sequência de animação
-                var playerPosition = _bossMaster.PlayerMaster.transform.position;
-                var distance = playerPosition.z + distanceOffset;
+            // Movimento principal com DOTween e armazenar o Tween
+            _moveTween = transform.DOMoveZ(distance, moveDuration).SetEase(Ease.Linear);
 
-                var mySequence = DOTween.Sequence();
-                mySequence.AppendInterval(initialDelay);
+            // Adicionar o Tween ao Sequence
+            mySequence.Append(_moveTween);
 
-                // Callback para atualizar a posição antes de mover
-                mySequence.AppendCallback(() =>
-                {
-                    transform.position = new Vector3(playerPosition.x, transform.position.y, transform.position.z);
-                });
+            // Ao concluir a animação, definir o estado como Success
+            mySequence.OnComplete(() =>
+            {
+                if (_hasCompleted) return; // Garante que só seja chamado uma vez
+                _currentState = NodeState.Success;
+                _moveTween = null;  // Resetar o Tween
+                _hasCompleted = true;  // Marca que a animação foi completada
+                Invulnerability(false);
+            });
 
-                // Movimento principal com DOTween e armazenar o Tween
-                _moveTween = transform.DOMoveZ(distance, moveDuration).SetEase(Ease.Linear);
+            // Caso a animação seja interrompida (seu mySequence for "Killed"), definir o estado como Failure
+            mySequence.OnKill(() =>
+            {
+                if (_hasCompleted) return;  // Garante que só seja chamado se OnComplete não foi chamado
+                _currentState = NodeState.Failure;
+                _moveTween = null;  // Resetar o Tween
+            });
 
-                // Adicionar o Tween ao Sequence
-                mySequence.Append(_moveTween);
-
-                // Ao concluir a animação, definir o estado como Success
-                mySequence.OnComplete(() =>
-                {
-                    if (_hasCompleted) return; // Garante que só seja chamado uma vez
-                    _currentState = NodeState.Success;
-                    _bossMaster.IsEmerge = true;
-                    _moveTween = null;  // Resetar o Tween
-                    _hasCompleted = true;  // Marca que a animação foi completada
-                    Invulnerability(false);
-                });
-
-                // Caso a animação seja interrompida (seu mySequence for "Killed"), definir o estado como Failure
-                mySequence.OnKill(() =>
-                {
-                    if (_hasCompleted) return;  // Garante que só seja chamado se OnComplete não foi chamado
-                    _currentState = NodeState.Failure;
-                    _moveTween = null;  // Resetar o Tween
-                });
-
-                // Inicia a sequência
-                mySequence.Play();
-            }
+            // Inicia a sequência
+            mySequence.Play();
 
             // Enquanto a animação está em andamento, retorna Running
             return NodeState.Running;
@@ -101,7 +97,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         // Método para configurar o início do comportamento
         private void StartSetup()
         {
-            _bossMaster.IsEmerge = false;
             transform.position = Vector3.zero;  // Reposiciona o Boss no início
             _bossMaster.OnEventBossResetForEnter();
         }

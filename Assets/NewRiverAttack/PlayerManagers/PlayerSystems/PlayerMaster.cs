@@ -3,6 +3,7 @@ using ImmersiveGames.ObjectManagers.Interfaces;
 using ImmersiveGames.PoolManagers.Interface;
 using ImmersiveGames.ShopManagers.ShopProducts;
 using NewRiverAttack.GameManagers;
+using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
@@ -26,6 +27,8 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private PlayerLives _playerLives;
         internal bool AutoPilot;
         internal bool BossController;
+
+        private PlayersManager _playersManager;
 
         #region Player Config Settings (privates)
 
@@ -91,12 +94,11 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             BossController = false;
         }
 
-        /*protected internal override void InitializeObject()
+        protected override void SetInitialReferences()
         {
-            //No caso aqui é pra inicializar da posição zero ao iniciar
-            base.InitializeObject();
-            SavePosition(Vector3.zero);
-        }*/
+            base.SetInitialReferences();
+            _playersManager = PlayersManager.Instance;
+        }
 
         #endregion
 
@@ -111,7 +113,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private void TryReSpawn()
         {
-            var lives = (_playerLives) ? _playerLives.GetLives : GamePlayManagerRef.PlayersDefault.maxLives;
+            var lives = (_playerLives) ? _playerLives.GetLives : _playersManager.PlayersDefault.maxLives;
             GameStatisticManager.instance.OnEventServiceUpdate();
             if (lives <= 0)
             {
@@ -137,9 +139,9 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void Reposition()
         {
             transform.position = new Vector3(GetLastPositionX,
-                GamePlayManagerRef.PlayersDefault.spawnPosition.y,
+                _playersManager.PlayersDefault.spawnPosition.y,
                 GetLastPositionZ);
-            transform.Rotate(GamePlayManagerRef.PlayersDefault.spawnPosition);
+            transform.Rotate(_playersManager.PlayersDefault.spawnPosition);
             OnEventPlayerMasterRespawn();
             Invoke(nameof(ReadyPlayer), timeoutReSpawn);
         }
@@ -209,13 +211,13 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void OnEventPlayerMasterRespawn()
         {
             EventPlayerMasterRespawn?.Invoke();
-            GamePlayManagerRef.OnEventGameRestart();
+            GamePlayManagerRef.OnEventObstacleReload();
         }
 
         private void OnEventPlayerMasterReady()
         {
             EventPlayerMasterReady?.Invoke();
-            GamePlayManagerRef.OnEventGameReady();
+            GamePlayManagerRef.OnEventGameReadyGo();
         }
 
         public void OnEventPlayerMasterCollect(ICollectable collectable)

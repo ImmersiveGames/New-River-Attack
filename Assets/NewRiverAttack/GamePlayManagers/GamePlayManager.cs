@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using ImmersiveGames;
 using ImmersiveGames.CameraManagers;
 using ImmersiveGames.DebugManagers;
@@ -10,7 +8,6 @@ using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.HUBManagers;
 using NewRiverAttack.LevelBuilder;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
-using NewRiverAttack.PlayerManagers.ScriptableObjects;
 using NewRiverAttack.SaveManagers;
 using NewRiverAttack.StateManagers;
 using NewRiverAttack.StateManagers.States;
@@ -24,40 +21,33 @@ namespace NewRiverAttack.GamePlayManagers
 
         [Header("Default Layers")]
         public LayerMask layerEnemies;
-
         
         internal bool IsBossFight;
         private bool _isPause;
-
-        [Header("Player Initialize")]
-        [SerializeField] private PlayersDefaultSettings allPlayersDefaultSettings;
-
-        private readonly List<PlayerMaster> _initializedPlayers = new List<PlayerMaster>();
         
         private LevelBuilderManager _levelBuilderManager;
         private LevelData _actualLevel;
 
-        private bool _activePlayers;
-
         private GameManager _gameManager;
-        private GameOptionsSave _gameOptionsSave;
 
         #endregion
 
         #region Delegates
+        public event Action EventGameReadyGo;
+        public event Action EventGameFinisher;
+        public event Action EventGameReset; //Hard Reset
+        
+        public event Action EventObstacleReload; //SoftReload (Respawn)
+        
         public delegate void PlayerMasterEventHandler(PlayerMaster playerMaster);
-        public event PlayerMasterEventHandler EventPlayerGetHit;
-        public event PlayerMasterEventHandler EventPlayerInitialize;
-      
         public delegate void GamePlayGeneralEventHandler();
         public event GamePlayGeneralEventHandler EventPostStateGameInitialize;
-        public event GamePlayGeneralEventHandler EventGameReady; //inicia após a contagem
-        public event GamePlayGeneralEventHandler EventGameRestart;
+        //public event GamePlayGeneralEventHandler EventGameRestart;
         public event GamePlayGeneralEventHandler EventGameOver;
-        public event GamePlayGeneralEventHandler EventGameFinisher;
+        
         public event GamePlayGeneralEventHandler EventGamePause;
         public event GamePlayGeneralEventHandler EventGameUnPause;
-        public event GamePlayGeneralEventHandler EventGameReload;
+        
         public delegate void GamePlayHudFloatEventHandler(float valueUpdate, int playerIndex);
         public event GamePlayHudFloatEventHandler EventHudRapidFireUpdate;
         public event GamePlayHudFloatEventHandler EventHudRapidFireEnd;
@@ -71,39 +61,36 @@ namespace NewRiverAttack.GamePlayManagers
         #endregion
         
         public static GamePlayManager Instance { get; private set; }
-        
+
+        #region Unity Methods
         private void Awake()
         {
+            SetInitialReferences();
             if (Instance == null)
             {
                 Instance = this;
+                
                 DebugManager.Log<GamePlayManager>("GamePlayManager instanciado.");
             }
             else
             {
                 Destroy(gameObject);
-                DebugManager.LogWarning<GamePlayManager>("Tentativa de criar uma segunda instância de SteamStatsService foi evitada.");
+                DebugManager.LogWarning<GamePlayManager>("Tentativa de criar uma segunda instância de GamePlayManager foi evitada.");
             }
         }
-
-        #region Unity Methods
-        
         private void OnEnable()
         {
-            SetInitialReferences();
-            SetGameMode();
+            BuildLevel();
         }
         private void SetInitialReferences()
         {
             _gameManager = GameManager.instance;
-            _gameOptionsSave = GameOptionsSave.Instance;
             _levelBuilderManager = LevelBuilderManager.Instance;
         }
 
         private void Start()
         {
             _isPause = false;
-            InitializePlayers(allPlayersDefaultSettings);
             StartCoroutine(WaitForInitialization());
         }
 
@@ -120,7 +107,6 @@ namespace NewRiverAttack.GamePlayManagers
 
         private void CleanUpGame()
         {
-            DestroyPlayers();
             _gameManager = null;
             _levelBuilderManager.DestroyLevel();
             _levelBuilderManager = null;
@@ -131,70 +117,19 @@ namespace NewRiverAttack.GamePlayManagers
         #region Controle de Jogo
 
         public bool ShouldBePlayingGame =>
-            GameManager.StateManager.GetCurrentState() is GameStatePlay && _activePlayers && !_isPause;
+            GameManager.StateManager.GetCurrentState is GameStatePlay && PlayersManager.Instance.HasPlayersActive && !_isPause;
         
 
         #endregion
 
-        #region Inicialização de Jogadores
-
-        private void InitializePlayers(PlayersDefaultSettings playersDefaultSettings)
-        {
-            DebugManager.Log<GamePlayManager>($"Inicializando Jogadores");
-
-            var rotationQuaternion = Quaternion.Euler(playersDefaultSettings.spawnRotation);
-            DestroyPlayers();
-            for (var index = 0; index < _gameOptionsSave.playerSettings.Length; index++)
-            {
-                var playerSetting = GameOptionsSave.Instance.playerSettings[index];
-                var playerName = string.IsNullOrEmpty(playerSetting.playerName) ? $"Player {index}" : playerSetting.playerName;
-
-                var newPlayer = Instantiate(playersDefaultSettings.playerPrefab, playersDefaultSettings.spawnPosition, rotationQuaternion);
-                newPlayer.name = playerName;
-
-                var playerMaster = newPlayer.GetComponent<PlayerMaster>();
-                if (playerMaster == null)
-                {
-                    throw new MissingComponentException($"Componente PlayerMaster não encontrado no prefab {playersDefaultSettings.playerPrefab.name}");
-                }
-
-                DebugManager.Log<GamePlayManager>(
-                    $"{playerName} instanciação na posição {playersDefaultSettings.spawnPosition} e rotação {playersDefaultSettings.spawnRotation}");
-                _initializedPlayers.Add(playerMaster);
-                playerMaster.OnEventPlayerMasterInitialize(index, playersDefaultSettings);
-                OnEventPlayerInitialize(playerMaster);
-            }
-        }
-
-        private void DestroyPlayers()
-        {
-            // Verifica se a lista de jogadores inicializados não está vazia
-            if (_initializedPlayers is not { Count: > 0 }) return;
-            // Itera pela lista de jogadores
-            foreach (var playerMaster in _initializedPlayers.ToList().Where(playerMaster => playerMaster != null && playerMaster.gameObject != null))
-            {
-                DestroyImmediate(playerMaster.gameObject);
-            }
-            // Limpa a lista de jogadores após a destruição
-            _initializedPlayers.Clear();
-        }
-
-
-        #endregion
-
+        //Chamado Na Animação pós o texto de "GO"
         public void StartReadyGame()
         {
-            //Aqui é Apos o Go da Animação
-            _activePlayers = true;
-            _initializedPlayers[0].SavePosition(Vector3.zero);
-            OnEventGameReady();
+            OnEventGameReadyGo();
         }
         public void FinisherGame()
         {
             AudioManager.instance.PlayBGMOneShot("Finish");
-            var player = _initializedPlayers[0].transform.position;
-            CameraManager.RepositionEndCamera(new Vector3(player.x,40,player.z));
-            CameraManager.ActiveEndCamera(true);
             OnEventGameFinisher();
         }
 
@@ -239,7 +174,7 @@ namespace NewRiverAttack.GamePlayManagers
             }
         }
 
-        private void SetGameMode()
+        private void BuildLevel()
         {
             _actualLevel = GetLevel(_gameManager.gamePlayMode);
             IsBossFight = _actualLevel.levelType == LevelTypes.Boss;
@@ -249,7 +184,7 @@ namespace NewRiverAttack.GamePlayManagers
 
         private IEnumerator WaitForInitialization()
         {
-            while (!GameManager.StateManager.GetCurrentState().StateFinalization)
+            while (!GameManager.StateManager.GetCurrentState.StateFinalization)
             {
                 yield return null;
             }
@@ -257,39 +192,18 @@ namespace NewRiverAttack.GamePlayManagers
             OnEventPostStateGameInitialize();
             //Aqui são as configurações assim que a cena for totalmente carregada.
         }
-
-        public void SetActiveLevel(LevelData dataLevel)
-        {
-            _actualLevel = dataLevel;
-        }
-
-        public LevelData GetLevelData => _actualLevel;
-        public int GetNumberOfPlayers => _initializedPlayers.Count;
-        public PlayersDefaultSettings PlayersDefault => allPlayersDefaultSettings;
-        public PlayerMaster GetPlayerMaster(int playerIndex)
-        {
-            return _initializedPlayers.ElementAtOrDefault(playerIndex);
-        }
+        
         #endregion
 
         #region Calls
-
-        private void OnEventPlayerInitialize(PlayerMaster playerMaster)
-        {
-            EventPlayerInitialize?.Invoke(playerMaster);
-        }
 
         private void OnEventPostStateGameInitialize()
         {
             EventPostStateGameInitialize?.Invoke();
         }
-        internal void OnEventGameReady()
+        internal void OnEventGameReadyGo()
         {
-            EventGameReady?.Invoke();
-        }
-        internal void OnEventGameRestart()
-        {
-            EventGameRestart?.Invoke();
+            EventGameReadyGo?.Invoke();
         }
         internal void OnEventHudScoreUpdate(int valueUpdate, int playerIndex )
         {
@@ -318,10 +232,6 @@ namespace NewRiverAttack.GamePlayManagers
         {
             EventHudRapidFireUpdate?.Invoke(valueUpdate, playerIndex);
         }
-        internal void OnEventPlayerGetHit(PlayerMaster playerMaster)
-        {
-            EventPlayerGetHit?.Invoke(playerMaster);
-        }
         internal void OnEventGamePause()
         {
             _isPause = true;
@@ -349,21 +259,23 @@ namespace NewRiverAttack.GamePlayManagers
             GameSaveHandler.Instance.SaveGameData();
             EventGameFinisher?.Invoke();
         }
-        internal void OnEventGameReload()
+        
+        internal void OnEventGameReset()
         {
             _isPause = false;
-            
-            CameraManager.ActiveEndCamera(false);
             _levelBuilderManager.CleanUpLevel();
-            SetGameMode();
-            InitializePlayers(allPlayersDefaultSettings);
+            CameraManager.ActiveEndCamera(false);
+            BuildLevel();
+            CameraManager.ActiveStartCamera();
             GameManager.StateManager.ForceChangeState(StatesNames.GameStatePlay.ToString());
             GameSaveHandler.Instance.SaveGameData();
-            EventGameReload?.Invoke();
+            EventGameReset?.Invoke();
+        }
+        internal void OnEventObstacleReload()
+        {
+            EventObstacleReload?.Invoke();
         }
         #endregion
-
-
         
     }
 }

@@ -18,7 +18,7 @@ namespace ImmersiveGames.BehaviorTreeSystem.Decorations
             _condition = condition;
             _onConditionMet = () => 
             {
-                Debug.Log("Executing onConditionMet action.");
+                //Debug.Log("Executing onConditionMet action.");
                 onConditionMet?.Invoke();
             };
         }
@@ -35,7 +35,7 @@ namespace ImmersiveGames.BehaviorTreeSystem.Decorations
             // Verifica a condição de parada
             if (_condition())
             {
-                Debug.Log("Condição atendida no ConditionalNodeDecorator.");
+                //Debug.Log("Condição atendida no ConditionalNodeDecorator.");
                 _onConditionMet?.Invoke();
                 _isConditionMet = true;
             }

@@ -27,6 +27,7 @@ namespace NewRiverAttack.HUDManagers.UI
         private AudioSource _audioSource;
         private PlayerFuel _playerFuel;
         private GamePlayManager _gamePlayManager;
+        private PlayersManager _playersManager;
 
         #region UNITYMETHODS
 
@@ -36,7 +37,8 @@ namespace NewRiverAttack.HUDManagers.UI
         }
         private void Start()
         {
-            _playerMaster = _gamePlayManager.GetPlayerMaster(playerIndex);
+            _playersManager = PlayersManager.Instance;
+            _playerMaster = _playersManager.GetPlayerMaster(playerIndex);
             _playerFuel = _playerMaster.GetComponent<PlayerFuel>();
             _valorMeta = _playerFuel.GetFuel / _playerFuel.GetMaxFuel;
             _playerMaster.EventPlayerMasterGetHit += StopSound;

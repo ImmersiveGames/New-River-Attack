@@ -1,3 +1,4 @@
+using System;
 using Cinemachine;
 using ImmersiveGames.DebugManagers;
 using NewRiverAttack.GamePlayManagers;
@@ -8,22 +9,13 @@ namespace ImmersiveGames.CameraManagers
 {
     public class CameraMaster : MonoBehaviour
     {
-        private CinemachineVirtualCamera _virtualCamera;
-        private GamePlayManager _gamePlayManager;
+        private static CinemachineVirtualCamera _virtualCamera;
 
         private void Awake()
         {
             SetInitialReferences();
-            _gamePlayManager.EventPlayerInitialize += TargetPlayer;
         }
-        
-
-        private void OnDisable()
-        {
-            _gamePlayManager.EventPlayerInitialize -= TargetPlayer;
-        }
-
-        private void TargetPlayer(PlayerMaster playerMaster)
+        public static void TargetPlayer(PlayerMaster playerMaster)
         {
             if (playerMaster != null)
             {
@@ -37,7 +29,6 @@ namespace ImmersiveGames.CameraManagers
         }
         private void SetInitialReferences()
         {
-            _gamePlayManager = GamePlayManager.Instance;
             _virtualCamera = GetComponent<CinemachineVirtualCamera>();
         }
     }

@@ -28,7 +28,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Helpers
             if (!CanShoot()) return;
             shooter.ShootSound();
             // Verificar se há um alvo
-            var target = GamePlayManager.Instance.GetPlayerMaster(0)?.transform;
+            var target = PlayersManager.Instance.GetPlayerMaster(0)?.transform;
             if (target == null) return;
 
             // Direção principal em direção ao alvo

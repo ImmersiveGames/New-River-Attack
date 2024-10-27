@@ -22,7 +22,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         #endregion
         public void OnEnter()
         {
-            BossMaster.IsEmerge = true;
             AnimationEmerge();
         }
 

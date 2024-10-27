@@ -24,8 +24,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         private void Start()
         {
-            GamePlayManager.Instance.EventGameReload += ResetAll;
-            _bossCollider = GetComponent<BossCollider>();
+            GamePlayManager.Instance.EventGameReset += ResetAll;
             CreateBossBehaviors();
         }
 
@@ -38,12 +37,13 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         private void OnDisable()
         {
-            GamePlayManager.Instance.EventGameReload -= ResetAll;
+            GamePlayManager.Instance.EventGameReset -= ResetAll;
         }
 
         private void SetInitialReferences()
         {
             _bossMaster = GetComponent<BossMaster>();
+            _bossCollider = GetComponent<BossCollider>();
         }
 
         private INodeFunctionProvider GetComponentByID<T>(int idNode = 0) where T : Component
@@ -250,7 +250,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             bool GlobalStopCondition() 
             {
                 // Verifica uma condição de interrupção global (por exemplo, uma variável de jogo)
-                Debug.Log($"Condition {_bossCollider.GetHp()}");
+                //Debug.Log($"Condition {_bossCollider.GetHp()}");
                 if (_bossCollider == null) return false;
                 var hp = _bossCollider.GetHp();
                 return hp <= 0;
@@ -259,7 +259,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             NodeState StopTree()
             {
                 //Placeholder: Aqui vai a ação de finalização no caso morte.
-                Debug.Log("STOP TREE");
+                //Debug.Log("STOP TREE");
                 return NodeState.Success;
             }
         }
@@ -268,7 +268,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         private void ResetTree()
         {
             if (_tree == null) return;
-            Debug.Log("Resetando a árvore de comportamento");
+            //Debug.Log("Resetando a árvore de comportamento");
             _tree = null;  // Limpa a árvore atual
             CreateBossBehaviors();  // Recria a árvore de comportamento do zero
         }

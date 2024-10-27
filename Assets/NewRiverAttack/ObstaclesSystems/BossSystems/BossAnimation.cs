@@ -28,7 +28,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             _bossMaster.EventObstacleChangeSkin += SetAnimations;
             _bossMaster.EventObstacleHit += AnimateGotHit;
             _gamePlayBossManager.EventEnterBoss += AnimateEmerge;
-            _gamePlayManager.EventGameRestart += ResetAnimation;
+            _gamePlayManager.EventGameReset += ResetAnimation;
             _bossMaster.EventBossResetForEnter += BossResetForEnter;
         }
 
@@ -37,7 +37,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             _bossMaster.EventObstacleChangeSkin -= SetAnimations;
             _bossMaster.EventObstacleHit -= AnimateGotHit;
             _gamePlayBossManager.EventEnterBoss -= AnimateEmerge;
-            _gamePlayManager.EventGameRestart -= ResetAnimation;
+            _gamePlayManager.EventGameReset -= ResetAnimation;
             _bossMaster.EventBossResetForEnter -= BossResetForEnter;
         }
 

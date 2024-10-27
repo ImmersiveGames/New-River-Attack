@@ -25,6 +25,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private PlayerMaster _playerMaster;
         private GamePlayManager _gamePlayManager;
+        private PlayersManager _playersManager;
 
         private void Awake()
         {
@@ -61,6 +62,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void SetInitialReferences()
         {
             _gamePlayManager = GamePlayManager.Instance;
+            _playersManager = PlayersManager.Instance;
             _playerMaster = GetComponent<PlayerMaster>();
         }
 
@@ -86,7 +88,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private void InitializePlayerController(int indexPlayer, PlayersDefaultSettings playersDefaultSettings)
         {
-            var playerMaster = _gamePlayManager.GetPlayerMaster(indexPlayer);
+            var playerMaster = _playersManager.GetPlayerMaster(indexPlayer);
             var skin = playerMaster.ActualSkin ?? playersDefaultSettings.skinDefault;
             _speedVertical = skin.playerSpeed;
             _speedHorizontal = skin.playerAgility;

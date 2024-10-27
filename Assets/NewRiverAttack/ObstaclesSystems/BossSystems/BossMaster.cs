@@ -7,23 +7,17 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 {
     public sealed class BossMaster : EnemiesMaster
     {
-        public bool IsEmerge { get; set; }
-        public PlayerMaster PlayerMaster { get; private set; }
-
         #region Delagates & Events
-
         public delegate void BossGenericHandler();
         public event BossGenericHandler EventBossResetForEnter;
 
         #endregion
 
         #region Unity Methods
-
         protected override void OnEnable()
         {
             base.OnEnable();
-            GamePlayManagerRef.EventGameReload += ReloadBoss;
-            GamePlayManagerRef.EventPlayerInitialize += GetPlayerMaster;
+            GamePlayManagerRef.EventGameReset += ReloadBoss;
         }
 
         private void Start()
@@ -34,19 +28,11 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         protected override void OnDisable()
         {
             base.OnDisable();
-            GamePlayManagerRef.EventGameReload -= ReloadBoss;
-            GamePlayManagerRef.EventPlayerInitialize -= GetPlayerMaster;
+            GamePlayManagerRef.EventGameReset -= ReloadBoss;
         }
 
         #endregion
-
-
         
-
-        private void GetPlayerMaster(PlayerMaster playerMaster)
-        {
-            PlayerMaster = playerMaster;
-        }
 
         private void ReloadBoss()
         {

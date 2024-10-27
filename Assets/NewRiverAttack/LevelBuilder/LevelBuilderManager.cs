@@ -125,12 +125,12 @@ namespace NewRiverAttack.LevelBuilder
                 }
 
                 GameObject enemySetInstance = null;
-                if (_levelData.setLevelList[_nextSegmentIndex].enemySetObject != null)
+                var prefab = _levelData.setLevelList[_nextSegmentIndex].enemySetObject;
+                if (prefab != null)
                 {
-                    enemySetInstance = Instantiate(_levelData.setLevelList[_nextSegmentIndex].enemySetObject,
-                        newSegment.transform.position, newSegment.transform.rotation, _setsContainer.transform);
+                    enemySetInstance = Instantiate(prefab, newSegment.transform.position, newSegment.transform.rotation, _setsContainer.transform);
+                    var enemiesMaster = enemySetInstance.GetComponentsInChildren<ObjectMaster>(true);
                     enemySetInstance.SetActive(true);
-                    var enemiesMaster = enemySetInstance.GetComponentsInChildren<ObjectMaster>();
                     foreach (var enemy in enemiesMaster)
                     {
                         enemy.InitializeObject();

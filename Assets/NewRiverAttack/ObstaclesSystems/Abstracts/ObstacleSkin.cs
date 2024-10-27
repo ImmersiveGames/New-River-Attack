@@ -21,21 +21,21 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             //RemoveSkin();
             SetInitialReferences();
             ObstacleMaster.EventObstacleDeath += DesativeSkin;
-            _gamePlayManager.EventGameRestart += RestoreSkin;
-            _gamePlayManager.EventGameReload += ReloadSkin;
+            _gamePlayManager.EventObstacleReload += RestoreSkin;
+            _gamePlayManager.EventGameReset += ResetSkin;
             _skin?.SetActive(true);
         }
 
         private void Start()
         {
-            ReloadSkin();
+            ResetSkin();
         }
 
         protected virtual void OnDisable()
         {
             ObstacleMaster.EventObstacleDeath -= DesativeSkin;
-            _gamePlayManager.EventGameRestart -= RestoreSkin;
-            _gamePlayManager.EventGameReload -= ReloadSkin;
+            _gamePlayManager.EventObstacleReload -= RestoreSkin;
+            _gamePlayManager.EventGameReset -= ResetSkin;
         }
 
         #endregion
@@ -45,7 +45,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             _gamePlayManager = GamePlayManager.Instance;
         }
 
-        private void ReloadSkin()
+        private void ResetSkin()
         {
             ChangePlayerSkin(ObstacleMaster.objectDefault, ObstacleMaster.objectDefault.randomSkin);
             _skin.SetActive(true);

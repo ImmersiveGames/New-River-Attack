@@ -9,12 +9,14 @@ namespace ImmersiveGames.TimelineManagers.Abstracts
     {
         private PlayableDirector _playableDirector;
         protected GamePlayManager GamePlayManagerRef;
+        protected PlayersManager PlayersManagerRef;
         protected TimelineManager TimelineManagerRef;
         protected CinemachineVirtualCamera VirtualCamera;
         
         protected virtual void SetInitialReferences()
         {
             GamePlayManagerRef = GamePlayManager.Instance;
+            PlayersManagerRef = PlayersManager.Instance;
             _playableDirector = GetComponent<PlayableDirector>();
             _playableDirector.gameObject.SetActive(true);
             TimelineManagerRef = new TimelineManager(_playableDirector);

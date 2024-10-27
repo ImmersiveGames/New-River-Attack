@@ -38,7 +38,7 @@ namespace NewRiverAttack.EndCreditsManagers
         }
         private IEnumerator WaitForInitialization()
         {
-            while (!GameManager.StateManager.GetCurrentState().StateFinalization)
+            while (!GameManager.StateManager.GetCurrentState.StateFinalization)
             {
                 yield return null;
             }

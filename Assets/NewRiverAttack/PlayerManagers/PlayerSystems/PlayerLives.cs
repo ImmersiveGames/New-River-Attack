@@ -10,6 +10,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
     {
         private PlayerMaster _playerMaster;
         private GamePlayManager _gamePlayManager;
+        private PlayersManager _playersManager;
         private int _lives;
         public int GetLives => _lives;
 
@@ -21,8 +22,8 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _playerMaster.EventPlayerMasterGetHit += LoseLive;
             _playerMaster.EventPlayerMasterInitialize += InitializeLives;
             _playerMaster.EventPlayerMasterStartPowerUp += PowerUpAddLive;
-            _gamePlayManager.EventGameRestart += InitializeLives;
-            _gamePlayManager.EventGameReload += InitializeLives;
+            _gamePlayManager.EventGameReset += InitializeLives;
+            _gamePlayManager.EventObstacleReload += InitializeLives;
         }
 
         private void OnDisable()
@@ -30,8 +31,8 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _playerMaster.EventPlayerMasterGetHit -= LoseLive;
             _playerMaster.EventPlayerMasterInitialize -= InitializeLives;
             _playerMaster.EventPlayerMasterStartPowerUp -= PowerUpAddLive;
-            _gamePlayManager.EventGameRestart -= InitializeLives;
-            _gamePlayManager.EventGameReload -= InitializeLives;
+            _gamePlayManager.EventGameReset -= InitializeLives;
+            _gamePlayManager.EventObstacleReload -= InitializeLives;
         }
 
         #endregion
@@ -39,6 +40,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         {
             _playerMaster = GetComponent<PlayerMaster>();
             _gamePlayManager = GamePlayManager.Instance;
+            _playersManager = PlayersManager.Instance;
         }
         
         private void InitializeLives(int indexPlayer, PlayersDefaultSettings defaultSettings)
@@ -48,7 +50,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         }
         private void InitializeLives()
         {
-            _gamePlayManager.OnEventHudLivesUpdate(_gamePlayManager.PlayersDefault.startLives, _playerMaster.PlayerIndex);
+            _gamePlayManager.OnEventHudLivesUpdate(_playersManager.PlayersDefault.startLives, _playerMaster.PlayerIndex);
         }
 
         private void ChangeLives(int quantity)

@@ -41,8 +41,8 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         private void OnEnable()
         {
             SetInitialReferences();
-            _gamePlayManagers.EventGameRestart += ResetMovement;
-            _gamePlayManagers.EventGameReload += ReloadMovement;
+            _gamePlayManagers.EventObstacleReload += ResetMovement;
+            _gamePlayManagers.EventGameReset += ReloadMovement;
         }
         private void Update()
         {
@@ -51,8 +51,8 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         }
         private void OnDisable()
         {
-            _gamePlayManagers.EventGameRestart -= ResetMovement;
-            _gamePlayManagers.EventGameReload -= ReloadMovement;
+            _gamePlayManagers.EventObstacleReload -= ResetMovement;
+            _gamePlayManagers.EventGameReset -= ReloadMovement;
         }
         
 

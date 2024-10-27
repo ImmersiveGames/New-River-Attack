@@ -9,10 +9,15 @@ namespace ImmersiveGames.CameraManagers
         public CinemachineVirtualCamera[] virtualCameras;
 
         private static CinemachineVirtualCamera _endVirtualCamera;
+        private static CinemachineVirtualCamera _startVirtualCamera;
+
+        private static Transform _startCameraTransform;
         protected override void Awake()
         {
             base.Awake();
             _endVirtualCamera = virtualCameras[^1];
+            _startVirtualCamera = virtualCameras[1];
+            _startCameraTransform = _startVirtualCamera.transform;
         }
 
         public static void RepositionEndCamera(Vector3 zPosition)
@@ -24,5 +29,13 @@ namespace ImmersiveGames.CameraManagers
         {
             _endVirtualCamera.gameObject.SetActive(active);
         }
+        public static void ActiveStartCamera()
+        {
+            _startVirtualCamera.gameObject.SetActive(true);
+            _startVirtualCamera.transform.position  = _startVirtualCamera.transform.position;
+            _startVirtualCamera.transform.rotation  = _startVirtualCamera.transform.rotation;
+        }
+        
+        
     }
 }

@@ -67,7 +67,7 @@ namespace NewRiverAttack.HUBManagers
 
         private IEnumerator WaitForInitialization()
         {
-            while (!GameManager.StateManager.GetCurrentState().StateFinalization)
+            while (!GameManager.StateManager.GetCurrentState.StateFinalization)
             {
                 yield return null;
             }

@@ -19,14 +19,14 @@ namespace NewRiverAttack.ObstaclesSystems.CollectibleSystems
             SetInitialReferences();
             _collectibleMaster.EventMasterCollectCollect += MasterCollectAnimation;
             _collectibleMaster.EventObstacleChangeSkin += SetAnimations;
-            _gamePlayManager.EventGameRestart += ResetCollectableAnimation;
+            _gamePlayManager.EventGameReset += ResetCollectableAnimation;
         }
 
         private void OnDisable()
         {
             _collectibleMaster.EventMasterCollectCollect -= MasterCollectAnimation;
             _collectibleMaster.EventObstacleChangeSkin -= SetAnimations;
-            _gamePlayManager.EventGameRestart -= ResetCollectableAnimation;
+            _gamePlayManager.EventGameReset -= ResetCollectableAnimation;
         }
 
         #endregion

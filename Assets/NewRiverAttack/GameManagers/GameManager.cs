@@ -49,8 +49,8 @@ namespace NewRiverAttack.GameManagers
 
         private void Update()
         {
-            if (StateManager.GetCurrentState().StateInitialized)
-                StateManager.GetCurrentState().UpdateState();
+            if (StateManager.GetCurrentState.StateInitialized)
+                StateManager.GetCurrentState.UpdateState();
         }
 
         // Adicione uma propriedade estática para acessar _stateManager de qualquer lugar

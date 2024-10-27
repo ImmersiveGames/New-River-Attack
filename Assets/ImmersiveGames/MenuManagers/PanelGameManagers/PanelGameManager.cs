@@ -26,7 +26,7 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
             SetupInitial();
             InputGameManager.UnregisterAction("PauseGame", StartPauseMenu );
             InputGameManager.RegisterAction("PauseGame", StartPauseMenu );
-            _gamePlayManager.EventGameReady += SetHudMenu;
+            _gamePlayManager.EventGameReadyGo += SetHudMenu;
             _gamePlayManager.EventGameOver += SetGameOverMenu;
             _gamePlayManager.EventGameFinisher += SetGameComplete;
         }
@@ -38,8 +38,9 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
 
         private void OnDestroy()
         {
-            _gamePlayManager.EventGameReady -= SetHudMenu;
+            _gamePlayManager.EventGameReadyGo -= SetHudMenu;
             _gamePlayManager.EventGameFinisher -= SetGameComplete;
+            _gamePlayManager.EventGameOver -= SetGameOverMenu;
             InputGameManager.UnregisterAction("Pause", StartUnPauseMenu );
             InputGameManager.UnregisterAction("PauseGame", StartPauseMenu );
         }
@@ -138,7 +139,7 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
         public void ButtonReload()
         {
             
-            _gamePlayManager.OnEventGameReload();
+            _gamePlayManager.OnEventGameReset();
             SetupInitial();
         }
         private void SetupInitial()

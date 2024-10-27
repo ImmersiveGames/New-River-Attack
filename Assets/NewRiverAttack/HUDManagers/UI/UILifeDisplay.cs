@@ -1,4 +1,5 @@
 using ImmersiveGames.DebugManagers;
+using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ namespace NewRiverAttack.HUDManagers.UI
         [SerializeField] private GameObject iconLives;
         [SerializeField] private int playerIndex;
         private GamePlayManager _gamePlayManager;
+        private PlayersManager _playersManager;
         private PlayerMaster _playerMaster;
         private PlayerLives _playerLives;
 
@@ -45,7 +47,8 @@ namespace NewRiverAttack.HUDManagers.UI
         private void SetInitialReferences()
         {
             _gamePlayManager = GamePlayManager.Instance;
-            _playerMaster = _gamePlayManager.GetPlayerMaster(playerIndex);
+            _playersManager = PlayersManager.Instance;
+            _playerMaster = _playersManager.GetPlayerMaster(playerIndex);
             _playerLives = _playerMaster.GetComponent<PlayerLives>();
         }
 
