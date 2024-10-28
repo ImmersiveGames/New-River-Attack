@@ -24,7 +24,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         private void Start()
         {
-            GamePlayManager.Instance.EventGameReset += ResetAll;
             CreateBossBehaviors();
         }
 
@@ -33,11 +32,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             if (!GamePlayManager.Instance.ShouldBePlayingGame) return;
             if (_bossMaster.IsDisable && _bossCollider.GetHp() > 0) return;
             _tree?.Tick();  // Atualiza a árvore de comportamento a cada frame
-        }
-
-        private void OnDisable()
-        {
-            GamePlayManager.Instance.EventGameReset -= ResetAll;
         }
 
         private void SetInitialReferences()
@@ -131,7 +125,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             var onEnterMineShoot = NodeFactory.ApplyDecorator(nodeMineShoot, NodeDecorations.OnEnterDecorator,
                 new Dictionary<NodeDecorationsParam, object>
                 {
-                    { NodeDecorationsParam.OnEnter, (Action)mineSpawn.ResetBehavior }
+                    { NodeDecorationsParam.OnEnter, (Action)nodeMineShoot.OnEnter }
                 }
             );
             var repeatConeShot01X5 = NodeFactory.ApplyDecorator(nodeConeShoot01, NodeDecorations.RepeatDecorator,
@@ -255,52 +249,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
                 var hp = _bossCollider.GetHp();
                 return hp <= 0;
             }
-
-            NodeState StopTree()
-            {
-                //Placeholder: Aqui vai a ação de finalização no caso morte.
-                //Debug.Log("STOP TREE");
-                return NodeState.Success;
-            }
-        }
-
-        // Método para resetar a árvore
-        private void ResetTree()
-        {
-            if (_tree == null) return;
-            //Debug.Log("Resetando a árvore de comportamento");
-            _tree = null;  // Limpa a árvore atual
-            CreateBossBehaviors();  // Recria a árvore de comportamento do zero
-        }
-
-        // Método para resetar todo o comportamento, incluindo os nós e a árvore
-        public void ResetAll()
-        {
-            // Resetar comportamentos individuais
-            var enterScene = GetComponent<BossBehaviorEnterScene>();
-            var singleShoot = GetComponentByID<BossBehaviorSingleShoot>(1) as BossBehaviorSingleShoot;
-            var coneShoot = GetComponentByID<BossBehaviorConeShoot>(1) as BossBehaviorConeShoot;
-            var coneShoot02 = GetComponentByID<BossBehaviorConeShoot>(2) as BossBehaviorConeShoot;
-            var mineSpawn = GetComponentByID<BossBehaviorRandomSpawn>(1)as BossBehaviorRandomSpawn;
-            var movement = GetComponent<BossBehaviorMovement>();
-            var emerge = GetComponent<BossBehaviorEmerge>();
-            var submerge = GetComponent<BossBehaviorSubmerge>();
-            var death = GetComponent<BossBehaviorDeath>();
-            var finish = GetComponent<BossBehaviorFinishGame>();
-
-            enterScene?.ResetBehavior();  // Resetar o EnterScene
-            singleShoot?.ResetBehavior();
-            coneShoot?.ResetBehavior();
-            coneShoot02?.ResetBehavior();
-            mineSpawn?.ResetBehavior();
-            movement?.ResetBehavior();
-            emerge?.ResetBehavior();
-            submerge?.ResetBehavior();
-            death?.ResetBehavior();
-            finish?.ResetBehavior();
-
-            // Resetar a árvore de comportamento
-            ResetTree();
         }
 
     }

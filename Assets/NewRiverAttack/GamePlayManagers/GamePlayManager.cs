@@ -4,9 +4,7 @@ using ImmersiveGames;
 using ImmersiveGames.CameraManagers;
 using ImmersiveGames.DebugManagers;
 using NewRiverAttack.GameManagers;
-using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.HUBManagers;
-using NewRiverAttack.PlayerManagers.PlayerSystems;
 using NewRiverAttack.SaveManagers;
 using NewRiverAttack.StateManagers;
 using NewRiverAttack.StateManagers.States;
@@ -16,25 +14,16 @@ namespace NewRiverAttack.GamePlayManagers
 {
     public sealed class GamePlayManager : MonoBehaviour
     {
-        #region Variáveis
-        
-        private bool _isPause;
-
-        #endregion
-
-        #region Delegates
+        #region Actions
         public event Action EventGameReadyGo;
         public event Action EventGameFinisher;
+        public event Action EventGameResetClear;
         public event Action EventGameReset; //Hard Reset
         public event Action EventObstacleReload; //SoftReload (Respawn)
-        
-        public delegate void PlayerMasterEventHandler(PlayerMaster playerMaster);
-        public delegate void GamePlayGeneralEventHandler();
-        public event GamePlayGeneralEventHandler EventPostStateGameInitialize;
-        //public event GamePlayGeneralEventHandler EventGameRestart;
-        public event GamePlayGeneralEventHandler EventGameOver;
-        public event GamePlayGeneralEventHandler EventGamePause;
-        public event GamePlayGeneralEventHandler EventGameUnPause;
+        public event Action EventPostStateGameInitialize;
+        public event Action EventGameOver;
+        public event Action EventGamePause;
+        public event Action EventGameUnPause;
 
         #endregion
         
@@ -59,7 +48,7 @@ namespace NewRiverAttack.GamePlayManagers
 
         private void Start()
         {
-            _isPause = false;
+            IsPause = false;
             StartCoroutine(WaitForInitialization());
         }
 
@@ -78,8 +67,9 @@ namespace NewRiverAttack.GamePlayManagers
         #region Controle de Jogo
 
         public bool ShouldBePlayingGame =>
-            GameManager.StateManager.GetCurrentState is GameStatePlay && PlayersManager.Instance.HasPlayersActive && !_isPause;
-        
+            GameManager.StateManager.GetCurrentState is GameStatePlay && PlayersManager.Instance.HasPlayersActive && !IsPause;
+
+        public bool IsPause { get; private set; }
 
         #endregion
 
@@ -148,13 +138,13 @@ namespace NewRiverAttack.GamePlayManagers
         
         internal void OnEventGamePause()
         {
-            _isPause = true;
+            IsPause = true;
             EventGamePause?.Invoke();
             Time.timeScale = 0;
         }
         internal void OnEventGameUnPause()
         {
-            _isPause = false;
+            IsPause = false;
             EventGameUnPause?.Invoke();
             Time.timeScale = 1;
         }
@@ -173,7 +163,7 @@ namespace NewRiverAttack.GamePlayManagers
         
         internal void OnEventGameReset()
         {
-            _isPause = false;
+            IsPause = false;
             CameraManager.ActiveEndCamera(false);
             CameraManager.ActiveStartCamera();
             GameManager.StateManager.ForceChangeState(StatesNames.GameStatePlay.ToString());
@@ -183,6 +173,10 @@ namespace NewRiverAttack.GamePlayManagers
         internal void OnEventObstacleReload()
         {
             EventObstacleReload?.Invoke();
+        }
+        internal void OnEventGameResetClear()
+        {
+            EventGameResetClear?.Invoke();
         }
         #endregion
         

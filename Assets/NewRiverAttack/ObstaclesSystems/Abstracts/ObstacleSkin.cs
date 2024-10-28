@@ -22,7 +22,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             SetInitialReferences();
             ObstacleMaster.EventObstacleDeath += DesativeSkin;
             _gamePlayManager.EventObstacleReload += RestoreSkin;
-            _gamePlayManager.EventGameReset += ResetSkin;
+            _gamePlayManager.EventGameResetClear += ResetSkin;
             _skin?.SetActive(true);
         }
 
@@ -35,7 +35,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         {
             ObstacleMaster.EventObstacleDeath -= DesativeSkin;
             _gamePlayManager.EventObstacleReload -= RestoreSkin;
-            _gamePlayManager.EventGameReset -= ResetSkin;
+            _gamePlayManager.EventGameResetClear -= ResetSkin;
         }
 
         #endregion

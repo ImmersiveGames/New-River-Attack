@@ -36,6 +36,5 @@ namespace ImmersiveGames.CameraManagers
             _startVirtualCamera.transform.rotation  = _startVirtualCamera.transform.rotation;
         }
         
-        
     }
 }

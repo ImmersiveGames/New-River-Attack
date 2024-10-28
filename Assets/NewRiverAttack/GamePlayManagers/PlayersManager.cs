@@ -147,6 +147,7 @@ namespace NewRiverAttack.GamePlayManagers
 
         private void ResetPlayer()
         {
+            HasPlayersActive = false;
             InitializePlayers(allPlayersDefaultSettings);
         }
 

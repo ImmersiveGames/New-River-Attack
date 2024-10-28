@@ -22,7 +22,7 @@ namespace NewRiverAttack.ObstaclesSystems.AreaEffectSystems
             _areaEffectMaster.EventMasterAreaEffectExit += OffFilledUp;
             _areaEffectMaster.EventObstacleDeath += OffFilledUp;
             _areaEffectMaster.EventObstacleChangeSkin += SetAnimations;
-            _gamePlayManager.EventGameReset -= OffFilledUp;
+            _gamePlayManager.EventGameResetClear -= OffFilledUp;
         }
 
         private void OnDisable()
@@ -31,7 +31,7 @@ namespace NewRiverAttack.ObstaclesSystems.AreaEffectSystems
             _areaEffectMaster.EventMasterAreaEffectExit -= OffFilledUp;
             _areaEffectMaster.EventObstacleDeath -= OffFilledUp;
             _areaEffectMaster.EventObstacleChangeSkin -= SetAnimations;
-            _gamePlayManager.EventGameReset -= OffFilledUp;
+            _gamePlayManager.EventGameResetClear -= OffFilledUp;
         }
 
         #endregion

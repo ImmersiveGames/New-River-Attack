@@ -83,7 +83,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
         public override float GetCadenceShoot => baseCadence;
 
-        public void ResetBehavior()
+        public void OnEnter()
         {
             if (_spawnRoutine != null)
             {

@@ -7,7 +7,7 @@
         protected override void OnEnable()
         {
             base.OnEnable();
-            GamePlayManagerRef.EventGameReset += DestroyMe;
+            GamePlayManagerRef.EventGameResetClear += DestroyMe;
             GamePlayManagerRef.EventObstacleReload += DestroyMe;
         }
 
@@ -22,7 +22,7 @@
         protected override void OnDisable()
         {
             base.OnDisable();
-            GamePlayManagerRef.EventGameReset -= DestroyMe;
+            GamePlayManagerRef.EventGameResetClear -= DestroyMe;
             GamePlayManagerRef.EventObstacleReload -= DestroyMe;
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.Utils;
 using UnityEngine;
@@ -7,10 +8,8 @@ namespace ImmersiveGames.ScenesManager
 {
     public sealed class FadeManager : MonoBehaviour
     {
-        public delegate void FadeManagerEventHandler();
-
-        private event FadeManagerEventHandler EventFadeInStart;
-        public event FadeManagerEventHandler EventFadeOutComplete;
+        public event Action EventFadeInStart;
+        public event Action EventFadeOutComplete;
         
         public static FadeManager Instance { get; private set; }
         
@@ -43,7 +42,7 @@ namespace ImmersiveGames.ScenesManager
         {
             if (_canvasGroup != null)
             {
-                OnEventFadeInStart();
+                await MainThreadDispatcher.EnqueueAsync(OnEventFadeInStart).ConfigureAwait(false);
                 /*MainThreadTaskExecutor.RunOnMainThread(OnEventFadeInStart);*/
                 await FadeAsync(true, durationFadeIn).ConfigureAwait(false);
             }
@@ -58,7 +57,8 @@ namespace ImmersiveGames.ScenesManager
             if (_canvasGroup != null)
             {
                 await FadeAsync(false, durationFadeOut).ConfigureAwait(false);
-                OnEventOutComplete();
+                await MainThreadDispatcher.EnqueueAsync(OnEventOutComplete).ConfigureAwait(false);
+                //OnEventOutComplete();
                 //MainThreadTaskExecutor.RunOnMainThread(OnEventOutComplete);
             }
             else

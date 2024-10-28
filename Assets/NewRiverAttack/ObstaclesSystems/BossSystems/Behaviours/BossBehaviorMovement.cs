@@ -9,7 +9,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
     public class BossBehaviorMovement : MonoBehaviour, INodeFunctionProvider
     {
         [SerializeField] private float bossDistance = 12f;
-        private BossMaster _bossMaster;
         private BossDirections _myDirections;
         private Vector2 _limitX;
         private Vector2 _limitZ;
@@ -18,20 +17,9 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
         private void Awake()
         {
-            _bossMaster = GetComponent<BossMaster>();
             _myDirections = BossDirections.North;
             _limitX = GamePlayBossManager.instance.bossAreaX;
             _limitZ = GamePlayBossManager.instance.bossAreaZ;
-        }
-
-        private void OnEnable()
-        {
-            _bossMaster.EventBossResetForEnter += ResetBehavior;
-        }
-
-        private void OnDisable()
-        {
-            _bossMaster.EventBossResetForEnter -= ResetBehavior;
         }
 
         #endregion
@@ -43,11 +31,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             var newPosition = GetNewPosition(newDirection, playerPosition, bossDistance);
             transform.position = newPosition;
             return NodeState.Success;
-        }
-
-        public void ResetBehavior()
-        {
-            _myDirections = BossDirections.North;
         }
 
         private Vector3 GetNewPosition(BossDirections direction, Vector3 playerPosition, float distance = 10f)

@@ -75,7 +75,8 @@ namespace NewRiverAttack.GamePlayManagers
                     return null;
             }
         }
-        internal void LevelReset()
+
+        private void LevelReset()
         {
             _levelBuilderManager.CleanUpLevel();
             BuildLevel();

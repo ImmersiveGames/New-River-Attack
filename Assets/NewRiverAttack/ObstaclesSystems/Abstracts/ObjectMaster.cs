@@ -14,22 +14,23 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         private Vector3 _savePosition;
         protected GamePlayManager GamePlayManagerRef;
-        public bool ObjectIsReady => !IsDead && !IsDisable && GamePlayManagerRef.ShouldBePlayingGame;   
+        public bool ObjectIsReady => !IsDead && !IsDisable && !GamePlayManagerRef.IsPause;   
         
         #region Unity Methods
 
         private void Awake()
         {
             SetInitialReferences();
+            
         }
 
         protected virtual void OnEnable()
         {
+            ClearObject();
             GamePlayManagerRef.EventPostStateGameInitialize += InitializeObject;
             GamePlayManagerRef.EventGameReadyGo += InitializeObject;
+            GamePlayManagerRef.EventGameOver += ClearObject;
             DebugManager.Log<ObjectMaster>($"Enable - {gameObject.name}");
-            IsDisable = true;
-            IsDead = false;
         }
 
         private void Start()
@@ -42,6 +43,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         {
             GamePlayManagerRef.EventPostStateGameInitialize -= InitializeObject;
             GamePlayManagerRef.EventGameReadyGo -= InitializeObject;
+            GamePlayManagerRef.EventGameOver -= ClearObject;
         }
 
         #endregion
@@ -54,6 +56,11 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         protected virtual void SetInitialReferences()
         {
             GamePlayManagerRef = GamePlayManager.Instance;
+        }
+        private void ClearObject()
+        {
+            IsDisable = true;
+            IsDead = false;
         }
         
         private void SetInitialPosition()

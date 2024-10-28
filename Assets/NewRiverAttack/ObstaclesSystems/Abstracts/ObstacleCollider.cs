@@ -24,7 +24,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         protected virtual void OnEnable()
         {
             
-            GamePlayManager.EventGameReset += ReloadHp;
+            GamePlayManager.EventGameResetClear += ReloadHp;
             GamePlayManager.EventObstacleReload += ReloadHp;
         }
 
@@ -35,7 +35,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         protected virtual void OnDisable()
         {
-            GamePlayManager.EventGameReset -= ReloadHp;
+            GamePlayManager.EventGameResetClear -= ReloadHp;
             GamePlayManager.EventObstacleReload -= ReloadHp;
         }
 

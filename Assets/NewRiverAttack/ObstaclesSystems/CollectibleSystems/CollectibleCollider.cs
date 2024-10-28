@@ -10,7 +10,7 @@ namespace NewRiverAttack.ObstaclesSystems.CollectibleSystems
         {
             base.OnEnable();
             ObstacleMaster.EventObstacleHit += ColliderHit;
-            GamePlayManager.EventGameReset += ColliderReload;
+            GamePlayManager.EventGameResetClear += ColliderReload;
             GamePlayManager.EventObstacleReload += ColliderReload;
         }
 
@@ -18,7 +18,7 @@ namespace NewRiverAttack.ObstaclesSystems.CollectibleSystems
         {
             base.OnDisable();
             ObstacleMaster.EventObstacleHit -= ColliderHit;
-            GamePlayManager.EventGameReset -= ColliderReload;
+            GamePlayManager.EventGameResetClear -= ColliderReload;
             GamePlayManager.EventObstacleReload -= ColliderReload;
         }
 

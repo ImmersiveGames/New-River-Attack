@@ -1,9 +1,7 @@
 using ImmersiveGames.DebugManagers;
 using NewRiverAttack.GamePlayManagers;
-using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 using UnityEngine.UI;
-using GamePlayManager = NewRiverAttack.GamePlayManagers.GamePlayManager;
 
 namespace NewRiverAttack.HUDManagers.UI
 {
@@ -11,73 +9,74 @@ namespace NewRiverAttack.HUDManagers.UI
     {
         [SerializeField] private GameObject iconLives;
         [SerializeField] private int playerIndex;
+        private Sprite _iconSkin;
         private PlayersManager _playersManager;
         private GameHudManager _gameHudManager;
-        private PlayerMaster _playerMaster;
-        private PlayerLives _playerLives;
 
         #region UNITYMETHODS
 
-        private void OnEnable()
+        private void Awake()
         {
             SetInitialReferences();
-
-            _gameHudManager.EventHudLivesUpdate += SetLivesUI;
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            CreateLiveIcon(transform, _playerLives.GetLives);
+            _gameHudManager.EventHudLivesUpdate += SetLivesUI;
+            _iconSkin = _playersManager.GetPlayerMaster(playerIndex).ActualSkin.GetSpriteLife();
+            CreateLiveIcon(transform, _playersManager.PlayersDefault.startLives);
         }
 
         private void OnDisable()
         {
             _gameHudManager.EventHudLivesUpdate -= SetLivesUI;
         }
-
-        private void SetLivesUI(int valueUpdate, int iPlayerIndex)
-        {
-            if (_playerMaster.PlayerIndex != iPlayerIndex) return;
-            DebugManager.Log<UILifeDisplay>($"UPDATE LIVES: {valueUpdate}");
-            CreateLiveIcon(transform, valueUpdate);
-        }
-
         #endregion
 
         private void SetInitialReferences()
         {
             _playersManager = PlayersManager.Instance;
             _gameHudManager = GameHudManager.Instance;
-            _playerMaster = _playersManager.GetPlayerMaster(playerIndex);
-            _playerLives = _playerMaster.GetComponent<PlayerLives>();
         }
-
+        private void SetLivesUI(int valueUpdate, int iPlayerIndex)
+        {
+            if (playerIndex != iPlayerIndex) return;
+            DebugManager.Log<UILifeDisplay>($"UPDATE LIVES: {valueUpdate}");
+            CreateLiveIcon(transform, valueUpdate);
+        }
         private void CreateLiveIcon(Transform parent, int quantity)
         {
             // Garante que a quantidade não seja menor que 0
             quantity = Mathf.Max(quantity, 0);
 
             // Obtém o número atual de filhos
-            int childCount = parent.childCount;
+            var childCount = parent.childCount;
 
             // Calcula a diferença entre a quantidade desejada e o número atual de filhos
-            int diff = quantity - childCount;
+            var diff = quantity - childCount;
 
-            // Se a diferença for negativa, remova os filhos extras
-            if (diff < 0)
+            switch (diff)
             {
-                for (int i = childCount - 1; i >= quantity; i--)
+                // Se a diferença for negativa, remova os filhos extras
+                case < 0:
                 {
-                    Destroy(parent.GetChild(i).gameObject);
+                    for (var i = childCount - 1; i >= quantity; i--)
+                    {
+                        Destroy(parent.GetChild(i).gameObject);
+                    }
+
+                    break;
                 }
-            }
-            // Se a diferença for positiva, adicione os filhos necessários
-            else if (diff > 0)
-            {
-                for (int i = 0; i < diff; i++)
+                // Se a diferença for positiva, adicione os filhos necessários
+                case > 0:
                 {
-                    var icon = Instantiate(iconLives, parent);
-                    icon.GetComponent<Image>().sprite = _playerMaster.ActualSkin.GetSpriteLife();
+                    for (var i = 0; i < diff; i++)
+                    {
+                        var icon = Instantiate(iconLives, parent);
+                        icon.GetComponent<Image>().sprite = _iconSkin;
+                    }
+
+                    break;
                 }
             }
         }

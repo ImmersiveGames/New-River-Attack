@@ -1,4 +1,5 @@
-﻿using NewRiverAttack.GamePlayManagers;
+﻿using System;
+using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace NewRiverAttack.LevelBuilder.Abstracts
         protected virtual void OnEnable()
         {
             SetInitialReferences();
+            GamePlayManagerRef.EventGameResetClear += ResetFinishers;
             InFinisher = false;
         }
 
@@ -35,10 +37,21 @@ namespace NewRiverAttack.LevelBuilder.Abstracts
             if( playerMaster == null) return;
             InFinisher = false;
         }
+
+        private void OnDisable()
+        {
+            GamePlayManagerRef.EventGameResetClear -= ResetFinishers;
+        }
+
         protected virtual void SetInitialReferences()
         {
             InFinisher = false;
             GamePlayManagerRef = GamePlayManager.Instance;
+        }
+        
+        private void ResetFinishers()
+        {
+            InFinisher = false;
         }
     }
 }

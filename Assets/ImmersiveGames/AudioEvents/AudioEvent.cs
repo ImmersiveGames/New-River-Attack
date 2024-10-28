@@ -161,7 +161,7 @@ namespace ImmersiveGames.AudioEvents
             source.loop = audioSample.loop;
         }
 
-        public float GetVolume => Random.Range(audioSample.volume.x, audioSample.volume.y);
+        private float GetVolume => Random.Range(audioSample.volume.x, audioSample.volume.y);
 
         public float GetPitch => Random.Range(audioSample.pitch.x, audioSample.pitch.y);
 

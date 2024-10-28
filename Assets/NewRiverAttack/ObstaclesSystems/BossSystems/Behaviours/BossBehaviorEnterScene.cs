@@ -23,6 +23,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         // Método para reinicializar o estado do nó, usado no reset
         public void OnEnter()
         { 
+            Debug.Log("EnterSCENE");
             _bossMaster = GetComponent<BossMaster>();
             _playerMaster = PlayersManager.Instance.GetPlayerMaster(0);
             _currentState = NodeState.Running;  // Reinicia o estado para Running ao entrar
@@ -30,13 +31,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             _moveTween = null;   // Reseta o Tween
             _hasCompleted = false; // Reseta o controle de conclusão
             Invulnerability(true);
-        }
-
-        // Método para resetar o comportamento (será chamado no ResetAll)
-        public void ResetBehavior()
-        {
-            OnEnter();  // Reutiliza o método OnEnter para resetar o estado e a animação
-            StartSetup();  // Reposiciona o boss no início
         }
 
         // Método que controla a entrada do Boss na cena
@@ -62,7 +56,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             {
                 transform.position = new Vector3(playerPosition.x, transform.position.y, transform.position.z);
             });
-
+            
             // Movimento principal com DOTween e armazenar o Tween
             _moveTween = transform.DOMoveZ(distance, moveDuration).SetEase(Ease.Linear);
 
@@ -94,12 +88,12 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             return NodeState.Running;
         }
 
-        // Método para configurar o início do comportamento
+        /*// Método para configurar o início do comportamento
         private void StartSetup()
         {
             transform.position = Vector3.zero;  // Reposiciona o Boss no início
             _bossMaster.OnEventBossResetForEnter();
-        }
+        }*/
 
         // Retorna a função que será chamada pelo nó de comportamento
         public Func<NodeState> GetNodeFunction()

@@ -1,4 +1,5 @@
-﻿using ImmersiveGames.DebugManagers;
+﻿using System;
+using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ObjectManagers.Interfaces;
 using ImmersiveGames.PoolManagers.Interface;
 using ImmersiveGames.ShopManagers.ShopProducts;
@@ -39,43 +40,20 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         #endregion
 
         #region Delagates
-
-        public delegate void PlayerMasterGeneralHandler();
-
-        public event PlayerMasterGeneralHandler EventPlayerMasterRespawn;
-        public event PlayerMasterGeneralHandler EventPlayerMasterReady;
-        public event PlayerMasterGeneralHandler EventPlayerMasterGetHit;
-        public event PlayerMasterGeneralHandler EventPlayerMasterForceExplode;
-        public delegate void PlayerMasterObstacleHandler(ICollectable collectable);
-
-        public event PlayerMasterObstacleHandler EventPlayerMasterCollect;
-
-        public delegate void PlayerMasterSkinHandler(ShopProductSkin shopProductSkin);
-
-        public event PlayerMasterSkinHandler EventPlayerMasterChangeSkin;
-
-        public delegate void AxisEventHandler(Vector2 dir);
-
-        public event AxisEventHandler EventPlayerMasterAxisMovement;
-
-        public delegate void PlayerMasterEventHandler(int indexPlayer, PlayersDefaultSettings defaultSettings);
-
-        public event PlayerMasterEventHandler EventPlayerMasterInitialize;
-
-        public delegate void PlayerMasterPowerUpHandler(ActivePowerUp activePowerUp);
-
-        public event PlayerMasterPowerUpHandler EventPlayerMasterStartPowerUp;
-        public event PlayerMasterPowerUpHandler EventPlayerMasterEndPowerUp;
-
-        public delegate void PlayerMasterAreaEffectHandler(AreaEffectScriptable areaEffectScriptable);
-
-        public event PlayerMasterAreaEffectHandler EventPlayerMasterAreaEffectStart;
-        public event PlayerMasterAreaEffectHandler EventPlayerMasterAreaEffectEnd;
-
-        public delegate void PlayerMasterToggleHandler(bool active);
-
-        public event PlayerMasterToggleHandler EventPlayerMasterToggleSkin;
-        public event PlayerMasterToggleHandler EventPlayerMasterStopDecoyFuel;
+        public event Action EventPlayerMasterRespawn;
+        public event Action EventPlayerMasterReady;
+        public event Action EventPlayerMasterGetHit;
+        public event Action EventPlayerMasterForceExplode;
+        public event Action<ICollectable> EventPlayerMasterCollect;
+        public event Action<ShopProductSkin> EventPlayerMasterChangeSkin;
+        public event Action<Vector2> EventPlayerMasterAxisMovement;
+        public event Action<int,PlayersDefaultSettings> EventPlayerMasterInitialize;
+        public event Action<ActivePowerUp> EventPlayerMasterStartPowerUp;
+        public event Action<ActivePowerUp> EventPlayerMasterEndPowerUp;
+        public event Action<AreaEffectScriptable> EventPlayerMasterAreaEffectStart;
+        public event Action<AreaEffectScriptable> EventPlayerMasterAreaEffectEnd;
+        public event Action<bool> EventPlayerMasterToggleSkin;
+        public event Action<bool> EventPlayerMasterStopDecoyFuel;
 
         #endregion
 

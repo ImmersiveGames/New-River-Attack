@@ -50,10 +50,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             return NodeState.Success; // Retorna Success após o tiro
         }
 
-        public void ResetBehavior()
-        {
-        }
-
         public override BulletSpawnData CreateBulletData(Vector3 direction, Vector3 position)
         {
             return new BulletSpawnData(

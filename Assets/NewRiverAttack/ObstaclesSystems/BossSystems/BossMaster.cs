@@ -7,12 +7,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 {
     public sealed class BossMaster : EnemiesMaster
     {
-        #region Delagates & Events
-        public delegate void BossGenericHandler();
-        public event BossGenericHandler EventBossResetForEnter;
-
-        #endregion
-
         #region Unity Methods
         protected override void OnEnable()
         {
@@ -37,8 +31,8 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         private void ReloadBoss()
         {
             GamePlayBossManager.instance.SetBoss(this);
-            var behaviors = GetComponent<BossBehaviorHandle>();
-            behaviors.ResetAll();
+            /*var behaviors = GetComponent<BossBehaviorHandle>();
+            behaviors.ResetAll();*/
             gameObject.transform.localScale = Vector3.one;
         }
 
@@ -46,10 +40,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         {
             base.AttemptKillObstacle(playerMaster);
             playerMaster.OnEventPlayerMasterStopDecoyFuel(true);
-        }
-        internal void OnEventBossResetForEnter()
-        {
-            EventBossResetForEnter?.Invoke();
         }
     }
 }

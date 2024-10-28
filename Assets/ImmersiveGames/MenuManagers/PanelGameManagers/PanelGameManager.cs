@@ -1,5 +1,6 @@
 ﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.InputManager;
+using ImmersiveGames.ScenesManager;
 using NewRiverAttack.GameManagers;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.StateManagers;
@@ -16,13 +17,19 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
         private PanelGameComplete _panelGameComplete;
         private GamePlayManager _gamePlayManager;
 
+        private FadeManager _fadeManager;
+
         private bool _inLoad;
         
         #region Unity Methods
 
-        private void OnEnable()
+        private void Awake()
         {
             SetInitialReferences();
+        }
+
+        private void OnEnable()
+        {
             SetupInitial();
             InputGameManager.UnregisterAction("PauseGame", StartPauseMenu );
             InputGameManager.RegisterAction("PauseGame", StartPauseMenu );
@@ -54,6 +61,7 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
             _panelGamePause = GetComponentInChildren<PanelGamePause>(true);
             _panelGameOver = GetComponentInChildren<PanelGameOver>(true);
             _panelGameComplete = GetComponentInChildren<PanelGameComplete>(true);
+            _fadeManager = FadeManager.Instance;
             
         }
         private void SetHudMenu()
@@ -127,7 +135,6 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
 
         public void ButtonContinue()
         {
-            if (!_gamePlayManager.ShouldBePlayingGame) return;
             if (_inLoad) return;
             _inLoad = true;
             DebugManager.Log<PanelGameHud>($"CALL UNPAUSE {_gamePlayManager.ShouldBePlayingGame}");
@@ -135,12 +142,25 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
             _gamePlayManager.OnEventGameUnPause();
             _inLoad = false;
         }
-
-        public void ButtonReload()
+        public async void ButtonReset()
         {
+            if (_inLoad) return;
+            _inLoad = true;
+
+            // Inicia o fade-in
+            await _fadeManager.FadeInAsync().ConfigureAwait(true);
+
+            _gamePlayManager.OnEventGameResetClear();
             
-            _gamePlayManager.OnEventGameReset();
+            // Realiza o reset das configurações
             SetupInitial();
+
+            _gamePlayManager.OnEventGameReset();
+
+            // Inicia o fade-out após o reset estar completo
+            await _fadeManager.FadeOutAsync().ConfigureAwait(true);
+
+            _inLoad = false;
         }
         private void SetupInitial()
         {
@@ -148,6 +168,7 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
             _panelGamePause.gameObject.SetActive(false);
             _panelGameOver.gameObject.SetActive(false);
             _panelGameComplete.gameObject.SetActive(false);
+            
         }
     }
 }

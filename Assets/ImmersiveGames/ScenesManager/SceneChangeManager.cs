@@ -14,15 +14,14 @@ namespace ImmersiveGames.ScenesManager
         public Slider loadingProgressBar;
 
         public static async Task StartSceneTransitionAsync(IState nextState, string previousSceneName, LoadSceneMode loadSceneMode, 
-            bool unloadPreviousAdditiveScene)
+            bool unloadPreviousAdditiveScene, bool reloadIfSameScene = false) // Novo parâmetro opcional
         {
-            if (nextState == null || nextState.SceneName == previousSceneName || !nextState.RequiresSceneLoad)
+            if (nextState == null || (nextState.SceneName == previousSceneName && !reloadIfSameScene) || !nextState.RequiresSceneLoad)
                 return;
 
             await MainThreadDispatcher.EnqueueAsync(async () =>
             {
-                if (SceneManager.GetActiveScene().name == nextState.SceneName) return;
-
+                // Remove a verificação do nome da cena ativa para permitir o recarregamento
                 if (unloadPreviousAdditiveScene && AdditiveScenes.Count > 0)
                 {
                     var previousAdditiveScene = AdditiveScenes.Pop();
@@ -37,6 +36,7 @@ namespace ImmersiveGames.ScenesManager
                 }
             }).ConfigureAwait(false);
         }
+
 
         private static async Task UnloadSceneAsync(string sceneName)
         {

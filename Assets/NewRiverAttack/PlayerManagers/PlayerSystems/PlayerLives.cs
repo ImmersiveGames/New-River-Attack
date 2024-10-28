@@ -12,8 +12,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private GamePlayManager _gamePlayManager;
         private GameHudManager _gameHudManager;
         private PlayersManager _playersManager;
-        private int _lives;
-        public int GetLives => _lives;
+        public int GetLives { get; private set; }
 
         #region Unity Methodos
 
@@ -23,8 +22,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _playerMaster.EventPlayerMasterGetHit += LoseLive;
             _playerMaster.EventPlayerMasterInitialize += InitializeLives;
             _playerMaster.EventPlayerMasterStartPowerUp += PowerUpAddLive;
-            _gamePlayManager.EventGameReset += InitializeLives;
-            _gamePlayManager.EventObstacleReload += InitializeLives;
+            _gamePlayManager.EventGameResetClear += ResetLives;
         }
 
         private void OnDisable()
@@ -32,8 +30,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _playerMaster.EventPlayerMasterGetHit -= LoseLive;
             _playerMaster.EventPlayerMasterInitialize -= InitializeLives;
             _playerMaster.EventPlayerMasterStartPowerUp -= PowerUpAddLive;
-            _gamePlayManager.EventGameReset -= InitializeLives;
-            _gamePlayManager.EventObstacleReload -= InitializeLives;
+            _gamePlayManager.EventGameResetClear -= ResetLives;
         }
 
         #endregion
@@ -47,18 +44,18 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         
         private void InitializeLives(int indexPlayer, PlayersDefaultSettings defaultSettings)
         {
-            _lives = defaultSettings.startLives;
-            _gameHudManager.OnEventHudLivesUpdate(_lives, _playerMaster.PlayerIndex);
+            GetLives = defaultSettings.startLives;
+            _gameHudManager.OnEventHudLivesUpdate(GetLives, _playerMaster.PlayerIndex);
         }
-        private void InitializeLives()
+        private void ResetLives()
         {
-            _gameHudManager.OnEventHudLivesUpdate(_playersManager.PlayersDefault.startLives, _playerMaster.PlayerIndex);
+            GetLives = _playersManager.PlayersDefault.startLives;
         }
 
         private void ChangeLives(int quantity)
         {
-            _lives += quantity;
-            _gameHudManager.OnEventHudLivesUpdate(_lives, _playerMaster.PlayerIndex);
+            GetLives = Mathf.Max(0, GetLives + quantity);
+            _gameHudManager.OnEventHudLivesUpdate(GetLives, _playerMaster.PlayerIndex);
         }
         
         private void LoseLive()

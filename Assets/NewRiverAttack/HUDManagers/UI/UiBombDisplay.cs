@@ -1,3 +1,4 @@
+using System;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using TMPro;
@@ -20,6 +21,11 @@ namespace NewRiverAttack.HUDManagers.UI
 
         #region UNITYMETHODS
 
+        private void Awake()
+        {
+            SetInitialReferences();
+        }
+
         private void OnEnable()
         {
             _gameHudManager.EventHudBombUpdate += UpdateBombs;
@@ -27,7 +33,8 @@ namespace NewRiverAttack.HUDManagers.UI
 
         private void Start()
         {
-            SetInitialReferences();
+            var playerMaster = _playersManager.GetPlayerMaster(indexPlayer);
+            _playerBombs = playerMaster.GetComponent<PlayerBombs>();
             UpdateBombs(_playerBombs.GetBomb, indexPlayer);
         }
 
@@ -42,8 +49,6 @@ namespace NewRiverAttack.HUDManagers.UI
         {
             _gameHudManager = GameHudManager.Instance;
             _playersManager = PlayersManager.Instance;
-            var playerMaster = _playersManager.GetPlayerMaster(indexPlayer);
-            _playerBombs = playerMaster.GetComponent<PlayerBombs>();
         }
 
         private void UpdateBombs(int valueUpdate, int playerIndex)
