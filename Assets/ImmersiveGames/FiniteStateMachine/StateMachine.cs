@@ -44,8 +44,7 @@ namespace ImmersiveGames.FiniteStateMachine
          _currentState = state;
       
          _transitions.TryGetValue(_currentState.GetType(), out _currentTransitions);
-         if (_currentTransitions == null)
-            _currentTransitions = EmptyTransitions;
+         _currentTransitions ??= EmptyTransitions;
       
          _currentState.OnEnter();
       }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ImmersiveGames.BehaviorTreeSystem.Interface;
 
 namespace ImmersiveGames.BehaviorTreeSystem.Nodes
@@ -18,8 +19,8 @@ namespace ImmersiveGames.BehaviorTreeSystem.Nodes
 
         public NodeState Tick()
         {
-            bool isAnyRunning = false;
-            int successCount = 0;
+            var isAnyRunning = false;
+            var successCount = 0;
 
             foreach (var node in _nodes)
             {
@@ -39,15 +40,19 @@ namespace ImmersiveGames.BehaviorTreeSystem.Nodes
                         if (_requireAllSuccess) 
                             return NodeState.Failure; // Falha imediata se todos precisarem ter sucesso
                         break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
 
-            if (_requireAllSuccess && successCount == _nodes.Count) 
-                return NodeState.Success;
-            if (!_requireAllSuccess && successCount > 0) 
-                return NodeState.Success;
-
-            return isAnyRunning ? NodeState.Running : NodeState.Failure;
+            switch (_requireAllSuccess)
+            {
+                case true when successCount == _nodes.Count:
+                case false when successCount > 0:
+                    return NodeState.Success;
+                default:
+                    return isAnyRunning ? NodeState.Running : NodeState.Failure;
+            }
         }
 
         public void OnEnter()

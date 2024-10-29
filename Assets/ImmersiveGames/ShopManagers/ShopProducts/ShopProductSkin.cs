@@ -4,6 +4,7 @@ using ImmersiveGames.ShopManagers.Abstracts;
 using ImmersiveGames.ShopManagers.Interfaces;
 using NewRiverAttack.SaveManagers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ImmersiveGames.ShopManagers.ShopProducts
 {
@@ -24,14 +25,15 @@ namespace ImmersiveGames.ShopManagers.ShopProducts
         public float maxFuel;
         [Range(1f,5f)]
         public float cadenceFuel;
+        [FormerlySerializedAs("cadenceShoot")]
         [Header("Shooting Settings")]
         [Range(0.1f,2f)] 
-        public float cadenceShoot;
+        public float cooldownShoot;
         [Range(2f,10f)] 
         public float bulletSpeedMultiply;
         [Range(0,10)] 
         public int bulletDamage;
-        [Range(0,10)] 
+        [Header("Collider Settings")][Range(0,10)] 
         public int colliderDamage;
         
         
@@ -53,7 +55,7 @@ namespace ImmersiveGames.ShopManagers.ShopProducts
         }
         public float GetRateShoot()
         {
-            return 1 - CalculateRelativeValue(0.1f, 1.5f,cadenceShoot);
+            return 1 - CalculateRelativeValue(0.1f, 1.5f,cooldownShoot);
         }
         private static float CalculateRelativeValue(float min, float max, float current)
         {

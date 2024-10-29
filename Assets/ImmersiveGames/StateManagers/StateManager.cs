@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ScenesManager;
 using ImmersiveGames.StateManagers.Interfaces;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace ImmersiveGames.StateManagers

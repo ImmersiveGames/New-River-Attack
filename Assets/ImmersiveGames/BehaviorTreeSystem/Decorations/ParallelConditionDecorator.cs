@@ -19,21 +19,16 @@ namespace ImmersiveGames.BehaviorTreeSystem.Decorations
         public NodeState Tick()
         {
             // Verifica a condição paralela
-            if (_condition())
-            {
-                // Executa a ação paralela se a condição for verdadeira
-                var result = _parallelActionNode.Tick();
+            if (!_condition()) return _decoratedNode.Tick();
+            // Executa a ação paralela se a condição for verdadeira
+            var result = _parallelActionNode.Tick();
 
-                // Se a ação paralela terminar, retorna o resultado
-                if (result == NodeState.Success || result == NodeState.Failure)
-                {
-                    _parallelActionNode.OnExit();
-                    return result;
-                }
-            }
+            // Se a ação paralela terminar, retorna o resultado
+            if (result is not (NodeState.Success or NodeState.Failure)) return _decoratedNode.Tick();
+            _parallelActionNode.OnExit();
+            return result;
 
             // Continua com o comportamento do nó decorado
-            return _decoratedNode.Tick();
         }
 
         public void OnEnter()

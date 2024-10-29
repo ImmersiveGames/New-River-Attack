@@ -26,8 +26,6 @@ namespace ImmersiveGames.PoolManagers
             DebugManager.LogError<PoolObjectManager>($"Pool {poolName} não encontrado!");
             return null;
         }
-
-
         public Transform GetPool(string poolName)
         {
             return _objectPools.TryGetValue(poolName, out var pool) ? pool.GetRoot() : null;

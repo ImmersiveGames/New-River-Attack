@@ -33,20 +33,13 @@ namespace ImmersiveGames.BehaviorTreeSystem.Nodes
             var result = _currentNode.Tick();
 
             // Se o nó atual retornar Success ou Failure, conclui a execução do RandomSelectorNode
-            if (result is NodeState.Success or NodeState.Failure)
-            {
-                _currentNode.OnExit();
-                _currentTimes++;
+            if (result is not (NodeState.Success or NodeState.Failure)) return NodeState.Running;
+            _currentNode.OnExit();
+            _currentTimes++;
 
-                // Se houver execuções restantes, seleciona um novo nó aleatório
-                if (_currentTimes >= _maxTimes) return NodeState.Success;
-                SelectRandomNode();
-                return NodeState.Running;
-
-                // Retorna Success após alcançar o número máximo de execuções
-            }
-
-            // Continua executando enquanto o nó atual ainda está Running
+            // Se houver execuções restantes, seleciona um novo nó aleatório
+            if (_currentTimes >= _maxTimes) return NodeState.Success;
+            SelectRandomNode();
             return NodeState.Running;
         }
 

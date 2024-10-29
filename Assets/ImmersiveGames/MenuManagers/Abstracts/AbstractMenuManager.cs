@@ -42,11 +42,9 @@ namespace ImmersiveGames.MenuManagers.Abstracts
                 foreach (var menu in _menus)
                 {
                     menu.menuGameObject.SetActive(false);
-                    if (menu.virtualCameraBase != null)
-                    {
-                        menu.virtualCameraBase.Priority = 0;
-                        menu.virtualCameraBase.gameObject.SetActive(false);
-                    }
+                    if (menu.virtualCameraBase == null) continue;
+                    menu.virtualCameraBase.Priority = 0;
+                    menu.virtualCameraBase.gameObject.SetActive(false);
                 }
 
                 // Atualiza o índice do menu atual

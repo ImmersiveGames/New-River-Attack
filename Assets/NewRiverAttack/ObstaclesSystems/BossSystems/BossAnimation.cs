@@ -24,7 +24,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         private void OnEnable()
         {
             SetInitialReferences();
-            _bossMaster.EventObstacleChangeSkin += SetAnimations;
+            _bossMaster.EventObjectChangeSkin += SetAnimations;
             _bossMaster.EventObstacleHit += AnimateGotHit;
             _gamePlayBossManager.EventEnterBoss += AnimateEmerge;
             _gamePlayManager.EventGameResetClear += ResetAnimation;
@@ -32,7 +32,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
         private void OnDisable()
         {
-            _bossMaster.EventObstacleChangeSkin -= SetAnimations;
+            _bossMaster.EventObjectChangeSkin -= SetAnimations;
             _bossMaster.EventObstacleHit -= AnimateGotHit;
             _gamePlayBossManager.EventEnterBoss -= AnimateEmerge;
             _gamePlayManager.EventGameResetClear -= ResetAnimation;

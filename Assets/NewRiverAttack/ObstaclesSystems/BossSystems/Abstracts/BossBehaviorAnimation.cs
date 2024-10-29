@@ -17,12 +17,12 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Abstracts
         }
         private void OnEnable()
         {
-            BossMaster.EventObstacleChangeSkin += UpdateSkin;
+            BossMaster.EventObjectChangeSkin += UpdateSkin;
         }
 
         private void OnDisable()
         {
-            BossMaster.EventObstacleChangeSkin -= UpdateSkin;
+            BossMaster.EventObjectChangeSkin -= UpdateSkin;
         }
 
         #endregion

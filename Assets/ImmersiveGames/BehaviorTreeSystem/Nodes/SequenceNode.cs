@@ -41,13 +41,11 @@ namespace ImmersiveGames.BehaviorTreeSystem.Nodes
 
             // Se o nó atual teve sucesso, avança para o próximo
             _currentNodeIndex++;
-            if (_currentNodeIndex < _nodes.Count)
-            {
-                _nodes[_currentNodeIndex].OnEnter(); // Inicializa o próximo nó
-                return NodeState.Running; // Continua a execução
-            }
+            if (_currentNodeIndex >= _nodes.Count)
+                return NodeState.Success; // Todos os nós foram executados com sucesso
+            _nodes[_currentNodeIndex].OnEnter(); // Inicializa o próximo nó
+            return NodeState.Running; // Continua a execução
 
-            return NodeState.Success; // Todos os nós foram executados com sucesso
         }
 
         public void OnExit()

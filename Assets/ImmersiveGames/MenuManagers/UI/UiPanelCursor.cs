@@ -35,10 +35,7 @@ namespace ImmersiveGames.MenuManagers.UI
         {
             _isLoadMenu = false;
         }
-
         public GameObject GetCurrentActiveButton => _currentActiveButton;
-        
-        public void ClearCurrentActiveButton() => _currentActiveButton = null; // Método atualizado
 
         private void SetCursor(RectTransform reference)
         {

@@ -20,10 +20,10 @@ using NewRiverAttack.HUDManagers.UI;
 using NewRiverAttack.LevelBuilder;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.BossSystems;
-using NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours;
 using NewRiverAttack.ObstaclesSystems.BridgeSystems;
 using NewRiverAttack.ObstaclesSystems.CollectibleSystems;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
+using NewRiverAttack.ObstaclesSystems.ShootStates;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using NewRiverAttack.SaveManagers;
 using NewRiverAttack.ShoppingSystems.SimpleShopping;
@@ -87,6 +87,9 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<GameStateGameOver>(DebugManager.DebugLevels.None);
             
             
+            DebugManager.SetScriptDebugLevel<PatrolState>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<ShootState>(DebugManager.DebugLevels.None);
+            
             //Players
             DebugManager.SetScriptDebugLevel<PlayerMaster>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerController>(DebugManager.DebugLevels.None);
@@ -97,7 +100,7 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<PlayerCollisions>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerLives>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<UILifeDisplay>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<PlayerShootOld>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<PlayerShoot>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerBombs>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<Bullets>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<BulletBombPlayer>(DebugManager.DebugLevels.None);

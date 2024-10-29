@@ -61,10 +61,10 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             #region Providers Creators
 
             var enterScene = GetComponent<BossBehaviorEnterScene>();
-            var singleShoot = GetComponentByID<BossBehaviorSingleShoot>(1);
+            /*var singleShoot = GetComponentByID<BossBehaviorSingleShoot>(1);
             var coneShoot = GetComponentByID<BossBehaviorConeShoot>(1);
             var coneShoot02 = GetComponentByID<BossBehaviorConeShoot>(2);
-            var mineSpawn = GetComponentByID<BossBehaviorRandomSpawn>(1);
+            var mineSpawn = GetComponentByID<BossBehaviorRandomSpawn>(1);*/
             var movement = GetComponent<BossBehaviorMovement>();
             var emerge = GetComponent<BossBehaviorEmerge>();
             var submerge = GetComponent<BossBehaviorSubmerge>();
@@ -77,10 +77,10 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
             // Cria Nodes
             var nodeEnterScene = NodeFactory.CreateNodeFromFunctionProvider(enterScene);
-            var nodeSingleShoot = NodeFactory.CreateNodeFromFunctionProvider(singleShoot);
+            /*var nodeSingleShoot = NodeFactory.CreateNodeFromFunctionProvider(singleShoot);
             var nodeConeShoot01 = NodeFactory.CreateNodeFromFunctionProvider(coneShoot);
             var nodeConeShoot02 = NodeFactory.CreateNodeFromFunctionProvider(coneShoot02);
-            var nodeMineShoot = NodeFactory.CreateNodeFromFunctionProvider(mineSpawn);
+            var nodeMineShoot = NodeFactory.CreateNodeFromFunctionProvider(mineSpawn);*/
             var nodeMovement = NodeFactory.CreateNodeFromFunctionProvider(movement);
             var nodeEmerge = NodeFactory.CreateNodeFromFunctionProvider(emerge);
             var nodeSubmerge = NodeFactory.CreateNodeFromFunctionProvider(submerge);
@@ -122,7 +122,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
                 }
             );
             
-            var onEnterMineShoot = NodeFactory.ApplyDecorator(nodeMineShoot, NodeDecorations.OnEnterDecorator,
+            /*var onEnterMineShoot = NodeFactory.ApplyDecorator(nodeMineShoot, NodeDecorations.OnEnterDecorator,
                 new Dictionary<NodeDecorationsParam, object>
                 {
                     { NodeDecorationsParam.OnEnter, (Action)nodeMineShoot.OnEnter }
@@ -151,7 +151,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
                 {
                     { NodeDecorationsParam.Times, 6 }
                 }
-            );
+            );*/
             var onEnterDeath = NodeFactory.ApplyDecorator(nodeDeath, NodeDecorations.OnEnterDecorator,
                 new Dictionary<NodeDecorationsParam, object>
                 {
@@ -172,41 +172,41 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             
             var sequenceNorth = new SequenceNode(new List<INode>
             {
-                repeatConeShot01X3,
+                //repeatConeShot01X3,
                 nodeWaitSec,
-                onEnterMineShoot,
+                //onEnterMineShoot,
                 nodeWaitSec,
-                repeatConeShot01X5,
+                //repeatConeShot01X5,
                 nodeWaitSec,
                 
                 onEnterSubmerge,
-                nodeSingleShoot,
+                //nodeSingleShoot,
                 nodeMovement,
                 onEnterExitEmerge,
                 nodeWaitSec
             });
             var sequenceSouth = new SequenceNode(new List<INode>
             {
-                onEnterMineShoot,
+                //onEnterMineShoot,
                 nodeWaitSec,
-                repeatConeShot02X6,
+                //repeatConeShot02X6,
                 nodeWaitSec,
                 
                 onEnterSubmerge,
-                nodeSingleShoot,
+                //nodeSingleShoot,
                 nodeMovement,
                 onEnterExitEmerge,
                 nodeWaitSec,
             });
             var sequenceSide = new SequenceNode(new List<INode>
             {
-                repeatConeShot02X4,
+                //repeatConeShot02X4,
                 nodeWaitSec,
-                repeatConeShot02X4,
+                //repeatConeShot02X4,
                 nodeWaitSec,
                 
                 onEnterSubmerge,
-                nodeSingleShoot,
+                //nodeSingleShoot,
                 nodeMovement,
                 onEnterExitEmerge,
                 nodeWaitSec,

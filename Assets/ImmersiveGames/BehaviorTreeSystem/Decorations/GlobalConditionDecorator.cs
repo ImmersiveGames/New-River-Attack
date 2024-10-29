@@ -19,22 +19,19 @@ namespace ImmersiveGames.BehaviorTreeSystem.Decorations
         public NodeState Tick()
         {
             // Verifica a condição global
-            if (_condition())
+            if (!_condition()) return _decoratedNode.Tick();
+            // Se a condição for verdadeira, executa o nó de substituição (override)
+            var result = _overrideNode.Tick();
+
+            // Finaliza a execução do overrideNode quando ele termina
+            if (result is NodeState.Success or NodeState.Failure)
             {
-                // Se a condição for verdadeira, executa o nó de substituição (override)
-                var result = _overrideNode.Tick();
-
-                // Finaliza a execução do overrideNode quando ele termina
-                if (result is NodeState.Success or NodeState.Failure)
-                {
-                    _overrideNode.OnExit();
-                }
-
-                return result;
+                _overrideNode.OnExit();
             }
 
+            return result;
+
             // Caso a condição não seja verdadeira, continua com o comportamento original
-            return _decoratedNode.Tick();
         }
 
         public void OnEnter()

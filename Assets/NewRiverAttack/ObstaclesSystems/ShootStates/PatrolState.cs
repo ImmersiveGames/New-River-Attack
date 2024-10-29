@@ -3,6 +3,7 @@ using ImmersiveGames.FiniteStateMachine;
 using ImmersiveGames.ObjectManagers.DetectManagers;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
+using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.ShootStates
 {

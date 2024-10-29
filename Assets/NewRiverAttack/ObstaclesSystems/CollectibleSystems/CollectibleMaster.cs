@@ -1,4 +1,5 @@
-﻿using ImmersiveGames.ObjectManagers.Interfaces;
+﻿using System;
+using ImmersiveGames.ObjectManagers.Interfaces;
 using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
@@ -8,7 +9,7 @@ namespace NewRiverAttack.ObstaclesSystems.CollectibleSystems
 {
     public class CollectibleMaster : ObstacleMaster, ICollectable
     {
-        internal event ObstacleGenericHandler EventMasterCollectCollect;
+        internal event Action EventMasterCollectCollect;
 
         public void Collect(PlayerMaster playerMaster)
         {

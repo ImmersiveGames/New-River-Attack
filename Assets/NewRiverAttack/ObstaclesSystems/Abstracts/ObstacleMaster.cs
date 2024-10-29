@@ -15,8 +15,6 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         }
         
         #region Delagates & Events
-        public delegate void ObstacleGenericHandler();
-        public event ObstacleGenericHandler EventObstacleChangeSkin;
         public delegate void ObstacleMasterHandler(PlayerMaster playerMaster);
         public event ObstacleMasterHandler EventObstacleDeath;
         public event ObstacleMasterHandler EventObstacleHit;
@@ -61,11 +59,6 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         {
             AttemptKillObstacle(playerMaster);
             EventObstacleDeath?.Invoke(playerMaster);
-        }
-
-        internal void OnObstacleChangeSkin()
-        {
-            EventObstacleChangeSkin?.Invoke();
         }
     }
 }

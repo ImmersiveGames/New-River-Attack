@@ -1,4 +1,5 @@
-﻿using ImmersiveGames.DebugManagers;
+﻿using System;
+using ImmersiveGames.DebugManagers;
 using NewRiverAttack.GamePlayManagers;
 using UnityEngine;
 
@@ -15,6 +16,8 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         private Vector3 _savePosition;
         protected GamePlayManager GamePlayManagerRef;
         public bool ObjectIsReady => !IsDead && !IsDisable && !GamePlayManagerRef.IsPause;   
+        
+        public event Action EventObjectChangeSkin;
         
         #region Unity Methods
 
@@ -84,6 +87,10 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         protected internal void SavePosition(Vector3 myPosition)
         {
             _savePosition = myPosition;
+        }
+        internal void OnObjectChangeSkin()
+        {
+            EventObjectChangeSkin?.Invoke();
         }
     }
 }

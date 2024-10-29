@@ -177,22 +177,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8232004363638800602}
-    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4051715128356781852}
-    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4834472796722127644}
-    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1158815908821011756}
-    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4930180847178675582}
     - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
         type: 3}
@@ -210,6 +194,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1074189007053486126}
+    - targetCorrespondingSourceObject: {fileID: 7841797180397970709, guid: c4bed2524d6c2be458e7205159ddbb5b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4074855950840237639}
   m_SourcePrefab: {fileID: 100100000, guid: c4bed2524d6c2be458e7205159ddbb5b, type: 3}
 --- !u!1 &3351906142001725201 stripped
 GameObject:
@@ -244,106 +232,6 @@ MonoBehaviour:
   initialDelay: 3
   moveDuration: 5
   distanceOffset: 40
---- !u!114 &8232004363638800602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3351906142001725201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74274faca1234eee9de2cc3efbe285f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabBullet: {fileID: 3926336138218741227, guid: e2ee9b9e816edbe4ab423fff2b1d9ba4,
-    type: 3}
-  audioShoot: {fileID: 11400000, guid: 7051e6f622b4c004b8243bebe05e80da, type: 2}
-  initialPoolSize: 20
-  persistent: 0
-  poolName: PoolMines
-  idNode: 1
-  itemCount: 8
-  safeDistance: 2
-  safeEnemyDistance: 3
-  itemDamage: 1
-  itemSpeed: 0
-  itemLifetime: 5
-  baseCadence: 3
-  cadenceVariance: 0.5
---- !u!114 &4051715128356781852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3351906142001725201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9a42975e8f44367b065d3aaf4bfd676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabBullet: {fileID: 834139095582931611, guid: 6e08394c7f60711468021abfca52a7a6,
-    type: 3}
-  audioShoot: {fileID: 11400000, guid: 32c7cdb10f78e9c459e69b46a28733a8, type: 2}
-  initialPoolSize: 2
-  persistent: 0
-  poolName: PoolGas
-  idNode: 1
-  bulletDamage: 0
-  bulletSpeed: 10
-  bulletLifetime: 6
-  baseCadence: 1
---- !u!114 &4834472796722127644
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3351906142001725201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b4c22ebc407af44e8a381827d7e43d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabBullet: {fileID: 1678599070653623651, guid: 39f17979f49e9aa4a8581a235928267c,
-    type: 3}
-  audioShoot: {fileID: 11400000, guid: 32c7cdb10f78e9c459e69b46a28733a8, type: 2}
-  initialPoolSize: 20
-  persistent: 0
-  poolName: PoolCone01
-  idNode: 1
-  bulletDamage: 1
-  bulletSpeed: 20
-  bulletLifetime: 5
-  projectileCount: 5
-  coneAngle: 45
-  shootCooldown: 1.5
---- !u!114 &1158815908821011756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3351906142001725201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b4c22ebc407af44e8a381827d7e43d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabBullet: {fileID: 1678599070653623651, guid: 39f17979f49e9aa4a8581a235928267c,
-    type: 3}
-  audioShoot: {fileID: 11400000, guid: 32c7cdb10f78e9c459e69b46a28733a8, type: 2}
-  initialPoolSize: 30
-  persistent: 0
-  poolName: PoolCone02
-  idNode: 2
-  bulletDamage: 1
-  bulletSpeed: 25
-  bulletLifetime: 3
-  projectileCount: 9
-  coneAngle: 90
-  shootCooldown: 1.5
 --- !u!114 &4930180847178675582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,6 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d98f2ab6a648f398dd180a68a97e30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossDistance: 12
 --- !u!114 &766218042095677876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,3 +298,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onBossDeath: Death
   extendTime: 2
+--- !u!114 &4074855950840237639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3351906142001725201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a420affe05d424ebe556af845c252b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabBullet: {fileID: 1678599070653623651, guid: 3c74fc8416c495444b1c82ceef276d19,
+    type: 3}
+  poolName: Cone05
+  initialPoolSize: 10
+  persistent: 0
+  audioShoot: {fileID: 11400000, guid: 32c7cdb10f78e9c459e69b46a28733a8, type: 2}
+  shootPattern: {fileID: 11400000, guid: 43f231072cf2d2a45b1b451cee852ebf, type: 2}
+  enableTargeting: 1
+  target: {fileID: 0}
+  idNode: 0
+  bulletDamage: 1
+  bulletSpeed: 20
+  bulletLifetime: 3

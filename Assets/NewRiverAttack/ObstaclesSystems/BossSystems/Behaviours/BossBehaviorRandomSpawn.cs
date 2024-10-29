@@ -9,7 +9,7 @@ using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 {
-    public class BossBehaviorRandomSpawn : ObjectShoot, INodeFunctionProvider
+    /*public class BossBehaviorRandomSpawn : ObjectShoot, INodeFunctionProvider
     {
         private BossMaster _bossMaster;
         private RandomSpawnHelper _spawnHelper;
@@ -106,5 +106,5 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 false
             );
         }
-    }
+    }*/
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using ImmersiveGames.DebugManagers;
+﻿using System.Linq;
 using NewRiverAttack.ObstaclesSystems;
 using UnityEngine;
 using Random = UnityEngine.Random;

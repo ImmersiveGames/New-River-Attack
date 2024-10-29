@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 {
-    public class BossBehaviorConeShoot : ObjectShoot, INodeFunctionProvider
+    /*public class BossBehaviorConeShoot : ObjectShoot, INodeFunctionProvider
     {
         private BossMaster _bossMaster;
 
@@ -68,5 +68,5 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 false
             );
         }
-    }
+    }*/
 }

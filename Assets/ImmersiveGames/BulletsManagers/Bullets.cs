@@ -16,7 +16,7 @@ namespace ImmersiveGames.BulletsManagers
             transform1.rotation = spawnPosition.rotation;
             BulletData = bulletData;
         }
-        internal virtual void AutoDestroy(float timer)
+        internal void AutoDestroy(float timer)
         {
             //Debug.Log($"Timer In Bullet: {BulletData.BulletTimer}, Timer:{Time.time} , Time: {timer}");
             if (BulletData.BulletTimer > 0 && Time.time >= timer)

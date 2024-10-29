@@ -1,6 +1,5 @@
 ﻿using System;
 using ImmersiveGames.BehaviorTreeSystem.Interface;
-using UnityEngine;
 
 namespace ImmersiveGames.BehaviorTreeSystem.Decorations
 {
@@ -41,13 +40,9 @@ namespace ImmersiveGames.BehaviorTreeSystem.Decorations
             }
 
             // Se a condição foi atendida, retorna Success imediatamente
-            if (_isConditionMet)
-            {
-                return NodeState.Success;
-            }
-
-            // Continua normalmente caso a condição não tenha sido atendida
-            return _node.Tick();
+            return _isConditionMet ? NodeState.Success :
+                // Continua normalmente caso a condição não tenha sido atendida
+                _node.Tick();
         }
 
 

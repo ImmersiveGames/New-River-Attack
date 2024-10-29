@@ -14,11 +14,9 @@ namespace ImmersiveGames.Utils
             foreach (Transform child in objeto.transform)
             {
                 // Verifica se o filho tem o componente IgnoreBoundsFlag
-                if (child.GetComponent<IgnoreBoundsFlag>() == null)
-                {
-                    var childRender = child.GetComponent<Renderer>();
-                    bounds.Encapsulate(childRender ? childRender.bounds : GetBounds(child.gameObject));
-                }
+                if (child.GetComponent<IgnoreBoundsFlag>() != null) continue;
+                var childRender = child.GetComponent<Renderer>();
+                bounds.Encapsulate(childRender ? childRender.bounds : GetBounds(child.gameObject));
             }
             return bounds;
         }

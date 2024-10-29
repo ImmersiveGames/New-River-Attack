@@ -1,70 +1,95 @@
-﻿using ImmersiveGames.AudioEvents;
-using ImmersiveGames.PoolSystems.Interfaces;
-using UnityEngine;
-using NewRiverAttack.BulletsManagers.Interface;
+﻿using NewRiverAttack.BulletsManagers.Interface;
 using NewRiverAttack.ObstaclesSystems.BossSystems.Helpers;
-using NewRiverAttack.ObstaclesSystems.BossSystems.Helpers.Interfaces;
+using UnityEngine;
+using ImmersiveGames.AudioEvents;
+using ImmersiveGames.PoolSystems.Interfaces;
 using NewRiverAttack.PlayerManagers.Tags;
+using NewRiverAttack.ShootSystems;
 
 namespace NewRiverAttack.ObstaclesSystems.Abstracts
 {
     public abstract class ObjectShoot : MonoBehaviour
     {
         [Header("Pool Settings")]
-        [SerializeField]
-        protected GameObject prefabBullet;
-        [SerializeField] protected AudioEvent audioShoot;
+        [SerializeField] protected GameObject prefabBullet;
+        [SerializeField] protected string poolName;
         [SerializeField] protected int initialPoolSize = 10;
         [SerializeField] protected bool persistent;
-        [SerializeField] protected string poolName;
-        
-        public Transform SpawnPoint { get; private set; }
-        protected PoolingHelper PoolHelper { get; private set; }
-        private IShootPattern ShootPattern { get; set; }
+
+        [Header("Audio Settings")]
+        [SerializeField] protected AudioEvent audioShoot;
         private AudioSource _audioSource;
-        private ObstacleMaster _obstacleMaster;
+
+        [Header("Shooting Pattern")]
+        [SerializeField] protected ShootPatternBase shootPattern;
+
+        [Header("Targeting Settings")]
+        [SerializeField]
+        protected bool enableTargeting;  // Habilita ou desabilita a mira no alvo
+        [SerializeField] protected Transform target;      // Referência ao alvo, se existir
+
+        private TargetingSystem _targetingSystem = new TargetingSystem();
+        protected Transform SpawnPoint { get; private set; }
+        private PoolingHelper _poolHelper;
+
         protected virtual void Awake()
         {
-            _obstacleMaster = GetComponent<ObstacleMaster>();
+            if(string.IsNullOrEmpty(poolName))
+                poolName = $"Pool ({gameObject.name})";
+            // Inicializa o PoolingHelper e configura o ponto de spawn
+            _poolHelper = new PoolingHelper(prefabBullet, transform, poolName, initialPoolSize, persistent);
             _audioSource = GetComponent<AudioSource>();
-            PoolHelper = new PoolingHelper(prefabBullet, transform, poolName, initialPoolSize, persistent);
+
             UpdateSpawnPoint();
         }
 
-        private void OnEnable()
+        // Método para obter e ativar o projétil no SpawnPoint
+        public void PoolingOut(Transform spawnPoint, ISpawnData bulletData)
         {
-            _obstacleMaster.EventObstacleChangeSkin += UpdateSpawnPoint;
+            _poolHelper.GetObject(spawnPoint, bulletData);
         }
 
-        private void OnDisable()
-        {
-            _obstacleMaster.EventObstacleChangeSkin -= UpdateSpawnPoint;
-        }
-        public void PoolingOut(Transform spawnPoint,ISpawnData bulletData)
-        {
-            PoolHelper.GetObject(spawnPoint, bulletData);
-        }
-        protected void UpdateSpawnPoint()
-        {
-            var shootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
-            SpawnPoint = shootSpawnPoint != null ? shootSpawnPoint.transform : transform;
-        }
-
-        protected void SetShootPattern(IShootPattern pattern)
-        {
-            ShootPattern = pattern;
-        }
-
+        // Método para executar o padrão de tiro, ajustando a mira no alvo se habilitado
         protected void ExecuteShootPattern()
         {
-            ShootPattern?.Execute(SpawnPoint, this);
+            if (enableTargeting && target != null)
+            {
+                TargetingSystem.AimAtTarget(SpawnPoint, target);
+            }
+
+            // Executa o padrão de tiro
+            if (shootPattern != null)
+            {
+                shootPattern.Execute(SpawnPoint, this);
+            }
         }
+
+        // Método para emitir o som de tiro
         public void ShootSound()
         {
             if (_audioSource == null || audioShoot == null) return;
             audioShoot.SimplePlay(_audioSource);
         }
-        public abstract float GetCadenceShoot { get; }
+
+        // Método abstrato para criar os dados do projétil
         public abstract BulletSpawnData CreateBulletData(Vector3 direction, Vector3 position);
+
+        
+        protected void UpdateSpawnPoint()
+        {
+            var shootSpawnPoint = GetComponentInChildren<ShootSpawnPoint>();
+            SpawnPoint = shootSpawnPoint != null ? shootSpawnPoint.transform : transform;
+        }
+        // Define o alvo para mira
+        public void SetTarget(Transform newTarget)
+        {
+            target = newTarget;
+        }
+
+        // Ativa ou desativa a mira no alvo
+        public void EnableTargeting(bool enable)
+        {
+            enableTargeting = enable;
+        }
     }
 }

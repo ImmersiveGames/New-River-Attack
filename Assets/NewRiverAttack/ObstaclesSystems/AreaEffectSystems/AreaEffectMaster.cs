@@ -1,4 +1,5 @@
-﻿using ImmersiveGames.ObjectManagers.Interfaces;
+﻿using System;
+using ImmersiveGames.ObjectManagers.Interfaces;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
@@ -11,8 +12,8 @@ namespace NewRiverAttack.ObstaclesSystems.AreaEffectSystems
 
         public bool IsInAreaEffect => _inAreaEffect;
 
-        internal event ObstacleGenericHandler EventMasterAreaEffectEnter;
-        internal event ObstacleGenericHandler EventMasterAreaEffectExit;
+        internal event Action EventMasterAreaEffectEnter;
+        internal event Action EventMasterAreaEffectExit;
 
         internal AreaEffectScriptable GetScriptableSettings => objectDefault as AreaEffectScriptable;
 

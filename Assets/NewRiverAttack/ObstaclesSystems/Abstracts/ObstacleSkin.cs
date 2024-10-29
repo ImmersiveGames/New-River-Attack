@@ -75,7 +75,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             RemoveSkin();
             CreateSkin(skin);
             _skin.SetActive(true);
-            ObstacleMaster.OnObstacleChangeSkin();
+            ObstacleMaster.OnObjectChangeSkin();
         }
 
         private void RemoveSkin()

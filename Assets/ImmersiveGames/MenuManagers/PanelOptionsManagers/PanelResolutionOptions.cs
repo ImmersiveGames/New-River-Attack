@@ -19,7 +19,7 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
 
         private void Awake()
         {
-            // Popula o array de resoluções únicas
+            // Popular o array de resoluções únicas
             _uniqueResolutions = GetUniqueResolutions(Screen.resolutions, PanelFrameRateOptions.ActualFrameRate);
             if (_uniqueResolutions == null || _uniqueResolutions.Length == 0)
             {
@@ -140,12 +140,10 @@ namespace ImmersiveGames.MenuManagers.PanelOptionsManagers
 
         private static void SaveResolutionToOptions()
         {
-            if (GameOptionsSave.Instance != null)
-            {
-                // Sempre salva a resolução atual em GameOptionsSave.Instance.actualResolution
-                GameOptionsSave.Instance.actualResolution = new Vector2Int(_actualResolution.width, _actualResolution.height);
-                DebugManager.Log<PanelResolutionOptions>($"Resolução salva: {_actualResolution.width} x {_actualResolution.height}");
-            }
+            if (GameOptionsSave.Instance == null) return;
+            // Sempre salva a resolução atual em GameOptionsSave.Instance.actualResolution
+            GameOptionsSave.Instance.actualResolution = new Vector2Int(_actualResolution.width, _actualResolution.height);
+            DebugManager.Log<PanelResolutionOptions>($"Resolução salva: {_actualResolution.width} x {_actualResolution.height}");
         }
 
         public Action<int> OnValueChanged { get; set; }

@@ -26,15 +26,13 @@ namespace ImmersiveGames.Utils
         {
             if (_objects.Count > 0)
             {
-                T obj = _objects.Dequeue();
+                var obj = _objects.Dequeue();
                 obj.gameObject.SetActive(true);
                 return obj;
             }
-            else
-            {
-                T newObj = Object.Instantiate(_prefab, _parent);
-                return newObj;
-            }
+
+            var newObj = Object.Instantiate(_prefab, _parent);
+            return newObj;
         }
 
         public void ReleaseObject(T obj)

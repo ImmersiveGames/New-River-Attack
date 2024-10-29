@@ -15,14 +15,14 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
         private void OnEnable()
         {
             SetInitialReferences();
-            _mineMaster.EventObstacleChangeSkin += SetAnimations;
+            _mineMaster.EventObjectChangeSkin += SetAnimations;
             _mineMaster.EventAlertApproach += AnimationAlert;
             _mineMaster.EventAlertStop += AnimationAlertStop;
         }
 
         private void OnDisable()
         {
-            _mineMaster.EventObstacleChangeSkin -= SetAnimations;
+            _mineMaster.EventObjectChangeSkin -= SetAnimations;
             _mineMaster.EventAlertApproach -= AnimationAlert;
             _mineMaster.EventAlertStop -= AnimationAlertStop;
         }
