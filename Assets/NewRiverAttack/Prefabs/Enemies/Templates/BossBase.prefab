@@ -17,6 +17,15 @@ GameObject:
   - component: {fileID: 4259177956943633282}
   - component: {fileID: 3588219461795857954}
   - component: {fileID: 1573996410733112715}
+  - component: {fileID: 7313535707353678704}
+  - component: {fileID: 5584621028616393533}
+  - component: {fileID: 3825846407316426457}
+  - component: {fileID: 4682698680170686522}
+  - component: {fileID: 5275919549825474841}
+  - component: {fileID: 320060375096885243}
+  - component: {fileID: 5995627308662089235}
+  - component: {fileID: 7979006095075875279}
+  - component: {fileID: 6327318730731437817}
   m_Layer: 7
   m_Name: BossBase
   m_TagString: Untagged
@@ -261,10 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onEmerge: Emerge
-  onSubmerge: Submerge
   onGotHit: GotHit
-  onDeath: Death
-  onReset: ResetIdle
 --- !u!114 &1573996410733112715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,6 +285,149 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioExplosion: {fileID: 11400000, guid: c6eca7c09e6b2fa428d40907bfc3a8e6, type: 2}
   audioHit: {fileID: 11400000, guid: 3a0827fd90471244dbf1cd22aabe2ad8, type: 2}
+--- !u!114 &7313535707353678704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7841797180397970709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbaeb509f6614e08a113d32b6e5ee746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5584621028616393533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7841797180397970709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aad5bb7fe714204b05bcc08578b918c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialDelay: 3
+  moveDuration: 5
+  distanceOffset: 40
+--- !u!114 &3825846407316426457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7841797180397970709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68cacd9296b2411780feb45773ff015c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onEmerge: Emerge
+--- !u!114 &4682698680170686522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7841797180397970709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b19da31b9d7e402f9be971a37326f3b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onSubmerge: Submerge
+--- !u!114 &5275919549825474841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7841797180397970709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d98f2ab6a648f398dd180a68a97e30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossDistance: 12
+--- !u!114 &320060375096885243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7841797180397970709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 837c963a11774f369a52e2188fa79e26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  extendTime: 3
+--- !u!114 &5995627308662089235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7841797180397970709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 855f03ca90224825a5e589072e7a58a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onBossDeath: Death
+  extendTime: 2
+--- !u!114 &7979006095075875279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7841797180397970709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a420affe05d424ebe556af845c252b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabBullet: {fileID: 1678599070653623651, guid: 3c74fc8416c495444b1c82ceef276d19,
+    type: 3}
+  poolName: Cone05
+  initialPoolSize: 15
+  persistent: 0
+  audioShoot: {fileID: 11400000, guid: 32c7cdb10f78e9c459e69b46a28733a8, type: 2}
+  shootPattern: {fileID: 11400000, guid: 43f231072cf2d2a45b1b451cee852ebf, type: 2}
+  enableTargeting: 1
+  target: {fileID: 0}
+  idNode: 1
+  bulletDamage: 1
+  bulletSpeed: 20
+  bulletLifetime: 3
+--- !u!114 &6327318730731437817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7841797180397970709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a420affe05d424ebe556af845c252b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabBullet: {fileID: 1678599070653623651, guid: 3c74fc8416c495444b1c82ceef276d19,
+    type: 3}
+  poolName: Cone09
+  initialPoolSize: 30
+  persistent: 0
+  audioShoot: {fileID: 11400000, guid: 32c7cdb10f78e9c459e69b46a28733a8, type: 2}
+  shootPattern: {fileID: 11400000, guid: ad419fe869b6fc743a7abaa88277a0df, type: 2}
+  enableTargeting: 1
+  target: {fileID: 0}
+  idNode: 2
+  bulletDamage: 1
+  bulletSpeed: 20
+  bulletLifetime: 3
 --- !u!1001 &1403828760880168052
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -341,6 +490,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Submarine_Skin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6321393266989568489, guid: db474fbe6cbc89b4a9c285de7fd215b1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6321393266989568489, guid: db474fbe6cbc89b4a9c285de7fd215b1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6321393266989568489, guid: db474fbe6cbc89b4a9c285de7fd215b1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.97629607
+      objectReference: {fileID: 0}
+    - target: {fileID: 6321393266989568489, guid: db474fbe6cbc89b4a9c285de7fd215b1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.21643952
+      objectReference: {fileID: 0}
+    - target: {fileID: 6321393266989568489, guid: db474fbe6cbc89b4a9c285de7fd215b1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479083814283722136, guid: db474fbe6cbc89b4a9c285de7fd215b1,
+        type: 3}
+      propertyPath: m_Name
+      value: VFX_Splash
       objectReference: {fileID: 0}
     - target: {fileID: 7479083814283722136, guid: db474fbe6cbc89b4a9c285de7fd215b1,
         type: 3}

@@ -43,6 +43,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             _enemiesMaster.EventObjectChangeSkin -= UpdateSpawnPoint;
         }
 
+        public bool ShootIsReady => IsVisible && _enemiesMaster.ObjectIsReady;
         private void InitializeStateMachine()
         {
             _stateMachine = new StateMachine();
@@ -77,12 +78,6 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
                 _enemiesMaster.GetEnemySettings.timeoutDestroy,
                 false
             );
-        }
-
-        // Método para executar o padrão de tiro
-        public void ExecuteShootPattern()
-        {
-            shootPattern.Execute(SpawnPoint, this);
         }
     }
 }

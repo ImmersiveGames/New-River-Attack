@@ -1,4 +1,5 @@
-﻿using NewRiverAttack.ObstaclesSystems.Abstracts;
+﻿using System;
+using NewRiverAttack.ObstaclesSystems.Abstracts;
 using UnityEngine;
 
 namespace NewRiverAttack.ShootSystems
@@ -6,42 +7,40 @@ namespace NewRiverAttack.ShootSystems
     public abstract class ShootPatternBase : ScriptableObject
     {
         [SerializeField] protected float cooldown = 1.0f;
-        private float _lastShootTime;
+        private float _lastShootTime = -Mathf.Infinity;  // Inicia para permitir o primeiro disparo
 
         private void OnEnable()
         {
-            // Configura o tempo inicial para o cooldown iniciar corretamente
-            _lastShootTime = Time.realtimeSinceStartup;
+            _lastShootTime = -cooldown;  // Permite o disparo inicial imediato
         }
 
-        // Método para verificar se o cooldown está completo usando realtimeSinceStartup
-        public virtual bool CanShoot()
+        public bool TryShoot(Action executeShootAction)
         {
-            return Time.realtimeSinceStartup >= _lastShootTime + cooldown;
+            if (!(Time.realtimeSinceStartup >= _lastShootTime + cooldown)) return false;
+            executeShootAction.Invoke();           // Executa o disparo
+            _lastShootTime = Time.realtimeSinceStartup; // Atualiza o tempo para o próximo cooldown
+            return true;
         }
+       
 
-        // Método abstrato para executar o padrão de tiro específico
-        public abstract void Execute(Transform spawnPoint, ObjectShoot shooter);
-
-        // Define parâmetros específicos para o padrão de tiro
         public virtual void SetParameter(EnumShootParameter parameter, object value)
         {
             if (parameter == EnumShootParameter.Cooldown && value is float newCooldown)
             {
                 cooldown = newCooldown;
             }
+            else
+            {
+                Debug.LogWarning($"Parâmetro '{parameter}' não suportado pelo padrão de tiro base ou tipo inválido.");
+            }
         }
 
-        // Obtém parâmetros específicos para o padrão de tiro
-        public virtual object GetParameter(EnumShootParameter parameterName)
+        protected virtual object GetParameter(EnumShootParameter parameterName)
         {
             return parameterName == EnumShootParameter.Cooldown ? cooldown : null;
         }
 
-        // Atualiza o tempo do último tiro usando realtimeSinceStartup para manter o controle preciso do cooldown
-        public void UpdateLastShootTime()
-        {
-            _lastShootTime = Time.realtimeSinceStartup;
-        }
+
+        public abstract void Execute(Transform spawnPoint, ObjectShoot shooter);
     }
 }

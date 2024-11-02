@@ -3,6 +3,7 @@ using ImmersiveGames.BehaviorTreeSystem.Interface;
 using NewRiverAttack.BulletsManagers.Interface;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
+using NewRiverAttack.ObstaclesSystems.BossSystems.Helpers.Interfaces;
 using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
@@ -12,7 +13,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         private BossMaster _bossMaster;
 
         [Header("Node Reference")]
-        public int idNode;  // Identificador do nó para uso na árvore de comportamento
+        public int idNode;
 
         [Header("Bullet Settings")]
         [SerializeField] private int bulletDamage = 1;
@@ -28,29 +29,36 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
         private void Start()
         {
-            SetTarget(PlayersManager.Instance.GetPlayerMaster(0).transform);
+            var player = PlayersManager.Instance.GetPlayerMaster(0);
+            if (player != null)
+            {
+                SetTarget(player.transform);
+            }
+
+            UpdateSpawnPoint();
         }
 
         public string NodeName => $"BossShoot_{idNode}";
         public int NodeID => idNode;
 
-        // Retorna a função de execução do tiro para o nó de comportamento
+        // Função de execução do tiro para o Behavior Tree
         public Func<NodeState> GetNodeFunction() => ExecuteShooting;
 
-        // Função de execução de tiro, usada pelo Behavior Tree
         private NodeState ExecuteShooting()
         {
-            if (!shootPattern.CanShoot())
-            {
-                return NodeState.Running; // Retorna Running enquanto o cooldown estiver ativo
-            }
-
-            ExecuteShootPattern(); // Executa o padrão de tiro configurado
-            ShootSound();
-            return NodeState.Success; // Retorna Success após o tiro
+            // Usa TryShoot para lidar com o cooldown e decidir o estado do nó
+            var shotExecuted = shootPattern.TryShoot(ExecuteShootPattern);
+            return shotExecuted ? NodeState.Success : // Disparo efetuado com sucesso
+                NodeState.Running; // Ainda no cooldown, continua rodando
         }
 
-        // Define os dados específicos do projétil do boss
+        public void OnEnter()
+        {
+            if (shootPattern is IResettablePattern resettablePattern)
+            {
+                resettablePattern.ResetPattern(this);
+            }
+        }
         public override BulletSpawnData CreateBulletData(Vector3 direction, Vector3 position)
         {
             return new BulletSpawnData(

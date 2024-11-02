@@ -2,6 +2,7 @@
 using UnityEngine;
 using ImmersiveGames.PoolSystems.Interfaces;
 using NewRiverAttack.BulletsManagers.Interface;
+using NewRiverAttack.GamePlayManagers;
 
 namespace NewRiverAttack.BulletsManagers
 {
@@ -9,11 +10,23 @@ namespace NewRiverAttack.BulletsManagers
     {
         protected BulletSpawnData BulletData;
         protected float Lifetime;
+        private GamePlayManager _gamePlayManager;
 
         protected bool IsInitialize { get; private set; }
 
+        private void OnEnable()
+        {
+            _gamePlayManager = GamePlayManager.Instance;
+            _gamePlayManager.EventGameResetClear += ReturnToPool;
+            _gamePlayManager.EventGameOver += ReturnToPool;
+            _gamePlayManager.EventGameFinisher += ReturnToPool;
+        }
+
         private void OnDisable()
         {
+            _gamePlayManager.EventGameResetClear -= ReturnToPool;
+            _gamePlayManager.EventGameOver -= ReturnToPool;
+            _gamePlayManager.EventGameFinisher -= ReturnToPool;
             IsInitialize = false;
         }
 

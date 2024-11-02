@@ -49,12 +49,10 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void AttemptShoot(InputAction.CallbackContext context)
         {
             if (!context.performed) return;
-
-            if (shootPattern != null && shootPattern.CanShoot())
+            if (!_playerMaster.ObjectIsReady) return;
+            if (shootPattern != null)
             {
                 ExecuteShootPattern();
-                shootPattern.UpdateLastShootTime();
-                ShootSound();
             }
             else
             {
@@ -65,22 +63,18 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         // Reduz temporariamente o cooldown com power-up de tiro rápido
         private void StartPowerUp(ActivePowerUp activePowerUp)
         {
-            if (activePowerUp.PowerUpData.powerUpType == PowerUpTypes.RapidFire && shootPattern != null)
-            {
-                float newCooldown = _originalCooldown / cadenceDivider;
-                shootPattern.SetParameter(EnumShootParameter.Cooldown, newCooldown);
-                Debug.Log($"PlayerShoot.StartPowerUp: Cooldown reduzido temporariamente para {newCooldown}");
-            }
+            if (activePowerUp.PowerUpData.powerUpType != PowerUpTypes.RapidFire || shootPattern == null) return;
+            var newCooldown = _originalCooldown / cadenceDivider;
+            shootPattern.SetParameter(EnumShootParameter.Cooldown, newCooldown);
+            Debug.Log($"PlayerShoot.StartPowerUp: Cooldown reduzido temporariamente para {newCooldown}");
         }
 
         // Restaura o cooldown original ao término do power-up
         private void EndPowerUp(ActivePowerUp activePowerUp)
         {
-            if (activePowerUp.PowerUpData.powerUpType == PowerUpTypes.RapidFire && shootPattern != null)
-            {
-                shootPattern.SetParameter(EnumShootParameter.Cooldown, _originalCooldown);
-                Debug.Log("PlayerShoot.EndPowerUp: Cooldown restaurado ao valor original.");
-            }
+            if (activePowerUp.PowerUpData.powerUpType != PowerUpTypes.RapidFire || shootPattern == null) return;
+            shootPattern.SetParameter(EnumShootParameter.Cooldown, _originalCooldown);
+            Debug.Log("PlayerShoot.EndPowerUp: Cooldown restaurado ao valor original.");
         }
 
         public override BulletSpawnData CreateBulletData(Vector3 direction, Vector3 position)

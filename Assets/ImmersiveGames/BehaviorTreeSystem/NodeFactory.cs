@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ImmersiveGames.BehaviorTreeSystem.Decorations;
 using ImmersiveGames.BehaviorTreeSystem.Interface;
 using ImmersiveGames.BehaviorTreeSystem.Nodes;
+using UnityEngine;
 
 namespace ImmersiveGames.BehaviorTreeSystem
 {
@@ -39,9 +40,7 @@ namespace ImmersiveGames.BehaviorTreeSystem
         {
             if (!parameters.TryGetValue(NodeParam.Action, out var actionObj) || actionObj is not Func<NodeState> action)
                 throw new ArgumentException("Invalid or missing 'action' parameter for ActionNode.");
-
             var node = new ActionNode(action);
-
             if (parameters.TryGetValue(NodeParam.NodeName, out var nodeName) && nodeName is string name)
             {
                 _nodeReferences[name] = node;

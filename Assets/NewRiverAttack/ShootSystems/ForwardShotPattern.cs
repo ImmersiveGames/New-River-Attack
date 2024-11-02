@@ -8,13 +8,12 @@ namespace NewRiverAttack.ShootSystems
     {
         public override void Execute(Transform spawnPoint, ObjectShoot shooter)
         {
-            if (!CanShoot()) return;
-
-            var bulletData = shooter.CreateBulletData(spawnPoint.forward, spawnPoint.position);
-            shooter.PoolingOut(spawnPoint, bulletData);
-            shooter.ShootSound();
-
-            UpdateLastShootTime();
+            TryShoot(() =>
+            {
+                var bulletData = shooter.CreateBulletData(spawnPoint.forward, spawnPoint.position);
+                shooter.PoolingOut(spawnPoint, bulletData);
+                shooter.ShootSound();
+            });
         }
     }
 }

@@ -24,13 +24,12 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         private void Awake()
         {
             SetInitialReferences();
-            
         }
 
         protected virtual void OnEnable()
         {
             ClearObject();
-            GamePlayManagerRef.EventPostStateGameInitialize += InitializeObject;
+            //GamePlayManagerRef.EventPostStateGameInitialize += InitializeObject;
             GamePlayManagerRef.EventGameReadyGo += InitializeObject;
             GamePlayManagerRef.EventGameOver += ClearObject;
             DebugManager.Log<ObjectMaster>($"Enable - {gameObject.name}");
@@ -44,7 +43,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
 
         protected virtual void OnDisable()
         {
-            GamePlayManagerRef.EventPostStateGameInitialize -= InitializeObject;
+            //GamePlayManagerRef.EventPostStateGameInitialize -= InitializeObject;
             GamePlayManagerRef.EventGameReadyGo -= InitializeObject;
             GamePlayManagerRef.EventGameOver -= ClearObject;
         }

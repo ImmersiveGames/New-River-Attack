@@ -4,6 +4,10 @@
     {
         Cooldown,
         ProjectileCount,
-        ConeAngle
+        ConeAngle,
+        ItemCount,
+        SafeDistance,
+        SafeEnemyDistance,
+        CadenceVariance
     }
 }

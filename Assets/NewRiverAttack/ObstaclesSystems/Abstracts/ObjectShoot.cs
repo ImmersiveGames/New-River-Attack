@@ -28,40 +28,37 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         protected bool enableTargeting;  // Habilita ou desabilita a mira no alvo
         [SerializeField] protected Transform target;      // Referência ao alvo, se existir
 
-        private TargetingSystem _targetingSystem = new TargetingSystem();
-        protected Transform SpawnPoint { get; private set; }
-        private PoolingHelper _poolHelper;
-
+        //private TargetingSystem _targetingSystem;
+        private Transform SpawnPoint { get; set; }
+        public PoolingHelper PoolHelper;
         protected virtual void Awake()
         {
             if(string.IsNullOrEmpty(poolName))
                 poolName = $"Pool ({gameObject.name})";
             // Inicializa o PoolingHelper e configura o ponto de spawn
-            _poolHelper = new PoolingHelper(prefabBullet, transform, poolName, initialPoolSize, persistent);
+            PoolHelper = new PoolingHelper(prefabBullet, transform, poolName, initialPoolSize, persistent);
             _audioSource = GetComponent<AudioSource>();
-
             UpdateSpawnPoint();
+            //_targetingSystem = new TargetingSystem();
         }
+        
 
         // Método para obter e ativar o projétil no SpawnPoint
         public void PoolingOut(Transform spawnPoint, ISpawnData bulletData)
         {
-            _poolHelper.GetObject(spawnPoint, bulletData);
+            PoolHelper.GetObject(spawnPoint, bulletData);
         }
 
         // Método para executar o padrão de tiro, ajustando a mira no alvo se habilitado
-        protected void ExecuteShootPattern()
+        public void ExecuteShootPattern()
         {
             if (enableTargeting && target != null)
             {
                 TargetingSystem.AimAtTarget(SpawnPoint, target);
             }
-
             // Executa o padrão de tiro
-            if (shootPattern != null)
-            {
-                shootPattern.Execute(SpawnPoint, this);
-            }
+            if (shootPattern == null) return;
+            shootPattern.Execute(SpawnPoint, this);
         }
 
         // Método para emitir o som de tiro

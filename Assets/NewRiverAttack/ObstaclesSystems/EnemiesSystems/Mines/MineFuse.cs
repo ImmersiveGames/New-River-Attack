@@ -1,5 +1,6 @@
 ﻿using ImmersiveGames.FiniteStateMachine;
 using NewRiverAttack.BulletsManagers;
+using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
 using UnityEngine;
 
@@ -24,6 +25,8 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
         private BulletBossMine _bulletBossMine;
         private MinePatrolState _startState;
 
+        private GamePlayManager _gamePlayManager;
+
         #region Unity Methods
 
         private void Awake()
@@ -33,6 +36,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
             _enemiesScriptable = _mineMaster.GetEnemySettings;
             _target = null;
             _fuseInitialize = false;
+            _gamePlayManager = GamePlayManager.Instance;
         }
 
         private void Start()
@@ -42,9 +46,13 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
 
         private void OnEnable()
         {
+            _gamePlayManager.EventGameOver += DestroyMine;
+            _gamePlayManager.EventGameResetClear += DestroyMine;
+            _gamePlayManager.EventGameFinisher += DestroyMine;
             if (_stateMachine == null) return;
             ResetFuse();
         }
+        
 
         private void Update()
         {
@@ -54,6 +62,9 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
 
         private void OnDisable()
         {
+            _gamePlayManager.EventGameOver -= DestroyMine;
+            _gamePlayManager.EventGameResetClear -= DestroyMine;
+            _gamePlayManager.EventGameFinisher -= DestroyMine;
             _fuseInitialize = false;  // Desativa a mina
             _target = null;           // Reseta o alvo
         }
@@ -85,6 +96,10 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
             _mineMaster.OnEventShoot();
             _stateMachine.SetState(_startState);
             Invoke(nameof(SetFuseReady), timeAnimation);
+        }
+        private void DestroyMine()
+        {
+            Destroy(gameObject);
         }
 
         public void SetTarget(Transform target)

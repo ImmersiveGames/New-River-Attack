@@ -19,11 +19,9 @@ namespace NewRiverAttack.ObstaclesSystems.ShootStates
         public void Tick()
         {
             // Checa se o inimigo está visível e se o cooldown está completo
-            if (!_enemiesShoot.IsVisible || !_shootPattern.CanShoot()) return;
-
+            if (!_enemiesShoot.ShootIsReady) return;
             // Executa o padrão de tiro e reproduz o som
             _enemiesShoot.ExecuteShootPattern();
-            _enemiesShoot.ShootSound();
         }
 
         public void OnEnter() => DebugManager.Log<ShootState>("Inimigo entrou no estado de Tiro.");

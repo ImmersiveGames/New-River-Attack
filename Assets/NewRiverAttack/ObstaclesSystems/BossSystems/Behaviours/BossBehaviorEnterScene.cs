@@ -23,7 +23,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         // Método para reinicializar o estado do nó, usado no reset
         public void OnEnter()
         { 
-            Debug.Log("EnterSCENE");
             _bossMaster = GetComponent<BossMaster>();
             _playerMaster = PlayersManager.Instance.GetPlayerMaster(0);
             _currentState = NodeState.Running;  // Reinicia o estado para Running ao entrar
