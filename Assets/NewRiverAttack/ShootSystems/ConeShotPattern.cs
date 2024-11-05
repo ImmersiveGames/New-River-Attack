@@ -1,4 +1,5 @@
-﻿using NewRiverAttack.ObstaclesSystems.Abstracts;
+﻿using ImmersiveGames.DebugManagers;
+using NewRiverAttack.ObstaclesSystems.Abstracts;
 using UnityEngine;
 
 namespace NewRiverAttack.ShootSystems
@@ -40,18 +41,18 @@ namespace NewRiverAttack.ShootSystems
                     if (value is int count)
                         projectileCount = count;
                     else
-                        Debug.LogError("O valor para ProjectileCount precisa ser do tipo int.");
+                        DebugManager.LogError<ConeShotPattern>("O valor para ProjectileCount precisa ser do tipo int.");
                     break;
 
                 case EnumShootParameter.ConeAngle:
                     if (value is float angle)
                         coneAngle = angle;
                     else
-                        Debug.LogError("O valor para ConeAngle precisa ser do tipo float.");
+                        DebugManager.LogError<ConeShotPattern>("O valor para ConeAngle precisa ser do tipo float.");
                     break;
 
                 default:
-                    Debug.LogWarning($"Parâmetro '{parameter}' não suportado pelo ConeShotPattern.");
+                    DebugManager.LogWarning<ConeShotPattern>($"Parâmetro '{parameter}' não suportado pelo ConeShotPattern.");
                     break;
             }
         }

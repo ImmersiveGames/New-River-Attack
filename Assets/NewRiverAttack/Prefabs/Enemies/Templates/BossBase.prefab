@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 5995627308662089235}
   - component: {fileID: 7979006095075875279}
   - component: {fileID: 6327318730731437817}
+  - component: {fileID: 5953635943779030828}
   m_Layer: 7
   m_Name: BossBase
   m_TagString: Untagged
@@ -425,6 +426,31 @@ MonoBehaviour:
   enableTargeting: 1
   target: {fileID: 0}
   idNode: 2
+  bulletDamage: 1
+  bulletSpeed: 20
+  bulletLifetime: 3
+--- !u!114 &5953635943779030828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7841797180397970709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a420affe05d424ebe556af845c252b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabBullet: {fileID: 3926336138218741227, guid: e2ee9b9e816edbe4ab423fff2b1d9ba4,
+    type: 3}
+  poolName: Mines
+  initialPoolSize: 30
+  persistent: 0
+  audioShoot: {fileID: 11400000, guid: 32c7cdb10f78e9c459e69b46a28733a8, type: 2}
+  shootPattern: {fileID: 11400000, guid: 711d08055b7a7824fa18e492e3c57ba1, type: 2}
+  enableTargeting: 1
+  target: {fileID: 0}
+  idNode: 3
   bulletDamage: 1
   bulletSpeed: 20
   bulletLifetime: 3

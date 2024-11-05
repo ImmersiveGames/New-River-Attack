@@ -7,18 +7,17 @@ namespace NewRiverAttack.ShootSystems
     public abstract class ShootPatternBase : ScriptableObject
     {
         [SerializeField] protected float cooldown = 1.0f;
-        private float _lastShootTime = -Mathf.Infinity;  // Inicia para permitir o primeiro disparo
-
-        private void OnEnable()
+        protected float LastShootTime = -Mathf.Infinity;  // Inicia para permitir o primeiro disparo
+        protected virtual void OnEnable()
         {
-            _lastShootTime = -cooldown;  // Permite o disparo inicial imediato
+            LastShootTime = -cooldown;  // Permite o disparo inicial imediato
         }
 
-        public bool TryShoot(Action executeShootAction)
+        public virtual bool TryShoot(Action executeShootAction)
         {
-            if (!(Time.realtimeSinceStartup >= _lastShootTime + cooldown)) return false;
+            if (!(Time.realtimeSinceStartup >= LastShootTime + cooldown)) return false;
             executeShootAction.Invoke();           // Executa o disparo
-            _lastShootTime = Time.realtimeSinceStartup; // Atualiza o tempo para o próximo cooldown
+            LastShootTime = Time.realtimeSinceStartup; // Atualiza o tempo para o próximo cooldown
             return true;
         }
        

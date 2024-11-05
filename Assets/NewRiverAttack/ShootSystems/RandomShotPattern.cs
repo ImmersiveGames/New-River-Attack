@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using UnityEngine;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.BossSystems.Helpers;
@@ -10,103 +10,42 @@ namespace NewRiverAttack.ShootSystems
     [CreateAssetMenu(fileName = "RandomSpawnPattern", menuName = "ImmersiveGames/RiverAttack/ShootPatterns/RandomSpawn", order = 405)]
     public class RandomSpawnPattern : ShootPatternBase, IResettablePattern
     {
-        [SerializeField] private int itemCount = 5;
         [SerializeField] private float safeDistance = 2f;
         [SerializeField] private float safeEnemyDistance = 3f;
-        [SerializeField] private float cadenceVariance = 0.5f;
         [SerializeField] private LayerMask myLayerMask;
 
         private RandomSpawnHelper _spawnHelper;
-        private Coroutine _spawnRoutine;
+        private GameObject _randomPoint;
 
         public override void Execute(Transform spawnPoint, ObjectShoot shooter)
         {
-            // Inicializa o SpawnHelper com o transform do próprio shooter
-            _spawnHelper ??= new RandomSpawnHelper(safeDistance, shooter.transform, Camera.main, safeEnemyDistance, myLayerMask);
-
-            // Inicia o processo de spawn
-            _spawnRoutine = shooter.StartCoroutine(SpawnItemsCoroutine(spawnPoint, shooter));
-        }
-
-        private IEnumerator SpawnItemsCoroutine(Transform spawnPoint, ObjectShoot shooter)
-        {
-            var tempSpawnPoint = new GameObject("TempSpawnPoint").transform;
-            for (var i = 0; i < itemCount; i++)
+            TryShoot(() =>
             {
-                var randomPosition = _spawnHelper?.GetValidSpawnPosition<EnemiesMaster>();
-                if (randomPosition.HasValue)
-                {
-                    tempSpawnPoint.position = randomPosition.Value;
-                    var itemData = shooter.CreateBulletData(Vector3.zero, randomPosition.Value);
-                    shooter.PoolingOut(tempSpawnPoint, itemData);
-                }
+                // Inicializa o RandomSpawnHelper se necessário
+                _spawnHelper ??= new RandomSpawnHelper(safeDistance, shooter.transform, Camera.main, safeEnemyDistance, myLayerMask);
 
-                yield return new WaitForSeconds(cooldown + Random.Range(-cadenceVariance, cadenceVariance));
-            }
-
-            Destroy(tempSpawnPoint.gameObject);
-            shooter.PoolHelper.ReturnMarkedObjects();
-            _spawnRoutine = null;
+                // Gera uma posição aleatória para o disparo
+                var randomPosition = _spawnHelper.GetValidSpawnPosition<EnemiesMaster>();
+                if (!randomPosition.HasValue) return;
+                _randomPoint.transform.position = (Vector3)randomPosition;
+                var bulletData = shooter.CreateBulletData(Vector3.zero, randomPosition.Value);
+                shooter.PoolingOut(_randomPoint.transform, bulletData); // Usa o spawnPoint fornecido para o disparo
+                shooter.ShootSound();
+            });
         }
 
         public void ResetPattern(ObjectShoot shooter)
         {
-            // Reinicia o comportamento, interrompendo a coroutine atual, se existir
-            if (_spawnRoutine != null)
-            {
-                shooter.StopCoroutine(_spawnRoutine);
-                _spawnRoutine = null;
-            }
-            
-            shooter.PoolHelper.ReturnMarkedObjects();
+            //LastShootTime = -cooldown;  // Reseta o tempo do último disparo
+            //shooter.PoolHelper.ReturnMarkedObjects();
+            if(_randomPoint == null)
+                _randomPoint = new GameObject("randomPoint");
         }
 
-        public override void SetParameter(EnumShootParameter parameter, object value)
+        public void ExitPattern(ObjectShoot shooter)
         {
-            base.SetParameter(parameter, value);
-
-            switch (parameter)
-            {
-                case EnumShootParameter.ItemCount:
-                    if (value is int count)
-                        itemCount = count;
-                    else
-                        Debug.LogError("O valor para ItemCount precisa ser do tipo int.");
-                    break;
-                case EnumShootParameter.SafeDistance:
-                    if (value is float distance)
-                        safeDistance = distance;
-                    else
-                        Debug.LogError("O valor para SafeDistance precisa ser do tipo float.");
-                    break;
-                case EnumShootParameter.SafeEnemyDistance:
-                    if (value is float enemyDistance)
-                        safeEnemyDistance = enemyDistance;
-                    else
-                        Debug.LogError("O valor para SafeEnemyDistance precisa ser do tipo float.");
-                    break;
-                case EnumShootParameter.CadenceVariance:
-                    if (value is float variance)
-                        cadenceVariance = variance;
-                    else
-                        Debug.LogError("O valor para CadenceVariance precisa ser do tipo float.");
-                    break;
-                default:
-                    Debug.LogWarning($"Parâmetro '{parameter}' não suportado pelo RandomSpawnPattern.");
-                    break;
-            }
-        }
-
-        protected override object GetParameter(EnumShootParameter parameterName)
-        {
-            return parameterName switch
-            {
-                EnumShootParameter.ItemCount => itemCount,
-                EnumShootParameter.SafeDistance => safeDistance,
-                EnumShootParameter.SafeEnemyDistance => safeEnemyDistance,
-                EnumShootParameter.CadenceVariance => cadenceVariance,
-                _ => base.GetParameter(parameterName)
-            };
+            if(_randomPoint != null)
+                Destroy(_randomPoint);
         }
     }
 }

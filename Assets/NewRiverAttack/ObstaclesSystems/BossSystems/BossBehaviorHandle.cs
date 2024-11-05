@@ -40,7 +40,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             _bossCollider = GetComponent<BossCollider>();
         }
 
-        private INodeFunctionProvider GetComponentByID<T>(int idNode = 0) where T : Component
+        private T GetComponentByID<T>(int idNode = 0) where T : Component
         {
             var components = GetComponents<T>();
             if (components.Length == 0) return null; // Retorna null se não houver componentes
@@ -49,7 +49,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             {
                 var functionProvider = mono as INodeFunctionProvider;
                 if (functionProvider?.NodeID == idNode)
-                    return (INodeFunctionProvider)mono; // Retorna o componente que corresponde ao NodeID
+                    return mono; // Retorna o componente que corresponde ao NodeID
             }
 
             return null; // Retorna null se nenhum componente correspondente for encontrado
@@ -60,14 +60,10 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             #region Providers Creators
 
             var enterScene = GetComponent<BossBehaviorEnterScene>();
-            /*var singleShoot = GetComponentByID<BossBehaviorSingleShoot>(1);
-             */
             var coneShoot = GetComponentByID<BossBehaviorShoot>(1);
             var coneShoot02 = GetComponentByID<BossBehaviorShoot>(2);
-            /*
-             var coneShoot = GetComponentByID<BossBehaviorShoot>(1);
-            var coneShoot02 = GetComponentByID<BossBehaviorConeShoot>(2);
-            var mineSpawn = GetComponentByID<BossBehaviorRandomSpawn>(1);*/
+            var mineSpawn = GetComponentByID<BossBehaviorShoot>(3);
+
             var movement = GetComponent<BossBehaviorMovement>();
             var emerge = GetComponent<BossBehaviorEmerge>();
             var submerge = GetComponent<BossBehaviorSubmerge>();
@@ -80,10 +76,9 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
 
             // Cria Nodes
             var nodeEnterScene = NodeFactory.CreateNodeFromFunctionProvider(enterScene);
-            /*var nodeSingleShoot = NodeFactory.CreateNodeFromFunctionProvider(singleShoot);*/
             var nodeConeShoot01 = NodeFactory.CreateNodeFromFunctionProvider(coneShoot);
             var nodeConeShoot02 = NodeFactory.CreateNodeFromFunctionProvider(coneShoot02);
-            /*var nodeMineShoot = NodeFactory.CreateNodeFromFunctionProvider(mineSpawn);*/
+            var nodeMineShoot = NodeFactory.CreateNodeFromFunctionProvider(mineSpawn);
             var nodeMovement = NodeFactory.CreateNodeFromFunctionProvider(movement);
             var nodeEmerge = NodeFactory.CreateNodeFromFunctionProvider(emerge);
             var nodeSubmerge = NodeFactory.CreateNodeFromFunctionProvider(submerge);
@@ -125,25 +120,23 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
                 }
             );
             
-            /*
-             var onEnterMineShoot = NodeFactory.ApplyDecorator(nodeMineShoot, NodeDecorations.OnEnterDecorator,
+             var onEnterMineShoot = NodeFactory.ApplyDecorator(nodeMineShoot, NodeDecorations.OnEnterExitDecorator,
                 new Dictionary<NodeDecorationsParam, object>
                 {
-                    { NodeDecorationsParam.OnEnter, (Action)nodeMineShoot.OnEnter }
+                    { NodeDecorationsParam.OnEnter, (Action)mineSpawn.OnEnter },
+                    { NodeDecorationsParam.OnExit, (Action)mineSpawn.OnExit }
                 }
             );
-            */
+            var repeatMineX10 = NodeFactory.ApplyDecorator(onEnterMineShoot, NodeDecorations.RepeatDecorator,
+                new Dictionary<NodeDecorationsParam, object>
+                {
+                    { NodeDecorationsParam.Times, 10 }
+                }
+            );
             var repeatConeShot01X5 = NodeFactory.ApplyDecorator(nodeConeShoot01, NodeDecorations.RepeatDecorator,
                 new Dictionary<NodeDecorationsParam, object>
                 {
                     { NodeDecorationsParam.Times, 5 }
-                }
-            );
-            
-            var repeatConeShot01X3 = NodeFactory.ApplyDecorator(nodeConeShoot01, NodeDecorations.RepeatDecorator,
-                new Dictionary<NodeDecorationsParam, object>
-                {
-                    { NodeDecorationsParam.Times, 3 }
                 }
             );
             
@@ -179,9 +172,9 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             
             var sequenceNorth = new SequenceNode(new List<INode>
             {
-                repeatConeShot01X3,
+                repeatConeShot01X5,
                 nodeWaitSec,
-                //onEnterMineShoot,
+                repeatMineX10,
                 nodeWaitSec,
                 repeatConeShot02X4,
                 nodeWaitSec,
@@ -193,7 +186,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             });
             var sequenceSouth = new SequenceNode(new List<INode>
             {
-                //onEnterMineShoot,
+                repeatMineX10,
                 nodeWaitSec,
                 repeatConeShot02X6,
                 nodeWaitSec,
@@ -235,6 +228,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
                 nodeWaitSec,
                 onEnterEnterScene,
                 nodeWaitSec,
+                sequenceNorth,
                 conditionalRandomShoot,
                 nodeWaitSec,
                 onEnterDeath,

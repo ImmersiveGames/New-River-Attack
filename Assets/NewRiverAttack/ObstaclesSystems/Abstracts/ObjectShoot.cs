@@ -26,7 +26,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         [Header("Targeting Settings")]
         [SerializeField]
         protected bool enableTargeting;  // Habilita ou desabilita a mira no alvo
-        [SerializeField] protected Transform target;      // Referência ao alvo, se existir
+        [SerializeField] public Transform target;      // Referência ao alvo, se existir
 
         //private TargetingSystem _targetingSystem;
         private Transform SpawnPoint { get; set; }
@@ -88,5 +88,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         {
             enableTargeting = enable;
         }
+        
+        
     }
 }

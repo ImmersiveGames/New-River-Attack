@@ -61,10 +61,8 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Helpers
             if (!IsPositionInView(position)) return false;
             if (IsTooCloseToSpawned(position)) return false;
             if (IsTooCloseToBoss(position)) return false;
-            if (IsNearEnemy<T>(position)) return false;
-
+            return !IsNearEnemy<T>(position);
             // Se passar por todas as condições, a posição é válida
-            return true;
         }
 
         private bool IsTooCloseToSpawned(Vector3 position)

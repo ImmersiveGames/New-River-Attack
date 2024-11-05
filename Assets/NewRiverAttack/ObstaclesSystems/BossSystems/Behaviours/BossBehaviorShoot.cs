@@ -59,6 +59,13 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 resettablePattern.ResetPattern(this);
             }
         }
+        public void OnExit()
+        {
+            if (shootPattern is IResettablePattern resettablePattern)
+            {
+                resettablePattern.ExitPattern(this);
+            }
+        }
         public override BulletSpawnData CreateBulletData(Vector3 direction, Vector3 position)
         {
             return new BulletSpawnData(
