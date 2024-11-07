@@ -12,20 +12,16 @@ namespace ImmersiveGames.Utils
 
         private void Awake()
         {
-            // Garantir que não haja duplicatas de MainThreadDispatcher
-            if (_instance != null && _instance != this)
+            if (_instance != null)
             {
                 Destroy(gameObject);
                 return;
             }
-
             _instance = this;
-            DontDestroyOnLoad(gameObject);
         }
 
         private void Update()
         {
-            // Processar todas as ações enfileiradas na thread principal
             while (ActionsQueue.TryDequeue(out var action))
             {
                 action?.Invoke();
@@ -36,25 +32,15 @@ namespace ImmersiveGames.Utils
         {
             get
             {
-                Initialize(); // Garante que o dispatcher é inicializado
+                if (_instance != null) return _instance;
+                var go = new GameObject("MainThreadDispatcher");
+                _instance = go.AddComponent<MainThreadDispatcher>();
                 return _instance;
             }
         }
 
-        // Método de inicialização seguro
-        public static void Initialize()
-        {
-            if (_instance != null) return;
-
-            // Cria o objeto no caso de ainda não existir
-            var go = new GameObject("MainThreadDispatcher");
-            _instance = go.AddComponent<MainThreadDispatcher>();
-            DontDestroyOnLoad(go);
-        }
-
         public static void Enqueue(Action action)
         {
-            if (action == null) throw new ArgumentNullException(nameof(action));
             ActionsQueue.Enqueue(action);
         }
 
@@ -79,26 +65,29 @@ namespace ImmersiveGames.Utils
             return tcs.Task;
         }
 
-        public static Task EnqueueAsync(Func<Task> action)
+        public static async Task EnqueueAsync(Func<Task> action)
         {
             if (action == null) throw new ArgumentNullException(nameof(action));
-
+            
             var tcs = new TaskCompletionSource<bool>();
 
-            Enqueue(async () =>
+            Enqueue(Action);
+
+            await tcs.Task.ConfigureAwait(false);
+            return;
+
+            async void Action()
             {
                 try
                 {
-                    await action();
+                    await action.Invoke().ConfigureAwait(false);
                     tcs.SetResult(true);
                 }
                 catch (Exception ex)
                 {
                     tcs.SetException(ex);
                 }
-            });
-
-            return tcs.Task;
+            }
         }
     }
 }

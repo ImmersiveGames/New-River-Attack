@@ -2,7 +2,6 @@
 using ImmersiveGames.AudioEvents;
 using ImmersiveGames.BulletsManagers;
 using ImmersiveGames.DebugManagers;
-using ImmersiveGames.GameStateSystem;
 using ImmersiveGames.InputManager;
 using ImmersiveGames.MenuManagers;
 using ImmersiveGames.MenuManagers.Abstracts;
@@ -68,7 +67,6 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<GamePlayManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<GameOptionsSave>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<GemeStatisticsDataLog>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<GameStateManager>(DebugManager.DebugLevels.All);
             
             
             
