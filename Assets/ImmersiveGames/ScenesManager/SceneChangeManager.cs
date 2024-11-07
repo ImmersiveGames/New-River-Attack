@@ -25,16 +25,16 @@ namespace ImmersiveGames.ScenesManager
                 if (unloadPreviousAdditiveScene && AdditiveScenes.Count > 0)
                 {
                     var previousAdditiveScene = AdditiveScenes.Pop();
-                    await UnloadSceneAsync(previousAdditiveScene).ConfigureAwait(false);
+                    await UnloadSceneAsync(previousAdditiveScene);
                 }
 
-                await LoadSceneAsync(nextState.SceneName, loadSceneMode).ConfigureAwait(false);
+                await LoadSceneAsync(nextState.SceneName, loadSceneMode);
 
                 if (loadSceneMode == LoadSceneMode.Additive)
                 {
                     AdditiveScenes.Push(nextState.SceneName);
                 }
-            }).ConfigureAwait(false);
+            });
         }
 
 
@@ -56,7 +56,7 @@ namespace ImmersiveGames.ScenesManager
                         asyncUnload.completed += _ => unloadCompletionSource.SetResult(true);
 
                     return Task.CompletedTask;
-                }).ConfigureAwait(false);
+                });
 
                 await unloadCompletionSource.Task.ConfigureAwait(false);
             }
@@ -81,14 +81,15 @@ namespace ImmersiveGames.ScenesManager
 
                 instance.loadingProgressBar.gameObject.SetActive(true);
                 var asyncOperation = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
-                
+
                 while (asyncOperation is { isDone: false })
                 {
                     UpdateProgressBar(asyncOperation.progress);
                     await Task.Yield();
                 }
+
                 instance.loadingProgressBar.gameObject.SetActive(false);
-            }).ConfigureAwait(false);
+            });
 
             await loadCompletionSource.Task.ConfigureAwait(false);
         }

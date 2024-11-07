@@ -12,22 +12,20 @@ namespace ImmersiveGames.Utils
 
         private void Awake()
         {
-            if (_instance != null)
+            // Garantir que não haja duplicatas de MainThreadDispatcher
+            if (_instance != null && _instance != this)
             {
                 Destroy(gameObject);
                 return;
             }
+
             _instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
         private void Update()
         {
-            if (_instance == null)
-            {
-                var go = new GameObject("MainThreadDispatcher");
-                _instance = go.AddComponent<MainThreadDispatcher>();
-                DontDestroyOnLoad(go);
-            }
+            // Processar todas as ações enfileiradas na thread principal
             while (ActionsQueue.TryDequeue(out var action))
             {
                 action?.Invoke();
@@ -38,11 +36,20 @@ namespace ImmersiveGames.Utils
         {
             get
             {
-                if (_instance != null) return _instance;
-                var go = new GameObject("MainThreadDispatcher");
-                _instance = go.AddComponent<MainThreadDispatcher>();
+                Initialize(); // Garante que o dispatcher é inicializado
                 return _instance;
             }
+        }
+
+        // Método de inicialização seguro
+        public static void Initialize()
+        {
+            if (_instance != null) return;
+
+            // Cria o objeto no caso de ainda não existir
+            var go = new GameObject("MainThreadDispatcher");
+            _instance = go.AddComponent<MainThreadDispatcher>();
+            DontDestroyOnLoad(go);
         }
 
         public static void Enqueue(Action action)
@@ -93,6 +100,5 @@ namespace ImmersiveGames.Utils
 
             return tcs.Task;
         }
-
     }
 }

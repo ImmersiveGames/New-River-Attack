@@ -31,8 +31,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
         private void ReloadBoss()
         {
             GamePlayBossManager.instance.SetBoss(this);
-            /*var behaviors = GetComponent<BossBehaviorHandle>();
-            behaviors.ResetAll();*/
             gameObject.transform.localScale = Vector3.one;
         }
 

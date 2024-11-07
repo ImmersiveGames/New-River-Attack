@@ -2,12 +2,15 @@
 using ImmersiveGames.AudioEvents;
 using ImmersiveGames.BulletsManagers;
 using ImmersiveGames.DebugManagers;
+using ImmersiveGames.GameStateSystem;
 using ImmersiveGames.InputManager;
 using ImmersiveGames.MenuManagers;
 using ImmersiveGames.MenuManagers.Abstracts;
 using ImmersiveGames.MenuManagers.PanelGameManagers;
 using ImmersiveGames.MenuManagers.PanelOptionsManagers;
 using ImmersiveGames.PoolManagers;
+using ImmersiveGames.ScenesManager;
+using ImmersiveGames.ScenesManager.Transitions;
 using ImmersiveGames.ShopManagers.NavigationModes;
 using ImmersiveGames.StateManagers;
 using ImmersiveGames.SteamServicesManagers;
@@ -53,6 +56,9 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<PanelGameManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PanelGameHud>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PanelGameOver>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<FadeManager>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<FadeTransition>(DebugManager.DebugLevels.All);
+            
             
             //Audios
             DebugManager.SetScriptDebugLevel<AudioManager>(DebugManager.DebugLevels.None);
@@ -62,6 +68,8 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<GamePlayManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<GameOptionsSave>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<GemeStatisticsDataLog>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<GameStateManager>(DebugManager.DebugLevels.All);
+            
             
             
             //Inputs
@@ -79,8 +87,8 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<ShopSkinChanger>(DebugManager.DebugLevels.None);
             
             //Scenes e States
-            DebugManager.SetScriptDebugLevel<GameState>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<StateManager>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<GameState>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<StateManager>(DebugManager.DebugLevels.All);
             DebugManager.SetScriptDebugLevel<GameStateBriefingRoom>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<GameStateMenuInitial>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<GameStatePlay>(DebugManager.DebugLevels.None);

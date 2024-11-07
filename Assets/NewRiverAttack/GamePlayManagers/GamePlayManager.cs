@@ -166,7 +166,7 @@ namespace NewRiverAttack.GamePlayManagers
             IsPause = false;
             CameraManager.ActiveEndCamera(false);
             CameraManager.ActiveStartCamera();
-            GameManager.StateManager.ForceChangeState(StatesNames.GameStatePlay.ToString());
+            //GameManager.StateManager.ForceChangeState(StatesNames.GameStatePlay.ToString());
             GameSaveHandler.Instance.SaveGameData();
             EventGameReset?.Invoke();
         }

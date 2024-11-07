@@ -8,8 +8,10 @@ namespace ImmersiveGames.ScenesManager
 {
     public sealed class FadeManager : MonoBehaviour
     {
-        public event Action EventFadeInStart;
-        public event Action EventFadeOutComplete;
+        public delegate void FadeManagerEventHandler();
+
+        private event FadeManagerEventHandler EventFadeInStart;
+        public event FadeManagerEventHandler EventFadeOutComplete;
         
         public static FadeManager Instance { get; private set; }
         
@@ -42,9 +44,10 @@ namespace ImmersiveGames.ScenesManager
         {
             if (_canvasGroup != null)
             {
-                await MainThreadDispatcher.EnqueueAsync(OnEventFadeInStart).ConfigureAwait(false);
+                OnEventFadeInStart();
+                //await MainThreadDispatcher.EnqueueAsync(OnEventFadeInStart).ConfigureAwait(false);
                 /*MainThreadTaskExecutor.RunOnMainThread(OnEventFadeInStart);*/
-                await FadeAsync(true, durationFadeIn).ConfigureAwait(false);
+                await FadeAsync(true, durationFadeIn);//.ConfigureAwait(false);
             }
             else
             {
@@ -56,9 +59,9 @@ namespace ImmersiveGames.ScenesManager
         {
             if (_canvasGroup != null)
             {
-                await FadeAsync(false, durationFadeOut).ConfigureAwait(false);
-                await MainThreadDispatcher.EnqueueAsync(OnEventOutComplete).ConfigureAwait(false);
-                //OnEventOutComplete();
+                await FadeAsync(false, durationFadeOut);//.ConfigureAwait(false);
+                //await MainThreadDispatcher.EnqueueAsync(OnEventOutComplete).ConfigureAwait(false);
+                OnEventOutComplete();
                 //MainThreadTaskExecutor.RunOnMainThread(OnEventOutComplete);
             }
             else
@@ -77,7 +80,7 @@ namespace ImmersiveGames.ScenesManager
             var fadeCompletionSource = new TaskCompletionSource<bool>();
 
             // Run the fade on the main thread
-            await MainThreadDispatcher.EnqueueAsync(FadeUpdate).ConfigureAwait(false);
+            await MainThreadDispatcher.EnqueueAsync(FadeUpdate);//.ConfigureAwait(false);
 
             // Wait for the fade to complete before returning
             await fadeCompletionSource.Task.ConfigureAwait(false);

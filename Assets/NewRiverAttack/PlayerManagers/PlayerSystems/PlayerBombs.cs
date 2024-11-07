@@ -93,6 +93,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void PowerUpAddBomb(ActivePowerUp activePowerUp)
         {
             if (activePowerUp.PowerUpData.powerUpType != PowerUpTypes.Bomb) return;
+            if(GetBomb +1 > PlayersManager.Instance.PlayersDefault.maxBombs) return;
             GetBomb += 1;
             _gameHudManager.OnEventHudBombUpdate(GetBomb, _playerMaster.PlayerIndex);
         }

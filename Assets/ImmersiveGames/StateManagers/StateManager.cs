@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ImmersiveGames.DebugManagers;
+using ImmersiveGames.GameStateSystem;
 using ImmersiveGames.ScenesManager;
 using ImmersiveGames.StateManagers.Interfaces;
 using UnityEngine.SceneManagement;
@@ -74,10 +75,6 @@ namespace ImmersiveGames.StateManagers
         }
 
         public IState GetCurrentState => _currentState;
-
-        public IState GetPreviousState()
-        {
-            return _previousState;
-        }
+        public IState GetPreviousState => _previousState;
     }
 }
