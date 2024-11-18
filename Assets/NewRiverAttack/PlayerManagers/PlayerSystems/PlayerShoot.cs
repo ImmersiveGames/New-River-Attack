@@ -1,4 +1,5 @@
 ﻿using System;
+using ImmersiveGames.DebugManagers;
 using ImmersiveGames.InputManager;
 using NewRiverAttack.BulletsManagers.Interface;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
@@ -36,7 +37,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             if (shootPattern == null || _playerMaster.ActualSkin == null) return;
             _originalCooldown = _playerMaster.ActualSkin.cooldownShoot;
             shootPattern.SetParameter(EnumShootParameter.Cooldown, _originalCooldown);
-            Debug.Log($"PlayerShoot.Awake: Cooldown inicial definido a partir de ActualSkin: {_originalCooldown}");
+            DebugManager.Log<PlayerShoot>($"PlayerShoot.Start: Cooldown inicial definido a partir de ActualSkin: {_originalCooldown}");
         }
 
         private void OnDisable()
@@ -56,7 +57,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             }
             else
             {
-                Debug.Log("PlayerShoot.AttemptShoot: Cooldown ainda ativo.");
+                DebugManager.Log<PlayerShoot>("PlayerShoot.AttemptShoot: Cooldown ainda ativo.");
             }
         }
 
@@ -66,7 +67,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             if (activePowerUp.PowerUpData.powerUpType != PowerUpTypes.RapidFire || shootPattern == null) return;
             var newCooldown = _originalCooldown / cadenceDivider;
             shootPattern.SetParameter(EnumShootParameter.Cooldown, newCooldown);
-            Debug.Log($"PlayerShoot.StartPowerUp: Cooldown reduzido temporariamente para {newCooldown}");
+            DebugManager.Log<PlayerShoot>($"PlayerShoot.StartPowerUp: Cooldown reduzido temporariamente para {newCooldown}");
         }
 
         // Restaura o cooldown original ao término do power-up
@@ -74,7 +75,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         {
             if (activePowerUp.PowerUpData.powerUpType != PowerUpTypes.RapidFire || shootPattern == null) return;
             shootPattern.SetParameter(EnumShootParameter.Cooldown, _originalCooldown);
-            Debug.Log("PlayerShoot.EndPowerUp: Cooldown restaurado ao valor original.");
+            DebugManager.Log<PlayerShoot>("PlayerShoot.EndPowerUp: Cooldown restaurado ao valor original.");
         }
 
         public override BulletSpawnData CreateBulletData(Vector3 direction, Vector3 position)

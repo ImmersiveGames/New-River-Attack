@@ -55,8 +55,8 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<PanelGameManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PanelGameHud>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PanelGameOver>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<FadeManager>(DebugManager.DebugLevels.All);
-            DebugManager.SetScriptDebugLevel<FadeTransition>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<FadeManager>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<FadeTransition>(DebugManager.DebugLevels.None);
             
             
             //Audios

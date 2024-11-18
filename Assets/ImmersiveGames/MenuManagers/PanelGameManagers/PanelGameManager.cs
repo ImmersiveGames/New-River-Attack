@@ -149,9 +149,8 @@ namespace ImmersiveGames.MenuManagers.PanelGameManagers
 
             // Inicia o fade-in
             await _fadeManager.FadeInAsync().ConfigureAwait(true);
-
             _gamePlayManager.OnEventGameResetClear();
-            
+            GameManager.StateManager.ForceChangeState("GameStatePlay");
             // Realiza o reset das configurações
             SetupInitial();
 

@@ -57,7 +57,8 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
                 TargetingSystem.AimAtTarget(SpawnPoint, target);
             }
             // Executa o padrão de tiro
-            if (shootPattern == null) return;
+            if (shootPattern == null || SpawnPoint == null) return;
+            Debug.Log(shootPattern, SpawnPoint);
             shootPattern.Execute(SpawnPoint, this);
         }
 

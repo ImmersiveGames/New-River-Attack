@@ -24,14 +24,12 @@ namespace ImmersiveGames.ScenesManager
             await MainThreadDispatcher.EnqueueAsync(async () =>
             {
                 if (SceneManager.GetActiveScene().name == nextState.SceneName) return;
-                if (unloadPreviousAdditiveScene)
+
+                if (unloadPreviousAdditiveScene && AdditiveScenes.Count > 0)
                 {
                     // Descarrega a última cena aditiva
-                    if (AdditiveScenes.Count > 0)
-                    {
-                        var previousAdditiveScene = AdditiveScenes.Pop();
-                        await UnloadSceneAsync(previousAdditiveScene).ConfigureAwait(false);
-                    }
+                    var previousAdditiveScene = AdditiveScenes.Pop();
+                    await UnloadSceneAsync(previousAdditiveScene).ConfigureAwait(false);
                 }
 
                 await LoadSceneAsync(nextState.SceneName, loadSceneMode).ConfigureAwait(false);
@@ -41,7 +39,6 @@ namespace ImmersiveGames.ScenesManager
                     // Empilha a nova cena aditiva
                     AdditiveScenes.Push(nextState.SceneName);
                 }
-                // Desative o painel de loading no final da transição
             }).ConfigureAwait(false);
         }
 
@@ -54,14 +51,9 @@ namespace ImmersiveGames.ScenesManager
 
             await MainThreadDispatcher.EnqueueAsync(() =>
             {
-                if (SceneManager.GetActiveScene().name == sceneName) return Task.CompletedTask;
                 SceneManager.sceneUnloaded += SceneUnloaded;
                 var asyncUnload = SceneManager.UnloadSceneAsync(sceneName);
-
-                // Verifica se o processo de descarregamento foi concluído
-                if (asyncUnload != null) asyncUnload.completed += _ => unloadCompletionSource.SetResult(true);
-
-                return Task.CompletedTask;
+                asyncUnload.completed += _ => unloadCompletionSource.SetResult(true);
             }).ConfigureAwait(false);
 
             await unloadCompletionSource.Task.ConfigureAwait(false);
@@ -70,9 +62,6 @@ namespace ImmersiveGames.ScenesManager
             {
                 SceneManager.sceneUnloaded -= SceneUnloaded;
 
-                // Confirmação de que a cena foi completamente descarregado
-                if (SceneManager.GetSceneByName(sceneName).isLoaded) return;
-                unloadCompletionSource.SetResult(true);
                 // Atualize a barra de progresso aqui (por exemplo, definindo-a como 100%)
                 UpdateProgressBar(1.0f);
             }
@@ -90,15 +79,17 @@ namespace ImmersiveGames.ScenesManager
                 SceneManager.sceneLoaded += SceneLoaded;
                 instance.loadingProgressBar.gameObject.SetActive(true);
                 var asyncOperation = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
-                while (asyncOperation is { isDone: false })
+
+                while (!asyncOperation.isDone)
                 {
                     // Atualize a barra de progresso durante o carregamento
                     UpdateProgressBar(asyncOperation.progress);
                     await Task.Yield();
                 }
+
                 instance.loadingProgressBar.gameObject.SetActive(false);
             }).ConfigureAwait(false);
-            await Task.Delay(500).ConfigureAwait(true);
+
             await loadCompletionSource.Task.ConfigureAwait(false);
 
             void SceneLoaded(Scene scene, LoadSceneMode mode)

@@ -1,8 +1,10 @@
 ﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.InputManager;
 using ImmersiveGames.ShopManagers.ShopProducts;
+using NewRiverAttack.GameManagers;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
+using NewRiverAttack.StateManagers.States;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
