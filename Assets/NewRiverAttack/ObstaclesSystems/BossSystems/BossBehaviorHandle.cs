@@ -120,17 +120,23 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
                 }
             );
             
-             var onEnterMineShoot = NodeFactory.ApplyDecorator(nodeMineShoot, NodeDecorations.OnEnterExitDecorator,
+             var onEnterMineShoot = NodeFactory.ApplyDecorator(nodeMineShoot, NodeDecorations.OnEnterDecorator,
                 new Dictionary<NodeDecorationsParam, object>
                 {
                     { NodeDecorationsParam.OnEnter, (Action)mineSpawn.OnEnter },
-                    { NodeDecorationsParam.OnExit, (Action)mineSpawn.OnExit }
+                    //{ NodeDecorationsParam.OnExit, (Action)mineSpawn.OnExit }
                 }
             );
             var repeatMineX10 = NodeFactory.ApplyDecorator(onEnterMineShoot, NodeDecorations.RepeatDecorator,
                 new Dictionary<NodeDecorationsParam, object>
                 {
                     { NodeDecorationsParam.Times, 10 }
+                }
+            );
+            var repeatMineX10Exit = NodeFactory.ApplyDecorator(repeatMineX10, NodeDecorations.OnExitDecorator,
+                new Dictionary<NodeDecorationsParam, object>
+                {
+                    { NodeDecorationsParam.OnExit, (Action)mineSpawn.OnExit }
                 }
             );
             var repeatConeShot01X5 = NodeFactory.ApplyDecorator(nodeConeShoot01, NodeDecorations.RepeatDecorator,
@@ -174,7 +180,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             {
                 repeatConeShot01X5,
                 nodeWaitSec,
-                repeatMineX10,
+                repeatMineX10Exit,
                 nodeWaitSec,
                 repeatConeShot02X4,
                 nodeWaitSec,
@@ -186,7 +192,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             });
             var sequenceSouth = new SequenceNode(new List<INode>
             {
-                repeatMineX10,
+                repeatMineX10Exit,
                 nodeWaitSec,
                 repeatConeShot02X6,
                 nodeWaitSec,

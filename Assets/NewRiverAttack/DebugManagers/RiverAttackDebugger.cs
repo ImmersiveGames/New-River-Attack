@@ -1,13 +1,12 @@
 ﻿using ImmersiveGames;
 using ImmersiveGames.AudioEvents;
-using ImmersiveGames.BulletsManagers;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.InputManager;
 using ImmersiveGames.MenuManagers;
 using ImmersiveGames.MenuManagers.Abstracts;
 using ImmersiveGames.MenuManagers.PanelGameManagers;
 using ImmersiveGames.MenuManagers.PanelOptionsManagers;
-using ImmersiveGames.PoolManagers;
+using ImmersiveGames.PoolSystems;
 using ImmersiveGames.ScenesManager;
 using ImmersiveGames.ScenesManager.Transitions;
 using ImmersiveGames.ShopManagers.NavigationModes;
@@ -69,7 +68,6 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<GemeStatisticsDataLog>(DebugManager.DebugLevels.None);
             
             
-            
             //Inputs
             DebugManager.SetScriptDebugLevel<ActionManager>(DebugManager.DebugLevels.None);
             
@@ -85,13 +83,12 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<ShopSkinChanger>(DebugManager.DebugLevels.None);
             
             //Scenes e States
-            DebugManager.SetScriptDebugLevel<GameState>(DebugManager.DebugLevels.All);
-            DebugManager.SetScriptDebugLevel<StateManager>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<GameState>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<StateManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<GameStateBriefingRoom>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<GameStateMenuInitial>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<GameStatePlay>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<GameStateGameOver>(DebugManager.DebugLevels.None);
-            
             
             DebugManager.SetScriptDebugLevel<PatrolState>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<ShootState>(DebugManager.DebugLevels.None);
@@ -108,7 +105,7 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<UILifeDisplay>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerShoot>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerBombs>(DebugManager.DebugLevels.None);
-            DebugManager.SetScriptDebugLevel<Bullets>(DebugManager.DebugLevels.None);
+            DebugManager.SetScriptDebugLevel<Bullet>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<BulletBombPlayer>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PlayerFuel>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<UIFuelDisplay>(DebugManager.DebugLevels.None);

@@ -1,20 +1,19 @@
 ﻿using ImmersiveGames.PoolSystems;
 using UnityEngine;
 using ImmersiveGames.PoolSystems.Interfaces;
-using NewRiverAttack.BulletsManagers.Interface;
 using NewRiverAttack.GamePlayManagers;
 
 namespace NewRiverAttack.BulletsManagers
 {
     public abstract class Bullet : MonoBehaviour, IPoolable
     {
-        protected BulletSpawnData BulletData;
+        protected ISpawnData SpawnData;
         protected float Lifetime;
         private GamePlayManager _gamePlayManager;
 
         protected bool IsInitialize { get; private set; }
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             _gamePlayManager = GamePlayManager.Instance;
             _gamePlayManager.EventGameResetClear += ReturnToPool;
@@ -30,6 +29,8 @@ namespace NewRiverAttack.BulletsManagers
             IsInitialize = false;
         }
 
+        public ISpawnData GetSpawnData => SpawnData;
+
         #region IPoolable
 
         public PoolObject Pool { get; set; } // Referência ao pool
@@ -37,10 +38,10 @@ namespace NewRiverAttack.BulletsManagers
         // Método chamado quando o projétil é instanciado do pool
         public virtual void OnSpawned(Transform spawnPosition, ISpawnData data)
         {
-            BulletData = data as BulletSpawnData;
-            if (BulletData != null)
+            SpawnData = data;
+            if (SpawnData != null)
             {
-                Lifetime = BulletData.Timer;
+                Lifetime = SpawnData.Timer;
             }
 
             transform.position = spawnPosition.position;
@@ -54,7 +55,7 @@ namespace NewRiverAttack.BulletsManagers
         {
             IsInitialize = false; // Certifica-se de que a lógica de movimento e qualquer estado seja resetado
             Lifetime = 0;         // Reseta o tempo de vida da bala
-            BulletData = null;    // Limpa os dados do projétil
+            SpawnData = null;    // Limpa os dados do projétil
         }
 
         #endregion

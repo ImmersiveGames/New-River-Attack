@@ -1,5 +1,5 @@
-﻿using System;
-using ImmersiveGames.FiniteStateMachine;
+﻿using ImmersiveGames.FiniteStateMachine;
+using ImmersiveGames.PoolSystems.Interfaces;
 using NewRiverAttack.BulletsManagers.Interface;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
@@ -13,7 +13,7 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         private StateMachine _stateMachine;
         private IState _startState;
         private EnemiesMaster _enemiesMaster;
-        internal bool IsVisible; // Checagem de visibilidade
+        private bool _isVisible; // Checagem de visibilidade
         private EnemiesScriptable _enemiesScriptable;
 
         protected override void Awake()
@@ -43,11 +43,11 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
             _enemiesMaster.EventObjectChangeSkin -= UpdateSpawnPoint;
         }
 
-        public bool ShootIsReady => IsVisible && _enemiesMaster.ObjectIsReady;
+        public bool ShootIsReady => _isVisible && _enemiesMaster.ObjectIsReady;
         private void InitializeStateMachine()
         {
             _stateMachine = new StateMachine();
-            var shootState = new ShootState(this, shootPattern);
+            var shootState = new ShootState(this);
             var patrolState = new PatrolState(this);
 
             // Transição para o estado de tiro apenas se o inimigo tiver um alvo e estiver visível
@@ -63,11 +63,11 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems
         }
 
         // Atualiza o estado de visibilidade
-        private void OnBecameVisible() => IsVisible = true;
-        private void OnBecameInvisible() => IsVisible = false;
+        private void OnBecameVisible() => _isVisible = true;
+        private void OnBecameInvisible() => _isVisible = false;
 
         // Cria os dados do projétil específico para o inimigo
-        public override BulletSpawnData CreateBulletData(Vector3 direction, Vector3 position)
+        public override ISpawnData CreateBulletData(Vector3 direction, Vector3 position)
         {
             return new BulletSpawnData(
                 _enemiesMaster,

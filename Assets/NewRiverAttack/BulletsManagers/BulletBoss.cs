@@ -1,16 +1,19 @@
-﻿using NewRiverAttack.ObstaclesSystems.Abstracts;
+﻿using ImmersiveGames.PoolSystems.Interfaces;
+using NewRiverAttack.BulletsManagers.Interface;
+using NewRiverAttack.ObstaclesSystems.Abstracts;
 using UnityEngine;
 
 namespace NewRiverAttack.BulletsManagers
 {
     public class BulletBoss : Bullet
     {
+        private BulletSpawnData _bulletSpawnData;
         private void Update()
         {
             if (!IsInitialize) return;
 
             // Movimenta o projétil na direção e velocidade fornecidas
-            transform.position += BulletData.Direction * (BulletData.Speed * Time.deltaTime);
+            transform.position += SpawnData.Direction * (_bulletSpawnData.Speed * Time.deltaTime);
 
             // Reduz o tempo de vida do projétil
             Lifetime -= Time.deltaTime;
@@ -26,6 +29,11 @@ namespace NewRiverAttack.BulletsManagers
             if (other.GetComponentInParent<Bullet>()) return;
             if (other.GetComponentInParent<ObstacleMaster>()) return;
             ReturnToPool();
+        }
+        public override void OnSpawned(Transform spawnPosition, ISpawnData data)
+        {
+            base.OnSpawned(spawnPosition, data);
+            _bulletSpawnData = SpawnData as BulletSpawnData;
         }
     }
 }

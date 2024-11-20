@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using ImmersiveGames.BulletsManagers;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.SteamServicesManagers;
 using ImmersiveGames.Utils;
+using NewRiverAttack.BulletsManagers;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.GamePlayManagers.GamePlayLogs;
 using NewRiverAttack.LevelBuilder;
@@ -135,7 +135,7 @@ namespace NewRiverAttack.GameStatisticsSystem
                 OnEventServiceSet("stat_ObstacleDeaths", _gemeStatisticsDataLog.playersDieEnemyCollider);
             }
             // Testa se o componente é do tipo Bullets
-            else if (other.GetComponentInParent<Bullets>())
+            else if (other.GetComponentInParent<Bullet>())
             {
                 _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersDieEnemyBullets, 1);
                 OnEventServiceSet("stat_BulletsDeaths", _gemeStatisticsDataLog.playersDieEnemyBullets);

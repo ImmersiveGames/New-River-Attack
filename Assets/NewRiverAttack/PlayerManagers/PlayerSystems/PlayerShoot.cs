@@ -1,10 +1,9 @@
-﻿using System;
-using ImmersiveGames.DebugManagers;
+﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.InputManager;
+using ImmersiveGames.PoolSystems.Interfaces;
 using NewRiverAttack.BulletsManagers.Interface;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.CollectibleSystems.PowerUpSystems;
-using NewRiverAttack.ShootSystems;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -36,7 +35,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             // Configura o cooldown inicial com base no valor de ActualSkin
             if (shootPattern == null || _playerMaster.ActualSkin == null) return;
             _originalCooldown = _playerMaster.ActualSkin.cooldownShoot;
-            shootPattern.SetParameter(EnumShootParameter.Cooldown, _originalCooldown);
+            cooldown = _originalCooldown;
             DebugManager.Log<PlayerShoot>($"PlayerShoot.Start: Cooldown inicial definido a partir de ActualSkin: {_originalCooldown}");
         }
 
@@ -66,7 +65,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         {
             if (activePowerUp.PowerUpData.powerUpType != PowerUpTypes.RapidFire || shootPattern == null) return;
             var newCooldown = _originalCooldown / cadenceDivider;
-            shootPattern.SetParameter(EnumShootParameter.Cooldown, newCooldown);
+            cooldown = newCooldown;
             DebugManager.Log<PlayerShoot>($"PlayerShoot.StartPowerUp: Cooldown reduzido temporariamente para {newCooldown}");
         }
 
@@ -74,11 +73,11 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void EndPowerUp(ActivePowerUp activePowerUp)
         {
             if (activePowerUp.PowerUpData.powerUpType != PowerUpTypes.RapidFire || shootPattern == null) return;
-            shootPattern.SetParameter(EnumShootParameter.Cooldown, _originalCooldown);
+            cooldown = _originalCooldown;
             DebugManager.Log<PlayerShoot>("PlayerShoot.EndPowerUp: Cooldown restaurado ao valor original.");
         }
 
-        public override BulletSpawnData CreateBulletData(Vector3 direction, Vector3 position)
+        public override ISpawnData CreateBulletData(Vector3 direction, Vector3 position)
         {
             return new BulletSpawnData(
                 _playerMaster,

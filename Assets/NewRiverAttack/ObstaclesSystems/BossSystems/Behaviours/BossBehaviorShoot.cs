@@ -1,8 +1,10 @@
 ﻿using System;
 using ImmersiveGames.BehaviorTreeSystem.Interface;
+using ImmersiveGames.PoolSystems.Interfaces;
 using NewRiverAttack.BulletsManagers.Interface;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
+using NewRiverAttack.ObstaclesSystems.BossSystems.Helpers;
 using NewRiverAttack.ObstaclesSystems.BossSystems.Helpers.Interfaces;
 using UnityEngine;
 
@@ -38,6 +40,14 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             UpdateSpawnPoint();
         }
 
+        private void OnDisable()
+        {
+            if (shootPattern is IResettablePattern resettablePattern)
+            {
+                resettablePattern.ExitPattern(this);
+            }
+        }
+
         public string NodeName => $"BossShoot_{idNode}";
         public int NodeID => idNode;
 
@@ -46,14 +56,25 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
         private NodeState ExecuteShooting()
         {
-            // Usa TryShoot para lidar com o cooldown e decidir o estado do nó
-            var shotExecuted = shootPattern.TryShoot(ExecuteShootPattern);
-            return shotExecuted ? NodeState.Success : // Disparo efetuado com sucesso
-                NodeState.Running; // Ainda no cooldown, continua rodando
+            if (Time.realtimeSinceStartup < LastShootTime + cooldown) return NodeState.Running;
+
+            if (enableTargeting && target != null)
+            {
+                TargetingSystem.AimAtTarget(SpawnPoint, target);
+            }
+
+            if (shootPattern != null && SpawnPoint != null)
+            {
+                shootPattern?.Execute(SpawnPoint, this);
+                LastShootTime = Time.realtimeSinceStartup; // Atualiza o cooldown
+            }
+
+            return NodeState.Success;
         }
 
         public void OnEnter()
         {
+            UpdateSpawnPoint();
             if (shootPattern is IResettablePattern resettablePattern)
             {
                 resettablePattern.ResetPattern(this);
@@ -66,7 +87,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                 resettablePattern.ExitPattern(this);
             }
         }
-        public override BulletSpawnData CreateBulletData(Vector3 direction, Vector3 position)
+        public override ISpawnData CreateBulletData(Vector3 direction, Vector3 position)
         {
             return new BulletSpawnData(
                 _bossMaster,

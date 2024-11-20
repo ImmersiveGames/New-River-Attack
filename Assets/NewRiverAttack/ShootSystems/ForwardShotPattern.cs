@@ -8,12 +8,9 @@ namespace NewRiverAttack.ShootSystems
     {
         public override void Execute(Transform spawnPoint, ObjectShoot shooter)
         {
-            TryShoot(() =>
-            {
                 var bulletData = shooter.CreateBulletData(spawnPoint.forward, spawnPoint.position);
                 shooter.PoolingOut(spawnPoint, bulletData);
                 shooter.ShootSound();
-            });
         }
     }
 }

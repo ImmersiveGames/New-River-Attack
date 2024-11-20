@@ -1,5 +1,4 @@
-﻿using ImmersiveGames.BulletsManagers;
-using ImmersiveGames.DebugManagers;
+﻿using ImmersiveGames.DebugManagers;
 using NewRiverAttack.BulletsManagers;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.GameStatisticsSystem;
@@ -79,7 +78,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         {
             return other switch
             {
-                Bullets bullet => bullet.GetBulletData.BulletOwner as T,
+                BulletPlayer bullet => bullet.GetData.Owner as T,
                 ObjectMaster player => player as T,
                 _ => null
             };
@@ -89,7 +88,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         {
             var teste= component switch
             {
-                Bullets bullet => bullet.GetBulletData.BulletDamage,
+                BulletPlayer bullet => bullet.GetData.Damage,
                 PlayerMaster player => player.ActualSkin.colliderDamage,
                 _ => 0
             };

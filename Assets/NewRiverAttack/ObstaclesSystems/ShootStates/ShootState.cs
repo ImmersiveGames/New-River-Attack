@@ -1,19 +1,16 @@
 ﻿using ImmersiveGames.DebugManagers;
 using ImmersiveGames.FiniteStateMachine;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
-using NewRiverAttack.ShootSystems;
 
 namespace NewRiverAttack.ObstaclesSystems.ShootStates
 {
     public class ShootState : IState
     {
         private readonly EnemiesShoot _enemiesShoot;
-        private readonly ShootPatternBase _shootPattern;
 
-        public ShootState(EnemiesShoot enemiesShoot, ShootPatternBase shootPattern)
+        public ShootState(EnemiesShoot enemiesShoot)
         {
             _enemiesShoot = enemiesShoot;
-            _shootPattern = shootPattern;
         }
 
         public void Tick()

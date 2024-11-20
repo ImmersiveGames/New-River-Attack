@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using ImmersiveGames;
 using ImmersiveGames.AudioEvents;
-using ImmersiveGames.BulletsManagers;
 using ImmersiveGames.CameraManagers;
 using ImmersiveGames.DebugManagers;
+using ImmersiveGames.PoolSystems.Interfaces;
 using NewRiverAttack.AudioManagers;
+using NewRiverAttack.BulletsManagers.Interface;
 using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
@@ -12,86 +13,74 @@ using UnityEngine;
 
 namespace NewRiverAttack.BulletsManagers
 {
-    public class BulletBombPlayer : Bullets
+    public class BulletBombPlayer : Bullet
     {
-        private float _timeLife;
-        private float _endLife;
         private double _timerParam;
         private float _startRadius;
 
         private AudioEvent _audioEvent;
         private SphereCollider _collider;
-        private readonly List<EnemiesMaster> _enemiesMasters = new List<EnemiesMaster>();
+        private List<EnemiesMaster> _enemiesMasters = new List<EnemiesMaster>();
 
         private AudioSource _audioSource;
-        private BombData _bombData;
-
-        #region Unity Methods
-
-        private void OnEnable()
+        private BombSpawnData _bombData;
+        
+        protected override void OnEnable()
         {
+            base.OnEnable();
             var particleSystems = GetComponentsInChildren<ParticleSystem>();
             _collider = GetComponent<SphereCollider>();
             _startRadius = _collider.radius;
-            _timeLife = MaxTimeSystemParticle(particleSystems);
-            DebugManager.Log<BulletBombPlayer>($"{_timeLife}");
+            Lifetime = MaxTimeSystemParticle(particleSystems);
+            DebugManager.Log<BulletBombPlayer>($"{Lifetime}");
+            _bombData = SpawnData as BombSpawnData;
         }
-        
+        private void FixedUpdate()
+        {
+            ExpandCollider();
+        }
+
+        private void AutoDestroy()
+        {
+            GameStatisticManager.instance.LogBombsHit(_enemiesMasters.Count);
+            _enemiesMasters = new List<EnemiesMaster>();
+            ReturnToPool();
+        }
         private void OnTriggerEnter(Collider other)
         {
+            if (other.GetComponentInParent<PlayerMaster>()) return;
             var enemy = other.GetComponentInParent<EnemiesMaster>();
             if (enemy && !_enemiesMasters.Contains(enemy))
             {
                 _enemiesMasters.Add(enemy);
             }
-        }
-
-        private void FixedUpdate()
-        {
-            ExpandCollider();
-            AutoDestroy(_endLife);
+            
         }
         private void OnBecameInvisible()
         {
-            Invoke(nameof(DestroyMe), _bombData.BulletTimer);
+            Invoke(nameof(AutoDestroy), _bombData.Timer);
         }
 
-        private void OnDisable()
+        public override void OnSpawned(Transform spawnPosition, ISpawnData data)
         {
-            Invoke(nameof(DestroyMe), _bombData.BulletTimer);
-        }
-
-        #endregion
-
-        public override void OnSpawned(Transform spawnPosition, IBulletsData bombData)
-        {
+            base.OnSpawned(spawnPosition, data);
+            _bombData = SpawnData as BombSpawnData;
             if (_audioSource == null)
                 _audioSource = GetComponent<AudioSource>();
             if (_audioEvent == null)
                 _audioEvent = AudioManager.instance.GetAudioSfxEvent(EnumSfxSound.SfxPlayerBomb);
-            BulletData = _bombData = bombData is BombData bulletsData ? bulletsData : default;
+            
+            gameObject.SetActive(true);
+            _audioEvent.PlayOnShot(_audioSource);
             
             var transform1 = transform;
             var position = spawnPosition.position;
-            transform1.position = new Vector3(position.x, position.y, position.z + _bombData.BulletOffSet);
-            gameObject.SetActive(true);
-            _endLife = Time.time + _timeLife;
-            _audioEvent.PlayOnShot(_audioSource);
+            if (_bombData != null)
+                transform1.position = new Vector3(position.x, position.y, position.z + BombSpawnData.BulletOffSet);
+            
         }
 
-        private void ExpandCollider()
-        {
-            if (_bombData.BombRadius == 0) return;
-            _timerParam += Time.deltaTime * _bombData.BombRadiusSpeed;
-            if (CameraShake.Instance != null)
-            {
-                CameraShake.Instance.ShakeCamera(_bombData.BombShakeForce, _bombData.BombShakeTime);
-            }
-            //HardWereVibration(_bombData.BombMillisecondsVibrate);
-            if (!_collider && _collider.GetType() != typeof(SphereCollider))
-                return;
-            _collider.radius = Mathf.Lerp(_startRadius, _bombData.BombRadius, (float)_timerParam);
-        }
+        #region Particles System
 
         private float MaxTimeSystemParticle(IReadOnlyCollection<ParticleSystem> particleSystems)
         {
@@ -115,26 +104,24 @@ namespace NewRiverAttack.BulletsManagers
 
             return maxTime;
         }
-
-        protected override void DestroyMe()
+        private void ExpandCollider()
         {
-            GameStatisticManager.instance.LogBombsHit(_enemiesMasters.Count);
-            GameObject o;
-            (o = gameObject).SetActive(false);
-            Destroy(o);
-        }
-
-        public PlayerMaster GetBombOwner => _bombData.BulletOwner as PlayerMaster;
-
-        /*private void HardWereVibration(long timeVibration)
-        {
-            if (Application.platform == RuntimePlatform.Android && SystemInfo.supportsVibration)
+            if (_bombData.BombRadius == 0) return;
+            _timerParam += Time.deltaTime * _bombData.BombRadiusSpeed;
+            if (CameraShake.Instance != null)
             {
-                #if UNITY_ANDROID && !UNITY_EDITOR
-                ToolsAndroid.Vibrate(timeVibration);
-                Handheld.Vibrate();
-                #endif
+                CameraShake.Instance.ShakeCamera(_bombData.BombShakeForce, _bombData.BombShakeTime);
             }
-        }*/
+            //HardWereVibration(_bombData.BombMillisecondsVibrate);
+            if (!_collider && _collider.GetType() != typeof(SphereCollider))
+                return;
+            _collider.radius = Mathf.Lerp(_startRadius, _bombData.BombRadius, (float)_timerParam);
+            if (Mathf.Approximately(_collider.radius, _bombData.BombRadius))
+            {
+                AutoDestroy();
+            }
+            
+        }
+        #endregion
     }
 }

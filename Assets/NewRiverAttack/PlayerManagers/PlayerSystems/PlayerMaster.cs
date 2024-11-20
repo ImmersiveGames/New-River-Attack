@@ -1,7 +1,6 @@
 ﻿using System;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.ObjectManagers.Interfaces;
-using ImmersiveGames.PoolManagers.Interface;
 using ImmersiveGames.ShopManagers.ShopProducts;
 using NewRiverAttack.GameManagers;
 using NewRiverAttack.GamePlayManagers;
@@ -14,7 +13,7 @@ using UnityEngine;
 
 namespace NewRiverAttack.PlayerManagers.PlayerSystems
 {
-    public sealed class PlayerMaster : ObjectMaster, IHasPool
+    public sealed class PlayerMaster : ObjectMaster
     {
         [Header("player Settings")] [SerializeField]
         public bool godMode;
