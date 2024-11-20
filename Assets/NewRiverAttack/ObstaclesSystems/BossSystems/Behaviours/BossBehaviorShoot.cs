@@ -25,14 +25,14 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         protected override void Awake()
         {
             base.Awake();
-            enableTargeting = true;
             _bossMaster = GetComponent<BossMaster>();
         }
 
         private void Start()
         {
+            SetTarget(null);
             var player = PlayersManager.Instance.GetPlayerMaster(0);
-            if (player != null)
+            if (player != null && enableTargeting)
             {
                 SetTarget(player.transform);
             }
@@ -57,17 +57,15 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         private NodeState ExecuteShooting()
         {
             if (Time.realtimeSinceStartup < LastShootTime + cooldown) return NodeState.Running;
-
+            UpdateSpawnPoint();
             if (enableTargeting && target != null)
             {
                 TargetingSystem.AimAtTarget(SpawnPoint, target);
             }
 
-            if (shootPattern != null && SpawnPoint != null)
-            {
-                shootPattern?.Execute(SpawnPoint, this);
-                LastShootTime = Time.realtimeSinceStartup; // Atualiza o cooldown
-            }
+            if (shootPattern == null || SpawnPoint == null) return NodeState.Failure;
+            shootPattern?.Execute(SpawnPoint, this);
+            LastShootTime = Time.realtimeSinceStartup; // Atualiza o cooldown
 
             return NodeState.Success;
         }

@@ -1,4 +1,5 @@
-﻿using NewRiverAttack.BulletsManagers.Interface;
+﻿using ImmersiveGames.PoolSystems.Interfaces;
+using NewRiverAttack.BulletsManagers.Interface;
 using UnityEngine;
 
 namespace NewRiverAttack.BulletsManagers
@@ -6,11 +7,6 @@ namespace NewRiverAttack.BulletsManagers
     public class BulletBossGasStation : Bullet
     {
         private BulletSpawnData _bulletSpawnData;
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-            _bulletSpawnData = SpawnData as BulletSpawnData;
-        }
         private void Update()
         {
             if (!IsInitialize) return;
@@ -31,6 +27,11 @@ namespace NewRiverAttack.BulletsManagers
             {
                 ReturnToPool();
             }
+        }
+        public override void OnSpawned(Transform spawnPosition, ISpawnData data)
+        {
+            base.OnSpawned(spawnPosition, data);
+            _bulletSpawnData = SpawnData as BulletSpawnData;
         }
     }
 }

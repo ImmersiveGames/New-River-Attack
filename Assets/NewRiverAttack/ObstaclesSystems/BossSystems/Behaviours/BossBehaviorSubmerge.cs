@@ -23,6 +23,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
         public void OnEnter()
         {
+            ResetBehavior();
             Invulnerability(true);
             AnimationSubmerge();
         }
@@ -33,8 +34,9 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         }
         private NodeState SubmergeBoss()
         {
-            _elapsedTime += Time.deltaTime;
-            return _elapsedTime >= _timerSubmerge ? NodeState.Success : NodeState.Running;
+            _elapsedTime -= Time.deltaTime;
+            //Debug.Log($"Sub: {_elapsedTime}");
+            return _elapsedTime <= 0 ? NodeState.Success : NodeState.Running;
         }
         
         private void AnimationSubmerge()
@@ -42,9 +44,10 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             if (Animator == null || string.IsNullOrEmpty(onSubmerge)) return;
             Animator.SetTrigger(onSubmerge);
         }
-        public void ResetBehavior()
+
+        private void ResetBehavior()
         {
-            _elapsedTime = 0;
+            _elapsedTime = _timerSubmerge;
         }
 
         public string NodeName => "BossSubmerge";

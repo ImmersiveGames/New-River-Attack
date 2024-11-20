@@ -12,7 +12,7 @@ namespace NewRiverAttack.BulletsManagers
             _mineMaster = GetComponent<MineMaster>();
         }
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
             _mineMaster.EventObstacleDeath += MarkToReturn;
         }

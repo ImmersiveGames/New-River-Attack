@@ -22,6 +22,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         #endregion
         public void OnEnter()
         {
+            ResetBehavior();
             AnimationEmerge();
         }
 
@@ -36,8 +37,9 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         }
         private NodeState EmergeBoss()
         {
-            _elapsedTime += Time.deltaTime;
-            return _elapsedTime >= _timerEmerge ? NodeState.Success : NodeState.Running;
+            _elapsedTime -= Time.deltaTime;
+            //Debug.Log($"Emerge: {_elapsedTime}");
+            return _elapsedTime <= 0 ? NodeState.Success : NodeState.Running;
         }
         private void AnimationEmerge()
         {
@@ -46,7 +48,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         }
         public void ResetBehavior()
         {
-            _elapsedTime = 0;
+            _elapsedTime = _timerEmerge;
         }
 
         public string NodeName => "BossEmerge";

@@ -63,6 +63,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             var coneShoot = GetComponentByID<BossBehaviorShoot>(1);
             var coneShoot02 = GetComponentByID<BossBehaviorShoot>(2);
             var mineSpawn = GetComponentByID<BossBehaviorShoot>(3);
+            var gasSpawn = GetComponentByID<BossBehaviorShoot>(4);
 
             var movement = GetComponent<BossBehaviorMovement>();
             var emerge = GetComponent<BossBehaviorEmerge>();
@@ -79,6 +80,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
             var nodeConeShoot01 = NodeFactory.CreateNodeFromFunctionProvider(coneShoot);
             var nodeConeShoot02 = NodeFactory.CreateNodeFromFunctionProvider(coneShoot02);
             var nodeMineShoot = NodeFactory.CreateNodeFromFunctionProvider(mineSpawn);
+            var nodeGasShoot = NodeFactory.CreateNodeFromFunctionProvider(gasSpawn);
             var nodeMovement = NodeFactory.CreateNodeFromFunctionProvider(movement);
             var nodeEmerge = NodeFactory.CreateNodeFromFunctionProvider(emerge);
             var nodeSubmerge = NodeFactory.CreateNodeFromFunctionProvider(submerge);
@@ -123,8 +125,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
              var onEnterMineShoot = NodeFactory.ApplyDecorator(nodeMineShoot, NodeDecorations.OnEnterDecorator,
                 new Dictionary<NodeDecorationsParam, object>
                 {
-                    { NodeDecorationsParam.OnEnter, (Action)mineSpawn.OnEnter },
-                    //{ NodeDecorationsParam.OnExit, (Action)mineSpawn.OnExit }
+                    { NodeDecorationsParam.OnEnter, (Action)mineSpawn.OnEnter }
                 }
             );
             var repeatMineX10 = NodeFactory.ApplyDecorator(onEnterMineShoot, NodeDecorations.RepeatDecorator,
@@ -186,6 +187,9 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
                 nodeWaitSec,
                 
                 onEnterSubmerge,
+                nodeWaitSec,
+                nodeGasShoot,
+                nodeWaitSec,
                 nodeMovement,
                 onEnterExitEmerge,
                 nodeWaitSec
@@ -198,18 +202,24 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
                 nodeWaitSec,
                 
                 onEnterSubmerge,
+                nodeWaitSec,
+                nodeGasShoot,
+                nodeWaitSec,
                 nodeMovement,
                 onEnterExitEmerge,
                 nodeWaitSec,
             });
             var sequenceSide = new SequenceNode(new List<INode>
             {
-                repeatConeShot02X4,
+               repeatConeShot02X4,
                 nodeWaitSec,
                 repeatConeShot02X4,
                 nodeWaitSec,
                 
                 onEnterSubmerge,
+                nodeWaitSec,
+                nodeGasShoot,
+                nodeWaitSec,
                 nodeMovement,
                 onEnterExitEmerge,
                 nodeWaitSec,
@@ -234,7 +244,6 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems
                 nodeWaitSec,
                 onEnterEnterScene,
                 nodeWaitSec,
-                sequenceNorth,
                 conditionalRandomShoot,
                 nodeWaitSec,
                 onEnterDeath,

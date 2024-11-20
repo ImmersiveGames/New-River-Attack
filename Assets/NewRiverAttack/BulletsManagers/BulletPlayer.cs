@@ -7,14 +7,12 @@ namespace NewRiverAttack.BulletsManagers
 {
     public sealed class BulletPlayer : Bullet
     {
-        private BulletSpawnData _bulletSpawnData;
-
         private void Update()
         {
             if (!IsInitialize) return;
 
             // Movimenta o projétil na direção e velocidade fornecidas
-            transform.position += _bulletSpawnData.Direction * (_bulletSpawnData.Speed * Time.deltaTime);
+            transform.position += GetData.Direction * (GetData.Speed * Time.deltaTime);
 
             // Reduz o tempo de vida do projétil
             Lifetime -= Time.deltaTime;
@@ -26,19 +24,19 @@ namespace NewRiverAttack.BulletsManagers
             }
         }
 
-        public BulletSpawnData GetData => _bulletSpawnData;
+        public BulletSpawnData GetData { get; private set; }
 
         public override void OnSpawned(Transform spawnPosition, ISpawnData data)
         {
-            _bulletSpawnData = data as BulletSpawnData;
-            base.OnSpawned(spawnPosition, _bulletSpawnData);
+            GetData = data as BulletSpawnData;
+            base.OnSpawned(spawnPosition, GetData);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponentInParent<Bullet>()) return;
+            if (other.GetComponentInParent<BulletEnemies>()) return;
             if (other.GetComponentInParent<PlayerMaster>()) return;
-            ReturnToPool();
+            Invoke(nameof(ReturnToPool), 0.02f);
         }
     }
 }
