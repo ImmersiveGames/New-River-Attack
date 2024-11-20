@@ -16,33 +16,31 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
         {
             if (_isMoving)
             {
-                // Interrompe a coroutine anterior antes de iniciar uma nova
-                if (monoBehaviour != null) monoBehaviour.StopCoroutine(nameof(MoveToPosition));
+                DebugManager.Log<SmoothFiniteNavigationMode>("Movimento já em andamento. Ignorado.");
+                return; // Previne nova movimentação durante o processo atual
             }
 
             if (monoBehaviour == null) return;
-            switch (forward)
+
+            // Verifica limites para evitar movimentos fora do intervalo
+            if ((!forward && _moveCount <= 0) || (forward && _moveCount >= content.childCount - 1))
             {
-                // Verifica se já estamos no primeiro ou no último item antes de iniciar a movimentação
-                case false when _moveCount <= 0:
-                    DebugManager.Log<SmoothFiniteNavigationMode>("Já no primeiro item, não é possível mover para trás.");
-                    return;
-                case true when _moveCount >= content.childCount - 1:
-                    DebugManager.Log<SmoothFiniteNavigationMode>("Já no último item, não é possível mover para frente.");
-                    return;
-                default:
-                    // Inicia a navegação
-                    monoBehaviour.StartCoroutine(MoveToPosition(content, forward, content.childCount));
-                    break;
+                DebugManager.Log<SmoothFiniteNavigationMode>("Movimento nos limites. Ignorado.");
+                return;
             }
+
+            monoBehaviour.StartCoroutine(MoveToPosition(content, forward, content.childCount));
         }
 
         public override void MoveContentToIndex(RectTransform content, int index)
         {
-            var layoutGroup = content.GetComponent<HorizontalLayoutGroup>();  // Obtendo o layout aqui (esse GetComponent é seguro para o HorizontalLayoutGroup)
+            // Sincronização do índice
+            _moveCount = Mathf.Clamp(index, 0, content.childCount - 1);
+            SelectedItemIndex = _moveCount; // Garante que ambos estão sincronizados
+
+            var layoutGroup = content.GetComponent<HorizontalLayoutGroup>();
             if (layoutGroup != null)
             {
-                _moveCount = Mathf.Clamp(index, 0, content.childCount - 1);  // Garante que o índice está dentro do limite
                 MoveToSpecificPosition(content, _moveCount, layoutGroup);
             }
             else
@@ -53,12 +51,12 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
 
         private void MoveToSpecificPosition(RectTransform content, int targetIndex, HorizontalLayoutGroup layoutGroup)
         {
-            var itemWidth = content.GetChild(0).GetComponent<RectTransform>().rect.width;  // Obtém a largura real do primeiro item
-            var moveAmount = itemWidth + layoutGroup.spacing;  // Usa o tamanho real do item mais o espaçamento
+            var itemWidth = content.GetChild(0).GetComponent<RectTransform>().rect.width;
+            var moveAmount = itemWidth + layoutGroup.spacing;
 
             var targetX = -targetIndex * moveAmount;
 
-            // Ajusta a posição suavemente
+            // Ajusta a posição imediatamente
             content.anchoredPosition = new Vector2(targetX, content.anchoredPosition.y);
             DebugManager.Log<SmoothFiniteNavigationMode>($"Movido para a posição do item de índice: {targetIndex}");
         }
@@ -69,17 +67,18 @@ namespace ImmersiveGames.ShopManagers.NavigationModes
             DebugManager.Log<SmoothFiniteNavigationMode>("Iniciando movimento.");
 
             _moveCount += forward ? 1 : -1;
-            _moveCount = Mathf.Clamp(_moveCount, 0, totalItems - 1);  // Garante que o índice está dentro dos limites
+            _moveCount = Mathf.Clamp(_moveCount, 0, totalItems - 1);
 
+            // Sincroniza o índice após o movimento
             SelectedItemIndex = _moveCount;
-            DebugManager.Log<SmoothFiniteNavigationMode>($"Índice selecionado: {SelectedItemIndex}");
+            DebugManager.Log<SmoothFiniteNavigationMode>($"Índice sincronizado após movimento: {SelectedItemIndex}");
 
-            var itemWidth = content.GetChild(0).GetComponent<RectTransform>().rect.width;  // Obtém a largura real do primeiro item
-            var moveAmount = itemWidth + content.GetComponent<HorizontalLayoutGroup>().spacing;  // Usa o tamanho real do item mais o espaçamento
+            var itemWidth = content.GetChild(0).GetComponent<RectTransform>().rect.width;
+            var moveAmount = itemWidth + content.GetComponent<HorizontalLayoutGroup>().spacing;
 
             var rect = content.anchoredPosition;
             var targetX = forward ? rect.x - moveAmount : rect.x + moveAmount;
-            targetX = Mathf.Clamp(targetX, -((totalItems - 1) * moveAmount), 0f);  // Garante que a posição não ultrapasse os limites
+            targetX = Mathf.Clamp(targetX, -((totalItems - 1) * moveAmount), 0f);
 
             var velocity = 0f;
             while (Mathf.Abs(rect.x - targetX) > Approximation)
