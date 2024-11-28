@@ -79,6 +79,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             return other switch
             {
                 BulletPlayer bullet => bullet.GetData.Owner as T,
+                BulletBombPlayer bomb => bomb.GetData.Owner as T,
                 ObjectMaster player => player as T,
                 _ => null
             };
@@ -89,6 +90,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             var teste= component switch
             {
                 BulletPlayer bullet => bullet.GetData.Damage,
+                BulletBombPlayer bomb => bomb.GetData.Damage,
                 PlayerMaster player => player.ActualSkin.colliderDamage,
                 _ => 0
             };

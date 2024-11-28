@@ -3,6 +3,7 @@ using ImmersiveGames.InputManager;
 using ImmersiveGames.PoolSystems.Interfaces;
 using NewRiverAttack.BulletsManagers.Interface;
 using NewRiverAttack.GamePlayManagers;
+using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.CollectibleSystems.PowerUpSystems;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
@@ -13,6 +14,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 {
     public class PlayerBombs : ObjectShoot
     {
+        [Header("BOMB SETTINGS")]
         [SerializeField, Range(1,10)] private int bombDamage;
         [SerializeField, Range(1f,5f)] private float bombLifeTimer = 2.0f;
         
@@ -22,7 +24,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         [SerializeField, Range(1f,10f)] private float shakeForce;
         [SerializeField, Range(0.01f,0.1f)] private float shakeTime;
         
-        public float coolDownBomb;
         private PlayerMaster _playerMaster;
         private GameHudManager _gameHudManager;
         public int GetBomb { get; private set; }
@@ -47,13 +48,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _playerMaster.EventPlayerMasterStartPowerUp -= PowerUpAddBomb;
         }
         
-        private void Start()
-        {
-            // Configura o cooldown inicial com base no valor de ActualSkin
-            if (shootPattern == null || _playerMaster.ActualSkin == null) return;
-            cooldown = coolDownBomb;
-            DebugManager.Log<PlayerShoot>($"PlayerShoot.Start: Cooldown inicial definido a partir de ActualSkin: {coolDownBomb}");
-        }
         private void InitializeBombs(int indexPlayer, PlayersDefaultSettings defaultSettings)
         {
             GetBomb = defaultSettings.startBombs;
@@ -65,7 +59,12 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             if (!_playerMaster.ObjectIsReady) return;
             if (shootPattern != null)
             {
+                if(GetBomb <=0)return;
                 ExecuteShootPattern();
+                GetBomb -= 1;
+                if (GetBomb < 0) GetBomb = 0;
+                _gameHudManager.OnEventHudBombUpdate(GetBomb, _playerMaster.PlayerIndex);
+                GameStatisticManager.instance.LogBombs(1);
             }
             else
             {

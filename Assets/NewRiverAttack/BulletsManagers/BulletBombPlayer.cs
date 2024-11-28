@@ -32,7 +32,6 @@ namespace NewRiverAttack.BulletsManagers
             _collider = GetComponent<SphereCollider>();
             _startRadius = _collider.radius;
             Lifetime = MaxTimeSystemParticle(particleSystems);
-            DebugManager.Log<BulletBombPlayer>($"{Lifetime}");
             _bombData = SpawnData as BombSpawnData;
         }
         private void FixedUpdate()
@@ -44,6 +43,7 @@ namespace NewRiverAttack.BulletsManagers
         {
             GameStatisticManager.instance.LogBombsHit(_enemiesMasters.Count);
             _enemiesMasters = new List<EnemiesMaster>();
+            ResetBomb();
             ReturnToPool();
         }
         private void OnTriggerEnter(Collider other)
@@ -61,6 +61,13 @@ namespace NewRiverAttack.BulletsManagers
             Invoke(nameof(AutoDestroy), _bombData.Timer);
         }
 
+        private void ResetBomb()
+        {
+            _collider.radius = _startRadius;
+            _timerParam = 0; 
+        }
+
+        public BombSpawnData GetData => _bombData;
         public override void OnSpawned(Transform spawnPosition, ISpawnData data)
         {
             base.OnSpawned(spawnPosition, data);
@@ -116,7 +123,8 @@ namespace NewRiverAttack.BulletsManagers
             if (!_collider && _collider.GetType() != typeof(SphereCollider))
                 return;
             _collider.radius = Mathf.Lerp(_startRadius, _bombData.BombRadius, (float)_timerParam);
-            if (Mathf.Approximately(_collider.radius, _bombData.BombRadius))
+
+            if (_timerParam >= _bombData.Timer)
             {
                 AutoDestroy();
             }
