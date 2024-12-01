@@ -21,8 +21,10 @@ namespace NewRiverAttack.GameManagers
 
         public LevelData classicModeLevels;
         public LevelListData missionModeLevels;
+        [Header("HUD Settings")] 
         internal LevelData ActiveLevel;
-        internal int ActiveIndex;
+        internal int ActiveIndex = -1;
+        internal int CompleteIndex = -1;
         
         protected override void Awake()
         {

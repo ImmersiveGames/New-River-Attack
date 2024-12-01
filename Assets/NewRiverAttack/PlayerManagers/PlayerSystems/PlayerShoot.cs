@@ -14,12 +14,13 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         [Header("Power-Up Settings")]
         [SerializeField, Range(0, 5)] private int cadenceDivider = 2;  // Redução do cooldown com power-up
         private float _originalCooldown;  // Armazena o cooldown original para restaurar após o power-up
-
+        private bool _inPowerUp;
         private PlayerMaster _playerMaster;
         
         protected override void Awake()
         {
             base.Awake();
+            _inPowerUp = false;
             _playerMaster = GetComponent<PlayerMaster>();
         }
 
@@ -64,6 +65,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void StartPowerUp(ActivePowerUp activePowerUp)
         {
             if (activePowerUp.PowerUpData.powerUpType != PowerUpTypes.RapidFire || shootPattern == null) return;
+            _inPowerUp = true;
             var newCooldown = _originalCooldown / cadenceDivider;
             cooldown = newCooldown;
             DebugManager.Log<PlayerShoot>($"PlayerShoot.StartPowerUp: Cooldown reduzido temporariamente para {newCooldown}");
@@ -73,6 +75,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private void EndPowerUp(ActivePowerUp activePowerUp)
         {
             if (activePowerUp.PowerUpData.powerUpType != PowerUpTypes.RapidFire || shootPattern == null) return;
+            _inPowerUp = false;
             cooldown = _originalCooldown;
             DebugManager.Log<PlayerShoot>("PlayerShoot.EndPowerUp: Cooldown restaurado ao valor original.");
         }
@@ -86,7 +89,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
                 _playerMaster.ActualSkin.bulletDamage,
                 _playerMaster.ActualSkin.playerSpeed * _playerMaster.ActualSkin.bulletSpeedMultiply,
                 2.0f,
-                false
+                _inPowerUp
             );
         }
     }

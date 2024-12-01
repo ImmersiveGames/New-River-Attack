@@ -95,9 +95,8 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 
         private void EndFillEnd(AreaEffectScriptable areaEffectScriptable)
         {
-            if (areaEffectScriptable.obstacleTypes != ObstacleTypes.GasStation) return;
             _inPowerUp = false;
-
+            if (areaEffectScriptable.obstacleTypes != ObstacleTypes.GasStation) return;
             PauseDecoy(false); // Retoma o consumo de combustível
         }
 
@@ -117,6 +116,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             if (_inPowerUp)
             {
                 // Recarregar combustível
+                PauseDecoy(true);
                 var lastFillFuel = _areaEffectCadence * Time.deltaTime;
                 GetFuel += lastFillFuel;
                 GetFuel = Mathf.Clamp(GetFuel, 0f, GetMaxFuel);
@@ -125,15 +125,19 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             else if (!_fuelPause && _playerMaster.ObjectIsReady && !_playerMaster.godMode && !_playerMaster.AutoPilot)
             {
                 // Consumir combustível
+                PauseDecoy(false);
                 var lastFuel = reduceFuelCadence * Time.deltaTime;
                 GetFuel -= lastFuel;
                 GetFuel = Mathf.Clamp(GetFuel, 0f, GetMaxFuel);
                 GameStatisticManager.instance.LogFuelSpend(lastFuel);
-                if (GetFuel <= 0)
-                {
-                    _playerMaster.OnEventPlayerMasterGetHit();
-                    GameStatisticManager.instance.LogFuelOut(1);
-                }
+                if (!(GetFuel <= 0)) return;
+                _playerMaster.OnEventPlayerMasterGetHit();
+                GameStatisticManager.instance.LogFuelOut(1);
+            }
+            else
+            {
+                PauseDecoy(false);
+                _inPowerUp = false;
             }
         }
     }

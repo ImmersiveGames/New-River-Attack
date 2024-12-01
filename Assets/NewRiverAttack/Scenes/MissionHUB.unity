@@ -577,19 +577,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 786517735}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 619394824}
-        m_TargetAssemblyTypeName: NewRiverAttack.HUBManagers.HubPanelMaster, Assembly-CSharp
-        m_MethodName: ButtonNavigation
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &329872763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -884,6 +872,8 @@ GameObject:
   - component: {fileID: 619394819}
   - component: {fileID: 619394818}
   - component: {fileID: 619394823}
+  - component: {fileID: 619394826}
+  - component: {fileID: 619394827}
   m_Layer: 5
   m_Name: Mission Selection Canvas
   m_TagString: Untagged
@@ -1088,7 +1078,30 @@ MonoBehaviour:
   backwardButton: {fileID: 2130449931}
   startButton: {fileID: 1400851648}
   backButton: {fileID: 1840669832}
-  cursor: {fileID: 1912406064}
+--- !u!114 &619394826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619394817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfae19e7029640baaa596ed3d4cc8cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &619394827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619394817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62ca2b562b804adbbb1ec9558754b535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &650435269
 GameObject:
   m_ObjectHideFlags: 0
@@ -2994,19 +3007,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 809232055}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 619394824}
-        m_TargetAssemblyTypeName: NewRiverAttack.HUBManagers.HubPanelMaster, Assembly-CSharp
-        m_MethodName: ButtonStartMission
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1400851649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3147,19 +3148,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 923748709}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 619394824}
-        m_TargetAssemblyTypeName: NewRiverAttack.HUBManagers.HubPanelMaster, Assembly-CSharp
-        m_MethodName: ButtonMenuInicial
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1840669833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3220,7 +3209,7 @@ PrefabInstance:
         type: 3}
       propertyPath: missionModeLevels
       value: 
-      objectReference: {fileID: 11400000, guid: 47a816f58e2577a4c9a7281610f34436,
+      objectReference: {fileID: 11400000, guid: c2573330f4fa06f438df8b14f7a67b9b,
         type: 2}
     - target: {fileID: 645895881759750797, guid: edd48384923765647a80334cb3dc5dc8,
         type: 3}
@@ -3298,7 +3287,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 880521586296968963, guid: edd48384923765647a80334cb3dc5dc8, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edd48384923765647a80334cb3dc5dc8, type: 3}
@@ -3346,7 +3336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 928d07e779c148898dbc438ab9bc2283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0, z: 10}
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &1912406062
 GameObject:
   m_ObjectHideFlags: 0
@@ -3356,8 +3346,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1912406063}
-  - component: {fileID: 1912406064}
   - component: {fileID: 1912406065}
+  - component: {fileID: 1912406066}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3381,24 +3371,6 @@ Transform:
   - {fileID: 155694179}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1912406064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912406062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 574b8faf231244039ee2a06bebabba26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offsetZ: 10
-  moveTime: 1
-  rotateTime: 0.4
-  exitRotationAnimation: 5
-  enterRotationAnimation: 15
-  enterAnimation: 2
 --- !u!82 &1912406065
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3495,6 +3467,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1912406066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912406062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 574b8faf231244039ee2a06bebabba26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceFromCenter: 3
+  moveDuration: 1
+  rotateDuration: 0.5
+  exitRotationAnimation: 0
+  enterRotationAnimation: 0
+  enterAnimation: 0
 --- !u!1 &1938412509
 GameObject:
   m_ObjectHideFlags: 0
@@ -3845,19 +3835,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1938412511}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 619394824}
-        m_TargetAssemblyTypeName: NewRiverAttack.HUBManagers.HubPanelMaster, Assembly-CSharp
-        m_MethodName: ButtonNavigation
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: -1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2130449932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7341,7 +7319,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f37e0ac779104cf89212a85f301e1c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actualIndex: 0
 --- !u!4 &6606969091676369770
 Transform:
   m_ObjectHideFlags: 0

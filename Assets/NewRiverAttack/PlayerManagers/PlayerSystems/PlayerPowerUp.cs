@@ -142,11 +142,8 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
         private float GetPowerUpRemainingTime(PowerUpTypes powerUpType)
         {
             var activePowerUp = FindActivePowerUp(powerUpType);
-            if (activePowerUp != null)
-            {
-                return Mathf.Max(0, activePowerUp.RemainingDuration); // Garantir que nunca retorna um valor negativo
-            }
-            return 0f; // Retorna 0 se o power-up não estiver ativo
+            return activePowerUp != null ? Mathf.Max(0, activePowerUp.RemainingDuration) : // Garantir que nunca retorna um valor negativo
+                0f; // Retorna 0 se o power-up não estiver ativo
         }
 
         public void EndSpecificPowerUp(PowerUpTypes powerUpType)

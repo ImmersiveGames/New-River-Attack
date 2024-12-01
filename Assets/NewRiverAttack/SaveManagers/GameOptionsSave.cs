@@ -66,6 +66,11 @@ namespace NewRiverAttack.SaveManagers
                 playerSettings[indexSettings].actualSkin = skin;
             }
         }
+
+        public GameObject GetSkin(int indexSettings)
+        {
+            return playerSettings[indexSettings].actualSkin.prefabSkin;
+        }
         
         public void UpdateWallet(int price)
         {

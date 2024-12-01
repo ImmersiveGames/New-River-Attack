@@ -1,73 +1,76 @@
-﻿using System;
-using System.Collections.Generic;
-using NewRiverAttack.LevelBuilder;
+﻿using NewRiverAttack.LevelBuilder;
 using NewRiverAttack.SaveManagers;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace NewRiverAttack.HUBManagers.UI
 {
-    public class UiHubIcons: MonoBehaviour
-    { 
+    public class UiHubIcons : MonoBehaviour
+    {
+        [Header("Icon Colors")]
+        public Color lockedColor = Color.red;
+        public Color openColor = Color.white;
+        public Color actualColor = Color.yellow;
         
-        private Image _missionIcon;
-        private int _hubOrder;
-        private LevelData _level;
+        private int _hubIndex; // Índice da ponte no HUB
+        private LevelData _levelData;
+        private Image _missionIcon; // Referência ao ícone visual
+        
         private HubGameManager _hubGameManager;
+
+        private void Awake()
+        {
+            _hubGameManager = HubGameManager.Instance;
+        }
 
         private void OnEnable()
         {
-            SetInitialReferences();
-            _hubGameManager.EventInitializeHub += InitializeIcon;
-            _hubGameManager.EventCursorUpdateHub += InitializeIcon;
-        }
-        
-
-        private void SetInitialReferences()
-        {
-            _missionIcon = GetComponentInChildren<Image>();
-            _hubGameManager = HubGameManager.Instance;
+            _hubGameManager.EventUpdateHub += UpdateIcon;
         }
 
         private void OnDisable()
         {
-            _hubGameManager.EventInitializeHub -= InitializeIcon;
-            _hubGameManager.EventCursorUpdateHub -= InitializeIcon;
+            _hubGameManager.EventUpdateHub -= UpdateIcon;
         }
 
+        /// <summary>
+        /// Configura o índice da ponte no HUB.
+        /// </summary>
         public void SetIcon(LevelData levelData, int hubIndex)
         {
-            _level = levelData;
-            _missionIcon.sprite = _level.hudPath.iconSprite;
-            _hubOrder = hubIndex;
+            _hubIndex = hubIndex;
+            _levelData = levelData;
+            SetSprite(levelData.hudPath.iconSprite);
+            UpdateIcon(GameOptionsSave.Instance.activeIndexMissionLevel);
         }
-        private void InitializeIcon(List<HubOrderData> hubOrderData, int startIndex)
+
+        private void SetSprite(Sprite sprite)
         {
-            if (hubOrderData[startIndex].levelData.hudPath.levelsStates != LevelsStates.Complete)
-            {
-                hubOrderData[_hubOrder].levelData.hudPath.levelsStates = LevelsStates.Locked;
-                if (_hubOrder < GameOptionsSave.Instance.activeIndexMissionLevel)
-                {
-                    hubOrderData[_hubOrder].levelData.hudPath.levelsStates = LevelsStates.Open;
-                }
-                if (startIndex == _hubOrder)
-                {
-                    hubOrderData[startIndex].levelData.hudPath.levelsStates = LevelsStates.Actual;
-                }
-            }
-            SetColorState(hubOrderData[_hubOrder].levelData.hudPath);
+            _missionIcon = GetComponentInChildren<Image>();
+            if (_missionIcon != null)
+                _missionIcon.sprite = sprite;
         }
         
-        private void SetColorState(HubData hubData)
+        private void UpdateIcon(int obj)
         {
-            _missionIcon.color = hubData.levelsStates switch
-            {
-                LevelsStates.Locked => _hubGameManager.LockedColor,
-                LevelsStates.Actual => _hubGameManager.ActualColor,
-                LevelsStates.Complete => _hubGameManager.CompleteColor,
-                LevelsStates.Open => _hubGameManager.OpenColor,
-                _ => throw new ArgumentOutOfRangeException()
-            };
+            _levelData.hudPath.levelsStates = HubGameManager.UpdateLevel(obj, _hubIndex);
+            SetColorState(_levelData.hudPath.levelsStates);
         }
+        /// <summary>
+        /// Define a cor do ícone com base no estado atual.
+        /// </summary>
+        private void SetColorState(LevelsStates state)
+        {
+            if (_missionIcon == null) return;
+            _missionIcon.color = state switch
+            {
+                LevelsStates.Locked => lockedColor,
+                LevelsStates.Open => openColor,
+                LevelsStates.Actual => actualColor,
+                _ => _missionIcon.color
+            };
+            
+        }
+        
     }
 }

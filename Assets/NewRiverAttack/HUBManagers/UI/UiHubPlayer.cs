@@ -1,69 +1,83 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using DG.Tweening;
 using ImmersiveGames;
-using ImmersiveGames.ShopManagers.Abstracts;
-using ImmersiveGames.ShopManagers.ShopProducts;
 using NewRiverAttack.AudioManagers;
-using NewRiverAttack.PlayerManagers.ScriptableObjects;
-using NewRiverAttack.PlayerManagers.Tags;
+using NewRiverAttack.GameManagers;
 using NewRiverAttack.SaveManagers;
 
 namespace NewRiverAttack.HUBManagers.UI
 {
-    public class UiHubPlayer: MonoBehaviour
+    public class UiHubPlayer : MonoBehaviour
     {
-        private HubGameManager _hubGameManager;
-        public float offsetZ = 10f;
-        [Header("Move Animation")]
-        public float moveTime = 1.0f;
-        public float rotateTime = 0.5f;
+        public float distanceFromCenter = 3f;
+        
+        public float moveDuration = 1f; // Tempo para movimento
+        public float rotateDuration = 0.5f; // Tempo para rotação
+        
         public Ease exitRotationAnimation;
         public Ease enterRotationAnimation;
         public Ease enterAnimation;
         
-        private PlayerSettings _playerSettings;
+        private HubGameManager _hubGameManager;
+        private GameManager _gameManager;
         private AudioSource _audioSource;
-        private void OnEnable()
+
+        private void Awake()
         {
-            SetInitialReferences();
-            _playerSettings = GameOptionsSave.Instance.playerSettings[0];
-            ShoppingChangeSkin(_playerSettings.actualSkin,1);
-            _hubGameManager.EventInitializeHub += StartPosition;
-            _hubGameManager.EventCursorUpdateHub += CursorUpdatePosition;
-        }
-        private void SetInitialReferences()
-        {
+            _gameManager = GameManager.instance;
             _hubGameManager = HubGameManager.Instance;
             _audioSource = GetComponent<AudioSource>();
         }
 
+        private void OnEnable()
+        {
+            _hubGameManager.EventBuildHub += StartPosition;
+            _hubGameManager.EventCursorMove += HandleCursorMove;
+        }
+
+        private void Start()
+        {
+            SetSkin();
+        }
+
         private void OnDisable()
         {
-            _hubGameManager.EventInitializeHub -= StartPosition;
-            _hubGameManager.EventCursorUpdateHub -= CursorUpdatePosition;
+            _hubGameManager.EventBuildHub -= StartPosition;
+            _hubGameManager.EventCursorMove -= HandleCursorMove;
         }
 
-        private void CursorUpdatePosition(List<HubOrderData> hubOrderData, int startIndex)
+        private void StartPosition()
         {
-            var position = SetPosition(hubOrderData[startIndex].position);
-            MoveObject( position.z,  moveTime, rotateTime);
+            var hubIndex = _gameManager.ActiveIndex >= 0? _gameManager.ActiveIndex: _hubGameManager.SaveIndex;
+            var iconPosition = _hubGameManager.GetPositionByIndex(hubIndex);
+            transform.position = SetPosition(iconPosition);
         }
-
-        private void StartPosition(List<HubOrderData> hubOrderData, int startIndex)
-        {
-            transform.position = SetPosition(hubOrderData[startIndex].position);
-        }
-
         private Vector3 SetPosition(float iconPosition)
         {
-            var transform1 = transform;
-            var position1 = transform1.position;
-            var position = position1;
-            return new Vector3(position.x, position.y, iconPosition - offsetZ);
+            var position = transform.position;
+            return new Vector3(position.x, position.y, iconPosition - distanceFromCenter);
         }
 
-        private void MoveObject(float targetZ, float moveDuration, float rotateDuration)
+        private void SetSkin()
+        {
+            if (transform.childCount <= 0)
+                return;
+            foreach (Transform child in transform)
+            {
+                Destroy(child.gameObject);
+            }
+
+            var skin = GameOptionsSave.Instance.GetSkin(0);
+            Instantiate(skin, transform);
+        }
+        /// <summary>
+        /// Atualiza a posição do cursor ao receber o evento.
+        /// </summary>
+        private void HandleCursorMove(float targetZ)
+        {
+            MoveObject(targetZ, moveDuration, rotateDuration);
+        }
+        private void MoveObject(float targetZ, float duration, float timeRotate)
         {
             // Get current object's Z position
             var cursor = gameObject;
@@ -84,49 +98,22 @@ namespace NewRiverAttack.HUBManagers.UI
                 // 180-degree rotation around Y axis if target position is greater than current position
                 initialRotation = new Vector3(-180, 0, 0);
             }
-            var audioGameOver = AudioManager.instance.GetAudioSfxEvent(EnumSfxSound.SfxEngineAccelerate);
+            var audioSfxEvent = AudioManager.instance.GetAudioSfxEvent(EnumSfxSound.SfxEngineAccelerate);
             // Create DoTween sequences for animation
             DOTween.Sequence()
                 .OnStart(() =>
                 {
-                    _hubGameManager.IsHubReady = false;
-                    audioGameOver.PlayOnShot(_audioSource);
+                    audioSfxEvent.PlayOnShot(_audioSource);
                 })
-                .Append(gameObject.transform.DOMoveZ(targetZ, moveDuration).SetEase(enterAnimation))  // Slow down at start (InQuad)
-                .Join(gameObject.transform.DORotate(initialRotation, moveDuration).SetEase(enterRotationAnimation))
-                .Append(gameObject.transform.DORotate(finalRotation, rotateDuration).SetEase(exitRotationAnimation))  // Speed up at end (OutQuad)
+                .Append(gameObject.transform.DOMoveZ(targetZ, duration).SetEase(enterAnimation))  // Slow down at start (InQuad)
+                .Join(gameObject.transform.DORotate(initialRotation, duration).SetEase(enterRotationAnimation))
+                .Append(gameObject.transform.DORotate(finalRotation, timeRotate).SetEase(exitRotationAnimation))  // Speed up at end (OutQuad)
                 .OnComplete(() =>
                 {
-                    audioGameOver.Stop(_audioSource);
-                    _hubGameManager.IsHubReady = true;
+                    audioSfxEvent.Stop(_audioSource);
                 })
                 .Play();
         }
-        private void ShoppingChangeSkin(ShopProduct shopProduct, int quantity)
-        {
-            var shopProductSkin = shopProduct as ShopProductSkin;
-            var shopQuantity = quantity;
-
-            var children = GetComponentInChildren<SkinAttach>();
-            if (shopProductSkin == null) return;
-            if (children == true)
-            {
-                var siblingIndex = children.transform.GetSiblingIndex();
-                DestroyImmediate(transform.GetChild(siblingIndex).gameObject);
-            }
-            var mySkin = Instantiate(shopProductSkin.prefabSkin, transform);
-            mySkin.transform.SetAsFirstSibling();
-            TurnOffTrails();
-        }
-
-        private void TurnOffTrails()
-        {
-            var trailRenderers = GetComponentsInChildren<TrailRenderer>();
-
-            foreach(var trail in trailRenderers)
-            {
-                trail.enabled = false;
-            }
-        }
+        
     }
 }

@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using ImmersiveGames.DebugManagers;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 
@@ -46,12 +47,12 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Helpers
                 }
 
                 // Se todas as tentativas falharem, resetamos a lista
-                Debug.LogWarning("Todas as posições estão muito próximas! Resetando posições spawnadas.");
+                DebugManager.LogWarning<RandomSpawnHelper>("Todas as posições estão muito próximas! Resetando posições spawnadas.");
                 _spawnedPositions.Clear();
                 resetAttempts++; // Contabiliza o reset
             }
 
-            Debug.LogError("Falha ao encontrar uma posição válida após múltiplos resets.");
+            DebugManager.LogError<RandomSpawnHelper>("Falha ao encontrar uma posição válida após múltiplos resets.");
             return null; // Retorna null após o máximo de resets
         }
 
@@ -79,7 +80,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Helpers
         {
             var enemyNearby = _detectPlayerApproach.TargetApproach<T>(position, _enemyLayerMask);
             if (enemyNearby == null) return false;
-            Debug.Log($"Posição inválida! EnemiesMaster detectado perto da posição {position}");
+            DebugManager.Log<RandomSpawnHelper>($"Posição inválida! EnemiesMaster detectado perto da posição {position}");
             return true;
         }
         

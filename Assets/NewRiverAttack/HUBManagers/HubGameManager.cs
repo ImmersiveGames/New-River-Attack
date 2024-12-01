@@ -1,138 +1,112 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using ImmersiveGames.DebugManagers;
 using NewRiverAttack.GameManagers;
-using NewRiverAttack.HUBManagers.UI;
+using NewRiverAttack.LevelBuilder;
 using NewRiverAttack.SaveManagers;
-using NewRiverAttack.StateManagers;
 using UnityEngine;
 
 namespace NewRiverAttack.HUBManagers
 {
     public sealed class HubGameManager : MonoBehaviour
     {
-        [Header("HUB Icon Color")] public readonly Color LockedColor = Color.red;
-        public readonly Color ActualColor = new Color(255, 255, 0, 255);
-        public readonly Color CompleteColor = Color.green;
-        public readonly Color OpenColor = Color.white;
-
-        internal bool IsHubReady { get; set; }
-        internal List<HubOrderData> LevelOrder = new List<HubOrderData>();
-        private int _lastSave;
-        public int actualIndex;
-        
-        private const float WaitBridge = 1.5f;
-        private const float WaitMove = 1f;
-
-        private UiHubPlayer _playerHub;
         public static HubGameManager Instance { get; private set; }
-        
+        public event Action EventBuildHub;
+        public event Action<int> EventExplodeBridge;
+        public event Action<int> EventUpdateIndex;
+        public event Action<float> EventCursorMove; // Evento para informar a posição ao cursor
+        public event Action<int> EventUpdateHub; // Evento para informar a posição ao cursor
 
-        #region Delegates & Events
-        
-        public delegate void HubInitializationHandler(List<HubOrderData> listHubOrderData, int startIndex);
-        public event HubInitializationHandler EventInitializeHub;
-        public event HubInitializationHandler EventCursorUpdateHub;
-
-        #endregion
-        
-
-        #region Unity Methods
+        public List<HubOrderData> CachedHubOrderData { get; private set; } = new List<HubOrderData>();
+        public int SaveIndex { get; private set; }
+        public bool ActiveHub { get; set; }
         private void Awake()
         {
             if (Instance == null)
             {
                 Instance = this;
-                DebugManager.Log<HubGameManager>("HubGameManager instanciado.");
             }
             else
             {
                 Destroy(gameObject);
-                DebugManager.LogWarning<HubGameManager>("Tentativa de criar uma segunda instância de SteamStatsService foi evitada.");
+                Debug.LogWarning("Tentativa de criar uma segunda instância de HubGameManager foi evitada.");
             }
-        }
-        private void Start()
-        {
-            IsHubReady = false;
-            _lastSave = GameOptionsSave.Instance.activeIndexMissionLevel;
-            StartCoroutine(WaitForInitialization());
-        }
 
-        private void OnDisable()
-        {
-            LevelOrder = new List<HubOrderData>();
-        }
-
-        #endregion
-
-        private IEnumerator WaitForInitialization()
-        {
-            while (!GameManager.StateManager.GetCurrentState.StateFinalization)
-            {
-                yield return null;
-            }
-            IsHubReady = true;
+            ActiveHub = true;
+            SaveIndex = GameOptionsSave.Instance.activeIndexMissionLevel;
         }
         
-        private void PlayAnimationBridge()
+        public static LevelsStates UpdateLevel(int actualIndex, int hubIndex)
         {
-            var indexOrder = GameOptionsSave.Instance.activeIndexMissionLevel;
-            var bridge = LevelOrder[indexOrder].bridge;
-            bridge.ExplodeBridge();
-            Invoke(nameof(UpdateComplete), WaitMove);
-        }
-
-        private async void UpdateComplete()
-        {
-            var lastIndex = LevelOrder.Count - 1;
-            if (actualIndex < lastIndex)
+            if (actualIndex == hubIndex)
             {
-                _lastSave += 1;
-
-                // Atualiza diretamente o GameOptionsSave.Instance.activeIndexMissionLevel
-                GameOptionsSave.Instance.activeIndexMissionLevel = Mathf.Max(GameOptionsSave.Instance.activeIndexMissionLevel, _lastSave);
+                return LevelsStates.Actual;
+            }
+            var maxIndex = GameOptionsSave.Instance.activeIndexMissionLevel;
+            return maxIndex > hubIndex ? LevelsStates.Open : LevelsStates.Locked;
+        }
         
-                OnEventCursorUpdateHub(_lastSave);
-            }
-    
-            IsHubReady = true;
-    
-            if (actualIndex != lastIndex) return;
-
-            await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateEndGame.ToString()).ConfigureAwait(false);
-        }
-
-        #region Calls
-
-        internal void OnEventInitializeHub()
+        public float GetPositionByIndex(int index)
         {
-            actualIndex = GameManager.instance.ActiveIndex;
-            if (GameManager.instance.ActiveLevel == null)
+
+            // Validar se o índice está dentro do intervalo
+            if (index >= 0 && index < CachedHubOrderData.Count)
             {
-                actualIndex = _lastSave;
+                return CachedHubOrderData[index].position;
             }
-            EventInitializeHub?.Invoke(LevelOrder, actualIndex);
-            //Debug.Log($"Index: {actualIndex}");
-            if (actualIndex != _lastSave) return;
-            if (LevelOrder[_lastSave].levelData.hudPath.levelsStates == LevelsStates.Complete)
-            {
-                OnEventCompleteLevel();
-            }
+
+            // Retornar um valor padrão ou lançar uma exceção caso o índice seja inválido
+            Debug.LogWarning($"Índice inválido: {index}. Cache contém {CachedHubOrderData.Count} itens.");
+            return -1f; // Valor padrão indicando que a posição não foi encontrada
         }
 
-        private void OnEventCompleteLevel()
+        public LevelData GetActualDataSave()
         {
-            IsHubReady = false;
-            LevelOrder[_lastSave].levelData.hudPath.levelsStates = LevelsStates.Open;
-            Invoke(nameof(PlayAnimationBridge), WaitBridge);
-            
+            var tempIndex = GameManager.instance.ActiveIndex >= 0 ? GameManager.instance.ActiveIndex : SaveIndex;
+            return GetLevelDataByIndex(tempIndex);
         }
-        internal void OnEventCursorUpdateHub(int startIndex)
+        
+        public LevelData GetLevelDataByIndex(int index)
         {
-            EventCursorUpdateHub?.Invoke(LevelOrder, startIndex);
+
+            // Validar se o índice está dentro do intervalo
+            if (index >= 0 && index < CachedHubOrderData.Count)
+            {
+                return CachedHubOrderData[index].levelData;
+            }
+
+            // Retornar nulo se o índice for inválido
+            Debug.LogWarning($"Índice inválido: {index}. Cache contém {CachedHubOrderData.Count} itens.");
+            return null;
         }
+
+        #region Call Events
+
+        public void OnEventBuildHub()
+        {
+            EventBuildHub?.Invoke();
+        }
+        /// <summary>
+        /// Obtém a posição da função `GetPositionByIndex` e envia ao cursor.
+        /// </summary>
+        public void OnEventCursorMove(int tempIndex)
+        {
+            //if (!ActiveHub) return;
+            var positionZ = GetPositionByIndex(tempIndex);
+            if (!(positionZ >= 0)) return;
+            EventUpdateHub?.Invoke(tempIndex);
+            EventCursorMove?.Invoke(positionZ); // Envia apenas o valor Z ao cursor
+        }
+        public void OnEventExplodeBridge(int indexBridge)
+        {
+            EventExplodeBridge?.Invoke(indexBridge);
+        }
+        public void OnEventUpdateIndex(int indexUpdate)
+        {
+            EventUpdateIndex?.Invoke(indexUpdate);
+            SaveIndex = GameOptionsSave.Instance.activeIndexMissionLevel = indexUpdate;
+        }
+        
         #endregion
-
         
     }
 }

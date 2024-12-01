@@ -89,7 +89,7 @@ namespace NewRiverAttack.GamePlayManagers
             switch (gamePlayModes)
             {
                 case GamePlayModes.MissionMode:
-                    GameManager.instance.ActiveLevel.hudPath.levelsStates = LevelsStates.Complete;
+                    GameManager.instance.CompleteIndex = GameManager.instance.ActiveIndex;
                     Invoke(nameof(SendToHub), 2f);
                     break;
                 case GamePlayModes.ClassicMode:

@@ -120,7 +120,7 @@ namespace NewRiverAttack.GamePlayManagers
         {
             //Aqui é Apos o Go da Animação
             HasPlayersActive = true;
-            _initializedPlayers[0].SavePosition(Vector3.zero);
+            _initializedPlayers[0].SavePosition(transform.position);
         }
 
         private void PlayerSetFinish()

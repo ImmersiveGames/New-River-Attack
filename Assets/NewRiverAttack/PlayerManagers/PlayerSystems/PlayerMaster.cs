@@ -79,6 +79,12 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _gameHudManager = GameHudManager.Instance;
         }
 
+        protected internal override void InitializeObject()
+        {
+            base.InitializeObject();
+            IsDisable = false;
+        }
+
         #endregion
 
         #region Object Master

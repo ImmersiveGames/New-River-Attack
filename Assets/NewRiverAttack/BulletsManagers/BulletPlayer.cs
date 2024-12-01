@@ -1,12 +1,23 @@
-﻿using ImmersiveGames.PoolSystems.Interfaces;
+﻿using System;
+using ImmersiveGames.PoolSystems.Interfaces;
 using NewRiverAttack.BulletsManagers.Interface;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace NewRiverAttack.BulletsManagers
 {
     public sealed class BulletPlayer : Bullet
     {
+        [SerializeField] private Color powerUpColor = Color.red;
+        private Color _originalColor;
+        private Material _originalMaterial;
+        private void Awake()
+        {
+            _originalMaterial = GetComponent<Renderer>().material;
+            _originalColor = _originalMaterial.color;
+        }
+
         private void Update()
         {
             if (!IsInitialize) return;
@@ -29,6 +40,7 @@ namespace NewRiverAttack.BulletsManagers
         public override void OnSpawned(Transform spawnPosition, ISpawnData data)
         {
             GetData = data as BulletSpawnData;
+            _originalMaterial.color = GetData is { PowerUp: true } ? powerUpColor : _originalColor;
             base.OnSpawned(spawnPosition, GetData);
         }
 

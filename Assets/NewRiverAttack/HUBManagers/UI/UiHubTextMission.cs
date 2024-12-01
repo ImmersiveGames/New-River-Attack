@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace NewRiverAttack.HUBManagers.UI
@@ -7,19 +6,23 @@ namespace NewRiverAttack.HUBManagers.UI
     public class UiHubTextMission : MonoBehaviour
     {
         private HubGameManager _hubGameManager;
-        private TMP_Text _text;
+        private TMP_Text _text; // Componente de texto TMP para exibir o nome da missão
+
+        private void Awake()
+        {
+            SetInitialReferences();
+        }
 
         private void OnEnable()
         {
-            SetInitialReferences();
-            _hubGameManager.EventInitializeHub += InitializeName;
-            _hubGameManager.EventCursorUpdateHub += InitializeName;
+            _hubGameManager.EventBuildHub += InitializeName;
+            _hubGameManager.EventUpdateHub += UpdateName;
         }
+
 
         private void OnDisable()
         {
-            _hubGameManager.EventInitializeHub -= InitializeName;
-            _hubGameManager.EventCursorUpdateHub -= InitializeName;
+            _hubGameManager.EventBuildHub -= InitializeName;
         }
 
         private void SetInitialReferences()
@@ -27,10 +30,19 @@ namespace NewRiverAttack.HUBManagers.UI
             _hubGameManager = HubGameManager.Instance;
             _text = GetComponent<TMP_Text>();
         }
-        
-        private void InitializeName(List<HubOrderData> hubOrderData, int startIndex)
+
+        private void InitializeName()
         {
-            _text.text = hubOrderData[startIndex].levelData.GetName();
+            var actualLevelData = _hubGameManager.GetActualDataSave();
+            if (actualLevelData == null) return;
+            _text.text = actualLevelData.GetName();
+        }
+
+        private void UpdateName(int indexHub)
+        {
+            var actualLevelData = _hubGameManager.GetLevelDataByIndex(indexHub);
+            if (actualLevelData == null) return;
+            _text.text = actualLevelData.GetName();
         }
     }
 }

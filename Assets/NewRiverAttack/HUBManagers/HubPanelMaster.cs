@@ -1,14 +1,9 @@
-﻿using System.Collections.Generic;
-using ImmersiveGames;
+﻿using ImmersiveGames;
 using ImmersiveGames.InputManager;
 using NewRiverAttack.AudioManagers;
 using NewRiverAttack.GameManagers;
-using NewRiverAttack.GamePlayManagers;
-using NewRiverAttack.HUBManagers.UI;
-using NewRiverAttack.SaveManagers;
 using NewRiverAttack.StateManagers;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -16,170 +11,83 @@ namespace NewRiverAttack.HUBManagers
 {
     public class HubPanelMaster : MonoBehaviour
     {
+        
         public Button forwardButton;
         public Button backwardButton;
         public Button startButton;
         public Button backButton;
 
-        public UiHubPlayer cursor;
-
-        private int _indexMenu;
-
         private HubGameManager _hubGameManager;
-        private GameManager _gameManager;
-        
-        #region Unity Methods
-        private void OnEnable()
-        {
-            SetInitialReferences();
-       
-            // Ativa o Action Map para navegação no Hub
-            InputGameManager.ActionManager.ActivateActionMap(ActionManager.GameActionMaps.HubControl);
+        private HubNavigationManager _navigationManager;
 
-            // Registra ações de entrada
-            InputGameManager.RegisterAction("StartButton", HandleMissionStart);
-            InputGameManager.RegisterAction("BackButton", HandleBackToMenu);
-            InputGameManager.RegisterAction("RightSelection", GoRight);
-            InputGameManager.RegisterAction("LeftSelection", GoLeft);
-
-            _hubGameManager.EventInitializeHub += SetIndexMenu;
-            _hubGameManager.EventCursorUpdateHub += SetIndexMenu;
-        }
-        private void OnDisable()
-        {
-            _hubGameManager.EventInitializeHub -= SetIndexMenu;
-            _hubGameManager.EventCursorUpdateHub -= SetIndexMenu;
-
-            // Desregistra ações
-            InputGameManager.UnregisterAction("StartButton", HandleMissionStart);
-            InputGameManager.UnregisterAction("BackButton", HandleBackToMenu);
-            InputGameManager.UnregisterAction("RightSelection", GoRight);
-            InputGameManager.UnregisterAction("LeftSelection", GoLeft);
-
-            // Restaura o Action Map anterior
-            InputGameManager.ActionManager.RestoreActionMap();
-        }
-        #endregion
-        private void SetInitialReferences()
+        private void Awake()
         {
             _hubGameManager = HubGameManager.Instance;
-            _gameManager = GameManager.instance;
-            EnableButtons();
-        }
-        private void SetIndexMenu(List<HubOrderData> listHubOrderData, int startIndex)
-        {
-            _indexMenu = startIndex;
-        }
-
-        private void DisableButtons()
-        {
-            forwardButton.interactable = false;
-            backwardButton.interactable = false;
-            startButton.interactable = false;
-            backButton.interactable = false;
-        }
-        private void EnableButtons()
-        {
-            forwardButton.interactable = true;
-            backwardButton.interactable = true;
-            startButton.interactable = true;
-            backButton.interactable = true;
+            _navigationManager = GetComponent<HubNavigationManager>();
+            EnableButtons(false);
+            // Adiciona os eventos para os botões
+            forwardButton.onClick.AddListener(() => _navigationManager.NavigateForward());
+            backwardButton.onClick.AddListener(() => _navigationManager.NavigateBackward());
+            startButton.onClick.AddListener( ButtonStartMission);
+            backButton.onClick.AddListener(ButtonMenuInitial);
         }
 
-        #region INPUTs
-
-        private void GoLeft(InputAction.CallbackContext obj)
+        private void OnEnable()
         {
-            if (!_hubGameManager.IsHubReady) return;
-
-            // Limpa a seleção anterior e atualiza o botão selecionado
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(backwardButton.gameObject);
-            backwardButton.onClick.Invoke();
+            _hubGameManager.EventBuildHub += InitializePanel;
+            InputGameManager.RegisterAction("StartButton", ButtonStartMission);
+            InputGameManager.RegisterAction("BackButton", ButtonMenuInitial);
         }
 
-        private void GoRight(InputAction.CallbackContext obj)
+        private void OnDisable()
         {
-            if (!_hubGameManager.IsHubReady) return;
-
-            // Limpa a seleção anterior e atualiza o botão selecionado
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(forwardButton.gameObject);
-            forwardButton.onClick.Invoke();
+            _hubGameManager.EventBuildHub -= InitializePanel;
+            InputGameManager.UnregisterAction("StartButton", ButtonStartMission);
+            InputGameManager.UnregisterAction("BackButton", ButtonMenuInitial);
         }
 
-        private void HandleBackToMenu(InputAction.CallbackContext obj)
+        private void InitializePanel()
         {
-            if (!_hubGameManager.IsHubReady) return;
-
-            // Limpa a seleção anterior e atualiza o botão selecionado
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(backButton.gameObject);
-            backButton.onClick.Invoke();
+            EnableButtons(true);
         }
 
-        private void HandleMissionStart(InputAction.CallbackContext obj)
+        private void EnableButtons(bool enable)
         {
-            if (!_hubGameManager.IsHubReady) return;
-
-            // Limpa a seleção anterior e atualiza o botão selecionado
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(startButton.gameObject);
-
-            // Unifica a execução da missão chamando a função centralizada
-            startButton.onClick.Invoke();
+            startButton.interactable = enable;
+            backButton.interactable = enable;
+            forwardButton.interactable = enable;
+            backwardButton.interactable = enable;
         }
-
-        #endregion
-
-        #region Buttons
-
-        public void ButtonNavigation(bool back)
+        private void ButtonStartMission(InputAction.CallbackContext obj)
         {
-            if (!_hubGameManager.IsHubReady) return;
-
-            var increment = back ? -1 : 1;
-
-            if (_indexMenu + increment > GameOptionsSave.Instance.activeIndexMissionLevel) return;
-            
-            _indexMenu += increment;
-            if (_indexMenu < 0) _indexMenu = 0;
-
-            _hubGameManager.OnEventCursorUpdateHub(_indexMenu);
-     
+            ButtonStartMission();
         }
-        public async void ButtonStartMission()
+        private async void ButtonStartMission()
         {
-            DisableButtons();
+            if(!_hubGameManager.ActiveHub) return;
+            EnableButtons(false);
             // Som de clique
-            var audioGameOver = AudioManager.instance.GetAudioSfxEvent(EnumSfxSound.SfxMouseClick);
-            audioGameOver.PlayOnShot(GetComponent<AudioSource>());
-
-            // Inicia a missão
-            _gameManager.gamePlayMode = GamePlayModes.MissionMode;
-            _gameManager.ActiveIndex = _indexMenu;
-            _gameManager.ActiveLevel = _hubGameManager.LevelOrder[_indexMenu].levelData;
-
+            var audioMouseClick = AudioManager.instance.GetAudioSfxEvent(EnumSfxSound.SfxMouseClick);
+            audioMouseClick.PlayOnShot(GetComponent<AudioSource>());
+            _navigationManager.StartMission();
             // Troca de estado de forma assíncrona
             await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStatePlay.ToString()).ConfigureAwait(false);
-            
         }
-        public async void ButtonMenuInicial()
+        private void ButtonMenuInitial(InputAction.CallbackContext obj)
         {
-            DisableButtons();
-            // Som de clique
-            var audioGameOver = AudioManager.instance.GetAudioSfxEvent(EnumSfxSound.SfxMouseClick);
-            audioGameOver.PlayOnShot(GetComponent<AudioSource>());
-
-            // Volta ao menu inicial
-            _gameManager.gamePlayMode = GamePlayModes.MissionMode;
-
-            // Troca de estado para o menu inicial
-            await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateMenuInitial.ToString()).ConfigureAwait(false);
-
-            
+            ButtonMenuInitial();
         }
-        #endregion
+        private async void ButtonMenuInitial()
+        {
+            if(!_hubGameManager.ActiveHub) return;
+            EnableButtons(false);
+            // Som de clique
+            var audioMouseClick = AudioManager.instance.GetAudioSfxEvent(EnumSfxSound.SfxMouseClick);
+            audioMouseClick.PlayOnShot(GetComponent<AudioSource>());
+            _navigationManager.MenuInicial();
+            // Troca de estado de forma assíncrona
+            await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateMenuInitial.ToString()).ConfigureAwait(false);
+        }
         
     }
 }
