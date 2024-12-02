@@ -1,6 +1,7 @@
 ﻿using ImmersiveGames.PoolSystems.Interfaces;
 using NewRiverAttack.BulletsManagers.Interface;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
+using NewRiverAttack.WallsManagers;
 using UnityEngine;
 
 namespace NewRiverAttack.BulletsManagers
@@ -26,7 +27,7 @@ namespace NewRiverAttack.BulletsManagers
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponentInParent<Bullet>()) return;
+            if (other.GetComponentInParent<BulletEnemies>()) return;
             if (other.GetComponentInParent<ObstacleMaster>()) return;
             ReturnToPool();
         }

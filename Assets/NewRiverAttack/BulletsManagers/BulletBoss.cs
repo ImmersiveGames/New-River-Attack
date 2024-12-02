@@ -26,7 +26,7 @@ namespace NewRiverAttack.BulletsManagers
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponentInParent<Bullet>()) return;
+            if (other.GetComponentInParent<BulletBoss>()) return;
             if (other.GetComponentInParent<ObstacleMaster>()) return;
             ReturnToPool();
         }

@@ -1,4 +1,6 @@
 ﻿using NewRiverAttack.GameManagers;
+using NewRiverAttack.GamePlayManagers;
+using NewRiverAttack.StateManagers;
 using UnityEngine;
 
 namespace NewRiverAttack.HUBManagers
@@ -34,11 +36,22 @@ namespace NewRiverAttack.HUBManagers
         {
             _hubGameManager.OnEventExplodeBridge(_completeIndex);
             var nextIndex = _completeIndex + 1;
+            if (nextIndex >= _hubGameManager.CachedHubOrderData.Count)
+            {
+                Invoke(nameof(SendToCompleteGame), 2f);
+                return;
+            }
             _hubGameManager.OnEventUpdateIndex(nextIndex);
             _hubGameManager.OnEventCursorMove(nextIndex);
             ClearActivities();
         }
 
+        private async void SendToCompleteGame()
+        {
+            ClearActivities();
+            await GameManager.StateManager.ChangeStateAsync(StatesNames.GameStateEndGame.ToString()).ConfigureAwait(false);
+        }
+        
         private void ClearActivities()
         {
             _gameManager.CompleteIndex = -1;

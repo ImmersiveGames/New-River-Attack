@@ -102,6 +102,15 @@ namespace NewRiverAttack.HUBManagers
         }
         public void OnEventUpdateIndex(int indexUpdate)
         {
+            if (indexUpdate < 0)
+            {
+                indexUpdate = 0;
+            }
+
+            if (indexUpdate >= CachedHubOrderData.Count)
+            {
+                indexUpdate = CachedHubOrderData.Count - 1;
+            }
             EventUpdateIndex?.Invoke(indexUpdate);
             SaveIndex = GameOptionsSave.Instance.activeIndexMissionLevel = indexUpdate;
         }

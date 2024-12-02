@@ -49,6 +49,7 @@ namespace NewRiverAttack.BulletsManagers
         private void OnTriggerEnter(Collider other)
         {
             if (other.GetComponentInParent<PlayerMaster>()) return;
+            if (other.GetComponentInParent<BulletPlayer>()) return;
             var enemy = other.GetComponentInParent<EnemiesMaster>();
             if (enemy && !_enemiesMasters.Contains(enemy))
             {

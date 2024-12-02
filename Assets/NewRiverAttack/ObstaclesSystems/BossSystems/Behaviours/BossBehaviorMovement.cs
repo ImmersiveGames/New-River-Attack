@@ -12,6 +12,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         private BossDirections _myDirections;
         private Vector2 _limitX;
         private Vector2 _limitZ;
+        private const float AdditionalZ = 3f; // Valor adicional no eixo Z
 
         #region Unity Methods
 
@@ -45,34 +46,46 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
                     {
                         newPosition.z = _limitZ.y;
                     }
+
                     break;
-                /*case BossDirections.South:
-                    newPosition.z -= distance;
-                    if (newPosition.z < _limitZ.x)
-                    {
-                        newPosition.z = _limitZ.x;
-                    }
-                    break;*/
+
                 case BossDirections.East:
                     newPosition.x += distance;
                     if (newPosition.x > _limitX.y)
                     {
                         newPosition.x = _limitX.y;
                     }
+
+                    newPosition.z += AdditionalZ; // Adiciona valor extra no Z
+                    if (newPosition.z > _limitZ.y) // Checa o limite superior do eixo Z
+                    {
+                        newPosition.z = _limitZ.y;
+                    }
+
                     break;
+
                 case BossDirections.West:
                     newPosition.x -= distance;
                     if (newPosition.x < _limitX.x)
                     {
                         newPosition.x = _limitX.x;
                     }
+
+                    newPosition.z += AdditionalZ; // Adiciona valor extra no Z
+                    if (newPosition.z > _limitZ.y) // Checa o limite superior do eixo Z
+                    {
+                        newPosition.z = _limitZ.y;
+                    }
+
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
             }
 
             return newPosition;
         }
+
         private static BossDirections GetRandomDirection(BossDirections exclude)
         {
             var directions = Enum.GetValues(typeof(BossDirections))
@@ -88,6 +101,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             var target = PlayersManager.Instance.GetPlayerMaster(0);
             return target.transform.position;
         }
+
         public Func<NodeState> GetNodeFunction()
         {
             return ChooseNewPosition;
@@ -99,6 +113,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             West,
             East
         }
+
         public string NodeName => "BossMovement";
         public int NodeID => 0;
     }

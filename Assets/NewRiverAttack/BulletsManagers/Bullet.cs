@@ -61,7 +61,7 @@ namespace NewRiverAttack.BulletsManagers
         #endregion
 
         // Método para retornar o projétil ao pool
-        protected void ReturnToPool()
+        protected virtual void ReturnToPool()
         {
             IsInitialize = false; // Desativa a lógica de movimento
             Pool?.ReturnObject(gameObject); // Retorna ao pool

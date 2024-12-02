@@ -2,6 +2,8 @@
 using ImmersiveGames.PoolSystems.Interfaces;
 using NewRiverAttack.BulletsManagers.Interface;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
+using NewRiverAttack.WallsManagers;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -9,6 +11,7 @@ namespace NewRiverAttack.BulletsManagers
 {
     public sealed class BulletPlayer : Bullet
     {
+        [SerializeField] private GameObject vfxExplode;
         [SerializeField] private Color powerUpColor = Color.red;
         private Color _originalColor;
         private Material _originalMaterial;
@@ -44,10 +47,17 @@ namespace NewRiverAttack.BulletsManagers
             base.OnSpawned(spawnPosition, GetData);
         }
 
+        protected override void ReturnToPool()
+        {
+            var vfx =Instantiate(vfxExplode, transform.position, quaternion.identity);
+            base.ReturnToPool();
+        }
+
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponentInParent<BulletEnemies>()) return;
+            if (other.GetComponentInParent<BulletPlayer>()) return;
             if (other.GetComponentInParent<PlayerMaster>()) return;
+            Instantiate(vfxExplode, transform.position, quaternion.identity);
             Invoke(nameof(ReturnToPool), 0.02f);
         }
     }
