@@ -53,11 +53,11 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
             // Callback para atualizar a posição antes de mover
             mySequence.AppendCallback(() =>
             {
-                transform.position = new Vector3(playerPosition.x, transform.position.y, transform.position.z);
+                transform.position = new Vector3(playerPosition.x, transform.position.y, transform.position.z+10);
             });
             
             // Movimento principal com DOTween e armazenar o Tween
-            _moveTween = transform.DOMoveZ(distance, moveDuration).SetEase(Ease.Linear);
+            _moveTween = transform.DOMoveZ(distance, moveDuration).SetEase(Ease.OutCubic);
 
             // Adicionar o Tween ao Sequence
             mySequence.Append(_moveTween);
