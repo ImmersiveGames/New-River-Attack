@@ -2,6 +2,7 @@
 using NewRiverAttack.BulletsManagers;
 using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
+using NewRiverAttack.PlayerManagers.PlayerSystems;
 using UnityEngine;
 
 namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
@@ -49,11 +50,10 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
             _gamePlayManager.EventGameOver += DestroyMine;
             _gamePlayManager.EventGameResetClear += DestroyMine;
             _gamePlayManager.EventGameFinisher += DestroyMine;
+            _mineMaster.EventObstacleDeath += ReturnToPool;
             if (_stateMachine == null) return;
             ResetFuse();
         }
-        
-
         private void Update()
         {
             if (ShouldBeReady)  // Só atualiza o FSM quando a mina estiver pronta
@@ -62,11 +62,12 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
 
         private void OnDisable()
         {
+            _fuseInitialize = false;  // Desativa a mina
+            _target = null;           // Reseta o alvo
             _gamePlayManager.EventGameOver -= DestroyMine;
             _gamePlayManager.EventGameResetClear -= DestroyMine;
             _gamePlayManager.EventGameFinisher -= DestroyMine;
-            _fuseInitialize = false;  // Desativa a mina
-            _target = null;           // Reseta o alvo
+            _mineMaster.EventObstacleDeath -= ReturnToPool;
         }
 
         #endregion
@@ -111,20 +112,16 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
         {
             _fuseInitialize = true;  // Após 2 segundos, a mina está pronta para operar
         }
+        private void ReturnToPool(PlayerMaster playerMaster)
+        {
+            Invoke(nameof(ReturnBullet),2f);
+        }
 
         public void ReturnBullet()
         {
             if (_bulletBossMine != null)
             {
                 _bulletBossMine?.Pool.ReturnObject(gameObject);
-            }
-        }
-
-        public void MarkForReturn()
-        {
-            if (_bulletBossMine != null)
-            {
-                _bulletBossMine?.Pool.MarkForReturn(gameObject);
             }
         }
         
@@ -134,7 +131,6 @@ namespace NewRiverAttack.ObstaclesSystems.EnemiesSystems.Mines
 
         public void OnEventAlertApproach()=> _mineMaster.OnEventAlertApproach();
         public void OnEventAlertStop()=> _mineMaster.OnEventAlertStop();
-        public void OnEventDetonate()=> _mineMaster.OnEventDetonate();
 
         #endregion
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ImmersiveGames.BehaviorTreeSystem.Interface;
 using NewRiverAttack.GamePlayManagers;
@@ -8,11 +9,11 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 {
     public class BossBehaviorMovement : MonoBehaviour, INodeFunctionProvider
     {
-        [SerializeField] private float bossDistance = 12f;
+        private const float BossDistance = 15f;
         private BossDirections _myDirections;
         private Vector2 _limitX;
         private Vector2 _limitZ;
-        private const float AdditionalZ = 3f; // Valor adicional no eixo Z
+        private const float AdditionalZ = 10f; // Valor adicional no eixo Z
 
         #region Unity Methods
 
@@ -29,7 +30,7 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
         {
             var playerPosition = GetReferencePosition();
             var newDirection = GetRandomDirection(_myDirections);
-            var newPosition = GetNewPosition(newDirection, playerPosition, bossDistance);
+            var newPosition = GetNewPosition(newDirection, playerPosition, BossDistance);
             transform.position = newPosition;
             return NodeState.Success;
         }
@@ -88,12 +89,21 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Behaviours
 
         private static BossDirections GetRandomDirection(BossDirections exclude)
         {
-            var directions = Enum.GetValues(typeof(BossDirections))
-                .Cast<BossDirections>()
-                .Where(dir => dir != exclude)
-                .ToArray();
-            var randomIndex = UnityEngine.Random.Range(0, directions.Length);
-            return directions[randomIndex];
+            // Criação da lista ponderada
+            var weightedDirections = new List<BossDirections>
+            {
+                BossDirections.North, BossDirections.North,
+                BossDirections.East,
+                BossDirections.North, BossDirections.North,
+                BossDirections.West
+            };
+
+            // Filtra a direção excluída
+            var filteredDirections = weightedDirections.Where(dir => dir != exclude).ToList();
+
+            // Sorteio aleatório de uma direção a partir da lista filtrada
+            var randomIndex = UnityEngine.Random.Range(0, filteredDirections.Count);
+            return filteredDirections[randomIndex];
         }
 
         private Vector3 GetReferencePosition()

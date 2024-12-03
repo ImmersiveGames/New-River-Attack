@@ -61,7 +61,7 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
             IsDisable = true;
             IsDead = false;
         }
-        
+
         private void SetInitialPosition()
         {
             var transform1 = transform;

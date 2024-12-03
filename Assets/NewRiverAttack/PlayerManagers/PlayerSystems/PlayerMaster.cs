@@ -163,8 +163,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _playerScore += score;
             _gameHudManager.OnEventHudScoreUpdate(_playerScore, PlayerIndex);
         }
-
-        internal int GetPlayerScore => _playerScore;
         internal PlayerSettings GetPlayerSettings => GameOptionsSave.Instance.playerSettings[PlayerIndex];
 
         #region Calls

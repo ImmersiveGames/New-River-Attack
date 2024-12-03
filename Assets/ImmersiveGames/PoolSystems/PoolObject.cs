@@ -9,7 +9,6 @@ namespace ImmersiveGames.PoolSystems
     {
         private readonly List<GameObject> _pooledObjects;  // Objetos no pool
         private readonly List<GameObject> _activeObjects;  // Objetos ativos
-        private readonly List<GameObject> _markedForReturn;  // Objetos marcados para retorno
 
         private readonly GameObject _prefab;
         private readonly Transform _root;
@@ -23,7 +22,6 @@ namespace ImmersiveGames.PoolSystems
 
             _pooledObjects = new List<GameObject>();
             _activeObjects = new List<GameObject>();
-            _markedForReturn = new List<GameObject>();
 
             _prefab = prefab;
 
@@ -84,26 +82,6 @@ namespace ImmersiveGames.PoolSystems
             poolable?.OnSpawned(spawnPosition, data);
             obj.transform.parent = null;
             return obj;
-        }
-
-        // Marca um objeto para retornar ao pool após a conclusão do ciclo de spawn
-        public void MarkForReturn(GameObject obj)
-        {
-            if (_markedForReturn.Contains(obj)) return;
-            //Debug.Log($"Marcado: {obj}");
-            _markedForReturn.Add(obj);  // Marca o objeto para retorno
-        }
-
-        // Retorna todos os objetos que foram marcados para retorno ao pool
-        public void ReturnMarkedObjects()
-        {
-            // Use um loop 'for' para evitar erros de modificação de coleção durante a enumeração
-            for (var i = _markedForReturn.Count - 1; i >= 0; i--)
-            {
-                //Debug.Log($"Return Objects {_markedForReturn[i]}");
-                ReturnObject(_markedForReturn[i]);
-            }
-            _markedForReturn.Clear();  // Limpa a lista de marcados
         }
 
         // Retorna todos os objetos ativos ao pool

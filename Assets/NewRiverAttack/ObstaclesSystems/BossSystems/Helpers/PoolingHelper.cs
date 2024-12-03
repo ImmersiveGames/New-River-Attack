@@ -19,24 +19,5 @@ namespace NewRiverAttack.ObstaclesSystems.BossSystems.Helpers
             _poolObject.GetObject(spawnPosition, data);
         }
         
-        public void MarkForReturn(GameObject obj)
-        {
-            _poolObject.MarkForReturn(obj);
-        }
-        public void ReturnMarkedObjects()
-        {
-            _poolObject.ReturnMarkedObjects();
-        }
-
-        public void ReturnObject(GameObject obj)
-        {
-            _poolObject.ReturnObject(obj);
-        }
-
-        public void ReturnAllActiveObjects()
-        {
-            _poolObject.ReturnAllActiveObjects();
-        }
-        
     }
 }
