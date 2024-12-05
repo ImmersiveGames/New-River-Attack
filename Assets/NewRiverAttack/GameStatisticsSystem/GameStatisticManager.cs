@@ -11,6 +11,7 @@ using NewRiverAttack.ObstaclesSystems;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.CollectibleSystems.PowerUpSystems;
 using NewRiverAttack.ObstaclesSystems.ObjectsScriptable;
+using NewRiverAttack.PlayerManagers.PlayerSystems;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
 using NewRiverAttack.WallsManagers;
 using UnityEngine;
@@ -30,16 +31,16 @@ namespace NewRiverAttack.GameStatisticsSystem
         public delegate void GameLogFloatHandler(string stateName, float floatValue);
         public event GameLogFloatHandler EventServiceUpdateFloat;
 
-        protected override void Awake()
-        {
-            _startTimer = Time.time;
-            base.Awake();
-        }
-
         private void Start()
         {
+            _startTimer = Time.time;
             _steamAchievementService = SteamAchievementService.Instance;
             _gemeStatisticsDataLog = GemeStatisticsDataLog.Instance;
+        }
+
+        private void OnDestroy()
+        {
+            LogSessionTime(_startTimer);
         }
 
         private void OnApplicationQuit()
@@ -53,7 +54,7 @@ namespace NewRiverAttack.GameStatisticsSystem
             var sessionTime = Time.time - sessionStartTime;
             if (!_gemeStatisticsDataLog) return;
             _gemeStatisticsDataLog.playersTimeSpent += sessionTime;
-            //DebugManager.Log<GameStatisticManager>($"Log Offline Timer {_gemeStatisticsDataLog.playersTimeSpent}");
+            DebugManager.Log<GameStatisticManager>($"Log Offline Timer {_gemeStatisticsDataLog.playersTimeSpent}");
         }
 
         internal async void LogMaxScore(int score)
@@ -62,7 +63,7 @@ namespace NewRiverAttack.GameStatisticsSystem
             if (score <= _gemeStatisticsDataLog.playersMaxScore) return;
             _gemeStatisticsDataLog.playersMaxScore = score;
             await SteamLeaderboardService.Instance.UpdateScore(score, true).ConfigureAwait(false);
-            //DebugManager.Log<GameStatisticManager>($"Log Offline Max Score {_gemeStatisticsDataLog.playersMaxScore}");
+            DebugManager.Log<GameStatisticManager>($"Log Offline Max Score {_gemeStatisticsDataLog.playersMaxScore}");
         }
 
         public void LogAmountDistance(float amount)
@@ -83,13 +84,14 @@ namespace NewRiverAttack.GameStatisticsSystem
         {
             if(_gemeStatisticsDataLog == null || intValue <= 0) return;
             _gemeStatisticsDataLog.playersMaxDistance = Mathf.Max(_gemeStatisticsDataLog.playersMaxDistance, intValue);
-            //DebugManager.Log<GameStatisticManager>($"Log Offline MAX Distance: {_gemeStatisticsDataLog.playersMaxDistance}");
+            DebugManager.Log<GameStatisticManager>($"Log Offline MAX Distance: {_gemeStatisticsDataLog.playersMaxDistance}");
         }
 
-        public void LogShoots(int intValue)
+        public void LogShoots(ObjectShoot whoShoot)
         {
-            if(_gemeStatisticsDataLog == null || intValue <= 0) return;
-            _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersShoots, intValue);
+            if(_gemeStatisticsDataLog == null) return;
+            if(whoShoot is not PlayerShoot) return;
+            _gemeStatisticsDataLog.IncrementStat(ref _gemeStatisticsDataLog.playersShoots, 1);
             CheckAmountUpdate("stat_Shoots", _gemeStatisticsDataLog.playersShoots);
         }
 

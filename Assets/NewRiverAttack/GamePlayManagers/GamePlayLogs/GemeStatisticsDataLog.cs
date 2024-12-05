@@ -202,7 +202,7 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
         public void SetAmountDistance(float amount)
         {
             playersAmountDistance = amount / BaseConversion;
-            //DebugManager.Log<GemeStatisticsDataLog>($"Distance converted to custom unit: {playersAmountDistance:F2}");
+            DebugManager.Log<GemeStatisticsDataLog>($"Distance converted to custom unit: {playersAmountDistance:F2}");
         }
 
         public int GetCrashes => playersDieWall + playersDieEnemyCollider + playersDieFuelOut;

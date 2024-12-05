@@ -19,11 +19,9 @@ namespace ImmersiveGames.SteamServicesManagers
 
         private void Awake()
         {
-            // Remover DontDestroyOnLoad para garantir que o objeto seja recriado ao voltar para a cena
             if (Instance == null)
             {
                 Instance = this;
-                //DontDestroyOnLoad(gameObject); // Removido para permitir a reinicialização na troca de cena
             }
             else
             {
@@ -89,7 +87,7 @@ namespace ImmersiveGames.SteamServicesManagers
                     if (result.HasValue)
                     {
                         DebugManager.Log<SteamLeaderboardService>($"Pontuação registrada: {result.Value.Score}");
-                        await SteamLeaderboardService.Instance.GetScores(10).ConfigureAwait(true); // Atualiza a lista de scores
+                        await GetScores(10).ConfigureAwait(true); // Atualiza a lista de scores
                     }
                 }
                 catch (Exception e)

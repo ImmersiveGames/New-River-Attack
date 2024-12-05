@@ -1,13 +1,10 @@
-﻿using System;
-using ImmersiveGames.PoolSystems.Interfaces;
+﻿using ImmersiveGames.PoolSystems.Interfaces;
 using NewRiverAttack.BulletsManagers.Interface;
 using NewRiverAttack.LevelBuilder.Abstracts;
 using NewRiverAttack.ObstaclesSystems.CollectibleSystems.PowerUpSystems;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
-using NewRiverAttack.WallsManagers;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace NewRiverAttack.BulletsManagers
 {

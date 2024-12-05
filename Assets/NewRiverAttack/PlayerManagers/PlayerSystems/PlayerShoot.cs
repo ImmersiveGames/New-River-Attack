@@ -2,6 +2,7 @@
 using ImmersiveGames.InputManager;
 using ImmersiveGames.PoolSystems.Interfaces;
 using NewRiverAttack.BulletsManagers.Interface;
+using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using NewRiverAttack.ObstaclesSystems.CollectibleSystems.PowerUpSystems;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
 {
     public class PlayerShoot : ObjectShoot
     {
+        [SerializeField, Range(0.1f,2f)] private float bulletLife;
         [Header("Power-Up Settings")]
         [SerializeField, Range(0, 5)] private int cadenceDivider = 2;  // Redução do cooldown com power-up
         private float _originalCooldown;  // Armazena o cooldown original para restaurar após o power-up
@@ -55,10 +57,6 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             {
                 ExecuteShootPattern();
             }
-            else
-            {
-                DebugManager.Log<PlayerShoot>("PlayerShoot.AttemptShoot: Cooldown ainda ativo.");
-            }
         }
 
         // Reduz temporariamente o cooldown com power-up de tiro rápido
@@ -68,6 +66,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
             _inPowerUp = true;
             var newCooldown = _originalCooldown / cadenceDivider;
             cooldown = newCooldown;
+            GameStatisticManager.instance.LogTimeRapidFire(activePowerUp.PowerUpData.duration);
             DebugManager.Log<PlayerShoot>($"PlayerShoot.StartPowerUp: Cooldown reduzido temporariamente para {newCooldown}");
         }
 
@@ -88,7 +87,7 @@ namespace NewRiverAttack.PlayerManagers.PlayerSystems
                 position,
                 _playerMaster.ActualSkin.bulletDamage,
                 _playerMaster.ActualSkin.playerSpeed * _playerMaster.ActualSkin.bulletSpeedMultiply,
-                2.0f,
+                bulletLife,
                 _inPowerUp
             );
         }

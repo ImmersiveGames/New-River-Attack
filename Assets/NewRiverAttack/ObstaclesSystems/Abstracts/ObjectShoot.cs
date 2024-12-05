@@ -2,6 +2,7 @@
 using UnityEngine;
 using ImmersiveGames.AudioEvents;
 using ImmersiveGames.PoolSystems.Interfaces;
+using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.PlayerManagers.Tags;
 using NewRiverAttack.ShootSystems;
 
@@ -62,17 +63,15 @@ namespace NewRiverAttack.ObstaclesSystems.Abstracts
         public void ExecuteShootPattern()
         {
             if (Time.realtimeSinceStartup < LastShootTime + cooldown) return;
-
             if (enableTargeting && target != null)
             {
                 TargetingSystem.AimAtTarget(SpawnPoint, target);
             }
 
-            if (shootPattern != null && SpawnPoint != null)
-            {
-                shootPattern.Execute(SpawnPoint, this);
-                LastShootTime = Time.realtimeSinceStartup; // Atualiza o cooldown
-            }
+            if (shootPattern == null || SpawnPoint == null) return;
+            shootPattern.Execute(SpawnPoint, this);
+            GameStatisticManager.instance.LogShoots(this);
+            LastShootTime = Time.realtimeSinceStartup; // Atualiza o cooldown
         }
 
         public void ShootSound()
