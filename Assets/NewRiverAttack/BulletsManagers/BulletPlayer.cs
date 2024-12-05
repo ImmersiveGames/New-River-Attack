@@ -1,6 +1,7 @@
 ﻿using System;
 using ImmersiveGames.PoolSystems.Interfaces;
 using NewRiverAttack.BulletsManagers.Interface;
+using NewRiverAttack.LevelBuilder.Abstracts;
 using NewRiverAttack.ObstaclesSystems.CollectibleSystems.PowerUpSystems;
 using NewRiverAttack.PlayerManagers.PlayerSystems;
 using NewRiverAttack.WallsManagers;
@@ -59,6 +60,7 @@ namespace NewRiverAttack.BulletsManagers
             if (other.GetComponentInParent<BulletPlayer>()) return;
             if (other.GetComponentInParent<PlayerMaster>()) return;
             if (other.GetComponentInParent<PowerUpMaster>()) return;
+            if (other.GetComponentInParent<LevelFinishers>()) return;
             Instantiate(vfxExplode, transform.position, quaternion.identity);
             Invoke(nameof(ReturnToPool), 0.02f);
         }
