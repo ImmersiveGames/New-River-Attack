@@ -1,4 +1,5 @@
 ﻿using NewRiverAttack.GameManagers;
+using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.LevelBuilder;
 using NewRiverAttack.ObstaclesSystems.EnemiesSystems;
@@ -19,8 +20,8 @@ namespace NewRiverAttack.ObstaclesSystems.BridgeSystems
             
             //TODO: Aqui é um bom local para ajustar os saves e atualizar o cenário.
             LevelBuilderManager.Instance.OptimizeSegments(transform.position.z);
-            
             if (!GetBridgeSettings.isCheckPoint) return;
+            GamePlayManager.Instance.OnEventGameReadyGo();
             GameStatisticManager.instance.LogCompletePath(1, GameManager.instance.gamePlayMode);
             var position = transform.position;
             var savePosition = new Vector3(position.x, playerMaster.transform.position.y,

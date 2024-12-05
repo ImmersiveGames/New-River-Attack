@@ -2,6 +2,7 @@
 using System.Linq;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.Utils;
+using NewRiverAttack.GamePlayManagers;
 using NewRiverAttack.GameStatisticsSystem;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
 using UnityEngine;
@@ -266,10 +267,8 @@ namespace NewRiverAttack.LevelBuilder
                 maxScenarioObjects - activeObjects.Count);
             DebugManager.Log<LevelBuilderManager>("Índice do segmento para Adicionar: " + segmentsToInstantiateFront);
             // Instanciar os segmentos à frente
-            if (segmentsToInstantiateFront > 0)
-            {
-                AddNextSegment(segmentsToInstantiateFront);
-            }
+            if (segmentsToInstantiateFront <= 0) return;
+            AddNextSegment(segmentsToInstantiateFront);
         }
         public void DestroyLevel()
         {

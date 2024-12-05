@@ -1,6 +1,7 @@
 ﻿using ImmersiveGames.PoolSystems.Interfaces;
 using NewRiverAttack.BulletsManagers.Interface;
 using NewRiverAttack.ObstaclesSystems.Abstracts;
+using NewRiverAttack.ObstaclesSystems.CollectibleSystems.PowerUpSystems;
 using UnityEngine;
 
 namespace NewRiverAttack.BulletsManagers
@@ -28,6 +29,7 @@ namespace NewRiverAttack.BulletsManagers
         {
             if (other.GetComponentInParent<BulletBoss>()) return;
             if (other.GetComponentInParent<ObstacleMaster>()) return;
+            if (other.GetComponentInParent<PowerUpMaster>()) return;
             ReturnToPool();
         }
         public override void OnSpawned(Transform spawnPosition, ISpawnData data)
