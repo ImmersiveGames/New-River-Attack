@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using CarterGames.Assets.SaveManager;
 using ImmersiveGames.ShopManagers.ShopProducts;
 using NewRiverAttack.GamePlayManagers.GamePlayLogs;
-using NewRiverAttack.LevelBuilder;
 using NewRiverAttack.PlayerManagers.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Localization;
@@ -13,7 +12,7 @@ namespace Saves
     [CreateAssetMenu(fileName = "RiverSaveObject")]
     public class RiverSaveObject : SaveObject
     {
-        public SaveValue<long> lastDate = new SaveValue<long>("lastSaveData");
+        public SaveValue<string> lastVersion;
         public SaveValue<int> wallet;
 
         public SaveValue<float> bgmVolume;

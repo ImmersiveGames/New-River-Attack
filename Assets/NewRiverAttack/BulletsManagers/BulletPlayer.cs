@@ -48,7 +48,7 @@ namespace NewRiverAttack.BulletsManagers
 
         protected override void ReturnToPool()
         {
-            var vfx =Instantiate(vfxExplode, transform.position, quaternion.identity);
+            Instantiate(vfxExplode, transform.position, quaternion.identity);
             base.ReturnToPool();
         }
 
@@ -58,7 +58,6 @@ namespace NewRiverAttack.BulletsManagers
             if (other.GetComponentInParent<PlayerMaster>()) return;
             if (other.GetComponentInParent<PowerUpMaster>()) return;
             if (other.GetComponentInParent<LevelFinishers>()) return;
-            Instantiate(vfxExplode, transform.position, quaternion.identity);
             Invoke(nameof(ReturnToPool), 0.02f);
         }
     }

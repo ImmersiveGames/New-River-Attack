@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 namespace ImmersiveGames.Utils
 {
-    public class Tools
+    public static class Tools
     {
         
         /*

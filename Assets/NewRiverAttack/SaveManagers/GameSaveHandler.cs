@@ -1,6 +1,6 @@
-﻿using System;
-using CarterGames.Assets.SaveManager;
+﻿using CarterGames.Assets.SaveManager;
 using ImmersiveGames.DebugManagers;
+using ImmersiveGames.Utils;
 using NewRiverAttack.GamePlayManagers.GamePlayLogs;
 using Saves;
 using UnityEngine;
@@ -12,8 +12,8 @@ namespace NewRiverAttack.SaveManagers
         [SerializeField] private GemeStatisticsDataLog dataLog;
         [SerializeField] private GameOptionsSave gameOptionsSave;
         [SerializeField] private RiverSaveObject saveObject;
-        
-        private readonly DateTime _lastDate = new DateTime(2024, 9, 20); 
+
+        [SerializeField] private string versionTarget;
         
         public static GameSaveHandler Instance { get; private set; }
         
@@ -22,7 +22,6 @@ namespace NewRiverAttack.SaveManagers
             if (Instance == null)
             {
                 Instance = this;
-                //DontDestroyOnLoad(gameObject);
                 DebugManager.Log<GameSaveHandler>("Instância criada.");
             }
             else
@@ -41,16 +40,28 @@ namespace NewRiverAttack.SaveManagers
         private void Start()
         {
             LoadGameLocation();
-            var saveData = new DateTime(saveObject.lastDate.Value);
-            // Verifica se o último save foi feito antes da data limite
-            if (saveObject.lastDate == null || saveData >= _lastDate) return;
-            DebugManager.Log<GameSaveHandler>("Resetando dados, save anterior à data limite.");
-            ResetFiles();
+
+            CheckLastVersion();
         }
 
         private void OnDisable()
         {
             SaveGameData();
+        }
+
+        private void CheckLastVersion()
+        {
+            if (string.IsNullOrEmpty(saveObject.lastVersion.Value))
+            {
+                DebugManager.Log<GameSaveHandler>("Não há uma versão salva " + versionTarget);
+                ResetFiles();
+                return;
+            }
+
+            if (saveObject.lastVersion == null ||
+                !VersionChecker.IsTargetVersionLowerThenSave(versionTarget, saveObject.lastVersion.Value)) return;
+            DebugManager.Log<GameSaveHandler>("A versão salva atual é menor que a versão Alvo " + saveObject.lastVersion.Value);
+            ResetFiles();
         }
 
         private void ResetFiles()
@@ -59,7 +70,6 @@ namespace NewRiverAttack.SaveManagers
             PlayerPrefs.Save();  // Salva a exclusão dos dados no PlayerPrefs
             saveObject.ResetObjectSaveValues();
             SaveManager.Save();  // Salva o novo estado do saveObject
-            
             // Limpa os logs também
             dataLog.ResetLogs();
         }
@@ -71,11 +81,9 @@ namespace NewRiverAttack.SaveManagers
 
         private void LoadGameLocation()
         {
-            if (saveObject.startLocale != null)
-            {
-                gameOptionsSave.startLocale = saveObject.startLocale.Value;
-                DebugManager.Log<GameSaveHandler>($"Locale carregado: {gameOptionsSave.startLocale}");
-            }
+            if (saveObject.startLocale == null) return;
+            gameOptionsSave.startLocale = saveObject.startLocale.Value;
+            DebugManager.Log<GameSaveHandler>($"Locale carregado: {gameOptionsSave.startLocale}");
         }
         
         private void SaveGameLocation()
@@ -100,7 +108,7 @@ namespace NewRiverAttack.SaveManagers
             SaveGameOptions();
             SaveGameStatistics();
             // Atualiza a data do último save
-            saveObject.lastDate.Value = DateTime.Now.Ticks;
+            saveObject.lastVersion.Value = Application.version;
 
             // Salva o estado atualizado
             saveObject.Save();
