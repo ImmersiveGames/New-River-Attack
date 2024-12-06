@@ -1,6 +1,5 @@
 ﻿using System;
 using ImmersiveGames.DebugManagers;
-using ImmersiveGames.MenuManagers;
 using NewRiverAttack.GamePlayManagers.GamePlayLogs;
 using Steamworks;
 using Steamworks.Data;
@@ -10,14 +9,37 @@ namespace ImmersiveGames.SteamServicesManagers
 {
     public class SteamLeaderboardService : MonoBehaviour
     {
-        private static Leaderboard? _leaderboard;
-        public static Leaderboard? Leaderboard => _leaderboard;
-
+        [SerializeField] private string leaderboardName = "River_Attack_HiScore";
+        private Leaderboard? _leaderboard;
+        public Leaderboard? Leaderboard => _leaderboard;
+        public static SteamLeaderboardService Instance { get; private set; }
         private GemeStatisticsDataLog _gemeStatistics;
 
         private void Awake()
         {
-            _gemeStatistics = GemeStatisticsDataLog.Instance;
+            if (Instance == null)
+            {
+                // Cria o objeto na raiz da cena se ele não for o objeto raiz
+                if (transform.parent != null)
+                {
+                    GameObject rootObject = new GameObject("SteamLeaderboardService");
+                    Instance = rootObject.AddComponent<SteamLeaderboardService>();
+                    DontDestroyOnLoad(rootObject);  // Marca o objeto como persistente
+                }
+                else
+                {
+                    Instance = this;
+                    _gemeStatistics = GemeStatisticsDataLog.Instance;
+                    Init(leaderboardName);
+                    DontDestroyOnLoad(gameObject);  // Marca o objeto como persistente
+                }
+                DebugManager.Log<SteamLeaderboardService>("Instância criada e marcada para não destruir ao carregar uma nova cena.");
+            }
+            else
+            {
+                Destroy(gameObject);  // Garante que não haverá múltiplas instâncias
+                DebugManager.LogWarning<SteamLeaderboardService>("Tentativa de criar outra instância evitada e o novo objeto foi destruído.");
+            }
         }
 
         private void Start()
@@ -27,8 +49,12 @@ namespace ImmersiveGames.SteamServicesManagers
                 UpdateScore(_gemeStatistics.playersMaxScore);
             }
         }
+        private void OnDisable()
+        {
+            _leaderboard = null;
+        }
 
-        public static async void Init(string boardName)
+        private async void Init(string boardName)
         {
             if (!SteamConnectionManager.ConnectedToSteam) return;
             _leaderboard = await SteamUserStats.FindLeaderboardAsync(boardName).ConfigureAwait(false);
@@ -44,7 +70,7 @@ namespace ImmersiveGames.SteamServicesManagers
             }
         }
 
-        public static async void UpdateScore(int score)
+        public async void UpdateScore(int score)
         {
             if (!SteamConnectionManager.ConnectedToSteam) return;
             if (_leaderboard == null) return;
@@ -53,183 +79,13 @@ namespace ImmersiveGames.SteamServicesManagers
                 var result = await _leaderboard.Value.SubmitScoreAsync(score).ConfigureAwait(true);
                 if (result.HasValue)
                 {
-                    DebugManager.Log<PanelLeaderBoards>($"Placar atualizado: {score}");
+                    DebugManager.Log<SteamLeaderboardService>($"Placar atualizado: {score}");
                 }
             }
             catch (Exception ex)
             {
-                DebugManager.LogError<PanelLeaderBoards>($"Erro ao Atualizar o placar: {ex.Message}");
+                DebugManager.LogError<SteamLeaderboardService>($"Erro ao Atualizar o placar: {ex.Message}");
             }
         }
-
-        public static void DestroyBoard()
-        {
-            _leaderboard = null;
-        }
-
-
-        /*public static SteamLeaderboardService Instance { get; private set; }
-        private static Leaderboard? _leaderboard;
-        private const string LeaderboardName = "River_Attack_HiScore";
-        private HashSet<int> _offlineScores = new HashSet<int>();
-
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
-
-        // Adicionar método para forçar a inicialização toda vez que o objeto for ativado (OnEnable)
-        private async void OnEnable()
-        {
-            LoadOfflineScores();
-            await InitializeLeaderboard(); // Tentar carregar o leaderboard novamente
-            SyncOfflineScores(); // Sincroniza qualquer pontuação offline
-        }
-
-        public static async Task InitializeLeaderboard()
-        {
-            int retryCount = 3;
-            for (int i = 0; i < retryCount; i++)
-            {
-                try
-                {
-                    DebugManager.Log<SteamLeaderboardService>("Tentando inicializar o leaderboard...");
-                    _leaderboard = await SteamUserStats.FindLeaderboardAsync(LeaderboardName).ConfigureAwait(false);
-                    if (_leaderboard.HasValue)
-                    {
-                        DebugManager.Log<SteamLeaderboardService>("Leaderboard inicializado com sucesso.");
-                        break;
-                    }
-                    else
-                    {
-                        DebugManager.LogError<SteamLeaderboardService>($"Falha ao inicializar o leaderboard. Tentativa: {i + 1}");
-                    }
-                }
-                catch (Exception e)
-                {
-                    DebugManager.LogError<SteamLeaderboardService>($"Erro ao inicializar o leaderboard: {e.Message}. Tentativa: {i + 1}");
-                }
-            }
-        }
-
-        public async Task UpdateScore(int score, bool force = false)
-        {
-            if (SteamConnectionManager.ConnectedToSteam && _leaderboard.HasValue)
-            {
-                try
-                {
-                    // Obtém a pontuação atual do usuário no leaderboard
-                    var currentScoreEntry = await _leaderboard.Value.GetScoresAroundUserAsync(1, 1).ConfigureAwait(false);
-                    var currentScore = currentScoreEntry?.FirstOrDefault().Score ?? 0; // Valor padrão de 0 se não houver pontuação
-
-                    if (currentScore >= score && !force)
-                    {
-                        DebugManager.Log<SteamLeaderboardService>($"A nova pontuação ({score}) não é superior à pontuação atual ({currentScore}).");
-                        return; // Se a nova pontuação não for maior, não a envia
-                    }
-
-                    // Envia a pontuação superior ou força o envio
-                    var result = force
-                        ? await _leaderboard.Value.ReplaceScore(score).ConfigureAwait(false)
-                        : await _leaderboard.Value.SubmitScoreAsync(score).ConfigureAwait(false);
-
-                    if (result.HasValue)
-                    {
-                        DebugManager.Log<SteamLeaderboardService>($"Pontuação registrada: {result.Value.Score}");
-                        await GetScores(10).ConfigureAwait(true); // Atualiza a lista de scores
-                    }
-                }
-                catch (Exception e)
-                {
-                    DebugManager.LogError<SteamLeaderboardService>($"Erro ao atualizar a pontuação: {e.Message}");
-                }
-            }
-            else
-            {
-                _offlineScores.Add(score);
-                SaveOfflineScores();
-            }
-        }
-
-        public async Task<LeaderboardEntry[]> GetScores(int quantity)
-        {
-            if (!SteamConnectionManager.ConnectedToSteam || !_leaderboard.HasValue)
-                return null;
-
-            try
-            {
-                return await _leaderboard.Value.GetScoresAsync(quantity).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                DebugManager.LogError<SteamLeaderboardService>($"Erro ao buscar pontuações: {e.Message}");
-                return null;
-            }
-        }
-
-        public Task<LeaderboardEntry[]> GetScoresFromFriends()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<LeaderboardEntry[]> GetScoresAround(int start, int end)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SaveOfflineScores()
-        {
-            if (_offlineScores != null && _offlineScores.Any())
-            {
-                PlayerPrefs.SetString("OfflineScores", string.Join(",", _offlineScores));
-                PlayerPrefs.Save();
-                DebugManager.Log<SteamLeaderboardService>("Pontuações offline salvas.");
-            }
-            else
-            {
-                DebugManager.LogWarning<SteamLeaderboardService>("Nenhuma pontuação offline para salvar.");
-            }
-        }
-
-        public void LoadOfflineScores()
-        {
-            var savedScores = PlayerPrefs.GetString("OfflineScores", "");
-            if (!string.IsNullOrEmpty(savedScores))
-            {
-                _offlineScores = savedScores.Split(',').Select(int.Parse).ToHashSet();
-                DebugManager.Log<SteamLeaderboardService>("Pontuações offline carregadas com sucesso.");
-            }
-            else
-            {
-                DebugManager.LogWarning<SteamLeaderboardService>("Nenhuma pontuação offline encontrada.");
-            }
-        }
-
-        public async void SyncOfflineScores()
-        {
-            if (!SteamConnectionManager.ConnectedToSteam || !_leaderboard.HasValue || !_offlineScores.Any())
-                return;
-
-            DebugManager.Log<SteamLeaderboardService>("Sincronizando pontuações offline...");
-
-            foreach (var score in _offlineScores.ToList())
-            {
-                await UpdateScore(score).ConfigureAwait(true);
-            }
-            _offlineScores.Clear();
-            SaveOfflineScores();
-        }
-
-        private void OnApplicationQuit()
-        {
-            SaveOfflineScores();
-        }*/
     }
 }

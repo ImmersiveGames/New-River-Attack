@@ -48,7 +48,6 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<PanelResolutionOptions>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<AbstractMenuManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<MainMenu>(DebugManager.DebugLevels.None);
-
             
             DebugManager.SetScriptDebugLevel<PanelGamePause>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PanelGameManager>(DebugManager.DebugLevels.None);
@@ -56,7 +55,6 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<PanelGameOver>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<FadeManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<FadeTransition>(DebugManager.DebugLevels.None);
-            
             
             //Audios
             DebugManager.SetScriptDebugLevel<AudioManager>(DebugManager.DebugLevels.None);
@@ -66,7 +64,6 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<GamePlayManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<GameOptionsSave>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<GemeStatisticsDataLog>(DebugManager.DebugLevels.None);
-            
             
             //Inputs
             DebugManager.SetScriptDebugLevel<ActionManager>(DebugManager.DebugLevels.None);
@@ -133,7 +130,6 @@ namespace NewRiverAttack.DebugManagers
             //Boss
             DebugManager.SetScriptDebugLevel<BossMaster>(DebugManager.DebugLevels.None);
             
-            
             //Steam Services
             DebugManager.SetScriptDebugLevel<SteamConnectionManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<SteamAchievementService>(DebugManager.DebugLevels.None);
@@ -143,8 +139,7 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<SteamServerUpdater>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<GameStatisticManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PanelStatisticsManager>(DebugManager.DebugLevels.None);
-            
-            DebugManager.SetScriptDebugLevel<GameSaveHandler>(DebugManager.DebugLevels.All);
+            DebugManager.SetScriptDebugLevel<GameSaveHandler>(DebugManager.DebugLevels.None);
         }
     }
 }

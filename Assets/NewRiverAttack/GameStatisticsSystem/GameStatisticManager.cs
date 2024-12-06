@@ -57,11 +57,12 @@ namespace NewRiverAttack.GameStatisticsSystem
             DebugManager.Log<GameStatisticManager>($"Log Offline Timer {_gemeStatisticsDataLog.playersTimeSpent}");
         }
 
-        internal async void LogMaxScore(int score)
+        internal void LogMaxScore(int score)
         {
             if(_gemeStatisticsDataLog == null || score <= 0) return;
             if (score <= _gemeStatisticsDataLog.playersMaxScore) return;
             _gemeStatisticsDataLog.playersMaxScore = score;
+            SteamLeaderboardService.Instance.UpdateScore(score);
             DebugManager.Log<GameStatisticManager>($"Log Offline Max Score {_gemeStatisticsDataLog.playersMaxScore}");
         }
 

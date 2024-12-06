@@ -9,28 +9,18 @@ namespace ImmersiveGames.MenuManagers
 {
     public class PanelLeaderBoards : MonoBehaviour
     {
-        [SerializeField] private string leaderboardName = "River_Attack_HiScore";
+        
         [SerializeField] private int numRegister;
         [SerializeField] private GameObject prefabLine;
         [SerializeField] private Transform content;
         [SerializeField] private GameObject loadingObject;
         private Leaderboard? _leaderboard;
 
-        private void Awake()
-        {
-            SteamLeaderboardService.Init(leaderboardName);
-            _leaderboard = SteamLeaderboardService.Leaderboard;
-        }
-
         private void OnEnable()
         {
+            _leaderboard = SteamLeaderboardService.Instance.Leaderboard;
             ClearLeaderboard();
             CreateGlobalBoard(numRegister);
-        }
-
-        private void OnDisable()
-        {
-            SteamLeaderboardService.DestroyBoard();
         }
 
         private async void CreateGlobalBoard(int numTotal)
