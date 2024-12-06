@@ -27,7 +27,7 @@ namespace ImmersiveGames.ShopManagers.ShopProducts
         public int QuantityInStock
         {
             get => inQuantityInStock;
-            set => inQuantityInStock = value;// = inShopProductType == ShopProductType.Unique ? 1: value;
+            set => inQuantityInStock = value;
         }
         
         public void UpdateStock(int quantity)

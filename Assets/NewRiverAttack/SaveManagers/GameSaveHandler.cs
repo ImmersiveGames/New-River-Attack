@@ -22,7 +22,6 @@ namespace NewRiverAttack.SaveManagers
             if (Instance == null)
             {
                 Instance = this;
-                DebugManager.Log<GameSaveHandler>("Instância criada.");
             }
             else
             {
@@ -66,6 +65,7 @@ namespace NewRiverAttack.SaveManagers
 
         private void ResetFiles()
         {
+            Debug.Log("RESETOU OS SAVE");
             PlayerPrefs.DeleteAll();
             PlayerPrefs.Save();  // Salva a exclusão dos dados no PlayerPrefs
             saveObject.ResetObjectSaveValues();

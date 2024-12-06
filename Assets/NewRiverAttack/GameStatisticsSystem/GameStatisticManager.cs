@@ -62,7 +62,6 @@ namespace NewRiverAttack.GameStatisticsSystem
             if(_gemeStatisticsDataLog == null || score <= 0) return;
             if (score <= _gemeStatisticsDataLog.playersMaxScore) return;
             _gemeStatisticsDataLog.playersMaxScore = score;
-            await SteamLeaderboardService.Instance.UpdateScore(score, true).ConfigureAwait(false);
             DebugManager.Log<GameStatisticManager>($"Log Offline Max Score {_gemeStatisticsDataLog.playersMaxScore}");
         }
 

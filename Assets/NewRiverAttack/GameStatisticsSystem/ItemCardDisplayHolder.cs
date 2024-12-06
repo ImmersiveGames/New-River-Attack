@@ -1,4 +1,5 @@
 using System.Globalization;
+using Steamworks;
 using TMPro;
 using UnityEngine;
 
@@ -9,9 +10,9 @@ namespace NewRiverAttack.GameStatisticsSystem
         [SerializeField] public TMP_Text itemNameText;
         [SerializeField] public TMP_Text itemValueText;
 
-        public void Init(string playerName, int score, int rank)
+        public void Init(Friend playerName, int score, int rank)
         {
-            itemNameText.text = $"{rank} - {playerName}";
+            itemNameText.text = $"{rank} - {playerName.Name}";
             itemValueText.text = score.ToString();
         }
 

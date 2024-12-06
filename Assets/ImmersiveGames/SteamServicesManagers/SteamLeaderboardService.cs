@@ -1,18 +1,74 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ImmersiveGames.DebugManagers;
-using ImmersiveGames.SteamServicesManagers.Interface;
+using ImmersiveGames.MenuManagers;
+using NewRiverAttack.GamePlayManagers.GamePlayLogs;
 using Steamworks;
 using Steamworks.Data;
 using UnityEngine;
 
 namespace ImmersiveGames.SteamServicesManagers
 {
-    public class SteamLeaderboardService : MonoBehaviour, ILeaderboardService
+    public class SteamLeaderboardService : MonoBehaviour
     {
-        public static SteamLeaderboardService Instance { get; private set; }
+        private static Leaderboard? _leaderboard;
+        public static Leaderboard? Leaderboard => _leaderboard;
+
+        private GemeStatisticsDataLog _gemeStatistics;
+
+        private void Awake()
+        {
+            _gemeStatistics = GemeStatisticsDataLog.Instance;
+        }
+
+        private void Start()
+        {
+            if (_gemeStatistics.playersMaxScore > 0)
+            {
+                UpdateScore(_gemeStatistics.playersMaxScore);
+            }
+        }
+
+        public static async void Init(string boardName)
+        {
+            if (!SteamConnectionManager.ConnectedToSteam) return;
+            _leaderboard = await SteamUserStats.FindLeaderboardAsync(boardName).ConfigureAwait(false);
+            if (_leaderboard.HasValue)
+            {
+                // Leaderboard encontrado, use leaderboard.Value para acessar
+                DebugManager.Log<SteamLeaderboardService>("Leaderboard encontrado: " + _leaderboard.Value.Name);
+            }
+            else
+            {
+                // Leaderboard não encontrado ou houve erro
+                DebugManager.LogError<SteamLeaderboardService>("O leaderboard não foi encontrado.");
+            }
+        }
+
+        public static async void UpdateScore(int score)
+        {
+            if (!SteamConnectionManager.ConnectedToSteam) return;
+            if (_leaderboard == null) return;
+            try
+            {
+                var result = await _leaderboard.Value.SubmitScoreAsync(score).ConfigureAwait(true);
+                if (result.HasValue)
+                {
+                    DebugManager.Log<PanelLeaderBoards>($"Placar atualizado: {score}");
+                }
+            }
+            catch (Exception ex)
+            {
+                DebugManager.LogError<PanelLeaderBoards>($"Erro ao Atualizar o placar: {ex.Message}");
+            }
+        }
+
+        public static void DestroyBoard()
+        {
+            _leaderboard = null;
+        }
+
+
+        /*public static SteamLeaderboardService Instance { get; private set; }
         private static Leaderboard? _leaderboard;
         private const string LeaderboardName = "River_Attack_HiScore";
         private HashSet<int> _offlineScores = new HashSet<int>();
@@ -174,6 +230,6 @@ namespace ImmersiveGames.SteamServicesManagers
         private void OnApplicationQuit()
         {
             SaveOfflineScores();
-        }
+        }*/
     }
 }

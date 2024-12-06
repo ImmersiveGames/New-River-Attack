@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using ImmersiveGames.DebugManagers;
 using ImmersiveGames.MenuManagers.UI;
+using ImmersiveGames.Utils;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -91,7 +92,7 @@ namespace ImmersiveGames.MenuManagers.Abstracts
 
 
 
-        private void SetSelectGameObject(GameObject firstSelectObject)
+        /*private void SetSelectGameObject(GameObject firstSelectObject)
         {
             if (firstSelectObject == null) return;
 
@@ -109,7 +110,7 @@ namespace ImmersiveGames.MenuManagers.Abstracts
 
             // Atraso para garantir que o GameObject esteja ativo
             StartCoroutine(SelectAfterDelay(firstSelectObject));
-        }
+        }*/
 
         private IEnumerator SelectAfterDelay(GameObject firstSelectObject)
         {

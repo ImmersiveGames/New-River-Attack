@@ -144,7 +144,7 @@ namespace NewRiverAttack.DebugManagers
             DebugManager.SetScriptDebugLevel<GameStatisticManager>(DebugManager.DebugLevels.None);
             DebugManager.SetScriptDebugLevel<PanelStatisticsManager>(DebugManager.DebugLevels.None);
             
-            
+            DebugManager.SetScriptDebugLevel<GameSaveHandler>(DebugManager.DebugLevels.All);
         }
     }
 }

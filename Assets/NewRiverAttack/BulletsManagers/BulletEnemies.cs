@@ -28,9 +28,10 @@ namespace NewRiverAttack.BulletsManagers
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponentInParent<BulletEnemies>()) return;
-            if (other.GetComponentInParent<ObstacleMaster>()) return;
-            if (other.GetComponentInParent<PowerUpMaster>()) return;
+            if (other.GetComponentInParent<BulletEnemies>() || 
+                other.GetComponentInParent<ObstacleMaster>()||
+                other.GetComponentInParent<PowerUpMaster>() || 
+                other.GetComponentInParent<WallMaster>()) return;
             ReturnToPool();
         }
         public override void OnSpawned(Transform spawnPosition, ISpawnData data)

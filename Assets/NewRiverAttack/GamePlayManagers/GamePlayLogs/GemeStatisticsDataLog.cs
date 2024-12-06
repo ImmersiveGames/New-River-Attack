@@ -19,7 +19,6 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
         }
 
         [Header("Players Logs")] 
-        public DateTime LastDate;
         public int playersMaxScore;
         public float playersTimeSpent;
         public int playersMaxDistance;
@@ -167,7 +166,6 @@ namespace NewRiverAttack.GamePlayManagers.GamePlayLogs
 
         public void ResetLogs()
         {
-            LastDate = DateTime.Now;
         playersMaxScore = 0;
         playersTimeSpent = 0;
         playersMaxDistance = 0;

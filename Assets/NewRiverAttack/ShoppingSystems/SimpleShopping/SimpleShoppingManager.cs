@@ -61,8 +61,17 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
             _productStocks = new List<ShopProductStock>(stockShopsList);
 
             // Ordenando a lista por nome
-            _productStocks.Sort((x, y) => string.Compare(x.ShopProduct.name, y.ShopProduct.name, StringComparison.Ordinal));
+            //_productStocks.Sort((x, y) => string.Compare(x.ShopProduct.name, y.ShopProduct.name, StringComparison.Ordinal));
+            // Ordenando a lista por preço
+            _productStocks.Sort((x, y) =>
+            {
+                int priceComparison = x.ShopProduct.priceItem.CompareTo(y.ShopProduct.priceItem);
+                return priceComparison == 0
+                    ? string.Compare(x.ShopProduct.name, y.ShopProduct.name, StringComparison.Ordinal)
+                    : priceComparison;
+            });
 
+            
             CreateShopping(panelContent);
         }
 
