@@ -24,8 +24,9 @@ namespace NewRiverAttack.ShoppingSystems.SkinChanger
             }
         }
 
-        private void OnEnable()
+        private void Enable()
         {
+            if(GameOptionsSave.Instance.playerSettings.Length >0)
             playerSettings = GameOptionsSave.Instance.playerSettings[0];
             ShoppingChangeSkin(playerSettings.actualSkin,1);
             _simpleShoppingManager.EventUseProduct += ShoppingChangeSkin;
