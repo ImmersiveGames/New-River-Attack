@@ -20,7 +20,7 @@ MonoBehaviour:
     defaultValue: 
   wallet:
     key: 713eb01e-904b-4240-844c-916d62a4adda
-    value: 6
+    value: 0
     defaultValue: 0
   bgmVolume:
     key: 9be6caaf-ce81-4142-b6aa-9a61a2b379e5
@@ -32,7 +32,7 @@ MonoBehaviour:
     defaultValue: 0
   startLocale:
     key: 9d150d76-bba2-48e2-8a3f-acc7f2ee0dfe
-    value: {fileID: 11400000, guid: 71a44355d5d503d4dbca75c65994bde9, type: 2}
+    value: {fileID: 0}
     defaultValue: {fileID: 0}
   selectedQualityIndex:
     key: fd81e501-09b1-4d6c-bf44-eca54c216b30
@@ -48,9 +48,7 @@ MonoBehaviour:
     defaultValue: 0
   listPlayerProductStocks:
     key: 64d4c953-b122-48cd-b709-76971d379268
-    value:
-    - inQuantityInStock: 1
-      inShopProduct: {fileID: 11400000, guid: af1cc418d2f81394182cb972ddbba198, type: 2}
+    value: []
     defaultValue: []
   playerSettings:
     key: f1a53577-f547-4c6f-8fc5-59ff82217fc6
@@ -71,7 +69,7 @@ MonoBehaviour:
     defaultValue: 0
   playersMaxScore:
     key: 122ade93-cd8b-45cf-9e27-5c04a4e5ba2a
-    value: 6200
+    value: 0
     defaultValue: 0
   playersTimeSpent:
     key: 59d331c7-f295-484d-9a63-7d41c63130e8
@@ -79,19 +77,19 @@ MonoBehaviour:
     defaultValue: 0
   playersMaxDistance:
     key: 34c10ee2-973c-4752-b400-220df416a8db
-    value: 18
+    value: 0
     defaultValue: 0
   playersDeaths:
     key: ca2c934b-a4d2-44ae-a146-d4f8096ed3f5
-    value: 6
+    value: 0
     defaultValue: 0
   playersDieWall:
     key: 9b01126d-6357-4fbd-988e-05da54fe774d
-    value: 1
+    value: 0
     defaultValue: 0
   playersDieEnemyCollider:
     key: 50966f9e-6cda-4fbe-9616-57c41701e912
-    value: 5
+    value: 0
     defaultValue: 0
   playersDieEnemyBullets:
     key: add80491-74ad-4e04-8c25-41d6e06e02b0
@@ -103,7 +101,7 @@ MonoBehaviour:
     defaultValue: 0
   playersShoots:
     key: 894ba710-adb1-46ca-92d5-e6be1ac9a324
-    value: 38
+    value: 0
     defaultValue: 0
   playersBombs:
     key: bae59b14-5f1c-440e-82a6-599ace919aa4
@@ -111,7 +109,7 @@ MonoBehaviour:
     defaultValue: 0
   playersTimeRapidFire:
     key: dbdb8830-dd02-43e3-8e4f-8862d638f21f
-    value: 16
+    value: 0
     defaultValue: 0
   playersBombHit:
     key: 63377e97-0deb-4692-bf84-c08de87f8c53
@@ -119,19 +117,19 @@ MonoBehaviour:
     defaultValue: 0
   playersFuelSpent:
     key: 256aa1b1-cff3-4187-9106-6257025d29e5
-    value: 97.12826
+    value: 1.4810342
     defaultValue: 0
   playersFuelCharge:
     key: c681026e-ea8f-4563-a28a-61a8c1104021
-    value: 59.793198
+    value: 0
     defaultValue: 0
   playersAmountDistance:
     key: 75c2d5ca-45f3-45ff-be96-4924aeafec78
-    value: 0.9439953
+    value: 0.24399468
     defaultValue: 0
   playersClassicPath:
     key: 0936121f-575f-4098-a497-9098779e1217
-    value: 2
+    value: 0
     defaultValue: 0
   playersMissionPath:
     key: 10451ab0-d747-4830-abe2-e369ce203d3b
@@ -143,37 +141,5 @@ MonoBehaviour:
     defaultValue: 0
   hitEnemiesResultsList:
     key: bec3e614-1cd8-4f67-9670-75154b05fe0a
-    value:
-    - player: {fileID: 11400000, guid: ceb963168ba4f8848b9c9f123aab4f9a, type: 2}
-      enemy: {fileID: 11400000, guid: 29ede106db981a849988775bf3e0837e, type: 2}
-      quantity: 13
-      collisionType: 0
-    - player: {fileID: 11400000, guid: ceb963168ba4f8848b9c9f123aab4f9a, type: 2}
-      enemy: {fileID: 11400000, guid: 9c6a9f868e7ddd944b0758922c40a89f, type: 2}
-      quantity: 12
-      collisionType: 0
-    - player: {fileID: 11400000, guid: ceb963168ba4f8848b9c9f123aab4f9a, type: 2}
-      enemy: {fileID: 11400000, guid: 57513b46de3d898499d22f13245f6680, type: 2}
-      quantity: 2
-      collisionType: 0
-    - player: {fileID: 11400000, guid: ceb963168ba4f8848b9c9f123aab4f9a, type: 2}
-      enemy: {fileID: 11400000, guid: 5f26fcb877582554594ddf4523ce731a, type: 2}
-      quantity: 2
-      collisionType: 0
-    - player: {fileID: 11400000, guid: ceb963168ba4f8848b9c9f123aab4f9a, type: 2}
-      enemy: {fileID: 11400000, guid: ec2686d4dff66814587fc27876d32b7f, type: 2}
-      quantity: 5
-      collisionType: 0
-    - player: {fileID: 11400000, guid: ceb963168ba4f8848b9c9f123aab4f9a, type: 2}
-      enemy: {fileID: 11400000, guid: 349443eb2c51352488b7578e6658cc7f, type: 2}
-      quantity: 2
-      collisionType: 0
-    - player: {fileID: 11400000, guid: ceb963168ba4f8848b9c9f123aab4f9a, type: 2}
-      enemy: {fileID: 11400000, guid: 349443eb2c51352488b7578e6658cc7f, type: 2}
-      quantity: 1
-      collisionType: 2
-    - player: {fileID: 11400000, guid: ceb963168ba4f8848b9c9f123aab4f9a, type: 2}
-      enemy: {fileID: 11400000, guid: 29ede106db981a849988775bf3e0837e, type: 2}
-      quantity: 4
-      collisionType: 2
+    value: []
     defaultValue: []
