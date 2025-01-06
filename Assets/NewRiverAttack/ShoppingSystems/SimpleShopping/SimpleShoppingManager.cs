@@ -174,6 +174,13 @@ namespace NewRiverAttack.ShoppingSystems.SimpleShopping
 
             ClearShopping(content);  // Certifique-se de que ClearShopping está funcionando corretamente
 
+            stockShopsList.Sort((x, y) =>
+            {
+                int priceComparison = x.ShopProduct.priceItem.CompareTo(y.ShopProduct.priceItem);
+                return priceComparison == 0
+                    ? string.Compare(x.ShopProduct.name, y.ShopProduct.name, StringComparison.Ordinal)
+                    : priceComparison;
+            });
             foreach (var stock in stockShopsList)
             {
                 if (stock.ShopProduct == null)
