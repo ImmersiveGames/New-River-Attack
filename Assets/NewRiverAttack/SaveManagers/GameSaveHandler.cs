@@ -128,9 +128,9 @@ namespace NewRiverAttack.SaveManagers
             saveObject.actualResolution.Value = gameOptionsSave.actualResolution;
             saveObject.frameRate.Value = gameOptionsSave.frameRate;
 
-            if (gameOptionsSave.listPlayerProductStocks != null)
+       
                 saveObject.listPlayerProductStocks.Value = gameOptionsSave.listPlayerProductStocks;
-            if (gameOptionsSave.playerSettings != null)
+    
                 saveObject.playerSettings.Value = gameOptionsSave.playerSettings;
             
             saveObject.wallet.Value = gameOptionsSave.wallet;
@@ -178,12 +178,11 @@ namespace NewRiverAttack.SaveManagers
             if (saveObject.frameRate.Value != 0)
                 gameOptionsSave.frameRate = saveObject.frameRate.Value;
             
-            if (saveObject.listPlayerProductStocks.Value.Count != 0)
+
                 gameOptionsSave.listPlayerProductStocks = saveObject.listPlayerProductStocks.Value;
-            if (saveObject.playerSettings.Value.Length != 0)
+
                 gameOptionsSave.playerSettings = saveObject.playerSettings.Value;
             
-            if (saveObject.wallet.Value != 0)
                 gameOptionsSave.wallet = saveObject.wallet.Value;
             
             if (saveObject.activeIndexMissionLevel.Value != 0)
